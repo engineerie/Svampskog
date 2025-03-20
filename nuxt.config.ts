@@ -9,6 +9,12 @@ export default defineNuxtConfig({
     "nuxt-og-image",
   ],
 
+  content: {
+    preview: {
+      api: 'https://api.nuxt.studio'
+    }
+  },
+
   devtools: {
     enabled: true,
   },
