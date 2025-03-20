@@ -1,0 +1,29 @@
+<template>
+  <div class="relative">
+    <UPageCard
+      variant="subtle"
+      class="rounded-2xl"
+    >
+      <video
+        class="rounded-xl"
+        data-v-baf90ddd=""
+        preload="none"
+        poster="/images/SvamparSverige4.svg"
+        :controls="true"
+      ><source
+        data-v-baf90ddd=""
+        src="https://res.cloudinary.com/nuxt/video/upload/v1708511800/ui-pro/video-nuxt-ui-pro_kwfbdh.webm"
+        type="video/webm"
+      ><source
+        data-v-baf90ddd=""
+        src="https://res.cloudinary.com/nuxt/video/upload/v1708511800/ui-pro/video-nuxt-ui-pro_kwfbdh.mp4"
+        type="video/mp4"
+      ><source
+        data-v-baf90ddd=""
+        src="https://res.cloudinary.com/nuxt/video/upload/v1708511800/ui-pro/video-nuxt-ui-pro_kwfbdh.ogg"
+        type="video/ogg"
+      >
+      </video>
+    </UPageCard>
+  </div>
+</template>

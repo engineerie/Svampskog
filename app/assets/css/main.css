@@ -1,0 +1,28 @@
+@import "tailwindcss" theme(static);
+@import "@nuxt/ui-pro";
+
+@source "../../../content";
+
+@theme static {
+  --font-sans: "Public Sans", sans-serif;
+
+  --color-skin-50: #fff9f6;
+  --color-skin-100: #fef1e9;
+  --color-skin-200: #fde2d2;
+  --color-skin-300: #fcd3bb;
+  --color-skin-400: #fbc5a4;
+  --color-skin-500: #f9b68d;
+  --color-skin-600: #f7a676;
+  --color-skin-700: #f59960;
+  --color-skin-800: #f3874a;
+  --color-skin-900: #f17534;
+  --color-skin-950: #ef6628;
+}
+
+.dark {
+  --ui-bg: var(--ui-color-neutral-950);
+}
+
+:root {
+  --ui-radius: var(--radius-lg);
+}
