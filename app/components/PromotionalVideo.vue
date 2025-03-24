@@ -2,13 +2,13 @@
   <div class="relative">
     <UPageCard
       variant="subtle"
-      class="rounded-2xl"
+
     >
       <video
-        class="rounded-xl"
+      class="rounded-xl"
         data-v-baf90ddd=""
         preload="none"
-        poster="/images/SvamparSverige4.svg"
+        poster="/images/Norr_Tallskog_1-40_Blåbär_grupp.png"
         :controls="true"
       ><source
         data-v-baf90ddd=""

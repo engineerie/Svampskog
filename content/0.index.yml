@@ -2,11 +2,11 @@ title: Svampskog
 description: Svampskog.se är en webbapplikation där du kan utforska vilka mykorrhizasvampar som kan finnas i olika skogar och se hur de reagerar vid skogsbruksåtgärder.
 navigation: false
 hero:
-  title: '[Mykorrhizasvamp]{.text-(--ui-primary)} <br> & skogsskötsel'
-  description: Svampskog.se är en webbapplikation där du kan utforska vilka mykorrhizasvampar som kan finnas i olika skogar och se hur de reagerar vid skogsbruksåtgärder.
+  title: '[Svampar]{.text-(--ui-primary)} <br> & skogsskötsel'
+  description: Utforska vilka mykorrhizasvampar som kan finnas i olika skogar och se hur de reagerar vid skogsbruksåtgärder.
   badge: Ny version ute nu
   links:
-    - label: Mykorrhizasvampar
+    - label: Svampar
       icon: i-lineicons-mushroom-1
       trailing: false
       to: https://ui.nuxt.com/getting-started/installation/pro/nuxt

@@ -7,7 +7,9 @@ export default defineNuxtConfig({
     "@nuxt/image",
     "@vueuse/nuxt",
     "nuxt-og-image",
+    "@pinia/nuxt",
   ],
+  
 
   content: {
     preview: {
@@ -20,6 +22,13 @@ export default defineNuxtConfig({
   },
 
   css: ["~/assets/css/main.css"],
+
+  ui: {
+    theme: {
+      colors: ['primary', 'secondary', 'poison', 'signal', 'info', 'success', 'warning', 'error'],
+      transitions: true
+    }
+  },
 
   // routeRules: {
   //   "/docs": { redirect: "/docs/guide", prerender: false },

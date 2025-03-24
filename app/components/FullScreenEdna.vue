@@ -1,0 +1,725 @@
+<template>
+  <div class="">
+    <div
+      class=""
+    >
+      <div class="flex gap-2 p-2 justify-end z-30" >
+        <div v-if="!isNormalView">
+          <USelect
+  v-model="rowsPerPage"
+  :items="[10, 20, 30, 40, 50, 'Alla']"
+  placeholder="Rader per sida"
+/>
+        </div>
+
+        <UInput
+  :model-value="table?.tableApi?.getState().globalFilter || ''"
+  class="max-w-sm min-w-[12ch]"
+  placeholder="Sök i tabell"
+  @update:model-value="value => table?.tableApi?.setGlobalFilter(value)"
+/>
+      </div>
+      <div v-if="filteredData" :class="[isNormalView ? '' : '']">
+        <div class="">
+          <!-- v-model="selectedRows" -->
+
+          <!-- UTable with Filtered Data -->
+         <UTable
+  ref="table"
+  v-model:pagination="pagination"
+  :data="sortedData"
+  :columns="columns"
+  sticky
+  :loading="isLoading"
+  :sort="sort"
+  @update:sort="sort = $event"
+  :pagination-options="!isNormalView ? { getPaginationRowModel: getPaginationRowModel() } : undefined"
+  :class="{ 'h-[442px]': isNormalView }"
+/>
+            <!-- Custom cell templates -->
+            <!-- <template #sample_plot_count-cell="{ row, index }">
+              <div v-if="showIcons" class="flex items-center justify-center">
+                <div
+                  data-tooltip="right"
+                  :data-tooltip-text="`Förekommer i ${row.sample_plot_count} av ${sampleEnvCount} skogar`"
+                >
+                  <Icon
+                    name="fluent:shape-organic-16-filled"
+                    :class="'h-7 w-7 -my-2'"
+                    :style="{ color: allColors[index] }"
+                  />
+                </div>
+              </div>
+              <div v-else class="px-2 w-32">
+                <UProgress
+                  :max="sampleEnvCount"
+                  :value="row.sample_plot_count"
+                  :color="allColors[row.colorIndex]"
+                  data-tooltip="right"
+                  :data-tooltip-text="`Förekommer i ${row.sample_plot_count} av ${sampleEnvCount} skogar`"
+                />
+              </div>
+            </template> -->
+
+            <!-- <template #Commonname-cell="{ row }">
+              <div v-if="isNormalView" class="truncate">
+                {{ capitalize(row.Commonname) }}
+                <span class="italic text-neutral-400">({{ capitalize(row.Scientificname) }})</span>
+              </div>
+              <div v-else>{{ capitalize(row.Commonname) }}</div>
+            </template> -->
+
+            <!-- <template #Scientificname-cell="{ row }">
+              <div class="italic font-thin max-w-52 truncate">
+                {{ row.Scientificname }}
+              </div>
+            </template> -->
+<!-- 
+            <template #Svamp-grupp-släkte-cell="{ row }">
+              <div
+                data-tooltip="left"
+                :data-tooltip-text="row['Svamp-grupp-släkte'] !== '0' ? capitalize(row['Svamp-grupp-släkte']) : 'Okänd'"
+                class="ml-2"
+              >
+                <NuxtImg
+                  v-if="row['Svamp-grupp-släkte'] !== 'Saknas'"
+                  :src="getIconPath(row['Svamp-grupp-släkte'])"
+                  class="w-6"
+                  alt="Svamp Icon"
+                />
+                <Icon v-else name="heroicons:x-mark-20-solid" class="size-7" />
+              </div>
+            </template> -->
+
+            <!-- <template #RL2020kat-cell="{ row }">
+              <div class="flex items-center space-x-2">
+                <div
+                  :class="[getStatusColor(row.RL2020kat), 'h-5 w-5 rounded-full flex items-center justify-center text-white z-0 max-w-12']"
+                  data-tooltip="left"
+                  :data-tooltip-text="row['RL2020kat'] !== 'Saknas' ? getStatusTooltip(row.RL2020kat) : 'Ej bedömd'"
+                />
+                <div v-if="row.SIGNAL_art === 'S'" class="relative">
+                  <div
+                    class="h-5 w-5 rounded-full bg-neutral-500 opacity-100 flex items-center justify-center text-white z-10 text-sm"
+                    data-tooltip-text="Signalart"
+                  />
+                </div>
+              </div>
+            </template> -->
+<!-- 
+            <template #matsvamp-cell="{ row }">
+              <div v-if="row.matsvamp === 1">
+                <Icon name="icon-park-solid:knife-fork" class="h-7 w-7 text-yellow-500 -my-2" />
+              </div>
+              <div v-else-if="row.Giftsvamp === 'x'">
+                <Icon name="hugeicons:danger" class="text-lime-500 w-7 h-7" />
+              </div>
+            </template> -->
+
+            <!-- Empty state template -->
+            <!-- <template #empty>
+              <div class="flex flex-col items-center justify-center py-6 gap-3">
+                <span class="text-gray-500">Inga arter hittades</span>
+              </div>
+            </template> -->
+          <!-- </UTable> -->
+          <div
+            class="flex justify-between items-center p-5 border-t-[1px] border-neutral-200 dark:border-neutral-700"
+          >
+            <div class="flex h-fit shrink-0 gap-1 items-center">
+              <!-- Left mini-legend -->
+              
+              <h1
+            
+              >
+                Visar {{ startItem }} till {{ endItem }} av
+                {{ totalItems }} arter
+              </h1>
+              <!-- <div
+                class="rounded-l-xl flex items-end px-3 -mr-2 py-1 bg-neutral-50 border-[0.5px] border-r-0 border-neutral-100 text-neutral-400"
+              >
+                <div class="flex items-end" :data-nui-tooltip="'Mycelform'">
+                  <Icon
+                    name="fluent:shape-organic-16-filled"
+                    class="h-6 w-6 -mr-5 text-gray-500 z-[2]"
+                  />
+                  <Icon
+                    name="fluent:shape-organic-16-filled"
+                    class="h-6 w-6 -mr-5 text-gray-400 z-[1]"
+                  />
+                  <Icon
+                    name="fluent:shape-organic-16-filled"
+                    class="h-6 w-6 mr-2 text-gray-300 z-0"
+                  />
+                  <h1 class="text-neutral-400">{{ topCount }} Arter</h1>
+                </div>
+              </div> -->
+    
+              <!-- <div
+                class="flex items-end px-3 py-1 bg-neutral-50 border-[0.5px] border-neutral-100 rounded-r-xl text-neutral-400 border-l-0"
+              >
+                <div class="flex items-end" :data-nui-tooltip="'Mycelform'">
+                  <Icon
+                    name="fluent:shape-organic-16-filled"
+                    class="h-6 w-6 -mr-5 text-yellow-400 z-[3]"
+                  />
+                  <Icon
+                    name="fluent:shape-organic-16-filled"
+                    class="h-6 w-6 -mr-5 text-lime-400 z-[2]"
+                  />
+                  <Icon
+                    name="fluent:shape-organic-16-filled"
+                    class="h-6 w-6 -mr-5 text-teal-400 z-[1]"
+                  />
+                  <Icon
+                    name="fluent:shape-organic-16-filled"
+                    class="h-6 w-6 mr-2 text-rose-400 z-0"
+                  />
+                  <h1 size="xs" weight="medium" class="text-neutral-400">
+                    {{ remainingCount }} Arter
+                  </h1>
+                </div>
+              </div> -->
+            </div>
+
+            <!-- Display the current range and total items -->
+
+            <div>
+              <!-- Pagination component -->
+              <div v-if="!isNormalView && rowsPerPage !== 'Alla'">
+                <div class="flex justify-center">
+  <UPagination
+    :default-page="(table?.tableApi?.getState().pagination.pageIndex || 0) + 1"
+    :items-per-page="table?.tableApi?.getState().pagination.pageSize"
+    :total="table?.tableApi?.getFilteredRowModel().rows.length"
+    @update:page="(p) => table?.tableApi?.setPageIndex(p - 1)"
+  />
+</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div v-else>
+        <div class="max-w-sm space-y-2 mt-2">
+          <USkeleton class="h-4 w-full rounded" />
+          <USkeleton class="h-4 w-[85%] rounded" />
+        </div>
+      </div>
+
+      <!-- Information section aligned to the bottom -->
+    </div>
+  </div>
+</template>
+
+<script setup>
+import { ref, reactive, onMounted, onUnmounted, computed, watch, h, resolveComponent } from "vue";
+import { useRoute } from "vue-router";
+import { useSpeciesStore } from "~/stores/speciesStore";
+import { useEnvParamsStore } from '~/stores/envParamsStore'
+import { getPaginationRowModel } from '@tanstack/vue-table'
+
+const props = defineProps({
+  isNormalView: Boolean,
+});
+
+const table = useTemplateRef('table')
+
+const rowsPerPage = ref(props.isNormalView ? 500 : 10);
+
+const pagination = ref({
+  pageIndex: 0,
+  pageSize: 10
+});
+
+
+
+// This new boolean controls how 'förekomst' will be shown
+const showIcons = ref(false);
+
+const speciesStore = useSpeciesStore();
+
+function selectRow(row) {
+  speciesStore.selectSpecies(row, "edna");
+}
+
+const color = computed(() => {
+  switch (true) {
+    case sampleEnvCount.value < 10:
+      return "error";
+    case sampleEnvCount.value < 50:
+      return "warning";
+    default:
+      return "primary";
+  }
+});
+
+// Method to strip 'detaljer' from the URL if it exists
+const stripDetailsFromURL = (url) => {
+  if (!url) return "";
+  return url.replace("/detaljer", "").replace("/artinformation", "");
+};
+
+// Capitalize function for displaying the species name
+const capitalize = (str) => {
+  if (!str) return "";
+  return str.charAt(0).toUpperCase() + str.slice(1).toLowerCase();
+};
+
+const sampleEnvCount = computed(() => {
+  return data.value.length > 0 ? data.value[0].sample_env_count : 0;
+});
+
+const getIconPath = (svampGrupp) => {
+  const iconMapping = {
+    övrigt: "BasilOther1Solid.png",
+    hattsvamp: "hattsvamp.png",
+    kantarell: "kantarell.webp",
+    sopp: "sopp.png",
+    taggsvamp: "taggsvamp.png",
+    fingersvamp: "fingersvamp.webp",
+    tryffel: "tryffel.webp",
+    skinnsvamp: "skinnsvamp.webp",
+    skålsvamp: "skalsvamp.webp",
+  };
+
+  return `/images/svampgrupp/${iconMapping[svampGrupp] || "default-icon.webp"}`;
+};
+
+
+
+const route = useRoute();
+const activeTab = ref("spatialForest");
+
+const getStatusAbbreviation = (status) => {
+  const abbreviations = {
+    LC: "LC",
+    NT: "NT", // Near Threatened
+    EN: "EN", // Endangered
+    VU: "VU", // Vulnerable
+    CR: "CR", // Critically Endangered
+    RE: "RE", // Regionally Extinct
+    DD: "DD", // Data Deficient
+  };
+  return abbreviations[status] || "NE"; // Default case
+};
+
+const getStatusColor = (status) => {
+  const colors = {
+    LC: "success",
+    NT: "error",
+    EN: "error",
+    VU: "error",
+    CR: "error",
+    RE: "error",
+    DD: "neutral",
+  };
+  return colors[status] || "neutral";
+};
+
+const getStatusTooltip = (status) => {
+  const tooltips = {
+    LC: "Livskraftig",
+    NT: "Nära hotad",
+    EN: "Starkt hotad",
+    VU: "Sårbar",
+    CR: "Akut hotad",
+    RE: "Nationellt utdöd",
+    DD: "Kunskapsbrist",
+  };
+  return tooltips[status] || "Ej bedömd";
+};
+
+const sort = ref({ column: "", direction: "asc" });
+
+const UBadge = resolveComponent('UBadge')
+const NuxtImg = resolveComponent('NuxtImg')
+const UProgress = resolveComponent('UProgress')
+const UButton = resolveComponent('UButton')
+
+
+const columns = [
+{
+  accessorKey: "sample_plot_count",
+  header: ({ column }) => {
+    const isSorted = column.getIsSorted();
+    return h(
+      UButton,
+      {
+        color: 'neutral',
+        variant: 'ghost',
+        label: 'Förekomst',
+        icon: isSorted
+          ? (isSorted === 'asc'
+              ? 'i-lucide-arrow-up-narrow-wide'
+              : 'i-lucide-arrow-down-wide-narrow')
+          : 'i-lucide-arrow-up-down',
+        class: '-mx-2.5',
+        onClick: () => column.toggleSorting(isSorted === 'asc')
+      }
+    );
+  },
+  cell: ({ row, index }) => {
+    const progressVal = Number(row.getValue("sample_plot_count"));
+    const maxVal = Number(sampleEnvCount.value) || 100;
+   
+    return h(UProgress, {
+      modelValue: progressVal,
+      max: maxVal,
+      // Instead of passing the color prop, use the style attribute to override the CSS variable:
+  
+
+      color: allColors.value[index],
+      indeterminate: false,
+
+      "onUpdate:modelValue": () => {}
+    });
+  }
+},
+{
+  accessorKey: "Commonname",
+  header: ({ column }) => {
+    const isSorted = column.getIsSorted();
+    return h(
+      UButton,
+      {
+        color: 'neutral',
+        variant: 'ghost',
+        label: 'Namn',
+        icon: isSorted
+          ? (isSorted === 'asc'
+              ? 'i-lucide-arrow-up-narrow-wide'
+              : 'i-lucide-arrow-down-wide-narrow')
+          : 'i-lucide-arrow-up-down',
+        class: '-mx-2.5',
+        onClick: () => column.toggleSorting(isSorted === 'asc')
+      }
+    );
+  },
+  cell: ({ row }) =>
+    h('div', { class: 'text-neutral-700' }, capitalize(row.getValue("Commonname")))
+},
+
+        {
+          accessorKey: "Scientificname",
+          header: ({ column }) => {
+    const isSorted = column.getIsSorted();
+    return h(
+      UButton,
+      {
+        color: 'neutral',
+        variant: 'ghost',
+        label: 'Latinskt namn',
+        icon: isSorted
+          ? (isSorted === 'asc'
+              ? 'i-lucide-arrow-up-narrow-wide'
+              : 'i-lucide-arrow-down-wide-narrow')
+          : 'i-lucide-arrow-up-down',
+        class: '-mx-2.5',
+        onClick: () => column.toggleSorting(isSorted === 'asc')
+      }
+    );
+  },
+          // sortable: true,
+          cell: ({ row }) => `${row.getValue('Scientificname')}`
+
+        },
+
+      {
+  accessorKey: "Svamp-grupp-släkte",
+  header: ({ column }) => {
+    const isSorted = column.getIsSorted();
+    return h(
+      UButton,
+      {
+        color: 'neutral',
+        variant: 'ghost',
+        label: 'Grupp',
+        icon: isSorted
+          ? (isSorted === 'asc'
+              ? 'i-lucide-arrow-up-narrow-wide'
+              : 'i-lucide-arrow-down-wide-narrow')
+          : 'i-lucide-arrow-up-down',
+        class: '-mx-2.5',
+        onClick: () => column.toggleSorting(isSorted === 'asc')
+      }
+    );
+  },
+  sortable: props.isNormalView ? false : true,
+  cell: ({ row }) => {
+    const grupp = row.getValue("Svamp-grupp-släkte");
+    return grupp !== "Saknas"
+      ? h(NuxtImg, {
+          src: getIconPath(grupp),
+          alt: "Svamp Icon",
+          class: "w-6"
+        })
+      : h(Icon, { name: "heroicons:x-mark-20-solid", class: "size-7" });
+  }
+},
+  {
+  accessorKey: 'matsvamp',
+  header: 'Matsvamp',
+  cell: ({ row }) =>
+    h('div', { class: 'flex gap-1' }, [
+      row.getValue('matsvamp') === 1 && h(UBadge, { color: 'warning', variant: 'subtle' }, () => 'Matsvamp'),
+      row.original.Giftsvamp?.toLowerCase() === 'x' && h(UBadge, { color: 'poison', variant: 'subtle' }, () => 'Giftsvamp')
+    ].filter(Boolean))
+},
+{
+  accessorKey: 'RL2020kat',
+  header: 'Status',
+  cell: ({ row }) => {
+    const status = row.getValue('RL2020kat');
+    const mainBadge = h(
+      UBadge,
+      { color: getStatusColor(status), variant: 'subtle' },
+      () => getStatusTooltip(status)
+    );
+    // Check if SIGNAL_art is "S" and conditionally add the Signalart badge
+    const signalBadge =
+      row.original.SIGNAL_art === 'S'
+        ? h(UBadge, { color: 'signal', variant: 'subtle' }, 'Signalart')
+        : null;
+    return h('div', { class: 'flex gap-1' }, [mainBadge, signalBadge].filter(Boolean));
+  }
+},
+];
+
+const geography = ref("");
+const forestType = ref("");
+const standAge = ref("");
+const vegetationType = ref("");
+
+const topCount = ref(0);
+const remainingCount = ref(0);
+const topPercentage = ref(0);
+const remainingPercentage = ref(0);
+
+const handleInfoUpdate = (info) => {
+  topCount.value = info.topCount;
+  remainingCount.value = info.remainingCount;
+  topPercentage.value = info.topPercentage;
+  remainingPercentage.value = info.remainingPercentage;
+};
+
+const data = ref([]);
+const isLoading = ref(true);
+const allColors = ref([]);
+
+const generateColors = (start, end, steps) => {
+  const stepR = (end[0] - start[0]) / (steps - 1);
+  const stepG = (end[1] - start[1]) / (steps - 1);
+  const stepB = (end[2] - start[2]) / (steps - 1);
+  const colors = [];
+
+  for (let i = 0; i < steps; i++) {
+    const r = Math.round(start[0] + stepR * i);
+    const g = Math.round(start[1] + stepG * i);
+    const b = Math.round(start[2] + stepB * i);
+    colors.push(`rgb(${r}, ${g}, ${b})`);
+  }
+  return colors;
+};
+const fetchData = async () => {
+  if (
+    envStore.geography &&
+    envStore.forestType &&
+    envStore.standAge &&
+    envStore.vegetationType
+  ) {
+    const filename = `data-${envStore.geography}-${envStore.forestType}-${envStore.standAge}-${envStore.vegetationType}.json`;
+    try {
+      const response = await fetch(`/edna/${filename}`);
+      if (!response.ok)
+        throw new Error(`Failed to fetch data from ${filename}`);
+      data.value = await response.json();
+
+      // Once data is fetched, turn off loading
+      isLoading.value = false;
+
+      // 1) Assign each row a stable colorIndex based on its original position
+      data.value.forEach((row, i) => {
+        row.colorIndex = i;
+      });
+
+      // 2) Figure out how many total species we have
+      const totalSpecies = data.value.length;
+
+      // 3) Use your existing logic for topCount (10% in your case)
+      topCount.value = Math.floor(totalSpecies * 0.1);
+      remainingCount.value = totalSpecies - topCount.value;
+
+      // 4) Generate the color arrays
+      const grayColors = generateColors(
+        [82, 82, 82],
+        [212, 212, 212],
+        topCount.value
+      );
+      const rainbowColors = generateRainbowColors(remainingCount.value);
+
+      // 5) Combine them into one big array
+      allColors.value = [...grayColors, ...rainbowColors];
+    } catch (error) {
+      console.error("Error fetching data:", error);
+    }
+  }
+};
+
+// Helper function to generate rainbow colors
+function generateRainbowColors(steps) {
+  const colors = [];
+  const saturation = 70; // Adjust for vibrancy
+  const lightness = 50; // Adjust for brightness
+
+  for (let i = 0; i < steps; i++) {
+    // Calculate hue from 30° (orange) to 330° (red)
+    const hue = 45 + (300 / (steps - 1 || 1)) * i;
+    colors.push(`hsl(${hue % 360}, ${saturation}%, ${lightness}%)`);
+  }
+  return colors;
+}
+
+const envStore = useEnvParamsStore();
+
+watch(
+  () => [
+    envStore.geography,
+    envStore.forestType,
+    envStore.standAge,
+    envStore.vegetationType
+  ],
+  () => {
+    // Call your fetch function when any of these change:
+    fetchData();
+  },
+  { immediate: true }
+);
+
+const searchQuery = ref("");
+const page = ref(1);
+const rowsPerPageOptions = [5, 10, 20, 30, 40, 50]; // Options for rows per page
+
+
+const filteredData = computed(() => {
+  let result = data.value;
+
+  // Apply any filters you have
+  if (searchQuery.value) {
+    result = result.filter((row) => {
+      return Object.values(row).some((value) =>
+        String(value).toLowerCase().includes(searchQuery.value.toLowerCase())
+      );
+    });
+  }
+
+  return result;
+});
+
+const sortedData = computed(() => {
+  let result = filteredData.value.slice(); // Create a shallow copy to sort
+
+  if (sort.value && sort.value.column) {
+    const column = sort.value.column;
+    const direction = sort.value.direction;
+
+    result.sort((a, b) => {
+      const valueA = a[column];
+      const valueB = b[column];
+
+      // Handle null or undefined values
+      if (valueA == null && valueB != null) return 1;
+      if (valueA != null && valueB == null) return -1;
+      if (valueA == null && valueB == null) return 0;
+
+      // Compare values using Swedish locale
+      const comparison = String(valueA).localeCompare(String(valueB), "sv", {
+        numeric: true,
+        sensitivity: "base",
+      });
+
+      return direction === "asc" ? comparison : -comparison;
+    });
+  }
+
+  return result;
+});
+// const totalItems = computed(() => filteredData.value.length);
+
+watch(rowsPerPage, (newVal) => {
+  let newPageSize =
+    newVal === "Alla" ? totalItems.value || data.value.length : Number(newVal);
+  // Update our reactive pagination object:
+  pagination.value.pageSize = newPageSize;
+  pagination.value.pageIndex = 0;
+  // Force the table to update by calling its API methods:
+  if (table.value?.tableApi) {
+    table.value.tableApi.setPageSize(newPageSize);
+    table.value.tableApi.setPageIndex(0);
+  }
+});
+
+const paginatedData = computed(() => {
+  // If "All" is selected, show all rows
+  if (rowsPerPage.value === "Alla") {
+    return sortedData.value;
+  } else {
+    const start = (page.value - 1) * rowsPerPage.value;
+    const end = page.value * rowsPerPage.value;
+    return sortedData.value.slice(start, end);
+  }
+});
+
+// Calculate totalPages only if rowsPerPage is a number
+const totalPages = computed(() => {
+  if (rowsPerPage.value === "Alla") {
+    return 1;
+  }
+  return Math.ceil(totalItems.value / rowsPerPage.value);
+});
+
+const currentPaginationRows = computed(() => {
+  return table.value?.tableApi?.getPaginationRowModel().rows || [];
+});
+
+const startItem = computed(() => {
+  const rows = currentPaginationRows.value;
+  return rows.length > 0 ? rows[0].index + 1 : 0;
+});
+
+const endItem = computed(() => {
+  const rows = currentPaginationRows.value;
+  return rows.length > 0 ? rows[rows.length - 1].index + 1 : 0;
+});
+
+const totalItems = computed(() => {
+  return table.value?.tableApi?.getFilteredRowModel().rows.length || 0;
+});
+</script>
+
+<style scoped>
+/* For Webkit browsers like Chrome, Safari */
+
+/* Hide scrollbar for IE, Edge and Firefox */
+#scrollbar {
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none; /* Firefox */
+}
+
+#scrollbar::-webkit-scrollbar-thumb {
+  display: none;
+  background-color: #6f202033; /* color of the scroll thumb */
+  border-radius: 20px; /* roundness of the scroll thumb */
+}
+
+#scrollbar:hover::-webkit-scrollbar-thumb {
+  display: block;
+}
+
+/* For Firefox */
+#scrollbar {
+  scrollbar-width: medium;
+  scrollbar-color: #88888800 #f2f3f500;
+  transition: scrollbar-color 1s ease-in-out; /* transition effect for Firefox */
+}
+</style>

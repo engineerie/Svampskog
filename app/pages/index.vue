@@ -25,7 +25,7 @@ useSeoMeta({
         <!-- <StarsBg /> -->
       </template>
       <template #title>
-        <MDC :value="page.hero.title" class="*:leading-11 sm:*:leading-19 max-w-3xl mx-auto text-4xl sm:text-7xl" />
+        <MDC :value="page.hero.title" class="*:leading-11 sm:*:leading-19 max-w-3xl mx-auto " />
       </template>
       <PromotionalVideo />
     </UPageHero>
@@ -71,50 +71,3 @@ useSeoMeta({
     </UPageCTA> -->
   </div>
 </template>
-
-<style scoped>
-.landing-section {
-  z-index: 0;
-  position: relative;
-  background: radial-gradient(35.36% 35.36% at 100% 25%,
-      #0000 66%,
-      #e5e5e5 68% 70%,
-      #0000 72%) 21px 21px / calc(2 * 21px) calc(2 * 21px),
-    radial-gradient(35.36% 35.36% at 0 75%,
-      #0000 66%,
-      #e5e5e5 68% 70%,
-      #0000 72%) 21px 21px / calc(2 * 21px) calc(2 * 21px),
-    radial-gradient(35.36% 35.36% at 100% 25%,
-      #0000 66%,
-      #e5e5e5 68% 70%,
-      #0000 72%) 0 0 / calc(2 * 21px) calc(2 * 21px),
-    radial-gradient(35.36% 35.36% at 0 75%,
-      #0000 66%,
-      #e5e5e5 68% 70%,
-      #0000 72%) 0 0 / calc(2 * 21px) calc(2 * 21px),
-    repeating-conic-gradient(#f5f5f5 0 25%, #0000 0 50%) 0 0 / calc(2 * 21px) calc(2 * 21px),
-    radial-gradient(#0000 66%, #e5e5e5 68% 70%, #0000 72%) 0 calc(21px / 2) / 21px 21px #f5f5f5;
-}
-
-.dark .landing-section {
-  z-index: 0;
-  background: radial-gradient(35.36% 35.36% at 100% 25%,
-      #0000 66%,
-      #404040 68% 70%,
-      #0000 72%) 21px 21px / calc(2 * 21px) calc(2 * 21px),
-    radial-gradient(35.36% 35.36% at 0 75%,
-      #0000 66%,
-      #404040 68% 70%,
-      #0000 72%) 21px 21px / calc(2 * 21px) calc(2 * 21px),
-    radial-gradient(35.36% 35.36% at 100% 25%,
-      #0000 66%,
-      #404040 68% 70%,
-      #0000 72%) 0 0 / calc(2 * 21px) calc(2 * 21px),
-    radial-gradient(35.36% 35.36% at 0 75%,
-      #0000 66%,
-      #404040 68% 70%,
-      #0000 72%) 0 0 / calc(2 * 21px) calc(2 * 21px),
-    repeating-conic-gradient(#171717 0 25%, #0000 0 50%) 0 0 / calc(2 * 21px) calc(2 * 21px),
-    radial-gradient(#0000 66%, #404040 68% 70%, #0000 72%) 0 calc(21px / 2) / 21px 21px #171717;
-}
-</style>

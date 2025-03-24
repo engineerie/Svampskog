@@ -2,27 +2,29 @@
 const route = useRoute()
 
 const items = computed(() => [
-  {
-    label: 'Svampskog',
-    children: [
+  // {
+  //   label: 'Svampskog',
+  //   children: [
       {
-        label: 'Mykorrhizasvampar',
+        label: 'Svampar',
         description: 'Vilka arter finns i olika skogar.',
         icon: 'i-lineicons-mushroom-1',
+        to: '/mykorrhizasvampar',
+        active: route.path.startsWith('/mykorrhizasvampar'),
       },
       {
         label: 'Skogsskötsel',
         description: 'Hur skogsskötsel påverkar svampar.',
-        icon: 'i-lineicons-grow',
+        icon: 'i-hugeicons-tree-06',
       },
       {
         label: 'Svampkunskap',
         description: 'Läs om hur svampar lever i marken.',
         icon: 'i-heroicons-book-open',
 
-      }
-    ]
-  },
+      },
+  //   ]
+  // },
   {
     label: 'Dokumentation',
     description: 'Hur du bäst använder appen.',
@@ -61,8 +63,8 @@ const items = computed(() => [
         to: '/info',
       },
       {
-        label: 'Blog',
-        description: 'Nyheter och senaste uppdateringarna.',
+        label: 'Nyheter',
+        description: 'Pressklipp och senaste uppdateringarna.',
         icon: 'i-heroicons-newspaper',
         to: '/blog'
       },

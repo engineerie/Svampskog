@@ -1,9 +1,6 @@
 <script setup lang="ts">
-import { ref, watch } from 'vue'
-import type { ContentNavigationItem } from '@nuxt/content'
-
-
 const colorMode = useColorMode()
+
 const color = computed(() => colorMode.value === 'dark' ? '#111827' : 'white')
 
 useHead({
@@ -12,8 +9,12 @@ useHead({
     { name: 'viewport', content: 'width=device-width, initial-scale=1' },
     { key: 'theme-color', name: 'theme-color', content: color }
   ],
-  link: [{ rel: 'icon', href: '/favicon.ico' }],
-  htmlAttrs: { lang: 'en' }
+  link: [
+    { rel: 'icon', href: '/favicon.ico' }
+  ],
+  htmlAttrs: {
+    lang: 'en'
+  }
 })
 
 useSeoMeta({
@@ -23,47 +24,27 @@ useSeoMeta({
   twitterCard: 'summary_large_image'
 })
 
-const route = useRoute()
-
-// Create a reactive variable for navigation data.
-const navigation = ref<ContentNavigationItem[]>([])
-
-// Define a helper function to fetch navigation based on the current route.
-async function fetchNavigation() {
-  const isInfo = route.path.startsWith('/info')
-  const collectionKey = isInfo ? 'information' : 'docs'
-  const navRoot = isInfo ? '/info' : '/docs'
-  
-  const { data } = await useAsyncData('navigation', () =>
-    queryCollectionNavigation(collectionKey),
-    {
-      transform: data => data.find(item => item.path === navRoot)?.children || []
-    }
-  )
-  navigation.value = data.value || []
-}
-
-// Initial fetch.
-fetchNavigation()
-
-// Watch the route and re-fetch navigation when the path changes.
-watch(() => route.path, () => {
-  fetchNavigation()
+const { data: navigation } = await useAsyncData('navigation', () => queryCollectionNavigation('docs'), {
+  transform: data => data.find(item => item.path === '/docs')?.children || []
+})
+const { data: files } = useLazyAsyncData('search', () => queryCollectionSearchSections('docs'), {
+  server: false
 })
 
-// Use dynamic search sections query based on the current route.
-const { data: files } = useLazyAsyncData('search', () =>
-  queryCollectionSearchSections(route.path.startsWith('/info') ? 'information' : 'docs'),
-  { server: false }
-)
+const links = [{
+  label: 'Docs',
+  icon: 'i-lucide-book',
+  to: '/docs/getting-started'
+}, {
+  label: 'Pricing',
+  icon: 'i-lucide-credit-card',
+  to: '/pricing'
+}, {
+  label: 'Blog',
+  icon: 'i-lucide-pencil',
+  to: '/blog'
+}]
 
-const links = [
-  { label: 'Docs', icon: 'i-lucide-book', to: '/docs/guide' },
-  { label: 'Pricing', icon: 'i-lucide-credit-card', to: '/pricing' },
-  { label: 'Blog', icon: 'i-lucide-pencil', to: '/blog' }
-]
-
-// Provide the reactive navigation data to child components.
 provide('navigation', navigation)
 </script>
 
