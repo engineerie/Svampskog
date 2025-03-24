@@ -50,10 +50,7 @@
         <!-- Original search input -->
       </div>
     </div>
-
-    <div
-      class="relative backdrop-blur-3xl overflow-clip rounded-xl bg-white bg-opacity-80 dark:bg-neutral-900 dark:bg-opacity-60 border dark:border-neutral-800 border-stone-200"
-    >
+    <div class="p-2">
       <div class="flex gap-2 p-2 justify-end z-30" v-if="!isNormalView">
         <USelectMenu
           :ui="{ rounded: 'rounded-full' }"
@@ -250,18 +247,18 @@
       <div v-else>
         <div
           :class="[
-            'grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 gap-4 p-4  min-h-[399px] overflow-scroll',
-            isNormalView ? 'md:grid-cols-3' : 'md:grid-cols-6 border-t',
+            'grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 gap-4  min-h-[399px] ',
+            props.isNormalView ? 'md:grid-cols-6' : 'md:grid-cols-6 border-t',
           ]"
         >
           <div
             v-for="(row, index) in gridPaginatedData"
             :key="row.Commonname + row.Scientificname + index"
-            class="bg-white dark:bg-neutral-800 rounded-lg shadow hover:shadow-md transition-shadow cursor-pointer h-[184px]"
+            class="bg-white dark:bg-neutral-800 rounded-2xl shadow hover:shadow-md transition-shadow cursor-pointer h-[184px]"
             @click="selectRow(row)"
           >
             <!-- Image Thumbnail -->
-            <div class="w-full h-32 relative rounded-t-lg overflow-hidden">
+            <div class="w-full h-32 relative rounded-t-2xl overflow-hidden">
               <NuxtImg
                 v-if="row.images && row.images.length"
                 :src="row.images[0]"
@@ -306,7 +303,7 @@
 
         <!-- GRID VIEW PAGINATION -->
         <div
-          class="flex justify-between items-center p-5 border-t border-neutral-200 dark:border-neutral-800"
+          class="flex justify-between items-center "
         >
           <div>
             <p class="text-sm">
@@ -319,33 +316,9 @@
               v-model="gridPage"
               :page-count="gridPageSize"
               :total="totalItems"
-              :ui="{
-                wrapper: 'flex items-center gap-1',
-                rounded: '!rounded-full min-w-[32px] justify-center px-4',
-                default: {},
-              }"
-              size="lg"
+          
             >
-              <template #prev="{ onClick }">
-                <UButton
-                  icon="i-heroicons-chevron-left-20-solid"
-                  size="lg"
-                  color="white"
-                  :ui="{ rounded: 'rounded-full dark:border-neutral-800' }"
-                  class="rtl:[&_span:first-child]:rotate-180 dark:bg-neutral-900 border-[0.5px]"
-                  @click="onClick"
-                />
-              </template>
-              <template #next="{ onClick }">
-                <UButton
-                  icon="i-heroicons-chevron-right-20-solid"
-                  size="lg"
-                  color="white"
-                  :ui="{ rounded: 'rounded-full dark:border-neutral-800' }"
-                  class="rtl:[&_span:last-child]:rotate-180 dark:bg-neutral-900 border-[0.5px]"
-                  @click="onClick"
-                />
-              </template>
+              
             </UPagination>
           </div>
         </div>
@@ -543,7 +516,7 @@ const computedUITable = computed(() => ({
 // --- Grid View Pagination ---
 // We use a fixed page size based on our design (columns are controlled via Tailwind classes)
 
-const gridPageSize = computed(() => (props.isNormalView ? 6 : 24));
+const gridPageSize = computed(() => (props.isNormalView ? 12 : 24));
 const gridPage = ref(1);
 const gridPaginatedData = computed(() => {
   const start = (gridPage.value - 1) * gridPageSize.value;

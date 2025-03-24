@@ -26,20 +26,25 @@
         </div>
       </UPageCard> -->
 
-      <div class="col-span-12 mx-6">
-        <UPageHeader
+       <!-- <UPageHeader
     title="Svampar"
     description="Här kan du söka på svenska skogsmiljöer för att se vilka arter som
             kan finnas i marken."
-  />
+            :ui="{  root: 'relative border-none border-(--ui-border) py-2'}" 
+   
+  /> -->
+
+      <div class="col-span-12 mx-6">
+       
         <UTabs
       v-model="activeTab"
       :items="items"
+      variant="link"
+      color="neutral"
+      class="mb-4"
     />
-
         <UPage
           v-if="activeTab === 'komigang'"
-       variant="outline"
         >
        
        
@@ -80,15 +85,15 @@
                   <Icon name="mdi:chevron-down" class="size-5" />
                 </div>
                 för att se alla alternativ som radioknappar.
-                <UAlert
+                <!-- <UAlert
                   class="my-2"
                   icon="i-heroicons-information-circle"
                   color="warning"
                   variant="subtle"
                   title="Det är nödvändigt att göra val i alla kategorier."
-                />
+                /> -->
               </li>
-              <li class="pt-4">
+              <li class="">
                 Du kan också klicka på
                 <div
                   class="inline-flex mx-1 items-center rounded-full ring-1 ring-neutral-200 w-fit text-sm py-1 pl-4 pr-3 gap-1 bg-neutral-50 text-neutral-950"
@@ -98,13 +103,13 @@
                 </div>
                 för att begränsa urvalet till miljöer där det finns data från
                 markinventeringen.
-                <UAlert
+                <!-- <UAlert
                   class="my-2"
                   icon="i-heroicons-light-bulb"
                   color="success"
                   variant="subtle"
                   title="Om val är inaktiverade kan det hjälpa att avvmarkera redan gjorda val."
-                />
+                /> -->
               </li>
             </ul>
           </div>

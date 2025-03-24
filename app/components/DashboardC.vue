@@ -63,10 +63,12 @@ watch(
 // A ref to track if a full-screen view is active
 const activeFullScreenComponent = ref(null);
 
-// A computed property to check if all required route parameters are provided
+// A computed property to check if all required environment parameters are provided
 const hasAllParams = computed(() => {
-  const { geography, forestType, standAge, vegetationType } = route.params;
-  return geography && forestType && standAge && vegetationType;
+  return envParamsStore.geography &&
+         envParamsStore.forestType &&
+         envParamsStore.standAge &&
+         envParamsStore.vegetationType;
 });
 
 // The active component is chosen based on the route parameters and any full-screen state:
@@ -128,13 +130,41 @@ watch(
   () => route.params,
   (newParams) => {
     envParamsStore.setParams({
-      geography: newParams.geography,
-      forestType: newParams.forestType,
-      standAge: newParams.standAge,
-      vegetationType: newParams.vegetationType,
+      geography: newParams.geography || '',
+      forestType: newParams.forestType || '',
+      standAge: newParams.standAge || '',
+      vegetationType: newParams.vegetationType || '',
     });
   },
   { immediate: true }
+);
+
+// Watch for changes in environment parameters to update the URL
+watch(
+  () => [
+    envParamsStore.geography,
+    envParamsStore.forestType,
+    envParamsStore.standAge,
+    envParamsStore.vegetationType
+  ],
+  () => {
+    if (
+      envParamsStore.geography &&
+      envParamsStore.forestType &&
+      envParamsStore.standAge &&
+      envParamsStore.vegetationType
+    ) {
+      const newPath = `/mykorrhizasvampar/${encodeURIComponent(envParamsStore.geography)}/${encodeURIComponent(envParamsStore.forestType)}/${encodeURIComponent(envParamsStore.standAge)}/${encodeURIComponent(envParamsStore.vegetationType)}`;
+      if (window.location.pathname !== newPath) {
+        window.history.replaceState(null, '', newPath);
+      }
+    } else {
+      if (window.location.pathname !== '/') {
+        window.history.replaceState(null, '', '/');
+      }
+    }
+  },
+  { deep: true }
 );
 </script>
 

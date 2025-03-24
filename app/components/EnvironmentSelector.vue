@@ -59,6 +59,7 @@
 
       <!-- Toggle Buttons for Lock & Kombinationsvy -->
       <div class="flex justify-end gap-2 mb-2">
+     
         <UButton
           trailing
           :icon="restrictionEnabled ? 'mdi:lock' : 'mdi:lock-open'"

@@ -49,10 +49,10 @@ export const useEnvParamsStore = defineStore("envParams", {
   actions: {
     // Destructure the parameters and type them.
     setParams({ geography, forestType, standAge, vegetationType }: EnvParams) {
-      this.geography = geography;
-      this.forestType = forestType;
-      this.standAge = standAge;
-      this.vegetationType = vegetationType;
+      this.geography = geography || '';
+      this.forestType = forestType || '';
+      this.standAge = standAge || '';
+      this.vegetationType = vegetationType || '';
     },
   },
   getters: {

@@ -9,8 +9,8 @@ const items = computed(() => [
         label: 'Svampar',
         description: 'Vilka arter finns i olika skogar.',
         icon: 'i-lineicons-mushroom-1',
-        to: '/mykorrhizasvampar',
-        active: route.path.startsWith('/mykorrhizasvampar'),
+        to: '/mykorrhizasvampar/start',
+        // active: route.path.startsWith('/mykorrhizasvampar'),
       },
       {
         label: 'Skogsskötsel',

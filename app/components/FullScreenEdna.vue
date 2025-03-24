@@ -4,39 +4,105 @@
       class=""
     >
       <div class="flex gap-2 p-2 justify-end z-30" >
+       <!-- Remove these USelect components from the top filter bar -->
+<!--
+<USelect
+  v-model="selectedFilter"
+  multiple
+  :items="svampOptions"
+  placeholder="Filtrera svamptyp"
+/>
+<USelect
+  v-model="selectedGrupp"
+  multiple
+  :items="gruppOptions"
+  placeholder="Filtrera grupp"
+/>
+<USelect
+  v-model="selectedStatus"
+  multiple
+  :items="statusOptions"
+  placeholder="Filtrera status"
+/>
+-->
+
+<!-- And add the following block in their place -->
+<div class="flex gap-2 items-end">  <template v-if="selectedFilter.length">
+    <span v-for="filter in selectedFilter" :key="'svamp-'+filter">
+      <UBadge
+        trailing-icon="i-heroicons-x-mark-solid"
+        variant="subtle"
+        :color="filter === 'Matsvamp' ? 'warning' : filter === 'Giftsvamp' ? 'poison' : 'neutral'"
+        class="cursor-pointer"
+        @click="selectedFilter = selectedFilter.filter(f => f !== filter)"
+      >
+        {{ capitalize(filter) }}
+      </UBadge>
+    </span>
+  </template>
+  <template v-if="selectedGrupp.length">
+    <span v-for="filter in selectedGrupp" :key="'grupp-'+filter">
+      <UBadge
+        trailing-icon="i-heroicons-x-mark-solid"
+        variant="subtle"
+        color="neutral"
+        class="cursor-pointer"
+        @click="selectedGrupp = selectedGrupp.filter(f => f !== filter)"
+      >
+        {{ capitalize(filter) }}
+      </UBadge>
+    </span>
+  </template>
+  <template v-if="selectedStatus.length">
+    <span v-for="filter in selectedStatus" :key="'status-'+filter">
+      <UBadge
+        trailing-icon="i-heroicons-x-mark-solid"
+        variant="subtle"
+        :color="filter === 'Signalart' ? 'signal' : getStatusColor(filter)"
+        class="cursor-pointer"
+        @click="selectedStatus = selectedStatus.filter(f => f !== filter)"
+      >
+        {{ filter === 'Signalart' ? 'Signalart' : getStatusTooltip(filter) }}
+      </UBadge>
+    </span>
+  </template>
+</div>
         <div v-if="!isNormalView">
           <USelect
-  v-model="rowsPerPage"
-  :items="[10, 20, 30, 40, 50, 'Alla']"
-  placeholder="Rader per sida"
-/>
+            v-model="rowsPerPage"
+            :items="[10, 20, 30, 40, 50, 'Alla']"
+            placeholder="Rader per sida"
+          />
+          
         </div>
 
         <UInput
-  :model-value="table?.tableApi?.getState().globalFilter || ''"
-  class="max-w-sm min-w-[12ch]"
-  placeholder="Sök i tabell"
-  @update:model-value="value => table?.tableApi?.setGlobalFilter(value)"
-/>
+          :model-value="table?.tableApi?.getState().globalFilter || ''"
+          class="max-w-sm min-w-[12ch]"
+          placeholder="Sök i tabell"
+          @update:model-value="value => table?.tableApi?.setGlobalFilter(value)"
+        />
       </div>
       <div v-if="filteredData" :class="[isNormalView ? '' : '']">
         <div class="">
           <!-- v-model="selectedRows" -->
 
           <!-- UTable with Filtered Data -->
-         <UTable
-  ref="table"
-  v-model:pagination="pagination"
-  :data="sortedData"
-  :columns="columns"
-  sticky
-  :loading="isLoading"
-  :sort="sort"
-  @update:sort="sort = $event"
-  @select="selectRow"
-  :pagination-options="!isNormalView ? { getPaginationRowModel: getPaginationRowModel() } : undefined"
-  :class="{ 'h-[442px]': isNormalView }"
-/>
+          <UTable
+            ref="table"
+            v-model:pagination="pagination"
+            :data="sortedData"
+            :columns="columns"
+            sticky
+            :loading="isLoading"
+            :sort="sort"
+            @update:sort="sort = $event"
+            @select="selectRow"
+        :autoResetAll="true" 
+
+            :pagination-options="!isNormalView ? { getPaginationRowModel: getPaginationRowModel() } : undefined"
+            :class="{ 'h-[442px]': isNormalView }"
+          />
           <div
             class="flex justify-between items-center p-5 border-t-[1px] border-neutral-200 dark:border-neutral-700"
           >
@@ -56,13 +122,13 @@
               <!-- Pagination component -->
               <div v-if="!isNormalView && rowsPerPage !== 'Alla'">
                 <div class="flex justify-center">
-  <UPagination
-    :default-page="(table?.tableApi?.getState().pagination.pageIndex || 0) + 1"
-    :items-per-page="table?.tableApi?.getState().pagination.pageSize"
-    :total="table?.tableApi?.getFilteredRowModel().rows.length"
-    @update:page="(p) => table?.tableApi?.setPageIndex(p - 1)"
-  />
-</div>
+                  <UPagination
+                    :default-page="(table?.tableApi?.getState().pagination.pageIndex || 0) + 1"
+                    :items-per-page="table?.tableApi?.getState().pagination.pageSize"
+                    :total="table?.tableApi?.getFilteredRowModel().rows.length"
+                    @update:page="(p) => table?.tableApi?.setPageIndex(p - 1)"
+                  />
+                </div>
               </div>
             </div>
           </div>
@@ -93,7 +159,138 @@ const props = defineProps({
 
 const table = useTemplateRef('table')
 
+const svampOptions = computed(() => {
+  const options = ['Matsvamp', 'Giftsvamp'];
+  const counts = {};
+  filteredData.value.forEach(row => {
+    if (row.matsvamp == 1) {
+      counts['Matsvamp'] = (counts['Matsvamp'] || 0) + 1;
+    }
+    if ((row.Giftsvamp || '').toLowerCase() === 'x') {
+      counts['Giftsvamp'] = (counts['Giftsvamp'] || 0) + 1;
+    }
+  });
+  return options.map(opt => ({
+    label: `${opt} (${counts[opt] || 0})`,
+    value: opt
+  }));
+});
+
 const rowsPerPage = ref(props.isNormalView ? 500 : 10);
+const selectedFilter = ref([]);
+const selectedStatus = ref([]);
+const selectedGrupp = ref([]);
+const gruppMenuItems = computed(() => {
+  return gruppOptions.value.map(option => ({
+    label: option.label,
+    type: 'checkbox',
+    checked: selectedGrupp.value.includes(option.value),
+    onUpdateChecked(checked) {
+      if (checked) {
+        if (!selectedGrupp.value.includes(option.value)) {
+          selectedGrupp.value.push(option.value);
+        }
+      } else {
+        selectedGrupp.value = selectedGrupp.value.filter(val => val !== option.value);
+      }
+    },
+    onSelect(e) {
+      e.preventDefault();
+    }
+  }));
+});
+
+const svampMenuItems = computed(() => {
+  return svampOptions.value.map(option => ({
+    label: option.label,
+    type: 'checkbox',
+    checked: selectedFilter.value.includes(option.value),
+    onUpdateChecked(checked) {
+      if (checked) {
+        if (!selectedFilter.value.includes(option.value)) {
+          selectedFilter.value.push(option.value);
+        }
+      } else {
+        selectedFilter.value = selectedFilter.value.filter(val => val !== option.value);
+      }
+    },
+    onSelect(e) {
+      e.preventDefault();
+    }
+  }));
+});
+
+const statusMenuItems = computed(() => {
+  return statusOptions.value.map(option => ({
+    label: option.label,
+    type: 'checkbox',
+    checked: selectedStatus.value.includes(option.value),
+    onUpdateChecked(checked) {
+      if (checked) {
+        if (!selectedStatus.value.includes(option.value)) {
+          selectedStatus.value.push(option.value);
+        }
+      } else {
+        selectedStatus.value = selectedStatus.value.filter(val => val !== option.value);
+      }
+    },
+    onSelect(e) {
+      e.preventDefault();
+    }
+  }));
+});
+
+const gruppOptions = computed(() => {
+  const counts = {};
+  // Iterate over filteredData (or data.value if you want counts from all data)
+  filteredData.value.forEach(row => {
+    const group = row["Svamp-grupp-släkte"];
+    if (group) {
+      counts[group] = (counts[group] || 0) + 1;
+    }
+  });
+  // Create an options array with labels including counts
+  return Object.keys(counts).map(group => ({
+    label: `${capitalize(group)} (${counts[group]})`,
+    value: group
+  }));
+});
+
+const statusOptions = computed(() => {
+  // Define the base statuses
+  const statuses = ['LC', 'NT', 'EN', 'VU', 'CR', 'RE', 'DD'];
+
+  // Initialize a counts object for each status and for 'Ej bedömd'
+  const counts = {};
+  // Iterate over the full data
+  data.value.forEach(row => {
+    const statusVal = row.RL2020kat;
+    if (statuses.includes(statusVal)) {
+      counts[statusVal] = (counts[statusVal] || 0) + 1;
+    } else if (
+      statusVal === '0' ||
+      String(statusVal).toUpperCase() === 'NA' ||
+      String(statusVal).toUpperCase() === 'NE'
+    ) {
+      counts['Ej bedömd'] = (counts['Ej bedömd'] || 0) + 1;
+    }
+  });
+
+  // Compute the number of rows that have SIGNAL_art === 'S'
+  const signalCount = data.value.reduce((acc, row) => {
+  return acc + ((row.SIGNAL_art === 'S') ? 1 : 0);
+}, 0);
+
+  // Build the options array with counts appended to the label
+  return [
+    ...statuses.map(s => ({
+      label: `${getStatusTooltip(s)} (${counts[s] || 0})`,
+      value: s
+    })),
+    { label: `Ej bedömd (${counts['Ej bedömd'] || 0})`, value: 'Ej bedömd' },
+    { label: `Signalart (${signalCount})`, value: 'Signalart' }
+  ];
+});
 
 const pagination = ref({
   pageIndex: 0,
@@ -105,23 +302,6 @@ const speciesStore = useSpeciesStore();
 function selectRow(row, e) {
   speciesStore.selectSpecies(row.original, "edna");
 }
-
-const color = computed(() => {
-  switch (true) {
-    case sampleEnvCount.value < 10:
-      return "error";
-    case sampleEnvCount.value < 50:
-      return "warning";
-    default:
-      return "primary";
-  }
-});
-
-// Method to strip 'detaljer' from the URL if it exists
-const stripDetailsFromURL = (url) => {
-  if (!url) return "";
-  return url.replace("/detaljer", "").replace("/artinformation", "");
-};
 
 // Capitalize function for displaying the species name
 const capitalize = (str) => {
@@ -147,24 +327,6 @@ const getIconPath = (svampGrupp) => {
   };
 
   return `/images/svampgrupp/${iconMapping[svampGrupp] || "default-icon.webp"}`;
-};
-
-
-
-const route = useRoute();
-const activeTab = ref("spatialForest");
-
-const getStatusAbbreviation = (status) => {
-  const abbreviations = {
-    LC: "LC",
-    NT: "NT", // Near Threatened
-    EN: "EN", // Endangered
-    VU: "VU", // Vulnerable
-    CR: "CR", // Critically Endangered
-    RE: "RE", // Regionally Extinct
-    DD: "DD", // Data Deficient
-  };
-  return abbreviations[status] || "NE"; // Default case
 };
 
 const getStatusColor = (status) => {
@@ -199,6 +361,7 @@ const UBadge = resolveComponent('UBadge')
 const NuxtImg = resolveComponent('NuxtImg')
 const UProgress = resolveComponent('UProgress')
 const UButton = resolveComponent('UButton')
+const UDropdownMenu = resolveComponent('UDropdownMenu')
 
 
 const columns = [
@@ -263,9 +426,9 @@ const columns = [
     h('div', { class: 'text-neutral-700' }, capitalize(row.getValue("Commonname")))
 },
 
-        {
-          accessorKey: "Scientificname",
-          header: ({ column }) => {
+{
+  accessorKey: "Scientificname",
+  header: ({ column }) => {
     const isSorted = column.getIsSorted();
     return h(
       UButton,
@@ -283,32 +446,24 @@ const columns = [
       }
     );
   },
-          // sortable: true,
-          cell: ({ row }) => `${row.getValue('Scientificname')}`
+  // sortable: true,
+  cell: ({ row }) => `${row.getValue('Scientificname')}`
 
-        },
+},
 
-      {
+{
   accessorKey: "Svamp-grupp-släkte",
-  header: ({ column }) => {
-    const isSorted = column.getIsSorted();
-    return h(
-      UButton,
-      {
-        color: 'neutral',
-        variant: 'ghost',
-        label: 'Grupp',
-        icon: isSorted
-          ? (isSorted === 'asc'
-              ? 'i-lucide-arrow-up-narrow-wide'
-              : 'i-lucide-arrow-down-wide-narrow')
-          : 'i-lucide-arrow-up-down',
-        class: '-mx-2.5',
-        onClick: () => column.toggleSorting(isSorted === 'asc')
-      }
-    );
+  header: () => h(UDropdownMenu, {
+    items: gruppMenuItems.value,
+    content: { align: 'start' },
+    ui: { content: 'w-48' }
+  }, {
+    default: () => h(UButton, { label: 'Grupp', variant: 'ghost', color: 'neutral', icon: "i-lucide-list-filter"  })
+  }),
+  filterFn: (row, columnId, filterValue) => {
+    if (!filterValue || filterValue.length === 0) return true;
+    return filterValue.includes(row.getValue(columnId));
   },
-  sortable: props.isNormalView ? false : true,
   cell: ({ row }) => {
     const grupp = row.getValue("Svamp-grupp-släkte");
     return grupp !== "Saknas"
@@ -320,9 +475,26 @@ const columns = [
       : h(Icon, { name: "heroicons:x-mark-20-solid", class: "size-7" });
   }
 },
-  {
+{
   accessorKey: 'matsvamp',
-  header: 'Matsvamp',
+  header: () => h(UDropdownMenu, {
+    items: svampMenuItems.value,
+    content: { align: 'start' },
+    ui: { content: 'w-48' }
+  }, {
+    default: () => h(UButton, { label: 'Matsvamp', variant: 'ghost', color: 'neutral', icon: "i-lucide-list-filter" })
+  }),
+  filterFn: (row, columnId, filterValue) => {
+  if (!filterValue || filterValue.length === 0) return true;
+  let match = false;
+  if (filterValue.includes('Matsvamp')) {
+    match = match || (row.getValue(columnId) === 1);
+  }
+  if (filterValue.includes('Giftsvamp')) {
+    match = match || ((row.original.Giftsvamp || '').toLowerCase() === 'x');
+  }
+  return match;
+},
   cell: ({ row }) =>
     h('div', { class: 'flex gap-1' }, [
       row.getValue('matsvamp') === 1 && h(UBadge, { color: 'warning', variant: 'subtle' }, () => 'Matsvamp'),
@@ -331,7 +503,31 @@ const columns = [
 },
 {
   accessorKey: 'RL2020kat',
-  header: 'Status',
+  header: () => h(UDropdownMenu, {
+    items: statusMenuItems.value,
+    content: { align: 'start' },
+    ui: { content: 'w-48' }
+  }, {
+    default: () => h(UButton, { label: 'Status', variant: 'ghost', color: 'neutral', icon: "i-lucide-list-filter"  })
+  }),
+  filterFn: (row, columnId, filterValue) => {
+  if (!filterValue || filterValue.length === 0) return true;
+  const statusVal = row.getValue(columnId);
+  return filterValue.some(filter => {
+    if (filter === 'Ej bedömd') {
+      return (
+        statusVal === 0 ||
+        statusVal === '0' ||
+        String(statusVal).toUpperCase() === 'NA' ||
+        String(statusVal).toUpperCase() === 'NE'
+      );
+    }
+    if (filter === 'Signalart') {
+      return row.original.SIGNAL_art === 'S';
+    }
+    return filter === statusVal;
+  });
+},
   cell: ({ row }) => {
     const status = row.getValue('RL2020kat');
     const mainBadge = h(
@@ -339,7 +535,6 @@ const columns = [
       { color: getStatusColor(status), variant: 'subtle' },
       () => getStatusTooltip(status)
     );
-    // Check if SIGNAL_art is "S" and conditionally add the Signalart badge
     const signalBadge =
       row.original.SIGNAL_art === 'S'
         ? h(UBadge, { color: 'signal', variant: 'subtle' }, 'Signalart')
@@ -348,11 +543,6 @@ const columns = [
   }
 },
 ];
-
-const geography = ref("");
-const forestType = ref("");
-const standAge = ref("");
-const vegetationType = ref("");
 
 const topCount = ref(0);
 const remainingCount = ref(0);
@@ -425,6 +615,8 @@ const fetchData = async () => {
       allColors.value = [...grayColors, ...rainbowColors];
     } catch (error) {
       console.error("Error fetching data:", error);
+      data.value = [];   // Ensure data is cleared if fetch fails
+      isLoading.value = false;
     }
   }
 };
@@ -453,7 +645,9 @@ watch(
     envStore.vegetationType
   ],
   () => {
-    // Call your fetch function when any of these change:
+    // Clear previous data and show loading state immediately when parameters change
+    data.value = [];
+    isLoading.value = true;
     fetchData();
   },
   { immediate: true }
@@ -461,8 +655,6 @@ watch(
 
 const searchQuery = ref("");
 const page = ref(1);
-const rowsPerPageOptions = [5, 10, 20, 30, 40, 50]; // Options for rows per page
-
 
 const filteredData = computed(() => {
   let result = data.value;
@@ -522,41 +714,46 @@ watch(rowsPerPage, (newVal) => {
   }
 });
 
-const paginatedData = computed(() => {
-  // If "All" is selected, show all rows
-  if (rowsPerPage.value === "Alla") {
-    return sortedData.value;
-  } else {
-    const start = (page.value - 1) * rowsPerPage.value;
-    const end = page.value * rowsPerPage.value;
-    return sortedData.value.slice(start, end);
-  }
-});
-
-// Calculate totalPages only if rowsPerPage is a number
-const totalPages = computed(() => {
-  if (rowsPerPage.value === "Alla") {
-    return 1;
-  }
-  return Math.ceil(totalItems.value / rowsPerPage.value);
-});
-
 const currentPaginationRows = computed(() => {
   return table.value?.tableApi?.getPaginationRowModel().rows || [];
 });
 
+const paginationState = computed(() => table.value?.tableApi?.getState().pagination || { pageIndex: 0, pageSize: 10 });
+
 const startItem = computed(() => {
-  const rows = currentPaginationRows.value;
-  return rows.length > 0 ? rows[0].index + 1 : 0;
+  // Start index is based on the current page index and page size
+  return (paginationState.value.pageIndex * paginationState.value.pageSize) + 1;
 });
 
 const endItem = computed(() => {
-  const rows = currentPaginationRows.value;
-  return rows.length > 0 ? rows[rows.length - 1].index + 1 : 0;
+  // End index is the start plus the number of rows in the current page
+  const end = (paginationState.value.pageIndex * paginationState.value.pageSize) + currentPaginationRows.value.length;
+  // Ensure end doesn't exceed the total number of filtered items
+  return end > totalItems.value ? totalItems.value : end;
 });
 
 const totalItems = computed(() => {
   return table.value?.tableApi?.getFilteredRowModel().rows.length || 0;
+});
+
+const columnFilters = computed(() => {
+  const filters = [];
+  if (selectedFilter.value && selectedFilter.value.length > 0) {
+    filters.push({ id: 'matsvamp', value: selectedFilter.value });
+  }
+  if (selectedStatus.value && selectedStatus.value.length > 0) {
+    filters.push({ id: 'RL2020kat', value: selectedStatus.value });
+  }
+  if (selectedGrupp.value && selectedGrupp.value.length > 0) {
+    filters.push({ id: 'Svamp-grupp-släkte', value: selectedGrupp.value });
+  }
+  return filters;
+});
+
+watch(columnFilters, (newFilters) => {
+  if (table.value?.tableApi) {
+    table.value.tableApi.setColumnFilters(newFilters);
+  }
 });
 </script>
 
