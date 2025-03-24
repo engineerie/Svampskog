@@ -33,96 +33,10 @@
   :loading="isLoading"
   :sort="sort"
   @update:sort="sort = $event"
+  @select="selectRow"
   :pagination-options="!isNormalView ? { getPaginationRowModel: getPaginationRowModel() } : undefined"
   :class="{ 'h-[442px]': isNormalView }"
 />
-            <!-- Custom cell templates -->
-            <!-- <template #sample_plot_count-cell="{ row, index }">
-              <div v-if="showIcons" class="flex items-center justify-center">
-                <div
-                  data-tooltip="right"
-                  :data-tooltip-text="`Förekommer i ${row.sample_plot_count} av ${sampleEnvCount} skogar`"
-                >
-                  <Icon
-                    name="fluent:shape-organic-16-filled"
-                    :class="'h-7 w-7 -my-2'"
-                    :style="{ color: allColors[index] }"
-                  />
-                </div>
-              </div>
-              <div v-else class="px-2 w-32">
-                <UProgress
-                  :max="sampleEnvCount"
-                  :value="row.sample_plot_count"
-                  :color="allColors[row.colorIndex]"
-                  data-tooltip="right"
-                  :data-tooltip-text="`Förekommer i ${row.sample_plot_count} av ${sampleEnvCount} skogar`"
-                />
-              </div>
-            </template> -->
-
-            <!-- <template #Commonname-cell="{ row }">
-              <div v-if="isNormalView" class="truncate">
-                {{ capitalize(row.Commonname) }}
-                <span class="italic text-neutral-400">({{ capitalize(row.Scientificname) }})</span>
-              </div>
-              <div v-else>{{ capitalize(row.Commonname) }}</div>
-            </template> -->
-
-            <!-- <template #Scientificname-cell="{ row }">
-              <div class="italic font-thin max-w-52 truncate">
-                {{ row.Scientificname }}
-              </div>
-            </template> -->
-<!-- 
-            <template #Svamp-grupp-släkte-cell="{ row }">
-              <div
-                data-tooltip="left"
-                :data-tooltip-text="row['Svamp-grupp-släkte'] !== '0' ? capitalize(row['Svamp-grupp-släkte']) : 'Okänd'"
-                class="ml-2"
-              >
-                <NuxtImg
-                  v-if="row['Svamp-grupp-släkte'] !== 'Saknas'"
-                  :src="getIconPath(row['Svamp-grupp-släkte'])"
-                  class="w-6"
-                  alt="Svamp Icon"
-                />
-                <Icon v-else name="heroicons:x-mark-20-solid" class="size-7" />
-              </div>
-            </template> -->
-
-            <!-- <template #RL2020kat-cell="{ row }">
-              <div class="flex items-center space-x-2">
-                <div
-                  :class="[getStatusColor(row.RL2020kat), 'h-5 w-5 rounded-full flex items-center justify-center text-white z-0 max-w-12']"
-                  data-tooltip="left"
-                  :data-tooltip-text="row['RL2020kat'] !== 'Saknas' ? getStatusTooltip(row.RL2020kat) : 'Ej bedömd'"
-                />
-                <div v-if="row.SIGNAL_art === 'S'" class="relative">
-                  <div
-                    class="h-5 w-5 rounded-full bg-neutral-500 opacity-100 flex items-center justify-center text-white z-10 text-sm"
-                    data-tooltip-text="Signalart"
-                  />
-                </div>
-              </div>
-            </template> -->
-<!-- 
-            <template #matsvamp-cell="{ row }">
-              <div v-if="row.matsvamp === 1">
-                <Icon name="icon-park-solid:knife-fork" class="h-7 w-7 text-yellow-500 -my-2" />
-              </div>
-              <div v-else-if="row.Giftsvamp === 'x'">
-                <Icon name="hugeicons:danger" class="text-lime-500 w-7 h-7" />
-              </div>
-            </template> -->
-
-            <!-- Empty state template -->
-            <!-- <template #empty>
-              <div class="flex flex-col items-center justify-center py-6 gap-3">
-                <span class="text-gray-500">Inga arter hittades</span>
-              </div>
-            </template> -->
-          <!-- </UTable> -->
           <div
             class="flex justify-between items-center p-5 border-t-[1px] border-neutral-200 dark:border-neutral-700"
           >
@@ -135,54 +49,8 @@
                 Visar {{ startItem }} till {{ endItem }} av
                 {{ totalItems }} arter
               </h1>
-              <!-- <div
-                class="rounded-l-xl flex items-end px-3 -mr-2 py-1 bg-neutral-50 border-[0.5px] border-r-0 border-neutral-100 text-neutral-400"
-              >
-                <div class="flex items-end" :data-nui-tooltip="'Mycelform'">
-                  <Icon
-                    name="fluent:shape-organic-16-filled"
-                    class="h-6 w-6 -mr-5 text-gray-500 z-[2]"
-                  />
-                  <Icon
-                    name="fluent:shape-organic-16-filled"
-                    class="h-6 w-6 -mr-5 text-gray-400 z-[1]"
-                  />
-                  <Icon
-                    name="fluent:shape-organic-16-filled"
-                    class="h-6 w-6 mr-2 text-gray-300 z-0"
-                  />
-                  <h1 class="text-neutral-400">{{ topCount }} Arter</h1>
-                </div>
-              </div> -->
-    
-              <!-- <div
-                class="flex items-end px-3 py-1 bg-neutral-50 border-[0.5px] border-neutral-100 rounded-r-xl text-neutral-400 border-l-0"
-              >
-                <div class="flex items-end" :data-nui-tooltip="'Mycelform'">
-                  <Icon
-                    name="fluent:shape-organic-16-filled"
-                    class="h-6 w-6 -mr-5 text-yellow-400 z-[3]"
-                  />
-                  <Icon
-                    name="fluent:shape-organic-16-filled"
-                    class="h-6 w-6 -mr-5 text-lime-400 z-[2]"
-                  />
-                  <Icon
-                    name="fluent:shape-organic-16-filled"
-                    class="h-6 w-6 -mr-5 text-teal-400 z-[1]"
-                  />
-                  <Icon
-                    name="fluent:shape-organic-16-filled"
-                    class="h-6 w-6 mr-2 text-rose-400 z-0"
-                  />
-                  <h1 size="xs" weight="medium" class="text-neutral-400">
-                    {{ remainingCount }} Arter
-                  </h1>
-                </div>
-              </div> -->
+          
             </div>
-
-            <!-- Display the current range and total items -->
 
             <div>
               <!-- Pagination component -->
@@ -207,7 +75,7 @@
         </div>
       </div>
 
-      <!-- Information section aligned to the bottom -->
+
     </div>
   </div>
 </template>
@@ -232,15 +100,10 @@ const pagination = ref({
   pageSize: 10
 });
 
-
-
-// This new boolean controls how 'förekomst' will be shown
-const showIcons = ref(false);
-
 const speciesStore = useSpeciesStore();
 
-function selectRow(row) {
-  speciesStore.selectSpecies(row, "edna");
+function selectRow(row, e) {
+  speciesStore.selectSpecies(row.original, "edna");
 }
 
 const color = computed(() => {
