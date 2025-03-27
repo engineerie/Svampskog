@@ -3,7 +3,7 @@
     <div
       class=""
     >
-      <div class="flex gap-2 p-2 justify-end z-30" >
+      <div class="flex gap-2 p-2 justify-between z-30" >
        <!-- Remove these USelect components from the top filter bar -->
 <!--
 <USelect
@@ -27,7 +27,31 @@
 -->
 
 <!-- And add the following block in their place -->
-<div class="flex gap-2 items-end">  <template v-if="selectedFilter.length">
+<div class="flex gap-2 items-end">  
+  <UInput
+          :model-value="table?.tableApi?.getState().globalFilter || ''"
+          class="max-w-sm min-w-[12ch]"
+          placeholder="Sök på namn"
+          @update:model-value="value => table?.tableApi?.setGlobalFilter(value)"
+          variant="ghost"
+        />
+  
+</div>
+<div class="flex gap-2">
+  <template v-if="selectedMark.length">
+    <span v-for="filter in selectedMark" :key="'mark-'+filter">
+      <UBadge
+        trailing-icon="i-heroicons-x-mark-solid"
+        variant="subtle"
+        :color="filter === 'KALKmark' ? 'kalkmark' : filter === 'ANNANmark' ? 'vanligmark' : 'neutral'"
+        class="cursor-pointer"
+        @click="selectedMark = selectedMark.filter(f => f !== filter)"
+      >
+        {{ filter === 'KALKmark' ? 'Kalkmark' : filter === 'ANNANmark' ? 'Vanlig skogsmark' : capitalize(filter) }}
+      </UBadge>
+    </span>
+  </template>
+  <template v-if="selectedFilter.length">
     <span v-for="filter in selectedFilter" :key="'svamp-'+filter">
       <UBadge
         trailing-icon="i-heroicons-x-mark-solid"
@@ -66,22 +90,48 @@
       </UBadge>
     </span>
   </template>
-</div>
-        <div v-if="!isNormalView">
+
+  <UDropdownMenu
+  :items="table?.tableApi?.getAllColumns()?.filter(column => column.getCanHide())?.map(column => ({
+    label: column.columnDef.meta?.headerText || upperFirst(column.id),
+    type: 'checkbox',
+    checked: column.getIsVisible(),
+    onUpdateChecked(checked) {
+      table?.tableApi?.getColumn(column.id)?.toggleVisibility(!!checked)
+    },
+    onSelect(e) {
+      e?.preventDefault()
+    }
+  }))"
+  :content="{ align: 'end' }"
+>
+  <UButton
+    label="Kolumner"
+    color="neutral"
+    variant="ghost"
+    trailing-icon="i-lucide-chevron-down"
+  />
+</UDropdownMenu>
+
+        <div v-if="!isNormalView" >
           <USelect
             v-model="rowsPerPage"
-            :items="[10, 20, 30, 40, 50, 'Alla']"
+            :items="[
+              { value: 10, label: '10 rader' },
+              { value: 20, label: '20 rader' },
+              { value: 30, label: '30 rader' },
+              { value: 40, label: '40 rader' },
+              { value: 50, label: '50 rader' },
+              { value: 'Alla', label: 'Alla' }
+            ]"
+            item-value="value"
+            item-label="label"
             placeholder="Rader per sida"
+            variant="ghost"
           />
-          
         </div>
-
-        <UInput
-          :model-value="table?.tableApi?.getState().globalFilter || ''"
-          class="max-w-sm min-w-[12ch]"
-          placeholder="Sök i tabell"
-          @update:model-value="value => table?.tableApi?.setGlobalFilter(value)"
-        />
+      </div>
+       
       </div>
       <div v-if="filteredData" :class="[isNormalView ? '' : '']">
         <div class="">
@@ -91,16 +141,15 @@
         
           <UTable
             ref="table"
+            v-model:column-visibility="columnVisibility"
             v-model:pagination="pagination"
-            :data="sortedData"
+            :data="filteredData"
             :columns="columns"
             sticky
             :loading="isLoading"
-            :sort="sort"
-            @update:sort="sort = $event"
+            v-model:sorting="sorting"
             @select="selectRow"
-        :autoResetAll="true" 
-
+            :autoResetAll="true" 
             :pagination-options="!isNormalView ? { getPaginationRowModel: getPaginationRowModel() } : undefined"
             :class="{ 'h-[442px]': isNormalView }"
           />
@@ -124,6 +173,8 @@
               <div v-if="!isNormalView && rowsPerPage !== 'Alla'">
                 <div class="flex justify-center">
                   <UPagination
+                  active-variant="ghost"
+                  variant="ghost"
                     :default-page="(table?.tableApi?.getState().pagination.pageIndex || 0) + 1"
                     :items-per-page="table?.tableApi?.getState().pagination.pageSize"
                     :total="table?.tableApi?.getFilteredRowModel().rows.length"
@@ -152,19 +203,88 @@ import { ref, computed, watch, h, resolveComponent } from "vue";
 import { useSpeciesStore } from "~/stores/speciesStore";
 import { useEnvParamsStore } from '~/stores/envParamsStore'
 import { getPaginationRowModel } from '@tanstack/vue-table'
+import { upperFirst } from 'scule'
+
 
 const props = defineProps({
-  isNormalView: Boolean,
+  isNormalView: { type: Boolean, default: false },
+  dataTypeFolder: { type: String, default: 'edna' },
+  dataType: { type: String, default: 'data' },
+  grupp: { type: String, default: 'Svamp-grupp-släkte' },
+  mat: { type: String, default: 'matsvamp' },
+  obs: { type: String, default: 'sample_plot_count' },
+  obsLabel: { type: String, default: 'Förekomst' },
+  columnVisibilityOverrides: { type: Object, default: () => ({}) },
+  filterEdible: { type: Boolean, default: false },
+  filterPoison: { type: Boolean, default: false }
 });
 
+
+
 const table = useTemplateRef('table')
+
+const defaultVisibility = {
+  RankRed: false,
+  "Rank matsvamp": false,
+  "Rank giftsvamp": false,
+};
+
+const columnVisibility = ref({ ...defaultVisibility, ...props.columnVisibilityOverrides });
+
+// Define a reactive array for selected mark filters
+const selectedMark = ref([]);
+// Create computed mark options – these will include the count of matches.
+const markOptions = computed(() => {
+  const counts = {};
+  // Iterate over filteredData to count how many rows have each mark
+  filteredData.value.forEach(row => {
+    if (row.KALKmark) {
+      counts["Kalkmark"] = (counts["Kalkmark"] || 0) + 1;
+    }
+    if (row.ANNANmark) {
+      counts["Vanlig skogsmark"] = (counts["Vanlig skogsmark"] || 0) + 1;
+    }
+  });
+  return [
+    { label: `Kalkmark (${counts["Kalkmark"] || 0})`, value: "KALKmark" },
+    { label: `Vanlig skogsmark (${counts["Vanlig skogsmark"] || 0})`, value: "ANNANmark" }
+  ];
+});
+
+// Create the markMenuItems computed property similar to statusMenuItems:
+const markMenuItems = computed(() => {
+  return markOptions.value.map(option => ({
+    label: option.label,
+    type: 'checkbox',
+    checked: selectedMark.value.includes(option.value),
+    onUpdateChecked(checked) {
+      if (checked) {
+        if (!selectedMark.value.includes(option.value)) {
+          selectedMark.value.push(option.value);
+        }
+      } else {
+        selectedMark.value = selectedMark.value.filter(val => val !== option.value);
+      }
+    },
+    onSelect(e) {
+      e.preventDefault();
+    }
+  }));
+});
 
 const svampOptions = computed(() => {
   const options = ['Matsvamp', 'Giftsvamp'];
   const counts = {};
   filteredData.value.forEach(row => {
-    if (row.matsvamp == 1) {
-      counts['Matsvamp'] = (counts['Matsvamp'] || 0) + 1;
+    let matVal = row[props.mat];
+    if (props.mat === "Nyasvamp-boken") {
+      if (matVal && String(matVal).toLowerCase() === 'x') {
+        counts['Matsvamp'] = (counts['Matsvamp'] || 0) + 1;
+      }
+    } else {
+      if (matVal == 1) {
+        counts['Matsvamp'] = (counts['Matsvamp'] || 0) + 1;
+      }
     }
     if ((row.Giftsvamp || '').toLowerCase() === 'x') {
       counts['Giftsvamp'] = (counts['Giftsvamp'] || 0) + 1;
@@ -244,7 +364,7 @@ const gruppOptions = computed(() => {
   const counts = {};
   // Iterate over filteredData (or data.value if you want counts from all data)
   filteredData.value.forEach(row => {
-    const group = row["Svamp-grupp-släkte"];
+    const group = row[props.grupp];
     if (group) {
       counts[group] = (counts[group] || 0) + 1;
     }
@@ -355,7 +475,9 @@ const getStatusTooltip = (status) => {
   return tooltips[status] || "Ej bedömd";
 };
 
-const sort = ref({ column: "", direction: "asc" });
+const sorting = ref([{ id: props.obs, desc: true }])
+
+// const sort = ref({ column: "", direction: "asc" });
 
 const UBadge = resolveComponent('UBadge')
 const NuxtImg = resolveComponent('NuxtImg')
@@ -366,42 +488,31 @@ const UDropdownMenu = resolveComponent('UDropdownMenu')
 
 const columns = [
 {
-  accessorKey: "sample_plot_count",
-  header: ({ column }) => {
-    const isSorted = column.getIsSorted();
-    return h(
-      UButton,
-      {
-        color: 'neutral',
-        variant: 'ghost',
-        label: 'Förekomst',
-        icon: isSorted
-          ? (isSorted === 'asc'
-              ? 'i-lucide-arrow-up-narrow-wide'
-              : 'i-lucide-arrow-down-wide-narrow')
-          : 'i-lucide-arrow-up-down',
-        class: '-mx-2.5',
-        onClick: () => column.toggleSorting(isSorted === 'asc')
-      }
-    );
+  accessorKey: "images",
+  header: "Bild", // You can leave the header empty or provide an icon/label
+  sortable: false,
+  cell: ({ row }) => {
+    const images = row.getValue("images");
+    // If an image exists, render it using NuxtImg; otherwise, render a fallback Icon
+    if (images && images.length) {
+      return h(resolveComponent('NuxtImg'), {
+        src: images[0],
+        class: "size-12 object-cover -my-4 rounded-lg border border-neutral-200",
+        alt: "Species Image",
+        height: "300",
+        width: "450",
+        format: "webp"
+      });
+    }
+    // return h("div", { 
+    //   class: "size-12 -my-4 rounded-lg flex items-center justify-center bg-gray-200 dark:bg-gray-700" 
+    // }, [
+    //   h(resolveComponent('Icon'), { name: "material-symbols:photo", class: "size-5 text-neutral-500" })
+    // ]);
   },
-  cell: ({ row, index }) => {
-    const progressVal = Number(row.getValue("sample_plot_count"));
-    const maxVal = Number(sampleEnvCount.value) || 100;
-   
-    return h(UProgress, {
-      modelValue: progressVal,
-      max: maxVal,
-      // Instead of passing the color prop, use the style attribute to override the CSS variable:
-  
-
-      color: allColors.value[index],
-      indeterminate: false,
-
-      "onUpdate:modelValue": () => {}
-    });
-  }
+  meta: { headerText: 'Bild' },
 },
+
 {
   accessorKey: "Commonname",
   header: ({ column }) => {
@@ -424,6 +535,8 @@ const columns = [
   },
   cell: ({ row }) =>
     h('div', { class: 'text-neutral-700' }, capitalize(row.getValue("Commonname")))
+    ,
+  meta: { headerText: 'Namn' },
 },
 
 {
@@ -448,11 +561,12 @@ const columns = [
   },
   // sortable: true,
   cell: ({ row }) => `${row.getValue('Scientificname')}`
-
+  ,
+  meta: { headerText: 'Latinskt namn' },
 },
 
 {
-  accessorKey: "Svamp-grupp-släkte",
+  accessorKey: props.grupp,
   header: () => h(UDropdownMenu, {
     items: gruppMenuItems.value,
     content: { align: 'start' },
@@ -465,7 +579,7 @@ const columns = [
     return filterValue.includes(row.getValue(columnId));
   },
   cell: ({ row }) => {
-    const grupp = row.getValue("Svamp-grupp-släkte");
+    const grupp = row.getValue(props.grupp);
     return grupp !== "Saknas"
       ? h(NuxtImg, {
           src: getIconPath(grupp),
@@ -473,10 +587,52 @@ const columns = [
           class: "w-6"
         })
       : h(Icon, { name: "heroicons:x-mark-20-solid", class: "size-7" });
-  }
+  },
+  meta: { headerText: 'Grupp' },
 },
 {
-  accessorKey: 'matsvamp',
+  accessorKey: "mark", // changed from "Mark"
+  header: () =>
+    h(
+      UDropdownMenu,
+      {
+        items: markMenuItems.value,
+        content: { align: "start" },
+        ui: { content: "w-48" }
+      },
+      {
+        default: () =>
+          h(UButton, {
+            label: "Mark",
+            variant: "ghost",
+            color: "neutral",
+            icon: "i-lucide-list-filter"
+          })
+      }
+    ),
+  filterFn: (row, filterValue) => {
+    // If no mark options are selected, return true (no filtering)
+    if (!filterValue || filterValue.length === 0) return true;
+    let match = false;
+    // Use row.original to check for marks
+    if (filterValue.includes("KALKmark") && row.original.KALKmark) match = true;
+    if (filterValue.includes("ANNANmark") && row.original.ANNANmark) match = true;
+    return match;
+  },
+  cell: ({ row }) => {
+    return h(
+      "div",
+      { class: "flex items-center space-x-1" },
+      [
+        row.original.KALKmark && h(UBadge, { color: "kalkmark", variant: "subtle" }, () => "Kalkmark"),
+        row.original.ANNANmark && h(UBadge, { color: "vanligmark", variant: "subtle" }, () => "Vanlig skogsmark")
+      ].filter(Boolean)
+    );
+  },
+  meta: { headerText: 'Mark' },
+},
+{
+  accessorKey: props.mat,
   header: () => h(UDropdownMenu, {
     items: svampMenuItems.value,
     content: { align: 'start' },
@@ -485,21 +641,29 @@ const columns = [
     default: () => h(UButton, { label: 'Matsvamp', variant: 'ghost', color: 'neutral', icon: "i-lucide-list-filter" })
   }),
   filterFn: (row, columnId, filterValue) => {
-  if (!filterValue || filterValue.length === 0) return true;
-  let match = false;
-  if (filterValue.includes('Matsvamp')) {
-    match = match || (row.getValue(columnId) === 1);
-  }
-  if (filterValue.includes('Giftsvamp')) {
-    match = match || ((row.original.Giftsvamp || '').toLowerCase() === 'x');
-  }
-  return match;
-},
+    if (!filterValue || filterValue.length === 0) return true;
+    let match = false;
+    if (filterValue.includes('Matsvamp')) {
+      if (props.mat === "Nyasvamp-boken") {
+        match = match || (row.getValue(columnId)?.toLowerCase() === 'x');
+      } else {
+        match = match || (row.getValue(columnId) === 1);
+      }
+    }
+    if (filterValue.includes('Giftsvamp')) {
+      match = match || ((row.original.Giftsvamp || '').toLowerCase() === 'x');
+    }
+    return match;
+  },
   cell: ({ row }) =>
     h('div', { class: 'flex gap-1' }, [
-      row.getValue('matsvamp') === 1 && h(UBadge, { color: 'warning', variant: 'subtle' }, () => 'Matsvamp'),
+      (props.mat === "Nyasvamp-boken"
+        ? row.getValue(props.mat)?.toLowerCase() === 'x'
+        : row.getValue(props.mat) === 1) && h(UBadge, { color: 'warning', variant: 'subtle' }, () => 'Matsvamp'),
       row.original.Giftsvamp?.toLowerCase() === 'x' && h(UBadge, { color: 'poison', variant: 'subtle' }, () => 'Giftsvamp')
     ].filter(Boolean))
+    ,
+  meta: { headerText: 'Matsvamp' },
 },
 {
   accessorKey: 'RL2020kat',
@@ -540,7 +704,46 @@ const columns = [
         ? h(UBadge, { color: 'signal', variant: 'subtle' }, 'Signalart')
         : null;
     return h('div', { class: 'flex gap-1' }, [mainBadge, signalBadge].filter(Boolean));
-  }
+  },
+  meta: { headerText: 'Status' },
+},
+{
+  accessorKey: props.obs,
+  header: ({ column }) => {
+    const isSorted = column.getIsSorted();
+    return h(
+      UButton,
+      {
+        color: 'neutral',
+        variant: 'ghost',
+        label: props.obsLabel,
+        icon: isSorted
+          ? (isSorted === 'asc'
+              ? 'i-lucide-arrow-up-narrow-wide'
+              : 'i-lucide-arrow-down-wide-narrow')
+          : 'i-lucide-arrow-up-down',
+        class: '-mx-2.5',
+        onClick: () => column.toggleSorting(isSorted === 'asc')
+      }
+    );
+  },
+  cell: ({ row, index }) => {
+    const progressVal = Number(row.getValue(props.obs));
+    const maxVal = Number(sampleEnvCount.value) || 3;
+   
+    return h(UProgress, {
+      modelValue: progressVal,
+      max: maxVal,
+      // Instead of passing the color prop, use the style attribute to override the CSS variable:
+  
+
+      color: allColors.value[index],
+      indeterminate: false,
+
+      "onUpdate:modelValue": () => {}
+    });
+  },
+  meta: { headerText: props.obsLabel },
 },
 ];
 
@@ -572,10 +775,10 @@ const fetchData = async () => {
     envStore.standAge &&
     envStore.vegetationType
   ) {
-    const filename = `data-${envStore.geography}-${envStore.forestType}-${envStore.standAge}-${envStore.vegetationType}.json`;
+    const filename = `${props.dataType}-${envStore.geography}-${envStore.forestType}-${envStore.standAge}-${envStore.vegetationType}.json`;
     try {
-      const response = await fetch(`/edna/${filename}`);
-      if (!response.ok)
+      const response = await fetch(`/${props.dataTypeFolder}/${filename}`);
+        if (!response.ok)
         throw new Error(`Failed to fetch data from ${filename}`);
       data.value = await response.json();
 
@@ -650,7 +853,7 @@ const searchQuery = ref("");
 const filteredData = computed(() => {
   let result = data.value;
 
-  // Apply any filters you have
+  // Apply global search filtering
   if (searchQuery.value) {
     result = result.filter((row) => {
       return Object.values(row).some((value) =>
@@ -659,37 +862,52 @@ const filteredData = computed(() => {
     });
   }
 
-  return result;
-});
-
-const sortedData = computed(() => {
-  let result = filteredData.value.slice(); // Create a shallow copy to sort
-
-  if (sort.value && sort.value.column) {
-    const column = sort.value.column;
-    const direction = sort.value.direction;
-
-    result.sort((a, b) => {
-      const valueA = a[column];
-      const valueB = b[column];
-
-      // Handle null or undefined values
-      if (valueA == null && valueB != null) return 1;
-      if (valueA != null && valueB == null) return -1;
-      if (valueA == null && valueB == null) return 0;
-
-      // Compare values using Swedish locale
-      const comparison = String(valueA).localeCompare(String(valueB), "sv", {
-        numeric: true,
-        sensitivity: "base",
-      });
-
-      return direction === "asc" ? comparison : -comparison;
+  // Apply edible/poison filtering if specified via props
+  if (props.filterEdible) {
+    result = result.filter(row => {
+      const edibleVal = row[props.mat];
+      return edibleVal && String(edibleVal).toLowerCase() === 'x';
+    });
+  } else if (props.filterPoison) {
+    result = result.filter(row => {
+      const edibleVal = row[props.mat];
+      return !(edibleVal && String(edibleVal).toLowerCase() === 'x');
     });
   }
 
   return result;
 });
+
+// const sorting = ref([{ id: props.obs, desc: false }])
+
+// const sortedData = computed(() => {
+//   let result = filteredData.value.slice(); // Create a shallow copy to sort
+
+//   if (sort.value && sort.value.column) {
+//     const column = sort.value.column;
+//     const direction = sort.value.direction;
+
+//     result.sort((a, b) => {
+//       const valueA = a[column];
+//       const valueB = b[column];
+
+//       // Handle null or undefined values
+//       if (valueA == null && valueB != null) return 1;
+//       if (valueA != null && valueB == null) return -1;
+//       if (valueA == null && valueB == null) return 0;
+
+//       // Compare values using Swedish locale
+//       const comparison = String(valueA).localeCompare(String(valueB), "sv", {
+//         numeric: true,
+//         sensitivity: "base",
+//       });
+
+//       return direction === "asc" ? comparison : -comparison;
+//     });
+//   }
+
+//   return result;
+// });
 // const totalItems = computed(() => filteredData.value.length);
 
 watch(rowsPerPage, (newVal) => {
@@ -730,13 +948,16 @@ const totalItems = computed(() => {
 const columnFilters = computed(() => {
   const filters = [];
   if (selectedFilter.value && selectedFilter.value.length > 0) {
-    filters.push({ id: 'matsvamp', value: selectedFilter.value });
+    filters.push({ id: props.mat, value: selectedFilter.value });
   }
   if (selectedStatus.value && selectedStatus.value.length > 0) {
     filters.push({ id: 'RL2020kat', value: selectedStatus.value });
   }
   if (selectedGrupp.value && selectedGrupp.value.length > 0) {
-    filters.push({ id: 'Svamp-grupp-släkte', value: selectedGrupp.value });
+    filters.push({ id: props.grupp, value: selectedGrupp.value });
+  }
+  if (selectedMark.value && selectedMark.value.length > 0) {
+    filters.push({ id: "mark", value: selectedMark.value });
   }
   return filters;
 });

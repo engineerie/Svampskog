@@ -1,17 +1,29 @@
 <template>
   <div>
     <!-- Controls: filtering and zoom -->
-    <div class="flex justify-end gap-2 mb-4">
+    <div class="flex justify-between gap-2 mb-4 mx-2">
+      <div class="flex gap-2">
+        <UInput
+    v-model="chartSearchTerm"
+    placeholder="Sök på namn"
+    variant="ghost"
+  />
       <USelect
         v-model="selectedFilters"
         multiple
         :items="filterItems"
-        class="w-48"
+        class="w-fit"
         placeholder="Fokusera på grupp"
+        variant="ghost"
       />
-      <UButton @click="zoomOut" icon="i-heroicons-magnifying-glass-minus" color="neutral" variant="outline"/>
-      <UButton @click="zoomIn"  icon="i-heroicons-magnifying-glass-plus" color="neutral" variant="outline"/>
-    </div>
+      </div>
+      
+      <div class="flex gap-0.5">
+         <UButton @click="zoomOut" icon="i-heroicons-magnifying-glass-minus" color="neutral" variant="ghost"/>
+      <UButton @click="zoomIn"  icon="i-heroicons-magnifying-glass-plus" color="neutral" variant="ghost"/>
+ 
+      </div>
+        </div>
 
     <!-- Chart Container: we attach a click handler here -->
     <div class="w-full h-[420px] overflow-y-auto overflow-x-scroll" @click="handleChartClick">
@@ -45,6 +57,8 @@ import { VisXYContainer, VisStackedBar, VisAxis, VisTooltip, VisCrosshair } from
 import { StackedBar } from '@unovis/ts'
 import { useEnvParamsStore } from '~/stores/envParamsStore'
 import { useSpeciesStore } from '~/stores/speciesStore'
+
+const chartSearchTerm = ref('')
 
 // ----- Filtering & Zoom Setup -----
 const filterItems = ref(['Matsvamp', 'Giftsvamp', 'Rödlistade svampar', 'Signalarter'])
@@ -122,10 +136,22 @@ watch(
 const xAccessor = (_: any, i: number) => i
 const yAccessor = (d: any) => d.sample_plot_count
 const tickFormat = (_: any, i: number) => {
-  if (selectedFilters.value.length === 0) return ''
   const d = updatedChartData.value[i]
-  if (d && d.barColor === '#d4d4d4') return ''
-  return capitalizeFirstLetter(d.Commonname)
+  // When a search term is entered, only show names for matching species
+  if (chartSearchTerm.value.trim() !== "") {
+    const term = chartSearchTerm.value.trim().toLowerCase()
+    if ((d.Commonname && d.Commonname.toLowerCase().includes(term)) ||
+        (d.Scientificname && d.Scientificname.toLowerCase().includes(term))) {
+      return capitalizeFirstLetter(d.Commonname)
+    } else {
+      return ""
+    }
+  } else {
+    // Otherwise, use the existing group filter logic
+    if (selectedFilters.value.length === 0) return ""
+    if (d && d.barColor === '#d4d4d4') return ""
+    return capitalizeFirstLetter(d.Commonname)
+  }
 }
 function capitalizeFirstLetter(str: string): string {
   return str ? str.charAt(0).toUpperCase() + str.slice(1) : ""
@@ -180,7 +206,21 @@ const triggers = { [StackedBar.selectors.bar]: tooltipTemplate }
 const updatedChartData = computed(() => {
   return chartData.value.map(d => {
     let newColor = d.fillColor || 'var(--ui-primary)'
-    if (selectedFilters.value.length > 0) {
+    
+    // If there's a search term, override the colors based on matching species names.
+    if (chartSearchTerm.value.trim() !== "") {
+      const term = chartSearchTerm.value.trim().toLowerCase()
+      if (
+        (d.Commonname && d.Commonname.toLowerCase().includes(term)) ||
+        (d.Scientificname && d.Scientificname.toLowerCase().includes(term))
+      ) {
+        newColor = '#22c55e'  // Green for matching species
+      } else {
+        newColor = '#d4d4d4'  // Gray for non-matching species
+      }
+    }
+    // Else, if group filters are active, use your existing logic.
+    else if (selectedFilters.value.length > 0) {
       if (selectedFilters.value.includes('Matsvamp') && d.matsvamp == 1) {
         newColor = '#eab308'
       } else if (selectedFilters.value.includes('Giftsvamp') && d.Giftsvamp === "x") {
@@ -193,6 +233,7 @@ const updatedChartData = computed(() => {
         newColor = '#d4d4d4'
       }
     }
+    // Otherwise, retain the original fill color.
     return { ...d, barColor: newColor }
   })
 })

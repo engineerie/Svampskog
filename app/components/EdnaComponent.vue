@@ -4,7 +4,7 @@
     <div class="flex justify-between">
       <div class="flex gap-4">
         <h1 class="text-3xl ml-4">Alla mykorrhizasvampar</h1>
-        <UTabs v-model="activeTab" :items="items" color="neutral" variant="link" />
+        <UTabs v-model="activeTab" :items="items" color="neutral" variant="link" :unmount-on-hide="false"/>
        
       </div>
       <div class="flex gap-4 items-end pb-2">
@@ -39,7 +39,8 @@
     </div>
 
     <!-- FullScreenEdna (if spatialForest tab is active) -->
-    <FullScreenEdna v-if="activeTab === 'spatialForest'" :isNormalView="isNormalView" />
+    <!-- <FullScreenEdna v-if="activeTab === 'spatialForest'" :isNormalView="isNormalView" /> -->
+    <SpeciesTable v-if="activeTab === 'spatialForest'" :isNormalView="isNormalView" :column-visibility-overrides="{ mark: false }"/>
 
     <!-- Column Chart View -->
     <div

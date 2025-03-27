@@ -66,38 +66,41 @@
        
         />
         <UInput
+  v-model="searchQuery"
+  placeholder="Sök i tabell"
+/>
+        <!-- <UInput
          
           icon="i-heroicons-magnifying-glass-20-solid"
           v-model="searchQuery"
           placeholder="Sök i tabell"
-        />
+        /> -->
       </div>
 
       <!-- TABLE VIEW -->
       <div v-if="isTableView">
         <div v-if="filteredData" :class="[isNormalView ? '' : 'border-t']">
           <UTable
-            :loading="isLoading"
-            :loading-state="{
-              icon: 'i-heroicons-arrow-path-20-solid',
-              label: 'Laddar',
-            }"
-            :class="{
-              'min-h-[415px]': isNormalView,
-              '': !isNormalView,
-            }"
-            :sort-button="{
-              color: 'text-neutral-700 dark:text-neutral-300',
-              size: 'xl',
-            }"
-            :ui="computedUITable"
-            :columns="selectedColumns"
-            :rows="paginatedData"
-            @select="selectRow"
-            v-model:sort="sort"
-            sort-mode="manual"
-            :key="route.fullPath"
-          >
+  ref="table"
+  v-model:pagination="pagination"
+  :loading="isLoading"
+  :loading-state="{
+    icon: 'i-heroicons-arrow-path-20-solid',
+    label: 'Laddar',
+  }"
+  :class="{ 'min-h-[415px]': isNormalView, '': !isNormalView }"
+  :sort-button="{
+    color: 'text-neutral-700 dark:text-neutral-300',
+    size: 'xl',
+  }"
+
+  :columns="selectedColumns"
+  :data="sortedData"
+  @select="selectRow"
+  :sort="sort"
+  @update:sort="sort = $event"
+  sort-mode="manual"
+>
             <template #empty-state>
               <div class="flex flex-col items-center justify-center py-6 gap-3">
                 <span class="italic text-sm">
@@ -146,28 +149,7 @@
                   size="xs"
                   label="Signalart"
                 />
-                <!-- <div
-                  v-if="row.SIGNAL_art !== 'S'"
-                  :class="getStatusColor(row.RL2020kat)"
-                  class="h-8 w-8 rounded-full flex items-center justify-center text-white z-0 max-w-12"
-                  data-nui-tooltip-position="right"
-                  :data-nui-tooltip="
-                    row['RL2020kat'] !== 'Saknas'
-                      ? getStatusTooltip(row.RL2020kat)
-                      : 'Ej bedömd'
-                  "
-                >
-                  {{ getStatusAbbreviation(row.RL2020kat) }}
-                </div>
-                <div v-if="row.SIGNAL_art === 'S'" class="relative">
-                  <div
-                    class="h-8 w-8 rounded-full bg-neutral-500 opacity-100 flex items-center justify-center text-white z-10"
-                    data-nui-tooltip-position="right"
-                    :data-nui-tooltip="'Signalart'"
-                  >
-                    S
-                  </div>
-                </div> -->
+            
               </div>
             </template>
             <template #Commonname-data="{ row }">
@@ -244,7 +226,7 @@
               </p>
             </div>
             <div v-if="rowsPerPage !== 'Alla'">
-              <UPagination
+              <!-- <UPagination
                 :max="2"
                 v-model="page"
                 :page-count="rowsPerPage"
@@ -276,7 +258,7 @@
                     @click="onClick"
                   />
                 </template>
-              </UPagination>
+              </UPagination> -->
             </div>
           </div>
         </div>
@@ -293,7 +275,7 @@
           <div
             v-for="(row, index) in gridPaginatedData"
             :key="row.Commonname + row.Scientificname + index"
-            class="bg-white dark:bg-neutral-800 rounded-2xl shadow hover:shadow-md transition-shadow cursor-pointer h-[184px]"
+            class="bg-white dark:bg-neutral-800 rounded-2xl border border-neutral-200 hover:shadow-md transition-shadow cursor-pointer h-[184px]"
             @click="selectRow(row)"
           >
             <!-- Image Thumbnail -->
@@ -332,9 +314,10 @@
                 </div> -->
                 <UBadge
                   v-if="row.SIGNAL_art !== 'S'"
-                  color="rose"
+                  class="bg-error-50 dark:bg-error-950/80"
+                  color="error"
                   variant="subtle"
-                  size="xs"
+            
                   :label="
                     row.RL2020kat !== 'Saknas'
                       ? getStatusTooltip(row.RL2020kat)
@@ -344,9 +327,9 @@
 
                 <UBadge
                   v-if="row.SIGNAL_art === 'S'"
-                  color="gray"
-                  variant="solid"
-                  size="xs"
+                  color="signal"
+                  variant="subtle"
+               
                   label="Signalart"
                 />
               </div>
@@ -416,8 +399,11 @@
 
 <script setup>
 import { ref, computed, reactive, onMounted, onUnmounted, watch } from "vue";
-import { useRoute } from "vue-router";
 import { useSpeciesStore } from "~/stores/speciesStore";
+import { useEnvParamsStore } from '~/stores/envParamsStore';
+import { getPaginationRowModel } from '@tanstack/vue-table';
+
+const envStore = useEnvParamsStore();
 
 const items = [
   {
@@ -598,14 +584,11 @@ const getIconPath = (svampGrupp) => {
 };
 
 // --- Data Fetching & Filtering ---
-const route = useRoute();
-const geography = ref("");
-const forestType = ref("");
-const standAge = ref("");
-const vegetationType = ref("");
+
 const data = ref([]);
 const isLoading = ref(true);
-async function fetchData(geography, forestType, standAge, vegetationType) {
+async function fetchData() {
+  const { geography, forestType, standAge, vegetationType } = envStore;
   const filename = `redlisted-${geography}-${forestType}-${standAge}-${vegetationType}.json`;
   try {
     const response = await fetch(`/redlisted/${filename}`);
@@ -617,30 +600,22 @@ async function fetchData(geography, forestType, standAge, vegetationType) {
   }
 }
 watch(
-  () => route.params,
-  (params) => {
+  () => [
+    envStore.geography,
+    envStore.forestType,
+    envStore.standAge,
+    envStore.vegetationType
+  ],
+  () => {
     isLoading.value = true;
-    const { geography, forestType, standAge, vegetationType } = params;
-    if (geography && forestType && standAge && vegetationType) {
-      fetchData(geography, forestType, standAge, vegetationType);
-    }
-  },
-  { immediate: true }
-);
-watch(
-  () => route.params,
-  (params) => {
-    geography.value = params.geography || "default-value";
-    forestType.value = params.forestType || "default-value";
-    standAge.value = params.standAge || "default-value";
-    vegetationType.value = params.vegetationType || "default-value";
+    fetchData();
   },
   { immediate: true }
 );
 
 const searchQuery = ref("");
-const page = ref(1);
-const rowsPerPage = ref(props.isNormalView ? 5 : 10);
+// const page = ref(1);
+// const rowsPerPage = ref(props.isNormalView ? 5 : 10);
 const markOptions = [
   { id: "all", label: "Alla marker", value: null },
   { id: "kalkmark", label: "Kalkmark", value: "KALKmark" },
@@ -649,17 +624,24 @@ const markOptions = [
 const selectedMark = ref(markOptions[0]);
 const filteredData = computed(() => {
   let result = data.value;
-  if (selectedMark.value && selectedMark.value.value !== null) {
-    result = result.filter((row) => row[selectedMark.value.value] != null);
-  }
-  if (searchQuery.value) {
+  const globalFilter = table.value?.tableApi?.getState().globalFilter;
+  if (globalFilter) {
     result = result.filter((row) =>
       Object.values(row).some((value) =>
-        String(value).toLowerCase().includes(searchQuery.value.toLowerCase())
+        String(value).toLowerCase().includes(globalFilter.toLowerCase())
       )
     );
   }
   return result;
+});
+
+const paginationState = computed(() => table.value?.tableApi?.getState().pagination || { pageIndex: 0, pageSize: props.isNormalView ? 5 : 10 });
+const currentPaginationRows = computed(() => table.value?.tableApi?.getPaginationRowModel().rows || []);
+const startItem = computed(() => (paginationState.value.pageIndex * paginationState.value.pageSize) + 1);
+const totalItems = computed(() => table.value?.tableApi?.getFilteredRowModel().rows.length || sortedData.value.length);
+const endItem = computed(() => {
+  const end = (paginationState.value.pageIndex * paginationState.value.pageSize) + currentPaginationRows.value.length;
+  return end > totalItems.value ? totalItems.value : end;
 });
 const sortedData = computed(() => {
   let result = filteredData.value.slice();
@@ -692,26 +674,9 @@ const sortedData = computed(() => {
   }
   return result;
 });
-const totalItems = computed(() => sortedData.value.length);
-const startItem = computed(() => {
-  if (rowsPerPage.value === "Alla") return totalItems.value > 0 ? 1 : 0;
-  return (page.value - 1) * rowsPerPage.value + 1;
-});
-const endItem = computed(() => {
-  if (rowsPerPage.value === "Alla") return totalItems.value;
-  return Math.min(page.value * rowsPerPage.value, totalItems.value);
-});
 
-// --- Add Computed for Table Pagination ---
-const paginatedData = computed(() => {
-  if (rowsPerPage.value === "Alla") {
-    return sortedData.value;
-  } else {
-    const start = (page.value - 1) * rowsPerPage.value;
-    const end = page.value * rowsPerPage.value;
-    return sortedData.value.slice(start, end);
-  }
-});
+const table = useTemplateRef('table');
+const pagination = ref({ pageIndex: 0, pageSize: props.isNormalView ? 5 : 10 });
 
 // --- Grid View Pagination ---
 const gridPageSize = computed(() => (props.isNormalView ? 12 : 24));
@@ -732,44 +697,42 @@ const gridEndItem = computed(() =>
 const sort = ref({ column: "", direction: "asc" });
 
 const imageColumn = {
-  key: "image",
+  accessorKey: "image",
   label: "",
   sortable: false,
 };
 
 const columns = [
   {
-    key: "RL2020kat",
+    accessorKey: "RL2020kat",
     label: "Status",
     sortable: props.isNormalView ? false : true,
   },
   {
-    key: "Commonname",
+    accessorKey: "Commonname",
     label: "Namn",
     sortable: props.isNormalView ? false : true,
   },
   {
-    key: "Scientificname",
+    accessorKey: "Scientificname",
     label: "Latinskt namn",
     sortable: props.isNormalView ? false : true,
   },
-  { key: "Mark", label: "Mark", sortable: props.isNormalView ? false : true },
+  { accessorKey: "Mark", label: "Mark", sortable: props.isNormalView ? false : true },
   {
-    key: "OVANLIGHET",
+    accessorKey: "OVANLIGHET",
     label: "Extra ovanlig",
     sortable: props.isNormalView ? false : true,
   },
   {
-    key: "Svamp-grupp",
+    accessorKey: "Svamp-grupp",
     label: "Grupp",
     sortable: props.isNormalView ? false : true,
   },
-  { key: "RankRed", label: "Antal fynd", sortable: true },
+  { accessorKey: "RankRed", label: "Antal fynd", sortable: true },
 ];
 const isRare = ref(false);
-const toggleRare = () => {
-  isRare.value = !isRare.value;
-};
+
 const selectedColumns = computed(() =>
   [
     imageColumn,

@@ -14,7 +14,7 @@
               <transition name="slide-up" mode="out-in">
                 <div
                   :key="getLabel(category.key)"
-                  class="flex items-center justify-center cursor-pointer"
+                  class="flex items-center justify-center cursor-default"
                 >
                   <div
                     class="my-2 w-14 h-14 rounded-lg flex justify-center items-center"
@@ -24,7 +24,7 @@
                   </div>
                   <div class="text-center">
                     <h1 class="text-neutral-500">{{ category.title }}</h1>
-                    <h1 class="text-2xl">
+                    <h1 class="text-2xl font-medium">
                       {{ getLabel(category.key) || category.defaultLabel }}
                     </h1>
                   </div>
@@ -66,7 +66,7 @@
           @click="toggleRestriction"
           shape="full"
           class="transition-all"
-          variant="soft"
+          variant="ghost"
           :color="restrictionEnabled ? 'secondary' : 'neutral'"
         >
           {{ restrictionEnabled ? "Markinventeringsdata" : "Markinventeringsdata" }}
@@ -76,7 +76,7 @@
           :icon="listBoxRowVisible ? 'mdi:chevron-up' : 'mdi:chevron-down'"
           @click="toggleHeight"
           color="neutral"
-          variant="soft"
+          variant="ghost"
         >
           {{ listBoxRowVisible ? "Dölj kombinationsvy" : "Visa kombinationsvy" }}
         </UButton>
@@ -84,16 +84,17 @@
 
       <!-- Combination view (checkboxes) -->
       <div
-        :style="{ height: listBoxRowVisible ? '250px' : '0px' }"
+        :style="{ height: listBoxRowVisible ? '260px' : '0px' }"
         class="overflow-visible transition-height ease-in-out duration-500"
       >
         <Transition name="fade">
           <div v-show="listBoxRowVisible">
             <div class="grid grid-cols-4 gap-5">
-              <div
+              
+              <UCard
                 v-for="category in categories"
                 :key="category.key"
-                class="p-6 pl-10 pb-4 backdrop-blur-3xl rounded-xl bg-white bg-opacity-40 dark:bg-neutral-900 dark:bg-opacity-60 border dark:border-neutral-800 border-stone-200/50"
+            variant="soft"
               >
                 <div
                   v-for="option in enabledOptions[category.key]"
@@ -118,7 +119,7 @@
                     :disabled="option.disabled"
                   />
                 </div>
-              </div>
+              </UCard>
             </div>
           </div>
         </Transition>
@@ -148,7 +149,7 @@
             @click="toggleRestriction"
             shape="full"
             class="transition-all"
-            variant="soft"
+            variant="ghost"
             :color="restrictionEnabled ? 'secondary' : 'neutral'"
           >
             {{ restrictionEnabled ? "Markinventeringsdata" : "Markinventeringsdata" }}

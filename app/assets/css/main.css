@@ -25,5 +25,5 @@
 }
 
 :root {
-  --ui-radius: var(--radius-lg);
+  --ui-radius: var(--radius-md);
 }

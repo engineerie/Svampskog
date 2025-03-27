@@ -13,7 +13,7 @@ useSeoMeta({
 
 <template>
   <div v-if="page">
-    <UPageHero :title="page.hero.title" :description="page.hero.description" :links="page.hero.links">
+    <UPageHero :title="page.hero.title" :description="page.hero.description" :links="page.hero.links" >
       <template #headline>
         <UButton icon="i-heroicons-arrow-right-20-solid" trailing label="Svampskog v.1 2025.04.09" variant="subtle" />
       </template>

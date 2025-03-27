@@ -3,14 +3,14 @@ description: Svampskog.se är en webbapplikation där du kan utforska vilka myko
 navigation: false
 hero:
   title: '[Svampar]{.text-(--ui-primary)} <br> & skogsskötsel'
-  description: Utforska vilka mykorrhizasvampar som kan finnas i olika skogar och se hur de reagerar vid skogsbruksåtgärder.
+  description: Utforska vilka mykorrhizasvampar som kan finnas i olika skogar och se hur de påverkas av skogsskötsel.
   badge: Ny version ute nu
   links:
     - label: Svampar
       icon: i-lineicons-mushroom-1
       trailing: false
-      to: https://ui.nuxt.com/getting-started/installation/pro/nuxt
-      target: _blank
+      to: /mykorrhizasvampar/start
+      target: 
       size: xl
       color: neutral
       variant: ghost
@@ -22,13 +22,13 @@ hero:
       size: xl
       color: neutral
       variant: ghost
-    - label: Svampkunskap
-      icon: i-heroicons-book-open
-      size: xl
-      color: neutral
-      variant: ghost
-      to: https://github.com/nuxt-ui-pro/saas
-      target: _blank
+    # - label: Svampkunskap
+    #   icon: i-heroicons-book-open
+    #   size: xl
+    #   color: neutral
+    #   variant: ghost
+    #   to: https://github.com/nuxt-ui-pro/saas
+    #   target: _blank
 sections:
   - title: Utforska svampar i olika skogar
     description: Här kan du söka på svenska skogsmiljöer för att se vilka arter som kan finnas i marken baserat på DNA-analyser av svampmycel i jordprover samt vår samlade kunskap om var olika arters fruktkroppar förekommer.

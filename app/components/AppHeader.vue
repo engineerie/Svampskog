@@ -17,12 +17,12 @@ const items = computed(() => [
         description: 'Hur skogsskötsel påverkar svampar.',
         icon: 'i-hugeicons-tree-06',
       },
-      {
-        label: 'Svampkunskap',
-        description: 'Läs om hur svampar lever i marken.',
-        icon: 'i-heroicons-book-open',
+      // {
+      //   label: 'Svampkunskap',
+      //   description: 'Läs om hur svampar lever i marken.',
+      //   icon: 'i-heroicons-book-open',
 
-      },
+      // },
   //   ]
   // },
   {

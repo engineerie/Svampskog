@@ -11,7 +11,7 @@
 
     <div class="col-span-12">
       <div class="flex justify-end mb-2 sticky top-28 pt-2 z-10">
-    <div  class="bg-white rounded-2xl">
+    <div  class="bg-white dark:bg-black rounded-xl">
           <UBadge
             size="lg"
             color="secondary"
@@ -40,9 +40,9 @@
 
 
     <div class="col-span-12 ">
-      <div class="flex justify-end  mb-2 sticky top-28 pt-2 z-10     ">
+      <div class="flex justify-end  mb-2 sticky top-28 pt-2 z-50     ">
        
-        <div  class="bg-white rounded-2xl">
+        <div  class="bg-white dark:bg-black rounded-xl z-50">
           <UBadge
             size="lg"
             color="warning"
@@ -70,10 +70,14 @@
           class="bg-white overflow-hidden rounded-tr-none rounded-[calc(1.5rem-1px)]"
         > -->
       <div
-        class="col-span-12 grid grid-cols-12 rounded-2xl p-4 gap-y-10 gap-x-6 "
+        class="col-span-12 grid grid-cols-12 rounded-2xl gap-y-10 "
       >
         <div class="col-span-12 flex flex-col">
-          <FullScreenRedlisted
+          <RedlistedComponent
+          :isNormalView="true"
+          @enlarge="emitEnlarge('RedlistedComponent')"
+        />
+          <!-- <FullScreenRedlisted
             :geography="geography"
             :forestType="forestType"
             :standAge="standAge"
@@ -81,7 +85,7 @@
             :isNormalView="true"
             @enlarge="emitEnlarge('FullScreenRedlisted')"
             :key="route.fullPath"
-          />
+          /> -->
         </div>
         <div class="col-span-12 flex flex-col h-full">
           <FullScreenEdible
