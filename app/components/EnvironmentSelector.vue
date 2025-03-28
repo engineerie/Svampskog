@@ -16,12 +16,12 @@
                   :key="getLabel(category.key)"
                   class="flex items-center justify-center cursor-default"
                 >
-                  <div
+                  <!-- <div
                     class="my-2 w-14 h-14 rounded-lg flex justify-center items-center"
                     :class="iconColor(category.key)"
                   >
                     <Icon :name="category.icon" class="h-8 w-8" />
-                  </div>
+                  </div> -->
                   <div class="text-center">
                     <h1 class="text-neutral-500">{{ category.title }}</h1>
                     <h1 class="text-2xl font-medium">
@@ -130,7 +130,7 @@
     <transition name="fold-down">
       <div
         v-if="isSticky"
-        class="fixed top-16 z-20 bg-(--ui-bg)/75 backdrop-blur border-b border-neutral-200 left-0 right-0"
+        class="fixed top-16 z-20 bg-white dark:bg-black border-b border-neutral-200 left-0 right-0"
       >
         <div class="flex space-x-4 w-full mx-auto max-w-7xl p-2">
           <!-- Use enabledOptions for USelect items as well -->
@@ -183,7 +183,7 @@ onMounted(() => {
     observer = new IntersectionObserver(
       ([entry]) => {
         // When the original content is no longer visible, show the sticky header
-        isSticky.value = !entry.isIntersecting
+        isSticky.value = !(entry?.isIntersecting ?? true)
       },
       { threshold: 0 }
     )

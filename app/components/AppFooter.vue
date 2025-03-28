@@ -47,11 +47,11 @@ function onSubmit() {
 
 <template>
   <USeparator
-    icon="i-simple-icons-nuxtdotjs"
-    class="h-px"
+
+    class="h-px mt-12"
   />
   <UFooter :ui="{ top: 'border-b border-[var(--ui-border)]' }">
-    <template #top>
+    <!-- <template #top>
       <UContainer>
         <UFooterColumns :columns="columns">
           <template #right>
@@ -81,7 +81,7 @@ function onSubmit() {
           </template>
         </UFooterColumns>
       </UContainer>
-    </template>
+    </template> -->
 
     <template #left>
       <p class="text-(--ui-text-muted) text-sm">

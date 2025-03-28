@@ -204,7 +204,19 @@ const sortedData = computed(() => {
 const searchTerm = ref('')
 
 // Compute the list after applying the search filter only
-const searchFilteredData = computed(() => {
+// const searchFilteredData = computed(() => {
+//   let result = sortedData.value;
+//   if (searchTerm.value.trim() !== '') {
+//     const term = searchTerm.value.trim().toLowerCase();
+//     result = result.filter(row =>
+//       (row.Commonname && row.Commonname.toLowerCase().includes(term)) ||
+//       (row.Scientificname && row.Scientificname.toLowerCase().includes(term))
+//     );
+//   }
+//   return result;
+// });
+
+const baseFilteredData = computed(() => {
   let result = sortedData.value;
   if (searchTerm.value.trim() !== '') {
     const term = searchTerm.value.trim().toLowerCase();
@@ -212,6 +224,17 @@ const searchFilteredData = computed(() => {
       (row.Commonname && row.Commonname.toLowerCase().includes(term)) ||
       (row.Scientificname && row.Scientificname.toLowerCase().includes(term))
     );
+  }
+  if (props.filterEdible) {
+    result = result.filter(row => {
+      const edibleVal = row["Nyasvamp-boken"];
+      return edibleVal && String(edibleVal).toLowerCase() === 'x';
+    });
+  } else if (props.filterPoison) {
+    result = result.filter(row => {
+      const edibleVal = row["Nyasvamp-boken"];
+      return !(edibleVal && String(edibleVal).toLowerCase() === 'x');
+    });
   }
   return result;
 });
@@ -221,14 +244,14 @@ const statusOptionsWithCount = computed(() => {
   return statusOptions.map(option => {
     let count = 0;
     if (option.value === 'Ej bedömd') {
-      count = searchFilteredData.value.filter(row => {
+      count = baseFilteredData.value.filter(row => {
         const rowStatus = String(row.RL2020kat).trim();
-        return ['0', 'NA', 'NE', 'Saknas'].includes(rowStatus);
+        return ['0', 'NA', 'NE', 'Saknas', 'null'].includes(rowStatus);
       }).length;
     } else if (option.value === 'Signalart') {
-      count = searchFilteredData.value.filter(row => row.SIGNAL_art === 'S').length;
+      count = baseFilteredData.value.filter(row => row.SIGNAL_art === 'S').length;
     } else {
-      count = searchFilteredData.value.filter(row => {
+      count = baseFilteredData.value.filter(row => {
         const rowStatus = String(row.RL2020kat).trim();
         return rowStatus === option.value;
       }).length;
@@ -262,7 +285,7 @@ const filteredData = computed(() => {
       const matches = statusFilter.value.some(selected => {
         const selectedValue = (selected && selected.value) ? selected.value : selected;
         if (selectedValue === 'Ej bedömd') {
-          return ['0', 'NA', 'NE', 'Saknas'].includes(rowStatus);
+          return ['0', 'NA', 'NE', 'Saknas', 'null'].includes(rowStatus);
         } else if (selectedValue === 'Signalart') {
           return row.SIGNAL_art === 'S';
         }

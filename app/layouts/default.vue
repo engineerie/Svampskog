@@ -3,7 +3,7 @@
 
     <AppHeader />
 
-    <UMain class="mx-auto max-w-7xl px-6">
+    <UMain class="mx-auto max-w-7xl">
      
       <slot />
     </UMain>

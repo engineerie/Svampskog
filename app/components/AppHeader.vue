@@ -85,11 +85,22 @@ const items = computed(() => [
 </script>
 
 <template>
-  <UHeader mode="drawer">
+  <UHeader mode="drawer" class="bg-white dark:bg-black">
     <template #left>
-      <NuxtLink to="/" class="text-2xl font-bold flex items-center ">
-        <span class="text-primary-500 ml-3">Svamp</span>
-        skog
+      <NuxtLink to="https://www.slu.se/" target="blank">
+         <UColorModeImage
+    light="/images/slu_logo_webb.png"
+    dark="/images/slu_logo_white_webb.png"
+    :width="50"
+    :height="50"
+     class="size-8 mr-3"
+  />
+      </NuxtLink>
+     
+      <NuxtLink to="/" class="text-2xl font-semibold flex items-center ">
+        <UBadge size="xl" color="neutral" variant="subtle">Svampskog</UBadge>
+        <!-- <span class=" ml-2">Svamp</span>
+        skog -->
 
  
       </NuxtLink>

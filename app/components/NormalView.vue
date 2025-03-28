@@ -40,12 +40,12 @@
 
 
     <div class="col-span-12 ">
-      <div class="flex justify-end  mb-2 sticky top-28 pt-2 z-50     ">
+      <div class="flex justify-end  mb-2 sticky top-28 pt-2 z-10     ">
        
-        <div  class="bg-white dark:bg-black rounded-xl z-50">
+        <div  class="bg-white dark:bg-black rounded-xl z-10">
           <UBadge
             size="lg"
-            color="warning"
+            color="tertiary"
             variant="subtle"
            icon="lineicons:mushroom-1"
            label="Enligt samlad kunskap, främst var fruktkroppar förekommer"

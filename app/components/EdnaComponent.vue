@@ -7,7 +7,7 @@
         <UTabs v-model="activeTab" :items="items" color="neutral" variant="link" :unmount-on-hide="false"/>
        
       </div>
-      <div class="flex gap-4 items-end pb-2">
+      <div class="flex gap-3 items-center pb-2">
         <UBadge
           v-if="!isNormalView"
           icon="solar:dna-linear"
@@ -16,18 +16,16 @@
           variant="subtle"
           label="Enligt DNA från markinventeringens provytor"
           class="h-fit"
-        />
-        <div class="w-32">
-          <h1 class="text-neutral-400 text-xs">
-            Baserat på {{ sampleEnvCount }} skogar
-          </h1>
-          <UProgress
-            :indicator="false"
-            v-model="sampleEnvCount"
-            :max="100"
-            size="xl"
-          />
-        </div>
+        />   
+        <UBadge
+          :icon="sampleEnvCount < 10 ? 'i-cuida-warning-outline' : undefined"
+          size="lg"
+          :color="sampleEnvCount < 10 ? 'warning' : 'primary'"
+          variant="subtle"
+          class="h-fit"
+        >
+          {{ sampleEnvCount < 10 ? 'Lågt provantal: ' + sampleEnvCount + ' skogar' : 'Baserat på ' + sampleEnvCount + ' skogar' }}
+        </UBadge>
         <UButton
         color="neutral"
         variant="ghost"

@@ -2,11 +2,11 @@
   <div>
     <!-- Header with title, filters and view toggle -->
     <div class="flex justify-between">
-      <div class="flex gap-4">
-        <UIcon
+      <div class="flex gap-4 ml-4">
+        <!-- <UIcon
           name="hugeicons:danger"
           class="h-10 w-10 text-poison-500 ml-4"
-        />
+        /> -->
         <h1 class="text-neutral-800 dark:text-neutral-300 text-3xl">
           Giftsvampar
         </h1>

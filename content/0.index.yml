@@ -2,7 +2,7 @@ title: Svampskog
 description: Svampskog.se är en webbapplikation där du kan utforska vilka mykorrhizasvampar som kan finnas i olika skogar och se hur de reagerar vid skogsbruksåtgärder.
 navigation: false
 hero:
-  title: '[Svampar]{.text-(--ui-primary)} <br> & skogsskötsel'
+  title: Svampar och skogsskötsel
   description: Utforska vilka mykorrhizasvampar som kan finnas i olika skogar och se hur de påverkas av skogsskötsel.
   badge: Ny version ute nu
   links:
@@ -33,12 +33,13 @@ sections:
   - title: Utforska svampar i olika skogar
     description: Här kan du söka på svenska skogsmiljöer för att se vilka arter som kan finnas i marken baserat på DNA-analyser av svampmycel i jordprover samt vår samlade kunskap om var olika arters fruktkroppar förekommer.
     id: features
-    headline: Mykorrhizasvampar
+    headline: Svamparter
     links:
-      - label: Gå till mykorrhizasvampar
+      - label: Gå till svamparter
         to: /mykorrhizasvampar
-        icon: i-lucide-square-play
+        icon: i-heroicons-arrow-right
     orientation: horizontal
+    reverse: true
     src: /images/SvamparSverige4.svg
     features:
       - name: 99.9% Uptime
@@ -54,9 +55,9 @@ sections:
     links:
       - label: Gå till skogsskötsel
         to: /mykorrhizasvampar
-        icon: i-lucide-square-play
+        icon: i-heroicons-arrow-right
     orientation: horizontal
-    reverse: true
+    reverse: false
     features:
       - name: Lightning Fast
         description: Interaktiv modell där 5 olika skogsbrukssätt kan utforskas.

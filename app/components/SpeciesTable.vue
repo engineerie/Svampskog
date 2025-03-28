@@ -382,12 +382,13 @@ const statusOptions = computed(() => {
 
   // Initialize a counts object for each status and for 'Ej bedömd'
   const counts = {};
-  // Iterate over the full data
-  data.value.forEach(row => {
+  // Iterate over the filtered data (after edible/poison filters)
+  filteredData.value.forEach(row => {
     const statusVal = row.RL2020kat;
     if (statuses.includes(statusVal)) {
       counts[statusVal] = (counts[statusVal] || 0) + 1;
     } else if (
+      statusVal === null ||
       statusVal === '0' ||
       String(statusVal).toUpperCase() === 'NA' ||
       String(statusVal).toUpperCase() === 'NE'
@@ -396,10 +397,10 @@ const statusOptions = computed(() => {
     }
   });
 
-  // Compute the number of rows that have SIGNAL_art === 'S'
-  const signalCount = data.value.reduce((acc, row) => {
-  return acc + ((row.SIGNAL_art === 'S') ? 1 : 0);
-}, 0);
+  // Compute the number of rows that have SIGNAL_art === 'S' from the filtered data
+  const signalCount = filteredData.value.reduce((acc, row) => {
+    return acc + ((row.SIGNAL_art === 'S') ? 1 : 0);
+  }, 0);
 
   // Build the options array with counts appended to the label
   return [
@@ -680,6 +681,7 @@ const columns = [
   return filterValue.some(filter => {
     if (filter === 'Ej bedömd') {
       return (
+        statusVal === null ||
         statusVal === 0 ||
         statusVal === '0' ||
         String(statusVal).toUpperCase() === 'NA' ||
