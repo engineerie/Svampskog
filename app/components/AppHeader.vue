@@ -87,7 +87,7 @@ const items = computed(() => [
 <template>
   <UHeader mode="drawer" class="bg-white dark:bg-black">
     <template #left>
-      <NuxtLink to="https://www.slu.se/" target="blank">
+      <!-- <NuxtLink to="https://www.slu.se/" target="blank"> -->
          <UColorModeImage
     light="/images/slu_logo_webb.png"
     dark="/images/slu_logo_white_webb.png"
@@ -95,7 +95,7 @@ const items = computed(() => [
     :height="50"
      class="size-8 mr-3"
   />
-      </NuxtLink>
+      <!-- </NuxtLink> -->
      
       <NuxtLink to="/" class="text-2xl font-semibold flex items-center ">
         <UBadge size="xl" color="neutral" variant="subtle">Svampskog</UBadge>

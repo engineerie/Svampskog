@@ -5,32 +5,32 @@ export default defineAppConfig({
         {
           color: 'signal',
           variant: 'subtle',
-          class: 'bg-signal-50 text-(--ui-signal) ring ring-inset ring-(--ui-signal)/25'
+          class: 'bg-signal-50 text-(--ui-signal) dark:bg-signal-950/80 ring ring-inset ring-(--ui-signal)/25'
         },
         {
           color: 'error',
           variant: 'subtle',
-          class: 'bg-error-50 text-(--ui-error) ring ring-inset ring-(--ui-error)/25'
+          class: 'bg-error-50 text-(--ui-error) dark:bg-error-950/80 ring ring-inset ring-(--ui-error)/25'
         },
         {
           color: 'warning',
           variant: 'subtle',
-          class: 'bg-warning-50 text-(--ui-warning) ring ring-inset ring-(--ui-warning)/25'
+          class: 'bg-warning-50 dark:bg-warning-950/80 text-(--ui-warning) ring ring-inset ring-(--ui-warning)/25'
         },
         {
           color: 'poison',
           variant: 'subtle',
-          class: 'bg-poison-50 text-(--ui-poison) ring ring-inset ring-(--ui-poison)/25'
+          class: 'bg-poison-50 text-(--ui-poison) dark:bg-poison-950/80 ring ring-inset ring-(--ui-poison)/25'
         },
         {
           color: 'kalkmark',
           variant: 'subtle',
-          class: 'bg-kalkmark-50 text-(--ui-kalkmark) ring ring-inset ring-(--ui-kalkmark)/25'
+          class: 'bg-kalkmark-50 text-(--ui-kalkmark) dark:bg-kalkmark-950/80 ring ring-inset ring-(--ui-kalkmark)/25'
         },
         {
           color: 'vanligmark',
           variant: 'subtle',
-          class: 'bg-vanligmark-50 text-(--ui-vanligmark) ring ring-inset ring-(--ui-vanligmark)/25'
+          class: 'bg-vanligmark-50 text-(--ui-vanligmark) dark:bg-vanligmark-950/80 ring ring-inset ring-(--ui-vanligmark)/25'
         },
       ],
     },

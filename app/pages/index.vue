@@ -48,6 +48,7 @@ onUnmounted(() => {
 
 <template>
   <div v-if="page">
+    <div class="fixed top-0 left-0 w-full h-60 pointer-events-none z-10 bg-gradient-to-b from-white/60 to-transparent dark:from-black/80 dark:to-transparent"></div>
     <!-- <div class="absolute">
        <div class="relative hidden sm:block">
         <NuxtImg src="/images/hero2.png" 
@@ -75,8 +76,9 @@ onUnmounted(() => {
       <template #title>
         <MDC :value="page.hero.title" class="*:leading-11 sm:*:leading-19 max-w-3xl mx-auto " />
       </template>
-     
-      <NuxtImg src="/images/3Trees.png" class="rounded-xl border border-neutral-200 dark:border-neutral-700 shadow" width="600" height="400"/>
+      <NuxtImg src="/images/boleto_small.png" class="sm:-mt-90 -mb-32 -mt-10 sm:-mb-80" />
+
+      <!-- <NuxtImg src="/images/3Trees.png" class="rounded-xl border border-neutral-200 dark:border-neutral-700 shadow" width="600" height="400"/> -->
       <!-- <div class="relative hidden sm:block">
         <NuxtImg src="/images/hero2.png" 
         class="rounded-xl shadow-md" height="500" width="800" format="webp" quality="80"/>
@@ -110,16 +112,17 @@ onUnmounted(() => {
       <!-- <UCard>
         <NuxtImg :src="section.src" />
       </UCard> -->
-      <GrowingGrid/>
+      <LandingSpeciesGrid :filterEdible="true"/>
+      <!-- <GrowingGrid/> -->
       <!-- <ImagePlaceholder /> -->
     </UPageSection>
 
-    <UPageSection :title="page.features.title" :description="page.features.description"
+    <!-- <UPageSection :title="page.features.title" :description="page.features.description"
       :headline="page.features.headline">
       <UPageGrid>
         <UPageCard v-for="(item, index) in page.features.items" :key="index" v-bind="item" />
       </UPageGrid>
-    </UPageSection>
+    </UPageSection> -->
 
     <UPageSection id="testimonials" :headline="page.testimonials.headline" :title="page.testimonials.title"
       :description="page.testimonials.description">
