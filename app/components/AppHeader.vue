@@ -5,24 +5,26 @@ const items = computed(() => [
   // {
   //   label: 'Svampskog',
   //   children: [
-      {
-        label: 'Svampar',
-        description: 'Vilka arter finns i olika skogar.',
-        icon: 'i-lineicons-mushroom-1',
-        to: '/mykorrhizasvampar/start',
-        // active: route.path.startsWith('/mykorrhizasvampar'),
-      },
-      {
-        label: 'Skogsskötsel',
-        description: 'Hur skogsskötsel påverkar svampar.',
-        icon: 'i-hugeicons-tree-06',
-      },
-      // {
-      //   label: 'Svampkunskap',
-      //   description: 'Läs om hur svampar lever i marken.',
-      //   icon: 'i-heroicons-book-open',
+  {
+    label: 'Svampar',
+    description: 'Vilka arter finns i olika skogar.',
+    icon: 'i-lineicons-mushroom-1',
+    to: '/mykorrhizasvampar/start',
+    // active: route.path.startsWith('/mykorrhizasvampar'),
+  },
+  {
+    label: 'Skogsskötsel',
+    description: 'Hur skogsskötsel påverkar svampar.',
+    icon: 'i-hugeicons-tree-06',
+    to: '/skogsskotsel',
 
-      // },
+  },
+  // {
+  //   label: 'Svampkunskap',
+  //   description: 'Läs om hur svampar lever i marken.',
+  //   icon: 'i-heroicons-book-open',
+
+  // },
   //   ]
   // },
   {
@@ -88,23 +90,18 @@ const items = computed(() => [
   <UHeader mode="drawer" class="bg-white dark:bg-black">
     <template #left>
       <!-- <NuxtLink to="https://www.slu.se/" target="blank"> -->
-         <UColorModeImage
-    light="/images/slu_logo_webb.png"
-    dark="/images/slu_logo_white_webb.png"
-    :width="50"
-    :height="50"
-     class="size-8 mr-3"
-  />
+      <UColorModeImage light="/images/slu_logo_webb.png" dark="/images/slu_logo_white_webb.png" :width="50" :height="50"
+        class="size-8 mx-3" />
       <!-- </NuxtLink> -->
-     
+
       <NuxtLink to="/" class="text-2xl font-semibold flex items-center ">
         <UBadge size="xl" color="neutral" variant="subtle">Svampskog</UBadge>
         <!-- <span class=" ml-2">Svamp</span>
         skog -->
 
- 
+
       </NuxtLink>
-   
+
     </template>
 
     <UNavigationMenu :items="items" variant="link" />
@@ -120,10 +117,10 @@ const items = computed(() => [
     <template #body>
       <UNavigationMenu :items="items" orientation="vertical" class="-mx-2.5" />
 
-      <USeparator class="my-6" />
-
+      <!-- <USeparator class="my-6" /> -->
+      <!-- 
       <UButton label="Sign in" color="neutral" variant="subtle" to="/login" block class="mb-3" />
-      <UButton label="Sign up" color="neutral" to="/signup" block />
+      <UButton label="Sign up" color="neutral" to="/signup" block /> -->
     </template>
   </UHeader>
 </template>

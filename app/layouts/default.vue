@@ -2,12 +2,12 @@
   <div>
 
     <AppHeader />
+    <UMain>
+      <UContainer>
+        <slot />
 
-    <UMain class="mx-auto max-w-7xl">
-     
-      <slot />
+      </UContainer>
     </UMain>
-
     <AppFooter />
   </div>
 </template>

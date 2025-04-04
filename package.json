@@ -24,11 +24,14 @@
     "apexcharts": "^4.5.0",
     "nuxt": "^3.16.0",
     "nuxt-og-image": "^5.0.2",
+    "openseadragon": "^5.0.1",
+    "openseadragon-opacity-slider": "^1.0.0",
     "pinia": "^3.0.1",
     "vue3-apexcharts": "^1.8.0"
   },
   "devDependencies": {
     "@nuxt/eslint": "^1.2.0",
+    "@types/lodash-es": "^4.17.12",
     "eslint": "^9.22.0",
     "typescript": "^5.8.2",
     "vue-tsc": "^2.2.2"

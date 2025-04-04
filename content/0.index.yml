@@ -17,8 +17,8 @@ hero:
     - label: Skogsskötsel
       icon: i-hugeicons-tree-06
       trailing: false
-      to: https://ui.nuxt.com/getting-started/installation/pro/nuxt
-      target: _blank
+      to: /skogsskotsel
+      target: 
       size: xl
       color: neutral
       variant: ghost
@@ -36,7 +36,7 @@ sections:
     headline: Svamparter
     links:
       - label: Gå till svamparter
-        to: /mykorrhizasvampar
+        to: /mykorrhizasvampar/start
         icon: i-heroicons-arrow-right
     orientation: horizontal
     reverse: true

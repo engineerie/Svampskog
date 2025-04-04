@@ -1,0 +1,36 @@
+{
+  "naturskog": {
+    "naturskydd": {
+      "title": "1.1 Inga åtgärder",
+      "description": "Beståndet lämnas för fri utveckling tills vidare. Kan t ex vara en skog med områdesskydd eller som är en frivillig naturvårdsavsättning.",
+      "impact": "Samhället mykorrhizasvampar lever vidare med de arter som finns i skogen. Förekomst av matsvampar oftast bra i skogar som sköts på detta sätt. Rödlistade arter på platsen fortlever. Svamparnas mycelindivider kan både bli gamla som träd eller äldre, och växa och bli många m2 stora där det kontinuerligt finns träd. Sker plockhuggning av enstaka träd utspritt i beståndet har det minimal påverkan på mykorrhizasvampar.",
+      "image": "/images/ingen_åtgärd.jpg"
+    },
+    "trakthygge": {
+      "title": "1.2 Trakthyggesbruk",
+      "description": "Sedan 1950-talet det dominerande skogsskötselsystemet som går ut på att skapa likåldriga, större bestånd, trakter, med normalt ett trädslag. Hela beståndet behandlas samtidigt: avverkning, markberedning, plantering, röjning, gallring och åter avverkning efter 60–100 år.",
+      "impact": "Mykorrhizasvampar försvinner nästan helt efter avverkning då de är beroende av symbios med träd. Svampmycel överlever på hänsynsträd, naturligt föryngrade plantor och längs skogskanter. Plantskoleplantor har spontant med sig några få arter, som ersätts med tiden av arter som etableras via sporer från näraliggande skogar. Matsvampar saknas efter avverkning men kan dyka upp efter decennier. Rödlistade arter är oftast för ovanliga i grannskapet för att återetableras.",
+      "image": "/images/kalhygge.jpg"
+    },
+    "luckhuggning": {
+      "title": "1.3 Hyggesfritt – ",
+      "description": "Luckhuggning innebär att träd avverkas i luckor med 20–50 m storlek (motsvarar 500–2 500 m²). När ny skog vuxit upp kan luckorna utvidgas eller nya luckor tas upp. Luckhuggning fungerar även i enskiktad granskog. Luckor >2 500 m² räknas som hyggen enligt Skogsstyrelsens definition.",
+      "impact": "Ett trakthyggesbruk i mindre skala. Hur stor påverkan blir beror på luckornas storlek. Kanteffekten gör att mykorrhizasvampar lever vidare i omgivande rötter ca 10 m in i luckorna. Med luckdiameter <20 m är påverkan liten; större luckor gör att mycel dör i mitten av luckorna och återetableras långsamt. För hela skogen blir svampmängden något lägre. Mycel av rödlistade arter kan fortleva med små luckor men minskar i större luckor.",
+      "image": "/images/luckhuggning.jpg"
+    },
+    "skärmträd": {
+      "title": "1.4 Hyggesfritt – ",
+      "description": "Överhållen skärm innebär att fler skärmträd lämnas än i traditionellt skärmskogsbruk och de sparas längre. Minst 25 träd per hektar ingår i det nya beståndet. Tall och bok fungerar bra, gran är vindkänslig. Överhållen skärm kan vara ett bra val för naturvärden som behöver ljus och värme.",
+      "impact": "Troligen liten påverkan på mykorrhizasvampar; de flesta mycel lever vidare i rötterna på skärmträden, om än med färre fruktkroppar. De etablerar sig också på uppväxande plantor. De flesta arter, även rödlistade, kan fortleva. Matsvampstillgången är dock lägre under skärmtiden.",
+      "image": "/images/överhållenskärm.jpg"
+    },
+    "blädning": {
+      "title": "1.5 Hyggesfritt",
+      "description": "Blädning innebär ofta uttag om 20–30 % av virkesvolymen med 15–30 års intervall, med målet att behålla en fullskiktad skog. Passar skuggtåliga trädslag, främst gran, i bördigare marker. Bevarar fuktigare och mer skyddad miljö.",
+      "impact": "Påverkan är förmodligen försumbar eftersom det kontinuerligt finns levande trädrötter i hela beståndet. I princip lever alla mycel vidare. Rödlistade arter kan fortleva om de redan finns. Matsvampsmängden kan minska några år direkt efter en blädning men återgår därefter.",
+      "image": "/images/blädning.jpg"
+    }
+  },
+
+  "produktionsskog_": {}
+}

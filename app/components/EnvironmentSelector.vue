@@ -4,18 +4,11 @@
     <div ref="contentRef" class="original-content">
       <!-- Parameter Popover Grid -->
       <div class="grid grid-cols-4 gap-5 mb-2">
-        <div
-          v-for="category in categories"
-          :key="category.key"
-          class="flex justify-center w-full"
-        >
+        <div v-for="category in categories" :key="category.key" class="flex justify-center w-full">
           <UPopover mode="hover">
             <div>
               <transition name="slide-up" mode="out-in">
-                <div
-                  :key="getLabel(category.key)"
-                  class="flex items-center justify-center cursor-default"
-                >
+                <div :key="getLabel(category.key)" class="flex items-center justify-center cursor-default">
                   <!-- <div
                     class="my-2 w-14 h-14 rounded-lg flex justify-center items-center"
                     :class="iconColor(category.key)"
@@ -34,16 +27,11 @@
             <template #content>
               <div class="p-2 min-w-60 max-w-96">
                 <!-- Use enabledOptions so that restriction applies here -->
-                <div
-                  v-for="option in enabledOptions[category.key]"
-                  :key="option.value"
-                  class="hover:bg-neutral-50 p-3 rounded-md my-1 cursor-pointer"
-                  :class="{
-          'bg-neutral-100': option.value === envStore[category.key],
-          'opacity-40 cursor-not-allowed': option.disabled
-        }"
-                  @click="() => { if (!option.disabled) selectOption(category.key, option.value) }"
-                >
+                <div v-for="option in enabledOptions[category.key]" :key="option.value"
+                  class="hover:bg-neutral-50 p-3 rounded-md my-1 cursor-pointer" :class="{
+                    'bg-neutral-100': option.value === envStore[category.key],
+                    'opacity-40 cursor-not-allowed': option.disabled
+                  }" @click="() => { if (!option.disabled) selectOption(category.key, option.value) }">
                   <h1 class="text-md font-semibold text-neutral-900">
                     {{ option.label }}
                   </h1>
@@ -59,65 +47,37 @@
 
       <!-- Toggle Buttons for Lock & Kombinationsvy -->
       <div class="flex justify-end gap-2 mb-2">
-     
-        <UButton
-          trailing
-          :icon="restrictionEnabled ? 'mdi:lock' : 'mdi:lock-open'"
-          @click="toggleRestriction"
-          shape="full"
-          class="transition-all"
-          variant="ghost"
-          :color="restrictionEnabled ? 'secondary' : 'neutral'"
-        >
+
+        <UButton trailing :icon="restrictionEnabled ? 'mdi:lock' : 'mdi:lock-open'" @click="toggleRestriction"
+          shape="full" class="transition-all" variant="ghost" :color="restrictionEnabled ? 'secondary' : 'neutral'">
           {{ restrictionEnabled ? "Markinventeringsdata" : "Markinventeringsdata" }}
         </UButton>
-        <UButton
-          trailing
-          :icon="listBoxRowVisible ? 'mdi:chevron-up' : 'mdi:chevron-down'"
-          @click="toggleHeight"
-          color="neutral"
-          variant="ghost"
-        >
+        <UButton trailing :icon="listBoxRowVisible ? 'mdi:chevron-up' : 'mdi:chevron-down'" @click="toggleHeight"
+          color="neutral" variant="ghost">
           {{ listBoxRowVisible ? "Dölj kombinationsvy" : "Visa kombinationsvy" }}
         </UButton>
       </div>
 
       <!-- Combination view (checkboxes) -->
-      <div
-        :style="{ height: listBoxRowVisible ? '260px' : '0px' }"
-        class="overflow-visible transition-height ease-in-out duration-500"
-      >
+      <div :style="{ height: listBoxRowVisible ? '260px' : '0px' }"
+        class="overflow-visible transition-height ease-in-out duration-500">
         <Transition name="fade">
           <div v-show="listBoxRowVisible">
             <div class="grid grid-cols-4 gap-5">
-              
-              <UCard
-                v-for="category in categories"
-                :key="category.key"
-            variant="soft"
-              >
-                <div
-                  v-for="option in enabledOptions[category.key]"
-                  :key="option.value"
-                  class="flex justify-between mb-2 text-neutral-500"
-                >
-                  <label
-                    :for="`${category.key}-${option.value}`"
-                    :class="{
-                      'opacity-40 cursor-not-allowed': option.disabled,
-                      'cursor-pointer': !option.disabled
-                    }"
-                    class="text-sm"
-                  >
+
+              <UCard v-for="category in categories" :key="category.key" variant="soft">
+                <div v-for="option in enabledOptions[category.key]" :key="option.value"
+                  class="flex justify-between mb-2 text-neutral-500">
+                  <label :for="`${category.key}-${option.value}`" :class="{
+                    'opacity-40 cursor-not-allowed': option.disabled,
+                    'cursor-pointer': !option.disabled
+                  }" class="text-sm">
                     {{ option.label }}
                   </label>
-                  <UCheckbox
-                    :id="`${category.key}-${option.value}`"
-                    color="primary"
+                  <UCheckbox :id="`${category.key}-${option.value}`" color="primary"
                     :model-value="envStore[category.key] === option.value"
                     @update:model-value="() => { if (!option.disabled) selectOption(category.key, option.value) }"
-                    :disabled="option.disabled"
-                  />
+                    :disabled="option.disabled" />
                 </div>
               </UCard>
             </div>
@@ -128,30 +88,13 @@
 
     <!-- Sticky header that folds down from behind the AppHeader -->
     <transition name="fold-down">
-      <div
-        v-if="isSticky"
-        class="fixed top-16 z-20 bg-white dark:bg-black border-b border-neutral-200 left-0 right-0"
-      >
+      <div v-if="isSticky" class="fixed top-16 z-20 bg-white dark:bg-black border-b border-neutral-200 left-0 right-0">
         <div class="flex space-x-4 w-full mx-auto max-w-7xl p-2">
           <!-- Use enabledOptions for USelect items as well -->
-          <USelect
-            v-for="category in categories"
-            :key="category.key"
-            :items="enabledOptions[category.key]"
-            v-model="envStore[category.key]"
-            :placeholder="category.defaultLabel"
-            class="flex-1"
-            append-to-body
-          />
-          <UButton
-            trailing
-            :icon="restrictionEnabled ? 'mdi:lock' : 'mdi:lock-open'"
-            @click="toggleRestriction"
-            shape="full"
-            class="transition-all"
-            variant="ghost"
-            :color="restrictionEnabled ? 'secondary' : 'neutral'"
-          >
+          <USelect v-for="category in categories" :key="category.key" :items="enabledOptions[category.key]"
+            v-model="envStore[category.key]" :placeholder="category.defaultLabel" class="flex-1" append-to-body />
+          <UButton trailing :icon="restrictionEnabled ? 'mdi:lock' : 'mdi:lock-open'" @click="toggleRestriction"
+            shape="full" class="transition-all" variant="ghost" :color="restrictionEnabled ? 'secondary' : 'neutral'">
             {{ restrictionEnabled ? "Markinventeringsdata" : "Markinventeringsdata" }}
           </UButton>
         </div>
@@ -296,58 +239,58 @@ const enabledOptions = computed(() => ({
     ...option,
     disabled:
       restrictionEnabled.value &&
-      (envStore.forestType ||
-        envStore.standAge ||
-        envStore.vegetationType)
+        (envStore.forestType ||
+          envStore.standAge ||
+          envStore.vegetationType)
         ? !validCombinations.value.some((comb) =>
-            (!envStore.forestType || comb.forest === envStore.forestType) &&
-            (!envStore.standAge || comb.age === envStore.standAge) &&
-            (!envStore.vegetationType || comb.veg === envStore.vegetationType) &&
-            comb.geo === option.value
-          )
+          (!envStore.forestType || comb.forest === envStore.forestType) &&
+          (!envStore.standAge || comb.age === envStore.standAge) &&
+          (!envStore.vegetationType || comb.veg === envStore.vegetationType) &&
+          comb.geo === option.value
+        )
         : false
   })),
   forestType: forestTypeOptions.map((option) => ({
     ...option,
     disabled:
       restrictionEnabled.value &&
-      (envStore.geography ||
-        envStore.standAge ||
-        envStore.vegetationType)
+        (envStore.geography ||
+          envStore.standAge ||
+          envStore.vegetationType)
         ? !validCombinations.value.some((comb) =>
-            (!envStore.geography || comb.geo === envStore.geography) &&
-            (!envStore.standAge || comb.age === envStore.standAge) &&
-            (!envStore.vegetationType || comb.veg === envStore.vegetationType) &&
-            comb.forest === option.value
-          )
+          (!envStore.geography || comb.geo === envStore.geography) &&
+          (!envStore.standAge || comb.age === envStore.standAge) &&
+          (!envStore.vegetationType || comb.veg === envStore.vegetationType) &&
+          comb.forest === option.value
+        )
         : false
   })),
   standAge: standAgeOptions.map((option) => ({
     ...option,
     disabled:
       restrictionEnabled.value &&
-      (envStore.geography ||
-        envStore.forestType ||
-        envStore.vegetationType)
+        (envStore.geography ||
+          envStore.forestType ||
+          envStore.vegetationType)
         ? !validCombinations.value.some((comb) =>
-            (!envStore.geography || comb.geo === envStore.geography) &&
-            (!envStore.forestType || comb.forest === envStore.forestType) &&
-            (!envStore.vegetationType || comb.veg === envStore.vegetationType) &&
-            comb.age === option.value
-          )
+          (!envStore.geography || comb.geo === envStore.geography) &&
+          (!envStore.forestType || comb.forest === envStore.forestType) &&
+          (!envStore.vegetationType || comb.veg === envStore.vegetationType) &&
+          comb.age === option.value
+        )
         : false
   })),
   vegetationType: vegetationTypeOptions.map((option) => ({
     ...option,
     disabled:
       restrictionEnabled.value &&
-      (envStore.geography || envStore.forestType || envStore.standAge)
+        (envStore.geography || envStore.forestType || envStore.standAge)
         ? !validCombinations.value.some((comb) =>
-            (!envStore.geography || comb.geo === envStore.geography) &&
-            (!envStore.forestType || comb.forest === envStore.forestType) &&
-            (!envStore.standAge || comb.age === envStore.standAge) &&
-            comb.veg === option.value
-          )
+          (!envStore.geography || comb.geo === envStore.geography) &&
+          (!envStore.forestType || comb.forest === envStore.forestType) &&
+          (!envStore.standAge || comb.age === envStore.standAge) &&
+          comb.veg === option.value
+        )
         : false
   }))
 }))
@@ -394,22 +337,27 @@ watch(
 .transition-height {
   transition: height 0.5s ease-in-out;
 }
+
 .fade-enter-active,
 .fade-leave-active {
   transition: opacity 0.5s;
 }
+
 .fade-enter,
 .fade-leave-to {
   opacity: 0;
 }
+
 .slide-up-enter-active,
 .slide-up-leave-active {
   transition: all 0.25s ease-out;
 }
+
 .slide-up-enter-from {
   opacity: 0;
   transform: translateY(30px);
 }
+
 .slide-up-leave-to {
   opacity: 0;
   transform: translateY(-30px);
@@ -420,10 +368,12 @@ watch(
 .fold-down-leave-active {
   transition: transform 0.3s ease;
 }
+
 .fold-down-enter-from,
 .fold-down-leave-to {
   transform: translateY(-100%);
 }
+
 .fold-down-enter-to,
 .fold-down-leave-from {
   transform: translateY(0);

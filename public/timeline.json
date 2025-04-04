@@ -1,0 +1,375 @@
+[
+  {
+    "startskog": "naturskog",
+    "atgard": "naturskydd",
+    "tid": "innan",
+    "skog": "Äldre skog",
+    "svamp": "Rikligt med mykorhizasvamp med många olika arter. Goda förutsättningar för matsvampar. Rödlistade svampar kan finnas. Gamla svampindivider som kan ha stora mycelstorlekar."
+  },
+  {
+    "startskog": "naturskog",
+    "atgard": "naturskydd",
+    "tid": "efter",
+    "skog": "Äldre skog , viss intern dynamik med träd som dör och självföryngring kan förekomma.",
+    "svamp": "Rikligt med mykorhizasvamp med många olika arter. Goda förutsättningar för matsvampar. Rödlistade svampar kan finnas. Gamla svampindivider som kan ha stora mycelstorlekar."
+  },
+  {
+    "startskog": "naturskog",
+    "atgard": "naturskydd",
+    "tid": "20 år",
+    "skog": "Äldre skog , viss intern dynamik med träd som dör och självföryngring kan förekomma.",
+    "svamp": "Rikligt med mykorhizasvamp med många olika arter. Goda förutsättningar för matsvampar. Rödlistade svampar kan finnas. Gamla svampindivider som kan ha stora mycelstorlekar."
+  },
+  {
+    "startskog": "naturskog",
+    "atgard": "naturskydd",
+    "tid": "50 år",
+    "skog": "Äldre skog , viss intern dynamik med träd som dör och självföryngring kan förekomma.",
+    "svamp": "Rikligt med mykorhizasvamp med många olika arter. Goda förutsättningar för matsvampar. Rödlistade svampar kan finnas. Gamla svampindivider som kan ha stora mycelstorlekar."
+  },
+  {
+    "startskog": "naturskog",
+    "atgard": "naturskydd",
+    "tid": "80 år",
+    "skog": "Äldre skog , viss intern dynamik med träd som dör och självföryngring kan förekomma.",
+    "svamp": "Rikligt med mykorhizasvamp med många olika arter. Goda förutsättningar för matsvampar. Rödlistade svampar kan finnas. Gamla svampindivider som kan ha stora mycelstorlekar."
+  },
+
+  {
+    "startskog": "naturskog",
+    "atgard": "trakthygge",
+    "tid": "innan",
+    "skog": "Äldre skog",
+    "svamp": "Rikligt med mykorhizasvamp med många olika arter.Goda förutsättningar för matsvampar. Rödlistade svampar kan finnas. Gamla svampindivider kan ha stora mycelstorlekar."
+  },
+  {
+    "startskog": "naturskog",
+    "atgard": "trakthygge",
+    "tid": "efter",
+    "skog": "Kalaverkning med 5%  naturhänsyn i form av  enstaka och grupper av hänsynsträd samt högstubbar.",
+    "svamp": "Merparten av mykorrhizasvamparnas mycel tynar bort och dör. Svampmycel överlever vid hänsynsträd, längs med hyggeskanterna och på kvarväxande småplantor."
+  },
+  {
+    "startskog": "naturskog",
+    "atgard": "trakthygge",
+    "tid": "20 år",
+    "skog": "Trädplantor som sattes efter avverkning  är nu 5-10 meter hög ungskog .",
+    "svamp": "Successivt återetableras mykorrhizasvampar med vindspridda sporer från näraliggande skogar. Betydligt mindre mängd mykorrhiza och färre arter än  i äldre skog. Matsvampar saknas ofta helt."
+  },
+  {
+    "startskog": "naturskog",
+    "atgard": "trakthygge",
+    "tid": "50 år",
+    "skog": "Uppvuxen skog. En gallring av  30% av beståndets stamantal har skett. Sker 1-3 gånger under ett  bestånds omloppstid.",
+    "svamp": "Mängd och artantal mykorrhizasvampar närmar sig vad som finns I äldre skog. Matsvampar, t ex stensopp, blir allt vanligare. Gallringen påverkar inte förekomsten av mykorrhizasvamparna nämnvärt."
+  },
+  {
+    "startskog": "naturskog",
+    "atgard": "trakthygge",
+    "tid": "80 år",
+    "skog": "Äldre skog, kan beroende på markbördighet och var in Sverige komma att avverkas vid 6+ - + 100 års ålder.",
+    "svamp": "Förekomsten av vanliga mykorrhizasvampar, mängd och artantal är ungefär samma som före avverkningen. Ofta bra för matsvampar. Någon rödlistade art kan ha fortlevt på lämnade evighetsträd och någon kan ha spridits in och tableras om den finns i närheten."
+  },
+
+  {
+    "startskog": "naturskog",
+    "atgard": "luckhuggning",
+    "tid": "innan",
+    "skog": "Äldre skog",
+    "svamp": "Rikligt med mykorhizasvamp med många olika arter.Goda förutsättningar för matsvampar. Rödlistade svampar kan finnas. Gamla svampindivider kan ha stora mycelstorlekar."
+  },
+  {
+    "startskog": "naturskog",
+    "atgard": "luckhuggning",
+    "tid": "efter",
+    "skog": "Avverkning i en större lucka och två mindre luckor. Skogen i resten av beståndet är inakt.",
+    "svamp": "Luckorna fungerar som små hyggen. Mykorrhiza på omgivande träds rötter som sträcker sig ca 10 m in i luckorna forlever. Den ohuggna skogens mykorrhizasvamparna fortlever, men sammantaget minskar matsvampar och eventuell förekomst av rödlistade arter i beståndet."
+  },
+  {
+    "startskog": "naturskog",
+    "atgard": "luckhuggning",
+    "tid": "20 år",
+    "skog": "Självföryngrade träd har börjat växa upp i luckorna.",
+    "svamp": "Svampsamhället i det ursprungliga beståndet  är fortsatt opåverkat.  Mykorrhizasvampar från mycel och sporer som finns på platsen etablerar sig på de självföryngrade trädplantorna."
+  },
+  {
+    "startskog": "naturskog",
+    "atgard": "luckhuggning",
+    "tid": "50 år",
+    "skog": "Tre nya luckor avverkades efter ca 30 år. Träden i de första luckorna närmar sig 50 år och i de nyare luckorna 20 år.",
+    "svamp": "Artantal och mykorrhizamängd minskar under ett par decennier i luckorna. Uppväxande trädplantor etableras av samma mykorrhizasvampar som funnits på platsen. Förekomsten av matsvamp liksom ovanliga och rödlistade svampar fortlever i ursprungsskogen och kan etableras på de uppväxande träden."
+  },
+  {
+    "startskog": "naturskog",
+    "atgard": "luckhuggning",
+    "tid": "80 år",
+    "skog": "Efter ca 60 år avverkas resten av beståndet.Träden är nu ca 80 år i de äldsta luckorna och 50, respektive  20, år i de yngre luckorna.",
+    "svamp": "Förekomsten av vanliga mykorrhizasvampar, mängd och artantal är ela tiden något lägre än före avverkningen pga av luckorna. Ursprungliga förekomster av matsvamp liksom ovanliga och rödlistade svampar bedöms ofta kunna fortleva  på beståndsnivå."
+  },
+
+  {
+    "startskog": "naturskog",
+    "atgard": "skärmträd",
+    "tid": "innan",
+    "skog": "Äldre skog",
+    "svamp": "Rikligt med mykorhizasvamp med många olika arter.Goda förutsättningar för matsvampar. Rödlistade svampar kan finnas. Gamla svampindivider kan ha stora mycelstorlekar."
+  },
+  {
+    "startskog": "naturskog",
+    "atgard": "skärmträd",
+    "tid": "efter",
+    "skog": "Föreberedande avverkning som lämnar 300-400 skärmträd/ha.",
+    "svamp": "Mängden mykorrhiza halveras då ungefär hälften av beståndet träd avverkas.  Artsammansättningen påverkas något. Alla vanliga och de allra flesta ovanligare svamparterna fortlever på skärmträdens rötter som täcker merparten av beståndets yta."
+  },
+  {
+    "startskog": "naturskog",
+    "atgard": "skärmträd",
+    "tid": "10 år",
+    "skog": "Avverkning som lämnar 75-150 fröträd/ha.",
+    "svamp": "Mängden mykorrhiza minskar med färre träd.  Artsammansättningen av påverkas mindre. Alla vanliga och de allra flesta ovanligare svamparterna fortlever på skärmträdens rötter som täcker större delen av beståndets yta."
+  },
+  {
+    "startskog": "naturskog",
+    "atgard": "skärmträd",
+    "tid": "20 år",
+    "skog": "När självföryngrade trädplantor etablerats och vuxit sig ca 2 meter höga avverkas fröträden. Hänsynsträd lämnas.",
+    "svamp": "Bedömningen är att mycel från många mykorrhizasvampar på skärmträdenss  rötter har etablerats på de naturligt föryngrade plantornas rötter. Mängden mykorrhiza går ner men merparten av arter fortlever. Lite matsvamp. Ovanligare och rödlistade arter på hänsynsträd fortlever och bedöms också ha etablerats på de yngre trädplantorna."
+  },
+  {
+    "startskog": "naturskog",
+    "atgard": "skärmträd",
+    "tid": "50 år",
+    "skog": "Uppvuxen skog.",
+    "svamp": "Mängd och artantal mykorrhizasvampar är ungefär vad som finns i äldre skog. Samma förekomsten av vanlig arter. En stor del av  ursprungliga mat- ovanligare och rödlistade svamp arter bedöms fortleva. Potentiellt god tillgång på matsvampar."
+  },
+  {
+    "startskog": "naturskog",
+    "atgard": "skärmträd",
+    "tid": "80 år",
+    "skog": "Äldre skog, Dags att skapa skärmträdställning igen.",
+    "svamp": "Artantal, mängd mykorrhizasvampar och tillgång på matsvampar bedöms vara ungefär som före friställande av skärmträd. En stor del av de ursprungliga ovanligare och rödlistade arterna bedöms fortsatt kunna finnas i beståndet."
+  },
+
+  {
+    "startskog": "naturskog",
+    "atgard": "blädning",
+    "tid": "innan",
+    "skog": "Äldre skog",
+    "svamp": "Rikligt med mykorhizasvamp med många olika arter.Goda förutsättningar för matsvampar. Rödlistade svampar kan finnas. Gamla svampindivider kan ha stora mycelstorlekar."
+  },
+  {
+    "startskog": "naturskog",
+    "atgard": "blädning",
+    "tid": "efter",
+    "skog": "Avverkning av ca 1/3 av träden utspritt i beståndet.  Ger plats åt mindre och yngre träd att växa till.",
+    "svamp": "Liten påverkan på mykorrhizasvampar. Artsammansättningen i princip opåverkan. Tillfällig nedgång I mängden mykorrhiza som följd av lägre sammanlagd fotosyntes pga blädningen."
+  },
+  {
+    "startskog": "naturskog",
+    "atgard": "blädning",
+    "tid": "20 år",
+    "skog": "Mindre och yngre träd växer upp till och fyller i luckorna som bildades vid blädningen.",
+    "svamp": "Artsammansättning och mängd mykorrhiza bedöms vara samma som före blädningen för såväl vanliga arter, mat- ovanligare och rödlistade arter."
+  },
+  {
+    "startskog": "naturskog",
+    "atgard": "blädning",
+    "tid": "50 år",
+    "skog": "Ny blädningsomgång där ytterligare 1/3 av träden avverkas. Ger utrymme åt nya mindre och yngre träd att växa till.",
+    "svamp": "Fortsatt liten påverkan på mykorrhizasvampar. Artsammansättningen i princip opåverkad. Tillfällig nedgång i mängden mykorrhiza som följd av lägre sammanlagd fotosyntes pga blädningen."
+  },
+  {
+    "startskog": "naturskog",
+    "atgard": "blädning",
+    "tid": "80 år",
+    "skog": "Ungefär 60 år efter den första blädningen avverkas den sista tredjedelen av träden från det ursprungliga beståndet.",
+    "svamp": "Fortsatt liten påverkan på mykorrhizasvampar. Artsammansättning och mängd mykorrhiza bedöms vara fortsatt samma som före blädningen för såväl vanliga arter, mat- ovanligare och rödlistade arter."
+  },
+
+  {
+    "startskog": "produktionsskog_",
+    "atgard": "naturskydd",
+    "tid": "innan",
+    "skog": "Äldre tidigare kalavverkad skog",
+    "svamp": "Rikligt med mykorhizasvamp med många olika arter.Goda förutsättningar för matsvampar. Oftast saknas rödlistade svampar. Gamla svampindivider som kan ha stora mycelstorlekar."
+  },
+  {
+    "startskog": "produktionsskog_",
+    "atgard": "naturskydd",
+    "tid": "efter",
+    "skog": "Äldre skog , viss intern dynamik med träd som dör och självföryngring kan förekomma.",
+    "svamp": "Rikligt med mykorhizasvamp med många olika arter.Goda förutsättningar för matsvampar. Som regel saknas rödlistade svampar, men etablering kan ske om arterna finns  I den omdelbara närheten. Gamla svampindivider som kan ha stora mycelstorlekar."
+  },
+  {
+    "startskog": "produktionsskog_",
+    "atgard": "naturskydd",
+    "tid": "20 år",
+    "skog": "Äldre skog , viss intern dynamik med träd som dör och självföryngring kan förekomma.",
+    "svamp": "Rikligt med mykorhizasvamp med många olika arter.Goda förutsättningar för matsvampar. Som regel saknas rödlistade svampar, men etablering kan ske om arterna finns  I den omdelbara närheten. Gamla svampindivider som kan ha stora mycelstorlekar."
+  },
+  {
+    "startskog": "produktionsskog_",
+    "atgard": "naturskydd",
+    "tid": "50 år",
+    "skog": "Äldre skog , viss intern dynamik med träd som dör och självföryngring kan förekomma.",
+    "svamp": "Rikligt med mykorhizasvamp med många olika arter.Goda förutsättningar för matsvampar. Som regel saknas rödlistade svampar, men etablering kan ske om arterna finns  I den omdelbara närheten. Gamla svampindivider som kan ha stora mycelstorlekar."
+  },
+  {
+    "startskog": "produktionsskog_",
+    "atgard": "naturskydd",
+    "tid": "80 år",
+    "skog": "Äldre skog , viss intern dynamik med träd som dör och självföryngring kan förekomma.",
+    "svamp": "Rikligt med mykorhizasvamp med många olika arter.Goda förutsättningar för matsvampar. Som regel saknas rödlistade svampar, men etablering kan ske om arterna finns  i den omdelbara närheten. Gamla svampindivider som kan ha stora mycelstorlekar."
+  },
+
+  {
+    "startskog": "produktionsskog_",
+    "atgard": "trakthygge",
+    "tid": "innan",
+    "skog": "Äldre tidigare kalavverkad skog",
+    "svamp": "Rikligt med mykorhizasvamp med många olika arter.Goda förutsättningar för matsvampar. Oftast saknas rödlistade svampar. Gamla svampindivider som kan ha stora mycelstorlekar."
+  },
+  {
+    "startskog": "produktionsskog_",
+    "atgard": "trakthygge",
+    "tid": "efter",
+    "skog": "Kalaverkning med 5%  naturhänsyn i form av  enstaka och grupper av hänsynsträd samt högstubbar.",
+    "svamp": "Merparten av mykorrhizasvamparnas mycel tynar bort och dör. Svampmycel överlever vid hänsynsträd, längs med hyggeskanterna och på kvarväxande småplantor."
+  },
+  {
+    "startskog": "produktionsskog_",
+    "atgard": "trakthygge",
+    "tid": "20 år",
+    "skog": "Trädplantor som sattes efter avverkning  är nu 5-10 meter hög ungskog .",
+    "svamp": "Successivt återetableras mykorrhizasvampar med vindspridda sporer från näraliggande skogar. Betydligt mindre mängd mykorrhiza och färre arter än  i äldre skog. Matsvampar saknas ofta helt."
+  },
+  {
+    "startskog": "produktionsskog_",
+    "atgard": "trakthygge",
+    "tid": "50 år",
+    "skog": "Uppvuxen skog. En gallring av  30% av beståndets stamantal har skett. Sker 1-3 gånger under ett  bestånds omloppstid.",
+    "svamp": "Mängd och artantal mykorrhizasvampar närmar sig vad som finns I äldre skog. Matsvampar, t ex stensopp, blir allt vanligare. Gallringen påverkar inte förekomsten av mykorrhizasvamparna nämnvärt."
+  },
+  {
+    "startskog": "produktionsskog_",
+    "atgard": "trakthygge",
+    "tid": "80 år",
+    "skog": "Äldre skog, kan beroende på markbördighet och var in Sverige komma att avverkas vid 60-100 års ålder.",
+    "svamp": "Förekomsten av vanliga mykorrhizasvampar, mängd och artantal är ungefär samma som före avverkningen. Ofta bra för matsvampar. Någon rödlistade art kan ha lyckats etableras om de  förekommer i närheten."
+  },
+
+  {
+    "startskog": "produktionsskog_",
+    "atgard": "luckhuggning",
+    "tid": "innan",
+    "skog": "Äldre tidigare kalavverkad skog",
+    "svamp": "Rikligt med mykorhizasvamp med många olika arter.Goda förutsättningar för matsvampar. Oftast saknas rödlistade svampar. Gamla svampindivider som kan ha stora mycelstorlekar."
+  },
+  {
+    "startskog": "produktionsskog_",
+    "atgard": "luckhuggning",
+    "tid": "efter",
+    "skog": "Avverkning i en större lucka och två mindre luckor. Skogen i resten av beståndet är inakt.",
+    "svamp": "Luckorna fungerar som små hyggen. Mykorrhiza på omgivande träds rötter som sträcker sig ca 10 m in i luckorna forlever. Den ohuggna skogens mykorrhizasvamparna fortlever, men sammantaget minskar matsvampar och ovanligare arter i beståndet."
+  },
+  {
+    "startskog": "produktionsskog_",
+    "atgard": "luckhuggning",
+    "tid": "20 år",
+    "skog": "Självföryngrade träd har börjat växa upp i luckorna.",
+    "svamp": "Svampsamhället i det ursprungliga beståndet  är fortsatt opåverkat.  Mykorrhizasvampar från mycel och sporer som finns på platsen etablerar sig på de självföryngrade trädplantorna."
+  },
+  {
+    "startskog": "produktionsskog_",
+    "atgard": "luckhuggning",
+    "tid": "50 år",
+    "skog": "Tre nya luckor avverkades efter ca 30 år. Träden i de första luckorna närmar sig 50 år och i de nyare luckorna 20 år.",
+    "svamp": "Artantal och mykorrhizamängd minskar under ett par decennier i luckorna. Uppväxande trädplantor etableras av samma mykorrhizasvampar som funnits på platsen. Förekomsten av matsvamp liksom ovanliga  svampar fortlever i ursprungsskogen och kan etableras på de uppväxande träden."
+  },
+  {
+    "startskog": "produktionsskog_",
+    "atgard": "luckhuggning",
+    "tid": "80 år",
+    "skog": "Efter ca 60 år avverkas resten av beståndet.Träden är nu ca 80 år i de äldsta luckorna och 50, respektive  20, år i de yngre luckorna.",
+    "svamp": "Förekomsten av vanliga mykorrhizasvampar, mängd och artantal är ela tiden något lägre än före avverkningen pga av luckorna. Ursprungliga förekomster av matsvamp liksom ovanliga svampar bedöms ofta kunna fortleva  på beståndsnivå."
+  },
+
+  {
+    "startskog": "produktionsskog_",
+    "atgard": "skärmträd",
+    "tid": "innan",
+    "skog": "Äldre tidigare kalavverkad skog",
+    "svamp": "Rikligt med mykorhizasvamp med många olika arter.Goda förutsättningar för matsvampar. Oftast saknas rödlistade svampar. Gamla svampindivider som kan ha stora mycelstorlekar."
+  },
+  {
+    "startskog": "produktionsskog_",
+    "atgard": "skärmträd",
+    "tid": "efter",
+    "skog": "Föreberedande avverkning som lämnar 300-400 skärmträd/ha.",
+    "svamp": "Mängden mykorrhiza halveras då ungefär hälften av beståndet träd avverkas.  Artsammansättningen påverkas något. Alla vanliga och de allra flesta ovanligare svamparterna fortlever på skärmträdens rötter som täcker merparten av beståndets yta."
+  },
+  {
+    "startskog": "produktionsskog_",
+    "atgard": "skärmträd",
+    "tid": "10 år",
+    "skog": "Avverkning som lämnar 75-150 fröträd/ha.",
+    "svamp": "Mängden mykorrhiza minskar med färre träd.  Artsammansättningen av påverkas mindre. Alla vanliga och de allra flesta ovanligare svamparterna fortlever på skärmträdens rötter som täcker större delen av beståndets yta."
+  },
+  {
+    "startskog": "produktionsskog_",
+    "atgard": "skärmträd",
+    "tid": "20 år",
+    "skog": "När självföryngrade trädplantor etablerats och vuxit sig ca 2 meter höga avverkas fröträden. Hänsynsträd lämnas.",
+    "svamp": "Bedömningen är att mycel från många mykorrhizasvampar på skärmträdenss  rötter har etablerats på de naturligt föryngrade plantornas rötter. Mängden mykorrhiza går ner men merparten av arter fortlever. Lite matsvamp. Ovanligare  arter på hänsynsträd fortlever och bedöms också ha etablerats på de yngre trädplantorna."
+  },
+  {
+    "startskog": "produktionsskog_",
+    "atgard": "skärmträd",
+    "tid": "50 år",
+    "skog": "Uppvuxen skog.",
+    "svamp": "Mängd och artantal mykorrhizasvampar är ungefär vad som finns i äldre skog. Samma förekomsten av vanlig arter. En stor del av  ursprungliga mat- och ovanligare svamparter bedöms fortleva. Potentiellt god tillgång på matsvampar."
+  },
+  {
+    "startskog": "produktionsskog_",
+    "atgard": "skärmträd",
+    "tid": "80 år",
+    "skog": "Äldre skog, Dags att skapa skärmträdställning igen.",
+    "svamp": "Artantal, mängd mykorrhizasvampar och tillgång på matsvampar bedöms vara ungefär som före friställande av skärmträd. En stor del av de ursprungliga ovanligare arterna bedöms fortsatt kunna finnas i beståndet."
+  },
+
+  {
+    "startskog": "produktionsskog_",
+    "atgard": "blädning",
+    "tid": "innan",
+    "skog": "Äldre tidigare kalavverkad skog",
+    "svamp": "Rikligt med mykorhizasvamp med många olika arter.Goda förutsättningar för matsvampar. Oftast saknas rödlistade svampar. Gamla svampindivider som kan ha stora mycelstorlekar."
+  },
+  {
+    "startskog": "produktionsskog_",
+    "atgard": "blädning",
+    "tid": "efter",
+    "skog": "Avverkning av ca 1/3 av träden utspritt i beståndet.  Ger plats åt mindre och yngre träd att växa till.",
+    "svamp": "Liten påverkan på mykorrhizasvampar. Artsammansättningen i princip opåverkan. Tillfällig nedgång I mängden mykorrhiza som följd av lägre sammanlagd fotosyntes pga blädningen."
+  },
+  {
+    "startskog": "produktionsskog_",
+    "atgard": "blädning",
+    "tid": "20 år",
+    "skog": "Mindre och yngre träd växer upp till och fyller i luckorna som bildades vid blädningen.",
+    "svamp": "Artsammansättning och mängd mykorrhiza bedöms vara samma som före blädningen för såväl vanliga arter, mat- ovanligare och rödlistade arter."
+  },
+  {
+    "startskog": "produktionsskog_",
+    "atgard": "blädning",
+    "tid": "50 år",
+    "skog": "Ny blädningsomgång där ytterligare 1/3 av träden avverkas. Ger utrymme åt nya mindre och yngre träd att växa till.",
+    "svamp": "Fortsatt liten påverkan på mykorrhizasvampar. Artsammansättningen i princip opåverkad. Tillfällig nedgång i mängden mykorrhiza som följd av lägre sammanlagd fotosyntes pga blädningen."
+  },
+  {
+    "startskog": "produktionsskog_",
+    "atgard": "blädning",
+    "tid": "80 år",
+    "skog": "Ungefär 60 år efter den första blädningen avverkas den sista tredjedelen av träden från det ursprungliga beståndet.",
+    "svamp": "Fortsatt liten påverkan på mykorrhizasvampar. Artsammansättning och mängd mykorrhiza bedöms vara fortsatt samma som före blädningen för såväl vanliga arter som mat- och ovanligare arter.  Som regel saknas rödlistade svampar, men etablering kan ske om arterna finns  i den omdelbara närheten."
+  }
+]

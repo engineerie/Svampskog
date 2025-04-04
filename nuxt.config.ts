@@ -9,25 +9,36 @@ export default defineNuxtConfig({
     "nuxt-og-image",
     "@pinia/nuxt",
   ],
-  
 
   content: {
     preview: {
-      api: 'https://api.nuxt.studio'
-    }
+      api: "https://api.nuxt.studio",
+    },
   },
 
   devtools: {
-    enabled: true,
+    enabled: false,
   },
 
   css: ["~/assets/css/main.css"],
 
   ui: {
     theme: {
-      colors: ['primary', 'secondary', 'tertiary', 'poison', 'signal', 'info', 'success', 'warning', 'error', 'kalkmark', 'vanligmark'],
-      transitions: true
-    }
+      colors: [
+        "primary",
+        "secondary",
+        "tertiary",
+        "poison",
+        "signal",
+        "info",
+        "success",
+        "warning",
+        "error",
+        "kalkmark",
+        "vanligmark",
+      ],
+      transitions: true,
+    },
   },
 
   // routeRules: {
