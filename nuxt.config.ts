@@ -10,11 +10,11 @@ export default defineNuxtConfig({
     "@pinia/nuxt",
   ],
 
-  content: {
-    preview: {
-      api: "https://api.nuxt.studio",
-    },
-  },
+  // content: {
+  //   preview: {
+  //     api: "https://api.nuxt.studio",
+  //   },
+  // },
 
   devtools: {
     enabled: false,
