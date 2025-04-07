@@ -1,15 +1,15 @@
 <template>
   <div class="cursor-pointer" @click="handleClick">
     <UBadge :label="annotation.title" color="neutral" v-if="isSelected" />
-    <div class="w-full flex justify-center">
-      <div :class="['relative transition-all', isSelected ? 'size-12' : 'size-12']">
-        <Icon name="i-heroicons-map-pin-solid" :class="[
-          'absolute  transition-all ',
-          isSelected ? 'size-12 text-green-500' : 'size-12 text-neutral-600',
+    <div class="w-full flex justify-center z-30">
+      <div :class="['relative transition-all', isSelected ? 'size-10' : 'size-10']">
+        <Icon :name="annotation.icon" :class="[
+          'absolute transition-all z-10',
+          isSelected ? 'size-10 text-green-500' : 'size-10 text-' + annotation.color,
         ]" />
-        <Icon name="i-heroicons-outline-map-pin" :class="[
-          'absolute transition-all ',
-          isSelected ? 'size-12 text-white' : ' size-12 text-white',
+        <Icon :name="annotation.iconOutline" :class="[
+          'absolute transition-all z-20',
+          isSelected ? 'size-10 text-white' : 'size-10 text-white',
         ]" />
       </div>
     </div>
@@ -41,4 +41,6 @@ const isSelected = computed(() => {
 function handleClick() {
   selectedAnnotationStore.setSelectedAnnotation(props.annotation);
 }
+
+
 </script>

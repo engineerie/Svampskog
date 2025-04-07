@@ -16,6 +16,12 @@ export default defineNuxtConfig({
     },
   },
 
+  vite: {
+    server: {
+      cors: true
+    }
+  },
+
   devtools: {
     enabled: false,
   },
@@ -41,9 +47,14 @@ export default defineNuxtConfig({
     },
   },
 
-  // routeRules: {
-  //   "/docs": { redirect: "/docs/guide", prerender: false },
-  // },
+  routeRules: {
+    // "/docs": { redirect: "/docs/guide", prerender: false },
+    '/images/**': {
+      headers: {
+        'Access-Control-Allow-Origin': '*'
+      }
+    }
+  },
 
   future: {
     compatibilityVersion: 4,
@@ -55,6 +66,13 @@ export default defineNuxtConfig({
     prerender: {
       routes: ["/", "/docs", "/info"],
       crawlLinks: true,
+    },
+    routeRules: {
+      '/images/**': {
+        headers: {
+          'Access-Control-Allow-Origin': '*'
+        }
+      }
     },
   },
 

@@ -3,7 +3,7 @@
     "artkategori": "Skinnsvampar",
     "startskog": "naturskog",
     "frameworks": "blädning",
-    "ålder": 0,
+    "ålder": -2,
     "klassning": 24
   },
   {
@@ -38,7 +38,7 @@
     "artkategori": "Skinnsvampar",
     "startskog": "naturskog",
     "frameworks": "naturskydd",
-    "ålder": 0,
+    "ålder": -2,
     "klassning": 24
   },
   {
@@ -73,7 +73,7 @@
     "artkategori": "Skinnsvampar",
     "startskog": "naturskog",
     "frameworks": "luckhuggning",
-    "ålder": 0,
+    "ålder": -2,
     "klassning": 24
   },
   {
@@ -108,7 +108,7 @@
     "artkategori": "Skinnsvampar",
     "startskog": "naturskog",
     "frameworks": "skärmträd",
-    "ålder": 0,
+    "ålder": -2,
     "klassning": 24
   },
   {
@@ -150,7 +150,7 @@
     "artkategori": "Skinnsvampar",
     "startskog": "naturskog",
     "frameworks": "trakthygge",
-    "ålder": 0,
+    "ålder": -2,
     "klassning": 24
   },
   {
@@ -185,7 +185,7 @@
     "artkategori": "Skinnsvampar",
     "startskog": "produktionsskog_",
     "frameworks": "blädning",
-    "ålder": 0,
+    "ålder": -2,
     "klassning": 30
   },
   {
@@ -220,7 +220,7 @@
     "artkategori": "Skinnsvampar",
     "startskog": "produktionsskog_",
     "frameworks": "naturskydd",
-    "ålder": 0,
+    "ålder": -2,
     "klassning": 30
   },
   {
@@ -255,7 +255,7 @@
     "artkategori": "Skinnsvampar",
     "startskog": "produktionsskog_",
     "frameworks": "luckhuggning",
-    "ålder": 0,
+    "ålder": -2,
     "klassning": 30
   },
   {
@@ -290,7 +290,7 @@
     "artkategori": "Skinnsvampar",
     "startskog": "produktionsskog_",
     "frameworks": "skärmträd",
-    "ålder": 0,
+    "ålder": -2,
     "klassning": 30
   },
   {
@@ -332,7 +332,7 @@
     "artkategori": "Skinnsvampar",
     "startskog": "produktionsskog_",
     "frameworks": "trakthygge",
-    "ålder": 0,
+    "ålder": -2,
     "klassning": 30
   },
   {
@@ -367,7 +367,7 @@
     "artkategori": "Spindelskivlingar",
     "startskog": "naturskog",
     "frameworks": "blädning",
-    "ålder": 0,
+    "ålder": -2,
     "klassning": 20
   },
   {
@@ -402,7 +402,7 @@
     "artkategori": "Spindelskivlingar",
     "startskog": "naturskog",
     "frameworks": "naturskydd",
-    "ålder": 0,
+    "ålder": -2,
     "klassning": 20
   },
   {
@@ -437,7 +437,7 @@
     "artkategori": "Spindelskivlingar",
     "startskog": "naturskog",
     "frameworks": "luckhuggning",
-    "ålder": 0,
+    "ålder": -2,
     "klassning": 20
   },
   {
@@ -472,7 +472,7 @@
     "artkategori": "Spindelskivlingar",
     "startskog": "naturskog",
     "frameworks": "skärmträd",
-    "ålder": 0,
+    "ålder": -2,
     "klassning": 20
   },
   {
@@ -514,7 +514,7 @@
     "artkategori": "Spindelskivlingar",
     "startskog": "naturskog",
     "frameworks": "trakthygge",
-    "ålder": 0,
+    "ålder": -2,
     "klassning": 20
   },
   {
@@ -549,7 +549,7 @@
     "artkategori": "Spindelskivlingar",
     "startskog": "produktionsskog_",
     "frameworks": "blädning",
-    "ålder": 0,
+    "ålder": -2,
     "klassning": 14
   },
   {
@@ -584,7 +584,7 @@
     "artkategori": "Spindelskivlingar",
     "startskog": "produktionsskog_",
     "frameworks": "naturskydd",
-    "ålder": 0,
+    "ålder": -2,
     "klassning": 14
   },
   {
@@ -619,7 +619,7 @@
     "artkategori": "Spindelskivlingar",
     "startskog": "produktionsskog_",
     "frameworks": "luckhuggning",
-    "ålder": 0,
+    "ålder": -2,
     "klassning": 14
   },
   {
@@ -654,7 +654,7 @@
     "artkategori": "Spindelskivlingar",
     "startskog": "produktionsskog_",
     "frameworks": "skärmträd",
-    "ålder": 0,
+    "ålder": -2,
     "klassning": 14
   },
   {
@@ -696,7 +696,7 @@
     "artkategori": "Spindelskivlingar",
     "startskog": "produktionsskog_",
     "frameworks": "trakthygge",
-    "ålder": 0,
+    "ålder": -2,
     "klassning": 14
   },
   {
@@ -731,7 +731,7 @@
     "artkategori": "Kremlor och riskor",
     "startskog": "naturskog",
     "frameworks": "blädning",
-    "ålder": 0,
+    "ålder": -2,
     "klassning": 18
   },
   {
@@ -766,7 +766,7 @@
     "artkategori": "Kremlor och riskor",
     "startskog": "naturskog",
     "frameworks": "naturskydd",
-    "ålder": 0,
+    "ålder": -2,
     "klassning": 18
   },
   {
@@ -801,7 +801,7 @@
     "artkategori": "Kremlor och riskor",
     "startskog": "naturskog",
     "frameworks": "luckhuggning",
-    "ålder": 0,
+    "ålder": -2,
     "klassning": 18
   },
   {
@@ -836,7 +836,7 @@
     "artkategori": "Kremlor och riskor",
     "startskog": "naturskog",
     "frameworks": "skärmträd",
-    "ålder": 0,
+    "ålder": -2,
     "klassning": 18
   },
   {
@@ -878,7 +878,7 @@
     "artkategori": "Kremlor och riskor",
     "startskog": "naturskog",
     "frameworks": "trakthygge",
-    "ålder": 0,
+    "ålder": -2,
     "klassning": 18
   },
   {
@@ -913,7 +913,7 @@
     "artkategori": "Kremlor och riskor",
     "startskog": "produktionsskog_",
     "frameworks": "blädning",
-    "ålder": 0,
+    "ålder": -2,
     "klassning": 13
   },
   {
@@ -948,7 +948,7 @@
     "artkategori": "Kremlor och riskor",
     "startskog": "produktionsskog_",
     "frameworks": "naturskydd",
-    "ålder": 0,
+    "ålder": -2,
     "klassning": 13
   },
   {
@@ -983,7 +983,7 @@
     "artkategori": "Kremlor och riskor",
     "startskog": "produktionsskog_",
     "frameworks": "luckhuggning",
-    "ålder": 0,
+    "ålder": -2,
     "klassning": 13
   },
   {
@@ -1018,7 +1018,7 @@
     "artkategori": "Kremlor och riskor",
     "startskog": "produktionsskog_",
     "frameworks": "skärmträd",
-    "ålder": 0,
+    "ålder": -2,
     "klassning": 13
   },
   {
@@ -1060,7 +1060,7 @@
     "artkategori": "Kremlor och riskor",
     "startskog": "produktionsskog_",
     "frameworks": "trakthygge",
-    "ålder": 0,
+    "ålder": -2,
     "klassning": 13
   },
   {
@@ -1095,7 +1095,7 @@
     "artkategori": "Övriga svampar",
     "startskog": "naturskog",
     "frameworks": "blädning",
-    "ålder": 0,
+    "ålder": -2,
     "klassning": 17
   },
   {
@@ -1130,7 +1130,7 @@
     "artkategori": "Övriga svampar",
     "startskog": "naturskog",
     "frameworks": "naturskydd",
-    "ålder": 0,
+    "ålder": -2,
     "klassning": 11
   },
   {
@@ -1165,7 +1165,7 @@
     "artkategori": "Övriga svampar",
     "startskog": "naturskog",
     "frameworks": "luckhuggning",
-    "ålder": 0,
+    "ålder": -2,
     "klassning": 11
   },
   {
@@ -1200,7 +1200,7 @@
     "artkategori": "Övriga svampar",
     "startskog": "naturskog",
     "frameworks": "skärmträd",
-    "ålder": 0,
+    "ålder": -2,
     "klassning": 11
   },
   {
@@ -1242,7 +1242,7 @@
     "artkategori": "Övriga svampar",
     "startskog": "naturskog",
     "frameworks": "trakthygge",
-    "ålder": 0,
+    "ålder": -2,
     "klassning": 11
   },
   {
@@ -1277,7 +1277,7 @@
     "artkategori": "Övriga svampar",
     "startskog": "produktionsskog_",
     "frameworks": "blädning",
-    "ålder": 0,
+    "ålder": -2,
     "klassning": 22
   },
   {
@@ -1312,7 +1312,7 @@
     "artkategori": "Övriga svampar",
     "startskog": "produktionsskog_",
     "frameworks": "naturskydd",
-    "ålder": 0,
+    "ålder": -2,
     "klassning": 22
   },
   {
@@ -1347,7 +1347,7 @@
     "artkategori": "Övriga svampar",
     "startskog": "produktionsskog_",
     "frameworks": "luckhuggning",
-    "ålder": 0,
+    "ålder": -2,
     "klassning": 22
   },
   {
@@ -1382,7 +1382,7 @@
     "artkategori": "Övriga svampar",
     "startskog": "produktionsskog_",
     "frameworks": "skärmträd",
-    "ålder": 0,
+    "ålder": -2,
     "klassning": 22
   },
   {
@@ -1424,7 +1424,7 @@
     "artkategori": "Övriga svampar",
     "startskog": "produktionsskog_",
     "frameworks": "trakthygge",
-    "ålder": 0,
+    "ålder": -2,
     "klassning": 22
   },
   {
@@ -1459,7 +1459,7 @@
     "artkategori": "matsvamp",
     "startskog": "naturskog",
     "frameworks": "blädning",
-    "ålder": 0,
+    "ålder": -2,
     "klassning": 27
   },
   {
@@ -1494,7 +1494,7 @@
     "artkategori": "matsvamp",
     "startskog": "naturskog",
     "frameworks": "naturskydd",
-    "ålder": 0,
+    "ålder": -2,
     "klassning": 27
   },
   {
@@ -1529,7 +1529,7 @@
     "artkategori": "matsvamp",
     "startskog": "naturskog",
     "frameworks": "luckhuggning",
-    "ålder": 0,
+    "ålder": -2,
     "klassning": 27
   },
   {
@@ -1564,7 +1564,7 @@
     "artkategori": "matsvamp",
     "startskog": "naturskog",
     "frameworks": "skärmträd",
-    "ålder": 0,
+    "ålder": -2,
     "klassning": 27
   },
   {
@@ -1606,7 +1606,7 @@
     "artkategori": "matsvamp",
     "startskog": "naturskog",
     "frameworks": "trakthygge",
-    "ålder": 0,
+    "ålder": -2,
     "klassning": 27
   },
   {
@@ -1641,7 +1641,7 @@
     "artkategori": "matsvamp",
     "startskog": "produktionsskog_",
     "frameworks": "blädning",
-    "ålder": 0,
+    "ålder": -2,
     "klassning": 21
   },
   {
@@ -1676,7 +1676,7 @@
     "artkategori": "matsvamp",
     "startskog": "produktionsskog_",
     "frameworks": "naturskydd",
-    "ålder": 0,
+    "ålder": -2,
     "klassning": 21
   },
   {
@@ -1711,7 +1711,7 @@
     "artkategori": "matsvamp",
     "startskog": "produktionsskog_",
     "frameworks": "luckhuggning",
-    "ålder": 0,
+    "ålder": -2,
     "klassning": 21
   },
   {
@@ -1746,7 +1746,7 @@
     "artkategori": "matsvamp",
     "startskog": "produktionsskog_",
     "frameworks": "skärmträd",
-    "ålder": 0,
+    "ålder": -2,
     "klassning": 21
   },
   {
@@ -1788,7 +1788,7 @@
     "artkategori": "matsvamp",
     "startskog": "produktionsskog_",
     "frameworks": "trakthygge",
-    "ålder": 0,
+    "ålder": -2,
     "klassning": 21
   },
   {
@@ -1823,7 +1823,7 @@
     "artkategori": "rödlistade + signalarter",
     "startskog": "naturskog",
     "frameworks": "blädning",
-    "ålder": 0,
+    "ålder": -2,
     "klassning": 0.6
   },
   {
@@ -1858,7 +1858,7 @@
     "artkategori": "rödlistade + signalarter",
     "startskog": "naturskog",
     "frameworks": "naturskydd",
-    "ålder": 0,
+    "ålder": -2,
     "klassning": 0.6
   },
   {
@@ -1893,7 +1893,7 @@
     "artkategori": "rödlistade + signalarter",
     "startskog": "naturskog",
     "frameworks": "luckhuggning",
-    "ålder": 0,
+    "ålder": -2,
     "klassning": 0.6
   },
   {
@@ -1928,7 +1928,7 @@
     "artkategori": "rödlistade + signalarter",
     "startskog": "naturskog",
     "frameworks": "skärmträd",
-    "ålder": 0,
+    "ålder": -2,
     "klassning": 0.6
   },
   {
@@ -1970,7 +1970,7 @@
     "artkategori": "rödlistade + signalarter",
     "startskog": "naturskog",
     "frameworks": "trakthygge",
-    "ålder": 0,
+    "ålder": -2,
     "klassning": 0.6
   },
   {
@@ -2005,7 +2005,7 @@
     "artkategori": "rödlistade + signalarter",
     "startskog": "produktionsskog_",
     "frameworks": "blädning",
-    "ålder": 0,
+    "ålder": -2,
     "klassning": 0.3
   },
   {
@@ -2040,7 +2040,7 @@
     "artkategori": "rödlistade + signalarter",
     "startskog": "produktionsskog_",
     "frameworks": "naturskydd",
-    "ålder": 0,
+    "ålder": -2,
     "klassning": 0.3
   },
   {
@@ -2075,7 +2075,7 @@
     "artkategori": "rödlistade + signalarter",
     "startskog": "produktionsskog_",
     "frameworks": "luckhuggning",
-    "ålder": 0,
+    "ålder": -2,
     "klassning": 0.3
   },
   {
@@ -2110,7 +2110,7 @@
     "artkategori": "rödlistade + signalarter",
     "startskog": "produktionsskog_",
     "frameworks": "skärmträd",
-    "ålder": 0,
+    "ålder": -2,
     "klassning": 0.3
   },
   {
@@ -2152,7 +2152,7 @@
     "artkategori": "rödlistade + signalarter",
     "startskog": "produktionsskog_",
     "frameworks": "trakthygge",
-    "ålder": 0,
+    "ålder": -2,
     "klassning": 0.3
   },
   {

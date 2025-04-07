@@ -42,7 +42,7 @@
             Skogstyp (vilka träd som dominerar),
 
             <Icon name="carbon:crop-growth" class="size-5 text-violet-500 -mb-1" />
-            Beståndsålder (trädens ålder) och
+            Skogsålder (trädens ålder) och
 
             <Icon name="fluent-emoji-high-contrast:herb" class="size-5 text-teal-500 -mb-1" />
             Fältskikt (vilken vegetation som växer på marken).
@@ -122,7 +122,7 @@
           </div>
         </div>
         <div>
-          <h1 size="lg" weight="light" class="mb-2">Beståndsålder</h1>
+          <h1 size="lg" weight="light" class="mb-2">Skogsålder</h1>
           <div class="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-4 gap-4">
             <div v-for="option in standAgeOptions"
               class="cursor-pointer rounded-xl overflow-hidden border border-neutral-200" @click="openModal(option)">

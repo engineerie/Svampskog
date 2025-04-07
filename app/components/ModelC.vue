@@ -250,16 +250,20 @@
                     class="w-full h-full" />
                   <transition name="slide-out">
                     <div v-if="selectedAnnotation"
-                      class="absolute inset-y-0 right-0  w-64 bg-neutral-50 overflow-auto z-10 pointer-events-auto border-neutral-300 border-l ">
-                      <NuxtImg v-if="selectedAnnotation.thumbnail" :src="selectedAnnotation.thumbnail" width="300"
-                        height="300" alt="Thumbnail" class=" border-b border-neutral-300" />
+                      class="absolute inset-y-0 right-0  w-68 bg-neutral-50 overflow-auto z-10 pointer-events-auto border-neutral-300 border-l ">
+                      <div class="h-64 flex items-center justify-center text-neutral-300">
+  Bild kommer snart
+</div>
+                      
+                      <!-- <NuxtImg v-if="selectedAnnotation.thumbnail" :src="selectedAnnotation.thumbnail" width="300"
+                        height="300" alt="Thumbnail" class=" border-b border-neutral-300" /> -->
                       <UButton color="white" :ui="{ rounded: 'rounded-full' }" icon="heroicons:x-mark"
                         @click="closeAnnotation" class="absolute bottom-2 right-2" />
-                      <div class="px-3 py-2">
+                      <div class="px-4 py-2">
                         <h3 class="text-lg font-semibold text-neutral-800">
                           {{ selectedAnnotation.title }}
                         </h3>
-                        <p class="text-neutral-500">
+                        <p class="text-neutral-400">
                           {{ selectedAnnotation.text }}
                         </p>
                       </div>
@@ -487,7 +491,7 @@ const currentOverlayImagePath = computed(() => {
   const treeVisibility = "visa";
   const fungiVisibility = showFungi.value ? "visa" : "dölj";
   const startskogValue = currentStartskog.value.value;
-  return `/images/DZI_Images/${framework}_${tLabel}_${fungiVisibility}_${treeVisibility}_${startskogValue}.png`;
+  return `/images/DZI_Images/${framework}_${tLabel}_${fungiVisibility}_${treeVisibility}_${startskogValue}_v2.png`;
 });
 
 // For the "before" viewer (often using a static time label like "före")
@@ -497,7 +501,7 @@ const comparisonOverlayImagePath1 = computed(() => {
   const treeVisibility = "visa"; // force trees visible if desired
   const fungiVisibility = showFungi.value ? "visa" : "dölj";
   const startskogValue = currentStartskog.value.value;
-  return `/images/DZI_Images/${framework}_${tLabel}_${fungiVisibility}_${treeVisibility}_${startskogValue}.png`;
+  return `/images/DZI_Images/${framework}_${tLabel}_${fungiVisibility}_${treeVisibility}_${startskogValue}_v2.png`;
 });
 
 // For the "after" viewer (using the current time label)
@@ -507,7 +511,7 @@ const comparisonOverlayImagePath2 = computed(() => {
   const treeVisibility = "visa"; // force trees visible if desired
   const fungiVisibility = showFungi.value ? "visa" : "dölj";
   const startskogValue = currentStartskog.value.value;
-  return `/images/DZI_Images/${framework}_${tLabel}_${fungiVisibility}_${treeVisibility}_${startskogValue}.png`;
+  return `/images/DZI_Images/${framework}_${tLabel}_${fungiVisibility}_${treeVisibility}_${startskogValue}_v2.png`;
 });
 
 // For framework1 viewer:
@@ -517,7 +521,7 @@ const frameworkOverlayImagePath1 = computed(() => {
   const treeVisibility = "visa";
   const fungiVisibility = showFungi.value ? "visa" : "dölj";
   const startskogValue = currentStartskog.value.value;
-  return `/images/DZI_Images/${framework}_${tLabel}_${fungiVisibility}_${treeVisibility}_${startskogValue}.png`;
+  return `/images/DZI_Images/${framework}_${tLabel}_${fungiVisibility}_${treeVisibility}_${startskogValue}_v2.png`;
 });
 
 // For framework2 viewer:
@@ -527,7 +531,7 @@ const frameworkOverlayImagePath2 = computed(() => {
   const treeVisibility = "visa";
   const fungiVisibility = showFungi.value ? "visa" : "dölj";
   const startskogValue = currentStartskog.value.value;
-  return `/images/DZI_Images/${framework}_${tLabel}_${fungiVisibility}_${treeVisibility}_${startskogValue}.png`;
+  return `/images/DZI_Images/${framework}_${tLabel}_${fungiVisibility}_${treeVisibility}_${startskogValue}_v2.png`;
 });
 
 const overlayStore = useOverlayStore();
@@ -767,7 +771,7 @@ const comparisonImagePath1 = computed(() => {
   const treeVisibility = "dölj";
   const fungiVisibility = showFungi.value ? "visa" : "dölj";
   const startskogValue = currentStartskog.value.value;
-  return `/images/DZI_Images/${framework}_${timeLabel}_${fungiVisibility}_${treeVisibility}_${startskogValue}.png`;
+  return `/images/DZI_Images/${framework}_${timeLabel}_${fungiVisibility}_${treeVisibility}_${startskogValue}_v2.png`;
 });
 
 const currentImagePath2 = computed(() => {
@@ -776,7 +780,7 @@ const currentImagePath2 = computed(() => {
   const treeVisibility = "dölj";
   const fungiVisibility = showFungi.value ? "visa" : "dölj";
   const startskogValue = currentStartskog.value.value;
-  return `/images/DZI_Images/${framework}_${tLabel}_${fungiVisibility}_${treeVisibility}_${startskogValue}.png`;
+  return `/images/DZI_Images/${framework}_${tLabel}_${fungiVisibility}_${treeVisibility}_${startskogValue}_v2.png`;
 });
 
 const currentImageKey = computed(() => {
@@ -791,7 +795,7 @@ const currentImagePath = computed(() => {
   const treeVisibility = "dölj";
   const fungiVisibility = showFungi.value ? "visa" : "dölj";
   const startskogValue = currentStartskog.value.value;
-  return `/images/DZI_Images/${framework}_${tLabel}_${fungiVisibility}_${treeVisibility}_${startskogValue}.png`;
+  return `/images/DZI_Images/${framework}_${tLabel}_${fungiVisibility}_${treeVisibility}_${startskogValue}_v2.png`;
 });
 
 // Watchers

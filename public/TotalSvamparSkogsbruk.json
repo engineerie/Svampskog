@@ -2,8 +2,39 @@
   {
     "artkategori": "total",
     "frameworks": "naturskydd",
+    "ålder": -4,
+    "klassning": 100
+  },
+  {
+    "artkategori": "total",
+    "frameworks": "trakthygge",
+    "ålder": -4,
+    "klassning": 100
+  },
+  {
+    "artkategori": "total",
+    "frameworks": "blädning",
+    "ålder": -4,
+    "klassning": 100
+  },
+  {
+    "artkategori": "total",
+    "frameworks": "luckhuggning",
+    "ålder": -4,
+    "klassning": 100
+  },
+  {
+    "artkategori": "total",
+    "frameworks": "skärmträd",
+    "ålder": -4,
+    "klassning": 100
+  },
+
+  {
+    "artkategori": "total",
+    "frameworks": "naturskydd",
     "ålder": 1,
-    "klassning": 80
+    "klassning": 100
   },
   {
     "artkategori": "total",
@@ -34,13 +65,13 @@
     "artkategori": "total",
     "frameworks": "naturskydd",
     "ålder": 10,
-    "klassning": 80
+    "klassning": 100
   },
   {
     "artkategori": "total",
     "frameworks": "trakthygge",
     "ålder": 10,
-    "klassning": 10
+    "klassning": 15
   },
   {
     "artkategori": "total",
@@ -65,278 +96,278 @@
     "artkategori": "total",
     "frameworks": "naturskydd",
     "ålder": 20,
-    "klassning": 80
+    "klassning": 100
   },
   {
     "artkategori": "total",
     "frameworks": "trakthygge",
     "ålder": 20,
-    "klassning": 50
-  },
-  {
-    "artkategori": "total",
-    "frameworks": "blädning",
-    "ålder": 20,
-    "klassning": 90
-  },
-  {
-    "artkategori": "total",
-    "frameworks": "luckhuggning",
-    "ålder": 20,
-    "klassning": 90
-  },
-  {
-    "artkategori": "total",
-    "frameworks": "skärmträd",
-    "ålder": 20,
-    "klassning": 30
-  },
-
-  {
-    "artkategori": "total",
-    "frameworks": "naturskydd",
-    "ålder": 30,
-    "klassning": 80
-  },
-  {
-    "artkategori": "total",
-    "frameworks": "trakthygge",
-    "ålder": 30,
-    "klassning": 100
-  },
-  {
-    "artkategori": "total",
-    "frameworks": "blädning",
-    "ålder": 30,
-    "klassning": 75
-  },
-  {
-    "artkategori": "total",
-    "frameworks": "luckhuggning",
-    "ålder": 30,
-    "klassning": 75
-  },
-  {
-    "artkategori": "total",
-    "frameworks": "skärmträd",
-    "ålder": 30,
-    "klassning": 40
-  },
-
-  {
-    "artkategori": "total",
-    "frameworks": "naturskydd",
-    "ålder": 40,
-    "klassning": 80
-  },
-  {
-    "artkategori": "total",
-    "frameworks": "trakthygge",
-    "ålder": 40,
-    "klassning": 100
-  },
-  {
-    "artkategori": "total",
-    "frameworks": "blädning",
-    "ålder": 40,
-    "klassning": 85
-  },
-  {
-    "artkategori": "total",
-    "frameworks": "luckhuggning",
-    "ålder": 40,
-    "klassning": 85
-  },
-  {
-    "artkategori": "total",
-    "frameworks": "skärmträd",
-    "ålder": 40,
-    "klassning": 50
-  },
-
-  {
-    "artkategori": "total",
-    "frameworks": "naturskydd",
-    "ålder": 50,
-    "klassning": 80
-  },
-  {
-    "artkategori": "total",
-    "frameworks": "trakthygge",
-    "ålder": 50,
-    "klassning": 100
-  },
-  {
-    "artkategori": "total",
-    "frameworks": "blädning",
-    "ålder": 50,
-    "klassning": 90
-  },
-  {
-    "artkategori": "total",
-    "frameworks": "luckhuggning",
-    "ålder": 50,
-    "klassning": 90
-  },
-  {
-    "artkategori": "total",
-    "frameworks": "skärmträd",
-    "ålder": 50,
-    "klassning": 100
-  },
-
-  {
-    "artkategori": "total",
-    "frameworks": "naturskydd",
-    "ålder": 60,
-    "klassning": 80
-  },
-  {
-    "artkategori": "total",
-    "frameworks": "trakthygge",
-    "ålder": 60,
-    "klassning": 90
-  },
-  {
-    "artkategori": "total",
-    "frameworks": "blädning",
-    "ålder": 60,
-    "klassning": 75
-  },
-  {
-    "artkategori": "total",
-    "frameworks": "luckhuggning",
-    "ålder": 60,
-    "klassning": 75
-  },
-  {
-    "artkategori": "total",
-    "frameworks": "skärmträd",
-    "ålder": 60,
-    "klassning": 100
-  },
-
-  {
-    "artkategori": "total",
-    "frameworks": "naturskydd",
-    "ålder": 70,
-    "klassning": 80
-  },
-  {
-    "artkategori": "total",
-    "frameworks": "trakthygge",
-    "ålder": 70,
-    "klassning": 90
-  },
-  {
-    "artkategori": "total",
-    "frameworks": "blädning",
-    "ålder": 70,
-    "klassning": 85
-  },
-  {
-    "artkategori": "total",
-    "frameworks": "luckhuggning",
-    "ålder": 70,
-    "klassning": 85
-  },
-  {
-    "artkategori": "total",
-    "frameworks": "skärmträd",
-    "ålder": 70,
-    "klassning": 100
-  },
-
-  {
-    "artkategori": "total",
-    "frameworks": "naturskydd",
-    "ålder": 80,
-    "klassning": 80
-  },
-  {
-    "artkategori": "total",
-    "frameworks": "trakthygge",
-    "ålder": 80,
-    "klassning": 90
-  },
-  {
-    "artkategori": "total",
-    "frameworks": "blädning",
-    "ålder": 80,
-    "klassning": 90
-  },
-  {
-    "artkategori": "total",
-    "frameworks": "luckhuggning",
-    "ålder": 80,
-    "klassning": 90
-  },
-  {
-    "artkategori": "total",
-    "frameworks": "skärmträd",
-    "ålder": 80,
-    "klassning": 90
-  },
-
-  {
-    "artkategori": "total",
-    "frameworks": "naturskydd",
-    "ålder": 90,
-    "klassning": 80
-  },
-  {
-    "artkategori": "total",
-    "frameworks": "trakthygge",
-    "ålder": 90,
-    "klassning": 90
-  },
-  {
-    "artkategori": "total",
-    "frameworks": "blädning",
-    "ålder": 90,
-    "klassning": 75
-  },
-  {
-    "artkategori": "total",
-    "frameworks": "luckhuggning",
-    "ålder": 90,
-    "klassning": 75
-  },
-  {
-    "artkategori": "total",
-    "frameworks": "skärmträd",
-    "ålder": 90,
-    "klassning": 90
-  },
-
-  {
-    "artkategori": "total",
-    "frameworks": "naturskydd",
-    "ålder": 100,
-    "klassning": 80
-  },
-  {
-    "artkategori": "total",
-    "frameworks": "trakthygge",
-    "ålder": 100,
-    "klassning": 5
-  },
-  {
-    "artkategori": "total",
-    "frameworks": "blädning",
-    "ålder": 100,
-    "klassning": 75
-  },
-  {
-    "artkategori": "total",
-    "frameworks": "luckhuggning",
-    "ålder": 100,
-    "klassning": 75
-  },
-  {
-    "artkategori": "total",
-    "frameworks": "skärmträd",
-    "ålder": 100,
     "klassning": 60
+  },
+  {
+    "artkategori": "total",
+    "frameworks": "blädning",
+    "ålder": 20,
+    "klassning": 100
+  },
+  {
+    "artkategori": "total",
+    "frameworks": "luckhuggning",
+    "ålder": 20,
+    "klassning": 100
+  },
+  {
+    "artkategori": "total",
+    "frameworks": "skärmträd",
+    "ålder": 20,
+    "klassning": 60
+  },
+
+  {
+    "artkategori": "total",
+    "frameworks": "naturskydd",
+    "ålder": 30,
+    "klassning": 100
+  },
+  {
+    "artkategori": "total",
+    "frameworks": "trakthygge",
+    "ålder": 30,
+    "klassning": 100
+  },
+  {
+    "artkategori": "total",
+    "frameworks": "blädning",
+    "ålder": 30,
+    "klassning": 75
+  },
+  {
+    "artkategori": "total",
+    "frameworks": "luckhuggning",
+    "ålder": 30,
+    "klassning": 75
+  },
+  {
+    "artkategori": "total",
+    "frameworks": "skärmträd",
+    "ålder": 30,
+    "klassning": 100
+  },
+
+  {
+    "artkategori": "total",
+    "frameworks": "naturskydd",
+    "ålder": 40,
+    "klassning": 100
+  },
+  {
+    "artkategori": "total",
+    "frameworks": "trakthygge",
+    "ålder": 40,
+    "klassning": 115
+  },
+  {
+    "artkategori": "total",
+    "frameworks": "blädning",
+    "ålder": 40,
+    "klassning": 85
+  },
+  {
+    "artkategori": "total",
+    "frameworks": "luckhuggning",
+    "ålder": 40,
+    "klassning": 85
+  },
+  {
+    "artkategori": "total",
+    "frameworks": "skärmträd",
+    "ålder": 40,
+    "klassning": 115
+  },
+
+  {
+    "artkategori": "total",
+    "frameworks": "naturskydd",
+    "ålder": 50,
+    "klassning": 100
+  },
+  {
+    "artkategori": "total",
+    "frameworks": "trakthygge",
+    "ålder": 50,
+    "klassning": 120
+  },
+  {
+    "artkategori": "total",
+    "frameworks": "blädning",
+    "ålder": 50,
+    "klassning": 100
+  },
+  {
+    "artkategori": "total",
+    "frameworks": "luckhuggning",
+    "ålder": 50,
+    "klassning": 100
+  },
+  {
+    "artkategori": "total",
+    "frameworks": "skärmträd",
+    "ålder": 50,
+    "klassning": 120
+  },
+
+  {
+    "artkategori": "total",
+    "frameworks": "naturskydd",
+    "ålder": 60,
+    "klassning": 100
+  },
+  {
+    "artkategori": "total",
+    "frameworks": "trakthygge",
+    "ålder": 60,
+    "klassning": 120
+  },
+  {
+    "artkategori": "total",
+    "frameworks": "blädning",
+    "ålder": 60,
+    "klassning": 75
+  },
+  {
+    "artkategori": "total",
+    "frameworks": "luckhuggning",
+    "ålder": 60,
+    "klassning": 75
+  },
+  {
+    "artkategori": "total",
+    "frameworks": "skärmträd",
+    "ålder": 60,
+    "klassning": 120
+  },
+
+  {
+    "artkategori": "total",
+    "frameworks": "naturskydd",
+    "ålder": 70,
+    "klassning": 100
+  },
+  {
+    "artkategori": "total",
+    "frameworks": "trakthygge",
+    "ålder": 70,
+    "klassning": 115
+  },
+  {
+    "artkategori": "total",
+    "frameworks": "blädning",
+    "ålder": 70,
+    "klassning": 85
+  },
+  {
+    "artkategori": "total",
+    "frameworks": "luckhuggning",
+    "ålder": 70,
+    "klassning": 85
+  },
+  {
+    "artkategori": "total",
+    "frameworks": "skärmträd",
+    "ålder": 70,
+    "klassning": 115
+  },
+
+  {
+    "artkategori": "total",
+    "frameworks": "naturskydd",
+    "ålder": 80,
+    "klassning": 100
+  },
+  {
+    "artkategori": "total",
+    "frameworks": "trakthygge",
+    "ålder": 80,
+    "klassning": 112
+  },
+  {
+    "artkategori": "total",
+    "frameworks": "blädning",
+    "ålder": 80,
+    "klassning": 100
+  },
+  {
+    "artkategori": "total",
+    "frameworks": "luckhuggning",
+    "ålder": 80,
+    "klassning": 100
+  },
+  {
+    "artkategori": "total",
+    "frameworks": "skärmträd",
+    "ålder": 80,
+    "klassning": 112
+  },
+
+  {
+    "artkategori": "total",
+    "frameworks": "naturskydd",
+    "ålder": 90,
+    "klassning": 100
+  },
+  {
+    "artkategori": "total",
+    "frameworks": "trakthygge",
+    "ålder": 90,
+    "klassning": 110
+  },
+  {
+    "artkategori": "total",
+    "frameworks": "blädning",
+    "ålder": 90,
+    "klassning": 75
+  },
+  {
+    "artkategori": "total",
+    "frameworks": "luckhuggning",
+    "ålder": 90,
+    "klassning": 75
+  },
+  {
+    "artkategori": "total",
+    "frameworks": "skärmträd",
+    "ålder": 90,
+    "klassning": 110
+  },
+
+  {
+    "artkategori": "total",
+    "frameworks": "naturskydd",
+    "ålder": 100,
+    "klassning": 100
+  },
+  {
+    "artkategori": "total",
+    "frameworks": "trakthygge",
+    "ålder": 100,
+    "klassning": 110
+  },
+  {
+    "artkategori": "total",
+    "frameworks": "blädning",
+    "ålder": 100,
+    "klassning": 85
+  },
+  {
+    "artkategori": "total",
+    "frameworks": "luckhuggning",
+    "ålder": 100,
+    "klassning": 85
+  },
+  {
+    "artkategori": "total",
+    "frameworks": "skärmträd",
+    "ålder": 100,
+    "klassning": 110
   }
 ]

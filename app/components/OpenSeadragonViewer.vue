@@ -1,5 +1,6 @@
 <template>
-  <div v-if="isClient" :id="viewerId" class="openseadragon-viewer relative" ref="viewerContainer"
+  <client-only>
+    <div v-if="isClient" :id="viewerId" class="openseadragon-viewer relative rounded-xl overflow-hidden" ref="viewerContainer"
     :style="{ backgroundColor: backgroundColor }" @mousedown.capture="handleActivate" @mousemove="updateMousePosition">
     <div v-if="!(layoutMode === 'slider' && comparisonMode)" class="absolute top-0 m-2 z-10" :style="{
       ...(sliderPosition === 'left' ? { right: '0px', textAlign: 'right' } : { left: '0px' })
@@ -10,7 +11,7 @@
       <UBadge class="bg-neutral-800 text-neutral-100">{{ timeLabel }}</UBadge>
     </div>
     <!-- Display viewport coordinates for marker placement -->
-    <!-- <div class="absolute top-0 right-0 m-2 p-1 bg-black bg-opacity-50 text-white text-xs z-50">
+    <!-- <div class="absolute top-32 right-0 m-2 p-1 bg-black bg-opacity-50 text-white text-xs z-50">
       X: {{ mousePos.x.toFixed(4) }}, Y: {{ mousePos.y.toFixed(4) }}
     </div> -->
     <div class="osd-opacity-slider-container bg-neutral-800 flex items-center p-1.5 gap-1 rounded-lg m-2" :style="{
@@ -34,45 +35,22 @@
         @input="handleSliderInput" class="accent-neutral-100 h-[5px] w-20 " />
     </div>
 
-    <div :class="['absolute bottom-0 m-2 z-10', (layoutMode === 'slider' && comparisonMode) ? 'w-1/2' : '']" :style="{
-      zIndex: 10,
-      ...(sliderPosition === 'left'
-        ? { left: '0px', paddingRight: (layoutMode === 'slider' && comparisonMode) ? '20px' : '0px' }
-        : { right: '0px', paddingLeft: (layoutMode === 'slider' && comparisonMode) ? '20px' : '0px' }
-      )
-    }">
+    <div
+      :class="['absolute pointer-events-none bottom-0 m-2 z-10', (layoutMode === 'slider' && comparisonMode) ? 'w-1/2' : '']"
+      :style="{
+        zIndex: 10,
+        ...(sliderPosition === 'left'
+          ? { left: '0px', paddingRight: (layoutMode === 'slider' && comparisonMode) ? '20px' : '0px' }
+          : { right: '0px', paddingLeft: (layoutMode === 'slider' && comparisonMode) ? '20px' : '0px' }
+        )
+      }">
       <!-- Minimize/Enlarge Button in top right corner -->
 
 
       <div>
         <div :class="['w-full flex', (sliderPosition === 'left') ? '' : 'justify-end']">
-          <!-- <div class="p-2 bg-neutral-900/80 rounded-md mt-1 text-sm text-neutral-200 w-fit">
-            <div class="flex items-center">
-              <UIcon name="i-fluent-shape-organic-48-filled" class="text-gray-300 mr-1" />
-              <span>Svampmycel</span>
-            </div>
-            <div class="flex items-center">
-              <UIcon name="i-fluent-shape-organic-48-filled" class="text-warning-500 mr-1" />Matsvamp mycel
-            </div>
-            <div class="flex items-center">
-              <UIcon name="i-fluent-shape-organic-48-filled" class="text-error-500 mr-1" />Rödlistade mycel
-            </div>
-          </div> -->
-          <!-- <div class="p-2 bg-neutral-900/80 rounded-md mt-1 text-sm text-neutral-200 w-fit">
-            <div class="flex items-center  border-b border-neutral-50">
-              <UIcon name="i-fluent-shape-organic-48-filled" class="text-gray-300 mr-1" />
-              <span>Total mycelmängd: {{ svampMycelValue }} %</span>
-            </div>
-            <div class="flex items-center">
-              <UIcon name="i-fluent-shape-organic-48-filled" class="text-warning-500 mr-1" />
-              <span>Matsvamp mycel: {{ matsvampMycelValue }}%</span>
-            </div>
-            <div class="flex items-center">
-              <UIcon name="i-fluent-shape-organic-48-filled" class="text-error-500 mr-1" />
-              <span>Rödlistade mycel: {{ rodlistadeMycelValue }}%</span>
-            </div>
-          </div> -->
-          <div class=" rounded-md overflow-hidden mt-1 text-sm text-neutral-200 w-fit">
+
+          <div class=" rounded-md overflow-hidden mt-1 text-sm text-neutral-200 w-fit ">
             <div class="flex items-center p-1 bg-neutral-700/60 border-b border-neutral-500 border-dashed">
               <UIcon name="i-fluent-shape-organic-48-filled" class="text-gray-300 mr-1" />
               <span>Total mycelmängd: {{ svampMycelValue }} %</span>
@@ -91,7 +69,7 @@
 
         <div :class="['w-full flex', (sliderPosition === 'left') ? '' : 'justify-end']">
 
-          <div class=" mt-1 text-md text-neutral-200 relative group w-fit">
+          <div class=" mt-1 text-md text-neutral-200 relative group w-fit pointer-events-auto">
 
 
 
@@ -113,7 +91,7 @@
     </div>
 
   </div>
-
+  </client-only>
 </template>
 
 <script>
@@ -224,12 +202,21 @@ export default {
       console.log("currentTime:", props.currentTime, "numericTime:", result);
       return result;
     });
+    const adjustedSvamparTime = computed(() => {
+      // For SvamparSkogsbruk.json, change 0 to -2
+      return numericTime.value === 0 ? -2 : numericTime.value;
+    });
+    
+    const adjustedTotalSvamparTime = computed(() => {
+      // For TotalSvamparSkogsbruk.json, change 0 to -4
+      return numericTime.value === 0 ? -4 : numericTime.value;
+    });
 
     const svampMycelValue = computed(() => {
       const match = totalSvamparData.find(item =>
         item.artkategori === "total" &&
         item.frameworks === props.currentFramework.value &&
-        Number(item.ålder) === numericTime.value
+        Number(item.ålder) === adjustedTotalSvamparTime.value
       );
       return match ? match.klassning : 'N/A';
     });
@@ -239,7 +226,7 @@ export default {
         item.artkategori === "matsvamp" &&
         item.startskog === props.currentStartskog.value &&
         item.frameworks === props.currentFramework.value &&
-        Number(item.ålder) === numericTime.value
+        Number(item.ålder) === adjustedSvamparTime.value
       );
       return match ? match.klassning : 'N/A';
     });
@@ -249,7 +236,7 @@ export default {
         item.artkategori === "rödlistade + signalarter" &&
         item.startskog === props.currentStartskog.value &&
         item.frameworks === props.currentFramework.value &&
-        Number(item.ålder) === numericTime.value
+        Number(item.ålder) === adjustedSvamparTime.value
       );
       return match ? match.klassning : 'N/A';
     });
@@ -334,8 +321,13 @@ export default {
         if (!annotation.position) return;
 
         const markerContainer = document.createElement("div");
-        // Set the z-index for the marker container
-        markerContainer.style.zIndex = "5";
+        // Set the z-index for the marker container based on whether it is active
+        const selectedAnnotation = selectedAnnotationStore.selectedAnnotation;
+        if (selectedAnnotation && selectedAnnotation.id === annotation.id) {
+          markerContainer.style.zIndex = "6";
+        } else {
+          markerContainer.style.zIndex = "5";
+        }
 
         // Mount the AnnotationMarker component for this annotation.
         const markerApp = createApp(AnnotationMarker, { annotation });
@@ -397,7 +389,7 @@ export default {
       // Create viewer options
       const viewerOptions = {
         element: containerEl,
-        crossOriginPolicy: "Anonymous",
+        crossOriginPolicy: 'Anonymous',
         showNavigationControl: false,
         visibilityRatio: 1,
         minZoomLevel: 1,
@@ -424,7 +416,7 @@ export default {
 
       // Emit viewport changes
       viewer.value.addHandler("animation", () => {
-        const zoom = viewer.value.viewport.getZoom();
+        const zoom = viewer.value.viewport.getZoom(); 
         const center = viewer.value.viewport.getCenter();
         emit("viewportChanged", { zoom, center });
       });

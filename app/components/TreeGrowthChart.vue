@@ -1,13 +1,12 @@
 <template>
     <!-- Container for the left axis (% Mykorrhizasvamp) -->
-    <VisXYContainer :data="treeGrowthData" :margin="margin" :autoMargin="false" width="100%" height="40vh"
+    <VisXYContainer :data="treeGrowthData" :margin="margin" :autoMargin="false" width="100%" :height="500"
         :xDomain="xDomain">
         <template v-if="chartType === true">
             <VisArea :x="chartX" :y="chartLine1" :color="'#d4d4d4'" :lineWidth="3" />
-
         </template>
         <template v-if="chartType === false">
-            <VisGroupedBar :x="chartX" :y="chartLine1" :color="'#ffedd5'" :lineWidth="3" />
+            <VisGroupedBar :x="chartX" :y="chartLine1" :color="'#d4d4d4'" :lineWidth="3" :barPadding="0.4" />
         </template>
         <VisAxis type="x" :numTicks="4" :tickFormat="xTicks" label="Skogsålder" />
         <VisAxis type="y" :tickFormat="chartLine1Ticks" :tickTextWidth="60" :tickTextColor="'#737373'"
@@ -15,14 +14,14 @@
     </VisXYContainer>
 
     <!-- Container for the right axis (Löpande trädtillväxt) -->
-    <VisXYContainer :data="treeGrowthData" :yDomain="[0, 10]" :margin="margin" :autoMargin="false"
+    <VisXYContainer :data="treeGrowthData" :yDomain="[0, 10]" :margin="margin" :autoMargin="false" :height="500"
         :style="containerStyle" :xDomain="xDomain">
         <template v-if="chartType === true">
             <VisLine :x="chartX" :y="chartLine2" :color="'#22c55e'" :lineWidth="3" />
 
         </template>
         <template v-if="chartType === false">
-            <VisGroupedBar :x="chartX" :y="chartLine2" :color="'#22c55e'" :lineWidth="3" />
+            <VisGroupedBar :x="chartX" :y="chartLine2" :color="'#22c55e'" :lineWidth="3" :barPadding="0.5" />
         </template>
         <VisAxis type="y" position="right" :tickFormat="chartLine2Ticks" :gridLine="false" :tickTextColor="'#22c55e'"
             :labelColor="'#22c55e'" label="Löpande trädtillväxt" />

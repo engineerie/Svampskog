@@ -3,54 +3,38 @@
     <div class="grid grid-cols-4 gap-5 mb-2">
       <!-- GEOGRAPHY -->
       <div class="flex justify-center w-full">
-        <UPopover
-         mode="hover"
-        ><div>
-          <transition name="slide-up" mode="out-in">
-            <div
-              :key="geographyLabel"
-              class="flex items-center justify-center cursor-pointer"
-            >
-              <div
-                class="my-2 w-14 h-14 rounded-lg text-fuchsia-500 flex justify-center items-center"
-              >
-                <Icon
-                  name="material-symbols:location-on-outline"
-                  class="h-8 w-8"
-                />
+        <UPopover mode="hover">
+          <div>
+            <transition name="slide-up" mode="out-in">
+              <div :key="geographyLabel" class="flex items-center justify-center cursor-pointer">
+                <div class="my-2 w-14 h-14 rounded-lg text-fuchsia-500 flex justify-center items-center">
+                  <Icon name="material-symbols:location-on-outline" class="h-8 w-8" />
+                </div>
+                <div>
+                  <h1 class="text-neutral-500">Var i Sverige</h1>
+                  <h1 class="text-neutral-800 text-2xl">
+                    {{ geographyLabel }}
+                  </h1>
+                </div>
               </div>
-              <div>
-                <h1 class="text-neutral-500">Var i Sverige</h1>
-                <h1 class="text-neutral-800 text-2xl">
-                  {{ geographyLabel }}
-                </h1>
-              </div>
-            </div>
-          </transition>
+            </transition>
           </div>
 
           <template #content>
             <div class="p-2 min-w-60 max-w-96">
-              <div
-                v-for="option in enabledGeographyOptions"
-        
-                class="hover:bg-gray-100 p-3 rounded-md my-1"
-                :class="[
-                  option.disabled
-                    ? 'opacity-50 cursor-not-allowed '
-                    : 'cursor-pointer ',
-                  option.value === currentSelectedValueFor('geography')
-                    ? 'bg-primary-50 hover:bg-primary-50 ring-1 ring-primary-100'
-                    : 'ring-0',
-                ]"
-                
-                @click="
+              <div v-for="option in enabledGeographyOptions" class="hover:bg-gray-100 p-3 rounded-md my-1" :class="[
+                option.disabled
+                  ? 'opacity-50 cursor-not-allowed '
+                  : 'cursor-pointer ',
+                option.value === currentSelectedValueFor('geography')
+                  ? 'bg-primary-50 hover:bg-primary-50 ring-1 ring-primary-100'
+                  : 'ring-0',
+              ]" @click="
                   () => {
                     if (!option.disabled) selectGeography(option);
                     open = false;
                   }
-                "
-              >
+                ">
                 <h1 class="text-sm font-bold text-neutral-900">
                   {{ option.label }}
                 </h1>
@@ -65,51 +49,39 @@
 
       <!-- FOREST TYPE -->
       <div class="flex justify-center">
-        <UPopover
-         mode="hover"
-      
-        ><div> <transition name="slide-up" mode="out-in">
-            <div
-              :key="forestTypeLabel"
-              class="flex items-center justify-center cursor-pointer"
-            >
-              <div
-                class="my-2 w-14 h-14 rounded-lg text-green-500 flex justify-center items-center"
-              >
-                <Icon name="lucide:trees" class="h-8 w-8" />
+        <UPopover mode="hover">
+          <div>
+            <transition name="slide-up" mode="out-in">
+              <div :key="forestTypeLabel" class="flex items-center justify-center cursor-pointer">
+                <div class="my-2 w-14 h-14 rounded-lg text-green-500 flex justify-center items-center">
+                  <Icon name="lucide:trees" class="h-8 w-8" />
+                </div>
+                <div>
+                  <h1 class="text-neutral-500">Skogstyp</h1>
+                  <h1 class="text-neutral-800 text-2xl">
+                    {{ forestTypeLabel }}
+                  </h1>
+                </div>
               </div>
-              <div>
-                <h1 class="text-neutral-500">Skogstyp</h1>
-                <h1 class="text-neutral-800 text-2xl">
-                  {{ forestTypeLabel }}
-                </h1>
-              </div>
-            </div>
-          </transition>
-        </div>
-         
+            </transition>
+          </div>
+
 
           <template #content>
             <div class="p-2 min-w-60 max-w-96">
-              <div
-                v-for="option in enabledForestTypes"
-         
-                class="hover:bg-gray-100 p-3 rounded-md my-1"
-                :class="[
-                  option.disabled
-                    ? 'opacity-50 cursor-not-allowed '
-                    : 'cursor-pointer ',
-                  option.value === currentSelectedValueFor('forestType')
-                    ? 'bg-primary-50 hover:bg-primary-50 ring-1 ring-primary-100'
-                    : 'ring-0',
-                ]"
-                @click="
+              <div v-for="option in enabledForestTypes" class="hover:bg-gray-100 p-3 rounded-md my-1" :class="[
+                option.disabled
+                  ? 'opacity-50 cursor-not-allowed '
+                  : 'cursor-pointer ',
+                option.value === currentSelectedValueFor('forestType')
+                  ? 'bg-primary-50 hover:bg-primary-50 ring-1 ring-primary-100'
+                  : 'ring-0',
+              ]" @click="
                   () => {
                     if (!option.disabled) selectForestType(option);
-              
+
                   }
-                "
-              >
+                ">
                 <h1 class="text-sm font-bold text-neutral-900">
                   {{ option.label }}
                 </h1>
@@ -124,54 +96,40 @@
 
       <!-- STAND AGE -->
       <div class="flex justify-center">
-        <UPopover
-         mode="hover"
-     
-        >
-        <div>
+        <UPopover mode="hover">
+          <div>
 
-          <transition name="slide-up" mode="out-in">
-            <div
-              :key="standAgeLabel"
-              class="flex items-center justify-center cursor-pointer"
-            >
-              <div
-                class="my-2 w-14 h-14 rounded-lg text-violet-500 flex justify-center items-center"
-              >
-                <Icon name="carbon:crop-growth" class="h-8 w-8" />
+            <transition name="slide-up" mode="out-in">
+              <div :key="standAgeLabel" class="flex items-center justify-center cursor-pointer">
+                <div class="my-2 w-14 h-14 rounded-lg text-violet-500 flex justify-center items-center">
+                  <Icon name="carbon:crop-growth" class="h-8 w-8" />
+                </div>
+                <div>
+                  <h1 size="md" weight="light" class="text-neutral-500">
+                    Skogsålder
+                  </h1>
+                  <h1 class="text-neutral-800 text-2xl">
+                    {{ standAgeLabel }}
+                  </h1>
+                </div>
               </div>
-              <div>
-                <h1 size="md" weight="light" class="text-neutral-500">
-                  Beståndsålder
-                </h1>
-                <h1 class="text-neutral-800 text-2xl">
-                  {{ standAgeLabel }}
-                </h1>
-              </div>
-            </div>
-          </transition>
-        </div>
+            </transition>
+          </div>
           <template #content>
             <div class="p-2 min-w-60 max-w-96">
-              <div
-                v-for="option in enabledStandAges"
-        
-                class="hover:bg-gray-100 p-3 rounded-md my-1"
-                :class="[
-                  option.disabled
-                    ? 'opacity-50 cursor-not-allowed '
-                    : 'cursor-pointer ',
-                  option.value === currentSelectedValueFor('standAge')
-                    ? 'bg-primary-50 hover:bg-primary-50 ring-1 ring-primary-100'
-                    : 'ring-0',
-                ]"
-                @click="
+              <div v-for="option in enabledStandAges" class="hover:bg-gray-100 p-3 rounded-md my-1" :class="[
+                option.disabled
+                  ? 'opacity-50 cursor-not-allowed '
+                  : 'cursor-pointer ',
+                option.value === currentSelectedValueFor('standAge')
+                  ? 'bg-primary-50 hover:bg-primary-50 ring-1 ring-primary-100'
+                  : 'ring-0',
+              ]" @click="
                   () => {
                     if (!option.disabled) selectStandAge(option);
-               
+
                   }
-                "
-              >
+                ">
                 <h1 class="text-sm font-bold text-neutral-900">
                   {{ option.label }}
                 </h1>
@@ -186,54 +144,41 @@
 
       <!-- VEGETATION TYPE -->
       <div class="flex justify-center">
-        <UPopover
-        mode="hover"
+        <UPopover mode="hover">
+          <div>
+            <transition name="slide-up" mode="out-in">
+              <div :key="vegetationTypeLabel" class="flex items-center justify-center cursor-pointer">
+                <div class="my-2 w-14 h-14 rounded-lg text-teal-500 flex justify-center items-center">
+                  <Icon name="fluent-emoji-high-contrast:herb" class="h-8 w-8" />
+                </div>
+                <div>
+                  <h1 size="md" weight="light" class="text-neutral-500">
+                    Fältskikt
+                  </h1>
+                  <h1 class="text-neutral-800 text-2xl">
+                    {{ vegetationTypeLabel }}
+                  </h1>
+                </div>
+              </div>
+            </transition>
+          </div>
 
-        >
-        <div> <transition name="slide-up" mode="out-in">
-            <div
-              :key="vegetationTypeLabel"
-              class="flex items-center justify-center cursor-pointer"
-            >
-              <div
-                class="my-2 w-14 h-14 rounded-lg text-teal-500 flex justify-center items-center"
-              >
-                <Icon name="fluent-emoji-high-contrast:herb" class="h-8 w-8" />
-              </div>
-              <div>
-                <h1 size="md" weight="light" class="text-neutral-500">
-                  Fältskikt
-                </h1>
-                <h1 class="text-neutral-800 text-2xl">
-                  {{ vegetationTypeLabel }}
-                </h1>
-              </div>
-            </div>
-          </transition>
-        </div>
-         
 
           <template #content>
             <div class="p-2 min-w-60 max-w-96">
-              <div
-                v-for="option in enabledVegetationTypes"
-       
-                class="hover:bg-gray-100 p-3 rounded-md my-1"
-                :class="[
-                  option.disabled
-                    ? 'opacity-50 cursor-not-allowed '
-                    : 'cursor-pointer ',
-                  option.value === currentSelectedValueFor('vegetationType')
-                    ? 'bg-primary-50 hover:bg-primary-50 ring-1 ring-primary-100'
-                    : 'ring-0',
-                ]"
-                @click="
+              <div v-for="option in enabledVegetationTypes" class="hover:bg-gray-100 p-3 rounded-md my-1" :class="[
+                option.disabled
+                  ? 'opacity-50 cursor-not-allowed '
+                  : 'cursor-pointer ',
+                option.value === currentSelectedValueFor('vegetationType')
+                  ? 'bg-primary-50 hover:bg-primary-50 ring-1 ring-primary-100'
+                  : 'ring-0',
+              ]" @click="
                   () => {
                     if (!option.disabled) selectVegetationType(option);
-              
+
                   }
-                "
-              >
+                ">
                 <h1 class="text-sm font-bold text-neutral-900">
                   {{ option.label }}
                 </h1>
@@ -249,40 +194,20 @@
   </div>
 
   <!-- ListBoxRowHorizontal container with height transition -->
-  <div
-    :style="{ height: listBoxRowHeight }"
-    class="overflow-visible transition-height ease-in-out duration-500"
-  >
+  <div :style="{ height: listBoxRowHeight }" class="overflow-visible transition-height ease-in-out duration-500">
     <Transition name="fade">
-      <ListBoxRowHorizontal
-        ref="listBoxRef"
-        class="overflow-visible z-50"
-        v-show="listBoxRowVisible"
-      />
+      <ListBoxRowHorizontal ref="listBoxRef" class="overflow-visible z-50" v-show="listBoxRowVisible" />
     </Transition>
   </div>
 
   <!-- Toggle button -->
   <div class="flex justify-end gap-2 mb-2">
-    <UButton
-      trailing
-      :icon="restrictionEnabled ? 'mdi:lock' : 'mdi:lock-open'"
-      @click="toggleRestriction"
-      shape="full"
-      class="transition-all"
-    variant="soft"
-      :color="restrictionEnabled ? 'secondary' : 'neutral'"
-    >
+    <UButton trailing :icon="restrictionEnabled ? 'mdi:lock' : 'mdi:lock-open'" @click="toggleRestriction" shape="full"
+      class="transition-all" variant="soft" :color="restrictionEnabled ? 'secondary' : 'neutral'">
       {{ restrictionEnabled ? "Markinventeringsdata" : "Markinventeringsdata" }}
     </UButton>
-    <UButton
-      trailing
-      :icon="listBoxRowVisible ? 'mdi:chevron-up' : 'mdi:chevron-down'"
-      @click="toggleHeight"
-      color="neutral"
-      variant="soft"
-     
-    >
+    <UButton trailing :icon="listBoxRowVisible ? 'mdi:chevron-up' : 'mdi:chevron-down'" @click="toggleHeight"
+      color="neutral" variant="soft">
       {{ listBoxRowVisible ? "Dölj kombinationsvy" : "Visa kombinationsvy" }}
     </UButton>
   </div>
@@ -505,22 +430,27 @@ const enabledVegetationTypes = computed(() => {
 .transition-height {
   transition: height 0.5s ease-in-out;
 }
+
 .fade-enter-active,
 .fade-leave-active {
   transition: opacity 0.5s;
 }
+
 .fade-enter,
 .fade-leave-to {
   opacity: 0;
 }
+
 .slide-up-enter-active,
 .slide-up-leave-active {
   transition: all 0.25s ease-out;
 }
+
 .slide-up-enter-from {
   opacity: 0;
   transform: translateY(30px);
 }
+
 .slide-up-leave-to {
   opacity: 0;
   transform: translateY(-30px);

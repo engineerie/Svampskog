@@ -43,7 +43,7 @@
             Skogstyp (vilka träd som dominerar),
 
             <Icon name="carbon:crop-growth" class="size-5 text-violet-500 -mb-1" />
-            Beståndsålder (trädens ålder) och
+            Skogsålder (trädens ålder) och
 
             <Icon name="fluent-emoji-high-contrast:herb" class="size-5 text-teal-500 -mb-1" />
             Fältskikt (vilken vegetation som växer på marken).
@@ -89,72 +89,7 @@
     <div v-else-if="activeTab === 'miljo'">
       <UPageHeader headline="Svampar" title="Miljöinformation"
         description="Definitationer och bilder på de olika miljöerna." />
-      <div class="space-y-6 mt-4">
-        <div>
-          <h1 size="lg" weight="light" class="mb-2">Var i Sverige</h1>
-          <div class="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-4 gap-4">
-            <div v-for="option in geographyOptions"
-              class="cursor-pointer rounded-xl overflow-hidden border border-neutral-200" @click="openModal(option)">
-              <div class="bg-gray-200 h-40 rounded-lg flex items-center justify-center">
-                <div class="w-full h-full flex items-center justify-center bg-gray-200 dark:bg-gray-700">
-                  <Icon name="material-symbols:photo" class="w-8 h-8 text-neutral-500" />
-                </div>
-              </div>
-              <div class="p-2 text-md font-medium text-neutral-600">
-                {{ option.label }}
-              </div>
-            </div>
-          </div>
-        </div>
-        <div>
-          <h1 size="lg" weight="light" class="mb-2">Skogstyp</h1>
-          <div class="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-4 gap-4">
-            <div v-for="option in forestTypeOptions"
-              class="cursor-pointer rounded-xl overflow-hidden border border-neutral-200" @click="openModal(option)">
-              <div class="bg-gray-200 h-40 rounded-lg flex items-center justify-center">
-                <div class="w-full h-full flex items-center justify-center bg-gray-200 dark:bg-gray-700">
-                  <Icon name="material-symbols:photo" class="w-8 h-8 text-neutral-500" />
-                </div>
-              </div>
-              <div class="p-2 text-md font-medium text-neutral-600">
-                {{ option.label }}
-              </div>
-            </div>
-          </div>
-        </div>
-        <div>
-          <h1 size="lg" weight="light" class="mb-2">Beståndsålder</h1>
-          <div class="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-4 gap-4">
-            <div v-for="option in standAgeOptions"
-              class="cursor-pointer rounded-xl overflow-hidden border border-neutral-200" @click="openModal(option)">
-              <div class="bg-gray-200 h-40 rounded-lg flex items-center justify-center">
-                <div class="w-full h-full flex items-center justify-center bg-gray-200 dark:bg-gray-700">
-                  <Icon name="material-symbols:photo" class="w-8 h-8 text-neutral-500" />
-                </div>
-              </div>
-              <div class="p-2 text-md font-medium text-neutral-600">
-                {{ option.label }}
-              </div>
-            </div>
-          </div>
-        </div>
-        <div>
-          <h1 size="lg" weight="light" class="mb-2">Fältskikt</h1>
-          <div class="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-4 gap-4">
-            <div v-for="option in vegetationTypeOptions"
-              class="cursor-pointer rounded-xl overflow-hidden border border-neutral-200" @click="openModal(option)">
-              <div class="bg-gray-200 h-40 rounded-lg flex items-center justify-center">
-                <div class="w-full h-full flex items-center justify-center bg-gray-200 dark:bg-gray-700">
-                  <Icon name="material-symbols:photo" class="w-8 h-8 text-neutral-500" />
-                </div>
-              </div>
-              <div class="p-2 text-md font-medium text-neutral-600">
-                {{ option.label }}
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
+      <Miljoinformation />
 
     </div>
 
@@ -170,7 +105,7 @@
       <transition @before-enter="beforeEnter" @enter="enter" @leave="leave">
         <div v-if="activeComponent === StartView" class="header-container">
           <UPageHeader headline="Svampar" title="Arter i olika miljöer"
-            description="Här kan du söka på svenska skogsmiljöer för att se vilka arter som kan finnas i marken baserat på DNA-analyser av svampmycel i jordprover samt vår samlade kunskap om var olika arters fruktkroppar förekommer." />
+            description="Här kan du söka på svenska skogsmiljöer för att se vilka mykorrhizasvampar som kan finnas i marken baserat på DNA-analyser av svampmycel i markprover samt vår samlade kunskap om var olika arters fruktkroppar förekommer." />
         </div>
       </transition>
       <EnvironmentSelector />

@@ -1,4 +1,9 @@
 <template>
+  <!-- Preload all images so they are included in static prerender -->
+  <div class="hidden">
+    <NuxtImg v-for="(src, key) in imageMap" :key="key" :src="src" width="300" height="180" format="webp" quality="80"
+      preload />
+  </div>
   <div class="pt-8">
     <!-- Original EnvironmentSelector content -->
     <div ref="contentRef" class="original-content">
@@ -9,12 +14,6 @@
             <div>
               <transition name="slide-up" mode="out-in">
                 <div :key="getLabel(category.key)" class="flex items-center justify-center cursor-default">
-                  <!-- <div
-                    class="my-2 w-14 h-14 rounded-lg flex justify-center items-center"
-                    :class="iconColor(category.key)"
-                  >
-                    <Icon :name="category.icon" class="h-8 w-8" />
-                  </div> -->
                   <div class="text-center">
                     <h1 class="text-neutral-500">{{ category.title }}</h1>
                     <h1 class="text-2xl font-medium">
@@ -27,17 +26,40 @@
             <template #content>
               <div class="p-2 min-w-60 max-w-96">
                 <!-- Use enabledOptions so that restriction applies here -->
-                <div v-for="option in enabledOptions[category.key]" :key="option.value"
-                  class="hover:bg-neutral-50 p-3 rounded-md my-1 cursor-pointer" :class="{
+                <div v-for="option in enabledOptions[category.key]" :key="option.value">
+                  <UPopover :open-delay="300" mode="hover" v-if="imageMap[option.value]" :content="{
+                    align: 'start',
+                    side: 'right',
+                    sideOffset: 1
+                  }">
+                    <div class="hover:bg-neutral-50 p-3 rounded-md my-1 cursor-pointer" :class="{
+                      'bg-neutral-100': option.value === envStore[category.key],
+                      'opacity-40 cursor-not-allowed': option.disabled
+                    }" @click="() => { if (!option.disabled) selectOption(category.key, option.value) }">
+                      <h1 class="text-md font-semibold text-neutral-900">
+                        {{ option.label }}
+                      </h1>
+                      <p class="text-sm text-neutral-500 font-light">
+                        {{ option.description || '' }}
+                      </p>
+                    </div>
+                    <template #content>
+                      <NuxtImg :src="imageMap[option.value]" class="rounded-md max-w-xs max-h-52 object-cover"
+                        width="300" height="180" format="webp" quality="80" />
+                    </template>
+                  </UPopover>
+
+                  <div v-else :key="option.value" class="hover:bg-neutral-50 p-3 rounded-md my-1 cursor-pointer" :class="{
                     'bg-neutral-100': option.value === envStore[category.key],
                     'opacity-40 cursor-not-allowed': option.disabled
                   }" @click="() => { if (!option.disabled) selectOption(category.key, option.value) }">
-                  <h1 class="text-md font-semibold text-neutral-900">
-                    {{ option.label }}
-                  </h1>
-                  <p class="text-sm text-neutral-500 font-light">
-                    {{ option.description || '' }}
-                  </p>
+                    <h1 class="text-md font-semibold text-neutral-900">
+                      {{ option.label }}
+                    </h1>
+                    <p class="text-sm text-neutral-500 font-light">
+                      {{ option.description || '' }}
+                    </p>
+                  </div>
                 </div>
               </div>
             </template>
@@ -111,7 +133,8 @@ import {
   geographyOptions,
   forestTypeOptions,
   standAgeOptions,
-  vegetationTypeOptions
+  vegetationTypeOptions,
+  imageMap
 } from '~/stores/envParamsStore'
 
 const envStore = useEnvParamsStore()
@@ -167,7 +190,7 @@ const categories: Category[] = [
   },
   {
     key: 'standAge',
-    title: 'Beståndsålder',
+    title: 'Skogsålder',
     defaultLabel: 'Välj ålder',
     icon: 'carbon:crop-growth',
     options: standAgeOptions

@@ -76,7 +76,7 @@ onUnmounted(() => {
       <template #title>
         <MDC :value="page.hero.title" class="*:leading-11 sm:*:leading-19 max-w-3xl mx-auto " />
       </template>
-      <NuxtImg src="/images/boleto_small.png" class="sm:-mt-90 -mb-32 -mt-10 sm:-mb-80" />
+      <NuxtImg src="/images/boleto_small.png" width="1500" height="1800" quality="80" format="webp" class="sm:-mt-90 -mb-32 -mt-10 sm:-mb-80" />
 
       <!-- <NuxtImg src="/images/3Trees.png" class="rounded-xl border border-neutral-200 dark:border-neutral-700 shadow" width="600" height="400"/> -->
       <!-- <div class="relative hidden sm:block">

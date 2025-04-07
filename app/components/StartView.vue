@@ -37,7 +37,7 @@ orientation="horizontal"
                  name="carbon:crop-growth"
                  class="size-5 text-violet-500 -mb-1"
                />
-               Beståndsålder (trädens ålder) och
+               Skogsålder (trädens ålder) och
 
                <Icon
                  name="fluent-emoji-high-contrast:herb"
