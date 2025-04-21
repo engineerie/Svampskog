@@ -103,7 +103,7 @@ function generateRainbowColors(steps: number): string[] {
 async function fetchChartData() {
   const envStore = useEnvParamsStore()
   if (envStore.geography && envStore.forestType && envStore.standAge && envStore.vegetationType) {
-    const filename = `data-${envStore.geography}-${envStore.forestType}-${envStore.standAge}-${envStore.vegetationType}.json`
+    const filename = `edna-${envStore.geography}-${envStore.forestType}-${envStore.standAge}-${envStore.vegetationType}.json`
     try {
       const response = await fetch(`/edna/${filename}`)
       if (!response.ok) throw new Error(`Failed to fetch ${filename}`)

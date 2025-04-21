@@ -1,6 +1,6 @@
 <template>
     <!-- Container for the left axis (% Mykorrhizasvamp) -->
-    <VisXYContainer :data="treeGrowthData" :margin="margin" :autoMargin="false" width="100%" :height="500"
+    <VisXYContainer :data="treeGrowthData" :margin="margin" :autoMargin="false" width="100%" :height="350"
         :xDomain="xDomain">
         <template v-if="chartType === true">
             <VisArea :x="chartX" :y="chartLine1" :color="'#d4d4d4'" :lineWidth="3" />
@@ -14,7 +14,7 @@
     </VisXYContainer>
 
     <!-- Container for the right axis (Löpande trädtillväxt) -->
-    <VisXYContainer :data="treeGrowthData" :yDomain="[0, 10]" :margin="margin" :autoMargin="false" :height="500"
+    <VisXYContainer :data="treeGrowthData" :yDomain="[0, 10]" :margin="margin" :autoMargin="false" :height="350"
         :style="containerStyle" :xDomain="xDomain">
         <template v-if="chartType === true">
             <VisLine :x="chartX" :y="chartLine2" :color="'#22c55e'" :lineWidth="3" />

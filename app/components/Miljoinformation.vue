@@ -7,7 +7,7 @@
   <div class="space-y-6 mt-4">
     <div>
       <h1 class="mb-2 text-2xl font-medium">Var i Sverige</h1>
-      <div class="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 gap-4">
+      <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
         <div v-for="option in geographyOptions" class=" rounded-xl overflow-hidden border border-neutral-200">
           <div class="px-3 pt-2 text-lg font-medium text-neutral-600">
             {{ option.label }}
@@ -18,7 +18,7 @@
     </div>
     <div>
       <h1 class="mb-2 text-2xl font-medium">Skogstyp</h1>
-      <div class="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 gap-4">
+      <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
         <div v-for="option in forestTypeOptions" class=" rounded-xl overflow-hidden border border-neutral-200">
           <div class="bg-gray-200 h-58 rounded-lg flex items-center justify-center">
             <NuxtImg v-if="imageMap[option.value]" :src="imageMap[option.value]" class="w-full h-full object-cover"
@@ -35,7 +35,7 @@
     </div>
     <div>
       <h1 class="mb-2 text-2xl font-medium">Skogsålder</h1>
-      <div class="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 gap-4">
+      <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
         <div v-for="option in standAgeOptions" class=" rounded-xl overflow-hidden border border-neutral-200">
           <div class="px-3 pt-2 text-lg font-medium text-neutral-600">
             {{ option.label }}
@@ -46,7 +46,7 @@
     </div>
     <div>
       <h1 class="mb-2 text-2xl font-medium">Fältskikt</h1>
-      <div class="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 gap-4">
+      <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
         <div v-for="option in vegetationTypeOptions" class=" rounded-xl overflow-hidden border border-neutral-200">
           <div class="bg-gray-200 h-58 rounded-lg flex items-center justify-center">
             <NuxtImg v-if="imageMap[option.value]" :src="imageMap[option.value]" class="w-full h-full object-cover"

@@ -39,7 +39,7 @@
 
       </div>
     </div>
-    <div class="col-span-7 p-4 gap-4">
+    <div class="col-span-7 gap-4">
 
       <!-- <SpeciesRichness class="col-span-4"/> -->
 

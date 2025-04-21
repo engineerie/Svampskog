@@ -90,16 +90,16 @@ function onSubmit() {
     </template>
 
     <template #right>
-      <UColorModeButton />
+      <!-- <UColorModeButton /> -->
 
-      <UButton
+      <!-- <UButton
         to="https://github.com/nuxt-ui-pro/saas"
         target="_blank"
         icon="i-simple-icons-github"
         aria-label="GitHub"
         color="neutral"
         variant="ghost"
-      />
+      /> -->
     </template>
   </UFooter>
 </template>

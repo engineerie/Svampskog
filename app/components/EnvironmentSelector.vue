@@ -10,10 +10,10 @@
       <!-- Parameter Popover Grid -->
       <div class="grid grid-cols-4 gap-5 mb-2">
         <div v-for="category in categories" :key="category.key" class="flex justify-center w-full">
-          <UPopover mode="hover">
+          <UPopover >
             <div>
               <transition name="slide-up" mode="out-in">
-                <div :key="getLabel(category.key)" class="flex items-center justify-center cursor-default">
+                <div :key="getLabel(category.key)" class="flex items-center justify-center cursor-pointer">
                   <div class="text-center">
                     <h1 class="text-neutral-500">{{ category.title }}</h1>
                     <h1 class="text-2xl font-medium">

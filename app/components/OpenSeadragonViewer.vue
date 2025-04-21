@@ -1,4 +1,7 @@
 <template>
+  <div class="relative">
+
+
   <client-only>
     <div v-if="isClient" :id="viewerId" class="openseadragon-viewer relative rounded-xl overflow-hidden" ref="viewerContainer"
     :style="{ backgroundColor: backgroundColor }" @mousedown.capture="handleActivate" @mousemove="updateMousePosition">
@@ -14,27 +17,31 @@
     <!-- <div class="absolute top-32 right-0 m-2 p-1 bg-black bg-opacity-50 text-white text-xs z-50">
       X: {{ mousePos.x.toFixed(4) }}, Y: {{ mousePos.y.toFixed(4) }}
     </div> -->
-    <div class="osd-opacity-slider-container bg-neutral-800 flex items-center p-1.5 gap-1 rounded-lg m-2" :style="{
+    <!-- <div class="osd-opacity-slider-container bg-neutral-800 flex items-center p-1.5 gap-1 rounded-lg m-2" :style="{
       position: 'absolute',
       top: '0px',
       zIndex: 10,
       ...(sliderPosition === 'left' ? { left: '40px' } : { right: '0px' })
     }">
-      <!-- In slider mode, show badges on either side of the slider handle -->
-      <!-- <template v-if="layoutMode === 'slider' && comparisonMode">
-        <div class="absolute z-50" :style="{ left: 'calc(50% - 70px)', top: '-30px' }">
-          <UBadge variant="solid" color="primary">{{ frameworkLabel }}</UBadge>
-        </div>
-        <div class="absolute z-50" :style="{ left: 'calc(50% + 70px)', top: '-30px' }">
-          <UBadge variant="solid" color="secondary">{{ timeLabel }}</UBadge>
-        </div>
-      </template> -->
+      <UIcon name="i-hugeicons-tree-06" class="size-5 text-neutral-100" />
+      <input id="osdOverlayOpacity" type="range" min="0" max="1" step="0.01" :value="overlayOpacityLocal"
+        @input="handleSliderInput" class="accent-neutral-100 h-[5px] w-20 " />
+    </div> -->
 
+   
+   
+  </div>
+  </client-only>
+  <div class="osd-opacity-slider-container bg-neutral-800 flex items-center p-1.5 gap-1 rounded-lg m-2" :style="{
+      position: 'absolute',
+      top: '0px',
+      zIndex: 10,
+      ...(sliderPosition === 'left' ? { left: '40px' } : { right: '0px' })
+    }">
       <UIcon name="i-hugeicons-tree-06" class="size-5 text-neutral-100" />
       <input id="osdOverlayOpacity" type="range" min="0" max="1" step="0.01" :value="overlayOpacityLocal"
         @input="handleSliderInput" class="accent-neutral-100 h-[5px] w-20 " />
     </div>
-
     <div
       :class="['absolute pointer-events-none bottom-0 m-2 z-10', (layoutMode === 'slider' && comparisonMode) ? 'w-1/2' : '']"
       :style="{
@@ -44,9 +51,6 @@
           : { right: '0px', paddingLeft: (layoutMode === 'slider' && comparisonMode) ? '20px' : '0px' }
         )
       }">
-      <!-- Minimize/Enlarge Button in top right corner -->
-
-
       <div>
         <div :class="['w-full flex', (sliderPosition === 'left') ? '' : 'justify-end']">
 
@@ -89,9 +93,7 @@
       </div>
 
     </div>
-
-  </div>
-  </client-only>
+</div>
 </template>
 
 <script>
@@ -364,64 +366,60 @@ export default {
 
     // Initialize the viewer.
     async function initViewer() {
-      if (typeof window === "undefined") return;
-      if (viewer.value) return;
-      if (route.name !== "skogsskotsel") return;
-      const containerEl = viewerContainer.value;
-      if (!containerEl) return;
+  if (typeof window === "undefined") return;
+  if (viewer.value) return;
+  if (route.name !== "skogsskotsel") return;
+  const containerEl = viewerContainer.value;
+  if (!containerEl) return;
 
-      // Import OpenSeadragon and use default export if available
-      const osdModule = await import("openseadragon");
-      const osd = osdModule.default || osdModule;
-      osdLib = osd;
+  const osdModule = await import("openseadragon");
+  const osd = osdModule.default || osdModule;
+  osdLib = osd;
 
-      // Check for WebGL support
-      const supportsWebGL = (() => {
-        try {
-          const canvas = document.createElement("canvas");
-          return !!(window.WebGLRenderingContext && (canvas.getContext("webgl") || canvas.getContext("experimental-webgl")));
-        } catch (e) {
-          return false;
-        }
-      })();
-      console.log("WebGL support:", supportsWebGL);
-
-      // Create viewer options
-      const viewerOptions = {
-        element: containerEl,
-        crossOriginPolicy: 'Anonymous',
-        showNavigationControl: false,
-        visibilityRatio: 1,
-        minZoomLevel: 1,
-        constrainDuringPan: true,
-        panHorizontal: true,
-        panVertical: true,
-        homeFillsViewer: true,
-        animationTime: 0.5,
-        defaultZoomLevel: props.layoutMode === "sideBySide" ? null : 1.3,
-        gestureSettingsMouse: {
-          scrollToZoom: true,
-          clickToZoom: false,
-          dblClickToZoom: true,
-          clickTodrag: false,
-          pinchToZoom: false,
-        },
-      };
-
-      if (supportsWebGL) {
-        viewerOptions.useWebGL = true;
+  // Patch the image loader to force the crossOrigin attribute
+  if (osdLib && osdLib.ImageLoader && osdLib.ImageLoader.prototype) {
+    const originalCreateImage = osdLib.ImageLoader.prototype.createImage;
+    osdLib.ImageLoader.prototype.createImage = function (tileUrl, success, error) {
+      const img = originalCreateImage.apply(this, arguments);
+      if (img) {
+        img.crossOrigin = 'Anonymous';
       }
+      return img;
+    };
+  }
 
-      viewer.value = osd(viewerOptions);
+  // Viewer initialization options
+  const viewerOptions = {
+    element: containerEl,
+    crossOriginPolicy: 'Anonymous',
+    ajaxWithCredentials: false,
+    showNavigationControl: false,
+    visibilityRatio: 1,
+    minZoomLevel: 1,
+    constrainDuringPan: true,
+    panHorizontal: true,
+    panVertical: true,
+    homeFillsViewer: true,
+    animationTime: 0.5,
+    defaultZoomLevel: props.layoutMode === "sideBySide" ? null : 1.3,
+    gestureSettingsMouse: {
+      scrollToZoom: true,
+      clickToZoom: false,
+      dblClickToZoom: true,
+      clickTodrag: false,
+      pinchToZoom: false,
+    },
+  };
 
-      // Emit viewport changes
-      viewer.value.addHandler("animation", () => {
-        const zoom = viewer.value.viewport.getZoom(); 
-        const center = viewer.value.viewport.getCenter();
-        emit("viewportChanged", { zoom, center });
-      });
-      transitionToNewTile(props.dziUrl);
-    }
+  viewer.value = osd(viewerOptions);
+
+  viewer.value.addHandler("animation", () => {
+    const zoom = viewer.value.viewport.getZoom();
+    const center = viewer.value.viewport.getCenter();
+    emit("viewportChanged", { zoom, center });
+  });
+  transitionToNewTile(props.dziUrl);
+}
 
     function transitionToNewTile(newUrl) {
       if (!viewer.value) return;
@@ -444,7 +442,7 @@ export default {
             viewer.value.addTiledImage({
               tileSource: props.overlayDziUrl,
               opacity: overlayOpacityLocal.value,
-              useCanvas: true, // force canvas mode so opacity updates work immediately
+              // useCanvas: true, 
               success: function (overlayTiledImage) {
                 overlayImage.value = overlayTiledImage;
               }
@@ -480,7 +478,7 @@ export default {
           viewer.value.forceRedraw();
         }
       }
-    }, { immediate: true, flush: 'sync' });
+    }, );
 
     // Updated handleSliderInput function
     function handleSliderInput(event) {
@@ -522,13 +520,20 @@ export default {
 
     // Watch for changes in dziUrl.
     watch(
-      () => props.dziUrl,
-      (newVal, oldVal) => {
-        if (viewer.value && newVal !== oldVal) {
-          transitionToNewTile(newVal);
-        }
-      }
-    );
+  () => props.dziUrl,
+  async (newVal, oldVal) => {
+    if (viewer.value && newVal !== oldVal) {
+      // Destroy the current viewer before loading the new URL
+      viewer.value.destroy();
+      viewer.value = null;
+      // Optionally clear current tile references
+      currentTile.value = null;
+      overlayImage.value = null;
+      // Reinitialize the viewer with the new URL
+      await initViewer();
+    }
+  }
+);
 
     // Watch for changes in annotations.
     watch(
@@ -645,7 +650,7 @@ export default {
       mousePos,
       updateMousePosition,
       handleSliderInput,
-      overlayOpacityLocal,  // <-- add this line
+      overlayOpacityLocal,  
       timelineInfo,
       isPanelMinimized,
       togglePanelMinimized,

@@ -209,7 +209,7 @@ import { upperFirst } from 'scule'
 const props = defineProps({
   isNormalView: { type: Boolean, default: false },
   dataTypeFolder: { type: String, default: 'edna' },
-  dataType: { type: String, default: 'data' },
+  dataType: { type: String, default: 'edna' },
   grupp: { type: String, default: 'Svamp-grupp-släkte' },
   mat: { type: String, default: 'matsvamp' },
   obs: { type: String, default: 'sample_plot_count' },
@@ -789,8 +789,18 @@ const fetchData = async () => {
 
       // 1) Assign each row a stable colorIndex based on its original position
       data.value.forEach((row, i) => {
-        row.colorIndex = i;
-      });
+  row.colorIndex = i;
+  // Remap rank values if they exist
+  if (row.RankRed) {
+    row.RankRed = 4 - Number(row.RankRed);
+  }
+  if (row["Rank matsvamp"]) {
+    row["Rank matsvamp"] = 4 - Number(row["Rank matsvamp"]);
+  }
+  if (row["Rank giftsvamp"]) {
+    row["Rank giftsvamp"] = 4 - Number(row["Rank giftsvamp"]);
+  }
+});
 
       // 2) Figure out how many total species we have
       const totalSpecies = data.value.length;

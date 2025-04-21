@@ -1,6 +1,5 @@
-<!-- MySlideover.vue -->
 <template>
-  <!-- Slide-in from right transition -->
+  <!-- MySlideover.vue -->
   <transition name="slide-in-right">
     <div
       v-if="modelValue"
@@ -17,33 +16,27 @@
         :class="[localPinned ? '-m-1' : '', expanded ? 'w-[744px]' : 'w-96']"
         @click.stop
       >
-        <!-- <div>
-            <slot name="header" />
-          </div> -->
-
         <div class="absolute top-4 right-4 items-end gap-2 z-10 flex">
           <UButton
-            class="shadow hover:opacity-100"
-            color="white"
+            class="shadow hover:bg-white"
+            color="neutral"
+            variant="subtle"
             :ui="{ rounded: 'rounded-full' }"
             @click="togglePinned"
             icon="codicon:pinned"
-            :class="
-              localPinned
-                ? 'text-primary-500 opacity-100'
-                : 'text-neutral-700 opacity-90'
-            "
+            :class="localPinned ? 'text-primary-500' : 'text-neutral-700'"
           />
           <UButton
-            class="shadow opacity-90 hover:opacity-100"
-            color="white"
+            class="shadow hover:bg-white"
+            color="neutral"
+            variant="subtle"
             :ui="{ rounded: 'rounded-full' }"
             icon="heroicons:x-mark"
             @click="emit('update:modelValue', false)"
           />
         </div>
 
-        <div class="h-full relative overflow-auto pb-16">
+        <div class="h-full relative overflow-auto pb-16 no-scrollbar">
           <slot />
         </div>
       </div>
@@ -55,28 +48,12 @@
 import { ref, watch } from "vue";
 
 const props = defineProps({
-  /**
-   * Open/closed state
-   */
-  modelValue: {
-    type: Boolean,
-    default: false,
-  },
-  /**
-   * Pinned state => determines if overlay is shown
-   */
-  pinned: {
-    type: Boolean,
-    default: true,
-  },
-
+  modelValue: { type: Boolean, default: false },
+  pinned: { type: Boolean, default: true },
   expanded: { type: Boolean, default: false },
 });
 const emit = defineEmits(["update:modelValue", "update:pinned"]);
 
-/**
- * localPinned mirrors the parent's pinned prop
- */
 const localPinned = ref(props.pinned);
 
 watch(
@@ -86,18 +63,31 @@ watch(
   }
 );
 
-/**
- * Toggle pinned <-> unpinned
- */
 function togglePinned() {
   localPinned.value = !localPinned.value;
-  // Let the parent know pinned changed
   emit("update:pinned", localPinned.value);
 }
 </script>
 
 <style scoped>
-/* Simple transition for sliding in from the right */
+/* Hide scrollbars for the element with class "no-scrollbar" */
+
+/* For WebKit browsers */
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
+/* For Firefox */
+.no-scrollbar {
+  scrollbar-width: none;
+}
+
+/* For IE, Edge */
+.no-scrollbar {
+  -ms-overflow-style: none;
+}
+
+/* Existing transition styles */
 .slide-in-right-enter-active,
 .slide-in-right-leave-active {
   transition: transform 0.5s ease;

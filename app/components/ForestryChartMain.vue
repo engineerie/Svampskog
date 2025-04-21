@@ -1,8 +1,8 @@
 <template>
     <div>
-        <UPageHeader headline="Skogsskötsel" title="Svampdata"
+        <UPageHeader headline="Skogsskötsel" title="Diagram och staplar"
             description="Utforska data för svampgrupper vid olika skogsåldrar och skogsbrukssätt." />
-        <h1 class="text-2xl font-bold mt-10">Samband mellan mykorrhizasvamp och träd</h1>
+            <UPage><template #left><div></div></template>   <h1 class="text-2xl font-bold mt-10">Samband mellan mykorrhizasvamp och träd</h1>
         <p class="text-base/7 ">Mykorrhizasvampar lever i symbios med träd och är helt beroende av socker som
             transporteras från trädens
             rötter. Diagrammet visar hur mängden mykorrhizasvamp i marken följer mängden socker som träden producerar,
@@ -12,7 +12,7 @@
                 :icon="TreeChartLine ? 'i-carbon-chart-column' : 'i-carbon-chart-line-smooth'"
                 @click="ToggleTreeChartType" />
         </div>
-        <div class="relative mt-10 mb-28">
+        <div class="relative mt-10 mb-16">
             <TreeGrowthChart :chartType="TreeChartLine" />
         </div>
         <h1 class="text-2xl font-bold mt-10">Mängd mykorrhizasvamp vid olika skogsskötsel</h1>
@@ -25,7 +25,7 @@
             och luckhuggning innebär återkommande mindre ingrepp, där svampmängden sjunker något ungefär vart trettionde
             år men i övrigt hålls relativt stabil över tid.
         </p>
-        <div class="controls w-full flex justify-end">
+        <div class="controls w-full flex my-2">
             <!-- <USelect class="min-w-32  " v-model="selectedFrameworks" :items="frameworkOptions" multiple
                 label="Select Frameworks" /> -->
             <!-- <USelect class="min-w-32" v-model="selectedArtkategori" :items="artkategoriOptions"
@@ -37,7 +37,7 @@
         </div>
         <ForestryChartDisplay
             :selectedFrameworks="['naturskydd', 'trakthygge', 'luckhuggning', 'blädning', 'skärmträd']"
-            :selectedArtkategori="['total']" :chartType="chartType" :maxYValue="130" class=" mb-28" />
+            :selectedArtkategori="['total']" :chartType="chartType" :maxYValue="130" class=" mb-16" />
         <h1 class="text-2xl font-bold mt-10">Rödlistade och signalarter</h1>
         <p class="text-base/7 ">
             Praesent elementum ut lacus a pharetra. Sed a malesuada mauris. Morbi et convallis libero. Aliquam
@@ -47,7 +47,7 @@
 
 
         </p>
-        <div class="controls w-full flex justify-end">
+        <div class="controls w-full flex my-2">
             <!-- <USelect class="min-w-32  " v-model="selectedFrameworks" :items="frameworkOptions" multiple
                 label="Select Frameworks" /> -->
             <!-- <USelect class="min-w-32" v-model="selectedArtkategori" :items="artkategoriOptions"
@@ -64,7 +64,7 @@
         <ForestryChartDisplay
             :selectedFrameworks="['naturskydd', 'trakthygge', 'luckhuggning', 'blädning', 'skärmträd']"
             :selectedArtkategori="['rödlistade + signalarter']" :chartType="chartType"
-            :selectedStartskog="selectedStartskog3" :redColor="true" :maxYValue="0.65" class=" mb-28" />
+            :selectedStartskog="selectedStartskog3" :redColor="true" :maxYValue="0.65" class=" mb-16" />
         <h1 class="text-2xl font-bold mt-10">Matsvampar</h1>
         <p class="text-base/7 ">
             Praesent elementum ut lacus a pharetra. Sed a malesuada mauris. Morbi et convallis libero. Aliquam
@@ -74,7 +74,7 @@
 
 
         </p>
-        <div class="controls w-full flex justify-end">
+        <div class="controls w-full flex my-2">
             <!-- <USelect class="min-w-32  " v-model="selectedFrameworks" :items="frameworkOptions" multiple
                 label="Select Frameworks" /> -->
             <!-- <USelect class="min-w-32" v-model="selectedArtkategori" :items="artkategoriOptions"
@@ -91,7 +91,7 @@
         <ForestryChartDisplay
             :selectedFrameworks="['naturskydd', 'trakthygge', 'luckhuggning', 'blädning', 'skärmträd']"
             :selectedArtkategori="['matsvamp']" :chartType="chartType" :selectedStartskog="selectedStartskog2"
-            :yellowColor="true" :maxYValue="28" class=" mb-28" />
+            :yellowColor="true" :maxYValue="28" class=" mb-16" />
         <h1 class="text-2xl font-bold mt-10">Olika svampgrupper</h1>
         <p class="text-base/7 ">Praesent elementum ut lacus a pharetra. Sed a malesuada mauris. Morbi et convallis
             libero. Aliquam vestibulum, felis eu fringilla elementum, nibh nunc tincidunt ex, quis vulputate nunc erat
@@ -99,7 +99,7 @@
             Curabitur viverra quam a risus sagittis maximus.
 
         </p>
-        <div class="controls w-full flex justify-end">
+        <div class="controls w-full flex my-2">
             <!-- <USelect class="min-w-32  " v-model="selectedFrameworks" :items="frameworkOptions" multiple
                 label="Select Frameworks" /> -->
             <!-- <USelect class="min-w-32" v-model="selectedArtkategori" :items="artkategoriOptions"
@@ -117,7 +117,9 @@
         </div>
         <ForestryChartDisplay :selectedFrameworks="[selectedSingleFramework]" :selectedArtkategori="selectedArtkategori"
             :chartType="chartType" :singleFrameworkSelection="true" :selectedStartskog="selectedStartskog"
-            :maxYValue="45" />
+            :maxYValue="45" /><template #right><div></div></template></UPage>
+            
+     
     </div>
 </template>
 

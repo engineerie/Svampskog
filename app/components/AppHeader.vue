@@ -27,31 +27,31 @@ const items = computed(() => [
   // },
   //   ]
   // },
-  {
-    label: 'Dokumentation',
-    description: 'Hur du bäst använder appen.',
-    to: '/docs',
-    // children: [
-    //   {
-    //     label: 'Guide',
-    //     description: 'Hur du bäst använder appen.',
-    //     icon: 'i-lineicons-direction',
-    //     to: '/docs'
-    //   },
-    //   {
-    //     label: 'Definitioner',
-    //     description: 'Hur olika kategorier definieras.',
-    //     icon: 'i-heroicons-clipboard-document-list',
-    //     to: '/docs'
-    //   },
-    //   {
-    //     label: 'Källor',
-    //     description: 'Var informationen kommer ifrån.',
-    //     icon: 'i-heroicons-archive-box',
-    //     to: '/docs'
-    //   }
-    // ]
-  },
+  // {
+  //   label: 'Dokumentation',
+  //   description: 'Hur du bäst använder appen.',
+  //   to: '/docs',
+  //   children: [
+  //     {
+  //       label: 'Guide',
+  //       description: 'Hur du bäst använder appen.',
+  //       icon: 'i-lineicons-direction',
+  //       to: '/docs'
+  //     },
+  //     {
+  //       label: 'Definitioner',
+  //       description: 'Hur olika kategorier definieras.',
+  //       icon: 'i-heroicons-clipboard-document-list',
+  //       to: '/docs'
+  //     },
+  //     {
+  //       label: 'Källor',
+  //       description: 'Var informationen kommer ifrån.',
+  //       icon: 'i-heroicons-archive-box',
+  //       to: '/docs'
+  //     }
+  //   ]
+  // },
   {
     label: 'Om projektet',
     description: 'Information om bakgrund och syfte.',
@@ -64,22 +64,23 @@ const items = computed(() => [
         icon: 'i-heroicons-information-circle',
         to: '/info',
       },
-      {
-        label: 'Nyheter',
-        description: 'Pressklipp och senaste uppdateringarna.',
-        icon: 'i-heroicons-newspaper',
-        to: '/blog'
-      },
-      {
-        label: 'Kommande',
-        description: 'Uppdateringar som planeras.',
-        icon: 'i-lsicon-path-filled',
-        to: '/info/kommande'
-      },
+      // {
+      //   label: 'Nyheter',
+      //   description: 'Pressklipp och senaste uppdateringarna.',
+      //   icon: 'i-heroicons-newspaper',
+      //   to: '/blog'
+      // },
+      // {
+      //   label: 'Kommande',
+      //   description: 'Uppdateringar som planeras.',
+      //   icon: 'i-lsicon-path-filled',
+      //   to: '/info/kommande'
+      // },
       {
         label: 'Kontakt',
-        description: 'Hör av dig med frågor eller förslag.',
-        icon: 'i-heroicons-chat-bubble-left-ellipsis'
+        description: 'För frågor eller förslag.',
+        icon: 'i-heroicons-chat-bubble-left-ellipsis',
+        to: '/kontakt',
       }
     ]
   }

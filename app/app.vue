@@ -50,6 +50,8 @@ provide('navigation', navigation)
 
 <template>
   <UApp>
+    <UBanner title="Förhandsversion: fler funktioner och mobilanpassning kommer snart!" />
+
     <NuxtLoadingIndicator />
 
     <NuxtLayout>

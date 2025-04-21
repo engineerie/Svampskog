@@ -1,15 +1,15 @@
 <template>
-    <div>
-        <div class="w-full flex justify-end">
+    <div class="relative">
+        <div class="absolute right-0 top-0 z-40">
             <UButton color="neutral" variant="subtle"
                 :icon="chartType === 'line' ? 'i-carbon-chart-column' : 'i-carbon-chart-line-smooth'"
                 @click="ToggleChartType" />
         </div>
 
         <div class="my-chart-container">
-            <VisBulletLegend :items="legendItems" :onLegendItemClick="updateLegendItem" labelFontSize="large"
-                bulletSize="1rem" />
-            <VisXYContainer :data="chartData" :height="500" :yDomain="[0, props.maxYValue || undefined]">
+            <VisBulletLegend :items="legendItems" :onLegendItemClick="updateLegendItem" labelFontSize="medium"
+                bulletSize="1rem" class="mb-4"/>
+            <VisXYContainer :data="chartData" :height="350" :yDomain="[0, props.maxYValue || undefined]">
                 <template v-if="chartType === 'line'">
                     <VisLine :color="computedLineColors" :x="xAccessor" :y="yAccessors" :interpolateMissingData="true"
                         :lineWidth="3" />

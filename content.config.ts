@@ -56,6 +56,14 @@ export const collections = {
       description: z.string().nonempty()
     })
   }),
+  mushroomInfo: defineCollection({
+    type: 'page',
+    source: '6.mushroom/**/*',
+    schema: z.object({
+      title: z.string().nonempty(),
+      description: z.string().nonempty()
+    })
+  }),
   posts: defineCollection({
     type: 'page',
     source: '3.blog/**/*',

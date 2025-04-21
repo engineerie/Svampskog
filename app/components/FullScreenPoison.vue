@@ -17,7 +17,11 @@
       color="neutral"
     />
     <div class="flex gap-4 items-end pb-2">
-      <UBadge
+ 
+    </div>
+      </div>
+      <div class="flex gap-2 items-center mb-2">
+        <UBadge
         v-if="!isNormalView"
         icon="lineicons:mushroom-1"
         size="lg"
@@ -26,9 +30,6 @@
         label="Enligt samlad kunskap, främst var fruktkroppar förekommer"
         class="h-fit"
       />
-    </div>
-      </div>
-      <div class="flex gap-2 items-end mb-2">
         <UButton
       color="neutral"
       variant="ghost"
@@ -39,6 +40,8 @@
       </div>
     </div>
       <!-- TABLE VIEW -->
+      <transition name="fade" mode="out-in" class="min-h-[550px]">
+
       <div v-if="isTableView">
           <SpeciesTable :is-normal-view="isNormalView" dataType="edibledata" dataTypeFolder="edible" grupp="Svamp-grupp" mat="Nyasvamp-boken" obs="Rank giftsvamp" obsLabel="Antal fynd" :filterPoison="true"  :column-visibility-overrides="{ 'mark': false }" 
           />
@@ -46,12 +49,13 @@
       <div v-else>
         <SpeciesGrid :is-normal-view="isNormalView" dataType="edibledata" dataTypeFolder="edible" :filterPoison="true"/>
       </div>
+      </transition>
   </div>
 </template>
 
 <script setup>
-import { ref, computed} from "vue";
-
+import { ref, computed } from "vue";
+import { useTabsStore } from '~/stores/tabsStore';
 
 const items = [
   {
@@ -66,8 +70,11 @@ const items = [
   },
 ];
 
-
-const activeTab = ref("grid");
+const tabsStore = useTabsStore();
+const activeTab = computed({
+  get: () => tabsStore.getActiveTab("FullscreenPoison"),
+  set: (val) => tabsStore.setActiveTab("FullscreenPoison", val),
+});
 const isTableView = computed(() => activeTab.value === "table");
 
 const props = defineProps({ isNormalView: Boolean });
@@ -75,3 +82,14 @@ const props = defineProps({ isNormalView: Boolean });
 </script>
 
 
+<style scoped>
+.fade-enter-active,
+.fade-leave-active {
+  transition: opacity 0.3s ease-in-out;
+}
+
+.fade-enter-from,
+.fade-leave-to {
+  opacity: 0;
+}
+</style>

@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import type { ContentNavigationItem } from '@nuxt/content'
 
-const navigation = inject<Ref<ContentNavigationItem[]>>('navigation')
+// const navigation = inject<Ref<ContentNavigationItem[]>>('navigation')
 </script>
 
 <template>
@@ -13,7 +13,7 @@ const navigation = inject<Ref<ContentNavigationItem[]>>('navigation')
         <UPage>
           <template #left>
             <UPageAside>
-              <template #top>
+              <!-- <template #top>
                 <UContentSearchButton
                   label="Search..."
                   variant="outline"
@@ -26,12 +26,12 @@ const navigation = inject<Ref<ContentNavigationItem[]>>('navigation')
                     </div>
                   </template>
                 </UContentSearchButton>
-              </template>
-              <UContentNavigation
+              </template> -->
+              <!-- <UContentNavigation
                 :navigation="navigation"
                 
                 variant="pill"
-              />
+              /> -->
             </UPageAside>
           </template>
 

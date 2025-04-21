@@ -1,7 +1,12 @@
 <template>
+    <div class="hidden">
+    <NuxtImg v-for="(src, key) in imageMap" :key="key" :src="src" width="600" height="420" quality="80" format="webp" preload />
+  </div>
   <MySlideover v-model="showSlideover" :pinned="isPinned" @update:pinned="(val) => (isPinned = val)">
     <SpeciesInfo :species="speciesStore.selectedSpecies" :source="speciesStore.sourceComponent" />
   </MySlideover>
+
+  <UContainer>
   <div>
     <div class="flex justify-between items-center w-full">
       <!-- <UButton label="Välj miljö" class="h-fit"/>
@@ -12,79 +17,51 @@
      color="neutral"
      class="py-1 w-fit"
    /> -->
-      <div class="flex items-center w-full mt-2 gap-2">
+  <!-- Buttons for medium and larger screens -->
+  <div class="hidden sm:flex flex-wrap items-center w-full mt-2 gap-2">
+    <UButton
+    v-for="item in items"
+    :key="item.value"
+    :label="item.label"
+    :color="activeTab === item.value ? 'primary' : 'neutral'"
+    variant="ghost"
+    size="sm"
+    @click="activeTab = item.value"
+  />
+  </div>
 
-
-
-        <UButton v-if="items.length" :label="items[3].label"
-          :color="activeTab === items[3].value ? 'primary' : 'neutral'" variant="ghost" size="sm"
-          @click="activeTab = items[3].value" />
-        <div class="flex gap-2">
-          <UButton v-for="item in items.slice(0, 3)" :key="item.value" :label="item.label"
-            :color="activeTab === item.value ? 'primary' : 'neutral'" variant="ghost" size="sm"
-            @click="activeTab = item.value" />
-        </div>
-      </div>
+  <!-- USelect for small screens with full width -->
+  <div class="block sm:hidden mt-2 w-full">
+    <USelect v-model="activeTab" :items="items" option-label="label" option-value="value" class="w-full" />
+  </div>
     </div>
 
-    <UPage v-if="activeTab === 'komigang'">
-      <UPageHeader headline="Svampar" title="Guide" description="Information om hur du kan använda verktyget." />
+    <div v-if="activeTab === 'komigang'">
+      <UPage>
+ 
+ <template #left> <div></div></template>
+ <template #right> <div><div class="text-neutral-500 mt-6 pr-4"> Ett öppet <NuxtLink class="text-primary-500" to="https://www.slu.se/fakulteter/s/samverkan/livslangt-larande/" target="blank">webbinarium</NuxtLink> om att använda Svampskog hålls den 23 april och fler tillfällen planeras till hösten.
+ </div></div></template>
+      <UPageHeader headline="Svampar" title="Manual" description="Information om hur du kan använda verktyget." />
+
+     </UPage>
+<UPage>
 
 
-      <div class="mt-4">
-        <ul class="space-y-4">
-          <li class="">
-            Välj skogsmiljö genom att ange
+  <template #left> <div></div></template>
+      <template #right> <div></div></template>
 
-            <Icon name="material-symbols:location-on-outline" class="size-5 text-fuchsia-500 -mb-1" />
-            Var i Sverige (för närvarande begränsat till norr och söder),
+      <template>
 
-            <Icon name="lucide:trees" class="size-5 text-green-500 -mb-1" />
-            Skogstyp (vilka träd som dominerar),
+</template>
+      <ContentRenderer
+        v-if="page"
+        :value="page"
+      />
+</UPage>
 
-            <Icon name="carbon:crop-growth" class="size-5 text-violet-500 -mb-1" />
-            Skogsålder (trädens ålder) och
-
-            <Icon name="fluent-emoji-high-contrast:herb" class="size-5 text-teal-500 -mb-1" />
-            Fältskikt (vilken vegetation som växer på marken).
-          </li>
-          <li>
-            Klicka på respektive kategori för att göra dina val, eller
-            använd knappen
-            <div
-              class="inline-flex mx-1 items-center rounded-full ring-1 ring-neutral-200 w-fit text-sm py-1 pl-4 pr-3 gap-1 bg-neutral-50 text-neutral-950">
-              <span>Visa kombinationsvy</span>
-              <Icon name="mdi:chevron-down" class="size-5" />
-            </div>
-            för att se alla alternativ som radioknappar.
-            <!-- <UAlert
-                 class="my-2"
-                 icon="i-heroicons-information-circle"
-                 color="warning"
-                 variant="subtle"
-                 title="Det är nödvändigt att göra val i alla kategorier."
-               /> -->
-          </li>
-          <li class="">
-            Du kan också klicka på
-            <div
-              class="inline-flex mx-1 items-center rounded-full ring-1 ring-neutral-200 w-fit text-sm py-1 pl-4 pr-3 gap-1 bg-neutral-50 text-neutral-950">
-              <span>Markinventeringsdata</span>
-              <Icon name="mdi:lock-open" class="size-4" />
-            </div>
-            för att begränsa urvalet till miljöer där det finns data från
-            markinventeringen.
-            <!-- <UAlert
-                 class="my-2"
-                 icon="i-heroicons-light-bulb"
-                 color="success"
-                 variant="subtle"
-                 title="Om val är inaktiverade kan det hjälpa att avvmarkera redan gjorda val."
-               /> -->
-          </li>
-        </ul>
-      </div>
-    </UPage>
+     
+    </div>
 
     <div v-else-if="activeTab === 'miljo'">
       <UPageHeader headline="Svampar" title="Miljöinformation"
@@ -94,26 +71,66 @@
     </div>
 
     <div v-else-if="activeTab === 'dataunderlag'">
-      <UPageHeader headline="Svampar" title="Dataunderlag"
-        description="Information om var dataunderlaget kommer ifrån." />
-      <div class="grid grid-cols-1 md:grid-cols-2 md:gap-32 gap-16 mx-6 mt-12">
-        <LandingDNA />
-        <LandingSamladKunskap />
+      <UPage>
+ 
+ <template #left> <div></div></template>
+ <template #right> <div></div></template>
+      <UPageHeader headline="Svampar" title="Dokumentation"
+      description="Information om innehållet och var det kommer ifrån." />
+      </UPage>
+<UPage>
+ 
+  <template #left> <div><div class="text-neutral-500 mt-6">Text: Anders Dahlberg <br/> 9 april 2025</div></div></template>
+  <template #right> <div></div></template>
+  
+      <div class="mt-6">
+        <DokumentationSvampar />
+        <!-- <LandingDNA />
+        <LandingSamladKunskap /> -->
       </div>
+</UPage>
+
+
+    
     </div>
     <div v-else-if="activeTab === 'dashboard'">
-      <transition @before-enter="beforeEnter" @enter="enter" @leave="leave">
-        <div v-if="activeComponent === StartView" class="header-container">
-          <UPageHeader headline="Svampar" title="Arter i olika miljöer"
-            description="Här kan du söka på svenska skogsmiljöer för att se vilka mykorrhizasvampar som kan finnas i marken baserat på DNA-analyser av svampmycel i markprover samt vår samlade kunskap om var olika arters fruktkroppar förekommer." />
+    <UMain>
+      <transition name="fade" mode="out-in">
+        <div v-if="!showEnvironmentSelector" key="header-view">
+          <UPage class="header-container">
+            <template #left><div></div> </template>
+            <template #right><div></div></template>
+            <div>
+              <UPageHeader
+              headline="Svampar"
+              title="Arter i olika miljöer"
+              description="Här kan du söka på svenska skogsmiljöer för att se vilka mykorrhizasvampar som kan finnas i marken baserat på DNA-analyser av svampmycel i markprover samt vår samlade kunskap om var olika arters fruktkroppar förekommer."
+              />
+            <div class="mt-4">
+              <UButton label="Välj miljö" @click="showEnvironmentSelector = true" />
+            </div>
+            </div>
+            
+          </UPage>
+        </div>
+
+        <div v-else key="selector-view">
+          <EnvironmentSelector class="block" />
         </div>
       </transition>
-      <EnvironmentSelector />
+
       <transition name="fade" mode="out-in">
-        <component :is="activeComponent" @close="handleCloseFullScreen" @enlarge="handleFullScreen" />
+        <component
+          :is="activeComponent"
+          @close="handleCloseFullScreen"
+          @enlarge="handleFullScreen"
+          class="hidden sm:block"
+        />
       </transition>
-    </div>
+    </UMain>
   </div>
+  </div>
+</UContainer>
 </template>
 
 <script setup>
@@ -130,24 +147,37 @@ import { useEnvParamsStore } from "~/stores/envParamsStore";
 
 import { useSpeciesStore } from "~/stores/speciesStore";
 import EdnaComponent from "./EdnaComponent.vue";
+import { imageMap } from '~/stores/envParamsStore'
+const route = useRoute();
+
+// inside <script setup> before your useAsyncData call:
+const allDocs = await queryCollection('mushroomInfo').all()
+console.log('🍄 mushroomInfo docs:', allDocs)
+
+// Fetch the manual markdown from the mushroomInfo collection
+const { data: page } = await useAsyncData('manual-doc', () =>
+  queryCollection('mushroomInfo')
+       .path('/mushroom/manual')
+    .first()
+)
 
 
 const activeTab = ref("dashboard");
 
 const items = [
-  { label: "Guide", value: "komigang" },
-  { label: "Miljöinformation", value: "miljo" },
-  { label: "Dataunderlag", value: "dataunderlag" },
-  { label: "Arter i olika miljöer", value: "dashboard" },
+{ label: "Arter i olika miljöer", value: "dashboard" },
+{ label: "Miljöinformation", value: "miljo" },
+  { label: "Manual", value: "komigang" },
+  { label: "Dokumentation", value: "dataunderlag" },
 ];
 
 const speciesStore = useSpeciesStore();
 const envParamsStore = useEnvParamsStore();
 
-const route = useRoute();
 
 const showSlideover = ref(false);
 const isPinned = ref(true);
+const showEnvironmentSelector = ref(false);
 
 // Toggle the slideover panel (e.g. for SpeciesInfo)
 // function toggleSlideover() {
@@ -271,26 +301,10 @@ watch(
   { deep: true }
 );
 
-function beforeEnter(el) {
-  el.style.height = '0';
-}
+watch(activeComponent, () => {
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+});
 
-function enter(el, done) {
-  const height = el.scrollHeight;
-  el.style.height = height + 'px';
-  el.addEventListener('transitionend', () => {
-    el.style.height = 'auto';
-    done();
-  }, { once: true });
-}
-
-function leave(el, done) {
-  el.style.height = el.scrollHeight + 'px';
-  // Force a reflow so the starting height is applied before collapsing.
-  void el.offsetHeight;
-  el.style.height = '0';
-  el.addEventListener('transitionend', done, { once: true });
-}
 </script>
 
 <style scoped>
@@ -318,6 +332,5 @@ function leave(el, done) {
 
 .header-container {
   overflow: hidden;
-  transition: height 0.3s ease;
 }
 </style>

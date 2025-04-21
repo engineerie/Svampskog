@@ -66,8 +66,8 @@ sections:
         description: Jämför både utveckling över tid och olika metoder sida vid sida.
         icon: i-iconamoon-compare
       - name: Infinite Scale
-        description: Förbered material för presentationer och utbildning
-        icon: i-heroicons-presentation-chart-bar
+        description: Kommer snart!
+        icon: i-line-md-loading-twotone-loop
 features:
   title: Svampar och träd hänger ihop
   description: Svampskog.se fokuserar på mykorrhizasvampar, det vill säga svampar som lever i symbios med träd. För att tydligöra deras betydelse har vi tagit fram grundläggande kunskap om hur dessa svampar lever i marken.
@@ -92,9 +92,9 @@ features:
       description: Kanske kort om att wood wide web inte finns, men väl ett mer intrikat och fascinerande gytter av olika mycel.
       icon: i-material-symbols-network-node
 testimonials:
-  headline: Nyheter
-  title: Vad händer hos oss?
-  description: Upptäck våra senaste uppdateringar, pressklipp och intressanta händelser.
+  headline: Om projektet
+  title: Om Svampskog
+  description: Svampskog syftar till att förmedla lättillgänglig och tillförlitlig information om vilka mykorrhizasvampar som kan finnas i olika skogar, och hur deras förekomst påverkas av olika former av skogsskötsel. Projektet riktar sig till alla som är intresserade av skog och svamp.
   items:
     - quote: The developer experience is unmatched. We migrated our entire infrastructure in weeks instead of months, and our team's productivity has increased dramatically. The TypeScript support and component library saved us months of development time.
       user:

@@ -53,7 +53,8 @@ export default defineNuxtConfig({
       headers: {
         'Access-Control-Allow-Origin': '*'
       }
-    }
+    },
+    '/*': { cors: true, headers: { 'access-control-allow-methods': 'GET' } },
   },
 
   future: {

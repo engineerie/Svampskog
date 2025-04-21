@@ -39,11 +39,43 @@ function handleScroll() {
 
 onMounted(() => {
   window.addEventListener('scroll', handleScroll)
+
+  const sections = document.querySelectorAll('.page-section');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('in-view');
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.1 });
+  sections.forEach(section => observer.observe(section));
 })
 
 onUnmounted(() => {
   window.removeEventListener('scroll', handleScroll)
 })
+
+const svampinfo = ref([
+  {
+    // title: 'Artrikt',
+    description: 'Det finns omkring 2000 olika arter mykorrhizasvampar Sverige.',
+    icon: 'i-gg-sweden',
+    // to: '/getting-started/icons'
+  },
+  {
+    // title: 'Naturvård',
+    description: '340 mykorrhizasvampar är rödlistade i Sverige.',
+    icon: 'i-material-symbols-award-star-outline',
+    // to: '/getting-started/fonts'
+  },
+  {
+    // title: 'Matsvamp',
+    description: 'De allra flesta matsvampar är mykorrhizasvampar.',
+    icon: 'i-icon-park-solid-knife-fork',
+    // to: '/getting-started/color-mode'
+  }
+])
 </script>
 
 <template>
@@ -61,11 +93,17 @@ onUnmounted(() => {
         <NuxtImg src="/images/hero1.png" class=" shadow-md absolute top-0"  height="600" width="500" format="webp" quality="80" :style="{ opacity: heroOpacity }"/>
       </div>
     </div> -->
-   
+    <div class="page-section">
     <UPageHero :title="page.hero.title" :description="page.hero.description" :links="page.hero.links" orientation="horizontal">
-      <!-- <template #headline>
-        <UButton icon="i-heroicons-arrow-right-20-solid" trailing label="Svampskog v.1 2025.04.09" variant="subtle" />
-      </template> -->
+      <template #headline>
+        <UButton trailing variant="subtle">
+    <span class="whitespace-normal hidden sm:block">
+      Förhandsversion: fler funktioner och mobilanpassning kommer snart
+    </span>
+    <span class="whitespace-normal sm:hidden">
+      Mobilanpassning kommer snart!
+    </span>
+  </UButton>      </template> 
 
       <template #top>
         <div
@@ -76,7 +114,7 @@ onUnmounted(() => {
       <template #title>
         <MDC :value="page.hero.title" class="*:leading-11 sm:*:leading-19 max-w-3xl mx-auto " />
       </template>
-      <NuxtImg src="/images/boleto_small.png" width="1500" height="1800" quality="80" format="webp" class="sm:-mt-90 -mb-32 -mt-10 sm:-mb-80" />
+      <NuxtImg src="/images/boleto_small.png" width="1500" height="2100" quality="80" format="webp" class="sm:-mt-90 -mb-32 -mt-10 sm:-mb-80" />
 
       <!-- <NuxtImg src="/images/3Trees.png" class="rounded-xl border border-neutral-200 dark:border-neutral-700 shadow" width="600" height="400"/> -->
       <!-- <div class="relative hidden sm:block">
@@ -92,16 +130,29 @@ onUnmounted(() => {
      
       <!-- <PromotionalVideo /> -->
     </UPageHero>
+  </div>
+  <div class="page-section">
+    <UPageSection
+      description="Mykorrhizasvampar är svampar som lever i symbios med träd. Symbiosen innebär att svamparna får sin energi från träden. I utbyte sköter de om trädens näringsförsörjning. Svamparnas mikroskopiskt tunna hyfer är om- och invuxna i trädens tunna rötter och förstorar trädens rotsystem tusenfalt. "
+      :features="svampinfo"
+      orientation="vertical"
+      class=""
+    />
+  </div>
 
-   
-
-    <UPageSection v-for="(section, index) in page.sections" :key="index" :title="section.title"
-      :description="section.description" :orientation="section.orientation" :reverse="section.reverse"
-      :features="section.features" :links="section.links" :headline="section.headline">
+  <div class="page-section">
+    <UPageSection 
+      :title="page.sections[0].title"
+      :description="page.sections[0].description"
+      :orientation="page.sections[0].orientation"
+      :reverse="page.sections[0].reverse"
+      :features="page.sections[0].features"
+      :links="page.sections[0].links"
+      :headline="page.sections[0].headline">
       <template #links>
         <div class="flex space-x-2">
           <UButton 
-            v-for="(link, linkIndex) in section.links" 
+            v-for="(link, linkIndex) in page.sections[0].links" 
             :key="linkIndex" 
             variant="ghost"
             v-bind="link" 
@@ -109,41 +160,58 @@ onUnmounted(() => {
             trailing/>
         </div>
       </template>
-      <!-- <UCard>
-        <NuxtImg :src="section.src" />
-      </UCard> -->
+      
       <LandingSpeciesGrid :filterEdible="true"/>
-      <!-- <GrowingGrid/> -->
-      <!-- <ImagePlaceholder /> -->
     </UPageSection>
+  </div>
 
-    <!-- <UPageSection :title="page.features.title" :description="page.features.description"
-      :headline="page.features.headline">
-      <UPageGrid>
-        <UPageCard v-for="(item, index) in page.features.items" :key="index" v-bind="item" />
-      </UPageGrid>
-    </UPageSection> -->
-
-    <UPageSection id="testimonials" :headline="page.testimonials.headline" :title="page.testimonials.title"
-      :description="page.testimonials.description">
-      <UPageColumns class="xl:columns-4">
-        <UPageCard v-for="(testimonial, index) in page.testimonials.items" :key="index" variant="subtle"
-          :description="testimonial.quote"
-          :ui="{ description: 'before:content-[open-quote] after:content-[close-quote]' }">
-          <template #footer>
-            <UUser v-bind="testimonial.user" size="lg" />
-          </template>
-        </UPageCard>
-      </UPageColumns>
+  <div class="page-section">
+    <UPageSection 
+      :title="page.sections[1].title"
+      :description="page.sections[1].description"
+      :orientation="page.sections[1].orientation"
+      
+      :features="page.sections[1].features"
+      :links="page.sections[1].links"
+      :headline="page.sections[1].headline">
+      <template #links>
+        <div class="flex space-x-2">
+          <UButton 
+            v-for="(link, linkIndex) in page.sections[1].links" 
+            :key="linkIndex" 
+            variant="ghost"
+            v-bind="link" 
+            size="xl"
+            trailing/>
+        </div>
+      </template>
+      
+      <LandingForestry />
     </UPageSection>
+  </div>
 
-    <USeparator />
+  <div class="page-section" id="testimonials">
+    <UPageSection :headline="page.testimonials.headline" :title="page.testimonials.title"
+      :description="page.testimonials.description" class="hidden sm:block">
+      <Omsvampskog />
+    </UPageSection>
+      <UPageSection :headline="page.testimonials.headline" :title="page.testimonials.title"
+      :description="page.testimonials.description" orientation="horizontal" class="sm:hidden">
+      <Omsvampskog />
 
-    <!-- <UPageCTA v-bind="page.cta" variant="naked" class="overflow-hidden">
-      <div
-        class="absolute rounded-full dark:bg-(--ui-primary) blur-[250px] size-40 sm:size-50 transform -translate-x-1/2 left-1/2 -translate-y-80" />
+  </UPageSection>
 
-      <StarsBg />
-    </UPageCTA> -->
+  </div>
+
   </div>
 </template>
+
+<style scoped>
+.page-section {
+  opacity: 0;
+  transition: opacity 0.8s ease-in-out;
+}
+.page-section.in-view {
+  opacity: 1;
+}
+</style>

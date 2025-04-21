@@ -38,14 +38,16 @@
 
     <!-- FullScreenEdna (if spatialForest tab is active) -->
     <!-- <FullScreenEdna v-if="activeTab === 'spatialForest'" :isNormalView="isNormalView" /> -->
-    <SpeciesTable v-if="activeTab === 'spatialForest'" :isNormalView="isNormalView" :column-visibility-overrides="{ mark: false }"/>
+    <transition name="fade" mode="out-in" class="min-h-[550px]">
+<div v-if="activeTab === 'spatialForest'" >
+      <SpeciesTable :isNormalView="isNormalView" :column-visibility-overrides="{ mark: false }"/>
 
-    <!-- Column Chart View -->
+</div>
+    
     <div
-      v-if="activeTab === 'columnChart'"
+      v-else-if="activeTab === 'columnChart'"
       class="p-2"
     >
-      <!-- Legend omitted for brevity -->
       <BarChart
         :chartData="data"
         :chartWidth="chartWidth"
@@ -55,22 +57,25 @@
         :vegetationType="vegetationTypeValue"
       />
     </div>
+  </transition>
   </div>
 </template>
 
 <script setup lang="ts">
 import { ref, computed, watch } from "vue";
-import { useRoute } from "vue-router";
 import { useEnvParamsStore } from "~/stores/envParamsStore";
 import { storeToRefs } from "pinia";
+import { useTabsStore } from '~/stores/tabsStore';
 
-
-// Component props and emitted events.
 const props = defineProps<{ isNormalView: boolean }>();
 const emit = defineEmits<{ (e: "enlarge"): void }>();
 
-// Tabs config.
-const activeTab = ref<"columnChart" | "spatialForest">("columnChart");
+const tabsStore = useTabsStore();
+const activeTab = computed({
+  get: () => tabsStore.getActiveTab("EdnaComponent"),
+  set: (val) => tabsStore.setActiveTab("EdnaComponent", val),
+});
+
 const items = [
   { label: "Diagram", icon: "material-symbols:bar-chart", value: "columnChart" },
   { label: "Tabell", icon: "material-symbols:table-outline", value: "spatialForest" },
@@ -95,7 +100,7 @@ const chartWidth = ref("100%");
 
 // Fetch data when environment store values change.
 async function fetchData(geog: string, forest: string, age: string, veg: string) {
-  const filename = `data-${geog}-${forest}-${age}-${veg}.json`;
+  const filename = `edna-${geog}-${forest}-${age}-${veg}.json`;
   try {
     const response = await fetch(`/edna/${filename}`);
     if (!response.ok) throw new Error(`Failed to fetch ${filename}`);
@@ -121,5 +126,13 @@ watch(
 </script>
 
 <style scoped>
-/* Add your styles */
+.fade-enter-active,
+.fade-leave-active {
+  transition: opacity 0.3s ease-in-out;
+}
+
+.fade-enter-from,
+.fade-leave-to {
+  opacity: 0;
+}
 </style>

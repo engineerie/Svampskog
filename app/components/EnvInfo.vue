@@ -1,73 +1,146 @@
+<template>
+  <UCard class="text-lg/8 text-neutral-500 dark:text-neutral-400 h-full" variant="naked">
+    <p class="mb-2">
+      I denna skogsmiljö dominerar ofta
+      <span
+        class="font-semibold text-neutral-600 dark:text-neutral-50 cursor-pointer"
+        @click="openSpecies(speciesStore.topTwoCommon[0])"
+      >
+        {{ speciesStore.topTwoCommon[0]?.Commonname }}
+      </span>
+      <span class="italic text-neutral-500 dark:text-neutral-400">
+        ({{ speciesStore.topTwoCommon[0]?.Scientificname }})
+      </span>
+      ,
+      <span
+        class="font-semibold text-neutral-600 dark:text-neutral-50 cursor-pointer"
+        @click="openSpecies(speciesStore.topTwoCommon[1])"
+      >
+        {{ speciesStore.topTwoCommon[1]?.Commonname }}
+      </span>
+      <span class="italic text-neutral-500 dark:text-neutral-400">
+        ({{ speciesStore.topTwoCommon[1]?.Scientificname }})
+      </span>
+      och
+      <span
+        class="font-semibold text-neutral-600 dark:text-neutral-50 cursor-pointer"
+        @click="openSpecies(speciesStore.topTwoCommon[2])"
+      >
+        {{ speciesStore.topTwoCommon[2]?.Commonname }}
+      </span>
+      <span class="italic text-neutral-500 dark:text-neutral-400">
+        ({{ speciesStore.topTwoCommon[2]?.Scientificname }})
+      </span>
+      som mycel.
+    </p>
+    
+    <div v-if="envStore.standAge == '1-40'" class="mb-2">Oftast saknas naturvårdsarter. Undantagsvis kan enstaka förekomma. Då ofta vid lämnad naturhänsyn. </div>
+
+    <div v-else-if="envStore.standAge === '41-90'" class="mb-2">
+      Sällsynt kan naturvårdsarter som t ex
+      <span
+        class="font-semibold text-neutral-600 dark:text-neutral-50 cursor-pointer"
+        @click="openSpecies(speciesStore.topTwoRedlisted[0])"
+      >
+        {{ speciesStore.topTwoRedlisted[0]?.Commonname }}
+      </span>
+      <span class="italic text-neutral-500 dark:text-neutral-400">
+        ({{ speciesStore.topTwoRedlisted[0]?.Scientificname }})
+      </span>
+      och
+      <span
+        class="font-semibold text-neutral-600 dark:text-neutral-50 cursor-pointer"
+        @click="openSpecies(speciesStore.topTwoRedlisted[1])"
+      >
+        {{ speciesStore.topTwoRedlisted[1]?.Commonname }}
+      </span>
+      <span class="italic text-neutral-500 dark:text-neutral-400">
+        ({{ speciesStore.topTwoRedlisted[1]?.Scientificname }})
+      </span>
+      kan förekomma.
+    </div>
+    <div v-else-if="envStore.standAge === '91' || 'allaåldrar'" class="mb-2">
+      Naturvårdsarter som t ex
+      <span
+        class="font-semibold text-neutral-600 dark:text-neutral-50 cursor-pointer"
+        @click="openSpecies(speciesStore.topTwoRedlisted[0])"
+      >
+        {{ speciesStore.topTwoRedlisted[0]?.Commonname }}
+      </span>
+      <span class="italic text-neutral-500 dark:text-neutral-400">
+        ({{ speciesStore.topTwoRedlisted[0]?.Scientificname }})
+      </span>
+      och
+      <span
+        class="font-semibold text-neutral-600 dark:text-neutral-50 cursor-pointer"
+        @click="openSpecies(speciesStore.topTwoRedlisted[1])"
+      >
+        {{ speciesStore.topTwoRedlisted[1]?.Commonname }}
+      </span>
+      <span class="italic text-neutral-500 dark:text-neutral-400">
+        ({{ speciesStore.topTwoRedlisted[1]?.Scientificname }})
+      </span>
+      kan förekomma.
+    </div>
+    <p class="mb-2">
+      Det kan finnas många olika matsvampar. Vanliga är t ex
+      <span
+        class="font-semibold text-neutral-600 dark:text-neutral-50 cursor-pointer"
+        @click="openSpecies(speciesStore.topTwoEdible[0])"
+      >
+        {{ speciesStore.topTwoEdible[0]?.Commonname }}
+      </span>
+      <span class="italic text-neutral-500 dark:text-neutral-400">
+        ({{ speciesStore.topTwoEdible[0]?.Scientificname }})
+      </span>
+      och
+      <span
+        class="font-semibold text-neutral-600 dark:text-neutral-50 cursor-pointer"
+        @click="openSpecies(speciesStore.topTwoEdible[1])"
+      >
+        {{ speciesStore.topTwoEdible[1]?.Commonname }}
+      </span>
+      <span class="italic text-neutral-500 dark:text-neutral-400">
+        ({{ speciesStore.topTwoEdible[1]?.Scientificname }})
+      </span>.
+    </p>
+  </UCard>
+</template>
+
 <script setup>
-import { storeToRefs } from "pinia";
-import { useEnvParamsStore } from "~/stores/envParamsStore";
+import { watch } from 'vue'
+import { useEnvParamsStore } from '~/stores/envParamsStore'
+import { useSpeciesDataStore } from '~/stores/speciesDataStore'
+import { useSpeciesStore } from '~/stores/speciesStore'
+import { capitalize } from 'lodash-es'
 
-// Grab the store
-const envParamsStore = useEnvParamsStore();
+const envStore = useEnvParamsStore()
+const speciesStore = useSpeciesDataStore()
+const globalSpeciesStore = useSpeciesStore()
 
-// Grab the label getters as refs
-const { geographyLabel, forestTypeLabel, standAgeLabel, vegetationTypeLabel } =
-  storeToRefs(envParamsStore);
+// Define a function to open the Myslideover with the selected species
+const openSpecies = (species) => {
+  if (!species) return;
+  globalSpeciesStore.selectSpecies(species, 'Myslideover')
+}
+
+// Watch for changes in environment parameters and fetch edna, edible, and redlisted data accordingly
+watch(
+  () => [envStore.geography, envStore.forestType, envStore.standAge, envStore.vegetationType],
+  ([geog, forest, age, veg]) => {
+    if (geog && forest && age && veg) {
+      // Fetch edna data from /edna/data-*.json for topTwoCommon
+      speciesStore.fetchSpeciesData('data', 'edna')
+      // Fetch edible data from /edible/edibledata-*.json for topTwoEdible
+      speciesStore.fetchSpeciesData('data', 'edible')
+      // Fetch redlisted data from /redlisted/redlisted-*.json for topTwoRedlisted
+      speciesStore.fetchSpeciesData('data', 'redlisted')
+    }
+  },
+  { immediate: true }
+)
 </script>
 
-<template>
-  <div class="p-2">
-    <!-- <h1 weight="medium" size="lg" class="text-neutral-900">
-      {{ geographyLabel }} - {{ forestTypeLabel }} - {{ standAgeLabel }} -
-      {{ vegetationTypeLabel }}
-    </h1> -->
-    <!-- <div class="flex gap-2 w-full mb-4">
-      <UBadge
-        icon="i-material-symbols-location-on-outline"
-        size="sm"
-        color="white"
-        variant="solid"
-        :ui="{ rounded: 'rounded-full' }"
-        class="flex gap-1"
-      >
-        <Icon
-          name="material-symbols:location-on-outline"
-          class="text-fuchsia-500"
-        />
-        {{ geographyLabel }}
-      </UBadge>
-      <UBadge
-        size="sm"
-        color="white"
-        variant="solid"
-        :ui="{ rounded: 'rounded-full' }"
-        class="flex gap-1"
-      >
-        <Icon name="lucide:trees" class="text-green-500" />
-        {{ forestTypeLabel }}
-      </UBadge>
-      <UBadge
-        size="sm"
-        color="white"
-        variant="solid"
-        :ui="{ rounded: 'rounded-full' }"
-        class="flex gap-1"
-      >
-        <Icon name="carbon:crop-growth" class="text-violet-500" />
-        {{ standAgeLabel }}
-      </UBadge>
-      <UBadge
-        size="sm"
-        color="white"
-        variant="solid"
-        :ui="{ rounded: 'rounded-full' }"
-        class="flex gap-1"
-      >
-        <Icon name="fluent-emoji-high-contrast:herb" class="text-teal-500" />
-        {{ vegetationTypeLabel }}
-      </UBadge>
-    </div> -->
-    <div class="">
-      <h1 size="lg" weight="light" class="text-neutral-500">
-        Här är underlaget från markinventeringen [gott] och visar [många] arter,
-        så som [art1, art2]. I den här miljön finns det [få] Naturvårdsarter
-        t.ex. [art3], [Många] matsvampar kan också finnas här, t.ex [art4].
-      </h1>
-    </div>
-  </div>
-</template>
+<style scoped>
+/* Component-specific styles can go here */
+</style>

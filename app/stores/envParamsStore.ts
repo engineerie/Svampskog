@@ -53,22 +53,22 @@ export const standAgeOptions = [
   {
     value: "1-40",
     label: "1-40 år",
-    description: "Trädbeståndets medelålder är mellan 1 och 40 år",
+    description: "Skogens medelålder är mellan 1 och 40 år",
   },
   {
     value: "41-90",
     label: "41-90 år",
-    description: "Trädbeståndets medelålder är mellan 41 och 90 år",
+    description: "SKogens medelålder är mellan 41 och 90 år",
   },
   {
     value: "91",
     label: "91 år och äldre",
-    description: "Trädbeståndets medelålder är äldre än 90 år",
+    description: "Skogens medelålder är äldre än 90 år",
   },
   {
     value: "allaåldrar",
     label: "Alla åldrar",
-    description: "Inkluderar trädbestånds med alla trädmedelåldrar",
+    description: "Inkluderar skogar med alla trädmedelåldrar",
   },
 ];
 

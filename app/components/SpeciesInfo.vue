@@ -1,6 +1,6 @@
 <!-- SpeciesInfo.vue -->
 <template>
-  <div class="w-full relative overflow-scroll">
+  <div class="w-full relative overflow-visible">
     <!-- Top Heading Bar -->
     <!-- <div class="absolute top-0 w-full z-50 flex justify-between">
       <h1 class="pt-3 pb-2 px-6 text-3xl">
@@ -39,7 +39,7 @@
             format="webp"
           />
           <div class="absolute bottom-0 right-0 justify-end p-2 items-center">
-            <UBadge color="gray" :ui="{ rounded: 'rounded-lg' }">
+            <UBadge color="neutral" variant="subtle">
               <h1 weight="light" size="sm" class="">Foto:</h1>
               <Icon name="ph:copyright" class="h-4 w-4 mx-1" />
               <h1 weight="light" size="sm" class="">
@@ -63,7 +63,7 @@
         format="webp"
       />
       <div class="absolute bottom-0 right-0 justify-end p-2 items-center">
-        <UBadge color="gray" :ui="{ rounded: 'rounded-lg' }">
+        <UBadge color="neutral" variant="subtle">
           <h1 weight="light" size="sm" class="">Foto:</h1>
           <Icon name="ph:copyright" class="h-4 w-4 mx-1" />
           <h1 weight="light" size="sm" class="">Michael Krikorev</h1></UBadge
@@ -158,10 +158,10 @@
       <!-- Kalkmark and Vanlig Skogsmark Badges -->
       <div class="flex items-center space-x-2 mt-3">
         <div v-if="species.KALKmark">
-          <UBadge color="amber" variant="subtle"> Kalkmark </UBadge>
+          <UBadge color="kalkmark" variant="subtle"> Kalkmark </UBadge>
         </div>
         <div v-if="species.ANNANmark">
-          <UBadge color="emerald" variant="subtle"> Vanlig skogsmark </UBadge>
+          <UBadge color="vanligmark" variant="subtle"> Vanlig skogsmark </UBadge>
         </div>
       </div>
 

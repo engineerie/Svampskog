@@ -1,28 +1,28 @@
 <template>
   <div class="mt-14">
     <div class="hidden">
-      <NuxtImg src="/images/hyggesfritt.jpg" class="object-cover" alt="Inte kalavverkad" height="250" width="500"
+      <NuxtImg src="/images/hyggesfritt.png" class="object-cover" alt="Inte kalavverkad" height="250" width="450"
         format="webp" />
-      <NuxtImg src="/images/kalhygge.jpeg" class="object-cover" alt="Kalavverkad" height="250" width="500"
+      <NuxtImg src="/images/kalhygge.png" class="object-cover" alt="Kalavverkad" height="250" width="450"
         format="webp" />
-      <NuxtImg src="/images/hyggesfritt.jpg" class="object-cover" alt="Inte kalavverkad" width="300" height="180"
+      <NuxtImg src="/images/hyggesfritt.png" class="object-cover" alt="Inte kalavverkad" width="300" height="180"
         format="webp" />
-      <NuxtImg src="/images/kalhygge.jpeg" class="object-cover" alt="Kalavverkad" width="300" height="180"
+      <NuxtImg src="/images/kalhygge.png" class="object-cover" alt="Kalavverkad" width="300" height="180"
         format="webp" />
-      <NuxtImg width="300" height="180" src="/images/ingen_åtgärd.jpg" class="h-full rounded-t-xl overflow-hidden"
+      <NuxtImg width="300" height="180" src="/images/ingen_åtgärd.png" class="h-full rounded-t-xl overflow-hidden"
         alt="Inga åtgärder" format="webp" />
-      <NuxtImg width="300" height="180" src="/images/kalhygge.jpg" class="h-full rounded-t-xl overflow-hidden"
+      <NuxtImg width="300" height="180" src="/images/kalhygge.png" class="h-full rounded-t-xl overflow-hidden"
         alt="Trakthyggesbruk" format="webp" />
-      <NuxtImg width="300" height="180" src="/images/luckhuggning.jpg" class="h-full rounded-t-xl overflow-hidden"
+      <NuxtImg width="300" height="180" src="/images/luckhuggning.png" class="h-full rounded-t-xl overflow-hidden"
         alt="Luckhuggning" format="webp" />
-      <NuxtImg width="300" height="180" src="/images/överhållenskärm.jpg" class="h-full rounded-t-xl overflow-hidden"
+      <NuxtImg width="300" height="180" src="/images/skärm.png" class="h-full rounded-t-xl overflow-hidden"
         alt="Överhållen skärm" format="webp" />
-      <NuxtImg width="300" height="180" src="/images/blädning.jpg" class="h-full rounded-t-xl overflow-hidden"
+      <NuxtImg width="300" height="180" src="/images/blädning.png" class="h-full rounded-t-xl overflow-hidden"
         alt="Blädning" format="webp" />
     </div>
 
     <!-- Updated Stepper (Circles and Labels separated) -->
-    <div class="mb-3 mx-60">
+    <div class="mb-3 w-[35rem] mx-auto">
       <!-- Circles and line -->
       <div class="px-6">
         <div class="relative" style="height: 3rem">
@@ -54,14 +54,14 @@
           :class="{ 'text-primary-500': index <= currentStep }">
           <div>{{ step.label }}</div>
           <!-- Display badges for selections in historik and skogsskötsel -->
-          <div v-if="index === 1 && onboardingStore.selectedStartskog !== null"
+          <div v-if="index === 0 && onboardingStore.selectedStartskog !== null"
             class="absolute left-1/2 top-full mt-1 transform -translate-x-1/2 w-full">
             <UBadge>
               {{ startskogOptions[onboardingStore.selectedStartskog] }}
             </UBadge>
           </div>
           <!-- Display badge for skogsskötsel -->
-          <div v-if="index === 2 && onboardingStore.selectedFramework !== null"
+          <div v-if="index === 1 && onboardingStore.selectedFramework !== null"
             class="absolute left-1/2 top-full mt-1 transform -translate-x-1/2">
             <UBadge>
               {{ frameworkOptions[onboardingStore.selectedFramework] }}
@@ -77,22 +77,18 @@
         <div class="rounded-2xl">
           <transition name="fade" mode="out-in">
             <!-- Step 0: Information -->
-            <div v-if="currentStep === 0">
-              <!-- <UPageCTA description=" 
-" orientation="horizontal" variant="naked">
+            <!-- <div v-if="currentStep === 0">
+              
 
-              </UPageCTA> -->
-
-              <!-- Navigation buttons -->
+          
               <div class="flex gap-2 w-full justify-center mt-20">
-                <!-- Next Button -->
                 <UButton size="lg" color="neutral" variant="subtle" trailing icon="heroicons:arrow-right"
                   @click="nextStep" :disabled="!isStepEnabled(1)" label="Välj historik" />
               </div>
-            </div>
+            </div> -->
 
             <!-- Step 1: Välj historik -->
-            <div v-else-if="currentStep === 1">
+            <div v-if="currentStep === 0">
               <h1 class="mb-12 mt-20 text-center text-2xl text-neutral-800">
                 Har skogen varit kalavverkad tidigare eller inte?
               </h1>
@@ -106,10 +102,10 @@
                     :class="optionCardClass(onboardingStore.selectedStartskog, 0)"
                     @click="onboardingStore.selectedStartskog = 0">
                     <div class="relative">
-                      <NuxtImg src="/images/hyggesfritt.jpg" class="object-cover" alt="Inte kalavverkad" height="250"
-                        width="500" format="webp" />
+                      <NuxtImg src="/images/hyggesfritt.png" class="object-cover" alt="Inte kalavverkad" height="250"
+                        width="450" format="webp" />
                     </div>
-                    <div class="pt-2 px-4 pb-5">
+                    <div class="p-3">
                       <h1 class="text-muted-800 text-xl font-medium mb-1">
                         Inte kalavverkad
                       </h1>
@@ -125,10 +121,10 @@
                     :class="optionCardClass(onboardingStore.selectedStartskog, 1)"
                     @click="onboardingStore.selectedStartskog = 1">
                     <div class="relative">
-                      <NuxtImg src="/images/kalhygge.jpeg" class="object-cover" alt="Kalavverkad" height="250"
-                        width="500" format="webp" />
+                      <NuxtImg src="/images/kalhygge.png" class="object-cover" alt="Kalavverkad" height="250"
+                        width="450" format="webp" />
                     </div>
-                    <div class="pt-2 px-4 pb-5">
+                    <div class="p-3">
                       <h1 class="text-muted-800 text-xl font-medium mb-1">
                         Kalavverkad
                       </h1>
@@ -153,7 +149,7 @@
             </div>
 
             <!-- Step 2: Välj skogsskötsel -->
-            <div v-else-if="currentStep === 2">
+            <div v-else-if="currentStep === 1">
               <h1 class="mb-6 mt-20 text-center text-neutral-800 text-2xl">
                 Vilken skogsskötsel planeras?
               </h1>
@@ -175,11 +171,11 @@
                         :class="optionCardClass(onboardingStore.selectedFramework, 0)
                           " @click="onboardingStore.selectedFramework = 0">
                         <div class="relative">
-                          <NuxtImg width="300" height="180" src="/images/ingen_åtgärd.jpg"
+                          <NuxtImg width="300" height="180" src="/images/ingen_åtgärd.png"
                             class="h-full overflow-hidden" alt="Inga åtgärder" format="webp" />
                         </div>
                         <div class="flex items-center gap-1 p-2">
-                          <Icon name="pepicons-pop:tree-circle" class="size-5 text-green-400" />
+                          <!-- <Icon name="pepicons-pop:tree-circle" class="size-5 text-green-400" /> -->
                           <h1 size="md" weight="medium" class="text-muted-600">
                             Inga åtgärder
                           </h1>
@@ -191,11 +187,11 @@
                         :class="optionCardClass(onboardingStore.selectedFramework, 1)
                           " @click="onboardingStore.selectedFramework = 1">
                         <div class="relative">
-                          <NuxtImg width="300" height="180" src="/images/kalhygge.jpg" class="h-full overflow-hidden"
+                          <NuxtImg width="300" height="180" src="/images/kalhygge.png" class="h-full overflow-hidden"
                             alt="Trakthyggesbruk" format="webp" />
                         </div>
                         <div class="flex items-center gap-1 p-2">
-                          <Icon name="material-symbols:resize" class="size-5 text-violet-400" />
+                          <!-- <Icon name="material-symbols:resize" class="size-5 text-violet-400" /> -->
                           <h1 size="md" weight="medium" class="text-muted-600">
                             Trakthyggesbruk
                           </h1>
@@ -210,11 +206,11 @@
                         :class="optionCardClass(onboardingStore.selectedFramework, 2)
                           " @click="onboardingStore.selectedFramework = 2">
                         <div class="relative">
-                          <NuxtImg width="300" height="180" src="/images/luckhuggning.jpg"
+                          <NuxtImg width="300" height="180" src="/images/luckhuggning.png"
                             class="h-full overflow-hidden" alt="Luckhuggning" format="webp" />
                         </div>
                         <div class="flex items-center gap-1 p-2">
-                          <Icon name="pixelarticons:chess" class="size-5 text-sky-400" />
+                          <!-- <Icon name="pixelarticons:chess" class="size-5 text-sky-400" /> -->
                           <h1 size="md" weight="medium" class="text-muted-600">
                             Luckhuggning
                           </h1>
@@ -227,11 +223,11 @@
                         :class="optionCardClass(onboardingStore.selectedFramework, 3)
                           " @click="onboardingStore.selectedFramework = 3">
                         <div class="relative">
-                          <NuxtImg width="300" height="180" src="/images/överhållenskärm.jpg"
+                          <NuxtImg width="300" height="180" src="/images/skärm.png"
                             class="h-full overflow-hidden" alt="Överhållen skärm" format="webp" />
                         </div>
                         <div class="flex items-center gap-1 p-2">
-                          <Icon name="catppuccin:redwood" class="size-5 text-orange-400" />
+                          <!-- <Icon name="catppuccin:redwood" class="size-5 text-orange-400" /> -->
                           <h1 size="md" weight="medium" class="text-muted-600">
                             Överhållen skärm
                           </h1>
@@ -244,11 +240,11 @@
                         :class="optionCardClass(onboardingStore.selectedFramework, 4)
                           " @click="onboardingStore.selectedFramework = 4">
                         <div class="relative">
-                          <NuxtImg width="300" height="180" src="/images/blädning.jpg" class="h-full overflow-hidden"
+                          <NuxtImg width="300" height="180" src="/images/blädning.png" class="h-full overflow-hidden"
                             alt="Blädning" format="webp" />
                         </div>
                         <div class="flex items-center gap-1 p-2">
-                          <Icon name="tabler:christmas-tree-off" class="size-5 text-teal-400" />
+                          <!-- <Icon name="tabler:christmas-tree-off" class="size-5 text-teal-400" /> -->
                           <h1 size="md" weight="medium" class="text-muted-600">
                             Blädning
                           </h1>
@@ -322,8 +318,8 @@
                     <div class="rounded-xl overflow-hidden border border-neutral-300 bg-white shadow">
                       <div class="relative">
                         <NuxtImg :src="onboardingStore.selectedStartskog === 0
-                          ? '/images/hyggesfritt.jpg'
-                          : '/images/kalhygge.jpeg'
+                          ? '/images/hyggesfritt.png'
+                          : '/images/kalhygge.png'
                           " class="w-full overflow-hidden object-cover" alt="Historik val" width="300" height="180"
                           format="webp" />
                       </div>
@@ -410,7 +406,7 @@ const methodLabels = {
 };
 
 const onboardingStepsDisplay = [
-  { label: "Information", icon: "heroicons:information-circle" },
+  // { label: "Information", icon: "heroicons:information-circle" },
   { label: "Välj historik", icon: "iconamoon:history-light" },
   { label: "Välj skogsskötsel", icon: "mdi:saw-blade" },
   // { label: "Gå till modell", icon: "heroicons:arrow-right" },
@@ -494,15 +490,15 @@ function frameworkImage() {
   const index = onboardingStore.selectedFramework;
   switch (index) {
     case 0:
-      return "/images/ingen_åtgärd.jpg";
+      return "/images/ingen_åtgärd.png";
     case 1:
-      return "/images/kalhygge.jpg";
+      return "/images/kalhygge.png";
     case 2:
-      return "/images/luckhuggning.jpg";
+      return "/images/luckhuggning.png";
     case 3:
-      return "/images/överhållenskärm.jpg";
+      return "/images/skärm.png";
     case 4:
-      return "/images/blädning.jpg";
+      return "/images/blädning.png";
     default:
       return "";
   }
