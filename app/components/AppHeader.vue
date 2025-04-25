@@ -11,6 +11,20 @@ const items = computed(() => [
     icon: 'i-lineicons-mushroom-1',
     to: '/mykorrhizasvampar/start',
     // active: route.path.startsWith('/mykorrhizasvampar'),
+      children: [
+      {
+        label: 'Sök på miljö',
+        description: 'Vilka arter finns i olika skogar.',
+        icon: 'i-lineicons-mushroom-1',
+        to: '/mykorrhizasvampar/start',
+      },
+      {
+        label: 'Dokumentation',
+        description: 'Manual och underlag.',
+        icon: 'i-heroicons-clipboard-document-list',
+        to: '/svampardocs'
+      },
+    ]
   },
   {
     label: 'Skogsskötsel',

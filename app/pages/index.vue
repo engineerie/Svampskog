@@ -58,22 +58,17 @@ onUnmounted(() => {
 
 const svampinfo = ref([
   {
-    // title: 'Artrikt',
     description: 'Det finns omkring 2000 olika arter mykorrhizasvampar Sverige.',
     icon: 'i-gg-sweden',
-    // to: '/getting-started/icons'
   },
   {
-    // title: 'Naturvård',
     description: '340 mykorrhizasvampar är rödlistade i Sverige.',
     icon: 'i-material-symbols-award-star-outline',
-    // to: '/getting-started/fonts'
   },
   {
-    // title: 'Matsvamp',
+
     description: 'De allra flesta matsvampar är mykorrhizasvampar.',
     icon: 'i-icon-park-solid-knife-fork',
-    // to: '/getting-started/color-mode'
   }
 ])
 </script>
@@ -132,12 +127,28 @@ const svampinfo = ref([
     </UPageHero>
   </div>
   <div class="page-section">
-    <UPageSection
+    <!-- <UPageSection
       description="Mykorrhizasvampar är svampar som lever i symbios med träd. Symbiosen innebär att svamparna får sin energi från träden. I utbyte sköter de om trädens näringsförsörjning. Svamparnas mikroskopiskt tunna hyfer är om- och invuxna i trädens tunna rötter och förstorar trädens rotsystem tusenfalt. "
       :features="svampinfo"
       orientation="vertical"
       class=""
-    />
+    >     
+   
+  </UPageSection> -->
+    <UContainer class="text-center mx-auto max-w-5xl text-neutral-500 text-md my-24">
+      "Mykorrhizasvampar är svampar som lever i symbios med träd. Symbiosen innebär att svamparna får sin energi från träden. I utbyte sköter de om trädens näringsförsörjning. Svamparnas mikroskopiskt tunna hyfer är om- och invuxna i trädens tunna rötter och förstorar trädens rotsystem tusenfalt. 
+Det finns omkring 2000 olika arter mykorrhizasvampar i Sverige, 340 är rödlistade. De allra flesta matsvampar är mykorrhizasvampar." 
+      
+<div class="flex justify-center mt-4 page-section">
+<UUser
+    name="Anders Dahlberg"
+    description="Professor i mykologi"
+  
+  />
+</div>
+      
+    </UContainer>
+
   </div>
 
   <div class="page-section">
@@ -185,7 +196,6 @@ const svampinfo = ref([
             trailing/>
         </div>
       </template>
-      
       <LandingForestry />
     </UPageSection>
   </div>
@@ -209,9 +219,11 @@ const svampinfo = ref([
 <style scoped>
 .page-section {
   opacity: 0;
-  transition: opacity 0.8s ease-in-out;
+  transform: translateY(20px);
+  transition: opacity 0.8s ease-in-out, transform 0.8s ease-in-out;
 }
 .page-section.in-view {
   opacity: 1;
+  transform: translateY(0);
 }
 </style>

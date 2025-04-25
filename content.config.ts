@@ -58,10 +58,11 @@ export const collections = {
   }),
   mushroomInfo: defineCollection({
     type: 'page',
-    source: '6.mushroom/**/*',
+    source: '6.svamparDocs/**/*',
     schema: z.object({
       title: z.string().nonempty(),
-      description: z.string().nonempty()
+      description: z.string().nonempty(),
+      headline: z.string().optional(),
     })
   }),
   posts: defineCollection({

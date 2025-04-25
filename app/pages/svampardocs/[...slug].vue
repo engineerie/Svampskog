@@ -1,20 +1,19 @@
 <script setup lang="ts">
 
 definePageMeta({
-  layout: 'docs'
+  layout: 'svampardocs',
+  collection: 'mushroomInfo' 
 })
 
 const route = useRoute()
 
-const { data: page } = await useAsyncData(route.path, () =>
-  queryCollection('information').path(route.path).first()
-)
+const { data: page } = await useAsyncData(route.path, () => queryCollection('mushroomInfo').path(route.path).first())
 if (!page.value) {
   throw createError({ statusCode: 404, statusMessage: 'Page not found', fatal: true })
 }
 
 const { data: surround } = await useAsyncData(`${route.path}-surround`, () => {
-  return queryCollectionItemSurroundings('information', route.path, {
+  return queryCollectionItemSurroundings('mushroomInfo', route.path, {
     fields: ['description']
   })
 })
@@ -32,9 +31,9 @@ defineOgImageComponent('Saas')
 </script>
 
 <template>
-
   <UPage v-if="page">
     <UPageHeader
+    :headline="page.headline"
       :title="page.title"
       :description="page.description"
     />

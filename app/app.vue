@@ -27,6 +27,11 @@ useSeoMeta({
 const { data: navigation } = await useAsyncData('navigation', () => queryCollectionNavigation('docs'), {
   transform: data => data.find(item => item.path === '/docs')?.children || []
 })
+
+const { data: svamparnavigation } = await useAsyncData('svamparnavigation', () => queryCollectionNavigation('mushroomInfo'), {
+  transform: data => data.find(item => item.path === '/svampardocs')?.children || []
+})
+
 const { data: files } = useLazyAsyncData('search', () => queryCollectionSearchSections('docs'), {
   server: false
 })
@@ -46,6 +51,7 @@ const links = [{
 }]
 
 provide('navigation', navigation)
+provide('svamparnavigation', svamparnavigation)
 </script>
 
 <template>

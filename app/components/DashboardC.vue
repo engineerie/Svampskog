@@ -2,6 +2,10 @@
     <div class="hidden">
     <NuxtImg v-for="(src, key) in imageMap" :key="key" :src="src" width="600" height="420" quality="80" format="webp" preload />
   </div>
+  <div class="hidden">
+    <NuxtImg v-for="(src, key) in imageMap" :key="key" :src="src" width="300" height="180" format="webp" quality="80"
+      preload />
+  </div>
   <MySlideover v-model="showSlideover" :pinned="isPinned" @update:pinned="(val) => (isPinned = val)">
     <SpeciesInfo :species="speciesStore.selectedSpecies" :source="speciesStore.sourceComponent" />
   </MySlideover>
@@ -18,7 +22,7 @@
      class="py-1 w-fit"
    /> -->
   <!-- Buttons for medium and larger screens -->
-  <div class="hidden sm:flex flex-wrap items-center w-full mt-2 gap-2">
+  <!-- <div class="hidden sm:flex flex-wrap items-center w-full mt-2 gap-2">
     <UButton
     v-for="item in items"
     :key="item.value"
@@ -28,7 +32,8 @@
     size="sm"
     @click="activeTab = item.value"
   />
-  </div>
+  </div> -->
+
 
   <!-- USelect for small screens with full width -->
   <div class="block sm:hidden mt-2 w-full">
@@ -43,7 +48,6 @@
  <template #right> <div><div class="text-neutral-500 mt-6 pr-4"> Ett öppet <NuxtLink class="text-primary-500" to="https://www.slu.se/fakulteter/s/samverkan/livslangt-larande/" target="blank">webbinarium</NuxtLink> om att använda Svampskog hålls den 23 april och fler tillfällen planeras till hösten.
  </div></div></template>
       <UPageHeader headline="Svampar" title="Manual" description="Information om hur du kan använda verktyget." />
-
      </UPage>
 <UPage>
 
@@ -106,8 +110,9 @@
               title="Arter i olika miljöer"
               description="Här kan du söka på svenska skogsmiljöer för att se vilka mykorrhizasvampar som kan finnas i marken baserat på DNA-analyser av svampmycel i markprover samt vår samlade kunskap om var olika arters fruktkroppar förekommer."
               />
-            <div class="mt-4">
+            <div class="mt-4 flex gap-2">
               <UButton label="Välj miljö" @click="showEnvironmentSelector = true" />
+              <UButton label="Dokumentation" to="/svampardocs" />
             </div>
             </div>
             
@@ -116,6 +121,7 @@
 
         <div v-else key="selector-view">
           <EnvironmentSelector class="block" />
+          <USeparator class="mb-4" />
         </div>
       </transition>
 

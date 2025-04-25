@@ -65,9 +65,9 @@ sections:
       - name: Predictable Pricing
         description: Jämför både utveckling över tid och olika metoder sida vid sida.
         icon: i-iconamoon-compare
-      - name: Infinite Scale
-        description: Kommer snart!
-        icon: i-line-md-loading-twotone-loop
+      # - name: Infinite Scale
+      #   description: Kommer snart!
+      #   icon: i-line-md-loading-twotone-loop
 features:
   title: Svampar och träd hänger ihop
   description: Svampskog.se fokuserar på mykorrhizasvampar, det vill säga svampar som lever i symbios med träd. För att tydligöra deras betydelse har vi tagit fram grundläggande kunskap om hur dessa svampar lever i marken.

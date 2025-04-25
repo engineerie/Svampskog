@@ -108,6 +108,8 @@ import timelineData from "public/timeline.json";
 import { usePanelStore } from '~/stores/panelStore';
 import svamparData from "public/SvamparSkogsbruk.json";
 import totalSvamparData from "public/TotalSvamparSkogsbruk.json";
+import { useViewerStore } from '~/stores/viewerStore';
+
 
 
 
@@ -167,6 +169,7 @@ export default {
   },
   setup(props, { emit, expose }) {
     const route = useRoute();
+    const viewerStore = useViewerStore();
 
     const viewer = ref(null);
     const isClient = ref(false);
@@ -412,12 +415,20 @@ export default {
   };
 
   viewer.value = osd(viewerOptions);
+  // restore last zoom & pan
+if (viewerStore.center) {
+  const { x, y } = viewerStore.center;
+  viewer.value.viewport.zoomTo(viewerStore.zoom);
+  viewer.value.viewport.panTo(new osdLib.Point(x, y));
+  viewer.value.viewport.applyConstraints();
+}
 
-  viewer.value.addHandler("animation", () => {
-    const zoom = viewer.value.viewport.getZoom();
-    const center = viewer.value.viewport.getCenter();
-    emit("viewportChanged", { zoom, center });
-  });
+viewer.value.addHandler('animation', () => {
+  const zoom   = viewer.value.viewport.getZoom();
+  const center = viewer.value.viewport.getCenter();
+  viewerStore.setViewport(zoom, { x: center.x, y: center.y });
+  emit('viewportChanged', { zoom, center });
+});
   transitionToNewTile(props.dziUrl);
 }
 
@@ -425,11 +436,19 @@ export default {
       if (!viewer.value) return;
       viewer.value.addTiledImage({
         tileSource: newUrl,
+        preserveViewport: true,
+        crossOriginPolicy: 'Anonymous',
+        ajaxWithCredentials: false,
         success: function (newTiledImage) {
           if (currentTile.value) {
             viewer.value.world.removeItem(currentTile.value);
           }
           currentTile.value = newTiledImage;
+          // restore previous zoom & pan
+          const { zoom, center } = viewerStore;
+          viewer.value.viewport.zoomTo(zoom);
+          viewer.value.viewport.panTo(new osdLib.Point(center.x, center.y));
+          viewer.value.viewport.applyConstraints();
           emit("opened");
           updateOverlays();
           // Remove any existing overlay image before adding a new one
@@ -442,7 +461,8 @@ export default {
             viewer.value.addTiledImage({
               tileSource: props.overlayDziUrl,
               opacity: overlayOpacityLocal.value,
-              // useCanvas: true, 
+              crossOriginPolicy: 'Anonymous',
+              ajaxWithCredentials: false,
               success: function (overlayTiledImage) {
                 overlayImage.value = overlayTiledImage;
               }
@@ -519,21 +539,21 @@ export default {
     }
 
     // Watch for changes in dziUrl.
-    watch(
-  () => props.dziUrl,
-  async (newVal, oldVal) => {
-    if (viewer.value && newVal !== oldVal) {
-      // Destroy the current viewer before loading the new URL
-      viewer.value.destroy();
-      viewer.value = null;
-      // Optionally clear current tile references
-      currentTile.value = null;
-      overlayImage.value = null;
-      // Reinitialize the viewer with the new URL
-      await initViewer();
-    }
+    watch(() => props.dziUrl, async (newUrl, oldUrl) => {
+  if (viewer.value && newUrl !== oldUrl) {
+    // save
+    const zoom   = viewer.value.viewport.getZoom();
+    const center = viewer.value.viewport.getCenter();
+    viewerStore.setViewport(zoom, { x: center.x, y: center.y });
+
+    // then destroy + reinit
+    viewer.value.destroy();
+    viewer.value = null;
+    currentTile.value = null;
+    overlayImage.value = null;
+    await initViewer();
   }
-);
+});
 
     // Watch for changes in annotations.
     watch(

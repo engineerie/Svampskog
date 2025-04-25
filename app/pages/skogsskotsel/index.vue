@@ -6,8 +6,30 @@
         <NuxtImg src="/images/kalhygge.png" width="800" height="500" format="webp" quality="80" class="mt-12 rounded-xl"/>
         <NuxtImg src="/images/luckhuggning.png" width="800" height="500" format="webp" quality="80" class="mt-12 rounded-xl"/>
         <NuxtImg src="/images/skärm.png" width="800" height="500" format="webp" quality="80" class="mt-12 rounded-xl"/>
-        <NuxtImg src="/images/blädning.png" width="800" height="500" format="webp" quality="80" class="mt-12 rounded-xl"/></div>
-
+        <NuxtImg src="/images/blädning.png" width="800" height="500" format="webp" quality="80" class="mt-12 rounded-xl"/>
+      
+      
+      </div>
+      <div class="hidden">
+      <NuxtImg src="/images/hyggesfritt.png" class="object-cover" alt="Inte kalavverkad" height="250" width="450"
+        format="webp" />
+      <NuxtImg src="/images/kalhygge.png" class="object-cover" alt="Kalavverkad" height="250" width="450"
+        format="webp" />
+      <NuxtImg src="/images/hyggesfritt.png" class="object-cover" alt="Inte kalavverkad" width="300" height="180"
+        format="webp" />
+      <NuxtImg src="/images/kalhygge.png" class="object-cover" alt="Kalavverkad" width="300" height="180"
+        format="webp" />
+      <NuxtImg width="300" height="180" src="/images/ingen_åtgärd.png" class="h-full rounded-t-xl overflow-hidden"
+        alt="Inga åtgärder" format="webp" />
+      <NuxtImg width="300" height="180" src="/images/kalhygge.png" class="h-full rounded-t-xl overflow-hidden"
+        alt="Trakthyggesbruk" format="webp" />
+      <NuxtImg width="300" height="180" src="/images/luckhuggning.png" class="h-full rounded-t-xl overflow-hidden"
+        alt="Luckhuggning" format="webp" />
+      <NuxtImg width="300" height="180" src="/images/skärm.png" class="h-full rounded-t-xl overflow-hidden"
+        alt="Överhållen skärm" format="webp" />
+      <NuxtImg width="300" height="180" src="/images/blädning.png" class="h-full rounded-t-xl overflow-hidden"
+        alt="Blädning" format="webp" />
+    </div>
 
     <UContainer class="flex justify-between items-center w-full">
      <!-- Buttons for medium and larger screens -->
@@ -79,7 +101,7 @@
           <transition name="fade" mode="out-in">
           <div v-if="!showOnboarding" key="header-view">
             <UPageHeader
-              headline="Kommer snart!"
+              headline="Skogsskötsel"
               title="Modell för skogsskötsel"
               description="Här visualiserar vi baserat på den kunskap som finns hur
                     olika former av trakthyggesbruk och hyggesfria metoder

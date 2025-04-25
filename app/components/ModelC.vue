@@ -658,7 +658,7 @@ const frameworks = [
     id: 4,
     label: "Blädning",
     value: "blädning",
-    text: "Stora träd gallras",
+    text: "Enstaka träd gallras",
     icon: "lineicons:trees",
     iconColor: "text-teal-500",
   },
