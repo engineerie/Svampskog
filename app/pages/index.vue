@@ -92,10 +92,8 @@ const svampinfo = ref([
     <UPageHero :title="page.hero.title" :description="page.hero.description" :links="page.hero.links" orientation="horizontal">
       <template #headline>
         <UButton trailing variant="subtle">
-    <span class="whitespace-normal hidden sm:block">
-      Förhandsversion: fler funktioner och mobilanpassning kommer snart
-    </span>
-    <span class="whitespace-normal sm:hidden">
+
+    <span class="whitespace-normal ">
       Mobilanpassning kommer snart!
     </span>
   </UButton>      </template> 

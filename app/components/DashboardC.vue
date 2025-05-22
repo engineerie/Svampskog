@@ -36,9 +36,9 @@
 
 
   <!-- USelect for small screens with full width -->
-  <div class="block sm:hidden mt-2 w-full">
+  <!-- <div class="block sm:hidden mt-2 w-full">
     <USelect v-model="activeTab" :items="items" option-label="label" option-value="value" class="w-full" />
-  </div>
+  </div> -->
     </div>
 
     <div v-if="activeTab === 'komigang'">
@@ -107,12 +107,25 @@
             <div>
               <UPageHeader
               headline="Svampar"
-              title="Arter i olika miljöer"
+              title="Utforska svampar i olika skogar"
               description="Här kan du söka på svenska skogsmiljöer för att se vilka mykorrhizasvampar som kan finnas i marken baserat på DNA-analyser av svampmycel i markprover samt vår samlade kunskap om var olika arters fruktkroppar förekommer."
               />
-            <div class="mt-4 flex gap-2">
-              <UButton label="Välj miljö" @click="showEnvironmentSelector = true" />
-              <UButton label="Dokumentation" to="/svampardocs" />
+            <div class="mt-4 grid sm:grid-cols-2 gap-4 pb-2 px-0.5 sm:px-0">
+              <UPageCard
+    title="Sök på miljö"
+    description="Sök på svenska skogsmiljöer för att se vilka mykorrhizasvampar som kan finnas där."
+    icon="i-healthicons-forest-outline"
+    @click="showEnvironmentSelector = true"
+    class="cursor-pointer "
+  />
+  <UPageCard
+    title="Dokumentation"
+    description="Information om hur du använder artsidan och var underlaget kommer ifrån."
+    icon="i-heroicons-clipboard-document-list"
+    to="/svampardocs"
+  />
+              <!-- <UButton label="Välj miljö" @click="showEnvironmentSelector = true" />
+              <UButton label="Dokumentation" to="/svampardocs" /> -->
             </div>
             </div>
             
@@ -120,8 +133,8 @@
         </div>
 
         <div v-else key="selector-view">
-          <EnvironmentSelector class="block" />
-          <USeparator class="mb-4" />
+          <EnvironmentSelector class="" />
+          <!-- <USeparator class="mb-4" /> -->
         </div>
       </transition>
 
@@ -130,7 +143,7 @@
           :is="activeComponent"
           @close="handleCloseFullScreen"
           @enlarge="handleFullScreen"
-          class="hidden sm:block"
+          class="block"
         />
       </transition>
     </UMain>

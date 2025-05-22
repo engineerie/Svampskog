@@ -2,16 +2,16 @@
   <div class="relative">
 
 
-  <client-only>
+  <!-- <client-only> -->
     <div v-if="isClient" :id="viewerId" class="openseadragon-viewer relative rounded-xl overflow-hidden" ref="viewerContainer"
     :style="{ backgroundColor: backgroundColor }" @mousedown.capture="handleActivate" @mousemove="updateMousePosition">
     <div v-if="!(layoutMode === 'slider' && comparisonMode)" class="absolute top-0 m-2 z-10" :style="{
       ...(sliderPosition === 'left' ? { right: '0px', textAlign: 'right' } : { left: '0px' })
     }">
       <div>
-        <UBadge class="bg-neutral-800 text-neutral-100 mb-0.5">{{ frameworkLabel }}</UBadge>
+        <UBadge class="backdrop-blur-xl bg-neutral-100/10 text-neutral-100 mb-0.5">{{ frameworkLabel }}</UBadge>
       </div>
-      <UBadge class="bg-neutral-800 text-neutral-100">{{ timeLabel }}</UBadge>
+      <UBadge class="backdrop-blur-xl bg-neutral-100/10 text-neutral-100">{{ timeLabel }}</UBadge>
     </div>
     <!-- Display viewport coordinates for marker placement -->
     <!-- <div class="absolute top-32 right-0 m-2 p-1 bg-black bg-opacity-50 text-white text-xs z-50">
@@ -31,39 +31,29 @@
    
    
   </div>
-  </client-only>
-  <div class="osd-opacity-slider-container bg-neutral-800 flex items-center p-1.5 gap-1 rounded-lg m-2" :style="{
-      position: 'absolute',
-      top: '0px',
-      zIndex: 10,
-      ...(sliderPosition === 'left' ? { left: '40px' } : { right: '0px' })
-    }">
-      <UIcon name="i-hugeicons-tree-06" class="size-5 text-neutral-100" />
-      <input id="osdOverlayOpacity" type="range" min="0" max="1" step="0.01" :value="overlayOpacityLocal"
-        @input="handleSliderInput" class="accent-neutral-100 h-[5px] w-20 " />
-    </div>
+  <!-- </client-only> -->
     <div
-      :class="['absolute pointer-events-none bottom-0 m-2 z-10', (layoutMode === 'slider' && comparisonMode) ? 'w-1/2' : '']"
+      :class="['absolute pointer-events-none bottom-0 z-10', (layoutMode === 'slider' && comparisonMode) ? 'w-1/2' : 'w-full']"
       :style="{
         zIndex: 10,
         ...(sliderPosition === 'left'
-          ? { left: '0px', paddingRight: (layoutMode === 'slider' && comparisonMode) ? '20px' : '0px' }
-          : { right: '0px', paddingLeft: (layoutMode === 'slider' && comparisonMode) ? '20px' : '0px' }
+          ? { left: '0px', paddingRight: (layoutMode === 'slider' && comparisonMode) ? '0px' : '0px' }
+          : { right: '0px', paddingLeft: (layoutMode === 'slider' && comparisonMode) ? '0px' : '0px' }
         )
       }">
-      <div>
+      <div class="w-full">
         <div :class="['w-full flex', (sliderPosition === 'left') ? '' : 'justify-end']">
 
-          <div class=" rounded-md overflow-hidden mt-1 text-sm text-neutral-200 w-fit ">
-            <div class="flex items-center p-1 bg-neutral-700/60 border-b border-neutral-500 border-dashed">
+          <div class="overflow-hidden mt-1 px-2 text-sm text-neutral-200 w-full backdrop-blur-2xl flex rounded-t-lg border-t border-neutral-800/60 ">
+            <div class="flex items-center p-1.5 bg-neutral-700/10 border-r border-neutral-500 border-dashed">
               <UIcon name="i-fluent-shape-organic-48-filled" class="text-gray-300 mr-1" />
               <span>Total mycelmängd: {{ svampMycelValue }} %</span>
             </div>
-            <div class="flex items-center p-1 bg-neutral-900/80">
+            <div class="flex items-center p-1.5 ">
               <UIcon name="i-fluent-shape-organic-48-filled" class="text-warning-500 mr-1" />
               <span>Matsvamp av total: {{ matsvampMycelValue }}%</span>
             </div>
-            <div class="flex items-center p-1 bg-neutral-900/80">
+            <div class="flex items-center p-1.5 ">
               <UIcon name="i-fluent-shape-organic-48-filled" class="text-error-500 mr-1" />
               <span>Naturvårdsarter av total: {{ rodlistadeMycelValue }}%</span>
             </div>
@@ -71,22 +61,25 @@
         </div>
 
 
-        <div :class="['w-full flex', (sliderPosition === 'left') ? '' : 'justify-end']">
+        <div :class="['flex w-full', (sliderPosition === 'left') ? '' : 'justify-end']">
 
-          <div class=" mt-1 text-md text-neutral-200 relative group w-fit pointer-events-auto">
+          <div class="w-full text-sm text-neutral-100 relative group pointer-events-auto p-4 backdrop-blur-2xl border-t border-neutral-800/50">
 
 
 
             <div v-if="!isPanelMinimized">
-              <UButton @click="togglePanelMinimized" icon="i-heroicons-x-mark"
-                class="bg-neutral-700 hover:bg-neutral-600 m-1 opacity-0 group-hover:opacity-100 absolute right-0 top-0 transition-all"
-                size="sm" color="neutral" variant="solid" />
-              <p class="p-2 bg-neutral-800/80 rounded-t-md" v-if="timelineInfo">Skog: {{ timelineInfo.skog }}</p>
-              <p class="p-2 bg-neutral-900/80 rounded-b-md" v-if="timelineInfo">Svamp: {{ timelineInfo.svamp }}</p>
+              <!-- <UButton @click="togglePanelMinimized" icon="i-heroicons-x-mark"
+                class="bg-neutral-100 hover:bg-neutral-600 m-1 opacity-0 group-hover:opacity-100 absolute right-0 top-0 transition-all"
+                size="sm" color="neutral" variant="solid" /> -->
+                
+                  <p class=" mb-3" v-if="timelineInfo"><span class="font-bold ">Skog:</span>  {{ timelineInfo.skog }}</p>
+                  <p class=" " v-if="timelineInfo"><span class="font-bold ">Svamp:</span> {{ timelineInfo.svamp }}</p>
+              
+             
             </div>
-            <div v-else class="hover:cursor-pointer p-2 bg-neutral-900/80 rounded-md" @click="togglePanelMinimized">
+            <!-- <div v-else class="hover:cursor-pointer p-2 bg-neutral-900/80 rounded-md w-fit" @click="togglePanelMinimized">
               <span>Visa text</span>
-            </div>
+            </div> -->
           </div>
 
         </div>
@@ -98,6 +91,7 @@
 
 <script>
 import { ref, computed, watch, onMounted, onBeforeUnmount, onActivated, nextTick, createApp } from "vue";
+import debounce from 'lodash/debounce';
 
 import { useRoute } from "vue-router";
 import AnnotationPopup from "./AnnotationPopup.vue";
@@ -179,13 +173,55 @@ export default {
     );
     let osdLib = null;
     let unmounted = false;
-    onBeforeUnmount(() => {
-      unmounted = true;
-    });
     const currentTile = ref(null);
     const overlayImage = ref(null);
 
-    let annotationOverlayIds = [];
+    // Track annotation overlays as { id, app } objects for teardown
+    let annotationOverlayApps = [];
+    // Track MouseTracker instances and animation handler for cleanup
+    let mouseTrackers = [];
+    let animationHandler;
+
+    // Fully tear down an existing viewer instance
+    function destroyViewer() {
+      if (!viewer.value) return;
+      if (animationHandler) {
+        viewer.value.removeHandler('animation', animationHandler);
+        animationHandler = null;
+      }
+      mouseTrackers.forEach(tracker => tracker.destroy());
+      mouseTrackers = [];
+      annotationOverlayApps.forEach(({ id, app }) => {
+        app.unmount();
+        viewer.value.removeOverlay(id);
+      });
+      annotationOverlayApps = [];
+      viewerContainer.value
+        .querySelectorAll('.osd-snapshot')
+        .forEach(el => el.remove());
+      // Force GPU memory to be released for WebGL contexts
+      const canvas = viewerContainer.value.querySelector('canvas');
+      if (canvas) {
+        const gl = canvas.getContext('webgl') || canvas.getContext('experimental-webgl');
+        if (gl) {
+          const ext = gl.getExtension('WEBGL_lose_context');
+          if (ext) ext.loseContext();
+        }
+      }
+      viewer.value.clearOverlays();
+      viewer.value.destroy();
+      viewer.value = null;
+      currentTile.value = null;
+      overlayImage.value = null;
+    }
+
+    // Debounced tile transition
+    const doTileTransition = debounce(newUrl => transitionToNewTile(newUrl), 100);
+    watch(() => props.dziUrl, (newUrl, oldUrl) => {
+      if (viewer.value && newUrl !== oldUrl) {
+        doTileTransition(newUrl);
+      }
+    });
 
     const panelStore = usePanelStore();
     const isPanelMinimized = computed(() => panelStore.isPanelMinimized);
@@ -262,11 +298,9 @@ export default {
     const mousePos = ref({ x: 0, y: 0 });
     function updateMousePosition(e) {
       if (!viewerContainer.value || !viewer.value || !osdLib) return;
-      // Get container coordinates
       const rect = viewerContainer.value.getBoundingClientRect();
       const containerX = e.clientX - rect.left;
       const containerY = e.clientY - rect.top;
-      // Convert container pixel coordinates to viewport coordinates
       const pixelPoint = new osdLib.Point(containerX, containerY);
       const viewportPoint = viewer.value.viewport.pointFromPixel(pixelPoint);
       mousePos.value.x = viewportPoint.x;
@@ -284,7 +318,7 @@ export default {
           staticOverlay = document.createElement("div");
           staticOverlay.id = staticOverlayId;
           staticOverlay.className = "highlight";
-          staticOverlay.style.zIndex = "5";
+          staticOverlay.style.zIndex = "5000";
           staticOverlay.style.pointerEvents = "none";
           viewer.value.addOverlay({
             element: staticOverlay,
@@ -315,11 +349,16 @@ export default {
     function updateOverlays() {
       if (!viewer.value || !osdLib) return;
 
-      // Remove previously added annotation overlays only.
-      annotationOverlayIds.forEach((id) => {
+     // Destroy any existing MouseTracker instances before clearing overlays
+      mouseTrackers.forEach(tracker => tracker.destroy());
+      mouseTrackers = [];     
+      
+      // Remove previously added annotation overlays and unmount their Vue apps.
+      annotationOverlayApps.forEach(({ id, app }) => {
+        app.unmount();
         viewer.value.removeOverlay(id);
       });
-      annotationOverlayIds = [];
+      annotationOverlayApps = [];
 
       // Now add marker overlays from annotations.
       props.annotations.forEach((annotation) => {
@@ -338,13 +377,13 @@ export default {
         const markerApp = createApp(AnnotationMarker, { annotation });
         markerApp.mount(markerContainer);
 
-        new osdLib.MouseTracker({
+        const tracker = new osdLib.MouseTracker({
           element: markerContainer,
           clickHandler: () => {
             emit("annotationClicked", annotation);
           },
         });
-
+        mouseTrackers.push(tracker);
         // Assign a unique ID for each marker overlay.
         const markerId = "annotation-" + annotation.id;
         markerContainer.id = markerId;
@@ -354,151 +393,208 @@ export default {
           placement: "BOTTOM",
           checkResize: false,
         });
-        annotationOverlayIds.push(markerId);
+        annotationOverlayApps.push({ id: markerId, app: markerApp });
       });
     }
 
     // Method to show the popup overlay.
     function showPopup(annotation) {
       if (!viewer.value || !osdLib) return;
+      const popupId = `popup-${annotation.id}`;
       const popupContainer = document.createElement("div");
+      popupContainer.id = popupId;
       popupContainer.style.pointerEvents = "auto";
+      viewer.value.addOverlay({
+        element: popupContainer,
+        location: new osdLib.Point(annotation.position.x, annotation.position.y),
+      });
       const app = createApp(AnnotationPopup, { annotation });
       app.mount(popupContainer);
+      annotationOverlayApps.push({ id: popupId, app });
     }
 
     // Initialize the viewer.
     async function initViewer() {
-  if (typeof window === "undefined") return;
-  if (viewer.value) return;
-  if (route.name !== "skogsskotsel") return;
-  const containerEl = viewerContainer.value;
-  if (!containerEl) return;
+      if (typeof window === "undefined") return;
+      if (viewer.value) return;
+      if (route.name !== "skogsskotsel-modell") return;
+      const containerEl = viewerContainer.value;
+      if (!containerEl) return;
 
-  const osdModule = await import("openseadragon");
-  const osd = osdModule.default || osdModule;
-  osdLib = osd;
+      const osdModule = await import("openseadragon");
+      const osd = osdModule.default || osdModule;
+      osdLib = osd;
 
-  // Patch the image loader to force the crossOrigin attribute
-  if (osdLib && osdLib.ImageLoader && osdLib.ImageLoader.prototype) {
-    const originalCreateImage = osdLib.ImageLoader.prototype.createImage;
-    osdLib.ImageLoader.prototype.createImage = function (tileUrl, success, error) {
-      const img = originalCreateImage.apply(this, arguments);
-      if (img) {
-        img.crossOrigin = 'Anonymous';
-      }
-      return img;
-    };
-  }
-
-  // Viewer initialization options
-  const viewerOptions = {
-    element: containerEl,
-    crossOriginPolicy: 'Anonymous',
-    ajaxWithCredentials: false,
-    showNavigationControl: false,
-    visibilityRatio: 1,
-    minZoomLevel: 1,
-    constrainDuringPan: true,
-    panHorizontal: true,
-    panVertical: true,
-    homeFillsViewer: true,
-    animationTime: 0.5,
-    defaultZoomLevel: props.layoutMode === "sideBySide" ? null : 1.3,
-    gestureSettingsMouse: {
-      scrollToZoom: true,
-      clickToZoom: false,
-      dblClickToZoom: true,
-      clickTodrag: false,
-      pinchToZoom: false,
-    },
-  };
-
-  viewer.value = osd(viewerOptions);
-  // restore last zoom & pan
-if (viewerStore.center) {
-  const { x, y } = viewerStore.center;
-  viewer.value.viewport.zoomTo(viewerStore.zoom);
-  viewer.value.viewport.panTo(new osdLib.Point(x, y));
-  viewer.value.viewport.applyConstraints();
-}
-
-viewer.value.addHandler('animation', () => {
-  const zoom   = viewer.value.viewport.getZoom();
-  const center = viewer.value.viewport.getCenter();
-  viewerStore.setViewport(zoom, { x: center.x, y: center.y });
-  emit('viewportChanged', { zoom, center });
-});
-  transitionToNewTile(props.dziUrl);
-}
-
-    function transitionToNewTile(newUrl) {
-      if (!viewer.value) return;
-      viewer.value.addTiledImage({
-        tileSource: newUrl,
-        preserveViewport: true,
-        crossOriginPolicy: 'Anonymous',
-        ajaxWithCredentials: false,
-        success: function (newTiledImage) {
-          if (currentTile.value) {
-            viewer.value.world.removeItem(currentTile.value);
-          }
-          currentTile.value = newTiledImage;
-          // restore previous zoom & pan
-          const { zoom, center } = viewerStore;
-          viewer.value.viewport.zoomTo(zoom);
-          viewer.value.viewport.panTo(new osdLib.Point(center.x, center.y));
-          viewer.value.viewport.applyConstraints();
-          emit("opened");
-          updateOverlays();
-          // Remove any existing overlay image before adding a new one
-          if (overlayImage.value) {
-            viewer.value.world.removeItem(overlayImage.value);
-            overlayImage.value = null;
-          }
-          // If an overlay DZI URL is provided, add it on top and store its reference
-          if (props.overlayDziUrl) {
-            viewer.value.addTiledImage({
-              tileSource: props.overlayDziUrl,
-              opacity: overlayOpacityLocal.value,
-              crossOriginPolicy: 'Anonymous',
-              ajaxWithCredentials: false,
-              success: function (overlayTiledImage) {
-                overlayImage.value = overlayTiledImage;
-              }
-            });
-          }
+      // Viewer initialization options
+      const viewerOptions = {
+        element: containerEl,
+        // crossOriginPolicy: 'Anonymous',
+        // ajaxWithCredentials: false,
+        showNavigationControl: false,
+        maxImageCacheCount: 50,       
+        visibilityRatio: 1,
+        minZoomLevel: 1,
+        constrainDuringPan: true,
+        panHorizontal: true,
+        panVertical: true,
+        homeFillsViewer: true,
+        animationTime: 0.5,
+        defaultZoomLevel: props.layoutMode === "sideBySide" ? null : 1.3,
+        gestureSettingsMouse: {
+          scrollToZoom: true,
+          clickToZoom: false,
+          dblClickToZoom: true,
+          clickTodrag: false,
+          pinchToZoom: false,
         },
-      });
+        drawer: 'canvas',
+      };
+
+      viewer.value = osd(viewerOptions);
+      // Prevent OpenSeadragon from clearing overlays on open, so static overlay stays mounted
+      viewer.value.clearOverlays = () => {};
+
+      // restore last zoom & pan
+      if (viewerStore.center) {
+        const { x, y } = viewerStore.center;
+        viewer.value.viewport.zoomTo(viewerStore.zoom);
+        viewer.value.viewport.panTo(new osdLib.Point(x, y));
+        viewer.value.viewport.applyConstraints();
+      }
+
+// Store animation handler for cleanup
+      animationHandler = () => {
+        const zoom   = viewer.value.viewport.getZoom();
+        const center = viewer.value.viewport.getCenter();
+        viewerStore.setViewport(zoom, { x: center.x, y: center.y });
+        emit('viewportChanged', { zoom, center });
+      };
+      viewer.value.addHandler('animation', animationHandler);
+
+      transitionToNewTile(props.dziUrl);
     }
 
 
+    // Snapshot-based crossfade for tile transitions
+    function transitionToNewTile(newUrl) {
+      if (!viewer.value) return;
 
-    const overlayOpacityLocal = ref(1);
+      // Remove any leftover snapshots before creating a new one
+      const existingSnapshots = viewerContainer.value.querySelectorAll('.osd-snapshot');
+      existingSnapshots.forEach(el => viewerContainer.value.removeChild(el));
 
-    watch(() => props.globalOpacity, (newVal) => {
-      if (newVal !== undefined) {
-        overlayOpacityLocal.value = newVal;
-        if (viewer.value && props.overlayDziUrl) {
-          const itemCount = viewer.value.world.getItemCount();
-          for (let i = 0; i < itemCount; i++) {
-            const tile = viewer.value.world.getItemAt(i);
-            let tileSourceUrl = '';
-            if (tile.source.tilesUrl) {
-              tileSourceUrl = tile.source.tilesUrl.slice(0, -7) + '.dzi';
-            } else if (tile.source.url) {
-              tileSourceUrl = tile.source.url;
+      const zoom = viewer.value.viewport.getZoom();
+      const center = viewer.value.viewport.getCenter();
+
+      // Try to capture a snapshot from the current canvas
+      let snapshotUrl = null;
+      try {
+        const canvas = viewer.value.drawer.canvas;
+        snapshotUrl = canvas.toDataURL("image/png");
+      } catch (e) {
+        console.warn("Snapshot capture failed:", e);
+      }
+
+      let snapshotImg = null;
+      if (snapshotUrl) {
+        snapshotImg = document.createElement("img");
+        snapshotImg.classList.add('osd-snapshot');
+        snapshotImg.src = snapshotUrl;
+        snapshotImg.style.position = "absolute";
+        snapshotImg.style.top = "0";
+        snapshotImg.style.left = "0";
+        snapshotImg.style.width = "100%";
+        snapshotImg.style.height = "100%";
+        snapshotImg.style.objectFit = "cover";
+        snapshotImg.style.zIndex = "2";
+        snapshotImg.style.opacity = "1";
+        snapshotImg.style.transition = "opacity 0.5s ease";
+        viewerContainer.value.appendChild(snapshotImg);
+      }
+
+      viewer.value.open({
+        tileSource: newUrl,
+        // crossOriginPolicy: 'Anonymous',
+        // ajaxWithCredentials: false,
+      });
+
+      viewer.value.addOnceHandler('open', () => {
+        viewer.value.viewport.zoomTo(zoom, null, true);
+        viewer.value.viewport.panTo(center, true);
+        viewer.value.viewport.applyConstraints();
+
+        emit('opened');
+        updateOverlays();
+
+        if (props.overlayDziUrl) {
+          if (overlayImage.value) {
+            viewer.value.world.removeItem(overlayImage.value);
+            overlayImage.value.destroy();
+            overlayImage.value = null;
+          }
+
+          viewer.value.addTiledImage({
+            tileSource: props.overlayDziUrl,
+            // crossOriginPolicy: 'Anonymous',
+            // ajaxWithCredentials: false,
+            opacity: overlayOpacityLocal.value,
+            success: event => {
+              overlayImage.value = event.item;
             }
-            if (tileSourceUrl === props.overlayDziUrl) {
-              if (typeof tile.setOpacity === 'function') {
-                tile.setOpacity(newVal);
+          });
+        }
+
+
+        // Fade out and remove the snapshot overlay
+        if (snapshotImg) {
+          setTimeout(() => {
+            snapshotImg.style.opacity = "0";
+            setTimeout(() => {
+              if (viewerContainer.value.contains(snapshotImg)) {
+                viewerContainer.value.removeChild(snapshotImg);
+              }
+            }, 500);
+          }, 50);
+        }
+      });
+    }
+
+    const overlayOpacityLocal = ref(props.globalOpacity !== undefined ? props.globalOpacity : 1);
+
+    watch(
+      () => props.globalOpacity,
+      (newVal) => {
+        if (newVal !== undefined) {
+          overlayOpacityLocal.value = newVal;
+          if (viewer.value && props.overlayDziUrl) {
+            const itemCount = viewer.value.world.getItemCount();
+            for (let i = 0; i < itemCount; i++) {
+              const tile = viewer.value.world.getItemAt(i);
+              let tileSourceUrl = '';
+              if (tile.source.tilesUrl) {
+                tileSourceUrl = tile.source.tilesUrl.slice(0, -7) + '.dzi';
+              } else if (tile.source.url) {
+                tileSourceUrl = tile.source.url;
+              }
+              if (tileSourceUrl === props.overlayDziUrl) {
+                if (typeof tile.setOpacity === 'function') {
+                  tile.setOpacity(newVal);
+                }
+                if (tile.tiles && tile.tiles.length) {
+                  tile.tiles.forEach(tileObj => {
+                    if (tileObj.elmt) {
+                      tileObj.elmt.style.opacity = newVal;
+                    }
+                  });
+                }
               }
             }
+            viewer.value.forceRedraw();
           }
-          viewer.value.forceRedraw();
         }
-      }
-    }, );
+      },
+      { immediate: true }
+    );
 
     // Updated handleSliderInput function
     function handleSliderInput(event) {
@@ -531,6 +627,12 @@ viewer.value.addHandler('animation', () => {
           }
         }
         viewer.value.forceRedraw();
+        // Toggle base layer visibility: hide when overlay at 100%, show otherwise
+        if (currentTile.value && typeof currentTile.value.setOpacity === 'function') {
+          currentTile.value.setOpacity(newOpacity >= 1 ? 0 : 1);
+        }
+        // Redraw base layer change
+        viewer.value.forceRedraw();
       }
       // If globalOpacity prop is defined, emit the update to parent.
       if (props.globalOpacity !== undefined) {
@@ -538,22 +640,7 @@ viewer.value.addHandler('animation', () => {
       }
     }
 
-    // Watch for changes in dziUrl.
-    watch(() => props.dziUrl, async (newUrl, oldUrl) => {
-  if (viewer.value && newUrl !== oldUrl) {
-    // save
-    const zoom   = viewer.value.viewport.getZoom();
-    const center = viewer.value.viewport.getCenter();
-    viewerStore.setViewport(zoom, { x: center.x, y: center.y });
-
-    // then destroy + reinit
-    viewer.value.destroy();
-    viewer.value = null;
-    currentTile.value = null;
-    overlayImage.value = null;
-    await initViewer();
-  }
-});
+    // Removed watcher for full re-init on framework or startskog changes
 
     // Watch for changes in annotations.
     watch(
@@ -565,17 +652,80 @@ viewer.value.addHandler('animation', () => {
     );
 
     onBeforeUnmount(() => {
-      if (viewer.value) {
-        viewer.value.destroy();
-        viewer.value = null;
-      }
+      destroyViewer();
+      unmounted = true;
     });
-    onActivated(() => {
-      if (props.dziUrl && viewer.value) {
-        transitionToNewTile(props.dziUrl);
-      }
-    });
+    // onActivated(() => {
+    //   if (props.dziUrl && viewer.value) {
+    //     transitionToNewTile(props.dziUrl);
+    //   }
+    // });
     // Also, in the onMounted() hook, after initializing the viewer, check the current overlay state:
+    // --- Background DZI preloading function ---
+    // async function preloadTilesWithBackgroundViewer(dziUrls = []) {
+    //   // Only run on client
+    //   if (typeof window === "undefined") return;
+    //   const backgroundEl = document.createElement('div');
+    //   backgroundEl.style.position = 'absolute';
+    //   backgroundEl.style.width = '1px';
+    //   backgroundEl.style.height = '1px';
+    //   backgroundEl.style.overflow = 'hidden';
+    //   backgroundEl.style.pointerEvents = 'none';
+    //   backgroundEl.style.opacity = 0;
+    //   document.body.appendChild(backgroundEl);
+
+    //   const osdModule = await import("openseadragon");
+    //   const osd = osdModule.default || osdModule;
+    //   const preloadViewer = osd({
+    //     element: backgroundEl,
+    //     crossOriginPolicy: 'Anonymous',
+    //     ajaxWithCredentials: false,
+    //     showNavigationControl: false,
+    //     visibilityRatio: 1,
+    //     animationTime: 0.1,
+    //     gestureSettingsMouse: {
+    //       scrollToZoom: false,
+    //       clickToZoom: false,
+    //       dblClickToZoom: false,
+    //       clickTodrag: false,
+    //       pinchToZoom: false,
+    //     },
+    //   });
+
+    //   for (const url of dziUrls) {
+    //     console.log('Opening background DZI for preload:', url);
+    //     await new Promise((resolve) => {
+    //       preloadViewer.addOnceHandler('open', () => {
+    //         console.log('Opened:', url);
+    //         preloadViewer.viewport.goHome();
+    //         preloadViewer.viewport.zoomTo(preloadViewer.viewport.getMaxZoom());
+
+    //         const p = preloadViewer.viewport;
+    //         const osdPoint = osd.Point;
+
+    //         setTimeout(() => p.panTo(new osdPoint(0, 0)), 100);     // Top-left
+    //         setTimeout(() => p.panTo(new osdPoint(1, 0)), 300);     // Top-right
+    //         setTimeout(() => p.panTo(new osdPoint(0, 1)), 500);     // Bottom-left
+    //         setTimeout(() => p.panTo(new osdPoint(1, 1)), 700);     // Bottom-right
+    //         setTimeout(() => p.panTo(p.getCenter()), 900);          // Center
+    //         setTimeout(() => {
+    //           console.log('Completed tile pan preload for:', url);
+    //           resolve();
+    //         }, 1200); // Allow time for all tile requests
+    //       });
+
+    //       preloadViewer.open({
+    //         tileSource: url,
+    //         crossOriginPolicy: 'Anonymous',
+    //         ajaxWithCredentials: false,
+    //       });
+    //     });
+    //   }
+
+    //   preloadViewer.destroy();
+    //   document.body.removeChild(backgroundEl);
+    // }
+
     onMounted(() => {
       if (typeof window === "undefined") return;
       isClient.value = true;
@@ -597,6 +747,25 @@ viewer.value.addHandler('animation', () => {
               });
             }
           }
+          // --- Background preloading logic ---
+          // Only preload if this viewer is not in comparison mode (avoid duplicate preloads)
+          // if (!props.comparisonMode) {
+          //   try {
+          //     // Compose the framework and time labels as in main app
+          //     const framework = props.currentFramework.value.toLowerCase();
+          //     const startskogValue = props.currentStartskog.value;
+          //     const treeVisibility = 'dölj';
+          //     const fungiVisibility = 'visa'; // assume fungi visible
+          //     const timeLabels = ['före', 'efter', '20', '50', '80'];
+          //     if (framework === 'skärmträd') timeLabels.splice(2, 0, '10');
+          //     const urls = timeLabels.map(label =>
+          //       `/images/DZI_Images/${framework}_${label}_${fungiVisibility}_${treeVisibility}_${startskogValue}_v2.dzi`
+          //     );
+          //     preloadTilesWithBackgroundViewer(urls);
+          //   } catch (e) {
+          //     // ignore
+          //   }
+          // }
         });
       });
     });
@@ -647,6 +816,7 @@ viewer.value.addHandler('animation', () => {
       }
     }
 
+
     // Emit an activation event.
     // function handleActivate() {
     //   emit("activated", viewerId.value);
@@ -661,6 +831,15 @@ viewer.value.addHandler('animation', () => {
       getCenter,
       setZoomAndCenter,
       addSyncHandler,
+    });
+
+    // Re-create or tear down the viewer when the tab is hidden or shown
+    document.addEventListener('visibilitychange', () => {
+      if (document.hidden) {
+        destroyViewer();
+      } else {
+        initViewer();
+      }
     });
 
     return {

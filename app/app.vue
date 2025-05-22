@@ -56,7 +56,7 @@ provide('svamparnavigation', svamparnavigation)
 
 <template>
   <UApp>
-    <UBanner title="Förhandsversion: fler funktioner och mobilanpassning kommer snart!" />
+    <!-- <UBanner title="Förhandsversion: fler funktioner och mobilanpassning kommer snart!" /> -->
 
     <NuxtLoadingIndicator />
 

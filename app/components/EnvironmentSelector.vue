@@ -4,19 +4,19 @@
     <NuxtImg v-for="(src, key) in imageMap" :key="key" :src="src" width="300" height="180" format="webp" quality="80"
       preload />
   </div>
-  <div class="pt-8">
+  <div class="sm:pt-8 pt-2 hidden sm:block">
     <!-- Original EnvironmentSelector content -->
     <div ref="contentRef" class="original-content">
       <!-- Parameter Popover Grid -->
-      <div class="grid grid-cols-4 gap-5 mb-2">
-        <div v-for="category in categories" :key="category.key" class="flex justify-center w-full">
+      <div class="grid grid-cols-2 sm:grid-cols-4 sm:gap-5 gap-2 mb-2">
+        <div v-for="category in categories" :key="category.key" class="flex sm:justify-center w-full">
           <UPopover >
             <div>
               <transition name="slide-up" mode="out-in">
-                <div :key="getLabel(category.key)" class="flex items-center justify-center cursor-pointer">
-                  <div class="text-center">
+                <div :key="getLabel(category.key)" class="flex items-center sm:justify-center cursor-pointer">
+                  <div class="sm:text-center">
                     <h1 class="text-neutral-500">{{ category.title }}</h1>
-                    <h1 class="text-2xl font-medium">
+                    <h1 class="sm:text-2xl font-medium">
                       {{ getLabel(category.key) || category.defaultLabel }}
                     </h1>
                   </div>
@@ -76,7 +76,7 @@
         </UButton>
         <UButton trailing :icon="listBoxRowVisible ? 'mdi:chevron-up' : 'mdi:chevron-down'" @click="toggleHeight"
           color="neutral" variant="ghost">
-          {{ listBoxRowVisible ? "Dölj kombinationsvy" : "Visa kombinationsvy" }}
+          {{ listBoxRowVisible ? "Kombinationsvy" : "Kombinationsvy" }}
         </UButton>
       </div>
 
@@ -85,7 +85,7 @@
         class="overflow-visible transition-height ease-in-out duration-500">
         <Transition name="fade">
           <div v-show="listBoxRowVisible">
-            <div class="grid grid-cols-4 gap-5">
+            <div class="grid sm:grid-cols-4 gap-2 sm:gap-5">
 
               <UCard v-for="category in categories" :key="category.key" variant="soft">
                 <div v-for="option in enabledOptions[category.key]" :key="option.value"
@@ -110,7 +110,7 @@
 
     <!-- Sticky header that folds down from behind the AppHeader -->
     <transition name="fold-down">
-      <div v-if="isSticky" class="fixed top-16 z-20 bg-white dark:bg-black border-b border-neutral-200 left-0 right-0">
+      <div v-if="isSticky" class="hidden sm:fixed top-16 z-20 bg-white dark:bg-black border-b border-neutral-200 left-0 right-0">
         <div class="flex space-x-4 w-full mx-auto max-w-7xl p-2">
           <!-- Use enabledOptions for USelect items as well -->
           <USelect v-for="category in categories" :key="category.key" :items="enabledOptions[category.key]"
@@ -206,7 +206,7 @@ const categories: Category[] = [
 
 // Toggle combination view and restriction state
 const listBoxRowVisible = ref(false)
-const restrictionEnabled = ref(false)
+const restrictionEnabled = ref(true)
 
 function toggleHeight(): void {
   listBoxRowVisible.value = !listBoxRowVisible.value

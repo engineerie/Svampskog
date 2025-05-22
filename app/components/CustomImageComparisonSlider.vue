@@ -17,14 +17,14 @@
     }" @mousedown="startDrag" @touchstart="startDrag">
       <div class="flex h-full relative">
         <div class="absolute text-end  right-3 top-2">
-          <UBadge class="bg-neutral-800 text-neutral-100 h-fit whitespace-nowrap mb-0.5">{{ frameworkLabel }}</UBadge>
-          <UBadge class="bg-neutral-800 text-neutral-100 h-fit whitespace-nowrap">{{ timeLabel }}</UBadge>
+          <UBadge class="backdrop-blur-xl bg-neutral-100/0 text-neutral-100 h-fit whitespace-nowrap mb-0.5">{{ frameworkLabel }}</UBadge>
+          <UBadge class="backdrop-blur-xl bg-neutral-100/00 text-neutral-100 h-fit whitespace-nowrap">{{ timeLabel }}</UBadge>
         </div>
 
         <div class="h-full w-1 bg-white bg-opacity-50 border border-gray-300"></div>
         <div class="absolute top-2 left-3">
-          <UBadge class="bg-neutral-800 text-neutral-100 h-fit whitespace-nowrap mb-0.5">{{ frameworkLabel2 }}</UBadge>
-          <UBadge class="bg-neutral-800 text-neutral-100 h-fit whitespace-nowrap">{{ timeLabel2 }}</UBadge>
+          <UBadge class="backdrop-blur-xl bg-neutral-100/0 text-neutral-100 h-fit whitespace-nowrap mb-0.5">{{ frameworkLabel2 }}</UBadge>
+          <UBadge class="backdrop-blur-xl bg-neutral-100/0 text-neutral-100 h-fit whitespace-nowrap">{{ timeLabel2 }}</UBadge>
         </div>
       </div>
     </div>
@@ -40,7 +40,7 @@
   </div>
 </template>
 <script setup>
-import { ref, watch, onMounted } from "vue";
+import { ref, watch, onMounted, onUnmounted } from "vue";
 
 // Accept a prop for layout mode.
 const props = defineProps({

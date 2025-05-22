@@ -42,6 +42,7 @@ export default defineNuxtConfig({
         "error",
         "kalkmark",
         "vanligmark",
+        "time",
       ],
       transitions: true,
     },
@@ -49,12 +50,12 @@ export default defineNuxtConfig({
 
   routeRules: {
     // "/docs": { redirect: "/docs/guide", prerender: false },
-    '/images/**': {
-      headers: {
-        'Access-Control-Allow-Origin': '*'
-      }
-    },
-    '/*': { cors: true, headers: { 'access-control-allow-methods': 'GET' } },
+    // '/images/**': {
+    //   headers: {
+    //     'Access-Control-Allow-Origin': '*'
+    //   }
+    // },
+    // '/*': { cors: true, headers: { 'access-control-allow-methods': 'GET' } },
   },
 
   future: {
@@ -68,13 +69,13 @@ export default defineNuxtConfig({
       routes: ["/", "/docs", "/info"],
       crawlLinks: true,
     },
-    routeRules: {
-      '/images/**': {
-        headers: {
-          'Access-Control-Allow-Origin': '*'
-        }
-      }
-    },
+    // routeRules: {
+    //   '/images/**': {
+    //     headers: {
+    //       'Access-Control-Allow-Origin': '*'
+    //     }
+    //   }
+    // },
   },
 
   eslint: {

@@ -3,8 +3,8 @@
     <!-- <UPageHeader
        headline="Svampar"
     title="Svampar i skogsmiljöer"
-    description="Sök på svenska skogsmiljöer för att se vilka arter som
-            kan finnas i marken."
+    description="Här kan du söka på svenska skogsmiljöer för att se vilka arter som kan finnas i marken baserat på DNA-analyser av svampmycel i jordprover samt vår samlade kunskap om var olika arters fruktkroppar förekommer.
+"
   /> -->
 
     <!-- <UPageCTA
@@ -18,8 +18,10 @@ orientation="horizontal"
    
   </UPageCTA> -->
 
+<!-- <template #left><div></div></template>
+<template #right><div></div></template>
 
-    <!-- <div class="mt-4 text-lg text-neutral-500 mx-20">
+    <div class="mt-4 text-lg text-neutral-500">
            <ul class="space-y-4">
              <li class="">
                Välj skogsmiljö genom att ange

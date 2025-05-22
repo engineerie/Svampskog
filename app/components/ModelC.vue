@@ -3,111 +3,175 @@
     <div class="transition-all duration-300">
       <div class="pt-2">
         <div class="w-full flex gap-2">
-          <div class=" w-full mx-3 mt-2" v-if="!frameworksVisible">
+          <div class=" w-full mx-3 mt-2 mb-1" v-if="!frameworksVisible">
             <div class="flex gap-2 items-center justify-between w-full">
 
-              <div class="flex">
+              <div class="flex justify-center w-full">
+                
+                <div class="text-center">  <div class="flex gap-3 items-center justify-center">
+                <!-- Grid-based framework selector: two columns when comparing, one column otherwise -->
+<template v-if="isFrameworkCompareMode">
+  <div class="grid w-full items-center grid-cols-2">
+    <!-- Left popover, right‐aligned within its cell -->
+    <div class="flex justify-end pr-2 cursor-pointer">
+      <UPopover destroy-on-close :popper="{ placement: 'bottom-start' }">
+        <UBadge size="lg" variant="subtle">
+          {{ currentFramework.label }}
+          <Icon name="i-heroicons-chevron-down-solid" class="size-4 mt-0.5" />
+        </UBadge>
+        <!-- <h1 class="text-2xl flex items-center">
+          {{ currentFramework.label }}
+          <Icon name="i-heroicons-chevron-down-solid" class="size-5 ml-1 mt-1" />
+        </h1> -->
+        <template #content>
+          <div class="p-2 flex flex-col gap-2">
+            <div
+              v-for="(framework, index) in frameworks"
+              :key="framework.id"
+              @click="selectedFrameworkIndex = index"
+              class="flex items-center gap-2 cursor-pointer hover:bg-neutral-100 p-2 rounded-md"
+            >
+              <div>
+                <div class="font-medium">{{ framework.label }}</div>
+                <div class="text-sm text-neutral-500">{{ framework.text }}</div>
+              </div>
+            </div>
+          </div>
+        </template>
+      </UPopover>
+    </div>
+
+    <!-- Right popover, left‐aligned within its cell -->
+    <div class="flex justify-start cursor-pointer">
+      <!-- <USeparator orientation="vertical" class="h-8 mr-4" /> -->
+      <UPopover destroy-on-close :ui="{ rounded: 'rounded-xl' }" :popper="{ placement: 'bottom-start' }" class="ml-2">
+        <!-- <h1 class="text-2xl flex items-center">
+          {{ currentFramework2.label }}
+          <Icon name="i-heroicons-chevron-down-solid" class="size-5 ml-1 mt-1" />
+        </h1> -->
+        <UBadge size="lg" variant="subtle" color="info">
+          {{ currentFramework2.label }}
+          <Icon name="i-heroicons-chevron-down-solid" class="size-4 mt-0.5" />
+        </UBadge>
+        <template #content>
+          <div class="p-2 flex flex-col gap-2">
+            <div
+              v-for="(framework, index) in frameworks"
+              :key="'framework2-'+framework.id"
+              @click="selectedFrameworkIndex2 = index"
+              class="flex items-center gap-2 cursor-pointer hover:bg-neutral-100 p-2 rounded-md"
+            >
+              <div>
+                <div class="font-medium">{{ framework.label }}</div>
+                <div class="text-sm text-neutral-500">{{ framework.text }}</div>
+              </div>
+            </div>
+          </div>
+        </template>
+      </UPopover>
+    </div>
+  </div>
+</template>
+
+<template v-else>
+  <div class="grid w-full items-center grid-cols-1">
+    <div class="flex justify-center cursor-pointer">
+      <UPopover destroy-on-close :popper="{ placement: 'bottom-start' }">
+        <UBadge size="lg" variant="subtle">
+          {{ currentFramework.label }}
+          <Icon name="i-heroicons-chevron-down-solid" class="size-4 mt-0.5" />
+        </UBadge>
+        <template #content>
+          <div class="p-2 flex flex-col gap-2">
+            <div
+              v-for="(framework, index) in frameworks"
+              :key="framework.id"
+              @click="selectedFrameworkIndex = index"
+              class="flex items-center gap-2 cursor-pointer hover:bg-neutral-100 p-2 rounded-md"
+            >
+              <div>
+                <div class="font-medium">{{ framework.label }}</div>
+                <div class="text-sm text-neutral-500">{{ framework.text }}</div>
+              </div>
+            </div>
+          </div>
+        </template>
+      </UPopover>
+    </div>
+  </div>
+</template>
+
+              </div>
+
+                </div>
                 <!-- Custom popover-based select for main framework -->
-                <UPopover :popper="{ placement: 'bottom-start' }">
-                  <h1 class="text-2xl flex items-center ">
-                    {{ currentFramework.label }}
-                    <Icon name="i-heroicons-chevron-down-solid" class="size-5 ml-1 mt-1" />
-                  </h1>
-
-                  <template #content>
-                    <div class="p-2 flex flex-col gap-2">
-                      <div v-for="(framework, index) in frameworks" :key="framework.id"
-                        @click="selectedFrameworkIndex = index"
-                        class="flex items-center gap-2 cursor-pointer hover:bg-neutral-100 p-2 rounded-md">
-
-                        <div>
-                          <div class="font-medium">{{ framework.label }}</div>
-                          <div class="text-sm text-neutral-500">
-                            {{ framework.text }}
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </template>
-                </UPopover>
-                <template v-if="isFrameworkCompareMode">
-                  <div class="flex gap-2 items-center">
-                    <h1 class="text-neutral-800 text-2xl">
-                      <USeparator orientation="vertical" class="h-8 ml-5 mr-3" />
-                    </h1>
-
-                    <div>
-                      <UPopover :ui="{ rounded: 'rounded-xl' }" :popper="{ placement: 'bottom-start' }">
-                        <h1 class=" text-2xl flex items-center">
-                          {{ currentFramework2.label }}
-                          <Icon name="i-heroicons-chevron-down-solid" class="size-5 ml-1 mt-1" />
-                        </h1>
-
-                        <template #content>
-                          <div class="p-2 flex flex-col gap-2">
-                            <div v-for="(framework, index) in frameworks" :key="'framework2-' + framework.id"
-                              @click="selectedFrameworkIndex2 = index"
-                              class="flex items-center gap-2 cursor-pointer hover:bg-neutral-100 p-2 rounded-md">
-
-                              <div>
-                                <div class="font-medium">
-                                  {{ framework.label }}
-                                </div>
-                                <div class="text-sm text-neutral-500">
-                                  {{ framework.text }}
-                                </div>
-                              </div>
-                            </div>
-                          </div>
-                        </template>
-                      </UPopover>
-                    </div>
-                  </div>
-                </template>
+              
               </div>
             </div>
           </div>
         </div>
         <div class="flex">
 
-          <div class="w-full">
-            <div class="flex gap-2 items-center justify-between mx-1">
-              <div class="flex gap-3 items-center">
-                <UPopover v-model:open="open" :popper="{ placement: 'bottom-start' }">
-                  <UBadge size="lg" variant="subtle" class="h-fit" color="neutral">{{ currentStartskog.label }}
+          <div class="w-full relative">
+          
+            <div class="w-full flex justify-center mt-1 relative">
+              <UPopover class="absolute left-2 bottom-2 cursor-pointer" v-model:open="open" destroy-on-close :popper="{ placement: 'bottom-start' }">
+                  <UBadge size="lg" variant="subtle" class="h-fit" color="secondary">{{ currentStartskog.label }}
                   </UBadge>
-                  <!-- <USeparator orientation="vertical" class="h-8" /> -->
-
                   <template #content>
                     <div class="p-1 flex flex-col gap-1">
                       <div v-for="option in startskog" :key="option.value">
                         <UButton @click="selectOption(option)" color="white" variant="ghost"
-                          class="hover:bg-neutral-100 w-full" :class="{
-                            ' w-full  text-primary-500':
+                          class="hover:bg-neutral-100 w-full cursor-pointer" :class="{
+                            'w-full  text-secondary-500':
                               currentStartskog.value === option.value,
                           }">{{ option.label }}
                         </UButton>
                       </div>
                     </div>
                   </template>
-                </UPopover>
-                <UTabs variant="link" color="neutral" v-model="selectedTimeIndex" :items="timeItems" size="md" />
+                </UPopover> 
+                          <!-- <UTabs variant="link" color="neutral" v-model="selectedTimeIndex" :items="timeItems" size="md" /> -->
+                          <div class="absolute right-2 bottom-2 flex gap-2">
 
-              </div>
-              <div class="flex">
-
-
+                            
 
 
-                <UDropdownMenu :items="compareItems" :content="{ align: 'end', side: 'bottom', sideOffset: 8 }">
-                  <UButton :label="selectedCompareLabel" variant="ghost" color="neutral" :icon="activatorIcon" />
+            
+<!-- <USelect v-model="selectedCompareChoice" :items="compareOptions" placeholder="Välj jämförelseläge"
+    class="" variant="ghost" /> -->
+   
+                    <UButton color="neutral" variant="ghost" @click="toggleChartVisible"
+                      icon="i-carbon-chart-line-smooth"
+                      label="Diagram"
+                      class="cursor-pointer"
+                     /> 
+                     <UButton
+                     v-if="!isCompare && !isFrameworkCompareMode"
+                     class="cursor-pointer"
+
+
+                   @click="annotationsVisible = !annotationsVisible"
+           
+                   variant="ghost"
+                   color="neutral"
+      label="Anteckningar"
+                   icon="i-heroicons-outline-map-pin"
+                 />
+                 <UDropdownMenu :items="compareItems" :content="{ align: 'end', side: 'bottom', sideOffset: 8 }">
+                  <UButton :label="selectedCompareLabel" variant="ghost" color="neutral" :icon="activatorIcon" class="cursor-pointer" />
                 </UDropdownMenu>
-                <!-- <USelect v-model="selectedCompareChoice" :items="compareOptions" placeholder="Välj jämförelseläge"
-                    class="" variant="ghost" /> -->
-                <UButton variant="ghost" color="neutral" icon="i-heroicons-x-mark-solid"
-                  v-if="selectedCompareChoice === 'frameworkCompare' || selectedCompareChoice === 'beforeAfterCompare'"
-                  @click="selectedCompareChoice = 'none'" />
-              </div>
+<UButton variant="ghost" color="neutral" icon="i-heroicons-x-mark-solid" class="cursor-pointer" 
+  v-if="selectedCompareChoice === 'frameworkCompare' || selectedCompareChoice === 'beforeAfterCompare'"
+  @click="selectedCompareChoice = 'none'" />
+</div>
+                          
+            </div>
+
+            <div class="flex gap-2 items-center justify-between mx-1">
+           
+
+              
             </div>
             <!-- <div class="relative w-full h-[600px] resize-y overflow-auto flex p-1 pt-0 rounded-lg"> -->
             <div ref="resizableContainer" class="relative w-full overflow-visible flex p-1 pt-0 rounded-lg"
@@ -116,53 +180,54 @@
 
 
                 <div v-if="chartVisible"
-                  class="w-[45rem]  absolute top-9 left-1/2 transform -translate-x-1/2 bg-neutral-900/70 backdrop-blur-xl rounded-2xl shadow p-4 border border-neutral-700 z-20">
+                  class="w-[45rem]  absolute top-9 left-1/2 transform -translate-x-1/2 dark:bg-neutral-900/70 bg-white backdrop-blur-xl rounded-2xl shadow p-4 border border-neutral-300 dark:border-neutral-700 z-20">
 
-                  <div class="w-full justify-between flex pl-2">
-                    <div class="text-neutral-100 text-xl flex gap-2 items-center">
-                      <h1>{{ currentFramework.label }}</h1>
+                  <div class="w-full justify-between flex pl-2 mb-3">
+                    <div class="text-neutral-800 dark:text-neutral-200 text-xl flex gap-2 items-center">
+                      <UBadge variant="subtle" size="xl">{{ currentFramework.label }}</UBadge>
                       <div class="flex items-center" v-if="isFrameworkCompareMode">
-                        <USeparator orientation="vertical" class="h-6 mr-2 " color="" />
-                        <h1 class="text-blue-400">{{ currentFramework2.label }}</h1>
+                        <!-- <USeparator orientation="vertical" class="h-6 mr-2 " color="" /> -->
+                        <UBadge variant="subtle" color="info" size="xl">{{ currentFramework2.label }}</UBadge>
+    
                       </div>
                     </div>
 
                     <div class="flex gap-1">
 
-                      <UButton color="neutral" variant="solid" @click="toggleChartType" size="sm"
+                      <UButton color="neutral" variant="soft" @click="toggleChartType" size="sm"
                         :icon="chartType === 'line' ? 'i-carbon-chart-column' : 'i-carbon-chart-line-smooth'"
-                        class="z-10 hover:bg-neutral-800 bg-neutral-900 text-neutral-100 mb-2" />
-                      <UButton color="neutral" variant="solid" @click="toggleChartVisible" icon="i-heroicons-x-mark"
-                        size="sm" class="z-10 hover:bg-neutral-800 bg-neutral-900 text-neutral-100 mb-2" />
+                        class="z-10 dark:hover:bg-neutral-800 dark:bg-neutral-900 dark:text-neutral-100 mb-2" />
+                      <UButton color="neutral" variant="soft" @click="toggleChartVisible" icon="i-heroicons-x-mark"
+                        size="sm" class="z-10 dark:hover:bg-neutral-800 dark:bg-neutral-900 dark:text-neutral-100 mb-2" />
                     </div>
                   </div>
                   <div class="grid grid-cols-2 gap-8">
                     <div class="px-2">
-                      <p class="text-neutral-400">Diagramet för total mykorrhizasvamp visar andelen mycelmassa
+                      <p class="dark:text-neutral-400 text-neutral-600">Diagramet för total mykorrhizasvamp visar andelen mycelmassa
                         relativt till den ursprungliga mängden i <span @click="toggleOverlay"
                           class="underline  hover:cursor-pointer">skötselområdet</span>. Kurvan återspeglar
                         sockertillförseln
                         från träden till
                         marken.
                       </p>
-                      <p class="text-neutral-200 my-2">Total mykorrhizasvamp</p>
+                      <p class="dark:text-neutral-200 my-2">Total mykorrhizasvamp</p>
                       <LineChartForestry species="total" :selectedFramework="currentFramework.value"
                         :isComparison="isFrameworkCompareMode" :secondFramework="currentFramework2.value"
                         dataSource="total" :chartType="chartType" />
                     </div>
                     <div class="px-2">
-                      <p class="text-neutral-400">Diagramen för matsvamp och naturvårdsarter visar andelen svampmycel
+                      <p class="dark:text-neutral-400 text-neutral-600">Diagramen för matsvamp och naturvårdsarter visar andelen svampmycel
                         relativt
                         till den totala mängden
                         mykorrhizamycel i
                         hela
                         <span @click="toggleOverlay" class="underline  hover:cursor-pointer">skötselområdet</span>.
                       </p>
-                      <p class="text-neutral-200 my-2">Matsvamp</p>
+                      <p class="dark:text-neutral-200 my-2">Matsvamp</p>
                       <LineChartForestry species="matsvamp" :selectedFramework="currentFramework.value"
                         :selectedStartskog="currentStartskog.value" :isComparison="isFrameworkCompareMode"
                         :secondFramework="currentFramework2.value" :chartType="chartType" />
-                      <p class="text-neutral-200 my-2">Rödlistade och signalarter</p>
+                      <p class="dark:text-neutral-200 my-2">Rödlistade och signalarter</p>
                       <LineChartForestry species="rödlistade + signalarter" :selectedFramework="currentFramework.value"
                         :selectedStartskog="currentStartskog.value" :isComparison="isFrameworkCompareMode"
                         :secondFramework="currentFramework2.value" :chartType="chartType" />
@@ -176,33 +241,41 @@
 
 
                 <div class="absolute p-2 z-10">
-                  <div>
+                  <!-- <div>
                     <UButton color="neutral" variant="solid" @click="opacitySyncEnabled = !opacitySyncEnabled"
                       :icon="opacitySyncEnabled ? 'mdi:lock' : 'mdi:lock-open'"
                       class=" z-10 hover:bg-neutral-800 bg-neutral-900 text-neutral-100 mb-2" />
-                  </div>
-                  <div>
-                    <UButtonGroup class="size-xs  mb-2">
-
-
+                  </div> -->
+                  <div class="flex gap-1">
+                    <UButtonGroup class="size-xs">
                       <UButton color="neutral" variant="solid" @click="toggleOverlay"
-                        class="hover:bg-neutral-800 bg-neutral-900 text-neutral-100"
+                        class="hover:bg-neutral-800/50 bg-neutral-900/0 text-neutral-100"
                         icon="i-material-symbols-rectangle-outline" />
                       <UButton color="neutral" variant="solid" @click="zoomActiveIn"
-                        class="hover:bg-neutral-800 bg-neutral-900 text-neutral-100"
+                        class="hover:bg-neutral-800/50 bg-neutral-900/0  text-neutral-100"
                         icon="i-heroicons-magnifying-glass-plus" />
                       <UButton color="neutral" variant="solid" @click="zoomActiveOut"
-                        class="hover:bg-neutral-800 bg-neutral-900 text-neutral-100"
+                        class="hover:bg-neutral-800/50 bg-neutral-900/0  text-neutral-100"
                         icon="i-heroicons-magnifying-glass-minus" />
+                        <div class="flex items-center gap-2 p-1">
+                    <Icon name="i-hugeicons-tree-06" class="size-5 text-neutral-100" />
+                    <input
+                      type="range"
+                      min="0"
+                      max="1"
+                      step="0.01"
+                      v-model="globalOpacity"
+                      class="accent-neutral-100 h-[5px] w-20"
+                    />
+                  </div>
                     </UButtonGroup>
+                   
                   </div>
-                  <div>
-                    <UButton color="neutral" variant="solid" @click="toggleChartVisible"
-                      icon="i-carbon-chart-line-smooth"
-                      class=" z-10 hover:bg-neutral-800 bg-neutral-900 text-neutral-100 mb-2" />
-                  </div>
-                  <div class="shrink-0 bg-neutral-950/50 backdrop-blur-lg rounded-md"
-                    v-if="!isCompare && !isFrameworkCompareMode">
+                  
+                
+                 
+                  <div class="shrink-0 bg-neutral-100/0 backdrop-blur-xl rounded-xl p-1.5 border border-neutral-800/60 mt-4"
+                  v-if="!isCompare && !isFrameworkCompareMode && annotationsVisible">
                     <ul>
                       <li v-for="annotation in filteredAnnotations" :key="annotation.id" class="mb-0.5">
                         <UButton :color="selectedAnnotation &&
@@ -213,7 +286,7 @@
                             selectedAnnotation.id === annotation.id
                             ? 'soft'
                             : 'solid'
-                            " size="xs" class="w-full text-neutral-100" @click="handleAnnotationClicked(annotation)">
+                            " size="xs" class="w-full text-neutral-100 cursor-pointer" @click="handleAnnotationClicked(annotation)">
                           <template #leading>
                             <Icon :name="annotation.icon" :class="selectedAnnotation &&
                               selectedAnnotation.id === annotation.id
@@ -236,21 +309,21 @@
                   <OpenSeadragonViewer :currentFramework="currentFramework" :currentTime="timeLabelForDataFiltering"
                     :currentStartskog="currentStartskog" :layoutMode="currentLayoutMode" ref="singleViewerRef"
                     :frameworkLabel="currentFramework.label" :timeLabel="currentTimeLabel"
-                    :dziUrl="currentImagePath.replace('.png', '.dzi')"
-                    :overlayDziUrl="currentOverlayImagePath.replace('.png', '.dzi')" :allowPan="true"
-                    :annotations="filteredAnnotations" :selectedAnnotation="selectedAnnotation"
+                    :dziUrl="currentOverlayImagePath.replace('.png', '.dzi')"
+                    :overlayDziUrl="currentImagePath.replace('.png', '.dzi')" :allowPan="true"
+                    :annotations="annotationsVisible ? filteredAnnotations : []" :selectedAnnotation="selectedAnnotation"
                     v-if="!opacitySyncEnabled" @annotationClicked="handleAnnotationClicked" class="w-full h-full" />
                   <OpenSeadragonViewer :currentFramework="currentFramework" :currentTime="timeLabelForDataFiltering"
                     :currentStartskog="currentStartskog" :layoutMode="currentLayoutMode" ref="singleViewerRef"
                     :frameworkLabel="currentFramework.label" :timeLabel="currentTimeLabel"
-                    :dziUrl="currentImagePath.replace('.png', '.dzi')"
-                    :overlayDziUrl="currentOverlayImagePath.replace('.png', '.dzi')" :allowPan="true"
-                    :annotations="filteredAnnotations" :selectedAnnotation="selectedAnnotation" v-else
+                    :dziUrl="currentOverlayImagePath.replace('.png', '.dzi')"
+                    :overlayDziUrl="currentImagePath.replace('.png', '.dzi')" :allowPan="true"
+                    :annotations="annotationsVisible ? filteredAnnotations : []" :selectedAnnotation="selectedAnnotation" v-else
                     v-model:globalOpacity="globalOpacity" @annotationClicked="handleAnnotationClicked"
                     class="w-full h-full" />
                   <transition name="slide-out">
                     <div v-if="selectedAnnotation"
-                      class="absolute inset-y-0 right-0  w-68 bg-neutral-50 overflow-auto z-10 pointer-events-auto border-neutral-300 border-l ">
+                      class="absolute inset-y-0 right-0  w-68 bg-white dark:bg-neutral-950/70 backdrop-blur-2xl overflow-auto z-10 pointer-events-auto border-neutral-300 dark:border-neutral-700 border-l ">
                       <div class="h-64 flex items-center justify-center text-neutral-300">
   Bild kommer snart
 </div>
@@ -258,9 +331,9 @@
                       <!-- <NuxtImg v-if="selectedAnnotation.thumbnail" :src="selectedAnnotation.thumbnail" width="300"
                         height="300" alt="Thumbnail" class=" border-b border-neutral-300" /> -->
                       <UButton color="white" :ui="{ rounded: 'rounded-full' }" icon="heroicons:x-mark"
-                        @click="closeAnnotation" class="absolute bottom-2 right-2" />
+                        @click="closeAnnotation" class="absolute top-2 right-2" />
                       <div class="px-4 py-2">
-                        <h3 class="text-lg font-semibold text-neutral-800">
+                        <h3 class="text-lg font-semibold text-neutral-800 dark:text-neutral-200">
                           {{ selectedAnnotation.title }}
                         </h3>
                         <p class="text-neutral-400">
@@ -282,16 +355,16 @@
                     <OpenSeadragonViewer :currentFramework="currentFramework" currentTime="innan"
                       :currentStartskog="currentStartskog" :layoutMode="currentLayoutMode" ref="beforeViewerRef"
                       :comparisonMode="true" :frameworkLabel="currentFramework.label" timeLabel="Före avverkning"
-                      :dziUrl="comparisonImagePath1.replace('.png', '.dzi')"
-                      :overlayDziUrl="comparisonOverlayImagePath1.replace('.png', '.dzi')" :allowPan="true"
+                      :dziUrl="comparisonOverlayImagePath1.replace('.png', '.dzi')"
+                      :overlayDziUrl="comparisonImagePath1.replace('.png', '.dzi')" :allowPan="true"
                       @opened="onViewerOpened('before')" @activated="activeViewer.valueOf = 'before'"
                       v-if="!opacitySyncEnabled"
                       class="w-full h-full z-0 rounded-xl border-[0.5px] border-neutral-300 dark:border-neutral-800 overflow-hidden" />
                     <OpenSeadragonViewer :currentFramework="currentFramework" currentTime="innan"
                       :currentStartskog="currentStartskog" :layoutMode="currentLayoutMode" ref="beforeViewerRef"
                       :comparisonMode="true" :frameworkLabel="currentFramework.label" timeLabel="Före avverkning"
-                      :dziUrl="comparisonImagePath1.replace('.png', '.dzi')"
-                      :overlayDziUrl="comparisonOverlayImagePath1.replace('.png', '.dzi')" :allowPan="true"
+                      :dziUrl="comparisonOverlayImagePath1.replace('.png', '.dzi')"
+                      :overlayDziUrl="comparisonImagePath1.replace('.png', '.dzi')" :allowPan="true"
                       @opened="onViewerOpened('before')" @activated="activeViewer.valueOf = 'before'" v-else
                       v-model:globalOpacity="globalOpacity"
                       class="w-full h-full z-0 rounded-xl border-[0.5px] border-neutral-300 dark:border-neutral-800 overflow-hidden" />
@@ -300,16 +373,16 @@
                     <OpenSeadragonViewer :currentFramework="currentFramework" :currentTime="timeLabelForDataFiltering"
                       :currentStartskog="currentStartskog" :layoutMode="currentLayoutMode" ref="afterViewerRef"
                       :comparisonMode="true" :frameworkLabel="currentFramework.label" :timeLabel="currentTimeLabel"
-                      :dziUrl="currentImagePath.replace('.png', '.dzi')"
-                      :overlayDziUrl="comparisonOverlayImagePath2.replace('.png', '.dzi')" :allowPan="true"
+                      :dziUrl="comparisonOverlayImagePath2.replace('.png', '.dzi')"
+                      :overlayDziUrl="currentImagePath.replace('.png', '.dzi')" :allowPan="true"
                       sliderPosition="right" @opened="onViewerOpened('after')"
                       @activated="activeViewer.valueOf = 'after'" v-if="!opacitySyncEnabled"
                       class="w-full h-full z-0 rounded-xl border-[0.5px] border-neutral-300 dark:border-neutral-800 overflow-hidden" />
                     <OpenSeadragonViewer :currentFramework="currentFramework2" :currentTime="timeLabelForDataFiltering"
                       :currentStartskog="currentStartskog" :layoutMode="currentLayoutMode" ref="afterViewerRef"
                       :comparisonMode="true" :frameworkLabel="currentFramework.label" :timeLabel="currentTimeLabel"
-                      :dziUrl="currentImagePath.replace('.png', '.dzi')"
-                      :overlayDziUrl="comparisonOverlayImagePath2.replace('.png', '.dzi')" :allowPan="true"
+                      :dziUrl="comparisonOverlayImagePath2.replace('.png', '.dzi')"
+                      :overlayDziUrl="currentImagePath.replace('.png', '.dzi')" :allowPan="true"
                       sliderPosition="right" @opened="onViewerOpened('after')"
                       @activated="activeViewer.valueOf = 'after'" v-else v-model:globalOpacity="globalOpacity"
                       class="w-full h-full z-0 rounded-xl border-[0.5px] border-neutral-300 dark:border-neutral-800 overflow-hidden" />
@@ -325,8 +398,8 @@
                     <OpenSeadragonViewer :currentFramework="currentFramework" :currentTime="timeLabelForDataFiltering"
                       :currentStartskog="currentStartskog" :layoutMode="currentLayoutMode" ref="framework1ViewerRef"
                       :comparisonMode="true" :frameworkLabel="currentFramework.label" :timeLabel="currentTimeLabel"
-                      :dziUrl="currentImagePath.replace('.png', '.dzi')"
-                      :overlayDziUrl="frameworkOverlayImagePath1.replace('.png', '.dzi')"
+                      :dziUrl="frameworkOverlayImagePath1.replace('.png', '.dzi')"
+                      :overlayDziUrl="currentImagePath.replace('.png', '.dzi')"
                       :allowPan="!isCompare && !isFrameworkCompareMode" v-if="!opacitySyncEnabled"
                       @viewportChanged="($event) => onViewportChanged('framework1', $event)"
                       @opened="onViewerOpened('framework1')" @activated="activeViewer.valueOf = 'framework1'"
@@ -334,8 +407,8 @@
                     <OpenSeadragonViewer :currentFramework="currentFramework" :currentTime="timeLabelForDataFiltering"
                       :currentStartskog="currentStartskog" :layoutMode=currentLayoutMode ref="framework1ViewerRef"
                       :comparisonMode="true" :frameworkLabel="currentFramework.label" :timeLabel="currentTimeLabel"
-                      :dziUrl="currentImagePath.replace('.png', '.dzi')"
-                      :overlayDziUrl="frameworkOverlayImagePath1.replace('.png', '.dzi')"
+                      :dziUrl="frameworkOverlayImagePath1.replace('.png', '.dzi')"
+                      :overlayDziUrl="currentImagePath.replace('.png', '.dzi')"
                       :allowPan="!isCompare && !isFrameworkCompareMode" v-else v-model:globalOpacity="globalOpacity"
                       @viewportChanged="($event) => onViewportChanged('framework1', $event)"
                       @opened="onViewerOpened('framework1')" @activated="activeViewer.valueOf = 'framework1'"
@@ -345,8 +418,8 @@
                     <OpenSeadragonViewer :currentFramework="currentFramework2" :currentTime="timeLabelForDataFiltering"
                       :currentStartskog="currentStartskog" :layoutMode="currentLayoutMode" ref="framework2ViewerRef"
                       :comparisonMode="true" :frameworkLabel="currentFramework2.label" :timeLabel="currentTimeLabel"
-                      :dziUrl="currentImagePath2.replace('.png', '.dzi')"
-                      :overlayDziUrl="frameworkOverlayImagePath2.replace('.png', '.dzi')" v-if="!opacitySyncEnabled"
+                      :dziUrl="frameworkOverlayImagePath2.replace('.png', '.dzi')"
+                      :overlayDziUrl="currentImagePath2.replace('.png', '.dzi')" v-if="!opacitySyncEnabled"
                       :allowPan="!isCompare && !isFrameworkCompareMode" sliderPosition="right"
                       @viewportChanged="($event) => onViewportChanged('framework2', $event)"
                       @opened="onViewerOpened('framework2')" @activated="activeViewer.valueOf = 'framework2'"
@@ -355,8 +428,8 @@
                     <OpenSeadragonViewer :currentFramework="currentFramework2" :currentTime="timeLabelForDataFiltering"
                       :currentStartskog="currentStartskog" :layoutMode="currentLayoutMode" ref="framework2ViewerRef"
                       :comparisonMode="true" :frameworkLabel="currentFramework2.label" :timeLabel="currentTimeLabel"
-                      :dziUrl="currentImagePath2.replace('.png', '.dzi')"
-                      :overlayDziUrl="frameworkOverlayImagePath2.replace('.png', '.dzi')" v-else
+                      :dziUrl="frameworkOverlayImagePath2.replace('.png', '.dzi')"
+                      :overlayDziUrl="currentImagePath2.replace('.png', '.dzi')" v-else
                       v-model:globalOpacity="globalOpacity" :allowPan="!isCompare && !isFrameworkCompareMode"
                       sliderPosition="right" @viewportChanged="($event) => onViewportChanged('framework2', $event)"
                       @opened="onViewerOpened('framework2')" @activated="activeViewer.valueOf = 'framework2'"
@@ -365,20 +438,29 @@
                   </template>
                 </CustomImageComparisonSlider>
               </div>
-              <div class="absolute -bottom-2 left-1/2 transform -translate-x-1/2 w-full flex justify-center z-10">
+              <div class="absolute -bottom-14 mb-1.5 left-1/2 transform -translate-x-1/2 w-full flex justify-center z-10">
                 <!-- Style the handle as needed -->
                 <div class="h-1.5  w-24 bg-neutral-500/30 hover:bg-neutral-500/70 rounded cursor-grab transition-all"
                   @pointerdown="startVerticalResize">
                 </div>
               </div>
-              <div class="absolute -bottom-8 w-full flex justify-end pr-2">
+              <div class="absolute -bottom-18 mb-1 w-full flex justify-end pr-2">
 
-                <UButton @click="toggleFullWidth" color="neutral" variant="ghost"
+                <UButton @click="toggleFullWidth" color="neutral" variant="soft" size="xs"
                   :icon="isFullWidth ? 'i-ri-collapse-horizontal-line' : 'i-ri-expand-horizontal-s-line'">
 
                 </UButton>
               </div>
             </div>
+          <UTabs
+  v-model="selectedTimeValue"
+  :items="timeItems"
+  size="md"
+  :ui="{
+    indicator: 'bg-orange-100 dark:bg-orange-400/9 border border-orange-300/80 dark:border-orange-300/30 ',
+ trigger: 'data-[state=active]:text-orange-500 dark:data-[state=active]:text-orange-400/90 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary'
+  }"
+/>
           </div>
         </div>
       </div>
@@ -391,12 +473,19 @@
 
 <script setup>
 // import SvampLineChart from "~/components/SvampLineChart.vue";
-import OpenSeadragonViewer from "~/components/OpenSeadragonViewer.vue";
-import { ref, computed, watch } from "vue";
+import { defineAsyncComponent } from 'vue';
+const OpenSeadragonViewer = defineAsyncComponent(() =>
+  import('~/components/OpenSeadragonViewer.vue')
+);
+import { ref, computed, watch, onMounted, onBeforeUnmount, onUnmounted } from "vue";
+let removeShortcutsFn;
 import { useOnboardingStore } from "~/stores/onboardingStore";
 import annotationsData from "public/annotations.json"; // NEW: import your annotations JSON
 import { useSelectedAnnotationStore } from "~/stores/selectedAnnotationStore";
 import { useOverlayStore } from "~/stores/overlayStore";
+
+const annotationsVisible = ref(false);
+
 
 // New reactive variable for container width (in rem), starting at 85rem.
 const containerWidth = ref(85);
@@ -479,8 +568,8 @@ function toggleChartVisible() {
   chartVisible.value = !chartVisible.value;
 }
 // Global opacity sync state
-const opacitySyncEnabled = ref(false);
-const globalOpacity = ref(1);
+const opacitySyncEnabled = ref(true);
+const globalOpacity = ref(0);
 
 // Assuming the base image is currentImagePath (trees off)
 // For the overlay image, force trees to be visible.
@@ -607,8 +696,19 @@ watch([isFrameworkCompareMode, isCompare], ([frameworkCompare, compare]) => {
 
 const open = ref(false);
 
-defineShortcuts({
-  o: () => (open.value = !open.value),
+// defineShortcuts({
+//   o: () => (open.value = !open.value),
+// });
+onMounted(() => {
+  removeShortcutsFn = defineShortcuts({
+    o: () => (open.value = !open.value),
+  });
+});
+
+onBeforeUnmount(() => {
+  if (typeof removeShortcutsFn === "function") {
+    removeShortcutsFn();
+  }
 });
 
 // Function to handle selecting an option
@@ -666,8 +766,8 @@ const frameworks = [
 
 // Startskog array
 const startskog = [
-  { label: "I äldre skog som inte kalavverkats", value: "naturskog" },
-  { label: "I skog som har kalavverkats", value: "produktionsskog_" },
+  { label: "Inte kalavverkad", value: "naturskog" },
+  { label: "Kalavverkad", value: "produktionsskog_" },
 ];
 
 // Current framework and startskog
@@ -729,25 +829,35 @@ const sliderSteps = computed(() => {
 
 // Create UTabs items from sliderSteps
 const timeItems = computed(() =>
-  sliderSteps.value.map((step) => ({
-    key: String(step.value), // Ensure the key is a string
+  sliderSteps.value.map(step => ({
+    value: String(step.value),
     label: step.label,
     disabled: isCompare.value && step.value === 3,
   }))
 );
 
+const selectedTimeValue = computed({
+  get() {
+    return String(time.value);
+  },
+  set(newKey) {
+    const step = sliderSteps.value.find(s => String(s.value) === newKey);
+    if (step) handleTimeSelection(step);
+  }
+});
+
 // Create a computed property that gets/sets the selected tab index
 // based on the time value. When set, it calls handleTimeSelection.
 // Use a ref for the selected tab index
-const selectedTimeIndex = ref(0);
+// const selectedTimeIndex = ref(0);
 
 // Watch the selectedTimeIndex and update time when it changes
-watch(selectedTimeIndex, (newIndex) => {
-  const step = sliderSteps.value[newIndex];
-  if (step) {
-    handleTimeSelection(step);
-  }
-});
+// watch(selectedTimeIndex, (newIndex) => {
+//   const step = sliderSteps.value[newIndex];
+//   if (step) {
+//     handleTimeSelection(step);
+//   }
+// });
 
 // Current time labels
 const currentTimeLabel = computed(() => {
@@ -805,6 +915,55 @@ watch([currentFramework, isCompare, isFrameworkCompareMode], () => {
     time.value = 15;
   }
 });
+
+// // Preload watcher: robust DZI manifest parsing and tile calculation
+// watch([currentFramework, currentStartskog, showFungi], ([framework, startskog, fungiVisible]) => {
+//   const frameworkValue = framework.value.toLowerCase();
+//   const startskogValue = startskog.value;
+//   const treeVisibility = 'dölj';
+//   const fungiVisibility = fungiVisible ? 'visa' : 'dölj';
+//   // Build all DZI URLs for the current slider steps
+//   const urls = sliderSteps.value.map(step => {
+//     const tLabel = step.timeLabel;
+//     return `/images/DZI_Images/${frameworkValue}_${tLabel}_${fungiVisibility}_${treeVisibility}_${startskogValue}_v2.dzi`;
+//   });
+//   // Deduplicate URLs
+//   const uniqueUrls = Array.from(new Set(urls));
+//   uniqueUrls.forEach(dziUrl => {
+//     console.log('Preloading DZI:', dziUrl);
+//     fetch(dziUrl)
+//       .then(res => res.text())
+//       .then(xmlText => {
+//         const parser = new DOMParser();
+//         const xmlDoc = parser.parseFromString(xmlText, 'application/xml');
+//         const imageEl = xmlDoc.documentElement; // <Image> root
+//         const format = imageEl.getAttribute('Format');
+//         const tileSize = parseInt(imageEl.getAttribute('TileSize'), 10);
+//         const sizeEl = xmlDoc.getElementsByTagName('Size')[0];
+//         const width = parseInt(sizeEl.getAttribute('Width'), 10);
+//         const height = parseInt(sizeEl.getAttribute('Height'), 10);
+//         const maxLevel = Math.ceil(Math.log2(Math.max(width, height)));
+//         const targetLevel = Math.min(11, maxLevel);
+//         for (let level = 0; level <= targetLevel; level++) {
+//           const scale = Math.pow(2, maxLevel - level);
+//           const levelWidth = Math.ceil(width / scale);
+//           const levelHeight = Math.ceil(height / scale);
+//           const cols = Math.ceil(levelWidth / tileSize);
+//           const rows = Math.ceil(levelHeight / tileSize);
+//           for (let x = 0; x < cols; x++) {
+//             for (let y = 0; y < rows; y++) {
+//               const tileUrl = dziUrl.replace('.dzi', `_files/${level}/${x}_${y}.${format}`);
+//               console.log(`Preloading tile L${level} (${x},${y}):`, tileUrl);
+//               const img = new Image();
+//               img.crossOrigin = 'Anonymous';
+//               img.src = tileUrl;
+//             }
+//           }
+//         }
+//       })
+//       .catch(() => {});
+//   });
+// }, { immediate: true });
 
 // Viewer references
 const singleViewerRef = ref(null);
@@ -1007,7 +1166,7 @@ const selectedCompareChoice = ref(null)
 
 
 // A new reactive variable for layout mode, independent of isFrameworkCompareMode.
-const currentLayoutMode = ref('sideBySide'); // 'sideBySide' or 'slider'
+const currentLayoutMode = ref('slider'); // 'sideBySide' or 'slider'
 
 // Update your toggle function to use the comparisonSliderRef.
 function toggleComparisonLayout() {

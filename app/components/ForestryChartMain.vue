@@ -1,8 +1,8 @@
 <template>
     <div>
-        <UPageHeader headline="Skogsskötsel" title="Diagram och staplar"
-            description="Utforska data för svampgrupper vid olika skogsåldrar och skogsbrukssätt." />
-            <UPage><template #left><div></div></template>   <h1 class="text-2xl font-bold mt-10">Samband mellan mykorrhizasvamp och träd</h1>
+
+            <UPage><template #left><div></div></template>         <UPageHeader headline="Skogsskötsel" title="Diagram och staplar"
+                description="Utforska data för svampgrupper vid olika skogsåldrar och skogsbrukssätt." />  <h1 class="text-2xl font-bold mt-10">Samband mellan mykorrhizasvamp och träd</h1>
         <p class="text-base/7 ">Mykorrhizasvampar lever i symbios med träd och är helt beroende av socker som
             transporteras från trädens
             rötter. Diagrammet visar hur mängden mykorrhizasvamp i marken följer mängden socker som träden producerar,

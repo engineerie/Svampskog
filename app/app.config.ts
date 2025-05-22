@@ -3,6 +3,11 @@ export default defineAppConfig({
     badge: {
       compoundVariants: [
         {
+          color: 'time',
+          variant: 'subtle',
+          class: 'bg-time-50 text-(--ui-time) dark:bg-time-950/80 ring ring-inset ring-(--ui-time)/25'
+        },
+        {
           color: 'signal',
           variant: 'subtle',
           class: 'bg-signal-50 text-(--ui-signal) dark:bg-signal-950/80 ring ring-inset ring-(--ui-signal)/25'
@@ -43,6 +48,7 @@ export default defineAppConfig({
       signal: "teal",
       kalkmark: "slate",
       vanligmark: "emerald",
+      time: "orange",
     },
 
   },

@@ -611,7 +611,7 @@ const columns = [
           })
       }
     ),
-  filterFn: (row, filterValue) => {
+  filterFn: (row, _columnId, filterValue) => {
     // If no mark options are selected, return true (no filtering)
     if (!filterValue || filterValue.length === 0) return true;
     let match = false;

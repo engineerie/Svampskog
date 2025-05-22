@@ -29,7 +29,7 @@
           <!-- Background line -->
           <div class="absolute top-1/2 h-1 bg-gray-200 z-[-1]" :style="{ left: lineLeft, right: lineLeft }"></div>
           <!-- Animated progress line -->
-          <div class="absolute top-1/2 h-1 bg-primary-500 transition-all duration-50 z-[-1]"
+          <div class="absolute top-1/2 h-1 bg-neutral-500 transition-all duration-50 z-[-1]"
             :style="{ left: lineLeft, width: progressWidth }"></div>
           <!-- Circles container -->
           <div class="flex items-center h-full z-10">
@@ -51,19 +51,19 @@
       <div class="flex mt-2 px-6">
         <div v-for="(step, index) in onboardingStepsDisplay" :key="index"
           class="flex-1 text-center text-sm text-neutral-500 relative"
-          :class="{ 'text-primary-500': index <= currentStep }">
+          :class="{ 'text-neutral-500': index <= currentStep }">
           <div>{{ step.label }}</div>
           <!-- Display badges for selections in historik and skogsskötsel -->
           <div v-if="index === 0 && onboardingStore.selectedStartskog !== null"
             class="absolute left-1/2 top-full mt-1 transform -translate-x-1/2 w-full">
-            <UBadge>
+            <UBadge color="secondary" variant="subtle">
               {{ startskogOptions[onboardingStore.selectedStartskog] }}
             </UBadge>
           </div>
           <!-- Display badge for skogsskötsel -->
           <div v-if="index === 1 && onboardingStore.selectedFramework !== null"
             class="absolute left-1/2 top-full mt-1 transform -translate-x-1/2">
-            <UBadge>
+            <UBadge variant="subtle">
               {{ frameworkOptions[onboardingStore.selectedFramework] }}
             </UBadge>
           </div>
@@ -432,7 +432,7 @@ const progressWidth = computed(() => {
 
 function circleClasses(index) {
   return index <= currentStep.value
-    ? "border-primary-500 bg-primary-500 text-neutral-50"
+    ? "border-neutral-500 bg-neutral-500 text-neutral-50"
     : "border-gray-300 bg-white text-neutral-500";
 }
 

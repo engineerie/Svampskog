@@ -1,5 +1,5 @@
 <template>
-  <UCard class="text-lg/8 text-neutral-500 dark:text-neutral-400 h-full" variant="naked">
+  <UCard class="sm:text-lg/8 text-neutral-500 dark:text-neutral-400 h-full" variant="naked">
     <p class="mb-2">
       I denna skogsmiljö dominerar ofta
       <span

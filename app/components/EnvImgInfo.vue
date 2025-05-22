@@ -1,6 +1,6 @@
 <template>
-  <div class="grid grid-cols-12 gap-4">
-    <div class="col-span-5 flex">
+  <div class="grid grid-cols-12 sm:gap-4">
+    <div class="col-span-12  sm:col-span-5 sm:flex">
       <div class="relative rounded-2xl overflow-hidden border border-neutral-200 dark:border-neutral-700">
         <SpatialForest />
         <div class="flex absolute bottom-0 justify-between w-full p-2 items-end">
@@ -25,8 +25,8 @@
                 <div class="rounded-xl overflow-hidden">
                   <SpatialForest />
                 </div>
-                <div class="mt-4 text-md text-neutral-500">
-                  Bilder visar förenklat hur mycel av olika arter och individer bildar ett komplext lapptäcke i
+                <div class="mt-2 sm:mt-4 text-md text-neutral-500">
+                  Bilden visar förenklat hur mycel av olika arter och individer bildar ett komplext lapptäcke i
                   skogsmark. Olika arter
                   har olika färger. Storlekar visar utbredningen av olika mycel, ofta någon kvadratmeter stora. På
                   rötterna av äldre
@@ -39,12 +39,12 @@
 
       </div>
     </div>
-    <div class="col-span-7 gap-4">
+    <div class="col-span-12  sm:col-span-7 ">
 
       <!-- <SpeciesRichness class="col-span-4"/> -->
 
 
-      <EnvInfo class="col-span-8" />
+      <EnvInfo/>
 
     </div>
   </div>
@@ -54,15 +54,15 @@
 </template>
 
 <script setup>
-import { ref } from "vue";
+// import { ref } from "vue";
 
 // Create a reactive variable to control the modal's visibility
-const isForestModalOpen = ref(false);
+// const isForestModalOpen = ref(false);
 
-// Function to open a modal based on type
-function openModal(type) {
-  if (type === "ForestImg") {
-    isForestModalOpen.value = true;
-  }
-}
+// // Function to open a modal based on type
+// function openModal(type) {
+//   if (type === "ForestImg") {
+//     isForestModalOpen.value = true;
+//   }
+// }
 </script>

@@ -1,4 +1,7 @@
 <script setup lang="ts">
+import type { ContentNavigationItem } from '@nuxt/content'
+
+const navigation = inject<Ref<ContentNavigationItem[]>>('svamparnavigation')
 const route = useRoute()
 
 const items = computed(() => [
@@ -10,11 +13,11 @@ const items = computed(() => [
     description: 'Vilka arter finns i olika skogar.',
     icon: 'i-lineicons-mushroom-1',
     to: '/mykorrhizasvampar/start',
-    // active: route.path.startsWith('/mykorrhizasvampar'),
+    active: route.path.startsWith('/mykorrhizasvampar'),
       children: [
       {
         label: 'Sök på miljö',
-        description: 'Vilka arter finns i olika skogar.',
+        description: 'Se vilka arter som kan finnas i olika skogar.',
         icon: 'i-lineicons-mushroom-1',
         to: '/mykorrhizasvampar/start',
       },
@@ -31,7 +34,34 @@ const items = computed(() => [
     description: 'Hur skogsskötsel påverkar svampar.',
     icon: 'i-hugeicons-tree-06',
     to: '/skogsskotsel',
+    active: route.path.startsWith('/skogsskotsel'),
 
+    children: [
+      {
+        label: 'Skötselmetoder',
+        description: 'Läs om olika skogsskötsel.',
+        icon: 'mdi:saw-blade',
+        to: '/skogsskotsel/skotselmetoder'
+      },
+      {
+        label: 'Interaktiv modell',
+        description: 'Se hur skogsskötsel påverkar i en modell.',
+        icon: 'i-material-symbols-interactive-space-outline-rounded',
+        to: '/skogsskotsel/modell'
+      },
+      {
+        label: 'Diagram och staplar',
+        description: 'Utforska data för svampar och skogsbruk',
+        icon: 'i-carbon-chart-line-smooth',
+        to: '/skogsskotsel/diagram'
+      },
+      {
+        label: 'Dokumentation',
+        description: 'Manual och underlag.',
+        icon: 'i-heroicons-clipboard-document-list',
+        to: '/skogsskotsel/dokumentation'
+      },
+    ]
   },
   // {
   //   label: 'Svampkunskap',
@@ -102,12 +132,13 @@ const items = computed(() => [
 </script>
 
 <template>
-  <UHeader mode="drawer" class="bg-white dark:bg-black">
+  <UHeader mode="modal" class="bg-white dark:bg-black">
     <template #left>
       <!-- <NuxtLink to="https://www.slu.se/" target="blank"> -->
+        <!-- </NuxtLink> -->
       <UColorModeImage light="/images/slu_logo_webb.png" dark="/images/slu_logo_white_webb.png" :width="50" :height="50"
         class="size-8 mx-3" />
-      <!-- </NuxtLink> -->
+      
 
       <NuxtLink to="/" class="text-2xl font-semibold flex items-center ">
         <UBadge size="xl" color="neutral" variant="subtle">Svampskog</UBadge>
@@ -131,7 +162,9 @@ const items = computed(() => [
 
     <template #body>
       <UNavigationMenu :items="items" orientation="vertical" class="-mx-2.5" />
-
+     <USeparator class="my-2" label="Svampar dokumentation" type="dashed"/>
+      <UContentNavigation :navigation="navigation" highlight />
+ 
       <!-- <USeparator class="my-6" /> -->
       <!-- 
       <UButton label="Sign in" color="neutral" variant="subtle" to="/login" block class="mb-3" />

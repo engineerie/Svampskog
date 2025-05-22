@@ -34,9 +34,9 @@ const computedLineColors = computed(() => {
     const speciesLower = props.species.toLowerCase();
     if (speciesLower === "total") {
         if (props.isComparison && props.secondFramework && props.secondFramework !== props.selectedFramework) {
-            return ["#808080", "#3b82f6"]; // gray for the main total line and blue for the comparison
+            return ["#22c55e", "#3b82f6"]; // gray for the main total line and blue for the comparison
         }
-        return "#808080"; // gray color for total svamp instance when not comparing
+        return "#22c55e"; // gray color for total svamp instance when not comparing
     }
     // Determine the original color based on species.
     let originalColor = "";
