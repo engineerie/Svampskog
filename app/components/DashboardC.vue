@@ -11,133 +11,8 @@
   </MySlideover>
 
   <UContainer>
-  <div>
-    <div class="flex justify-between items-center w-full">
-      <!-- <UButton label="Välj miljö" class="h-fit"/>
-        <UTabs
-     v-model="activeTab"
-     :items="items"
-     variant="link"
-     color="neutral"
-     class="py-1 w-fit"
-   /> -->
-  <!-- Buttons for medium and larger screens -->
-  <!-- <div class="hidden sm:flex flex-wrap items-center w-full mt-2 gap-2">
-    <UButton
-    v-for="item in items"
-    :key="item.value"
-    :label="item.label"
-    :color="activeTab === item.value ? 'primary' : 'neutral'"
-    variant="ghost"
-    size="sm"
-    @click="activeTab = item.value"
-  />
-  </div> -->
-
-
-  <!-- USelect for small screens with full width -->
-  <!-- <div class="block sm:hidden mt-2 w-full">
-    <USelect v-model="activeTab" :items="items" option-label="label" option-value="value" class="w-full" />
-  </div> -->
-    </div>
-
-    <div v-if="activeTab === 'komigang'">
-      <UPage>
- 
- <template #left> <div></div></template>
- <template #right> <div><div class="text-neutral-500 mt-6 pr-4"> Ett öppet <NuxtLink class="text-primary-500" to="https://www.slu.se/fakulteter/s/samverkan/livslangt-larande/" target="blank">webbinarium</NuxtLink> om att använda Svampskog hålls den 23 april och fler tillfällen planeras till hösten.
- </div></div></template>
-      <UPageHeader headline="Svampar" title="Manual" description="Information om hur du kan använda verktyget." />
-     </UPage>
-<UPage>
-
-
-  <template #left> <div></div></template>
-      <template #right> <div></div></template>
-
-      <template>
-
-</template>
-      <ContentRenderer
-        v-if="page"
-        :value="page"
-      />
-</UPage>
-
-     
-    </div>
-
-    <div v-else-if="activeTab === 'miljo'">
-      <UPageHeader headline="Svampar" title="Miljöinformation"
-        description="Definitationer och bilder på de olika miljöerna." />
-      <Miljoinformation />
-
-    </div>
-
-    <div v-else-if="activeTab === 'dataunderlag'">
-      <UPage>
- 
- <template #left> <div></div></template>
- <template #right> <div></div></template>
-      <UPageHeader headline="Svampar" title="Dokumentation"
-      description="Information om innehållet och var det kommer ifrån." />
-      </UPage>
-<UPage>
- 
-  <template #left> <div><div class="text-neutral-500 mt-6">Text: Anders Dahlberg <br/> 9 april 2025</div></div></template>
-  <template #right> <div></div></template>
-  
-      <div class="mt-6">
-        <DokumentationSvampar />
-        <!-- <LandingDNA />
-        <LandingSamladKunskap /> -->
-      </div>
-</UPage>
-
-
-    
-    </div>
-    <div v-else-if="activeTab === 'dashboard'">
     <UMain>
-      <transition name="fade" mode="out-in">
-        <div v-if="!showEnvironmentSelector" key="header-view">
-          <UPage class="header-container">
-            <template #left><div></div> </template>
-            <template #right><div></div></template>
-            <div>
-              <UPageHeader
-              headline="Svampar"
-              title="Utforska svampar i olika skogar"
-              description="Här kan du söka på svenska skogsmiljöer för att se vilka mykorrhizasvampar som kan finnas i marken baserat på DNA-analyser av svampmycel i markprover samt vår samlade kunskap om var olika arters fruktkroppar förekommer."
-              />
-            <div class="mt-4 grid sm:grid-cols-2 gap-4 pb-2 px-0.5 sm:px-0">
-              <UPageCard
-    title="Sök på miljö"
-    description="Sök på svenska skogsmiljöer för att se vilka mykorrhizasvampar som kan finnas där."
-    icon="i-healthicons-forest-outline"
-    @click="showEnvironmentSelector = true"
-    class="cursor-pointer "
-  />
-  <UPageCard
-    title="Dokumentation"
-    description="Information om hur du använder artsidan och var underlaget kommer ifrån."
-    icon="i-heroicons-clipboard-document-list"
-    to="/svampardocs"
-  />
-              <!-- <UButton label="Välj miljö" @click="showEnvironmentSelector = true" />
-              <UButton label="Dokumentation" to="/svampardocs" /> -->
-            </div>
-            </div>
-            
-          </UPage>
-        </div>
-
-        <div v-else key="selector-view">
-          <EnvironmentSelector class="" />
-          <!-- <USeparator class="mb-4" /> -->
-        </div>
-      </transition>
-
+          <EnvironmentSelector class="fixed top-16 left-0 right-0" />
       <transition name="fade" mode="out-in">
         <component
           :is="activeComponent"
@@ -147,8 +22,6 @@
         />
       </transition>
     </UMain>
-  </div>
-  </div>
 </UContainer>
 </template>
 
@@ -159,8 +32,8 @@ import MySlideover from "./MySlideover.vue";
 import FullScreenPoison from "./FullScreenPoison.vue";
 import FullScreenEdible from "./FullScreenEdible.vue";
 import RedlistedComponent from "./RedlistedComponent.vue";
-import NormalView from "./NormalView.vue"; // Component for the normal view
-import StartView from "./StartView.vue"; // Component for the normal view
+import NormalView from "./NormalView.vue"; 
+import StartView from "./StartView.vue"; 
 
 import { useEnvParamsStore } from "~/stores/envParamsStore";
 
@@ -169,39 +42,13 @@ import EdnaComponent from "./EdnaComponent.vue";
 import { imageMap } from '~/stores/envParamsStore'
 const route = useRoute();
 
-// inside <script setup> before your useAsyncData call:
-const allDocs = await queryCollection('mushroomInfo').all()
-console.log('🍄 mushroomInfo docs:', allDocs)
-
-// Fetch the manual markdown from the mushroomInfo collection
-const { data: page } = await useAsyncData('manual-doc', () =>
-  queryCollection('mushroomInfo')
-       .path('/mushroom/manual')
-    .first()
-)
-
-
-const activeTab = ref("dashboard");
-
-const items = [
-{ label: "Arter i olika miljöer", value: "dashboard" },
-{ label: "Miljöinformation", value: "miljo" },
-  { label: "Manual", value: "komigang" },
-  { label: "Dokumentation", value: "dataunderlag" },
-];
-
 const speciesStore = useSpeciesStore();
 const envParamsStore = useEnvParamsStore();
 
 
 const showSlideover = ref(false);
 const isPinned = ref(true);
-const showEnvironmentSelector = ref(false);
 
-// Toggle the slideover panel (e.g. for SpeciesInfo)
-// function toggleSlideover() {
-//   showSlideover.value = !showSlideover.value;
-// }
 
 // Open the slideover automatically when a species is selected
 watch(
@@ -224,10 +71,6 @@ const hasAllParams = computed(() => {
     envParamsStore.vegetationType;
 });
 
-// The active component is chosen based on the route parameters and any full-screen state:
-// - If not all parameters are provided, we show StartView.
-// - If all parameters are provided, we use the full-screen component if one is active,
-//   or fall back to NormalView.
 const activeComponent = computed(() => {
   if (!hasAllParams.value) {
     return StartView;

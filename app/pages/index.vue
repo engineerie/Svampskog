@@ -89,18 +89,20 @@ const svampinfo = ref([
       </div>
     </div> -->
     <div class="page-section">
-    <UPageHero :title="page.hero.title" :description="page.hero.description" :links="page.hero.links" orientation="horizontal">
+    <UPageHero :ui="{
+      container: 'pt-6 md:pt-24'
+    }" :title="page.hero.title" :description="page.hero.description" :links="page.hero.links" orientation="horizontal">
       <template #headline>
-        <UButton trailing variant="subtle">
+        <UButton variant="subtle" color="warning" icon="i-fluent-emoji-high-contrast-construction">
 
     <span class="whitespace-normal ">
-      Mobilanpassning kommer snart!
+      Utvecklingsarbete och dokumentation pågår 
     </span>
   </UButton>      </template> 
 
       <template #top>
         <div
-          class="absolute rounded-full dark:bg-(--ui-primary) blur-[300px] size-60 sm:size-80 transform -translate-x-1/2 left-1/2 -translate-y-80" />
+          class="absolute rounded-full dark:bg-(--ui-primary) blur-[300px] size-60 sm:size-80 transform -translate-x-1/2 left-1/2 -translate-y-80" ></div>
 
         <!-- <StarsBg /> -->
       </template>
@@ -124,7 +126,7 @@ const svampinfo = ref([
       <!-- <PromotionalVideo /> -->
     </UPageHero>
   </div>
-  <div class="page-section">
+  <div class="page-section ">
     <!-- <UPageSection
       description="Mykorrhizasvampar är svampar som lever i symbios med träd. Symbiosen innebär att svamparna får sin energi från träden. I utbyte sköter de om trädens näringsförsörjning. Svamparnas mikroskopiskt tunna hyfer är om- och invuxna i trädens tunna rötter och förstorar trädens rotsystem tusenfalt. "
       :features="svampinfo"
@@ -134,8 +136,7 @@ const svampinfo = ref([
    
   </UPageSection> -->
     <UContainer class="text-center mx-auto max-w-5xl text-neutral-500 text-md my-24">
-      "Mykorrhizasvampar är svampar som lever i symbios med träd. Symbiosen innebär att svamparna får sin energi från träden. I utbyte sköter de om trädens näringsförsörjning. Svamparnas mikroskopiskt tunna hyfer är om- och invuxna i trädens tunna rötter och förstorar trädens rotsystem tusenfalt. 
-Det finns omkring 2000 olika arter mykorrhizasvampar i Sverige, 340 är rödlistade. De allra flesta matsvampar är mykorrhizasvampar." 
+      "Mykorrhizasvampar lever i symbios med träd vilket innebär att svamparna får sin energi från träden och I utbyte sköter de om trädens näringsförsörjning. <span class="hidden md:inline">Svamparnas mikroskopiskt tunna hyfer är om- och invuxna i trädens tunna rötter och förstorar trädens rotsystem tusenfalt.</span>" 
       
 <div class="flex justify-center mt-4 page-section">
 <UUser
@@ -163,7 +164,7 @@ Det finns omkring 2000 olika arter mykorrhizasvampar i Sverige, 340 är rödlist
           <UButton 
             v-for="(link, linkIndex) in page.sections[0].links" 
             :key="linkIndex" 
-            variant="ghost"
+            variant="subtle"
             v-bind="link" 
             size="xl"
             trailing/>
@@ -188,7 +189,7 @@ Det finns omkring 2000 olika arter mykorrhizasvampar i Sverige, 340 är rödlist
           <UButton 
             v-for="(link, linkIndex) in page.sections[1].links" 
             :key="linkIndex" 
-            variant="ghost"
+            variant="subtle"
             v-bind="link" 
             size="xl"
             trailing/>
@@ -214,7 +215,7 @@ Det finns omkring 2000 olika arter mykorrhizasvampar i Sverige, 340 är rödlist
   </div>
 </template>
 
-<style scoped>
+<style>
 .page-section {
   opacity: 0;
   transform: translateY(20px);

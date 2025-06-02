@@ -12,7 +12,7 @@ const items = computed(() => [
     label: 'Svampar',
     description: 'Vilka arter finns i olika skogar.',
     icon: 'i-lineicons-mushroom-1',
-    to: '/mykorrhizasvampar/start',
+    to: '/mykorrhizasvampar',
     active: route.path.startsWith('/mykorrhizasvampar'),
       children: [
       {
@@ -137,7 +137,7 @@ const items = computed(() => [
       <!-- <NuxtLink to="https://www.slu.se/" target="blank"> -->
         <!-- </NuxtLink> -->
       <UColorModeImage light="/images/slu_logo_webb.png" dark="/images/slu_logo_white_webb.png" :width="50" :height="50"
-        class="size-8 mx-3" />
+        class="size-8 mr-2" />
       
 
       <NuxtLink to="/" class="text-2xl font-semibold flex items-center ">

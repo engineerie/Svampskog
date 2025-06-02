@@ -106,10 +106,10 @@
                         width="450" format="webp" />
                     </div>
                     <div class="p-3">
-                      <h1 class="text-muted-800 text-xl font-medium mb-1">
-                        Inte kalavverkad
+                      <h1 class="text-neutral-800 text-lg font-medium mb-1">
+                        Inte tidigare kalavverkad
                       </h1>
-                      <h1 class="text-muted-400">
+                      <h1 class="text-neutral-500">
                         Skogen har oftast skogsbrukats, men inte varit
                         kalavverkad.
                       </h1>
@@ -125,12 +125,11 @@
                         width="450" format="webp" />
                     </div>
                     <div class="p-3">
-                      <h1 class="text-muted-800 text-xl font-medium mb-1">
-                        Kalavverkad
+                      <h1 class="text-neutral-800 text-lg font-medium mb-1">
+                        Tidigare kalavverkad
                       </h1>
-                      <h1 size="md" weight="medium" class="text-muted-400">
-                        Skogen har varit kalavverkad eller är etablerad på
-                        tidigare trädlös mark.
+                      <h1 size="md" weight="medium" class="text-neutral-500">
+                        Skogen har varit kalavverkad eller är första generationen skog på tidigare jordbruksmark.
                       </h1>
                     </div>
                   </div>

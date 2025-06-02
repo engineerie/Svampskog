@@ -18,7 +18,7 @@ useHead({
 })
 
 useSeoMeta({
-  titleTemplate: '%s - Nuxt UI Pro - SaaS template',
+  titleTemplate: 'Svampskog',
   ogImage: 'https://saas-template.nuxt.dev/social-card.png',
   twitterImage: 'https://saas-template.nuxt.dev/social-card.png',
   twitterCard: 'summary_large_image'
@@ -32,23 +32,23 @@ const { data: svamparnavigation } = await useAsyncData('svamparnavigation', () =
   transform: data => data.find(item => item.path === '/svampardocs')?.children || []
 })
 
-const { data: files } = useLazyAsyncData('search', () => queryCollectionSearchSections('docs'), {
-  server: false
-})
+// const { data: files } = useLazyAsyncData('search', () => queryCollectionSearchSections('docs'), {
+//   server: false
+// })
 
-const links = [{
-  label: 'Docs',
-  icon: 'i-lucide-book',
-  to: '/docs/getting-started'
-}, {
-  label: 'Pricing',
-  icon: 'i-lucide-credit-card',
-  to: '/pricing'
-}, {
-  label: 'Blog',
-  icon: 'i-lucide-pencil',
-  to: '/blog'
-}]
+// const links = [{
+//   label: 'Docs',
+//   icon: 'i-lucide-book',
+//   to: '/docs/getting-started'
+// }, {
+//   label: 'Pricing',
+//   icon: 'i-lucide-credit-card',
+//   to: '/pricing'
+// }, {
+//   label: 'Blog',
+//   icon: 'i-lucide-pencil',
+//   to: '/blog'
+// }]
 
 provide('navigation', navigation)
 provide('svamparnavigation', svamparnavigation)
@@ -56,7 +56,7 @@ provide('svamparnavigation', svamparnavigation)
 
 <template>
   <UApp>
-    <!-- <UBanner title="Förhandsversion: fler funktioner och mobilanpassning kommer snart!" /> -->
+    <UBanner icon="i-fluent-emoji-high-contrast-construction" color="warning" title="Förhandsversion: fler funktioner och mobilanpassning kommer snart!" />
 
     <NuxtLoadingIndicator />
 
@@ -64,7 +64,7 @@ provide('svamparnavigation', svamparnavigation)
       <NuxtPage />
     </NuxtLayout>
 
-    <ClientOnly>
+    <!-- <ClientOnly>
       <LazyUContentSearch
         :files="files"
         shortcut="meta_k"
@@ -72,6 +72,6 @@ provide('svamparnavigation', svamparnavigation)
         :links="links"
         :fuse="{ resultLimit: 42 }"
       />
-    </ClientOnly>
+    </ClientOnly> -->
   </UApp>
 </template>

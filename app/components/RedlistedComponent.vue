@@ -1,12 +1,30 @@
 <template>
   <div>
     <!-- Header with title, filters, and view toggle -->
-    <div class="flex justify-between">
-      <div class="flex gap-4 ml-4">
-        <h1 class="text-neutral-800 dark:text-neutral-300 text-3xl">
+    <div class="md:flex justify-between">
+      <div class="md:flex gap-4">
+        <div class="w-full flex justify-between">
+  <h1         @click="$emit('enlarge')"
+   class="text-teal-500 text-2xl md:text-3xl">
           Naturvårdsarter
         </h1>
+        
+        <UButton
+        :label="isNormalView ? '' : 'Gå tillbaka'"
+      color="neutral"
+      variant="soft"
+        size="lg"
+        @click="$emit('enlarge')"
+        :class="isNormalView ? 'hidden' : 'md:hidden'"
+        :icon="isNormalView ? '' : 'i-heroicons-arrow-uturn-left-solid'"
+        trailing
+      />
+       
+       
+        </div>
+      
         <UTabs
+        class="hidden md:flex"
           v-model="activeTab"
           :items="items"
           variant="link"
@@ -21,21 +39,23 @@
           color="tertiary"
           variant="subtle"
           label="Enligt samlad kunskap, främst var fruktkroppar förekommer"
-          class="h-fit"
+          class="h-fit hidden md:flex"
         />
-        <UButton
+      
+          <UButton
           color="neutral"
           variant="ghost"
           size="lg"
           :icon="isNormalView ? 'material-symbols:open-in-full' : 'material-symbols:close-fullscreen'"
           @click="$emit('enlarge')"
-        />
+          class="hidden md:flex"        />
       </div>
     </div>
     <!-- Table vs. grid view -->
-    <transition name="fade" mode="out-in" class="min-h-[550px]">
+    <transition name="fade" mode="out-in" class="md:min-h-[260px]">
     <div v-if="isTableView">
       <SpeciesTable
+      @enlarge="emit('enlarge')"
         :is-normal-view="isNormalView"
         dataType="redlisted"
         dataTypeFolder="redlisted"
@@ -54,8 +74,11 @@
 </template>
 
 <script setup>
-import { computed } from "vue";
+import { computed, defineEmits } from "vue";
+import { useMediaQuery } from "@vueuse/core";
 import { useTabsStore } from "~/stores/tabsStore";
+
+const emit = defineEmits(['enlarge']);
 
 // Define the items for the tabs.
 const items = [
@@ -74,13 +97,20 @@ const items = [
 // Import props if needed.
 const props = defineProps({ isNormalView: Boolean });
 
+// detect mobile screens (< md)
+const isSmallScreen = useMediaQuery('(max-width: 767px)');
+
 // Set up the store.
 const tabsStore = useTabsStore();
 
 // Bind the active tab for this component to the store.
 const activeTab = computed({
-  get: () => tabsStore.getActiveTab("RedlistedComponent"),
-  set: (val) => tabsStore.setActiveTab("RedlistedComponent", val),
+  get: () => isSmallScreen.value ? 'table' : tabsStore.getActiveTab("RedlistedComponent"),
+  set: (val) => {
+    if (!isSmallScreen.value) {
+      tabsStore.setActiveTab("RedlistedComponent", val);
+    }
+  }
 });
 
 // Compute if the table view should be active.

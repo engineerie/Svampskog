@@ -13,16 +13,16 @@
   </div>
   <!-- min-h-[399px] -->
     <div
-            class="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-6 gap-4   p-2"
+            class="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-8 gap-4   p-2"
           >
             <div
               v-for="(row, index) in gridPaginatedData"
               :key="row.Commonname + row.Scientificname + index"
-              class="bg-white dark:bg-neutral-800 rounded-2xl border border-neutral-200 hover:shadow-md transition-shadow cursor-pointer h-[184px]"
+              class="bg-white dark:bg-neutral-800 rounded-2xl border border-neutral-200 dark:border-neutral-700/40 hover:shadow-md transition-shadow cursor-pointer h-[150px]"
               @click="selectRow(row)"
             >
               <!-- Image Thumbnail -->
-              <div class="w-full h-32 relative rounded-t-2xl overflow-hidden">
+              <div class="w-full h-24 relative rounded-t-2xl overflow-hidden">
                 <NuxtImg
                   v-if="row.images && row.images.length"
                   :src="row.images[0]"
@@ -41,12 +41,13 @@
                     class="w-8 h-8 text-neutral-500"
                   />
                 </div>
-                <div class="absolute bottom-2 left-2 flex gap-1">
+                <div class="absolute bottom-1 left-1 flex gap-1">
                     <UBadge
                     v-if="row.SIGNAL_art !== 'S' && !(['LC', '0', 'NA', 'NE', 'Saknas', null].includes(row.RL2020kat))"
                     class="bg-error-50 dark:bg-error-950/80"
                     color="error"
                     variant="subtle"
+                    size="sm"
                     :label="row.RL2020kat !== 'Saknas' ? getStatusTooltip(row.RL2020kat) : 'Ej bedömd'"
                   />
                   <UBadge
@@ -54,25 +55,28 @@
                     color="signal"
                     variant="subtle"
                     label="Signalart"
+                    size="sm"
                   />
                   <UBadge
                     v-if="row['Nyasvamp-boken'] === 'x'"
                     color="warning"
                     variant="subtle"
                     label="Matsvamp"
+                    size="sm"
                   />
                   <UBadge
                     v-if="row['Giftsvamp'] === 'x'"
                     color="poison"
                     variant="subtle"
                     label="Giftsvamp"
+                    size="sm"
                   />
                 </div>
               </div>
               <!-- Species Names -->
               <div class="p-2 pt-1">
                 <div
-                  class="text-md font-medium text-neutral-500 dark:text-neutral-300 truncate"
+                  class="text-sm font-medium text-neutral-500 dark:text-neutral-300 truncate"
                 >
                   {{ capitalize(row.Commonname) }}
                 </div>
@@ -319,7 +323,7 @@ const filteredData = computed(() => {
 });
 
 // Grid pagination – adjust page size based on isNormalView
-const gridPageSize = computed(() => (props.isNormalView ? 12 : 24))
+const gridPageSize = computed(() => (props.isNormalView ? 24 : 32))
 const gridPage = ref(1)
 const gridPaginatedData = computed(() => {
   const start = (gridPage.value - 1) * gridPageSize.value

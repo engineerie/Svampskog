@@ -3,22 +3,22 @@
     <!-- Environment Row -->
     <div class="sm:px-2 text-lg font-semibold py-2 flex flex-wrap gap-2 sm:gap-4">
   <transition name="slide-up" mode="out-in">
-    <UBadge :key="envParamsStore.geographyLabel" size="lg" color="neutral" variant="subtle">
+    <UBadge :key="envParamsStore.geographyLabel" size="lg" color="neutral" variant="soft">
       {{ envParamsStore.geographyLabel }}
     </UBadge>
   </transition>
   <transition name="slide-up" mode="out-in">
-    <UBadge :key="envParamsStore.forestTypeLabel" size="lg" color="neutral" variant="subtle">
+    <UBadge :key="envParamsStore.forestTypeLabel" size="lg" color="neutral" variant="soft">
       {{ envParamsStore.forestTypeLabel }}
     </UBadge>
   </transition>
   <transition name="slide-up" mode="out-in">
-    <UBadge :key="envParamsStore.standAgeLabel" size="lg" color="neutral" variant="subtle">
+    <UBadge :key="envParamsStore.standAgeLabel" size="lg" color="neutral" variant="soft">
       {{ envParamsStore.standAgeLabel }}
     </UBadge>
   </transition>
   <transition name="slide-up" mode="out-in">
-    <UBadge :key="envParamsStore.vegetationTypeLabel" size="lg" color="neutral" variant="subtle">
+    <UBadge :key="envParamsStore.vegetationTypeLabel" size="lg" color="neutral" variant="soft">
       {{ envParamsStore.vegetationTypeLabel }}
     </UBadge>
   </transition>

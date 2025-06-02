@@ -5,26 +5,30 @@ definePageMeta({ layout: 'mylayout' })
 <template>
   <UContainer>
     <UPage>
-        <template #left>
+        <!-- <template #left>
           <div >
           </div>
          
         </template>
-        <template #right><div></div></template>
-        <UPageHeader
+        <template #right><div></div></template> -->
+        <!-- <UPageHeader
       headline="Skogsskötsel"
       title="Se hur skogsskötsel påverkar svampar"
       description="Här visualiserar vi baserat på den kunskap som finns hur olika former av trakthyggesbruk och hyggesfria metoder påverkar förekomsten av mykorrhizasvampar under en skogsgeneration.
 "
-    />
-    <div class="mt-4 grid grid-cols-1 sm:grid-cols-2 gap-4">
+    /> -->
+    <div class="mt-4 grid grid-cols-1 sm:grid-cols-3 gap-4">
       <UPageCard
         title="Skötselmetoder"
         description="Läs om skötselmetoder och hur de påverkar mykorrhizasvampar."
         to="/skogsskotsel/skotselmetoder"
         class="cursor-pointer"
         icon="mdi:saw-blade"
-      />
+        variant="ghost"
+        orientation="vertical"
+
+      >  <NuxtImg src="/images/luckhuggning.png" width="500" height="300" format="webp" quality="80" class=" rounded-xl border border-neutral-100"/>
+    </UPageCard>
      
       <UPageCard
         title="Interaktiv modell"
@@ -32,7 +36,10 @@ definePageMeta({ layout: 'mylayout' })
         to="/skogsskotsel/modell"
         class="cursor-pointer"
         icon="i-material-symbols-interactive-space-outline-rounded"
-      />
+        variant="ghost"
+        orientation="vertical"
+      ><NuxtImg src="/images/LandningSkogsbruk/trakthygge_efter_visa_visa_produktionsskog_.png" width="500" height="300" format="webp" quality="80" class=" rounded-xl border border-neutral-100"/>
+    </UPageCard>
     
       <UPageCard
         title="Diagram och staplar"
@@ -40,14 +47,22 @@ definePageMeta({ layout: 'mylayout' })
         to="/skogsskotsel/diagram"
         class="cursor-pointer"
         icon="i-carbon-chart-line-smooth"
-      />
+        variant="ghost"
+
+        orientation="vertical"
+
+      ><NuxtImg src="/images/diagram.png" width="500" height="300" format="webp" quality="80" class=" rounded-xl border border-neutral-100"/>
+    </UPageCard>
       <UPageCard
       icon="i-heroicons-clipboard-document-list"
 
         title="Dokumentation"
         description="Se dokumentationen."
         to="/skogsskotsel/dokumentation"
-        class="cursor-pointer"
+        class="cursor-pointer grow-0"
+        variant="ghost"
+        orientation="vertical"
+
       />
     </div>
       </UPage>

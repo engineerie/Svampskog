@@ -9,11 +9,11 @@ hero:
     - label: Svampar
       icon: i-lineicons-mushroom-1
       trailing: false
-      to: /mykorrhizasvampar/start
+      to: /mykorrhizasvampar
       target: 
       size: xl
-      color: neutral
-      variant: ghost
+      color: primary
+      variant: subtle
     - label: Skogsskötsel
       icon: i-hugeicons-tree-06
       trailing: false
@@ -21,7 +21,7 @@ hero:
       target: 
       size: xl
       color: neutral
-      variant: ghost
+      variant: subtle
     # - label: Svampkunskap
     #   icon: i-heroicons-book-open
     #   size: xl
@@ -31,30 +31,30 @@ hero:
     #   target: _blank
 sections:
   - title: Utforska svampar i olika skogar
-    description: Här kan du söka på svenska skogsmiljöer för att se vilka arter som kan finnas i marken baserat på DNA-analyser av svampmycel i jordprover samt vår samlade kunskap om var olika arters fruktkroppar förekommer.
+    description: Här kan du ta reda på vilka mykorrhizasvampar som kan finns i en skog baserat på dels DNA-analyser av svampmycel i jordprover, dels vår samlade kunskap om var olika arters fruktkroppar förekommer.
     id: features
-    headline: Svamparter
+    headline: Svampar
     links:
-      - label: Gå till svamparter
-        to: /mykorrhizasvampar/start
+      - label: Gå till svampar
+        to: /mykorrhizasvampar
         icon: i-heroicons-arrow-right
     orientation: horizontal
     reverse: true
     src: /images/SvamparSverige4.svg
     features:
       - name: 99.9% Uptime
-        description: Hittills har prover från 2500 skogar runt om i Sverige DNA analyserats. Resultaten ger en bra bild av förekomsten av vanliga mykorrhizasvampar.
+        description: Hittills har prover från 2500 skogar runt om i Sverige DNA-analyserats. Resultaten ger en bra bild av förekomsten av vanligare mykorrhizasvampar, även de som saknar fruktkroppar.
         icon: i-solar-dna-linear
       - name: Bank-Level Security
-        description: Baserat på uppgifter om fruktkroppar har vi sammanställt information om var mat- och giftsvampar samt naturvårdsintressanta svampar kan förekomma.
+        description: För att få uppgifter om alla, både vanliga och ovanligare, arters förekomster har vi också sammanställt information om var mat- och giftsvampar samt naturvårdsintressanta svampar kan förekomma.
         icon: i-lineicons-mushroom-1
   - title: Se hur skogsskötsel påverkar svampar
-    description: Här visualiserar vi baserat på den kunskap som finns hur olika former av trakthyggesbruk och hyggesfria metoder påverkar förekomsten av mykorrhizasvampar under en skogsgeneration.
+    description: Här försöker vi att visualisera hur trakthyggesbruk och olika former av hyggesfria metoder kan påverka förekomsten av mykorrhizasvampar under en skogsgeneration. Informationen baseras på sammanställda forskningsresultat, bl a från ett samarbete med Markinventeringen och Riksskogstaxeringen. 
     src: /images/SvamparSverige4.svg
     headline: Skogsskötsel
     links:
       - label: Gå till skogsskötsel
-        to: /mykorrhizasvampar
+        to: /skogsskotsel
         icon: i-heroicons-arrow-right
     orientation: horizontal
     reverse: false

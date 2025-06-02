@@ -4,19 +4,97 @@
     <NuxtImg v-for="(src, key) in imageMap" :key="key" :src="src" width="300" height="180" format="webp" quality="80"
       preload />
   </div>
-  <div class="sm:pt-8 pt-2 hidden sm:block">
+<div :class="['block md:hidden relative transition-height ', mobileCollapsed ? 'h-16' : 'h-36']">
+  <div :class="[' z-20 bg-white dark:bg-neutral-950 border-b border-neutral-200 dark:border-neutral-800 fixed left-0 right-0 transition-height', mobileCollapsed ? 'h-12' : 'h-32']">
+    <Transition name="fade" mode="out-in">
+      <div v-if="!mobileCollapsed" class="grid grid-cols-2 gap-2 w-full mx-auto max-w-full p-2">
+        <!-- Use enabledOptions for USelect items as well -->
+        <USelect v-for="category in categories" :key="category.key" :items="enabledOptions[category.key]"
+          v-model="envStore[category.key]" :placeholder="category.defaultLabel" class="flex-1" append-to-body variant="soft"/>
+          <div class="flex gap-2">
+<UButton trailing :icon="restrictionEnabled ? 'mdi:lock' : 'mdi:lock-open'" @click="toggleRestriction"
+          shape="full" class="transition-all shrink-0" variant="soft" :color="restrictionEnabled ? 'secondary' : 'neutral'">
+          {{ restrictionEnabled ? "DNA-data" : "DNA-data" }}
+        </UButton>
+        <UModal fullscreen title="Kombinationer" class="w-full">
+          <UButton shape="full" trailing icon="mdi:apps" variant="soft">
+            Kombinationer
+          </UButton>
+          <template #body>
+            <UButton trailing :icon="restrictionEnabled ? 'mdi:lock' : 'mdi:lock-open'" @click="toggleRestriction"
+          shape="full" class="transition-all shrink-0 mb-2" variant="soft" :color="restrictionEnabled ? 'secondary' : 'neutral'">
+          {{ restrictionEnabled ? "Begränsar val till där det finns DNA-data" : "DNA-data" }}
+        </UButton>
+            <div class="grid gap-2 ">
+              <UCard v-for="category in categories" :key="category.key" variant="soft">
+                <div v-for="option in enabledOptions[category.key]" :key="option.value"
+                  class="flex justify-between mb-2 text-neutral-500">
+                  <label :for="`${category.key}-${option.value}`"
+                    :class="{ 'opacity-40 cursor-not-allowed': option.disabled, 'cursor-pointer': !option.disabled }"
+                    class="text-sm">
+                    {{ option.label }}
+                  </label>
+                  <UCheckbox
+                    :id="`${category.key}-${option.value}`"
+                    color="primary"
+                    :model-value="envStore[category.key] === option.value"
+                    @update:model-value="() => { if (!option.disabled) selectOption(category.key, option.value) }"
+                    :disabled="option.disabled"
+                  />
+                </div>
+              </UCard>
+            </div>
+          </template>
+        </UModal>
+          </div>
+        
+        <div class="flex justify-end">
+           <UButton @click="toggleMobileCollapsed" trailing icon=""
+          shape="full" class="transition-all" variant="soft" color="neutral">
+          Dölj
+        </UButton>
+        </div>
+       
+      </div>
+      <div v-else class="flex justify-between w-full mx-auto max-w-full ">
+        <div class="flex gap-1 p-2 overflow-scroll" @click="toggleMobileCollapsed">
+          <UBadge
+            v-for="category in categories"
+            :key="category.key"
+            size="xl"
+            variant="soft"
+            color="neutral"
+            class=" "
+            truncate
+            :label="getLabel(category.key) || category.defaultLabel"
+          >
+            <!-- {{ getLabel(category.key) || category.defaultLabel }} -->
+          </UBadge>
+        </div>
+        <!-- <div class="flex justify-end">
+          <UButton @click="toggleMobileCollapsed" trailing icon="mdi:chevron-down"
+            shape="full" class="transition-all" variant="soft" color="neutral">
+            Visa
+          </UButton>
+        </div> -->
+      </div>
+    </Transition>
+  </div>
+</div>
+      
+  <div class="md:pt-8 pt-2 hidden md:block">
     <!-- Original EnvironmentSelector content -->
     <div ref="contentRef" class="original-content">
       <!-- Parameter Popover Grid -->
-      <div class="grid grid-cols-2 sm:grid-cols-4 sm:gap-5 gap-2 mb-2">
-        <div v-for="category in categories" :key="category.key" class="flex sm:justify-center w-full">
+      <div class="grid grid-cols-2 md:grid-cols-4 md:gap-5 gap-2 mb-2">
+        <div v-for="category in categories" :key="category.key" class="flex md:justify-center w-full">
           <UPopover >
             <div>
               <transition name="slide-up" mode="out-in">
-                <div :key="getLabel(category.key)" class="flex items-center sm:justify-center cursor-pointer">
-                  <div class="sm:text-center">
+                <div :key="getLabel(category.key)" class="flex items-center md:justify-center cursor-pointer">
+                  <div class="md:text-center">
                     <h1 class="text-neutral-500">{{ category.title }}</h1>
-                    <h1 class="sm:text-2xl font-medium">
+                    <h1 class="md:text-2xl font-medium">
                       {{ getLabel(category.key) || category.defaultLabel }}
                     </h1>
                   </div>
@@ -85,7 +163,7 @@
         class="overflow-visible transition-height ease-in-out duration-500">
         <Transition name="fade">
           <div v-show="listBoxRowVisible">
-            <div class="grid sm:grid-cols-4 gap-2 sm:gap-5">
+            <div class="grid md:grid-cols-4 gap-2 md:gap-5">
 
               <UCard v-for="category in categories" :key="category.key" variant="soft">
                 <div v-for="option in enabledOptions[category.key]" :key="option.value"
@@ -108,9 +186,11 @@
       </div>
     </div>
 
+    
+
     <!-- Sticky header that folds down from behind the AppHeader -->
     <transition name="fold-down">
-      <div v-if="isSticky" class="hidden sm:fixed top-16 z-20 bg-white dark:bg-black border-b border-neutral-200 left-0 right-0">
+      <div v-if="isSticky" class="hidden md:block fixed top-16 z-20 bg-white dark:bg-black border-b border-neutral-200 left-0 right-0">
         <div class="flex space-x-4 w-full mx-auto max-w-7xl p-2">
           <!-- Use enabledOptions for USelect items as well -->
           <USelect v-for="category in categories" :key="category.key" :items="enabledOptions[category.key]"
@@ -127,6 +207,7 @@
 
 <script setup lang="ts">
 import { ref, computed, onMounted, onBeforeUnmount, watch } from 'vue'
+const props = defineProps<{ initialMobileCollapsed?: boolean }>();
 import { useRouter } from 'vue-router'
 import {
   useEnvParamsStore,
@@ -208,6 +289,12 @@ const categories: Category[] = [
 const listBoxRowVisible = ref(false)
 const restrictionEnabled = ref(true)
 
+const mobileCollapsed = ref(props.initialMobileCollapsed ?? false)
+
+function toggleMobileCollapsed(): void {
+  mobileCollapsed.value = !mobileCollapsed.value
+}
+
 function toggleHeight(): void {
   listBoxRowVisible.value = !listBoxRowVisible.value
 }
@@ -239,6 +326,15 @@ function getLabel(categoryKey: Category['key']): string {
       return ''
   }
 }
+
+const collapsedSummary = computed(() => {
+  return categories
+    .map(category => {
+      const label = getLabel(category.key) || category.defaultLabel;
+      return label.length > 6 ? label.slice(0, 6) : label;
+    })
+    .join(' / ');
+});
 
 function iconColor(categoryKey: Category['key']): string {
   switch (categoryKey) {
@@ -363,7 +459,7 @@ watch(
 
 .fade-enter-active,
 .fade-leave-active {
-  transition: opacity 0.5s;
+  transition: opacity 0.2s;
 }
 
 .fade-enter,

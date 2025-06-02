@@ -1,33 +1,19 @@
 <template>
   <div>
-    <!-- Controls: filtering and zoom -->
-    <div class="flex justify-between gap-2 mb-4 mx-2">
-      <div class="flex gap-2">
-        <UInput
-    v-model="chartSearchTerm"
-    placeholder="Sök på namn"
-    variant="ghost"
-  />
-      <USelect
-        v-model="selectedFilters"
-        multiple
-        :items="filterItems"
-        class="w-fit"
-        placeholder="Fokusera på grupp"
-        variant="ghost"
-      />
-      </div>
-      
-      <div class="flex gap-0.5">
-         <UButton @click="zoomOut" icon="i-heroicons-magnifying-glass-minus" color="neutral" variant="ghost"/>
-      <UButton @click="zoomIn"  icon="i-heroicons-magnifying-glass-plus" color="neutral" variant="ghost"/>
- 
-      </div>
-        </div>
+
+    <div class="flex justify-end gap-2 mb-2 mx-2">
+      <UButton @click="zoomOut" icon="i-heroicons-magnifying-glass-minus" color="neutral" variant="ghost" />
+      <UButton @click="zoomIn" icon="i-heroicons-magnifying-glass-plus" color="neutral" variant="ghost" />
+    </div>
 
     <!-- Chart Container: we attach a click handler here -->
-    <div class="w-full h-[420px] overflow-y-auto overflow-x-scroll" @click="handleChartClick">
-      <VisXYContainer :data="updatedChartData" :width="chartWidth" :height="chartHeight">
+    <div
+         :class="[
+           'w-full overflow-y-auto overflow-x-scroll',
+           { 'bar-chart-container': currentZoomIndex === 0 }
+         ]"
+         @click="handleChartClick"
+       >      <VisXYContainer :data="updatedChartData" :width="chartWidth" height="200">
         <!-- Bar Chart -->
         <VisStackedBar :data="updatedChartData" :x="xAccessor" :y="yAccessor" :color="barColorAccessor" :barPadding="0.1"/>
         <VisAxis
@@ -41,7 +27,7 @@
           tickTextAlign="left"
           :tick-format="tickFormat"
         />
-        <VisAxis type="y" label="Antal skogar där arten påträffats" :gridLine="false" />
+        <VisAxis type="y" label="Antal skogar" :gridLine="false" />
         <!-- Tooltip: followCursor remains true (or default) so that hover works; allowHover not needed -->
         <VisTooltip :triggers="triggers" :followCursor="true" />
         <!-- Crosshair for better pointer guidance -->
@@ -58,15 +44,28 @@ import { StackedBar } from '@unovis/ts'
 import { useEnvParamsStore } from '~/stores/envParamsStore'
 import { useSpeciesStore } from '~/stores/speciesStore'
 
-const chartSearchTerm = ref('')
+const props = defineProps({
+  searchTerm: { type: String, default: '' },
+  matsvampFilter: { type: Boolean, default: false },
+  giftsvampFilter: { type: Boolean, default: false },
+  gruppFilter: { type: Array as PropType<string[]>, default: () => [] },
+  groupKey: { type: String, default: 'Svamp-grupp-släkte' },
+  statusFilter: { type: Array as PropType<string[]>, default: () => [] }
+})
+
+const emit = defineEmits<{
+  (e: 'update:searchTerm', value: string): void
+}>()
+
+const chartSearchTermLocal = computed({
+  get: () => props.searchTerm,
+  set: (val: string) => emit('update:searchTerm', val)
+})
 
 // ----- Filtering & Zoom Setup -----
-const filterItems = ref(['Matsvamp', 'Giftsvamp', 'Rödlistade svampar', 'Signalarter'])
-const selectedFilters = ref<string[]>([])
 const zoomLevels = ["100%", "200%", "400%", "800%"]
 const currentZoomIndex = ref(0)
 const chartWidth = computed(() => zoomLevels[currentZoomIndex.value])
-const chartHeight = ref(400)
 
 // ----- Chart Data & Color Setup -----
 const chartData = ref<any[]>([])
@@ -137,21 +136,86 @@ const xAccessor = (_: any, i: number) => i
 const yAccessor = (d: any) => d.sample_plot_count
 const tickFormat = (_: any, i: number) => {
   const d = updatedChartData.value[i]
-  // When a search term is entered, only show names for matching species
-  if (chartSearchTerm.value.trim() !== "") {
-    const term = chartSearchTerm.value.trim().toLowerCase()
-    if ((d.Commonname && d.Commonname.toLowerCase().includes(term)) ||
-        (d.Scientificname && d.Scientificname.toLowerCase().includes(term))) {
-      return capitalizeFirstLetter(d.Commonname)
-    } else {
-      return ""
-    }
-  } else {
-    // Otherwise, use the existing group filter logic
-    if (selectedFilters.value.length === 0) return ""
-    if (d && d.barColor === '#d4d4d4') return ""
-    return capitalizeFirstLetter(d.Commonname)
+  // Compute matchSearch
+  const term = props.searchTerm.trim().toLowerCase()
+  const common = String(d.Commonname || '').toLowerCase()
+  const scientific = String(d.Scientificname || '').toLowerCase()
+  const matchSearch = term ? (common.includes(term) || scientific.includes(term)) : true
+
+  // 1) Early return: only search active (no other filters)
+  const statusActive = props.statusFilter.length > 0
+  const svampActive = props.matsvampFilter || props.giftsvampFilter
+  const groupActive = props.gruppFilter.length > 0
+  if (!statusActive && !svampActive && !groupActive && props.searchTerm.trim() !== '') {
+    return matchSearch ? capitalizeFirstLetter(d.Commonname) : ''
   }
+
+  // 2a) Compute matches
+  const matchSignal =
+    statusActive &&
+    props.statusFilter.includes('Signalart') &&
+    (d.SIGNAL_art === 'S')
+
+  const otherStatuses = props.statusFilter.filter(s => s !== 'Signalart')
+  // Add Ej bedömd and Ej tillämplig logic
+  const matchEjBedom = statusActive && props.statusFilter.includes('Ej bedömd') &&
+    (d.RL2020kat === null || d.RL2020kat === 0 || d.RL2020kat === '0' || String(d.RL2020kat).toUpperCase() === 'NE')
+  const matchEjTillamplig = statusActive && props.statusFilter.includes('Ej tillämplig') &&
+    String(d.RL2020kat).toUpperCase() === 'NA'
+  const matchStatus = statusActive
+    ? matchSignal || otherStatuses.includes(d.RL2020kat)
+    : false
+
+  const matchMats = props.matsvampFilter ? d.matsvamp == 1 : false
+  const matchGifts = props.giftsvampFilter
+    ? (d.Giftsvamp || '').toLowerCase() === 'x'
+    : false
+
+  const matchGroup = groupActive
+    ? props.gruppFilter.includes(d[props.groupKey])
+    : false
+
+  // 3) If Status filter is active, only label those matching all active filters:
+  if (statusActive) {
+    // 3a) Only Status (no Svamp, no Grupp)
+    if (!svampActive && !groupActive) {
+      return (matchSearch && (matchSignal || matchStatus || matchEjBedom || matchEjTillamplig))
+        ? capitalizeFirstLetter(d.Commonname)
+        : ''
+    }
+    // 3b) Status + other filters
+    const passesStatus = matchSearch && (matchSignal || matchStatus || matchEjBedom || matchEjTillamplig)
+    const passesSvamp = svampActive ? (matchMats || matchGifts) : true
+    const passesGroupVal = groupActive ? matchGroup : true
+
+    if (passesStatus && passesSvamp && passesGroupVal) {
+      return capitalizeFirstLetter(d.Commonname)
+    }
+    return ''
+  }
+
+  // 4) No Status → If Svamp/Group is active, only label those matching all:
+  if (svampActive || groupActive) {
+    // 4a) Only Svamp (no Grupp)
+    if (svampActive && !groupActive) {
+      return (matchSearch && (matchMats || matchGifts))
+        ? capitalizeFirstLetter(d.Commonname)
+        : ''
+    }
+    // 4b) Only Grupp (no Svamp)
+    if (!svampActive && groupActive) {
+      return (matchSearch && matchGroup) ? capitalizeFirstLetter(d.Commonname) : ''
+    }
+    // 4c) Svamp + Grupp
+    const passesSvampOnly = matchSearch && (matchMats || matchGifts)
+    if (passesSvampOnly && matchGroup) {
+      return capitalizeFirstLetter(d.Commonname)
+    }
+    return ''
+  }
+
+  // 5) No filters/search → hide all names
+  return ''
 }
 function capitalizeFirstLetter(str: string): string {
   return str ? str.charAt(0).toUpperCase() + str.slice(1) : ""
@@ -176,7 +240,7 @@ function tooltipTemplate(d: any): string {
     VU: "Sårbar",
     CR: "Akut hotad",
     DD: "Kunskapsbrist",
-    RE: "Nationellt utdöd"
+    RE: "Nationellt utdöd",
   }
   const rodlisteBadge = rlMapping[d["RL2020kat"]]
     ? `<div class="font-md bg-rose-50 border border-rose-200 text-rose-500 text-xs rounded-md py-0.5 px-1">${rlMapping[d["RL2020kat"]]}</div>`
@@ -204,37 +268,106 @@ const triggers = { [StackedBar.selectors.bar]: tooltipTemplate }
 
 // ----- Custom Bar Color Based on Selected Filters -----
 const updatedChartData = computed(() => {
+  const defaultGray = '#d4d4d4'
   return chartData.value.map(d => {
-    let newColor = d.fillColor || 'var(--ui-primary)'
-    
-    // If there's a search term, override the colors based on matching species names.
-    if (chartSearchTerm.value.trim() !== "") {
-      const term = chartSearchTerm.value.trim().toLowerCase()
-      if (
-        (d.Commonname && d.Commonname.toLowerCase().includes(term)) ||
-        (d.Scientificname && d.Scientificname.toLowerCase().includes(term))
-      ) {
-        newColor = '#22c55e'  // Green for matching species
-      } else {
-        newColor = '#d4d4d4'  // Gray for non-matching species
-      }
+    // Compute matchSearch at the top
+    const term = props.searchTerm.trim().toLowerCase();
+    const common = String(d.Commonname || '').toLowerCase();
+    const scientific = String(d.Scientificname || '').toLowerCase();
+    const matchSearch = term ? (common.includes(term) || scientific.includes(term)) : true;
+
+    // 1) Only search active (no other filters)
+    const statusActive = props.statusFilter.length > 0
+    const svampActive = props.matsvampFilter || props.giftsvampFilter
+    const groupActive = props.gruppFilter.length > 0
+    if (!statusActive && !svampActive && !groupActive && props.searchTerm.trim() !== '') {
+      return { ...d, barColor: matchSearch ? '#8b5cf6' : defaultGray }
     }
-    // Else, if group filters are active, use your existing logic.
-    else if (selectedFilters.value.length > 0) {
-      if (selectedFilters.value.includes('Matsvamp') && d.matsvamp == 1) {
-        newColor = '#eab308'
-      } else if (selectedFilters.value.includes('Giftsvamp') && d.Giftsvamp === "x") {
-        newColor = '#84cc16'
-      } else if (selectedFilters.value.includes('Rödlistade svampar') && ["NT", "EN", "VU", "CR", "DD", "RE"].includes(d["RL2020kat"])) {
-        newColor = '#ef4444'
-      } else if (selectedFilters.value.includes('Signalarter') && d["SIGNAL_art"] === "S") {
-        newColor = '#14b8a6'
-      } else {
-        newColor = '#d4d4d4'
+
+    // 2a) Compute boolean matches for each category
+    const matchSignal =
+      statusActive &&
+      props.statusFilter.includes('Signalart') &&
+      d.SIGNAL_art === 'S'
+
+    const otherStatuses = props.statusFilter.filter(s => s !== 'Signalart')
+    // Add Ej bedömd and Ej tillämplig logic
+    const matchEjBedom = statusActive && props.statusFilter.includes('Ej bedömd') &&
+      (d.RL2020kat === null || d.RL2020kat === 0 || d.RL2020kat === '0' || String(d.RL2020kat).toUpperCase() === 'NE')
+    const matchEjTillamplig = statusActive && props.statusFilter.includes('Ej tillämplig') &&
+      String(d.RL2020kat).toUpperCase() === 'NA'
+    const matchStatus = statusActive
+      ? matchSignal || otherStatuses.includes(d.RL2020kat)
+      : false
+
+    const matchMats = props.matsvampFilter ? d.matsvamp == 1 : false
+    const matchGifts = props.giftsvampFilter
+      ? (d.Giftsvamp || '').toLowerCase() === 'x'
+      : false
+
+    const matchGroup = groupActive
+      ? props.gruppFilter.includes(d[props.groupKey])
+      : false
+
+    // 3) If any Status filter is on, handle Status‐first logic:
+    if (statusActive) {
+      // 3a) Only Status (no Svamp, no Grupp)
+      if (!svampActive && !groupActive) {
+        if (matchSearch && matchSignal) return { ...d, barColor: '#14b8a6' }    // teal-500
+        if (matchSearch && (matchSignal || matchStatus || matchEjBedom || matchEjTillamplig)) {
+          if (matchSignal) return { ...d, barColor: '#14b8a6' }
+          if (d.RL2020kat === 'LC') return { ...d, barColor: '#22c55e' }
+          if (['NT','EN','VU','CR'].includes(d.RL2020kat)) return { ...d, barColor: '#ef4444' }
+          if (matchEjBedom || matchEjTillamplig) return { ...d, barColor: '#737373' }
+          return { ...d, barColor: '#1f2937' }
+        }
+        return { ...d, barColor: defaultGray }
       }
+      // 3b) Status + (possibly Svamp/Group)
+      const passesStatus = matchSearch && (matchSignal || matchStatus || matchEjBedom || matchEjTillamplig)
+      const passesSvamp = svampActive ? (matchMats || matchGifts) : true
+      const passesGroupVal = groupActive ? matchGroup : true
+
+      if (passesStatus && passesSvamp && passesGroupVal) {
+        // Color precedence: Signalart > RL status > Matsvamp > Giftsvamp > Grupp
+        if (matchSignal) return { ...d, barColor: '#14b8a6' }
+        if (otherStatuses.length > 0) {
+          if (d.RL2020kat === 'LC') return { ...d, barColor: '#22c55e' }
+          if (['NT','EN','VU','CR'].includes(d.RL2020kat)) return { ...d, barColor: '#ef4444' }
+          if (matchEjBedom || matchEjTillamplig) return { ...d, barColor: '#737373' }
+          return { ...d, barColor: '#1f2937' }
+        }
+        if (props.matsvampFilter && matchMats) return { ...d, barColor: '#eab308' }
+        if (props.giftsvampFilter && matchGifts) return { ...d, barColor: '#84cc16' }
+        if (groupActive && matchGroup) return { ...d, barColor: '#000000' }
+      }
+      return { ...d, barColor: defaultGray }
     }
-    // Otherwise, retain the original fill color.
-    return { ...d, barColor: newColor }
+
+    // 4) Otherwise (no Status filter), fall back to Svamp/Group logic:
+    if (svampActive || groupActive) {
+      // 4a) Only Svamp (no Grupp)
+      if (svampActive && !groupActive) {
+        if (matchSearch && matchMats) return { ...d, barColor: '#eab308' }  // yellow
+        if (matchSearch && matchGifts) return { ...d, barColor: '#84cc16' } // green
+        return { ...d, barColor: defaultGray }
+      }
+      // 4b) Only Grupp (no Svamp)
+      if (!svampActive && groupActive) {
+        if (matchSearch && matchGroup) return { ...d, barColor: '#000000' } // black
+        return { ...d, barColor: defaultGray }
+      }
+      // 4c) Svamp + Grupp
+      const passesSvampOnly = matchSearch && (matchMats || matchGifts)
+      if (passesSvampOnly && matchGroup) {
+        if (matchMats) return { ...d, barColor: '#eab308' }
+        if (matchGifts) return { ...d, barColor: '#84cc16' }
+      }
+      return { ...d, barColor: defaultGray }
+    }
+
+    // 5) No filters or search → keep each bar's original fillColor
+    return { ...d, barColor: d.fillColor || 'var(--ui-primary)' }
   })
 })
 const barColorAccessor = (d: any) => d.barColor
@@ -261,4 +394,14 @@ function handleChartClick(event: MouseEvent) {
   }
 }
 </script>
+
+<style scoped>
+.bar-chart-container {
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none; /* Firefox */
+}
+.bar-chart-container::-webkit-scrollbar {
+  display: none; /* Chrome, Safari, Opera */
+}
+</style>
 

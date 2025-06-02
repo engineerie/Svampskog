@@ -3,7 +3,7 @@
     <div
       class=""
     >
-      <div class="flex gap-2 p-2 justify-between z-30" >
+      <div class="flex md:gap-2 md:p-2 justify-between z-30" >
        <!-- Remove these USelect components from the top filter bar -->
 <!--
 <USelect
@@ -29,22 +29,27 @@
 <!-- And add the following block in their place -->
 <div class="flex gap-2 items-end">  
   <UInput
-          :model-value="table?.tableApi?.getState().globalFilter || ''"
-          class="max-w-sm min-w-[12ch]"
-          placeholder="Sök på namn"
-          @update:model-value="value => table?.tableApi?.setGlobalFilter(value)"
-          variant="ghost"
-        />
-  
+  :model-value="table?.tableApi?.getColumn('Commonname')?.getFilterValue() || ''"
+  class="max-w-sm min-w-[12ch] hidden md:block"
+  placeholder="Sök på namn"
+  @update:model-value="value => {
+    table?.tableApi?.getColumn('Commonname')?.setFilterValue(value);
+    onSearchInput(value);
+  }"
+  variant="soft"
+/>
 </div>
-<div class="flex gap-2">
+ <!-- Mobile only: Filter & Sort dropdowns driving hidden columns -->
+
+
+<div class="flex gap-2 overflow-scroll" id="scrollbar">
   <template v-if="selectedMark.length">
     <span v-for="filter in selectedMark" :key="'mark-'+filter">
       <UBadge
         trailing-icon="i-heroicons-x-mark-solid"
         variant="subtle"
         :color="filter === 'KALKmark' ? 'kalkmark' : filter === 'ANNANmark' ? 'vanligmark' : 'neutral'"
-        class="cursor-pointer"
+        class="cursor-pointer mb-2 md:mb-0 "
         @click="selectedMark = selectedMark.filter(f => f !== filter)"
       >
         {{ filter === 'KALKmark' ? 'Kalkmark' : filter === 'ANNANmark' ? 'Vanlig skogsmark' : capitalize(filter) }}
@@ -57,7 +62,7 @@
         trailing-icon="i-heroicons-x-mark-solid"
         variant="subtle"
         :color="filter === 'Matsvamp' ? 'warning' : filter === 'Giftsvamp' ? 'poison' : 'neutral'"
-        class="cursor-pointer"
+        class="cursor-pointer mb-2 md:mb-0 "
         @click="selectedFilter = selectedFilter.filter(f => f !== filter)"
       >
         {{ capitalize(filter) }}
@@ -70,7 +75,7 @@
         trailing-icon="i-heroicons-x-mark-solid"
         variant="subtle"
         color="neutral"
-        class="cursor-pointer"
+        class="cursor-pointer mb-2 md:mb-0 "
         @click="selectedGrupp = selectedGrupp.filter(f => f !== filter)"
       >
         {{ capitalize(filter) }}
@@ -83,7 +88,7 @@
         trailing-icon="i-heroicons-x-mark-solid"
         variant="subtle"
         :color="filter === 'Signalart' ? 'signal' : getStatusColor(filter)"
-        class="cursor-pointer"
+        class="cursor-pointer mb-2 md:mb-0 "
         @click="selectedStatus = selectedStatus.filter(f => f !== filter)"
       >
         {{ filter === 'Signalart' ? 'Signalart' : getStatusTooltip(filter) }}
@@ -92,6 +97,7 @@
   </template>
 
   <UDropdownMenu
+  class="hidden md:flex"
   :items="table?.tableApi?.getAllColumns()?.filter(column => column.getCanHide())?.map(column => ({
     label: column.columnDef.meta?.headerText || upperFirst(column.id),
     type: 'checkbox',
@@ -113,7 +119,7 @@
   />
 </UDropdownMenu>
 
-        <div v-if="!isNormalView" >
+        <div v-if="!isNormalView" class="hidden md:flex">
           <USelect
             v-model="rowsPerPage"
             :items="[
@@ -133,6 +139,42 @@
       </div>
        
       </div>
+      <div class="flex md:hidden gap-2 w-full mb-2" v-if="!isNormalView">
+       
+  <UDropdownMenu :items="sortMenuItems" :content="{ align: 'start' }">
+     <UButton variant="soft" icon="i-lucide-arrow-up-down"  color="neutral"/>
+   </UDropdownMenu>
+   <UDropdownMenu :items="filterMenuItems" :content="{ align: 'start' }">
+     <UButton variant="soft" icon="i-lucide-list-filter"  color="neutral"/>
+   </UDropdownMenu>
+   <div >
+          <USelect
+            v-model="rowsPerPage"
+            :items="[
+              { value: 10, label: '10 rader' },
+              { value: 20, label: '20 rader' },
+              { value: 30, label: '30 rader' },
+              { value: 40, label: '40 rader' },
+              { value: 50, label: '50 rader' },
+              { value: 'Alla', label: 'Alla' }
+            ]"
+            item-value="value"
+            item-label="label"
+            placeholder="Rader per sida"
+            variant="soft"
+          />
+        </div>
+        <UInput
+  :model-value="table?.tableApi?.getColumn('Commonname')?.getFilterValue() || ''"
+  class="max-w-sm min-w-[12ch]"
+  placeholder="Sök på namn"
+  @update:model-value="value => {
+    table?.tableApi?.getColumn('Commonname')?.setFilterValue(value);
+    onSearchInput(value);
+  }"
+  variant="soft"
+/>
+ </div>
       <div v-if="filteredData" :class="[isNormalView ? '' : '']">
         <div class="">
           <!-- v-model="selectedRows" -->
@@ -143,7 +185,7 @@
             ref="table"
             v-model:column-visibility="columnVisibility"
             v-model:pagination="pagination"
-            :data="filteredData"
+            :data="displayedData"
             :columns="columns"
             sticky
             :loading="isLoading"
@@ -151,21 +193,36 @@
             @select="selectRow"
             :autoResetAll="true" 
             :pagination-options="!isNormalView ? { getPaginationRowModel: getPaginationRowModel() } : undefined"
-            :class="{ 'h-[442px]': isNormalView }"
+            :class="{ 'md:max-h-[442px]': isNormalView }"
+            :ui="{
+                thead: 'hidden md:table-header-group',
+                tbody:'divide-none md:divide-dotted',
+                td: 'px-0 md:px-4 md:pt-4 md:pb-4 pt-2 pb-3',
+        
+            }"
           />
+         
           <div
-            class="flex justify-between items-center p-5 border-t-[1px] border-neutral-200 dark:border-neutral-700"
+            class="md:flex justify-between items-center pb-2 md:pt-5 md:p-5 md:border-t-[1px] border-neutral-200 dark:border-neutral-700"
           >
-            <div class="flex h-fit shrink-0 gap-1 items-center">
+            <div class="flex h-fit shrink-0 gap-1 items-center justify-between">
               <!-- Left mini-legend -->
               
-              <h1
-            
+              <h1 
+            class="flex"
               >
-                Visar {{ startItem }} till {{ endItem }} av
+                Visar <span class="hidden md:flex">&nbsp {{ startItem }} till &nbsp</span> {{ endItem }} av
                 {{ totalItems }} arter
               </h1>
-          
+              <UButton
+              v-if="isNormalView"
+        class="md:hidden"
+        color="neutral"
+        variant="soft"
+        label="Visa alla"
+        size="md"
+        @click="emit('enlarge')"
+        />
             </div>
 
             <div>
@@ -199,12 +256,45 @@
 </template>
 
 <script setup>
-import { ref, computed, watch, h, resolveComponent } from "vue";
+import { ref, computed, watch, h, resolveComponent, onBeforeUnmount } from "vue";
+import { useMediaQuery } from '@vueuse/core';
+// detect mobile screens (below md)
+const isMobile = useMediaQuery('(max-width: 767px)');
 import { useSpeciesStore } from "~/stores/speciesStore";
 import { useEnvParamsStore } from '~/stores/envParamsStore'
 import { getPaginationRowModel } from '@tanstack/vue-table'
 import { upperFirst } from 'scule'
 
+// allow child to emit an "enlarge" event
+const emit = defineEmits([
+  'enlarge',
+  'update:matsvampFilter',
+  'update:giftsvampFilter',
+  'update:gruppFilter',
+  'update:statusFilter'
+]);
+
+// Temporary storage for raw input and debounce timer
+const rawSearch = ref('');
+let searchTimeout = null;
+
+// Called on each keystroke: update rawSearch and reset debounce timer
+function onSearchInput(value) {
+  rawSearch.value = value;
+  if (searchTimeout) {
+    clearTimeout(searchTimeout);
+  }
+  searchTimeout = setTimeout(() => {
+    emit('update:searchTerm', rawSearch.value);
+  }, 300); // 300 ms debounce
+}
+
+// Clear the timeout if the component unmounts
+onBeforeUnmount(() => {
+  if (searchTimeout) {
+    clearTimeout(searchTimeout);
+  }
+});
 
 const props = defineProps({
   isNormalView: { type: Boolean, default: false },
@@ -216,18 +306,42 @@ const props = defineProps({
   obsLabel: { type: String, default: 'Förekomst' },
   columnVisibilityOverrides: { type: Object, default: () => ({}) },
   filterEdible: { type: Boolean, default: false },
-  filterPoison: { type: Boolean, default: false }
+  filterPoison: { type: Boolean, default: false },
+  searchTerm:      { type: String, default: '' }
 });
 
 
 
 const table = useTemplateRef('table')
 
-const defaultVisibility = {
-  RankRed: false,
-  "Rank matsvamp": false,
-  "Rank giftsvamp": false,
-};
+// const defaultVisibility = {
+//   RankRed: false,
+//   "Rank matsvamp": false,
+//   "Rank giftsvamp": false,
+// };
+const defaultVisibility = isMobile.value
+  ? {
+      RankRed: false,
+      "Rank matsvamp": false,
+      "Rank giftsvamp": false,
+      [props.grupp]: false,
+      mark: false,
+      [props.mat]: false,
+      RL2020kat: false,
+      Commonname: false,
+      Scientificname: false,
+      images: false,
+      [props.obs]: false,
+    }
+  : {
+      RankRed: false,
+      "Rank matsvamp": false,
+      "Rank giftsvamp": false,
+    };
+// If dataType is 'edna', ensure mark column is hidden by default
+if (props.dataType === 'edna') {
+  defaultVisibility.mark = false;
+}
 
 const columnVisibility = ref({ ...defaultVisibility, ...props.columnVisibilityOverrides });
 
@@ -235,19 +349,37 @@ const columnVisibility = ref({ ...defaultVisibility, ...props.columnVisibilityOv
 const selectedMark = ref([]);
 // Create computed mark options – these will include the count of matches.
 const markOptions = computed(() => {
-  const counts = {};
-  // Iterate over filteredData to count how many rows have each mark
+  const totalCounts = {};
+  // Total counts from filteredData (before column filters)
   filteredData.value.forEach(row => {
     if (row.KALKmark) {
-      counts["Kalkmark"] = (counts["Kalkmark"] || 0) + 1;
+      totalCounts["KALKmark"] = (totalCounts["KALKmark"] || 0) + 1;
     }
     if (row.ANNANmark) {
-      counts["Vanlig skogsmark"] = (counts["Vanlig skogsmark"] || 0) + 1;
+      totalCounts["ANNANmark"] = (totalCounts["ANNANmark"] || 0) + 1;
+    }
+  });
+  // Visible counts from current table rows after column filters
+  const visibleRows = table.value?.tableApi?.getFilteredRowModel()?.rows || [];
+  const visibleCounts = {};
+  visibleRows.forEach(rowModel => {
+    const row = rowModel.original;
+    if (row.KALKmark) {
+      visibleCounts["KALKmark"] = (visibleCounts["KALKmark"] || 0) + 1;
+    }
+    if (row.ANNANmark) {
+      visibleCounts["ANNANmark"] = (visibleCounts["ANNANmark"] || 0) + 1;
     }
   });
   return [
-    { label: `Kalkmark (${counts["Kalkmark"] || 0})`, value: "KALKmark" },
-    { label: `Vanlig skogsmark (${counts["Vanlig skogsmark"] || 0})`, value: "ANNANmark" }
+    {
+      label: `Kalkmark (${visibleCounts["KALKmark"] || 0}/${totalCounts["KALKmark"] || 0})`,
+      value: "KALKmark"
+    },
+    {
+      label: `Vanlig skogsmark (${visibleCounts["ANNANmark"] || 0}/${totalCounts["ANNANmark"] || 0})`,
+      value: "ANNANmark"
+    }
   ];
 });
 
@@ -274,26 +406,52 @@ const markMenuItems = computed(() => {
 
 const svampOptions = computed(() => {
   const options = ['Matsvamp', 'Giftsvamp'];
-  const counts = {};
+  // Compute total counts from filteredData (before column filters)
+  const totalCounts = {};
   filteredData.value.forEach(row => {
-    let matVal = row[props.mat];
+    const matVal = row[props.mat];
+    // Matsvamp logic:
     if (props.mat === "Nyasvamp-boken") {
       if (matVal && String(matVal).toLowerCase() === 'x') {
-        counts['Matsvamp'] = (counts['Matsvamp'] || 0) + 1;
+        totalCounts['Matsvamp'] = (totalCounts['Matsvamp'] || 0) + 1;
       }
     } else {
       if (matVal == 1) {
-        counts['Matsvamp'] = (counts['Matsvamp'] || 0) + 1;
+        totalCounts['Matsvamp'] = (totalCounts['Matsvamp'] || 0) + 1;
       }
     }
+    // Giftsvamp logic:
     if ((row.Giftsvamp || '').toLowerCase() === 'x') {
-      counts['Giftsvamp'] = (counts['Giftsvamp'] || 0) + 1;
+      totalCounts['Giftsvamp'] = (totalCounts['Giftsvamp'] || 0) + 1;
     }
   });
-  return options.map(opt => ({
-    label: `${opt} (${counts[opt] || 0})`,
-    value: opt
-  }));
+  // Compute visible counts from current table rows after column filters
+  const visibleRows = table.value?.tableApi?.getFilteredRowModel()?.rows || [];
+  const visibleCounts = {};
+  visibleRows.forEach(rowModel => {
+    const row = rowModel.original;
+    // Matsvamp logic:
+    const matVal = row[props.mat];
+    if (
+      (props.mat === "Nyasvamp-boken"
+        ? matVal && String(matVal).toLowerCase() === 'x'
+        : matVal == 1)
+    ) {
+      visibleCounts['Matsvamp'] = (visibleCounts['Matsvamp'] || 0) + 1;
+    }
+    // Giftsvamp logic:
+    if ((row.Giftsvamp || '').toLowerCase() === 'x') {
+      visibleCounts['Giftsvamp'] = (visibleCounts['Giftsvamp'] || 0) + 1;
+    }
+  });
+  return options.map(opt => {
+    const total = totalCounts[opt] || 0;
+    const visible = visibleCounts[opt] || 0;
+    return {
+      label: `${opt} (${visible}/${total})`,
+      value: opt
+    };
+  });
 });
 
 const rowsPerPage = ref(props.isNormalView ? 500 : 10);
@@ -360,56 +518,161 @@ const statusMenuItems = computed(() => {
   }));
 });
 
+// Leverage the real (hidden) Commonname/Scientificname columns
+const sortMenuItems = computed(() => [
+  {
+    label: 'Namn',
+    children: [
+      {
+        label: 'A → Ö',
+        onSelect(e) {
+          e.preventDefault();
+          table.value?.tableApi?.setSorting([{ id: 'Commonname', desc: false }]);
+        }
+      },
+      {
+        label: 'Ö → A',
+        onSelect(e) {
+          e.preventDefault();
+          table.value?.tableApi?.setSorting([{ id: 'Commonname', desc: true }]);
+        }
+      }
+    ]
+  },
+  {
+    label: 'Vetenskapligt namn',
+    children: [
+      {
+        label: 'A → Ö',
+        onSelect(e) {
+          e.preventDefault();
+          table.value?.tableApi?.setSorting([{ id: 'Scientificname', desc: false }]);
+        }
+      },
+      {
+        label: 'Ö → A',
+        onSelect(e) {
+          e.preventDefault();
+          table.value?.tableApi?.setSorting([{ id: 'Scientificname', desc: true }]);
+        }
+      }
+    ]
+  }
+]);
+
+// Combined mobile filter menu (nested)
+const filterMenuItems = computed(() => [
+  { label: 'Grupp', children: gruppMenuItems.value },
+  { label: 'Matsvamp', children: svampMenuItems.value },
+  { label: 'Status', children: statusMenuItems.value },
+  { label: 'Mark',    children: markMenuItems.value },
+]);
+
 const gruppOptions = computed(() => {
-  const counts = {};
-  // Iterate over filteredData (or data.value if you want counts from all data)
+  const totalCounts = {};
+  // Total counts from filteredData before column filters
   filteredData.value.forEach(row => {
     const group = row[props.grupp];
     if (group) {
-      counts[group] = (counts[group] || 0) + 1;
+      totalCounts[group] = (totalCounts[group] || 0) + 1;
     }
   });
-  // Create an options array with labels including counts
-  return Object.keys(counts).map(group => ({
-    label: `${capitalize(group)} (${counts[group]})`,
-    value: group
-  }));
+  // Visible counts from the table’s current filtered rows
+  const visibleRows = table.value?.tableApi?.getFilteredRowModel()?.rows || [];
+  const visibleCounts = {};
+  visibleRows.forEach(rowModel => {
+    const row = rowModel.original;
+    const group = row[props.grupp];
+    if (group) {
+      visibleCounts[group] = (visibleCounts[group] || 0) + 1;
+    }
+  });
+  // Build options with “visible/total”
+  return Object.keys(totalCounts).map(group => {
+    const total = totalCounts[group] || 0;
+    const visible = visibleCounts[group] || 0;
+    return {
+      label: `${capitalize(group)} (${visible}/${total})`,
+      value: group
+    };
+  });
 });
 
 const statusOptions = computed(() => {
-  // Define the base statuses
+  // Base statuses
   const statuses = ['LC', 'NT', 'EN', 'VU', 'CR', 'RE', 'DD'];
 
-  // Initialize a counts object for each status and for 'Ej bedömd'
-  const counts = {};
-  // Iterate over the filtered data (after edible/poison filters)
+  // Total counts (from filteredData before column filters)
+  const totalCounts = {};
   filteredData.value.forEach(row => {
     const statusVal = row.RL2020kat;
     if (statuses.includes(statusVal)) {
-      counts[statusVal] = (counts[statusVal] || 0) + 1;
+      totalCounts[statusVal] = (totalCounts[statusVal] || 0) + 1;
     } else if (
       statusVal === null ||
       statusVal === '0' ||
-      String(statusVal).toUpperCase() === 'NA' ||
+      statusVal === 0 ||
       String(statusVal).toUpperCase() === 'NE'
     ) {
-      counts['Ej bedömd'] = (counts['Ej bedömd'] || 0) + 1;
+      // NE or 0 => Ej bedömd
+      totalCounts['Ej bedömd'] = (totalCounts['Ej bedömd'] || 0) + 1;
+    } else if (String(statusVal).toUpperCase() === 'NA') {
+      // NA => Ej tillämplig
+      totalCounts['Ej tillämplig'] = (totalCounts['Ej tillämplig'] || 0) + 1;
+    }
+    if (row.SIGNAL_art === 'S') {
+      totalCounts['Signalart'] = (totalCounts['Signalart'] || 0) + 1;
     }
   });
 
-  // Compute the number of rows that have SIGNAL_art === 'S' from the filtered data
-  const signalCount = filteredData.value.reduce((acc, row) => {
-    return acc + ((row.SIGNAL_art === 'S') ? 1 : 0);
-  }, 0);
+  // Visible counts (from current table rows after column filters)
+  const visibleRows = table.value?.tableApi?.getFilteredRowModel()?.rows || [];
+  const visibleCounts = {};
+  visibleRows.forEach(rowModel => {
+    const row = rowModel.original;
+    const statusVal = row.RL2020kat;
+    if (statuses.includes(statusVal)) {
+      visibleCounts[statusVal] = (visibleCounts[statusVal] || 0) + 1;
+    } else if (
+      statusVal === null ||
+      statusVal === '0' ||
+      statusVal === 0 ||
+      String(statusVal).toUpperCase() === 'NE'
+    ) {
+      visibleCounts['Ej bedömd'] = (visibleCounts['Ej bedömd'] || 0) + 1;
+    } else if (String(statusVal).toUpperCase() === 'NA') {
+      visibleCounts['Ej tillämplig'] = (visibleCounts['Ej tillämplig'] || 0) + 1;
+    }
+    if (row.SIGNAL_art === 'S') {
+      visibleCounts['Signalart'] = (visibleCounts['Signalart'] || 0) + 1;
+    }
+  });
 
-  // Build the options array with counts appended to the label
+  // Build options with “visible/total”
   return [
-    ...statuses.map(s => ({
-      label: `${getStatusTooltip(s)} (${counts[s] || 0})`,
-      value: s
-    })),
-    { label: `Ej bedömd (${counts['Ej bedömd'] || 0})`, value: 'Ej bedömd' },
-    { label: `Signalart (${signalCount})`, value: 'Signalart' }
+    ...statuses.map(s => {
+      const total = totalCounts[s] || 0;
+      const visible = visibleCounts[s] || 0;
+      return {
+        label: `${getStatusTooltip(s)} (${visible}/${total})`,
+        value: s
+      };
+    }),
+    (() => {
+      const total = totalCounts['Ej bedömd'] || 0;
+      const visible = visibleCounts['Ej bedömd'] || 0;
+      return { label: `Ej bedömd (${visible}/${total})`, value: 'Ej bedömd' };
+    })(),
+    (() => {
+      const total = totalCounts['Ej tillämplig'] || 0;
+      const visible = visibleCounts['Ej tillämplig'] || 0;
+      return { label: `Ej tillämplig (${visible}/${total})`, value: 'Ej tillämplig' };
+    })(),
+    (() => {
+      const total = totalCounts['Signalart'] || 0;
+      const visible = visibleCounts['Signalart'] || 0;
+      return { label: `Signalart (${visible}/${total})`, value: 'Signalart' };
+    })()
   ];
 });
 
@@ -473,6 +736,12 @@ const getStatusTooltip = (status) => {
     RE: "Nationellt utdöd",
     DD: "Kunskapsbrist",
   };
+  if (status === null || status === 0 || String(status).toUpperCase() === "NE") {
+    return "Ej bedömd";
+  }
+  if (String(status).toUpperCase() === "NA") {
+    return "Ej tillämplig";
+  }
   return tooltips[status] || "Ej bedömd";
 };
 
@@ -487,7 +756,7 @@ const UButton = resolveComponent('UButton')
 const UDropdownMenu = resolveComponent('UDropdownMenu')
 
 
-const columns = [
+const desktopColumns = [
 {
   accessorKey: "images",
   header: "Bild", // You can leave the header empty or provide an icon/label
@@ -537,6 +806,13 @@ const columns = [
   cell: ({ row }) =>
     h('div', { class: 'text-neutral-700' }, capitalize(row.getValue("Commonname")))
     ,
+  filterFn: (row, _columnId, filterValue) => {
+    if (!filterValue) return true
+    const term = String(filterValue).toLowerCase()
+    const common = String(row.getValue("Commonname") || "").toLowerCase()
+    const scientific = String(row.getValue("Scientificname") || "").toLowerCase()
+    return common.includes(term) || scientific.includes(term)
+  },
   meta: { headerText: 'Namn' },
 },
 
@@ -561,8 +837,8 @@ const columns = [
     );
   },
   // sortable: true,
-  cell: ({ row }) => `${row.getValue('Scientificname')}`
-  ,
+  cell: ({ row }) =>
+    h('div', { class: 'truncate' }, row.getValue('Scientificname')),
   meta: { headerText: 'Latinskt namn' },
 },
 
@@ -592,7 +868,8 @@ const columns = [
   meta: { headerText: 'Grupp' },
 },
 {
-  accessorKey: "mark", // changed from "Mark"
+  accessorKey: "mark",
+  enableHiding: props.dataType === 'edna' ? false : true,
   header: () =>
     h(
       UDropdownMenu,
@@ -676,24 +953,26 @@ const columns = [
     default: () => h(UButton, { label: 'Status', variant: 'ghost', color: 'neutral', icon: "i-lucide-list-filter"  })
   }),
   filterFn: (row, columnId, filterValue) => {
-  if (!filterValue || filterValue.length === 0) return true;
-  const statusVal = row.getValue(columnId);
-  return filterValue.some(filter => {
-    if (filter === 'Ej bedömd') {
-      return (
-        statusVal === null ||
-        statusVal === 0 ||
-        statusVal === '0' ||
-        String(statusVal).toUpperCase() === 'NA' ||
-        String(statusVal).toUpperCase() === 'NE'
-      );
-    }
-    if (filter === 'Signalart') {
-      return row.original.SIGNAL_art === 'S';
-    }
-    return filter === statusVal;
-  });
-},
+    if (!filterValue || filterValue.length === 0) return true;
+    const statusVal = row.getValue(columnId);
+    return filterValue.some(filter => {
+      if (filter === 'Ej bedömd') {
+        return (
+          statusVal === null ||
+          statusVal === 0 ||
+          statusVal === '0' ||
+          String(statusVal).toUpperCase() === 'NE'
+        );
+      }
+      if (filter === 'Ej tillämplig') {
+        return String(statusVal).toUpperCase() === 'NA';
+      }
+      if (filter === 'Signalart') {
+        return row.original.SIGNAL_art === 'S';
+      }
+      return filter === statusVal;
+    });
+  },
   cell: ({ row }) => {
     const status = row.getValue('RL2020kat');
     const mainBadge = h(
@@ -738,8 +1017,8 @@ const columns = [
       max: maxVal,
       // Instead of passing the color prop, use the style attribute to override the CSS variable:
   
-
-      color: allColors.value[index],
+color: 'secondary',
+      // color: allColors.value[index],
       indeterminate: false,
 
       "onUpdate:modelValue": () => {}
@@ -748,6 +1027,90 @@ const columns = [
   meta: { headerText: props.obsLabel },
 },
 ];
+
+// on mobile, single expanded Namn column with group icon and badges
+const mobileColumns = [
+  {
+    header: 'Namn',
+    cell: ({ row }) => {
+      const images = row.original.images || [];
+      // Species image column
+      const imageComp = images.length
+        ? h(NuxtImg, {
+            src: images[0],
+            alt: row.original.Commonname,
+            class: "size-16 object-cover rounded-lg border border-neutral-200 dark:border-neutral-800",
+            height: "300",
+            width: "450",
+            format: "webp"
+          })
+        : h("div", { 
+            class: "size-16 rounded-lg flex items-center justify-center bg-neutral-100 dark:bg-neutral-800" 
+          }, [
+            h(NuxtImg, {
+          src: getIconPath(row.original[props.grupp]),
+          alt: `${row.original[props.grupp]} icon`,
+          class: "w-6 h-6"
+        }),
+          ]);
+      // Icon and names
+      const headerComp = h("div", { class: "flex items-center text-neutral-700 dark:text-neutral-200 space-x-4" }, [
+        h("div", { class: "flex-1 min-w-0" }, [
+          h("div", { class: "truncate" }, capitalize(row.original.Commonname)),
+          h("small", { class: "text-xs text-neutral-500 dark:text-neutral-400 italic block truncate max-w-48" }, row.original.Scientificname)
+        ])
+      ]);
+      // Badges below icon and names, with matsvamp conditionally rendered
+      const matVal = row.original[props.mat];
+      const isMat = props.mat === "Nyasvamp-boken"
+        ? matVal && String(matVal).toLowerCase() === 'x'
+        : matVal === 1;
+      const matsvampBadge = isMat
+        ? h(UBadge, { color: "warning", variant: "subtle", size: "sm" }, () => "Matsvamp")
+        : null;
+      const badgesComp = h("div", { class: "flex flex-wrap gap-2 mt-2" }, [
+        props.dataType === 'edna'
+          ? h(UBadge, { color: "secondary", variant: "subtle", size: "sm" }, () => `${row.original[props.obs]} skogar`)
+          : null,
+        // Status badge
+        h(UBadge, { color: getStatusColor(row.original.RL2020kat), variant: "subtle", size: "sm" }, () => getStatusTooltip(row.original.RL2020kat)),
+        // Signalart badge
+        row.original.SIGNAL_art === 'S'
+          ? h(UBadge, { color: "signal", variant: "subtle", size: "sm" }, () => "Signalart")
+          : null,
+        // Mark badges
+        row.original.KALKmark
+          ? h(UBadge, { color: "kalkmark", variant: "subtle", size: "sm" }, () => "Kalkmark")
+          : null,
+        // Matsvamp badge
+        matsvampBadge,
+        // Giftsvamp badge
+        row.original.Giftsvamp?.toLowerCase() === 'x'
+          ? h(UBadge, { color: "poison", variant: "subtle", size: "sm" }, () => "Giftsvamp")
+          : null,
+      ].filter(Boolean));
+      // Combine into two-column layout: image | (icon+names + badges)
+      return h("div", { class: "flex space-x-4 items-start" }, [
+        imageComp,
+        h("div", { class: "flex flex-col" }, [headerComp, badgesComp])
+      ]);
+    },
+    meta: { headerText: 'Namn' }
+  },
+  // Spread in the desktopColumns, but override the mark column to set enableHiding as needed
+  ...desktopColumns.map(col => {
+    if (col.accessorKey === "mark") {
+      return {
+        ...col,
+        enableHiding: props.dataType === 'edna' ? false : true
+      }
+    }
+    return col;
+  })
+];
+
+// switch between desktop and mobile column sets
+const columns = computed(() => isMobile.value ? mobileColumns : desktopColumns);
 
 const topCount = ref(0);
 const remainingCount = ref(0);
@@ -890,6 +1253,15 @@ const filteredData = computed(() => {
   return result;
 });
 
+  // Limit rows on mobile when in normal view to the top 4 species
+  const displayedData = computed(() => {
+    if (isMobile.value && props.isNormalView) {
+      return filteredData.value.slice(0, 4);
+    }
+    return filteredData.value;
+  });
+ 
+
 // const sorting = ref([{ id: props.obs, desc: false }])
 
 // const sortedData = computed(() => {
@@ -954,11 +1326,14 @@ const endItem = computed(() => {
 });
 
 const totalItems = computed(() => {
-  return table.value?.tableApi?.getFilteredRowModel().rows.length || 0;
+  return table.value?.tableApi?.getFilteredRowModel()?.rows.length || 0;
 });
 
 const columnFilters = computed(() => {
-  const filters = [];
+  // If searchTerm is present, filter Commonname (and Scientificname via filterFn)
+  const filters = props.searchTerm
+    ? [{ id: 'Commonname', value: props.searchTerm }]
+    : []
   if (selectedFilter.value && selectedFilter.value.length > 0) {
     filters.push({ id: props.mat, value: selectedFilter.value });
   }
@@ -979,6 +1354,25 @@ watch(columnFilters, (newFilters) => {
     table.value.tableApi.setColumnFilters(newFilters);
   }
 });
+
+// Watch columnFilters to emit matsvampFilter when the matsvamp column filter is active
+watch(columnFilters, (newFilters) => {
+  // 1) Matsvamp/Giftsvamp
+  const svampFilter = newFilters.find(f => f.id === props.mat);
+  const svampValues = svampFilter?.value ?? [];
+  emit('update:matsvampFilter', svampValues.includes('Matsvamp'));
+  emit('update:giftsvampFilter', svampValues.includes('Giftsvamp'));
+
+  // 2) Grupp
+  const gruppFilterEntry = newFilters.find(f => f.id === props.grupp);
+  const gruppValues = gruppFilterEntry?.value ?? [];
+  emit('update:gruppFilter', gruppValues);
+
+  // 3) Status (RL2020kat)
+  const statusFilterEntry = newFilters.find(f => f.id === 'RL2020kat');
+  const statusValues = statusFilterEntry?.value ?? [];
+  emit('update:statusFilter', statusValues);
+}, { deep: true, immediate: true });
 </script>
 
 <style scoped>

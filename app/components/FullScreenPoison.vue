@@ -1,24 +1,38 @@
 <template>
   <div>
     <!-- Header with title, filters and view toggle -->
-    <div class="flex justify-between">
-      <div class="flex gap-4 ml-4">
+    <div class="md:flex justify-between">
+      <div class="md:flex gap-4">
         <!-- <UIcon
           name="hugeicons:danger"
           class="h-10 w-10 text-poison-500 ml-4"
         /> -->
-        <h1 class="text-neutral-800 dark:text-neutral-300 text-3xl">
+        <div class="w-full flex justify-between">
+
+        <h1  @click="$emit('enlarge')" class="text-lime-500 dark:text-neutral-300 text-2xl md:text-3xl">
           Giftsvampar
         </h1>
+
+        <UButton
+        :label="isNormalView ? '' : 'Gå tillbaka'"
+      color="neutral"
+      variant="soft"
+        size="lg"
+        @click="$emit('enlarge')"
+        :class="isNormalView ? 'hidden' : 'md:hidden'"
+        :icon="isNormalView ? '' : 'i-heroicons-arrow-uturn-left-solid'"
+        trailing
+      />
+
+          </div>
+
         <UTabs
       v-model="activeTab"
       :items="items"
       variant="link"
       color="neutral"
+      class="md:flex hidden"
     />
-    <div class="flex gap-4 items-end pb-2">
- 
-    </div>
       </div>
       <div class="flex gap-2 items-center mb-2">
         <UBadge
@@ -28,22 +42,22 @@
         color="tertiary"
         variant="subtle"
         label="Enligt samlad kunskap, främst var fruktkroppar förekommer"
-        class="h-fit"
+        class="h-fit hidden md:flex"
       />
-        <UButton
-      color="neutral"
-      variant="ghost"
-        size="lg"
-        :icon="isNormalView ? 'material-symbols:open-in-full' : 'material-symbols:close-fullscreen'"
-        @click="$emit('enlarge')"
-      />
+      <UButton
+          color="neutral"
+          variant="ghost"
+          size="lg"
+          :icon="isNormalView ? 'material-symbols:open-in-full' : 'material-symbols:close-fullscreen'"
+          @click="$emit('enlarge')"
+          class="hidden md:flex"        />
       </div>
     </div>
       <!-- TABLE VIEW -->
-      <transition name="fade" mode="out-in" class="min-h-[550px]">
+      <transition name="fade" mode="out-in" class="md:min-h-[260px]">
 
       <div v-if="isTableView">
-          <SpeciesTable :is-normal-view="isNormalView" dataType="edibledata" dataTypeFolder="edible" grupp="Svamp-grupp" mat="Nyasvamp-boken" obs="Rank giftsvamp" obsLabel="Antal fynd" :filterPoison="true"  :column-visibility-overrides="{ 'mark': false }" 
+          <SpeciesTable @enlarge="emit('enlarge')" :is-normal-view="isNormalView" dataType="edibledata" dataTypeFolder="edible" grupp="Svamp-grupp" mat="Nyasvamp-boken" obs="Rank giftsvamp" obsLabel="Antal fynd" :filterPoison="true"  :column-visibility-overrides="{ 'mark': false }" 
           />
       </div>
       <div v-else>
@@ -54,8 +68,11 @@
 </template>
 
 <script setup>
-import { ref, computed } from "vue";
+import { ref, computed, defineEmits } from "vue";
+import { useMediaQuery } from "@vueuse/core";
 import { useTabsStore } from '~/stores/tabsStore';
+
+const emit = defineEmits(['enlarge']);
 
 const items = [
   {
@@ -71,13 +88,19 @@ const items = [
 ];
 
 const tabsStore = useTabsStore();
+const props = defineProps({ isNormalView: Boolean });
+// detect mobile screens (< md)
+const isSmallScreen = useMediaQuery('(max-width: 767px)');
+
 const activeTab = computed({
-  get: () => tabsStore.getActiveTab("FullscreenPoison"),
-  set: (val) => tabsStore.setActiveTab("FullscreenPoison", val),
+  get: () => isSmallScreen.value ? 'table' : tabsStore.getActiveTab("FullscreenPoison"),
+  set: (val) => {
+    if (!isSmallScreen.value) {
+      tabsStore.setActiveTab("FullscreenPoison", val);
+    }
+  }
 });
 const isTableView = computed(() => activeTab.value === "table");
-
-const props = defineProps({ isNormalView: Boolean });
 
 </script>
 

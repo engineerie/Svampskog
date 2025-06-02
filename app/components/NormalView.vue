@@ -10,15 +10,25 @@
     </div>
 
     <div class="col-span-12">
-      <div class="flex justify-end mb-2 sticky top-28 pt-2 z-10">
-    <div  class="bg-white dark:bg-black rounded-xl">
+      <USeparator type="dashed" class="mt-4"/>
+
+      <div class="flex justify-end md:mb-2 sticky top-28 pt-2 z-10">
+    <div  class="bg-white dark:bg-black rounded-xl mb-2">
           <UBadge
             size="lg"
             color="secondary"
             variant="subtle"
             icon="solar:dna-linear"
             label="Enligt DNA från markinventeringens provytor"
-           class="h-full"
+           class="h-full hidden md:flex  "
+            />
+            <UBadge
+            size="md"
+            color="secondary"
+            variant="subtle"
+            icon="solar:dna-linear"
+            label="DNA"
+           class="h-full md:hidden"
             />
 
     </div>
@@ -29,27 +39,48 @@
   
 
       <!-- Main content -->
-
-        <EdnaComponent
+<div>
+   <EdnaComponent
+        class=" mb-8"
           :isNormalView="true"
           @enlarge="emitEnlarge('FullScreenEdna')"
         />
 
+</div>
+       
    
     </div>
 
 
-    <div class="col-span-12 ">
+    <div class="col-span-12">
+      <USeparator type="dashed"/>
+      <!-- <UBadge
+            size="md"
+            color="tertiary"
+            variant="subtle"
+           icon="lineicons:mushroom-1"
+           label="Enligt samlad kunskap / var fruktkroppar förekommer"
+              class="h-fit mt-4 md:hidden "
+           /> -->
       <div class="flex justify-end  mb-2 sticky top-28 pt-2 z-10     ">
        
         <div  class="bg-white dark:bg-black rounded-xl z-10">
-          <UBadge
+          
+           <UBadge
             size="lg"
             color="tertiary"
             variant="subtle"
            icon="lineicons:mushroom-1"
            label="Enligt samlad kunskap, främst var fruktkroppar förekommer"
-              class="h-full"
+              class="h-full hidden md:flex"
+           />
+           <UBadge
+            size="md"
+            color="tertiary"
+            variant="subtle"
+           icon="lineicons:mushroom-1"
+           label="Samlad kunskap"
+              class="h-full md:hidden"
            />
       
      </div>

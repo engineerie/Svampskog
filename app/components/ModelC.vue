@@ -378,7 +378,7 @@
                       sliderPosition="right" @opened="onViewerOpened('after')"
                       @activated="activeViewer.valueOf = 'after'" v-if="!opacitySyncEnabled"
                       class="w-full h-full z-0 rounded-xl border-[0.5px] border-neutral-300 dark:border-neutral-800 overflow-hidden" />
-                    <OpenSeadragonViewer :currentFramework="currentFramework2" :currentTime="timeLabelForDataFiltering"
+                    <OpenSeadragonViewer :currentFramework="currentFramework" :currentTime="timeLabelForDataFiltering"
                       :currentStartskog="currentStartskog" :layoutMode="currentLayoutMode" ref="afterViewerRef"
                       :comparisonMode="true" :frameworkLabel="currentFramework.label" :timeLabel="currentTimeLabel"
                       :dziUrl="comparisonOverlayImagePath2.replace('.png', '.dzi')"
@@ -750,7 +750,7 @@ const frameworks = [
     id: 3,
     label: "Överhållen skärm",
     value: "skärmträd",
-    text: "Överhållen skärm",
+    text: "Avverkning i tre steg under 20 år",
     icon: "catppuccin:redwood",
     iconColor: "text-orange-500",
   },
@@ -766,8 +766,8 @@ const frameworks = [
 
 // Startskog array
 const startskog = [
-  { label: "Inte kalavverkad", value: "naturskog" },
-  { label: "Kalavverkad", value: "produktionsskog_" },
+  { label: "Inte tidigare kalavverkad", value: "naturskog" },
+  { label: "Tidigare kalavverkad", value: "produktionsskog_" },
 ];
 
 // Current framework and startskog
