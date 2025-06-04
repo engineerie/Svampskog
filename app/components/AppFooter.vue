@@ -47,8 +47,7 @@ function onSubmit() {
 
 <template>
   <USeparator
-
-    class="h-px mt-12"
+    class="h-px"
   />
   <UFooter :ui="{ top: 'border-b border-[var(--ui-border)]' }">
     <!-- <template #top>

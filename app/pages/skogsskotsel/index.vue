@@ -4,6 +4,7 @@ definePageMeta({ layout: 'mylayout' })
 
 <template>
   <UContainer>
+    
     <UPage>
         <!-- <template #left>
           <div >
@@ -11,20 +12,22 @@ definePageMeta({ layout: 'mylayout' })
          
         </template>
         <template #right><div></div></template> -->
+        <UPageHero title="Skogsskötsel" description="Här visualiserar vi baserat på den kunskap som finns hur olika former av trakthyggesbruk och hyggesfria metoder påverkar förekomsten av mykorrhizasvampar under en skogsgeneration.
+"/>
         <!-- <UPageHeader
       headline="Skogsskötsel"
       title="Se hur skogsskötsel påverkar svampar"
       description="Här visualiserar vi baserat på den kunskap som finns hur olika former av trakthyggesbruk och hyggesfria metoder påverkar förekomsten av mykorrhizasvampar under en skogsgeneration.
 "
     /> -->
-    <div class="mt-4 grid grid-cols-1 sm:grid-cols-3 gap-4">
+      <UPageGrid class="mt-8">
       <UPageCard
         title="Skötselmetoder"
         description="Läs om skötselmetoder och hur de påverkar mykorrhizasvampar."
         to="/skogsskotsel/skotselmetoder"
         class="cursor-pointer"
         icon="mdi:saw-blade"
-        variant="ghost"
+        variant="outline"
         orientation="vertical"
 
       >  <NuxtImg src="/images/luckhuggning.png" width="500" height="300" format="webp" quality="80" class=" rounded-xl border border-neutral-100"/>
@@ -36,7 +39,7 @@ definePageMeta({ layout: 'mylayout' })
         to="/skogsskotsel/modell"
         class="cursor-pointer"
         icon="i-material-symbols-interactive-space-outline-rounded"
-        variant="ghost"
+        variant="outline"
         orientation="vertical"
       ><NuxtImg src="/images/LandningSkogsbruk/trakthygge_efter_visa_visa_produktionsskog_.png" width="500" height="300" format="webp" quality="80" class=" rounded-xl border border-neutral-100"/>
     </UPageCard>
@@ -47,7 +50,7 @@ definePageMeta({ layout: 'mylayout' })
         to="/skogsskotsel/diagram"
         class="cursor-pointer"
         icon="i-carbon-chart-line-smooth"
-        variant="ghost"
+        variant="outline"
 
         orientation="vertical"
 
@@ -60,11 +63,11 @@ definePageMeta({ layout: 'mylayout' })
         description="Se dokumentationen."
         to="/skogsskotsel/dokumentation"
         class="cursor-pointer grow-0"
-        variant="ghost"
+        variant="outline"
         orientation="vertical"
 
       />
-    </div>
+    </UPageGrid>
       </UPage>
   
   </UContainer>

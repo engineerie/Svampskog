@@ -95,7 +95,19 @@ testimonials:
   headline: Om projektet
   title: Om Svampskog
   description: Svampskog syftar till att förmedla lättillgänglig och tillförlitlig information om vilka mykorrhizasvampar som kan finnas i olika skogar, och hur deras förekomst påverkas av olika former av skogsskötsel. Projektet riktar sig till alla som är intresserade av skog och svamp.
-  items:
+  links:
+      - label: Gå till skogsskötsel
+        to: /skogsskotsel
+        icon: i-heroicons-arrow-right
+  features: 
+    - title: Lansering
+      icon: i-heroicons-rocket-launch-solid
+      description: Webbplatsen mjuklanserades den 9 april och utvecklas löpande sommaren 2025.
+    - title: Kommande
+      icon: i-heroicons-calendar
+      description: Ett mobilanpassat webbverktyg samt en modul för svampkännedom lanseras i slutet av augusti 2025
+    - title: Webbinarium
+      description: Ett öppet webbinarium om att använda Svampskog hölls den 23 april. Under hösten 2025 planeras fler webbinarium. De kommer att annonseras här.
     - quote: The developer experience is unmatched. We migrated our entire infrastructure in weeks instead of months, and our team's productivity has increased dramatically. The TypeScript support and component library saved us months of development time.
       user:
         name: Sarah Chen

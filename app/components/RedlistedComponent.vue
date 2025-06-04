@@ -10,7 +10,6 @@
         </h1>
         
         <UButton
-        :label="isNormalView ? '' : 'Gå tillbaka'"
       color="neutral"
       variant="soft"
         size="lg"

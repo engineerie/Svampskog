@@ -557,6 +557,25 @@ const sortMenuItems = computed(() => [
         }
       }
     ]
+  },
+  {
+    label: props.obsLabel || 'Förekomst',
+    children: [
+      {
+        label: 'Lägst → Högst',
+        onSelect(e) {
+          e.preventDefault();
+          table.value?.tableApi?.setSorting([{ id: props.obs, desc: false }]);
+        }
+      },
+      {
+        label: 'Högst → Lägst',
+        onSelect(e) {
+          e.preventDefault();
+          table.value?.tableApi?.setSorting([{ id: props.obs, desc: true }]);
+        }
+      }
+    ]
   }
 ]);
 

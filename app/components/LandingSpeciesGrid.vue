@@ -1,24 +1,24 @@
 <template>
   <div>
     <!-- Environment Row -->
-    <div class="sm:px-2 text-lg font-semibold py-2 flex flex-wrap gap-2 sm:gap-4">
+    <div class="sm:px-2 text-lg font-semibold py-2 flex overflow-hidden   gap-2 sm:gap-4 w-full">
   <transition name="slide-up" mode="out-in">
-    <UBadge :key="envParamsStore.geographyLabel" size="lg" color="neutral" variant="soft">
+    <UBadge :key="envParamsStore.geographyLabel" size="lg" color="neutral" variant="soft" class="shrink-0">
       {{ envParamsStore.geographyLabel }}
     </UBadge>
   </transition>
   <transition name="slide-up" mode="out-in">
-    <UBadge :key="envParamsStore.forestTypeLabel" size="lg" color="neutral" variant="soft">
+    <UBadge :key="envParamsStore.forestTypeLabel" size="lg" color="neutral" variant="soft" class="shrink-0">
       {{ envParamsStore.forestTypeLabel }}
     </UBadge>
   </transition>
   <transition name="slide-up" mode="out-in">
-    <UBadge :key="envParamsStore.standAgeLabel" size="lg" color="neutral" variant="soft">
+    <UBadge :key="envParamsStore.standAgeLabel" size="lg" color="neutral" variant="soft" class="shrink-0">
       {{ envParamsStore.standAgeLabel }}
     </UBadge>
   </transition>
   <transition name="slide-up" mode="out-in">
-    <UBadge :key="envParamsStore.vegetationTypeLabel" size="lg" color="neutral" variant="soft">
+    <UBadge :key="envParamsStore.vegetationTypeLabel" size="lg" color="neutral" variant="soft" class="shrink-0">
       {{ envParamsStore.vegetationTypeLabel }}
     </UBadge>
   </transition>
@@ -35,11 +35,11 @@
         <div
           v-for="(row, index) in gridPaginatedData"
           :key="row.Commonname + row.Scientificname + index"
-          class="bg-white dark:bg-neutral-900 rounded-2xl border border-neutral-200 dark:border-neutral-800 hover:shadow-md transition-shadow cursor-pointer h-[184px]"
+          class="bg-white dark:bg-neutral-900 rounded-xl border border-neutral-200 dark:border-neutral-800 h-[142px]"
           @click="selectRow(row)"
         >
           <!-- Image Thumbnail -->
-          <div class="w-full h-32 relative rounded-t-2xl overflow-hidden">
+          <div class="w-full h-28 relative rounded-t-xl overflow-hidden">
             <NuxtImg
               v-if="row.images && row.images.length"
               :src="row.images[0]"
@@ -58,7 +58,7 @@
                 class="w-8 h-8 text-neutral-500"
               />
             </div>
-            <div class="absolute bottom-2 left-2 flex gap-1">
+            <!-- <div class="absolute bottom-2 left-2 flex gap-1">
               <UBadge
                 v-if="row.SIGNAL_art !== 'S' && !(['LC', '0', 'NA', 'NE', 'Saknas', null].includes(row.RL2020kat))"
                 class="bg-error-50 dark:bg-error-950/80"
@@ -84,16 +84,16 @@
                 variant="subtle"
                 label="Giftsvamp"
               />
-            </div>
+            </div> -->
           </div>
           <!-- Species Names -->
-          <div class="p-2 pt-1">
-            <div class="text-md font-medium text-neutral-500 dark:text-neutral-300 truncate">
+          <div class="p-2.5 pt-1">
+            <div class="text-sm font-medium text-neutral-500 dark:text-neutral-300 truncate">
               {{ capitalize(row.Commonname) }}
             </div>
-            <div class="text-sm font-medium text-neutral-400 dark:text-neutral-300 truncate">
+            <!-- <div class="text-sm font-medium text-neutral-400 dark:text-neutral-300 truncate">
               {{ capitalize(row.Scientificname) }}
-            </div>
+            </div> -->
           </div>
         </div>
       </transition-group>
@@ -118,6 +118,15 @@
       </div>
     </div>
     -->
+    <!-- Animated progress bar -->
+    <div class="mt-2 px-4">
+      <div class="w-full bg-gray-200 dark:bg-gray-700 h-0.5 rounded overflow-hidden">
+        <div
+          :key="currentFileIndex"
+          class="h-1 bg-primary-500 rounded animate-progress"
+        ></div>
+      </div>
+    </div>
   </div>
 </template>
 
@@ -184,6 +193,7 @@ const data = ref([])
 const isLoading = ref(true)
 let intervalId = null
 
+
 async function fetchData() {
   const url = edibleFiles[currentFileIndex.value]
   try {
@@ -199,13 +209,15 @@ async function fetchData() {
   }
 }
 
-onMounted(() => {
-  fetchData()
-  intervalId = setInterval(() => {
+onMounted(async () => {
+  // Fetch initial data
+  await fetchData()
+  // Cycle data every 30 seconds
+  intervalId = setInterval(async () => {
     currentFileIndex.value = (currentFileIndex.value + 1) % edibleFiles.length
     isLoading.value = true
-    fetchData()
-  }, 30000)  // updated to 10 seconds
+    await fetchData()
+  }, 15000)
 })
 
 onUnmounted(() => {
@@ -383,7 +395,7 @@ function selectRow(row) {
 
 .slide-up-enter-active,
 .slide-up-leave-active {
-  transition: all 0.25s ease-out;
+  transition: all 0.4s ease-out;
 }
 .slide-up-enter-from {
   opacity: 0;
@@ -392,5 +404,16 @@ function selectRow(row) {
 .slide-up-leave-to {
   opacity: 0;
   transform: translateY(-30px);
+}
+</style>
+
+<style scoped>
+@keyframes progressAnimation {
+  from { width: 0%; }
+  to { width: 100%; }
+}
+.animate-progress {
+  width: 100%;
+  animation: progressAnimation 15s linear forwards;
 }
 </style>

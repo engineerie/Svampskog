@@ -56,21 +56,6 @@ onUnmounted(() => {
   window.removeEventListener('scroll', handleScroll)
 })
 
-const svampinfo = ref([
-  {
-    description: 'Det finns omkring 2000 olika arter mykorrhizasvampar Sverige.',
-    icon: 'i-gg-sweden',
-  },
-  {
-    description: '340 mykorrhizasvampar är rödlistade i Sverige.',
-    icon: 'i-material-symbols-award-star-outline',
-  },
-  {
-
-    description: 'De allra flesta matsvampar är mykorrhizasvampar.',
-    icon: 'i-icon-park-solid-knife-fork',
-  }
-])
 </script>
 
 <template>
@@ -149,14 +134,14 @@ const svampinfo = ref([
     </UContainer>
 
   </div>
-
+  <!-- :features="page.sections[0].features" -->
   <div class="page-section">
     <UPageSection 
       :title="page.sections[0].title"
       :description="page.sections[0].description"
       :orientation="page.sections[0].orientation"
       :reverse="page.sections[0].reverse"
-      :features="page.sections[0].features"
+    
       :links="page.sections[0].links"
       :headline="page.sections[0].headline">
       <template #links>
@@ -174,14 +159,14 @@ const svampinfo = ref([
       <LandingSpeciesGrid :filterEdible="true"/>
     </UPageSection>
   </div>
-
+  <!-- :features="page.sections[1].features" -->
   <div class="page-section">
     <UPageSection 
       :title="page.sections[1].title"
       :description="page.sections[1].description"
       :orientation="page.sections[1].orientation"
       
-      :features="page.sections[1].features"
+      
       :links="page.sections[1].links"
       :headline="page.sections[1].headline">
       <template #links>

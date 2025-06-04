@@ -3,11 +3,11 @@ import { defineStore } from "pinia";
 
 // Export the options arrays so they can be imported elsewhere.
 export const geographyOptions = [
-  { value: "Norr", label: "Norra Sverige", description: "Norr om latitud 60°" },
+  { value: "Norr", label: "Norra Sverige", description: "Norr om breddgrad 60°" },
   {
     value: "Söder",
     label: "Södra Sverige",
-    description: "Söder om latitud 60°",
+    description: "Söder om breddgrad 60°",
   },
 ];
 

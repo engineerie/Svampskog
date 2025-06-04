@@ -19,17 +19,20 @@
             color="secondary"
             variant="subtle"
             icon="solar:dna-linear"
-            label="Enligt DNA från markinventeringens provytor"
-           class="h-full hidden md:flex  "
-            />
-            <UBadge
-            size="md"
+            :label="dnaExpanded ? 'Enligt DNA från markinventeringens provytor' : 'DNA'"
+            class="h-full cursor-pointer md:hidden"
+            @click="dnaExpanded = !dnaExpanded"
+          />
+
+          <UBadge
+            size="lg"
             color="secondary"
             variant="subtle"
             icon="solar:dna-linear"
-            label="DNA"
-           class="h-full md:hidden"
+            label="Enligt DNA från markinventeringens provytor"
+           class="h-full hidden md:flex  "
             />
+       
 
     </div>
       
@@ -70,18 +73,22 @@
             size="lg"
             color="tertiary"
             variant="subtle"
-           icon="lineicons:mushroom-1"
-           label="Enligt samlad kunskap, främst var fruktkroppar förekommer"
-              class="h-full hidden md:flex"
+            icon="lineicons:mushroom-1"
+            label="Enligt samlad kunskap, främst var fruktkroppar förekommer"
+            class="h-full hidden md:flex"
            />
            <UBadge
-            size="md"
+            size="lg"
             color="tertiary"
             variant="subtle"
-           icon="lineicons:mushroom-1"
-           label="Samlad kunskap"
-              class="h-full md:hidden"
-           />
+            icon="lineicons:mushroom-1"
+            class="h-full cursor-pointer md:hidden whitespace-normal break-words text-left"
+            @click="knowledgeExpanded = !knowledgeExpanded"
+           >
+             {{ knowledgeExpanded
+               ? 'Enligt samlad kunskap, främst var fruktkroppar förekommer'
+               : 'Samlad kunskap' }}
+           </UBadge>
       
      </div>
         
@@ -151,6 +158,7 @@
 import EdnaComponent from "./EdnaComponent.vue";
 import { useRoute } from "vue-router";
 import EnvImgInfo from "./EnvImgInfo.vue";
+import { ref } from 'vue';
 const route = useRoute();
 
 // Define props
@@ -170,6 +178,9 @@ const emit = defineEmits(["enlarge"]);
 const emitEnlarge = (componentName) => {
   emit("enlarge", componentName);
 };
+
+const dnaExpanded = ref(false);
+const knowledgeExpanded = ref(false);
 </script>
 
 <style scoped>

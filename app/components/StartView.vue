@@ -18,60 +18,48 @@ orientation="horizontal"
    
   </UPageCTA> -->
 
-<!-- <template #left><div></div></template>
+<template #left><div></div></template>
 <template #right><div></div></template>
 
-    <div class="mt-4 text-lg text-neutral-500">
+    <UCard class="mt-8 text-lg text-neutral-600 dark:text-neutral-400" variant="soft">
            <ul class="space-y-4">
              <li class="">
                Välj skogsmiljö genom att ange
 
-               <Icon
-                 name="material-symbols:location-on-outline"
-                 class="size-5 text-fuchsia-500 -mb-1"
-               />
-               Var i Sverige (för närvarande begränsat till norr och söder),
+               <span class="font-semibold text-neutral-700 dark:text-neutral-200">Var i Sverige </span>
+               (norr och söder om breddgrad 60 ca Uppsala),
+<span class="font-semibold text-neutral-700 dark:text-neutral-200">Skogstyp</span>
+                (vilka träd som dominerar),
 
-               <Icon name="lucide:trees" class="size-5 text-green-500 -mb-1" />
-               Skogstyp (vilka träd som dominerar),
+               <span class="font-semibold text-neutral-700 dark:text-neutral-200">Skogsålder</span>
+                (trädens ålder) och
 
-               <Icon
-                 name="carbon:crop-growth"
-                 class="size-5 text-violet-500 -mb-1"
-               />
-               Skogsålder (trädens ålder) och
-
-               <Icon
-                 name="fluent-emoji-high-contrast:herb"
-                 class="size-5 text-teal-500 -mb-1"
-               />
-               Fältskikt (vilken vegetation som växer på marken).
+               <span class="font-semibold text-neutral-700 dark:text-neutral-200">Fältskikt</span>
+                (vilken vegetation som växer på marken).
              </li>
              <li>
                Klicka på respektive kategori för att göra dina val, eller
                använd knappen
-               <div
+               <UBadge label="Kombinationsvy" icon="mdi:chevron-down" trailing color="neutral" variant="soft" size="lg"/>
+               <!-- <div
                  class="inline-flex mx-1 items-center rounded-full ring-1 ring-neutral-200 w-fit text-sm py-1 pl-4 pr-3 gap-1 bg-neutral-50 text-neutral-950"
                >
                  <span>Visa kombinationsvy</span>
                  <Icon name="mdi:chevron-down" class="size-5" />
-               </div>
+               </div> -->
                för att se alla alternativ som radioknappar.
-          ´
+          
              </li>
              <li class="">
-               Du kan också klicka på
-               <div
-                 class="inline-flex mx-1 items-center rounded-full ring-1 ring-neutral-200 w-fit text-sm py-1 pl-4 pr-3 gap-1 bg-neutral-50 text-neutral-950"
-               >
-                 <span>Markinventeringsdata</span>
-                 <Icon name="mdi:lock-open" class="size-4" />
-               </div>
+               Klicka på
+               <UBadge label="Markinventeringsdata" icon="mdi:lock" trailing color="secondary" variant="soft" size="lg"/>
+
+              
                för att begränsa urvalet till miljöer där det finns data från
                markinventeringen.
-        ´
+        
              </li>
            </ul>
-         </div> -->
+          </UCard>
   </UPage>
 </template>

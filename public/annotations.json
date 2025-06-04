@@ -84,7 +84,7 @@
     },
     {
       "id": "matsvampsmycel_kort_tid",
-      "title": "Matsvampsmycel efter avverkning",
+      "title": "Matsvamp efter avverkning",
       "text": "Nästan alla matsvampar är mykorrhizasvampar och försvinner efter avverkning. De överlever om dess mycel växer med hänsynsträd som lämnats eller nära en skogskant. Annars behöver de återetableras i ungskog från sporer som sprids in från näraliggande skogar.",
       "thumbnail": "/images/Skogsbruk.png",
       "icon": "i-material-symbols-light-circle",
@@ -289,7 +289,7 @@
     },
     {
       "id": "sjalforyngrade_sma_tradplantor",
-      "title": "Självföryngrade små trädplantor",
+      "title": "Självföryngrade trädplantor",
       "text": "Små mycel av mykorrhizasvampar växer i plantornas rötter. Om de växer nära hänsynsträd kan mycel vuxint in från dessas rötter. Annars etableras mycel från svampsporer som sprid in från näraliggande skogar. Vissa svamparter har också en sporbank i marken.",
       "thumbnail": "/images/Skogsbruk.png",
       "icon": "i-heroicons-map-pin-solid",
