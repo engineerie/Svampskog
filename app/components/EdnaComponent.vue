@@ -1,9 +1,30 @@
 <template>
+  <div>
 
-
+<div :class="isNormalView ? 'hidden' : 'mb-2'" class="w-full flex justify-end gap-2">
+     <UButton
+      class="md:hidden ml-2 "
+      :class="isNormalView ? 'hidden' : ''"
+      variant="soft"
+      icon="material-symbols:bar-chart"
+      size="lg"
+      label="Diagram"
+      trailing
+    />
+   <UButton
+      color="neutral"
+      variant="soft"
+        size="lg"
+        @click="$emit('enlarge')"
+  :class="isNormalView ? 'hidden' : 'md:hidden'"
+        :icon="isNormalView ? '' : 'i-heroicons-arrow-uturn-left-solid'"
+        trailing
+        
+      />
+</div>
     
         
-  <div class=" ">
+  <UCard>
     
     <!-- Header / List View -->
    
@@ -16,16 +37,7 @@
         <div class="flex justify-between md:mt-0 mt-1 mb-1 md:mb-2">
                   <h1 @click="$emit('enlarge')" class="text-2xl md:text-3xl  ">Alla mykorrhizasvampar</h1>
                  
-                  <UButton
-      color="neutral"
-      variant="soft"
-        size="lg"
-        @click="$emit('enlarge')"
-        :class="isNormalView ? 'hidden' : 'md:hidden'"
-        :icon="isNormalView ? '' : 'i-heroicons-arrow-uturn-left-solid'"
-        trailing
-        
-      />
+                 
         </div>
 
         <div class="flex justify-between">
@@ -66,9 +78,18 @@
     />
     <!-- modal body -->
     <template #body >
-      <EnvironmentSelector :initialMobileCollapsed="true" />
+      <EnvironmentSelector :initialMobileCollapsed="true"/>
 
-      <BarChart
+      <UButton
+        variant="ghost"
+        size="md"
+        @click="showBarChart = !showBarChart"
+        :label="showBarChart ? 'Dölj diagram' : 'Visa diagram'"
+        class="mb-2 hidden md:block"
+      />
+
+      <BarChart v-if="showBarChart"
+      class="mt-2"
   :chartData="data"
   :chartWidth="chartWidth"
   :geography="geographyValue"
@@ -123,6 +144,16 @@
         >
           {{ sampleEnvCount < 10 ? 'Lågt provantal: ' + sampleEnvCount + ' skogar' : 'Baserat på ' + sampleEnvCount + ' skogar' }}
         </UBadge>
+         <UButton
+                 class="hidden md:flex h-fit"
+
+    color="neutral"
+      variant="soft"
+      size="md"
+      @click="showBarChart = !showBarChart"
+      :label="showBarChart ? 'Dölj diagram' : 'Visa diagram'"
+
+    />
         <UButton
         class="hidden md:flex h-fit"
         color="neutral"
@@ -154,7 +185,8 @@
       v-else-if="activeTab === 'columnChart'"
       class="p-2"
     >
-    <BarChart
+   
+    <BarChart v-if="showBarChart"
   :chartData="data"
   :chartWidth="chartWidth"
   :geography="geographyValue"
@@ -184,8 +216,8 @@
     </div>
   </transition>
 
-  </div>
-
+</UCard>
+</div>
 </template>
 
 <script setup lang="ts">
@@ -203,6 +235,7 @@ const statusFilter = ref<string[]>([]);
 
 
 const modalSearchTerm = ref('');
+const showBarChart = ref(true);
 
 const { isNormalView } = defineProps<{ isNormalView: boolean }>();
 const emit = defineEmits<{ (e: "enlarge"): void }>();

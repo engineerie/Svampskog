@@ -1,7 +1,11 @@
 <template>
     <AppHeader />
-    <UMain>
+    <UMain class="flex flex-col ">
         <slot />
+    
     </UMain>
-    <AppFooter/>
+      
+
+
+    <AppFooter />
 </template>

@@ -1,7 +1,7 @@
 <template>
   <div class="grid grid-cols-12 gap-4">
     <div class="col-span-12  sm:col-span-4 sm:flex">
-      <div class="relative rounded-2xl overflow-hidden border border-neutral-200/50 dark:border-neutral-800/50">
+      <div class="relative rounded-lg overflow-hidden border border-neutral-200 dark:border-neutral-800/50">
         <SpatialForest />
         <div class="flex absolute bottom-0 justify-between w-full p-2 items-end">
           <h1 class="text-neutral-400 text-xs ">

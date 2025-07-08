@@ -1,5 +1,5 @@
 <template>
-  <div class="relative w-full h-auto rounded-2xl overflow-hidden">
+  <div class="relative w-full h-auto rounded-lg overflow-hidden">
     <!-- Underlying image -->
     <NuxtImg
       class="w-full h-auto"

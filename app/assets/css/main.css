@@ -20,11 +20,11 @@
 }
 
 .dark {
-  --ui-bg: var(--ui-color-neutral-900);
+  --ui-bg: var(--ui-color-neutral-950);
 }
 
 :root {
-  --ui-radius: var(--radius-md);
+  --ui-radius: var(--radius-sm);
   --ui-container: 85rem;
   --vis-line-gapfill-stroke-dasharray: 1 3;
   --vis-line-gapfill-stroke-opacity: 1;

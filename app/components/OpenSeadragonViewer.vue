@@ -3,15 +3,15 @@
 
 
   <!-- <client-only> -->
-    <div v-if="isClient" :id="viewerId" class="openseadragon-viewer relative rounded-xl overflow-hidden" ref="viewerContainer"
+    <div v-if="isClient" :id="viewerId" class="openseadragon-viewer relative rounded-lg overflow-hidden" ref="viewerContainer"
     :style="{ backgroundColor: backgroundColor }" @mousedown.capture="handleActivate" @mousemove="updateMousePosition">
     <div v-if="!(layoutMode === 'slider' && comparisonMode)" class="absolute top-0 m-2 z-10" :style="{
       ...(sliderPosition === 'left' ? { right: '0px', textAlign: 'right' } : { left: '0px' })
     }">
       <div>
-        <UBadge class="backdrop-blur-xl bg-neutral-100/10 text-neutral-100 mb-0.5">{{ frameworkLabel }}</UBadge>
+        <UBadge size="lg" class="backdrop-blur-xl bg-neutral-100/10 text-neutral-100 mb-0.5">{{ frameworkLabel }}</UBadge>
       </div>
-      <UBadge class="backdrop-blur-xl bg-neutral-100/10 text-neutral-100">{{ timeLabel }}</UBadge>
+      <UBadge size="lg" class="backdrop-blur-xl bg-neutral-100/10 text-neutral-100">{{ timeLabel }}</UBadge>
     </div>
     <!-- Display viewport coordinates for marker placement -->
     <!-- <div class="absolute top-32 right-0 m-2 p-1 bg-black bg-opacity-50 text-white text-xs z-50">
@@ -63,7 +63,7 @@
 
         <div :class="['flex w-full', (sliderPosition === 'left') ? '' : 'justify-end']">
 
-          <div class="w-full text-sm text-neutral-100 relative group pointer-events-auto p-4 backdrop-blur-2xl border-t border-neutral-800/50">
+          <div class="w-full text-lg text-neutral-100 relative group pointer-events-auto p-4 backdrop-blur-2xl border-t border-neutral-800/50">
 
 
 
@@ -417,7 +417,7 @@ export default {
     async function initViewer() {
       if (typeof window === "undefined") return;
       if (viewer.value) return;
-      if (route.name !== "skogsskotsel-modell") return;
+      if (route.name !== "skogsskotsel-skotselmetoder") return;
       const containerEl = viewerContainer.value;
       if (!containerEl) return;
 
@@ -439,7 +439,7 @@ export default {
         panVertical: true,
         homeFillsViewer: true,
         animationTime: 0.5,
-        defaultZoomLevel: props.layoutMode === "sideBySide" ? null : 1.3,
+        defaultZoomLevel: props.layoutMode === "sideBySide" ? null : 1.2,
         gestureSettingsMouse: {
           scrollToZoom: true,
           clickToZoom: false,

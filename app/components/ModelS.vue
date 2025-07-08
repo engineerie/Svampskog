@@ -1,24 +1,24 @@
 <template>
-  <div :class="['mx-auto', isFullWidth ? 'max-w-[150rem]' : 'max-w-[85rem]']" class="transition-all duration-500 px-4">
+  <div :class="['mx-auto', isFullWidth ? 'max-w-[150rem]' : 'max-w-[83.5rem]']" class="transition-all duration-500 px-4">
     <div class="transition-all duration-300">
-      <div class="pt-2">
+      <div class="pt-1">
         <div class="w-full flex gap-2">
-          <div class=" w-full  mt-2 mb-1" v-if="!frameworksVisible">
+          <div class=" w-full mx-3 mb-1" v-if="!frameworksVisible">
             <div class="flex gap-2 items-center justify-between w-full">
 
               <div class="flex justify-center w-full">
                 
-                <div class="">  <div class="flex gap-3 ">
+                <div class="text-center">  <div class="flex gap-3 items-center justify-center">
                 <!-- Grid-based framework selector: two columns when comparing, one column otherwise -->
 <template v-if="isFrameworkCompareMode">
   <div class="grid w-full items-center grid-cols-2">
     <!-- Left popover, right‐aligned within its cell -->
     <div class="flex justify-end pr-2 cursor-pointer">
       <UPopover destroy-on-close :popper="{ placement: 'bottom-start' }">
-        <UButton size="xl" variant="subtle">
+        <UBadge size="lg" variant="subtle">
           {{ currentFramework.label }}
           <Icon name="i-heroicons-chevron-down-solid" class="size-4 mt-0.5" />
-        </UButton>
+        </UBadge>
         <!-- <h1 class="text-2xl flex items-center">
           {{ currentFramework.label }}
           <Icon name="i-heroicons-chevron-down-solid" class="size-5 ml-1 mt-1" />
@@ -44,15 +44,15 @@
     <!-- Right popover, left‐aligned within its cell -->
     <div class="flex justify-start cursor-pointer">
       <!-- <USeparator orientation="vertical" class="h-8 mr-4" /> -->
-      <UPopover destroy-on-close :ui="{ rounded: 'rounded-xl' }" :popper="{ placement: 'bottom-start' }" class="ml-2">
+      <UPopover destroy-on-close :ui="{ rounded: 'rounded-lg' }" :popper="{ placement: 'bottom-start' }" class="ml-2">
         <!-- <h1 class="text-2xl flex items-center">
           {{ currentFramework2.label }}
           <Icon name="i-heroicons-chevron-down-solid" class="size-5 ml-1 mt-1" />
         </h1> -->
-        <UButton size="xl" variant="subtle" color="info">
+        <UBadge size="lg" variant="subtle" color="info">
           {{ currentFramework2.label }}
           <Icon name="i-heroicons-chevron-down-solid" class="size-4 mt-0.5" />
-        </UButton>
+        </UBadge>
         <template #content>
           <div class="p-2 flex flex-col gap-2">
             <div
@@ -73,14 +73,14 @@
   </div>
 </template>
 
-<template v-else>
-  <div class="">
-    <div class=" ">
+<!-- <template v-else>
+  <div class="grid w-full items-center grid-cols-1">
+    <div class="flex justify-center cursor-pointer">
       <UPopover destroy-on-close :popper="{ placement: 'bottom-start' }">
-        <UButton size="xl" variant="subtle">
+        <UBadge size="lg" variant="subtle">
           {{ currentFramework.label }}
           <Icon name="i-heroicons-chevron-down-solid" class="size-4 mt-0.5" />
-        </UButton>
+        </UBadge>
         <template #content>
           <div class="p-2 flex flex-col gap-2">
             <div
@@ -99,7 +99,7 @@
       </UPopover>
     </div>
   </div>
-</template>
+</template> -->
 
               </div>
 
@@ -113,10 +113,11 @@
         <div class="flex">
 
           <div class="w-full relative">
-          
-            <div class="w-full flex justify-center mt-1 relative">
-              <!-- <UPopover class="absolute left-2 bottom-2 cursor-pointer" v-model:open="open" destroy-on-close :popper="{ placement: 'bottom-start' }">
-                  <UBadge size="xl" variant="subtle" class="h-fit" color="secondary">{{ currentStartskog.label }}
+           
+        
+            <!-- <div class="w-full flex justify-center mt-1 relative">
+              <UPopover class="absolute left-2 bottom-2 cursor-pointer" v-model:open="open" destroy-on-close :popper="{ placement: 'bottom-start' }">
+                  <UBadge size="lg" variant="subtle" class="h-fit" color="secondary">{{ currentStartskog.label }}
                   </UBadge>
                   <template #content>
                     <div class="p-1 flex flex-col gap-1">
@@ -130,51 +131,37 @@
                       </div>
                     </div>
                   </template>
-                </UPopover>  -->
-                          <!-- <UTabs variant="link" color="neutral" v-model="selectedTimeIndex" :items="timeItems" size="md" /> -->
+                </UPopover> 
                           <div class="absolute right-2 bottom-2 flex gap-2">
-
-                            
-
-
-            
-<!-- <USelect v-model="selectedCompareChoice" :items="compareOptions" placeholder="Välj jämförelseläge"
-    class="" variant="ghost" /> -->
-   
-                    <UButton  size="xl" color="neutral" variant="soft" @click="toggleChartVisible"
+                    <UButton color="neutral" variant="ghost" @click="toggleChartVisible"
                       icon="i-carbon-chart-line-smooth"
                       label="Diagram"
                       class="cursor-pointer"
                      /> 
                      <UButton
-                      size="xl" 
                      v-if="!isCompare && !isFrameworkCompareMode"
                      class="cursor-pointer"
-
-
                    @click="annotationsVisible = !annotationsVisible"
-           
-                   variant="soft"
+                   variant="ghost"
                    color="neutral"
       label="Anteckningar"
                    icon="i-heroicons-outline-map-pin"
                  />
                  <UDropdownMenu :items="compareItems" :content="{ align: 'end', side: 'bottom', sideOffset: 8 }">
-                  <UButton size="xl" :label="selectedCompareLabel" variant="soft" color="neutral" :icon="activatorIcon" class="cursor-pointer" />
+                  <UButton :label="selectedCompareLabel" variant="ghost" color="neutral" :icon="activatorIcon" class="cursor-pointer" />
                 </UDropdownMenu>
 <UButton variant="ghost" color="neutral" icon="i-heroicons-x-mark-solid" class="cursor-pointer" 
   v-if="selectedCompareChoice === 'frameworkCompare' || selectedCompareChoice === 'beforeAfterCompare'"
   @click="selectedCompareChoice = 'none'" />
 </div>
                           
-            </div>
+            </div> -->
 
             <div class="flex gap-2 items-center justify-between mx-1">
            
 
               
             </div>
-            <!-- <div class="relative w-full h-[600px] resize-y overflow-auto flex p-1 pt-0 rounded-lg"> -->
             <div ref="resizableContainer" class="relative w-full overflow-visible flex pt-0 rounded-lg"
               :style="{ height: containerHeight + 'px' }">
               <div class="relative w-full ">
@@ -187,7 +174,6 @@
                     <div class="text-neutral-800 dark:text-neutral-200 text-xl flex gap-2 items-center">
                       <UBadge variant="subtle" size="xl">{{ currentFramework.label }}</UBadge>
                       <div class="flex items-center" v-if="isFrameworkCompareMode">
-                        <!-- <USeparator orientation="vertical" class="h-6 mr-2 " color="" /> -->
                         <UBadge variant="subtle" color="info" size="xl">{{ currentFramework2.label }}</UBadge>
     
                       </div>
@@ -242,11 +228,6 @@
 
 
                 <div class="absolute p-2 z-10">
-                  <!-- <div>
-                    <UButton color="neutral" variant="solid" @click="opacitySyncEnabled = !opacitySyncEnabled"
-                      :icon="opacitySyncEnabled ? 'mdi:lock' : 'mdi:lock-open'"
-                      class=" z-10 hover:bg-neutral-800 bg-neutral-900 text-neutral-100 mb-2" />
-                  </div> -->
                   <div class="flex gap-1">
                     <UButtonGroup class="size-xs">
                       <UButton color="neutral" variant="solid" @click="toggleOverlay"
@@ -275,7 +256,7 @@
                   
                 
                  
-                  <div class="shrink-0 bg-neutral-100/0 backdrop-blur-xl rounded-xl p-1.5 border border-neutral-800/60 mt-4"
+                  <div class="shrink-0 bg-neutral-100/0 backdrop-blur-xl rounded-lg p-1.5 border border-neutral-800/60 mt-4"
                   v-if="!isCompare && !isFrameworkCompareMode && annotationsVisible">
                     <ul>
                       <li v-for="annotation in filteredAnnotations" :key="annotation.id" class="mb-0.5">
@@ -306,7 +287,7 @@
 
                 <!-- Single View -->
                 <div v-if="!isCompare && !isFrameworkCompareMode"
-                  class="w-full h-full overflow-hidden rounded-xl relative border border-neutral-200 dark:border-neutral-800 shadow">
+                  class="w-full h-full overflow-hidden rounded-lg relative border border-neutral-200 dark:border-neutral-800 shadow">
                   <OpenSeadragonViewer :currentFramework="currentFramework" :currentTime="timeLabelForDataFiltering"
                     :currentStartskog="currentStartskog" :layoutMode="currentLayoutMode" ref="singleViewerRef"
                     :frameworkLabel="currentFramework.label" :timeLabel="currentTimeLabel"
@@ -360,7 +341,7 @@
                       :overlayDziUrl="comparisonImagePath1.replace('.png', '.dzi')" :allowPan="true"
                       @opened="onViewerOpened('before')" @activated="activeViewer.valueOf = 'before'"
                       v-if="!opacitySyncEnabled"
-                      class="w-full h-full z-0 rounded-xl border-[0.5px] border-neutral-300 dark:border-neutral-800 overflow-hidden" />
+                      class="w-full h-full z-0 rounded-lg border-[0.5px] border-neutral-300 dark:border-neutral-800 overflow-hidden" />
                     <OpenSeadragonViewer :currentFramework="currentFramework" currentTime="innan"
                       :currentStartskog="currentStartskog" :layoutMode="currentLayoutMode" ref="beforeViewerRef"
                       :comparisonMode="true" :frameworkLabel="currentFramework.label" timeLabel="Före avverkning"
@@ -368,7 +349,7 @@
                       :overlayDziUrl="comparisonImagePath1.replace('.png', '.dzi')" :allowPan="true"
                       @opened="onViewerOpened('before')" @activated="activeViewer.valueOf = 'before'" v-else
                       v-model:globalOpacity="globalOpacity"
-                      class="w-full h-full z-0 rounded-xl border-[0.5px] border-neutral-300 dark:border-neutral-800 overflow-hidden" />
+                      class="w-full h-full z-0 rounded-lg border-[0.5px] border-neutral-300 dark:border-neutral-800 overflow-hidden" />
                   </template>
                   <template #second>
                     <OpenSeadragonViewer :currentFramework="currentFramework" :currentTime="timeLabelForDataFiltering"
@@ -378,7 +359,7 @@
                       :overlayDziUrl="currentImagePath.replace('.png', '.dzi')" :allowPan="true"
                       sliderPosition="right" @opened="onViewerOpened('after')"
                       @activated="activeViewer.valueOf = 'after'" v-if="!opacitySyncEnabled"
-                      class="w-full h-full z-0 rounded-xl border-[0.5px] border-neutral-300 dark:border-neutral-800 overflow-hidden" />
+                      class="w-full h-full z-0 rounded-lg border-[0.5px] border-neutral-300 dark:border-neutral-800 overflow-hidden" />
                     <OpenSeadragonViewer :currentFramework="currentFramework" :currentTime="timeLabelForDataFiltering"
                       :currentStartskog="currentStartskog" :layoutMode="currentLayoutMode" ref="afterViewerRef"
                       :comparisonMode="true" :frameworkLabel="currentFramework.label" :timeLabel="currentTimeLabel"
@@ -386,7 +367,7 @@
                       :overlayDziUrl="currentImagePath.replace('.png', '.dzi')" :allowPan="true"
                       sliderPosition="right" @opened="onViewerOpened('after')"
                       @activated="activeViewer.valueOf = 'after'" v-else v-model:globalOpacity="globalOpacity"
-                      class="w-full h-full z-0 rounded-xl border-[0.5px] border-neutral-300 dark:border-neutral-800 overflow-hidden" />
+                      class="w-full h-full z-0 rounded-lg border-[0.5px] border-neutral-300 dark:border-neutral-800 overflow-hidden" />
                   </template>
                 </CustomImageComparisonSlider>
 
@@ -404,7 +385,7 @@
                       :allowPan="!isCompare && !isFrameworkCompareMode" v-if="!opacitySyncEnabled"
                       @viewportChanged="($event) => onViewportChanged('framework1', $event)"
                       @opened="onViewerOpened('framework1')" @activated="activeViewer.valueOf = 'framework1'"
-                      class="w-full h-full z-0 rounded-xl border-[0.5px] border-neutral-300 dark:border-neutral-800 overflow-hidden" />
+                      class="w-full h-full z-0 rounded-lg border-[0.5px] border-neutral-300 dark:border-neutral-800 overflow-hidden" />
                     <OpenSeadragonViewer :currentFramework="currentFramework" :currentTime="timeLabelForDataFiltering"
                       :currentStartskog="currentStartskog" :layoutMode=currentLayoutMode ref="framework1ViewerRef"
                       :comparisonMode="true" :frameworkLabel="currentFramework.label" :timeLabel="currentTimeLabel"
@@ -413,7 +394,7 @@
                       :allowPan="!isCompare && !isFrameworkCompareMode" v-else v-model:globalOpacity="globalOpacity"
                       @viewportChanged="($event) => onViewportChanged('framework1', $event)"
                       @opened="onViewerOpened('framework1')" @activated="activeViewer.valueOf = 'framework1'"
-                      class="w-full h-full z-0 rounded-xl border-[0.5px] border-neutral-300 dark:border-neutral-800 overflow-hidden" />
+                      class="w-full h-full z-0 rounded-lg border-[0.5px] border-neutral-300 dark:border-neutral-800 overflow-hidden" />
                   </template>
                   <template #second>
                     <OpenSeadragonViewer :currentFramework="currentFramework2" :currentTime="timeLabelForDataFiltering"
@@ -424,7 +405,7 @@
                       :allowPan="!isCompare && !isFrameworkCompareMode" sliderPosition="right"
                       @viewportChanged="($event) => onViewportChanged('framework2', $event)"
                       @opened="onViewerOpened('framework2')" @activated="activeViewer.valueOf = 'framework2'"
-                      class="w-full h-full z-0 rounded-xl border-[0.5px] border-neutral-300 dark:border-neutral-800 overflow-hidden" />
+                      class="w-full h-full z-0 rounded-lg border-[0.5px] border-neutral-300 dark:border-neutral-800 overflow-hidden" />
 
                     <OpenSeadragonViewer :currentFramework="currentFramework2" :currentTime="timeLabelForDataFiltering"
                       :currentStartskog="currentStartskog" :layoutMode="currentLayoutMode" ref="framework2ViewerRef"
@@ -434,34 +415,31 @@
                       v-model:globalOpacity="globalOpacity" :allowPan="!isCompare && !isFrameworkCompareMode"
                       sliderPosition="right" @viewportChanged="($event) => onViewportChanged('framework2', $event)"
                       @opened="onViewerOpened('framework2')" @activated="activeViewer.valueOf = 'framework2'"
-                      class="w-full h-full z-0 rounded-xl border-[0.5px] border-neutral-300 dark:border-neutral-800 overflow-hidden" />
+                      class="w-full h-full z-0 rounded-lg border-[0.5px] border-neutral-300 dark:border-neutral-800 overflow-hidden" />
 
                   </template>
                 </CustomImageComparisonSlider>
               </div>
+              
               <div class="absolute -bottom-18 mb-1.5 left-1/2 transform -translate-x-1/2 w-full flex justify-center z-10">
-                <!-- Style the handle as needed -->
                 <div class="h-1.5  w-24 bg-neutral-500/30 hover:bg-neutral-500/70 rounded cursor-grab transition-all"
                   @pointerdown="startVerticalResize">
                 </div>
               </div>
-              <div class="absolute -bottom-24 w-full flex justify-end ">
+              <!-- <div class="absolute -bottom-18 mb-1 w-full flex justify-end pr-2">
 
-                <UButton @click="toggleFullWidth" color="neutral" variant="soft" size="lg"
+                <UButton @click="toggleFullWidth" color="neutral" variant="soft" size="xs"
                   :icon="isFullWidth ? 'i-ri-collapse-horizontal-line' : 'i-ri-expand-horizontal-s-line'">
 
                 </UButton>
-              </div>
+              </div> -->
             </div>
-              <div class="flex w-full gap-2 pt-1.5">
+          <div class="flex w-full gap-2 pt-1.5">
     <UPopover class="shrink-0 cursor-pointer" v-model:open="open" destroy-on-close :popper="{ placement: 'bottom-start' }">
                   <UBadge size="xl" variant="subtle" class="mb-3 mt-1"  color="secondary">{{ currentStartskog.label }}
                   </UBadge>
                  
-                  <template #content >
-                    <div class="text-sm w-64 p-3 text-neutral-500 border-b border-neutral-200 ">
-Kort beskriving av betydelsen för skogens historik
-                    </div>
+                  <template #content>
                     <div class="p-1 flex flex-col gap-1">
                       <div v-for="option in startskog" :key="option.value">
                         <UButton @click="selectOption(option)" size="xl" color="white" variant="ghost"
@@ -472,7 +450,6 @@ Kort beskriving av betydelsen för skogens historik
                         </UButton>
                       </div>
                     </div>
-                    
                   </template>
                 </UPopover> 
                 <div class="w-full ">
@@ -489,15 +466,6 @@ Kort beskriving av betydelsen för skogens historik
                 </div>
           
             </div>
-          <!-- <UTabs
-  v-model="selectedTimeValue"
-  :items="timeItems"
-  size="xl"
-  :ui="{
-    indicator: 'bg-orange-100 dark:bg-orange-400/9 border border-orange-300/80 dark:border-orange-300/30 ',
- trigger: 'data-[state=active]:text-orange-500 dark:data-[state=active]:text-orange-400/90 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary'
-  }"
-/> -->
           </div>
         </div>
       </div>
@@ -818,7 +786,7 @@ const currentStartskog = computed(
 );
 
 // Time references
-const time = ref(3);
+const time = ref(15);
 
 // Handle time selection
 function handleTimeSelection(step) {

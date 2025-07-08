@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <UCard>
     <!-- Header with title, filters and view toggle -->
     <div class="md:flex justify-between">
       <div class="md:flex gap-4">
@@ -66,7 +66,7 @@
         <SpeciesGrid :is-normal-view="isNormalView" dataType="edibledata" dataTypeFolder="edible" :filterEdible="true"/>
       </div>
       </transition>
-  </div>
+    </UCard>
 </template>
 
 <script setup>

@@ -77,7 +77,7 @@ onUnmounted(() => {
     <UPageHero :ui="{
       container: 'pt-6 md:pt-24'
     }" :title="page.hero.title" :description="page.hero.description" :links="page.hero.links" orientation="horizontal">
-      <template #headline>
+      <template #headline >
         <UButton variant="subtle" color="warning" icon="i-fluent-emoji-high-contrast-construction">
 
     <span class="whitespace-normal ">
@@ -85,16 +85,24 @@ onUnmounted(() => {
     </span>
   </UButton>      </template> 
 
-      <template #top>
+      <!-- <template #top>
         <div
           class="absolute rounded-full dark:bg-(--ui-primary) blur-[300px] size-60 sm:size-80 transform -translate-x-1/2 left-1/2 -translate-y-80" ></div>
 
-        <!-- <StarsBg /> -->
-      </template>
+        <StarsBg />
+      </template> -->
       <template #title>
-        <MDC :value="page.hero.title" class="*:leading-11 sm:*:leading-19 max-w-3xl mx-auto " />
+        <MDC :value="page.hero.title" class="*:leading-13 sm:*:leading-19 max-w-3xl mx-auto page-section " />
       </template>
-      <NuxtImg src="/images/boleto_small.png" width="1500" height="2100" quality="80" format="webp" class="sm:-mt-90 -mb-32 -mt-10 sm:-mb-80" />
+      <template #description>
+<MDC :value="page.hero.description" class="*:leading-7  sm:*:leading-8 max-w-3xl mx-auto description-section"/>
+      </template>
+
+      <template #links >
+
+      </template>
+      
+      <NuxtImg src="/images/boleto_small.png" width="1500" height="2100" quality="80" format="webp" class="boleto-img sm:-mt-90 -mb-32 -mt-10 sm:-mb-80" />
 
       <!-- <NuxtImg src="/images/3Trees.png" class="rounded-xl border border-neutral-200 dark:border-neutral-700 shadow" width="600" height="400"/> -->
       <!-- <div class="relative hidden sm:block">
@@ -120,7 +128,7 @@ onUnmounted(() => {
     >     
    
   </UPageSection> -->
-    <UContainer class="text-center mx-auto max-w-5xl text-neutral-500 text-md my-24">
+    <UContainer class="text-center mx-auto max-w-5xl text-neutral-500 dark:text-neutral-400 text-md my-24">
       "Mykorrhizasvampar lever i symbios med träd vilket innebär att svamparna får sin energi från träden och I utbyte sköter de om trädens näringsförsörjning. <span class="hidden md:inline">Svamparnas mikroskopiskt tunna hyfer är om- och invuxna i trädens tunna rötter och förstorar trädens rotsystem tusenfalt.</span>" 
       
 <div class="flex justify-center mt-4 page-section">
@@ -188,12 +196,14 @@ onUnmounted(() => {
     <UPageSection :headline="page.testimonials.headline" :title="page.testimonials.title"
       :description="page.testimonials.description" class="hidden sm:block">
       <Omsvampskog />
+      
     </UPageSection>
       <UPageSection :headline="page.testimonials.headline" :title="page.testimonials.title"
       :description="page.testimonials.description" orientation="horizontal" class="sm:hidden">
       <Omsvampskog />
 
   </UPageSection>
+  <Finansiering />
 
   </div>
 
@@ -209,5 +219,26 @@ onUnmounted(() => {
 .page-section.in-view {
   opacity: 1;
   transform: translateY(0);
+}
+.boleto-img {
+  opacity: 0;
+  transform: translateY(300px);
+  transition: opacity 2s ease-in-out 0.5s;
+}
+.description-section{
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.8s ease-in-out 0.5s, transform 1.2s ease-in-out 0.5s;
+}
+
+.page-section.in-view .boleto-img {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.page-section.in-view .description-section{
+  opacity: 1;
+  transform: translateY(0);
+
 }
 </style>

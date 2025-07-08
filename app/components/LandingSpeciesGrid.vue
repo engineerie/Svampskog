@@ -35,11 +35,11 @@
         <div
           v-for="(row, index) in gridPaginatedData"
           :key="row.Commonname + row.Scientificname + index"
-          class="bg-white dark:bg-neutral-900 rounded-xl border border-neutral-200 dark:border-neutral-800 h-[142px]"
+          class="bg-white dark:bg-neutral-900 rounded-md border border-neutral-200 dark:border-neutral-800 h-[142px]"
           @click="selectRow(row)"
         >
           <!-- Image Thumbnail -->
-          <div class="w-full h-28 relative rounded-t-xl overflow-hidden">
+          <div class="w-full h-28 relative rounded-t-md overflow-hidden">
             <NuxtImg
               v-if="row.images && row.images.length"
               :src="row.images[0]"

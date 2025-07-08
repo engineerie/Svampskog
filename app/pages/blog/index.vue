@@ -29,12 +29,9 @@ defineOgImageComponent('Saas')
           :to="post.path"
           :title="post.title"
           :description="post.description"
-          :image="post.image"
-          :date="new Date(post.date).toLocaleDateString('en', { year: 'numeric', month: 'short', day: 'numeric' })"
-          
           :badge="post.badge"
           :class="[]"
-          variant="ghost"
+          variant="outline"
           :ui="{
             description: 'line-clamp-2'
           }"

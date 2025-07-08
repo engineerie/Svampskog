@@ -7,7 +7,6 @@
           height="505"
           width="805"
           :src="imageUrl"
-          class="image-fit"
           format="webp"
         />
       </div>

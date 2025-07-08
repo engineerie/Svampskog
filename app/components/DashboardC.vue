@@ -10,19 +10,31 @@
     <SpeciesInfo :species="speciesStore.selectedSpecies" :source="speciesStore.sourceComponent" />
   </MySlideover>
 
-  <UContainer>
-    <UMain>
+  
+    
+                <UContainer>
+
           <EnvironmentSelector class="fixed top-16 left-0 right-0" />
-      <transition name="fade" mode="out-in">
+     </UContainer>
+          
+        
+
+        <div key="" class="bg-neutral-50 dark:bg-neutral-800/40 flex flex-col min-h-screen">
+          <USeparator class=" mb-4"/>
+          <UContainer class="w-full">
+            <transition name="fade" mode="out-in">
         <component
           :is="activeComponent"
           @close="handleCloseFullScreen"
           @enlarge="handleFullScreen"
-          class="block"
+        class="block"
         />
-      </transition>
-    </UMain>
-</UContainer>
+              </transition>
+
+        </UContainer>
+        </div>
+    
+
 </template>
 
 <script setup>

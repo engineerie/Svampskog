@@ -32,6 +32,13 @@ const { data: svamparnavigation } = await useAsyncData('svamparnavigation', () =
   transform: data => data.find(item => item.path === '/svampardocs')?.children || []
 })
 
+const { data: blognavigation } = await useAsyncData('blognavigation', () => queryCollectionNavigation('posts'), {
+  transform: data => data.find(item => item.path === '/blog')?.children || []
+})
+
+
+
+
 // const { data: files } = useLazyAsyncData('search', () => queryCollectionSearchSections('docs'), {
 //   server: false
 // })
@@ -52,11 +59,13 @@ const { data: svamparnavigation } = await useAsyncData('svamparnavigation', () =
 
 provide('navigation', navigation)
 provide('svamparnavigation', svamparnavigation)
+provide('blognavigation', blognavigation)
+
 </script>
 
 <template>
   <UApp>
-    <UBanner class="hidden md:block" icon="i-fluent-emoji-high-contrast-construction" color="warning" title="Förhandsversion: fler funktioner och mobilanpassning kommer snart!" />
+    <!-- <UBanner class="hidden md:block" icon="i-fluent-emoji-high-contrast-construction" color="warning" title="Förhandsversion: fler funktioner och mobilanpassning kommer snart!" /> -->
 
     <NuxtLoadingIndicator />
 

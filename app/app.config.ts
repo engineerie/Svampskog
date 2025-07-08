@@ -1,5 +1,6 @@
 export default defineAppConfig({
   ui: {
+    
     // table: {
     //   slots: {
     //     root: 'relative overflow-auto',
@@ -14,6 +15,7 @@ export default defineAppConfig({
     //     loading: 'py-6 text-center'
     //   },
     // },
+  
     badge: {
       compoundVariants: [
         {
@@ -67,12 +69,22 @@ export default defineAppConfig({
 
   },
   uiPro: {
-
+pageHeader: {
+  slots: {
+    title: 'font-semibold'
+  }
+},
     pageHero: {
       slots: {
+        title: 'font-semibold',
         links: ' flex'
       },
     }, 
+    pageSection: {
+      slots: {
+        title: 'font-semibold'
+      }
+    }
   }
 });
 

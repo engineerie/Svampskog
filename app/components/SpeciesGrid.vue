@@ -1,14 +1,23 @@
 <template>
     <div class="p-2 flex gap-2">
-    <UInput v-model="searchTerm" placeholder="Sök på namn" variant="ghost"/>
-        <USelect
+    <UInput v-model="searchTerm" placeholder="Sök på namn" variant="soft"/>
+    <USelect
       v-model="statusFilter"
       :items="statusOptionsWithCount"
       item-value="value"
       item-label="label"
       placeholder="Filtrera på status"
       multiple
-      variant="ghost"
+      variant="soft"
+    />
+    <USelect
+      v-model="groupFilter"
+      :items="groupOptionsWithCount"
+      item-value="value"
+      item-label="label"
+      placeholder="Filtrera på grupp"
+      multiple
+      variant="soft"
     />
   </div>
   <!-- min-h-[399px] -->
@@ -18,11 +27,11 @@
             <div
               v-for="(row, index) in gridPaginatedData"
               :key="row.Commonname + row.Scientificname + index"
-              class="bg-white dark:bg-neutral-800 rounded-2xl border border-neutral-200 dark:border-neutral-700/40 hover:shadow-md transition-shadow cursor-pointer h-[150px]"
+              class="bg-white dark:bg-neutral-800 rounded-lg border border-neutral-200 dark:border-neutral-700/40 hover:shadow-md transition-shadow cursor-pointer h-[126px]"
               @click="selectRow(row)"
             >
               <!-- Image Thumbnail -->
-              <div class="w-full h-24 relative rounded-t-2xl overflow-hidden">
+              <div class="w-full h-24 relative rounded-t-lg overflow-hidden">
                 <NuxtImg
                   v-if="row.images && row.images.length"
                   :src="row.images[0]"
@@ -34,7 +43,7 @@
                 />
                 <div
                   v-else
-                  class="w-full h-full flex items-center justify-center bg-gray-200 dark:bg-gray-700"
+                  class="w-full h-full flex items-center justify-center bg-neutral-200 dark:bg-neutral-700"
                 >
                   <Icon
                     name="material-symbols:photo"
@@ -57,7 +66,7 @@
                     label="Signalart"
                     size="sm"
                   />
-                  <UBadge
+                  <!-- <UBadge
                     v-if="row['Nyasvamp-boken'] === 'x'"
                     color="warning"
                     variant="subtle"
@@ -70,7 +79,7 @@
                     variant="subtle"
                     label="Giftsvamp"
                     size="sm"
-                  />
+                  /> -->
                 </div>
               </div>
               <!-- Species Names -->
@@ -80,11 +89,11 @@
                 >
                   {{ capitalize(row.Commonname) }}
                 </div>
-                <div
+                <!-- <div
                   class="text-sm font-medium text-neutral-400 dark:text-neutral-300 truncate"
                 >
                   {{ capitalize(row.Scientificname) }}
-                </div>
+                </div> -->
               </div>
             </div>
           </div>
@@ -120,6 +129,7 @@ import { useEnvParamsStore } from '~/stores/envParamsStore'
 import { useSpeciesStore } from '~/stores/speciesStore'
 
 const statusFilter = ref([])
+const groupFilter = ref([])
 const statusOptions = [
   { value: "LC", label: 'Livskraftig' },
   { value: "NT", label: 'Nära hotad' },
@@ -139,6 +149,7 @@ const props = defineProps({
   dataType: { type: String, default: 'data' },
   filterEdible: { type: Boolean, default: false },
   filterPoison: { type: Boolean, default: false },
+  grupp: { type: String, default: 'Svamp-grupp' },
 })
 
 // Set up the stores
@@ -267,6 +278,24 @@ const statusOptionsWithCount = computed(() => {
   });
 });
 
+const groupOptionsWithCount = computed(() => {
+  const counts = {};
+  baseFilteredData.value.forEach(row => {
+    const raw = row[props.grupp];
+    if (raw !== undefined && raw !== null) {
+      const group = String(raw).trim();
+      // Skip literal "undefined" or empty strings
+      if (group && group.toLowerCase() !== "undefined") {
+        counts[group] = (counts[group] || 0) + 1;
+      }
+    }
+  });
+  return Object.keys(counts).map(group => ({
+    value: group,
+    label: `${capitalize(group)} (${counts[group]})`
+  }));
+});
+
 // Filter the sortedData based on the searchTerm
 const filteredData = computed(() => {
   let result = sortedData.value;
@@ -299,6 +328,15 @@ const filteredData = computed(() => {
       return matches;
     });
     console.log('After status filtering, count:', result.length);
+  }
+
+  // Apply group filtering
+  if (groupFilter.value.length > 0) {
+    result = result.filter(row => {
+      const raw = row[props.grupp];
+      const rowGroup = raw !== undefined && raw !== null ? String(raw).trim() : '';
+      return groupFilter.value.includes(rowGroup);
+    });
   }
 
   // Apply edible or poisonous filtering based on props

@@ -1,11 +1,11 @@
 <template>
-  <UCard   class=" sm:text-md/8 overflow-y-clip text-neutral-500 dark:text-neutral-400 h-full" variant="soft">
+  <UCard   class=" sm:text-lg/8 overflow-y-clip text-neutral-500 dark:text-neutral-400 h-full">
     
      
-      <div class="flex md:block justify-between w-full" @click="toggleContent">      <h1 class="font-semibold text-neutral-600 dark:text-neutral-200" >Introduktion</h1> 
-      </div>
+      <!-- <div class="flex md:block justify-between w-full" @click="toggleContent">      <h1 class="font-semibold text-neutral-600 dark:text-neutral-200" >Introduktion</h1> 
+      </div> -->
 
-      <p class="mb-2 mt-4" v-if="contentVisible">
+      <p class="mb-2" v-if="contentVisible">
       I denna skogsmiljö dominerar ofta
       <span
         class="font-semibold text-neutral-800 dark:text-neutral-300 cursor-pointer"

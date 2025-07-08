@@ -1,15 +1,15 @@
 <template>
     <div class="relative">
-        <div class="absolute right-0 top-0 z-40">
+        <!-- <div class="absolute right-0 top-0 z-40">
             <UButton color="neutral" variant="subtle"
                 :icon="chartType === 'line' ? 'i-carbon-chart-column' : 'i-carbon-chart-line-smooth'"
                 @click="ToggleChartType" />
-        </div>
+        </div> -->
 
-        <div class="my-chart-container">
-            <VisBulletLegend :items="legendItems" :onLegendItemClick="updateLegendItem" labelFontSize="medium"
-                bulletSize="1rem" class="mb-4"/>
-            <VisXYContainer :data="chartData" :height="350" :yDomain="[0, props.maxYValue || undefined]">
+        <div class="">
+            <VisBulletLegend :items="legendItems" :onLegendItemClick="updateLegendItem" labelFontSize="small"
+                bulletSize="0.7rem" class="p-3 pb-0"/>
+            <VisXYContainer :data="chartData" :height="250" :margin="margin" :yDomain="[0, props.maxYValue || undefined]" >
                 <template v-if="chartType === 'line'">
                     <VisLine :color="computedLineColors" :x="xAccessor" :y="yAccessors" :interpolateMissingData="true"
                         :lineWidth="3" />
@@ -18,8 +18,8 @@
                     <VisGroupedBar :color="computedLineColors" :x="xAccessor" :y="yAccessors" :groupPadding="0.5"
                         :groupMaxWidth="35" />
                 </template>
-                <VisAxis type="x" label="Ålder" />
-                <VisAxis type="y" label="Klassning" />
+                <VisAxis type="x"  />
+                <VisAxis type="y"  />
                 <!-- <VisTooltip />
             <VisCrosshair /> -->
             </VisXYContainer>
@@ -39,6 +39,7 @@ import { capitalize } from 'lodash-es'
 
 const chartType = ref('line')
 
+const margin = { left: 10, right: 10, top:10, bottom: 10 }
 
 function ToggleChartType() {
     chartType.value = chartType.value === 'line' ? 'bar' : 'line';
@@ -254,8 +255,3 @@ function updateLegendItem(d: BulletLegendItemInterface) {
 const chartData = computed(() => mergedData.value)
 </script>
 
-<style scoped>
-.my-chart-container {
-    margin: 1rem 0;
-}
-</style>

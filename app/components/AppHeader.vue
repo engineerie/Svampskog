@@ -43,18 +43,18 @@ const items = computed(() => [
         icon: 'mdi:saw-blade',
         to: '/skogsskotsel/skotselmetoder'
       },
-      {
-        label: 'Interaktiv modell',
-        description: 'Se hur skogsskötsel påverkar i en modell.',
-        icon: 'i-material-symbols-interactive-space-outline-rounded',
-        to: '/skogsskotsel/modell'
-      },
-      {
-        label: 'Diagram och staplar',
-        description: 'Utforska data för svampar och skogsbruk',
-        icon: 'i-carbon-chart-line-smooth',
-        to: '/skogsskotsel/diagram'
-      },
+      // {
+      //   label: 'Interaktiv modell',
+      //   description: 'Se hur skogsskötsel påverkar i en modell.',
+      //   icon: 'i-material-symbols-interactive-space-outline-rounded',
+      //   to: '/skogsskotsel/modell'
+      // },
+      // {
+      //   label: 'Diagram och staplar',
+      //   description: 'Utforska data för svampar och skogsbruk',
+      //   icon: 'i-carbon-chart-line-smooth',
+      //   to: '/skogsskotsel/diagram'
+      // },
       {
         label: 'Dokumentation',
         description: 'Manual och underlag.',
@@ -150,7 +150,7 @@ const items = computed(() => [
 
     </template>
 
-    <UNavigationMenu :items="items" variant="link" />
+    <UNavigationMenu :items="items" variant="pill" />
 
     <template #right>
       <UColorModeButton />

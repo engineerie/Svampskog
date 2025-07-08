@@ -4,7 +4,7 @@
     <NuxtImg v-for="(src, key) in imageMap" :key="key" :src="src" width="300" height="180" format="webp" quality="80"
       preload />
   </div>
-<div :class="['block md:hidden relative transition-height ', mobileCollapsed ? 'h-16' : 'h-36']">
+<div :class="['block md:hidden relative transition-height ', mobileCollapsed ? 'h-11' : 'h-31']">
   <div :class="[' z-20 bg-white dark:bg-neutral-950 border-b border-neutral-200 dark:border-neutral-800 fixed left-0 right-0 transition-height', mobileCollapsed ? 'h-12' : 'h-32']">
     <Transition name="fade" mode="out-in">
       <div v-if="!mobileCollapsed" class="grid grid-cols-2 gap-2 w-full mx-auto max-w-full p-2">
@@ -102,7 +102,7 @@
               </transition>
             </div>
             <template #content>
-              <div class="p-2 min-w-60 max-w-96">
+              <div class="px-2 py-1 min-w-60 max-w-96">
                 <!-- Use enabledOptions so that restriction applies here -->
                 <div v-for="option in enabledOptions[category.key]" :key="option.value">
                   <UPopover :open-delay="300" mode="hover" v-if="imageMap[option.value]" :content="{
@@ -160,14 +160,14 @@
 
       <!-- Combination view (checkboxes) -->
       <div :style="{ height: listBoxRowVisible ? '260px' : '0px' }"
-        class="overflow-visible transition-height ease-in-out duration-500">
+        class="overflow-hidden transition-height ease-in-out duration-500">
         <Transition name="fade">
           <div v-show="listBoxRowVisible">
             <div class="grid md:grid-cols-4 gap-2 md:gap-5">
 
               <UCard v-for="category in categories" :key="category.key" variant="soft">
                 <div v-for="option in enabledOptions[category.key]" :key="option.value"
-                  class="flex justify-between mb-2 text-neutral-500">
+                  class="flex justify-between mb-2 text-neutral-600 dark:text-neutral-300">
                   <label :for="`${category.key}-${option.value}`" :class="{
                     'opacity-40 cursor-not-allowed': option.disabled,
                     'cursor-pointer': !option.disabled
@@ -190,7 +190,7 @@
 
     <!-- Sticky header that folds down from behind the AppHeader -->
     <transition name="fold-down">
-      <div v-if="isSticky" class="hidden md:block fixed top-16 z-20 bg-white dark:bg-black border-b border-neutral-200 left-0 right-0">
+      <div v-if="isSticky" class="hidden md:block fixed top-0 pt-16 z-20 bg-white dark:bg-black border-b border-neutral-200 dark:border-neutral-800 left-0 right-0">
         <div class="flex space-x-4 w-full mx-auto max-w-7xl p-2">
           <!-- Use enabledOptions for USelect items as well -->
           <USelect v-for="category in categories" :key="category.key" :items="enabledOptions[category.key]"

@@ -1,4 +1,15 @@
+
+
 <script setup lang="ts">
+definePageMeta({
+  layout: 'svamp-kunskap',
+})
+
+
+import type { ContentNavigationItem } from '@nuxt/content'
+
+const navigation = inject<Ref<ContentNavigationItem[]>>('blognavigation')
+
 const route = useRoute()
 
 const { data: post } = await useAsyncData(route.path, () => queryCollection('posts').path(route.path).first())
@@ -35,20 +46,30 @@ if (post.value.image?.src) {
 
 <template>
   <UContainer v-if="post">
-    <UPageHeader
+ <UPage>
+  <template #left>
+<UPageAside/>
+  </template>
+  <template #right>
+<UPageAside/>
+
+  </template>
+         <UPageHero
       :title="post.title"
       :description="post.description"
+      :ui="{title: 'text-4xl sm:text-6xl text-pretty tracking-tight', wrapper: 'text-left', container: 'lg:pb-20 pb-12 lg:pt-28 px-0 sm:px-0 md:px-0 lg:px-0'}"
     >
       <template #headline>
         <UBadge
           v-bind="post.badge"
           variant="subtle"
+          size="lg"
         />
-        <span class="text-(--ui-text-muted)">&middot;</span>
-        <time class="text-(--ui-text-muted)">{{ new Date(post.date).toLocaleDateString('en', { year: 'numeric', month: 'short', day: 'numeric' }) }}</time>
+        <!-- <span class="text-(--ui-text-muted)">&middot;</span> -->
+        <!-- <time class="text-(--ui-text-muted)">{{ new Date(post.date).toLocaleDateString('en', { year: 'numeric', month: 'short', day: 'numeric' }) }}</time> -->
       </template>
 
-      <div class="flex flex-wrap items-center gap-3 mt-4">
+      <!-- <div class="flex flex-wrap items-center gap-3 mt-4">
         <UButton
           v-for="(author, index) in post.authors"
           :key="index"
@@ -66,10 +87,14 @@ if (post.value.image?.src) {
 
           {{ author.name }}
         </UButton>
-      </div>
-    </UPageHeader>
+      </div> -->
+    </UPageHero>
+    <USeparator class="lg:pb-8 "/>
+  </UPage>
+  
 
     <UPage>
+     
       <UPageBody>
         <ContentRenderer
           v-if="post"
@@ -85,7 +110,17 @@ if (post.value.image?.src) {
         v-if="post?.body?.toc?.links?.length"
         #right
       >
-        <UContentToc :links="post.body.toc.links" />
+        <UContentToc :links="post.body.toc.links" title="På den här sidan"/>
+      </template>
+      <template #left>
+        <UPageAside>
+          
+          <UContentNavigation
+          
+                :navigation="navigation"
+                variant="pill"
+              />
+              </UPageAside>
       </template>
     </UPage>
   </UContainer>

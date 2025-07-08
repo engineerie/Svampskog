@@ -8,12 +8,11 @@
         :vegetationType="vegetationType"
       />
     </div>
-
     <div class="col-span-12">
-      <USeparator type="dashed" class="mt-4"/>
 
-      <div class="flex justify-end md:mb-2 sticky top-28 pt-2 z-10">
-    <div  class="bg-white dark:bg-black rounded-xl mb-2">
+    
+    <div class=" flex justify-end sticky top-28 pt-2  z-10">
+    <div  class="bg-white dark:bg-black rounded-md mb-2 ">
           <UBadge
             size="lg"
             color="secondary"
@@ -37,6 +36,11 @@
     </div>
       
       </div>
+
+    <div class="col-span-12 ">
+      <!-- <USeparator type="dashed" class="mt-4"/> -->
+
+      
       <!-- <USeparator class="mt-2 mb-6"/> -->
 
   
@@ -44,19 +48,17 @@
       <!-- Main content -->
 <div>
    <EdnaComponent
-        class=" mb-8"
           :isNormalView="true"
           @enlarge="emitEnlarge('FullScreenEdna')"
         />
-
 </div>
        
    
-    </div>
-
+</div>
+</div>
 
     <div class="col-span-12">
-      <USeparator type="dashed"/>
+      <!-- <USeparator type="dashed"/> -->
       <!-- <UBadge
             size="md"
             color="tertiary"
@@ -67,7 +69,7 @@
            /> -->
       <div class="flex justify-end  mb-2 sticky top-28 pt-2 z-10     ">
        
-        <div  class="bg-white dark:bg-black rounded-xl z-10">
+        <div  class="bg-white dark:bg-black rounded-md z-10">
           
            <UBadge
             size="lg"
@@ -107,8 +109,8 @@
         <div
           class="bg-white overflow-hidden rounded-tr-none rounded-[calc(1.5rem-1px)]"
         > -->
-      <div
-        class="col-span-12 grid grid-cols-12 rounded-2xl gap-y-10 "
+        <UCard :ui="{body: 'p-3 sm:p-3'}" variant="subtle"> <div
+        class="col-span-12 grid grid-cols-12 rounded-2xl gap-y-3"
       >
         <div class="col-span-12 flex flex-col">
           <RedlistedComponent
@@ -147,7 +149,8 @@
             :key="route.fullPath"
           />
         </div>
-      </div>
+      </div></UCard>
+     
       <!-- </div>
       </div> -->
     </div>

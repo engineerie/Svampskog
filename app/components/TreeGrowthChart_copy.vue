@@ -1,32 +1,30 @@
 <template>
-    <div class="border border-neutral-200 rounded-md md:flex">
+    <div class="border border-neutral-200 rounded-md">
 
     <!-- Container for the left axis (% Mykorrhizasvamp) -->
-    <VisXYContainer :data="treeGrowthData" :margin="margin" :yDomain="[0, 25]" :autoMargin="false" width="100%" :height="200" 
+    <VisXYContainer :data="treeGrowthData" :margin="margin" :autoMargin="false" width="100%" :height="200" 
         :xDomain="xDomain" >
         <template v-if="chartType === true">
             <VisLine :x="chartX" :y="chartLine1" :color="'#d4d4d4'" :lineWidth="3" />
         </template>
         <template v-if="chartType === false">
-            <VisGroupedBar :x="chartX" :y="chartLine1" :color="'#d4d4d4'" :lineWidth="3" :barPadding="0.5"  />
+            <VisGroupedBar :x="chartX" :y="chartLine1" :color="'#d4d4d4'" :lineWidth="3" :barPadding="0.4" :gridLine="false" />
         </template>
-        <VisAxis type="x" :numTicks="5" :tickFormat="xTicks" :gridLine="false" />
-        <VisAxis type="y" :numTicks="2" :tickFormat="chartLine1Ticks" :tickTextWidth="60"  :tickTextColor="'#737373'"
+        <VisAxis type="x" :numTicks="3" :tickFormat="xTicks" :gridLine="false" />
+        <VisAxis type="y" :numTicks="2" :tickFormat="chartLine1Ticks" :tickTextWidth="60" :gridLine="false"  :tickTextColor="'#737373'"
             :labelColor="'#737373'"  />
     </VisXYContainer>
 
     <!-- Container for the right axis (Löpande trädtillväxt) -->
     <VisXYContainer :data="treeGrowthData" :yDomain="[0, 10]" :margin="margin" :autoMargin="false" :height="200"
-         :xDomain="xDomain">
+        :style="containerStyle" :xDomain="xDomain">
         <template v-if="chartType === true">
             <VisLine :x="chartX" :y="chartLine2" :color="'#22c55e'" :lineWidth="3" />
         </template>
         <template v-if="chartType === false">
             <VisGroupedBar :x="chartX" :y="chartLine2" :color="'#22c55e'" :lineWidth="3" :barPadding="0.5" />
         </template>
-                <VisAxis type="x" :numTicks="5" :tickFormat="xTicks"  />
-
-        <VisAxis type="y" :numTicks="2"  position="right" :tickFormat="chartLine2Ticks"  :tickTextColor="'#22c55e'"
+        <VisAxis type="y" :numTicks="2"  position="right" :tickFormat="chartLine2Ticks" :gridLine="false" :tickTextColor="'#22c55e'"
             :labelColor="'#22c55e'" />
     </VisXYContainer>
         </div>
@@ -44,6 +42,7 @@ interface Props {
 const props = defineProps<Props>()
 
 const margin = { left: 50, right: 40, top:20, bottom: 30 }
+const containerStyle = { position: 'absolute', top: 0, left: 0, width: '100%', height: '40vh' }
 
 // Define the static data.
 const treeGrowthData = [

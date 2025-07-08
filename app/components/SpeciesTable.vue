@@ -195,11 +195,12 @@
             :pagination-options="!isNormalView ? { getPaginationRowModel: getPaginationRowModel() } : undefined"
             :class="{ 'md:max-h-[442px]': isNormalView }"
             :ui="{
-                thead: 'hidden md:table-header-group',
+                thead: 'hidden md:table-header-group bg-neutral-50 dark:bg-neutral-800/40',
                 tbody:'divide-none md:divide-dotted',
                 td: 'px-0 md:px-4 md:pt-4 md:pb-4 pt-2 pb-3',
         
             }"
+            class="rounded-t-lg "
           />
          
           <div
@@ -786,7 +787,7 @@ const desktopColumns = [
     if (images && images.length) {
       return h(resolveComponent('NuxtImg'), {
         src: images[0],
-        class: "size-12 object-cover -my-4 rounded-lg border border-neutral-200",
+        class: "size-12 object-cover -my-4 rounded-md border border-neutral-100 dark:border-neutral-800",
         alt: "Species Image",
         height: "300",
         width: "450",
@@ -823,7 +824,7 @@ const desktopColumns = [
     );
   },
   cell: ({ row }) =>
-    h('div', { class: 'text-neutral-700' }, capitalize(row.getValue("Commonname")))
+    h('div', { class: 'text-neutral-700 dark:text-neutral-200' }, capitalize(row.getValue("Commonname")))
     ,
   filterFn: (row, _columnId, filterValue) => {
     if (!filterValue) return true
