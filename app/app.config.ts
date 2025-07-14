@@ -84,7 +84,16 @@ pageHeader: {
       slots: {
         title: 'font-semibold'
       }
+    },
+    blogPost: {
+      variants: {
+        to: {
+          true: {
+            root: 'transition hover:ring-1.5 hover:ring-accented hover:ring-neutral-300',
+            image: 'transform transition-transform duration-200 group-hover/blog-post:scale-100',
+          }
+        }
+      }
     }
   }
 });
-

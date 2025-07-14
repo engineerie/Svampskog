@@ -6,16 +6,10 @@ definePageMeta({ layout: 'mylayout' })
   <UContainer>
     
     <UPage>
-        <!-- <template #left>
-          <div >
-          </div>
-         
-        </template>
-        <template #right><div></div></template> -->
-        <UPageHero title="Skogsskötsel" description="Här visualiserar vi baserat på den kunskap som finns hur olika former av trakthyggesbruk och hyggesfria metoder påverkar förekomsten av mykorrhizasvampar under en skogsgeneration.
+    
+        <!-- <UPageHero title="Skogsskötsel" description="Här visualiserar vi baserat på den kunskap som finns hur olika former av trakthyggesbruk och hyggesfria metoder påverkar förekomsten av mykorrhizasvampar under en skogsgeneration.
 ">  
-<!-- <template #headline><Icon name="i-hugeicons-tree-06" class="size-10 text-primary-500" /></template> -->
-</UPageHero>
+</UPageHero> -->
         <!-- <UPageHeader
       headline="Skogsskötsel"
       title="Se hur skogsskötsel påverkar svampar"
