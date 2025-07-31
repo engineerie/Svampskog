@@ -11,7 +11,7 @@
     <!-- Images Section -->
     <div
       v-if="imageUrls.length > 1"
-      class="group rounded-xl overflow-hidden m-2"
+      class="group overflow-hidden"
     >
       <UCarousel
         v-slot="{ item }"
@@ -32,13 +32,13 @@
         <div class="w-full relative">
           <NuxtImg
             :src="item"
-            class="w-full rounded-xl border border-neutral-300"
+            class="w-full "
             draggable="false"
             height="300"
             width="450"
             format="webp"
           />
-          <div class="absolute bottom-0 right-0 justify-end p-2 items-center">
+          <!-- <div class="absolute bottom-0 right-0 justify-end p-2 items-center">
             <UBadge color="neutral" variant="subtle">
               <h1 weight="light" size="sm" class="">Foto:</h1>
               <Icon name="ph:copyright" class="h-4 w-4 mx-1" />
@@ -46,34 +46,28 @@
                 Michael Krikorev
               </h1></UBadge
             >
-          </div>
+          </div> -->
         </div>
       </UCarousel>
     </div>
     <div
       v-else-if="imageUrls.length === 1"
-      class="m-2 rounded-xl overflow-hidden relative group"
+      class=" overflow-hidden relative group"
     >
       <NuxtImg
         :src="imageUrls[0]"
-        class="w-full rounded-xl border border-neutral-300"
+        class="w-full"
         draggable="false"
         height="300"
         width="450"
         format="webp"
       />
-      <div class="absolute bottom-0 right-0 justify-end p-2 items-center">
-        <UBadge color="neutral" variant="subtle">
-          <h1 weight="light" size="sm" class="">Foto:</h1>
-          <Icon name="ph:copyright" class="h-4 w-4 mx-1" />
-          <h1 weight="light" size="sm" class="">Michael Krikorev</h1></UBadge
-        >
-      </div>
+      
     </div>
     <div v-else>
       <!-- Placeholder image section -->
       <div
-        class="m-2 relative pb-[230px] bg-transparent border border-neutral-300 rounded-xl cursor-pointer"
+        class=" relative pb-[230px] bg-transparent cursor-pointer"
         style="
           background-image: repeating-linear-gradient(
             -45deg,
@@ -87,63 +81,67 @@
     </div>
 
     <!-- Content Section -->
-    <div class="px-4 pb-3">
+    <div class="px-5 pb-3 mt-4">
       <h1 class="text-2xl font-medium">{{ capitalize(species.Commonname) }}</h1>
-      <h1 class="text-neutral-600">{{ species.Scientificname }}</h1>
+      <h1 class="text-neutral-500">{{ species.Scientificname }}</h1>
+       <h1 class="mt-3 text-lg">
+          {{ truncatedTextEkologi }}
+        </h1>
 
+        <div class="-mx-1 mt-4">
       <!-- Svamp-grupp Icon and Name -->
       <div
-        class="flex items-center space-x-2 mt-3"
+        class="inline-flex m-1 h-fit align-bottom"
         v-if="species['Svamp-grupp']"
       >
-        <NuxtImg
+      <UBadge color="neutral" variant="subtle" size="xl" >   <NuxtImg
           :src="
             getIconPath(species['Svamp-grupp'], species['Svamp-grupp-släkte'])
           "
-          class="w-5"
+          class="w-4.5 "
           alt="Svamp Icon"
         />
-        <h1 size="md" weight="light">
           {{ capitalize(displayedSvampGrupp) }}
-        </h1>
+      </UBadge>
+     
       </div>
 
       <!-- Matsvamp indicator -->
       <div
-        class="flex items-center space-x-2 mt-3"
+        class="shrink-0 inline-flex m-1 align-bottom"
         v-if="species['Nyasvamp-boken'] === 'x'"
       >
-        <Icon
+      <UBadge color="warning" size="xl" variant="subtle" class=""><Icon
           name="icon-park-solid:knife-fork"
-          class="h-7 w-7 text-yellow-500 -my-2"
-        />
-        <h1 size="md" weight="light">Matsvamp</h1>
+        />Matsvamp</UBadge>
       </div>
 
       <!-- Giftsvamp indicator -->
       <div
-        class="flex items-center space-x-2 mt-3"
+        class=" shrink-0 inline-flex m-1 align-bottom"
         v-if="species.Giftsvamp === 'x'"
       >
-        <Icon name="hugeicons:danger" class="h-7 w-7 text-lime-500 -my-2" />
-        <h1 size="md" weight="light">Giftsvamp</h1>
+      <UBadge color="poison" size="xl" variant="subtle" class=""><Icon name="hugeicons:danger" />Giftsvamp</UBadge>
+        <!-- <Icon name="hugeicons:danger" class="h-7 w-7 text-lime-500 -my-2" />
+        <h1 size="md" weight="light">Giftsvamp</h1> -->
       </div>
 
       <!-- SIGNAL_art indicator -->
       <div
-        class="flex items-center space-x-2 mt-3"
+        class=" shrink-0 inline-flex m-1 align-bottom"
         v-if="species.SIGNAL_art === 'S'"
       >
-        <div
+      <UBadge color="signal" size="xl" variant="subtle" class="">Signalart</UBadge>
+        <!-- <div
           class="h-8 w-8 rounded-full bg-neutral-500 opacity-100 flex items-center justify-center text-white z-10"
         >
           S
         </div>
-        <h1 size="md" weight="light">Signalart</h1>
+        <h1 size="md" weight="light">Signalart</h1> -->
       </div>
 
       <!-- RL2020kat Status Badge -->
-      <div class="flex items-center space-x-2 mt-3" v-if="species.RL2020kat">
+      <!-- <div class="flex items-center space-x-2 mt-3" v-if="species.RL2020kat">
         <div
           :class="getStatusColor(species.RL2020kat)"
           class="h-8 w-8 rounded-full flex items-center justify-center text-white"
@@ -153,30 +151,26 @@
         <h1 size="md" weight="light">
           {{ getStatusTooltip(species.RL2020kat) }}
         </h1>
-      </div>
+      </div> -->
 
       <!-- Kalkmark and Vanlig Skogsmark Badges -->
-      <div class="flex items-center space-x-2 mt-3">
-        <div v-if="species.KALKmark">
-          <UBadge color="kalkmark" variant="subtle"> Kalkmark </UBadge>
-        </div>
-        <div v-if="species.ANNANmark">
-          <UBadge color="vanligmark" variant="subtle"> Vanlig skogsmark </UBadge>
-        </div>
+    
+          <UBadge v-if="species.KALKmark" size="xl" color="kalkmark" variant="subtle" class="shrink-0 inline-flex m-1 align-bottom">  Kalkmark </UBadge>
+          <UBadge  v-if="species.ANNANmark" size="xl" color="vanligmark" variant="subtle" class="shrink-0 inline-flex m-1 align-bottom"> Vanlig skogsmark </UBadge>
       </div>
 
-      <hr
+      <!-- <hr
         class="my-2"
         v-if="species.ekologi || species.Kriteriedokumentation"
-      />
+      /> -->
 
       <!-- Ekologi Section (Expand/Collapse) -->
-      <div
+      <!-- <div
         class="flex justify-between cursor-pointer"
         v-if="species.ekologi"
         @click="toggleExpandEkologi"
       >
-        <h1 size="lg" weight="medium">Ekologi</h1>
+        <h1 class="text-lg font-semibold">Ekologi</h1>
         <Icon
           name="mdi:chevron-down"
           :class="[
@@ -194,17 +188,28 @@
         <h1 size="md" weight="light">
           {{ truncatedTextEkologi }}
         </h1>
-      </div>
+      </div> -->
 
-      <hr class="my-2" v-if="species.Kriteriedokumentation" />
+      <!-- <hr class="my-2" v-if="species.Kriteriedokumentation" /> -->
 
       <!-- Kriteriedokumentation Section (Expand/Collapse) -->
+       <UCard class="my-4" v-if="species.Kriteriedokumentation">
       <div
         class="flex justify-between cursor-pointer"
-        v-if="species.Kriteriedokumentation"
+        
         @click="toggleExpand"
       >
-        <h1 size="lg" weight="medium">Dokumentation i rödlistan</h1>
+        <h1 class="text-lg font-semibold mb-2 flex">   <div class="flex items-center space-x-2" v-if="species.RL2020kat">
+        <div
+          :class="getStatusColor(species.RL2020kat)"
+          class="h-8 w-8 rounded-full flex items-center justify-center text-white"
+        >
+          {{ getStatusAbbreviation(species.RL2020kat) }}
+        </div>
+        <h1 size="md" weight="light">
+          {{ getStatusTooltip(species.RL2020kat) }}
+        </h1>
+      </div></h1>
         <Icon
           name="mdi:chevron-down"
           :class="[
@@ -223,16 +228,16 @@
           {{ truncatedText }}
         </h1>
       </div>
-
-      <hr class="my-2" v-if="species.Kriteriedokumentation" />
+       </UCard>
+      <!-- <hr class="my-2" v-if="species.Kriteriedokumentation" /> -->
 
       <!-- Links Section -->
-      <h1 size="md" weight="medium">Länkar</h1>
+      <h1 class="text-lg font-medium  mt-4">Läs mer på</h1>
       <NuxtLink
         v-if="species.Artfakta != 'Information saknas'"
         :to="stripDetailsFromURL(species.Artfakta)"
         target="_blank"
-        class="text-md font-thin mb-3 underline text-primary-500"
+        class="text-lg mb-3 underline text-primary-500"
       >
         Artfakta.se
       </NuxtLink>
@@ -241,7 +246,7 @@
         v-if="species.Svampguiden && species.Svampguiden !== '0'"
         :to="stripDetailsFromURL(species.Svampguiden)"
         target="_blank"
-        class="text-md font-thin mb-3 underline text-primary-500"
+        class="text-lg  mb-3 underline text-primary-500"
       >
         Svampguiden.com
       </NuxtLink>
@@ -261,7 +266,7 @@ const imageUrls = computed(() => props.species.images || []);
 
 // Expand/Collapse state for text sections
 const isExpanded = ref(false);
-const isExpandedEkologi = ref(false);
+const isExpandedEkologi = ref(true);
 
 const toggleExpand = () => {
   isExpanded.value = !isExpanded.value;

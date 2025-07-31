@@ -136,16 +136,16 @@ const items = computed(() => [
     <template #left>
       <!-- <NuxtLink to="https://www.slu.se/" target="blank"> -->
         <!-- </NuxtLink> -->
-      <UColorModeImage light="/images/slu_logo_webb.png" dark="/images/slu_logo_white_webb.png" :width="50" :height="50"
-        class="size-8 mr-2" />
+      
       
 
       <NuxtLink to="/" class="text-2xl font-semibold flex items-center ">
-        <UBadge size="xl" color="neutral" variant="subtle">Svampskog</UBadge>
+        <UColorModeImage light="/images/slu_logo_webb.png" dark="/images/slu_logo_white_webb.png" :width="50" :height="50"
+        class="size-8 mr-3" />
+        <h1 class="text-2xl font-light">|&nbsp; Svampskog</h1>
+        <!-- <UBadge size="xl" color="neutral" variant="solid">Svampskog</UBadge> -->
         <!-- <span class=" ml-2">Svamp</span>
         skog -->
-
-
       </NuxtLink>
 
     </template>

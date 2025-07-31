@@ -82,6 +82,7 @@ pageHeader: {
     }, 
     pageSection: {
       slots: {
+        container: 'flex flex-col-reverse sm:flex-col lg:grid py-16 sm:py-24 lg:py-32 gap-8 sm:gap-16',
         title: 'font-semibold'
       }
     },

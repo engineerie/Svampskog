@@ -207,7 +207,6 @@
 
 <script setup lang="ts">
 import { ref, computed, onMounted, onBeforeUnmount, watch } from 'vue'
-const props = defineProps<{ initialMobileCollapsed?: boolean }>();
 import { useRouter } from 'vue-router'
 import {
   useEnvParamsStore,
@@ -217,6 +216,9 @@ import {
   vegetationTypeOptions,
   imageMap
 } from '~/stores/envParamsStore'
+
+const props = defineProps<{ initialMobileCollapsed?: boolean }>();
+
 
 const envStore = useEnvParamsStore()
 

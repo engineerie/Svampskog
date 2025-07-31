@@ -424,6 +424,9 @@ export default {
       const osdModule = await import("openseadragon");
       const osd = osdModule.default || osdModule;
       osdLib = osd;
+      // Ensure Scalebar plugin attaches to this OpenSeadragon instance
+      window.OpenSeadragon = osdLib;
+      await import('~/assets/js/openseadragon-scalebar.js');
 
       // Viewer initialization options
       const viewerOptions = {
@@ -451,6 +454,17 @@ export default {
       };
 
       viewer.value = osd(viewerOptions);
+      // Attach scale bar plugin
+      viewer.value.scalebar({
+        type: osdLib.ScalebarType.MAP,
+        pixelsPerMeter: 10, // adjust to your image's real-world scale
+        minWidth: '75px',
+        location: osdLib.ScalebarLocation.TOP_LEFT,
+        color: 'white',
+        fontColor: 'white',
+        backgroundColor: 'rgba(0, 0, 0, 0.2)',
+        barThickness: 2
+      });
       // Prevent OpenSeadragon from clearing overlays on open, so static overlay stays mounted
       viewer.value.clearOverlays = () => {};
 

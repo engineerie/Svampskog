@@ -787,7 +787,7 @@ const desktopColumns = [
     if (images && images.length) {
       return h(resolveComponent('NuxtImg'), {
         src: images[0],
-        class: "size-12 object-cover -my-4 rounded-md border border-neutral-100 dark:border-neutral-800",
+        class: "h-16 w-22 object-cover -my-3 rounded-md border border-neutral-100 dark:border-neutral-800",
         alt: "Species Image",
         height: "300",
         width: "450",
@@ -824,7 +824,7 @@ const desktopColumns = [
     );
   },
   cell: ({ row }) =>
-    h('div', { class: 'text-neutral-700 dark:text-neutral-200' }, capitalize(row.getValue("Commonname")))
+    h('div', { class: 'text-neutral-700 dark:text-neutral-200 font-semibold truncate text-[16px]' }, capitalize(row.getValue("Commonname")))
     ,
   filterFn: (row, _columnId, filterValue) => {
     if (!filterValue) return true
@@ -858,7 +858,7 @@ const desktopColumns = [
   },
   // sortable: true,
   cell: ({ row }) =>
-    h('div', { class: 'truncate' }, row.getValue('Scientificname')),
+    h('div', { class: 'truncate  text-[16px]' }, row.getValue('Scientificname')),
   meta: { headerText: 'Latinskt namn' },
 },
 
@@ -1059,13 +1059,13 @@ const mobileColumns = [
         ? h(NuxtImg, {
             src: images[0],
             alt: row.original.Commonname,
-            class: "size-16 object-cover rounded-lg border border-neutral-200 dark:border-neutral-800",
+            class: "h-18 w-24 object-cover rounded-md border-[0.5px] border-neutral-200 dark:border-neutral-800",
             height: "300",
             width: "450",
             format: "webp"
           })
         : h("div", { 
-            class: "size-16 rounded-lg flex items-center justify-center bg-neutral-100 dark:bg-neutral-800" 
+            class: "h-18 w-24 rounded-md flex items-center justify-center bg-neutral-100 dark:bg-neutral-800" 
           }, [
             h(NuxtImg, {
           src: getIconPath(row.original[props.grupp]),
@@ -1074,9 +1074,9 @@ const mobileColumns = [
         }),
           ]);
       // Icon and names
-      const headerComp = h("div", { class: "flex items-center text-neutral-700 dark:text-neutral-200 space-x-4" }, [
+      const headerComp = h("div", { class: "flex items-center text-neutral-700 dark:text-neutral-200 " }, [
         h("div", { class: "flex-1 min-w-0" }, [
-          h("div", { class: "truncate" }, capitalize(row.original.Commonname)),
+          h("div", { class: "truncate text-lg font-semibold" }, capitalize(row.original.Commonname)),
           h("small", { class: "text-xs text-neutral-500 dark:text-neutral-400 italic block truncate max-w-48" }, row.original.Scientificname)
         ])
       ]);
@@ -1093,26 +1093,28 @@ const mobileColumns = [
           ? h(UBadge, { color: "secondary", variant: "subtle", size: "sm" }, () => `${row.original[props.obs]} skogar`)
           : null,
         // Status badge
-        h(UBadge, { color: getStatusColor(row.original.RL2020kat), variant: "subtle", size: "sm" }, () => getStatusTooltip(row.original.RL2020kat)),
+(row.original.RL2020kat !== 'LC' && row.original.RL2020kat !== 'NA' && row.original.RL2020kat !== 'NE' && row.original.RL2020kat !== "0" )
+        ? h(UBadge, { color: getStatusColor(row.original.RL2020kat), variant: "subtle", size: "sm" }, () => getStatusTooltip(row.original.RL2020kat))
+        : null,
         // Signalart badge
         row.original.SIGNAL_art === 'S'
           ? h(UBadge, { color: "signal", variant: "subtle", size: "sm" }, () => "Signalart")
           : null,
         // Mark badges
-        row.original.KALKmark
-          ? h(UBadge, { color: "kalkmark", variant: "subtle", size: "sm" }, () => "Kalkmark")
-          : null,
+        // row.original.KALKmark
+        //   ? h(UBadge, { color: "kalkmark", variant: "subtle", size: "sm" }, () => "Kalkmark")
+        //   : null,
         // Matsvamp badge
-        matsvampBadge,
+        // matsvampBadge,
         // Giftsvamp badge
-        row.original.Giftsvamp?.toLowerCase() === 'x'
-          ? h(UBadge, { color: "poison", variant: "subtle", size: "sm" }, () => "Giftsvamp")
-          : null,
+        // row.original.Giftsvamp?.toLowerCase() === 'x'
+        //   ? h(UBadge, { color: "poison", variant: "subtle", size: "sm" }, () => "Giftsvamp")
+        //   : null,
       ].filter(Boolean));
       // Combine into two-column layout: image | (icon+names + badges)
       return h("div", { class: "flex space-x-4 items-start" }, [
         imageComp,
-        h("div", { class: "flex flex-col" }, [headerComp, badgesComp])
+        h("div", { class: "flex flex-col " }, [headerComp, badgesComp])
       ]);
     },
     meta: { headerText: 'Namn' }

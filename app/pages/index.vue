@@ -60,7 +60,7 @@ onUnmounted(() => {
 
 <template>
   <div v-if="page">
-    <div class="fixed top-0 left-0 w-full h-60 pointer-events-none z-10 bg-gradient-to-b from-white/60 to-transparent dark:from-black/80 dark:to-transparent"></div>
+    <!-- <div class="fixed top-0 left-0 w-full h-60 pointer-events-none z-10 bg-gradient-to-b from-white/60 to-transparent dark:from-black/80 dark:to-transparent"></div> -->
     <!-- <div class="absolute">
        <div class="relative hidden sm:block">
         <NuxtImg src="/images/hero2.png" 
@@ -129,7 +129,7 @@ onUnmounted(() => {
    
   </UPageSection> -->
     <UContainer class="text-center mx-auto max-w-5xl text-neutral-500 dark:text-neutral-400 text-md my-24">
-      "Mykorrhizasvampar lever i symbios med träd vilket innebär att svamparna får sin energi från träden och I utbyte sköter de om trädens näringsförsörjning. <span class="hidden md:inline">Svamparnas mikroskopiskt tunna hyfer är om- och invuxna i trädens tunna rötter och förstorar trädens rotsystem tusenfalt.</span>" 
+      "Mykorrhizasvampar lever i symbios med träd. Det innebär att svamparna får sin energi från träden och i utbyte sköter de om trädens näringsförsörjning. <span class="hidden md:inline">Svamparnas mikroskopiskt tunna hyfer är om- och invuxna i trädens tunna rötter och förstorar trädens rotsystem tusenfalt.</span>" 
       
 <div class="flex justify-center mt-4 page-section">
 <UUser
@@ -151,7 +151,7 @@ onUnmounted(() => {
       :reverse="page.sections[0].reverse"
     
       :links="page.sections[0].links"
-      :headline="page.sections[0].headline">
+      >
       <template #links>
         <div class="flex space-x-2">
           <UButton 
@@ -176,7 +176,7 @@ onUnmounted(() => {
       
       
       :links="page.sections[1].links"
-      :headline="page.sections[1].headline">
+      >
       <template #links>
         <div class="flex space-x-2">
           <UButton 
