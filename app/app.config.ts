@@ -16,6 +16,7 @@ export default defineAppConfig({
     //   },
     // },
   
+    
     badge: {
       compoundVariants: [
         {
@@ -57,9 +58,10 @@ export default defineAppConfig({
     },
     colors: {
       primary: "green",
-      neutral: "neutral",
+      neutral: "rodeo-dust",
       secondary: "violet",
       tertiary: "amber",
+      rodeodust: "rodeo-dust",
       poison: "lime",
       signal: "teal",
       kalkmark: "slate",

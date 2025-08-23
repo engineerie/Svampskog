@@ -1,8 +1,8 @@
 <template>
   <div>
 
-<div :class="isNormalView ? 'hidden' : 'mb-2'" class="w-full flex justify-end gap-2">
-     <UButton
+<div :class="isNormalView ? 'hidden' : 'md:mb-2'" class="w-full flex justify-end gap-2">
+     <!-- <UButton
       class="md:hidden ml-2 "
       :class="isNormalView ? 'hidden' : ''"
       variant="soft"
@@ -10,21 +10,12 @@
       size="lg"
       label="Diagram"
       trailing
-    />
-   <UButton
-      color="neutral"
-      variant="soft"
-        size="lg"
-        @click="$emit('enlarge')"
-  :class="isNormalView ? 'hidden' : 'md:hidden'"
-        :icon="isNormalView ? '' : 'i-heroicons-arrow-uturn-left-solid'"
-        trailing
-        
-      />
+    /> -->
+
 </div>
     
         
-  <UCard>
+  <UCard class="md:mt-2">
     
     <!-- Header / List View -->
    
@@ -34,13 +25,27 @@
       
         
 
-        <div class="flex justify-between md:mt-0 mt-1 mb-1 md:mb-2">
-                  <h1 @click="$emit('enlarge')" class="text-2xl md:text-3xl  ">Alla mykorrhizasvampar</h1>
-                 
-                 
-        </div>
+        <div class=" md:mt-0 mt-1 mb-1 md:mb-2">
+                  <h1  class="text-3xl hidden md:block  font-medium">Alla mykorrhizasvampar</h1>
+                  <h1  class="text-3xl  md:hidden  font-semibold">Alla mykorrhizasvampar</h1>
+                
+                  <div class="flex gap-2">
+                                       <h1 class="text-md text-neutral-500" >{{totalSpecies}} arter baserat på {{sampleEnvCount}} skogar</h1>
 
-        <div class="flex justify-between">
+                      <UBadge
+    v-if="sampleEnvCount < 10"
+    :icon="sampleEnvCount < 10 ? 'i-cuida-warning-outline' : undefined"
+    size="md"
+    :color="sampleEnvCount < 10 ? 'warning' : 'secondary'"
+    variant="subtle"
+    class="h-fit flex "
+  >
+    {{ sampleEnvCount < 10 ? 'Få prov' : null }}
+  </UBadge>
+                  </div>
+
+        </div>
+        <div class="flex gap-2">
   
 
 
@@ -53,21 +58,13 @@
     label="Enligt DNA från markprover"
     class="h-fit md:hidden mb-2 mr-2"
   />    -->
-  <UBadge
-    :icon="sampleEnvCount < 10 ? 'i-cuida-warning-outline' : undefined"
-    size="md"
-    :color="sampleEnvCount < 10 ? 'warning' : 'secondary'"
-    variant="subtle"
-    class="h-fit flex md:hidden"
-  >
-    {{ sampleEnvCount < 10 ? 'Få prov: ' + sampleEnvCount + ' skogar' : 'Baserat på ' + sampleEnvCount + ' skogar' }}
-  </UBadge>
+
 
 <UModal fullscreen title="Diagram" :ui="{
   body: 'pt-0',
 }">
     <!-- trigger button -->
-    <UButton
+    <!-- <UButton
       class="md:hidden ml-2 "
       :class="isNormalView ? 'hidden' : ''"
       variant="soft"
@@ -75,7 +72,7 @@
       size="lg"
       label="Diagram"
       trailing
-    />
+    /> -->
     <!-- modal body -->
     <template #body >
       <EnvironmentSelector :initialMobileCollapsed="true"/>
@@ -89,7 +86,7 @@
       />
 
       <BarChart v-if="showBarChart"
-      class="mt-2"
+      class="mb-2"
   :chartData="data"
   :chartWidth="chartWidth"
   :geography="geographyValue"
@@ -124,8 +121,8 @@
         </div>
        
       </div>
-      <div class="flex gap-3 items-center pb-2">
-        <UBadge
+      <div class="flex gap-3 items-start">
+        <!-- <UBadge
           v-if="!isNormalView" 
           icon="solar:dna-linear"
           size="lg"
@@ -133,9 +130,9 @@
           variant="subtle"
           label="Enligt DNA från markinventeringens provytor"
           class="h-fit hidden md:flex"
-        />   
+        />    -->
        
-        <UBadge
+        <!-- <UBadge
           :icon="sampleEnvCount < 10 ? 'i-cuida-warning-outline' : undefined"
           size="lg"
           :color="sampleEnvCount < 10 ? 'warning' : 'secondary'"
@@ -143,25 +140,26 @@
           class="h-fit hidden md:flex"
         >
           {{ sampleEnvCount < 10 ? 'Lågt provantal: ' + sampleEnvCount + ' skogar' : 'Baserat på ' + sampleEnvCount + ' skogar' }}
-        </UBadge>
+        </UBadge> -->
          <UButton
                  class="hidden md:flex h-fit"
 
     color="neutral"
-      variant="soft"
+      variant="outline"
       size="md"
       @click="showBarChart = !showBarChart"
       :label="showBarChart ? 'Dölj diagram' : 'Visa diagram'"
 
     />
-        <UButton
+    
+        <!-- <UButton
         class="hidden md:flex h-fit"
         color="neutral"
         variant="ghost"
           size="lg"
           :icon="isNormalView ? 'material-symbols:open-in-full' : 'material-symbols:close-fullscreen'"
           @click="$emit('enlarge')"
-        />
+        /> -->
       </div>
     </div>
 
@@ -183,10 +181,10 @@
     
     <div
       v-else-if="activeTab === 'columnChart'"
-      class="p-2"
+      class=""
     >
    
-    <BarChart v-if="showBarChart"
+    <BarChart class="mb-6" v-if="showBarChart"
   :chartData="data"
   :chartWidth="chartWidth"
   :geography="geographyValue"
@@ -202,7 +200,7 @@
   @update:searchTerm="modalSearchTerm = $event"
 />
 <SpeciesTable
-  class="mt-2"
+  
   @enlarge="emit('enlarge')"
   @update:matsvampFilter="matsvampFilter = $event"
   @update:giftsvampFilter="giftsvampFilter = $event"
@@ -267,6 +265,7 @@ const vegetationTypeValue = computed(() => vegetationType.value);
 
 // Data for chart fetched based on environment.
 const data = ref<any[]>([]);
+const totalSpecies = computed(() => data.value.length);
 const sampleEnvCount = computed(() =>
   data.value.length > 0 ? data.value[0].sample_env_count || 0 : 0
 );

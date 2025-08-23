@@ -1,6 +1,7 @@
 <template>
-    <div class="hidden">
-    <NuxtImg v-for="(src, key) in imageMap" :key="key" :src="src" width="600" height="420" quality="80" format="webp" preload />
+  <div class="hidden">
+    <NuxtImg v-for="(src, key) in imageMap" :key="key" :src="src" width="600" height="420" quality="80" format="webp"
+      preload />
   </div>
   <div class="hidden">
     <NuxtImg v-for="(src, key) in imageMap" :key="key" :src="src" width="300" height="180" format="webp" quality="80"
@@ -10,30 +11,25 @@
     <SpeciesInfo :species="speciesStore.selectedSpecies" :source="speciesStore.sourceComponent" />
   </MySlideover>
 
-  
-    
-                <UContainer>
 
-          <EnvironmentSelector class="fixed top-16 left-0 right-0" />
-     </UContainer>
-          
-        
 
-        <div key="" class="bg-neutral-50 dark:bg-neutral-800/40 flex flex-col min-h-screen">
-          <USeparator class=" mb-4"/>
-          <UContainer class="w-full">
-            <transition name="fade" mode="out-in">
-        <component
-          :is="activeComponent"
-          @close="handleCloseFullScreen"
-          @enlarge="handleFullScreen"
-        class="block"
-        />
-              </transition>
+  <UContainer>
 
-        </UContainer>
-        </div>
-    
+    <EnvironmentSelector class="fixed top-16 left-0 right-0" />
+
+  </UContainer>
+
+
+  <div key="" class="bg-neutral-50 dark:bg-neutral-800/40 flex flex-col min-h-screen border-t border-neutral-200">
+    <!-- <USeparator class=" mb-0"/> -->
+    <UContainer class="w-full px-0 md:p-4">
+      <transition name="fade" mode="out-in">
+        <component :is="activeComponent" @close="handleCloseFullScreen" @enlarge="handleFullScreen" class="block" />
+      </transition>
+
+    </UContainer>
+  </div>
+
 
 </template>
 
@@ -44,8 +40,8 @@ import MySlideover from "./MySlideover.vue";
 import FullScreenPoison from "./FullScreenPoison.vue";
 import FullScreenEdible from "./FullScreenEdible.vue";
 import RedlistedComponent from "./RedlistedComponent.vue";
-import NormalView from "./NormalView.vue"; 
-import StartView from "./StartView.vue"; 
+import NormalView from "./NormalView.vue";
+import StartView from "./StartView.vue";
 
 import { useEnvParamsStore } from "~/stores/envParamsStore";
 
@@ -71,6 +67,13 @@ watch(
     }
   }
 );
+
+// Clear selection when the slide-over is closed
+watch(showSlideover, (isOpen) => {
+  if (!isOpen) {
+    speciesStore.clearSelection();
+  }
+});
 
 // A ref to track if a full-screen view is active
 const activeFullScreenComponent = ref(null);

@@ -1,0 +1,474 @@
+{
+  "trees": [
+    {
+      "framework": "trakthygge",
+      "time": [
+        "efter",
+        "20 år",
+        "50 år",
+        "80 år"
+      ],
+      "startskog": "naturskog",
+      "x": 0.27505064885000413,
+      "y": 0.25478183498856266,
+      "id": "tree-1754501317612"
+    },
+    {
+      "framework": "trakthygge",
+      "time": [
+        "efter",
+        "20 år",
+        "50 år",
+        "80 år"
+      ],
+      "startskog": "naturskog",
+      "x": 0.35419539477389633,
+      "y": 0.27932284147659125,
+      "id": "tree-1754501320877"
+    },
+    {
+      "framework": "trakthygge",
+      "time": [
+        "efter",
+        "20 år",
+        "50 år",
+        "80 år"
+      ],
+      "startskog": "naturskog",
+      "x": 0.35910359607150205,
+      "y": 0.2725740646923834,
+      "id": "tree-1754501321855"
+    },
+    {
+      "framework": "trakthygge",
+      "time": [
+        "efter",
+        "20 år",
+        "50 år",
+        "80 år"
+      ],
+      "startskog": "naturskog",
+      "x": 0.3637050347880074,
+      "y": 0.28053071913967387,
+      "id": "tree-1754501324320"
+    },
+    {
+      "framework": "trakthygge",
+      "time": [
+        "efter",
+        "20 år",
+        "50 år",
+        "80 år"
+      ],
+      "startskog": "naturskog",
+      "x": 0.37152748060606655,
+      "y": 0.27730971203812016,
+      "id": "tree-1754501328097"
+    },
+    {
+      "framework": "trakthygge",
+      "time": [
+        "efter",
+        "20 år",
+        "50 år",
+        "80 år"
+      ],
+      "startskog": "naturskog",
+      "x": 0.3772025883564232,
+      "y": 0.2693338849295108,
+      "id": "tree-1754501329294"
+    },
+    {
+      "framework": "trakthygge",
+      "time": [
+        "efter",
+        "20 år",
+        "50 år",
+        "80 år"
+      ],
+      "startskog": "naturskog",
+      "x": 0.39361438644529223,
+      "y": 0.27869014365307176,
+      "id": "tree-1754501333566"
+    },
+    {
+      "framework": "trakthygge",
+      "time": [
+        "efter",
+        "20 år",
+        "50 år",
+        "80 år"
+      ],
+      "startskog": "naturskog",
+      "x": 0.39330762386419194,
+      "y": 0.28727949592388174,
+      "id": "tree-1754501335568"
+    },
+    {
+      "framework": "trakthygge",
+      "time": [
+        "efter",
+        "20 år",
+        "50 år",
+        "80 år"
+      ],
+      "startskog": "naturskog",
+      "x": 0.37352143738321886,
+      "y": 0.2875862585049821,
+      "id": "tree-1754501339139"
+    },
+    {
+      "framework": "trakthygge",
+      "time": [
+        "efter",
+        "20 år",
+        "50 år",
+        "80 år"
+      ],
+      "startskog": "naturskog",
+      "x": 0.3798100702957762,
+      "y": 0.2920343159309373,
+      "id": "tree-1754501341578"
+    },
+    {
+      "framework": "trakthygge",
+      "time": [
+        "efter",
+        "20 år",
+        "50 år",
+        "80 år"
+      ],
+      "startskog": "naturskog",
+      "x": 0.36125093413920456,
+      "y": 0.3000101430395466,
+      "id": "tree-1754501344438"
+    },
+    {
+      "framework": "trakthygge",
+      "time": [
+        "efter",
+        "20 år",
+        "50 år",
+        "80 år"
+      ],
+      "startskog": "naturskog",
+      "x": 0.46831107494322927,
+      "y": 0.2595174823342994,
+      "id": "tree-1754501346452"
+    },
+    {
+      "framework": "trakthygge",
+      "time": [
+        "efter",
+        "20 år",
+        "50 år",
+        "80 år"
+      ],
+      "startskog": "naturskog",
+      "x": 0.44852488846225624,
+      "y": 0.22776755519041242,
+      "id": "tree-1754501348128"
+    },
+    {
+      "framework": "trakthygge",
+      "time": [
+        "efter",
+        "20 år",
+        "50 år",
+        "80 år"
+      ],
+      "startskog": "naturskog",
+      "x": 0.48648065609960467,
+      "y": 0.1615142237149943,
+      "id": "tree-1754501353772"
+    },
+    {
+      "framework": "trakthygge",
+      "time": [
+        "efter",
+        "20 år",
+        "50 år",
+        "80 år"
+      ],
+      "startskog": "naturskog",
+      "x": 0.5283537484198034,
+      "y": 0.26136544386316063,
+      "id": "tree-1754501356469"
+    },
+    {
+      "framework": "trakthygge",
+      "time": [
+        "efter",
+        "20 år",
+        "50 år",
+        "80 år"
+      ],
+      "startskog": "naturskog",
+      "x": 0.6391739229514132,
+      "y": 0.3940717746910847,
+      "id": "tree-1754501362962"
+    },
+    {
+      "framework": "skärmträd",
+      "time": [
+        "20 år",
+        "50 år",
+        "80 år"
+      ],
+      "startskog": "naturskog",
+      "x": 0.45065382891434347,
+      "y": 0.22843822843822853,
+      "id": "tree-1754581373774"
+    },
+    {
+      "framework": "skärmträd",
+      "time": [
+        "20 år",
+        "50 år",
+        "80 år"
+      ],
+      "startskog": "naturskog",
+      "x": 0.5188183229565384,
+      "y": 0.28331846729802,
+      "id": "tree-1754581376967"
+    },
+    {
+      "framework": "skärmträd",
+      "time": [
+        "20 år",
+        "50 år",
+        "80 år"
+      ],
+      "startskog": "naturskog",
+      "x": 0.4673931383089385,
+      "y": 0.2572968684883554,
+      "id": "tree-1754581381695"
+    },
+    {
+      "framework": "skärmträd",
+      "time": [
+        "20 år",
+        "50 år",
+        "80 år"
+      ],
+      "startskog": "naturskog",
+      "x": 0.669333232960136,
+      "y": 0.28911760027560546,
+      "id": "tree-1754581384997"
+    },
+    {
+      "framework": "skärmträd",
+      "time": [
+        "20 år",
+        "50 år",
+        "80 år"
+      ],
+      "startskog": "naturskog",
+      "x": 0.6777251985762534,
+      "y": 0.3630839948920772,
+      "id": "tree-1754581386703"
+    },
+    {
+      "framework": "skärmträd",
+      "time": [
+        "20 år",
+        "50 år",
+        "80 år"
+      ],
+      "startskog": "naturskog",
+      "x": 0.6696702390326273,
+      "y": 0.18417858233956672,
+      "id": "tree-1754581389125"
+    },
+    {
+      "framework": "skärmträd",
+      "time": [
+        "20 år",
+        "50 år",
+        "80 år"
+      ],
+      "startskog": "naturskog",
+      "x": 0.5277525220669634,
+      "y": 0.2613047180989743,
+      "id": "tree-1754583326264"
+    },
+    {
+      "framework": "skärmträd",
+      "time": [
+        "20 år",
+        "50 år",
+        "80 år"
+      ],
+      "startskog": "naturskog",
+      "x": 0.36692350907374677,
+      "y": 0.3955200109319218,
+      "id": "tree-1754583331241"
+    },
+    {
+      "framework": "skärmträd",
+      "time": [
+        "20 år",
+        "50 år",
+        "80 år"
+      ],
+      "startskog": "naturskog",
+      "x": 0.5630480314269213,
+      "y": 0.16761247371946478,
+      "id": "tree-1754583334895"
+    },
+    {
+      "framework": "skärmträd",
+      "time": [
+        "20 år",
+        "50 år",
+        "80 år"
+      ],
+      "startskog": "naturskog",
+      "x": 0.48644694993097093,
+      "y": 0.16192024897985063,
+      "id": "tree-1754583336589"
+    },
+    {
+      "framework": "skärmträd",
+      "time": [
+        "20 år",
+        "50 år",
+        "80 år"
+      ],
+      "startskog": "naturskog",
+      "x": 0.6396447908596811,
+      "y": 0.39587746873432744,
+      "id": "tree-1754583341785"
+    },
+    {
+      "framework": "skärmträd",
+      "time": "50 år",
+      "startskog": "naturskog",
+      "x": 0.6919913206419774,
+      "y": 0.3557143756973693,
+      "id": "tree-1754672460245"
+    },
+    {
+      "framework": "blädning",
+      "time": "efter",
+      "startskog": "naturskog",
+      "x": 0.4600794586979853,
+      "y": 0.2966644147737957,
+      "id": "tree-1754688996122"
+    },
+    {
+      "framework": "blädning",
+      "time": "efter",
+      "startskog": "naturskog",
+      "x": 0.5162601626016261,
+      "y": 0.3546747967479674,
+      "id": "tree-1754765588729"
+    },
+    {
+      "framework": "blädning",
+      "time": "efter",
+      "startskog": "naturskog",
+      "x": 0.6758130081300814,
+      "y": 0.5233739837398375,
+      "id": "tree-1754765590662"
+    },
+    {
+      "framework": "blädning",
+      "time": "efter",
+      "startskog": "naturskog",
+      "x": 0.491869918699187,
+      "y": 0.3445121951219512,
+      "id": "tree-1754765592452"
+    },
+    {
+      "framework": "blädning",
+      "time": "efter",
+      "startskog": "naturskog",
+      "x": 0.7815040650406505,
+      "y": 0.4644308943089431,
+      "id": "tree-1754765594075"
+    },
+    {
+      "framework": "blädning",
+      "time": "efter",
+      "startskog": "naturskog",
+      "x": 0.391260162601626,
+      "y": 0.3678861788617886,
+      "id": "tree-1754765596643"
+    },
+    {
+      "framework": "blädning",
+      "time": "efter",
+      "startskog": "naturskog",
+      "x": 0.391260162601626,
+      "y": 0.3678861788617886,
+      "id": "tree-1754765597346"
+    },
+    {
+      "framework": "blädning",
+      "time": "efter",
+      "startskog": "naturskog",
+      "x": 0.5902439024390244,
+      "y": 0.34298799005339836,
+      "id": "tree-1754765604453"
+    },
+    {
+      "framework": "blädning",
+      "time": "efter",
+      "startskog": "naturskog",
+      "x": 0.7817073170731705,
+      "y": 0.6335605558732467,
+      "id": "tree-1754765607478"
+    },
+    {
+      "framework": "luckhuggning",
+      "time": [
+        "efter",
+        "20 år",
+        "50 år",
+        "80 år"
+      ],
+      "startskog": "naturskog",
+      "x": 0.3318165596002855,
+      "y": 0.3787473233404712,
+      "id": "tree-1754817893188"
+    },
+    {
+      "framework": "luckhuggning",
+      "time": [
+        "efter",
+        "20 år",
+        "50 år",
+        "80 år"
+      ],
+      "startskog": "naturskog",
+      "x": 0.33627765881513205,
+      "y": 0.385438972162741,
+      "id": "tree-1754817894683"
+    },
+    {
+      "framework": "luckhuggning",
+      "time": "80 år",
+      "startskog": "naturskog",
+      "x": 0.6097784224673499,
+      "y": 0.26327916535918006,
+      "id": "tree-1754818046954"
+    },
+    {
+      "framework": "luckhuggning",
+      "time": "80 år",
+      "startskog": "naturskog",
+      "x": 0.32853243646495756,
+      "y": 0.2838237479698126,
+      "id": "tree-1754818064743"
+    },
+    {
+      "framework": "luckhuggning",
+      "time": "80 år",
+      "startskog": "naturskog",
+      "x": 0.32485128549175324,
+      "y": 0.2927198628217229,
+      "id": "tree-1754818065744"
+    }
+  ]
+}

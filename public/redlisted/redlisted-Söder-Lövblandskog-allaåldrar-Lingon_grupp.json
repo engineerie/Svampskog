@@ -35,11 +35,11 @@
     "ekologi": "Växer med tall, men även med gran, huvudsakligen i äldre barrblandskog. Relativt vanlig och med bred ekologi. ",
     "RankRed": 1,
     "Giftsvamp": null,
-    "förekomst_skog_ålder": 4,
+    "förekomst_skog_ålder": 2,
     "förekomst_skog": 1,
-    "förekomst_ålder": 3,
+    "förekomst_ålder": 1,
     "förekomst_ung": 0,
-    "förekomst_sum": 4,
+    "förekomst_sum": 2,
     "images": [
       "/images/SvampBilder/RödlistadeSvampar/Hydnellum caeruleum-4362.jpg"
     ]
@@ -80,11 +80,11 @@
     "ekologi": "Lavtallskog, lingontallskog och blåbärsgranskog. Mager mark. Med tall och gran.",
     "RankRed": 1,
     "Giftsvamp": null,
-    "förekomst_skog_ålder": 6,
+    "förekomst_skog_ålder": 3,
     "förekomst_skog": 2,
-    "förekomst_ålder": 4,
+    "förekomst_ålder": 1,
     "förekomst_ung": 0,
-    "förekomst_sum": 6,
+    "förekomst_sum": 3,
     "images": []
   },
   {
@@ -123,11 +123,11 @@
     "ekologi": "Växer med tall, ev också krypvide. Främst på kustnära sanddyner med lågt pH, ofta utlakade och med kråkbär, ärttryffel etc. ",
     "RankRed": 3,
     "Giftsvamp": null,
-    "förekomst_skog_ålder": 6,
+    "förekomst_skog_ålder": 3,
     "förekomst_skog": 2,
-    "förekomst_ålder": 4,
+    "förekomst_ålder": 1,
     "förekomst_ung": 0,
-    "förekomst_sum": 6,
+    "förekomst_sum": 3,
     "images": []
   },
   {
@@ -166,11 +166,11 @@
     "ekologi": "Växer huvudsakligen med gran och tall i barrskog, sällsynt i lövskog. ",
     "RankRed": 1,
     "Giftsvamp": null,
-    "förekomst_skog_ålder": 4,
+    "förekomst_skog_ålder": 2,
     "förekomst_skog": 1,
-    "förekomst_ålder": 3,
+    "förekomst_ålder": 1,
     "förekomst_ung": 0,
-    "förekomst_sum": 4,
+    "förekomst_sum": 2,
     "images": [
       "/images/SvampBilder/RödlistadeSvampar/Phellodon connatus-5448.jpg"
     ]

@@ -6,22 +6,23 @@ hero:
   description: Utforska vilka mykorrhizasvampar som kan finnas i olika skogar och se hur de påverkas av skogsskötsel.
   badge: Ny version ute nu
   links:
-    - label: Svampar
+    - label: Utforska svampar
       icon: i-lineicons-mushroom-1
       trailing: false
-      to: /mykorrhizasvampar
-      target: 
+      to: /mykorrhizasvampar/start
+      target:
       size: xl
-      color: primary
-      variant: subtle
-    - label: Skogsskötsel
+      color: rodeodust
+      variant: solid
+    - label: Se påverkan av skogsskötsel
       icon: i-hugeicons-tree-06
       trailing: false
-      to: /skogsskotsel
-      target: 
+      to: /skogsskotsel/skotselmetoder
+      target:
       size: xl
-      color: neutral
-      variant: subtle
+      color: rodeodust
+      variant: soft
+
     # - label: Svampkunskap
     #   icon: i-heroicons-book-open
     #   size: xl
@@ -38,6 +39,8 @@ sections:
       - label: Gå till svampar
         to: /mykorrhizasvampar
         icon: i-heroicons-arrow-right
+        color: "rodeodust"
+        variant: "solid"
     orientation: horizontal
     reverse: true
     src: /images/SvamparSverige4.svg
@@ -48,14 +51,16 @@ sections:
       - name: Bank-Level Security
         description: För att få uppgifter om alla, både vanliga och ovanligare, arters förekomster har vi också sammanställt information om var mat- och giftsvampar samt naturvårdsintressanta svampar kan förekomma.
         icon: i-lineicons-mushroom-1
-  - title: Se hur skogsskötsel påverkar svampar
-    description: Här försöker vi att visualisera hur trakthyggesbruk och olika former av hyggesfria metoder kan påverka förekomsten av mykorrhizasvampar under en skogsgeneration. Informationen baseras på sammanställda forskningsresultat, bl a från ett samarbete med Markinventeringen och Riksskogstaxeringen. 
+  - title: Hur påverkar olika skogsskötsel svampar?
+    description: Här försöker vi att visualisera hur trakthyggesbruk och olika former av hyggesfria metoder kan påverka förekomsten av mykorrhizasvampar under en skogsgeneration. Informationen baseras på sammanställda forskningsresultat, bl a från ett samarbete med Markinventeringen och Riksskogstaxeringen.
     src: /images/SvamparSverige4.svg
     headline: Skogsskötsel
     links:
       - label: Gå till skogsskötsel
         to: /skogsskotsel
         icon: i-heroicons-arrow-right
+        color: "rodeodust"
+        variant: "solid"
     orientation: horizontal
     reverse: false
     features:
@@ -96,10 +101,10 @@ testimonials:
   title: Om Svampskog
   description: Svampskog syftar till att förmedla lättillgänglig och tillförlitlig information om vilka mykorrhizasvampar som kan finnas i olika skogar, och hur deras förekomst påverkas av olika former av skogsskötsel. Projektet riktar sig till alla som är intresserade av skog och svamp.
   links:
-      - label: Gå till skogsskötsel
-        to: /skogsskotsel
-        icon: i-heroicons-arrow-right
-  features: 
+    - label: Gå till skogsskötsel
+      to: /skogsskotsel
+      icon: i-heroicons-arrow-right
+  features:
     - title: Lansering
       icon: i-heroicons-rocket-launch-solid
       description: Webbplatsen mjuklanserades den 9 april och utvecklas löpande sommaren 2025.

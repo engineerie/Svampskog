@@ -17,6 +17,20 @@
   --color-asphalt-800: #59483a;
   --color-asphalt-900: #4e4035;
   --color-asphalt-950: #16110e;
+
+  --color-rodeo-dust-50: #f9f6f3;
+  --color-rodeo-dust-100: #f2ece2;
+  --color-rodeo-dust-200: #e3d6c5;
+  --color-rodeo-dust-300: #d1bba0;
+  --color-rodeo-dust-400: #c3a283;
+  --color-rodeo-dust-500: #b1835e;
+  --color-rodeo-dust-600: #a37153;
+  --color-rodeo-dust-700: #885b46;
+  --color-rodeo-dust-800: #6f4c3d;
+  --color-rodeo-dust-900: #5a3f34;
+  --color-rodeo-dust-950: #30201a;
+
+
 }
 
 .dark {
@@ -24,7 +38,8 @@
 }
 
 :root {
-  --ui-radius: var(--radius-sm);
+  
+  --ui-radius: var(--radius-xs);
   --ui-container: 85rem;
   --vis-line-gapfill-stroke-dasharray: 1 3;
   --vis-line-gapfill-stroke-opacity: 1;

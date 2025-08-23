@@ -1,32 +1,5 @@
 [
   {
-    "SpeciesCode": "SI18-24",
-    "Scientificname": "Hyaloscypha variabilis",
-    "Svampguiden": "0",
-    "Kriteriedokumentation": null,
-    "OVANLIGHET": null,
-    "KALKmark": null,
-    "ANNANmark": null,
-    "Värdtaxa:Vedochbark": null,
-    "Värdtaxa:Finarerötterochrottrådar": null,
-    "ekologi": null,
-    "Commonname": "skålsvamp",
-    "matsvamp": 0,
-    "total_presence": 19,
-    "Artfakta": "Information saknas",
-    "RL2020kat": "0",
-    "Svamp-grupp": "0",
-    "Svamp-Undersvamp-grupp": "0",
-    "SIGNAL_art": "0",
-    "Nyasvamp-boken": "0",
-    "Giftsvamp": "0",
-    "Genus": "Hyaloscypha",
-    "sample_plot_count": 4,
-    "sample_env_count": 5,
-    "Svamp-grupp-släkte": "skålsvamp",
-    "images": []
-  },
-  {
     "SpeciesCode": "SI18-26",
     "Scientificname": "Hyaloscypha finlandica sp.1",
     "Svampguiden": "0",
@@ -1492,7 +1465,14 @@
     "sample_plot_count": 1,
     "sample_env_count": 5,
     "Svamp-grupp-släkte": "sopp",
-    "images": []
+    "images": [
+      "/images/SvampBilder/Matsvampar/Boletus edulis-1.jpg",
+      "/images/SvampBilder/Matsvampar/Boletus edulis-2.jpg",
+      "/images/SvampBilder/Matsvampar/Boletus edulis-3.jpg",
+      "/images/SvampBilder/Matsvampar/Boletus edulis-6.jpg",
+      "/images/SvampBilder/Matsvampar/Boletus edulis-4.jpg",
+      "/images/SvampBilder/Matsvampar/Boletus edulis-5.jpg"
+    ]
   },
   {
     "SpeciesCode": "SI18-593",

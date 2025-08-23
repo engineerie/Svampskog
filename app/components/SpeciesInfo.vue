@@ -84,7 +84,64 @@
     <div class="px-5 pb-3 mt-4">
       <h1 class="text-2xl font-medium">{{ capitalize(species.Commonname) }}</h1>
       <h1 class="text-neutral-500">{{ species.Scientificname }}</h1>
-       <h1 class="mt-3 text-lg">
+      <!-- Rarity indicators -->
+       <div class="my-1">
+
+      
+<div
+  v-if="species['Rank matsvamp'] === 3"
+  
+  
+  
+  class="text-sm text-red-700 shrink-0 flex gap-1 items-center "
+>
+<UIcon name="codicon:circle-large-filled" class="size-3"/>
+  Sällsynt matsvamp
+</div>
+<div
+  v-if="species['Rank matsvamp'] === 2"
+  
+  
+  class="text-sm text-yellow-600 shrink-0 flex gap-1 items-center"
+>
+<UIcon name="codicon:color-mode" class="size-3"/>
+  Ovanlig matsvamp
+</div>
+<div
+  v-if="species['Rank giftsvamp'] === 3"
+  
+  class="text-sm shrink-0 text-red-700 flex gap-1 items-center"
+>
+<UIcon name="codicon:circle-large-filled" class="size-3"/>
+  Sällsynt giftsvamp
+</div>
+<div
+  v-if="species['Rank giftsvamp'] === 2"
+  
+  class="text-sm text-yellow-600 shrink-0 flex gap-1 items-center"
+>
+<UIcon name="codicon:color-mode" class="size-3"/>
+
+  Ovanlig giftsvamp
+</div>
+<div
+  v-if="species.RankRed === 3"
+  
+  class="text-sm text-red-700 shrink-0 flex gap-1 items-center"
+>
+<UIcon name="codicon:circle-large-filled" class="size-3"/>
+  Sällsynt naturvårdsart
+</div>
+<div
+  v-if="species.RankRed === 2"
+ 
+  class="text-sm text-yellow-600 shrink-0 flex gap-1 items-center"
+>
+<UIcon name="codicon:color-mode" class="size-3"/>
+  Ovanlig naturvårdsart
+</div> 
+ </div>
+      <h1 class="mt-3 text-lg">
           {{ truncatedTextEkologi }}
         </h1>
 

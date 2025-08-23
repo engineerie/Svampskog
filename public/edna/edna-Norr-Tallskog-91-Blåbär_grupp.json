@@ -1,32 +1,5 @@
 [
   {
-    "SpeciesCode": "SI18-24",
-    "Scientificname": "Hyaloscypha variabilis",
-    "Svampguiden": "0",
-    "Kriteriedokumentation": null,
-    "OVANLIGHET": null,
-    "KALKmark": null,
-    "ANNANmark": null,
-    "Värdtaxa:Vedochbark": null,
-    "Värdtaxa:Finarerötterochrottrådar": null,
-    "ekologi": null,
-    "Commonname": "skålsvamp",
-    "matsvamp": 0,
-    "total_presence": 826,
-    "Artfakta": "Information saknas",
-    "RL2020kat": "0",
-    "Svamp-grupp": "0",
-    "Svamp-Undersvamp-grupp": "0",
-    "SIGNAL_art": "0",
-    "Nyasvamp-boken": "0",
-    "Giftsvamp": "0",
-    "Genus": "Hyaloscypha",
-    "sample_plot_count": 60,
-    "sample_env_count": 61,
-    "Svamp-grupp-släkte": "skålsvamp",
-    "images": []
-  },
-  {
     "SpeciesCode": "SI18-15",
     "Scientificname": "Piloderma sphaerosporum",
     "Svampguiden": "0",
@@ -2688,7 +2661,9 @@
     "sample_plot_count": 1,
     "sample_env_count": 61,
     "Svamp-grupp-släkte": "taggsvamp",
-    "images": []
+    "images": [
+      "/images/SvampBilder/RödlistadeSvampar/Phellodon niger-5449.jpg"
+    ]
   },
   {
     "SpeciesCode": "SI18-214",

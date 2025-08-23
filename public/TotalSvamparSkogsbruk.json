@@ -1,32 +1,62 @@
 [
-  {
+    {
     "artkategori": "total",
     "frameworks": "naturskydd",
-    "ålder": -4,
+    "ålder": -7,
     "klassning": 100
   },
   {
     "artkategori": "total",
     "frameworks": "trakthygge",
-    "ålder": -4,
+    "ålder": -7,
     "klassning": 100
   },
   {
     "artkategori": "total",
     "frameworks": "blädning",
-    "ålder": -4,
+    "ålder": -7,
     "klassning": 100
   },
   {
     "artkategori": "total",
     "frameworks": "luckhuggning",
-    "ålder": -4,
+    "ålder": -7,
     "klassning": 100
   },
   {
     "artkategori": "total",
     "frameworks": "skärmträd",
-    "ålder": -4,
+    "ålder": -7,
+    "klassning": 100
+  },
+  {
+    "artkategori": "total",
+    "frameworks": "naturskydd",
+    "ålder": 0,
+    "klassning": 100
+  },
+  {
+    "artkategori": "total",
+    "frameworks": "trakthygge",
+    "ålder": 0,
+    "klassning": 100
+  },
+  {
+    "artkategori": "total",
+    "frameworks": "blädning",
+    "ålder": 0,
+    "klassning": 100
+  },
+  {
+    "artkategori": "total",
+    "frameworks": "luckhuggning",
+    "ålder": 0,
+    "klassning": 100
+  },
+  {
+    "artkategori": "total",
+    "frameworks": "skärmträd",
+    "ålder": 0,
     "klassning": 100
   },
 
@@ -89,9 +119,16 @@
     "artkategori": "total",
     "frameworks": "skärmträd",
     "ålder": 10,
+    "klassning": 70
+  },
+   {
+    "artkategori": "total",
+    "frameworks": "skärmträd",
+    "ålder": 11,
     "klassning": 40
   },
 
+
   {
     "artkategori": "total",
     "frameworks": "naturskydd",
@@ -121,6 +158,12 @@
     "frameworks": "skärmträd",
     "ålder": 20,
     "klassning": 60
+  },
+    {
+    "artkategori": "total",
+    "frameworks": "skärmträd",
+    "ålder": 21,
+    "klassning": 50
   },
 
   {
@@ -139,13 +182,13 @@
     "artkategori": "total",
     "frameworks": "blädning",
     "ålder": 30,
-    "klassning": 75
+    "klassning": 100
   },
   {
     "artkategori": "total",
     "frameworks": "luckhuggning",
     "ålder": 30,
-    "klassning": 75
+    "klassning": 100
   },
   {
     "artkategori": "total",
@@ -153,6 +196,20 @@
     "ålder": 30,
     "klassning": 100
   },
+
+  {
+    "artkategori": "total",
+    "frameworks": "blädning",
+    "ålder": 31,
+    "klassning": 75
+  },
+  {
+    "artkategori": "total",
+    "frameworks": "luckhuggning",
+    "ålder": 31,
+    "klassning": 75
+  },
+
 
   {
     "artkategori": "total",
@@ -228,23 +285,37 @@
     "ålder": 60,
     "klassning": 120
   },
-  {
+    {
     "artkategori": "total",
     "frameworks": "blädning",
     "ålder": 60,
-    "klassning": 75
+    "klassning": 100
   },
   {
     "artkategori": "total",
     "frameworks": "luckhuggning",
     "ålder": 60,
-    "klassning": 75
+    "klassning": 100
   },
   {
     "artkategori": "total",
     "frameworks": "skärmträd",
     "ålder": 60,
     "klassning": 120
+  },
+
+
+   {
+    "artkategori": "total",
+    "frameworks": "blädning",
+    "ålder": 61,
+    "klassning": 75
+  },
+  {
+    "artkategori": "total",
+    "frameworks": "luckhuggning",
+    "ålder": 61,
+    "klassning": 75
   },
 
   {
@@ -325,19 +396,32 @@
     "artkategori": "total",
     "frameworks": "blädning",
     "ålder": 90,
-    "klassning": 75
+    "klassning": 100
   },
   {
     "artkategori": "total",
     "frameworks": "luckhuggning",
     "ålder": 90,
-    "klassning": 75
+    "klassning": 100
   },
   {
     "artkategori": "total",
     "frameworks": "skärmträd",
     "ålder": 90,
     "klassning": 110
+  },
+
+   {
+    "artkategori": "total",
+    "frameworks": "blädning",
+    "ålder": 91,
+    "klassning": 75
+  },
+  {
+    "artkategori": "total",
+    "frameworks": "luckhuggning",
+    "ålder": 91,
+    "klassning": 75
   },
 
   {

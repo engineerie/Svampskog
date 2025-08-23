@@ -1,7 +1,7 @@
 <template>
   <div class="grid grid-cols-12 gap-4">
-    <div class="col-span-12  sm:col-span-4 sm:flex">
-      <div class="relative rounded-lg overflow-hidden border border-neutral-200 dark:border-neutral-800/50">
+    <div class="col-span-12 sm:col-span-4 sm:flex">
+      <div class="relative rounded-sm overflow-hidden border border-neutral-200 dark:border-neutral-800/50">
         <SpatialForest />
         <div class="flex absolute bottom-0 justify-between w-full p-2 items-end">
           <h1 class="text-neutral-400 text-xs ">
@@ -15,7 +15,7 @@
           <template #body>
       
          
-                <div class="rounded-xl overflow-hidden">
+                <div class="rounded-sm overflow-hidden">
                   <SpatialForest />
                 </div>
                 <div class="mt-2 sm:mt-4 text-md text-neutral-500">
@@ -31,7 +31,7 @@
 
       </div>
     </div>
-    <div class="col-span-12  sm:col-span-8">
+    <div class="col-span-12 sm:col-span-8 hidden md:flex">
 
       <!-- <SpeciesRichness class="col-span-4"/> -->
 

@@ -2,8 +2,8 @@
   <div>
 
     <AppHeader />
-    <UMain>
-        <slot />
+    <UMain class="flex flex-col">
+      <slot />
     </UMain>
     <AppFooter />
   </div>

@@ -12,27 +12,29 @@
       ></div>
       <div
         ref="panelRef"
-        class="ml-auto bg-white shadow-lg z-50 relative pointer-events-auto md:rounded-lg ring-1 ring-neutral-200 transition-all overflow-hidden"
+        class="ml-auto bg-white shadow-lg z-50 relative pointer-events-auto md:rounded-sm ring-1 ring-neutral-200 transition-all overflow-hidden"
         :class="[localPinned ? '-m-1' : '', expanded ? 'w-[744px]' : 'w-96']"
         @click.stop
       >
         <div class="absolute top-2 left-2 items-end w-full gap-2 z-10 flex">
          
           <UButton
-            class="shadow hover:bg-white"
+            class="shadow hover:bg-white rounded-full mt-2 ml-1 md:m-0"
             color="neutral"
             variant="subtle"
             :ui="{ rounded: 'rounded-full' }"
             icon="heroicons:x-mark"
+            size="lg"
             @click="emit('update:modelValue', false)"
           />
            <UButton
-            class="shadow hover:bg-white"
+            class="shadow hover:bg-white hidden md:flex rounded-full"
             color="neutral"
             variant="subtle"
             :ui="{ rounded: 'rounded-full' }"
             @click="togglePinned"
             icon="codicon:pinned"
+            size="lg"
             :class="localPinned ? 'text-primary-500' : 'text-neutral-700'"
           />
         </div>

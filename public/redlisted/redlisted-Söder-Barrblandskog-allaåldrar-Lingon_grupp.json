@@ -35,11 +35,11 @@
     "ekologi": "Bildar mykorrhiza med tall i kalkbarrskog. Karaktärsart i kalktallskog på torr till frisk mark.",
     "RankRed": 2,
     "Giftsvamp": null,
-    "förekomst_skog_ålder": 3,
+    "förekomst_skog_ålder": 2,
     "förekomst_skog": 1,
-    "förekomst_ålder": 2,
+    "förekomst_ålder": 1,
     "förekomst_ung": 0,
-    "förekomst_sum": 3,
+    "förekomst_sum": 2,
     "images": [
       "/images/SvampBilder/Giftsvampar/Tricholoma batschii-175-.jpg"
     ]
@@ -80,11 +80,11 @@
     "ekologi": "Växer med tall, men även med gran, huvudsakligen i äldre barrblandskog. Relativt vanlig och med bred ekologi. ",
     "RankRed": 1,
     "Giftsvamp": null,
-    "förekomst_skog_ålder": 4,
+    "förekomst_skog_ålder": 2,
     "förekomst_skog": 1,
-    "förekomst_ålder": 3,
+    "förekomst_ålder": 1,
     "förekomst_ung": 0,
-    "förekomst_sum": 4,
+    "förekomst_sum": 2,
     "images": [
       "/images/SvampBilder/RödlistadeSvampar/Hydnellum caeruleum-4362.jpg"
     ]
@@ -125,11 +125,11 @@
     "ekologi": "Lavtallskog, lingontallskog och blåbärsgranskog. Mager mark. Med tall och gran.",
     "RankRed": 1,
     "Giftsvamp": null,
-    "förekomst_skog_ålder": 6,
+    "förekomst_skog_ålder": 3,
     "förekomst_skog": 2,
-    "förekomst_ålder": 4,
+    "förekomst_ålder": 1,
     "förekomst_ung": 0,
-    "förekomst_sum": 6,
+    "förekomst_sum": 3,
     "images": []
   },
   {
@@ -168,11 +168,11 @@
     "ekologi": "Växer med gran i barrskog över hela landet.",
     "RankRed": 1,
     "Giftsvamp": null,
-    "förekomst_skog_ålder": 6,
+    "förekomst_skog_ålder": 3,
     "förekomst_skog": 2,
-    "förekomst_ålder": 4,
+    "förekomst_ålder": 1,
     "förekomst_ung": 0,
-    "förekomst_sum": 6,
+    "förekomst_sum": 3,
     "images": [
       "/images/SvampBilder/Matsvampar/Sarcodon imbricatus-2.jpg",
       "/images/SvampBilder/Matsvampar/Sarcodon imbricatus-1.jpg"
@@ -214,11 +214,11 @@
     "ekologi": "Växer med tall, främst i äldre sandtallskog men ibland även i grandominerad, rikare barrblandskog. ",
     "RankRed": 3,
     "Giftsvamp": null,
-    "förekomst_skog_ålder": 4,
+    "förekomst_skog_ålder": 3,
     "förekomst_skog": 2,
-    "förekomst_ålder": 2,
+    "förekomst_ålder": 1,
     "förekomst_ung": 0,
-    "förekomst_sum": 4,
+    "förekomst_sum": 3,
     "images": []
   },
   {
@@ -257,11 +257,11 @@
     "ekologi": "Växer med tall, i äldre lavtallskog och hällmarkstallskog. ",
     "RankRed": 2,
     "Giftsvamp": null,
-    "förekomst_skog_ålder": 4,
+    "förekomst_skog_ålder": 3,
     "förekomst_skog": 2,
-    "förekomst_ålder": 2,
+    "förekomst_ålder": 1,
     "förekomst_ung": 0,
-    "förekomst_sum": 4,
+    "förekomst_sum": 3,
     "images": [
       "/images/SvampBilder/RödlistadeSvampar/Tricholoma colossus-1596.jpg"
     ]
@@ -302,11 +302,11 @@
     "ekologi": "Växer med tall, på torr, sandig, bergig och mager mark i äldre lavtallskog. ",
     "RankRed": 2,
     "Giftsvamp": null,
-    "förekomst_skog_ålder": 3,
+    "förekomst_skog_ålder": 2,
     "förekomst_skog": 1,
-    "förekomst_ålder": 2,
+    "förekomst_ålder": 1,
     "förekomst_ung": 0,
-    "förekomst_sum": 3,
+    "förekomst_sum": 2,
     "images": [
       "/images/SvampBilder/RödlistadeSvampar/Tricholoma apium-1593.jpg"
     ]
@@ -347,11 +347,11 @@
     "ekologi": "Växer med tall gles, äldre kalktallskog med inslag av enstaka senvuxna granar, men kan också finnas i kalkbarrskog med blandad förekomst av tall och gran. Oftast på torr och näringsfattig mark med tunt jordlager eller blottad mark. ",
     "RankRed": 2,
     "Giftsvamp": null,
-    "förekomst_skog_ålder": 5,
+    "förekomst_skog_ålder": 3,
     "förekomst_skog": 2,
-    "förekomst_ålder": 3,
+    "förekomst_ålder": 1,
     "förekomst_ung": 0,
-    "förekomst_sum": 5,
+    "förekomst_sum": 3,
     "images": []
   },
   {
@@ -390,11 +390,11 @@
     "ekologi": "Växer med tall i med tall i tallskog. Huvudsakligen i äldre, glesare skogsbestånd och hällmarksimpediment. ",
     "RankRed": 1,
     "Giftsvamp": null,
-    "förekomst_skog_ålder": 5,
+    "förekomst_skog_ålder": 2,
     "förekomst_skog": 1,
-    "förekomst_ålder": 4,
+    "förekomst_ålder": 1,
     "förekomst_ung": 0,
-    "förekomst_sum": 5,
+    "förekomst_sum": 2,
     "images": [
       "/images/SvampBilder/Matsvampar/Sarcodon squamosus.jpg",
       "/images/SvampBilder/RödlistadeSvampar/Sarcodon squamosus-5966.jpg"
@@ -436,11 +436,11 @@
     "ekologi": "Växer med tall, ev också krypvide. Främst på kustnära sanddyner med lågt pH, ofta utlakade och med kråkbär, ärttryffel etc. ",
     "RankRed": 3,
     "Giftsvamp": null,
-    "förekomst_skog_ålder": 6,
+    "förekomst_skog_ålder": 3,
     "förekomst_skog": 2,
-    "förekomst_ålder": 4,
+    "förekomst_ålder": 1,
     "förekomst_ung": 0,
-    "förekomst_sum": 6,
+    "förekomst_sum": 3,
     "images": []
   },
   {
@@ -479,11 +479,11 @@
     "ekologi": "Växer med tall i kalkbarrskog, ofta på något sandiga jordar. ",
     "RankRed": 3,
     "Giftsvamp": null,
-    "förekomst_skog_ålder": 4,
+    "förekomst_skog_ålder": 3,
     "förekomst_skog": 2,
-    "förekomst_ålder": 2,
+    "förekomst_ålder": 1,
     "förekomst_ung": 0,
-    "förekomst_sum": 4,
+    "förekomst_sum": 3,
     "images": [
       "/images/SvampBilder/RödlistadeSvampar/Tricholoma joachimii-2072.jpg"
     ]
@@ -524,11 +524,11 @@
     "ekologi": "Växer med tall. Fruktkroppar påträffas under kolad ved som ligger på marken. Växer i brandpräglade torra tallskog med lång kontinuitet på mager och sandig mark. ",
     "RankRed": 1,
     "Giftsvamp": null,
-    "förekomst_skog_ålder": 4,
+    "förekomst_skog_ålder": 2,
     "förekomst_skog": 1,
-    "förekomst_ålder": 3,
+    "förekomst_ålder": 1,
     "förekomst_ung": 0,
-    "förekomst_sum": 4,
+    "förekomst_sum": 2,
     "images": [
       "/images/SvampBilder/RödlistadeSvampar/Hydnellum gracilipes-4365.jpg"
     ]
@@ -569,11 +569,11 @@
     "ekologi": "Växer huvudsakligen med gran och tall i barrskog, sällsynt i lövskog. ",
     "RankRed": 1,
     "Giftsvamp": null,
-    "förekomst_skog_ålder": 4,
+    "förekomst_skog_ålder": 2,
     "förekomst_skog": 1,
-    "förekomst_ålder": 3,
+    "förekomst_ålder": 1,
     "förekomst_ung": 0,
-    "förekomst_sum": 4,
+    "förekomst_sum": 2,
     "images": [
       "/images/SvampBilder/RödlistadeSvampar/Phellodon connatus-5448.jpg"
     ]
@@ -614,11 +614,11 @@
     "ekologi": "Växer med tall i lav- och lingontallskog på mager sandjord. ",
     "RankRed": 3,
     "Giftsvamp": null,
-    "förekomst_skog_ålder": 3,
+    "förekomst_skog_ålder": 2,
     "förekomst_skog": 1,
-    "förekomst_ålder": 2,
+    "förekomst_ålder": 1,
     "förekomst_ung": 0,
-    "förekomst_sum": 3,
+    "förekomst_sum": 2,
     "images": [
       "/images/SvampBilder/RödlistadeSvampar/Tricholoma roseoacerbum-245044.jpg"
     ]
@@ -659,11 +659,11 @@
     "ekologi": "Växer med tall i luckig kalkbarrskog.",
     "RankRed": 3,
     "Giftsvamp": null,
-    "förekomst_skog_ålder": "10s",
+    "förekomst_skog_ålder": null,
     "förekomst_skog": 1,
-    "förekomst_ålder": "0s",
+    "förekomst_ålder": null,
     "förekomst_ung": 0,
-    "förekomst_sum": "10s",
+    "förekomst_sum": null,
     "images": [
       "/images/SvampBilder/RödlistadeSvampar/Cortinarius terpsichores-248939.jpg"
     ]
@@ -704,11 +704,11 @@
     "ekologi": "Växer med tall i lavtallskog och hällmarkstallskog över en stor del av landet. Förekommer huvudsakligen i äldre skog. ",
     "RankRed": 1,
     "Giftsvamp": null,
-    "förekomst_skog_ålder": 4,
+    "förekomst_skog_ålder": 2,
     "förekomst_skog": 1,
-    "förekomst_ålder": 3,
+    "förekomst_ålder": 1,
     "förekomst_ung": 0,
-    "förekomst_sum": 4,
+    "förekomst_sum": 2,
     "images": [
       "/images/SvampBilder/RödlistadeSvampar/Lactarius musteus-4745.jpg"
     ]
@@ -749,11 +749,11 @@
     "ekologi": "Växer med gran i mossig granskog. Vanligast i norra Sverige. ",
     "RankRed": 1,
     "Giftsvamp": null,
-    "förekomst_skog_ålder": 5,
+    "förekomst_skog_ålder": 3,
     "förekomst_skog": 2,
-    "förekomst_ålder": 3,
+    "förekomst_ålder": 1,
     "förekomst_ung": 0,
-    "förekomst_sum": 5,
+    "förekomst_sum": 3,
     "images": [
       "/images/SvampBilder/Matsvampar/Hygrophorus karstenii-2.jpg",
       "/images/SvampBilder/Matsvampar/Hygrophorus karstenii-1.jpg",

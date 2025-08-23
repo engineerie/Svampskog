@@ -29,7 +29,7 @@
               v-for="(framework, index) in frameworks"
               :key="framework.id"
               @click="selectedFrameworkIndex = index"
-              class="flex items-center gap-2 cursor-pointer hover:bg-neutral-100 p-2 rounded-md"
+              class="flex items-center gap-2 cursor-pointer hover:bg-neutral-100 p-2 rounded-sm"
             >
               <div>
                 <div class="font-medium">{{ framework.label }}</div>
@@ -44,7 +44,7 @@
     <!-- Right popover, left‐aligned within its cell -->
     <div class="flex justify-start cursor-pointer">
       <!-- <USeparator orientation="vertical" class="h-8 mr-4" /> -->
-      <UPopover destroy-on-close :ui="{ rounded: 'rounded-lg' }" :popper="{ placement: 'bottom-start' }" class="ml-2">
+      <UPopover destroy-on-close :ui="{ rounded: 'rounded-sm' }" :popper="{ placement: 'bottom-start' }" class="ml-2">
         <!-- <h1 class="text-2xl flex items-center">
           {{ currentFramework2.label }}
           <Icon name="i-heroicons-chevron-down-solid" class="size-5 ml-1 mt-1" />
@@ -59,7 +59,7 @@
               v-for="(framework, index) in frameworks"
               :key="'framework2-'+framework.id"
               @click="selectedFrameworkIndex2 = index"
-              class="flex items-center gap-2 cursor-pointer hover:bg-neutral-100 p-2 rounded-md"
+              class="flex items-center gap-2 cursor-pointer hover:bg-neutral-100 p-2 rounded-sm"
             >
               <div>
                 <div class="font-medium">{{ framework.label }}</div>
@@ -162,13 +162,13 @@
 
               
             </div>
-            <div ref="resizableContainer" class="relative w-full overflow-visible flex pt-0 rounded-lg"
+            <div ref="resizableContainer" class="relative w-full overflow-visible flex pt-0 rounded-sm"
               :style="{ height: containerHeight + 'px' }">
               <div class="relative w-full ">
 
 
                 <div v-if="chartVisible"
-                  class="w-[45rem]  absolute top-9 left-1/2 transform -translate-x-1/2 dark:bg-neutral-900/70 bg-white backdrop-blur-xl rounded-2xl shadow p-4 border border-neutral-300 dark:border-neutral-700 z-20">
+                  class="w-[45rem]  absolute top-9 left-1/2 transform -translate-x-1/2 dark:bg-neutral-900/70 bg-white backdrop-blur-xl rounded-sm shadow p-4 border border-neutral-300 dark:border-neutral-700 z-20">
 
                   <div class="w-full justify-between flex pl-2 mb-3">
                     <div class="text-neutral-800 dark:text-neutral-200 text-xl flex gap-2 items-center">
@@ -240,7 +240,7 @@
                         class="hover:bg-neutral-800/50 bg-neutral-900/0  text-neutral-100"
                         icon="i-heroicons-magnifying-glass-minus" />
                         <div class="flex items-center gap-2 p-1">
-                    <Icon name="i-hugeicons-tree-06" class="size-5 text-neutral-100" />
+                    <!-- <Icon name="i-hugeicons-tree-06" class="size-5 text-neutral-100" /> -->
                     <input
                       type="range"
                       min="0"
@@ -256,7 +256,7 @@
                   
                 
                  
-                  <div class="shrink-0 bg-neutral-100/0 backdrop-blur-xl rounded-lg p-1.5 border border-neutral-800/60 mt-4"
+                  <div class="shrink-0 bg-neutral-100/0 backdrop-blur-xl rounded-sm p-1.5 border border-neutral-800/60 mt-4"
                   v-if="!isCompare && !isFrameworkCompareMode && annotationsVisible">
                     <ul>
                       <li v-for="annotation in filteredAnnotations" :key="annotation.id" class="mb-0.5">
@@ -287,7 +287,7 @@
 
                 <!-- Single View -->
                 <div v-if="!isCompare && !isFrameworkCompareMode"
-                  class="w-full h-full overflow-hidden rounded-lg relative border border-neutral-200 dark:border-neutral-800 shadow">
+                  class="w-full h-full relative ">
                   <OpenSeadragonViewer :currentFramework="currentFramework" :currentTime="timeLabelForDataFiltering"
                     :currentStartskog="currentStartskog" :layoutMode="currentLayoutMode" ref="singleViewerRef"
                     :frameworkLabel="currentFramework.label" :timeLabel="currentTimeLabel"
@@ -341,7 +341,7 @@
                       :overlayDziUrl="comparisonImagePath1.replace('.png', '.dzi')" :allowPan="true"
                       @opened="onViewerOpened('before')" @activated="activeViewer.valueOf = 'before'"
                       v-if="!opacitySyncEnabled"
-                      class="w-full h-full z-0 rounded-lg border-[0.5px] border-neutral-300 dark:border-neutral-800 overflow-hidden" />
+                      class="w-full h-full z-0 rounded-sm border-[0.5px] border-neutral-300 dark:border-neutral-800 overflow-hidden" />
                     <OpenSeadragonViewer :currentFramework="currentFramework" currentTime="innan"
                       :currentStartskog="currentStartskog" :layoutMode="currentLayoutMode" ref="beforeViewerRef"
                       :comparisonMode="true" :frameworkLabel="currentFramework.label" timeLabel="Före avverkning"
@@ -349,7 +349,7 @@
                       :overlayDziUrl="comparisonImagePath1.replace('.png', '.dzi')" :allowPan="true"
                       @opened="onViewerOpened('before')" @activated="activeViewer.valueOf = 'before'" v-else
                       v-model:globalOpacity="globalOpacity"
-                      class="w-full h-full z-0 rounded-lg border-[0.5px] border-neutral-300 dark:border-neutral-800 overflow-hidden" />
+                      class="w-full h-full z-0 rounded-sm border-[0.5px] border-neutral-300 dark:border-neutral-800 overflow-hidden" />
                   </template>
                   <template #second>
                     <OpenSeadragonViewer :currentFramework="currentFramework" :currentTime="timeLabelForDataFiltering"
@@ -359,7 +359,7 @@
                       :overlayDziUrl="currentImagePath.replace('.png', '.dzi')" :allowPan="true"
                       sliderPosition="right" @opened="onViewerOpened('after')"
                       @activated="activeViewer.valueOf = 'after'" v-if="!opacitySyncEnabled"
-                      class="w-full h-full z-0 rounded-lg border-[0.5px] border-neutral-300 dark:border-neutral-800 overflow-hidden" />
+                      class="w-full h-full z-0 rounded-sm border-[0.5px] border-neutral-300 dark:border-neutral-800 overflow-hidden" />
                     <OpenSeadragonViewer :currentFramework="currentFramework" :currentTime="timeLabelForDataFiltering"
                       :currentStartskog="currentStartskog" :layoutMode="currentLayoutMode" ref="afterViewerRef"
                       :comparisonMode="true" :frameworkLabel="currentFramework.label" :timeLabel="currentTimeLabel"
@@ -367,7 +367,7 @@
                       :overlayDziUrl="currentImagePath.replace('.png', '.dzi')" :allowPan="true"
                       sliderPosition="right" @opened="onViewerOpened('after')"
                       @activated="activeViewer.valueOf = 'after'" v-else v-model:globalOpacity="globalOpacity"
-                      class="w-full h-full z-0 rounded-lg border-[0.5px] border-neutral-300 dark:border-neutral-800 overflow-hidden" />
+                      class="w-full h-full z-0 rounded-sm border-[0.5px] border-neutral-300 dark:border-neutral-800 overflow-hidden" />
                   </template>
                 </CustomImageComparisonSlider>
 
@@ -385,7 +385,7 @@
                       :allowPan="!isCompare && !isFrameworkCompareMode" v-if="!opacitySyncEnabled"
                       @viewportChanged="($event) => onViewportChanged('framework1', $event)"
                       @opened="onViewerOpened('framework1')" @activated="activeViewer.valueOf = 'framework1'"
-                      class="w-full h-full z-0 rounded-lg border-[0.5px] border-neutral-300 dark:border-neutral-800 overflow-hidden" />
+                      class="w-full h-full z-0 rounded-sm border-[0.5px] border-neutral-300 dark:border-neutral-800 overflow-hidden" />
                     <OpenSeadragonViewer :currentFramework="currentFramework" :currentTime="timeLabelForDataFiltering"
                       :currentStartskog="currentStartskog" :layoutMode=currentLayoutMode ref="framework1ViewerRef"
                       :comparisonMode="true" :frameworkLabel="currentFramework.label" :timeLabel="currentTimeLabel"
@@ -394,7 +394,7 @@
                       :allowPan="!isCompare && !isFrameworkCompareMode" v-else v-model:globalOpacity="globalOpacity"
                       @viewportChanged="($event) => onViewportChanged('framework1', $event)"
                       @opened="onViewerOpened('framework1')" @activated="activeViewer.valueOf = 'framework1'"
-                      class="w-full h-full z-0 rounded-lg border-[0.5px] border-neutral-300 dark:border-neutral-800 overflow-hidden" />
+                      class="w-full h-full z-0 rounded-sm border-[0.5px] border-neutral-300 dark:border-neutral-800 overflow-hidden" />
                   </template>
                   <template #second>
                     <OpenSeadragonViewer :currentFramework="currentFramework2" :currentTime="timeLabelForDataFiltering"
@@ -405,7 +405,7 @@
                       :allowPan="!isCompare && !isFrameworkCompareMode" sliderPosition="right"
                       @viewportChanged="($event) => onViewportChanged('framework2', $event)"
                       @opened="onViewerOpened('framework2')" @activated="activeViewer.valueOf = 'framework2'"
-                      class="w-full h-full z-0 rounded-lg border-[0.5px] border-neutral-300 dark:border-neutral-800 overflow-hidden" />
+                      class="w-full h-full z-0 rounded-sm border-[0.5px] border-neutral-300 dark:border-neutral-800 overflow-hidden" />
 
                     <OpenSeadragonViewer :currentFramework="currentFramework2" :currentTime="timeLabelForDataFiltering"
                       :currentStartskog="currentStartskog" :layoutMode="currentLayoutMode" ref="framework2ViewerRef"
@@ -415,7 +415,7 @@
                       v-model:globalOpacity="globalOpacity" :allowPan="!isCompare && !isFrameworkCompareMode"
                       sliderPosition="right" @viewportChanged="($event) => onViewportChanged('framework2', $event)"
                       @opened="onViewerOpened('framework2')" @activated="activeViewer.valueOf = 'framework2'"
-                      class="w-full h-full z-0 rounded-lg border-[0.5px] border-neutral-300 dark:border-neutral-800 overflow-hidden" />
+                      class="w-full h-full z-0 rounded-sm border-[0.5px] border-neutral-300 dark:border-neutral-800 overflow-hidden" />
 
                   </template>
                 </CustomImageComparisonSlider>
@@ -435,7 +435,7 @@
               </div> -->
             </div>
           <div class="flex w-full gap-2 pt-1.5">
-    <UPopover class="shrink-0 cursor-pointer" v-model:open="open" destroy-on-close :popper="{ placement: 'bottom-start' }">
+    <!-- <UPopover class="shrink-0 cursor-pointer" v-model:open="open" destroy-on-close :popper="{ placement: 'bottom-start' }">
                   <UBadge size="xl" variant="subtle" class="mb-3 mt-1"  color="secondary">{{ currentStartskog.label }}
                   </UBadge>
                  
@@ -451,14 +451,15 @@
                       </div>
                     </div>
                   </template>
-                </UPopover> 
+                </UPopover>  -->
                 <div class="w-full ">
  <UTabs
   v-model="selectedTimeValue"
   :items="timeItems"
-  size="xl"
+  size="lg"
   color="shrink-0 w-full"
   :ui="{
+    list: 'bg-transparent',
     indicator: 'bg-orange-100 dark:bg-orange-400/9 border border-orange-300/80 dark:border-orange-300/30 ',
  trigger: 'data-[state=active]:text-orange-500 dark:data-[state=active]:text-orange-400/90 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary'
   }"
@@ -526,7 +527,7 @@ onUnmounted(() => {
   window.removeEventListener('pointerup', stopResizing);
 });
 
-const containerHeight = ref(600);
+const containerHeight = ref(430);
 
 // Variables to store state while resizing
 let isResizing = false;
@@ -786,7 +787,7 @@ const currentStartskog = computed(
 );
 
 // Time references
-const time = ref(15);
+const time = ref(3);
 
 // Handle time selection
 function handleTimeSelection(step) {

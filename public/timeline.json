@@ -37,7 +37,7 @@
   {
     "startskog": "naturskog",
     "atgard": "trakthygge",
-    "tid": "Innan",
+    "tid": "innan",
     "skog": "Äldre skog.",
     "svamp": "Rikligt med mykorhizasvamp med många olika arter.Goda förutsättningar för matsvampar. Rödlistade svampar kan finnas. Gamla svampindivider kan ha stora mycelstorlekar."
   },
@@ -67,7 +67,7 @@
     "atgard": "trakthygge",
     "tid": "80 år",
     "skog": "Kan beroende på markbördighet och var in Sverige komma att avverkas vid mellan 60 till + 100 års beståndsålder.",
-    "svamp": "Förekomsten av vanliga mykorrhizasvampar, mängd och artantal är ungefär samma som före avverkningen. Ofta bra för matsvampar. Någon rödlistade art kan ha fortlevt på lämnade evighetstråd och någon kan sällsynt ha spridits in och etableras om den finns i närheten."
+    "svamp": "Förekomsten av vanliga mykorrhizasvampar, mängd och artantal är ungefär samma som före avverkningen. Ofta bra för matsvampar. Någon rödlistad art kan ha fortlevt på lämnade evighetsträd och någon kan sällsynt ha spridits in och etableras om den finns i närheten."
   },
   {
     "startskog": "naturskog",
@@ -123,7 +123,7 @@
     "atgard": "skärmträd",
     "tid": "10 år",
     "skog": "Avverkning som lämnar 75-150 fröträd/ha.",
-    "svamp": "Mängden mykorrhiza minskar med färre träd.  Artsammansättningen av påverkas mindre. Vanliga svamparterna fortlever på skärmträdens rötter. Minskad sannolikheten att ovanligare arter kan leva vidare. Som regel förekommer de bara med enstaka mycel i en skog."
+    "svamp": "Mängden mykorrhiza minskar med färre träd.  Artsammansättningen av påverkas mindre. Vanliga svamparterna fortlever på fröträdens rötter. Minskad sannolikheten att ovanligare arter kan leva vidare. Som regel förekommer de bara med enstaka mycel i en skog."
   },
   {
     "startskog": "naturskog",
@@ -249,7 +249,7 @@
     "atgard": "trakthygge",
     "tid": "80 år",
     "skog": "Kan beroende på markbördighet och var in Sverige komma att avverkas vid mellan 60 till + 100 års beståndsålder.",
-    "svamp": "Förekomsten av vanliga mykorrhizasvampar, mängd och artantal är ungefär samma som före avverkningen. Ofta bra för matsvampar. Någon rödlistade art kan ha lyckats etableras från sporer om de  förekommer i näraliggande skogar."
+    "svamp": "Förekomsten av vanliga mykorrhizasvampar, mängd och artantal är ungefär samma som före avverkningen. Ofta bra för matsvampar. Någon rödlistad art kan ha lyckats etableras från sporer om de  förekommer i näraliggande skogar."
   },
   {
     "startskog": "produktionsskog_",
@@ -305,7 +305,7 @@
     "atgard": "skärmträd",
     "tid": "10 år",
     "skog": "Avverkning som lämnar 75-150 fröträd/ha.",
-    "svamp": "Mängden mykorrhiza minskar med färre träd.  Artsammansättningen av påverkas mindre. Vanliga svamparterna fortlever på skärmträdens rötter. Minskad sannolikheten att ovanligare arter kan leva vidare. Som regel förekommer de bara med enstaka mycel i en skog."
+    "svamp": "Mängden mykorrhiza minskar med färre träd.  Artsammansättningen av påverkas mindre. Vanliga svamparterna fortlever på fröträdens rötter. Minskad sannolikheten att ovanligare arter kan leva vidare. Som regel förekommer de bara med enstaka mycel i en skog."
   },
   {
     "startskog": "produktionsskog_",

@@ -35,11 +35,11 @@
     "ekologi": "Bildar mykorrhiza med tall och gran i barrskog, framför allt sandtallskog men även i annan näringsfattig barrskog. ",
     "RankRed": 2,
     "Giftsvamp": null,
-    "förekomst_skog_ålder": 4,
+    "förekomst_skog_ålder": 3,
     "förekomst_skog": 2,
-    "förekomst_ålder": 2,
+    "förekomst_ålder": 1,
     "förekomst_ung": 0,
-    "förekomst_sum": 4,
+    "förekomst_sum": 3,
     "images": []
   }
 ]

@@ -35,11 +35,11 @@
     "ekologi": "Växer i barr- och blandskog, bl.a. ängsgranskog och kalktallskog på kalkrik mark. ",
     "RankRed": 1,
     "Giftsvamp": null,
-    "förekomst_skog_ålder": 4,
+    "förekomst_skog_ålder": 3,
     "förekomst_skog": 2,
-    "förekomst_ålder": 2,
+    "förekomst_ålder": 1,
     "förekomst_ung": 0,
-    "förekomst_sum": 4,
+    "förekomst_sum": 3,
     "images": []
   },
   {
@@ -78,11 +78,11 @@
     "ekologi": "Växer med gran i barrskog, helst örtrik kalkgranskog.",
     "RankRed": 3,
     "Giftsvamp": null,
-    "förekomst_skog_ålder": 4,
+    "förekomst_skog_ålder": 3,
     "förekomst_skog": 2,
-    "förekomst_ålder": 2,
+    "förekomst_ålder": 1,
     "förekomst_ung": 0,
-    "förekomst_sum": 4,
+    "förekomst_sum": 3,
     "images": []
   },
   {
@@ -121,11 +121,11 @@
     "ekologi": "Växer med gran, huvudsakligen i örtrika, kalkpåverkade, äldre granskogar.",
     "RankRed": 2,
     "Giftsvamp": null,
-    "förekomst_skog_ålder": "x2",
+    "förekomst_skog_ålder": "x1",
     "förekomst_skog": "x",
-    "förekomst_ålder": 2,
+    "förekomst_ålder": 1,
     "förekomst_ung": 0,
-    "förekomst_sum": "x2",
+    "förekomst_sum": "x1",
     "images": [
       "/images/SvampBilder/Giftsvampar/Cortinarius harcynicus-132-249278.jpg",
       "/images/SvampBilder/Giftsvampar/Cortinarius harcynicus-1-249278.jpg",
@@ -168,11 +168,11 @@
     "ekologi": "Växer med dels gran i ängsgranskog men även under bok, ek och avenbok i ädellövskog.",
     "RankRed": 2,
     "Giftsvamp": "x",
-    "förekomst_skog_ålder": 5,
+    "förekomst_skog_ålder": 3,
     "förekomst_skog": 2,
-    "förekomst_ålder": 3,
+    "förekomst_ålder": 1,
     "förekomst_ung": 0,
-    "förekomst_sum": 5,
+    "förekomst_sum": 3,
     "images": [
       "/images/SvampBilder/Giftsvampar/Ramaria mairei, Ramaria pallida-186-256756.jpg",
       "/images/SvampBilder/Giftsvampar/Ramaria mairei, Ramaria pallida-185-256756.jpg",
@@ -215,11 +215,11 @@
     "ekologi": "Växer med gran och tall i ängsgranskog och kalktallskog på torr och oftast kalkrik mark. Mer sällan även med bok och ek i ädellövskog. ",
     "RankRed": 2,
     "Giftsvamp": null,
-    "förekomst_skog_ålder": 4,
+    "förekomst_skog_ålder": 3,
     "förekomst_skog": 2,
-    "förekomst_ålder": 2,
+    "förekomst_ålder": 1,
     "förekomst_ung": 0,
-    "förekomst_sum": 4,
+    "förekomst_sum": 3,
     "images": []
   },
   {
@@ -258,11 +258,11 @@
     "ekologi": "Växer i löv- och barrskog, bl.a. bok-, gran- och fjällbjörkskog på kalkrik mark. ",
     "RankRed": 1,
     "Giftsvamp": null,
-    "förekomst_skog_ålder": 3,
+    "förekomst_skog_ålder": 2,
     "förekomst_skog": 1,
-    "förekomst_ålder": 2,
+    "förekomst_ålder": 1,
     "förekomst_ung": 0,
-    "förekomst_sum": 3,
+    "förekomst_sum": 2,
     "images": []
   },
   {
@@ -301,11 +301,11 @@
     "ekologi": "Växer med tall, men även med gran, huvudsakligen i äldre barrblandskog. Relativt vanlig och med bred ekologi. ",
     "RankRed": 1,
     "Giftsvamp": null,
-    "förekomst_skog_ålder": 5,
+    "förekomst_skog_ålder": 3,
     "förekomst_skog": 2,
-    "förekomst_ålder": 3,
+    "förekomst_ålder": 1,
     "förekomst_ung": 0,
-    "förekomst_sum": 5,
+    "förekomst_sum": 3,
     "images": [
       "/images/SvampBilder/RödlistadeSvampar/Hydnellum caeruleum-4362.jpg"
     ]
@@ -346,11 +346,11 @@
     "ekologi": "Växer med gran på näringsrik och/eller kalkrik, fuktig och örtrik mark i granskog och barrblandskog. ",
     "RankRed": 3,
     "Giftsvamp": null,
-    "förekomst_skog_ålder": 4,
+    "förekomst_skog_ålder": 3,
     "förekomst_skog": 2,
-    "förekomst_ålder": 2,
+    "förekomst_ålder": 1,
     "förekomst_ung": 0,
-    "förekomst_sum": 4,
+    "förekomst_sum": 3,
     "images": []
   },
   {
@@ -389,11 +389,11 @@
     "ekologi": "Växer med barrträd, framförallt gran, i äldre kalkbarrskog. ",
     "RankRed": 2,
     "Giftsvamp": null,
-    "förekomst_skog_ålder": 4,
+    "förekomst_skog_ålder": 3,
     "förekomst_skog": 2,
-    "förekomst_ålder": 2,
+    "förekomst_ålder": 1,
     "förekomst_ung": 0,
-    "förekomst_sum": 4,
+    "förekomst_sum": 3,
     "images": []
   },
   {
@@ -432,11 +432,11 @@
     "ekologi": "Växer med gran. Karaktäristiskt blånande underjordisk fruktkropp som påträffas i barrmattor vid murkna stubbar på fuktig, ofta kalkrik mark med ytligt, rörligt markvatten, i äldre ängsgranskog, bäckravin och källstråk. ",
     "RankRed": 3,
     "Giftsvamp": null,
-    "förekomst_skog_ålder": 4,
+    "förekomst_skog_ålder": 3,
     "förekomst_skog": 2,
-    "förekomst_ålder": 2,
+    "förekomst_ålder": 1,
     "förekomst_ung": 0,
-    "förekomst_sum": 4,
+    "förekomst_sum": 3,
     "images": []
   },
   {
@@ -475,11 +475,11 @@
     "ekologi": "Växer med gran på kalkrik mark, främst i äldre örtrik skog med djupt mosstäcke på fuktig, näringsrik mark. ",
     "RankRed": 3,
     "Giftsvamp": null,
-    "förekomst_skog_ålder": 6,
+    "förekomst_skog_ålder": 3,
     "förekomst_skog": 2,
-    "förekomst_ålder": 4,
+    "förekomst_ålder": 1,
     "förekomst_ung": 0,
-    "förekomst_sum": 6,
+    "förekomst_sum": 3,
     "images": []
   },
   {
@@ -518,11 +518,11 @@
     "ekologi": "Bildar mykorrhiza med gran i kalkrik barrskog, i södra Sverige sällsynt även med bok och ek på kalkrik mark. ",
     "RankRed": 2,
     "Giftsvamp": null,
-    "förekomst_skog_ålder": 5,
+    "förekomst_skog_ålder": 3,
     "förekomst_skog": 2,
-    "förekomst_ålder": 3,
+    "förekomst_ålder": 1,
     "förekomst_ung": 0,
-    "förekomst_sum": 5,
+    "förekomst_sum": 3,
     "images": [
       "/images/SvampBilder/Giftsvampar/Tricholoma aurantium-92-1595.jpg",
       "/images/SvampBilder/Giftsvampar/Tricholoma aurantium-174-1595.jpg"
@@ -564,11 +564,11 @@
     "ekologi": "Växer med gran i äldre kalkbarrskogar, helst ängsgranskog. ",
     "RankRed": 2,
     "Giftsvamp": null,
-    "förekomst_skog_ålder": 4,
+    "förekomst_skog_ålder": 3,
     "förekomst_skog": 2,
-    "förekomst_ålder": 2,
+    "förekomst_ålder": 1,
     "förekomst_ung": 0,
-    "förekomst_sum": 4,
+    "förekomst_sum": 3,
     "images": [
       "/images/SvampBilder/RödlistadeSvampar/Hydnellum auratile-786.jpg"
     ]
@@ -609,11 +609,11 @@
     "ekologi": "Växer med gran, möjligen även med tall. Växer i äldre ängsgranskog på kalkrik mark, sällsynt även i kalktallskog. ",
     "RankRed": 2,
     "Giftsvamp": null,
-    "förekomst_skog_ålder": 4,
+    "förekomst_skog_ålder": 3,
     "förekomst_skog": 2,
-    "förekomst_ålder": 2,
+    "förekomst_ålder": 1,
     "förekomst_ung": 0,
-    "förekomst_sum": 4,
+    "förekomst_sum": 3,
     "images": []
   },
   {
@@ -652,11 +652,11 @@
     "ekologi": "Växer med gran och tall, i örtrik äldre, fuktig barrskog.",
     "RankRed": 3,
     "Giftsvamp": null,
-    "förekomst_skog_ålder": 4,
+    "förekomst_skog_ålder": 3,
     "förekomst_skog": 2,
-    "förekomst_ålder": 2,
+    "förekomst_ålder": 1,
     "förekomst_ung": 0,
-    "förekomst_sum": 4,
+    "förekomst_sum": 3,
     "images": []
   },
   {
@@ -695,11 +695,11 @@
     "ekologi": "Växer med tall och/eller gran i äldre kalkbarrskog på torr och sandig mark, som kalktallhed och luckig ängsbarrskog. ",
     "RankRed": 3,
     "Giftsvamp": null,
-    "förekomst_skog_ålder": 4,
+    "förekomst_skog_ålder": 3,
     "förekomst_skog": 2,
-    "förekomst_ålder": 2,
+    "förekomst_ålder": 1,
     "förekomst_ung": 0,
-    "förekomst_sum": 4,
+    "förekomst_sum": 3,
     "images": []
   },
   {
@@ -738,11 +738,11 @@
     "ekologi": "Växer med tall och gran i kalktallskog och ängsgranskog på kalkrik mark.",
     "RankRed": 2,
     "Giftsvamp": null,
-    "förekomst_skog_ålder": "x2",
+    "förekomst_skog_ålder": "x1",
     "förekomst_skog": "x",
-    "förekomst_ålder": 2,
+    "förekomst_ålder": 1,
     "förekomst_ung": 0,
-    "förekomst_sum": "x2",
+    "förekomst_sum": "x1",
     "images": []
   },
   {
@@ -781,11 +781,11 @@
     "ekologi": "Växer i örtrik ganska torr skog på kalkmark tillsammans med gran, all och ibland ek och bok.",
     "RankRed": 2,
     "Giftsvamp": null,
-    "förekomst_skog_ålder": 4,
+    "förekomst_skog_ålder": 3,
     "förekomst_skog": 2,
-    "förekomst_ålder": 2,
+    "förekomst_ålder": 1,
     "förekomst_ung": 0,
-    "förekomst_sum": 4,
+    "förekomst_sum": 3,
     "images": []
   },
   {
@@ -824,11 +824,11 @@
     "ekologi": "Växer med gran, huvudsakligen i äldre ängsgranskog. ",
     "RankRed": 1,
     "Giftsvamp": null,
-    "förekomst_skog_ålder": 5,
+    "förekomst_skog_ålder": 3,
     "förekomst_skog": 2,
-    "förekomst_ålder": 3,
+    "förekomst_ålder": 1,
     "förekomst_ung": 0,
-    "förekomst_sum": 5,
+    "förekomst_sum": 3,
     "images": [
       "/images/SvampBilder/RödlistadeSvampar/Hydnellum suaveolens-4368.jpg"
     ]
@@ -869,11 +869,11 @@
     "ekologi": null,
     "RankRed": 1,
     "Giftsvamp": null,
-    "förekomst_skog_ålder": 6,
+    "förekomst_skog_ålder": 3,
     "förekomst_skog": 2,
-    "förekomst_ålder": 4,
+    "förekomst_ålder": 1,
     "förekomst_ung": 0,
-    "förekomst_sum": 6,
+    "förekomst_sum": 3,
     "images": [
       "/images/SvampBilder/Matsvampar/Ramaria botrytis-2.jpg",
       "/images/SvampBilder/Matsvampar/Ramaria botrytis-3.jpg",
@@ -917,11 +917,11 @@
     "ekologi": "Växer med främst bok i ängsbokskog, men även hassel och kanske lind i annan ädellövskog. Arten är knuten till rikare jordarter men inte kalkberoende. ",
     "RankRed": 2,
     "Giftsvamp": null,
-    "förekomst_skog_ålder": 3,
+    "förekomst_skog_ålder": 2,
     "förekomst_skog": 1,
-    "förekomst_ålder": 2,
+    "förekomst_ålder": 1,
     "förekomst_ung": 0,
-    "förekomst_sum": 3,
+    "förekomst_sum": 2,
     "images": [
       "/images/SvampBilder/RödlistadeSvampar/Porphyrellus porphyrosporus-1277.jpg"
     ]
@@ -962,11 +962,11 @@
     "ekologi": "Växer med gran, i äldre granskog på näringsrik mark. ",
     "RankRed": 3,
     "Giftsvamp": null,
-    "förekomst_skog_ålder": 4,
+    "förekomst_skog_ålder": 3,
     "förekomst_skog": 2,
-    "förekomst_ålder": 2,
+    "förekomst_ålder": 1,
     "förekomst_ung": 0,
-    "förekomst_sum": 4,
+    "förekomst_sum": 3,
     "images": []
   },
   {
@@ -1005,11 +1005,11 @@
     "ekologi": "Växer med gran i kalkbarrskog. Förefaller helt knuten till rikare skogstyper på starkt kalkrikt underlag. ",
     "RankRed": 3,
     "Giftsvamp": null,
-    "förekomst_skog_ålder": 4,
+    "förekomst_skog_ålder": 3,
     "förekomst_skog": 2,
-    "förekomst_ålder": 2,
+    "förekomst_ålder": 1,
     "förekomst_ung": 0,
-    "förekomst_sum": 4,
+    "förekomst_sum": 3,
     "images": []
   },
   {
@@ -1048,11 +1048,11 @@
     "ekologi": "Växer med gran, i äldre ängsgranskog på kalkrik mark. ",
     "RankRed": 3,
     "Giftsvamp": null,
-    "förekomst_skog_ålder": 4,
+    "förekomst_skog_ålder": 3,
     "förekomst_skog": 2,
-    "förekomst_ålder": 2,
+    "förekomst_ålder": 1,
     "förekomst_ung": 0,
-    "förekomst_sum": 4,
+    "förekomst_sum": 3,
     "images": [
       "/images/SvampBilder/RödlistadeSvampar/Tricholoma olivaceotinctum-1599.jpg"
     ]
@@ -1093,11 +1093,11 @@
     "ekologi": "Växer med dels bok i äldre bokskog, dels med gran i barrskog på näringsrik-kalkrik mark, sällsynt även med ek i ädellövskog. ",
     "RankRed": 2,
     "Giftsvamp": null,
-    "förekomst_skog_ålder": 4,
+    "förekomst_skog_ålder": 3,
     "förekomst_skog": 2,
-    "förekomst_ålder": 2,
+    "förekomst_ålder": 1,
     "förekomst_ung": 0,
-    "förekomst_sum": 4,
+    "förekomst_sum": 3,
     "images": [
       "/images/SvampBilder/RödlistadeSvampar/Ramaria sanguinea-1357.jpg"
     ]
@@ -1138,11 +1138,11 @@
     "ekologi": "Växer med gran i äldre granskog, helst ängsgranskog.",
     "RankRed": 1,
     "Giftsvamp": null,
-    "förekomst_skog_ålder": 4,
+    "förekomst_skog_ålder": 3,
     "förekomst_skog": 2,
-    "förekomst_ålder": 2,
+    "förekomst_ålder": 1,
     "förekomst_ung": 0,
-    "förekomst_sum": 4,
+    "förekomst_sum": 3,
     "images": [
       "/images/SvampBilder/RödlistadeSvampar/Boletopsis leucomelaena-150.jpg"
     ]
@@ -1183,11 +1183,11 @@
     "ekologi": "Granskog och skogsgläntor. Ofta kalkrik mark. Med gran.",
     "RankRed": 2,
     "Giftsvamp": null,
-    "förekomst_skog_ålder": 4,
+    "förekomst_skog_ålder": 3,
     "förekomst_skog": 2,
-    "förekomst_ålder": 2,
+    "förekomst_ålder": 1,
     "förekomst_ung": 0,
-    "förekomst_sum": 4,
+    "förekomst_sum": 3,
     "images": []
   },
   {
@@ -1226,11 +1226,11 @@
     "ekologi": "Växer med gran. Växer i djup barrförna, gärna i gamla myrstackar, i medelålders till äldre ängsgranskog på kalkrik mark.",
     "RankRed": 1,
     "Giftsvamp": null,
-    "förekomst_skog_ålder": 5,
+    "förekomst_skog_ålder": 3,
     "förekomst_skog": 2,
-    "förekomst_ålder": 3,
+    "förekomst_ålder": 1,
     "förekomst_ung": 0,
-    "förekomst_sum": 5,
+    "förekomst_sum": 3,
     "images": [
       "/images/SvampBilder/RödlistadeSvampar/Cortinarius fraudulosus-449.jpg"
     ]
@@ -1271,11 +1271,11 @@
     "ekologi": "Växer med gran och möjligen sällsynt med tall. Växer på kalkrik, ofta fuktig mark, bland mossa i framförallt äldre granskog, helst ängsgranskog. I norra Sverige förekommer den främst på mager tallhed med inslag av gran. ",
     "RankRed": 1,
     "Giftsvamp": null,
-    "förekomst_skog_ålder": 4,
+    "förekomst_skog_ålder": 3,
     "förekomst_skog": 2,
-    "förekomst_ålder": 2,
+    "förekomst_ålder": 1,
     "förekomst_ung": 0,
-    "förekomst_sum": 4,
+    "förekomst_sum": 3,
     "images": [
       "/images/SvampBilder/RödlistadeSvampar/Bankera violascens-1968.jpg"
     ]
@@ -1316,11 +1316,11 @@
     "ekologi": "Växer med gran på frisk örtrik mark i kalkrik granskog.",
     "RankRed": 2,
     "Giftsvamp": null,
-    "förekomst_skog_ålder": 6,
+    "förekomst_skog_ålder": 3,
     "förekomst_skog": 2,
-    "förekomst_ålder": 4,
+    "förekomst_ålder": 1,
     "förekomst_ung": 0,
-    "förekomst_sum": 6,
+    "förekomst_sum": 3,
     "images": [
       "/images/SvampBilder/Matsvampar/Albatrellus citrinus-2.jpg",
       "/images/SvampBilder/Matsvampar/Albatrellus citrinus-1.jpg",
@@ -1364,11 +1364,11 @@
     "ekologi": "Växer med gran helst på kalkrik mark, gärna i fuktig äldre ängsgranskog. ",
     "RankRed": 1,
     "Giftsvamp": null,
-    "förekomst_skog_ålder": 5,
+    "förekomst_skog_ålder": 3,
     "förekomst_skog": 2,
-    "förekomst_ålder": 3,
+    "förekomst_ålder": 1,
     "förekomst_ung": 0,
-    "förekomst_sum": 5,
+    "förekomst_sum": 3,
     "images": [
       "/images/SvampBilder/RödlistadeSvampar/Hydnellum geogenium-788.jpg"
     ]
@@ -1409,11 +1409,11 @@
     "ekologi": "Växer i lövskog och parker och örtrik barrskog i södra och mellersta Sverige. ",
     "RankRed": 1,
     "Giftsvamp": null,
-    "förekomst_skog_ålder": 6,
+    "förekomst_skog_ålder": 3,
     "förekomst_skog": 2,
-    "förekomst_ålder": 4,
+    "förekomst_ålder": 1,
     "förekomst_ung": 0,
-    "förekomst_sum": 6,
+    "förekomst_sum": 3,
     "images": [
       "/images/SvampBilder/Matsvampar/Russula aurea-3.jpg",
       "/images/SvampBilder/Matsvampar/Russula aurea-2.jpg",
@@ -1457,11 +1457,11 @@
     "ekologi": "Växer med tall och gran i luckig kalkbarrskog.",
     "RankRed": 2,
     "Giftsvamp": null,
-    "förekomst_skog_ålder": 4,
+    "förekomst_skog_ålder": 3,
     "förekomst_skog": 2,
-    "förekomst_ålder": 2,
+    "förekomst_ålder": 1,
     "förekomst_ung": 0,
-    "förekomst_sum": 4,
+    "förekomst_sum": 3,
     "images": [
       "/images/SvampBilder/RödlistadeSvampar/Cortinarius haasii-248956.jpg"
     ]
@@ -1502,11 +1502,11 @@
     "ekologi": "Växer med, troligen med både barr- och lövträd. ",
     "RankRed": 3,
     "Giftsvamp": null,
-    "förekomst_skog_ålder": 4,
+    "förekomst_skog_ålder": 3,
     "förekomst_skog": 2,
-    "förekomst_ålder": 2,
+    "förekomst_ålder": 1,
     "förekomst_ung": 0,
-    "förekomst_sum": 4,
+    "förekomst_sum": 3,
     "images": []
   },
   {
@@ -1545,11 +1545,11 @@
     "ekologi": "Växer med gran i örtrik äldre barrskog. Något kalkgynnad. ",
     "RankRed": 1,
     "Giftsvamp": null,
-    "förekomst_skog_ålder": 4,
+    "förekomst_skog_ålder": 3,
     "förekomst_skog": 2,
-    "förekomst_ålder": 2,
+    "förekomst_ålder": 1,
     "förekomst_ung": 0,
-    "förekomst_sum": 4,
+    "förekomst_sum": 3,
     "images": [
       "/images/SvampBilder/RödlistadeSvampar/Ramaria testaceoflava-5754.jpg"
     ]
@@ -1590,11 +1590,11 @@
     "ekologi": "Växer med gran, i granskog på rikare mark, framförallt i kalkbarrskogar, ofta i samma växtmiljö som violgubbe. ",
     "RankRed": 2,
     "Giftsvamp": null,
-    "förekomst_skog_ålder": 4,
+    "förekomst_skog_ålder": 3,
     "förekomst_skog": 2,
-    "förekomst_ålder": 2,
+    "förekomst_ålder": 1,
     "förekomst_ung": 0,
-    "förekomst_sum": 4,
+    "förekomst_sum": 3,
     "images": []
   },
   {
@@ -1633,11 +1633,11 @@
     "ekologi": "Växer med gran i örtrik kalkgranskog, ofta i samma miljöer som t.ex. norna eller bombmurkla. ",
     "RankRed": 3,
     "Giftsvamp": null,
-    "förekomst_skog_ålder": 4,
+    "förekomst_skog_ålder": 3,
     "förekomst_skog": 2,
-    "förekomst_ålder": 2,
+    "förekomst_ålder": 1,
     "förekomst_ung": 0,
-    "förekomst_sum": 4,
+    "förekomst_sum": 3,
     "images": []
   },
   {
@@ -1676,11 +1676,11 @@
     "ekologi": "Växer med gran i örtrik naturskogsartad kalkgranskog. ",
     "RankRed": 3,
     "Giftsvamp": null,
-    "förekomst_skog_ålder": 4,
+    "förekomst_skog_ålder": 3,
     "förekomst_skog": 2,
-    "förekomst_ålder": 2,
+    "förekomst_ålder": 1,
     "förekomst_ung": 0,
-    "förekomst_sum": 4,
+    "förekomst_sum": 3,
     "images": []
   },
   {
@@ -1719,11 +1719,11 @@
     "ekologi": "Växer med barrträd, sannolikt främst med gran i äldre kalk- och örtrik barrblandskog. ",
     "RankRed": 3,
     "Giftsvamp": null,
-    "förekomst_skog_ålder": 4,
+    "förekomst_skog_ålder": 3,
     "förekomst_skog": 2,
-    "förekomst_ålder": 2,
+    "förekomst_ålder": 1,
     "förekomst_ung": 0,
-    "förekomst_sum": 4,
+    "förekomst_sum": 3,
     "images": [
       "/images/SvampBilder/RödlistadeSvampar/Hygrophorus hyacinthinus-823.jpg"
     ]
@@ -1764,11 +1764,11 @@
     "ekologi": "Växer med gran i ängsgranskog på kalkrik mark. ",
     "RankRed": 3,
     "Giftsvamp": null,
-    "förekomst_skog_ålder": 5,
+    "förekomst_skog_ålder": 3,
     "förekomst_skog": 2,
-    "förekomst_ålder": 3,
+    "förekomst_ålder": 1,
     "förekomst_ung": 0,
-    "förekomst_sum": 5,
+    "förekomst_sum": 3,
     "images": []
   },
   {
@@ -1807,11 +1807,11 @@
     "ekologi": "Växer med tall, ibland även med gran. Växer huvudsakligen på kalkrik mark i barrskog, framförallt mossig gammal granskog med inslag av tall.",
     "RankRed": 2,
     "Giftsvamp": null,
-    "förekomst_skog_ålder": 4,
+    "förekomst_skog_ålder": 2,
     "förekomst_skog": 1,
-    "förekomst_ålder": 3,
+    "förekomst_ålder": 1,
     "förekomst_ung": 0,
-    "förekomst_sum": 4,
+    "förekomst_sum": 2,
     "images": [
       "/images/SvampBilder/RödlistadeSvampar/Catathelasma imperiale-275.jpg"
     ]
@@ -1852,11 +1852,11 @@
     "ekologi": "Växer med tall och/eller gran i luckig barrskog på kalkrik mark. ",
     "RankRed": 3,
     "Giftsvamp": null,
-    "förekomst_skog_ålder": 3,
+    "förekomst_skog_ålder": 2,
     "förekomst_skog": 1,
-    "förekomst_ålder": 2,
+    "förekomst_ålder": 1,
     "förekomst_ung": 0,
-    "förekomst_sum": 3,
+    "förekomst_sum": 2,
     "images": []
   },
   {
@@ -1895,11 +1895,11 @@
     "ekologi": "Växer med lövträd i lövskog och parker, sällsynt även i barrskog.",
     "RankRed": 3,
     "Giftsvamp": null,
-    "förekomst_skog_ålder": 4,
+    "förekomst_skog_ålder": 3,
     "förekomst_skog": 2,
-    "förekomst_ålder": 2,
+    "förekomst_ålder": 1,
     "förekomst_ung": 0,
-    "förekomst_sum": 4,
+    "förekomst_sum": 3,
     "images": []
   },
   {
@@ -1938,11 +1938,11 @@
     "ekologi": "Växer med gran i äldre kalkbarrskog. ",
     "RankRed": 3,
     "Giftsvamp": null,
-    "förekomst_skog_ålder": 3,
+    "förekomst_skog_ålder": 2,
     "förekomst_skog": 1,
-    "förekomst_ålder": 2,
+    "förekomst_ålder": 1,
     "förekomst_ung": 0,
-    "förekomst_sum": 3,
+    "förekomst_sum": 2,
     "images": [
       "/images/SvampBilder/RödlistadeSvampar/Hydnellum cumulatum-239737.jpg"
     ]
@@ -1983,11 +1983,11 @@
     "ekologi": "Växer med tall och gran i äldre ängsgranskog på kalkrik mark, mer sällan i ren kalktallskog.",
     "RankRed": 1,
     "Giftsvamp": null,
-    "förekomst_skog_ålder": 4,
+    "förekomst_skog_ålder": 3,
     "förekomst_skog": 2,
-    "förekomst_ålder": 2,
+    "förekomst_ålder": 1,
     "förekomst_ung": 0,
-    "förekomst_sum": 4,
+    "förekomst_sum": 3,
     "images": [
       "/images/SvampBilder/RödlistadeSvampar/Cortinarius cupreorufus-445.jpg"
     ]
@@ -2028,11 +2028,11 @@
     "ekologi": "Växer med gran i örtrik äldre granskog på kalkrik mark.",
     "RankRed": 1,
     "Giftsvamp": null,
-    "förekomst_skog_ålder": 4,
+    "förekomst_skog_ålder": 3,
     "förekomst_skog": 2,
-    "förekomst_ålder": 2,
+    "förekomst_ålder": 1,
     "förekomst_ung": 0,
-    "förekomst_sum": 4,
+    "förekomst_sum": 3,
     "images": []
   },
   {
@@ -2071,11 +2071,11 @@
     "ekologi": "Växer med gran i rikare men ej nödvändigtvis kalkrika barrblandskogar.",
     "RankRed": 3,
     "Giftsvamp": null,
-    "förekomst_skog_ålder": 4,
+    "förekomst_skog_ålder": 3,
     "förekomst_skog": 2,
-    "förekomst_ålder": 2,
+    "förekomst_ålder": 1,
     "förekomst_ung": 0,
-    "förekomst_sum": 4,
+    "förekomst_sum": 3,
     "images": []
   },
   {
@@ -2114,11 +2114,11 @@
     "ekologi": "Växer med gran i barrskog, helst ängsgranskog på kalk- och näringsrik mark. ",
     "RankRed": 1,
     "Giftsvamp": null,
-    "förekomst_skog_ålder": 4,
+    "förekomst_skog_ålder": 3,
     "förekomst_skog": 2,
-    "förekomst_ålder": 2,
+    "förekomst_ålder": 1,
     "förekomst_ung": 0,
-    "förekomst_sum": 4,
+    "förekomst_sum": 3,
     "images": []
   },
   {
@@ -2157,11 +2157,11 @@
     "ekologi": "Växer med gran och tall samt med hassel i hässlen, sällsynt troligen även med björk. Påträffas i ängsgranskog och kalktallskog, men också i betade lågskogar av hassel (hässlen). ",
     "RankRed": 2,
     "Giftsvamp": null,
-    "förekomst_skog_ålder": 4,
+    "förekomst_skog_ålder": 3,
     "förekomst_skog": 2,
-    "förekomst_ålder": 2,
+    "förekomst_ålder": 1,
     "förekomst_ung": 0,
-    "förekomst_sum": 4,
+    "förekomst_sum": 3,
     "images": [
       "/images/SvampBilder/RödlistadeSvampar/Cortinarius elegantior-3611.jpg"
     ]
@@ -2202,11 +2202,11 @@
     "ekologi": "Växer med gran i äldre örtrik skog på kalkrik mark.",
     "RankRed": 3,
     "Giftsvamp": null,
-    "förekomst_skog_ålder": "x2",
+    "förekomst_skog_ålder": "x1",
     "förekomst_skog": "x",
-    "förekomst_ålder": 2,
+    "förekomst_ålder": 1,
     "förekomst_ung": 0,
-    "förekomst_sum": "x2",
+    "förekomst_sum": "x1",
     "images": [
       "/images/SvampBilder/RödlistadeSvampar/Ramaria fennica-256840.jpg"
     ]
@@ -2247,11 +2247,11 @@
     "ekologi": "Växer med gran i örtrik äldre barrskog, ofta på kalkrik mark. ",
     "RankRed": 2,
     "Giftsvamp": null,
-    "förekomst_skog_ålder": 4,
+    "förekomst_skog_ålder": 3,
     "förekomst_skog": 2,
-    "förekomst_ålder": 2,
+    "förekomst_ålder": 1,
     "förekomst_ung": 0,
-    "förekomst_sum": 4,
+    "förekomst_sum": 3,
     "images": []
   },
   {
@@ -2290,11 +2290,11 @@
     "ekologi": "Växer med gran i kalkbarrskog.",
     "RankRed": 3,
     "Giftsvamp": null,
-    "förekomst_skog_ålder": 4,
+    "förekomst_skog_ålder": 3,
     "förekomst_skog": 2,
-    "förekomst_ålder": 2,
+    "förekomst_ålder": 1,
     "förekomst_ung": 0,
-    "förekomst_sum": 4,
+    "förekomst_sum": 3,
     "images": []
   },
   {
@@ -2333,11 +2333,11 @@
     "ekologi": "Växer med ek och gran i löv- och barrskog i södra och mellersta Sverige.",
     "RankRed": 1,
     "Giftsvamp": null,
-    "förekomst_skog_ålder": 5,
+    "förekomst_skog_ålder": 2,
     "förekomst_skog": 1,
-    "förekomst_ålder": 4,
+    "förekomst_ålder": 1,
     "förekomst_ung": 0,
-    "förekomst_sum": 5,
+    "förekomst_sum": 2,
     "images": [
       "/images/SvampBilder/Matsvampar/Lactarius volemus-4.jpg",
       "/images/SvampBilder/Matsvampar/Lactarius volemus-1.jpg",
@@ -2381,11 +2381,11 @@
     "ekologi": "Växer med gran, ev. även med tall i äldre barrskog, helst ängsgranskog, på kalkrik mark. ",
     "RankRed": 3,
     "Giftsvamp": null,
-    "förekomst_skog_ålder": 4,
+    "förekomst_skog_ålder": 3,
     "förekomst_skog": 2,
-    "förekomst_ålder": 2,
+    "förekomst_ålder": 1,
     "förekomst_ung": 0,
-    "förekomst_sum": 4,
+    "förekomst_sum": 3,
     "images": [
       "/images/SvampBilder/RödlistadeSvampar/Hygrophorus subviscifer-831.jpg"
     ]
@@ -2426,11 +2426,11 @@
     "ekologi": "Växer med gran, i gran- och blandskog på fuktig, rikare mark. ",
     "RankRed": 3,
     "Giftsvamp": null,
-    "förekomst_skog_ålder": 4,
+    "förekomst_skog_ålder": 3,
     "förekomst_skog": 2,
-    "förekomst_ålder": 2,
+    "förekomst_ålder": 1,
     "förekomst_ung": 0,
-    "förekomst_sum": 4,
+    "förekomst_sum": 3,
     "images": [
       "/images/SvampBilder/RödlistadeSvampar/Lactarius olivinus-4749.jpg"
     ]
@@ -2471,11 +2471,11 @@
     "ekologi": "Bildar mykorrhiza med gran och tall. Påträffas i barrskog, helst ängsgranskog, men även i ängsbokskog på näringsrik och kalkhaltig mark. ",
     "RankRed": 1,
     "Giftsvamp": null,
-    "förekomst_skog_ålder": 5,
+    "förekomst_skog_ålder": 3,
     "förekomst_skog": 2,
-    "förekomst_ålder": 3,
+    "förekomst_ålder": 1,
     "förekomst_ung": 0,
-    "förekomst_sum": 5,
+    "förekomst_sum": 3,
     "images": []
   },
   {
@@ -2514,11 +2514,11 @@
     "ekologi": "Växer med gran och tall, huvudsakligen i olika typer av äldre barrskog. ",
     "RankRed": 1,
     "Giftsvamp": null,
-    "förekomst_skog_ålder": 5,
+    "förekomst_skog_ålder": 3,
     "förekomst_skog": 2,
-    "förekomst_ålder": 3,
+    "förekomst_ålder": 1,
     "förekomst_ung": 0,
-    "förekomst_sum": 5,
+    "förekomst_sum": 3,
     "images": [
       "/images/SvampBilder/RödlistadeSvampar/Hydnellum aurantiacum-4361.jpg"
     ]
@@ -2559,11 +2559,11 @@
     "ekologi": "Växer med gran och tall i ängsgranskog och tallskog på kalkrik mark. ",
     "RankRed": 3,
     "Giftsvamp": null,
-    "förekomst_skog_ålder": 4,
+    "förekomst_skog_ålder": 3,
     "förekomst_skog": 2,
-    "förekomst_ålder": 2,
+    "förekomst_ålder": 1,
     "förekomst_ung": 0,
-    "förekomst_sum": 4,
+    "förekomst_sum": 3,
     "images": []
   },
   {
@@ -2602,11 +2602,11 @@
     "ekologi": "Växer med tall, gran och bok i ängsgranskog, kalktallskog och i ängsbokskog på rikare mark.",
     "RankRed": 2,
     "Giftsvamp": null,
-    "förekomst_skog_ålder": 4,
+    "förekomst_skog_ålder": 3,
     "förekomst_skog": 2,
-    "förekomst_ålder": 2,
+    "förekomst_ålder": 1,
     "förekomst_ung": 0,
-    "förekomst_sum": 4,
+    "förekomst_sum": 3,
     "images": []
   },
   {
@@ -2645,11 +2645,11 @@
     "ekologi": "Växer med gran i äldre ängsgranskog på näringsrik men ej nödvändigtvis kalkhaltig mark. ",
     "RankRed": 2,
     "Giftsvamp": null,
-    "förekomst_skog_ålder": 4,
+    "förekomst_skog_ålder": 3,
     "förekomst_skog": 2,
-    "förekomst_ålder": 2,
+    "förekomst_ålder": 1,
     "förekomst_ung": 0,
-    "förekomst_sum": 4,
+    "förekomst_sum": 3,
     "images": [
       "/images/SvampBilder/RödlistadeSvampar/Cortinarius cumatilis-1980.jpg"
     ]
@@ -2690,11 +2690,11 @@
     "ekologi": "Växer med gran. Växer i äldre ängsgranskog på kalkrik mark, ofta i anslutning till gamla myrstackar. ",
     "RankRed": 2,
     "Giftsvamp": null,
-    "förekomst_skog_ålder": 4,
+    "förekomst_skog_ålder": 3,
     "förekomst_skog": 2,
-    "förekomst_ålder": 2,
+    "förekomst_ålder": 1,
     "förekomst_ung": 0,
-    "förekomst_sum": 4,
+    "förekomst_sum": 3,
     "images": [
       "/images/SvampBilder/RödlistadeSvampar/Cortinarius aureopulverulentus-427.jpg"
     ]
@@ -2735,11 +2735,11 @@
     "ekologi": "Växer med gran och sällsynt tall i äldre barrskog, helst ängsgranskog på rikare mark, grönsten eller liknande. ",
     "RankRed": 2,
     "Giftsvamp": null,
-    "förekomst_skog_ålder": 4,
+    "förekomst_skog_ålder": 3,
     "förekomst_skog": 2,
-    "förekomst_ålder": 2,
+    "förekomst_ålder": 1,
     "förekomst_ung": 0,
-    "förekomst_sum": 4,
+    "förekomst_sum": 3,
     "images": [
       "/images/SvampBilder/RödlistadeSvampar/Hydnellum mirabile-789.jpg"
     ]
@@ -2780,11 +2780,11 @@
     "ekologi": "Växer med gran i kalkrik barrskog. ",
     "RankRed": 3,
     "Giftsvamp": null,
-    "förekomst_skog_ålder": 4,
+    "förekomst_skog_ålder": 3,
     "förekomst_skog": 2,
-    "förekomst_ålder": 2,
+    "förekomst_ålder": 1,
     "förekomst_ung": 0,
-    "förekomst_sum": 4,
+    "förekomst_sum": 3,
     "images": []
   },
   {
@@ -2823,11 +2823,11 @@
     "ekologi": "Växer med gran, i äldre ängsgranskog på kalkrik och näringsrik, något fuktig mark.",
     "RankRed": 3,
     "Giftsvamp": null,
-    "förekomst_skog_ålder": 4,
+    "förekomst_skog_ålder": 3,
     "förekomst_skog": 2,
-    "förekomst_ålder": 2,
+    "förekomst_ålder": 1,
     "förekomst_ung": 0,
-    "förekomst_sum": 4,
+    "förekomst_sum": 3,
     "images": []
   },
   {
@@ -2866,11 +2866,11 @@
     "ekologi": "Växer med gran, på näringrik eller kalkrik mark, ofta i skog med hög bonitet och i äldre skogsbestånd. ",
     "RankRed": 3,
     "Giftsvamp": null,
-    "förekomst_skog_ålder": 4,
+    "förekomst_skog_ålder": 3,
     "förekomst_skog": 2,
-    "förekomst_ålder": 2,
+    "förekomst_ålder": 1,
     "förekomst_ung": 0,
-    "förekomst_sum": 4,
+    "förekomst_sum": 3,
     "images": []
   },
   {
@@ -2909,11 +2909,11 @@
     "ekologi": "Växer på fuktiga och blöta platser bland mossa, ofta i gran- och björkskogar längs kanter av bäckar och kärr. Vanligtvis på kalkrik mark.",
     "RankRed": 1,
     "Giftsvamp": null,
-    "förekomst_skog_ålder": 6,
+    "förekomst_skog_ålder": 3,
     "förekomst_skog": 2,
-    "förekomst_ålder": 4,
+    "förekomst_ålder": 1,
     "förekomst_ung": 0,
-    "förekomst_sum": 6,
+    "förekomst_sum": 3,
     "images": [
       "/images/SvampBilder/Matsvampar/Craterellus lutescens-1.jpg",
       "/images/SvampBilder/Matsvampar/Craterellus lutescens-3.jpg",
@@ -2958,11 +2958,11 @@
     "ekologi": "Växer med gran i barr- och blandskog, helst ängsgranskog. ",
     "RankRed": 2,
     "Giftsvamp": null,
-    "förekomst_skog_ålder": 4,
+    "förekomst_skog_ålder": 3,
     "förekomst_skog": 2,
-    "förekomst_ålder": 2,
+    "förekomst_ålder": 1,
     "förekomst_ung": 0,
-    "förekomst_sum": 4,
+    "förekomst_sum": 3,
     "images": []
   },
   {
@@ -3001,11 +3001,11 @@
     "ekologi": "Växer med gran, i örtrik kalkgranskog eller annan bördig granskog av lågörtstyp. ",
     "RankRed": 3,
     "Giftsvamp": null,
-    "förekomst_skog_ålder": 4,
+    "förekomst_skog_ålder": 3,
     "förekomst_skog": 2,
-    "förekomst_ålder": 2,
+    "förekomst_ålder": 1,
     "förekomst_ung": 0,
-    "förekomst_sum": 4,
+    "förekomst_sum": 3,
     "images": []
   },
   {
@@ -3044,11 +3044,11 @@
     "ekologi": "Lavtallskog, lingontallskog och blåbärsgranskog. Med tall och gran.",
     "RankRed": 1,
     "Giftsvamp": null,
-    "förekomst_skog_ålder": 6,
+    "förekomst_skog_ålder": 3,
     "förekomst_skog": 2,
-    "förekomst_ålder": 4,
+    "förekomst_ålder": 1,
     "förekomst_ung": 0,
-    "förekomst_sum": 6,
+    "förekomst_sum": 3,
     "images": []
   },
   {
@@ -3087,11 +3087,11 @@
     "ekologi": "Växer med gran, möjligen även med tall. Påträffas i äldre barrskog, bl.a. ängsgranskog på torr till frisk kalkrik mark. ",
     "RankRed": 3,
     "Giftsvamp": null,
-    "förekomst_skog_ålder": 4,
+    "förekomst_skog_ålder": 3,
     "förekomst_skog": 2,
-    "förekomst_ålder": 2,
+    "förekomst_ålder": 1,
     "förekomst_ung": "x",
-    "förekomst_sum": 4,
+    "förekomst_sum": 3,
     "images": [
       "/images/SvampBilder/RödlistadeSvampar/Cortinarius fuscoperonatus-451.jpg"
     ]
@@ -3132,11 +3132,11 @@
     "ekologi": "Växer med löv- och barrträd. ",
     "RankRed": 3,
     "Giftsvamp": null,
-    "förekomst_skog_ålder": 3,
+    "förekomst_skog_ålder": 2,
     "förekomst_skog": 1,
-    "förekomst_ålder": 2,
+    "förekomst_ålder": 1,
     "förekomst_ung": 0,
-    "förekomst_sum": 3,
+    "förekomst_sum": 2,
     "images": []
   },
   {
@@ -3175,11 +3175,11 @@
     "ekologi": "Växer med gran, eventuellt även med tall, i ängsgranskog och barrblandskog på kalkrik mark. Växer huvudsakligen i äldre skogsbestånd bland örter eller i djup mossa. ",
     "RankRed": 3,
     "Giftsvamp": null,
-    "förekomst_skog_ålder": 4,
+    "förekomst_skog_ålder": 3,
     "förekomst_skog": 2,
-    "förekomst_ålder": 2,
+    "förekomst_ålder": 1,
     "förekomst_ung": 0,
-    "förekomst_sum": 4,
+    "förekomst_sum": 3,
     "images": []
   },
   {
@@ -3218,11 +3218,11 @@
     "ekologi": "Växer med tall och gran i kalktallskog och ängsgranskog, främst i äldre kalkbarrskog.",
     "RankRed": 3,
     "Giftsvamp": null,
-    "förekomst_skog_ålder": 4,
+    "förekomst_skog_ålder": 3,
     "förekomst_skog": 2,
-    "förekomst_ålder": 2,
+    "förekomst_ålder": 1,
     "förekomst_ung": 0,
-    "förekomst_sum": 4,
+    "förekomst_sum": 3,
     "images": []
   },
   {
@@ -3261,11 +3261,11 @@
     "ekologi": "Växer i barrskog, sällan i bok-, ek- eller fjällbjörkskog på näringsrik mark. ",
     "RankRed": 1,
     "Giftsvamp": null,
-    "förekomst_skog_ålder": 5,
+    "förekomst_skog_ålder": 3,
     "förekomst_skog": 2,
-    "förekomst_ålder": 3,
+    "förekomst_ålder": 1,
     "förekomst_ung": 0,
-    "förekomst_sum": 5,
+    "förekomst_sum": 3,
     "images": []
   },
   {
@@ -3304,11 +3304,11 @@
     "ekologi": "Växer med gran, möjligen även med björk och hassel, på kalkrik mark i örtrik äldre granskog och kalkbarrskog. ",
     "RankRed": 2,
     "Giftsvamp": null,
-    "förekomst_skog_ålder": 4,
+    "förekomst_skog_ålder": 3,
     "förekomst_skog": 2,
-    "förekomst_ålder": 2,
+    "förekomst_ålder": 1,
     "förekomst_ung": 0,
-    "förekomst_sum": 4,
+    "förekomst_sum": 3,
     "images": [
       "/images/SvampBilder/RödlistadeSvampar/Tricholoma atrosquamosum-1594.jpg"
     ]
@@ -3349,11 +3349,11 @@
     "ekologi": "Växer med gran och tall i ängsgranskog och barrblandskog på kalkrik mark.",
     "RankRed": 2,
     "Giftsvamp": null,
-    "förekomst_skog_ålder": 4,
+    "förekomst_skog_ålder": 3,
     "förekomst_skog": 2,
-    "förekomst_ålder": 2,
+    "förekomst_ålder": 1,
     "förekomst_ung": 0,
-    "förekomst_sum": 4,
+    "förekomst_sum": 3,
     "images": [
       "/images/SvampBilder/Giftsvampar/Cortinarius atrovirens-258-.jpg",
       "/images/SvampBilder/Giftsvampar/Cortinarius atrovirens-176-424.jpg",
@@ -3396,11 +3396,11 @@
     "ekologi": "Granskog. Fuktig, ofta kalkrik mark. Med gran.",
     "RankRed": 1,
     "Giftsvamp": null,
-    "förekomst_skog_ålder": 6,
+    "förekomst_skog_ålder": 3,
     "förekomst_skog": 2,
-    "förekomst_ålder": 4,
+    "förekomst_ålder": 1,
     "förekomst_ung": 0,
-    "förekomst_sum": 6,
+    "förekomst_sum": 3,
     "images": []
   },
   {
@@ -3439,11 +3439,11 @@
     "ekologi": "Växer med dels med gran i kalkbarrskog, sällsynt även med ek, hassel och bok i kalkrik ädellövskog. ",
     "RankRed": 2,
     "Giftsvamp": null,
-    "förekomst_skog_ålder": 4,
+    "förekomst_skog_ålder": 3,
     "förekomst_skog": 2,
-    "förekomst_ålder": 2,
+    "förekomst_ålder": 1,
     "förekomst_ung": 0,
-    "förekomst_sum": 4,
+    "förekomst_sum": 3,
     "images": []
   },
   {
@@ -3482,11 +3482,11 @@
     "ekologi": "Växer med gran, i granskog på rikare mark. ",
     "RankRed": 2,
     "Giftsvamp": null,
-    "förekomst_skog_ålder": 4,
+    "förekomst_skog_ålder": 3,
     "förekomst_skog": 2,
-    "förekomst_ålder": 2,
+    "förekomst_ålder": 1,
     "förekomst_ung": 0,
-    "förekomst_sum": 4,
+    "förekomst_sum": 3,
     "images": [
       "/images/SvampBilder/RödlistadeSvampar/Ramaria karstenii-256335.jpg"
     ]
@@ -3527,11 +3527,11 @@
     "ekologi": "Bildar mykorrhiza med bok och ek på kalkrik mark i huvudsakligen äldre skog men även med gran i örtrik äldre barrskog.",
     "RankRed": 2,
     "Giftsvamp": null,
-    "förekomst_skog_ålder": 5,
+    "förekomst_skog_ålder": 3,
     "förekomst_skog": 2,
-    "förekomst_ålder": 3,
+    "förekomst_ålder": 1,
     "förekomst_ung": 0,
-    "förekomst_sum": 5,
+    "förekomst_sum": 3,
     "images": []
   },
   {
@@ -3570,11 +3570,11 @@
     "ekologi": "Växer med barrträd i äldre kalkbarrskog.",
     "RankRed": 2,
     "Giftsvamp": null,
-    "förekomst_skog_ålder": 4,
+    "förekomst_skog_ålder": 3,
     "förekomst_skog": 2,
-    "förekomst_ålder": 2,
+    "förekomst_ålder": 1,
     "förekomst_ung": 0,
-    "förekomst_sum": 4,
+    "förekomst_sum": 3,
     "images": []
   },
   {
@@ -3613,11 +3613,11 @@
     "ekologi": "Växer med gran och tall i kalkbarrskog.",
     "RankRed": 2,
     "Giftsvamp": null,
-    "förekomst_skog_ålder": 4,
+    "förekomst_skog_ålder": 3,
     "förekomst_skog": 2,
-    "förekomst_ålder": 2,
+    "förekomst_ålder": 1,
     "förekomst_ung": 0,
-    "förekomst_sum": 4,
+    "förekomst_sum": 3,
     "images": [
       "/images/SvampBilder/RödlistadeSvampar/Cortinarius violaceomaculatus-3767.jpg"
     ]
@@ -3658,11 +3658,11 @@
     "ekologi": "Växer med gran, tall, bok och eventuellt även med ek, huvudsakligen i granskog men även bokskog på kalkrik mark. ",
     "RankRed": 1,
     "Giftsvamp": null,
-    "förekomst_skog_ålder": 5,
+    "förekomst_skog_ålder": 3,
     "förekomst_skog": 2,
-    "förekomst_ålder": 3,
+    "förekomst_ålder": 1,
     "förekomst_ung": 0,
-    "förekomst_sum": 5,
+    "förekomst_sum": 3,
     "images": [
       "/images/SvampBilder/Matsvampar/Gomphus clavatus-3.jpg",
       "/images/SvampBilder/Matsvampar/Gomphus clavatus-2.jpg",
@@ -3708,11 +3708,11 @@
     "ekologi": "Växer med gran i äldre ängsgranskog, ofta i sluttningar på fuktig mark. ",
     "RankRed": 3,
     "Giftsvamp": null,
-    "förekomst_skog_ålder": 4,
+    "förekomst_skog_ålder": 3,
     "förekomst_skog": 2,
-    "förekomst_ålder": 2,
+    "förekomst_ålder": 1,
     "förekomst_ung": 0,
-    "förekomst_sum": 4,
+    "förekomst_sum": 3,
     "images": [
       "/images/SvampBilder/RödlistadeSvampar/Cortinarius agathosmus-3528.jpg"
     ]
@@ -3753,11 +3753,11 @@
     "ekologi": "Barr- och lövskog. Näringsrik mark. Med barr- och lövträd.",
     "RankRed": 1,
     "Giftsvamp": null,
-    "förekomst_skog_ålder": 6,
+    "förekomst_skog_ålder": 3,
     "förekomst_skog": 2,
-    "förekomst_ålder": 4,
+    "förekomst_ålder": 1,
     "förekomst_ung": 0,
-    "förekomst_sum": 6,
+    "förekomst_sum": 3,
     "images": []
   },
   {
@@ -3796,11 +3796,11 @@
     "ekologi": "Växer mad gran i kalkrik frisk-fuktig kalkgranskog.- Även med bok i bokskog på kalkrik mark.",
     "RankRed": 3,
     "Giftsvamp": null,
-    "förekomst_skog_ålder": 4,
+    "förekomst_skog_ålder": 3,
     "förekomst_skog": 2,
-    "förekomst_ålder": 2,
+    "förekomst_ålder": 1,
     "förekomst_ung": 0,
-    "förekomst_sum": 4,
+    "förekomst_sum": 3,
     "images": []
   },
   {
@@ -3839,11 +3839,11 @@
     "ekologi": "Bildar mykorrhiza med gran i ängsgranskog på kalkrik mark.",
     "RankRed": 1,
     "Giftsvamp": "x",
-    "förekomst_skog_ålder": 5,
+    "förekomst_skog_ålder": 3,
     "förekomst_skog": 2,
-    "förekomst_ålder": 3,
+    "förekomst_ålder": 1,
     "förekomst_ung": 0,
-    "förekomst_sum": 5,
+    "förekomst_sum": 3,
     "images": [
       "/images/SvampBilder/Giftsvampar/Cortinarius meinhardii-187-473.jpg",
       "/images/SvampBilder/Giftsvampar/Cortinarius meinhardii-131-473.jpg",

@@ -689,7 +689,14 @@
     "sample_plot_count": 1,
     "sample_env_count": 5,
     "Svamp-grupp-släkte": "sopp",
-    "images": []
+    "images": [
+      "/images/SvampBilder/Matsvampar/Boletus edulis-1.jpg",
+      "/images/SvampBilder/Matsvampar/Boletus edulis-2.jpg",
+      "/images/SvampBilder/Matsvampar/Boletus edulis-3.jpg",
+      "/images/SvampBilder/Matsvampar/Boletus edulis-6.jpg",
+      "/images/SvampBilder/Matsvampar/Boletus edulis-4.jpg",
+      "/images/SvampBilder/Matsvampar/Boletus edulis-5.jpg"
+    ]
   },
   {
     "SpeciesCode": "SI18-586",
@@ -1126,7 +1133,11 @@
     "sample_plot_count": 1,
     "sample_env_count": 5,
     "Svamp-grupp-släkte": "sopp",
-    "images": []
+    "images": [
+      "/images/SvampBilder/Matsvampar/Xerocomellus porosporus-1.jpg",
+      "/images/SvampBilder/Matsvampar/Xerocomellus porosporus-3.jpg",
+      "/images/SvampBilder/Matsvampar/Xerocomellus porosporus-2.jpg"
+    ]
   },
   {
     "SpeciesCode": "SI21-2825",
@@ -1261,6 +1272,10 @@
     "sample_plot_count": 1,
     "sample_env_count": 5,
     "Svamp-grupp-släkte": "sopp",
-    "images": []
+    "images": [
+      "/images/SvampBilder/Matsvampar/Xerocomellus porosporus-1.jpg",
+      "/images/SvampBilder/Matsvampar/Xerocomellus porosporus-3.jpg",
+      "/images/SvampBilder/Matsvampar/Xerocomellus porosporus-2.jpg"
+    ]
   }
 ]

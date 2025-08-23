@@ -35,11 +35,11 @@
     "ekologi": "Växer med bok och ek i ädellövskog på kalkrik mark. ",
     "RankRed": 3,
     "Giftsvamp": null,
-    "förekomst_skog_ålder": 4,
+    "förekomst_skog_ålder": 3,
     "förekomst_skog": 2,
-    "förekomst_ålder": 2,
+    "förekomst_ålder": 1,
     "förekomst_ung": 0,
-    "förekomst_sum": 4,
+    "förekomst_sum": 3,
     "images": []
   },
   {
@@ -78,11 +78,11 @@
     "ekologi": "Växer med ek i ekdominerad ädellövskog på kalkrik mark.",
     "RankRed": 3,
     "Giftsvamp": null,
-    "förekomst_skog_ålder": 4,
+    "förekomst_skog_ålder": 3,
     "förekomst_skog": 2,
-    "förekomst_ålder": 2,
+    "förekomst_ålder": 1,
     "förekomst_ung": 0,
-    "förekomst_sum": 4,
+    "förekomst_sum": 3,
     "images": []
   },
   {
@@ -121,11 +121,11 @@
     "ekologi": "Växer med bok, ek och asp i lövskog, helst bok- och ekdominerade bestånd. Enstaka fynd har gjorts även i barrskog med lövinslag.",
     "RankRed": 3,
     "Giftsvamp": null,
-    "förekomst_skog_ålder": 4,
+    "förekomst_skog_ålder": 3,
     "förekomst_skog": 2,
-    "förekomst_ålder": 2,
+    "förekomst_ålder": 1,
     "förekomst_ung": 0,
-    "förekomst_sum": 4,
+    "förekomst_sum": 3,
     "images": [
       "/images/SvampBilder/RödlistadeSvampar/Phellodon confluens-1206.jpg"
     ]
@@ -166,11 +166,11 @@
     "ekologi": "Växer med bok i ängsbokskog på kalk- och mineralrik jord.",
     "RankRed": 3,
     "Giftsvamp": null,
-    "förekomst_skog_ålder": 4,
+    "förekomst_skog_ålder": 3,
     "förekomst_skog": 2,
-    "förekomst_ålder": 2,
+    "förekomst_ålder": 1,
     "förekomst_ung": 0,
-    "förekomst_sum": 4,
+    "förekomst_sum": 3,
     "images": []
   },
   {
@@ -209,11 +209,11 @@
     "ekologi": "Växer med bok i äldre ängsbokskog på näringsrik och kalkrik mark. ",
     "RankRed": 3,
     "Giftsvamp": null,
-    "förekomst_skog_ålder": 4,
+    "förekomst_skog_ålder": 3,
     "förekomst_skog": 2,
-    "förekomst_ålder": 2,
+    "förekomst_ålder": 1,
     "förekomst_ung": 0,
-    "förekomst_sum": 4,
+    "förekomst_sum": 3,
     "images": []
   },
   {
@@ -252,11 +252,11 @@
     "ekologi": "Växer med bok och ek, i mer eller mindre slutna skogar på kalkjord. ",
     "RankRed": 3,
     "Giftsvamp": null,
-    "förekomst_skog_ålder": 4,
+    "förekomst_skog_ålder": 3,
     "förekomst_skog": 2,
-    "förekomst_ålder": 2,
+    "förekomst_ålder": 1,
     "förekomst_ung": 0,
-    "förekomst_sum": 4,
+    "förekomst_sum": 3,
     "images": []
   },
   {
@@ -295,11 +295,11 @@
     "ekologi": "Bildar mykorrhiza med tall och gran i barrskog, framför allt sandtallskog men även i annan näringsfattig barrskog. ",
     "RankRed": 2,
     "Giftsvamp": null,
-    "förekomst_skog_ålder": 4,
+    "förekomst_skog_ålder": 3,
     "förekomst_skog": 2,
-    "förekomst_ålder": 2,
+    "förekomst_ålder": 1,
     "förekomst_ung": 0,
-    "förekomst_sum": 4,
+    "förekomst_sum": 3,
     "images": []
   }
 ]

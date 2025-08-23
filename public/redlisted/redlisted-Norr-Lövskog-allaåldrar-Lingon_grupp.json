@@ -35,11 +35,11 @@
     "ekologi": "Växer med tall, ev också krypvide. Främst på kustnära sanddyner med lågt pH, ofta utlakade och med kråkbär, ärttryffel etc. ",
     "RankRed": 3,
     "Giftsvamp": null,
-    "förekomst_skog_ålder": 6,
+    "förekomst_skog_ålder": 3,
     "förekomst_skog": 2,
-    "förekomst_ålder": 4,
+    "förekomst_ålder": 1,
     "förekomst_ung": 0,
-    "förekomst_sum": 6,
+    "förekomst_sum": 3,
     "images": []
   }
 ]

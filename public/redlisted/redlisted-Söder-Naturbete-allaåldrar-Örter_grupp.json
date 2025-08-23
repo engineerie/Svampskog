@@ -35,11 +35,11 @@
     "ekologi": "Växer med ek på lerig kalkrik mark, i öppna solvarma lägen i hagmarker, lövängar och parker. ",
     "RankRed": 3,
     "Giftsvamp": null,
-    "förekomst_skog_ålder": 3,
+    "förekomst_skog_ålder": 2,
     "förekomst_skog": 1,
-    "förekomst_ålder": 2,
+    "förekomst_ålder": 1,
     "förekomst_ung": 0,
-    "förekomst_sum": 3,
+    "förekomst_sum": 2,
     "images": [
       "/images/SvampBilder/RödlistadeSvampar/Amanita lividopallescens-2975.jpg"
     ]
@@ -80,11 +80,11 @@
     "ekologi": "Växer med ek i löväng, hagmark, ljusöppen ekskog och park med ek på kalkrik mark.  ",
     "RankRed": 2,
     "Giftsvamp": null,
-    "förekomst_skog_ålder": 4,
+    "förekomst_skog_ålder": 3,
     "förekomst_skog": 2,
-    "förekomst_ålder": 2,
+    "förekomst_ålder": 1,
     "förekomst_ung": 0,
-    "förekomst_sum": 4,
+    "förekomst_sum": 3,
     "images": []
   },
   {
@@ -123,11 +123,11 @@
     "ekologi": "Växer med ek i ek- och hasselblandskog samt hagmark och löväng på kalkrik mark.",
     "RankRed": 3,
     "Giftsvamp": null,
-    "förekomst_skog_ålder": 3,
+    "förekomst_skog_ålder": 2,
     "förekomst_skog": 1,
-    "förekomst_ålder": 2,
+    "förekomst_ålder": 1,
     "förekomst_ung": 0,
-    "förekomst_sum": 3,
+    "förekomst_sum": 2,
     "images": []
   },
   {
@@ -166,11 +166,11 @@
     "ekologi": "Växer med ek i kalkrika halvöppna gräsmarker och brynrika ek-/hasselskogar och lövängar. ",
     "RankRed": 2,
     "Giftsvamp": "x",
-    "förekomst_skog_ålder": 3,
+    "förekomst_skog_ålder": 2,
     "förekomst_skog": 1,
-    "förekomst_ålder": 2,
+    "förekomst_ålder": 1,
     "förekomst_ung": 0,
-    "förekomst_sum": 3,
+    "förekomst_sum": 2,
     "images": [
       "/images/SvampBilder/Giftsvampar/Rubroboletus satanas-214-161.jpg",
       "/images/SvampBilder/Giftsvampar/Rubroboletus satanas-228-161.jpg",
@@ -218,11 +218,11 @@
     "ekologi": "Växer med äldre ek på kalk- och näringsrik mark i ädellövskog, lövlund, hässlen och hagmark. ",
     "RankRed": 3,
     "Giftsvamp": null,
-    "förekomst_skog_ålder": "x2",
+    "förekomst_skog_ålder": "x1",
     "förekomst_skog": "x",
-    "förekomst_ålder": 2,
+    "förekomst_ålder": 1,
     "förekomst_ung": 0,
-    "förekomst_sum": "x2",
+    "förekomst_sum": "x1",
     "images": [
       "/images/SvampBilder/RödlistadeSvampar/Hygrophorus penarioides-4419.jpg"
     ]
@@ -263,11 +263,11 @@
     "ekologi": "Växer med ek i i kalk- och örtrika, helst betespräglad och luckig ekskog, blandskog, lövlund och hagmark. ",
     "RankRed": 2,
     "Giftsvamp": null,
-    "förekomst_skog_ålder": 3,
+    "förekomst_skog_ålder": 2,
     "förekomst_skog": 1,
-    "förekomst_ålder": 2,
+    "förekomst_ålder": 1,
     "förekomst_ung": 0,
-    "förekomst_sum": 3,
+    "förekomst_sum": 2,
     "images": [
       "/images/SvampBilder/RödlistadeSvampar/Hygrophorus cossus-239233.jpg"
     ]
@@ -308,11 +308,11 @@
     "ekologi": "Bildar mykorrhiza med ek på kalkrik mark i solvarma lägen i glesa ädellövskogar, parker och andra brynmiljöer. ",
     "RankRed": 3,
     "Giftsvamp": "x",
-    "förekomst_skog_ålder": 3,
+    "förekomst_skog_ålder": 2,
     "förekomst_skog": 1,
-    "förekomst_ålder": 2,
+    "förekomst_ålder": 1,
     "förekomst_ung": 0,
-    "förekomst_sum": 3,
+    "förekomst_sum": 2,
     "images": [
       "/images/SvampBilder/Giftsvampar/Rubroboletus legaliae-232-156.jpg",
       "/images/SvampBilder/Giftsvampar/Rubroboletus legaliae-255-.jpg",
@@ -355,11 +355,11 @@
     "ekologi": "Växer med främst hassel, eventuellt även med ek. Växer i gles ädellövskog, hässlen, löväng och hagmark på kalkrik mark på exklusiva lokaler i södra Sveriges kalktrakter. ",
     "RankRed": 3,
     "Giftsvamp": null,
-    "förekomst_skog_ålder": 3,
+    "förekomst_skog_ålder": 2,
     "förekomst_skog": 1,
-    "förekomst_ålder": 2,
+    "förekomst_ålder": 1,
     "förekomst_ung": 0,
-    "förekomst_sum": 3,
+    "förekomst_sum": 2,
     "images": []
   },
   {
@@ -398,11 +398,11 @@
     "ekologi": "Växer med ek på kalkrik mark i ädellövskog, löväng, ekrik hagmark och gammal parkmiljö. ",
     "RankRed": 3,
     "Giftsvamp": null,
-    "förekomst_skog_ålder": 3,
+    "förekomst_skog_ålder": 2,
     "förekomst_skog": 1,
-    "förekomst_ålder": 2,
+    "förekomst_ålder": 1,
     "förekomst_ung": 0,
-    "förekomst_sum": 3,
+    "förekomst_sum": 2,
     "images": []
   },
   {
@@ -441,11 +441,11 @@
     "ekologi": "Växer med ek och hassel, sällsynt även bok och lind. Förekommer på torr, kalkrik mark i ek- och hasselblandskog, hässlen, samt löväng och hagmark.",
     "RankRed": 2,
     "Giftsvamp": null,
-    "förekomst_skog_ålder": 3,
+    "förekomst_skog_ålder": 2,
     "förekomst_skog": 1,
-    "förekomst_ålder": 2,
+    "förekomst_ålder": 1,
     "förekomst_ung": 0,
-    "förekomst_sum": 3,
+    "förekomst_sum": 2,
     "images": []
   },
   {
@@ -484,11 +484,11 @@
     "ekologi": "Växer med ek, i ljusöppen ädellövskog, löväng, hagmark och parkmiljö på kalkstark mark.",
     "RankRed": 3,
     "Giftsvamp": null,
-    "förekomst_skog_ålder": 3,
+    "förekomst_skog_ålder": 2,
     "förekomst_skog": 1,
-    "förekomst_ålder": 2,
+    "förekomst_ålder": 1,
     "förekomst_ung": 0,
-    "förekomst_sum": 3,
+    "förekomst_sum": 2,
     "images": []
   },
   {
@@ -527,11 +527,11 @@
     "ekologi": "Växer med ek  på lerig oftast kalkrik mark i skogsbryn, löväng och beteshage. ",
     "RankRed": 2,
     "Giftsvamp": null,
-    "förekomst_skog_ålder": 3,
+    "förekomst_skog_ålder": 2,
     "förekomst_skog": 1,
-    "förekomst_ålder": 2,
+    "förekomst_ålder": 1,
     "förekomst_ung": 0,
-    "förekomst_sum": 3,
+    "förekomst_sum": 2,
     "images": [
       "/images/SvampBilder/RödlistadeSvampar/Aureoboletus gentilis-1334.jpg"
     ]
@@ -572,11 +572,11 @@
     "ekologi": "Växer med ek i lövskog på rik mark. ",
     "RankRed": 3,
     "Giftsvamp": null,
-    "förekomst_skog_ålder": 3,
+    "förekomst_skog_ålder": 2,
     "förekomst_skog": 1,
-    "förekomst_ålder": 2,
+    "förekomst_ålder": 1,
     "förekomst_ung": 0,
-    "förekomst_sum": 3,
+    "förekomst_sum": 2,
     "images": []
   },
   {
@@ -615,11 +615,11 @@
     "ekologi": "Växer med bok, ek, avenbok och ev. hassel, i ängsbokskog, ek-hasselskog och hässlen med inslag av ek på kalkrik mark. En sällsynt sydlig art, knuten till exklusiva miljöer. ",
     "RankRed": 3,
     "Giftsvamp": null,
-    "förekomst_skog_ålder": 3,
+    "förekomst_skog_ålder": 2,
     "förekomst_skog": 1,
-    "förekomst_ålder": 2,
+    "förekomst_ålder": 1,
     "förekomst_ung": 0,
-    "förekomst_sum": 3,
+    "förekomst_sum": 2,
     "images": []
   },
   {
@@ -658,11 +658,11 @@
     "ekologi": "Bildar mykorrhiza med ek i varma lägen i gles ädellövskog, löväng, hagmark och parkmiljö. ",
     "RankRed": 3,
     "Giftsvamp": "x",
-    "förekomst_skog_ålder": 4,
+    "förekomst_skog_ålder": 2,
     "förekomst_skog": 1,
-    "förekomst_ålder": 3,
+    "förekomst_ålder": 1,
     "förekomst_ung": 0,
-    "förekomst_sum": 4,
+    "förekomst_sum": 2,
     "images": []
   },
   {
@@ -701,11 +701,11 @@
     "ekologi": "Växer med hassel, ek och sällsynt avenbok och lind. Växer i ädellövskog, löväng, hagmark och hässlen på kalkhaltig mark. ",
     "RankRed": 2,
     "Giftsvamp": null,
-    "förekomst_skog_ålder": 3,
+    "förekomst_skog_ålder": 2,
     "förekomst_skog": 1,
-    "förekomst_ålder": 2,
+    "förekomst_ålder": 1,
     "förekomst_ung": 0,
-    "förekomst_sum": 3,
+    "förekomst_sum": 2,
     "images": []
   },
   {
@@ -744,11 +744,11 @@
     "ekologi": "Växer med ek och hassel i luckig ädellövskog och hässlen på kalkrik mark. ",
     "RankRed": 3,
     "Giftsvamp": null,
-    "förekomst_skog_ålder": 3,
+    "förekomst_skog_ålder": 2,
     "förekomst_skog": 1,
-    "förekomst_ålder": 2,
+    "förekomst_ålder": 1,
     "förekomst_ung": 0,
-    "förekomst_sum": 3,
+    "förekomst_sum": 2,
     "images": []
   },
   {
@@ -787,11 +787,11 @@
     "ekologi": "Växer med bok och ek i varma lägen i gles luckig bok- och ekskog samt i hage, löväng och park med gamla träd. Knuten till näringsrik, basisk mark. ",
     "RankRed": 3,
     "Giftsvamp": null,
-    "förekomst_skog_ålder": 3,
+    "förekomst_skog_ålder": 2,
     "förekomst_skog": 1,
-    "förekomst_ålder": 2,
+    "förekomst_ålder": 1,
     "förekomst_ung": 0,
-    "förekomst_sum": 3,
+    "förekomst_sum": 2,
     "images": []
   },
   {
@@ -830,11 +830,11 @@
     "ekologi": "Växer med framförallt ek, lind och bok, kanske även hassel i luckiga, äldre ädellövskogar på kalkrik eller grönstenspåverkad mark.",
     "RankRed": 3,
     "Giftsvamp": null,
-    "förekomst_skog_ålder": 3,
+    "förekomst_skog_ålder": 2,
     "förekomst_skog": 1,
-    "förekomst_ålder": 2,
+    "förekomst_ålder": 1,
     "förekomst_ung": 0,
-    "förekomst_sum": 3,
+    "förekomst_sum": 2,
     "images": []
   },
   {
@@ -873,11 +873,11 @@
     "ekologi": "Växer med ek, hassel, bok och avenbok i ädellövskog, hässlen, hagmark och löväng på kalkrik mark. ",
     "RankRed": 3,
     "Giftsvamp": null,
-    "förekomst_skog_ålder": 3,
+    "förekomst_skog_ålder": 2,
     "förekomst_skog": 1,
-    "förekomst_ålder": 2,
+    "förekomst_ålder": 1,
     "förekomst_ung": 0,
-    "förekomst_sum": 3,
+    "förekomst_sum": 2,
     "images": []
   },
   {
@@ -916,11 +916,11 @@
     "ekologi": "Växer med ek i kalkrik, luckig ädellövskog på kalkrik mark. ",
     "RankRed": 3,
     "Giftsvamp": null,
-    "förekomst_skog_ålder": 3,
+    "förekomst_skog_ålder": 2,
     "förekomst_skog": 1,
-    "förekomst_ålder": 2,
+    "förekomst_ålder": 1,
     "förekomst_ung": 0,
-    "förekomst_sum": 3,
+    "förekomst_sum": 2,
     "images": [
       "/images/SvampBilder/RödlistadeSvampar/Lactarius zonarius-4788.jpg"
     ]

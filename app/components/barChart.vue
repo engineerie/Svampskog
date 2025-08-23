@@ -1,20 +1,19 @@
 <template>
   <div>
-
-    <div class="flex justify-end gap-2 mb-2 mx-2">
+    <!-- Zoom controls only on desktop -->
+    <div v-if="!isMobile" class="flex justify-end gap-2 mb-2 mx-2">
       <UButton @click="zoomOut" icon="i-heroicons-magnifying-glass-minus" color="neutral" variant="ghost" />
       <UButton @click="zoomIn" icon="i-heroicons-magnifying-glass-plus" color="neutral" variant="ghost" />
     </div>
 
-    <!-- Chart Container: we attach a click handler here -->
-    <div
+    <!-- Bar chart on desktop -->
+    <div v-if="!isMobile"
          :class="[
            'w-full overflow-y-auto overflow-x-scroll',
            { 'bar-chart-container': currentZoomIndex === 0 }
          ]"
-         @click="handleChartClick"
-       >      <VisXYContainer :data="updatedChartData" :width="chartWidth" height="200">
-        <!-- Bar Chart -->
+         @click="handleChartClick">
+      <VisXYContainer :data="updatedChartData" :width="chartWidth" height="200">
         <VisStackedBar :data="updatedChartData" :x="xAccessor" :y="yAccessor" :color="barColorAccessor" :barPadding="0.1"/>
         <VisAxis
           :gridLine="false"
@@ -28,18 +27,24 @@
           :tick-format="tickFormat"
         />
         <VisAxis type="y" label="Antal skogar" :gridLine="false" />
-        <!-- Tooltip: followCursor remains true (or default) so that hover works; allowHover not needed -->
         <VisTooltip :triggers="triggers" :followCursor="true" />
-        <!-- Crosshair for better pointer guidance -->
         <VisCrosshair :color="barColorAccessor" :template="tooltipTemplate" />
       </VisXYContainer>
     </div>
+
+    <!-- Donut chart on mobile -->
+    <!-- <div v-else class="flex justify-center p-4">
+<VisSingleContainer :data="donutData">
+  <VisDonut :radius="100" :cornerRadius="3" :value="donutValue" :color="donutColorAccessor" />
+</VisSingleContainer>
+    </div> -->
   </div>
 </template>
 
 <script setup lang="ts">
 import { ref, computed, onMounted, watch } from 'vue'
-import { VisXYContainer, VisStackedBar, VisAxis, VisTooltip, VisCrosshair } from '@unovis/vue'
+import { useMediaQuery } from '@vueuse/core'
+import { VisXYContainer, VisStackedBar, VisAxis, VisTooltip, VisCrosshair, VisSingleContainer, VisDonut } from '@unovis/vue'
 import { StackedBar } from '@unovis/ts'
 import { useEnvParamsStore } from '~/stores/envParamsStore'
 import { useSpeciesStore } from '~/stores/speciesStore'
@@ -269,7 +274,14 @@ const triggers = { [StackedBar.selectors.bar]: tooltipTemplate }
 // ----- Custom Bar Color Based on Selected Filters -----
 const updatedChartData = computed(() => {
   const defaultGray = '#d4d4d4'
-  return chartData.value.map(d => {
+   return chartData.value.map(d => {
+   // Highlight selected species only while the slide-over is open
+   if (
+     isSlideOverOpen.value &&
+     d.Scientificname === speciesStore.selectedSpecies?.Scientificname
+   ) {
+     return { ...d, barColor: '#A855F7' }
+   }
     // Compute matchSearch at the top
     const term = props.searchTerm.trim().toLowerCase();
     const common = String(d.Commonname || '').toLowerCase();
@@ -386,6 +398,15 @@ function zoomOut() {
 
 // ----- Sidebar Trigger on Chart Click -----
 const speciesStore = useSpeciesStore()
+const isSlideOverOpen = computed(() => speciesStore.selectedSpecies !== null)
+
+// Detect mobile screens (< md)
+const isMobile = useMediaQuery('(max-width: 767px)')
+// Use full data objects so the donut can match bar colors
+const donutData = computed(() => updatedChartData.value)
+const donutValue = (d: any) => d.sample_plot_count
+const donutColorAccessor = (d: any) => d.barColor
+
 function handleChartClick(event: MouseEvent) {
   if (currentHoveredDatum.value) {
     speciesStore.selectSpecies(currentHoveredDatum.value, "edna")

@@ -58,7 +58,7 @@ export const standAgeOptions = [
   {
     value: "41-90",
     label: "41-90 år",
-    description: "SKogens medelålder är mellan 41 och 90 år",
+    description: "Skogens medelålder är mellan 41 och 90 år",
   },
   {
     value: "91",

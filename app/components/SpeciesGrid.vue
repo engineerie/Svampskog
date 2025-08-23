@@ -1,6 +1,7 @@
 <template>
     <div class="p-2 flex gap-2">
-    <UInput v-model="searchTerm" placeholder="Sök på namn" variant="soft"/>
+    <UInput icon="i-heroicons-magnifying-glass" 
+ v-model="searchTerm" placeholder="Sök på namn" variant="soft"/>
     <USelect
       v-model="statusFilter"
       :items="statusOptionsWithCount"
@@ -27,11 +28,11 @@
             <div
               v-for="(row, index) in gridPaginatedData"
               :key="row.Commonname + row.Scientificname + index"
-              class="bg-white dark:bg-neutral-800 rounded-lg border border-neutral-200 dark:border-neutral-700/40 hover:shadow-md transition-shadow cursor-pointer h-[126px]"
+              class="bg-white dark:bg-neutral-800 rounded-sm border overflow-hidden border-neutral-200 dark:border-neutral-700/40 hover:shadow-md transition-shadow cursor-pointer h-[126px]"
               @click="selectRow(row)"
             >
               <!-- Image Thumbnail -->
-              <div class="w-full h-24 relative rounded-t-lg overflow-hidden">
+              <div class="w-full h-24 relative ">
                 <NuxtImg
                   v-if="row.images && row.images.length"
                   :src="row.images[0]"

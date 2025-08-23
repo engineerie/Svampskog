@@ -1,7 +1,10 @@
 <template>
   <UCard   class=" sm:text-lg/8 overflow-y-clip text-neutral-500 dark:text-neutral-400 h-full">
     
-     
+   <div class="mb-2 md:hidden">
+     <button @click="toggleContent" class="px-3 py-1 bg-gray-200 rounded">Visa / Dölj</button>
+   </div>
+
       <!-- <div class="flex md:block justify-between w-full" @click="toggleContent">      <h1 class="font-semibold text-neutral-600 dark:text-neutral-200" >Introduktion</h1> 
       </div> -->
 
@@ -120,26 +123,19 @@
 <script setup>
 import { watch } from 'vue'
 import { ref } from 'vue';
-import { useMediaQuery } from '@vueuse/core';
 import { useEnvParamsStore } from '~/stores/envParamsStore'
 import { useSpeciesDataStore } from '~/stores/speciesDataStore'
 import { useSpeciesStore } from '~/stores/speciesStore'
-import { capitalize } from 'lodash-es'
 
 const envStore = useEnvParamsStore()
 const speciesStore = useSpeciesDataStore()
 const globalSpeciesStore = useSpeciesStore()
 
-// Mobile content toggle
-const isMobile = useMediaQuery('(max-width: 767px)');
-const contentVisible = ref(!isMobile.value);
-// Reset visibility when screen size changes
-watch(isMobile, mobile => {
-  contentVisible.value = !mobile;
-});
+const contentVisible = ref(true);
+
 // Toggle content on button click
 function toggleContent() {
-  if (isMobile.value) contentVisible.value = !contentVisible.value;
+  contentVisible.value = !contentVisible.value;
 }
 
 // Define a function to open the Myslideover with the selected species

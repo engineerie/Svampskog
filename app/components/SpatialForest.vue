@@ -11,7 +11,7 @@
         />
       </div>
     </div>
-    <USkeleton v-else class="h-20 w-32 mb-12 rounded-lg" />
+    <USkeleton v-else class="h-20 w-32 mb-12 rounded-sm" />
 
     <div class="hidden">
       <NuxtImg
