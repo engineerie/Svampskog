@@ -6,32 +6,24 @@ hero:
   description: Utforska vilka mykorrhizasvampar som kan finnas i olika skogar och se hur de påverkas av skogsskötsel.
   badge: Ny version ute nu
   links:
-    - label: Utforska svampar
+    - label: Svampar
       icon: i-lineicons-mushroom-1
       trailing: false
-      to: /mykorrhizasvampar/start
+      to: /mykorrhizasvampar
       target:
       size: xl
       color: rodeodust
       variant: solid
-    - label: Se påverkan av skogsskötsel
+    - label: Skogsskötsel
       icon: i-hugeicons-tree-06
       trailing: false
-      to: /skogsskotsel/skotselmetoder
+      to: /skogsskotsel
       target:
       size: xl
       color: rodeodust
-      variant: soft
-
-    # - label: Svampkunskap
-    #   icon: i-heroicons-book-open
-    #   size: xl
-    #   color: neutral
-    #   variant: ghost
-    #   to: https://github.com/nuxt-ui-pro/saas
-    #   target: _blank
+      variant: subtle
 sections:
-  - title: Utforska svampar i olika skogar
+  - title: Utforska svampar i svenska skogar
     description: Här kan du ta reda på vilka mykorrhizasvampar som kan finns i en skog baserat på dels DNA-analyser av svampmycel i jordprover, dels vår samlade kunskap om var olika arters fruktkroppar förekommer.
     id: features
     headline: Svampar
@@ -70,9 +62,6 @@ sections:
       - name: Predictable Pricing
         description: Jämför både utveckling över tid och olika metoder sida vid sida.
         icon: i-iconamoon-compare
-      # - name: Infinite Scale
-      #   description: Kommer snart!
-      #   icon: i-line-md-loading-twotone-loop
 features:
   title: Svampar och träd hänger ihop
   description: Svampskog.se fokuserar på mykorrhizasvampar, det vill säga svampar som lever i symbios med träd. För att tydligöra deras betydelse har vi tagit fram grundläggande kunskap om hur dessa svampar lever i marken.
@@ -98,7 +87,7 @@ features:
       icon: i-material-symbols-network-node
 testimonials:
   headline: Om projektet
-  title: Om Svampskog
+  title: Om projektet
   description: Svampskog syftar till att förmedla lättillgänglig och tillförlitlig information om vilka mykorrhizasvampar som kan finnas i olika skogar, och hur deras förekomst påverkas av olika former av skogsskötsel. Projektet riktar sig till alla som är intresserade av skog och svamp.
   links:
     - label: Gå till skogsskötsel

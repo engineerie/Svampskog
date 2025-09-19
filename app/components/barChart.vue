@@ -7,25 +7,16 @@
     </div>
 
     <!-- Bar chart on desktop -->
-    <div v-if="!isMobile"
-         :class="[
-           'w-full overflow-y-auto overflow-x-scroll',
-           { 'bar-chart-container': currentZoomIndex === 0 }
-         ]"
-         @click="handleChartClick">
+    <div v-if="!isMobile" :class="[
+      'w-full overflow-y-auto overflow-x-scroll',
+      { 'bar-chart-container': currentZoomIndex === 0 }
+    ]" @click="handleChartClick">
       <VisXYContainer :data="updatedChartData" :width="chartWidth" height="200">
-        <VisStackedBar :data="updatedChartData" :x="xAccessor" :y="yAccessor" :color="barColorAccessor" :barPadding="0.1"/>
-        <VisAxis
-          :gridLine="false"
-          type="x"
-          tickTextAnchor="start"
-          tickTextAngle="30"
-          :numTicks="updatedChartData.length"
-          tickTextFitMode="trim"
-          :tickTextWidth="150"
-          tickTextAlign="left"
-          :tick-format="tickFormat"
-        />
+        <VisStackedBar :data="updatedChartData" :x="xAccessor" :y="yAccessor" :color="barColorAccessor"
+          :barPadding="0.1" />
+        <VisAxis :gridLine="false" type="x" tickTextAnchor="start" tickTextAngle="30"
+          :numTicks="updatedChartData.length" tickTextFitMode="trim" :tickTextWidth="150" tickTextAlign="left"
+          :tick-format="tickFormat" />
         <VisAxis type="y" label="Antal skogar" :gridLine="false" />
         <VisTooltip :triggers="triggers" :followCursor="true" />
         <VisCrosshair :color="barColorAccessor" :template="tooltipTemplate" />
@@ -116,7 +107,7 @@ async function fetchChartData() {
       const totalSpecies = jsonData.length
       const numberOfGrayBars = Math.floor(totalSpecies * 0.1)
       const numberOfColorBars = totalSpecies - numberOfGrayBars
-      const grayColors = generateColors([82,82,82], [212,212,212], numberOfGrayBars)
+      const grayColors = generateColors([82, 82, 82], [212, 212, 212], numberOfGrayBars)
       const rainbowColors = generateRainbowColors(numberOfColorBars)
       const colors = [...grayColors, ...rainbowColors]
       chartData.value = jsonData.map((d: any, i: number) => ({
@@ -274,14 +265,14 @@ const triggers = { [StackedBar.selectors.bar]: tooltipTemplate }
 // ----- Custom Bar Color Based on Selected Filters -----
 const updatedChartData = computed(() => {
   const defaultGray = '#d4d4d4'
-   return chartData.value.map(d => {
-   // Highlight selected species only while the slide-over is open
-   if (
-     isSlideOverOpen.value &&
-     d.Scientificname === speciesStore.selectedSpecies?.Scientificname
-   ) {
-     return { ...d, barColor: '#A855F7' }
-   }
+  return chartData.value.map(d => {
+    // Highlight selected species only while the slide-over is open
+    if (
+      isSlideOverOpen.value &&
+      d.Scientificname === speciesStore.selectedSpecies?.Scientificname
+    ) {
+      return { ...d, barColor: '#A855F7' }
+    }
     // Compute matchSearch at the top
     const term = props.searchTerm.trim().toLowerCase();
     const common = String(d.Commonname || '').toLowerCase();
@@ -329,7 +320,7 @@ const updatedChartData = computed(() => {
         if (matchSearch && (matchSignal || matchStatus || matchEjBedom || matchEjTillamplig)) {
           if (matchSignal) return { ...d, barColor: '#14b8a6' }
           if (d.RL2020kat === 'LC') return { ...d, barColor: '#22c55e' }
-          if (['NT','EN','VU','CR'].includes(d.RL2020kat)) return { ...d, barColor: '#ef4444' }
+          if (['NT', 'EN', 'VU', 'CR'].includes(d.RL2020kat)) return { ...d, barColor: '#ef4444' }
           if (matchEjBedom || matchEjTillamplig) return { ...d, barColor: '#737373' }
           return { ...d, barColor: '#1f2937' }
         }
@@ -345,7 +336,7 @@ const updatedChartData = computed(() => {
         if (matchSignal) return { ...d, barColor: '#14b8a6' }
         if (otherStatuses.length > 0) {
           if (d.RL2020kat === 'LC') return { ...d, barColor: '#22c55e' }
-          if (['NT','EN','VU','CR'].includes(d.RL2020kat)) return { ...d, barColor: '#ef4444' }
+          if (['NT', 'EN', 'VU', 'CR'].includes(d.RL2020kat)) return { ...d, barColor: '#ef4444' }
           if (matchEjBedom || matchEjTillamplig) return { ...d, barColor: '#737373' }
           return { ...d, barColor: '#1f2937' }
         }
@@ -418,11 +409,14 @@ function handleChartClick(event: MouseEvent) {
 
 <style scoped>
 .bar-chart-container {
-  -ms-overflow-style: none; /* IE and Edge */
-  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none;
+  /* IE and Edge */
+  scrollbar-width: none;
+  /* Firefox */
 }
+
 .bar-chart-container::-webkit-scrollbar {
-  display: none; /* Chrome, Safari, Opera */
+  display: none;
+  /* Chrome, Safari, Opera */
 }
 </style>
-

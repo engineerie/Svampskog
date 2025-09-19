@@ -1,6 +1,6 @@
 <template>
   <div>
-    <UPage class="relative">
+    <UPage class="">
       <!-- Dropdown to select which chart to display -->
 
       <div class="mt-2 ml-4 flex justify-between">
@@ -10,8 +10,10 @@
           sideOffset: 8,
         }">
           <div class="flex items-center cursor-pointer w-fit">
-            <h1 class="text-white text-lg font-semibold leading-loose hover:bg-neutral-500/20 px-2 rounded-sm -mx-2"> {{
-              chartOptions.find(opt => opt.value === selectedChart)?.label || 'Välj diagram' }}
+            <h1
+              class="text-neutral-800 text-lg font-semibold leading-loose hover:bg-neutral-500/20 px-2 rounded-sm -mx-2">
+              {{
+                chartOptions.find(opt => opt.value === selectedChart)?.label || 'Välj diagram'}}
             </h1>
             <!-- <Icon name="i-mdi-chevron-down" class="text-white size-6 " /> -->
           </div>

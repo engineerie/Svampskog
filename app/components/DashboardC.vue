@@ -1,36 +1,20 @@
 <template>
-  <div class="hidden">
-    <NuxtImg v-for="(src, key) in imageMap" :key="key" :src="src" width="600" height="420" quality="80" format="webp"
-      preload />
-  </div>
-  <div class="hidden">
-    <NuxtImg v-for="(src, key) in imageMap" :key="key" :src="src" width="300" height="180" format="webp" quality="80"
-      preload />
-  </div>
   <MySlideover v-model="showSlideover" :pinned="isPinned" @update:pinned="(val) => (isPinned = val)">
     <SpeciesInfo :species="speciesStore.selectedSpecies" :source="speciesStore.sourceComponent" />
   </MySlideover>
-
-
-
   <UContainer>
-
-    <EnvironmentSelector class="fixed top-16 left-0 right-0" />
-
+    <transition name="fade">
+      <EnvironmentSelector v-if="hasAllParams" />
+    </transition>
   </UContainer>
-
-
-  <div key="" class="bg-neutral-50 dark:bg-neutral-800/40 flex flex-col min-h-screen border-t border-neutral-200">
-    <!-- <USeparator class=" mb-0"/> -->
-    <UContainer class="w-full px-0 md:p-4">
+  <div key=""
+    :class="['flex flex-col min-h-screen', hasAllParams ? 'border-t border-muted bg-neutral-50 ' : 'border-t border-muted bg-neutral-50 ']">
+    <UContainer class="w-full px-0">
       <transition name="fade" mode="out-in">
         <component :is="activeComponent" @close="handleCloseFullScreen" @enlarge="handleFullScreen" class="block" />
       </transition>
-
     </UContainer>
   </div>
-
-
 </template>
 
 <script setup>
@@ -41,22 +25,19 @@ import FullScreenPoison from "./FullScreenPoison.vue";
 import FullScreenEdible from "./FullScreenEdible.vue";
 import RedlistedComponent from "./RedlistedComponent.vue";
 import NormalView from "./NormalView.vue";
-import StartView from "./StartView.vue";
 
 import { useEnvParamsStore } from "~/stores/envParamsStore";
 
 import { useSpeciesStore } from "~/stores/speciesStore";
 import EdnaComponent from "./EdnaComponent.vue";
-import { imageMap } from '~/stores/envParamsStore'
+
 const route = useRoute();
-
-const speciesStore = useSpeciesStore();
-const envParamsStore = useEnvParamsStore();
-
 
 const showSlideover = ref(false);
 const isPinned = ref(true);
 
+const speciesStore = useSpeciesStore();
+const envParamsStore = useEnvParamsStore();
 
 // Open the slideover automatically when a species is selected
 watch(
@@ -87,9 +68,6 @@ const hasAllParams = computed(() => {
 });
 
 const activeComponent = computed(() => {
-  if (!hasAllParams.value) {
-    return StartView;
-  }
   switch (activeFullScreenComponent.value) {
     case "FullScreenEdna":
       return EdnaComponent;

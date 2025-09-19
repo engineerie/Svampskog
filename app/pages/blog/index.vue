@@ -15,28 +15,21 @@ defineOgImageComponent('Saas')
 </script>
 
 <template>
-  <UContainer>
-    <UPageHeader
-      v-bind="page"
-      class="py-[50px]"
-    />
+  <div class="bg-neutral-50">
+    <UContainer>
+      <UPageHero :ui="{ container: 'lg:py-24', title: 'sm:text-6xl', headline: 'text-neutral' }" v-bind="page"
+        class="py-[50px]" />
 
-    <UPageBody>
-      <UBlogPosts>
-        <UBlogPost
-          v-for="(post, index) in posts"
-          :key="index"
-          :to="post.path"
-          :title="post.title"
-          :description="post.description"
-          :badge="post.badge"
-          :class="[]"
-          variant="outline"
-          :ui="{
-            description: 'line-clamp-2'
-          }"
-        />
-      </UBlogPosts>
-    </UPageBody>
-  </UContainer>
+
+      <UPageBody>
+        <UBlogPosts>
+          <UBlogPost v-for="(post, index) in posts" :key="index" :to="post.path" :title="post.title"
+            :description="post.description" :badge="post.badge" :class="[]" variant="outline" :ui="{
+              description: 'line-clamp-2'
+            }" />
+        </UBlogPosts>
+      </UPageBody>
+    </UContainer>
+  </div>
+
 </template>

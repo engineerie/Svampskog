@@ -3,7 +3,11 @@ import { defineStore } from "pinia";
 
 // Export the options arrays so they can be imported elsewhere.
 export const geographyOptions = [
-  { value: "Norr", label: "Norra Sverige", description: "Norr om breddgrad 60°" },
+  {
+    value: "Norr",
+    label: "Norra Sverige",
+    description: "Norr om breddgrad 60°",
+  },
   {
     value: "Söder",
     label: "Södra Sverige",
@@ -94,27 +98,25 @@ export const vegetationTypeOptions = [
 
 // Define an interface for the environment parameters.
 interface EnvParams {
-  geography: string;
-  forestType: string;
-  standAge: string;
-  vegetationType: string;
+  geography: string | null;
+  forestType: string | null;
+  standAge: string | null;
+  vegetationType: string | null;
 }
 
 export const useEnvParamsStore = defineStore("envParams", {
   state: () => ({
-    // These are set by DashboardC.vue’s watcher or via route parameters.
-    geography: "",
-    forestType: "",
-    standAge: "",
-    vegetationType: "",
+    geography: null as string | null,
+    forestType: null as string | null,
+    standAge: null as string | null,
+    vegetationType: null as string | null,
   }),
   actions: {
-    // Destructure the parameters and type them.
     setParams({ geography, forestType, standAge, vegetationType }: EnvParams) {
-      this.geography = geography || "";
-      this.forestType = forestType || "";
-      this.standAge = standAge || "";
-      this.vegetationType = vegetationType || "";
+      this.geography = geography ?? null;
+      this.forestType = forestType ?? null;
+      this.standAge = standAge ?? null;
+      this.vegetationType = vegetationType ?? null;
     },
   },
   getters: {
@@ -124,7 +126,7 @@ export const useEnvParamsStore = defineStore("envParams", {
     },
     forestTypeLabel: (state) => {
       const option = forestTypeOptions.find(
-        (o) => o.value === state.forestType
+        (o) => o.value === state.forestType,
       );
       return option ? option.label : state.forestType;
     },
@@ -134,7 +136,7 @@ export const useEnvParamsStore = defineStore("envParams", {
     },
     vegetationTypeLabel: (state) => {
       const option = vegetationTypeOptions.find(
-        (o) => o.value === state.vegetationType
+        (o) => o.value === state.vegetationType,
       );
       return option ? option.label : state.vegetationType;
     },

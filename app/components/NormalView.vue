@@ -1,87 +1,21 @@
 <template>
   <div class="grid grid-cols-12 ">
-    <!-- <div class="col-span-12">
-      <EnvImgInfo
-      class="hidden md:flex"
-        :geography="geography"
-        :forestType="forestType"
-        :standAge="standAge"
-        :vegetationType="vegetationType"
-      />
-    </div> -->
     <div class="col-span-12">
       <UTabs :ui="{
-        indicator: 'bg-white dark:bg-violet-400/9 border border-neutral-300/80 dark:border-violet-300/30',
-        trigger: 'data-[state=active]:text-neutral-800 dark:data-[state=active]:text-violet-400/90 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary',
-        list: 'bg-transparent'
-      }" v-model="activeTab" :items="tabs" :content="false" class=" my-1 mx-1 md:-mt-2 md:mx-0" :size="tabSize"
-        color="neutral" variant="pill" />
+        indicator: 'bg-white border border-muted',
+        trigger: 'data-[state=active]:text-neutral-800 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary',
+        list: 'bg-transparent '
+      }" v-model="activeTab" :items="tabs" :content="false" class=" my-2 mx-1 md:mx-0" :size="tabSize" color="neutral"
+        variant="pill" />
 
       <div v-if="activeTab === 'dna'" class="col-span-12 ">
-        <!-- <USeparator type="dashed" class="mt-4"/> -->
-
-
-        <!-- <USeparator class="mt-2 mb-6"/> -->
-
-
-
-        <!-- Main content -->
         <div>
           <EdnaComponent :isNormalView="false" @enlarge="emitEnlarge('FullScreenEdna')" />
         </div>
-
-
       </div>
     </div>
 
     <div v-if="activeTab === 'knowledge'" class="col-span-12">
-      <!-- <USeparator type="dashed"/> -->
-      <!-- <UBadge
-            size="md"
-            color="tertiary"
-            variant="subtle"
-           icon="lineicons:mushroom-1"
-           label="Enligt samlad kunskap / var fruktkroppar förekommer"
-              class="h-fit mt-4 md:hidden "
-           /> -->
-      <!-- <div class="flex justify-end  mb-2 sticky top-28 pt-2 z-10     ">
-       
-        <div  class="bg-white dark:bg-black rounded-md z-10">
-          
-           <UBadge
-            size="lg"
-            color="tertiary"
-            variant="subtle"
-            icon="lineicons:mushroom-1"
-            label="Enligt samlad kunskap, främst var fruktkroppar förekommer"
-            class="h-full hidden md:flex"
-           />
-           <UBadge
-            size="lg"
-            color="tertiary"
-            variant="subtle"
-            icon="lineicons:mushroom-1"
-            class="h-full cursor-pointer md:hidden whitespace-normal break-words text-left"
-            @click="knowledgeExpanded = !knowledgeExpanded"
-           >
-             {{ knowledgeExpanded
-               ? 'Enligt samlad kunskap, främst var fruktkroppar förekommer'
-               : 'Samlad kunskap' }}
-           </UBadge>
-      
-     </div>
-        
-
-      </div> -->
-      <!-- <USeparator /> -->
-
-      <!-- <div
-        class="rounded-3xl p-[1.5px] bg-gradient-to-tr from-amber-500 to-95%"
-      >
-        <div
-          class="bg-white overflow-hidden rounded-tr-none rounded-[calc(1.5rem-1px)]"
-        > -->
-      <!-- <UCard :ui="{body: 'p-3 sm:p-3'}" variant="subtle"> -->
       <div class="col-span-12 grid-cols-12 rounded-2xl gap-y-3 hidden md:grid gap-4 mt-2">
 
         <div class="col-span-4 flex flex-col h-full">
@@ -104,7 +38,8 @@
           <div class="flex justify-between items-center">
             <div>
               <h1 class="text-2xl font-semibold text-warning-500">Matsvampar</h1>
-              <h1 class="text-neutral-500">{{ edibleCount }} arter</h1>
+              <USkeleton v-if="edibleCount === null" class="h-4 w-12 mt-2" />
+              <h1 v-else class="text-neutral-500">{{ edibleCount }} arter</h1>
             </div>
             <UButton icon="i-heroicons-chevron-right" class="rounded-full " variant="outline" color="neutral"
               size="xl" />
@@ -116,7 +51,8 @@
           <div class="flex justify-between items-center">
             <div>
               <h1 class="text-2xl font-semibold text-poison-500">Giftsvampar</h1>
-              <h1 class="text-neutral-500">{{ poisonCount }} arter</h1>
+              <USkeleton v-if="edibleCount === null" class="h-4 w-12 mt-2" />
+              <h1 v-else class="text-neutral-500">{{ poisonCount }} arter</h1>
             </div>
             <UButton icon="i-heroicons-chevron-right" class="rounded-full " variant="outline" color="neutral"
               size="xl" />
@@ -126,17 +62,16 @@
           <div class="flex justify-between items-center">
             <div>
               <h1 class="text-2xl font-semibold text-signal-500">Naturvårdsarter</h1>
-              <h1 class="text-neutral-500">{{ redlistCount }} arter</h1>
+              <USkeleton v-if="redlistCount === null" class="h-4 w-12 mt-2" />
+              <h1 v-else class="text-neutral-500">{{ redlistCount }} arter</h1>
             </div>
             <UButton icon="i-heroicons-chevron-right" class="rounded-full " variant="outline" color="neutral"
               size="xl" />
           </div>
         </UCard>
-      </UContainer>
-      <!-- </UCard> -->
 
-      <!-- </div>
-      </div> -->
+      </UContainer>
+
     </div>
   </div>
 </template>
@@ -150,9 +85,9 @@ import { useEnvParamsStore } from '~/stores/envParamsStore';
 const envStore = useEnvParamsStore();
 const route = useRoute();
 
-const redlistCount = ref(0);
-const edibleCount = ref(0);
-const poisonCount = ref(0);
+const redlistCount = ref(null);
+const edibleCount = ref(null);
+const poisonCount = ref(null);
 
 // Define props
 const props = defineProps({
@@ -190,6 +125,7 @@ onMounted(() => {
 onUnmounted(() => {
   window.removeEventListener('resize', updateWidth);
 });
+
 const tabSize = computed(() => windowWidth.value >= 768 ? 'lg' : 'lg');
 
 async function fetchCount(folder, type, countRef, filterKey = null) {

@@ -29,8 +29,6 @@
   --color-rodeo-dust-800: #6f4c3d;
   --color-rodeo-dust-900: #5a3f34;
   --color-rodeo-dust-950: #30201a;
-
-
 }
 
 .dark {
@@ -38,8 +36,7 @@
 }
 
 :root {
-  
-  --ui-radius: var(--radius-xs);
+  --ui-radius: 0.15rem;
   --ui-container: 85rem;
   --vis-line-gapfill-stroke-dasharray: 1 3;
   --vis-line-gapfill-stroke-opacity: 1;

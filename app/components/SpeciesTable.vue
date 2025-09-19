@@ -2,36 +2,13 @@
   <div class="">
     <div class="">
       <div v-if="!useMobileLayout" class="flex md:gap-2 mt-2 justify-between z-30">
-        <!-- Remove these USelect components from the top filter bar -->
-        <!--
-<USelect
-  v-model="selectedFilter"
-  multiple
-  :items="svampOptions"
-  placeholder="Filtrera svamptyp"
-/>
-<USelect
-  v-model="selectedGrupp"
-  multiple
-  :items="gruppOptions"
-  placeholder="Filtrera grupp"
-/>
-<USelect
-  v-model="selectedStatus"
-  multiple
-  :items="statusOptions"
-  placeholder="Filtrera status"
-/>
--->
-
-        <!-- And add the following block in their place -->
         <div class="flex gap-2 items-end justify-between w-full mb-2">
           <UInput :model-value="table?.tableApi?.getColumn('Commonname')?.getFilterValue() || ''"
             class="max-w-sm min-w-[12ch] hidden md:block" placeholder="Sök på namn" icon="i-heroicons-magnifying-glass"
             @update:model-value="value => {
               table?.tableApi?.getColumn('Commonname')?.setFilterValue(value);
               onSearchInput(value);
-            }" variant="outline" />
+            }" variant="soft" />
           <div class="flex gap-2">
             <div class="flex my-1 gap-2 overflow-scroll" id="scrollbar">
               <template v-if="selectedMark.length">
@@ -87,7 +64,7 @@
                 e?.preventDefault()
               }
             }))" :content="{ align: 'end' }">
-              <UButton label="Kolumner" color="neutral" variant="outline" trailing-icon="i-lucide-chevron-down" />
+              <UButton label="Kolumner" color="neutral" variant="soft" trailing-icon="i-lucide-chevron-down" />
             </UDropdownMenu>
 
             <div v-if="!isNormalView" class="hidden md:flex">
@@ -98,19 +75,18 @@
                 { value: 40, label: '40 rader' },
                 { value: 50, label: '50 rader' },
                 { value: 'Alla', label: 'Alla' }
-              ]" item-value="value" item-label="label" placeholder="Rader per sida" variant="outline" />
+              ]" item-value="value" item-label="label" placeholder="Rader per sida" variant="soft" />
             </div>
           </div>
         </div>
       </div>
-      <!-- Mobile only: Filter & Sort dropdowns driving hidden columns -->
 
       <div class="flex my-1 gap-2 overflow-scroll" id="scrollbar" v-if="useMobileLayout">
         <template v-if="selectedMark.length">
           <span v-for="filter in selectedMark" :key="'mark-' + filter">
             <UBadge trailing-icon="i-heroicons-x-mark-solid" variant="subtle"
               :color="filter === 'KALKmark' ? 'kalkmark' : filter === 'ANNANmark' ? 'vanligmark' : 'neutral'"
-              class="cursor-pointer mb-2 md:mb-0 " @click="selectedMark = selectedMark.filter(f => f !== filter)">
+              class="cursor-pointer mb-2 md:mb-0" @click="selectedMark = selectedMark.filter(f => f !== filter)">
               {{ filter === 'KALKmark' ? 'Kalkmark' : filter === 'ANNANmark' ? 'Vanlig skogsmark' : capitalize(filter)
               }}
             </UBadge>
@@ -150,34 +126,15 @@
     </div>
     <div v-if="useMobileLayout" class="flex gap-2 w-full mb-2">
 
-
-      <!-- <div >
-          <USelect
-            v-model="rowsPerPage"
-            :items="[
-              { value: 10, label: '10 rader' },
-              { value: 20, label: '20 rader' },
-              { value: 30, label: '30 rader' },
-              { value: 40, label: '40 rader' },
-              { value: 50, label: '50 rader' },
-              { value: 'Alla', label: 'Alla' }
-            ]"
-            item-value="value"
-            item-label="label"
-            placeholder="Rader per sida"
-            variant="soft"
-          />
-        </div> -->
-
       <UDropdownMenu :size="isMobile ? 'xl' : 'md'" :items="sortMenuItems" :content="{ align: 'start' }">
-        <UButton :variant="isMobile ? 'soft' : 'outline'" icon="i-lucide-arrow-up-down" :size="isMobile ? 'xl' : 'md'"
-          :label="isMobile ? '' : 'Sortera'" color="neutral" />
+        <UButton :variant="isMobile ? 'soft' : 'soft'" icon="i-lucide-arrow-up-down" :size="isMobile ? 'xl' : 'md'"
+          :label="isMobile ? null : 'Sortera'" color="neutral" trailing />
       </UDropdownMenu>
       <UDropdownMenu :size="isMobile ? 'xl' : 'md'" :items="filterMenuItems" :content="{ align: 'start' }">
-        <UButton :variant="isMobile ? 'soft' : 'outline'" icon="i-lucide-list-filter" :size="isMobile ? 'xl' : 'md'"
-          :label="isMobile ? '' : 'Filter'" color="neutral" />
+        <UButton :variant="isMobile ? 'soft' : 'soft'" icon="i-lucide-list-filter" :size="isMobile ? 'xl' : 'md'"
+          :label="isMobile ? null : 'Filter'" color="neutral" />
       </UDropdownMenu>
-      <UInput :variant="isMobile ? 'soft' : 'outline'"
+      <UInput :variant="isMobile ? 'soft' : 'soft'"
         :model-value="table?.tableApi?.getColumn('Commonname')?.getFilterValue() || ''" class="w-full min-w-[12ch]"
         placeholder="Sök på namn" :size="isMobile ? 'xl' : 'md'" icon="i-heroicons-magnifying-glass"
         @update:model-value="value => {
@@ -187,9 +144,6 @@
     </div>
     <div v-if="filteredData" :class="[isNormalView ? '' : '']">
       <div class="">
-        <!-- v-model="selectedRows" -->
-
-        <!-- UTable with Filtered Data -->
 
         <UTable ref="table" v-model:column-visibility="columnVisibility" v-model:pagination="pagination"
           :data="displayedData" :columns="columns" sticky :loading="isLoading" v-model:sorting="sorting"
@@ -246,9 +200,8 @@ import { useEnvParamsStore } from '~/stores/envParamsStore'
 import { getPaginationRowModel } from '@tanstack/vue-table'
 import { upperFirst } from 'scule'
 
-// detect mobile screens (below md)
+
 const isMobile = useMediaQuery('(max-width: 767px)');
-// Mobile-style layout on small screens OR desktop normal view (non-DNA)
 const useMobileLayout = computed(() =>
   isMobile.value || (props.isNormalView && props.dataTypeFolder !== 'edna')
 );
@@ -302,11 +255,6 @@ const props = defineProps({
 
 const table = useTemplateRef('table')
 
-// const defaultVisibility = {
-//   RankRed: false,
-//   "Rank matsvamp": false,
-//   "Rank giftsvamp": false,
-// };
 const defaultVisibility = useMobileLayout.value
   ? {
     RankRed: false,
@@ -326,7 +274,7 @@ const defaultVisibility = useMobileLayout.value
     "Rank matsvamp": false,
     "Rank giftsvamp": false,
   };
-// If dataType is 'edna', ensure mark column is hidden by default
+
 if (props.dataType === 'edna') {
   defaultVisibility.mark = false;
 }
@@ -506,7 +454,6 @@ const statusMenuItems = computed(() => {
   }));
 });
 
-// Leverage the real (hidden) Commonname/Scientificname columns
 const sortMenuItems = computed(() => [
   {
     label: 'Namn',
@@ -550,14 +497,14 @@ const sortMenuItems = computed(() => [
     label: props.obsLabel || 'Förekomst',
     children: [
       {
-        label: 'Lägst → Högst',
+        label: 'Högst → Lägst',
         onSelect(e) {
           e.preventDefault();
           table.value?.tableApi?.setSorting([{ id: props.obs, desc: false }]);
         }
       },
       {
-        label: 'Högst → Lägst',
+        label: 'Lägst → Högst',
         onSelect(e) {
           e.preventDefault();
           table.value?.tableApi?.setSorting([{ id: props.obs, desc: true }]);
@@ -594,7 +541,7 @@ const gruppOptions = computed(() => {
       visibleCounts[group] = (visibleCounts[group] || 0) + 1;
     }
   });
-  // Build options with “visible/total”
+
   return Object.keys(totalCounts).map(group => {
     const total = totalCounts[group] || 0;
     const visible = visibleCounts[group] || 0;
@@ -606,10 +553,9 @@ const gruppOptions = computed(() => {
 });
 
 const statusOptions = computed(() => {
-  // Base statuses
+
   const statuses = ['LC', 'NT', 'EN', 'VU', 'CR', 'RE', 'DD'];
 
-  // Total counts (from filteredData before column filters)
   const totalCounts = {};
   filteredData.value.forEach(row => {
     const statusVal = row.RL2020kat;
@@ -621,10 +567,8 @@ const statusOptions = computed(() => {
       statusVal === 0 ||
       String(statusVal).toUpperCase() === 'NE'
     ) {
-      // NE or 0 => Ej bedömd
       totalCounts['Ej bedömd'] = (totalCounts['Ej bedömd'] || 0) + 1;
     } else if (String(statusVal).toUpperCase() === 'NA') {
-      // NA => Ej tillämplig
       totalCounts['Ej tillämplig'] = (totalCounts['Ej tillämplig'] || 0) + 1;
     }
     if (row.SIGNAL_art === 'S') {
@@ -632,7 +576,6 @@ const statusOptions = computed(() => {
     }
   });
 
-  // Visible counts (from current table rows after column filters)
   const visibleRows = table.value?.tableApi?.getFilteredRowModel()?.rows || [];
   const visibleCounts = {};
   visibleRows.forEach(rowModel => {
@@ -655,7 +598,6 @@ const statusOptions = computed(() => {
     }
   });
 
-  // Build options with “visible/total”
   return [
     ...statuses.map(s => {
       const total = totalCounts[s] || 0;
@@ -694,7 +636,6 @@ function selectRow(row, e) {
   speciesStore.selectSpecies(row.original, "edna");
 }
 
-// Capitalize function for displaying the species name
 const capitalize = (str) => {
   if (!str) return "";
   return str.charAt(0).toUpperCase() + str.slice(1).toLowerCase();
@@ -759,8 +700,6 @@ const sorting = ref(
     : [{ id: props.obs, desc: true }]
 );
 
-// const sort = ref({ column: "", direction: "asc" });
-
 const UBadge = resolveComponent('UBadge')
 const NuxtImg = resolveComponent('NuxtImg')
 const UProgress = resolveComponent('UProgress')
@@ -772,11 +711,10 @@ const Icon = resolveComponent('Icon')
 const desktopColumns = [
   {
     accessorKey: "images",
-    header: "Bild", // You can leave the header empty or provide an icon/label
+    header: "Bild",
     sortable: false,
     cell: ({ row }) => {
       const images = row.getValue("images");
-      // If an image exists, render it using NuxtImg; otherwise, render a fallback Icon
       if (images && images.length) {
         return h(resolveComponent('NuxtImg'), {
           src: images[0],
@@ -787,11 +725,6 @@ const desktopColumns = [
           format: "webp"
         });
       }
-      // return h("div", { 
-      //   class: "size-12 -my-4 rounded-lg flex items-center justify-center bg-gray-200 dark:bg-gray-700" 
-      // }, [
-      //   h(resolveComponent('Icon'), { name: "material-symbols:photo", class: "size-5 text-neutral-500" })
-      // ]);
     },
     meta: { headerText: 'Bild' },
   },
@@ -849,7 +782,6 @@ const desktopColumns = [
         }
       );
     },
-    // sortable: true,
     cell: ({ row }) =>
       h('div', { class: 'truncate  text-[16px]' }, row.getValue('Scientificname')),
     meta: { headerText: 'Latinskt namn' },
@@ -902,10 +834,8 @@ const desktopColumns = [
         }
       ),
     filterFn: (row, _columnId, filterValue) => {
-      // If no mark options are selected, return true (no filtering)
       if (!filterValue || filterValue.length === 0) return true;
       let match = false;
-      // Use row.original to check for marks
       if (filterValue.includes("KALKmark") && row.original.KALKmark) match = true;
       if (filterValue.includes("ANNANmark") && row.original.ANNANmark) match = true;
       return match;
@@ -1023,7 +953,6 @@ const desktopColumns = [
     },
     cell: ({ row }) => {
       const val = row.getValue(props.obs);
-      // Show rank badges when props.obs corresponds to rank fields
       if (props.obs.startsWith('Rank')) {
         if (val === 3) {
           return h('span', { class: 'text-red-700' }, 'Sällsynt');
@@ -1032,20 +961,18 @@ const desktopColumns = [
         }
         return null;
       }
-      // Default: show number of forests as before
       return h(UBadge, { variant: 'subtle', color: 'secondary' }, () => `${val} skogar`);
     },
     meta: { headerText: props.obsLabel },
   },
 ];
 
-// on mobile, single expanded Namn column with group icon and badges
+
 const mobileColumns = [
   {
     header: 'Namn',
     cell: ({ row }) => {
       const images = row.original.images || [];
-      // Determine rarity icon based on rank fields and filters
       let rarityIcon = null;
       const rankVal = props.filterPoison
         ? row.original['Rank giftsvamp']
@@ -1057,12 +984,11 @@ const mobileColumns = [
       } else if (rankVal === 2) {
         rarityIcon = h(Icon, { name: 'codicon:color-mode', class: 'text-yellow-600 ml-1 size-3.5' });
       }
-      // Species image column
       const imageComp = images.length
         ? h(NuxtImg, {
           src: images[0],
           alt: row.original.Commonname,
-          class: "h-20 w-26 object-cover rounded-sm border-[0.5px] border-neutral-200 dark:border-neutral-800 md:ml-2",
+          class: "h-20 w-26 object-cover rounded border-[0.5px] border-neutral-200 dark:border-neutral-800 md:ml-2",
           height: "300",
           width: "450",
           format: "webp"
@@ -1076,7 +1002,6 @@ const mobileColumns = [
             class: "w-6 h-6"
           }),
         ]);
-      // Icon and names
       const headerComp = h("div", { class: "flex items-center text-neutral-700 dark:text-neutral-200" }, [
         h("div", { class: "flex-1 min-w-0" }, [
           h("div", { class: "text-lg font-semibold whitespace-normal break-words" }, [
@@ -1086,7 +1011,6 @@ const mobileColumns = [
           h("small", { class: "text-xs text-neutral-500 dark:text-neutral-400 italic block truncate max-w-48" }, row.original.Scientificname)
         ])
       ]);
-      // Badges below icon and names, with matsvamp conditionally rendered
       const matVal = row.original[props.mat];
       const isMat = props.mat === "Nyasvamp-boken"
         ? matVal && String(matVal).toLowerCase() === 'x'
@@ -1095,25 +1019,12 @@ const mobileColumns = [
         ? h(UBadge, { color: "warning", variant: "subtle", size: "sm" }, () => "Matsvamp")
         : null;
       const badgesComp = h("div", { class: "flex flex-wrap gap-2 mt-2 " }, [
-        // Status badge
         (row.original.RL2020kat !== 'LC' && row.original.RL2020kat !== 'NA' && row.original.RL2020kat !== 'NE' && row.original.RL2020kat !== "0")
-          ? h(UBadge, { color: getStatusColor(row.original.RL2020kat), variant: "subtle", size: "sm" }, () => getStatusTooltip(row.original.RL2020kat))
+          ? h(UBadge, { color: getStatusColor(row.original.RL2020kat), variant: "subtle", size: "md" }, () => getStatusTooltip(row.original.RL2020kat))
           : null,
-        // Signalart badge
         row.original.SIGNAL_art === 'S'
-          ? h(UBadge, { color: "signal", variant: "subtle", size: "sm" }, () => "Signalart")
+          ? h(UBadge, { color: "signal", variant: "subtle", size: "md" }, () => "Signalart")
           : null,
-        // Mark badges
-        // row.original.KALKmark
-        //   ? h(UBadge, { color: "kalkmark", variant: "subtle", size: "sm" }, () => "Kalkmark")
-        //   : null,
-        // Matsvamp badge
-        // matsvampBadge,
-        // Giftsvamp badge
-        // row.original.Giftsvamp?.toLowerCase() === 'x'
-        //   ? h(UBadge, { color: "poison", variant: "subtle", size: "sm" }, () => "Giftsvamp")
-        //   : null,
-        // Show progress bar on mobile for count
         props.dataType === 'edna'
           ? h(UProgress, {
             modelValue: row.getValue(props.obs),
@@ -1203,16 +1114,6 @@ const fetchData = async () => {
       // 1) Assign each row a stable colorIndex based on its original position
       data.value.forEach((row, i) => {
         row.colorIndex = i;
-        // Remap rank values if they exist
-        // if (row.RankRed) {
-        //   row.RankRed = 4 - Number(row.RankRed);
-        // }
-        // if (row["Rank matsvamp"]) {
-        //   row["Rank matsvamp"] = 4 - Number(row["Rank matsvamp"]);
-        // }
-        // if (row["Rank giftsvamp"]) {
-        //   row["Rank giftsvamp"] = 4 - Number(row["Rank giftsvamp"]);
-        // }
       });
 
       // 2) Figure out how many total species we have
@@ -1256,6 +1157,7 @@ function generateRainbowColors(steps) {
 
 const envStore = useEnvParamsStore();
 
+
 watch(
   () => [
     envStore.geography,
@@ -1265,7 +1167,7 @@ watch(
   ],
   () => {
     // Clear previous data and show loading state immediately when parameters change
-    data.value = [];
+    // data.value = [];
     isLoading.value = true;
     fetchData();
   },

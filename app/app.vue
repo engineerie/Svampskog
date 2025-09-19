@@ -65,7 +65,8 @@ provide('blognavigation', blognavigation)
 
 <template>
   <UApp>
-    <!-- <UBanner class="hidden md:block" icon="i-fluent-emoji-high-contrast-construction" color="warning" title="Utvecklingsarbete och dokumentation pågår" /> -->
+    <UBanner class="" icon="i-fluent-emoji-high-contrast-construction" color="warning"
+      title="Utvecklingsarbete och dokumentation pågår. Genomarbetad version planeras till 1 nov" />
 
     <NuxtLoadingIndicator />
 

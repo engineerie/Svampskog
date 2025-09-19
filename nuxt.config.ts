@@ -1,6 +1,5 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
-
   modules: [
     "@nuxt/ui-pro",
     "@nuxt/content",
@@ -10,24 +9,12 @@ export default defineNuxtConfig({
     "nuxt-og-image",
     "@pinia/nuxt",
   ],
-   icon: {
+  icon: {
     clientBundle: {
-       icons: [
-        'lineicons:mushroom-1',],
-      // Scan your components for `<Icon name="…"/>` or `<UIcon name="…"/>`
+      icons: ["lineicons:mushroom-1"],
       scan: true,
-
-      // Also include any custom collections (your @iconify-json packages)
       includeCustomCollections: true,
-
-      // (Optional) If you prefer, list exactly which icons to bundle:
-      // icons: [
-      //   'lineicons:mushroom-1',
-      //   'hugeicons:tree-06',
-      //   'fluent-emoji-high-contrast:construction',
-      //   'heroicons:arrow-right',
-      // ],
-    }
+    },
   },
 
   content: {
@@ -38,8 +25,8 @@ export default defineNuxtConfig({
 
   vite: {
     server: {
-      cors: true
-    }
+      cors: true,
+    },
   },
 
   devtools: {
@@ -49,6 +36,7 @@ export default defineNuxtConfig({
   css: ["~/assets/css/main.css"],
 
   ui: {
+    colorMode: false,
     theme: {
       colors: [
         "primary",
@@ -69,16 +57,6 @@ export default defineNuxtConfig({
     },
   },
 
-  routeRules: {
-    // "/docs": { redirect: "/docs/guide", prerender: false },
-    // '/images/**': {
-    //   headers: {
-    //     'Access-Control-Allow-Origin': '*'
-    //   }
-    // },
-    // '/*': { cors: true, headers: { 'access-control-allow-methods': 'GET' } },
-  },
-
   future: {
     compatibilityVersion: 4,
   },
@@ -90,13 +68,6 @@ export default defineNuxtConfig({
       routes: ["/", "/docs", "/info"],
       crawlLinks: true,
     },
-    // routeRules: {
-    //   '/images/**': {
-    //     headers: {
-    //       'Access-Control-Allow-Origin': '*'
-    //     }
-    //   }
-    // },
   },
 
   eslint: {

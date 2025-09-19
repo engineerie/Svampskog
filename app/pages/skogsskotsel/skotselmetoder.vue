@@ -5,9 +5,10 @@
       <div class="snap-y snap-proximity scroll-smooth">
 
 
-        <!-- <UPageHero class="snap-start" title="Skogsskötsel" description="
-Här visualiserar vi baserat på den kunskap som finns hur olika former av trakthyggesbruk och hyggesfria metoder påverkar förekomsten av mykorrhizasvampar under en skogsgeneration.">  
-</UPageHero> -->
+        <UPageHero :ui="{ container: 'lg:py-24', title: 'sm:text-6xl', headline: 'text-neutral' }" title="Träd och svamp är beroende av varandra 
+" headline="Hur påverkar olika skogsskötsel svampar?" description="
+Lär dig hur trakthyggesbruk och olika former av hygesfria metoder kan påverka förekomsten av mykorrhizasvampar">
+        </UPageHero>
         <!-- <Transition name="">
       <div v-if="!selectedMethod">
              <h1 class="text-4xl font-semibold leading-loose">Skogsskötsel</h1>

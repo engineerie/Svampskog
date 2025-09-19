@@ -1,95 +1,61 @@
 <template>
-    <div class="relative">
-        <!-- <div class="absolute right-0 top-0 z-50">
+
+  <!-- <div class="absolute right-0 top-0 z-50">
             <UButton color="neutral" variant="subtle"
                 :icon="chartType === 'line' ? 'i-carbon-chart-column' : 'i-carbon-chart-line-smooth'"
                 @click="ToggleChartType" />
         </div> -->
 
-        <div class="custom-area" :style="{ '--vis-area-stroke-color': parentStrokeColor }"
->
-            <!-- <VisBulletLegend :items="legendItems" :onLegendItemClick="updateLegendItem" labelFontSize="small"
+  <div class="custom-area" ref="rootEl" :style="{ '--vis-area-stroke-color': parentStrokeColor }">
+    <!-- <VisBulletLegend :items="legendItems" :onLegendItemClick="updateLegendItem" labelFontSize="small"
                 bulletSize="0.7rem" class="p-5 pb-0"/> -->
-<VisXYContainer
-v-if="chartReady"
-  :key="chartKey"
-  :data="chartData"
-  :height="150"
-  :margin="margin"
-  :xDomain="xDomain"
-  :yDomain="yDomain"
->              
-<template v-if="props.chartType === 'area' && props.singleFrameworkSelection">
-  <VisArea
-    :x="xAccessor"
-    :y="stackedYAccessors"
-    :color="stackedColors"
-    :interpolateMissingData="true"
-    :duration="0"
-  />
-  <VisCrosshair :template="crosshairTemplate" />
-  <VisTooltip :horizontalShift="30" />
-</template>
-<template v-else-if="props.chartType === 'area'">
-  <VisArea
-    v-for="fw in activeFrameworks"
-    :key="fw.key + '-area'"
-    :x="xAccessor"
-    :y="(d: any) => {
-      const v = Number(d?.[fw.key])
-      return Number.isFinite(v) ? v : NaN
-    }"
-    :color="() => (fw.colorArea || fw.color)"
-    :interpolateMissingData="true"
-    :duration="0"
-  />
-  <VisLine
-    v-for="fw in activeFrameworks"
-    :key="fw.key + '-line'"
-    :x="xAccessor"
-    :y="(d: any) => {
-      const v = Number(d?.[fw.key])
-      return Number.isFinite(v) ? v : NaN
-    }"
-    :color="() => (fw.colorLine || fw.color)"
-    :lineDashArray="fw.lineDashArray"
-    :lineWidth="4"
-    :duration="0"
-  />
-  <VisCrosshair :template="crosshairTemplate" />
-  <VisTooltip :horizontalShift="30" />
-</template>
-                <template v-else-if="props.chartType === 'bar'">
-                    <VisGroupedBar :color="computedLineColors" :x="xAccessor" :y="yAccessors" :groupPadding="0.5"
-                        :groupMaxWidth="20" />
-                </template>
-  <VisBrush :selection="brushSelection" :handleWidth="0"  :draggable="false"/>
-                <VisAxis
-                :gridLine="true"
-  type="x"
-  :tickValues="[-5, 0, 1, 10, 20, 30, 40, 50, 60, 70, 80, 90]"
-  :tickFormat="(val: number) => {
-    if (val === -5) return 'före'
-    if (val === 0) return ''
-    if (val === 10) return ''
-    if (val === 30) return ''
-    if (val === 40) return ''
-    if (val === 60) return ''
-    if (val === 70) return ''
-    if (val === 90) return ''
-    return val + ' år'
-  }"
-/>
-                <VisAxis type="y"  />
-            </VisXYContainer>
-        </div>
-    </div>
+    <ClientOnly>
+      <VisXYContainer v-if="isMounted && chartReady" :data="chartData" :height="200" :margin="margin" :xDomain="xDomain"
+        :yDomain="yDomain">
+        <template v-if="props.chartType === 'area' && props.singleFrameworkSelection">
+          <VisArea :x="xAccessor" :y="stackedYAccessors" :color="stackedColors" :interpolateMissingData="true" />
+          <VisCrosshair :template="crosshairTemplate" />
+          <VisTooltip :horizontalShift="30" />
+        </template>
+        <template v-else-if="props.chartType === 'area'">
+          <VisArea v-for="fw in activeFrameworks" :key="fw.key + '-area'" :x="xAccessor" :y="(d: any) => {
+            const v = Number(d?.[fw.key])
+            return Number.isFinite(v) ? v : NaN
+          }" :color="() => (fw.colorArea || fw.color)" :interpolateMissingData="true" />
+          <!-- <VisLine v-for="fw in activeFrameworks" :key="fw.key + '-line'" :x="xAccessor" :y="(d: any) => {
+            const v = Number(d?.[fw.key])
+            return Number.isFinite(v) ? v : NaN
+          }" :color="() => (fw.colorLine || fw.color)" :lineDashArray="fw.lineDashArray" :lineWidth="4" /> -->
+          <VisCrosshair :template="crosshairTemplate" />
+          <VisTooltip :horizontalShift="30" />
+        </template>
+        <template v-else-if="props.chartType === 'bar'">
+          <VisGroupedBar :color="computedLineColors" :x="xAccessor" :y="yAccessors" :groupPadding="0.5"
+            :groupMaxWidth="20" />
+        </template>
+        <!-- <VisBrush :selection="brushSelection" :handleWidth="0" :draggable="false" /> -->
+        <VisAxis :gridLine="true" type="x" :tickValues="[-5, 0, 1, 10, 20, 30, 40, 50, 60, 70, 80, 90]" :tickFormat="(val: number) => {
+          if (val === -5) return 'före'
+          if (val === 0) return ''
+          if (val === 10) return ''
+          if (val === 30) return ''
+          if (val === 40) return ''
+          if (val === 60) return ''
+          if (val === 70) return ''
+          if (val === 90) return ''
+          return val + ' år'
+        }" />
+        <VisAxis type="y" />
+      </VisXYContainer>
+    </ClientOnly>
+  </div>
+
 
 </template>
 
 <script setup lang="ts">
 
-import { computed, ref } from 'vue'
+import { computed, ref, onMounted, onBeforeUnmount, nextTick } from 'vue'
 import { VisXYContainer, VisAxis, VisLine, VisArea, VisGroupedBar, VisBulletLegend, VisBrush, VisCrosshair, VisTooltip } from '@unovis/vue'
 import type { BulletLegendItemInterface } from '@unovis/ts'
 import rawData from 'public/SvamparSkogsbruk.json'
@@ -135,63 +101,87 @@ const parentStrokeColor = computed(() => {
   return '#000000'; // fallback or neutral if multiple
 });
 
-const margin = { left: 10, right: 10, top:10, bottom: 10 }
+const margin = { left: 10, right: 10, top: 10, bottom: 10 }
+
+const rootEl = ref<HTMLElement | null>(null)
+const isMounted = ref(false)
+let __ro: ResizeObserver | null = null
+
+onMounted(async () => {
+  await nextTick()
+  isMounted.value = true
+  // Nudge Safari to paint after real layout
+  requestAnimationFrame(() => {
+    void rootEl.value?.offsetWidth
+  })
+  if (typeof window !== 'undefined' && 'ResizeObserver' in window) {
+    __ro = new ResizeObserver(() => {
+      // Read size to trigger a fresh paint when container changes
+      void rootEl.value?.offsetWidth
+    })
+    if (rootEl.value) __ro.observe(rootEl.value)
+  }
+})
+
+onBeforeUnmount(() => {
+  if (__ro) { __ro.disconnect(); __ro = null }
+})
 
 const inactiveArtkategoriKeys = ref<Set<string>>(new Set());
 const inactiveFrameworkKeys = ref<Set<string>>(new Set());
 
 
-    
+
 interface Props {
-    selectedFrameworks: string[],
-    selectedArtkategori: string[],
-    chartType: string,
-    currentTimeValue?: string
-    singleFrameworkSelection?: boolean,
-    selectedStartskog?: string, // <-- Add this
-    redColor?: boolean,
-    yellowColor?: boolean,
-    maxYValue?: number // <-- Add this
+  selectedFrameworks: string[],
+  selectedArtkategori: string[],
+  chartType: string,
+  currentTimeValue?: string
+  singleFrameworkSelection?: boolean,
+  selectedStartskog?: string, // <-- Add this
+  redColor?: boolean,
+  yellowColor?: boolean,
+  maxYValue?: number // <-- Add this
 }
 
 const props = withDefaults(defineProps<Props>(), {
-    selectedFrameworks: () => [],
-    singleFrameworkSelection: false,
-    redColor: false,
-    yellowColor: false
+  selectedFrameworks: () => [],
+  singleFrameworkSelection: false,
+  redColor: false,
+  yellowColor: false
 });
 
 const frameworkColorMapping = computed(() => {
-    if (props.redColor) {
-        return {
-            naturskydd: "#808080",
-            trakthygge: "#7f1d1d",
-            "skärmträd": "#b91c1c",
-            luckhuggning: "#f87171",
-            blädning: "#fca5a5",
-        };
-    } else if (props.yellowColor) {
-        return {
-            naturskydd: "#808080",
-            trakthygge: "#713f12",
-            "skärmträd": "#a16207",
-            luckhuggning: "#eab308",
-            blädning: "#fde047",
-        };
-    } else {
-        return {
-            naturskydd: "#808080",
-            trakthygge: "#a855f7",
-            luckhuggning: "#3b82f6",
-            "skärmträd": "#eab308",
-            blädning: "#22c55e",
-        };
-    }
+  if (props.redColor) {
+    return {
+      naturskydd: "#808080",
+      trakthygge: "#7f1d1d",
+      "skärmträd": "#b91c1c",
+      luckhuggning: "#f87171",
+      blädning: "#fca5a5",
+    };
+  } else if (props.yellowColor) {
+    return {
+      naturskydd: "#808080",
+      trakthygge: "#713f12",
+      "skärmträd": "#a16207",
+      luckhuggning: "#eab308",
+      blädning: "#fde047",
+    };
+  } else {
+    return {
+      naturskydd: "#808080",
+      trakthygge: "#a855f7",
+      luckhuggning: "#3b82f6",
+      "skärmträd": "#eab308",
+      blädning: "#22c55e",
+    };
+  }
 });
 
-function hexToRgba (hex: string, alpha = 1): string {
-  const m = hex.replace('#','')
-  const s = m.length === 3 ? m.split('').map(c=>c+c).join('') : m
+function hexToRgba(hex: string, alpha = 1): string {
+  const m = hex.replace('#', '')
+  const s = m.length === 3 ? m.split('').map(c => c + c).join('') : m
   const bigint = parseInt(s, 16)
   const r = (bigint >> 16) & 255
   const g = (bigint >> 8) & 255
@@ -213,37 +203,37 @@ const brushSelection = computed<[number, number]>(() => {
 })
 
 const artkategoriColorMapping: Record<string, string> = {
-    "skinnsvampar": "#8B5CF6",
-    "spindelskivlingar": "#EC4899",
-    "kremlor och riskor": "#0EA5E9",
-    "övriga svampar": "#5eead4",
-    "matsvamp": "#eab308",
-    "rödlistade + signalarter": "#5eead4",
-    "total": "#808080"
+  "skinnsvampar": "#8B5CF6",
+  "spindelskivlingar": "#EC4899",
+  "kremlor och riskor": "#0EA5E9",
+  "övriga svampar": "#5eead4",
+  "matsvamp": "#eab308",
+  "rödlistade + signalarter": "#5eead4",
+  "total": "#808080"
 };
 
 type LegendItem = BulletLegendItemInterface & {
-    key: string;
-    label: string;
-    color: string; // default color
-    colorArea?: string; // fill color for VisArea
-    colorLine?: string; // stroke color for VisLine
-    lineDashArray?: number[]; // for VisLine (Unovis prop)
-    isSecondary?: boolean;
-    inactive: boolean;
+  key: string;
+  label: string;
+  color: string; // default color
+  colorArea?: string; // fill color for VisArea
+  colorLine?: string; // stroke color for VisLine
+  lineDashArray?: number[]; // for VisLine (Unovis prop)
+  isSecondary?: boolean;
+  inactive: boolean;
 };
 
 function mapFrameworkLabel(label: string): string {
-    const lower = label.toLowerCase();
-    if (lower === "naturskydd") {
-        return "Ingen åtgärd";
-    } else if (lower === "trakthygge") {
-        return "Trakhyggesbruk";
-    } else if (lower === "skärmträd") {
-        return "Överhållen skärm";
-    } else {
-        return capitalize(label);
-    }
+  const lower = label.toLowerCase();
+  if (lower === "naturskydd") {
+    return "Ingen åtgärd";
+  } else if (lower === "trakthygge") {
+    return "Trakhyggesbruk";
+  } else if (lower === "skärmträd") {
+    return "Överhållen skärm";
+  } else {
+    return capitalize(label);
+  }
 }
 
 const legendOrder = ["naturskydd", "trakthygge", "skärmträd", "luckhuggning", "blädning"];
@@ -260,7 +250,7 @@ const originalSeriesMap = computed<Record<string, Array<{ age: number; value: nu
   for (const key of activeFrameworkKeys.value) {
     const s = filterDataForFramework(key).map(d => ({ age: Number(d.age), value: Number(d.klassning) }))
       .filter(p => Number.isFinite(p.age) && Number.isFinite(p.value))
-      .sort((a,b) => a.age - b.age)
+      .sort((a, b) => a.age - b.age)
     out[key] = s
   }
   return out
@@ -275,7 +265,7 @@ const allAges = computed<number[]>(() => {
   const minAge = Math.min(...mins)
   const maxAge = Math.max(...maxs)
   if (!Number.isFinite(minAge) || !Number.isFinite(maxAge)) return []
-  const out:number[] = []
+  const out: number[] = []
   const step = 1
   for (let a = minAge; a <= maxAge + 1e-9; a += step) {
     // round to nearest integer to avoid FP drift
@@ -344,39 +334,39 @@ const singleFrameworkOverrideColor = computed<string | null>(() => {
 })
 
 const legendItems = computed<LegendItem[]>(() => {
-    if (props.singleFrameworkSelection) {
-        return props.selectedArtkategori.map(art => {
-            const key = art.toLowerCase();
-            return {
-                key,
-                name: capitalize(art),
-                label: capitalize(art),
-                color: artkategoriColorMapping[key] || "#000000",
-                inactive: inactiveArtkategoriKeys.value.has(key),
-            };
-        });
-      } else {
+  if (props.singleFrameworkSelection) {
+    return props.selectedArtkategori.map(art => {
+      const key = art.toLowerCase();
+      return {
+        key,
+        name: capitalize(art),
+        label: capitalize(art),
+        color: artkategoriColorMapping[key] || "#000000",
+        inactive: inactiveArtkategoriKeys.value.has(key),
+      };
+    });
+  } else {
     const keys = activeFrameworkKeys.value
     // Base color used when only one framework is shown (depends on selected artkategori)
     const primaryCat = (props.selectedArtkategori?.[0] || '').toLowerCase()
     const singleColor = primaryCat === 'total' ? '#808080'
-                      : primaryCat === 'matsvamp' ? '#eab308'
-                      : primaryCat === 'rödlistade + signalarter' ? '#5eead4'
-                      : null
+      : primaryCat === 'matsvamp' ? '#eab308'
+        : primaryCat === 'rödlistade + signalarter' ? '#5eead4'
+          : null
 
     if (keys.length === 2) {
       const [k1, k2] = keys
       const base1 = singleColor || frameworkColorMapping.value[k1] || '#000000'
       const base2 = '#0a0a0a'
       return [
-          {
+        {
           key: k1,
           name: mapFrameworkLabel(k1),
           label: mapFrameworkLabel(k1),
           color: base1,
           colorArea: hexToRgba(base1, 0.5), // faint area fill
           colorLine: hexToRgba(base1, 0.5),
-          
+
           inactive: inactiveFrameworkKeys.value.has(k1),
           isSecondary: true,
         },
@@ -385,13 +375,13 @@ const legendItems = computed<LegendItem[]>(() => {
           name: mapFrameworkLabel(k2),
           label: mapFrameworkLabel(k2),
           color: base2,
-           colorArea: hexToRgba(base2, 0.5), // faint area fill
+          colorArea: hexToRgba(base2, 0.5), // faint area fill
           colorLine: hexToRgba(base2, 0.5),
           lineDashArray: [5],     // dashed line (same as your example)
           inactive: inactiveFrameworkKeys.value.has(k2),
           isSecondary: false,
         },
-      
+
       ]
     }
 
@@ -411,62 +401,62 @@ const legendItems = computed<LegendItem[]>(() => {
 });
 
 const activeFrameworks = computed(() => {
-    if (props.singleFrameworkSelection) return [];
+  if (props.singleFrameworkSelection) return [];
 
-    return legendItems.value.filter(item => !item.inactive);
+  return legendItems.value.filter(item => !item.inactive);
 });
 
 function filterDataForFramework(framework: string) {
-    const selected = props.selectedArtkategori.map(s => s.toLowerCase());
+  const selected = props.selectedArtkategori.map(s => s.toLowerCase());
 
-    const source = selected.includes('total') ? totalSvamparData : rawData;
+  const source = selected.includes('total') ? totalSvamparData : rawData;
 
-    return (source as any[]).filter(d =>
-        selected.includes(d.artkategori?.toLowerCase()) &&
-        d.frameworks?.toLowerCase() === framework.toLowerCase() &&
-        d.startskog?.toLowerCase() === props.selectedStartskog?.toLowerCase()
-    ).map(d => ({
-        age: d["ålder"],
-        klassning: +d["klassning"]
-    }));
+  return (source as any[]).filter(d =>
+    selected.includes(d.artkategori?.toLowerCase()) &&
+    d.frameworks?.toLowerCase() === framework.toLowerCase() &&
+    d.startskog?.toLowerCase() === props.selectedStartskog?.toLowerCase()
+  ).map(d => ({
+    age: d["ålder"],
+    klassning: +d["klassning"]
+  }));
 }
 
 
 const mergedData = computed(() => {
-    const dataMap = new Map<number, any>();
+  const dataMap = new Map<number, any>();
 
-    if (props.singleFrameworkSelection) {
-        const framework = props.selectedFrameworks[0];
-        props.selectedArtkategori.forEach(artkategori => {
-            const selected = artkategori.toLowerCase();
-            const source = selected === 'total' ? totalSvamparData : rawData;
-            const series = (source as any[]).filter(d =>
-                d.artkategori?.toLowerCase() === selected &&
-                d.frameworks?.toLowerCase() === framework &&
-                d.startskog?.toLowerCase() === props.selectedStartskog?.toLowerCase()
-            ).map(d => ({
-                age: d["ålder"],
-                klassning: +d["klassning"]
-            }));
+  if (props.singleFrameworkSelection) {
+    const framework = props.selectedFrameworks[0];
+    props.selectedArtkategori.forEach(artkategori => {
+      const selected = artkategori.toLowerCase();
+      const source = selected === 'total' ? totalSvamparData : rawData;
+      const series = (source as any[]).filter(d =>
+        d.artkategori?.toLowerCase() === selected &&
+        d.frameworks?.toLowerCase() === framework &&
+        d.startskog?.toLowerCase() === props.selectedStartskog?.toLowerCase()
+      ).map(d => ({
+        age: d["ålder"],
+        klassning: +d["klassning"]
+      }));
 
-            series.forEach(item => {
-                const existing = dataMap.get(item.age) || { age: item.age };
-                existing[selected] = item.klassning;
-                dataMap.set(item.age, existing);
-            });
-        });
-    } else {
-        activeFrameworks.value.forEach(framework => {
-            const series = filterDataForFramework(framework.key);
-            series.forEach(item => {
-                const existing = dataMap.get(item.age) || { age: item.age };
-                existing[framework.key] = item.klassning;
-                dataMap.set(item.age, existing);
-            });
-        });
-    }
+      series.forEach(item => {
+        const existing = dataMap.get(item.age) || { age: item.age };
+        existing[selected] = item.klassning;
+        dataMap.set(item.age, existing);
+      });
+    });
+  } else {
+    activeFrameworks.value.forEach(framework => {
+      const series = filterDataForFramework(framework.key);
+      series.forEach(item => {
+        const existing = dataMap.get(item.age) || { age: item.age };
+        existing[framework.key] = item.klassning;
+        dataMap.set(item.age, existing);
+      });
+    });
+  }
 
-    return Array.from(dataMap.values()).sort((a, b) => a.age - b.age);
+  return Array.from(dataMap.values()).sort((a, b) => a.age - b.age);
 });
 
 const xAccessor = (d: any) => {
@@ -476,43 +466,43 @@ const xAccessor = (d: any) => {
 const markerAccessor = (d: any) => d.__markerY
 
 const yAccessors = computed(() => {
-    if (props.singleFrameworkSelection) {
-        return props.selectedArtkategori
-            .filter(art => !inactiveArtkategoriKeys.value.has(art.toLowerCase()))
-            .map(art => (d: any) => d[art.toLowerCase()]);
-    } else {
-        return activeFrameworks.value.map(item => {
-            return (d: any) => d[item.key];
-        });
-    }
+  if (props.singleFrameworkSelection) {
+    return props.selectedArtkategori
+      .filter(art => !inactiveArtkategoriKeys.value.has(art.toLowerCase()))
+      .map(art => (d: any) => d[art.toLowerCase()]);
+  } else {
+    return activeFrameworks.value.map(item => {
+      return (d: any) => d[item.key];
+    });
+  }
 });
 
 const computedLineColors = computed(() => {
-    if (props.singleFrameworkSelection) {
-        return legendItems.value
-            .filter(item => !item.inactive)
-            .map(item => item.color || "#000000");
-    } else {
-        return activeFrameworks.value.map(f => f.color || "#000000");
-    }
+  if (props.singleFrameworkSelection) {
+    return legendItems.value
+      .filter(item => !item.inactive)
+      .map(item => item.color || "#000000");
+  } else {
+    return activeFrameworks.value.map(f => f.color || "#000000");
+  }
 });
 
 function updateLegendItem(d: BulletLegendItemInterface) {
-    const key = d.name?.toLowerCase();
-    if (!key) return;
+  const key = d.name?.toLowerCase();
+  if (!key) return;
 
-    if (props.singleFrameworkSelection) {
-        const current = new Set(inactiveArtkategoriKeys.value);
-        current.has(key) ? current.delete(key) : current.add(key);
-        inactiveArtkategoriKeys.value = current;
-    } else {
-        const frameworkKey = legendOrder.find(f => mapFrameworkLabel(f).toLowerCase() === key);
-        if (!frameworkKey) return;
+  if (props.singleFrameworkSelection) {
+    const current = new Set(inactiveArtkategoriKeys.value);
+    current.has(key) ? current.delete(key) : current.add(key);
+    inactiveArtkategoriKeys.value = current;
+  } else {
+    const frameworkKey = legendOrder.find(f => mapFrameworkLabel(f).toLowerCase() === key);
+    if (!frameworkKey) return;
 
-        const current = new Set(inactiveFrameworkKeys.value);
-        current.has(frameworkKey) ? current.delete(frameworkKey) : current.add(frameworkKey);
-        inactiveFrameworkKeys.value = current;
-    }
+    const current = new Set(inactiveFrameworkKeys.value);
+    current.has(frameworkKey) ? current.delete(frameworkKey) : current.add(frameworkKey);
+    inactiveFrameworkKeys.value = current;
+  }
 }
 
 // Unovis stacked areas require an array of y accessors (one per series)
@@ -538,22 +528,22 @@ const chartData = computed(() => {
 const crosshairTemplate = (d: any): string => {
   if (!d) return ''
   const age = d.age
-    if (!Number.isFinite(Number(age))) return ''
-const formatAge = (x:number) => (Number.isInteger(x) ? `${x}` : `${x}`.replace('.5', ',5'))
-const xLabel = age === -5 ? 'före' : (age === 1 ? '1 år' : `${formatAge(age)} år`)
+  if (!Number.isFinite(Number(age))) return ''
+  const formatAge = (x: number) => (Number.isInteger(x) ? `${x}` : `${x}`.replace('.5', ',5'))
+  const xLabel = age === -5 ? 'före' : (age === 1 ? '1 år' : `${formatAge(age)} år`)
 
   // Decide which series to show: frameworks (default) or artkategorier (singleFrameworkSelection)
   const series = props.singleFrameworkSelection
     ? props.selectedArtkategori.map(art => ({
-        key: art.toLowerCase(),
-        label: capitalize(art),
-        color: artkategoriColorMapping[art.toLowerCase()] || '#999'
-      }))
+      key: art.toLowerCase(),
+      label: capitalize(art),
+      color: artkategoriColorMapping[art.toLowerCase()] || '#999'
+    }))
     : activeFrameworks.value.map(fw => ({
-        key: fw.key,
-        label: mapFrameworkLabel(fw.key),
-        color: fw.color || '#999'
-      }))
+      key: fw.key,
+      label: mapFrameworkLabel(fw.key),
+      color: fw.color || '#999'
+    }))
 
   // Build rows only for series that have a value at this X
   const rows = series
@@ -580,23 +570,38 @@ const xLabel = age === -5 ? 'före' : (age === 1 ? '1 år' : `${formatAge(age)} 
 </script>
 
 <style>
-.custom-area{
---vis-area-fill-opacity: 0.5;
---vis-area-hover-fill-opacity: 0.5;
---vis-area-stroke-width: 0px;
---vis-brush-handle-stroke-color: #ffffff00;
---vis-axis-tick-color: #a3a3a37c;
---vis-axis-grid-color: #a3a3a324;
---vis-axis-tick-label-font-size: 18px;
---vis-axis-tick-label-color: #a3a3a3;
---vis-area-hover-stroke-width: 0px;
+.custom-area {
+  --vis-area-fill-opacity: 0.5;
+  --vis-area-hover-fill-opacity: 0.5;
+  --vis-area-stroke-width: 0px;
+  --vis-brush-handle-stroke-color: #ffffff00;
+  --vis-axis-tick-color: #a3a3a37c;
+  --vis-axis-grid-color: #a3a3a324;
+  --vis-axis-tick-label-font-size: 18px;
+  --vis-axis-tick-label-color: #a3a3a3;
+  --vis-area-hover-stroke-width: 0px;
 
---vis-tooltip-background-color: rgba(255, 255, 255, 0.95);
---vis-tooltip-border-color: #e5e9f7;
---vis-tooltip-text-color: #000;
---vis-tooltip-shadow-color: rgba(172, 179, 184, 0.35);
---vis-tooltip-backdrop-filter: none;
---vis-tooltip-padding: 10px 15px;
+  --vis-tooltip-background-color: rgba(255, 255, 255, 0.95);
+  --vis-tooltip-border-color: #e5e9f7;
+  --vis-tooltip-text-color: #000;
+  --vis-tooltip-shadow-color: rgba(172, 179, 184, 0.35);
+  --vis-tooltip-backdrop-filter: none;
+  --vis-tooltip-padding: 10px 15px;
 
+  /* Ensure series visibly paint above overlays */
+  --vis-line-stroke-width: 3px;
+  --vis-line-stroke-opacity: 1;
+
+
+}
+
+/* Safari SVG layout nudges */
+.custom-area {
+  isolation: isolate;
+}
+
+.custom-area svg {
+  display: block;
+  width: 100%;
 }
 </style>

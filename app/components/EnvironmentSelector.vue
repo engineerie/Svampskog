@@ -1,251 +1,171 @@
 <template>
-  <!-- Preload all images so they are included in static prerender -->
-  <div class="hidden">
-    <NuxtImg v-for="(src, key) in imageMap" :key="key" :src="src" width="300" height="180" format="webp" quality="80"
-      preload />
-  </div>
-<div  :class="['block md:hidden relative transition-height overflow-scroll', mobileCollapsed ? 'h-14' : 'h-13']">
-  <div :class="[' z-20 bg-white dark:bg-neutral-950 border-b border-neutral-200 dark:border-neutral-800 fixed left-0 right-0 transition-height', mobileCollapsed ? 'h-14' : 'h-14']">
-    <Transition name="fade" mode="out-in">
-      
-      <UModal :overlay="false" title="Välj miljö"  :ui="{body: 'p-0', title: 'text-2xl'}" >
-      <div class="flex justify-between w-full mx-auto max-w-full ">
-        <div class="flex gap-2 p-2 overflow-scroll" @click="toggleMobileCollapsed">
-          <UBadge
-            v-for="category in categories"
-            :key="category.key"
-            size="xl"
-            variant="outline"
-            color="neutral"
-            class=" text-lg"
-            truncate
-            :label="getLabel(category.key) || category.defaultLabel"
-          >
-          </UBadge>
-        </div>
-      </div>
-      <template #body>
-<div class=" w-full max-w-full p-3">
-        <!-- Use enabledOptions for USelect items as well -->
-        <USelect
-          size="xl"
-          v-for="category in categories"
-          :key="category.key"
-          :items="enabledOptions[category.key]"
-          v-model="envStore[category.key]"
-          :placeholder="category.defaultLabel"
-          class="flex-1 w-full my-1 text-lg"
-          append-to-body
-          variant="outline"
-        >
-          <template #item="{ item }">
-            <div class="flex flex-col">
-              <div class="text-lg font-medium">{{ item.label }}</div>
-              <div v-if="item.description" class="text-sm text-neutral-500">
-                {{ item.description }}
-              </div>
-            </div>
-          </template>
-        </USelect>
-          <div class="grid grid-cols-2 gap-2 mt-1 mb-2">
-<UButton size="xl" trailing :icon="restrictionEnabled ? 'mdi:lock' : 'mdi:lock-open'" @click="toggleRestriction"
-          shape="full" class="transition-all shrink-0" variant="ghost" :color="restrictionEnabled ? 'secondary' : 'neutral'">
-          {{ restrictionEnabled ? "DNA-data" : "DNA-data" }}
-        </UButton>
-        <UModal fullscreen title="Kombinationer" class="w-full">
-          <UButton size="xl" shape="full" trailing icon="mdi:apps" color="neutral" variant="outline">
-            Kombinationer
-          </UButton>
-          <template #body>
-            <UButton size="xl" trailing :icon="restrictionEnabled ? 'mdi:lock' : 'mdi:lock-open'" @click="toggleRestriction"
-          shape="full" class="transition-all shrink-0 mb-2 w-full" variant="soft" :color="restrictionEnabled ? 'secondary' : 'neutral'">
-          {{ restrictionEnabled ? "Begränsar till där det finns DNA-data" : "Inkluderar miljöer utan DNA-data" }}
-        </UButton>
-            <div class="grid gap-2 ">
-              <UCard v-for="category in categories" :key="category.key" variant="soft">
-                <div v-for="option in enabledOptions[category.key]" :key="option.value"
-                  class="flex justify-between mb-2 text-neutral-500 items-center">
-                  <label :for="`${category.key}-${option.value}`"
-                    :class="{ 'opacity-40 cursor-not-allowed': option.disabled, 'cursor-pointer': !option.disabled }"
-                    class="text-lg">
-                    {{ option.label }}
-                  </label>
-                  <UCheckbox
-                    :id="`${category.key}-${option.value}`"
-                    color="primary"
-                    :model-value="envStore[category.key] === option.value"
-                    @update:model-value="() => { if (!option.disabled) selectOption(category.key, option.value) }"
-                    :disabled="option.disabled"
-                  />
-                </div>
-              </UCard>
-            </div>
-          </template>
-        </UModal>
+  <div v-if="isMobile"
+    :class="[' block relative overflow-scroll -mx-4 w-screen', geography && forestType && standAge && vegetationType ? 'h-14' : 'h-0']">
+    <div
+      :class="['pt-0.5 top-16 z-20 w-screen inset-0 bg-neutral-50 dark:bg-neutral-950  dark:border-neutral-800 transition-height', mobileCollapsed ? 'h-14' : 'h-14']">
+      <UModal :overlay="true" title="Välj miljö" :ui="{ body: 'p-0', title: 'text-2xl' }">
+        <div class="flex justify-between w-full mx-auto max-w-full ">
+          <div class="flex gap-2 p-2 overflow-scroll">
+            <UBadge v-for="category in categories" :key="category.key" size="xl" variant="outline" color="neutral"
+              class=" text-lg" truncate :label="getLabel(category.key) || category.defaultLabel">
+            </UBadge>
           </div>
-        
-        <!-- <div class="flex justify-end">
-           <UButton @click="toggleMobileCollapsed" trailing icon=""
-          shape="full" class="transition-all" variant="soft" color="neutral">
-          Dölj
-        </UButton>
-        </div> -->
-        <!-- <div class="w-full"> 
-          <EnvImgInfo
-          v-if=" geography && forestType && standAge && vegetationType"
-      class="md:hidden w-full"
-        :geography="geography"
-        :forestType="forestType"
-        :standAge="standAge"
-        :vegetationType="vegetationType"
-      /></div> -->
-        <!-- <div class="flex gap-2 w-full mt-2"><UButton class="w-full" color="tertiary">Visa svampar baserat på samlad kunskap</UButton><UButton color="secondary" class="w-full">Visa svampar baserat på DNA-analyser</UButton> 
-          </div> -->
-      </div>
-      </template>
+        </div>
+        <template #body>
+          <div class=" w-full max-w-full p-4">
+            <!-- Use enabledOptions for USelect items as well -->
+            <USelect size="xl" v-for="category in categories" :key="category.key" :items="enabledOptions[category.key]"
+              v-model="envStore[category.key]" :placeholder="category.defaultLabel" class=" w-full my-1 text-lg"
+              variant="outline">
+              <template #item="{ item }">
+                <div class="flex flex-col">
+                  <div class="text-lg font-medium">{{ item.label }}</div>
+                  <div v-if="item.description" class="text-sm text-neutral-500">
+                    {{ item.description }}
+                  </div>
+                </div>
+              </template>
+            </USelect>
+            <div class="grid grid-cols-2 gap-2 mt-1 mb-2">
+              <UButton label="DNA-data" size="xl" trailing :icon="restrictionEnabled ? 'mdi:lock' : 'mdi:lock-open'"
+                @click="toggleRestriction" variant="subtle" :color="restrictionEnabled ? 'secondary' : 'neutral'" />
+
+              <UModal fullscreen title="Kombinationer" class="w-full" :ui="{ title: 'text-2xl' }">
+                <UButton label="Kombinationer" size="xl" shape="full" trailing icon="mdi:apps" color="neutral"
+                  variant="outline" />
+                <template #body>
+                  <UButton size="xl" trailing :icon="restrictionEnabled ? 'mdi:lock' : 'mdi:lock-open'"
+                    @click="toggleRestriction" shape="full" class="transition-all shrink-0 mb-2 w-full" variant="soft"
+                    :color="restrictionEnabled ? 'secondary' : 'neutral'">
+                    {{ restrictionEnabled ? "Begränsar till där det finns DNA-data" : "Inkluderar alla miljöer" }}
+                  </UButton>
+                  <div class="grid gap-2 ">
+                    <UCard v-for="category in categories" :key="category.key" variant="soft">
+                      <div v-for="option in enabledOptions[category.key]" :key="option.value"
+                        class="flex justify-between mb-2 text-neutral-500 items-center">
+                        <label :for="`${category.key}-${option.value}`"
+                          :class="{ 'opacity-40 cursor-not-allowed': option.disabled, 'cursor-pointer': !option.disabled }"
+                          class="text-lg">
+                          {{ option.label }}
+                        </label>
+                        <UCheckbox :id="`${category.key}-${option.value}`" color="primary"
+                          :model-value="envStore[category.key] === option.value"
+                          @update:model-value="() => { if (!option.disabled) selectOption(category.key, option.value) }"
+                          :disabled="option.disabled" />
+                      </div>
+                    </UCard>
+                  </div>
+                </template>
+              </UModal>
+            </div>
+            <Transition name="fade" mode="out-in">
+              <SpatialForest class="rounded overflow-hidden border border-neutral-200 h-fit" />
+            </Transition>
+          </div>
+        </template>
       </UModal>
-    </Transition>
+    </div>
   </div>
-</div>
-      
-  <div class="md:pt-4 pt-2 hidden md:block">
-    <!-- Original EnvironmentSelector content -->
-      
+
+  <div v-if="!isMobile" class="md:pt-4 pt-2 block">
     <div ref="contentRef" class="original-content w-full">
       <!-- Parameter Popover Grid -->
-       
+
       <div class="grid grid-cols-12 md:gap-4 gap-2 mb-4 ">
-        
-        <UCard class=" relative h-full col-span-9 items-center " variant="soft" > 
-      <div class="flex ">
-
-      
-        <div v-for="category in categories" :key="category.key" class="flex md:justify-center w-full m-3 mb-8">
-          <UPopover :content="{
-                    align: 'start',
-                    side: 'bottom',
-                  }">
-            <div>
-              <transition name="slide-up" mode="out-in">
-                <div :key="getLabel(category.key)" class="flex items-center md:justify-center cursor-pointer">
-                  <div class="md:text-center">
-                    <h1 class="text-neutral-500">{{ category.title }}</h1>
-                    <h1 class="md:text-2xl font-medium">
-                      {{ getLabel(category.key) || category.defaultLabel }}
-                    </h1>
-                  </div>
-                </div>
-              </transition>
-            </div>
-            <template #content>
-              <div class="px-2 py-1 min-w-60 max-w-96">
-                <!-- Use enabledOptions so that restriction applies here -->
-                <div v-for="option in enabledOptions[category.key]" :key="option.value">
-                  <UPopover :open-delay="300" mode="hover" v-if="imageMap[option.value]" :content="{
-                    align: 'start',
-                    side: 'left',
-                    sideOffset: 1
-                  }">
-                    <div class="hover:bg-neutral-50 p-3 rounded-sm overflow-hidden my-1 cursor-pointer" :class="{
-                      'bg-neutral-100': option.value === envStore[category.key],
-                      'opacity-40 cursor-not-allowed': option.disabled
-                    }" @click="() => { if (!option.disabled) selectOption(category.key, option.value) }">
-                      <h1 class="text-md font-semibold text-neutral-900">
-                        {{ option.label }}
-                      </h1>
-                      <p class="text-sm text-neutral-500 font-light">
-                        {{ option.description || '' }}
-                      </p>
+        <UCard
+          :class="[' relative h-full col-span-9 items-center ring-0', geography && forestType && standAge && vegetationType ? 'col-span-9' : 'col-span-12']">
+          <div class="flex ">
+            <div v-for="category in categories" :key="category.key" class="flex md:justify-center w-full m-3 mb-8">
+              <UPopover :content="{
+                align: 'start',
+                side: 'bottom',
+              }">
+                <div class="w-full">
+                  <transition name="slide-up" mode="out-in">
+                    <div :key="getLabel(category.key)"
+                      class="flex items-center md:justify-center cursor-pointer hover:bg-neutral-50 py-4 rounded-xl w-full">
+                      <div class="md:text-center">
+                        <h1 class="text-neutral-500">{{ category.title }}</h1>
+                        <h1 class="md:text-2xl font-medium">
+                          {{ getLabel(category.key) || category.defaultLabel }}
+                        </h1>
+                      </div>
                     </div>
-                    <template #content>
-                      <NuxtImg :src="imageMap[option.value]" class="rounded-sm max-w-xs max-h-52 object-cover"
-                        width="300" height="180" format="webp" quality="80" />
-                    </template>
-                  </UPopover>
-
-                  <div v-else :key="option.value" class="hover:bg-neutral-50 p-3 rounded-md my-1 cursor-pointer" :class="{
-                    'bg-neutral-100': option.value === envStore[category.key],
-                    'opacity-40 cursor-not-allowed': option.disabled
-                  }" @click="() => { if (!option.disabled) selectOption(category.key, option.value) }">
-                    <h1 class="text-md font-semibold text-neutral-900">
-                      {{ option.label }}
-                    </h1>
-                    <p class="text-sm text-neutral-500 font-light">
-                      {{ option.description || '' }}
-                    </p>
-                  </div>
+                  </transition>
                 </div>
-              </div>
-            </template>
-          </UPopover>
-        </div>
+                <template #content>
+                  <div class="px-2 py-1 min-w-60 max-w-96">
+                    <!-- Use enabledOptions so that restriction applies here -->
+                    <div v-for="option in enabledOptions[category.key]" :key="option.value">
+                      <UPopover :open-delay="300" mode="hover" v-if="imageMap[option.value]" :content="{
+                        align: 'start',
+                        side: 'left',
+                        sideOffset: 1
+                      }">
+                        <div class="hover:bg-neutral-50 p-3 rounded-sm overflow-hidden my-1 cursor-pointer" :class="{
+                          'bg-neutral-100': option.value === envStore[category.key],
+                          'opacity-40 cursor-not-allowed': option.disabled
+                        }" @click="() => { if (!option.disabled) selectOption(category.key, option.value) }">
+                          <h1 class="text-md font-semibold text-neutral-900">
+                            {{ option.label }}
+                          </h1>
+                          <p class="text-sm text-neutral-500 font-light">
+                            {{ option.description || '' }}
+                          </p>
+                        </div>
+                        <template #content>
+                          <NuxtImg :src="imageMap[option.value]" class="rounded-sm max-w-xs max-h-52 object-cover"
+                            width="300" height="180" format="webp" quality="80" />
+                        </template>
+                      </UPopover>
 
-        </div>
-     <!-- Toggle Buttons for Lock & Kombinationsvy -->
-   
-      <div class="absolute bottom-3 right-3 flex justify-end gap-2">
+                      <div v-else :key="option.value" class="hover:bg-neutral-50 p-3 rounded-md my-1 cursor-pointer"
+                        :class="{
+                          'bg-neutral-100': option.value === envStore[category.key],
+                          'opacity-40 cursor-not-allowed': option.disabled
+                        }" @click="() => { if (!option.disabled) selectOption(category.key, option.value) }">
+                        <h1 class="text-md font-semibold text-neutral-900">
+                          {{ option.label }}
+                        </h1>
+                        <p class="text-sm text-neutral-500 font-light">
+                          {{ option.description || '' }}
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                </template>
+              </UPopover>
+            </div>
+          </div>
 
-        <UButton trailing :icon="restrictionEnabled ? 'mdi:lock' : 'mdi:lock-open'" @click="toggleRestriction"
-          shape="full" class="transition-all" variant="ghost" :color="restrictionEnabled ? 'secondary' : 'neutral'">
-          {{ restrictionEnabled ? "Markinventeringsdata" : "Markinventeringsdata" }}
-        </UButton>
-        <UButton trailing icon="mdi:apps" @click="toggleHeight"
-          color="neutral" variant="ghost">
-          {{ listBoxRowVisible ? "Dölj kombinationer" : "Visa kombinationer" }}
-        </UButton>
-      <!-- <UButton
-      trailing
-      icon="i-heroicons-photo"
-  @click="showImgInfo = !showImgInfo"
-  
-  variant="ghost"
-  color="neutral"
->
-  {{ showImgInfo ? 'Dölj introduktion' : 'Visa introduktion' }}
-</UButton> -->
-      </div>
-      </UCard>
-        <div class="col-span-3 flex w-full justify-end">
+          <div class="absolute bottom-3 right-3 flex justify-end gap-2">
+            <UButton trailing :icon="restrictionEnabled ? 'mdi:lock' : 'mdi:lock-open'" @click="toggleRestriction"
+              shape="full" class="transition-all" variant="ghost" :color="restrictionEnabled ? 'secondary' : 'neutral'">
+              {{ restrictionEnabled ? "Markinventeringsdata" : "Markinventeringsdata" }}
+            </UButton>
+            <UButton trailing icon="mdi:apps" @click="toggleHeight" color="neutral" variant="ghost">
+              {{ listBoxRowVisible ? "Dölj kombinationer" : "Visa kombinationer" }}
+            </UButton>
+          </div>
+        </UCard>
+        <div class="col-span-3 flex w-full justify-end" v-if="geography && forestType && standAge && vegetationType">
           <Transition name="fade" mode="out-in">
-        <SpatialForest class="rounded-sm overflow-hidden  border border-neutral-200 h-fit" v-if="geography && forestType && standAge && vegetationType"/>
-<div v-else variant="outline" class="h-full flex items-end">
-        <div class=" text-base/7 text-neutral-500 dark:text-neutral-300 p-3 ">
-         
-            Klicka på kategorierna eller
-            använd knappen
-            <UBadge label="Visa kombinationer" icon="mdi:chevron-down" trailing color="neutral" variant="soft" size="md"/>
-
-
-             <!-- Använd
-            <UBadge label="Markinventeringsdata" icon="mdi:lock" trailing color="secondary" variant="soft" size="md"/>
-            för att begränsa val till där det finns data från
-            markinventeringen. -->
-          
-          <!-- <li class="">
-            Klicka på
-            <UBadge label="Markinventeringsdata" icon="mdi:lock" trailing color="secondary" variant="soft" size="lg"/>
-            för att begränsa urvalet till miljöer där det finns data från
-            markinventeringen.
-          </li> -->
+            <SpatialForest class="rounded-xl overflow-hidden border border-neutral-200 h-fit" />
+          </Transition>
         </div>
       </div>
-      </Transition>
-        </div>
-      </div>
-
- 
 
       <!-- Combination view (checkboxes) -->
       <div :style="{ height: listBoxRowVisible ? '290px' : '0px' }"
         class="overflow-hidden transition-height ease-in-out duration-500">
         <Transition name="fade">
           <div v-show="listBoxRowVisible">
-            <div class="grid md:grid-cols-4 gap-2 md:gap-5">
+            <div class="p-0.5 grid md:grid-cols-4 gap-2 md:gap-5">
 
               <UCard v-for="category in categories" :key="category.key" variant="soft">
                 <div v-for="option in enabledOptions[category.key]" :key="option.value"
                   class="flex justify-between mb-2 text-neutral-600 dark:text-neutral-300 items-center">
-                  <label :for="`${category.key}-${option.value}`"  :class="{
+                  <label :for="`${category.key}-${option.value}`" :class="{
                     'opacity-40 cursor-not-allowed': option.disabled,
                     'cursor-pointer': !option.disabled
                   }" class="text-md">
@@ -262,21 +182,17 @@
         </Transition>
       </div>
 
-<EnvImgInfo
-        v-if="showImgInfo && geography && forestType && standAge && vegetationType"
-      class="hidden md:grid mb-4"
-        :geography="geography"
-        :forestType="forestType"
-        :standAge="standAge"
-        :vegetationType="vegetationType"
-      />
- 
+      <EnvImgInfo v-if="showImgInfo && geography && forestType && standAge && vegetationType"
+        class="hidden md:grid mb-4" :geography="geography" :forestType="forestType" :standAge="standAge"
+        :vegetationType="vegetationType" />
+
     </div>
 
 
     <!-- Sticky header that folds down from behind the AppHeader -->
     <transition name="fold-down">
-      <div v-if="isSticky" class="hidden md:block fixed top-0 pt-16 z-20 bg-white dark:bg-black border-b border-neutral-200 dark:border-neutral-800 left-0 right-0">
+      <div v-if="isSticky"
+        class="hidden md:block fixed top-0 pt-16 z-20 bg-white dark:bg-black border-b border-neutral-200 dark:border-neutral-800 left-0 right-0">
         <div class="flex space-x-4 w-full mx-auto max-w-7xl p-2">
           <!-- Use enabledOptions for USelect items as well -->
           <USelect v-for="category in categories" :key="category.key" :items="enabledOptions[category.key]"
@@ -292,9 +208,7 @@
 </template>
 
 <script setup lang="ts">
-import type { container } from '#build/ui';
 import { ref, computed, onMounted, onBeforeUnmount, watch } from 'vue'
-import { useRouter } from 'vue-router'
 import {
   useEnvParamsStore,
   geographyOptions,
@@ -304,6 +218,9 @@ import {
   imageMap
 } from '~/stores/envParamsStore'
 
+// --- Mobile/desktop detection ---
+const isMobile = useMediaQuery('(max-width: 767px)')
+
 // Control whether the desktop image info is shown
 const showImgInfo = ref(false)
 
@@ -312,9 +229,9 @@ const props = defineProps<{ initialMobileCollapsed?: boolean }>();
 
 const envStore = useEnvParamsStore()
 
-const geography      = computed(() => envStore.geography)
-const forestType     = computed(() => envStore.forestType)
-const standAge       = computed(() => envStore.standAge)
+const geography = computed(() => envStore.geography)
+const forestType = computed(() => envStore.forestType)
+const standAge = computed(() => envStore.standAge)
 const vegetationType = computed(() => envStore.vegetationType)
 
 // For the original UI content and sticky header trigger
@@ -388,10 +305,6 @@ const restrictionEnabled = ref(true)
 
 const mobileCollapsed = ref(props.initialMobileCollapsed ?? false)
 
-function toggleMobileCollapsed(): void {
-  mobileCollapsed.value = !mobileCollapsed.value
-}
-
 function toggleHeight(): void {
   listBoxRowVisible.value = !listBoxRowVisible.value
 }
@@ -419,30 +332,6 @@ function getLabel(categoryKey: Category['key']): string {
       return envStore.standAgeLabel
     case 'vegetationType':
       return envStore.vegetationTypeLabel
-    default:
-      return ''
-  }
-}
-
-const collapsedSummary = computed(() => {
-  return categories
-    .map(category => {
-      const label = getLabel(category.key) || category.defaultLabel;
-      return label.length > 6 ? label.slice(0, 6) : label;
-    })
-    .join(' / ');
-});
-
-function iconColor(categoryKey: Category['key']): string {
-  switch (categoryKey) {
-    case 'geography':
-      return 'text-fuchsia-500'
-    case 'forestType':
-      return 'text-green-500'
-    case 'standAge':
-      return 'text-violet-500'
-    case 'vegetationType':
-      return 'text-teal-500'
     default:
       return ''
   }
@@ -518,8 +407,7 @@ onMounted(async () => {
   validCombinations.value = await response.json()
 })
 
-// Optionally watch selections and update the URL (as in your original logic)
-const router = useRouter()
+
 watch(
   () => [
     envStore.geography,
