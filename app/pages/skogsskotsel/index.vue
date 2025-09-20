@@ -11,7 +11,7 @@ Lär dig hur trakthyggesbruk och olika former av hygesfria metoder kan påverka 
                 <template #links>
                     <UModal>
                         <UChip color="warning" size="2xl">
-                            <UButton label="Visa modell för påverkan över tid" size="xl" color="neutral"
+                            <UButton label="Visa modell för påverkan över tid" size="xl" color="primary"
                                 icon="i-material-symbols-interactive-space" />
                         </UChip>
 
