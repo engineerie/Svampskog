@@ -1,5 +1,39 @@
 export default defineAppConfig({
   ui: {
+    contentSurround: {
+      slots: {
+        link: "border-none",
+      },
+    },
+    pageHeader: {
+      slots: {
+        title: "font-semibold",
+      },
+    },
+    pageHero: {
+      slots: {
+        title: "font-semibold",
+        links: " flex",
+      },
+    },
+    pageSection: {
+      slots: {
+        // container:
+        //   "flex flex-col-reverse sm:flex-col lg:grid py-16 sm:py-24 lg:py-32 gap-8 sm:gap-16",
+        title: "font-semibold",
+      },
+    },
+    blogPost: {
+      variants: {
+        to: {
+          true: {
+            root: "transition hover:ring-1.5 hover:ring-accented hover:ring-neutral-300",
+            image:
+              "transform transition-transform duration-200 group-hover/blog-post:scale-100",
+          },
+        },
+      },
+    },
     // table: {
     //   slots: {
     //     root: 'relative overflow-auto',
@@ -72,42 +106,6 @@ export default defineAppConfig({
       kalkmark: "slate",
       vanligmark: "emerald",
       time: "orange",
-    },
-  },
-  uiPro: {
-    contentSurround: {
-      slots: {
-        link: "border-none",
-      },
-    },
-    pageHeader: {
-      slots: {
-        title: "font-semibold",
-      },
-    },
-    pageHero: {
-      slots: {
-        title: "font-semibold",
-        links: " flex",
-      },
-    },
-    pageSection: {
-      slots: {
-        // container:
-        //   "flex flex-col-reverse sm:flex-col lg:grid py-16 sm:py-24 lg:py-32 gap-8 sm:gap-16",
-        title: "font-semibold",
-      },
-    },
-    blogPost: {
-      variants: {
-        to: {
-          true: {
-            root: "transition hover:ring-1.5 hover:ring-accented hover:ring-neutral-300",
-            image:
-              "transform transition-transform duration-200 group-hover/blog-post:scale-100",
-          },
-        },
-      },
     },
   },
 });
