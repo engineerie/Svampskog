@@ -6,6 +6,7 @@ settings:
 
 overrides:
   vue-tsc: 2.2.2
+  sharp: 0.34.4
 
 importers:
 
@@ -21,7 +22,7 @@ importers:
         specifier: ^3.3.0
         version: 3.7.1(better-sqlite3@12.2.0)(magicast@0.3.5)
       '@nuxt/image':
-        specifier: ^1.9.0
+        specifier: ^1.11.0
         version: 1.11.0(@netlify/blobs@8.1.2)(db0@0.3.2(better-sqlite3@12.2.0))(ioredis@5.7.0)(magicast@0.3.5)
       '@nuxt/ui':
         specifier: ^4.0.0-alpha.2
@@ -56,6 +57,9 @@ importers:
       openseadragon-opacity-slider:
         specifier: ^1.0.0
         version: 1.0.0
+      sharp:
+        specifier: 0.34.4
+        version: 0.34.4
       vue3-apexcharts:
         specifier: ^1.8.0
         version: 1.8.0(apexcharts@4.7.0)(vue@3.5.21(typescript@5.9.2))
@@ -1094,6 +1098,132 @@ packages:
     resolution: {integrity: sha512-C+KuEWIF5nSBrobFJhT//JS87OZ++QDORB6f2q2Wm6fl2mueSTpFBeBsveK0KW9hWiZ4mNiPjsh6Zs4jjdROSg==}
     peerDependencies:
       vue: '>=3'
+
+  '@img/colour@1.0.0':
+    resolution: {integrity: sha512-A5P/LfWGFSl6nsckYtjw9da+19jB8hkJ6ACTGcDfEJ0aE+l2n2El7dsVM7UVHZQ9s2lmYMWlrS21YLy2IR1LUw==}
+    engines: {node: '>=18'}
+
+  '@img/sharp-darwin-arm64@0.34.4':
+    resolution: {integrity: sha512-sitdlPzDVyvmINUdJle3TNHl+AG9QcwiAMsXmccqsCOMZNIdW2/7S26w0LyU8euiLVzFBL3dXPwVCq/ODnf2vA==}
+    engines: {node: ^18.17.0 || ^20.3.0 || >=21.0.0}
+    cpu: [arm64]
+    os: [darwin]
+
+  '@img/sharp-darwin-x64@0.34.4':
+    resolution: {integrity: sha512-rZheupWIoa3+SOdF/IcUe1ah4ZDpKBGWcsPX6MT0lYniH9micvIU7HQkYTfrx5Xi8u+YqwLtxC/3vl8TQN6rMg==}
+    engines: {node: ^18.17.0 || ^20.3.0 || >=21.0.0}
+    cpu: [x64]
+    os: [darwin]
+
+  '@img/sharp-libvips-darwin-arm64@1.2.3':
+    resolution: {integrity: sha512-QzWAKo7kpHxbuHqUC28DZ9pIKpSi2ts2OJnoIGI26+HMgq92ZZ4vk8iJd4XsxN+tYfNJxzH6W62X5eTcsBymHw==}
+    cpu: [arm64]
+    os: [darwin]
+
+  '@img/sharp-libvips-darwin-x64@1.2.3':
+    resolution: {integrity: sha512-Ju+g2xn1E2AKO6YBhxjj+ACcsPQRHT0bhpglxcEf+3uyPY+/gL8veniKoo96335ZaPo03bdDXMv0t+BBFAbmRA==}
+    cpu: [x64]
+    os: [darwin]
+
+  '@img/sharp-libvips-linux-arm64@1.2.3':
+    resolution: {integrity: sha512-I4RxkXU90cpufazhGPyVujYwfIm9Nk1QDEmiIsaPwdnm013F7RIceaCc87kAH+oUB1ezqEvC6ga4m7MSlqsJvQ==}
+    cpu: [arm64]
+    os: [linux]
+
+  '@img/sharp-libvips-linux-arm@1.2.3':
+    resolution: {integrity: sha512-x1uE93lyP6wEwGvgAIV0gP6zmaL/a0tGzJs/BIDDG0zeBhMnuUPm7ptxGhUbcGs4okDJrk4nxgrmxpib9g6HpA==}
+    cpu: [arm]
+    os: [linux]
+
+  '@img/sharp-libvips-linux-ppc64@1.2.3':
+    resolution: {integrity: sha512-Y2T7IsQvJLMCBM+pmPbM3bKT/yYJvVtLJGfCs4Sp95SjvnFIjynbjzsa7dY1fRJX45FTSfDksbTp6AGWudiyCg==}
+    cpu: [ppc64]
+    os: [linux]
+
+  '@img/sharp-libvips-linux-s390x@1.2.3':
+    resolution: {integrity: sha512-RgWrs/gVU7f+K7P+KeHFaBAJlNkD1nIZuVXdQv6S+fNA6syCcoboNjsV2Pou7zNlVdNQoQUpQTk8SWDHUA3y/w==}
+    cpu: [s390x]
+    os: [linux]
+
+  '@img/sharp-libvips-linux-x64@1.2.3':
+    resolution: {integrity: sha512-3JU7LmR85K6bBiRzSUc/Ff9JBVIFVvq6bomKE0e63UXGeRw2HPVEjoJke1Yx+iU4rL7/7kUjES4dZ/81Qjhyxg==}
+    cpu: [x64]
+    os: [linux]
+
+  '@img/sharp-libvips-linuxmusl-arm64@1.2.3':
+    resolution: {integrity: sha512-F9q83RZ8yaCwENw1GieztSfj5msz7GGykG/BA+MOUefvER69K/ubgFHNeSyUu64amHIYKGDs4sRCMzXVj8sEyw==}
+    cpu: [arm64]
+    os: [linux]
+
+  '@img/sharp-libvips-linuxmusl-x64@1.2.3':
+    resolution: {integrity: sha512-U5PUY5jbc45ANM6tSJpsgqmBF/VsL6LnxJmIf11kB7J5DctHgqm0SkuXzVWtIY90GnJxKnC/JT251TDnk1fu/g==}
+    cpu: [x64]
+    os: [linux]
+
+  '@img/sharp-linux-arm64@0.34.4':
+    resolution: {integrity: sha512-YXU1F/mN/Wu786tl72CyJjP/Ngl8mGHN1hST4BGl+hiW5jhCnV2uRVTNOcaYPs73NeT/H8Upm3y9582JVuZHrQ==}
+    engines: {node: ^18.17.0 || ^20.3.0 || >=21.0.0}
+    cpu: [arm64]
+    os: [linux]
+
+  '@img/sharp-linux-arm@0.34.4':
+    resolution: {integrity: sha512-Xyam4mlqM0KkTHYVSuc6wXRmM7LGN0P12li03jAnZ3EJWZqj83+hi8Y9UxZUbxsgsK1qOEwg7O0Bc0LjqQVtxA==}
+    engines: {node: ^18.17.0 || ^20.3.0 || >=21.0.0}
+    cpu: [arm]
+    os: [linux]
+
+  '@img/sharp-linux-ppc64@0.34.4':
+    resolution: {integrity: sha512-F4PDtF4Cy8L8hXA2p3TO6s4aDt93v+LKmpcYFLAVdkkD3hSxZzee0rh6/+94FpAynsuMpLX5h+LRsSG3rIciUQ==}
+    engines: {node: ^18.17.0 || ^20.3.0 || >=21.0.0}
+    cpu: [ppc64]
+    os: [linux]
+
+  '@img/sharp-linux-s390x@0.34.4':
+    resolution: {integrity: sha512-qVrZKE9Bsnzy+myf7lFKvng6bQzhNUAYcVORq2P7bDlvmF6u2sCmK2KyEQEBdYk+u3T01pVsPrkj943T1aJAsw==}
+    engines: {node: ^18.17.0 || ^20.3.0 || >=21.0.0}
+    cpu: [s390x]
+    os: [linux]
+
+  '@img/sharp-linux-x64@0.34.4':
+    resolution: {integrity: sha512-ZfGtcp2xS51iG79c6Vhw9CWqQC8l2Ot8dygxoDoIQPTat/Ov3qAa8qpxSrtAEAJW+UjTXc4yxCjNfxm4h6Xm2A==}
+    engines: {node: ^18.17.0 || ^20.3.0 || >=21.0.0}
+    cpu: [x64]
+    os: [linux]
+
+  '@img/sharp-linuxmusl-arm64@0.34.4':
+    resolution: {integrity: sha512-8hDVvW9eu4yHWnjaOOR8kHVrew1iIX+MUgwxSuH2XyYeNRtLUe4VNioSqbNkB7ZYQJj9rUTT4PyRscyk2PXFKA==}
+    engines: {node: ^18.17.0 || ^20.3.0 || >=21.0.0}
+    cpu: [arm64]
+    os: [linux]
+
+  '@img/sharp-linuxmusl-x64@0.34.4':
+    resolution: {integrity: sha512-lU0aA5L8QTlfKjpDCEFOZsTYGn3AEiO6db8W5aQDxj0nQkVrZWmN3ZP9sYKWJdtq3PWPhUNlqehWyXpYDcI9Sg==}
+    engines: {node: ^18.17.0 || ^20.3.0 || >=21.0.0}
+    cpu: [x64]
+    os: [linux]
+
+  '@img/sharp-wasm32@0.34.4':
+    resolution: {integrity: sha512-33QL6ZO/qpRyG7woB/HUALz28WnTMI2W1jgX3Nu2bypqLIKx/QKMILLJzJjI+SIbvXdG9fUnmrxR7vbi1sTBeA==}
+    engines: {node: ^18.17.0 || ^20.3.0 || >=21.0.0}
+    cpu: [wasm32]
+
+  '@img/sharp-win32-arm64@0.34.4':
+    resolution: {integrity: sha512-2Q250do/5WXTwxW3zjsEuMSv5sUU4Tq9VThWKlU2EYLm4MB7ZeMwF+SFJutldYODXF6jzc6YEOC+VfX0SZQPqA==}
+    engines: {node: ^18.17.0 || ^20.3.0 || >=21.0.0}
+    cpu: [arm64]
+    os: [win32]
+
+  '@img/sharp-win32-ia32@0.34.4':
+    resolution: {integrity: sha512-3ZeLue5V82dT92CNL6rsal6I2weKw1cYu+rGKm8fOCCtJTR2gYeUfY3FqUnIJsMUPIH68oS5jmZ0NiJ508YpEw==}
+    engines: {node: ^18.17.0 || ^20.3.0 || >=21.0.0}
+    cpu: [ia32]
+    os: [win32]
+
+  '@img/sharp-win32-x64@0.34.4':
+    resolution: {integrity: sha512-xIyj4wpYs8J18sVN3mSQjwrw7fKUqRw+Z5rnHNCy5fYTxigBz81u5mOMPmFumwjcn8+ld1ppptMBCLic1nz6ig==}
+    engines: {node: ^18.17.0 || ^20.3.0 || >=21.0.0}
+    cpu: [x64]
+    os: [win32]
 
   '@import-maps/resolve@1.0.1':
     resolution: {integrity: sha512-tWZNBIS1CoekcwlMuyG2mr0a1Wo5lb5lEHwwWvZo+5GLgr3e9LLDTtmgtCWEwBpXMkxn9D+2W9j2FY6eZQq0tA==}
@@ -3451,36 +3581,6 @@ packages:
   bare-events@2.7.0:
     resolution: {integrity: sha512-b3N5eTW1g7vXkw+0CXh/HazGTcO5KYuu/RCNaJbDMPI6LHDi+7qe8EmxKUVe1sUbY2KZOVZFyj62x0OEz9qyAA==}
 
-  bare-fs@4.4.4:
-    resolution: {integrity: sha512-Q8yxM1eLhJfuM7KXVP3zjhBvtMJCYRByoTT+wHXjpdMELv0xICFJX+1w4c7csa+WZEOsq4ItJ4RGwvzid6m/dw==}
-    engines: {bare: '>=1.16.0'}
-    peerDependencies:
-      bare-buffer: '*'
-    peerDependenciesMeta:
-      bare-buffer:
-        optional: true
-
-  bare-os@3.6.2:
-    resolution: {integrity: sha512-T+V1+1srU2qYNBmJCXZkUY5vQ0B4FSlL3QDROnKQYOqeiQR8UbjNHlPa+TIbM4cuidiN9GaTaOZgSEgsvPbh5A==}
-    engines: {bare: '>=1.14.0'}
-
-  bare-path@3.0.0:
-    resolution: {integrity: sha512-tyfW2cQcB5NN8Saijrhqn0Zh7AnFNsnczRcuWODH0eYAXBsJ5gVxAUuNr7tsHSC6IZ77cA0SitzT+s47kot8Mw==}
-
-  bare-stream@2.7.0:
-    resolution: {integrity: sha512-oyXQNicV1y8nc2aKffH+BUHFRXmx6VrPzlnaEvMhram0nPBrKcEdcyBg5r08D0i8VxngHFAiVyn1QKXpSG0B8A==}
-    peerDependencies:
-      bare-buffer: '*'
-      bare-events: '*'
-    peerDependenciesMeta:
-      bare-buffer:
-        optional: true
-      bare-events:
-        optional: true
-
-  bare-url@2.2.2:
-    resolution: {integrity: sha512-g+ueNGKkrjMazDG3elZO1pNs3HY5+mMmOet1jtKyhOaCnkLzitxf26z7hoAEkDNgdNmnc1KIlt/dw6Po6xZMpA==}
-
   base64-js@0.0.8:
     resolution: {integrity: sha512-3XSA2cR/h/73EzlXXdU6YNycmYI7+kicTxks4eJg2g39biHR84slg2+des+p7iHYhbRg/udIS4TD53WabcOUkw==}
     engines: {node: '>= 0.4'}
@@ -3796,10 +3896,6 @@ packages:
 
   color@3.2.1:
     resolution: {integrity: sha512-aBl7dZI9ENN6fUGC7mWpMTPNHmWUSNan9tuWN6ahh5ZLNk9baLJOnSMlrQkHcrfFgz2/RigjUVAjdx36VcemKA==}
-
-  color@4.2.3:
-    resolution: {integrity: sha512-1rXeuUUiGGrykh+CeBdu5Ie7OJwinCgQY0bc7GCRxy5xVHy+moaqkpL/jqQq0MtQOeYcrqEz4abc5f0KtU7W4A==}
-    engines: {node: '>=12.5.0'}
 
   colord@2.9.3:
     resolution: {integrity: sha512-jeC1axXpnb0/2nn/Y1LPuLdgXBLH7aDcHu4KEKfqw3CUhX7ZpfBSlPKyqXE6btIgEzfWtrX3/tyBCaCvXvMkOw==}
@@ -6588,9 +6684,6 @@ packages:
     resolution: {integrity: sha512-DSmt0OEcLoK4i3NuscSbGjOf3bqiDEutejqENSplMSFA/gmB8mkED9G4pKWnPl7MDU4rSHebKPHeitpDfyH0cQ==}
     engines: {node: '>=10'}
 
-  node-addon-api@6.1.0:
-    resolution: {integrity: sha512-+eawOlIgy680F0kBzPUNFhMZGtJ1YmqM6l4+Crf4IkImjYrO/mqPwRMh352g23uIaQKFItcQ64I7KMaJxHgAVA==}
-
   node-addon-api@7.1.1:
     resolution: {integrity: sha512-5m3bsyrjFWE1xf7nz7YXdN4udnVtXK6/Yfgn5qnahL6bCkf2yKt4k3nuTKAtT4r3IG8JNR2ncsIMdZuAzJjHQQ==}
 
@@ -7803,9 +7896,9 @@ packages:
   setprototypeof@1.2.0:
     resolution: {integrity: sha512-E5LDX7Wrp85Kil5bhZv46j8jOeboKq5JMmYM3gVGdGH8xFpPWXUMsNrlODCrkoxMEeNi/XZIwuRvY4XNwYMJpw==}
 
-  sharp@0.32.6:
-    resolution: {integrity: sha512-KyLTWwgcR9Oe4d9HwCwNM2l7+J0dUQwn/yf7S0EnTtb0eVS4RxO0eUSvxPtzT4F3SY+C4K6fqdv/DO27sJ/v/w==}
-    engines: {node: '>=14.15.0'}
+  sharp@0.34.4:
+    resolution: {integrity: sha512-FUH39xp3SBPnxWvd5iib1X8XY7J0K0X7d93sie9CJg2PO8/7gmg89Nve6OjItK53/MlAushNNxteBYfM6DEuoA==}
+    engines: {node: ^18.17.0 || ^20.3.0 || >=21.0.0}
 
   shebang-command@2.0.0:
     resolution: {integrity: sha512-kHxr2zZpYtdmrN1qDjrrX/Z1rR1kG8Dx+gkpK1G4eXmvXswmcE1hTWBWYUzlraYw1/yZp6YuDY77YtvbN0dmDA==}
@@ -8156,9 +8249,6 @@ packages:
 
   tar-fs@2.1.4:
     resolution: {integrity: sha512-mDAjwmZdh7LTT6pNleZ05Yt65HC3E+NiQzl672vQG38jIrehtJk/J3mNwIg+vShQPcLF/LV7CMnDW6vjj6sfYQ==}
-
-  tar-fs@3.1.1:
-    resolution: {integrity: sha512-LZA0oaPOc2fVo82Txf3gw+AkEd38szODlptMYejQUhndHMLQ9M059uXR+AfS7DNo0NpINvSqDsvyaCrBVkptWg==}
 
   tar-stream@2.2.0:
     resolution: {integrity: sha512-ujeqbceABgwMZxEJnk2HDY2DlnUZ+9oEcb1KzTVfYHio0UE6dG71n60d8D2I4qNvleWrrXpmjpt7vZeF1LnMZQ==}
@@ -9919,6 +10009,94 @@ snapshots:
       '@iconify/types': 2.0.0
       vue: 3.5.21(typescript@5.9.2)
 
+  '@img/colour@1.0.0': {}
+
+  '@img/sharp-darwin-arm64@0.34.4':
+    optionalDependencies:
+      '@img/sharp-libvips-darwin-arm64': 1.2.3
+    optional: true
+
+  '@img/sharp-darwin-x64@0.34.4':
+    optionalDependencies:
+      '@img/sharp-libvips-darwin-x64': 1.2.3
+    optional: true
+
+  '@img/sharp-libvips-darwin-arm64@1.2.3':
+    optional: true
+
+  '@img/sharp-libvips-darwin-x64@1.2.3':
+    optional: true
+
+  '@img/sharp-libvips-linux-arm64@1.2.3':
+    optional: true
+
+  '@img/sharp-libvips-linux-arm@1.2.3':
+    optional: true
+
+  '@img/sharp-libvips-linux-ppc64@1.2.3':
+    optional: true
+
+  '@img/sharp-libvips-linux-s390x@1.2.3':
+    optional: true
+
+  '@img/sharp-libvips-linux-x64@1.2.3':
+    optional: true
+
+  '@img/sharp-libvips-linuxmusl-arm64@1.2.3':
+    optional: true
+
+  '@img/sharp-libvips-linuxmusl-x64@1.2.3':
+    optional: true
+
+  '@img/sharp-linux-arm64@0.34.4':
+    optionalDependencies:
+      '@img/sharp-libvips-linux-arm64': 1.2.3
+    optional: true
+
+  '@img/sharp-linux-arm@0.34.4':
+    optionalDependencies:
+      '@img/sharp-libvips-linux-arm': 1.2.3
+    optional: true
+
+  '@img/sharp-linux-ppc64@0.34.4':
+    optionalDependencies:
+      '@img/sharp-libvips-linux-ppc64': 1.2.3
+    optional: true
+
+  '@img/sharp-linux-s390x@0.34.4':
+    optionalDependencies:
+      '@img/sharp-libvips-linux-s390x': 1.2.3
+    optional: true
+
+  '@img/sharp-linux-x64@0.34.4':
+    optionalDependencies:
+      '@img/sharp-libvips-linux-x64': 1.2.3
+    optional: true
+
+  '@img/sharp-linuxmusl-arm64@0.34.4':
+    optionalDependencies:
+      '@img/sharp-libvips-linuxmusl-arm64': 1.2.3
+    optional: true
+
+  '@img/sharp-linuxmusl-x64@0.34.4':
+    optionalDependencies:
+      '@img/sharp-libvips-linuxmusl-x64': 1.2.3
+    optional: true
+
+  '@img/sharp-wasm32@0.34.4':
+    dependencies:
+      '@emnapi/runtime': 1.5.0
+    optional: true
+
+  '@img/sharp-win32-arm64@0.34.4':
+    optional: true
+
+  '@img/sharp-win32-ia32@0.34.4':
+    optional: true
+
+  '@img/sharp-win32-x64@0.34.4':
+    optional: true
+
   '@import-maps/resolve@1.0.1': {}
 
   '@internationalized/date@3.9.0':
@@ -10019,7 +10197,7 @@ snapshots:
       nopt: 5.0.0
       npmlog: 5.0.1
       rimraf: 3.0.2
-      semver: 7.7.1
+      semver: 7.7.2
       tar: 6.2.1
     transitivePeerDependencies:
       - encoding
@@ -10229,7 +10407,7 @@ snapshots:
       p-filter: 4.1.0
       p-locate: 6.0.0
       read-pkg-up: 9.1.0
-      semver: 7.7.1
+      semver: 7.7.2
 
   '@netlify/functions-utils@5.3.18(rollup@4.52.0)(supports-color@9.4.0)':
     dependencies:
@@ -10402,7 +10580,7 @@ snapshots:
       precinct: 11.0.5(supports-color@9.4.0)
       require-package-name: 2.0.1
       resolve: 2.0.0-next.5
-      semver: 7.7.1
+      semver: 7.7.2
       tmp-promise: 3.0.3
       toml: 3.0.0
       unixify: 1.0.0
@@ -10756,12 +10934,10 @@ snapshots:
       - '@vercel/functions'
       - '@vercel/kv'
       - aws4fetch
-      - bare-buffer
       - db0
       - idb-keyval
       - ioredis
       - magicast
-      - react-native-b4a
       - uploadthing
 
   '@nuxt/kit@3.19.2(magicast@0.3.5)':
@@ -12113,7 +12289,7 @@ snapshots:
       debug: 4.4.0(supports-color@9.4.0)
       globby: 11.1.0
       is-glob: 4.0.3
-      semver: 7.7.1
+      semver: 7.7.2
       tsutils: 3.21.0(typescript@5.9.2)
     optionalDependencies:
       typescript: 5.9.2
@@ -12933,39 +13109,6 @@ snapshots:
   bare-events@2.7.0:
     optional: true
 
-  bare-fs@4.4.4:
-    dependencies:
-      bare-events: 2.7.0
-      bare-path: 3.0.0
-      bare-stream: 2.7.0(bare-events@2.7.0)
-      bare-url: 2.2.2
-      fast-fifo: 1.3.2
-    transitivePeerDependencies:
-      - react-native-b4a
-    optional: true
-
-  bare-os@3.6.2:
-    optional: true
-
-  bare-path@3.0.0:
-    dependencies:
-      bare-os: 3.6.2
-    optional: true
-
-  bare-stream@2.7.0(bare-events@2.7.0):
-    dependencies:
-      streamx: 2.22.1
-    optionalDependencies:
-      bare-events: 2.7.0
-    transitivePeerDependencies:
-      - react-native-b4a
-    optional: true
-
-  bare-url@2.2.2:
-    dependencies:
-      bare-path: 3.0.0
-    optional: true
-
   base64-js@0.0.8: {}
 
   base64-js@1.5.1: {}
@@ -13083,7 +13226,7 @@ snapshots:
 
   builtins@5.1.0:
     dependencies:
-      semver: 7.7.1
+      semver: 7.7.2
 
   bundle-name@4.1.0:
     dependencies:
@@ -13292,11 +13435,6 @@ snapshots:
   color@3.2.1:
     dependencies:
       color-convert: 1.9.3
-      color-string: 1.9.1
-
-  color@4.2.3:
-    dependencies:
-      color-convert: 2.0.1
       color-string: 1.9.1
 
   colord@2.9.3: {}
@@ -15412,7 +15550,7 @@ snapshots:
       listhen: 1.9.0
       ofetch: 1.4.1
       pathe: 1.1.2
-      sharp: 0.32.6
+      sharp: 0.34.4
       svgo: 3.3.2
       ufo: 1.6.1
       unstorage: 1.17.1(@netlify/blobs@8.1.2)(db0@0.3.2(better-sqlite3@12.2.0))(ioredis@5.7.0)
@@ -15433,11 +15571,9 @@ snapshots:
       - '@vercel/functions'
       - '@vercel/kv'
       - aws4fetch
-      - bare-buffer
       - db0
       - idb-keyval
       - ioredis
-      - react-native-b4a
       - uploadthing
 
   ipx@2.1.1(@netlify/blobs@8.1.2)(db0@0.3.2(better-sqlite3@12.2.0))(ioredis@5.7.0):
@@ -15453,7 +15589,7 @@ snapshots:
       listhen: 1.9.0
       ofetch: 1.4.1
       pathe: 1.1.2
-      sharp: 0.32.6
+      sharp: 0.34.4
       svgo: 3.3.2
       ufo: 1.6.1
       unstorage: 1.17.1(@netlify/blobs@8.1.2)(db0@0.3.2(better-sqlite3@12.2.0))(ioredis@5.7.0)
@@ -15474,11 +15610,9 @@ snapshots:
       - '@vercel/functions'
       - '@vercel/kv'
       - aws4fetch
-      - bare-buffer
       - db0
       - idb-keyval
       - ioredis
-      - react-native-b4a
       - uploadthing
     optional: true
 
@@ -15914,7 +16048,7 @@ snapshots:
       jest-validate: 27.5.1
       map-obj: 5.0.2
       moize: 6.1.6
-      semver: 7.7.1
+      semver: 7.7.2
 
   log-symbols@4.1.0:
     dependencies:
@@ -15986,7 +16120,7 @@ snapshots:
 
   make-dir@4.0.0:
     dependencies:
-      semver: 7.7.1
+      semver: 7.7.2
 
   make-error@1.3.6: {}
 
@@ -16647,7 +16781,6 @@ snapshots:
       - '@vercel/functions'
       - '@vercel/kv'
       - aws4fetch
-      - bare-buffer
       - bufferutil
       - db0
       - encoding
@@ -16776,8 +16909,6 @@ snapshots:
     dependencies:
       semver: 7.7.2
 
-  node-addon-api@6.1.0: {}
-
   node-addon-api@7.1.1: {}
 
   node-domexception@1.0.0: {}
@@ -16827,7 +16958,7 @@ snapshots:
     dependencies:
       hosted-git-info: 4.1.0
       is-core-module: 2.16.1
-      semver: 7.7.1
+      semver: 7.7.2
       validate-npm-package-license: 3.0.4
 
   normalize-package-data@6.0.2:
@@ -17325,7 +17456,7 @@ snapshots:
       ky: 1.10.0
       registry-auth-token: 5.1.0
       registry-url: 6.0.1
-      semver: 7.7.1
+      semver: 7.7.2
 
   package-manager-detector@1.3.0: {}
 
@@ -18316,19 +18447,34 @@ snapshots:
 
   setprototypeof@1.2.0: {}
 
-  sharp@0.32.6:
+  sharp@0.34.4:
     dependencies:
-      color: 4.2.3
+      '@img/colour': 1.0.0
       detect-libc: 2.1.0
-      node-addon-api: 6.1.0
-      prebuild-install: 7.1.3
-      semver: 7.7.1
-      simple-get: 4.0.1
-      tar-fs: 3.1.1
-      tunnel-agent: 0.6.0
-    transitivePeerDependencies:
-      - bare-buffer
-      - react-native-b4a
+      semver: 7.7.2
+    optionalDependencies:
+      '@img/sharp-darwin-arm64': 0.34.4
+      '@img/sharp-darwin-x64': 0.34.4
+      '@img/sharp-libvips-darwin-arm64': 1.2.3
+      '@img/sharp-libvips-darwin-x64': 1.2.3
+      '@img/sharp-libvips-linux-arm': 1.2.3
+      '@img/sharp-libvips-linux-arm64': 1.2.3
+      '@img/sharp-libvips-linux-ppc64': 1.2.3
+      '@img/sharp-libvips-linux-s390x': 1.2.3
+      '@img/sharp-libvips-linux-x64': 1.2.3
+      '@img/sharp-libvips-linuxmusl-arm64': 1.2.3
+      '@img/sharp-libvips-linuxmusl-x64': 1.2.3
+      '@img/sharp-linux-arm': 0.34.4
+      '@img/sharp-linux-arm64': 0.34.4
+      '@img/sharp-linux-ppc64': 0.34.4
+      '@img/sharp-linux-s390x': 0.34.4
+      '@img/sharp-linux-x64': 0.34.4
+      '@img/sharp-linuxmusl-arm64': 0.34.4
+      '@img/sharp-linuxmusl-x64': 0.34.4
+      '@img/sharp-wasm32': 0.34.4
+      '@img/sharp-win32-arm64': 0.34.4
+      '@img/sharp-win32-ia32': 0.34.4
+      '@img/sharp-win32-x64': 0.34.4
 
   shebang-command@2.0.0:
     dependencies:
@@ -18686,17 +18832,6 @@ snapshots:
       mkdirp-classic: 0.5.3
       pump: 3.0.3
       tar-stream: 2.2.0
-
-  tar-fs@3.1.1:
-    dependencies:
-      pump: 3.0.3
-      tar-stream: 3.1.7
-    optionalDependencies:
-      bare-fs: 4.4.4
-      bare-path: 3.0.0
-    transitivePeerDependencies:
-      - bare-buffer
-      - react-native-b4a
 
   tar-stream@2.2.0:
     dependencies:

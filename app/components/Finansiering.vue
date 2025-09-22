@@ -12,7 +12,7 @@
                 <NuxtImg src="/images/slu_logo_webb.png" height="60" />
                 <NuxtImg src="/images/skogssallskapet_logo.png" height="50" />
                 <NuxtImg src="/images/Skogsstyrelsen_logo.png" height="80" />
-                <NuxtImg src="/images/EU_logo.png" height="80" />
+                <NuxtImg src="/images/EU_Logo.png" height="80" />
             </div>
         </UContainer>
         <ul class="mt-28 text-sm sm:text-md sm:text-center mx-auto max-w-5xl px-6">
