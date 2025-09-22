@@ -151,6 +151,7 @@
 import { ref, computed, watch, h, resolveComponent } from "vue";
 import { useSpeciesStore } from "~/stores/speciesStore";
 import { useEnvParamsStore } from '~/stores/envParamsStore'
+import { hasEdnaDataset } from '~/utils/edna'
 import { getPaginationRowModel } from '@tanstack/vue-table'
 
 const props = defineProps({
@@ -565,52 +566,82 @@ const generateColors = (start, end, steps) => {
   }
   return colors;
 };
+const resetData = () => {
+  data.value = []
+  topCount.value = 0
+  remainingCount.value = 0
+  allColors.value = []
+}
+
 const fetchData = async () => {
-  if (
-    envStore.geography &&
-    envStore.forestType &&
-    envStore.standAge &&
+  const params = [
+    envStore.geography,
+    envStore.forestType,
+    envStore.standAge,
     envStore.vegetationType
-  ) {
-    const filename = `data-${envStore.geography}-${envStore.forestType}-${envStore.standAge}-${envStore.vegetationType}.json`;
-    try {
-      const response = await fetch(`/edna/${filename}`);
-      if (!response.ok)
-        throw new Error(`Failed to fetch data from ${filename}`);
-      data.value = await response.json();
+  ]
 
-      // Once data is fetched, turn off loading
-      isLoading.value = false;
-
-      // 1) Assign each row a stable colorIndex based on its original position
-      data.value.forEach((row, i) => {
-        row.colorIndex = i;
-      });
-
-      // 2) Figure out how many total species we have
-      const totalSpecies = data.value.length;
-
-      // 3) Use your existing logic for topCount (10% in your case)
-      topCount.value = Math.floor(totalSpecies * 0.1);
-      remainingCount.value = totalSpecies - topCount.value;
-
-      // 4) Generate the color arrays
-      const grayColors = generateColors(
-        [82, 82, 82],
-        [212, 212, 212],
-        topCount.value
-      );
-      const rainbowColors = generateRainbowColors(remainingCount.value);
-
-      // 5) Combine them into one big array
-      allColors.value = [...grayColors, ...rainbowColors];
-    } catch (error) {
-      console.error("Error fetching data:", error);
-      data.value = [];   // Ensure data is cleared if fetch fails
-      isLoading.value = false;
-    }
+  if (params.some(param => !param)) {
+    resetData()
+    isLoading.value = false
+    return
   }
-};
+
+  if (!hasEdnaDataset(
+    envStore.geography,
+    envStore.forestType,
+    envStore.standAge,
+    envStore.vegetationType
+  )) {
+    resetData()
+    isLoading.value = false
+    return
+  }
+
+  const filename = `data-${envStore.geography}-${envStore.forestType}-${envStore.standAge}-${envStore.vegetationType}.json`
+  try {
+    const response = await fetch(`/edna/${filename}`)
+    if (!response.ok) {
+      if (response.status === 404) {
+        resetData()
+        isLoading.value = false
+        return
+      }
+      throw new Error(`Failed to fetch data from ${filename}`)
+    }
+    data.value = await response.json()
+
+    // Once data is fetched, turn off loading
+    isLoading.value = false
+
+    // 1) Assign each row a stable colorIndex based on its original position
+    data.value.forEach((row, i) => {
+      row.colorIndex = i
+    })
+
+    // 2) Figure out how many total species we have
+    const totalSpecies = data.value.length
+
+    // 3) Use your existing logic for topCount (10% in your case)
+    topCount.value = Math.floor(totalSpecies * 0.1)
+    remainingCount.value = totalSpecies - topCount.value
+
+    // 4) Generate the color arrays
+    const grayColors = generateColors(
+      [82, 82, 82],
+      [212, 212, 212],
+      topCount.value
+    )
+    const rainbowColors = generateRainbowColors(remainingCount.value)
+
+    // 5) Combine them into one big array
+    allColors.value = [...grayColors, ...rainbowColors]
+  } catch (error) {
+    console.error("Error fetching data:", error)
+    resetData()
+    isLoading.value = false
+  }
+}
 
 // Helper function to generate rainbow colors
 function generateRainbowColors(steps) {
@@ -637,7 +668,7 @@ watch(
   ],
   () => {
     // Clear previous data and show loading state immediately when parameters change
-    data.value = [];
+    resetData();
     isLoading.value = true;
     fetchData();
   },

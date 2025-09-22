@@ -7,18 +7,12 @@
       <!-- Header / List View -->
 
       <div class="md:flex justify-between ">
-
         <div class="md:flex gap-4">
-
-
-
           <div class=" md:mt-0 mt-1 mb-1 md:mb-2">
             <h1 class="text-3xl hidden md:block  font-medium">Alla mykorrhizasvampar</h1>
             <h1 class="text-3xl  md:hidden  font-semibold">Alla mykorrhizasvampar</h1>
-
             <div class="flex gap-2">
               <h1 class="text-md text-neutral-500">{{ totalSpecies }} arter baserat på {{ sampleEnvCount }} skogar</h1>
-
               <UBadge v-if="sampleEnvCount < 10" :icon="sampleEnvCount < 10 ? 'i-cuida-warning-outline' : undefined"
                 size="md" :color="sampleEnvCount < 10 ? 'warning' : 'secondary'" variant="subtle" class="h-fit flex ">
                 {{ sampleEnvCount < 10 ? 'Få prov' : null }} </UBadge>
@@ -63,9 +57,8 @@
                 <BarChart v-if="showBarChart" class="mb-2" :chartData="data" :chartWidth="chartWidth"
                   :geography="geographyValue" :forestType="forestTypeValue" :standAge="standAgeValue"
                   :vegetationType="vegetationTypeValue" :matsvampFilter="matsvampFilter"
-                  :giftsvampFilter="giftsvampFilter" :gruppFilter="gruppFilter" :groupKey="grupp"
-                  :statusFilter="statusFilter" :search-term="modalSearchTerm"
-                  @update:searchTerm="modalSearchTerm = $event" />
+                  :giftsvampFilter="giftsvampFilter" :gruppFilter="gruppFilter" :statusFilter="statusFilter"
+                  :search-term="modalSearchTerm" />
                 <SpeciesTable class="mt-2" @enlarge="emit('enlarge')" @update:matsvampFilter="matsvampFilter = $event"
                   @update:giftsvampFilter="giftsvampFilter = $event" @update:gruppFilter="gruppFilter = $event"
                   @update:statusFilter="statusFilter = $event" @update:searchTerm="modalSearchTerm = $event"
@@ -136,8 +129,7 @@
           <BarChart class="mb-6" v-if="showBarChart" :chartData="data" :chartWidth="chartWidth"
             :geography="geographyValue" :forestType="forestTypeValue" :standAge="standAgeValue"
             :vegetationType="vegetationTypeValue" :matsvampFilter="matsvampFilter" :giftsvampFilter="giftsvampFilter"
-            :gruppFilter="gruppFilter" :groupKey="grupp" :statusFilter="statusFilter" :search-term="modalSearchTerm"
-            @update:searchTerm="modalSearchTerm = $event" />
+            :gruppFilter="gruppFilter" :statusFilter="statusFilter" :search-term="modalSearchTerm" />
           <SpeciesTable @enlarge="emit('enlarge')" @update:matsvampFilter="matsvampFilter = $event"
             @update:giftsvampFilter="giftsvampFilter = $event" @update:gruppFilter="gruppFilter = $event"
             @update:statusFilter="statusFilter = $event" @update:searchTerm="modalSearchTerm = $event"
@@ -156,6 +148,7 @@ import { useMediaQuery } from '@vueuse/core';
 import { useEnvParamsStore } from "~/stores/envParamsStore";
 import { storeToRefs } from "pinia";
 import { useTabsStore } from '~/stores/tabsStore';
+import { hasEdnaDataset } from '~/utils/edna';
 
 const matsvampFilter = ref(false);
 const giftsvampFilter = ref(false);
@@ -212,10 +205,25 @@ const columnVisibilityOverrides = computed(() => ({
 
 // Fetch data when environment store values change.
 async function fetchData(geog: string, forest: string, age: string, veg: string) {
+  if (!geog || !forest || !age || !veg) {
+    data.value = []
+    return
+  }
+
+  if (!hasEdnaDataset(geog, forest, age, veg)) {
+    data.value = []
+    return
+  }
   const filename = `edna-${geog}-${forest}-${age}-${veg}.json`;
   try {
     const response = await fetch(`/edna/${filename}`);
-    if (!response.ok) throw new Error(`Failed to fetch ${filename}`);
+    if (!response.ok) {
+      if (response.status === 404) {
+        data.value = []
+        return
+      }
+      throw new Error(`Failed to fetch ${filename}`)
+    }
     const jsonData = await response.json();
     jsonData.sort((a: any, b: any) => b.sample_plot_count - a.sample_plot_count);
     data.value = jsonData;

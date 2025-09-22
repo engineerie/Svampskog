@@ -5,7 +5,6 @@
       <UButton @click="zoomOut" icon="i-heroicons-magnifying-glass-minus" color="neutral" variant="ghost" />
       <UButton @click="zoomIn" icon="i-heroicons-magnifying-glass-plus" color="neutral" variant="ghost" />
     </div>
-
     <!-- Bar chart on desktop -->
     <div v-if="!isMobile" :class="[
       'w-full overflow-y-auto overflow-x-scroll',
@@ -18,17 +17,10 @@
           :numTicks="updatedChartData.length" tickTextFitMode="trim" :tickTextWidth="150" tickTextAlign="left"
           :tick-format="tickFormat" />
         <VisAxis type="y" label="Antal skogar" :gridLine="false" />
-        <VisTooltip :triggers="triggers" :followCursor="true" />
-        <VisCrosshair :color="barColorAccessor" :template="tooltipTemplate" />
+        <VisTooltip v-if="hasData" :triggers="triggers" :followCursor="true" />
+        <VisCrosshair v-if="hasData" :color="barColorAccessor" :template="tooltipTemplate" />
       </VisXYContainer>
     </div>
-
-    <!-- Donut chart on mobile -->
-    <!-- <div v-else class="flex justify-center p-4">
-<VisSingleContainer :data="donutData">
-  <VisDonut :radius="100" :cornerRadius="3" :value="donutValue" :color="donutColorAccessor" />
-</VisSingleContainer>
-    </div> -->
   </div>
 </template>
 
@@ -39,6 +31,7 @@ import { VisXYContainer, VisStackedBar, VisAxis, VisTooltip, VisCrosshair, VisSi
 import { StackedBar } from '@unovis/ts'
 import { useEnvParamsStore } from '~/stores/envParamsStore'
 import { useSpeciesStore } from '~/stores/speciesStore'
+import { hasEdnaDataset } from '~/utils/edna'
 
 const props = defineProps({
   searchTerm: { type: String, default: '' },
@@ -49,15 +42,6 @@ const props = defineProps({
   statusFilter: { type: Array as PropType<string[]>, default: () => [] }
 })
 
-const emit = defineEmits<{
-  (e: 'update:searchTerm', value: string): void
-}>()
-
-const chartSearchTermLocal = computed({
-  get: () => props.searchTerm,
-  set: (val: string) => emit('update:searchTerm', val)
-})
-
 // ----- Filtering & Zoom Setup -----
 const zoomLevels = ["100%", "200%", "400%", "800%"]
 const currentZoomIndex = ref(0)
@@ -65,6 +49,7 @@ const chartWidth = computed(() => zoomLevels[currentZoomIndex.value])
 
 // ----- Chart Data & Color Setup -----
 const chartData = ref<any[]>([])
+const envStore = useEnvParamsStore()
 function sortData(data: any[]) {
   return data.sort((a, b) => b.sample_plot_count - a.sample_plot_count)
 }
@@ -96,33 +81,47 @@ function generateRainbowColors(steps: number): string[] {
   return colors
 }
 async function fetchChartData() {
-  const envStore = useEnvParamsStore()
-  if (envStore.geography && envStore.forestType && envStore.standAge && envStore.vegetationType) {
-    const filename = `edna-${envStore.geography}-${envStore.forestType}-${envStore.standAge}-${envStore.vegetationType}.json`
-    try {
-      const response = await fetch(`/edna/${filename}`)
-      if (!response.ok) throw new Error(`Failed to fetch ${filename}`)
-      let jsonData = await response.json()
-      jsonData = sortData(jsonData)
-      const totalSpecies = jsonData.length
-      const numberOfGrayBars = Math.floor(totalSpecies * 0.1)
-      const numberOfColorBars = totalSpecies - numberOfGrayBars
-      const grayColors = generateColors([82, 82, 82], [212, 212, 212], numberOfGrayBars)
-      const rainbowColors = generateRainbowColors(numberOfColorBars)
-      const colors = [...grayColors, ...rainbowColors]
-      chartData.value = jsonData.map((d: any, i: number) => ({
-        ...d,
-        fillColor: colors[i] || 'var(--ui-primary)'
-      }))
-    } catch (error) {
-      console.error('Error fetching chart data:', error)
-      chartData.value = []
+  const params = [envStore.geography, envStore.forestType, envStore.standAge, envStore.vegetationType]
+  if (params.some(param => !param)) {
+    chartData.value = []
+    return
+  }
+
+  if (!hasEdnaDataset(...params)) {
+    chartData.value = []
+    return
+  }
+
+  const filename = `edna-${envStore.geography}-${envStore.forestType}-${envStore.standAge}-${envStore.vegetationType}.json`
+  try {
+    const response = await fetch(`/edna/${filename}`)
+    if (!response.ok) {
+      if (response.status === 404) {
+        chartData.value = []
+        return
+      }
+      throw new Error(`Failed to fetch ${filename}`)
     }
+    let jsonData = await response.json()
+    jsonData = sortData(jsonData)
+    const totalSpecies = jsonData.length
+    const numberOfGrayBars = Math.floor(totalSpecies * 0.1)
+    const numberOfColorBars = totalSpecies - numberOfGrayBars
+    const grayColors = generateColors([82, 82, 82], [212, 212, 212], numberOfGrayBars)
+    const rainbowColors = generateRainbowColors(numberOfColorBars)
+    const colors = [...grayColors, ...rainbowColors]
+    chartData.value = jsonData.map((d: any, i: number) => ({
+      ...d,
+      fillColor: colors[i] || 'var(--ui-primary)'
+    }))
+  } catch (error) {
+    console.error('Error fetching chart data:', error)
+    chartData.value = []
   }
 }
 onMounted(fetchChartData)
 watch(
-  () => [useEnvParamsStore().geography, useEnvParamsStore().forestType, useEnvParamsStore().standAge, useEnvParamsStore().vegetationType],
+  () => [envStore.geography, envStore.forestType, envStore.standAge, envStore.vegetationType],
   fetchChartData,
   { immediate: true }
 )
@@ -132,6 +131,7 @@ const xAccessor = (_: any, i: number) => i
 const yAccessor = (d: any) => d.sample_plot_count
 const tickFormat = (_: any, i: number) => {
   const d = updatedChartData.value[i]
+  if (!d) return ''
   // Compute matchSearch
   const term = props.searchTerm.trim().toLowerCase()
   const common = String(d.Commonname || '').toLowerCase()
@@ -221,6 +221,10 @@ function capitalizeFirstLetter(str: string): string {
 // We use a reactive variable to store the current hovered datum.
 const currentHoveredDatum = ref<any>(null)
 function tooltipTemplate(d: any): string {
+  if (!d) {
+    currentHoveredDatum.value = null
+    return '<div class="p-2 text-sm text-neutral-500">Ingen data</div>'
+  }
   // Update the reactive variable with the current datum
   currentHoveredDatum.value = d
   // Return the tooltip HTML (badges, image, etc.)
@@ -374,6 +378,13 @@ const updatedChartData = computed(() => {
   })
 })
 const barColorAccessor = (d: any) => d.barColor
+const hasData = computed(() => updatedChartData.value.length > 0)
+
+watch(updatedChartData, (newVal) => {
+  if (!newVal.length) {
+    currentHoveredDatum.value = null
+  }
+})
 
 // ----- Zoom Functions -----
 function zoomIn() {
@@ -393,10 +404,6 @@ const isSlideOverOpen = computed(() => speciesStore.selectedSpecies !== null)
 
 // Detect mobile screens (< md)
 const isMobile = useMediaQuery('(max-width: 767px)')
-// Use full data objects so the donut can match bar colors
-const donutData = computed(() => updatedChartData.value)
-const donutValue = (d: any) => d.sample_plot_count
-const donutColorAccessor = (d: any) => d.barColor
 
 function handleChartClick(event: MouseEvent) {
   if (currentHoveredDatum.value) {

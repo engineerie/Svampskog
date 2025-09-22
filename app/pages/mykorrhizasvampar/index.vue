@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref, computed, watch } from 'vue'
+import { ref, computed } from 'vue'
 import { useRouter } from 'vue-router'
 import { useMediaQuery } from '@vueuse/core'
 import {
@@ -162,9 +162,12 @@ function bentoImages(item: any) {
                     </div>
                   </template>
                 </USelect>
-                <UButton trailing :disabled="!allSelected" @click="redirect" color="neutral"
+                <UButton trailing :disabled="!allSelected" @click="redirect" color="primary"
                   icon="i-heroicons-arrow-right" label="Gå till miljö" size="xl" class="w-full my-1" />
                 <div class="grid grid-cols-2 gap-2 mt-1 mb-2">
+
+
+
                   <UButton label="DNA-data" size="xl" trailing :icon="restrictionEnabled ? 'mdi:lock' : 'mdi:lock-open'"
                     @click="toggleRestriction" variant="subtle" :color="restrictionEnabled ? 'secondary' : 'neutral'" />
                   <UModal fullscreen title="Kombinationer" class="w-full" :ui="{ title: 'text-2xl' }">
@@ -196,7 +199,16 @@ function bentoImages(item: any) {
                       </div>
                     </template>
                   </UModal>
+                  <UModal fullscreen title="Miljööversikt" class="col-span-2"
+                    :ui="{ content: 'overflow-y-scroll px-0', body: 'p-0', title: 'text-2xl' }">
+                    <UButton size="xl" label="Alla miljöer" trailing icon="i-hugeicons-tree-06" color="neutral"
+                      variant="subtle" />
+                    <template #body>
+                      <Miljoer />
+                    </template>
+                  </UModal>
                 </div>
+
                 <Transition name="fade" mode="out-in">
                   <SpatialForest class="rounded overflow-hidden border border-neutral-200 h-fit" />
                 </Transition>
@@ -208,7 +220,7 @@ function bentoImages(item: any) {
       <div v-if="!isMobile">
         <EnvironmentSelector />
         <div class="flex w-full justify-end mb-4">
-          <UButton :disabled="!allSelected" @click="redirect" color="neutral" icon="i-heroicons-arrow-right"
+          <UButton :disabled="!allSelected" @click="redirect" color="primary" icon="i-heroicons-arrow-right"
             label="Gå till miljö" />
         </div>
       </div>

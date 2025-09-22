@@ -129,6 +129,11 @@ onUnmounted(() => {
 const tabSize = computed(() => windowWidth.value >= 768 ? 'lg' : 'lg');
 
 async function fetchCount(folder, type, countRef, filterKey = null) {
+  const params = [envStore.geography, envStore.forestType, envStore.standAge, envStore.vegetationType]
+  if (params.some(param => !param)) {
+    countRef.value = 0
+    return
+  }
   const filename = `${type}-${envStore.geography}-${envStore.forestType}-${envStore.standAge}-${envStore.vegetationType}.json`;
   try {
     const res = await fetch(`/${folder}/${filename}`);

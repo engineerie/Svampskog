@@ -7,8 +7,7 @@
       <EnvironmentSelector v-if="hasAllParams" />
     </transition>
   </UContainer>
-  <div key=""
-    :class="['flex flex-col min-h-screen', hasAllParams ? 'border-t border-muted bg-neutral-50 ' : 'border-t border-muted bg-neutral-50 ']">
+  <div class="flex flex-col min-h-screen border-t border-muted bg-neutral-50">
     <UContainer class="w-full px-0">
       <transition name="fade" mode="out-in">
         <component :is="activeComponent" @close="handleCloseFullScreen" @enlarge="handleFullScreen" class="block" />
@@ -144,13 +143,13 @@ watch(
       envParamsStore.vegetationType
     ) {
       const newPath = `/mykorrhizasvampar/${encodeURIComponent(envParamsStore.geography)}/${encodeURIComponent(envParamsStore.forestType)}/${encodeURIComponent(envParamsStore.standAge)}/${encodeURIComponent(envParamsStore.vegetationType)}`;
-      if (window.location.pathname !== newPath) {
-        window.history.replaceState(null, '', newPath);
-      }
+      // if (window.location.pathname !== newPath) {
+      //   window.history.replaceState(null, '', newPath);
+      // }
     } else {
-      if (window.location.pathname !== '/') {
-        window.history.replaceState(null, '', '/');
-      }
+      // if (window.location.pathname !== '/') {
+      //   window.history.replaceState(null, '', '/');
+      // }
     }
   },
   { deep: true }

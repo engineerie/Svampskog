@@ -42,11 +42,9 @@ const items = computed(() => [
       </NuxtLink>
     </template>
     <template #right>
-      <UColorModeButton />
       <UNavigationMenu :items="items" variant="pill" color="neutral" :ui="{ link: 'text-md ', item: 'mx-0.5' }"
         class="hidden lg:flex" />
     </template>
-
     <template #body>
       <UNavigationMenu :items="items" orientation="vertical" color="neutral" variant="pill"
         :ui="{ link: 'text-3xl/10' }" />
