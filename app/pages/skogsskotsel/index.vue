@@ -156,7 +156,7 @@ const makeThumbSrc = (atgard: string, tid: string | number, startskog: string) =
     return `/images/thumbnails/${fileName}`
 }
 
-const { data: rawTimeline } = await useFetch<any[]>('/timeline.json')
+const { data: rawTimeline } = await useFetch<any[]>('public/timeline.json')
 
 const timelineItems = computed<any[]>(() => {
     const list = rawTimeline.value ?? []
