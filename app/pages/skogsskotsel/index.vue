@@ -129,9 +129,6 @@ Lär dig hur trakthyggesbruk och olika former av hygesfria metoder kan påverka 
 <script setup lang="ts">
 import { ref, computed } from 'vue'
 import type { TabsItem } from '@nuxt/ui'
-import type { TimelineItem } from '@nuxt/ui'
-import { img } from '#build/ui-pro/prose'
-import { pageSection } from '#build/ui-pro'
 
 const normalizeTimeToken = (t: string | number) => {
     const s = String(t).trim().toLowerCase()
