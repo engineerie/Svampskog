@@ -1,42 +1,21 @@
 <template>
   <!-- MySlideover.vue -->
   <transition name="slide-in-right">
-    <div
-      v-if="modelValue"
-      class="fixed inset-0 z-50 flex pointer-events-none md:m-2 group"
-    >
-      <div
-        v-if="!localPinned"
-        class="fixed inset-0 pointer-events-auto"
-        @click="emit('update:modelValue', false)"
-      ></div>
-      <div
-        ref="panelRef"
-        class="ml-auto bg-white shadow-lg z-50 relative pointer-events-auto md:rounded-sm ring-1 ring-neutral-200 transition-all overflow-hidden"
-        :class="[localPinned ? '-m-1' : '', expanded ? 'w-[744px]' : 'w-96']"
-        @click.stop
-      >
-        <div class="absolute top-2 left-2 items-end w-full gap-2 z-10 flex">
-         
-          <UButton
-            class="shadow hover:bg-white rounded-full mt-2 ml-1 md:m-0"
-            color="neutral"
-            variant="subtle"
-            :ui="{ rounded: 'rounded-full' }"
-            icon="heroicons:x-mark"
-            size="lg"
-            @click="emit('update:modelValue', false)"
-          />
-           <UButton
-            class="shadow hover:bg-white hidden md:flex rounded-full"
-            color="neutral"
-            variant="subtle"
-            :ui="{ rounded: 'rounded-full' }"
-            @click="togglePinned"
-            icon="codicon:pinned"
-            size="lg"
-            :class="localPinned ? 'text-primary-500' : 'text-neutral-700'"
-          />
+    <div v-if="modelValue" class="fixed inset-0 z-50 flex pointer-events-none group">
+      <div v-if="!localPinned" class="fixed inset-0 pointer-events-auto" @click="emit('update:modelValue', false)">
+      </div>
+      <div ref="panelRef"
+        class="ml-auto bg-white shadow-lg z-50 relative pointer-events-auto ring-1 ring-neutral-200 transition-all overflow-hidden"
+        :class="[localPinned ? '' : 'sm:ml-auto sm:m-2 sm:rounded', expanded ? 'w-[744px]' : 'w-screen sm:w-96']"
+        @click.stop>
+        <div class="absolute top-3 left-3 items-end w-full gap-2 z-10 flex">
+
+          <UButton class="shadow hover:bg-white rounded-full mt-2 ml-1 md:m-0" color="neutral" variant="soft"
+            :ui="{ rounded: 'rounded-full' }" icon="heroicons:x-mark" size="lg"
+            @click="emit('update:modelValue', false)" />
+          <UButton class="shadow hover:bg-white hidden md:flex rounded-full" color="neutral" variant="soft"
+            :ui="{ rounded: 'rounded-full' }" @click="togglePinned" icon="codicon:pinned" size="lg"
+            :class="localPinned ? 'text-primary-500' : 'text-neutral-700'" />
         </div>
 
         <div class="h-full relative overflow-auto pb-16 no-scrollbar">
@@ -95,6 +74,7 @@ function togglePinned() {
 .slide-in-right-leave-active {
   transition: transform 0.5s ease;
 }
+
 .slide-in-right-enter-from,
 .slide-in-right-leave-to {
   transform: translateX(100%);

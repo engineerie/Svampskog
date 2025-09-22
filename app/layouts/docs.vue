@@ -25,7 +25,7 @@ const navigation = inject<Ref<ContentNavigationItem[]>>('navigation')
                       <UKbd value="k" />
                     </div>
                   </template>
-                </UContentSearchButton> -->
+</UContentSearchButton> -->
               </template>
               <!-- <UContentNavigation
                 :navigation="navigation"

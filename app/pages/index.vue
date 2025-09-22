@@ -11,28 +11,11 @@
         <template #description>
           <MDC :value="page.hero.description" class="*:leading-7  sm:*:leading-8 max-w-3xl mx-auto " />
         </template>
-
-        <template #links>
-
-        </template>
-
         <NuxtImg src="/images/boleto_small.png" width="1500" height="2100" quality="80" format="webp"
           class=" sm:-mt-90 -mb-32 -mt-10 sm:-mb-80" />
-
       </UPageHero>
     </div>
-
     <div class="page-section ">
-      <!-- <UContainer class="text-center mx-auto max-w-5xl text-neutral-500 dark:text-neutral-400 text-md my-24">
-        "Mykorrhizasvampar lever i symbios med träd. Det innebär att svamparna får sin energi från träden och i utbyte
-        sköter de om trädens näringsförsörjning. <span class="hidden md:inline">Svamparnas mikroskopiskt tunna hyfer är
-          om-
-          och invuxna i trädens tunna rötter och förstorar trädens rotsystem tusenfalt.</span>"
-        <div class="flex justify-center mt-4 page-section">
-          <UUser name="Anders Dahlberg" description="Professor i mykologi" />
-        </div>
-      </UContainer> -->
-
     </div>
     <div class="page-section">
       <UPageSection :title="page.sections[0].title" :description="page.sections[0].description"
@@ -59,15 +42,10 @@
           class="rounded-md border border-neutral-200" />
       </UPageSection>
     </div>
-
-
-
-
     <UPageSection title="Aktuellt & lästips"
       :ui="{ container: 'bg-neutral-50 lg:rounded-2xl ring ring-neutral-100 py-12 sm:py-16 lg:py-22 my-4 sm:my-8 lg:my-10', title: 'text-start lg:text-center', description: 'text-start lg:text-center text-pretty' }"
       description=" Läs om projektet i media, lyssna på poddar om skog och svamp eller anmäl dig till webbinarier.">
       <UPageColumns>
-
         <UPageCard class="ring-0 border border-muted bg-white hover:bg-transparent"
           to="https://www.plockhugget.se/events/skogens-svampar-del-1-nedbrytarsvamparnas-mangfald-och-betydelse/"
           title="Skogens svampar - Del 1. Nedbrytarsvamparnas mångfald och betydelse"
@@ -78,7 +56,6 @@
               <UIcon name="i-heroicons-calendar-date-range" class="text-4xl" />
               <UBadge label="Anmälan öppen" size="md" color="primary" variant="subtle" class="h-fit" />
             </div>
-
             <h1 class="text-sm mt-2 flex w-full">Webbinarium | 6 november 2025 kl 19-20.30 <br /> Plockhugget.se</h1>
           </template>
         </UPageCard>
@@ -91,7 +68,6 @@
               <UIcon name="i-heroicons-calendar-date-range" class="text-4xl" />
               <UBadge label="Anmälan öppen" size="md" color="primary" variant="subtle" class="h-fit" />
             </div>
-
             <h1 class="text-sm mt-2">Webbinarium | 9 december 2025 kl 9-10.30 <br /> Plockhugget.se</h1>
           </template></UPageCard>
         <UPageCard class="ring-0 border border-muted bg-white hover:bg-transparent"
@@ -104,7 +80,6 @@
               <UIcon name="i-heroicons-calendar-date-range" class="text-4xl" />
               <UBadge label="Anmäl intresse" size="md" color="info" variant="subtle" class="h-fit" />
             </div>
-
             <h1 class="text-sm mt-2 flex w-full">Webbinarium | Vår 2026 <br /> </h1>
           </template>
         </UPageCard>
@@ -117,16 +92,12 @@
             </div>
             <h1 class="text-sm mt-2">{{ article.publicationDate }} | {{ article.publication }}</h1>
           </template>
-
         </UPageCard>
       </UPageColumns>
     </UPageSection>
-
     <UPageSection title="Kommande innehåll"
       :ui="{ container: 'flex-col', title: 'text-start lg:text-center', description: 'text-start lg:text-center text-pretty' }"
       description="Svampskog.se vidareutvecklas stegvis. Här hittar du en översikt över planerade funktioner och material som publiceras under året.">
-      <!-- <Omsvampskog /> -->
-
       <UTimeline :default-value="1" :items="timeline" size="3xl" orientation="vertical" :ui="{
         root: 'lg:flex-row lg:w-full',
         item: 'lg:flex-col',
@@ -134,13 +105,8 @@
         separator: 'lg:h-0.5 lg:w-auto',
         wrapper: 'lg:pe-8.5 lg:mt-0 lg:pb-0'
       }" />
-
     </UPageSection>
-
-
     <Finansiering />
-
-
   </div>
 </template>
 

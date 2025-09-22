@@ -1,4 +1,26 @@
 <template>
+  <!-- <USlideover :class="['transition-all', !isPinned ? 'm-1 rounded overflow-hidden' : 'm-0 rounded-none']"
+    v-model:open="showSlideover" :overlay="false" :dismissible="!isPinned" side="right" :modal="!isPinned" :ui="{
+      wrapper: 'md:p-2',
+      content: 'md:rounded-sm ring-1 ring-neutral-200 bg-white w-[24rem] max-w-full flex flex-col'
+    }">
+    <template #content="{ close }">
+      <div class="relative flex flex-col h-full">
+        <div class="absolute flex items-center justify-between gap-2 p-3 z-10">
+          <div class="flex items-center gap-2" v-if="!isMobile">
+            <UButton icon="codicon:pinned" color="neutral" variant="soft" :ui="{ rounded: 'rounded-full' }" size="lg"
+              class="rounded-full" :class="isPinned ? 'text-primary-500' : 'text-neutral-700'" @click="togglePinned" />
+          </div>
+          <UButton icon="heroicons:x-mark" color="neutral" variant="soft" :ui="{ rounded: 'rounded-full' }" size="lg"
+            class="rounded-full" @click="() => { close(); showSlideover = false }" />
+        </div>
+        <div class="flex-1 overflow-y-auto pb-6">
+          <SpeciesInfo v-if="speciesStore.selectedSpecies" :species="speciesStore.selectedSpecies"
+            :source="speciesStore.sourceComponent" />
+        </div>
+      </div>
+    </template>
+</USlideover> -->
   <MySlideover v-model="showSlideover" :pinned="isPinned" @update:pinned="(val) => (isPinned = val)">
     <SpeciesInfo :species="speciesStore.selectedSpecies" :source="speciesStore.sourceComponent" />
   </MySlideover>
@@ -19,7 +41,6 @@
 <script setup>
 import { computed, onMounted, onBeforeUnmount, ref, watch } from "vue";
 import { useRoute } from "vue-router";
-import MySlideover from "./MySlideover.vue";
 import FullScreenPoison from "./FullScreenPoison.vue";
 import FullScreenEdible from "./FullScreenEdible.vue";
 import RedlistedComponent from "./RedlistedComponent.vue";
@@ -29,11 +50,17 @@ import { useEnvParamsStore } from "~/stores/envParamsStore";
 
 import { useSpeciesStore } from "~/stores/speciesStore";
 import EdnaComponent from "./EdnaComponent.vue";
+import { useMediaQuery } from '@vueuse/core'
+const isMobile = useMediaQuery('(max-width: 767px)')
 
 const route = useRoute();
 
 const showSlideover = ref(false);
 const isPinned = ref(true);
+
+const togglePinned = () => {
+  isPinned.value = !isPinned.value
+};
 
 const speciesStore = useSpeciesStore();
 const envParamsStore = useEnvParamsStore();

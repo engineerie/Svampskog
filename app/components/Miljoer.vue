@@ -1,13 +1,6 @@
 <template>
     <UPage class="flex-1">
         <UContainer class="py-10 space-y-8">
-            <!-- <header class="space-y-2">
-                <h1 class="text-3xl font-semibold text-neutral-900 dark:text-neutral-100">Miljööversikt</h1>
-                <p class="text-neutral-600 dark:text-neutral-400 max-w-2xl">
-                    Utforska vilka kombinationer av geografi, skogstyp, ålder och fältskikt som har artdata.
-                </p>
-            </header> -->
-
             <div v-if="activeFilterBadges.length" class="flex justify-end">
                 <div class="flex flex-wrap gap-2 -mb-4">
                     <UBadge v-for="badge in activeFilterBadges" :key="badge.id" :variant="badge.variant ?? 'soft'"

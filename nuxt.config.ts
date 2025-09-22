@@ -1,4 +1,4 @@
-import { fileURLToPath } from 'node:url'
+import { fileURLToPath } from "node:url";
 
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
@@ -31,7 +31,7 @@ export default defineNuxtConfig({
     },
     resolve: {
       alias: {
-        public: fileURLToPath(new URL('./public', import.meta.url)),
+        public: fileURLToPath(new URL("./public", import.meta.url)),
       },
     },
   },
@@ -72,7 +72,7 @@ export default defineNuxtConfig({
 
   nitro: {
     prerender: {
-      routes: ["/", "/docs", "/info"],
+      routes: ["/", "/info"],
       crawlLinks: true,
     },
   },

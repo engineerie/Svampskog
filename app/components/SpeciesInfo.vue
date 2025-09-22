@@ -1,26 +1,9 @@
 <template>
   <div class="w-full relative overflow-visible">
-    <!-- Top Heading Bar -->
-    <!-- <div class="absolute top-0 w-full z-50 flex justify-between">
-      <h1 class="pt-3 pb-2 px-6 text-3xl">
-        {{ capitalize(species.Commonname) }}
-      </h1>
-    </div> -->
-
-    <!-- Images Section -->
     <div v-if="imageUrls.length > 1" class="group overflow-hidden">
       <UCarousel v-slot="{ item }" @select="currentIndex = $event" :items="imageUrls" :ui="{ item: 'basis-full' }">
         <div class="w-full relative" :key="item">
           <NuxtImg :src="item" class="w-full " draggable="false" height="300" width="450" format="webp" />
-          <!-- <div class="absolute bottom-0 right-0 justify-end p-2 items-center">
-            <UBadge color="neutral" variant="subtle">
-              <h1 weight="light" size="sm" class="">Foto:</h1>
-              <Icon name="ph:copyright" class="h-4 w-4 mx-1" />
-              <h1 weight="light" size="sm" class="">
-                Michael Krikorev
-              </h1></UBadge
-            >
-          </div> -->
         </div>
       </UCarousel>
 
@@ -34,8 +17,6 @@
         <h1>
           {{ currentIndex + 1 }} av {{ imageUrls.length }}
         </h1>
-
-
       </div>
     </div>
     <div v-else-if="imageUrls.length === 1" class=" overflow-hidden relative group">
@@ -54,18 +35,7 @@
 
       </div>
     </div>
-    <div v-else>
-      <!-- Placeholder image section -->
-      <div class=" relative pb-[230px] bg-transparent cursor-pointer" style="
-          background-image: repeating-linear-gradient(
-            -45deg,
-            rgba(0, 0, 0, 0.1) 0px,
-            rgba(0, 0, 0, 0.1) 5px,
-            transparent 5px,
-            transparent 10px
-          );
-        "></div>
-    </div>
+    <ImagePlaceholder class="rounded-none" v-else />
 
     <!-- Content Section -->
     <div class="px-5 pb-3 mt-4">

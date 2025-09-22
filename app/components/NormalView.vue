@@ -69,9 +69,7 @@
               size="xl" />
           </div>
         </UCard>
-
       </UContainer>
-
     </div>
   </div>
 </template>
@@ -79,7 +77,6 @@
 <script setup>
 import EdnaComponent from "./EdnaComponent.vue";
 import { useRoute } from "vue-router";
-import EnvImgInfo from "./EnvImgInfo.vue";
 import { ref, computed, watch, onMounted, onUnmounted } from 'vue';
 import { useEnvParamsStore } from '~/stores/envParamsStore';
 const envStore = useEnvParamsStore();

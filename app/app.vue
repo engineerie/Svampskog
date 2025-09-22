@@ -1,13 +1,13 @@
 <script setup lang="ts">
-const colorMode = useColorMode()
+// const colorMode = useColorMode()
 
-const color = computed(() => colorMode.value === 'dark' ? '#111827' : 'white')
+// const color = computed(() => colorMode.value === 'dark' ? '#111827' : 'white')
 
 useHead({
   meta: [
     { charset: 'utf-8' },
     { name: 'viewport', content: 'width=device-width, initial-scale=1' },
-    { key: 'theme-color', name: 'theme-color', content: color }
+    // { key: 'theme-color', name: 'theme-color', content: color }
   ],
   link: [
     { rel: 'icon', href: '/favicon.ico' }
@@ -36,27 +36,6 @@ const { data: blognavigation } = await useAsyncData('blognavigation', () => quer
   transform: data => data.find(item => item.path === '/blog')?.children || []
 })
 
-
-
-
-// const { data: files } = useLazyAsyncData('search', () => queryCollectionSearchSections('docs'), {
-//   server: false
-// })
-
-// const links = [{
-//   label: 'Docs',
-//   icon: 'i-lucide-book',
-//   to: '/docs/getting-started'
-// }, {
-//   label: 'Pricing',
-//   icon: 'i-lucide-credit-card',
-//   to: '/pricing'
-// }, {
-//   label: 'Blog',
-//   icon: 'i-lucide-pencil',
-//   to: '/blog'
-// }]
-
 provide('navigation', navigation)
 provide('svamparnavigation', svamparnavigation)
 provide('blognavigation', blognavigation)
@@ -67,21 +46,9 @@ provide('blognavigation', blognavigation)
   <UApp>
     <UBanner class="" icon="i-fluent-emoji-high-contrast-construction" color="warning"
       title="Utvecklingsarbete och dokumentation pågår. Genomarbetad version planeras till 1 nov" />
-
     <NuxtLoadingIndicator />
-
     <NuxtLayout>
       <NuxtPage />
     </NuxtLayout>
-
-    <!-- <ClientOnly>
-      <LazyUContentSearch
-        :files="files"
-        shortcut="meta_k"
-        :navigation="navigation"
-        :links="links"
-        :fuse="{ resultLimit: 42 }"
-      />
-    </ClientOnly> -->
   </UApp>
 </template>

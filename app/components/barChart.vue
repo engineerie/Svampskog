@@ -275,7 +275,7 @@ const updatedChartData = computed(() => {
       isSlideOverOpen.value &&
       d.Scientificname === speciesStore.selectedSpecies?.Scientificname
     ) {
-      return { ...d, barColor: '#A855F7' }
+      return { ...d, barColor: '#b1835e' }
     }
     // Compute matchSearch at the top
     const term = props.searchTerm.trim().toLowerCase();

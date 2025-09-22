@@ -12,7 +12,7 @@ hero:
       to: /mykorrhizasvampar
       target:
       size: xl
-      color: rodeodust
+      color: neutral
       variant: solid
     - label: Skogsskötsel
       icon: i-hugeicons-tree-06
@@ -20,7 +20,7 @@ hero:
       to: /skogsskotsel
       target:
       size: xl
-      color: rodeodust
+      color: neutral
       variant: subtle
 sections:
   - title: Utforska svampar i svenska skogar
@@ -31,7 +31,7 @@ sections:
       - label: Gå till svampar
         to: /mykorrhizasvampar
         icon: i-heroicons-arrow-right
-        color: "rodeodust"
+        color: "neutral"
         variant: "solid"
     orientation: horizontal
     reverse: true
@@ -51,7 +51,7 @@ sections:
       - label: Gå till skogsskötsel
         to: /skogsskotsel
         icon: i-heroicons-arrow-right
-        color: "rodeodust"
+        color: "neutral"
         variant: "solid"
     orientation: horizontal
     reverse: false

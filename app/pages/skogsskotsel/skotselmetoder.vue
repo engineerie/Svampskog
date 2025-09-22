@@ -106,7 +106,7 @@ Lär dig hur trakthyggesbruk och olika former av hygesfria metoder kan påverka 
     <Transition name="slide" mode="out-in">
       <div :key="grid ? (intro ? 0 : 1) : 2" class="w-full ">
         <SkogsskotselIntro v-if="intro" />
-        <SvampskogDynamikerFooter v-else-if="grid" />
+        <!-- <SvampskogDynamikerFooter v-else-if="grid" /> -->
         <UContainer v-else>
           <ForestryChartMain :parentSelectedFrameworks="selectedFrameworksProp" />
         </UContainer>

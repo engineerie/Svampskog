@@ -25,12 +25,9 @@ const navigation = inject<Ref<ContentNavigationItem[]>>('svamparnavigation')
                       <UKbd value="k" />
                     </div>
                   </template>
-                </UContentSearchButton>
-              </template> -->
-              <UContentNavigation
-                :navigation="navigation"
-                variant="pill"
-              />
+</UContentSearchButton>
+</template> -->
+              <UContentNavigation :navigation="navigation" variant="pill" />
             </UPageAside>
           </template>
 

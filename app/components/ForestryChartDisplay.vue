@@ -1,14 +1,5 @@
 <template>
-
-  <!-- <div class="absolute right-0 top-0 z-50">
-            <UButton color="neutral" variant="subtle"
-                :icon="chartType === 'line' ? 'i-carbon-chart-column' : 'i-carbon-chart-line-smooth'"
-                @click="ToggleChartType" />
-        </div> -->
-
   <div class="custom-area" ref="rootEl" :style="{ '--vis-area-stroke-color': parentStrokeColor }">
-    <!-- <VisBulletLegend :items="legendItems" :onLegendItemClick="updateLegendItem" labelFontSize="small"
-                bulletSize="0.7rem" class="p-5 pb-0"/> -->
     <ClientOnly>
       <VisXYContainer v-if="isMounted && chartReady" :data="chartData" :height="200" :margin="margin" :xDomain="xDomain"
         :yDomain="yDomain">
@@ -22,10 +13,6 @@
             const v = Number(d?.[fw.key])
             return Number.isFinite(v) ? v : NaN
           }" :color="() => (fw.colorArea || fw.color)" :interpolateMissingData="true" />
-          <!-- <VisLine v-for="fw in activeFrameworks" :key="fw.key + '-line'" :x="xAccessor" :y="(d: any) => {
-            const v = Number(d?.[fw.key])
-            return Number.isFinite(v) ? v : NaN
-          }" :color="() => (fw.colorLine || fw.color)" :lineDashArray="fw.lineDashArray" :lineWidth="4" /> -->
           <VisCrosshair :template="crosshairTemplate" />
           <VisTooltip :horizontalShift="30" />
         </template>
@@ -33,7 +20,6 @@
           <VisGroupedBar :color="computedLineColors" :x="xAccessor" :y="yAccessors" :groupPadding="0.5"
             :groupMaxWidth="20" />
         </template>
-        <!-- <VisBrush :selection="brushSelection" :handleWidth="0" :draggable="false" /> -->
         <VisAxis :gridLine="true" type="x" :tickValues="[-5, 0, 1, 10, 20, 30, 40, 50, 60, 70, 80, 90]" :tickFormat="(val: number) => {
           if (val === -5) return 'före'
           if (val === 0) return ''

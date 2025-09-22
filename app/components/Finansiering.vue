@@ -1,6 +1,5 @@
 <template>
     <div class=" pt-12 pb-18">
-
         <UContainer>
             <h1 class="text-lg text-center font-semibold text-neutral-900 my-12 sm:my-18">Projektet har finansierats av
                 SLU och
@@ -16,18 +15,6 @@
                 <NuxtImg src="/images/EU_logo.png" height="80" />
             </div>
         </UContainer>
-
-
-        <!-- <UPageLogos marquee class=" sm:hidden"
-            title="Projektet har finansierats av SLU och Skogssällskapet och med stöd från Skogsstyrelsen och EU.">
-            <NuxtImg src="/images/slu_logo_webb.png" height="40" />
-            <NuxtImg src="/images/skogssallskapet_logo.png" height="40" />
-            <NuxtImg src="/images/Skogsstyrelsen_logo.png" height="60" />
-            <NuxtImg src="/images/EU_logo.png" height="60" />
-        </UPageLogos> -->
-
-
-
         <ul class="mt-28 text-sm sm:text-md sm:text-center mx-auto max-w-5xl px-6">
             <li> Verktyget är utvecklat med data från Markinventeringen, SLU riksskogstaxeringen och SLU Artdatabanken.
             </li>
@@ -42,5 +29,4 @@
             </li>
         </ul>
     </div>
-
 </template>

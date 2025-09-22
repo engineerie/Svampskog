@@ -4,8 +4,7 @@
       :class="[' block relative overflow-scroll -mx-4 w-screen', geography && forestType && standAge && vegetationType ? 'h-14' : 'h-0']">
       <div
         :class="['pt-0.5 top-16 z-20 w-screen inset-0 bg-neutral-50 dark:bg-neutral-950  dark:border-neutral-800 transition-height', mobileCollapsed ? 'h-14' : 'h-14']">
-        <UModal :overlay="true" title="Välj miljö" description="Välj miljö med hjälp av listorna"
-          :ui="{ body: 'p-0', title: 'text-2xl' }">
+        <UModal :overlay="true" title="Välj miljö" :ui="{ body: 'p-0', title: 'text-2xl' }">
           <div class="flex justify-between w-full mx-auto max-w-full ">
             <div class="flex gap-2 p-2 overflow-scroll">
               <UBadge v-for="category in categories" :key="category.key" size="xl" variant="outline" color="neutral"
@@ -32,8 +31,7 @@
                 <UButton label="DNA-data" size="xl" trailing :icon="restrictionEnabled ? 'mdi:lock' : 'mdi:lock-open'"
                   @click="toggleRestriction" variant="subtle" :color="restrictionEnabled ? 'secondary' : 'neutral'" />
 
-                <UModal fullscreen title="Kombinationer" description="Utforska tillgängliga kombinationer"
-                  class="w-full" :ui="{ title: 'text-2xl' }">
+                <UModal fullscreen title="Kombinationer" class="w-full" :ui="{ title: 'text-2xl' }">
                   <UButton label="Kombinationer" size="xl" shape="full" trailing icon="mdi:apps" color="neutral"
                     variant="outline" />
                   <template #body>
@@ -199,11 +197,6 @@
             </div>
           </Transition>
         </div>
-
-        <EnvImgInfo v-if="showImgInfo && geography && forestType && standAge && vegetationType"
-          class="hidden md:grid mb-4" :geography="geography" :forestType="forestType" :standAge="standAge"
-          :vegetationType="vegetationType" />
-
       </div>
 
 
