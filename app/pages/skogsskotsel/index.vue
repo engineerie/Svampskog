@@ -17,6 +17,7 @@ Lär dig hur trakthyggesbruk och olika former av hygesfria metoder kan påverka 
                         <template #content>
                             <UAlert title="Denna funktion lanseras i November." color="warning"
                                 icon="i-fluent-emoji-high-contrast-construction" />
+
                             <!-- <ModelC /> -->
                         </template>
                     </UModal>
