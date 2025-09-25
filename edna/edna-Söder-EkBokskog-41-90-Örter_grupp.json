@@ -160,8 +160,8 @@
     "sample_env_count": 5,
     "Svamp-grupp-släkte": "tryffel",
     "images": [
-      "/images/SvampBilder/Giftsvampar/Scleroderma citrinum-117-5976.jpg",
-      "/images/SvampBilder/Giftsvampar/Scleroderma citrinum-116-5976.jpg"
+      "/images/svampbilder/Giftsvampar/Scleroderma citrinum-117-5976.jpg",
+      "/images/svampbilder/Giftsvampar/Scleroderma citrinum-116-5976.jpg"
     ]
   },
   {
@@ -271,10 +271,10 @@
     "sample_env_count": 5,
     "Svamp-grupp-släkte": "hattsvamp",
     "images": [
-      "/images/SvampBilder/Matsvampar/Russula vesca-1.jpg",
-      "/images/SvampBilder/Matsvampar/Russula vesca-3.jpg",
-      "/images/SvampBilder/Matsvampar/Russula vesca-2.jpg",
-      "/images/SvampBilder/Matsvampar/Russula vesca-4.jpg"
+      "/images/svampbilder/Matsvampar/Russula vesca-1.jpg",
+      "/images/svampbilder/Matsvampar/Russula vesca-3.jpg",
+      "/images/svampbilder/Matsvampar/Russula vesca-2.jpg",
+      "/images/svampbilder/Matsvampar/Russula vesca-4.jpg"
     ]
   },
   {
@@ -627,12 +627,12 @@
     "sample_env_count": 5,
     "Svamp-grupp-släkte": "sopp",
     "images": [
-      "/images/SvampBilder/Matsvampar/Suillus luteus-1.jpg",
-      "/images/SvampBilder/Matsvampar/Suillus luteus-2.jpg",
-      "/images/SvampBilder/Matsvampar/Suillus luteus-3.jpg",
-      "/images/SvampBilder/Matsvampar/Suillus luteus-4.jpg",
-      "/images/SvampBilder/Matsvampar/Suillus luteus-5.jpg",
-      "/images/SvampBilder/Giftsvampar/Suillus luteus-66-6088.jpg"
+      "/images/svampbilder/Matsvampar/Suillus luteus-1.jpg",
+      "/images/svampbilder/Matsvampar/Suillus luteus-2.jpg",
+      "/images/svampbilder/Matsvampar/Suillus luteus-3.jpg",
+      "/images/svampbilder/Matsvampar/Suillus luteus-4.jpg",
+      "/images/svampbilder/Matsvampar/Suillus luteus-5.jpg",
+      "/images/svampbilder/Giftsvampar/Suillus luteus-66-6088.jpg"
     ]
   },
   {
@@ -661,7 +661,7 @@
     "sample_env_count": 5,
     "Svamp-grupp-släkte": "tryffel",
     "images": [
-      "/images/SvampBilder/RödlistadeSvampar/Scleroderma verrucosum-1466.jpg"
+      "/images/svampbilder/RödlistadeSvampar/Scleroderma verrucosum-1466.jpg"
     ]
   },
   {
@@ -690,12 +690,12 @@
     "sample_env_count": 5,
     "Svamp-grupp-släkte": "sopp",
     "images": [
-      "/images/SvampBilder/Matsvampar/Boletus edulis-1.jpg",
-      "/images/SvampBilder/Matsvampar/Boletus edulis-2.jpg",
-      "/images/SvampBilder/Matsvampar/Boletus edulis-3.jpg",
-      "/images/SvampBilder/Matsvampar/Boletus edulis-6.jpg",
-      "/images/SvampBilder/Matsvampar/Boletus edulis-4.jpg",
-      "/images/SvampBilder/Matsvampar/Boletus edulis-5.jpg"
+      "/images/svampbilder/Matsvampar/Boletus edulis-1.jpg",
+      "/images/svampbilder/Matsvampar/Boletus edulis-2.jpg",
+      "/images/svampbilder/Matsvampar/Boletus edulis-3.jpg",
+      "/images/svampbilder/Matsvampar/Boletus edulis-6.jpg",
+      "/images/svampbilder/Matsvampar/Boletus edulis-4.jpg",
+      "/images/svampbilder/Matsvampar/Boletus edulis-5.jpg"
     ]
   },
   {
@@ -832,10 +832,10 @@
     "sample_env_count": 5,
     "Svamp-grupp-släkte": "hattsvamp",
     "images": [
-      "/images/SvampBilder/Matsvampar/Russula claroflava-4.jpg",
-      "/images/SvampBilder/Matsvampar/Russula claroflava-1.jpg",
-      "/images/SvampBilder/Matsvampar/Russula claroflava-3.jpg",
-      "/images/SvampBilder/Matsvampar/Russula claroflava-2.jpg"
+      "/images/svampbilder/Matsvampar/Russula claroflava-4.jpg",
+      "/images/svampbilder/Matsvampar/Russula claroflava-1.jpg",
+      "/images/svampbilder/Matsvampar/Russula claroflava-3.jpg",
+      "/images/svampbilder/Matsvampar/Russula claroflava-2.jpg"
     ]
   },
   {
@@ -1134,9 +1134,9 @@
     "sample_env_count": 5,
     "Svamp-grupp-släkte": "sopp",
     "images": [
-      "/images/SvampBilder/Matsvampar/Xerocomellus porosporus-1.jpg",
-      "/images/SvampBilder/Matsvampar/Xerocomellus porosporus-3.jpg",
-      "/images/SvampBilder/Matsvampar/Xerocomellus porosporus-2.jpg"
+      "/images/svampbilder/Matsvampar/Xerocomellus porosporus-1.jpg",
+      "/images/svampbilder/Matsvampar/Xerocomellus porosporus-3.jpg",
+      "/images/svampbilder/Matsvampar/Xerocomellus porosporus-2.jpg"
     ]
   },
   {
@@ -1273,9 +1273,9 @@
     "sample_env_count": 5,
     "Svamp-grupp-släkte": "sopp",
     "images": [
-      "/images/SvampBilder/Matsvampar/Xerocomellus porosporus-1.jpg",
-      "/images/SvampBilder/Matsvampar/Xerocomellus porosporus-3.jpg",
-      "/images/SvampBilder/Matsvampar/Xerocomellus porosporus-2.jpg"
+      "/images/svampbilder/Matsvampar/Xerocomellus porosporus-1.jpg",
+      "/images/svampbilder/Matsvampar/Xerocomellus porosporus-3.jpg",
+      "/images/svampbilder/Matsvampar/Xerocomellus porosporus-2.jpg"
     ]
   }
 ]

@@ -41,9 +41,9 @@
     "förekomst_ung": 0,
     "förekomst_sum": 3,
     "images": [
-      "/images/SvampBilder/Giftsvampar/Ramaria mairei, Ramaria pallida-186-256756.jpg",
-      "/images/SvampBilder/Giftsvampar/Ramaria mairei, Ramaria pallida-185-256756.jpg",
-      "/images/SvampBilder/RödlistadeSvampar/Ramaria pallida-256756.jpg"
+      "/images/svampbilder/Giftsvampar/Ramaria mairei, Ramaria pallida-186-256756.jpg",
+      "/images/svampbilder/Giftsvampar/Ramaria mairei, Ramaria pallida-185-256756.jpg",
+      "/images/svampbilder/RödlistadeSvampar/Ramaria pallida-256756.jpg"
     ]
   },
   {
@@ -131,7 +131,7 @@
     "förekomst_ung": 0,
     "förekomst_sum": 2,
     "images": [
-      "/images/SvampBilder/RödlistadeSvampar/Phellodon niger-5449.jpg"
+      "/images/svampbilder/RödlistadeSvampar/Phellodon niger-5449.jpg"
     ]
   },
   {
@@ -219,9 +219,9 @@
     "förekomst_ung": 0,
     "förekomst_sum": 3,
     "images": [
-      "/images/SvampBilder/Giftsvampar/Cortinarius meinhardii-187-473.jpg",
-      "/images/SvampBilder/Giftsvampar/Cortinarius meinhardii-131-473.jpg",
-      "/images/SvampBilder/RödlistadeSvampar/Cortinarius meinhardii-473.jpg"
+      "/images/svampbilder/Giftsvampar/Cortinarius meinhardii-187-473.jpg",
+      "/images/svampbilder/Giftsvampar/Cortinarius meinhardii-131-473.jpg",
+      "/images/svampbilder/RödlistadeSvampar/Cortinarius meinhardii-473.jpg"
     ]
   }
 ]

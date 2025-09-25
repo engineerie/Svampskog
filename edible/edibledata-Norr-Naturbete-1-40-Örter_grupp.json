@@ -40,11 +40,11 @@
     "förekomst_ung": 0,
     "förekomst_sum": 1.5,
     "images": [
-      "/images/SvampBilder/Matsvampar/Cantharellus cibarius-4.jpg",
-      "/images/SvampBilder/Matsvampar/Cantharellus cibarius-5.jpg",
-      "/images/SvampBilder/Matsvampar/Cantharellus cibarius-2.jpg",
-      "/images/SvampBilder/Matsvampar/Cantharellus cibarius-3.jpg",
-      "/images/SvampBilder/Matsvampar/Cantharellus cibarius-1.jpg"
+      "/images/svampbilder/Matsvampar/Cantharellus cibarius-4.jpg",
+      "/images/svampbilder/Matsvampar/Cantharellus cibarius-5.jpg",
+      "/images/svampbilder/Matsvampar/Cantharellus cibarius-2.jpg",
+      "/images/svampbilder/Matsvampar/Cantharellus cibarius-3.jpg",
+      "/images/svampbilder/Matsvampar/Cantharellus cibarius-1.jpg"
     ]
   },
   {
@@ -88,8 +88,8 @@
     "förekomst_ung": 0,
     "förekomst_sum": 1.5,
     "images": [
-      "/images/SvampBilder/Giftsvampar/Paxillus involutus-104-5351.jpg",
-      "/images/SvampBilder/Giftsvampar/Paxillus involutus-98-5351.jpg"
+      "/images/svampbilder/Giftsvampar/Paxillus involutus-104-5351.jpg",
+      "/images/svampbilder/Giftsvampar/Paxillus involutus-98-5351.jpg"
     ]
   },
   {
@@ -133,8 +133,8 @@
     "förekomst_ung": 0,
     "förekomst_sum": 1.5,
     "images": [
-      "/images/SvampBilder/Giftsvampar/Paxillus involutus-104-5351.jpg",
-      "/images/SvampBilder/Giftsvampar/Paxillus involutus-98-5351.jpg"
+      "/images/svampbilder/Giftsvampar/Paxillus involutus-104-5351.jpg",
+      "/images/svampbilder/Giftsvampar/Paxillus involutus-98-5351.jpg"
     ]
   },
   {
@@ -178,8 +178,8 @@
     "förekomst_ung": 0,
     "förekomst_sum": 1.5,
     "images": [
-      "/images/SvampBilder/Matsvampar/Lactarius torminosus-2.jpg",
-      "/images/SvampBilder/Matsvampar/Lactarius torminosus-1.jpg"
+      "/images/svampbilder/Matsvampar/Lactarius torminosus-2.jpg",
+      "/images/svampbilder/Matsvampar/Lactarius torminosus-1.jpg"
     ]
   },
   {
@@ -223,12 +223,12 @@
     "förekomst_ung": 0,
     "förekomst_sum": 1.5,
     "images": [
-      "/images/SvampBilder/Matsvampar/Boletus edulis-1.jpg",
-      "/images/SvampBilder/Matsvampar/Boletus edulis-2.jpg",
-      "/images/SvampBilder/Matsvampar/Boletus edulis-3.jpg",
-      "/images/SvampBilder/Matsvampar/Boletus edulis-6.jpg",
-      "/images/SvampBilder/Matsvampar/Boletus edulis-4.jpg",
-      "/images/SvampBilder/Matsvampar/Boletus edulis-5.jpg"
+      "/images/svampbilder/Matsvampar/Boletus edulis-1.jpg",
+      "/images/svampbilder/Matsvampar/Boletus edulis-2.jpg",
+      "/images/svampbilder/Matsvampar/Boletus edulis-3.jpg",
+      "/images/svampbilder/Matsvampar/Boletus edulis-6.jpg",
+      "/images/svampbilder/Matsvampar/Boletus edulis-4.jpg",
+      "/images/svampbilder/Matsvampar/Boletus edulis-5.jpg"
     ]
   }
 ]

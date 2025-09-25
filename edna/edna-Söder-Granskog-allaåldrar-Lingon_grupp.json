@@ -160,10 +160,10 @@
     "sample_env_count": 3,
     "Svamp-grupp-släkte": "hattsvamp",
     "images": [
-      "/images/SvampBilder/Matsvampar/Lactarius rufus-4.jpg",
-      "/images/SvampBilder/Matsvampar/Lactarius rufus-1.jpg",
-      "/images/SvampBilder/Matsvampar/Lactarius rufus-3.jpg",
-      "/images/SvampBilder/Matsvampar/Lactarius rufus-2.jpg"
+      "/images/svampbilder/Matsvampar/Lactarius rufus-4.jpg",
+      "/images/svampbilder/Matsvampar/Lactarius rufus-1.jpg",
+      "/images/svampbilder/Matsvampar/Lactarius rufus-3.jpg",
+      "/images/svampbilder/Matsvampar/Lactarius rufus-2.jpg"
     ]
   },
   {
@@ -354,8 +354,8 @@
     "sample_env_count": 3,
     "Svamp-grupp-släkte": "hattsvamp",
     "images": [
-      "/images/SvampBilder/Matsvampar/Hygrophorus olivaceoalbus-2.jpg",
-      "/images/SvampBilder/Matsvampar/Hygrophorus olivaceoalbus-1.jpg"
+      "/images/svampbilder/Matsvampar/Hygrophorus olivaceoalbus-2.jpg",
+      "/images/svampbilder/Matsvampar/Hygrophorus olivaceoalbus-1.jpg"
     ]
   },
   {
@@ -438,9 +438,9 @@
     "sample_env_count": 3,
     "Svamp-grupp-släkte": "hattsvamp",
     "images": [
-      "/images/SvampBilder/Giftsvampar/Cortinarius gentilis-136-3622.jpg",
-      "/images/SvampBilder/Giftsvampar/Cortinarius gentilis-201-3622.jpg",
-      "/images/SvampBilder/Giftsvampar/Cortinarius gentilis-135-3622.jpg"
+      "/images/svampbilder/Giftsvampar/Cortinarius gentilis-136-3622.jpg",
+      "/images/svampbilder/Giftsvampar/Cortinarius gentilis-201-3622.jpg",
+      "/images/svampbilder/Giftsvampar/Cortinarius gentilis-135-3622.jpg"
     ]
   },
   {
@@ -631,8 +631,8 @@
     "sample_env_count": 3,
     "Svamp-grupp-släkte": "hattsvamp",
     "images": [
-      "/images/SvampBilder/Giftsvampar/Cortinarius armillatus-20-3541.jpg",
-      "/images/SvampBilder/Giftsvampar/Cortinarius armillatus-21-3541.jpg"
+      "/images/svampbilder/Giftsvampar/Cortinarius armillatus-20-3541.jpg",
+      "/images/svampbilder/Giftsvampar/Cortinarius armillatus-21-3541.jpg"
     ]
   },
   {

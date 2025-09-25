@@ -41,7 +41,7 @@
     "förekomst_ung": 0,
     "förekomst_sum": 3,
     "images": [
-      "/images/SvampBilder/RödlistadeSvampar/Amanita lividopallescens-2975.jpg"
+      "/images/svampbilder/RödlistadeSvampar/Amanita lividopallescens-2975.jpg"
     ]
   },
   {
@@ -172,14 +172,14 @@
     "förekomst_ung": 0,
     "förekomst_sum": 3,
     "images": [
-      "/images/SvampBilder/Giftsvampar/Rubroboletus satanas-214-161.jpg",
-      "/images/SvampBilder/Giftsvampar/Rubroboletus satanas-228-161.jpg",
-      "/images/SvampBilder/Giftsvampar/Rubroboletus satanas-229-161.jpg",
-      "/images/SvampBilder/Giftsvampar/Rubroboletus satanas-230-161.jpg",
-      "/images/SvampBilder/Giftsvampar/Rubroboletus satanas-225-161.jpg",
-      "/images/SvampBilder/Giftsvampar/Rubroboletus satanas-224-161.jpg",
-      "/images/SvampBilder/Giftsvampar/Rubroboletus satanas-226-161.jpg",
-      "/images/SvampBilder/Giftsvampar/Rubroboletus satanas-227-161.jpg"
+      "/images/svampbilder/Giftsvampar/Rubroboletus satanas-214-161.jpg",
+      "/images/svampbilder/Giftsvampar/Rubroboletus satanas-228-161.jpg",
+      "/images/svampbilder/Giftsvampar/Rubroboletus satanas-229-161.jpg",
+      "/images/svampbilder/Giftsvampar/Rubroboletus satanas-230-161.jpg",
+      "/images/svampbilder/Giftsvampar/Rubroboletus satanas-225-161.jpg",
+      "/images/svampbilder/Giftsvampar/Rubroboletus satanas-224-161.jpg",
+      "/images/svampbilder/Giftsvampar/Rubroboletus satanas-226-161.jpg",
+      "/images/svampbilder/Giftsvampar/Rubroboletus satanas-227-161.jpg"
     ]
   },
   {
@@ -224,7 +224,7 @@
     "förekomst_ung": 0,
     "förekomst_sum": "x2",
     "images": [
-      "/images/SvampBilder/RödlistadeSvampar/Hygrophorus penarioides-4419.jpg"
+      "/images/svampbilder/RödlistadeSvampar/Hygrophorus penarioides-4419.jpg"
     ]
   },
   {
@@ -269,7 +269,7 @@
     "förekomst_ung": 0,
     "förekomst_sum": 3,
     "images": [
-      "/images/SvampBilder/RödlistadeSvampar/Hygrophorus cossus-239233.jpg"
+      "/images/svampbilder/RödlistadeSvampar/Hygrophorus cossus-239233.jpg"
     ]
   },
   {
@@ -314,9 +314,9 @@
     "förekomst_ung": 0,
     "förekomst_sum": 3,
     "images": [
-      "/images/SvampBilder/Giftsvampar/Rubroboletus legaliae-232-156.jpg",
-      "/images/SvampBilder/Giftsvampar/Rubroboletus legaliae-255-.jpg",
-      "/images/SvampBilder/Giftsvampar/Rubroboletus legaliae-231-156.jpg"
+      "/images/svampbilder/Giftsvampar/Rubroboletus legaliae-232-156.jpg",
+      "/images/svampbilder/Giftsvampar/Rubroboletus legaliae-255-.jpg",
+      "/images/svampbilder/Giftsvampar/Rubroboletus legaliae-231-156.jpg"
     ]
   },
   {
@@ -533,7 +533,7 @@
     "förekomst_ung": 0,
     "förekomst_sum": 3,
     "images": [
-      "/images/SvampBilder/RödlistadeSvampar/Aureoboletus gentilis-1334.jpg"
+      "/images/svampbilder/RödlistadeSvampar/Aureoboletus gentilis-1334.jpg"
     ]
   },
   {
@@ -922,7 +922,7 @@
     "förekomst_ung": 0,
     "förekomst_sum": 3,
     "images": [
-      "/images/SvampBilder/RödlistadeSvampar/Lactarius zonarius-4788.jpg"
+      "/images/svampbilder/RödlistadeSvampar/Lactarius zonarius-4788.jpg"
     ]
   }
 ]

@@ -52,17 +52,17 @@
     "sample_env_count": 12,
     "Svamp-grupp-släkte": "sopp",
     "images": [
-      "/images/SvampBilder/Matsvampar/Suillus variegatus-4.jpg",
-      "/images/SvampBilder/Matsvampar/Suillus variegatus-5.jpg",
-      "/images/SvampBilder/Matsvampar/Suillus variegatus-6.jpg",
-      "/images/SvampBilder/Matsvampar/Suillus variegatus-2.jpg",
-      "/images/SvampBilder/Matsvampar/Suillus variegatus-3.jpg",
-      "/images/SvampBilder/Matsvampar/Suillus variegatus-1.jpg",
-      "/images/SvampBilder/Giftsvampar/Suillus variegatus-1-6090.jpg",
-      "/images/SvampBilder/Giftsvampar/Suillus variegatus-1-6090-2.jpg",
-      "/images/SvampBilder/Giftsvampar/Suillus variegatus-1-6090-3.jpg",
-      "/images/SvampBilder/Giftsvampar/Suillus variegatus-1-6090-4.jpg",
-      "/images/SvampBilder/Giftsvampar/Suillus variegatus-1-6090-5.jpg"
+      "/images/svampbilder/Matsvampar/Suillus variegatus-4.jpg",
+      "/images/svampbilder/Matsvampar/Suillus variegatus-5.jpg",
+      "/images/svampbilder/Matsvampar/Suillus variegatus-6.jpg",
+      "/images/svampbilder/Matsvampar/Suillus variegatus-2.jpg",
+      "/images/svampbilder/Matsvampar/Suillus variegatus-3.jpg",
+      "/images/svampbilder/Matsvampar/Suillus variegatus-1.jpg",
+      "/images/svampbilder/Giftsvampar/Suillus variegatus-1-6090.jpg",
+      "/images/svampbilder/Giftsvampar/Suillus variegatus-1-6090-2.jpg",
+      "/images/svampbilder/Giftsvampar/Suillus variegatus-1-6090-3.jpg",
+      "/images/svampbilder/Giftsvampar/Suillus variegatus-1-6090-4.jpg",
+      "/images/svampbilder/Giftsvampar/Suillus variegatus-1-6090-5.jpg"
     ]
   },
   {
@@ -199,8 +199,8 @@
     "sample_env_count": 12,
     "Svamp-grupp-släkte": "hattsvamp",
     "images": [
-      "/images/SvampBilder/Giftsvampar/Cortinarius armillatus-20-3541.jpg",
-      "/images/SvampBilder/Giftsvampar/Cortinarius armillatus-21-3541.jpg"
+      "/images/svampbilder/Giftsvampar/Cortinarius armillatus-20-3541.jpg",
+      "/images/svampbilder/Giftsvampar/Cortinarius armillatus-21-3541.jpg"
     ]
   },
   {
@@ -850,10 +850,10 @@
     "sample_env_count": 12,
     "Svamp-grupp-släkte": "hattsvamp",
     "images": [
-      "/images/SvampBilder/Matsvampar/Lactarius rufus-4.jpg",
-      "/images/SvampBilder/Matsvampar/Lactarius rufus-1.jpg",
-      "/images/SvampBilder/Matsvampar/Lactarius rufus-3.jpg",
-      "/images/SvampBilder/Matsvampar/Lactarius rufus-2.jpg"
+      "/images/svampbilder/Matsvampar/Lactarius rufus-4.jpg",
+      "/images/svampbilder/Matsvampar/Lactarius rufus-1.jpg",
+      "/images/svampbilder/Matsvampar/Lactarius rufus-3.jpg",
+      "/images/svampbilder/Matsvampar/Lactarius rufus-2.jpg"
     ]
   },
   {
@@ -1017,12 +1017,12 @@
     "sample_env_count": 12,
     "Svamp-grupp-släkte": "sopp",
     "images": [
-      "/images/SvampBilder/Matsvampar/Suillus luteus-1.jpg",
-      "/images/SvampBilder/Matsvampar/Suillus luteus-2.jpg",
-      "/images/SvampBilder/Matsvampar/Suillus luteus-3.jpg",
-      "/images/SvampBilder/Matsvampar/Suillus luteus-4.jpg",
-      "/images/SvampBilder/Matsvampar/Suillus luteus-5.jpg",
-      "/images/SvampBilder/Giftsvampar/Suillus luteus-66-6088.jpg"
+      "/images/svampbilder/Matsvampar/Suillus luteus-1.jpg",
+      "/images/svampbilder/Matsvampar/Suillus luteus-2.jpg",
+      "/images/svampbilder/Matsvampar/Suillus luteus-3.jpg",
+      "/images/svampbilder/Matsvampar/Suillus luteus-4.jpg",
+      "/images/svampbilder/Matsvampar/Suillus luteus-5.jpg",
+      "/images/svampbilder/Giftsvampar/Suillus luteus-66-6088.jpg"
     ]
   },
   {
@@ -1348,8 +1348,8 @@
     "sample_env_count": 12,
     "Svamp-grupp-släkte": "hattsvamp",
     "images": [
-      "/images/SvampBilder/Giftsvampar/Tricholoma inamoenum-138-.jpg",
-      "/images/SvampBilder/Giftsvampar/Tricholoma inamoenum-180-.jpg"
+      "/images/svampbilder/Giftsvampar/Tricholoma inamoenum-138-.jpg",
+      "/images/svampbilder/Giftsvampar/Tricholoma inamoenum-180-.jpg"
     ]
   },
   {
@@ -1405,13 +1405,13 @@
     "sample_env_count": 12,
     "Svamp-grupp-släkte": "sopp",
     "images": [
-      "/images/SvampBilder/Matsvampar/Suillus bovinus-5.jpg",
-      "/images/SvampBilder/Matsvampar/Suillus bovinus-4.jpg",
-      "/images/SvampBilder/Matsvampar/Suillus bovinus-6.jpg",
-      "/images/SvampBilder/Matsvampar/Suillus bovinus-7.jpg",
-      "/images/SvampBilder/Matsvampar/Suillus bovinus-3.jpg",
-      "/images/SvampBilder/Matsvampar/Suillus bovinus-2.jpg",
-      "/images/SvampBilder/Matsvampar/Suillus bovinus-1.jpg"
+      "/images/svampbilder/Matsvampar/Suillus bovinus-5.jpg",
+      "/images/svampbilder/Matsvampar/Suillus bovinus-4.jpg",
+      "/images/svampbilder/Matsvampar/Suillus bovinus-6.jpg",
+      "/images/svampbilder/Matsvampar/Suillus bovinus-7.jpg",
+      "/images/svampbilder/Matsvampar/Suillus bovinus-3.jpg",
+      "/images/svampbilder/Matsvampar/Suillus bovinus-2.jpg",
+      "/images/svampbilder/Matsvampar/Suillus bovinus-1.jpg"
     ]
   },
   {
@@ -1710,10 +1710,10 @@
     "sample_env_count": 12,
     "Svamp-grupp-släkte": "hattsvamp",
     "images": [
-      "/images/SvampBilder/Matsvampar/Russula decolorans-4.jpg",
-      "/images/SvampBilder/Matsvampar/Russula decolorans-1.jpg",
-      "/images/SvampBilder/Matsvampar/Russula decolorans-2.jpg",
-      "/images/SvampBilder/Matsvampar/Russula decolorans-3.jpg"
+      "/images/svampbilder/Matsvampar/Russula decolorans-4.jpg",
+      "/images/svampbilder/Matsvampar/Russula decolorans-1.jpg",
+      "/images/svampbilder/Matsvampar/Russula decolorans-2.jpg",
+      "/images/svampbilder/Matsvampar/Russula decolorans-3.jpg"
     ]
   },
   {
@@ -2039,8 +2039,8 @@
     "sample_env_count": 12,
     "Svamp-grupp-släkte": "hattsvamp",
     "images": [
-      "/images/SvampBilder/Giftsvampar/Paxillus involutus-104-5351.jpg",
-      "/images/SvampBilder/Giftsvampar/Paxillus involutus-98-5351.jpg"
+      "/images/svampbilder/Giftsvampar/Paxillus involutus-104-5351.jpg",
+      "/images/svampbilder/Giftsvampar/Paxillus involutus-98-5351.jpg"
     ]
   },
   {
@@ -2123,12 +2123,12 @@
     "sample_env_count": 12,
     "Svamp-grupp-släkte": "sopp",
     "images": [
-      "/images/SvampBilder/Matsvampar/Boletus edulis-1.jpg",
-      "/images/SvampBilder/Matsvampar/Boletus edulis-2.jpg",
-      "/images/SvampBilder/Matsvampar/Boletus edulis-3.jpg",
-      "/images/SvampBilder/Matsvampar/Boletus edulis-6.jpg",
-      "/images/SvampBilder/Matsvampar/Boletus edulis-4.jpg",
-      "/images/SvampBilder/Matsvampar/Boletus edulis-5.jpg"
+      "/images/svampbilder/Matsvampar/Boletus edulis-1.jpg",
+      "/images/svampbilder/Matsvampar/Boletus edulis-2.jpg",
+      "/images/svampbilder/Matsvampar/Boletus edulis-3.jpg",
+      "/images/svampbilder/Matsvampar/Boletus edulis-6.jpg",
+      "/images/svampbilder/Matsvampar/Boletus edulis-4.jpg",
+      "/images/svampbilder/Matsvampar/Boletus edulis-5.jpg"
     ]
   },
   {
@@ -2454,11 +2454,11 @@
     "sample_env_count": 12,
     "Svamp-grupp-släkte": "hattsvamp",
     "images": [
-      "/images/SvampBilder/Matsvampar/Russula aeruginea-1.jpg",
-      "/images/SvampBilder/Matsvampar/Russula aeruginea-2.jpg",
-      "/images/SvampBilder/Matsvampar/Russula aeruginea-3.jpg",
-      "/images/SvampBilder/Matsvampar/Russula aeruginea-4.jpg",
-      "/images/SvampBilder/Matsvampar/Russula aeruginea-5.jpg"
+      "/images/svampbilder/Matsvampar/Russula aeruginea-1.jpg",
+      "/images/svampbilder/Matsvampar/Russula aeruginea-2.jpg",
+      "/images/svampbilder/Matsvampar/Russula aeruginea-3.jpg",
+      "/images/svampbilder/Matsvampar/Russula aeruginea-4.jpg",
+      "/images/svampbilder/Matsvampar/Russula aeruginea-5.jpg"
     ]
   },
   {

@@ -40,14 +40,14 @@
     "förekomst_ung": 0,
     "förekomst_sum": 3,
     "images": [
-      "/images/SvampBilder/Giftsvampar/Rubroboletus satanas-214-161.jpg",
-      "/images/SvampBilder/Giftsvampar/Rubroboletus satanas-228-161.jpg",
-      "/images/SvampBilder/Giftsvampar/Rubroboletus satanas-229-161.jpg",
-      "/images/SvampBilder/Giftsvampar/Rubroboletus satanas-230-161.jpg",
-      "/images/SvampBilder/Giftsvampar/Rubroboletus satanas-225-161.jpg",
-      "/images/SvampBilder/Giftsvampar/Rubroboletus satanas-224-161.jpg",
-      "/images/SvampBilder/Giftsvampar/Rubroboletus satanas-226-161.jpg",
-      "/images/SvampBilder/Giftsvampar/Rubroboletus satanas-227-161.jpg"
+      "/images/svampbilder/Giftsvampar/Rubroboletus satanas-214-161.jpg",
+      "/images/svampbilder/Giftsvampar/Rubroboletus satanas-228-161.jpg",
+      "/images/svampbilder/Giftsvampar/Rubroboletus satanas-229-161.jpg",
+      "/images/svampbilder/Giftsvampar/Rubroboletus satanas-230-161.jpg",
+      "/images/svampbilder/Giftsvampar/Rubroboletus satanas-225-161.jpg",
+      "/images/svampbilder/Giftsvampar/Rubroboletus satanas-224-161.jpg",
+      "/images/svampbilder/Giftsvampar/Rubroboletus satanas-226-161.jpg",
+      "/images/svampbilder/Giftsvampar/Rubroboletus satanas-227-161.jpg"
     ]
   },
   {
@@ -91,9 +91,9 @@
     "förekomst_ung": 0,
     "förekomst_sum": 3,
     "images": [
-      "/images/SvampBilder/Giftsvampar/Rubroboletus legaliae-232-156.jpg",
-      "/images/SvampBilder/Giftsvampar/Rubroboletus legaliae-255-.jpg",
-      "/images/SvampBilder/Giftsvampar/Rubroboletus legaliae-231-156.jpg"
+      "/images/svampbilder/Giftsvampar/Rubroboletus legaliae-232-156.jpg",
+      "/images/svampbilder/Giftsvampar/Rubroboletus legaliae-255-.jpg",
+      "/images/svampbilder/Giftsvampar/Rubroboletus legaliae-231-156.jpg"
     ]
   },
   {
@@ -137,11 +137,11 @@
     "förekomst_ung": 0,
     "förekomst_sum": 3,
     "images": [
-      "/images/SvampBilder/Matsvampar/Boletus reticulatus-1.jpg",
-      "/images/SvampBilder/Matsvampar/Boletus reticulatus-2.jpg",
-      "/images/SvampBilder/Matsvampar/Boletus reticulatus-3.jpg",
-      "/images/SvampBilder/Matsvampar/Boletus reticulatus-4.jpg",
-      "/images/SvampBilder/Matsvampar/Boletus reticulatus-5.jpg"
+      "/images/svampbilder/Matsvampar/Boletus reticulatus-1.jpg",
+      "/images/svampbilder/Matsvampar/Boletus reticulatus-2.jpg",
+      "/images/svampbilder/Matsvampar/Boletus reticulatus-3.jpg",
+      "/images/svampbilder/Matsvampar/Boletus reticulatus-4.jpg",
+      "/images/svampbilder/Matsvampar/Boletus reticulatus-5.jpg"
     ]
   },
   {
@@ -185,11 +185,11 @@
     "förekomst_ung": 0,
     "förekomst_sum": 3,
     "images": [
-      "/images/SvampBilder/Matsvampar/Cantharellus cibarius-4.jpg",
-      "/images/SvampBilder/Matsvampar/Cantharellus cibarius-5.jpg",
-      "/images/SvampBilder/Matsvampar/Cantharellus cibarius-2.jpg",
-      "/images/SvampBilder/Matsvampar/Cantharellus cibarius-3.jpg",
-      "/images/SvampBilder/Matsvampar/Cantharellus cibarius-1.jpg"
+      "/images/svampbilder/Matsvampar/Cantharellus cibarius-4.jpg",
+      "/images/svampbilder/Matsvampar/Cantharellus cibarius-5.jpg",
+      "/images/svampbilder/Matsvampar/Cantharellus cibarius-2.jpg",
+      "/images/svampbilder/Matsvampar/Cantharellus cibarius-3.jpg",
+      "/images/svampbilder/Matsvampar/Cantharellus cibarius-1.jpg"
     ]
   },
   {
@@ -233,8 +233,8 @@
     "förekomst_ung": 0,
     "förekomst_sum": 2,
     "images": [
-      "/images/SvampBilder/Giftsvampar/Paxillus involutus-104-5351.jpg",
-      "/images/SvampBilder/Giftsvampar/Paxillus involutus-98-5351.jpg"
+      "/images/svampbilder/Giftsvampar/Paxillus involutus-104-5351.jpg",
+      "/images/svampbilder/Giftsvampar/Paxillus involutus-98-5351.jpg"
     ]
   },
   {
@@ -278,8 +278,8 @@
     "förekomst_ung": 0,
     "förekomst_sum": 2,
     "images": [
-      "/images/SvampBilder/Giftsvampar/Paxillus involutus-104-5351.jpg",
-      "/images/SvampBilder/Giftsvampar/Paxillus involutus-98-5351.jpg"
+      "/images/svampbilder/Giftsvampar/Paxillus involutus-104-5351.jpg",
+      "/images/svampbilder/Giftsvampar/Paxillus involutus-98-5351.jpg"
     ]
   },
   {
@@ -323,7 +323,7 @@
     "förekomst_ung": 0,
     "förekomst_sum": 2,
     "images": [
-      "/images/SvampBilder/Giftsvampar/Scleroderma bovista-161-5975.jpg"
+      "/images/svampbilder/Giftsvampar/Scleroderma bovista-161-5975.jpg"
     ]
   },
   {
@@ -409,8 +409,8 @@
     "förekomst_ung": 0,
     "förekomst_sum": 3,
     "images": [
-      "/images/SvampBilder/Matsvampar/Lactarius torminosus-2.jpg",
-      "/images/SvampBilder/Matsvampar/Lactarius torminosus-1.jpg"
+      "/images/svampbilder/Matsvampar/Lactarius torminosus-2.jpg",
+      "/images/svampbilder/Matsvampar/Lactarius torminosus-1.jpg"
     ]
   },
   {
@@ -454,12 +454,12 @@
     "förekomst_ung": 0,
     "förekomst_sum": 3,
     "images": [
-      "/images/SvampBilder/Matsvampar/Boletus edulis-1.jpg",
-      "/images/SvampBilder/Matsvampar/Boletus edulis-2.jpg",
-      "/images/SvampBilder/Matsvampar/Boletus edulis-3.jpg",
-      "/images/SvampBilder/Matsvampar/Boletus edulis-6.jpg",
-      "/images/SvampBilder/Matsvampar/Boletus edulis-4.jpg",
-      "/images/SvampBilder/Matsvampar/Boletus edulis-5.jpg"
+      "/images/svampbilder/Matsvampar/Boletus edulis-1.jpg",
+      "/images/svampbilder/Matsvampar/Boletus edulis-2.jpg",
+      "/images/svampbilder/Matsvampar/Boletus edulis-3.jpg",
+      "/images/svampbilder/Matsvampar/Boletus edulis-6.jpg",
+      "/images/svampbilder/Matsvampar/Boletus edulis-4.jpg",
+      "/images/svampbilder/Matsvampar/Boletus edulis-5.jpg"
     ]
   }
 ]

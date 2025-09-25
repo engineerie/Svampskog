@@ -41,7 +41,7 @@
     "förekomst_ung": 0,
     "förekomst_sum": 3,
     "images": [
-      "/images/SvampBilder/RödlistadeSvampar/Hydnellum caeruleum-4362.jpg"
+      "/images/svampbilder/RödlistadeSvampar/Hydnellum caeruleum-4362.jpg"
     ]
   },
   {
@@ -129,15 +129,15 @@
     "förekomst_ung": 0,
     "förekomst_sum": 3,
     "images": [
-      "/images/SvampBilder/Matsvampar/Tricholoma matsutake-4.jpg",
-      "/images/SvampBilder/Matsvampar/Tricholoma matsutake-5.jpg",
-      "/images/SvampBilder/Matsvampar/Tricholoma matsutake-1.jpg",
-      "/images/SvampBilder/Matsvampar/Tricholoma matsutake-2.jpg",
-      "/images/SvampBilder/Matsvampar/Tricholoma matsutake-3.jpg",
-      "/images/SvampBilder/Giftsvampar/Tricholoma matsutake-166-6276.jpg",
-      "/images/SvampBilder/Giftsvampar/Tricholoma matsutake-165-6276.jpg",
-      "/images/SvampBilder/Giftsvampar/Tricholoma matsutake-210-6276.jpg",
-      "/images/SvampBilder/RödlistadeSvampar/Tricholoma matsutake-6276.jpg"
+      "/images/svampbilder/Matsvampar/Tricholoma matsutake-4.jpg",
+      "/images/svampbilder/Matsvampar/Tricholoma matsutake-5.jpg",
+      "/images/svampbilder/Matsvampar/Tricholoma matsutake-1.jpg",
+      "/images/svampbilder/Matsvampar/Tricholoma matsutake-2.jpg",
+      "/images/svampbilder/Matsvampar/Tricholoma matsutake-3.jpg",
+      "/images/svampbilder/Giftsvampar/Tricholoma matsutake-166-6276.jpg",
+      "/images/svampbilder/Giftsvampar/Tricholoma matsutake-165-6276.jpg",
+      "/images/svampbilder/Giftsvampar/Tricholoma matsutake-210-6276.jpg",
+      "/images/svampbilder/RödlistadeSvampar/Tricholoma matsutake-6276.jpg"
     ]
   },
   {
@@ -182,8 +182,8 @@
     "förekomst_ung": 0,
     "förekomst_sum": 4,
     "images": [
-      "/images/SvampBilder/Matsvampar/Albatrellus subrubescens.jpg",
-      "/images/SvampBilder/RödlistadeSvampar/Albatrellus subrubescens-1958.jpg"
+      "/images/svampbilder/Matsvampar/Albatrellus subrubescens.jpg",
+      "/images/svampbilder/RödlistadeSvampar/Albatrellus subrubescens-1958.jpg"
     ]
   },
   {
@@ -271,8 +271,8 @@
     "förekomst_ung": 0,
     "förekomst_sum": 4,
     "images": [
-      "/images/SvampBilder/Matsvampar/Sarcodon squamosus.jpg",
-      "/images/SvampBilder/RödlistadeSvampar/Sarcodon squamosus-5966.jpg"
+      "/images/svampbilder/Matsvampar/Sarcodon squamosus.jpg",
+      "/images/svampbilder/RödlistadeSvampar/Sarcodon squamosus-5966.jpg"
     ]
   },
   {
@@ -360,7 +360,7 @@
     "förekomst_ung": 0,
     "förekomst_sum": 3,
     "images": [
-      "/images/SvampBilder/RödlistadeSvampar/Phellodon connatus-5448.jpg"
+      "/images/svampbilder/RödlistadeSvampar/Phellodon connatus-5448.jpg"
     ]
   },
   {
@@ -405,7 +405,7 @@
     "förekomst_ung": 0,
     "förekomst_sum": 3,
     "images": [
-      "/images/SvampBilder/RödlistadeSvampar/Lactarius musteus-4745.jpg"
+      "/images/svampbilder/RödlistadeSvampar/Lactarius musteus-4745.jpg"
     ]
   }
 ]

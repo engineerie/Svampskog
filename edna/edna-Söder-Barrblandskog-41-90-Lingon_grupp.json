@@ -133,13 +133,13 @@
     "sample_env_count": 2,
     "Svamp-grupp-släkte": "sopp",
     "images": [
-      "/images/SvampBilder/Matsvampar/Suillus bovinus-5.jpg",
-      "/images/SvampBilder/Matsvampar/Suillus bovinus-4.jpg",
-      "/images/SvampBilder/Matsvampar/Suillus bovinus-6.jpg",
-      "/images/SvampBilder/Matsvampar/Suillus bovinus-7.jpg",
-      "/images/SvampBilder/Matsvampar/Suillus bovinus-3.jpg",
-      "/images/SvampBilder/Matsvampar/Suillus bovinus-2.jpg",
-      "/images/SvampBilder/Matsvampar/Suillus bovinus-1.jpg"
+      "/images/svampbilder/Matsvampar/Suillus bovinus-5.jpg",
+      "/images/svampbilder/Matsvampar/Suillus bovinus-4.jpg",
+      "/images/svampbilder/Matsvampar/Suillus bovinus-6.jpg",
+      "/images/svampbilder/Matsvampar/Suillus bovinus-7.jpg",
+      "/images/svampbilder/Matsvampar/Suillus bovinus-3.jpg",
+      "/images/svampbilder/Matsvampar/Suillus bovinus-2.jpg",
+      "/images/svampbilder/Matsvampar/Suillus bovinus-1.jpg"
     ]
   },
   {
@@ -303,10 +303,10 @@
     "sample_env_count": 2,
     "Svamp-grupp-släkte": "hattsvamp",
     "images": [
-      "/images/SvampBilder/Matsvampar/Russula decolorans-4.jpg",
-      "/images/SvampBilder/Matsvampar/Russula decolorans-1.jpg",
-      "/images/SvampBilder/Matsvampar/Russula decolorans-2.jpg",
-      "/images/SvampBilder/Matsvampar/Russula decolorans-3.jpg"
+      "/images/svampbilder/Matsvampar/Russula decolorans-4.jpg",
+      "/images/svampbilder/Matsvampar/Russula decolorans-1.jpg",
+      "/images/svampbilder/Matsvampar/Russula decolorans-2.jpg",
+      "/images/svampbilder/Matsvampar/Russula decolorans-3.jpg"
     ]
   },
   {
@@ -443,8 +443,8 @@
     "sample_env_count": 2,
     "Svamp-grupp-släkte": "hattsvamp",
     "images": [
-      "/images/SvampBilder/Matsvampar/Russula paludosa-2.jpg",
-      "/images/SvampBilder/Matsvampar/Russula paludosa-1.jpg"
+      "/images/svampbilder/Matsvampar/Russula paludosa-2.jpg",
+      "/images/svampbilder/Matsvampar/Russula paludosa-1.jpg"
     ]
   },
   {

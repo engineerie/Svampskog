@@ -133,12 +133,12 @@
     "sample_env_count": 15,
     "Svamp-grupp-släkte": "sopp",
     "images": [
-      "/images/SvampBilder/Matsvampar/Imleria badia-4.jpg",
-      "/images/SvampBilder/Matsvampar/Imleria badia-5.jpg",
-      "/images/SvampBilder/Matsvampar/Imleria badia-6.jpg",
-      "/images/SvampBilder/Matsvampar/Imleria badia-2.jpg",
-      "/images/SvampBilder/Matsvampar/Imleria badia-3.jpg",
-      "/images/SvampBilder/Matsvampar/Imleria badia-1.jpg"
+      "/images/svampbilder/Matsvampar/Imleria badia-4.jpg",
+      "/images/svampbilder/Matsvampar/Imleria badia-5.jpg",
+      "/images/svampbilder/Matsvampar/Imleria badia-6.jpg",
+      "/images/svampbilder/Matsvampar/Imleria badia-2.jpg",
+      "/images/svampbilder/Matsvampar/Imleria badia-3.jpg",
+      "/images/svampbilder/Matsvampar/Imleria badia-1.jpg"
     ]
   },
   {
@@ -572,8 +572,8 @@
     "sample_env_count": 15,
     "Svamp-grupp-släkte": "hattsvamp",
     "images": [
-      "/images/SvampBilder/Giftsvampar/Lactarius necator-33-4747.jpg",
-      "/images/SvampBilder/Giftsvampar/Lactarius necator-32-4747.jpg"
+      "/images/svampbilder/Giftsvampar/Lactarius necator-33-4747.jpg",
+      "/images/svampbilder/Giftsvampar/Lactarius necator-32-4747.jpg"
     ]
   },
   {
@@ -656,8 +656,8 @@
     "sample_env_count": 15,
     "Svamp-grupp-släkte": "hattsvamp",
     "images": [
-      "/images/SvampBilder/Giftsvampar/Paxillus involutus-104-5351.jpg",
-      "/images/SvampBilder/Giftsvampar/Paxillus involutus-98-5351.jpg"
+      "/images/svampbilder/Giftsvampar/Paxillus involutus-104-5351.jpg",
+      "/images/svampbilder/Giftsvampar/Paxillus involutus-98-5351.jpg"
     ]
   },
   {
@@ -713,11 +713,11 @@
     "sample_env_count": 15,
     "Svamp-grupp-släkte": "hattsvamp",
     "images": [
-      "/images/SvampBilder/Matsvampar/Russula integra-2.jpg",
-      "/images/SvampBilder/Matsvampar/Russula integra-3.jpg",
-      "/images/SvampBilder/Matsvampar/Russula integra-1.jpg",
-      "/images/SvampBilder/Matsvampar/Russula integra-4.jpg",
-      "/images/SvampBilder/Matsvampar/Russula integra-5.jpg"
+      "/images/svampbilder/Matsvampar/Russula integra-2.jpg",
+      "/images/svampbilder/Matsvampar/Russula integra-3.jpg",
+      "/images/svampbilder/Matsvampar/Russula integra-1.jpg",
+      "/images/svampbilder/Matsvampar/Russula integra-4.jpg",
+      "/images/svampbilder/Matsvampar/Russula integra-5.jpg"
     ]
   },
   {
@@ -800,11 +800,11 @@
     "sample_env_count": 15,
     "Svamp-grupp-släkte": "hattsvamp",
     "images": [
-      "/images/SvampBilder/Matsvampar/Russula aeruginea-1.jpg",
-      "/images/SvampBilder/Matsvampar/Russula aeruginea-2.jpg",
-      "/images/SvampBilder/Matsvampar/Russula aeruginea-3.jpg",
-      "/images/SvampBilder/Matsvampar/Russula aeruginea-4.jpg",
-      "/images/SvampBilder/Matsvampar/Russula aeruginea-5.jpg"
+      "/images/svampbilder/Matsvampar/Russula aeruginea-1.jpg",
+      "/images/svampbilder/Matsvampar/Russula aeruginea-2.jpg",
+      "/images/svampbilder/Matsvampar/Russula aeruginea-3.jpg",
+      "/images/svampbilder/Matsvampar/Russula aeruginea-4.jpg",
+      "/images/svampbilder/Matsvampar/Russula aeruginea-5.jpg"
     ]
   },
   {
@@ -1049,10 +1049,10 @@
     "sample_env_count": 15,
     "Svamp-grupp-släkte": "hattsvamp",
     "images": [
-      "/images/SvampBilder/Matsvampar/Russula aurea-3.jpg",
-      "/images/SvampBilder/Matsvampar/Russula aurea-2.jpg",
-      "/images/SvampBilder/Matsvampar/Russula aurea-1.jpg",
-      "/images/SvampBilder/Matsvampar/Russula aurea-4.jpg"
+      "/images/svampbilder/Matsvampar/Russula aurea-3.jpg",
+      "/images/svampbilder/Matsvampar/Russula aurea-2.jpg",
+      "/images/svampbilder/Matsvampar/Russula aurea-1.jpg",
+      "/images/svampbilder/Matsvampar/Russula aurea-4.jpg"
     ]
   }
 ]
