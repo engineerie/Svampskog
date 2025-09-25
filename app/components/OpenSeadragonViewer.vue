@@ -1,21 +1,25 @@
 <template>
-<div :class="['relative', fullscreenLayout ? ' gap-4' : 'grid md:grid-cols-5 gap-8']">
+  <div :class="['relative', fullscreenLayout ? ' gap-4' : 'grid md:grid-cols-5 gap-8']">
 
-  <!-- <client-only> -->
-    <div v-if="isClient" :id="viewerId" :class="['openseadragon-viewer ui-zoom-exempt col-span-3 relative overflow-hidden', fullscreenLayout ? '' : 'rounded-sm']" ref="viewerContainer"
-    :style="{ backgroundColor: backgroundColor }" @mousedown.capture="handleActivate" @mousemove="updateMousePosition" @click="handleRetentionClick($event)">
-    <div v-if="!(layoutMode === 'slider' && comparisonMode) && fullscreenLayout" class="absolute top-0 left-1/2 transform -translate-x-1/2 m-2 z-10 text-center">
-      <div>
-        <UBadge size="lg" class="backdrop-blur-xl bg-neutral-400/10 text-neutral-100 mb-0.5 z-50">{{ frameworkLabel }}</UBadge>
+    <!-- <client-only> -->
+    <div v-if="isClient" :id="viewerId"
+      :class="['openseadragon-viewer ui-zoom-exempt col-span-3 relative overflow-hidden', fullscreenLayout ? '' : 'rounded-sm']"
+      ref="viewerContainer" :style="{ backgroundColor: backgroundColor }" @mousedown.capture="handleActivate"
+      @mousemove="updateMousePosition" @click="handleRetentionClick($event)">
+      <div v-if="!(layoutMode === 'slider' && comparisonMode) && fullscreenLayout"
+        class="absolute top-0 left-1/2 transform -translate-x-1/2 m-2 z-10 text-center">
+        <div>
+          <UBadge size="lg" class="backdrop-blur-xl bg-neutral-400/10 text-neutral-100 mb-0.5 z-50">{{ frameworkLabel }}
+          </UBadge>
+        </div>
+        <UBadge size="lg" class="backdrop-blur-xl bg-neutral-400/10 text-neutral-100 z-50">{{ timeLabel }}</UBadge>
       </div>
-      <UBadge size="lg" class="backdrop-blur-xl bg-neutral-400/10 text-neutral-100 z-50">{{ timeLabel }}</UBadge>
-    </div>
 
-    <!-- Display viewport coordinates for marker placement -->
-    <!-- <div class="absolute top-32 right-0 m-2 p-1 bg-black bg-opacity-50 text-white text-xs z-50">
+      <!-- Display viewport coordinates for marker placement -->
+      <!-- <div class="absolute top-32 right-0 m-2 p-1 bg-black bg-opacity-50 text-white text-xs z-50">
       X: {{ mousePos.x.toFixed(4) }}, Y: {{ mousePos.y.toFixed(4) }}
     </div> -->
-    <!-- <div class="osd-opacity-slider-container bg-neutral-800 flex items-center p-1.5 gap-1 rounded-lg m-2" :style="{
+      <!-- <div class="osd-opacity-slider-container bg-neutral-800 flex items-center p-1.5 gap-1 rounded-lg m-2" :style="{
       position: 'absolute',
       top: '0px',
       zIndex: 10,
@@ -26,45 +30,36 @@
         @input="handleSliderInput" class="accent-neutral-100 h-[5px] w-20 " />
     </div> -->
 
-         <!-- Popover trigger for Kontinuerligt rottäcke (Blädning @ efter) -->
-      <UPopover
-      class="hover:cursor-pointer"
-        :open-delay="500"
-        :close-delay="300"
-      >
+      <!-- Popover trigger for Kontinuerligt rottäcke (Blädning @ efter) -->
+      <UPopover class="hover:cursor-pointer" :open-delay="500" :close-delay="300">
         <!-- Trigger element positioned over the rectangle -->
-      <div
-  :style="rottackePopover.visible
-    ? rottackePopoverStyle
-    : { position: 'absolute', top: '-99999px', left: '-99999px', width: '1px', height: '1px', pointerEvents: 'none' }"
-  class="absolute z-[10000]"
-  tabindex="0"
-  role="button"
-  aria-label="Kontinuerligt rottäcke"
-></div>
+        <div :style="rottackePopover.visible
+          ? rottackePopoverStyle
+          : { position: 'absolute', top: '-99999px', left: '-99999px', width: '1px', height: '1px', pointerEvents: 'none' }"
+          class="absolute z-[10000]" tabindex="0" role="button" aria-label="Kontinuerligt rottäcke"></div>
         <template #content>
           <div class="p-3 max-w-xs">
             I princip är hela området täckt av rötter där svampar kan överleva
           </div>
         </template>
       </UPopover>
-   
-  </div>
-  <!-- </client-only> -->
-   <!-- section to reactivate for not fullscreen mode + set viewer to gird-span-3 -->
-<div class="col-span-2">
-   
-    <div
-      :class="['pointer-events-none bottom-0  z-10', (layoutMode === 'slider' && comparisonMode) ? 'w-full' : 'w-full']"
-      :style="{
-        zIndex: 10,
-        ...(sliderPosition === 'left'
-          ? { left: '0px', paddingRight: (layoutMode === 'slider' && comparisonMode) ? '0px' : '0px' }
-          : { right: '0px', paddingLeft: (layoutMode === 'slider' && comparisonMode) ? '0px' : '0px' }
-        )
-      }">
-      <div class="w-full ">
-        <!-- <div :class="['w-full flex', (sliderPosition === 'left') ? '' : 'justify-end']">
+
+    </div>
+    <!-- </client-only> -->
+    <!-- section to reactivate for not fullscreen mode + set viewer to gird-span-3 -->
+    <div class="col-span-2">
+
+      <div
+        :class="['pointer-events-none bottom-0  z-10', (layoutMode === 'slider' && comparisonMode) ? 'w-full' : 'w-full']"
+        :style="{
+          zIndex: 10,
+          ...(sliderPosition === 'left'
+            ? { left: '0px', paddingRight: (layoutMode === 'slider' && comparisonMode) ? '0px' : '0px' }
+            : { right: '0px', paddingLeft: (layoutMode === 'slider' && comparisonMode) ? '0px' : '0px' }
+          )
+        }">
+        <div class="w-full ">
+          <!-- <div :class="['w-full flex', (sliderPosition === 'left') ? '' : 'justify-end']">
 
           <div class="overflow-hidden mt-1 px-2 text-sm text-neutral-200 w-full backdrop-blur-2xl flex rounded-t-lg border-t border-neutral-800/60 ">
             <div class="flex items-center p-1.5 bg-neutral-700/10 border-r border-neutral-500 border-dashed">
@@ -83,29 +78,30 @@
         </div> -->
 
 
-        <div v-if="!fullscreenLayout" :class="['flex w-full', (sliderPosition === 'left') ? '' : 'justify-end']">
+          <div v-if="!fullscreenLayout" :class="['flex w-full', (sliderPosition === 'left') ? '' : 'justify-end']">
 
-          <div class="w-full text-md  relative group pointer-events-auto">
+            <div class="w-full text-md  relative group pointer-events-auto">
 
 
-            
 
-            <div v-if="!isPanelMinimized">
-              <h1 class="text-3xl mt-2 font-medium">{{ frameworkLabel }}</h1>   
-              <h1 class="text-md text-neutral-500 mb-4">{{ timeLabel }}</h1>      
-                  <p class=" mb-6" v-if="timelineInfo">  {{ timelineInfo.skog }}</p>
-                  <p class=" " v-if="timelineInfo"><div class="font-bold mb-1.5 text-lg">Påverkan på mykorrizasvamp</div> {{ timelineInfo.svamp }}</p>
-               <div class="overflow-hidden mt-1 px-2  w-full flex">
-          </div>
+
+              <div v-if="!isPanelMinimized">
+                <h1 class="text-3xl mt-2 font-medium">{{ frameworkLabel }}</h1>
+                <h1 class="text-md text-neutral-500 mb-4">{{ timeLabel }}</h1>
+                <p class=" mb-6" v-if="timelineInfo"> {{ timelineInfo.skog }}</p>
+                <p class=" " v-if="timelineInfo">
+                <div class="font-bold mb-1.5 text-lg">Påverkan på mykorrizasvamp</div> {{ timelineInfo.svamp }}</p>
+                <div class="overflow-hidden mt-1 px-2  w-full flex">
+                </div>
+              </div>
             </div>
+
           </div>
-
         </div>
-      </div>
 
+      </div>
     </div>
   </div>
-</div>
 </template>
 
 <script>
@@ -125,13 +121,13 @@ const retentionOverlayIds = [];
 
 export default {
   name: "OpenSeadragonViewer",
-emits: ["annotationClicked", "viewportChanged", "opened", "retentionTreeAdded"],
+  emits: ["annotationClicked", "viewportChanged", "opened", "retentionTreeAdded"],
   props: {
     currentFramework: { type: Object, required: true },
     currentTime: { type: String, required: true },
     currentStartskog: { type: Object, required: true },
     retentionVisible: { type: Boolean, default: false },
-      
+
     fullscreenLayout: {
       type: Boolean,
       default: false
@@ -180,91 +176,91 @@ emits: ["annotationClicked", "viewportChanged", "opened", "retentionTreeAdded"],
       type: String,
       default: null,
     },
-      kanteffektVisible: { type: Boolean, default: false },
-  oldKanteffektVisible: { type: Boolean, default: true },
-  rottackeVisible: { type: Boolean, default: false },
- seedTreeVisible: { type: Boolean, default: false },
-   // Dev flag to enable saving clicks to a general store
-   devSaveClicks: { type: Boolean, default: false },
-   smaplantorVisible: { type: Boolean, default: false },
-   hogstubbarVisible: { type: Boolean, default: false },
+    kanteffektVisible: { type: Boolean, default: false },
+    oldKanteffektVisible: { type: Boolean, default: true },
+    rottackeVisible: { type: Boolean, default: false },
+    seedTreeVisible: { type: Boolean, default: false },
+    // Dev flag to enable saving clicks to a general store
+    devSaveClicks: { type: Boolean, default: false },
+    smaplantorVisible: { type: Boolean, default: false },
+    hogstubbarVisible: { type: Boolean, default: false },
     naturvardsarterVisible: { type: Boolean, default: false },
-     tradplantorVisible: { type: Boolean, default: false },
+    tradplantorVisible: { type: Boolean, default: false },
 
   },
   setup(props, { emit, expose }) {
 
-  const kanteffektOverlayIds = [];
-  
-  // Naturvårdsarter points (public JSON)
-const localNaturvard = ref([]);
-onMounted(async () => {
-  try {
-    const res = await fetch('/naturvard.json');
-    const json = await res.json();
-    // Accept { mycelium: [...] } or a raw array
-    localNaturvard.value = Array.isArray(json?.mycelium) ? json.mycelium : (Array.isArray(json) ? json : []);
-  } catch (e) {
-    console.error('Failed fetching naturvårdsarter points:', e);
-  }
-});
+    const kanteffektOverlayIds = [];
 
-const localTrees = ref([])
-// Seed trees (Fröträd) data
-const localSeedTrees = ref([]);
-onMounted(async () => {
-  try {
-     const res = await fetch('/retentionTrees.json');
-     const json = await res.json();
-     localTrees.value = json.trees || [];
-  } catch (e) {
-    console.error('Failed fetching public retentionTrees:', e);
-  }
-});
+    // Naturvårdsarter points (public JSON)
+    const localNaturvard = ref([]);
+    onMounted(async () => {
+      try {
+        const res = await fetch('/naturvard.json');
+        const json = await res.json();
+        // Accept { mycelium: [...] } or a raw array
+        localNaturvard.value = Array.isArray(json?.mycelium) ? json.mycelium : (Array.isArray(json) ? json : []);
+      } catch (e) {
+        console.error('Failed fetching naturvårdsarter points:', e);
+      }
+    });
 
-// Småplantor points (public JSON)
-const localSmaPlantor = ref([]);
-onMounted(async () => {
-  try {
-    // Try NFC path first ("småplantor.json"), then fallback to NFD variant ("småplantor.json")
-    let res = await fetch('/småplantor.json');
-    if (!res.ok) {
-      res = await fetch('/småplantor.json');
-    }
-    const json = await res.json();
-    localSmaPlantor.value = Array.isArray(json?.trees) ? json.trees : (Array.isArray(json) ? json : []);
-  } catch (e) {
-    console.error('Failed fetching småplantor points:', e);
-  }
-});
+    const localTrees = ref([])
+    // Seed trees (Fröträd) data
+    const localSeedTrees = ref([]);
+    onMounted(async () => {
+      try {
+        const res = await fetch('/retentionTrees.json');
+        const json = await res.json();
+        localTrees.value = json.trees || [];
+      } catch (e) {
+        console.error('Failed fetching public retentionTrees:', e);
+      }
+    });
 
- // Högstubbar points (public JSON)
- const localHogstubbar = ref([]);
- onMounted(async () => {
-   try {
-     const res = await fetch('/hogstubbar.json');
-     const json = await res.json();
-     // File format is { "stubbar": [ ... ] }
-     localHogstubbar.value = Array.isArray(json?.stubbar) ? json.stubbar : (Array.isArray(json) ? json : []);
-   } catch (e) {
-     console.error('Failed fetching högstubbar points:', e);
-   }
- });
+    // Småplantor points (public JSON)
+    const localSmaPlantor = ref([]);
+    onMounted(async () => {
+      try {
+        // Try NFC path first ("småplantor.json"), then fallback to NFD variant ("småplantor.json")
+        let res = await fetch('/småplantor.json');
+        if (!res.ok) {
+          res = await fetch('/småplantor.json');
+        }
+        const json = await res.json();
+        localSmaPlantor.value = Array.isArray(json?.trees) ? json.trees : (Array.isArray(json) ? json : []);
+      } catch (e) {
+        console.error('Failed fetching småplantor points:', e);
+      }
+    });
 
-// fetch kanteffekt overlays
-onMounted(async () => {
-  try {
-    const res = await fetch('/api/kanteffekt');
-    const json = await res.json();
-    // API should return { features: [...] }
-    localKanteffekt.value = json.features || [];
-  } catch (e) {
-    console.error('Failed fetching kanteffekt features:', e);
-  }
-});
+    // Högstubbar points (public JSON)
+    const localHogstubbar = ref([]);
+    onMounted(async () => {
+      try {
+        const res = await fetch('/hogstubbar.json');
+        const json = await res.json();
+        // File format is { "stubbar": [ ... ] }
+        localHogstubbar.value = Array.isArray(json?.stubbar) ? json.stubbar : (Array.isArray(json) ? json : []);
+      } catch (e) {
+        console.error('Failed fetching högstubbar points:', e);
+      }
+    });
 
-// kanteffekt overlays
-const localKanteffekt = ref([]);
+    // fetch kanteffekt overlays
+    onMounted(async () => {
+      try {
+        const res = await fetch('/api/kanteffekt');
+        const json = await res.json();
+        // API should return { features: [...] }
+        localKanteffekt.value = json.features || [];
+      } catch (e) {
+        console.error('Failed fetching kanteffekt features:', e);
+      }
+    });
+
+    // kanteffekt overlays
+    const localKanteffekt = ref([]);
 
 
     // General saved clicks (developer capture)
@@ -286,7 +282,7 @@ const localKanteffekt = ref([]);
     const viewer = ref(null);
     const isClient = ref(false);
     const viewerContainer = ref(null);
-       // Popover state for Kontinuerligt rottäcke (Blädning @ efter)
+    // Popover state for Kontinuerligt rottäcke (Blädning @ efter)
     const rottackePopover = ref({ visible: false, top: 0, left: 0, width: 0, height: 0 });
     const rottackePopoverStyle = computed(() => ({
       position: 'absolute',
@@ -313,22 +309,22 @@ const localKanteffekt = ref([]);
     let resizeObserver = null;
 
     function initCanvasOverlay() {
-      overlayCanvas.style.position      = 'absolute';
-      overlayCanvas.style.top           = '0';
-      overlayCanvas.style.left          = '0';
-      overlayCanvas.style.width         = '100%';
-      overlayCanvas.style.height        = '100%';
+      overlayCanvas.style.position = 'absolute';
+      overlayCanvas.style.top = '0';
+      overlayCanvas.style.left = '0';
+      overlayCanvas.style.width = '100%';
+      overlayCanvas.style.height = '100%';
       overlayCanvas.style.pointerEvents = 'none';
-      overlayCanvas.style.zIndex        = '20';
+      overlayCanvas.style.zIndex = '20';
       viewerContainer.value.appendChild(overlayCanvas);
-      overlayCanvas.width  = viewerContainer.value.clientWidth;
+      overlayCanvas.width = viewerContainer.value.clientWidth;
       overlayCanvas.height = viewerContainer.value.clientHeight;
       overlayCtx = overlayCanvas.getContext('2d');
       // Observe container size changes
       if (resizeObserver) resizeObserver.disconnect();
       resizeObserver = new ResizeObserver(resizeCanvas);
       resizeObserver.observe(viewerContainer.value);
-       try {
+      try {
         viewer.value?.addHandler?.('animation', () => drawAllOverlays());
         viewer.value?.addHandler?.('animation-finish', () => drawAllOverlays());
         viewer.value?.addHandler?.('viewport-change', () => drawAllOverlays());
@@ -338,7 +334,7 @@ const localKanteffekt = ref([]);
     }
 
     function resizeCanvas() {
-      overlayCanvas.width  = viewerContainer.value.clientWidth;
+      overlayCanvas.width = viewerContainer.value.clientWidth;
       overlayCanvas.height = viewerContainer.value.clientHeight;
       drawAllOverlays();
     }
@@ -378,7 +374,7 @@ const localKanteffekt = ref([]);
           if (tree.framework !== props.currentFramework.value) return;
           if (!timeMatches(tree.time, props.currentTime)) return;
           if (tree.startskog !== props.currentStartskog.value) return;
-          const pt    = new osdLib.Point(tree.x, tree.y);
+          const pt = new osdLib.Point(tree.x, tree.y);
           const pixel = viewer.value.viewport.pixelFromPoint(pt, true);
           const normalizedRadius = sizeNorm / 2;
           const pixelRight = viewer.value.viewport.pixelFromPoint(new osdLib.Point(tree.x + normalizedRadius, tree.y), true);
@@ -392,163 +388,163 @@ const localKanteffekt = ref([]);
 
           overlayCtx.save();
           overlayCtx.beginPath();
-          overlayCtx.arc(pixel.x, pixel.y, radius, 0, 2*Math.PI);
+          overlayCtx.arc(pixel.x, pixel.y, radius, 0, 2 * Math.PI);
           overlayCtx.closePath();
           overlayCtx.fillStyle = grad;
           overlayCtx.fill();
           overlayCtx.restore();
           overlayCtx.beginPath();
-          overlayCtx.arc(pixel.x, pixel.y, radius, 0, 2*Math.PI);
+          overlayCtx.arc(pixel.x, pixel.y, radius, 0, 2 * Math.PI);
           overlayCtx.strokeStyle = 'rgba(255,255,255,0)';
-          overlayCtx.lineWidth   = 2;
+          overlayCtx.lineWidth = 2;
           overlayCtx.stroke();
         });
       }
-// Trädplantor — borderless rectangle with world-anchored dotted rows (trakthygge, 20 år)
-if (
-  props.tradplantorVisible &&
-  props.currentFramework.value === 'trakthygge' &&
-  props.currentTime === '20 år'
-) {
-  // Static overlay bounds in image-normalized coordinates
-  const x0 = 0.2671, y0 = 0.1383;
-  const x1 = 0.7312, y1 = 0.4152;
+      // Trädplantor — borderless rectangle with world-anchored dotted rows (trakthygge, 20 år)
+      if (
+        props.tradplantorVisible &&
+        props.currentFramework.value === 'trakthygge' &&
+        props.currentTime === '20 år'
+      ) {
+        // Static overlay bounds in image-normalized coordinates
+        const x0 = 0.2671, y0 = 0.1383;
+        const x1 = 0.7312, y1 = 0.4152;
 
-  // Clip to the exact rectangle in pixel space (no border)
-  const tlPix = viewer.value.viewport.pixelFromPoint(new osdLib.Point(x0, y0), true);
-  const brPix = viewer.value.viewport.pixelFromPoint(new osdLib.Point(x1, y1), true);
-  const left = Math.min(tlPix.x, brPix.x);
-  const right = Math.max(tlPix.x, brPix.x);
-  const top = Math.min(tlPix.y, brPix.y);
-  const bottom = Math.max(tlPix.y, brPix.y);
-
-  overlayCtx.save();
-  overlayCtx.beginPath();
-  overlayCtx.rect(left, top, right - left, bottom - top);
-  overlayCtx.clip();
-
-  // Grid in WORLD (image-normalized) space so dots stay locked when zooming
-  const widthN = Math.abs(x1 - x0);
-  const heightN = Math.abs(y1 - y0);
-  const cols = 100; // adjust density here
-  const rows = Math.max(1, Math.round(cols * (heightN / widthN)));
-
-  const dx = widthN / cols;
-  const dy = heightN / rows;
-
-  const dotR = 3; // constant pixel radius
-
-  overlayCtx.beginPath();
-  for (let r = 0; r < rows; r++) {
-    const yN = y0 + (r + 0.5) * dy;
-    for (let c = 0; c < cols; c++) {
-      const xN = x0 + (c + 0.5) * dx;
-      const pix = viewer.value.viewport.pixelFromPoint(new osdLib.Point(xN, yN), true);
-      overlayCtx.moveTo(pix.x + dotR, pix.y);
-      overlayCtx.arc(pix.x, pix.y, dotR, 0, Math.PI * 2);
-    }
-  }
-  overlayCtx.fillStyle = 'rgba(255,255,255,0.85)';
-  overlayCtx.fill();
-  overlayCtx.restore();
-}
-          // Naturvårdsarter — teal stars (rgb(94,234,212))
-    if (props.naturvardsarterVisible && localNaturvard.value && localNaturvard.value.length) {
-      const arr = Array.isArray(localNaturvard.value) ? localNaturvard.value : [];
-
-      // helper to draw a 5-point star
-      const drawStar = (ctx, x, y, r) => {
-        const spikes = 5;
-        const step = Math.PI / spikes; // 36° steps
-        const inner = r * 0.5;
-        ctx.beginPath();
-        let rot = -Math.PI / 2; // start at top
-        for (let i = 0; i < spikes; i++) {
-          ctx.lineTo(x + Math.cos(rot) * r, y + Math.sin(rot) * r);
-          rot += step;
-          ctx.lineTo(x + Math.cos(rot) * inner, y + Math.sin(rot) * inner);
-          rot += step;
-        }
-        ctx.closePath();
-      };
-
-      arr.forEach(p => {
-        if (!p) return;
-        if (p.framework && !valueMatches(p.framework, props.currentFramework.value)) return;
-        if (p.startskog && p.startskog !== props.currentStartskog.value) return;
-        if (p.time && !timeMatches(p.time, props.currentTime)) return;
-
-        const pt = new osdLib.Point(p.x, p.y);
-        const pixel = viewer.value.viewport.pixelFromPoint(pt, true);
-        const normalizedRadius = 0.012; // small star, slightly larger than click dots
-        const pixelRight = viewer.value.viewport.pixelFromPoint(new osdLib.Point(p.x + normalizedRadius, p.y), true);
-        const radius = Math.abs(pixelRight.x - pixel.x);
+        // Clip to the exact rectangle in pixel space (no border)
+        const tlPix = viewer.value.viewport.pixelFromPoint(new osdLib.Point(x0, y0), true);
+        const brPix = viewer.value.viewport.pixelFromPoint(new osdLib.Point(x1, y1), true);
+        const left = Math.min(tlPix.x, brPix.x);
+        const right = Math.max(tlPix.x, brPix.x);
+        const top = Math.min(tlPix.y, brPix.y);
+        const bottom = Math.max(tlPix.y, brPix.y);
 
         overlayCtx.save();
-        drawStar(overlayCtx, pixel.x, pixel.y, radius);
-        overlayCtx.fillStyle = 'rgba(153,246,228, 1)'; // teal fill
+        overlayCtx.beginPath();
+        overlayCtx.rect(left, top, right - left, bottom - top);
+        overlayCtx.clip();
+
+        // Grid in WORLD (image-normalized) space so dots stay locked when zooming
+        const widthN = Math.abs(x1 - x0);
+        const heightN = Math.abs(y1 - y0);
+        const cols = 100; // adjust density here
+        const rows = Math.max(1, Math.round(cols * (heightN / widthN)));
+
+        const dx = widthN / cols;
+        const dy = heightN / rows;
+
+        const dotR = 3; // constant pixel radius
+
+        overlayCtx.beginPath();
+        for (let r = 0; r < rows; r++) {
+          const yN = y0 + (r + 0.5) * dy;
+          for (let c = 0; c < cols; c++) {
+            const xN = x0 + (c + 0.5) * dx;
+            const pix = viewer.value.viewport.pixelFromPoint(new osdLib.Point(xN, yN), true);
+            overlayCtx.moveTo(pix.x + dotR, pix.y);
+            overlayCtx.arc(pix.x, pix.y, dotR, 0, Math.PI * 2);
+          }
+        }
+        overlayCtx.fillStyle = 'rgba(255,255,255,0.85)';
         overlayCtx.fill();
-        overlayCtx.lineWidth = 2;
-        overlayCtx.strokeStyle = 'rgb(20,184,166)'; // teal outline
-        overlayCtx.stroke();
         overlayCtx.restore();
-      });
-    }
-    
+      }
+      // Naturvårdsarter — teal stars (rgb(94,234,212))
+      if (props.naturvardsarterVisible && localNaturvard.value && localNaturvard.value.length) {
+        const arr = Array.isArray(localNaturvard.value) ? localNaturvard.value : [];
+
+        // helper to draw a 5-point star
+        const drawStar = (ctx, x, y, r) => {
+          const spikes = 5;
+          const step = Math.PI / spikes; // 36° steps
+          const inner = r * 0.5;
+          ctx.beginPath();
+          let rot = -Math.PI / 2; // start at top
+          for (let i = 0; i < spikes; i++) {
+            ctx.lineTo(x + Math.cos(rot) * r, y + Math.sin(rot) * r);
+            rot += step;
+            ctx.lineTo(x + Math.cos(rot) * inner, y + Math.sin(rot) * inner);
+            rot += step;
+          }
+          ctx.closePath();
+        };
+
+        arr.forEach(p => {
+          if (!p) return;
+          if (p.framework && !valueMatches(p.framework, props.currentFramework.value)) return;
+          if (p.startskog && p.startskog !== props.currentStartskog.value) return;
+          if (p.time && !timeMatches(p.time, props.currentTime)) return;
+
+          const pt = new osdLib.Point(p.x, p.y);
+          const pixel = viewer.value.viewport.pixelFromPoint(pt, true);
+          const normalizedRadius = 0.012; // small star, slightly larger than click dots
+          const pixelRight = viewer.value.viewport.pixelFromPoint(new osdLib.Point(p.x + normalizedRadius, p.y), true);
+          const radius = Math.abs(pixelRight.x - pixel.x);
+
+          overlayCtx.save();
+          drawStar(overlayCtx, pixel.x, pixel.y, radius);
+          overlayCtx.fillStyle = 'rgba(153,246,228, 1)'; // teal fill
+          overlayCtx.fill();
+          overlayCtx.lineWidth = 2;
+          overlayCtx.strokeStyle = 'rgb(20,184,166)'; // teal outline
+          overlayCtx.stroke();
+          overlayCtx.restore();
+        });
+      }
+
 
       // Småplantor — very small WHITE circles (same size as saved clicks)
-if (props.smaplantorVisible && localSmaPlantor.value && localSmaPlantor.value.length) {
-  const arr = Array.isArray(localSmaPlantor.value) ? localSmaPlantor.value : [];
-  arr.forEach(p => {
-    if (!p) return;
-    if (p.framework && p.framework !== props.currentFramework.value) return;
-    if (p.startskog && p.startskog !== props.currentStartskog.value) return;
-    if (p.time && !timeMatches(p.time, props.currentTime)) return;
+      if (props.smaplantorVisible && localSmaPlantor.value && localSmaPlantor.value.length) {
+        const arr = Array.isArray(localSmaPlantor.value) ? localSmaPlantor.value : [];
+        arr.forEach(p => {
+          if (!p) return;
+          if (p.framework && p.framework !== props.currentFramework.value) return;
+          if (p.startskog && p.startskog !== props.currentStartskog.value) return;
+          if (p.time && !timeMatches(p.time, props.currentTime)) return;
 
-    const pt = new osdLib.Point(p.x, p.y);
-    const pixel = viewer.value.viewport.pixelFromPoint(pt, true);
-    const normalizedRadius = 0.0005; // same as saved clicks
-    const pixelRight = viewer.value.viewport.pixelFromPoint(new osdLib.Point(p.x + normalizedRadius, p.y), true);
-    const radius = Math.abs(pixelRight.x - pixel.x);
+          const pt = new osdLib.Point(p.x, p.y);
+          const pixel = viewer.value.viewport.pixelFromPoint(pt, true);
+          const normalizedRadius = 0.0005; // same as saved clicks
+          const pixelRight = viewer.value.viewport.pixelFromPoint(new osdLib.Point(p.x + normalizedRadius, p.y), true);
+          const radius = Math.abs(pixelRight.x - pixel.x);
 
-    overlayCtx.save();
-    overlayCtx.beginPath();
-    overlayCtx.arc(pixel.x, pixel.y, radius, 0, 2 * Math.PI);
-    overlayCtx.fillStyle = 'rgba(255, 255, 255, 0.95)'; // white fill
-    overlayCtx.fill();
-    overlayCtx.lineWidth = 1;
-    overlayCtx.strokeStyle = 'rgba(255,255,255,1)'; // white outline
-    overlayCtx.stroke();
-    overlayCtx.restore();
-  });
-}
+          overlayCtx.save();
+          overlayCtx.beginPath();
+          overlayCtx.arc(pixel.x, pixel.y, radius, 0, 2 * Math.PI);
+          overlayCtx.fillStyle = 'rgba(255, 255, 255, 0.95)'; // white fill
+          overlayCtx.fill();
+          overlayCtx.lineWidth = 1;
+          overlayCtx.strokeStyle = 'rgba(255,255,255,1)'; // white outline
+          overlayCtx.stroke();
+          overlayCtx.restore();
+        });
+      }
 
-     // Högstubbar — very small BLACK circles
-     if (props.hogstubbarVisible && localHogstubbar.value && localHogstubbar.value.length) {
-       const arr = Array.isArray(localHogstubbar.value) ? localHogstubbar.value : [];
-       arr.forEach(p => {
-         if (!p) return;
-         if (p.framework && p.framework !== props.currentFramework.value) return;
-         if (p.startskog && p.startskog !== props.currentStartskog.value) return;
-         if (p.time && !timeMatches(p.time, props.currentTime)) return;
- 
-         const pt = new osdLib.Point(p.x, p.y);
-         const pixel = viewer.value.viewport.pixelFromPoint(pt, true);
-         const normalizedRadius = 0.003; // match småplantor/saved clicks size
-         const pixelRight = viewer.value.viewport.pixelFromPoint(new osdLib.Point(p.x + normalizedRadius, p.y), true);
-         const radius = Math.abs(pixelRight.x - pixel.x);
- 
-         overlayCtx.save();
-         overlayCtx.beginPath();
-         overlayCtx.arc(pixel.x, pixel.y, radius, 0, 2 * Math.PI);
-         overlayCtx.fillStyle = 'rgba(0, 0, 0, 0.55)'; // black fill
-         overlayCtx.fill();
-         overlayCtx.lineWidth = 2;
-         overlayCtx.strokeStyle = 'rgba(255,255,255,0.6)'; // black outline
-         overlayCtx.stroke();
-         overlayCtx.restore();
-       });
-     }
+      // Högstubbar — very small BLACK circles
+      if (props.hogstubbarVisible && localHogstubbar.value && localHogstubbar.value.length) {
+        const arr = Array.isArray(localHogstubbar.value) ? localHogstubbar.value : [];
+        arr.forEach(p => {
+          if (!p) return;
+          if (p.framework && p.framework !== props.currentFramework.value) return;
+          if (p.startskog && p.startskog !== props.currentStartskog.value) return;
+          if (p.time && !timeMatches(p.time, props.currentTime)) return;
+
+          const pt = new osdLib.Point(p.x, p.y);
+          const pixel = viewer.value.viewport.pixelFromPoint(pt, true);
+          const normalizedRadius = 0.003; // match småplantor/saved clicks size
+          const pixelRight = viewer.value.viewport.pixelFromPoint(new osdLib.Point(p.x + normalizedRadius, p.y), true);
+          const radius = Math.abs(pixelRight.x - pixel.x);
+
+          overlayCtx.save();
+          overlayCtx.beginPath();
+          overlayCtx.arc(pixel.x, pixel.y, radius, 0, 2 * Math.PI);
+          overlayCtx.fillStyle = 'rgba(0, 0, 0, 0.55)'; // black fill
+          overlayCtx.fill();
+          overlayCtx.lineWidth = 2;
+          overlayCtx.strokeStyle = 'rgba(255,255,255,0.6)'; // black outline
+          overlayCtx.stroke();
+          overlayCtx.restore();
+        });
+      }
 
       // Seed trees (Fröträd) — same look as retention trees, but from seedTrees.json
       if (props.seedTreeVisible) {
@@ -564,7 +560,7 @@ if (props.smaplantorVisible && localSmaPlantor.value && localSmaPlantor.value.le
           if (!timeMatches(tree.time, props.currentTime)) return;
           if (tree.startskog !== props.currentStartskog.value) return;
 
-          const pt    = new osdLib.Point(tree.x, tree.y);
+          const pt = new osdLib.Point(tree.x, tree.y);
           const pixel = viewer.value.viewport.pixelFromPoint(pt, true);
 
           const normalizedRadius = sizeNorm / 2;
@@ -598,11 +594,11 @@ if (props.smaplantorVisible && localSmaPlantor.value && localSmaPlantor.value.le
 
       // Compute active kanteffekt features
       const activeKanteffekt = localKanteffekt.value.filter(f =>
-  f.framework === props.currentFramework.value &&
-  (Array.isArray(f.start)
-    ? f.start.includes(props.currentTime)
-    : f.start === props.currentTime)
-);
+        f.framework === props.currentFramework.value &&
+        (Array.isArray(f.start)
+          ? f.start.includes(props.currentTime)
+          : f.start === props.currentTime)
+      );
 
       // Kanteffekt polygon overlays
       if (props.kanteffektVisible) {
@@ -628,21 +624,21 @@ if (props.smaplantorVisible && localSmaPlantor.value && localSmaPlantor.value.le
 
             // Use hardcoded coordinates for now (replace with f.outer/f.inner if present)
             const outer = [
-              [0.7312,0.1383],[0.7312,0.4152],[0.2672,0.4152],[0.2671,0.1383]
-            ].map(([x,y]) => viewer.value.viewport.pixelFromPoint(new osdLib.Point(x,y), true));
+              [0.7312, 0.1383], [0.7312, 0.4152], [0.2672, 0.4152], [0.2671, 0.1383]
+            ].map(([x, y]) => viewer.value.viewport.pixelFromPoint(new osdLib.Point(x, y), true));
             const inner = [
-              [0.7190,0.1448],[0.5799,0.1448],[0.5799,0.1528],
-              [0.2800,0.1528],[0.2800,0.4030],[0.7190,0.4030]
-            ].map(([x,y]) => viewer.value.viewport.pixelFromPoint(new osdLib.Point(x,y), true));
+              [0.7190, 0.1448], [0.5799, 0.1448], [0.5799, 0.1528],
+              [0.2800, 0.1528], [0.2800, 0.4030], [0.7190, 0.4030]
+            ].map(([x, y]) => viewer.value.viewport.pixelFromPoint(new osdLib.Point(x, y), true));
 
             // Draw kanteffekt polygon with 45° stripes
             overlayCtx.save();
             // Create clipping path for polygon with hole
             overlayCtx.beginPath();
-            outer.forEach((p,i) => i===0 ? overlayCtx.moveTo(p.x, p.y) : overlayCtx.lineTo(p.x, p.y));
+            outer.forEach((p, i) => i === 0 ? overlayCtx.moveTo(p.x, p.y) : overlayCtx.lineTo(p.x, p.y));
             overlayCtx.closePath();
             overlayCtx.moveTo(inner[0].x, inner[0].y);
-            inner.forEach((p,i) => overlayCtx.lineTo(p.x, p.y));
+            inner.forEach((p, i) => overlayCtx.lineTo(p.x, p.y));
             overlayCtx.closePath();
             overlayCtx.clip('evenodd');
 
@@ -657,15 +653,15 @@ if (props.smaplantorVisible && localSmaPlantor.value && localSmaPlantor.value.le
             const w = overlayCanvas.width;
             const h = overlayCanvas.height;
             const diag = Math.hypot(w, h);
-            const count = Math.ceil((diag + stripeWidth*2) / (stripeWidth * 2));
+            const count = Math.ceil((diag + stripeWidth * 2) / (stripeWidth * 2));
             for (let i = -count; i <= count; i++) {
               const x = i * stripeWidth * 2;
               // white stripe
               overlayCtx.fillStyle = 'rgba(255,255,255,1)';
-              overlayCtx.fillRect(x, -diag, stripeWidth, diag*2);
+              overlayCtx.fillRect(x, -diag, stripeWidth, diag * 2);
               // gray stripe
               overlayCtx.fillStyle = 'rgba(115,115,115,0.5)';
-              overlayCtx.fillRect(x + stripeWidth, -diag, stripeWidth, diag*2);
+              overlayCtx.fillRect(x + stripeWidth, -diag, stripeWidth, diag * 2);
             }
             overlayCtx.restore();
 
@@ -673,13 +669,13 @@ if (props.smaplantorVisible && localSmaPlantor.value && localSmaPlantor.value.le
             overlayCtx.save();
             overlayCtx.globalAlpha = alpha;
             overlayCtx.beginPath();
-            outer.forEach((p,i) => i===0 ? overlayCtx.moveTo(p.x, p.y) : overlayCtx.lineTo(p.x, p.y));
+            outer.forEach((p, i) => i === 0 ? overlayCtx.moveTo(p.x, p.y) : overlayCtx.lineTo(p.x, p.y));
             overlayCtx.closePath();
             overlayCtx.moveTo(inner[0].x, inner[0].y);
-            inner.forEach((p,i) => overlayCtx.lineTo(p.x, p.y));
+            inner.forEach((p, i) => overlayCtx.lineTo(p.x, p.y));
             overlayCtx.closePath();
             overlayCtx.strokeStyle = 'rgba(255,255,255,0.8)';
-            overlayCtx.lineWidth   = 1;
+            overlayCtx.lineWidth = 1;
             overlayCtx.stroke();
             overlayCtx.restore();
           });
@@ -701,42 +697,42 @@ if (props.smaplantorVisible && localSmaPlantor.value && localSmaPlantor.value.le
             const pixelHoleRight = viewer.value.viewport.pixelFromPoint(new osdLib.Point(f.x + holeHalfNorm, f.y), true);
             const holeHalfSide = Math.abs(pixelHoleRight.x - centerPixel.x);
             // ---- Opacity per lucka & time ----
-let luckaNum = null;
-const m = typeof f.id === 'string' ? f.id.match(/ke-luckh-(\d+)/) : null;
-if (m) luckaNum = parseInt(m[1], 10);
+            let luckaNum = null;
+            const m = typeof f.id === 'string' ? f.id.match(/ke-luckh-(\d+)/) : null;
+            if (m) luckaNum = parseInt(m[1], 10);
 
-const efterGroup = [2,4,8,11,14];
-const fiftyGroup = [1,3,7,10,13];
-const eightyGroup = [5,6,9,12,15];
+            const efterGroup = [2, 4, 8, 11, 14];
+            const fiftyGroup = [1, 3, 7, 10, 13];
+            const eightyGroup = [5, 6, 9, 12, 15];
 
-const time = props.currentTime;
+            const time = props.currentTime;
 
-// Default to “old” value so we can decide to skip it if needed
-let alpha = 0.5;
+            // Default to “old” value so we can decide to skip it if needed
+            let alpha = 0.5;
 
-// Compute base alpha from the group + time
-if (luckaNum != null) {
-  let baseAlpha = 0.5;
+            // Compute base alpha from the group + time
+            if (luckaNum != null) {
+              let baseAlpha = 0.5;
 
-  if (efterGroup.includes(luckaNum)) {
-    const map = { 'efter': 1, '20 år': 1, '50 år': 0.5, '80 år': 0.5 };
-    baseAlpha = map[time] ?? 0.5;
-  } else if (fiftyGroup.includes(luckaNum)) {
-    const map = { '50 år': 1, '80 år': 0.5 };
-    baseAlpha = map[time] ?? 0.5;
-  } else if (eightyGroup.includes(luckaNum)) {
-    const map = { '80 år': 1 };
-    baseAlpha = map[time] ?? 0.5;
-  }
+              if (efterGroup.includes(luckaNum)) {
+                const map = { 'efter': 1, '20 år': 1, '50 år': 0.5, '80 år': 0.5 };
+                baseAlpha = map[time] ?? 0.5;
+              } else if (fiftyGroup.includes(luckaNum)) {
+                const map = { '50 år': 1, '80 år': 0.5 };
+                baseAlpha = map[time] ?? 0.5;
+              } else if (eightyGroup.includes(luckaNum)) {
+                const map = { '80 år': 1 };
+                baseAlpha = map[time] ?? 0.5;
+              }
 
-  // If it would have been shown as “old” (0.5) and the checkbox is off,
-  // skip drawing this lucka entirely for better performance.
-  if (!props.oldKanteffektVisible && baseAlpha === 0.5) {
-    return; // skip this squareHole lucka
-  }
+              // If it would have been shown as “old” (0.5) and the checkbox is off,
+              // skip drawing this lucka entirely for better performance.
+              if (!props.oldKanteffektVisible && baseAlpha === 0.5) {
+                return; // skip this squareHole lucka
+              }
 
-  alpha = baseAlpha;
-}
+              alpha = baseAlpha;
+            }
 
             // Clip path: outer rect minus inner hole (ring style)
             overlayCtx.save();
@@ -786,7 +782,7 @@ if (luckaNum != null) {
               const fontPx = Math.max(9, Math.min(14, side * 0.12));
               // Top-left corner of outer square with small padding
               const left = centerPixel.x - halfSide;
-              const top  = centerPixel.y - halfSide;
+              const top = centerPixel.y - halfSide;
               const padX = Math.max(3, fontPx * 0.3);
               const padY = Math.max(2, fontPx * 0.2);
 
@@ -821,26 +817,26 @@ if (luckaNum != null) {
           });
       }
       // Kontinuerligt rottäcke rectangle overlay (same dimensions as static overlay)
-if (props.rottackeVisible) {
-  const fw = props.currentFramework.value;
-  const t  = props.currentTime;
+      if (props.rottackeVisible) {
+        const fw = props.currentFramework.value;
+        const t = props.currentTime;
 
-  const isSkarmtrad = fw === 'skärmträd' || fw === 'skarmtrad';
-  const isBladning  = fw === 'blädning'  || fw === 'bladning';
+        const isSkarmtrad = fw === 'skärmträd' || fw === 'skarmtrad';
+        const isBladning = fw === 'blädning' || fw === 'bladning';
 
-  const showForSkarmtrad = isSkarmtrad && (t === 'efter');
-  const showForBladning  = isBladning && (t === 'efter' || t === '20 år' || t === '50 år' || t === '80 år');
+        const showForSkarmtrad = isSkarmtrad && (t === 'efter');
+        const showForBladning = isBladning && (t === 'efter' || t === '20 år' || t === '50 år' || t === '80 år');
 
-  if (showForSkarmtrad || showForBladning) {
-    // Same normalized rect as the static overlay
-    const norm = { x: 0.2675, y: 0.1393, width: 0.465, height: 0.275 };
+        if (showForSkarmtrad || showForBladning) {
+          // Same normalized rect as the static overlay
+          const norm = { x: 0.2675, y: 0.1393, width: 0.465, height: 0.275 };
 
-    const p1 = viewer.value.viewport.pixelFromPoint(new osdLib.Point(norm.x,              norm.y),              true);
-    const p2 = viewer.value.viewport.pixelFromPoint(new osdLib.Point(norm.x + norm.width, norm.y + norm.height), true);
-    const w  = p2.x - p1.x;
-    const h  = p2.y - p1.y;
+          const p1 = viewer.value.viewport.pixelFromPoint(new osdLib.Point(norm.x, norm.y), true);
+          const p2 = viewer.value.viewport.pixelFromPoint(new osdLib.Point(norm.x + norm.width, norm.y + norm.height), true);
+          const w = p2.x - p1.x;
+          const h = p2.y - p1.y;
 
-              // Set popover for Blädning at 'efter' only
+          // Set popover for Blädning at 'efter' only
           if (isBladning && t === 'efter') {
             rottackePopover.value = {
               visible: true,
@@ -851,79 +847,79 @@ if (props.rottackeVisible) {
             };
           }
 
-    // Clip to rectangle and draw standard 45° stripes
-    overlayCtx.save();
-    overlayCtx.beginPath();
-    overlayCtx.rect(p1.x, p1.y, w, h);
-    overlayCtx.clip();
+          // Clip to rectangle and draw standard 45° stripes
+          overlayCtx.save();
+          overlayCtx.beginPath();
+          overlayCtx.rect(p1.x, p1.y, w, h);
+          overlayCtx.clip();
 
-    overlayCtx.translate(p1.x + w/2, p1.y + h/2);
-    overlayCtx.rotate(-45 * Math.PI / 180);
-    const stripeWidth = 4; // px
-    const diag = Math.hypot(w, h);
-    const count = Math.ceil((diag + stripeWidth*2) / (stripeWidth * 2));
-    for (let i = -count; i <= count; i++) {
-      const x = i * stripeWidth * 2;
-      // white stripe
-      overlayCtx.fillStyle = 'rgba(255,255,255,0.7)';
-      overlayCtx.fillRect(x, -diag, stripeWidth, diag*2);
-      // gray stripe
-      overlayCtx.fillStyle = 'rgba(115,115,115,0.5)';
-      overlayCtx.fillRect(x + stripeWidth, -diag, stripeWidth, diag*2);
-    }
-    overlayCtx.restore();
+          overlayCtx.translate(p1.x + w / 2, p1.y + h / 2);
+          overlayCtx.rotate(-45 * Math.PI / 180);
+          const stripeWidth = 4; // px
+          const diag = Math.hypot(w, h);
+          const count = Math.ceil((diag + stripeWidth * 2) / (stripeWidth * 2));
+          for (let i = -count; i <= count; i++) {
+            const x = i * stripeWidth * 2;
+            // white stripe
+            overlayCtx.fillStyle = 'rgba(255,255,255,0.7)';
+            overlayCtx.fillRect(x, -diag, stripeWidth, diag * 2);
+            // gray stripe
+            overlayCtx.fillStyle = 'rgba(115,115,115,0.5)';
+            overlayCtx.fillRect(x + stripeWidth, -diag, stripeWidth, diag * 2);
+          }
+          overlayCtx.restore();
 
-    // Outline for clarity (same vibe as others)
-    overlayCtx.save();
-    overlayCtx.strokeStyle = 'rgba(255,255,255,0.8)';
-    overlayCtx.lineWidth   = 2;
-    overlayCtx.strokeRect(p1.x, p1.y, w, h);
-    overlayCtx.restore();
-  }
-}
+          // Outline for clarity (same vibe as others)
+          overlayCtx.save();
+          overlayCtx.strokeStyle = 'rgba(255,255,255,0.8)';
+          overlayCtx.lineWidth = 2;
+          overlayCtx.strokeRect(p1.x, p1.y, w, h);
+          overlayCtx.restore();
+        }
+      }
 
       // Static rectangle overlay
       if (overlayStore.staticOverlayVisible) {
         // Normalized rectangle coords
         const norm = { x: 0.2675, y: 0.1393, width: 0.465, height: 0.275 };
-        const p1 = viewer.value.viewport.pixelFromPoint(new osdLib.Point(norm.x,              norm.y),              true);
+        const p1 = viewer.value.viewport.pixelFromPoint(new osdLib.Point(norm.x, norm.y), true);
         const p2 = viewer.value.viewport.pixelFromPoint(new osdLib.Point(norm.x + norm.width, norm.y + norm.height), true);
-        const w  = p2.x - p1.x;
-        const h  = p2.y - p1.y;
+        const w = p2.x - p1.x;
+        const h = p2.y - p1.y;
         overlayCtx.strokeStyle = 'white';
-        overlayCtx.lineWidth   = 2;
+        overlayCtx.lineWidth = 2;
         overlayCtx.strokeRect(p1.x, p1.y, w, h);
       }
       // Saved clicks — small circles (dev)
-       if (localSavedClicks.value.length) {
-         localSavedClicks.value.forEach(c => {
-           // Filter by current context if present on the click
-           if (c.framework && c.framework !== props.currentFramework.value) return;
-           if (c.startskog && c.startskog !== props.currentStartskog.value) return;
-           if (c.time && !timeMatches(c.time, props.currentTime)) return;
- 
-           const pt = new osdLib.Point(c.x, c.y);
-           const pixel = viewer.value.viewport.pixelFromPoint(pt, true);
-           const normalizedRadius = 0.0005; // smaller marker
-           const pixelRight = viewer.value.viewport.pixelFromPoint(new osdLib.Point(c.x + normalizedRadius, c.y), true);
-           const radius = Math.abs(pixelRight.x - pixel.x);
- 
-           overlayCtx.save();
-           overlayCtx.beginPath();
-           overlayCtx.arc(pixel.x, pixel.y, radius, 0, 2 * Math.PI);
-           overlayCtx.fillStyle = 'rgba(255, 255, 255, 0.95)'; // yellow-ish
-           overlayCtx.fill();
-           overlayCtx.lineWidth = 1;
-           overlayCtx.strokeStyle = 'rgba(255, 255, 255, 1)';   // amber-ish
-           overlayCtx.stroke();
-           overlayCtx.restore();
-         });
-       }
+      if (localSavedClicks.value.length) {
+        localSavedClicks.value.forEach(c => {
+          // Filter by current context if present on the click
+          if (c.framework && c.framework !== props.currentFramework.value) return;
+          if (c.startskog && c.startskog !== props.currentStartskog.value) return;
+          if (c.time && !timeMatches(c.time, props.currentTime)) return;
+
+          const pt = new osdLib.Point(c.x, c.y);
+          const pixel = viewer.value.viewport.pixelFromPoint(pt, true);
+          const normalizedRadius = 0.0005; // smaller marker
+          const pixelRight = viewer.value.viewport.pixelFromPoint(new osdLib.Point(c.x + normalizedRadius, c.y), true);
+          const radius = Math.abs(pixelRight.x - pixel.x);
+
+          overlayCtx.save();
+          overlayCtx.beginPath();
+          overlayCtx.arc(pixel.x, pixel.y, radius, 0, 2 * Math.PI);
+          overlayCtx.fillStyle = 'rgba(255, 255, 255, 0.95)'; // yellow-ish
+          overlayCtx.fill();
+          overlayCtx.lineWidth = 1;
+          overlayCtx.strokeStyle = 'rgba(255, 255, 255, 1)';   // amber-ish
+          overlayCtx.stroke();
+          overlayCtx.restore();
+        });
+      }
     }
 
 
-       
-     
+
+
 
     // Insert overlayStore declaration before the watchers
     const overlayStore = useOverlayStore();
@@ -954,13 +950,13 @@ if (props.rottackeVisible) {
       if (overlayCtx) drawAllOverlays();
     });
     // Redraw on dev flag toggle
-     watch(() => props.devSaveClicks, () => {
-       if (overlayCtx) drawAllOverlays();
-     });
-     watch(() => props.smaplantorVisible, () => {
-    if (overlayCtx) drawAllOverlays();
+    watch(() => props.devSaveClicks, () => {
+      if (overlayCtx) drawAllOverlays();
     });
-      watch(() => props.hogstubbarVisible, () => {
+    watch(() => props.smaplantorVisible, () => {
+      if (overlayCtx) drawAllOverlays();
+    });
+    watch(() => props.hogstubbarVisible, () => {
       if (overlayCtx) drawAllOverlays();
     });
     watch(() => props.naturvardsarterVisible, () => {
@@ -972,17 +968,17 @@ if (props.rottackeVisible) {
 
 
 
-onMounted(async () => {
-  try {
-    const res = await fetch('/api/seedTrees');
-    const json = await res.json();
-    localSeedTrees.value = json.trees || [];
-  } catch (e) {
-    console.error('Failed fetching seedTrees:', e);
-  }
-});
+    onMounted(async () => {
+      try {
+        const res = await fetch('/api/seedTrees');
+        const json = await res.json();
+        localSeedTrees.value = json.trees || [];
+      } catch (e) {
+        console.error('Failed fetching seedTrees:', e);
+      }
+    });
 
-const viewerId = computed(
+    const viewerId = computed(
       () => "openseadragon-viewer-" + Math.random().toString(36).substr(2, 9)
     );
     let osdLib = null;
@@ -1015,7 +1011,7 @@ const viewerId = computed(
         animationHandler = null;
       }
       mouseTrackers.forEach(tracker => tracker.destroy());
-      mouseTrackers = [];     
+      mouseTrackers = [];
       annotationOverlayApps.forEach(({ id, app }) => {
         app.unmount();
         viewer.value.removeOverlay(id);
@@ -1080,7 +1076,7 @@ const viewerId = computed(
       // For SvamparSkogsbruk.json, change 0 to -2
       return numericTime.value === 0 ? -2 : numericTime.value;
     });
-    
+
     const adjustedTotalSvamparTime = computed(() => {
       // For TotalSvamparSkogsbruk.json, change 0 to -4
       return numericTime.value === 0 ? -4 : numericTime.value;
@@ -1140,44 +1136,44 @@ const viewerId = computed(
       mousePos.value.y = viewportPoint.y;
     }
 
- // Save any click to general store when dev flag is ON
- function handleRetentionClick(event) {
-   // Only active when developer switch is on
-   if (!props.devSaveClicks) return;
-   if (!viewerContainer.value || !viewer.value || !osdLib) return;
- 
-   const rect = viewerContainer.value.getBoundingClientRect();
-   const containerX = event.clientX - rect.left;
-   const containerY = event.clientY - rect.top;
-   const pixelPoint = new osdLib.Point(containerX, containerY);
-   const viewportPoint = viewer.value.viewport.pointFromPixel(pixelPoint);
- 
-   const isAllClick = event.metaKey || event.ctrlKey;
-   const timeValue = isAllClick ? 'alla' : props.currentTime;
- 
-   const click = {
-     framework: props.currentFramework.value,
-     time: timeValue,
-     startskog: props.currentStartskog.value,
-     x: viewportPoint.x,
-     y: viewportPoint.y,
-     id: `click-${Date.now()}`
-   };
- 
-   // Save to general saved clicks file via API
-   fetch('/api/savedclicks', {
-     method: 'POST',
-     headers: { 'Content-Type': 'application/json' },
-     body: JSON.stringify(click)
-   }).catch(err => console.error('Failed saving click:', err));
- 
-   // Update local state for immediate feedback
-   localSavedClicks.value.push(click);
- }
+    // Save any click to general store when dev flag is ON
+    function handleRetentionClick(event) {
+      // Only active when developer switch is on
+      if (!props.devSaveClicks) return;
+      if (!viewerContainer.value || !viewer.value || !osdLib) return;
+
+      const rect = viewerContainer.value.getBoundingClientRect();
+      const containerX = event.clientX - rect.left;
+      const containerY = event.clientY - rect.top;
+      const pixelPoint = new osdLib.Point(containerX, containerY);
+      const viewportPoint = viewer.value.viewport.pointFromPixel(pixelPoint);
+
+      const isAllClick = event.metaKey || event.ctrlKey;
+      const timeValue = isAllClick ? 'alla' : props.currentTime;
+
+      const click = {
+        framework: props.currentFramework.value,
+        time: timeValue,
+        startskog: props.currentStartskog.value,
+        x: viewportPoint.x,
+        y: viewportPoint.y,
+        id: `click-${Date.now()}`
+      };
+
+      // Save to general saved clicks file via API
+      fetch('/api/savedclicks', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(click)
+      }).catch(err => console.error('Failed saving click:', err));
+
+      // Update local state for immediate feedback
+      localSavedClicks.value.push(click);
+    }
 
 
 
- 
+
 
 
 
@@ -1202,10 +1198,10 @@ const viewerId = computed(
     function updateOverlays() {
       if (!viewer.value || !osdLib) return;
 
-     // Destroy any existing MouseTracker instances before clearing overlays
+      // Destroy any existing MouseTracker instances before clearing overlays
       mouseTrackers.forEach(tracker => tracker.destroy());
-      mouseTrackers = [];     
-      
+      mouseTrackers = [];
+
       // Remove previously added annotation overlays and unmount their Vue apps.
       annotationOverlayApps.forEach(({ id, app }) => {
         app.unmount();
@@ -1250,7 +1246,7 @@ const viewerId = computed(
       });
     }
 
-    
+
 
     // Method to show the popup overlay.
     function showPopup(annotation) {
@@ -1272,7 +1268,7 @@ const viewerId = computed(
     async function initViewer() {
       if (typeof window === "undefined") return;
       if (viewer.value) return;
-      if (route.name !== "skogsskotsel-skotselmetoder") return;
+      if (route.name !== "skogsskotsel") return;
       const containerEl = viewerContainer.value;
       if (!containerEl) return;
 
@@ -1289,7 +1285,7 @@ const viewerId = computed(
         crossOriginPolicy: 'Anonymous',
         ajaxWithCredentials: false,
         showNavigationControl: false,
-        maxImageCacheCount: 50,       
+        maxImageCacheCount: 50,
         visibilityRatio: 1,
         homeFillsViewer: true,
         minZoomLevel: 1,
@@ -1316,7 +1312,7 @@ const viewerId = computed(
       initCanvasOverlay();
       drawAllOverlays();
       viewer.value.addHandler('animation', drawAllOverlays);
-      viewer.value.addHandler('open',      drawAllOverlays);
+      viewer.value.addHandler('open', drawAllOverlays);
       // window.addEventListener('resize', resizeCanvas); // REMOVE: now handled by ResizeObserver
 
       // Attach scale bar plugin
@@ -1339,9 +1335,9 @@ const viewerId = computed(
         viewer.value.viewport.applyConstraints();
       }
 
-// Store animation handler for cleanup
+      // Store animation handler for cleanup
       animationHandler = () => {
-        const zoom   = viewer.value.viewport.getZoom();
+        const zoom = viewer.value.viewport.getZoom();
         const center = viewer.value.viewport.getCenter();
         viewerStore.setViewport(zoom, { x: center.x, y: center.y });
         emit('viewportChanged', { zoom, center });
@@ -1354,10 +1350,10 @@ const viewerId = computed(
 
     // Snapshot-based crossfade for tile transitions
     function transitionToNewTile(newUrl) {
-      
+
       if (!viewer.value) return;
 
-      
+
 
       // Remove any leftover snapshots before creating a new one
       const existingSnapshots = viewerContainer.value.querySelectorAll('.osd-snapshot');
@@ -1688,15 +1684,15 @@ const viewerId = computed(
       updateMousePosition,
       handleRetentionClick,
       handleSliderInput,
-      overlayOpacityLocal,  
+      overlayOpacityLocal,
       timelineInfo,
       isPanelMinimized,
       togglePanelMinimized,
       svampMycelValue,
       matsvampMycelValue,
       rodlistadeMycelValue,
-      rottackePopover, 
-      rottackePopoverStyle, 
+      rottackePopover,
+      rottackePopoverStyle,
       localSeedTrees
     };
   },
