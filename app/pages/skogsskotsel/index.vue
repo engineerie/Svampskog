@@ -6,7 +6,7 @@
 " description="
 Lär dig hur trakthyggesbruk och olika former av hygesfria metoder kan påverka förekomsten av mykorrhizasvampar"
                 orientation="horizontal">
-                <NuxtImg src="/images/Adobe/Stock Photo 563535222.jpeg" width="700" format="webp" alt="Illustration"
+                <NuxtImg src="/images/Landing/Stock Photo 563535222.jpeg" width="700" format="webp" alt="Illustration"
                     class=" rounded ring ring-neutral-300 " />
                 <template #links>
                     <UModal fullscreen>
@@ -15,9 +15,9 @@ Lär dig hur trakthyggesbruk och olika former av hygesfria metoder kan påverka 
                                 icon="i-material-symbols-interactive-space" />
                         </UChip>
                         <template #content>
-                            <!-- <UAlert title="Denna funktion lanseras i November." color="warning"
-                                icon="i-fluent-emoji-high-contrast-construction" /> -->
-                            <ModelC />
+                            <UAlert title="Denna funktion lanseras i November." color="warning"
+                                icon="i-fluent-emoji-high-contrast-construction" />
+                            <!-- <ModelC /> -->
                         </template>
                     </UModal>
                 </template>
@@ -194,38 +194,38 @@ const items = ref([
     {
         title: 'Träd och svampar är beroende av varandra',
         description: 'Alla träds finrötter, ofta mer än hundratusen per kvadratmeter, är om- och invuxna av mykorrhizasvampars mycel. Svamparnas tunna hyfer sträcker likt en diskborste ut sig från rotspetsarna och förstorar trädens rotsystem hundrafalt och mer.',
-        img: '/images/DavidReed.jpg'
+        img: '/images/Carousel/DavidReed.jpg'
     },
     {
         title: 'Fler och äldre träd ger mer mykorrhiza',
         description: 'Mängden träd avgör hur mycket mykorrhizasvampar det finns. Små och få träd ger mindre och fler och större träd ger större mängd och aktivitet av svamparna. Äldre skogar har också fler olika arter än yngre skogar.',
-        img: '/images/MushrommTreeDiagram4.jpg',
+        img: '/images/Carousel/MushrommTreeDiagram4.jpg',
         noBorder: true,
     },
     {
         title: 'När träden avverkas försvinner svamparna',
         description: 'När träden avverkas upphör sockerflödet till rötterna. Då tynar mykorrhizasvamparna bort och dör. Ett trakthygge innebär att omkring 95% av mängden mykorrhizasvampar försvinner.',
-        img: '/images/Stock Image 481542412.jpeg'
+        img: '/images/Carousel/Stock Image 481542412.jpeg'
     },
     {
         title: 'Svamparna överlever vid levande rötter',
         description: 'Mykorrhizasvampar kan bara överleva där det finns levande trädrötter - till exempel längs skogskanter, vid hänsynsträd eller på småplantor.',
-        img: '/images/Skogsbruk.png'
+        img: '/images/Carousel/Skogsbruk.png'
     },
     {
         title: 'Vanliga svampar kommer tillbaka',
         description: 'Efter avverkning återvänder de vanligaste svamparna. De kan antingen överleva i marken eller spridas in med sporer från närliggande skog. Ovanliga arter lyckas sällan återetablera sig.',
-        img: '/images/Spores Image.jpeg'
+        img: '/images/Carousel/Spores Image.jpeg'
     },
     {
         title: 'Val av skogsskötsel påverkar',
         description: 'Vid trakthygge försvinner de flesta arterna och mängden mykorrhiza minskar kraftigt. Med hyggesfria metoder blir påverkan betydligt mindre, eftersom det hela tiden finns många träd. Svampställen och ovanliga arter på platsen kan då fortleva.',
-        img: '/images/TraktBlad.png'
+        img: '/images/Carousel/TraktBlad.png'
     },
     {
         title: 'Hur kan man gynna mykorrhizasvampar?',
         description: 'Så här gör man om man vill måna om de mykorrhizasvampar som finns i en skog. 1) Spara skogsområdet. 2) Låt skogen bli äldre - då kan svamparna fortleva längre. 3) Välj hyggesfria metoder. 4) Om skogen kallavverkas - lämna väl tilltagna grupper med hänsynsträd.',
-        img: '/images/Mushroom Images.jpeg'
+        img: '/images/Carousel/Mushroom Images.jpeg'
     },
 ])
 
@@ -254,7 +254,7 @@ const methods = ref<Method[]>([
     {
         id: 'naturskydd',
         title: 'Inga åtgärder',
-        image: 'images/ingen_åtgärd.png',
+        image: 'images/metoder/ingen_åtgärd.png',
         shortdescription: 'Orörd skog',
         description:
             'Beståndet lämnas för fri utveckling tills vidare. Kan t ex vara en frivillig naturvårdsavsättning eller en skog med områdesskydd.',
@@ -264,7 +264,7 @@ const methods = ref<Method[]>([
     {
         id: 'trakthygge',
         title: 'Trakthygge',
-        image: 'images/kalhygge.png',
+        image: 'images/metoder/kalhygge.png',
         shortdescription: 'Kalavverkning med hänsyn',
         description:
             'Sedan 1950-talet det dominerande skogsskötselsystemet som går ut på att skapa likåldriga, större bestånd, trakter, med normalt ett trädslag. Hela beståndet behandlas samtidigt. Standardskötseln är: avverkning, markberedning, plantering, röjning, ett par gallringar och åter avverkning efter 60 till +100 år, beroende på bördighet och var i Sverige. Trakthuggning sker nästan uteslutande med kalavverkning och plantering, undantagsvis med fröträd som avverkas efter plantföryngring skett naturligt.',
@@ -274,7 +274,7 @@ const methods = ref<Method[]>([
     {
         id: 'luckhuggning',
         title: 'Luckhuggning',
-        image: 'images/luckhuggning.png',
+        image: 'images/metoder/luckhuggning.png',
         shortdescription: 'Mindre ytor kalavverkas',
         type: 'Hyggesfritt',
         description:
@@ -285,7 +285,7 @@ const methods = ref<Method[]>([
     {
         id: 'skärmträd',
         title: 'Överhållen skärm',
-        image: 'images/skärm.png',
+        image: 'images/metoder/skärm.png',
         shortdescription: 'Avverkning i tre sted under 20 år ',
         type: 'Hyggesfritt',
         description:
@@ -296,11 +296,10 @@ const methods = ref<Method[]>([
     {
         id: 'blädning',
         title: 'Blädning',
-        image: 'images/blädning.png',
+        image: 'images/metoder/blädning.png',
         shortdescription: 'Enstaka träd gallras',
         type: 'Hyggesfritt',
-        description:
-            'Innebär ofta uttag om 20–30 procent av virkesvolymen med intervall på 15–30 år. Avverkning görs med målet att skapa och bibehålla en fullskiktad skog, det vill säga en skog med träd i alla storlekar. Därför fungerar blädning bäst med skuggtåliga trädslag, som gran och bok. Marken måste vara tillräckligt bördig, för att plantor och småträd ska klara att växa i det slutna beståndet. Blädning lämpar sig i skogar där man vill bevara en fuktigare och mer skyddad miljö.',
+        description: 'Innebär ofta uttag om 20–30 procent av virkesvolymen med intervall på 15–30 år. Avverkning görs med målet att skapa och bibehålla en fullskiktad skog, det vill säga en skog med träd i alla storlekar. Därför fungerar blädning bäst med skuggtåliga trädslag, som gran och bok. Marken måste vara tillräckligt bördig, för att plantor och småträd ska klara att växa i det slutna beståndet. Blädning lämpar sig i skogar där man vill bevara en fuktigare och mer skyddad miljö.',
         descriptionsvamp:
             'Påverkan på mykorrhizasvampar är förmodligen försumbar då förändringen av deras markmiljö är liten och det kontinuerligt finns levande trädrötter i princip överallt i skogen. I princip lever alla mycel vidare efter en blädning. Ovanliga och rödlistade arter i beståndet kommer kunna finnas kvar. Mängden matsvampar är i stort sett opåverkad, men kan minska något några år efter en blädning.',
     }

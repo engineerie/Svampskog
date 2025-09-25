@@ -1,11 +1,9 @@
 <template>
   <div class="">
-    <div
-      class=""
-    >
-      <div class="flex gap-2 p-2 justify-end z-30" >
-       <!-- Remove these USelect components from the top filter bar -->
-<!--
+    <div class="">
+      <div class="flex gap-2 p-2 justify-end z-30">
+        <!-- Remove these USelect components from the top filter bar -->
+        <!--
 <USelect
   v-model="selectedFilter"
   multiple
@@ -26,109 +24,71 @@
 />
 -->
 
-<!-- And add the following block in their place -->
-<div class="flex gap-2 items-end">  <template v-if="selectedFilter.length">
-    <span v-for="filter in selectedFilter" :key="'svamp-'+filter">
-      <UBadge
-        trailing-icon="i-heroicons-x-mark-solid"
-        variant="subtle"
-        :color="filter === 'Matsvamp' ? 'warning' : filter === 'Giftsvamp' ? 'poison' : 'neutral'"
-        class="cursor-pointer"
-        @click="selectedFilter = selectedFilter.filter(f => f !== filter)"
-      >
-        {{ capitalize(filter) }}
-      </UBadge>
-    </span>
-  </template>
-  <template v-if="selectedGrupp.length">
-    <span v-for="filter in selectedGrupp" :key="'grupp-'+filter">
-      <UBadge
-        trailing-icon="i-heroicons-x-mark-solid"
-        variant="subtle"
-        color="neutral"
-        class="cursor-pointer"
-        @click="selectedGrupp = selectedGrupp.filter(f => f !== filter)"
-      >
-        {{ capitalize(filter) }}
-      </UBadge>
-    </span>
-  </template>
-  <template v-if="selectedStatus.length">
-    <span v-for="filter in selectedStatus" :key="'status-'+filter">
-      <UBadge
-        trailing-icon="i-heroicons-x-mark-solid"
-        variant="subtle"
-        :color="filter === 'Signalart' ? 'signal' : getStatusColor(filter)"
-        class="cursor-pointer"
-        @click="selectedStatus = selectedStatus.filter(f => f !== filter)"
-      >
-        {{ filter === 'Signalart' ? 'Signalart' : getStatusTooltip(filter) }}
-      </UBadge>
-    </span>
-  </template>
-</div>
+        <!-- And add the following block in their place -->
+        <div class="flex gap-2 items-end"> <template v-if="selectedFilter.length">
+            <span v-for="filter in selectedFilter" :key="'svamp-' + filter">
+              <UBadge trailing-icon="i-heroicons-x-mark-solid" variant="subtle"
+                :color="filter === 'Matsvamp' ? 'warning' : filter === 'Giftsvamp' ? 'poison' : 'neutral'"
+                class="cursor-pointer" @click="selectedFilter = selectedFilter.filter(f => f !== filter)">
+                {{ capitalize(filter) }}
+              </UBadge>
+            </span>
+          </template>
+          <template v-if="selectedGrupp.length">
+            <span v-for="filter in selectedGrupp" :key="'grupp-' + filter">
+              <UBadge trailing-icon="i-heroicons-x-mark-solid" variant="subtle" color="neutral" class="cursor-pointer"
+                @click="selectedGrupp = selectedGrupp.filter(f => f !== filter)">
+                {{ capitalize(filter) }}
+              </UBadge>
+            </span>
+          </template>
+          <template v-if="selectedStatus.length">
+            <span v-for="filter in selectedStatus" :key="'status-' + filter">
+              <UBadge trailing-icon="i-heroicons-x-mark-solid" variant="subtle"
+                :color="filter === 'Signalart' ? 'signal' : getStatusColor(filter)" class="cursor-pointer"
+                @click="selectedStatus = selectedStatus.filter(f => f !== filter)">
+                {{ filter === 'Signalart' ? 'Signalart' : getStatusTooltip(filter) }}
+              </UBadge>
+            </span>
+          </template>
+        </div>
         <div v-if="!isNormalView">
-          <USelect
-            v-model="rowsPerPage"
-            :items="[10, 20, 30, 40, 50, 'Alla']"
-            placeholder="Rader per sida"
-          />
-          
+          <USelect v-model="rowsPerPage" :items="[10, 20, 30, 40, 50, 'Alla']" placeholder="Rader per sida" />
+
         </div>
 
-        <UInput
-          :model-value="table?.tableApi?.getState().globalFilter || ''"
-          class="max-w-sm min-w-[12ch]"
-          placeholder="Sök i tabell"
-          @update:model-value="value => table?.tableApi?.setGlobalFilter(value)"
-        />
+        <UInput :model-value="table?.tableApi?.getState().globalFilter || ''" class="max-w-sm min-w-[12ch]"
+          placeholder="Sök i tabell" @update:model-value="value => table?.tableApi?.setGlobalFilter(value)" />
       </div>
       <div v-if="filteredData" :class="[isNormalView ? '' : '']">
         <div class="">
           <!-- v-model="selectedRows" -->
 
           <!-- UTable with Filtered Data -->
-        
-          <UTable
-            ref="table"
-            v-model:pagination="pagination"
-            :data="sortedData"
-            :columns="columns"
-            sticky
-            :loading="isLoading"
-            :sort="sort"
-            @update:sort="sort = $event"
-            @select="selectRow"
-        :autoResetAll="true" 
 
+          <UTable ref="table" v-model:pagination="pagination" :data="sortedData" :columns="columns" sticky
+            :loading="isLoading" :sort="sort" @update:sort="sort = $event" @select="selectRow" :autoResetAll="true"
             :pagination-options="!isNormalView ? { getPaginationRowModel: getPaginationRowModel() } : undefined"
-            :class="{ 'h-[442px]': isNormalView }"
-          />
-          <div
-            class="flex justify-between items-center p-5 border-t-[1px] border-neutral-200 dark:border-neutral-700"
-          >
+            :class="{ 'h-[442px]': isNormalView }" />
+          <div class="flex justify-between items-center p-5 border-t-[1px] border-neutral-200 dark:border-neutral-700">
             <div class="flex h-fit shrink-0 gap-1 items-center">
               <!-- Left mini-legend -->
-              
-              <h1
-            
-              >
+
+              <h1>
                 Visar {{ startItem }} till {{ endItem }} av
                 {{ totalItems }} arter
               </h1>
-          
+
             </div>
 
             <div>
               <!-- Pagination component -->
               <div v-if="!isNormalView && rowsPerPage !== 'Alla'">
                 <div class="flex justify-center">
-                  <UPagination
-                    :default-page="(table?.tableApi?.getState().pagination.pageIndex || 0) + 1"
+                  <UPagination :default-page="(table?.tableApi?.getState().pagination.pageIndex || 0) + 1"
                     :items-per-page="table?.tableApi?.getState().pagination.pageSize"
                     :total="table?.tableApi?.getFilteredRowModel().rows.length"
-                    @update:page="(p) => table?.tableApi?.setPageIndex(p - 1)"
-                  />
+                    @update:page="(p) => table?.tableApi?.setPageIndex(p - 1)" />
                 </div>
               </div>
             </div>
@@ -279,8 +239,8 @@ const statusOptions = computed(() => {
 
   // Compute the number of rows that have SIGNAL_art === 'S'
   const signalCount = data.value.reduce((acc, row) => {
-  return acc + ((row.SIGNAL_art === 'S') ? 1 : 0);
-}, 0);
+    return acc + ((row.SIGNAL_art === 'S') ? 1 : 0);
+  }, 0);
 
   // Build the options array with counts appended to the label
   return [
@@ -316,7 +276,7 @@ const sampleEnvCount = computed(() => {
 
 const getIconPath = (svampGrupp) => {
   const iconMapping = {
-    övrigt: "BasilOther1Solid.png",
+    övrigt: "ovrigt.webp",
     hattsvamp: "hattsvamp.png",
     kantarell: "kantarell.webp",
     sopp: "sopp.png",
@@ -359,190 +319,192 @@ const getStatusTooltip = (status) => {
 const sort = ref({ column: "", direction: "asc" });
 
 const UBadge = resolveComponent('UBadge')
-const NuxtImg = resolveComponent('NuxtImg')
 const UProgress = resolveComponent('UProgress')
 const UButton = resolveComponent('UButton')
 const UDropdownMenu = resolveComponent('UDropdownMenu')
 
 
 const columns = [
-{
-  accessorKey: "sample_plot_count",
-  header: ({ column }) => {
-    const isSorted = column.getIsSorted();
-    return h(
-      UButton,
-      {
-        color: 'neutral',
-        variant: 'ghost',
-        label: 'Förekomst',
-        icon: isSorted
-          ? (isSorted === 'asc'
+  {
+    accessorKey: "sample_plot_count",
+    header: ({ column }) => {
+      const isSorted = column.getIsSorted();
+      return h(
+        UButton,
+        {
+          color: 'neutral',
+          variant: 'ghost',
+          label: 'Förekomst',
+          icon: isSorted
+            ? (isSorted === 'asc'
               ? 'i-lucide-arrow-up-narrow-wide'
               : 'i-lucide-arrow-down-wide-narrow')
-          : 'i-lucide-arrow-up-down',
-        class: '-mx-2.5',
-        onClick: () => column.toggleSorting(isSorted === 'asc')
-      }
-    );
-  },
-  cell: ({ row, index }) => {
-    const progressVal = Number(row.getValue("sample_plot_count"));
-    const maxVal = Number(sampleEnvCount.value) || 100;
-   
-    return h(UProgress, {
-      modelValue: progressVal,
-      max: maxVal,
-      // Instead of passing the color prop, use the style attribute to override the CSS variable:
-  
-
-      color: allColors.value[index],
-      indeterminate: false,
-
-      "onUpdate:modelValue": () => {}
-    });
-  }
-},
-{
-  accessorKey: "Commonname",
-  header: ({ column }) => {
-    const isSorted = column.getIsSorted();
-    return h(
-      UButton,
-      {
-        color: 'neutral',
-        variant: 'ghost',
-        label: 'Namn',
-        icon: isSorted
-          ? (isSorted === 'asc'
-              ? 'i-lucide-arrow-up-narrow-wide'
-              : 'i-lucide-arrow-down-wide-narrow')
-          : 'i-lucide-arrow-up-down',
-        class: '-mx-2.5',
-        onClick: () => column.toggleSorting(isSorted === 'asc')
-      }
-    );
-  },
-  cell: ({ row }) =>
-    h('div', { class: 'text-neutral-700' }, capitalize(row.getValue("Commonname")))
-},
-
-{
-  accessorKey: "Scientificname",
-  header: ({ column }) => {
-    const isSorted = column.getIsSorted();
-    return h(
-      UButton,
-      {
-        color: 'neutral',
-        variant: 'ghost',
-        label: 'Latinskt namn',
-        icon: isSorted
-          ? (isSorted === 'asc'
-              ? 'i-lucide-arrow-up-narrow-wide'
-              : 'i-lucide-arrow-down-wide-narrow')
-          : 'i-lucide-arrow-up-down',
-        class: '-mx-2.5',
-        onClick: () => column.toggleSorting(isSorted === 'asc')
-      }
-    );
-  },
-  // sortable: true,
-  cell: ({ row }) => `${row.getValue('Scientificname')}`
-
-},
-
-{
-  accessorKey: "Svamp-grupp-släkte",
-  header: () => h(UDropdownMenu, {
-    items: gruppMenuItems.value,
-    content: { align: 'start' },
-    ui: { content: 'w-48' }
-  }, {
-    default: () => h(UButton, { label: 'Grupp', variant: 'ghost', color: 'neutral', icon: "i-lucide-list-filter"  })
-  }),
-  filterFn: (row, columnId, filterValue) => {
-    if (!filterValue || filterValue.length === 0) return true;
-    return filterValue.includes(row.getValue(columnId));
-  },
-  cell: ({ row }) => {
-    const grupp = row.getValue("Svamp-grupp-släkte");
-    return grupp !== "Saknas"
-      ? h(NuxtImg, {
-          src: getIconPath(grupp),
-          alt: "Svamp Icon",
-          class: "w-6"
-        })
-      : h(Icon, { name: "heroicons:x-mark-20-solid", class: "size-7" });
-  }
-},
-{
-  accessorKey: 'matsvamp',
-  header: () => h(UDropdownMenu, {
-    items: svampMenuItems.value,
-    content: { align: 'start' },
-    ui: { content: 'w-48' }
-  }, {
-    default: () => h(UButton, { label: 'Matsvamp', variant: 'ghost', color: 'neutral', icon: "i-lucide-list-filter" })
-  }),
-  filterFn: (row, columnId, filterValue) => {
-  if (!filterValue || filterValue.length === 0) return true;
-  let match = false;
-  if (filterValue.includes('Matsvamp')) {
-    match = match || (row.getValue(columnId) === 1);
-  }
-  if (filterValue.includes('Giftsvamp')) {
-    match = match || ((row.original.Giftsvamp || '').toLowerCase() === 'x');
-  }
-  return match;
-},
-  cell: ({ row }) =>
-    h('div', { class: 'flex gap-1' }, [
-      row.getValue('matsvamp') === 1 && h(UBadge, { color: 'warning', variant: 'subtle' }, () => 'Matsvamp'),
-      row.original.Giftsvamp?.toLowerCase() === 'x' && h(UBadge, { color: 'poison', variant: 'subtle' }, () => 'Giftsvamp')
-    ].filter(Boolean))
-},
-{
-  accessorKey: 'RL2020kat',
-  header: () => h(UDropdownMenu, {
-    items: statusMenuItems.value,
-    content: { align: 'start' },
-    ui: { content: 'w-48' }
-  }, {
-    default: () => h(UButton, { label: 'Status', variant: 'ghost', color: 'neutral', icon: "i-lucide-list-filter"  })
-  }),
-  filterFn: (row, columnId, filterValue) => {
-  if (!filterValue || filterValue.length === 0) return true;
-  const statusVal = row.getValue(columnId);
-  return filterValue.some(filter => {
-    if (filter === 'Ej bedömd') {
-      return (
-        statusVal === 0 ||
-        statusVal === '0' ||
-        String(statusVal).toUpperCase() === 'NA' ||
-        String(statusVal).toUpperCase() === 'NE'
+            : 'i-lucide-arrow-up-down',
+          class: '-mx-2.5',
+          onClick: () => column.toggleSorting(isSorted === 'asc')
+        }
       );
+    },
+    cell: ({ row, index }) => {
+      const progressVal = Number(row.getValue("sample_plot_count"));
+      const maxVal = Number(sampleEnvCount.value) || 100;
+
+      return h(UProgress, {
+        modelValue: progressVal,
+        max: maxVal,
+        // Instead of passing the color prop, use the style attribute to override the CSS variable:
+
+
+        color: allColors.value[index],
+        indeterminate: false,
+
+        "onUpdate:modelValue": () => { }
+      });
     }
-    if (filter === 'Signalart') {
-      return row.original.SIGNAL_art === 'S';
+  },
+  {
+    accessorKey: "Commonname",
+    header: ({ column }) => {
+      const isSorted = column.getIsSorted();
+      return h(
+        UButton,
+        {
+          color: 'neutral',
+          variant: 'ghost',
+          label: 'Namn',
+          icon: isSorted
+            ? (isSorted === 'asc'
+              ? 'i-lucide-arrow-up-narrow-wide'
+              : 'i-lucide-arrow-down-wide-narrow')
+            : 'i-lucide-arrow-up-down',
+          class: '-mx-2.5',
+          onClick: () => column.toggleSorting(isSorted === 'asc')
+        }
+      );
+    },
+    cell: ({ row }) =>
+      h('div', { class: 'text-neutral-700' }, capitalize(row.getValue("Commonname")))
+  },
+
+  {
+    accessorKey: "Scientificname",
+    header: ({ column }) => {
+      const isSorted = column.getIsSorted();
+      return h(
+        UButton,
+        {
+          color: 'neutral',
+          variant: 'ghost',
+          label: 'Latinskt namn',
+          icon: isSorted
+            ? (isSorted === 'asc'
+              ? 'i-lucide-arrow-up-narrow-wide'
+              : 'i-lucide-arrow-down-wide-narrow')
+            : 'i-lucide-arrow-up-down',
+          class: '-mx-2.5',
+          onClick: () => column.toggleSorting(isSorted === 'asc')
+        }
+      );
+    },
+    // sortable: true,
+    cell: ({ row }) => `${row.getValue('Scientificname')}`
+
+  },
+
+  {
+    accessorKey: "Svamp-grupp-släkte",
+    header: () => h(UDropdownMenu, {
+      items: gruppMenuItems.value,
+      content: { align: 'start' },
+      ui: { content: 'w-48' }
+    }, {
+      default: () => h(UButton, { label: 'Grupp', variant: 'ghost', color: 'neutral', icon: "i-lucide-list-filter" })
+    }),
+    filterFn: (row, columnId, filterValue) => {
+      if (!filterValue || filterValue.length === 0) return true;
+      return filterValue.includes(row.getValue(columnId));
+    },
+    cell: ({ row }) => {
+      const grupp = row.getValue("Svamp-grupp-släkte");
+      if (grupp !== "Saknas") {
+        return h('img', {
+          src: getIconPath(grupp),
+          alt: `${grupp || 'Svamp'} ikon`,
+          class: "w-6",
+          loading: 'lazy',
+          decoding: 'async'
+        });
+      }
+      return h(Icon, { name: "heroicons:x-mark-20-solid", class: "size-7" });
     }
-    return filter === statusVal;
-  });
-},
-  cell: ({ row }) => {
-    const status = row.getValue('RL2020kat');
-    const mainBadge = h(
-      UBadge,
-      { color: getStatusColor(status), variant: 'subtle' },
-      () => getStatusTooltip(status)
-    );
-    const signalBadge =
-      row.original.SIGNAL_art === 'S'
-        ? h(UBadge, { color: 'signal', variant: 'subtle' }, 'Signalart')
-        : null;
-    return h('div', { class: 'flex gap-1' }, [mainBadge, signalBadge].filter(Boolean));
-  }
-},
+  },
+  {
+    accessorKey: 'matsvamp',
+    header: () => h(UDropdownMenu, {
+      items: svampMenuItems.value,
+      content: { align: 'start' },
+      ui: { content: 'w-48' }
+    }, {
+      default: () => h(UButton, { label: 'Matsvamp', variant: 'ghost', color: 'neutral', icon: "i-lucide-list-filter" })
+    }),
+    filterFn: (row, columnId, filterValue) => {
+      if (!filterValue || filterValue.length === 0) return true;
+      let match = false;
+      if (filterValue.includes('Matsvamp')) {
+        match = match || (row.getValue(columnId) === 1);
+      }
+      if (filterValue.includes('Giftsvamp')) {
+        match = match || ((row.original.Giftsvamp || '').toLowerCase() === 'x');
+      }
+      return match;
+    },
+    cell: ({ row }) =>
+      h('div', { class: 'flex gap-1' }, [
+        row.getValue('matsvamp') === 1 && h(UBadge, { color: 'warning', variant: 'subtle' }, () => 'Matsvamp'),
+        row.original.Giftsvamp?.toLowerCase() === 'x' && h(UBadge, { color: 'poison', variant: 'subtle' }, () => 'Giftsvamp')
+      ].filter(Boolean))
+  },
+  {
+    accessorKey: 'RL2020kat',
+    header: () => h(UDropdownMenu, {
+      items: statusMenuItems.value,
+      content: { align: 'start' },
+      ui: { content: 'w-48' }
+    }, {
+      default: () => h(UButton, { label: 'Status', variant: 'ghost', color: 'neutral', icon: "i-lucide-list-filter" })
+    }),
+    filterFn: (row, columnId, filterValue) => {
+      if (!filterValue || filterValue.length === 0) return true;
+      const statusVal = row.getValue(columnId);
+      return filterValue.some(filter => {
+        if (filter === 'Ej bedömd') {
+          return (
+            statusVal === 0 ||
+            statusVal === '0' ||
+            String(statusVal).toUpperCase() === 'NA' ||
+            String(statusVal).toUpperCase() === 'NE'
+          );
+        }
+        if (filter === 'Signalart') {
+          return row.original.SIGNAL_art === 'S';
+        }
+        return filter === statusVal;
+      });
+    },
+    cell: ({ row }) => {
+      const status = row.getValue('RL2020kat');
+      const mainBadge = h(
+        UBadge,
+        { color: getStatusColor(status), variant: 'subtle' },
+        () => getStatusTooltip(status)
+      );
+      const signalBadge =
+        row.original.SIGNAL_art === 'S'
+          ? h(UBadge, { color: 'signal', variant: 'subtle' }, 'Signalart')
+          : null;
+      return h('div', { class: 'flex gap-1' }, [mainBadge, signalBadge].filter(Boolean));
+    }
+  },
 ];
 
 const topCount = ref(0);
@@ -784,14 +746,18 @@ watch(columnFilters, (newFilters) => {
 
 /* Hide scrollbar for IE, Edge and Firefox */
 #scrollbar {
-  -ms-overflow-style: none; /* IE and Edge */
-  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none;
+  /* IE and Edge */
+  scrollbar-width: none;
+  /* Firefox */
 }
 
 #scrollbar::-webkit-scrollbar-thumb {
   display: none;
-  background-color: #6f202033; /* color of the scroll thumb */
-  border-radius: 20px; /* roundness of the scroll thumb */
+  background-color: #6f202033;
+  /* color of the scroll thumb */
+  border-radius: 20px;
+  /* roundness of the scroll thumb */
 }
 
 #scrollbar:hover::-webkit-scrollbar-thumb {
@@ -802,6 +768,7 @@ watch(columnFilters, (newFilters) => {
 #scrollbar {
   scrollbar-width: medium;
   scrollbar-color: #88888800 #f2f3f500;
-  transition: scrollbar-color 1s ease-in-out; /* transition effect for Firefox */
+  transition: scrollbar-color 1s ease-in-out;
+  /* transition effect for Firefox */
 }
 </style>

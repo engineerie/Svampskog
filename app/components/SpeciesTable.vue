@@ -703,7 +703,6 @@ const sorting = ref(
 );
 
 const UBadge = resolveComponent('UBadge')
-const NuxtImg = resolveComponent('NuxtImg')
 const UProgress = resolveComponent('UProgress')
 const UButton = resolveComponent('UButton')
 const UDropdownMenu = resolveComponent('UDropdownMenu')
@@ -716,17 +715,19 @@ const desktopColumns = [
     header: "Bild",
     sortable: false,
     cell: ({ row }) => {
-      const images = row.getValue("images");
-      if (images && images.length) {
-        return h(resolveComponent('NuxtImg'), {
+      const images = row.getValue("images") || [];
+      if (images.length) {
+        return h('img', {
           src: images[0],
           class: "h-14 w-20 object-cover -my-3 rounded-md border border-neutral-100 dark:border-neutral-800",
-          alt: "Species Image",
-          height: "300",
-          width: "450",
-          format: "webp"
+          alt: row.original?.Commonname ? `${row.original.Commonname} bild` : "Species image",
+          loading: 'lazy',
+          decoding: 'async',
+          height: 300,
+          width: 450
         });
       }
+      return null;
     },
     meta: { headerText: 'Bild' },
   },
@@ -804,13 +805,16 @@ const desktopColumns = [
     },
     cell: ({ row }) => {
       const grupp = row.getValue(props.grupp);
-      return grupp !== "Saknas"
-        ? h(NuxtImg, {
+      if (grupp !== "Saknas") {
+        return h('img', {
           src: getIconPath(grupp),
-          alt: "Svamp Icon",
-          class: "w-6"
-        })
-        : h(Icon, { name: "heroicons:x-mark-20-solid", class: "size-7" });
+          alt: `${grupp || 'Svamp'} ikon`,
+          class: "w-6",
+          loading: 'lazy',
+          decoding: 'async'
+        });
+      }
+      return h(Icon, { name: "heroicons:x-mark-20-solid", class: "size-7" });
     },
     meta: { headerText: 'Grupp' },
   },
@@ -987,22 +991,24 @@ const mobileColumns = [
         rarityIcon = h(Icon, { name: 'codicon:color-mode', class: 'text-yellow-600 ml-1 size-3.5' });
       }
       const imageComp = images.length
-        ? h(NuxtImg, {
+        ? h('img', {
           src: images[0],
-          alt: row.original.Commonname,
+          alt: row.original.Commonname || 'Svampbild',
           class: "h-20 w-26 object-cover rounded border-[0.5px] border-neutral-200 dark:border-neutral-800 md:ml-2",
-          height: "300",
-          width: "450",
-          format: "webp",
-          quality: '70',
+          loading: 'lazy',
+          decoding: 'async',
+          height: 300,
+          width: 450
         })
         : h("div", {
           class: "h-20 w-26 rounded-sm flex items-center justify-center bg-neutral-100 dark:bg-neutral-800 md:ml-2"
         }, [
-          h(NuxtImg, {
+          h('img', {
             src: getIconPath(row.original[props.grupp]),
-            alt: `${row.original[props.grupp]} icon`,
-            class: "w-6 h-6"
+            alt: `${row.original[props.grupp] || 'Svamp'} icon`,
+            class: "w-6 h-6",
+            loading: 'lazy',
+            decoding: 'async'
           }),
         ]);
       const headerComp = h("div", { class: "flex items-center text-neutral-700 dark:text-neutral-200" }, [

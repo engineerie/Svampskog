@@ -3,13 +3,15 @@
   <div class="justify-center">
     <div v-if="imageUrl">
       <div class="relative">
-        <NuxtImg height="505" width="805" :src="imageUrl" format="webp" />
+        <img :src="imageUrl" alt="Vald skogsmiljö" class="max-w-full h-auto" loading="lazy" decoding="async"
+          width="805" height="505" />
       </div>
     </div>
     <USkeleton v-else class="h-20 flex items-center justify-center">Välj miljö för att visa bild</USkeleton>
 
     <!-- <div class="hidden">
-      <NuxtImg v-for="(src, index) in allImageUrls" :key="index" :src="src" height="505" width="805" format="webp" />
+      <img v-for="(src, index) in allImageUrls" :key="index" :src="src" alt="Förladdad skogsmiljö"
+        class="max-w-full h-auto" width="805" height="505" loading="lazy" decoding="async" />
     </div> -->
   </div>
 </template>

@@ -78,12 +78,11 @@ const items = ref([
   {
     title: 'Alla träd har mykorrhiza',
     description: 'Alla träd samarbetar med mykorrhizasvampar i symbios. Svamparna förstorar trädens rotsystem och förser dem med näring och vatten. I utbyte får svamparna socker från trädens fotosyntes.',
-    img: '/images/Mycorrhiza Image.jpeg'
+    img: '/images/Carousel/Mycorrhiza Image.jpeg'
   },
   {
     title: 'Många skogssvampar bildar mykorrhiza',
     description: 'De flesta större svampar i skogen bildar mykorrhiza - både ätliga och giftiga. Dit hör bland annat spindelskivlingar, kremlor, riskor, soppar och kantareller.',
-    img: '/images/Collage.png',
     specialBento: true,
     bentoImgs: [
       '/images/svampgrid/Cantharellus cibarius-3.jpg',
@@ -100,23 +99,22 @@ const items = ref([
   {
     title: 'Över 2000 arter i Sverige',
     description: 'I Sverige finns över 2 000 olika mykorrhizasvampar. Några är vanliga, men de flesta är ovanliga. I en äldre skog kan det finnas ett par hundra arter. Många bildar små och oansenliga fruktkroppar och är därför dåligt kända.',
-    img: '/images/ArterDiagram2.jpg',
+    img: '/images/Carousel/ArterDiagram2.jpg',
     noBorder: true,
   },
   {
     title: 'Det mesta är mycel i marken',
     description: 'Fruktkropparna är bara en liten del av svampen. Den största delen är mycel i marken, som växer året runt och kan leva i många år.',
-    img: '/images/Screenshot 2024-08-24 at 18.46.21-3.jpg',
     specialGrid: true,
     gridTop: '/images/svampgrid/Cantharellus cibarius-3.jpg',
-    gridRest: '/images/Mycorrhizae.jpg',
+    gridRest: '/images/Carousel/Mycorrhizae.jpg',
     gridCols: 5,
     gridRows: 3,
   },
   {
     title: 'Varje mycel är en individ',
     description: 'Varje mycel i marken är en svampindivid, ofta ungefär någon kvadratmeter stor. I en skog finns många individer, precis som det finns många hos växter och djur.',
-    img: '/images/Söder_Tallskog_91_Blåbär_grupp.png'
+    img: '/images/Carousel/Söder_Tallskog_91_Blåbär_grupp.png'
   },
 ])
 
@@ -142,7 +140,7 @@ function bentoImages(item: any) {
       <UPageHero :ui="{ container: ' lg:py-24', title: 'sm:text-6xl', headline: 'text-neutral' }"
         title="Sök svampar i svenska skogar" headline="" description="Baserat på DNA-analyser av svampmycel i jordprover, och sammanställda uppgifter om var olika arters fruktkroppar finns.
 " orientation="horizontal" class="">
-        <NuxtImg src="/images/Adobe/Mushroom Forest Image.jpeg" width="700" format="webp" alt="Illustration"
+        <NuxtImg src="/images/Landing/Mushroom Forest Image.jpeg" width="700" format="webp" alt="Illustration"
           class=" rounded ring ring-neutral-300 " />
         <template v-if="isMobile" #links>
           <UModal title="Välj miljö" :ui="{ body: 'p-0', title: 'text-2xl' }">

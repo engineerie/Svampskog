@@ -124,16 +124,36 @@ const handleKeydown = (event) => {
   }
 };
 
+function normalizeParam(param) {
+  if (Array.isArray(param)) {
+    return param[0] ?? null
+  }
+  return typeof param === 'string' && param.length > 0 ? param : null
+}
+
+function applyRouteParams(params) {
+  const normalized = {
+    geography: normalizeParam(params.geography),
+    forestType: normalizeParam(params.forestType),
+    standAge: normalizeParam(params.standAge),
+    vegetationType: normalizeParam(params.vegetationType),
+  }
+
+  if (
+    normalized.geography &&
+    normalized.forestType &&
+    normalized.standAge &&
+    normalized.vegetationType
+  ) {
+    envParamsStore.setParams(normalized)
+  }
+}
+
 onMounted(() => {
   window.addEventListener("keydown", handleKeydown);
 
-  // Initialize the environment parameters store from the current route
-  envParamsStore.setParams({
-    geography: route.params.geography,
-    forestType: route.params.forestType,
-    standAge: route.params.standAge,
-    vegetationType: route.params.vegetationType,
-  });
+  // Initialize the environment parameters store from the current route, if all params exist
+  applyRouteParams(route.params)
 });
 
 onBeforeUnmount(() => {
@@ -144,12 +164,7 @@ onBeforeUnmount(() => {
 watch(
   () => route.params,
   (newParams) => {
-    envParamsStore.setParams({
-      geography: newParams.geography || '',
-      forestType: newParams.forestType || '',
-      standAge: newParams.standAge || '',
-      vegetationType: newParams.vegetationType || '',
-    });
+    applyRouteParams(newParams)
   },
   { immediate: true }
 );

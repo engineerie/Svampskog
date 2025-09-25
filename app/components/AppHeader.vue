@@ -37,7 +37,7 @@ const items = computed(() => [
   }">
     <template #left>
       <NuxtLink to="/" class="text-2xl font-semibold flex items-center ">
-        <NuxtImg src="/images/slu_logo_webb.png" :width="50" :height="50" class="size-8 mr-3" />
+        <NuxtImg src="/images/logo/slu_logo_webb.png" :width="50" :height="50" class="size-8 mr-3" />
         <h1 class="text-2xl font-light">|&nbsp; Svampskog</h1>
       </NuxtLink>
     </template>

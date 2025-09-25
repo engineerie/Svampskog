@@ -11,7 +11,7 @@
         <template #description>
           <MDC :value="page.hero.description" class="*:leading-7  sm:*:leading-8 max-w-3xl mx-auto " />
         </template>
-        <NuxtImg src="/images/boleto_small.png" width="1500" height="2100" quality="80" format="webp"
+        <NuxtImg src="/images/Landing/boleto_small.png" width="1500" height="2100" quality="80" format="webp"
           class=" sm:-mt-90 -mb-32 -mt-10 sm:-mb-80" />
       </UPageHero>
     </div>
@@ -38,7 +38,7 @@
               size="xl" trailing />
           </div>
         </template>
-        <NuxtImg src="/images/Adobe/Stock Photo 563535222.jpeg" width="1000" type="webp"
+        <NuxtImg src="/images/Landing/Stock Photo 563535222.jpeg" width="1000" type="webp"
           class="rounded-md border border-neutral-200" />
       </UPageSection>
     </div>

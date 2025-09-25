@@ -145,13 +145,13 @@ export const useEnvParamsStore = defineStore("envParams", {
 
 // Image mapping for forestType and vegetationType
 export const imageMap: Record<string, string> = {
-  Barrblandskog: "/images/miljo/barrblandskog.png",
-  Blåbär_grupp: "/images/miljo/blabar.png",
-  Granskog: "/images/miljo/granskog.png",
-  Lövskog: "/images/miljo/lövskog.png",
-  Naturbete: "/images/miljo/naturbete.png",
-  Tallskog: "/images/miljo/tallskog.png",
-  Lingon_grupp: "/images/miljo/lingon.png",
-  krakbär: "/images/miljo/krakbar.png",
-  Örter_grupp: "/images/miljo/lagort.png",
+  Barrblandskog: "/images/miljo/barrblandskog.webp",
+  Blåbär_grupp: "/images/miljo/blabar.webp",
+  Granskog: "/images/miljo/granskog.webp",
+  Lövskog: "/images/miljo/lövskog.webp",
+  Naturbete: "/images/miljo/naturbete.webp",
+  Tallskog: "/images/miljo/tallskog.webp",
+  Lingon_grupp: "/images/miljo/lingon.webp",
+  krakbär: "/images/miljo/krakbar.webp",
+  Örter_grupp: "/images/miljo/lagort.webp",
 };

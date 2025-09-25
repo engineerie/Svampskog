@@ -3,23 +3,23 @@
     <!-- Environment Row -->
     <div class="sm:px-2 text-lg font-semibold py-2 flex overflow-hidden   gap-2 sm:gap-4 w-full">
   <transition name="slide-up" mode="out-in">
-    <UBadge :key="envParamsStore.geographyLabel" size="lg" color="neutral" variant="soft" class="shrink-0">
-      {{ envParamsStore.geographyLabel }}
+    <UBadge :key="currentEnvLabels.geography" size="lg" color="neutral" variant="soft" class="shrink-0">
+      {{ currentEnvLabels.geography }}
     </UBadge>
   </transition>
   <transition name="slide-up" mode="out-in">
-    <UBadge :key="envParamsStore.forestTypeLabel" size="lg" color="neutral" variant="soft" class="shrink-0">
-      {{ envParamsStore.forestTypeLabel }}
+    <UBadge :key="currentEnvLabels.forestType" size="lg" color="neutral" variant="soft" class="shrink-0">
+      {{ currentEnvLabels.forestType }}
     </UBadge>
   </transition>
   <transition name="slide-up" mode="out-in">
-    <UBadge :key="envParamsStore.standAgeLabel" size="lg" color="neutral" variant="soft" class="shrink-0">
-      {{ envParamsStore.standAgeLabel }}
+    <UBadge :key="currentEnvLabels.standAge" size="lg" color="neutral" variant="soft" class="shrink-0">
+      {{ currentEnvLabels.standAge }}
     </UBadge>
   </transition>
   <transition name="slide-up" mode="out-in">
-    <UBadge :key="envParamsStore.vegetationTypeLabel" size="lg" color="neutral" variant="soft" class="shrink-0">
-      {{ envParamsStore.vegetationTypeLabel }}
+    <UBadge :key="currentEnvLabels.vegetationType" size="lg" color="neutral" variant="soft" class="shrink-0">
+      {{ currentEnvLabels.vegetationType }}
     </UBadge>
   </transition>
 </div>
@@ -40,15 +40,9 @@
         >
           <!-- Image Thumbnail -->
           <div class="w-full h-28 relative rounded-t-md overflow-hidden">
-            <NuxtImg
-              v-if="row.images && row.images.length"
-              :src="row.images[0]"
-              class="w-full h-full object-cover"
-              alt="Species Image"
-              height="300"
-              width="450"
-              format="webp"
-            />
+            <img v-if="row.images && row.images.length" :src="row.images[0]"
+              class="w-full h-full object-cover" alt="Species image" height="300" width="450" loading="lazy"
+              decoding="async" />
             <div
               v-else
               class="w-full h-full flex items-center justify-center bg-gray-200 dark:bg-gray-700"
@@ -133,10 +127,13 @@
 <script setup>
 import { ref, computed, onMounted, onUnmounted } from 'vue'
 import { useSpeciesStore } from '~/stores/speciesStore'
-import { useEnvParamsStore } from '~/stores/envParamsStore'
+import {
+  geographyOptions,
+  forestTypeOptions,
+  standAgeOptions,
+  vegetationTypeOptions,
+} from '~/stores/envParamsStore'
 import { useMediaQuery } from '@vueuse/core'
-
-const envParamsStore = useEnvParamsStore()
 
 // Define props used in the component
 const props = defineProps({
@@ -202,12 +199,26 @@ async function fetchData() {
     data.value = await response.json()
     isLoading.value = false
 
-    // Update environment parameters based on the current file
-    envParamsStore.setParams(fileEnvironments[currentFileIndex.value])
   } catch (error) {
     console.error('Error fetching species data:', error)
   }
 }
+
+const currentEnvironment = computed(() => fileEnvironments[currentFileIndex.value])
+
+const currentEnvLabels = computed(() => {
+  const geography = geographyOptions.find(option => option.value === currentEnvironment.value?.geography)
+  const forestType = forestTypeOptions.find(option => option.value === currentEnvironment.value?.forestType)
+  const standAge = standAgeOptions.find(option => option.value === currentEnvironment.value?.standAge)
+  const vegetationType = vegetationTypeOptions.find(option => option.value === currentEnvironment.value?.vegetationType)
+
+  return {
+    geography: geography?.label || currentEnvironment.value?.geography || '',
+    forestType: forestType?.label || currentEnvironment.value?.forestType || '',
+    standAge: standAge?.label || currentEnvironment.value?.standAge || '',
+    vegetationType: vegetationType?.label || currentEnvironment.value?.vegetationType || '',
+  }
+})
 
 onMounted(async () => {
   // Fetch initial data

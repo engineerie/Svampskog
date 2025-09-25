@@ -3,7 +3,8 @@
     <div v-if="imageUrls.length > 1" class="group overflow-hidden">
       <UCarousel v-slot="{ item }" @select="currentIndex = $event" :items="imageUrls" :ui="{ item: 'basis-full' }">
         <div class="w-full relative" :key="item">
-          <NuxtImg :src="item" class="w-full " draggable="false" height="300" width="450" format="webp" />
+          <img :src="item" class="w-full" draggable="false" height="300" width="450" loading="lazy"
+            decoding="async" alt="Artbild" />
         </div>
       </UCarousel>
 
@@ -20,7 +21,8 @@
       </div>
     </div>
     <div v-else-if="imageUrls.length === 1" class=" overflow-hidden relative group">
-      <NuxtImg :src="imageUrls[0]" class="w-full" draggable="false" height="300" width="450" format="webp" />
+      <img :src="imageUrls[0]" class="w-full" draggable="false" height="300" width="450" loading="lazy"
+        decoding="async" alt="Artbild" />
       <div class="flex w-full bg-neutral-50 p-1 px-3 justify-between">
         <div class="flex ">
           <Icon name="i-mingcute-copyright-line" class="h-4 w-4 my-1 mr-1" />
@@ -79,8 +81,8 @@
         <!-- Svamp-grupp Icon and Name -->
         <div class="inline-flex m-1 h-fit align-bottom" v-if="species['Svamp-grupp']">
           <UBadge color="neutral" variant="subtle" size="xl">
-            <NuxtImg :src="getIconPath(species['Svamp-grupp'], species['Svamp-grupp-släkte'])
-              " class="w-4.5 " alt="Svamp Icon" />
+            <img :src="getIconPath(species['Svamp-grupp'], species['Svamp-grupp-släkte'])" class="w-4.5"
+              alt="Svamp ikon" loading="lazy" decoding="async" />
             {{ capitalize(displayedSvampGrupp) }}
           </UBadge>
 
@@ -305,7 +307,7 @@ const getIconPath = (primary, fallback) => {
   // If primary is "0", use the fallback value
   const group = primary === "0" && fallback ? fallback : primary;
   const iconMapping = {
-    övrigt: "BasilOther1Solid.png",
+    övrigt: "ovrigt.webp",
     hattsvamp: "hattsvamp.png",
     kantarell: "kantarell.webp",
     sopp: "sopp.png",

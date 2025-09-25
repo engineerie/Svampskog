@@ -33,15 +33,9 @@
             >
               <!-- Image Thumbnail -->
               <div class="w-full h-24 relative ">
-                <NuxtImg
-                  v-if="row.images && row.images.length"
-                  :src="row.images[0]"
-                  class="w-full h-full object-cover"
-                  alt="Species Image"
-                  height="300"
-                  width="450"
-                  format="webp"
-                />
+                <img v-if="row.images && row.images.length" :src="row.images[0]"
+                  class="w-full h-full object-cover" alt="Species image" height="300" width="450" loading="lazy"
+                  decoding="async" />
                 <div
                   v-else
                   class="w-full h-full flex items-center justify-center bg-neutral-200 dark:bg-neutral-700"

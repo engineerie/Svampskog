@@ -123,8 +123,9 @@
                             </p>
                           </div>
                           <template #content>
-                            <NuxtImg :src="imageMap[option.value]" class="rounded-sm max-w-xs max-h-52 object-cover"
-                              width="300" height="180" format="webp" quality="80" />
+                            <img :src="imageMap[option.value]" :alt="`${option.label} miljö`"
+                              class="rounded-sm max-w-xs max-h-52 object-cover" width="300" height="180" loading="lazy"
+                              decoding="async" />
                           </template>
                         </UPopover>
 
