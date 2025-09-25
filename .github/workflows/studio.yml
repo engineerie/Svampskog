@@ -1,3 +1,4 @@
+
 name: studio-nuxt-build
 run-name: studio nuxt build
 
@@ -5,7 +6,7 @@ on:
   # Runs on pushes targeting the default branch
   push:
     branches:
-      - "main"
+      - 'main'
 
   # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
@@ -40,7 +41,7 @@ jobs:
         id: pkgman
         run: |
           cache=`[ -f "./pnpm-lock.yaml" ] && echo "pnpm" || ([ -f "./package-lock.json" ] && echo "npm" || ([ -f "./yarn.lock" ] && echo "yarn" || echo ""))`
-          package_manager=`[ ! -z "$cache" ] && echo "$cache" || echo "pnpm"`
+          package_manager=`[ ! -z "$cache" ] && echo "$cache" || echo "npm"`
           echo "cache=$cache" >> $GITHUB_OUTPUT
           echo "package_manager=$package_manager" >> $GITHUB_OUTPUT
 
@@ -58,9 +59,11 @@ jobs:
         run: ${{ steps.pkgman.outputs.package_manager }} install
 
       - name: Generate
-        run: ${{ steps.pkgman.outputs.package_manager }} run generate
+        run: ${{ steps.pkgman.outputs.package_manager }} run build
         env:
+          NITRO_PRESET: github_pages
           NUXT_CONTENT_PREVIEW_API: https://api.nuxt.studio
+          
 
       # Deployment job
       - name: Deploy 🚀
