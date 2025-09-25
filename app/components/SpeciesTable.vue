@@ -649,7 +649,7 @@ const sampleEnvCount = computed(() => {
 
 const getIconPath = (svampGrupp) => {
   const iconMapping = {
-    övrigt: "BasilOther1Solid.png",
+    övrigt: "ovrigt.webp",
     hattsvamp: "hattsvamp.png",
     kantarell: "kantarell.webp",
     sopp: "sopp.png",
@@ -993,7 +993,8 @@ const mobileColumns = [
           class: "h-20 w-26 object-cover rounded border-[0.5px] border-neutral-200 dark:border-neutral-800 md:ml-2",
           height: "300",
           width: "450",
-          format: "webp"
+          format: "webp",
+          quality: '70',
         })
         : h("div", {
           class: "h-20 w-26 rounded-sm flex items-center justify-center bg-neutral-100 dark:bg-neutral-800 md:ml-2"
@@ -1072,7 +1073,7 @@ const tableUi = computed(() => ({
     ? 'divide-none'
     : 'divide-none md:divide-dotted',
   td: useMobileLayout.value
-    ? 'px-0 pt-2 pb-3'
+    ? 'px-0 pt-2 pb-3 cursor-pointer'
     : 'px-0 md:px-4 md:pt-4 md:pb-4 pt-2 pb-3',
 }));
 const topCount = ref(0);
