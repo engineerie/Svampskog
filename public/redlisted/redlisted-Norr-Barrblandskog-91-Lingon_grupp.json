@@ -41,7 +41,7 @@
     "förekomst_ung": 0,
     "förekomst_sum": 3,
     "images": [
-      "/images/SvampBilder/Giftsvampar/Tricholoma batschii-175-.jpg"
+      "/images/svampbilder/Giftsvampar/Tricholoma batschii-175-.jpg"
     ]
   },
   {
@@ -86,7 +86,7 @@
     "förekomst_ung": 0,
     "förekomst_sum": 3,
     "images": [
-      "/images/SvampBilder/RödlistadeSvampar/Hydnellum caeruleum-4362.jpg"
+      "/images/svampbilder/RödlistadeSvampar/Hydnellum caeruleum-4362.jpg"
     ]
   },
   {
@@ -174,8 +174,8 @@
     "förekomst_ung": 0,
     "förekomst_sum": 4,
     "images": [
-      "/images/SvampBilder/Matsvampar/Sarcodon imbricatus-2.jpg",
-      "/images/SvampBilder/Matsvampar/Sarcodon imbricatus-1.jpg"
+      "/images/svampbilder/Matsvampar/Sarcodon imbricatus-2.jpg",
+      "/images/svampbilder/Matsvampar/Sarcodon imbricatus-1.jpg"
     ]
   },
   {
@@ -220,7 +220,7 @@
     "förekomst_ung": 0,
     "förekomst_sum": 4,
     "images": [
-      "/images/SvampBilder/RödlistadeSvampar/Tricholoma colossus-1596.jpg"
+      "/images/svampbilder/RödlistadeSvampar/Tricholoma colossus-1596.jpg"
     ]
   },
   {
@@ -265,7 +265,7 @@
     "förekomst_ung": 0,
     "förekomst_sum": 3,
     "images": [
-      "/images/SvampBilder/RödlistadeSvampar/Tricholoma apium-1593.jpg"
+      "/images/svampbilder/RödlistadeSvampar/Tricholoma apium-1593.jpg"
     ]
   },
   {
@@ -353,8 +353,8 @@
     "förekomst_ung": 0,
     "förekomst_sum": 3,
     "images": [
-      "/images/SvampBilder/Matsvampar/Sarcodon squamosus.jpg",
-      "/images/SvampBilder/RödlistadeSvampar/Sarcodon squamosus-5966.jpg"
+      "/images/svampbilder/Matsvampar/Sarcodon squamosus.jpg",
+      "/images/svampbilder/RödlistadeSvampar/Sarcodon squamosus-5966.jpg"
     ]
   },
   {
@@ -442,7 +442,7 @@
     "förekomst_ung": 0,
     "förekomst_sum": 3,
     "images": [
-      "/images/SvampBilder/RödlistadeSvampar/Phellodon connatus-5448.jpg"
+      "/images/svampbilder/RödlistadeSvampar/Phellodon connatus-5448.jpg"
     ]
   },
   {
@@ -487,7 +487,7 @@
     "förekomst_ung": 0,
     "förekomst_sum": 3,
     "images": [
-      "/images/SvampBilder/RödlistadeSvampar/Phellodon secretus-232140.jpg"
+      "/images/svampbilder/RödlistadeSvampar/Phellodon secretus-232140.jpg"
     ]
   },
   {
@@ -532,7 +532,7 @@
     "förekomst_ung": 0,
     "förekomst_sum": 3,
     "images": [
-      "/images/SvampBilder/RödlistadeSvampar/Boletopsis grisea-149.jpg"
+      "/images/svampbilder/RödlistadeSvampar/Boletopsis grisea-149.jpg"
     ]
   },
   {
@@ -577,7 +577,7 @@
     "förekomst_ung": 0,
     "förekomst_sum": 3,
     "images": [
-      "/images/SvampBilder/RödlistadeSvampar/Lactarius musteus-4745.jpg"
+      "/images/svampbilder/RödlistadeSvampar/Lactarius musteus-4745.jpg"
     ]
   },
   {
@@ -622,7 +622,7 @@
     "förekomst_ung": 0,
     "förekomst_sum": 3,
     "images": [
-      "/images/SvampBilder/RödlistadeSvampar/Bankera fuligineoalba-3100.jpg"
+      "/images/svampbilder/RödlistadeSvampar/Bankera fuligineoalba-3100.jpg"
     ]
   },
   {
@@ -667,9 +667,9 @@
     "förekomst_ung": 0,
     "förekomst_sum": 4,
     "images": [
-      "/images/SvampBilder/Matsvampar/Hygrophorus karstenii-2.jpg",
-      "/images/SvampBilder/Matsvampar/Hygrophorus karstenii-1.jpg",
-      "/images/SvampBilder/RödlistadeSvampar/Hygrophorus karstenii-4412.jpg"
+      "/images/svampbilder/Matsvampar/Hygrophorus karstenii-2.jpg",
+      "/images/svampbilder/Matsvampar/Hygrophorus karstenii-1.jpg",
+      "/images/svampbilder/RödlistadeSvampar/Hygrophorus karstenii-4412.jpg"
     ]
   }
 ]

@@ -40,7 +40,7 @@
     "förekomst_ung": 1,
     "förekomst_sum": 4,
     "images": [
-      "/images/SvampBilder/Giftsvampar/Leccinum aurantiacum, populinum-62-.jpg"
+      "/images/svampbilder/Giftsvampar/Leccinum aurantiacum, populinum-62-.jpg"
     ]
   },
   {
@@ -84,10 +84,10 @@
     "förekomst_ung": 1,
     "förekomst_sum": 3,
     "images": [
-      "/images/SvampBilder/Matsvampar/Leccinum scabrum-4.jpg",
-      "/images/SvampBilder/Matsvampar/Leccinum scabrum-3.jpg",
-      "/images/SvampBilder/Matsvampar/Leccinum scabrum-2.jpg",
-      "/images/SvampBilder/Matsvampar/Leccinum scabrum-1.jpg"
+      "/images/svampbilder/Matsvampar/Leccinum scabrum-4.jpg",
+      "/images/svampbilder/Matsvampar/Leccinum scabrum-3.jpg",
+      "/images/svampbilder/Matsvampar/Leccinum scabrum-2.jpg",
+      "/images/svampbilder/Matsvampar/Leccinum scabrum-1.jpg"
     ]
   },
   {
@@ -131,12 +131,12 @@
     "förekomst_ung": 0,
     "förekomst_sum": 4,
     "images": [
-      "/images/SvampBilder/Matsvampar/Cantharellus pallens-5.jpg",
-      "/images/SvampBilder/Matsvampar/Cantharellus pallens-4.jpg",
-      "/images/SvampBilder/Matsvampar/Cantharellus pallens-6.jpg",
-      "/images/SvampBilder/Matsvampar/Cantharellus pallens-3.jpg",
-      "/images/SvampBilder/Matsvampar/Cantharellus pallens-2.jpg",
-      "/images/SvampBilder/Matsvampar/Cantharellus pallens-1.jpg"
+      "/images/svampbilder/Matsvampar/Cantharellus pallens-5.jpg",
+      "/images/svampbilder/Matsvampar/Cantharellus pallens-4.jpg",
+      "/images/svampbilder/Matsvampar/Cantharellus pallens-6.jpg",
+      "/images/svampbilder/Matsvampar/Cantharellus pallens-3.jpg",
+      "/images/svampbilder/Matsvampar/Cantharellus pallens-2.jpg",
+      "/images/svampbilder/Matsvampar/Cantharellus pallens-1.jpg"
     ]
   },
   {
@@ -180,8 +180,8 @@
     "förekomst_ung": 0,
     "förekomst_sum": 3,
     "images": [
-      "/images/SvampBilder/Matsvampar/Hydnum repandum-2.jpg",
-      "/images/SvampBilder/Matsvampar/Hydnum repandum-1.jpg"
+      "/images/svampbilder/Matsvampar/Hydnum repandum-2.jpg",
+      "/images/svampbilder/Matsvampar/Hydnum repandum-1.jpg"
     ]
   },
   {
@@ -225,10 +225,10 @@
     "förekomst_ung": 0,
     "förekomst_sum": 3,
     "images": [
-      "/images/SvampBilder/Matsvampar/Neoboletus luridiformis-3.jpg",
-      "/images/SvampBilder/Matsvampar/Neoboletus luridiformis-2.jpg",
-      "/images/SvampBilder/Matsvampar/Neoboletus luridiformis-1.jpg",
-      "/images/SvampBilder/Matsvampar/Neoboletus luridiformis-4.jpg"
+      "/images/svampbilder/Matsvampar/Neoboletus luridiformis-3.jpg",
+      "/images/svampbilder/Matsvampar/Neoboletus luridiformis-2.jpg",
+      "/images/svampbilder/Matsvampar/Neoboletus luridiformis-1.jpg",
+      "/images/svampbilder/Matsvampar/Neoboletus luridiformis-4.jpg"
     ]
   },
   {
@@ -272,12 +272,12 @@
     "förekomst_ung": 1,
     "förekomst_sum": 3,
     "images": [
-      "/images/SvampBilder/Matsvampar/Imleria badia-4.jpg",
-      "/images/SvampBilder/Matsvampar/Imleria badia-5.jpg",
-      "/images/SvampBilder/Matsvampar/Imleria badia-6.jpg",
-      "/images/SvampBilder/Matsvampar/Imleria badia-2.jpg",
-      "/images/SvampBilder/Matsvampar/Imleria badia-3.jpg",
-      "/images/SvampBilder/Matsvampar/Imleria badia-1.jpg"
+      "/images/svampbilder/Matsvampar/Imleria badia-4.jpg",
+      "/images/svampbilder/Matsvampar/Imleria badia-5.jpg",
+      "/images/svampbilder/Matsvampar/Imleria badia-6.jpg",
+      "/images/svampbilder/Matsvampar/Imleria badia-2.jpg",
+      "/images/svampbilder/Matsvampar/Imleria badia-3.jpg",
+      "/images/svampbilder/Matsvampar/Imleria badia-1.jpg"
     ]
   },
   {
@@ -321,10 +321,10 @@
     "förekomst_ung": 0,
     "förekomst_sum": 4,
     "images": [
-      "/images/SvampBilder/Matsvampar/Ramaria botrytis-2.jpg",
-      "/images/SvampBilder/Matsvampar/Ramaria botrytis-3.jpg",
-      "/images/SvampBilder/Matsvampar/Ramaria botrytis-1.jpg",
-      "/images/SvampBilder/RödlistadeSvampar/Ramaria botrytis-5734.jpg"
+      "/images/svampbilder/Matsvampar/Ramaria botrytis-2.jpg",
+      "/images/svampbilder/Matsvampar/Ramaria botrytis-3.jpg",
+      "/images/svampbilder/Matsvampar/Ramaria botrytis-1.jpg",
+      "/images/svampbilder/RödlistadeSvampar/Ramaria botrytis-5734.jpg"
     ]
   },
   {
@@ -368,11 +368,11 @@
     "förekomst_ung": 0,
     "förekomst_sum": 3,
     "images": [
-      "/images/SvampBilder/Matsvampar/Boletus reticulatus-1.jpg",
-      "/images/SvampBilder/Matsvampar/Boletus reticulatus-2.jpg",
-      "/images/SvampBilder/Matsvampar/Boletus reticulatus-3.jpg",
-      "/images/SvampBilder/Matsvampar/Boletus reticulatus-4.jpg",
-      "/images/SvampBilder/Matsvampar/Boletus reticulatus-5.jpg"
+      "/images/svampbilder/Matsvampar/Boletus reticulatus-1.jpg",
+      "/images/svampbilder/Matsvampar/Boletus reticulatus-2.jpg",
+      "/images/svampbilder/Matsvampar/Boletus reticulatus-3.jpg",
+      "/images/svampbilder/Matsvampar/Boletus reticulatus-4.jpg",
+      "/images/svampbilder/Matsvampar/Boletus reticulatus-5.jpg"
     ]
   },
   {
@@ -416,7 +416,7 @@
     "förekomst_ung": 0,
     "förekomst_sum": 3,
     "images": [
-      "/images/SvampBilder/Matsvampar/Leccinum variicolor.jpg"
+      "/images/svampbilder/Matsvampar/Leccinum variicolor.jpg"
     ]
   },
   {
@@ -460,10 +460,10 @@
     "förekomst_ung": 0,
     "förekomst_sum": 3,
     "images": [
-      "/images/SvampBilder/Matsvampar/Russula claroflava-4.jpg",
-      "/images/SvampBilder/Matsvampar/Russula claroflava-1.jpg",
-      "/images/SvampBilder/Matsvampar/Russula claroflava-3.jpg",
-      "/images/SvampBilder/Matsvampar/Russula claroflava-2.jpg"
+      "/images/svampbilder/Matsvampar/Russula claroflava-4.jpg",
+      "/images/svampbilder/Matsvampar/Russula claroflava-1.jpg",
+      "/images/svampbilder/Matsvampar/Russula claroflava-3.jpg",
+      "/images/svampbilder/Matsvampar/Russula claroflava-2.jpg"
     ]
   },
   {
@@ -549,11 +549,11 @@
     "förekomst_ung": 0,
     "förekomst_sum": 4,
     "images": [
-      "/images/SvampBilder/Matsvampar/Cantharellus cibarius-4.jpg",
-      "/images/SvampBilder/Matsvampar/Cantharellus cibarius-5.jpg",
-      "/images/SvampBilder/Matsvampar/Cantharellus cibarius-2.jpg",
-      "/images/SvampBilder/Matsvampar/Cantharellus cibarius-3.jpg",
-      "/images/SvampBilder/Matsvampar/Cantharellus cibarius-1.jpg"
+      "/images/svampbilder/Matsvampar/Cantharellus cibarius-4.jpg",
+      "/images/svampbilder/Matsvampar/Cantharellus cibarius-5.jpg",
+      "/images/svampbilder/Matsvampar/Cantharellus cibarius-2.jpg",
+      "/images/svampbilder/Matsvampar/Cantharellus cibarius-3.jpg",
+      "/images/svampbilder/Matsvampar/Cantharellus cibarius-1.jpg"
     ]
   },
   {
@@ -597,10 +597,10 @@
     "förekomst_ung": 0,
     "förekomst_sum": 3,
     "images": [
-      "/images/SvampBilder/Matsvampar/Russula vesca-1.jpg",
-      "/images/SvampBilder/Matsvampar/Russula vesca-3.jpg",
-      "/images/SvampBilder/Matsvampar/Russula vesca-2.jpg",
-      "/images/SvampBilder/Matsvampar/Russula vesca-4.jpg"
+      "/images/svampbilder/Matsvampar/Russula vesca-1.jpg",
+      "/images/svampbilder/Matsvampar/Russula vesca-3.jpg",
+      "/images/svampbilder/Matsvampar/Russula vesca-2.jpg",
+      "/images/svampbilder/Matsvampar/Russula vesca-4.jpg"
     ]
   },
   {
@@ -644,15 +644,15 @@
     "förekomst_ung": 0,
     "förekomst_sum": 3,
     "images": [
-      "/images/SvampBilder/Giftsvampar/Amanita phalloides-18-2979.jpg",
-      "/images/SvampBilder/Giftsvampar/Amanita phalloides-144-2979.jpg",
-      "/images/SvampBilder/Giftsvampar/Amanita phalloides-30-2979.jpg",
-      "/images/SvampBilder/Giftsvampar/Amanita phalloides-31-2979.jpg",
-      "/images/SvampBilder/Giftsvampar/Amanita phalloides-149-2979.jpg",
-      "/images/SvampBilder/Giftsvampar/Amanita phalloides-148-2979.jpg",
-      "/images/SvampBilder/Giftsvampar/Amanita phalloides-143-2979.jpg",
-      "/images/SvampBilder/Giftsvampar/Amanita phalloides-173-2979.jpg",
-      "/images/SvampBilder/Giftsvampar/Amanita phalloides-172-2979.jpg"
+      "/images/svampbilder/Giftsvampar/Amanita phalloides-18-2979.jpg",
+      "/images/svampbilder/Giftsvampar/Amanita phalloides-144-2979.jpg",
+      "/images/svampbilder/Giftsvampar/Amanita phalloides-30-2979.jpg",
+      "/images/svampbilder/Giftsvampar/Amanita phalloides-31-2979.jpg",
+      "/images/svampbilder/Giftsvampar/Amanita phalloides-149-2979.jpg",
+      "/images/svampbilder/Giftsvampar/Amanita phalloides-148-2979.jpg",
+      "/images/svampbilder/Giftsvampar/Amanita phalloides-143-2979.jpg",
+      "/images/svampbilder/Giftsvampar/Amanita phalloides-173-2979.jpg",
+      "/images/svampbilder/Giftsvampar/Amanita phalloides-172-2979.jpg"
     ]
   },
   {
@@ -696,11 +696,11 @@
     "förekomst_ung": 0,
     "förekomst_sum": 3,
     "images": [
-      "/images/SvampBilder/Matsvampar/Russula integra-2.jpg",
-      "/images/SvampBilder/Matsvampar/Russula integra-3.jpg",
-      "/images/SvampBilder/Matsvampar/Russula integra-1.jpg",
-      "/images/SvampBilder/Matsvampar/Russula integra-4.jpg",
-      "/images/SvampBilder/Matsvampar/Russula integra-5.jpg"
+      "/images/svampbilder/Matsvampar/Russula integra-2.jpg",
+      "/images/svampbilder/Matsvampar/Russula integra-3.jpg",
+      "/images/svampbilder/Matsvampar/Russula integra-1.jpg",
+      "/images/svampbilder/Matsvampar/Russula integra-4.jpg",
+      "/images/svampbilder/Matsvampar/Russula integra-5.jpg"
     ]
   },
   {
@@ -786,9 +786,9 @@
     "förekomst_ung": 0,
     "förekomst_sum": 3,
     "images": [
-      "/images/SvampBilder/Giftsvampar/Amanita pantherina-3-2978.jpg",
-      "/images/SvampBilder/Giftsvampar/Amanita pantherina-184-2978.jpg",
-      "/images/SvampBilder/Giftsvampar/Amanita pantherina-183-2978.jpg"
+      "/images/svampbilder/Giftsvampar/Amanita pantherina-3-2978.jpg",
+      "/images/svampbilder/Giftsvampar/Amanita pantherina-184-2978.jpg",
+      "/images/svampbilder/Giftsvampar/Amanita pantherina-183-2978.jpg"
     ]
   },
   {
@@ -832,8 +832,8 @@
     "förekomst_ung": 0,
     "förekomst_sum": 2,
     "images": [
-      "/images/SvampBilder/Giftsvampar/Paxillus involutus-104-5351.jpg",
-      "/images/SvampBilder/Giftsvampar/Paxillus involutus-98-5351.jpg"
+      "/images/svampbilder/Giftsvampar/Paxillus involutus-104-5351.jpg",
+      "/images/svampbilder/Giftsvampar/Paxillus involutus-98-5351.jpg"
     ]
   },
   {
@@ -877,8 +877,8 @@
     "förekomst_ung": 0,
     "förekomst_sum": 2,
     "images": [
-      "/images/SvampBilder/Giftsvampar/Paxillus involutus-104-5351.jpg",
-      "/images/SvampBilder/Giftsvampar/Paxillus involutus-98-5351.jpg"
+      "/images/svampbilder/Giftsvampar/Paxillus involutus-104-5351.jpg",
+      "/images/svampbilder/Giftsvampar/Paxillus involutus-98-5351.jpg"
     ]
   },
   {
@@ -964,10 +964,10 @@
     "förekomst_ung": 0,
     "förekomst_sum": 3,
     "images": [
-      "/images/SvampBilder/Matsvampar/Hydnum rufescens-4.jpg",
-      "/images/SvampBilder/Matsvampar/Hydnum rufescens-1.jpg",
-      "/images/SvampBilder/Matsvampar/Hydnum rufescens-3.jpg",
-      "/images/SvampBilder/Matsvampar/Hydnum rufescens-2.jpg"
+      "/images/svampbilder/Matsvampar/Hydnum rufescens-4.jpg",
+      "/images/svampbilder/Matsvampar/Hydnum rufescens-1.jpg",
+      "/images/svampbilder/Matsvampar/Hydnum rufescens-3.jpg",
+      "/images/svampbilder/Matsvampar/Hydnum rufescens-2.jpg"
     ]
   },
   {
@@ -1011,11 +1011,11 @@
     "förekomst_ung": 0,
     "förekomst_sum": 4,
     "images": [
-      "/images/SvampBilder/Matsvampar/Xerocomus subtomentosus-5.jpg",
-      "/images/SvampBilder/Matsvampar/Xerocomus subtomentosus-4.jpg",
-      "/images/SvampBilder/Matsvampar/Xerocomus subtomentosus-1.jpg",
-      "/images/SvampBilder/Matsvampar/Xerocomus subtomentosus-3.jpg",
-      "/images/SvampBilder/Matsvampar/Xerocomus subtomentosus-2.jpg"
+      "/images/svampbilder/Matsvampar/Xerocomus subtomentosus-5.jpg",
+      "/images/svampbilder/Matsvampar/Xerocomus subtomentosus-4.jpg",
+      "/images/svampbilder/Matsvampar/Xerocomus subtomentosus-1.jpg",
+      "/images/svampbilder/Matsvampar/Xerocomus subtomentosus-3.jpg",
+      "/images/svampbilder/Matsvampar/Xerocomus subtomentosus-2.jpg"
     ]
   },
   {
@@ -1059,7 +1059,7 @@
     "förekomst_ung": 0,
     "förekomst_sum": 2,
     "images": [
-      "/images/SvampBilder/Giftsvampar/Hebeloma sinapizans-134-.jpg"
+      "/images/svampbilder/Giftsvampar/Hebeloma sinapizans-134-.jpg"
     ]
   },
   {
@@ -1103,7 +1103,7 @@
     "förekomst_ung": 0,
     "förekomst_sum": 3,
     "images": [
-      "/images/SvampBilder/Matsvampar/Russula xerampelina.jpg"
+      "/images/svampbilder/Matsvampar/Russula xerampelina.jpg"
     ]
   },
   {
@@ -1147,8 +1147,8 @@
     "förekomst_ung": 0,
     "förekomst_sum": 3,
     "images": [
-      "/images/SvampBilder/Matsvampar/Lactarius trivialis-2.jpg",
-      "/images/SvampBilder/Matsvampar/Lactarius trivialis-1.jpg"
+      "/images/svampbilder/Matsvampar/Lactarius trivialis-2.jpg",
+      "/images/svampbilder/Matsvampar/Lactarius trivialis-1.jpg"
     ]
   },
   {
@@ -1192,8 +1192,8 @@
     "förekomst_ung": 0,
     "förekomst_sum": 3,
     "images": [
-      "/images/SvampBilder/Matsvampar/Lactarius torminosus-2.jpg",
-      "/images/SvampBilder/Matsvampar/Lactarius torminosus-1.jpg"
+      "/images/svampbilder/Matsvampar/Lactarius torminosus-2.jpg",
+      "/images/svampbilder/Matsvampar/Lactarius torminosus-1.jpg"
     ]
   },
   {
@@ -1237,12 +1237,12 @@
     "förekomst_ung": 0,
     "förekomst_sum": 4,
     "images": [
-      "/images/SvampBilder/Matsvampar/Boletus edulis-1.jpg",
-      "/images/SvampBilder/Matsvampar/Boletus edulis-2.jpg",
-      "/images/SvampBilder/Matsvampar/Boletus edulis-3.jpg",
-      "/images/SvampBilder/Matsvampar/Boletus edulis-6.jpg",
-      "/images/SvampBilder/Matsvampar/Boletus edulis-4.jpg",
-      "/images/SvampBilder/Matsvampar/Boletus edulis-5.jpg"
+      "/images/svampbilder/Matsvampar/Boletus edulis-1.jpg",
+      "/images/svampbilder/Matsvampar/Boletus edulis-2.jpg",
+      "/images/svampbilder/Matsvampar/Boletus edulis-3.jpg",
+      "/images/svampbilder/Matsvampar/Boletus edulis-6.jpg",
+      "/images/svampbilder/Matsvampar/Boletus edulis-4.jpg",
+      "/images/svampbilder/Matsvampar/Boletus edulis-5.jpg"
     ]
   },
   {
@@ -1286,14 +1286,14 @@
     "förekomst_ung": 0,
     "förekomst_sum": 3,
     "images": [
-      "/images/SvampBilder/Matsvampar/Craterellus cornucopioides-8.jpg",
-      "/images/SvampBilder/Matsvampar/Craterellus cornucopioides-2.jpg",
-      "/images/SvampBilder/Matsvampar/Craterellus cornucopioides-3.jpg",
-      "/images/SvampBilder/Matsvampar/Craterellus cornucopioides-1.jpg",
-      "/images/SvampBilder/Matsvampar/Craterellus cornucopioides-4.jpg",
-      "/images/SvampBilder/Matsvampar/Craterellus cornucopioides-5.jpg",
-      "/images/SvampBilder/Matsvampar/Craterellus cornucopioides-7.jpg",
-      "/images/SvampBilder/Matsvampar/Craterellus cornucopioides-6.jpg"
+      "/images/svampbilder/Matsvampar/Craterellus cornucopioides-8.jpg",
+      "/images/svampbilder/Matsvampar/Craterellus cornucopioides-2.jpg",
+      "/images/svampbilder/Matsvampar/Craterellus cornucopioides-3.jpg",
+      "/images/svampbilder/Matsvampar/Craterellus cornucopioides-1.jpg",
+      "/images/svampbilder/Matsvampar/Craterellus cornucopioides-4.jpg",
+      "/images/svampbilder/Matsvampar/Craterellus cornucopioides-5.jpg",
+      "/images/svampbilder/Matsvampar/Craterellus cornucopioides-7.jpg",
+      "/images/svampbilder/Matsvampar/Craterellus cornucopioides-6.jpg"
     ]
   },
   {
@@ -1337,12 +1337,12 @@
     "förekomst_ung": 0,
     "förekomst_sum": 3,
     "images": [
-      "/images/SvampBilder/Matsvampar/Leccinum versipelle-1.jpg",
-      "/images/SvampBilder/Matsvampar/Leccinum versipelle-2.jpg",
-      "/images/SvampBilder/Matsvampar/Leccinum versipelle-3.jpg",
-      "/images/SvampBilder/Matsvampar/Leccinum versipelle-4.jpg",
-      "/images/SvampBilder/Giftsvampar/Leccinum versipelle-47-245486.jpg",
-      "/images/SvampBilder/Giftsvampar/Leccinum versipelle-36-245486.jpg"
+      "/images/svampbilder/Matsvampar/Leccinum versipelle-1.jpg",
+      "/images/svampbilder/Matsvampar/Leccinum versipelle-2.jpg",
+      "/images/svampbilder/Matsvampar/Leccinum versipelle-3.jpg",
+      "/images/svampbilder/Matsvampar/Leccinum versipelle-4.jpg",
+      "/images/svampbilder/Giftsvampar/Leccinum versipelle-47-245486.jpg",
+      "/images/svampbilder/Giftsvampar/Leccinum versipelle-36-245486.jpg"
     ]
   },
   {
@@ -1428,9 +1428,9 @@
     "förekomst_ung": 0,
     "förekomst_sum": 3,
     "images": [
-      "/images/SvampBilder/Giftsvampar/Hebeloma crustuliniforme-217-4264.jpg",
-      "/images/SvampBilder/Giftsvampar/Hebeloma crustuliniforme-216-4264.jpg",
-      "/images/SvampBilder/Giftsvampar/Hebeloma crustuliniforme-142-4264.jpg"
+      "/images/svampbilder/Giftsvampar/Hebeloma crustuliniforme-217-4264.jpg",
+      "/images/svampbilder/Giftsvampar/Hebeloma crustuliniforme-216-4264.jpg",
+      "/images/svampbilder/Giftsvampar/Hebeloma crustuliniforme-142-4264.jpg"
     ]
   },
   {
@@ -1474,8 +1474,8 @@
     "förekomst_ung": 0,
     "förekomst_sum": 2,
     "images": [
-      "/images/SvampBilder/Giftsvampar/Inocybe lilacina-140-236498.jpg",
-      "/images/SvampBilder/Giftsvampar/Inocybe lilacina-153-236498.jpg"
+      "/images/svampbilder/Giftsvampar/Inocybe lilacina-140-236498.jpg",
+      "/images/svampbilder/Giftsvampar/Inocybe lilacina-153-236498.jpg"
     ]
   },
   {
@@ -1519,12 +1519,12 @@
     "förekomst_ung": 0,
     "förekomst_sum": 3,
     "images": [
-      "/images/SvampBilder/Matsvampar/Gomphus clavatus-3.jpg",
-      "/images/SvampBilder/Matsvampar/Gomphus clavatus-2.jpg",
-      "/images/SvampBilder/Matsvampar/Gomphus clavatus-1.jpg",
-      "/images/SvampBilder/Matsvampar/Gomphus clavatus-5.jpg",
-      "/images/SvampBilder/Matsvampar/Gomphus clavatus-4.jpg",
-      "/images/SvampBilder/RödlistadeSvampar/Gomphus clavatus-720.jpg"
+      "/images/svampbilder/Matsvampar/Gomphus clavatus-3.jpg",
+      "/images/svampbilder/Matsvampar/Gomphus clavatus-2.jpg",
+      "/images/svampbilder/Matsvampar/Gomphus clavatus-1.jpg",
+      "/images/svampbilder/Matsvampar/Gomphus clavatus-5.jpg",
+      "/images/svampbilder/Matsvampar/Gomphus clavatus-4.jpg",
+      "/images/svampbilder/RödlistadeSvampar/Gomphus clavatus-720.jpg"
     ]
   },
   {
@@ -1568,9 +1568,9 @@
     "förekomst_ung": 0,
     "förekomst_sum": 3,
     "images": [
-      "/images/SvampBilder/Matsvampar/Russula vitellina-3.jpg",
-      "/images/SvampBilder/Matsvampar/Russula vitellina-2.jpg",
-      "/images/SvampBilder/Matsvampar/Russula vitellina-1.jpg"
+      "/images/svampbilder/Matsvampar/Russula vitellina-3.jpg",
+      "/images/svampbilder/Matsvampar/Russula vitellina-2.jpg",
+      "/images/svampbilder/Matsvampar/Russula vitellina-1.jpg"
     ]
   }
 ]

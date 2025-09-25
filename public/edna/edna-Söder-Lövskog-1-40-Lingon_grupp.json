@@ -106,12 +106,12 @@
     "sample_env_count": 3,
     "Svamp-grupp-släkte": "sopp",
     "images": [
-      "/images/SvampBilder/Matsvampar/Boletus edulis-1.jpg",
-      "/images/SvampBilder/Matsvampar/Boletus edulis-2.jpg",
-      "/images/SvampBilder/Matsvampar/Boletus edulis-3.jpg",
-      "/images/SvampBilder/Matsvampar/Boletus edulis-6.jpg",
-      "/images/SvampBilder/Matsvampar/Boletus edulis-4.jpg",
-      "/images/SvampBilder/Matsvampar/Boletus edulis-5.jpg"
+      "/images/svampbilder/Matsvampar/Boletus edulis-1.jpg",
+      "/images/svampbilder/Matsvampar/Boletus edulis-2.jpg",
+      "/images/svampbilder/Matsvampar/Boletus edulis-3.jpg",
+      "/images/svampbilder/Matsvampar/Boletus edulis-6.jpg",
+      "/images/svampbilder/Matsvampar/Boletus edulis-4.jpg",
+      "/images/svampbilder/Matsvampar/Boletus edulis-5.jpg"
     ]
   },
   {
@@ -248,12 +248,12 @@
     "sample_env_count": 3,
     "Svamp-grupp-släkte": "hattsvamp",
     "images": [
-      "/images/SvampBilder/Giftsvampar/Cortinarius rubellus-23-3710.jpg",
-      "/images/SvampBilder/Giftsvampar/Cortinarius rubellus-245-3710.jpg",
-      "/images/SvampBilder/Giftsvampar/Cortinarius rubellus-88-3710.jpg",
-      "/images/SvampBilder/Giftsvampar/Cortinarius rubellus-89-3710.jpg",
-      "/images/SvampBilder/Giftsvampar/Cortinarius rubellus-25-3710.jpg",
-      "/images/SvampBilder/Giftsvampar/Cortinarius rubellus-87-3710.jpg"
+      "/images/svampbilder/Giftsvampar/Cortinarius rubellus-23-3710.jpg",
+      "/images/svampbilder/Giftsvampar/Cortinarius rubellus-245-3710.jpg",
+      "/images/svampbilder/Giftsvampar/Cortinarius rubellus-88-3710.jpg",
+      "/images/svampbilder/Giftsvampar/Cortinarius rubellus-89-3710.jpg",
+      "/images/svampbilder/Giftsvampar/Cortinarius rubellus-25-3710.jpg",
+      "/images/svampbilder/Giftsvampar/Cortinarius rubellus-87-3710.jpg"
     ]
   },
   {
@@ -498,8 +498,8 @@
     "sample_env_count": 3,
     "Svamp-grupp-släkte": "hattsvamp",
     "images": [
-      "/images/SvampBilder/Giftsvampar/Cortinarius armillatus-20-3541.jpg",
-      "/images/SvampBilder/Giftsvampar/Cortinarius armillatus-21-3541.jpg"
+      "/images/svampbilder/Giftsvampar/Cortinarius armillatus-20-3541.jpg",
+      "/images/svampbilder/Giftsvampar/Cortinarius armillatus-21-3541.jpg"
     ]
   },
   {

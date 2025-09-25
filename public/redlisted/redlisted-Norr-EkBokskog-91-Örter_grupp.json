@@ -41,9 +41,9 @@
     "förekomst_ung": 0,
     "förekomst_sum": 4,
     "images": [
-      "/images/SvampBilder/Giftsvampar/Ramaria mairei, Ramaria pallida-186-256756.jpg",
-      "/images/SvampBilder/Giftsvampar/Ramaria mairei, Ramaria pallida-185-256756.jpg",
-      "/images/SvampBilder/RödlistadeSvampar/Ramaria pallida-256756.jpg"
+      "/images/svampbilder/Giftsvampar/Ramaria mairei, Ramaria pallida-186-256756.jpg",
+      "/images/svampbilder/Giftsvampar/Ramaria mairei, Ramaria pallida-185-256756.jpg",
+      "/images/svampbilder/RödlistadeSvampar/Ramaria pallida-256756.jpg"
     ]
   },
   {
@@ -174,8 +174,8 @@
     "förekomst_ung": 0,
     "förekomst_sum": 3,
     "images": [
-      "/images/SvampBilder/Giftsvampar/Tricholoma aurantium-92-1595.jpg",
-      "/images/SvampBilder/Giftsvampar/Tricholoma aurantium-174-1595.jpg"
+      "/images/svampbilder/Giftsvampar/Tricholoma aurantium-92-1595.jpg",
+      "/images/svampbilder/Giftsvampar/Tricholoma aurantium-174-1595.jpg"
     ]
   },
   {
@@ -263,9 +263,9 @@
     "förekomst_ung": 0,
     "förekomst_sum": 4,
     "images": [
-      "/images/SvampBilder/Giftsvampar/Rubroboletus legaliae-232-156.jpg",
-      "/images/SvampBilder/Giftsvampar/Rubroboletus legaliae-255-.jpg",
-      "/images/SvampBilder/Giftsvampar/Rubroboletus legaliae-231-156.jpg"
+      "/images/svampbilder/Giftsvampar/Rubroboletus legaliae-232-156.jpg",
+      "/images/svampbilder/Giftsvampar/Rubroboletus legaliae-255-.jpg",
+      "/images/svampbilder/Giftsvampar/Rubroboletus legaliae-231-156.jpg"
     ]
   },
   {
@@ -310,7 +310,7 @@
     "förekomst_ung": 0,
     "förekomst_sum": 4,
     "images": [
-      "/images/SvampBilder/RödlistadeSvampar/Ramaria sanguinea-1357.jpg"
+      "/images/svampbilder/RödlistadeSvampar/Ramaria sanguinea-1357.jpg"
     ]
   },
   {
@@ -355,7 +355,7 @@
     "förekomst_ung": 0,
     "förekomst_sum": 4,
     "images": [
-      "/images/SvampBilder/RödlistadeSvampar/Hygrophorus chrysodon-821.jpg"
+      "/images/svampbilder/RödlistadeSvampar/Hygrophorus chrysodon-821.jpg"
     ]
   },
   {
@@ -744,12 +744,12 @@
     "förekomst_ung": 0,
     "förekomst_sum": 4,
     "images": [
-      "/images/SvampBilder/Matsvampar/Gomphus clavatus-3.jpg",
-      "/images/SvampBilder/Matsvampar/Gomphus clavatus-2.jpg",
-      "/images/SvampBilder/Matsvampar/Gomphus clavatus-1.jpg",
-      "/images/SvampBilder/Matsvampar/Gomphus clavatus-5.jpg",
-      "/images/SvampBilder/Matsvampar/Gomphus clavatus-4.jpg",
-      "/images/SvampBilder/RödlistadeSvampar/Gomphus clavatus-720.jpg"
+      "/images/svampbilder/Matsvampar/Gomphus clavatus-3.jpg",
+      "/images/svampbilder/Matsvampar/Gomphus clavatus-2.jpg",
+      "/images/svampbilder/Matsvampar/Gomphus clavatus-1.jpg",
+      "/images/svampbilder/Matsvampar/Gomphus clavatus-5.jpg",
+      "/images/svampbilder/Matsvampar/Gomphus clavatus-4.jpg",
+      "/images/svampbilder/RödlistadeSvampar/Gomphus clavatus-720.jpg"
     ]
   },
   {
@@ -837,9 +837,9 @@
     "förekomst_ung": 0,
     "förekomst_sum": 4,
     "images": [
-      "/images/SvampBilder/Giftsvampar/Cortinarius meinhardii-187-473.jpg",
-      "/images/SvampBilder/Giftsvampar/Cortinarius meinhardii-131-473.jpg",
-      "/images/SvampBilder/RödlistadeSvampar/Cortinarius meinhardii-473.jpg"
+      "/images/svampbilder/Giftsvampar/Cortinarius meinhardii-187-473.jpg",
+      "/images/svampbilder/Giftsvampar/Cortinarius meinhardii-131-473.jpg",
+      "/images/svampbilder/RödlistadeSvampar/Cortinarius meinhardii-473.jpg"
     ]
   }
 ]
