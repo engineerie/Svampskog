@@ -1,6 +1,0 @@
-navigation.icon: i-lucide-book-open
-items:
-  - title: Definitioner
-    path: /svampardocs/1.definitioner
-  - title: Navigering
-    path: /svampardocs/2.navigering
