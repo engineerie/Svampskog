@@ -29,7 +29,7 @@
       <EnvironmentSelector v-if="hasAllParams" />
     </transition>
   </UContainer>
-  <div class="flex flex-col min-h-screen border-t border-muted bg-neutral-50">
+  <div class="flex flex-col min-h-screen ">
     <UContainer class="w-full px-0">
       <transition name="fade" mode="out-in">
         <component :is="activeComponent" @close="handleCloseFullScreen" @enlarge="handleFullScreen" class="block" />

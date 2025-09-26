@@ -1,6 +1,6 @@
 <template>
   <div>
-    <UCard variant="outline" class="rounded-none sm:rounded-lg">
+    <UCard variant="ghost" class="rounded-none sm:rounded-lg">
       <!-- Header with title, filters and view toggle -->
       <div class="md:flex justify-between items-start">
         <div class="md:flex gap-4">

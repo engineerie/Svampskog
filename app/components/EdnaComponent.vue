@@ -2,7 +2,7 @@
   <div>
 
 
-    <UCard class="md:mt-2 rounded-none sm:rounded-lg">
+    <UCard class="md:mt-2 rounded-none sm:rounded-lg" variant="ghost">
 
       <!-- Header / List View -->
 

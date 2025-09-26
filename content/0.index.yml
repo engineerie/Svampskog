@@ -22,11 +22,15 @@ hero:
       size: xl
       color: neutral
       variant: subtle
+  headline:
+    label:
+    to: /blog
+    icon:
+    color: secondary
 sections:
   - title: Utforska svampar i svenska skogar
     description: Här kan du ta reda på vilka mykorrhizasvampar som kan finns i en skog baserat på dels DNA-analyser av svampmycel i jordprover, dels vår samlade kunskap om var olika arters fruktkroppar förekommer.
-    id: features
-    headline: Svampar
+    id: svampar
     links:
       - label: Gå till svampar
         to: /mykorrhizasvampar
@@ -35,18 +39,10 @@ sections:
         variant: "solid"
     orientation: horizontal
     reverse: true
-    src: /images/SvamparSverige4.svg
-    features:
-      - name: 99.9% Uptime
-        description: Hittills har prover från 2500 skogar runt om i Sverige DNA-analyserats. Resultaten ger en bra bild av förekomsten av vanligare mykorrhizasvampar, även de som saknar fruktkroppar.
-        icon: i-solar-dna-linear
-      - name: Bank-Level Security
-        description: För att få uppgifter om alla, både vanliga och ovanligare, arters förekomster har vi också sammanställt information om var mat- och giftsvampar samt naturvårdsintressanta svampar kan förekomma.
-        icon: i-lineicons-mushroom-1
   - title: Hur påverkar olika skogsskötsel svampar?
     description: Här försöker vi att visualisera hur trakthyggesbruk och olika former av hyggesfria metoder kan påverka förekomsten av mykorrhizasvampar under en skogsgeneration. Informationen baseras på sammanställda forskningsresultat, bl a från ett samarbete med Markinventeringen och Riksskogstaxeringen.
-    src: /images/SvamparSverige4.svg
-    headline: Skogsskötsel
+    id: skogsbruk
+    src: /images/Landing/Stock Photo 563535222.jpeg
     links:
       - label: Gå till skogsskötsel
         to: /skogsskotsel
@@ -55,123 +51,115 @@ sections:
         variant: "solid"
     orientation: horizontal
     reverse: false
-    features:
-      - name: Lightning Fast
-        description: Interaktiv modell där 5 olika skogsbrukssätt kan utforskas.
-        icon: i-material-symbols-interactive-space
-      - name: Predictable Pricing
-        description: Jämför både utveckling över tid och olika metoder sida vid sida.
-        icon: i-iconamoon-compare
-features:
-  title: Svampar och träd hänger ihop
-  description: Svampskog.se fokuserar på mykorrhizasvampar, det vill säga svampar som lever i symbios med träd. För att tydligöra deras betydelse har vi tagit fram grundläggande kunskap om hur dessa svampar lever i marken.
-  headline: Svampkunskap
+press:
+  title: Aktuellt & lästips
+  description: Läs om projektet i media, lyssna på poddar om skog och svamp eller anmäl dig till webbinarier.
   items:
-    - title: Vad är mykorrhiza?
-      description: Mykorrhizasvampar lever i symbios med träd. Svampar får sin energi från träden som i sin tur förser träden med näring och vatten.
-      icon: i-streamline-interface-arrows-button-zigzag-both-direction-arrow-curvy-diagram-zigzag-vertical
-    - title: Vilken betydelse har mykorrhiza?
-      description: Gammal symbios.
-      icon: i-fluent-important-20-regular
-    - title: Vilka svampar är mykorrhizasvampar?
-      description: Svampar med stora fruktkroppar, som kantareller, kremlor och soppar är mykorrhizasvampar. De allra flesta vildplockade matsvampar är mykorrhizasvampar.
-      icon: i-lineicons-mushroom-1
-    - title: Mykorrhizasvampar är individer
-      description: Mykorrhizasvampar lever som m²-stora mycel som kan bli lika gamla som träd.
-      icon: i-fluent-shape-organic-16-regular
-    - title: Hur många arter finns det?
-      description: I Sverige, i en skog, på ett träd.
-      icon: i-pajamas-subgroup
-    - title: Mycelnätverket
-      description: Kanske kort om att wood wide web inte finns, men väl ett mer intrikat och fascinerande gytter av olika mycel.
-      icon: i-material-symbols-network-node
-testimonials:
-  headline: Om projektet
-  title: Om projektet
-  description: Svampskog syftar till att förmedla lättillgänglig och tillförlitlig information om vilka mykorrhizasvampar som kan finnas i olika skogar, och hur deras förekomst påverkas av olika former av skogsskötsel. Projektet riktar sig till alla som är intresserade av skog och svamp.
-  links:
-    - label: Gå till skogsskötsel
-      to: /skogsskotsel
-      icon: i-heroicons-arrow-right
-  features:
-    - title: Lansering
-      icon: i-heroicons-rocket-launch-solid
-      description: Webbplatsen mjuklanserades den 9 april och utvecklas löpande sommaren 2025.
-    - title: Kommande
-      icon: i-heroicons-calendar
-      description: Ett mobilanpassat webbverktyg samt en modul för svampkännedom lanseras i slutet av augusti 2025
-    - title: Webbinarium
-      description: Ett öppet webbinarium om att använda Svampskog hölls den 23 april. Under hösten 2025 planeras fler webbinarium. De kommer att annonseras här.
-    - quote: The developer experience is unmatched. We migrated our entire infrastructure in weeks instead of months, and our team's productivity has increased dramatically. The TypeScript support and component library saved us months of development time.
-      user:
-        name: Sarah Chen
-        description: CTO at TechScale Solutions
-        avatar:
-          src: https://i.pravatar.cc/120?img=1
-    - quote: After implementing the edge computing features, our global application response times dropped by 70%. Our European and Asian markets saw immediate improvements in user engagement and conversion rates.
-      user:
-        name: Marcus Rodriguez
-        description: VP of Engineering at DataFlow
-        avatar:
-          src: https://i.pravatar.cc/120?img=7
-    - quote: The platform's security features gave us peace of mind during our SOC 2 certification. The built-in compliance tools and audit logs made the process seamless.
-      user:
-        name: David Kumar
-        description: Security Director at SecureStack
-        avatar:
-          src: https://i.pravatar.cc/120?img=3
-    - quote: During our Black Friday sale, we handled 15x our normal traffic without a hitch. The auto-scaling features worked flawlessly, and our monitoring dashboard gave us real-time insights throughout the event.
-      user:
-        name: Emily Zhang
-        description: Lead Architect at ScaleForce
-        avatar:
-          src: https://i.pravatar.cc/120?img=5
-    - quote: The support team goes above and beyond. They helped us optimize our CI/CD pipeline and suggested performance improvements that reduced our build times by 45%.
-      user:
-        name: James Wilson
-        description: DevOps Lead at CloudPro
-        avatar:
-          src: https://i.pravatar.cc/120?img=8
-    - quote: Switching to this platform reduced our infrastructure costs by 40% while improving performance. The cost savings alone paid for the investment within the first quarter.
-      user:
-        name: Lisa Patel
-        description: CEO at AutoScale
-        avatar:
-          src: https://i.pravatar.cc/120?img=9
-    - quote: The accessibility features and responsive components helped us achieve WCAG 2.1 compliance with minimal custom development. Our site now scores 100 on Lighthouse accessibility metrics.
-      user:
-        name: Michael Torres
-        description: Frontend Lead at AccessFirst
-        avatar:
-          src: https://i.pravatar.cc/120?img=11
-    - quote: We serve millions of API requests daily, and the real-time analytics and monitoring tools have been invaluable for optimizing our performance and identifying bottlenecks.
-      user:
-        name: Rachel Kim
-        description: Performance Engineer at APIHub
-        avatar:
-          src: https://i.pravatar.cc/120?img=10
-    - quote: The component library and design system tools helped us maintain consistency across our 20+ micro-frontends. Our development velocity has never been better.
-      user:
-        name: Thomas Weber
-        description: UI Architecture Lead at DesignScale
-        avatar:
-          src: https://i.pravatar.cc/120?img=12
-    - quote: Integration with our existing tools was seamless. The webhooks and API documentation made it easy to automate our workflows and enhance our development pipeline.
-      user:
-        name: Sophia Martinez
-        description: Integration Specialist at TechFlow
-        avatar:
-          src: https://i.pravatar.cc/120?img=14
-cta:
-  title: Start with Nuxt UI Pro today!
-  description: Nuxt UI Pro is free in development, but you need a license to use it in production.
-  links:
-    - label: Buy now
-      to: https://ui.nuxt.com/pro/purchase
-      target: _blank
-      icon: i-lucide-shopping-cart
-    - label: License
-      to: https://ui.nuxt.com/getting-started/license
-      trailingIcon: i-lucide-circle-help
-      target: _blank
-      variant: subtle
+    - title: "Webbinarium: Skogens svampar - Del 1"
+      publication: "Plockhugget.se"
+      publicationDate: "6 november 2025 kl 19-20.30"
+      url: "https://www.plockhugget.se/events/skogens-svampar-del-1-nedbrytarsvamparnas-mangfald-och-betydelse/"
+      icon: i-heroicons-calendar-date-range
+      description: "I denna första del om skogens svampar fokuserar Anders Dahlberg på svampar som är nedbrytare eller parasiter."
+      badge:
+        label: "Anmälan öppen"
+        color: primary
+    - title: "Webbinarium: Skogens svampar - Del 2"
+      publication: "Plockhugget.se"
+      publicationDate: "9 december 2025 kl 9-10.30"
+      url: "https://www.plockhugget.se/events/skogens-svampar-del-2-mykorrhizasvamparnas-mangfald-och-betydelse/"
+      icon: i-heroicons-calendar-date-range
+      description: "På senare år har forskning bringat allt större klarhet i vilka mykorrhizasvamparna är och deras biologi, hur skogsskötsel påverkar och kan utformas för att ta hänsyn till dem."
+      badge:
+        label: "Anmälan öppen"
+        color: primary
+    - title: "Webbinarium om Svampskog"
+      publication: "SLU"
+      publicationDate: "Vår 2026"
+      url: "https://www.slu.se/om-slu/organisation/fakulteter/fakulteten-for-skogsvetenskap/samverkan/kompetensutveckling-for-ett-hallbart-skogsbruk/se-svampen-i-din-skog/"
+      icon: i-heroicons-calendar-date-range
+      description: "Lär dig mer om skogens mykorrhizasvampar och hur skogsskötsel påverkar dem - och få en genomgång av hur du använder funktionerna i webbappen Svampskog."
+      badge:
+        label: "Anmäl intresse"
+        color: info
+    - title: "Då stannar kantarellen"
+      publication: "Föreningen & tidningen Skogen"
+      publicationDate: "2 april 2025"
+      url: "https://www.skogen.se/nyheter/da-stannar-kantarellen/"
+      icon: i-heroicons-newspaper
+      description: "Måste svampställena försvinna efter avverkning? Inte om man sparar träden där svamparna växer. En ny app visar hur svampar påverkas av skötselåtgärder."
+    - title: "Ny teknik: Se svampen i din skog"
+      publication: "Skogsvärden"
+      publicationDate: "2 oktober 2024"
+      url: "https://www.skogssallskapet.se/kunskapsbank/artiklar/2024-10-02-ny-teknik-se-svampen-i-din-skog.html"
+      icon: i-heroicons-newspaper
+      description: ""
+    - title: "Svamparnas rike - osynligt men viktigt"
+      publication: "Korta föreläsningar om svamp"
+      publicationDate: "14 mars 2024"
+      url: "https://www.ksla.se/aktiviteter/svamparnas-rike-osynligt-men-viktigt/"
+      icon: i-heroicons-film
+      description: "Fyra presentationer på Kungliga Skogs- och lantbruksakademien"
+    - title: "Så påverkar skogsbruket dina svampställen"
+      publication: "Dagens Nyheter"
+      publicationDate: "3 september 2023"
+      url: "https://www.dn.se/sverige/sa-paverkar-skogsbruket-dina-svampstallen/"
+      icon: i-heroicons-film
+      description: ""
+    - title: "Sporen - en podd om svampar"
+      publication: "Anna Rosling - Spotify"
+      publicationDate: "1 september 2023"
+      url: "https://open.spotify.com/show/77UlUrR6SbIrsyFBOLHC8c"
+      icon: i-heroicons-radio
+      description: "6 avsnitt från hösten 2023 där Anna Rosling från Uppsala universitet och Hanna Johannesson på Kungliga vetenskapsakademien/Stockholms universitet pratar om svamp."
+    - title: "Viktigt samspel mellan träd och svamp"
+      publication: "Skogseko"
+      publicationDate: "Nr 3 2022"
+      url: "https://e-tidning.skogseko.se/p/skogseko/skogseko-nr-3-2022/a/viktigt-samspel-mellan-trad-och-svamp/1525/587953/31172107"
+      icon: i-heroicons-newspaper
+      description: ""
+timeline:
+  title: Kommande innehåll
+  description: Svampskog.se vidareutvecklas stegvis. Här hittar du en översikt över planerade funktioner och material som publiceras under året.
+  items:
+    - date: "Vår 2025"
+      title: "Mjuklansering"
+      description: "Mjuklansering i samband med Flora och faunavårds-konferansen 9 april. Ett öppet webbinarium om att använda Svampskog hölls den 23 april."
+      icon: i-hugeicons-plant-01
+    - date: "Sommar 2025"
+      title: "Mobilanpassning"
+      description: "Hemsidan utvecklas löpande och mobilanpassas under sommaren 2025."
+      icon: i-heroicons-sun
+    - date: "November 2025"
+      title: "Skogsskötsel"
+      description: "Information om skogsskötsel färdigställs och lanseras."
+      icon: i-hugeicons-tree-06
+    - date: "November 2025"
+      title: "Svampkunskap"
+      description: "Modul för svampkunskap med tillhörande lärarhandledning läggs upp på svampskog.se"
+      icon: i-hugeicons-book-03
+    - date: "Vår 2026"
+      title: "Webbinarium"
+      description: "Webbinarium om svampar, skogssbruk och funktionerna på svampskog.se hålls."
+      icon: i-hugeicons-presentation-line-chart-01
+financing:
+  headline: "Projektet har finansierats av SLU och Skogssällskapet och med stöd från Skogsstyrelsen och EU."
+  logos:
+    - src: /images/logo/slu_logo_webb.png
+      alt: SLU
+      height: 60
+    - src: /images/logo/skogssallskapet_logo.png
+      alt: Skogssällskapet
+      height: 50
+    - src: /images/logo/Skogsstyrelsen_logo.png
+      alt: Skogsstyrelsen
+      height: 80
+    - src: /images/logo/EU_Logo.png
+      alt: EU
+      height: 80
+  notes:
+    - "Verktyget är utvecklat med data från Markinventeringen, SLU riksskogstaxeringen och SLU Artdatabanken."
+    - "Referensgrupp: Representanter från Bitzner, Skogforsk, Skogsstyrelsen, SLU-Artdatabanken, Sveaskog och Södra Skogsägarna."
+    - "Ansvarig för projektet och för informationsinnehåll: Anders Dahlberg, SLU"
+    - "Webb och konceptutveckling: Jacob Bertilsson"
+    - "Kontakt: Anders Dahlberg, anders.dahlberg@slu.se"

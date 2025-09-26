@@ -4,7 +4,7 @@
       <UTabs :ui="{
         indicator: 'bg-white border border-muted',
         trigger: 'data-[state=active]:text-neutral-800 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary',
-        list: 'bg-transparent '
+        list: ''
       }" v-model="activeTab" :items="tabs" :content="false" class=" my-2 mx-1 md:mx-0" :size="tabSize" color="neutral"
         variant="pill" />
 

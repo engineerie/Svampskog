@@ -11,11 +11,18 @@ const variantEnum = z.enum([
 const colorEnum = z.enum([
   "primary",
   "secondary",
-  "neutral",
-  "error",
-  "warning",
-  "success",
+  "tertiary",
+  "rodeodust",
+  "poison",
+  "signal",
   "info",
+  "success",
+  "warning",
+  "error",
+  "kalkmark",
+  "vanligmark",
+  "time",
+  "neutral",
 ]);
 const sizeEnum = z.enum(["xs", "sm", "md", "lg", "xl"]);
 const orientationEnum = z.enum(["vertical", "horizontal"]);
@@ -46,6 +53,53 @@ const imageSchema = z.object({
 const featureItemSchema = z.object({
   ...baseSchema,
   icon: z.string().nonempty(),
+});
+
+const badgeSchema = z.object({
+  label: z.string().nonempty(),
+  color: colorEnum.optional(),
+});
+
+const pressItemSchema = z.object({
+  title: z.string().nonempty(),
+  publication: z.string().optional(),
+  publicationDate: z.string().optional(),
+  description: z.string().optional(),
+  icon: z.string().optional(),
+  url: z.string().nonempty(),
+  badge: badgeSchema.optional(),
+});
+
+const timelineItemSchema = z.object({
+  date: z.string().nonempty(),
+  title: z.string().nonempty(),
+  description: z.string().nonempty(),
+  icon: z.string().optional(),
+});
+
+const pressSectionSchema = z.object({
+  title: z.string().nonempty(),
+  description: z.string().nonempty(),
+  items: z.array(pressItemSchema),
+});
+
+const timelineSectionSchema = z.object({
+  title: z.string().nonempty(),
+  description: z.string().nonempty(),
+  items: z.array(timelineItemSchema),
+});
+
+const logoSchema = z.object({
+  src: z.string().nonempty(),
+  alt: z.string().optional(),
+  height: z.number().optional(),
+  width: z.number().optional(),
+});
+
+const financingSchema = z.object({
+  headline: z.string().nonempty(),
+  logos: z.array(logoSchema),
+  notes: z.array(z.string()),
 });
 
 const sectionSchema = z.object({
@@ -106,41 +160,26 @@ export const collections = {
       description: z.string().nonempty(),
       hero: sectionSchema.extend({
         headline: z.object({
-          label: z.string().nonempty(),
-          to: z.string().nonempty(),
-          icon: z.string().nonempty(),
+          label: z.string().optional(),
+          to: z.string().optional(),
+          icon: z.string().optional(),
+          color: colorEnum.optional(),
         }),
         links: z.array(linkSchema),
       }),
       sections: z.array(
         sectionSchema.extend({
           id: z.string().nonempty(),
+          src: z.string().nonempty(),
           orientation: orientationEnum.optional(),
           features: z.array(featureItemSchema),
           links: z.array(linkSchema),
           reverse: z.boolean().optional(),
         }),
       ),
-      features: sectionSchema.extend({
-        items: z.array(featureItemSchema),
-      }),
-      testimonials: sectionSchema.extend({
-        items: z.array(
-          z.object({
-            quote: z.string().nonempty(),
-            user: z.object({
-              name: z.string().nonempty(),
-              description: z.string().nonempty(),
-              to: z.string().nonempty(),
-              target: z.string().nonempty(),
-              avatar: imageSchema,
-            }),
-          }),
-        ),
-      }),
-      cta: sectionSchema.extend({
-        links: z.array(linkSchema),
-      }),
+      press: pressSectionSchema.optional(),
+      timeline: timelineSectionSchema.optional(),
+      financing: financingSchema.optional(),
     }),
   }),
   blog: defineCollection({
