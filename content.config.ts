@@ -98,6 +98,19 @@ const timelineSectionSchema = z.object({
   items: z.array(timelineItemSchema),
 });
 
+const forestryTimelineEntrySchema = z.object({
+  startskog: z.string().nonempty(),
+  atgard: z.string().nonempty(),
+  tid: z.string().nonempty(),
+  skog: z.string().nonempty(),
+  svamp: z.string().nonempty(),
+});
+
+const forestryTimelineSchema = z.object({
+  id: z.string().nonempty(),
+  entries: z.array(forestryTimelineEntrySchema),
+});
+
 const logoSchema = z.object({
   src: z.string().nonempty(),
   alt: z.string().optional(),
@@ -209,9 +222,34 @@ export const collections = {
       carousel: z.array(carouselItemSchema).optional(),
     }),
   }),
+  skogsskotsel: defineCollection({
+    type: "page",
+    source: "2.skogsskotsel.yml",
+    schema: z.object({
+      title: z.string().nonempty(),
+      description: z.string().nonempty(),
+      hero: sectionSchema.extend({
+        headline: z.object({
+          label: z.string().optional(),
+          to: z.string().optional(),
+          icon: z.string().optional().editor({ input: "icon" }),
+          color: colorEnum.optional(),
+        }),
+        links: z.array(linkSchema),
+        src: z.string().nonempty(),
+        orientation: orientationEnum.optional(),
+      }),
+      carousel: z.array(carouselItemSchema).optional(),
+    }),
+  }),
   blog: defineCollection({
     source: "3.blog.yml",
     type: "data",
     schema: sectionSchema,
+  }),
+  forestryTimelines: defineCollection({
+    type: "data",
+    source: "timelines/**/*.yml",
+    schema: forestryTimelineSchema,
   }),
 };

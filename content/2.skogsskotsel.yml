@@ -2,52 +2,44 @@ title: Skogsskötsel
 description: Se hur skogsskötsel påverka mykorrhizasvampar.
 navigation: false
 hero:
-  title: Sök svampar i svenska skogar
-  description: Baserat på DNA-analyser av svampmycel i jordprover, och sammanställda uppgifter om var olika arters fruktkroppar finns.
+  title: Hur påverkas svampar av skogsskötsel?
+  description: Lär dig hur trakthyggesbruk och olika former av hygesfria metoder kan påverka förekomsten av mykorrhizasvampar
   orientation: horizontal
-  src: /images/Landing/Mushroom Forest Image.jpeg
+  src: /images/Landing/Stock Photo 563535222.jpeg
   headline:
     label:
     to:
     icon:
     color: secondary
   links:
-    - label: Sök skogssmiljö
-      icon: i-lineicons-mushroom-1
+    - label: Visa modell för påverkan över tid
+      icon: i-material-symbols:interactive-space
       trailing: false
-      to: /mykorrhizasvampar
+      to:
       target:
       size: xl
       color: neutral
       variant: solid
 carousel:
-  - title: Alla träd har mykorrhiza
-    description: Alla träd samarbetar med mykorrhizasvampar i symbios. Svamparna förstorar trädens rotsystem och förser dem med näring och vatten. I utbyte får svamparna socker från trädens fotosyntes.
-    img: /images/Carousel/Mycorrhiza Image.jpeg
-  - title: Många skogssvampar bildar mykorrhiza
-    description: De flesta större svampar i skogen bildar mykorrhiza - både ätliga och giftiga. Dit hör bland annat spindelskivlingar, kremlor, riskor, soppar och kantareller.
-    specialBento: true
-    bentoImgs:
-      - /images/svampgrid/Cantharellus cibarius-3.jpg
-      - /images/svampindex/Cortinarius sanguineus-179-.jpg
-      - /images/svampgrid/Gomphus clavatus-1.jpg
-      - /images/svampgrid/Tricholoma matsutake-166-6276.jpg
-      - /images/svampindex/Ramaria pallida-256756.jpg
-      - /images/svampindex/Tuber aestivum-1608.jpg
-      - /images/svampindex/Inonotus dryophilus-883.jpg
-      - /images/svampindex/Amanita pantherina-183-2978.jpg
-      - /images/svampindex/Coprinus comatus-107-3442.jpg
-  - title: Över 2000 arter i Sverige
-    description: I Sverige finns över 2 000 olika mykorrhizasvampar. Några är vanliga, men de flesta är ovanliga. I en äldre skog kan det finnas ett par hundra arter. Många bildar små och oansenliga fruktkroppar och är därför dåligt kända.
-    img: /images/Carousel/ArterDiagram2.jpg
+  - title: Träd och svampar är beroende av varandra
+    description: Alla träds finrötter, ofta mer än hundratusen per kvadratmeter, är om- och invuxna av mykorrhizasvampars mycel. Svamparnas tunna hyfer sträcker likt en diskborste ut sig från rotspetsarna och förstorar trädens rotsystem hundrafalt och mer.
+    img: /images/Carousel/DavidReed.jpg
+  - title: Fler och äldre träd ger mer mykorrhiza
+    description: Mängden träd avgör hur mycket mykorrhizasvampar det finns. Små och få träd ger mindre och fler och större träd ger större mängd och aktivitet av svamparna. Äldre skogar har också fler olika arter än yngre skogar.
+    img: /images/Carousel/MushrommTreeDiagram4.jpg
     noBorder: true
-  - title: Det mesta är mycel i marken
-    description: Fruktkropparna är bara en liten del av svampen. Den största delen är mycel i marken, som växer året runt och kan leva i många år.
-    specialGrid: true
-    gridTop: /images/svampgrid/Cantharellus cibarius-3.jpg
-    gridRest: /images/Carousel/Mycorrhizae.jpg
-    gridCols: 5
-    gridRows: 3
-  - title: Varje mycel är en individ
-    description: Varje mycel i marken är en svampindivid, ofta ungefär någon kvadratmeter stor. I en skog finns många individer, precis som det finns många hos växter och djur.
-    img: /images/Carousel/Söder_Tallskog_91_Blåbär_grupp.png
+  - title: När träden avverkas försvinner svamparna
+    description: När träden avverkas upphör sockerflödet till rötterna. Då tynar mykorrhizasvamparna bort och dör. Ett trakthygge innebär att omkring 95% av mängden mykorrhizasvampar försvinner.
+    img: /images/Carousel/Stock Image 481542412.jpeg
+  - title: Svamparna överlever vid levande rötter
+    description: Mykorrhizasvampar kan bara överleva där det finns levande trädrötter - till exempel längs skogskanter, vid hänsynsträd eller på småplantor.
+    img: /images/Carousel/Skogsbruk.png
+  - title: Vanliga svampar kommer tillbaka
+    description: Efter avverkning återvänder de vanligaste svamparna. De kan antingen överleva i marken eller spridas in med sporer från närliggande skog. Ovanliga arter lyckas sällan återetablera sig.
+    img: /images/Carousel/Spores Image.jpeg
+  - title: Val av skogsskötsel påverkar
+    description: Vid trakthygge försvinner de flesta arterna och mängden mykorrhiza minskar kraftigt. Med hyggesfria metoder blir påverkan betydligt mindre, eftersom det hela tiden finns många träd. Svampställen och ovanliga arter på platsen kan då fortleva.
+    img: /images/Carousel/TraktBlad.png
+  - title: Hur kan man gynna mykorrhizasvampar?
+    description: Så här gör man om man vill måna om de mykorrhizasvampar som finns i en skog. 1) Spara skogsområdet. 2) Låt skogen bli äldre - då kan svamparna fortleva längre. 3) Välj hyggesfria metoder. 4) Om skogen kallavverkas - lämna väl tilltagna grupper med hänsynsträd.
+    img: /images/Carousel/Mushroom Images.jpeg

@@ -1,23 +1,27 @@
 <template>
-    <div class=" dark:bg-neutral-900/40 flex-1">
+    <div class=" dark:bg-neutral-900/40 flex-1" v-if="page">
         <UContainer class="w-full px-0">
-            <UPageHero :links="links" :ui="{ container: 'lg:py-24', title: 'sm:text-6xl', headline: 'text-neutral' }"
-                title="Hur påverkas svampar av skogsskötsel?
-" description="
-Lär dig hur trakthyggesbruk och olika former av hygesfria metoder kan påverka förekomsten av mykorrhizasvampar"
-                orientation="horizontal">
-                <NuxtImg src="/images/Landing/Stock Photo 563535222.jpeg" width="700" format="webp" alt="Illustration"
-                    class=" rounded ring ring-neutral-300 " />
-                <template #links>
+            <UPageHero :ui="{ container: ' lg:py-24', title: 'sm:text-6xl', headline: 'text-neutral' }"
+                :title="page.hero.title" :description="page.hero.description" :orientation="page.hero.orientation"
+                class="">
+                <template #headline v-if="page.hero.headline.label">
+                    <NuxtLink :to="page.hero.headline.to">
+                        <UBadge :icon="page.hero.headline.icon" :label="page.hero.headline.label"
+                            :color="page.hero.headline.color" variant="subtle" size="lg" trailing
+                            :ui="{ base: 'rounded-full' }" />
+                    </NuxtLink>
+                </template>
+                <NuxtImg :src="page.hero.src" width="700" format="webp" alt="Illustration"
+                    class="rounded ring ring-neutral-300 " />
+                <template v-if="page?.hero?.links?.[0]" #links>
                     <UModal>
                         <UChip color="warning" size="2xl">
-                            <UButton label="Visa modell för påverkan över tid" size="xl" color="neutral"
-                                icon="i-material-symbols-interactive-space" />
+                            <UButton :label="page.hero.links[0].label" :size="page.hero.links[0].size"
+                                :color="page.hero.links[0].color" :icon="page.hero.links[0].icon" />
                         </UChip>
                         <template #content>
                             <UAlert title="Denna funktion lanseras i November." color="warning"
                                 icon="i-fluent-emoji-high-contrast-construction" />
-
                             <!-- <ModelC /> -->
                         </template>
                     </UModal>
@@ -55,7 +59,7 @@ Lär dig hur trakthyggesbruk och olika former av hygesfria metoder kan påverka 
                 <div class="flex justify-center w-full group">
                     <div v-if="selectedMethod === null" class="w-full mx-auto">
                         <UCarousel :ui="{ prev: 'ml-8 hidden group-hover:flex', next: 'mr-8 hidden group-hover:flex' }"
-                            v-slot="{ item }" :items="items" class="w-full mx-auto mb-8" arrows dots>
+                            v-slot="{ item }" :items="page.carousel ?? []" class="w-full mx-auto mb-8" arrows dots>
 
                             <UPageCTA :title="item.title"
                                 :ui="{ root: 'mx-3 lg:mx-8 my-1', container: 'border-none py-8', title: 'lg:text-5xl/14 font-medium' }"
@@ -131,6 +135,28 @@ Lär dig hur trakthyggesbruk och olika former av hygesfria metoder kan påverka 
 import { ref, computed } from 'vue'
 import type { TabsItem } from '@nuxt/ui'
 
+const { data: page } = await useAsyncData('skogsskotsel', () => queryCollection('skogsskotsel').first())
+if (!page.value) {
+    throw createError({
+        statusCode: 404,
+        statusMessage: 'Page not found',
+        fatal: true
+    })
+}
+
+interface TimelineEntry {
+    startskog: string
+    atgard: string
+    tid: string
+    skog: string
+    svamp: string
+}
+
+interface TimelineDoc {
+    id: string
+    entries: TimelineEntry[]
+}
+
 const normalizeTimeToken = (t: string | number) => {
     const s = String(t).trim().toLowerCase()
     if (s.includes('efter')) return 'efter'
@@ -157,19 +183,28 @@ const makeThumbSrc = (atgard: string, tid: string | number, startskog: string) =
     return `/images/thumbnails/${fileName}`
 }
 
-const { data: rawTimeline } = await useFetch<any[]>('/timeline.json')
+const { data: forestryTimeline } = await useAsyncData<TimelineDoc | null>('forestry-timeline-skogsskotsel', () =>
+    queryCollection('forestryTimelines').first()
+)
 
-const timelineItems = computed<any[]>(() => {
-    const list = rawTimeline.value ?? []
+interface TimelineDisplayItem {
+    tid: string
+    skog: string
+    svamp: string
+    thumb: string
+}
+
+const timelineItems = computed<TimelineDisplayItem[]>(() => {
+    const list = forestryTimeline.value?.entries ?? []
     const method = selectedMethod.value?.id
     if (!method) return []
     return list
-        .filter((e: any) => e.startskog === 'naturskog' && e.atgard === method)
-        .map((e: any) => ({
-            tid: e.tid,
-            skog: e.skog,
-            svamp: e.svamp,
-            thumb: makeThumbSrc(e.atgard, e.tid, e.startskog)
+        .filter((entry) => entry.startskog === 'naturskog' && entry.atgard === method)
+        .map((entry) => ({
+            tid: entry.tid,
+            skog: entry.skog,
+            svamp: entry.svamp,
+            thumb: makeThumbSrc(entry.atgard, entry.tid, entry.startskog)
         }))
 })
 
@@ -189,53 +224,6 @@ const tabs = ref<TabsItem[]>([
         icon: 'i-heroicons-list-bullet',
         slot: 'timeline' as const
     }
-])
-
-const items = ref([
-    {
-        title: 'Träd och svampar är beroende av varandra',
-        description: 'Alla träds finrötter, ofta mer än hundratusen per kvadratmeter, är om- och invuxna av mykorrhizasvampars mycel. Svamparnas tunna hyfer sträcker likt en diskborste ut sig från rotspetsarna och förstorar trädens rotsystem hundrafalt och mer.',
-        img: '/images/Carousel/DavidReed.jpg'
-    },
-    {
-        title: 'Fler och äldre träd ger mer mykorrhiza',
-        description: 'Mängden träd avgör hur mycket mykorrhizasvampar det finns. Små och få träd ger mindre och fler och större träd ger större mängd och aktivitet av svamparna. Äldre skogar har också fler olika arter än yngre skogar.',
-        img: '/images/Carousel/MushrommTreeDiagram4.jpg',
-        noBorder: true,
-    },
-    {
-        title: 'När träden avverkas försvinner svamparna',
-        description: 'När träden avverkas upphör sockerflödet till rötterna. Då tynar mykorrhizasvamparna bort och dör. Ett trakthygge innebär att omkring 95% av mängden mykorrhizasvampar försvinner.',
-        img: '/images/Carousel/Stock Image 481542412.jpeg'
-    },
-    {
-        title: 'Svamparna överlever vid levande rötter',
-        description: 'Mykorrhizasvampar kan bara överleva där det finns levande trädrötter - till exempel längs skogskanter, vid hänsynsträd eller på småplantor.',
-        img: '/images/Carousel/Skogsbruk.png'
-    },
-    {
-        title: 'Vanliga svampar kommer tillbaka',
-        description: 'Efter avverkning återvänder de vanligaste svamparna. De kan antingen överleva i marken eller spridas in med sporer från närliggande skog. Ovanliga arter lyckas sällan återetablera sig.',
-        img: '/images/Carousel/Spores Image.jpeg'
-    },
-    {
-        title: 'Val av skogsskötsel påverkar',
-        description: 'Vid trakthygge försvinner de flesta arterna och mängden mykorrhiza minskar kraftigt. Med hyggesfria metoder blir påverkan betydligt mindre, eftersom det hela tiden finns många träd. Svampställen och ovanliga arter på platsen kan då fortleva.',
-        img: '/images/Carousel/TraktBlad.png'
-    },
-    {
-        title: 'Hur kan man gynna mykorrhizasvampar?',
-        description: 'Så här gör man om man vill måna om de mykorrhizasvampar som finns i en skog. 1) Spara skogsområdet. 2) Låt skogen bli äldre - då kan svamparna fortleva längre. 3) Välj hyggesfria metoder. 4) Om skogen kallavverkas - lämna väl tilltagna grupper med hänsynsträd.',
-        img: '/images/Carousel/Mushroom Images.jpeg'
-    },
-])
-
-const links = ref([
-    {
-        label: 'Visa modell för påverkan över tid ',
-        icon: 'i-material-symbols-interactive-space',
-        color: 'neutral',
-    },
 ])
 
 interface Method {
