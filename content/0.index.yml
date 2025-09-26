@@ -30,25 +30,29 @@ hero:
 sections:
   - title: Utforska svampar i svenska skogar
     description: Här kan du ta reda på vilka mykorrhizasvampar som kan finns i en skog baserat på dels DNA-analyser av svampmycel i jordprover, dels vår samlade kunskap om var olika arters fruktkroppar förekommer.
+    headline:
     id: svampar
     links:
       - label: Gå till svampar
         to: /mykorrhizasvampar
-        icon: i-heroicons-arrow-right
-        color: "neutral"
-        variant: "solid"
+        icon: i-lineicons-mushroom-1
+        color: neutral
+        variant: solid
+        size: xl
     orientation: horizontal
     reverse: true
   - title: Hur påverkar olika skogsskötsel svampar?
     description: Här försöker vi att visualisera hur trakthyggesbruk och olika former av hyggesfria metoder kan påverka förekomsten av mykorrhizasvampar under en skogsgeneration. Informationen baseras på sammanställda forskningsresultat, bl a från ett samarbete med Markinventeringen och Riksskogstaxeringen.
+    headline:
     id: skogsbruk
     src: /images/Landing/Stock Photo 563535222.jpeg
     links:
       - label: Gå till skogsskötsel
         to: /skogsskotsel
-        icon: i-heroicons-arrow-right
-        color: "neutral"
-        variant: "solid"
+        icon: i-hugeicons-tree-06
+        color: neutral
+        variant: solid
+        size: xl
     orientation: horizontal
     reverse: false
 press:

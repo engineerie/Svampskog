@@ -67,7 +67,6 @@ onUnmounted(() => {
             <UBadge :icon="page.hero.headline.icon" :label="page.hero.headline.label" :color="page.hero.headline.color"
               variant="subtle" size="lg" trailing :ui="{ base: 'rounded-full' }" />
           </NuxtLink>
-
         </template>
         <template #title>
           <MDC :value="page.hero.title" class="*:leading-13 sm:*:leading-19 max-w-3xl mx-auto  " />
@@ -83,27 +82,15 @@ onUnmounted(() => {
     </div>
     <div class="page-section">
       <UPageSection v-if="page?.sections?.[0]" :title="page.sections[0].title"
-        :description="page.sections[0].description" :orientation="page.sections[0].orientation"
-        :reverse="page.sections[0].reverse" :links="page.sections[0].links">
-        <template #links>
-          <div class="flex space-x-2">
-            <UButton v-for="(link, linkIndex) in page.sections[0].links" :key="linkIndex" variant="subtle" v-bind="link"
-              size="xl" trailing />
-          </div>
-        </template>
+        :description="page.sections[0].description" :headline="page.sections[0].headline"
+        :orientation="page.sections[0].orientation" :reverse="page.sections[0].reverse" :links="page.sections[0].links">
         <LandingSpeciesGrid :filterEdible="true" />
       </UPageSection>
     </div>
     <div class="page-section">
       <UPageSection v-if="page?.sections?.[1]" :title="page.sections[1].title"
-        :description="page.sections[1].description" :orientation="page.sections[1].orientation"
-        :links="page.sections[1].links">
-        <template #links>
-          <div class="flex space-x-2">
-            <UButton v-for="(link, linkIndex) in page.sections[1].links" :key="linkIndex" variant="subtle" v-bind="link"
-              size="xl" trailing />
-          </div>
-        </template>
+        :description="page.sections[1].description" :headline="page.sections[1].headline"
+        :orientation="page.sections[1].orientation" :links="page.sections[1].links">
         <NuxtImg :src="page.sections[1].src" width="1000" type="webp" class="rounded-md border border-neutral-200" />
       </UPageSection>
     </div>

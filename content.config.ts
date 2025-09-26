@@ -35,7 +35,7 @@ const baseSchema = {
 const linkSchema = z.object({
   label: z.string().nonempty(),
   to: z.string().nonempty(),
-  icon: z.string().optional(),
+  icon: z.string().optional().editor({ input: "icon" }),
   size: sizeEnum.optional(),
   trailing: z.boolean().optional(),
   target: z.string().optional(),
@@ -48,11 +48,6 @@ const imageSchema = z.object({
   alt: z.string().optional(),
   loading: z.string().optional(),
   srcset: z.string().optional(),
-});
-
-const featureItemSchema = z.object({
-  ...baseSchema,
-  icon: z.string().nonempty(),
 });
 
 const badgeSchema = z.object({
@@ -74,7 +69,7 @@ const timelineItemSchema = z.object({
   date: z.string().nonempty(),
   title: z.string().nonempty(),
   description: z.string().nonempty(),
-  icon: z.string().optional(),
+  icon: z.string().optional().editor({ input: "icon" }),
 });
 
 const pressSectionSchema = z.object({
@@ -105,7 +100,6 @@ const financingSchema = z.object({
 const sectionSchema = z.object({
   headline: z.string().optional(),
   ...baseSchema,
-  features: z.array(featureItemSchema),
 });
 
 export const collections = {
@@ -162,7 +156,7 @@ export const collections = {
         headline: z.object({
           label: z.string().optional(),
           to: z.string().optional(),
-          icon: z.string().optional(),
+          icon: z.string().optional().editor({ input: "icon" }),
           color: colorEnum.optional(),
         }),
         links: z.array(linkSchema),
@@ -172,7 +166,6 @@ export const collections = {
           id: z.string().nonempty(),
           src: z.string().nonempty(),
           orientation: orientationEnum.optional(),
-          features: z.array(featureItemSchema),
           links: z.array(linkSchema),
           reverse: z.boolean().optional(),
         }),
