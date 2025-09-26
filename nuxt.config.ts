@@ -10,6 +10,7 @@ export default defineNuxtConfig({
     "@vueuse/nuxt",
     "nuxt-og-image",
     "@pinia/nuxt",
+    "motion-v/nuxt",
   ],
   icon: {
     clientBundle: {

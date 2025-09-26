@@ -10,6 +10,8 @@ import {
   vegetationTypeOptions,
 } from '~/stores/envParamsStore'
 
+const { data: page } = await useAsyncData('mykorrhizasvampar', () => queryCollection('mykorrhizasvampar').first())
+
 // Access the shared environment store
 const envStore = useEnvParamsStore()
 
@@ -74,77 +76,51 @@ function redirect() {
   }
 }
 
-const items = ref([
-  {
-    title: 'Alla träd har mykorrhiza',
-    description: 'Alla träd samarbetar med mykorrhizasvampar i symbios. Svamparna förstorar trädens rotsystem och förser dem med näring och vatten. I utbyte får svamparna socker från trädens fotosyntes.',
-    img: '/images/Carousel/Mycorrhiza Image.jpeg'
-  },
-  {
-    title: 'Många skogssvampar bildar mykorrhiza',
-    description: 'De flesta större svampar i skogen bildar mykorrhiza - både ätliga och giftiga. Dit hör bland annat spindelskivlingar, kremlor, riskor, soppar och kantareller.',
-    specialBento: true,
-    bentoImgs: [
-      '/images/svampgrid/Cantharellus cibarius-3.jpg',
-      'images/svampindex/Cortinarius sanguineus-179-.jpg',
-      '/images/svampgrid/Gomphus clavatus-1.jpg',
-      '/images/svampgrid/Tricholoma matsutake-166-6276.jpg',
-      'images/svampindex/Ramaria pallida-256756.jpg',
-      'images/svampindex/Tuber aestivum-1608.jpg',
-      'images/svampindex/Inonotus dryophilus-883.jpg',
-      'images/svampindex/Amanita pantherina-183-2978.jpg',
-      'images/svampindex/Coprinus comatus-107-3442.jpg',
-    ]
-  },
-  {
-    title: 'Över 2000 arter i Sverige',
-    description: 'I Sverige finns över 2 000 olika mykorrhizasvampar. Några är vanliga, men de flesta är ovanliga. I en äldre skog kan det finnas ett par hundra arter. Många bildar små och oansenliga fruktkroppar och är därför dåligt kända.',
-    img: '/images/Carousel/ArterDiagram2.jpg',
-    noBorder: true,
-  },
-  {
-    title: 'Det mesta är mycel i marken',
-    description: 'Fruktkropparna är bara en liten del av svampen. Den största delen är mycel i marken, som växer året runt och kan leva i många år.',
-    specialGrid: true,
-    gridTop: '/images/svampgrid/Cantharellus cibarius-3.jpg',
-    gridRest: '/images/Carousel/Mycorrhizae.jpg',
-    gridCols: 5,
-    gridRows: 3,
-  },
-  {
-    title: 'Varje mycel är en individ',
-    description: 'Varje mycel i marken är en svampindivid, ofta ungefär någon kvadratmeter stor. I en skog finns många individer, precis som det finns många hos växter och djur.',
-    img: '/images/Carousel/Söder_Tallskog_91_Blåbär_grupp.png'
-  },
-])
+type CarouselItem = {
+  title: string
+  description: string
+  img?: string
+  specialBento?: boolean
+  bentoImgs?: string[]
+  specialGrid?: boolean
+  gridTop?: string
+  gridRest?: string
+  gridCols?: number
+  gridRows?: number
+  noBorder?: boolean
+}
 
-function buildGrid(item: any) {
+function buildGrid(item: CarouselItem) {
   const cols = item.gridCols ?? 5
   const rows = item.gridRows ?? 4
   const total = cols * rows
-  const top = item.gridTop || item.img
-  const rest = item.gridRest || item.img
-  return [top, ...Array(Math.max(total - 1, 0)).fill(rest)]
+  const top = item.gridTop || item.img || ''
+  const rest = item.gridRest || item.img || ''
+  const grid = [top, ...Array(Math.max(total - 1, 0)).fill(rest)]
+  return grid.filter((src): src is string => Boolean(src))
 }
 
-function bentoImages(item: any) {
-  return Array.isArray(item.bentoImgs) ? item.bentoImgs : []
+function bentoImages(item: CarouselItem) {
+  return Array.isArray(item.bentoImgs) ? item.bentoImgs.filter(Boolean) : []
 }
 </script>
 <template>
 
-
-
-  <UPage class="flex-1 ">
+  <UPage v-if="page" class="flex-1">
     <UContainer class="w-full px-0">
       <UPageHero :ui="{ container: ' lg:py-24', title: 'sm:text-6xl', headline: 'text-neutral' }"
-        title="Sök svampar i svenska skogar" headline="" description="Baserat på DNA-analyser av svampmycel i jordprover, och sammanställda uppgifter om var olika arters fruktkroppar finns.
-" orientation="horizontal" class="">
-        <NuxtImg src="/images/Landing/Mushroom Forest Image.jpeg" width="700" format="webp" alt="Illustration"
+        :title="page.hero.title" :description="page.hero.description" :orientation="page.hero.orientation" class="">
+        <template #headline v-if="page.hero.headline.label">
+          <NuxtLink :to="page.hero.headline.to">
+            <UBadge :icon="page.hero.headline.icon" :label="page.hero.headline.label" :color="page.hero.headline.color"
+              variant="subtle" size="lg" trailing :ui="{ base: 'rounded-full' }" />
+          </NuxtLink>
+        </template>
+        <NuxtImg :src="page.hero.src" width="700" format="webp" alt="Illustration"
           class=" rounded ring ring-neutral-300 " />
-        <template v-if="isMobile" #links>
+        <template v-if="isMobile && page?.hero?.links?.[0]" #links>
           <UModal title="Välj miljö" :ui="{ body: 'p-0', title: 'text-2xl' }">
-            <UButton label="Sök skogsmiljö" size="xl" color="neutral" icon="i-heroicons-magnifying-glass" />
+            <UButton :label="page.hero.links[0].label" size="xl" color="neutral" icon="i-heroicons-magnifying-glass" />
             <template #body>
               <div class=" w-full max-w-full p-4">
                 <USelect size="xl" v-for="category in categories" :key="category.key"
@@ -233,7 +209,7 @@ function bentoImages(item: any) {
         <!-- Mobile inline environment selector -->
         <div class="group">
           <UCarousel :ui="{ prev: 'ml-8 hidden group-hover:flex', next: 'mr-8 hidden group-hover:flex' }"
-            v-slot="{ item }" :items="items" class="w-full mx-auto mb-8" arrows dots>
+            v-slot="{ item }" :items="page.carousel ?? []" class="w-full mx-auto mb-8" arrows dots>
             <UPageCTA :title="item.title"
               :ui="{ root: 'mx-3 lg:mx-8 my-1', container: 'border-none py-8', title: 'lg:text-5xl/14 font-medium' }"
               :description="item.description" orientation="horizontal">
@@ -254,10 +230,15 @@ function bentoImages(item: any) {
                   </div>
                 </div>
               </template>
-              <template v-else>
+              <template v-else-if="item.img">
                 <div class="flex justify-center w-full">
                   <NuxtImg :src="item.img" :class="['rounded ', { 'ring ring-neutral-200 shadow': !item.noBorder }]"
                     height="400" />
+                </div>
+              </template>
+              <template v-else>
+                <div class="flex justify-center items-center w-full min-h-60 text-neutral-500">
+                  <span>Ingen bild tillgänglig</span>
                 </div>
               </template>
             </UPageCTA>

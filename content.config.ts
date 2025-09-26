@@ -55,6 +55,20 @@ const badgeSchema = z.object({
   color: colorEnum.optional(),
 });
 
+const carouselItemSchema = z.object({
+  title: z.string().nonempty(),
+  description: z.string().nonempty(),
+  img: z.string().optional(),
+  specialBento: z.boolean().optional(),
+  bentoImgs: z.array(z.string()).optional(),
+  specialGrid: z.boolean().optional(),
+  gridTop: z.string().optional(),
+  gridRest: z.string().optional(),
+  gridCols: z.number().optional(),
+  gridRows: z.number().optional(),
+  noBorder: z.boolean().optional(),
+});
+
 const pressItemSchema = z.object({
   title: z.string().nonempty(),
   publication: z.string().optional(),
@@ -173,6 +187,26 @@ export const collections = {
       press: pressSectionSchema.optional(),
       timeline: timelineSectionSchema.optional(),
       financing: financingSchema.optional(),
+    }),
+  }),
+  mykorrhizasvampar: defineCollection({
+    type: "data",
+    source: "1.mykorrhizasvampar.yml",
+    schema: z.object({
+      title: z.string().nonempty(),
+      description: z.string().nonempty(),
+      hero: sectionSchema.extend({
+        headline: z.object({
+          label: z.string().optional(),
+          to: z.string().optional(),
+          icon: z.string().optional().editor({ input: "icon" }),
+          color: colorEnum.optional(),
+        }),
+        links: z.array(linkSchema),
+        src: z.string().nonempty(),
+        orientation: orientationEnum.optional(),
+      }),
+      carousel: z.array(carouselItemSchema).optional(),
     }),
   }),
   blog: defineCollection({

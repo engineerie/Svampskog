@@ -9,7 +9,7 @@ Lär dig hur trakthyggesbruk och olika former av hygesfria metoder kan påverka 
                 <NuxtImg src="/images/Landing/Stock Photo 563535222.jpeg" width="700" format="webp" alt="Illustration"
                     class=" rounded ring ring-neutral-300 " />
                 <template #links>
-                    <UModal fullscreen>
+                    <UModal>
                         <UChip color="warning" size="2xl">
                             <UButton label="Visa modell för påverkan över tid" size="xl" color="neutral"
                                 icon="i-material-symbols-interactive-space" />

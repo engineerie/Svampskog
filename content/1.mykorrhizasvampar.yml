@@ -1,0 +1,53 @@
+title: Svampar
+description: Sök på vilka mykorrhizasvampar som kan finnas i olika skogar baserat på miljö-DNA och sammanställd kunskap om vart fruktkroppar förekommer.
+navigation: false
+hero:
+  title: Sök svampar i svenska skogar
+  description: Baserat på DNA-analyser av svampmycel i jordprover, och sammanställda uppgifter om var olika arters fruktkroppar finns.
+  orientation: horizontal
+  src: /images/Landing/Mushroom Forest Image.jpeg
+  headline:
+    label:
+    to:
+    icon:
+    color: secondary
+  links:
+    - label: Sök skogssmiljö
+      icon: i-lineicons-mushroom-1
+      trailing: false
+      to: /mykorrhizasvampar
+      target:
+      size: xl
+      color: neutral
+      variant: solid
+carousel:
+  - title: Alla träd har mykorrhiza
+    description: Alla träd samarbetar med mykorrhizasvampar i symbios. Svamparna förstorar trädens rotsystem och förser dem med näring och vatten. I utbyte får svamparna socker från trädens fotosyntes.
+    img: /images/Carousel/Mycorrhiza Image.jpeg
+  - title: Många skogssvampar bildar mykorrhiza
+    description: De flesta större svampar i skogen bildar mykorrhiza - både ätliga och giftiga. Dit hör bland annat spindelskivlingar, kremlor, riskor, soppar och kantareller.
+    specialBento: true
+    bentoImgs:
+      - /images/svampgrid/Cantharellus cibarius-3.jpg
+      - /images/svampindex/Cortinarius sanguineus-179-.jpg
+      - /images/svampgrid/Gomphus clavatus-1.jpg
+      - /images/svampgrid/Tricholoma matsutake-166-6276.jpg
+      - /images/svampindex/Ramaria pallida-256756.jpg
+      - /images/svampindex/Tuber aestivum-1608.jpg
+      - /images/svampindex/Inonotus dryophilus-883.jpg
+      - /images/svampindex/Amanita pantherina-183-2978.jpg
+      - /images/svampindex/Coprinus comatus-107-3442.jpg
+  - title: Över 2000 arter i Sverige
+    description: I Sverige finns över 2 000 olika mykorrhizasvampar. Några är vanliga, men de flesta är ovanliga. I en äldre skog kan det finnas ett par hundra arter. Många bildar små och oansenliga fruktkroppar och är därför dåligt kända.
+    img: /images/Carousel/ArterDiagram2.jpg
+    noBorder: true
+  - title: Det mesta är mycel i marken
+    description: Fruktkropparna är bara en liten del av svampen. Den största delen är mycel i marken, som växer året runt och kan leva i många år.
+    specialGrid: true
+    gridTop: /images/svampgrid/Cantharellus cibarius-3.jpg
+    gridRest: /images/Carousel/Mycorrhizae.jpg
+    gridCols: 5
+    gridRows: 3
+  - title: Varje mycel är en individ
+    description: Varje mycel i marken är en svampindivid, ofta ungefär någon kvadratmeter stor. I en skog finns många individer, precis som det finns många hos växter och djur.
+    img: /images/Carousel/Söder_Tallskog_91_Blåbär_grupp.png
