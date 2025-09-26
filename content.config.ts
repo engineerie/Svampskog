@@ -162,7 +162,7 @@ export const collections = {
   }),
   index: defineCollection({
     source: "0.index.yml",
-    type: "data",
+    type: "page",
     schema: z.object({
       title: z.string().nonempty(),
       description: z.string().nonempty(),
@@ -190,7 +190,7 @@ export const collections = {
     }),
   }),
   mykorrhizasvampar: defineCollection({
-    type: "data",
+    type: "page",
     source: "1.mykorrhizasvampar.yml",
     schema: z.object({
       title: z.string().nonempty(),

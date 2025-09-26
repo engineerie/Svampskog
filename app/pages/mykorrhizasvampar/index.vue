@@ -11,6 +11,13 @@ import {
 } from '~/stores/envParamsStore'
 
 const { data: page } = await useAsyncData('mykorrhizasvampar', () => queryCollection('mykorrhizasvampar').first())
+if (!page.value) {
+  throw createError({
+    statusCode: 404,
+    statusMessage: 'Page not found',
+    fatal: true
+  })
+}
 
 // Access the shared environment store
 const envStore = useEnvParamsStore()

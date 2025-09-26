@@ -19,8 +19,8 @@ useHead({
 
 useSeoMeta({
   titleTemplate: 'Svampskog',
-  ogImage: 'https://saas-template.nuxt.dev/social-card.png',
-  twitterImage: 'https://saas-template.nuxt.dev/social-card.png',
+  ogImage: '/images/social-card.png',
+  twitterImage: '/images/social-card.png',
   twitterCard: 'summary_large_image'
 })
 
