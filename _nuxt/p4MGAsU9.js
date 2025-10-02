@@ -1,0 +1,1 @@
+import{_,d as s,e as a,g as e,cs as r,w as l,N as p,ct as f,cu as d}from"#entry";const m={};function u(t,i){const n=r,o=f,c=d;return a(),s("div",null,[e(n),e(o,{class:"flex flex-col"},{default:l(()=>[p(t.$slots,"default")]),_:3}),e(c)])}const h=_(m,[["render",u]]);export{h as default};
