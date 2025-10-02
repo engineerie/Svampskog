@@ -8,7 +8,7 @@
             @update:model-value="value => {
               table?.tableApi?.getColumn('Commonname')?.setFilterValue(value);
               onSearchInput(value);
-            }" variant="soft" />
+            }" variant="ghost" />
           <div class="flex gap-2">
             <div class="flex my-1 gap-2 overflow-scroll" id="scrollbar">
               <template v-if="selectedMark.length">
@@ -64,7 +64,7 @@
                 e?.preventDefault()
               }
             }))" :content="{ align: 'end' }">
-              <UButton label="Kolumner" color="neutral" variant="soft" trailing-icon="i-lucide-chevron-down" />
+              <UButton label="Kolumner" color="neutral" variant="ghost" trailing-icon="i-lucide-chevron-down" />
             </UDropdownMenu>
 
             <div v-if="!isNormalView" class="hidden md:flex">
@@ -75,7 +75,7 @@
                 { value: 40, label: '40 rader' },
                 { value: 50, label: '50 rader' },
                 { value: 'Alla', label: 'Alla' }
-              ]" item-value="value" item-label="label" placeholder="Rader per sida" variant="soft" />
+              ]" item-value="value" item-label="label" placeholder="Rader per sida" variant="ghost" />
             </div>
           </div>
         </div>
@@ -124,17 +124,19 @@
 
 
     </div>
+
     <div v-if="useMobileLayout" class="flex gap-2 w-full mb-2">
 
+
       <UDropdownMenu :size="isMobile ? 'xl' : 'md'" :items="sortMenuItems" :content="{ align: 'start' }">
-        <UButton :variant="isMobile ? 'soft' : 'soft'" icon="i-lucide-arrow-up-down" :size="isMobile ? 'xl' : 'md'"
-          :label="isMobile ? null : 'Sortera'" color="neutral" trailing />
+        <UButton :variant="isMobile ? 'soft' : 'ghost'" icon="i-lucide-arrow-up-down" :size="isMobile ? 'xl' : 'md'"
+          :label="isMobile ? null : null" color="neutral" trailing />
       </UDropdownMenu>
       <UDropdownMenu :size="isMobile ? 'xl' : 'md'" :items="filterMenuItems" :content="{ align: 'start' }">
-        <UButton :variant="isMobile ? 'soft' : 'soft'" icon="i-lucide-list-filter" :size="isMobile ? 'xl' : 'md'"
-          :label="isMobile ? null : 'Filter'" color="neutral" />
+        <UButton :variant="isMobile ? 'soft' : 'ghost'" icon="i-lucide-list-filter" :size="isMobile ? 'xl' : 'md'"
+          :label="isMobile ? null : null" color="neutral" />
       </UDropdownMenu>
-      <UInput :variant="isMobile ? 'soft' : 'soft'"
+      <UInput :variant="isMobile ? 'soft' : 'ghost'"
         :model-value="table?.tableApi?.getColumn('Commonname')?.getFilterValue() || ''" class="w-full min-w-[12ch]"
         placeholder="Sök på namn" :size="isMobile ? 'xl' : 'md'" icon="i-heroicons-magnifying-glass"
         @update:model-value="value => {
@@ -142,6 +144,7 @@
           onSearchInput(value);
         }" variant="soft" />
     </div>
+    <USeparator :ui="{ border: 'border-muted/50' }" class="mb-2" />
     <div v-if="filteredData" :class="[isNormalView ? '' : '']">
       <div class="">
 

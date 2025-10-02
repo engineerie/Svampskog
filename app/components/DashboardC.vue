@@ -35,8 +35,8 @@
     <div class="flex flex-col min-h-screen ">
       <UContainer class="w-full px-0 ">
         <transition name="fade" mode="out-in">
-          <component :is="activeComponent" @close="handleCloseFullScreen" @enlarge="handleFullScreen"
-            class="block border border-muted/50 bg-white rounded shadow" />
+          <NormalView class="block sm:border border-muted/50 bg-white sm:rounded sm:shadow"
+            :active-view="activeKnowledgeView" @enlarge="handleFullScreen" @close-view="handleCloseFullScreen" />
         </transition>
       </UContainer>
     </div>
@@ -46,15 +46,11 @@
 <script setup>
 import { computed, onMounted, onBeforeUnmount, ref, watch } from "vue";
 import { useRoute } from "vue-router";
-import FullScreenPoison from "./FullScreenPoison.vue";
-import FullScreenEdible from "./FullScreenEdible.vue";
-import RedlistedComponent from "./RedlistedComponent.vue";
 import NormalView from "./NormalView.vue";
 
 import { useEnvParamsStore } from "~/stores/envParamsStore";
 
 import { useSpeciesStore } from "~/stores/speciesStore";
-import EdnaComponent from "./EdnaComponent.vue";
 import { useMediaQuery } from '@vueuse/core'
 const isMobile = useMediaQuery('(max-width: 767px)')
 
@@ -87,8 +83,8 @@ watch(showSlideover, (isOpen) => {
   }
 });
 
-// A ref to track if a full-screen view is active
-const activeFullScreenComponent = ref(null);
+// Track which detailed view should be shown inside NormalView
+const activeKnowledgeView = ref(null);
 
 // A computed property to check if all required environment parameters are provided
 const hasAllParams = computed(() => {
@@ -98,28 +94,13 @@ const hasAllParams = computed(() => {
     envParamsStore.vegetationType;
 });
 
-const activeComponent = computed(() => {
-  switch (activeFullScreenComponent.value) {
-    case "FullScreenEdna":
-      return EdnaComponent;
-    case "FullScreenEdible":
-      return FullScreenEdible;
-    case "FullScreenPoison":
-      return FullScreenPoison;
-    case "RedlistedComponent":
-      return RedlistedComponent;
-    default:
-      return NormalView;
-  }
-});
-
 // Handlers for toggling full-screen view states
 const handleFullScreen = (componentName) => {
-  activeFullScreenComponent.value = componentName;
+  activeKnowledgeView.value = componentName;
 };
 
 const handleCloseFullScreen = () => {
-  activeFullScreenComponent.value = null;
+  activeKnowledgeView.value = null;
 };
 
 // Optional: handle the Esc key to clear a species selection or close modals
@@ -202,7 +183,7 @@ watch(
   { deep: true }
 );
 
-watch(activeComponent, () => {
+watch(activeKnowledgeView, () => {
   window.scrollTo({ top: 0, behavior: 'smooth' });
 });
 

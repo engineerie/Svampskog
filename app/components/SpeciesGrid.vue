@@ -1,67 +1,29 @@
 <template>
-    <div class="p-2 flex gap-2">
-    <UInput icon="i-heroicons-magnifying-glass" 
- v-model="searchTerm" placeholder="Sök på namn" variant="soft"/>
-    <USelect
-      v-model="statusFilter"
-      :items="statusOptionsWithCount"
-      item-value="value"
-      item-label="label"
-      placeholder="Filtrera på status"
-      multiple
-      variant="soft"
-    />
-    <USelect
-      v-model="groupFilter"
-      :items="groupOptionsWithCount"
-      item-value="value"
-      item-label="label"
-      placeholder="Filtrera på grupp"
-      multiple
-      variant="soft"
-    />
+  <div class="p-2 flex gap-2">
+    <UInput icon="i-heroicons-magnifying-glass" v-model="searchTerm" placeholder="Sök på namn" variant="soft" />
+    <USelect v-model="statusFilter" :items="statusOptionsWithCount" item-value="value" item-label="label"
+      placeholder="Filtrera på status" multiple variant="soft" />
+    <USelect v-model="groupFilter" :items="groupOptionsWithCount" item-value="value" item-label="label"
+      placeholder="Filtrera på grupp" multiple variant="soft" />
   </div>
   <!-- min-h-[399px] -->
-    <div
-            class="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-8 gap-4   p-2"
-          >
-            <div
-              v-for="(row, index) in gridPaginatedData"
-              :key="row.Commonname + row.Scientificname + index"
-              class="bg-white dark:bg-neutral-800 rounded-sm border overflow-hidden border-neutral-200 dark:border-neutral-700/40 hover:shadow-md transition-shadow cursor-pointer h-[126px]"
-              @click="selectRow(row)"
-            >
-              <!-- Image Thumbnail -->
-              <div class="w-full h-24 relative ">
-                <img v-if="row.images && row.images.length" :src="row.images[0]"
-                  class="w-full h-full object-cover" alt="Species image" height="300" width="450" loading="lazy"
-                  decoding="async" />
-                <div
-                  v-else
-                  class="w-full h-full flex items-center justify-center bg-neutral-200 dark:bg-neutral-700"
-                >
-                  <Icon
-                    name="material-symbols:photo"
-                    class="w-8 h-8 text-neutral-500"
-                  />
-                </div>
-                <div class="absolute bottom-1 left-1 flex gap-1">
-                    <UBadge
-                    v-if="row.SIGNAL_art !== 'S' && !(['LC', '0', 'NA', 'NE', 'Saknas', null].includes(row.RL2020kat))"
-                    class="bg-error-50 dark:bg-error-950/80"
-                    color="error"
-                    variant="subtle"
-                    size="sm"
-                    :label="row.RL2020kat !== 'Saknas' ? getStatusTooltip(row.RL2020kat) : 'Ej bedömd'"
-                  />
-                  <UBadge
-                    v-if="row.SIGNAL_art === 'S'"
-                    color="signal"
-                    variant="subtle"
-                    label="Signalart"
-                    size="sm"
-                  />
-                  <!-- <UBadge
+  <div class="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-8 gap-4   p-2">
+    <div v-for="(row, index) in gridPaginatedData" :key="row.Commonname + row.Scientificname + index"
+      class="bg-white dark:bg-neutral-800 rounded border overflow-hidden border-muted/50 dark:border-neutral-700/40 hover:shadow-md transition-shadow cursor-pointer h-[126px]"
+      @click="selectRow(row)">
+      <!-- Image Thumbnail -->
+      <div class="w-full h-24 relative ">
+        <img v-if="row.images && row.images.length" :src="row.images[0]" class="w-full h-full object-cover"
+          alt="Species image" height="300" width="450" loading="lazy" decoding="async" />
+        <div v-else class="w-full h-full flex items-center justify-center bg-neutral-200 dark:bg-neutral-700">
+          <Icon name="material-symbols:photo" class="w-8 h-8 text-neutral-500" />
+        </div>
+        <div class="absolute bottom-1 left-1 flex gap-1">
+          <UBadge v-if="row.SIGNAL_art !== 'S' && !(['LC', '0', 'NA', 'NE', 'Saknas', null].includes(row.RL2020kat))"
+            class="bg-error-50 dark:bg-error-950/80" color="error" variant="subtle" size="sm"
+            :label="row.RL2020kat !== 'Saknas' ? getStatusTooltip(row.RL2020kat) : 'Ej bedömd'" />
+          <UBadge v-if="row.SIGNAL_art === 'S'" color="signal" variant="subtle" label="Signalart" size="sm" />
+          <!-- <UBadge
                     v-if="row['Nyasvamp-boken'] === 'x'"
                     color="warning"
                     variant="subtle"
@@ -75,48 +37,37 @@
                     label="Giftsvamp"
                     size="sm"
                   /> -->
-                </div>
-              </div>
-              <!-- Species Names -->
-              <div class="p-2 pt-1">
-                <div
-                  class="text-sm font-medium text-neutral-500 dark:text-neutral-300 truncate"
-                >
-                  {{ capitalize(row.Commonname) }}
-                </div>
-                <!-- <div
+        </div>
+      </div>
+      <!-- Species Names -->
+      <div class="p-2 pt-1">
+        <div class="text-sm font-medium text-neutral-500 dark:text-neutral-300 truncate">
+          {{ capitalize(row.Commonname) }}
+        </div>
+        <!-- <div
                   class="text-sm font-medium text-neutral-400 dark:text-neutral-300 truncate"
                 >
                   {{ capitalize(row.Scientificname) }}
                 </div> -->
-              </div>
-            </div>
-          </div>
-  
-          <!-- GRID VIEW PAGINATION -->
-          <div
-            class="flex justify-between items-center px-5 py-2 "
-          >
-            <div>
-              <p >
-                Visar {{ gridStartItem }} till {{ gridEndItem }} av
-                {{ totalItems }} arter
-              </p>
-            </div>
-            <div>
-                <UPagination
-                :items-per-page="gridPageSize"
-                v-model:page="gridPage"   
-  :total="totalItems"
-  
+      </div>
+    </div>
+  </div>
 
-    active-variant="ghost"
-                  variant="ghost"
->
-</UPagination>
-          
-            </div>
-          </div>
+  <!-- GRID VIEW PAGINATION -->
+  <div class="flex justify-between items-center px-5 py-2 ">
+    <div>
+      <p>
+        Visar {{ gridStartItem }} till {{ gridEndItem }} av
+        {{ totalItems }} arter
+      </p>
+    </div>
+    <div>
+      <UPagination :items-per-page="gridPageSize" v-model:page="gridPage" :total="totalItems" active-variant="ghost"
+        variant="ghost">
+      </UPagination>
+
+    </div>
+  </div>
 </template>
 <script setup>
 import { ref, computed, watch } from 'vue'

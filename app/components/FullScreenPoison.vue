@@ -7,32 +7,33 @@
 
           <div>
 
-            <h1 @click="$emit('enlarge')"
-              class="text-lime-500 dark:text-neutral-300 text-4xl font-bold md:font-medium md:text-3xl cursor-default ">
-              Giftsvampar
-            </h1>
+            <div @click="handleTitleClick"
+              :class="['flex items-center dark:text-neutral-300 text-4xl font-medium md:text-3xl', isNormalView ? 'group cursor-pointer' : 'cursor-default']">
+              <UIcon name="i-hugeicons-danger" class="mr-2" />
+              <h1>
+                Giftsvampar
+              </h1>
+              <UIcon v-if="isNormalView" name="i-lucide-arrow-right"
+                class="size-6 font-medium text-neutral transition-all opacity-0 group-hover:translate-x-1 group-hover:opacity-100" />
+            </div>
             <h2 class="text-md text-neutral-500 md:mb-2">{{ poisonCount }} arter</h2>
           </div>
 
           <UButton color="neutral" variant="soft" size="xl" @click="$emit('enlarge')"
             :class="isNormalView ? 'hidden' : 'md:hidden'" :icon="isNormalView ? '' : 'i-heroicons-x-mark-solid'"
             trailing class="rounded-full" />
-
-
         </div>
 
 
       </div>
       <div class="md:flex gap-4 items-center  hidden">
-        <UBadge v-if="!isNormalView" icon="lineicons:mushroom-1" size="lg" color="tertiary" variant="subtle"
-          label="Enligt samlad kunskap, främst var fruktkroppar förekommer" class="h-fit hidden md:flex" />
         <UTabs v-if="!useMobileLayout" class="flex mt-2" v-model="activeTab" :items="items" variant="pill"
           color="neutral" size="md" :ui="{
             indicator: 'bg-white dark:bg-black border border-neutral-300/80 dark:border-neutral-300/30',
             trigger: 'data-[state=active]:text-neutral-700 dark:data-[state=active]:text-neutral-100/90 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-neutral'
           }" />
-        <UButton :label="isNormalView ? 'Visa mer' : 'Tillbaka till översikt'" color="neutral" variant="outline"
-          size="sm" @click="$emit('enlarge')" class="hidden md:flex ring-muted/60" />
+        <!-- <UButton :label="isNormalView ? 'Visa mer' : 'Tillbaka till översikt'" color="neutral" variant="outline"
+          size="sm" @click="$emit('enlarge')" class="hidden md:flex ring-muted/60" /> -->
       </div>
     </div>
     <!-- TABLE VIEW -->
@@ -106,6 +107,12 @@ const props = defineProps({ isNormalView: Boolean });
 const isSmallScreen = useMediaQuery('(max-width: 767px)');
 // Treat desktop normal view as mobile layout
 const useMobileLayout = computed(() => isSmallScreen.value || props.isNormalView);
+
+const handleTitleClick = () => {
+  if (props.isNormalView) {
+    emit('enlarge')
+  }
+}
 
 
 const activeTab = computed({

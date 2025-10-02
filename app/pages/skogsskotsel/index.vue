@@ -144,7 +144,7 @@
                                     <div class="px-6 sm:px-12 sm:border-r border-muted/50">
                                         <h1 class="my-4  text-3xl sm:text-4xl font-medium text-neutral-900">{{
                                             selectedMethod.title
-                                            }}
+                                        }}
                                         </h1>
                                         <MDC class="text-lg text-neutral-800  mb-8"
                                             :value="selectedMethod.description" />
@@ -167,16 +167,16 @@
                             </UPage>
                         </template>
                         <template #diagram>
-                            <UAlert title="Denna funktion lanseras i November." color="warning"
-                                icon="i-fluent-emoji-high-contrast-construction" />
+                            <!-- <UAlert title="Denna funktion lanseras i November." color="warning"
+                                icon="i-fluent-emoji-high-contrast-construction" /> -->
                             <!-- <h1
                                 class="text-3xl tracking-tight lg:text-5xl font-medium text-neutral-900 my-4 mx-2 lg:mt-8 mb-2">
                                 {{
                                     selectedMethod.title
                                 }}
-                            </h1>
+                            </h1> -->
                             <ForestryChartMain :parentSelectedFrameworks=[selectedMethod.id]
-                                currentStartskog="naturskog" /> -->
+                                currentStartskog="naturskog" />
                         </template>
                         <template #timeline>
                             <div class="p-6 pb-2">
@@ -295,11 +295,7 @@ const timelineItems = computed<TimelineDisplayItem[]>(() => {
 })
 
 const tabs = ref<TabsItem[]>([
-    {
-        label: 'Text',
-        icon: 'i-heroicons-book-open',
-        slot: 'text' as const
-    },
+
     {
         label: 'Diagram',
         icon: 'i-heroicons-presentation-chart-line',
@@ -309,7 +305,12 @@ const tabs = ref<TabsItem[]>([
         label: 'Tidslinje',
         icon: 'i-heroicons-list-bullet',
         slot: 'timeline' as const
-    }
+    },
+    {
+        label: 'Text',
+        icon: 'i-heroicons-book-open',
+        slot: 'text' as const
+    },
 ])
 
 interface Method {

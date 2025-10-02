@@ -3,12 +3,12 @@
     <div v-if="isMobile"
       :class="[' block relative overflow-scroll -mx-4 w-screen', geography && forestType && standAge && vegetationType ? 'h-14' : 'h-0']">
       <div
-        :class="['pt-0.5 top-16 z-20 w-screen inset-0 bg-neutral-50 dark:bg-neutral-950  dark:border-neutral-800 transition-height', mobileCollapsed ? 'h-14' : 'h-14']">
+        :class="['pt-0.5 top-16 z-20 w-screen inset-0 bg-neutral-50 dark:bg-neutral-950 border-b border-muted dark:border-neutral-800 transition-height', mobileCollapsed ? 'h-14' : 'h-14']">
         <UModal fullscreen :overlay="true" title="Välj miljö" :ui="{ body: 'p-0', title: 'text-2xl' }">
           <div class="flex justify-between w-full mx-auto max-w-full ">
-            <div class="flex gap-2 p-2 overflow-scroll">
+            <div class="flex gap-2 p-2 overflow-scroll ">
               <UBadge v-for="category in categories" :key="category.key" size="xl" variant="outline" color="neutral"
-                class=" text-lg" truncate :label="getLabel(category.key) || category.defaultLabel">
+                class="ring-muted text-lg" truncate :label="getLabel(category.key) || category.defaultLabel">
               </UBadge>
             </div>
           </div>
@@ -17,7 +17,7 @@
               <!-- Use enabledOptions for USelect items as well -->
               <USelect size="xl" v-for="category in categories" :key="category.key"
                 :items="enabledOptions[category.key]" v-model="envStore[category.key]"
-                :placeholder="category.defaultLabel" class=" w-full my-1 text-lg" variant="outline">
+                :placeholder="category.defaultLabel" class=" w-full my-1 text-lg ring-muted" variant="outline">
                 <template #item="{ item }">
                   <div class="flex flex-col">
                     <div class="text-lg font-medium">{{ item.label }}</div>
@@ -151,16 +151,16 @@
             <div class="absolute bottom-0 right-3 flex justify-end gap-2">
               <UButton trailing :icon="restrictionEnabled ? 'mdi:lock' : 'mdi:lock-open'" @click="toggleRestriction"
                 shape="full" class="transition-all bg-white"
-                :class="restrictionEnabled ? 'ring-secondary-200' : 'ring-muted'" variant="outline"
+                :class="restrictionEnabled ? 'ring-secondary-200/60' : 'ring-muted/60'" variant="outline"
                 :color="restrictionEnabled ? 'secondary' : 'neutral'">
                 {{ restrictionEnabled ? "Markinventeringsdata" : "Markinventeringsdata" }}
               </UButton>
-              <UButton trailing icon="mdi:apps" @click="toggleHeight" class="ring-muted" color="neutral"
+              <UButton trailing icon="mdi:apps" @click="toggleHeight" class="ring-muted/60" color="neutral"
                 variant="outline">
                 {{ listBoxRowVisible ? "Dölj kombinationer" : "Visa kombinationer" }}
               </UButton>
               <UModal title="Miljööversikt" :ui="{ content: 'max-w-[83rem]', body: 'sm:p-0', title: 'text-2xl' }">
-                <UButton class="ring-muted" label="Alla miljöer" trailing icon="i-hugeicons-tree-06" color="neutral"
+                <UButton class="ring-muted/60" label="Alla miljöer" trailing icon="i-hugeicons-tree-06" color="neutral"
                   variant="outline" />
                 <template #body>
                   <Miljoer />

@@ -252,6 +252,27 @@ export const collections = {
       gallery: gallerySectionSchema.optional(),
     }),
   }),
+  svamparSkogsbruk: defineCollection({
+    type: "data",
+    source: "forestry/svampar-skogsbruk.json",
+    schema: z.array(z.object({
+      artkategori: z.string().nonempty(),
+      frameworks: z.string().nonempty(),
+      startskog: z.string().optional(),
+      ['ålder']: z.number(),
+      klassning: z.number(),
+    })),
+  }),
+  totalSvamparSkogsbruk: defineCollection({
+    type: "data",
+    source: "forestry/total-svampar-skogsbruk.json",
+    schema: z.array(z.object({
+      artkategori: z.string().nonempty(),
+      frameworks: z.string().nonempty(),
+      ['ålder']: z.number(),
+      klassning: z.number(),
+    })),
+  }),
   skogsskotsel: defineCollection({
     type: "page",
     source: "2.skogsskotsel.yml",

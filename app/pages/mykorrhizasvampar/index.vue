@@ -183,7 +183,7 @@ function bentoImages(item: CarouselItem) {
               <div class=" w-full max-w-full p-4">
                 <USelect size="xl" v-for="category in categories" :key="category.key"
                   :items="enabledOptions[category.key]" v-model="envStore[category.key]"
-                  :placeholder="category.defaultLabel" class="flex-1 w-full my-1 text-lg" append-to-body
+                  :placeholder="category.defaultLabel" class="flex-1 w-full my-1 text-lg ring-muted" append-to-body
                   variant="outline">
                   <template #item="{ item }">
                     <div class="flex flex-col">
