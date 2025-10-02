@@ -112,10 +112,10 @@ import AnnotationPopup from "./AnnotationPopup.vue";
 import AnnotationMarker from "./AnnotationMarker.vue";
 import { useSelectedAnnotationStore } from "~/stores/selectedAnnotationStore";
 import { useOverlayStore } from "~/stores/overlayStore";
+import { useAsyncData } from '#app'
+import { queryCollection } from '#content/server'
 import timelineData from "public/timeline.json";
 import { usePanelStore } from '~/stores/panelStore';
-import svamparData from "public/SvamparSkogsbruk.json";
-import totalSvamparData from "public/TotalSvamparSkogsbruk.json";
 import { useViewerStore } from '~/stores/viewerStore';
 const retentionOverlayIds = [];
 
@@ -219,6 +219,19 @@ export default {
     });
 
     // Småplantor points (public JSON)
+    const svamparDataset = ref([]);
+    const totalSvamparDataset = ref([]);
+
+    useAsyncData('svampar-skogsbruk', () => queryCollection('svamparSkogsbruk').first()).then(({ data }) => {
+      const value = data.value
+      svamparDataset.value = Array.isArray(value?.entries) ? value.entries : []
+    })
+
+    useAsyncData('total-svampar-skogsbruk', () => queryCollection('totalSvamparSkogsbruk').first()).then(({ data }) => {
+      const value = data.value
+      totalSvamparDataset.value = Array.isArray(value?.entries) ? value.entries : []
+    })
+
     const localSmaPlantor = ref([]);
     onMounted(async () => {
       try {
@@ -1083,7 +1096,7 @@ export default {
     });
 
     const svampMycelValue = computed(() => {
-      const match = totalSvamparData.find(item =>
+      const match = totalSvamparDataset.value.find(item =>
         item.artkategori === "total" &&
         item.frameworks === props.currentFramework.value &&
         Number(item.ålder) === adjustedTotalSvamparTime.value
@@ -1092,7 +1105,7 @@ export default {
     });
 
     const matsvampMycelValue = computed(() => {
-      const match = svamparData.find(item =>
+      const match = svamparDataset.value.find(item =>
         item.artkategori === "matsvamp" &&
         item.startskog === props.currentStartskog.value &&
         item.frameworks === props.currentFramework.value &&
@@ -1102,7 +1115,7 @@ export default {
     });
 
     const rodlistadeMycelValue = computed(() => {
-      const match = svamparData.find(item =>
+      const match = svamparDataset.value.find(item =>
         item.artkategori === "rödlistade + signalarter" &&
         item.startskog === props.currentStartskog.value &&
         item.frameworks === props.currentFramework.value &&

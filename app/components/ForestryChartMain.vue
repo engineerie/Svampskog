@@ -246,22 +246,22 @@ const artkategoriColorMapping: Record<string, string> = {
 
 // If exactly one framework is active (and we're not in singleFrameworkSelection),
 // color that framework by selected artkategori: total / matsvamp / rödlistade + signalarter
-const legendOrder = ["naturskydd", "trakthygge", "skärmträd", "luckhuggning", "blädning"];
+// const legendOrder = ["naturskydd", "trakthygge", "skärmträd", "luckhuggning", "blädning"];
 
-const activeFrameworkKeys = computed(() => {
-  const selectedKeys = legendOrder.filter(key => props.selectedFrameworks.map(f => f.toLowerCase()).includes(key))
-  return selectedKeys.filter(key => !inactiveFrameworkKeys.value.has(key))
-})
+// const activeFrameworkKeys = computed(() => {
+//   const selectedKeys = legendOrder.filter(key => props.selectedFrameworks.map(f => f.toLowerCase()).includes(key))
+//   return selectedKeys.filter(key => !inactiveFrameworkKeys.value.has(key))
+// })
 
-const singleFrameworkOverrideColor = computed<string | null>(() => {
-  if (props.singleFrameworkSelection) return null
-  if (activeFrameworkKeys.value.length !== 1) return null
-  const primaryCat = (props.selectedArtkategori?.[0] || '').toLowerCase()
-  if (primaryCat === 'total') return '#808080'
-  if (primaryCat === 'matsvamp') return '#eab308'
-  if (primaryCat === 'rödlistade + signalarter') return '#14B8A6'
-  return null
-})
+// const singleFrameworkOverrideColor = computed<string | null>(() => {
+//   if (props.singleFrameworkSelection) return null
+//   if (activeFrameworkKeys.value.length !== 1) return null
+//   const primaryCat = (props.selectedArtkategori?.[0] || '').toLowerCase()
+//   if (primaryCat === 'total') return '#808080'
+//   if (primaryCat === 'matsvamp') return '#eab308'
+//   if (primaryCat === 'rödlistade + signalarter') return '#14B8A6'
+//   return null
+// })
 
 // Tooltip formatting function
 // const tooltipFormat = (d: any) => {

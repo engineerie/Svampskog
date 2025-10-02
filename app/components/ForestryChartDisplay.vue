@@ -44,9 +44,20 @@
 import { computed, ref, onMounted, onBeforeUnmount, nextTick } from 'vue'
 import { VisXYContainer, VisAxis, VisLine, VisArea, VisGroupedBar, VisBulletLegend, VisBrush, VisCrosshair, VisTooltip } from '@unovis/vue'
 import type { BulletLegendItemInterface } from '@unovis/ts'
-import rawData from 'public/SvamparSkogsbruk.json'
-import totalSvamparData from 'public/TotalSvamparSkogsbruk.json'
 import { capitalize } from 'lodash-es'
+import { useAsyncData } from '#app'
+
+const { data: svamparDataDoc } = await useAsyncData('svampar-skogsbruk', () =>
+  queryCollection('svamparSkogsbruk').first()
+)
+
+const { data: totalSvamparDataDoc } = await useAsyncData('total-svampar-skogsbruk', () =>
+  queryCollection('totalSvamparSkogsbruk').first()
+)
+
+const dataset = computed(() => Array.isArray(svamparDataDoc.value?.entries) ? svamparDataDoc.value.entries : [])
+const totalDataset = computed(() => Array.isArray(totalSvamparDataDoc.value?.entries) ? totalSvamparDataDoc.value.entries : [])
+
 
 const yDomain = computed<[number, number] | undefined>(() => {
   const max = Number(props.maxYValue)
@@ -395,13 +406,15 @@ const activeFrameworks = computed(() => {
 function filterDataForFramework(framework: string) {
   const selected = props.selectedArtkategori.map(s => s.toLowerCase());
 
-  const source = selected.includes('total') ? totalSvamparData : rawData;
+  const source = selected.includes('total') ? totalDataset.value : dataset.value;
+  const selectedStartskog = props.selectedStartskog ? props.selectedStartskog.toLowerCase() : null;
 
-  return (source as any[]).filter(d =>
-    selected.includes(d.artkategori?.toLowerCase()) &&
-    d.frameworks?.toLowerCase() === framework.toLowerCase() &&
-    d.startskog?.toLowerCase() === props.selectedStartskog?.toLowerCase()
-  ).map(d => ({
+  return (source as any[]).filter(d => {
+    const matchesCategory = selected.includes(d.artkategori?.toLowerCase());
+    const matchesFramework = d.frameworks?.toLowerCase() === framework.toLowerCase();
+    const matchesStartskog = !selectedStartskog || (d.startskog?.toLowerCase() ?? selectedStartskog) === selectedStartskog;
+    return matchesCategory && matchesFramework && matchesStartskog;
+  }).map(d => ({
     age: d["ålder"],
     klassning: +d["klassning"]
   }));
@@ -415,12 +428,14 @@ const mergedData = computed(() => {
     const framework = props.selectedFrameworks[0];
     props.selectedArtkategori.forEach(artkategori => {
       const selected = artkategori.toLowerCase();
-      const source = selected === 'total' ? totalSvamparData : rawData;
-      const series = (source as any[]).filter(d =>
-        d.artkategori?.toLowerCase() === selected &&
-        d.frameworks?.toLowerCase() === framework &&
-        d.startskog?.toLowerCase() === props.selectedStartskog?.toLowerCase()
-      ).map(d => ({
+      const source = selected === 'total' ? totalDataset.value : dataset.value;
+      const selectedStartskog = props.selectedStartskog ? props.selectedStartskog.toLowerCase() : null;
+      const series = (source as any[]).filter(d => {
+        const matchesCategory = d.artkategori?.toLowerCase() === selected;
+        const matchesFramework = d.frameworks?.toLowerCase() === framework;
+        const matchesStartskog = !selectedStartskog || (d.startskog?.toLowerCase() ?? selectedStartskog) === selectedStartskog;
+        return matchesCategory && matchesFramework && matchesStartskog;
+      }).map(d => ({
         age: d["ålder"],
         klassning: +d["klassning"]
       }));

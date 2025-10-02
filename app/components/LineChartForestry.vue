@@ -1,8 +1,16 @@
 <script setup lang="ts">
 import { computed } from 'vue'
 import { VisXYContainer, VisLine, VisAxis, VisCrosshair, VisGroupedBar, VisTooltip } from '@unovis/vue'
-import rawData from 'public/SvamparSkogsbruk.json'
-import totalSvamparData from 'public/TotalSvamparSkogsbruk.json'
+import { useAsyncData } from '#app'
+import { queryCollection } from '#content/server'
+const { data: svamparDataDoc } = await useAsyncData('svampar-skogsbruk', () =>
+  queryCollection('svamparSkogsbruk').first()
+)
+const { data: totalSvamparDataDoc } = await useAsyncData('total-svampar-skogsbruk', () =>
+  queryCollection('totalSvamparSkogsbruk').first()
+)
+const svamparDataset = computed(() => Array.isArray(svamparDataDoc.value?.entries) ? svamparDataDoc.value.entries : [])
+const totalSvamparDataset = computed(() => Array.isArray(totalSvamparDataDoc.value?.entries) ? totalSvamparDataDoc.value.entries : [])
 import { capitalize } from 'lodash-es'
 
 // Define the props for the component.
@@ -60,9 +68,10 @@ const computedLineColors = computed(() => {
 function filterData(framework: string, startskog: string) {
     const speciesLower = props.species?.toLowerCase() || ''
     const frameworkLower = framework?.toLowerCase() || ''
+    const selectedStartskogLower = props.selectedStartskog ? props.selectedStartskog.toLowerCase() : null
     if (props.dataSource === 'total') {
         // For total data, ignore startskog filtering.
-        return (totalSvamparData as any[]).filter(d =>
+        return (totalSvamparDataset.value as any[]).filter(d =>
             d.artkategori?.toLowerCase() === speciesLower &&
             d.frameworks?.toLowerCase() === frameworkLower
         ).map(d => ({
@@ -70,10 +79,9 @@ function filterData(framework: string, startskog: string) {
             klassning: +d["klassning"]
         }))
     } else {
-        const startskogLower = startskog?.toLowerCase() || ''
-        return (rawData as any[]).filter(d =>
+        return (svamparDataset.value as any[]).filter(d =>
             d.artkategori?.toLowerCase() === speciesLower &&
-            d.startskog?.toLowerCase() === startskogLower &&
+            (!selectedStartskogLower || (d.startskog?.toLowerCase() ?? selectedStartskogLower) === selectedStartskogLower) &&
             d.frameworks?.toLowerCase() === frameworkLower
         ).map(d => ({
             age: d["ålder"],
