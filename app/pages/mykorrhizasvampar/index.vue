@@ -115,18 +115,69 @@ function bentoImages(item: CarouselItem) {
 
   <UPage v-if="page" class="flex-1">
     <UContainer class="w-full px-0">
-      <UPageHero :ui="{ container: ' lg:py-24', title: 'sm:text-6xl', headline: 'text-neutral' }"
+      <UPageHero :ui="{ container: ' py-20 lg:py-24', title: ' sm:text-7xl', headline: 'text-neutral' }"
         :title="page.hero.title" :description="page.hero.description" :orientation="page.hero.orientation" class="">
-        <template #headline v-if="page.hero.headline.label">
-          <NuxtLink :to="page.hero.headline.to">
+        <template #headline v-if="page.hero.headline">
+          <!-- <NuxtLink :to="page.hero.headline.to">
             <UBadge :icon="page.hero.headline.icon" :label="page.hero.headline.label" :color="page.hero.headline.color"
               variant="subtle" size="lg" trailing :ui="{ base: 'rounded-full' }" />
-          </NuxtLink>
+          </NuxtLink> -->
+          <div class="flex justify-center items-center">
+            <Motion :initial="{
+              scale: 0.5,
+              opacity: 0,
+              // filter: 'blur(20px)'
+            }" :animate="{
+              scale: 1,
+              opacity: 1,
+              // filter: 'blur(0px)'
+            }" :transition="{
+              duration: 0.2,
+              delay: 0.2
+            }">
+              <NuxtImg src="/images/svampindex/Cortinarius sanguineus-179-.jpg" width="300" height="300" format="webp"
+                alt="Illustration"
+                class="size-24 rounded-xl ring ring-muted/50 inline-flex mb-12 lg:mb-18 h-fit shadow-xl" />
+            </Motion>
+            <Motion :initial="{
+              scale: 0.5,
+              opacity: 0,
+              // filter: 'blur(20px)'
+            }" :animate="{
+              scale: 1,
+              opacity: 1,
+              // filter: 'blur(0px)'
+            }" :transition="{
+              duration: 0.2,
+              delay: 0.3
+            }" class="-mx-4 z-50">
+              <NuxtImg src="/images/svampgrid/Cantharellus cibarius-3.jpg" width="300" height="300" format="webp"
+                alt="Illustration"
+                class="size-40 rounded-xl ring ring-muted/50 inline-flex mb-12 lg:mb-18 h-fit  z-50 shadow-xl" />
+            </Motion>
+            <Motion :initial="{
+              scale: 0.5,
+              opacity: 0,
+              // filter: 'blur(20px)'
+            }" :animate="{
+              scale: 1,
+              opacity: 1,
+              // filter: 'blur(0px)'
+            }" :transition="{
+              duration: 0.2,
+              delay: 0.25
+            }">
+              <NuxtImg src="/images/svampgrid/Gomphus clavatus-1.jpg" width="300" height="300" format="webp"
+                alt="Illustration"
+                class=" size-28 rounded-xl ring ring-muted/50 inline-flex mb-12 lg:mb-18 h-fit shadow-xl" />
+            </Motion>
+          </div>
+
         </template>
-        <NuxtImg :src="page.hero.src" width="700" format="webp" alt="Illustration"
-          class=" rounded ring ring-neutral-300 " />
+        <!-- <NuxtImg :src="page.hero.src" width="700" format="webp" alt="Illustration"
+          class=" rounded ring ring-neutral-300 " /> -->
         <template v-if="isMobile && page?.hero?.links?.[0]" #links>
-          <UModal title="Välj miljö" :ui="{ body: 'p-0', title: 'text-2xl' }">
+          <UModal title="Välj miljö" :ui="{ body: 'p-0', title: 'text-2xl' }" fullscreen>
             <UButton :label="page.hero.links[0].label" size="xl" color="neutral" icon="i-heroicons-magnifying-glass" />
             <template #body>
               <div class=" w-full max-w-full p-4">
@@ -198,12 +249,28 @@ function bentoImages(item: CarouselItem) {
           </UModal>
         </template>
       </UPageHero>
-      <div v-if="!isMobile">
-        <EnvironmentSelector />
-        <div class="flex w-full justify-end mb-4">
-          <UButton :disabled="!allSelected" @click="redirect" color="primary" icon="i-heroicons-arrow-right"
-            label="Gå till miljö" />
-        </div>
+      <div class="sm:mb-24" v-if="!isMobile">
+
+
+        <Motion :initial="{
+          opacity: 0,
+          transform: 'translateY(10px)'
+          // filter: 'blur(20px)'
+        }" :animate="{
+          opacity: 1,
+          transform: 'translateY(0px)'
+          // filter: 'blur(0px)'
+        }" :transition="{
+          duration: 0.3,
+          delay: 0.6
+        }">
+          <EnvironmentSelector class="bg-neutral-50/50 p-4 pr-8 ring ring-muted/50 rounded sm:mb-4" />
+
+          <div class="flex w-full justify-center mb-4">
+            <UButton size="xl" trailing :disabled="!allSelected" @click="redirect" color="primary"
+              icon="i-heroicons-arrow-right" label="Gå till miljö" />
+          </div>
+        </Motion>
       </div>
       <!-- redirection button here
        
@@ -211,9 +278,8 @@ function bentoImages(item: CarouselItem) {
 
     </UContainer>
 
-    <div class="bg-neutral-50 border-t border-muted">
+    <!-- <div class="bg-neutral-50 border-t border-muted">
       <UContainer class="w-full px-0 pb-8 pt-2 sm:pt-8">
-        <!-- Mobile inline environment selector -->
         <div class="group">
           <UCarousel :ui="{ prev: 'ml-8 hidden group-hover:flex', next: 'mr-8 hidden group-hover:flex' }"
             v-slot="{ item }" :items="page.carousel ?? []" class="w-full mx-auto mb-8" arrows dots>
@@ -252,7 +318,9 @@ function bentoImages(item: CarouselItem) {
           </UCarousel>
         </div>
       </UContainer>
-    </div>
+    </div> -->
+
+    <SCarousel :section="page.carousel" />
 
 
   </UPage>

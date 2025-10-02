@@ -2,11 +2,11 @@
   <div class="grid grid-cols-12 ">
     <div class="col-span-12">
       <UTabs :ui="{
-        indicator: 'bg-white border border-muted',
-        trigger: 'data-[state=active]:text-neutral-800 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary',
-        list: ''
-      }" v-model="activeTab" :items="tabs" :content="false" class=" my-2 mx-1 md:mx-0" :size="tabSize" color="neutral"
-        variant="pill" />
+        // indicator: 'bg-white border border-muted',
+        trigger: 'hover:bg-neutral-50 ring ring-muted mx-1 my-1 focus-visible:ring-0',
+        list: 'border-muted/50'
+      }" v-model="activeTab" :items="tabs" :content="false" class="md:mx-0" :size="tabSize" color="primary"
+        variant="link" />
 
       <div v-if="activeTab === 'dna'" class="col-span-12 ">
         <div>
@@ -16,7 +16,7 @@
     </div>
 
     <div v-if="activeTab === 'knowledge'" class="col-span-12">
-      <div class="col-span-12 grid-cols-12 rounded-2xl gap-y-3 hidden md:grid gap-4 mt-2">
+      <div class="col-span-12 grid-cols-12 rounded-2xl gap-y-3 hidden md:grid gap-4">
 
         <div class="col-span-4 flex flex-col h-full">
           <FullScreenEdible :geography="geography" :forestType="forestType" :standAge="standAge"
@@ -109,8 +109,8 @@ const knowledgeExpanded = ref(false);
 
 const activeTab = ref('knowledge')
 const tabs = [
-  { label: 'Samlad kunskap', value: 'knowledge' },
-  { label: 'DNA från markinventeringens provytor', value: 'dna' },
+  { label: 'Samlad kunskap', value: 'knowledge', icon: 'lineicons:mushroom-1' },
+  { label: 'DNA från markinventeringens provytor', value: 'dna', icon: 'solar:dna-linear' },
 ]
 // Responsive tab size based on Tailwind md breakpoint (768px)
 const windowWidth = ref(0);
@@ -123,7 +123,7 @@ onUnmounted(() => {
   window.removeEventListener('resize', updateWidth);
 });
 
-const tabSize = computed(() => windowWidth.value >= 768 ? 'lg' : 'lg');
+const tabSize = computed(() => windowWidth.value >= 768 ? 'md' : 'lg');
 
 async function fetchCount(folder, type, countRef, filterKey = null) {
   const params = [envStore.geography, envStore.forestType, envStore.standAge, envStore.vegetationType]

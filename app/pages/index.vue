@@ -27,70 +27,31 @@ useSeoMeta({
         </template>
 
         <template #title>
-          <Motion :initial="{
-            scale: 1.1,
-            opacity: 0,
-            filter: 'blur(20px)'
-          }" :animate="{
-            scale: 1,
-            opacity: 1,
-            filter: 'blur(0px)'
-          }" :transition="{
-            duration: 0.6,
-            delay: 0.3
-          }">
-            <MDC :value="page.hero.title" class="*:leading-13 sm:*:leading-19 max-w-3xl mx-auto  " />
-          </Motion>
+          <MDC :value="page.hero.title" class="*:leading-13 sm:*:leading-19 max-w-3xl mx-auto  " />
         </template>
         <template #description>
-          <Motion :initial="{
-            scale: 1.1,
-            opacity: 0,
-            filter: 'blur(20px)'
-          }" :animate="{
-            scale: 1,
-            opacity: 1,
-            filter: 'blur(0px)'
-          }" :transition="{
-            duration: 0.6,
-            delay: 0.4
-          }">
-            <MDC :value="page.hero.description" class="*:leading-7  sm:*:leading-8 max-w-3xl mx-auto " />
-          </Motion>
+          <MDC :value="page.hero.description" class="*:leading-7  sm:*:leading-8 max-w-3xl mx-auto " />
         </template>
         <template #links>
-          <Motion v-for="link in page.hero.links" :initial="{
-            scale: 1.1,
-            opacity: 0,
-            filter: 'blur(20px)'
-          }" :animate="{
-            scale: 1,
-            opacity: 1,
-            filter: 'blur(0px)'
-          }" :transition="{
-            duration: 0.6,
-            delay: 0.3
-          }">
-            <UButton :label="link.label" :icon="link.icon" :color="link.color" :variant="link.variant" :size="link.size"
-              :to="link.to" :target="link.target" />
-          </Motion>
-
+          <UButton v-for="link in page.hero.links" :label="link.label" :icon="link.icon" :color="link.color"
+            :variant="link.variant" :size="link.size" :to="link.to" :target="link.target" />
         </template>
         <Motion :initial="{
-          scale: 1.1,
           opacity: 0,
-          filter: 'blur(20px)'
+          transform: 'translateY(10px)'
+          // filter: 'blur(20px)'
         }" :animate="{
-          scale: 1,
           opacity: 1,
-          filter: 'blur(0px)'
+          transform: 'translateY(0px)'
+          // filter: 'blur(0px)'
         }" :transition="{
-          duration: 0.6,
-          delay: 0.3
-        }">
+              duration: 0.5,
+              delay: 0.2
+            }">
           <NuxtImg src="/images/Landing/boleto_small.png" width="1500" height="2100" quality="80" format="webp"
             class=" sm:-mt-90 -mb-32 -mt-10 sm:-mb-80" />
         </Motion>
+
       </UPageHero>
     </div>
     <!-- <div class="page-section ">

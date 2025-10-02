@@ -4,7 +4,7 @@
       :class="[' block relative overflow-scroll -mx-4 w-screen', geography && forestType && standAge && vegetationType ? 'h-14' : 'h-0']">
       <div
         :class="['pt-0.5 top-16 z-20 w-screen inset-0 bg-neutral-50 dark:bg-neutral-950  dark:border-neutral-800 transition-height', mobileCollapsed ? 'h-14' : 'h-14']">
-        <UModal :overlay="true" title="Välj miljö" :ui="{ body: 'p-0', title: 'text-2xl' }">
+        <UModal fullscreen :overlay="true" title="Välj miljö" :ui="{ body: 'p-0', title: 'text-2xl' }">
           <div class="flex justify-between w-full mx-auto max-w-full ">
             <div class="flex gap-2 p-2 overflow-scroll">
               <UBadge v-for="category in categories" :key="category.key" size="xl" variant="outline" color="neutral"
@@ -82,7 +82,7 @@
 
         <div class="grid grid-cols-12 md:gap-4 gap-2 mb-4 ">
           <UCard
-            :class="[' relative h-full col-span-9 items-center ring-0', geography && forestType && standAge && vegetationType ? 'col-span-9' : 'col-span-12']">
+            :class="[' relative h-full col-span-9 items-center ring-0 bg-transparent', geography && forestType && standAge && vegetationType ? 'col-span-9' : 'col-span-12']">
             <div class="flex ">
               <div v-for="category in categories" :key="category.key" class="flex md:justify-center w-full m-3 mb-8">
                 <UPopover :content="{
@@ -148,17 +148,20 @@
               </div>
             </div>
 
-            <div class="absolute bottom-3 right-3 flex justify-end gap-2">
+            <div class="absolute bottom-0 right-3 flex justify-end gap-2">
               <UButton trailing :icon="restrictionEnabled ? 'mdi:lock' : 'mdi:lock-open'" @click="toggleRestriction"
-                shape="full" class="transition-all" variant="ghost"
+                shape="full" class="transition-all bg-white"
+                :class="restrictionEnabled ? 'ring-secondary-200' : 'ring-muted'" variant="outline"
                 :color="restrictionEnabled ? 'secondary' : 'neutral'">
                 {{ restrictionEnabled ? "Markinventeringsdata" : "Markinventeringsdata" }}
               </UButton>
-              <UButton trailing icon="mdi:apps" @click="toggleHeight" color="neutral" variant="ghost">
+              <UButton trailing icon="mdi:apps" @click="toggleHeight" class="ring-muted" color="neutral"
+                variant="outline">
                 {{ listBoxRowVisible ? "Dölj kombinationer" : "Visa kombinationer" }}
               </UButton>
               <UModal title="Miljööversikt" :ui="{ content: 'max-w-[83rem]', body: 'sm:p-0', title: 'text-2xl' }">
-                <UButton label="Alla miljöer" trailing icon="i-hugeicons-tree-06" color="neutral" variant="ghost" />
+                <UButton class="ring-muted" label="Alla miljöer" trailing icon="i-hugeicons-tree-06" color="neutral"
+                  variant="outline" />
                 <template #body>
                   <Miljoer />
                 </template>
@@ -167,7 +170,7 @@
           </UCard>
           <div class="col-span-3 flex w-full justify-end" v-if="geography && forestType && standAge && vegetationType">
             <Transition name="fade" mode="out-in">
-              <SpatialForest class="rounded-xl overflow-hidden border border-neutral-200 h-fit" />
+              <SpatialForest />
             </Transition>
           </div>
         </div>

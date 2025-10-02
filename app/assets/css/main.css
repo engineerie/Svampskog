@@ -42,3 +42,13 @@
   --vis-line-gapfill-stroke-opacity: 1;
   --vis-line-gapfill-stroke-dashoffset: 1;
 }
+
+/* app/assets/css/main.css */
+html {
+  scrollbar-gutter: stable;
+}
+
+/* Nuxt UI’s scroll lock adds inline padding-right – just drop it */
+body[style*="padding-right"] {
+  padding-right: 0 !important;
+}

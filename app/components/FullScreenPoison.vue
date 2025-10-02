@@ -1,5 +1,5 @@
 <template>
-  <UCard variant="ghost" class="rounded-none sm:rounded-lg">
+  <UCard variant="ghost" class="rounded-none sm:rounded-none border-muted/50">
     <!-- Header with title, filters and view toggle -->
     <div class="md:flex justify-between items-start">
       <div class="md:flex gap-4">
@@ -32,7 +32,7 @@
             trigger: 'data-[state=active]:text-neutral-700 dark:data-[state=active]:text-neutral-100/90 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-neutral'
           }" />
         <UButton :label="isNormalView ? 'Visa mer' : 'Tillbaka till översikt'" color="neutral" variant="outline"
-          size="md" @click="$emit('enlarge')" class="hidden md:flex " />
+          size="sm" @click="$emit('enlarge')" class="hidden md:flex ring-muted/60" />
       </div>
     </div>
     <!-- TABLE VIEW -->

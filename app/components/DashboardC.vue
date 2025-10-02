@@ -1,5 +1,8 @@
 <template>
-  <!-- <USlideover :class="['transition-all', !isPinned ? 'm-1 rounded overflow-hidden' : 'm-0 rounded-none']"
+  <div class="bg-muted">
+
+
+    <!-- <USlideover :class="['transition-all', !isPinned ? 'm-1 rounded overflow-hidden' : 'm-0 rounded-none']"
     v-model:open="showSlideover" :overlay="false" :dismissible="!isPinned" side="right" :modal="!isPinned" :ui="{
       wrapper: 'md:p-2',
       content: 'md:rounded-sm ring-1 ring-neutral-200 bg-white w-[24rem] max-w-full flex flex-col'
@@ -21,20 +24,22 @@
       </div>
     </template>
 </USlideover> -->
-  <MySlideover v-model="showSlideover" :pinned="isPinned" @update:pinned="(val) => (isPinned = val)">
-    <SpeciesInfo :species="speciesStore.selectedSpecies" :source="speciesStore.sourceComponent" />
-  </MySlideover>
-  <UContainer>
-    <transition name="fade">
-      <EnvironmentSelector v-if="hasAllParams" />
-    </transition>
-  </UContainer>
-  <div class="flex flex-col min-h-screen ">
-    <UContainer class="w-full px-0">
-      <transition name="fade" mode="out-in">
-        <component :is="activeComponent" @close="handleCloseFullScreen" @enlarge="handleFullScreen" class="block" />
+    <MySlideover v-model="showSlideover" :pinned="isPinned" @update:pinned="(val) => (isPinned = val)">
+      <SpeciesInfo :species="speciesStore.selectedSpecies" :source="speciesStore.sourceComponent" />
+    </MySlideover>
+    <UContainer>
+      <transition name="fade">
+        <EnvironmentSelector v-if="hasAllParams" />
       </transition>
     </UContainer>
+    <div class="flex flex-col min-h-screen ">
+      <UContainer class="w-full px-0 ">
+        <transition name="fade" mode="out-in">
+          <component :is="activeComponent" @close="handleCloseFullScreen" @enlarge="handleFullScreen"
+            class="block border border-muted/50 bg-white rounded shadow" />
+        </transition>
+      </UContainer>
+    </div>
   </div>
 </template>
 

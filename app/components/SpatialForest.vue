@@ -1,14 +1,22 @@
 <template>
   <!-- Image Section -->
   <div class="justify-center">
-    <div v-if="imageUrl">
-      <div class="relative">
-        <img :src="imageUrl" alt="Vald skogsmiljö" class="max-w-full h-auto" loading="lazy" decoding="async"
-          width="805" height="505" />
-      </div>
-    </div>
+    <Motion v-if="imageUrl" :initial="{
+      opacity: 0,
+      transform: 'translateY(10px)'
+      // filter: 'blur(20px)'
+    }" :animate="{
+      opacity: 1,
+      transform: 'translateY(0px)'
+      // filter: 'blur(0px)'
+    }" :transition="{
+      duration: 0.5,
+      delay: 0.2
+    }">
+      <img :key="imageUrl" :src="imageUrl" alt="Vald skogsmiljö" class="h-full rounded ring ring-muted/50" width="805"
+        height="505" />
+    </Motion>
     <USkeleton v-else class="h-20 flex items-center justify-center">Välj miljö för att visa bild</USkeleton>
-
     <!-- <div class="hidden">
       <img v-for="(src, index) in allImageUrls" :key="index" :src="src" alt="Förladdad skogsmiljö"
         class="max-w-full h-auto" width="805" height="505" loading="lazy" decoding="async" />

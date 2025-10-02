@@ -69,6 +69,24 @@ const carouselItemSchema = z.object({
   noBorder: z.boolean().optional(),
 });
 
+const carouselSectionSchema = z.object({
+  title: z.string().optional(),
+  description: z.string().optional(),
+  items: z.array(carouselItemSchema),
+});
+
+const galleryItemSchema = z.object({
+  title: z.string().nonempty(),
+  image: z.string().nonempty(),
+  description: z.string().optional(),
+});
+
+const gallerySectionSchema = z.object({
+  title: z.string().nonempty(),
+  description: z.string().optional(),
+  items: z.array(galleryItemSchema),
+});
+
 const pressItemSchema = z.object({
   title: z.string().nonempty(),
   publication: z.string().optional(),
@@ -109,6 +127,17 @@ const forestryTimelineEntrySchema = z.object({
 const forestryTimelineSchema = z.object({
   id: z.string().nonempty(),
   entries: z.array(forestryTimelineEntrySchema),
+});
+
+const methodSchema = z.object({
+  index: z.number().optional(),
+  id: z.string().nonempty(),
+  title: z.string().nonempty(),
+  image: z.string().nonempty(),
+  shortdescription: z.string().nonempty(),
+  description: z.string().nonempty(),
+  descriptionsvamp: z.string().nonempty(),
+  type: z.string().optional(),
 });
 
 const logoSchema = z.object({
@@ -219,7 +248,8 @@ export const collections = {
         src: z.string().nonempty(),
         orientation: orientationEnum.optional(),
       }),
-      carousel: z.array(carouselItemSchema).optional(),
+      carousel: carouselSectionSchema.optional(),
+      gallery: gallerySectionSchema.optional(),
     }),
   }),
   skogsskotsel: defineCollection({
@@ -239,7 +269,8 @@ export const collections = {
         src: z.string().nonempty(),
         orientation: orientationEnum.optional(),
       }),
-      carousel: z.array(carouselItemSchema).optional(),
+      carousel: carouselSectionSchema.optional(),
+      methods: z.array(methodSchema).optional(),
     }),
   }),
   blog: defineCollection({
