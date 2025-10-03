@@ -467,8 +467,8 @@
   @retentionTreeAdded="retentionTrees.push($event)" :fullscreenLayout="true" :currentFramework="currentFramework" :currentTime="timeLabelForDataFiltering"
                     :currentStartskog="currentStartskog" :layoutMode="currentLayoutMode" ref="singleViewerRef"
                     :frameworkLabel="currentFramework.label" :timeLabel="currentTimeLabel"
-                    :dziUrl="currentOverlayImagePath.replace('.png', '.dzi')"
-                    :overlayDziUrl="currentImagePath.replace('.png', '.dzi')" :allowPan="true"
+                    :dziUrl="currentOverlayImagePath"
+                    :overlayDziUrl="currentImagePath" :allowPan="true"
                     :annotations="annotationsVisible ? filteredAnnotations : []" :selectedAnnotation="selectedAnnotation"
                     v-if="!opacitySyncEnabled" @annotationClicked="handleAnnotationClicked" class="w-full h-full" /> -->
                       <OpenSeadragonViewer :tradplantor-visible="tradplantorVisible"
@@ -481,8 +481,7 @@
                         :currentFramework="currentFramework" :currentTime="timeLabelForDataFiltering"
                         :currentStartskog="currentStartskog" :layoutMode="currentLayoutMode" ref="singleViewerRef"
                         :frameworkLabel="currentFramework.label" :timeLabel="currentTimeLabel"
-                        :dziUrl="currentOverlayImagePath.replace('.png', '.dzi')"
-                        :overlayDziUrl="currentImagePath.replace('.png', '.dzi')" :allowPan="true"
+                        :dziUrl="currentOverlayImagePath" :overlayDziUrl="currentImagePath" :allowPan="true"
                         :annotations="annotationsVisible ? filteredAnnotations : []"
                         :selectedAnnotation="selectedAnnotation" v-model:globalOpacity="globalOpacity"
                         @annotationClicked="handleAnnotationClicked" class="w-full h-full ui-zoom-exempt " />
@@ -521,16 +520,14 @@
                           :currentFramework="currentFramework" currentTime="innan" :currentStartskog="currentStartskog"
                           :layoutMode="currentLayoutMode" ref="beforeViewerRef" :comparisonMode="true"
                           :frameworkLabel="currentFramework.label" timeLabel="Före avverkning"
-                          :dziUrl="comparisonOverlayImagePath1.replace('.png', '.dzi')"
-                          :overlayDziUrl="comparisonImagePath1.replace('.png', '.dzi')" :allowPan="true"
+                          :dziUrl="comparisonOverlayImagePath1" :overlayDziUrl="comparisonImagePath1" :allowPan="true"
                           @opened="onViewerOpened('before')" @activated="activeViewer.valueOf = 'before'"
                           v-if="!opacitySyncEnabled" class="w-full h-full" />
                         <OpenSeadragonViewer :naturvardsarter-visible="naturvardsarterVisible" :fullscreenLayout="true"
                           :currentFramework="currentFramework" currentTime="innan" :currentStartskog="currentStartskog"
                           :layoutMode="currentLayoutMode" ref="beforeViewerRef" :comparisonMode="true"
                           :frameworkLabel="currentFramework.label" timeLabel="Före avverkning"
-                          :dziUrl="comparisonOverlayImagePath1.replace('.png', '.dzi')"
-                          :overlayDziUrl="comparisonImagePath1.replace('.png', '.dzi')" :allowPan="true"
+                          :dziUrl="comparisonOverlayImagePath1" :overlayDziUrl="comparisonImagePath1" :allowPan="true"
                           @opened="onViewerOpened('before')" @activated="activeViewer.valueOf = 'before'" v-else
                           v-model:globalOpacity="globalOpacity" class="w-full h-full" />
                       </template>
@@ -539,8 +536,7 @@
                           :currentFramework="currentFramework" :currentTime="timeLabelForDataFiltering"
                           :currentStartskog="currentStartskog" :layoutMode="currentLayoutMode" ref="afterViewerRef"
                           :comparisonMode="true" :frameworkLabel="currentFramework.label" :timeLabel="currentTimeLabel"
-                          :dziUrl="comparisonOverlayImagePath2.replace('.png', '.dzi')"
-                          :overlayDziUrl="currentImagePath.replace('.png', '.dzi')" :allowPan="true"
+                          :dziUrl="comparisonOverlayImagePath2" :overlayDziUrl="currentImagePath" :allowPan="true"
                           sliderPosition="right" @opened="onViewerOpened('after')"
                           @activated="activeViewer.valueOf = 'after'" v-if="!opacitySyncEnabled"
                           class="w-full h-full " />
@@ -548,8 +544,7 @@
                           :currentFramework="currentFramework" :currentTime="timeLabelForDataFiltering"
                           :currentStartskog="currentStartskog" :layoutMode="currentLayoutMode" ref="afterViewerRef"
                           :comparisonMode="true" :frameworkLabel="currentFramework.label" :timeLabel="currentTimeLabel"
-                          :dziUrl="comparisonOverlayImagePath2.replace('.png', '.dzi')"
-                          :overlayDziUrl="currentImagePath.replace('.png', '.dzi')" :allowPan="true"
+                          :dziUrl="comparisonOverlayImagePath2" :overlayDziUrl="currentImagePath" :allowPan="true"
                           sliderPosition="right" @opened="onViewerOpened('after')"
                           @activated="activeViewer.valueOf = 'after'" v-else v-model:globalOpacity="globalOpacity"
                           class="w-full h-full  " />
@@ -566,8 +561,7 @@
                           :currentFramework="currentFramework" :currentTime="timeLabelForDataFiltering"
                           :currentStartskog="currentStartskog" :layoutMode="currentLayoutMode" ref="framework1ViewerRef"
                           :comparisonMode="true" :frameworkLabel="currentFramework.label" :timeLabel="currentTimeLabel"
-                          :dziUrl="frameworkOverlayImagePath1.replace('.png', '.dzi')"
-                          :overlayDziUrl="currentImagePath.replace('.png', '.dzi')"
+                          :dziUrl="frameworkOverlayImagePath1" :overlayDziUrl="currentImagePath"
                           :allowPan="!isCompare && !isFrameworkCompareMode" v-if="!opacitySyncEnabled"
                           @viewportChanged="($event) => onViewportChanged('framework1', $event)"
                           @opened="onViewerOpened('framework1')" @activated="activeViewer.valueOf = 'framework1'"
@@ -576,8 +570,7 @@
                           :currentFramework="currentFramework" :currentTime="timeLabelForDataFiltering"
                           :currentStartskog="currentStartskog" :layoutMode="currentLayoutMode" ref="framework1ViewerRef"
                           :comparisonMode="true" :frameworkLabel="currentFramework.label" :timeLabel="currentTimeLabel"
-                          :dziUrl="frameworkOverlayImagePath1.replace('.png', '.dzi')"
-                          :overlayDziUrl="currentImagePath.replace('.png', '.dzi')"
+                          :dziUrl="frameworkOverlayImagePath1" :overlayDziUrl="currentImagePath"
                           :allowPan="!isCompare && !isFrameworkCompareMode" v-else v-model:globalOpacity="globalOpacity"
                           @viewportChanged="($event) => onViewportChanged('framework1', $event)"
                           @opened="onViewerOpened('framework1')" @activated="activeViewer.valueOf = 'framework1'"
@@ -588,18 +581,16 @@
                           :currentFramework="currentFramework2" :currentTime="timeLabelForDataFiltering"
                           :currentStartskog="currentStartskog" :layoutMode="currentLayoutMode" ref="framework2ViewerRef"
                           :comparisonMode="true" :frameworkLabel="currentFramework2.label" :timeLabel="currentTimeLabel"
-                          :dziUrl="frameworkOverlayImagePath2.replace('.png', '.dzi')"
-                          :overlayDziUrl="currentImagePath2.replace('.png', '.dzi')" v-if="!opacitySyncEnabled"
-                          :allowPan="!isCompare && !isFrameworkCompareMode" sliderPosition="right"
-                          @viewportChanged="($event) => onViewportChanged('framework2', $event)"
+                          :dziUrl="frameworkOverlayImagePath2" :overlayDziUrl="currentImagePath2"
+                          v-if="!opacitySyncEnabled" :allowPan="!isCompare && !isFrameworkCompareMode"
+                          sliderPosition="right" @viewportChanged="($event) => onViewportChanged('framework2', $event)"
                           @opened="onViewerOpened('framework2')" @activated="activeViewer.valueOf = 'framework2'"
                           class="w-full h-full" />
                         <OpenSeadragonViewer :naturvardsarter-visible="naturvardsarterVisible" :fullscreenLayout="true"
                           :currentFramework="currentFramework2" :currentTime="timeLabelForDataFiltering"
                           :currentStartskog="currentStartskog" :layoutMode="currentLayoutMode" ref="framework2ViewerRef"
                           :comparisonMode="true" :frameworkLabel="currentFramework2.label" :timeLabel="currentTimeLabel"
-                          :dziUrl="frameworkOverlayImagePath2.replace('.png', '.dzi')"
-                          :overlayDziUrl="currentImagePath2.replace('.png', '.dzi')" v-else
+                          :dziUrl="frameworkOverlayImagePath2" :overlayDziUrl="currentImagePath2" v-else
                           v-model:globalOpacity="globalOpacity" :allowPan="!isCompare && !isFrameworkCompareMode"
                           sliderPosition="right" @viewportChanged="($event) => onViewportChanged('framework2', $event)"
                           @opened="onViewerOpened('framework2')" @activated="activeViewer.valueOf = 'framework2'"
@@ -877,13 +868,18 @@
                         </div>
                       </div>
                       <!-- Time navigation (single view) -->
-                      <!-- <div class=" grid grid-cols-2 gap-4">
-  <div class="w-full">  <UButton size="xl"  v-if="hasPrevTime" @click="goPrevTime" variant="ghost" class="text-white hover:bg-neutral-500/20 w-full" :label="prevTitle" icon="i-heroicons-arrow-left-circle"/> </div>
-  <div class="w-full">
-    <UButton  size="xl" v-if="hasNextTime" @click="goNextTime" variant="ghost"  class="w-full text-white hover:bg-neutral-500/20 flex justify-end" trailing  :label="nextTitle"
-      icon="i-heroicons-arrow-right-circle"/>
-  </div>
-</div> -->
+                      <div class=" grid grid-cols-2 gap-4">
+                        <div class="w-full">
+                          <UButton size="xl" v-if="hasPrevTime" @click="goPrevTime" variant="ghost"
+                            class="text-white hover:bg-neutral-500/20 w-full" :label="prevTitle"
+                            icon="i-heroicons-arrow-left-circle" />
+                        </div>
+                        <div class="w-full">
+                          <UButton size="xl" v-if="hasNextTime" @click="goNextTime" variant="ghost"
+                            class="w-full text-white hover:bg-neutral-500/20 flex justify-end" trailing
+                            :label="nextTitle" icon="i-heroicons-arrow-right-circle" />
+                        </div>
+                      </div>
                     </div>
 
                   </div>
@@ -971,12 +967,49 @@ const OpenSeadragonViewer = defineAsyncComponent(() =>
   import('~/components/OpenSeadragonViewer.vue')
 );
 import { ref, computed, watch, onMounted, onBeforeUnmount, onUnmounted, reactive } from "vue";
+import { useRuntimeConfig } from '#imports';
 let removeShortcutsFn;
 import { useOnboardingStore } from "~/stores/onboardingStore";
 import annotationsData from "public/annotations.json"; // NEW: import your annotations JSON
 import { useSelectedAnnotationStore } from "~/stores/selectedAnnotationStore";
 import { useOverlayStore } from "~/stores/overlayStore";
 import timelineData from 'public/timeline.json';
+
+const {
+  public: {
+    dziBaseUrl: runtimeDziBaseUrl = 'https://pub-da16ec55366a450c81834d19968ae639.r2.dev/dzi_v2',
+    dziVersionSuffix: runtimeDziVersionSuffix = '',
+  } = {},
+} = useRuntimeConfig();
+
+const DZI_BASE_URL = runtimeDziBaseUrl;
+const DZI_VERSION_SUFFIX = runtimeDziVersionSuffix;
+
+function sanitizeSegment(segment) {
+  if (!segment) return '';
+  return segment
+    .toString()
+    .toLowerCase()
+    .replace(/å/g, 'a')
+    .replace(/ä/g, 'a')
+    .replace(/ö/g, 'o')
+    .replace(/[^a-z0-9_-]/g, '_')
+    .replace(/_+/g, '_')
+    .replace(/^_+|_+$/g, '');
+}
+
+function buildDziFilename({ framework, timeLabel, fungiVisibility, treeVisibility, startskog }) {
+  const safeSegments = [framework, timeLabel, fungiVisibility, treeVisibility, startskog]
+    .map(segment => sanitizeSegment(segment))
+    .filter(Boolean);
+  const base = safeSegments.join('_');
+  const suffix = sanitizeSegment(DZI_VERSION_SUFFIX);
+  return suffix ? `${base}_${suffix}` : base;
+}
+
+function buildDziUrl(parts) {
+  return `${DZI_BASE_URL}/${buildDziFilename(parts)}.dzi`;
+}
 
 // Compare toggle decoupled from selection: keep selection even when OFF
 const compareEnabled = ref(false)
@@ -1455,53 +1488,52 @@ const globalOpacity = ref(0);
 // Assuming the base image is currentImagePath (trees off)
 // For the overlay image, force trees to be visible.
 const currentOverlayImagePath = computed(() => {
-  const framework = currentFramework.value.value.toLowerCase();
+  const framework = currentFramework.value.value;
   const tLabel = mapTimeToLabel(time.value);
-  // Force trees to be visible (replace the tree visibility flag with 'visa')
   const treeVisibility = "visa";
   const fungiVisibility = showFungi.value ? "visa" : "dölj";
   const startskogValue = currentStartskog.value.value;
-  return `/images/DZI_Images/${framework}_${tLabel}_${fungiVisibility}_${treeVisibility}_${startskogValue}_v2.png`;
+  return buildDziUrl({ framework, timeLabel: tLabel, fungiVisibility, treeVisibility, startskog: startskogValue });
 });
 
 // For the "before" viewer (often using a static time label like "före")
 const comparisonOverlayImagePath1 = computed(() => {
-  const framework = currentFramework.value.value.toLowerCase();
-  const tLabel = "före"; // or another fixed value if needed
-  const treeVisibility = "visa"; // force trees visible if desired
+  const framework = currentFramework.value.value;
+  const tLabel = "före";
+  const treeVisibility = "visa";
   const fungiVisibility = showFungi.value ? "visa" : "dölj";
   const startskogValue = currentStartskog.value.value;
-  return `/images/DZI_Images/${framework}_${tLabel}_${fungiVisibility}_${treeVisibility}_${startskogValue}_v2.png`;
+  return buildDziUrl({ framework, timeLabel: tLabel, fungiVisibility, treeVisibility, startskog: startskogValue });
 });
 
 // For the "after" viewer (using the current time label)
 const comparisonOverlayImagePath2 = computed(() => {
-  const framework = currentFramework.value.value.toLowerCase();
+  const framework = currentFramework.value.value;
   const tLabel = mapTimeToLabel(time.value);
-  const treeVisibility = "visa"; // force trees visible if desired
+  const treeVisibility = "visa";
   const fungiVisibility = showFungi.value ? "visa" : "dölj";
   const startskogValue = currentStartskog.value.value;
-  return `/images/DZI_Images/${framework}_${tLabel}_${fungiVisibility}_${treeVisibility}_${startskogValue}_v2.png`;
+  return buildDziUrl({ framework, timeLabel: tLabel, fungiVisibility, treeVisibility, startskog: startskogValue });
 });
 
 // For framework1 viewer:
 const frameworkOverlayImagePath1 = computed(() => {
-  const framework = currentFramework.value.value.toLowerCase();
+  const framework = currentFramework.value.value;
   const tLabel = mapTimeToLabel(time.value);
   const treeVisibility = "visa";
   const fungiVisibility = showFungi.value ? "visa" : "dölj";
   const startskogValue = currentStartskog.value.value;
-  return `/images/DZI_Images/${framework}_${tLabel}_${fungiVisibility}_${treeVisibility}_${startskogValue}_v2.png`;
+  return buildDziUrl({ framework, timeLabel: tLabel, fungiVisibility, treeVisibility, startskog: startskogValue });
 });
 
 // For framework2 viewer:
 const frameworkOverlayImagePath2 = computed(() => {
-  const framework = currentFramework2.value.value.toLowerCase();
+  const framework = currentFramework2.value.value;
   const tLabel = mapTimeToLabel(time.value);
   const treeVisibility = "visa";
   const fungiVisibility = showFungi.value ? "visa" : "dölj";
   const startskogValue = currentStartskog.value.value;
-  return `/images/DZI_Images/${framework}_${tLabel}_${fungiVisibility}_${treeVisibility}_${startskogValue}_v2.png`;
+  return buildDziUrl({ framework, timeLabel: tLabel, fungiVisibility, treeVisibility, startskog: startskogValue });
 });
 
 const overlayStore = useOverlayStore();
@@ -1792,21 +1824,21 @@ const timelineInfoBefore = computed(() => {
 
 // Image paths
 const comparisonImagePath1 = computed(() => {
-  const framework = currentFramework.value.value.toLowerCase();
+  const framework = currentFramework.value.value;
   const timeLabel = "före";
   const treeVisibility = "dölj";
   const fungiVisibility = showFungi.value ? "visa" : "dölj";
   const startskogValue = currentStartskog.value.value;
-  return `/images/DZI_Images/${framework}_${timeLabel}_${fungiVisibility}_${treeVisibility}_${startskogValue}_v2.png`;
+  return buildDziUrl({ framework, timeLabel, fungiVisibility, treeVisibility, startskog: startskogValue });
 });
 
 const currentImagePath2 = computed(() => {
-  const framework = currentFramework2.value.value.toLowerCase();
+  const framework = currentFramework2.value.value;
   const tLabel = mapTimeToLabel(time.value);
   const treeVisibility = "dölj";
   const fungiVisibility = showFungi.value ? "visa" : "dölj";
   const startskogValue = currentStartskog.value.value;
-  return `/images/DZI_Images/${framework}_${tLabel}_${fungiVisibility}_${treeVisibility}_${startskogValue}_v2.png`;
+  return buildDziUrl({ framework, timeLabel: tLabel, fungiVisibility, treeVisibility, startskog: startskogValue });
 });
 
 const currentImageKey = computed(() => {
@@ -1816,13 +1848,24 @@ const currentImageKey = computed(() => {
 });
 
 const currentImagePath = computed(() => {
-  const framework = currentFramework.value.value.toLowerCase();
+  const framework = currentFramework.value.value;
   const tLabel = mapTimeToLabel(time.value);
   const treeVisibility = "dölj";
   const fungiVisibility = showFungi.value ? "visa" : "dölj";
   const startskogValue = currentStartskog.value.value;
-  return `/images/DZI_Images/${framework}_${tLabel}_${fungiVisibility}_${treeVisibility}_${startskogValue}_v2.png`;
+  return buildDziUrl({ framework, timeLabel: tLabel, fungiVisibility, treeVisibility, startskog: startskogValue });
 });
+
+if (import.meta.dev) {
+  watch(
+    [currentImagePath, currentOverlayImagePath],
+    ([base, overlay]) => {
+      console.debug('[OSD] Base DZI:', base);
+      console.debug('[OSD] Overlay DZI:', overlay);
+    },
+    { immediate: true }
+  );
+}
 
 // Watchers
 watch([currentFramework, isCompare, isFrameworkCompareMode], () => {

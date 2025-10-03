@@ -4,78 +4,18 @@
             <UPageHero :ui="{ container: 'py-12 lg:py-24', title: 'sm:text-7xl', headline: 'text-neutral' }"
                 :title="page.hero.title" :description="page.hero.description" :orientation="page.hero.orientation"
                 class="">
-                <template #headline v-if="page.hero.headline">
-                    <!-- <NuxtLink :to="page.hero.headline.to">
-            <UBadge :icon="page.hero.headline.icon" :label="page.hero.headline.label" :color="page.hero.headline.color"
-              variant="subtle" size="lg" trailing :ui="{ base: 'rounded-full' }" />
-          </NuxtLink> -->
-                    <div class="flex justify-center items-center">
-                        <!-- <Motion :initial="{
-                            scale: 0.5,
-                            opacity: 0,
-                            // filter: 'blur(20px)'
-                        }" :animate="{
-                            scale: 1,
-                            opacity: 1,
-                            // filter: 'blur(0px)'
-                        }" :transition="{
-                            duration: 0.2,
-                            delay: 0.2
-                        }">
-                            <NuxtImg src="/images/Carousel/Mycorrhizae.jpg" width="300" height="300" format="webp"
-                                alt="Illustration"
-                                class="size-24 rounded-xl ring ring-muted/50 inline-flex mb-12 lg:mb-18 h-fit shadow-xl" />
-                        </Motion> -->
-                        <!-- <Motion :initial="{
-                            scale: 1,
-                            opacity: 0,
-                            transform: 'translateY(20px)'
-                            // filter: 'blur(20px)'
-                        }" :animate="{
-                            scale: 1,
-                            opacity: 1,
-                            transform: 'translateY(0)'
-                            // filter: 'blur(0px)'
-                        }" :transition="{
-                            duration: 0.2,
-                            delay: 0.3
-                        }" class="-mx-8 z-50">
-                            <NuxtImg :src="page.hero.src" width="500" height="500" format="webp" alt="Illustration"
-                                class="size-60 rounded-xl ring ring-muted/50 inline-flex mb-12 lg:mb-18 h-fit  shadow-xl" />
-                        </Motion> -->
-                        <!-- <Motion :initial="{
-                            scale: 1,
-                            opacity: 0,
-                            transform: 'translateY(20px)'
-                            // filter: 'blur(20px)'
-                        }" :animate="{
-                            scale: 1,
-                            opacity: 1,
-                            transform: 'translateY(0)'
-                            // filter: 'blur(0px)'
-                        }" :transition="{
-                            duration: 0.2,
-                            delay: 0.3
-                        }" class="">
-                            <NuxtImg src="/images/svampgrid/Cantharellus cibarius-3.jpg" width="300" height="300"
-                                format="webp" alt="Illustration"
-                                class=" size-28 rounded-xl ring ring-muted/50 inline-flex mb-12 lg:mb-18 h-fit shadow-xl " />
-                        </Motion> -->
-                    </div>
-
-                </template>
                 <!-- <NuxtImg :src="page.hero.src" width="700" format="webp" alt="Illustration"
                     class="rounded ring ring-neutral-300 " /> -->
                 <template v-if="page?.hero?.links?.[0]" #links>
-                    <UModal>
+                    <UModal fullscreen>
                         <UChip color="warning" size="2xl">
                             <UButton :label="page.hero.links[0].label" :size="page.hero.links[0].size"
                                 :color="page.hero.links[0].color" :icon="page.hero.links[0].icon" />
                         </UChip>
                         <template #content>
-                            <UAlert title="Denna funktion lanseras i November." color="warning"
-                                icon="i-fluent-emoji-high-contrast-construction" />
-                            <!-- <ModelC /> -->
+                            <!-- <UAlert title="Denna funktion lanseras i November." color="warning"
+                                icon="i-fluent-emoji-high-contrast-construction" /> -->
+                            <ModelC />
                         </template>
                     </UModal>
                 </template>
@@ -144,7 +84,7 @@
                                     <div class="px-6 sm:px-12 sm:border-r border-muted/50">
                                         <h1 class="my-4  text-3xl sm:text-4xl font-medium text-neutral-900">{{
                                             selectedMethod.title
-                                            }}
+                                        }}
                                         </h1>
                                         <MDC class="text-lg text-neutral-800  mb-8"
                                             :value="selectedMethod.description" />

@@ -2,12 +2,11 @@
 import { computed } from 'vue'
 import { VisXYContainer, VisLine, VisAxis, VisCrosshair, VisGroupedBar, VisTooltip } from '@unovis/vue'
 import { useAsyncData } from '#app'
-import { queryCollection } from '#content/server'
 const { data: svamparDataDoc } = await useAsyncData('svampar-skogsbruk', () =>
-  queryCollection('svamparSkogsbruk').first()
+    queryCollection('svamparSkogsbruk').first()
 )
 const { data: totalSvamparDataDoc } = await useAsyncData('total-svampar-skogsbruk', () =>
-  queryCollection('totalSvamparSkogsbruk').first()
+    queryCollection('totalSvamparSkogsbruk').first()
 )
 const svamparDataset = computed(() => Array.isArray(svamparDataDoc.value?.entries) ? svamparDataDoc.value.entries : [])
 const totalSvamparDataset = computed(() => Array.isArray(totalSvamparDataDoc.value?.entries) ? totalSvamparDataDoc.value.entries : [])

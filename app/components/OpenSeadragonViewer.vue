@@ -33,9 +33,10 @@
       <!-- Popover trigger for Kontinuerligt rottäcke (Blädning @ efter) -->
       <UPopover class="hover:cursor-pointer" :open-delay="500" :close-delay="300">
         <!-- Trigger element positioned over the rectangle -->
-        <div :style="rottackePopover.visible
-          ? rottackePopoverStyle
-          : { position: 'absolute', top: '-99999px', left: '-99999px', width: '1px', height: '1px', pointerEvents: 'none' }"
+        <div
+          :style="rottackePopover.visible
+            ? rottackePopoverStyle
+            : { position: 'absolute', top: '-99999px', left: '-99999px', width: '1px', height: '1px', pointerEvents: 'none' }"
           class="absolute z-[10000]" tabindex="0" role="button" aria-label="Kontinuerligt rottäcke"></div>
         <template #content>
           <div class="p-3 max-w-xs">
@@ -112,8 +113,8 @@ import AnnotationPopup from "./AnnotationPopup.vue";
 import AnnotationMarker from "./AnnotationMarker.vue";
 import { useSelectedAnnotationStore } from "~/stores/selectedAnnotationStore";
 import { useOverlayStore } from "~/stores/overlayStore";
-import { useAsyncData } from '#app'
-import { queryCollection } from '#content/server'
+// import { useAsyncData } from '#app'
+// import { queryCollection } from '#content/server'
 import timelineData from "public/timeline.json";
 import { usePanelStore } from '~/stores/panelStore';
 import { useViewerStore } from '~/stores/viewerStore';
@@ -998,6 +999,24 @@ export default {
     let unmounted = false;
     const currentTile = ref(null);
     const overlayImage = ref(null);
+    function refreshOverlayTile(tileSource) {
+      if (!viewer.value) return;
+      if (overlayImage.value) {
+        viewer.value.world.removeItem(overlayImage.value);
+        overlayImage.value.destroy();
+        overlayImage.value = null;
+      }
+      if (!tileSource) return;
+      viewer.value.addTiledImage({
+        tileSource,
+        crossOriginPolicy: 'Anonymous',
+        ajaxWithCredentials: false,
+        opacity: overlayOpacityLocal.value,
+        success: event => {
+          overlayImage.value = event.item;
+        }
+      });
+    }
 
     // Track annotation overlays as { id, app } objects for teardown
     let annotationOverlayApps = [];
@@ -1063,6 +1082,11 @@ export default {
       if (viewer.value && newUrl !== oldUrl) {
         doTileTransition(newUrl);
       }
+    });
+
+    watch(() => props.overlayDziUrl, (newUrl, oldUrl) => {
+      if (!viewer.value || newUrl === oldUrl) return;
+      refreshOverlayTile(newUrl);
     });
 
     const panelStore = usePanelStore();
@@ -1363,10 +1387,7 @@ export default {
 
     // Snapshot-based crossfade for tile transitions
     function transitionToNewTile(newUrl) {
-
-      if (!viewer.value) return;
-
-
+      if (!viewer.value || !newUrl) return;
 
       // Remove any leftover snapshots before creating a new one
       const existingSnapshots = viewerContainer.value.querySelectorAll('.osd-snapshot');
@@ -1403,8 +1424,8 @@ export default {
 
       viewer.value.open({
         tileSource: newUrl,
-        // crossOriginPolicy: 'Anonymous',
-        // ajaxWithCredentials: false,
+        crossOriginPolicy: 'Anonymous',
+        ajaxWithCredentials: false,
       });
 
       viewer.value.addOnceHandler('open', () => {
@@ -1414,23 +1435,7 @@ export default {
 
         emit('opened');
 
-        if (props.overlayDziUrl) {
-          if (overlayImage.value) {
-            viewer.value.world.removeItem(overlayImage.value);
-            overlayImage.value.destroy();
-            overlayImage.value = null;
-          }
-
-          viewer.value.addTiledImage({
-            tileSource: props.overlayDziUrl,
-            // crossOriginPolicy: 'Anonymous',
-            // ajaxWithCredentials: false,
-            opacity: overlayOpacityLocal.value,
-            success: event => {
-              overlayImage.value = event.item;
-            }
-          });
-        }
+        refreshOverlayTile(props.overlayDziUrl);
 
         // Fade out and remove the snapshot overlay
         if (snapshotImg) {
