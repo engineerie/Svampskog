@@ -680,7 +680,7 @@
 
                       <!-- Single mode: just show the current time -->
                       <div v-if="!isCompare && !isFrameworkCompareMode">
-                        <div class="p-3 group text-base/7" v-if="timelineInfo" @click="handleTimelineClick">
+                        <div class="p-3 group text-base/7" @click="handleTimelineClick">
                           <UPopover :ui="{ content: 'bg-neutral-950/50 backdrop-blur-2xl ring-neutral-900/50' }"
                             destroy-on-close :content="{
                               align: 'start',
@@ -711,12 +711,15 @@
                               variant="soft" size="xs" :label="timeInfoVisible ? 'Dölj info' : 'Visa info'"
                               @click="toggleTimeInfoVisible" />
                           </div>
-                          <div v-if="timeInfoVisible" class="my-4">
+                          <div v-if="timeInfoVisible && timelineInfo" class="my-4">
                             <p class="mb-4 text-neutral-50" v-html="makeClickableHtml(timelineInfo.skog)"></p>
                             <div>
                               <p class="mb-2 text-white font-bold text-md">Påverkan på mykorrhizasvamp</p>
                               <span class="text-neutral-50" v-html="makeClickableHtml(timelineInfo.svamp)"></span>
                             </div>
+                          </div>
+                          <div v-else-if="timeInfoVisible" class="my-4 text-neutral-300 text-sm">
+                            Ingen tidslinjeinformation hittades för den här kombinationen.
                           </div>
                         </div>
                       </div>
@@ -968,12 +971,12 @@ const OpenSeadragonViewer = defineAsyncComponent(() =>
 );
 import { ref, computed, watch, onMounted, onBeforeUnmount, onUnmounted, reactive } from "vue";
 import { useRuntimeConfig } from '#imports';
+import { useAsyncData } from '#app';
 let removeShortcutsFn;
 import { useOnboardingStore } from "~/stores/onboardingStore";
-import annotationsData from "public/annotations.json"; // NEW: import your annotations JSON
+import annotationsData from "public/annotations.json";
 import { useSelectedAnnotationStore } from "~/stores/selectedAnnotationStore";
 import { useOverlayStore } from "~/stores/overlayStore";
-import timelineData from 'public/timeline.json';
 
 const {
   public: {
@@ -1009,6 +1012,27 @@ function buildDziFilename({ framework, timeLabel, fungiVisibility, treeVisibilit
 
 function buildDziUrl(parts) {
   return `${DZI_BASE_URL}/${buildDziFilename(parts)}.dzi`;
+}
+
+const { data: forestryTimeline } = await useAsyncData(
+  'forestry-timeline-modelc',
+  () => queryCollection('forestryTimelines').first()
+);
+
+const timelineEntries = computed(() => {
+  const value = forestryTimeline.value;
+  if (!value) return [];
+  if (Array.isArray(value)) {
+    const doc = value.find(item => item?.id === 'skogsskotsel') || value[0];
+    return Array.isArray(doc?.entries) ? doc.entries : [];
+  }
+  return Array.isArray(value.entries) ? value.entries : [];
+});
+
+if (import.meta.dev) {
+  watch(timelineEntries, entries => {
+    console.debug('[ModelC] timeline entries', entries?.length ?? 0);
+  }, { immediate: true });
 }
 
 // Compare toggle decoupled from selection: keep selection even when OFF
@@ -1292,7 +1316,7 @@ function findTimelineSkog(tid) {
   try {
     const fw = currentFramework.value && currentFramework.value.value
     const st = currentStartskog.value && currentStartskog.value.value
-    const rec = (timelineData || []).find(r =>
+    const rec = timelineEntries.value.find(r =>
       r.atgard === fw &&
       r.startskog === st &&
       normalizeTid(r.tid) === normalizeTid(tid)
@@ -1796,7 +1820,7 @@ const timeLabelForDataFiltering = computed(() =>
 
 const timelineInfo = computed(() => {
   if (!currentFramework.value?.value || !timeLabelForDataFiltering.value || !currentStartskog.value?.value) return null;
-  return timelineData.find(item =>
+  return timelineEntries.value.find(item =>
     item.atgard === currentFramework.value.value &&
     item.tid === timeLabelForDataFiltering.value &&
     item.startskog === currentStartskog.value.value
@@ -1804,7 +1828,7 @@ const timelineInfo = computed(() => {
 });
 const timelineInfo2 = computed(() => {
   if (!currentFramework2.value?.value || !timeLabelForDataFiltering.value || !currentStartskog.value?.value) return null;
-  return timelineData.find(item =>
+  return timelineEntries.value.find(item =>
     item.atgard === currentFramework2.value.value &&
     item.tid === timeLabelForDataFiltering.value &&
     item.startskog === currentStartskog.value.value
@@ -1815,7 +1839,7 @@ const timelineInfo2 = computed(() => {
 // Always fetch the “before” info (tid: 'innan') for before/after compare
 const timelineInfoBefore = computed(() => {
   if (!currentFramework.value?.value || !currentStartskog.value?.value) return null;
-  return timelineData.find(item =>
+  return timelineEntries.value.find(item =>
     item.atgard === currentFramework.value.value &&
     item.tid === 'innan' &&
     item.startskog === currentStartskog.value.value
