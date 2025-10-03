@@ -7,6 +7,9 @@
           <VisArea :x="xAccessor" :y="stackedYAccessors" :color="stackedColors" :interpolateMissingData="true" />
           <VisCrosshair :template="crosshairTemplate" />
           <VisTooltip :horizontalShift="30" />
+          <VisPlotline :value="10" color="rgba(220, 114, 0, 1)" axis="x" labelOrientation="vertical"
+            labelText="Plot line on x-axis" />
+
         </template>
         <template v-else-if="props.chartType === 'area'">
           <VisArea v-for="fw in activeFrameworks" :key="fw.key + '-area'" :x="xAccessor" :y="(d: any) => {
@@ -42,7 +45,7 @@
 <script setup lang="ts">
 
 import { computed, ref, onMounted, onBeforeUnmount, nextTick } from 'vue'
-import { VisXYContainer, VisAxis, VisLine, VisArea, VisGroupedBar, VisBulletLegend, VisBrush, VisCrosshair, VisTooltip } from '@unovis/vue'
+import { VisXYContainer, VisAxis, VisLine, VisArea, VisGroupedBar, VisBulletLegend, VisBrush, VisCrosshair, VisTooltip, VisPlotline } from '@unovis/vue'
 import type { BulletLegendItemInterface } from '@unovis/ts'
 import { capitalize } from 'lodash-es'
 import { useAsyncData } from '#app'

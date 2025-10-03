@@ -15,7 +15,7 @@
                         <template #content>
                             <!-- <UAlert title="Denna funktion lanseras i November." color="warning"
                                 icon="i-fluent-emoji-high-contrast-construction" /> -->
-                            <ModelC />
+                            <Model />
                         </template>
                     </UModal>
                 </template>
@@ -84,7 +84,7 @@
                                     <div class="px-6 sm:px-12 sm:border-r border-muted/50">
                                         <h1 class="my-4  text-3xl sm:text-4xl font-medium text-neutral-900">{{
                                             selectedMethod.title
-                                        }}
+                                            }}
                                         </h1>
                                         <MDC class="text-lg text-neutral-800  mb-8"
                                             :value="selectedMethod.description" />

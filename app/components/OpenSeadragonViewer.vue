@@ -1305,7 +1305,7 @@ export default {
     async function initViewer() {
       if (typeof window === "undefined") return;
       if (viewer.value) return;
-      if (route.name !== "skogsskotsel") return;
+      // if (route.name !== "skogsskotsel/modell") return;
       const containerEl = viewerContainer.value;
       if (!containerEl) return;
 
