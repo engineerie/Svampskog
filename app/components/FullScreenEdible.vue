@@ -6,7 +6,7 @@
         <div class="w-full flex justify-between items-start ">
           <div>
             <div @click="$emit('enlarge')"
-              class="group cursor-pointer dark:text-neutral-300 text-4xl md:text-3xl font-medium flex items-center">
+              class="group cursor-pointer dark:text-neutral-300 text-warning-500 text-4xl md:text-3xl font-medium flex items-center">
               <UIcon name="icon-park-solid:knife-fork" class="mr-2" />
               <h1>
                 Matsvampar

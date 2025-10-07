@@ -61,7 +61,7 @@
           <UPageFeature title="Enligt samlad kunskap" description="Framförallt vart fruktkroppar förekommer" />
 
           <UCard @click="emitEnlarge('FullScreenEdible')" class="ring-muted/50">
-            <div class="flex justify-between items-center ">
+            <div class="flex justify-between items-center text-warning-500">
               <div>
                 <h1 class="text-2xl font-semibold flex items-center">
                   <UIcon name="icon-park-solid:knife-fork" class="mr-2" />Matsvampar
@@ -74,7 +74,7 @@
             </div>
           </UCard>
           <UCard @click="emitEnlarge('FullScreenPoison')" class="ring-muted/50">
-            <div class="flex justify-between items-center">
+            <div class="flex justify-between items-center text-poison-500">
               <div>
                 <h1 class="text-2xl font-semibold flex items-center ">
                   <UIcon name="i-hugeicons-danger" class="mr-2" />Giftsvampar
@@ -87,7 +87,7 @@
             </div>
           </UCard>
           <UCard @click="emitEnlarge('RedlistedComponent')" class="ring-muted/50">
-            <div class="flex justify-between items-center">
+            <div class="flex justify-between items-center text-signal-500">
               <div>
                 <h1 class="text-2xl font-semibold flex items-center">
                   <UIcon name="i-material-symbols-award-star-outline" class="mr-2" />
@@ -103,7 +103,7 @@
           <USeparator />
           <UPageFeature title="Enligt DNA" description="Från markinventeringens jordprover" />
           <UCard @click="emitEnlarge('FullScreenEdna')" class="ring-muted/50">
-            <div class="flex justify-between items-center">
+            <div class="flex justify-between items-center text-secondary-500">
               <div class="truncate">
                 <div class="text-2xl font-semibold flex items-center ">
                   <UIcon name="solar:dna-linear" class="mr-2" />

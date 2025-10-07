@@ -9,10 +9,12 @@
       <div v-if="!(layoutMode === 'slider' && comparisonMode) && fullscreenLayout"
         class="absolute top-0 left-1/2 transform -translate-x-1/2 m-2 z-10 text-center">
         <div>
-          <UBadge size="lg" class="backdrop-blur-xl bg-neutral-400/10 text-neutral-100 mb-0.5 z-50">{{ frameworkLabel }}
+          <UBadge size="lg" class="backdrop-blur-xl bg-neutral-400/10 text-neutral-100 mb-0.5 z-50">{{
+            frameworkLabel }}
           </UBadge>
         </div>
-        <UBadge size="lg" class="backdrop-blur-xl bg-neutral-400/10 text-neutral-100 z-50">{{ timeLabel }}</UBadge>
+        <UBadge size="lg" class="backdrop-blur-xl bg-neutral-400/10 text-neutral-100 z-50">{{ timeLabel }}
+        </UBadge>
       </div>
 
       <!-- Display viewport coordinates for marker placement -->
@@ -91,7 +93,9 @@
                 <h1 class="text-md text-neutral-500 mb-4">{{ timeLabel }}</h1>
                 <p class=" mb-6" v-if="timelineInfo"> {{ timelineInfo.skog }}</p>
                 <p class=" " v-if="timelineInfo">
-                <div class="font-bold mb-1.5 text-lg">Påverkan på mykorrizasvamp</div> {{ timelineInfo.svamp }}</p>
+                <div class="font-bold mb-1.5 text-lg">Påverkan på mykorrizasvamp</div> {{
+                  timelineInfo.svamp }}
+                </p>
                 <div class="overflow-hidden mt-1 px-2  w-full flex">
                 </div>
               </div>
@@ -319,6 +323,7 @@ export default {
     };
     // ————————————— Canvas‐based overlay (replaces all DOM overlays) —————————————
     const overlayCanvas = document.createElement('canvas');
+    overlayCanvas.setAttribute('willReadFrequently', 'true');
     let overlayCtx = null;
     let resizeObserver = null;
 
@@ -355,6 +360,7 @@ export default {
 
     // build a tiny 8×8 diagonal stripe pattern off‐screen (45°)
     const patternCanvas = document.createElement('canvas');
+    patternCanvas.setAttribute('willReadFrequently', 'true');
     patternCanvas.width = patternCanvas.height = 8;
     const pctx = patternCanvas.getContext('2d');
     // fill background with semi-transparent white
@@ -1333,6 +1339,7 @@ export default {
         panVertical: true,
         homeFillsViewer: true,
         animationTime: 0.5,
+        // degrees: 90,
         defaultZoomLevel: props.layoutMode === "sideBySide" ? null : 1.2,
         gestureSettingsMouse: {
           scrollToZoom: true,

@@ -8,7 +8,7 @@
           <div>
 
             <div @click="handleTitleClick"
-              :class="['flex items-center dark:text-neutral-300 text-4xl font-medium md:text-3xl', isNormalView ? 'group cursor-pointer' : 'cursor-default']">
+              :class="['flex items-center text-poison-500 dark:text-neutral-300 text-4xl font-medium md:text-3xl', isNormalView ? 'group cursor-pointer' : 'cursor-default']">
               <UIcon name="i-hugeicons-danger" class="mr-2" />
               <h1>
                 Giftsvampar

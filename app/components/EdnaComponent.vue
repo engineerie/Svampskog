@@ -13,7 +13,7 @@
         <div class="md:flex gap-4">
           <div class=" md:mt-0 mt-1 mb-1 md:mb-2">
 
-            <div class="text-3xl font-medium flex items-center">
+            <div class="text-3xl font-medium flex items-center text-secondary-500">
               <UIcon name="solar:dna-linear" class="mr-2" />
               <h1 class="truncate">Alla mykorrhizasvampar</h1>
             </div>

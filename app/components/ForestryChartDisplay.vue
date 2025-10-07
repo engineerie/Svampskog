@@ -7,8 +7,6 @@
           <VisArea :x="xAccessor" :y="stackedYAccessors" :color="stackedColors" :interpolateMissingData="true" />
           <VisCrosshair :template="crosshairTemplate" />
           <VisTooltip :horizontalShift="30" />
-          <VisPlotline :value="10" color="rgba(220, 114, 0, 1)" axis="x" labelOrientation="vertical"
-            labelText="Plot line on x-axis" />
 
         </template>
         <template v-else-if="props.chartType === 'area'">
@@ -17,24 +15,26 @@
             return Number.isFinite(v) ? v : NaN
           }" :color="() => (fw.colorArea || fw.color)" :interpolateMissingData="true" />
           <VisCrosshair :template="crosshairTemplate" />
+          <VisPlotline :value="currentTimeValue" color="rgba(220, 114, 0, 1)" axis="x" labelOrientation="vertical" />
           <VisTooltip :horizontalShift="30" />
         </template>
         <template v-else-if="props.chartType === 'bar'">
           <VisGroupedBar :color="computedLineColors" :x="xAccessor" :y="yAccessors" :groupPadding="0.5"
             :groupMaxWidth="20" />
         </template>
-        <VisAxis :gridLine="true" type="x" :tickValues="[-5, 0, 1, 10, 20, 30, 40, 50, 60, 70, 80, 90]" :tickFormat="(val: number) => {
-          if (val === -5) return 'före'
-          if (val === 0) return ''
-          if (val === 10) return ''
-          if (val === 30) return ''
-          if (val === 40) return ''
-          if (val === 60) return ''
-          if (val === 70) return ''
-          if (val === 90) return ''
-          return val + ' år'
-        }" />
-        <VisAxis type="y" />
+        <VisAxis tickTextFontSize="12px" :gridLine="true" type="x"
+          :tickValues="[-5, 0, 10, 20, 30, 40, 50, 60, 70, 80, 90]" :tickFormat="(val: number) => {
+            if (val === -5) return ''
+            if (val === 0) return ''
+            if (val === 10) return ''
+            if (val === 30) return ''
+            if (val === 40) return ''
+            if (val === 60) return ''
+            if (val === 70) return ''
+            if (val === 90) return ''
+            return val
+          }" />
+        <VisAxis tickTextFontSize="12px" type="y" />
       </VisXYContainer>
     </ClientOnly>
   </div>
