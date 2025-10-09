@@ -114,11 +114,47 @@
           <div class="pointer-events-auto">
             <UDrawer :direction="isMobile ? 'bottom' : 'bottom'" :inset="isMobile ? false : false" handle-only
               :dismissible="isMobile ? true : false" :overlay="false" :handle="isMobile ? true : false" :modal="false"
-              v-model:open="open"
-              :ui="{ header: 'flex items-center justify-between', body: 'p-0', container: 'p-0 gap-0', content: 'max-w-[85rem] mx-auto', footer: 'gap-0' }">
+              v-model:open="textDrawerOpen"
+              :ui="{ header: 'flex items-center justify-between', body: 'p-0', container: 'p-0 gap-0', content: 'max-w-[85rem] mx-auto ', footer: 'gap-0' }">
               <UButton :size="isMobile ? 'xl' : 'lg'" :label="isMobile ? null : 'Text'" variant="outline"
                 color="neutral" icon="i-heroicons-book-open" class="rounded-2xl" />
               <template #body>
+                <UDrawer v-if="activeOverlayContent" v-model:open="overlayDrawerOpen" nested :direction="'bottom'"
+                  :modal="false" :overlay="false" :inset="false" :ui="{
+                    container: 'p-0 gap-0',
+                    content: 'max-w-3xl w-full mx-auto',
+                    body: 'p-4 space-y-3'
+                  }">
+                  <template #body>
+
+                    <div class="flex items-start justify-between gap-3">
+                      <h3 class="text-base font-semibold text-neutral-800">
+                        {{ activeOverlayContent.title }}
+                      </h3>
+                      <div class="flex gap-1">
+                        <UButton color="neutral" variant="ghost" size="xs" :ui="{ rounded: 'rounded-full' }"
+                          icon="codicon:pinned"
+                          :class="activeOverlayPinned ? 'text-primary-500' : 'text-neutral-500 hover:text-neutral-900'"
+                          :aria-pressed="activeOverlayPinned" :title="activeOverlayPinned ? 'Lossa' : 'Fäst'"
+                          @click="togglePinned(activeOverlayContent.key, { hideWhenUnpin: false })" />
+                      </div>
+                    </div>
+                    <p class="text-sm text-neutral-600 leading-relaxed">
+                      {{ activeOverlayContent.description }}
+                    </p>
+                    <UCard v-if="activeOverlayContent.key === 'kanteffekt' && isLuckhuggning.value" variant="soft"
+                      :ui="{ body: 'sm:p-4 sm:pl-2' }"
+                      class="mt-2 backdrop-blur-xl bg-neutral-900/50 border border-white/10">
+                      <USwitch :ui="{
+                        root: 'flex-row-reverse justify-between',
+                        label: 'text-white',
+                        description: 'text-neutral-200',
+                        base: 'data-[state=unchecked]:bg-neutral-600'
+                      }" size="xs" color="primary" v-model="oldKanteffektVisible" label="Tidigare kanteffekt"
+                        description="Visa spår från tidigare kanteffekt" />
+                    </UCard>
+                  </template>
+                </UDrawer>
                 <div v-if="timelineCarouselEnabled" class="sm:hidden ">
                   <UCarousel :items="timelineSections" :ui="{ item: 'basis-12/13', viewport: 'p-3' }">
                     <template #default="{ item: section }">
@@ -165,7 +201,8 @@
                     </template>
                   </UCarousel>
                 </div>
-                <div v-else class="sm:grid sm:grid-cols-2 divide-y sm:divide-y-0 sm:divide-x divide-muted/70">
+                <div v-else class="sm:grid divide-y sm:divide-y-0 sm:divide-x divide-muted/70"
+                  :class="compareEnabled ? 'sm:grid-cols-2' : 'sm:grid-cols-1'">
                   <div v-for="section in timelineSections" :key="section.key" class="p-3 sm:p-6 sm:pb-8 group"
                     @click="handleTimelineClick">
                     <div v-if="section.info" class="">
@@ -218,7 +255,7 @@
           <div class="pointer-events-auto">
             <UDrawer :direction="isMobile ? 'bottom' : 'bottom'" :inset="isMobile ? false : false" handle-only
               :dismissible="isMobile ? true : false" :overlay="false" :handle="isMobile ? true : false" :modal="false"
-              v-model:open="open3"
+              v-model:open="chartDrawerOpen"
               :ui="{ header: 'flex items-center justify-between', body: 'p-0', container: 'p-0 gap-0', content: 'max-w-[85rem] mx-auto', footer: 'gap-0' }">
               <UButton :size="isMobile ? 'xl' : 'lg'" :label="isMobile ? null : 'Diagram'" variant="outline"
                 color="neutral" class="rounded-2xl" icon="i-carbon-chart-line-smooth" />
@@ -232,43 +269,13 @@
 
         </div>
 
-        <div class="space-y-1.5 sm:p-4 p-2 pt-3 max-w-sm z-50 absolute top-0 right-0 transform-all text-end">
-          <template v-for="card in overlayCards" :key="card.key">
-            <div v-if="pinned[card.key]" class="flex flex-col sm:flex sm:flex-wrap gap-1 items-end">
-              <UBadge :label="card.title" color="neutral" variant="outline"
-                class="cursor-pointer shadow-sm sm:ml-1.5 w-fit" @click="togglePinned(card.key)" />
+        <div v-if="pinnedOverlayBadges.length"
+          class="space-y-1.5 sm:p-4 p-2 pt-3 max-w-sm z-50 absolute top-0 right-0 transform-all text-end pointer-events-none">
+          <template v-for="badge in pinnedOverlayBadges" :key="badge.key">
+            <div class="pointer-events-auto flex flex-col sm:flex sm:flex-wrap gap-1 items-end">
+              <UBadge :label="badge.title" color="neutral" variant="outline"
+                class="cursor-pointer shadow-sm sm:ml-1.5 w-fit" @click="togglePinned(badge.key)" />
             </div>
-
-            <UCard v-else :ui="{ body: 'p-3 sm:p-4' }" class="z-50 transform-all text-start">
-              <div>
-                <div>
-                  <div class="flex items-start justify-between gap-4">
-                    <div class="font-medium ">{{ card.title }}</div>
-                    <div class="flex gap-1">
-                      <UButton color="neutral" variant="ghost" :ui="{ rounded: 'rounded-full' }"
-                        @click="togglePinned(card.key)" icon="i-solar-minimize-square-3-linear" size="xs"
-                        :class="pinned[card.key] ? 'text-primary-500' : 'text-neutral-500 hover:text-neutral-900'" />
-                      <UButton class="text-neutral-500 hover:text-neutral-900" icon="i-heroicons-x-mark" variant="ghost"
-                        color="neutral" size="xs" @click="card.close()" />
-                    </div>
-                  </div>
-
-                  <p class="text-sm text-neutral-500 mt-1">
-                    {{ card.desc }}
-                  </p>
-                </div>
-              </div>
-
-              <template v-if="card.key === 'kanteffekt' && isLuckhuggning">
-                <UCard variant="soft" :ui="{ body: 'sm:p-4 sm:pl-2' }"
-                  class="mt-2 backdrop-blur-xl bg-neutral-900/50 border border-white/10">
-                  <USwitch
-                    :ui="{ root: 'flex-row-reverse justify-between', label: 'text-white', description: 'text-neutral-200', base: 'data-[state=unchecked]:bg-neutral-600' }"
-                    size="xs" color="primary" v-model="oldKanteffektVisible" label="Tidigare kanteffekt"
-                    description="Visa spår från tidigare kanteffekt" />
-                </UCard>
-              </template>
-            </UCard>
           </template>
         </div>
 
@@ -771,6 +778,7 @@ const OpenSeadragonViewer = defineAsyncComponent(() =>
   import('~/components/OpenSeadragonViewer.vue')
 );
 import { ref, computed, watch, onMounted, onBeforeUnmount, onUnmounted, reactive } from "vue";
+import type { Ref } from "vue";
 import { useRuntimeConfig } from '#imports';
 import { useAsyncData } from '#app';
 let removeShortcutsFn;
@@ -884,29 +892,22 @@ function toggleTimeInfo2Visible() {
   timeInfo2Visible.value = !timeInfo2Visible.value
 }
 
-// Track the order overlays became visible to control UCard stacking
-const overlayOrder = ref([]); // array of keys, e.g., ['retention','smaplantor']
+// Overlay tracking helpers
+const overlayKeys = ['retention', 'kanteffekt', 'rottacke', 'seedTree', 'smaplantor', 'hogstubbar', 'naturvardsarter', 'tradplantor'] as const;
+type OverlayKey = typeof overlayKeys[number];
 
-function updateOverlayOrder(key, visible) {
-  const arr = overlayOrder.value;
-  const idx = arr.indexOf(key);
+const overlayOrder = ref<OverlayKey[]>([]);
+
+function updateOverlayOrder(key: OverlayKey, visible: boolean) {
+  const order = overlayOrder.value;
+  const idx = order.indexOf(key);
   if (visible) {
-    if (idx !== -1) arr.splice(idx, 1); // move to the end
-    arr.push(key);
+    if (idx !== -1) order.splice(idx, 1);
+    order.push(key);
   } else if (idx !== -1) {
-    arr.splice(idx, 1);
+    order.splice(idx, 1);
   }
 }
-
-// Keep overlayOrder in sync with visibility refs
-watch(retentionVisible, v => updateOverlayOrder('retention', v), { immediate: true });
-watch(kanteffektVisible, v => updateOverlayOrder('kanteffekt', v), { immediate: true });
-watch(rottackeVisible, v => updateOverlayOrder('rottacke', v), { immediate: true });
-watch(seedTreeVisible, v => updateOverlayOrder('seedTree', v), { immediate: true });
-watch(smaplantorVisible, v => updateOverlayOrder('smaplantor', v), { immediate: true });
-watch(hogstubbarVisible, v => updateOverlayOrder('hogstubbar', v), { immediate: true });
-watch(naturvardsarterVisible, v => updateOverlayOrder('naturvardsarter', v), { immediate: true });
-watch(tradplantorVisible, v => updateOverlayOrder('tradplantor', v), { immediate: true });
 
 const overlayStore = useOverlayStore();
 const staticOverlayVisible = computed({
@@ -917,197 +918,23 @@ function toggleOverlay() {
   overlayStore.toggleStaticOverlay();
 }
 
-const overlayCards = computed(() => {
-  const cards = []
-  const add = (key, title, desc, close) => {
-    if (key === 'staticOverlay') return
-    cards.push({
-      key,
-      title,
-      desc,
-      close: () => {
-        pinned[key] = false
-        close?.()
-      }
-    })
+const overlayDrawerOpen = ref(false);
+const activeOverlayKey = ref<OverlayKey | null>(null);
+const textDrawerOpen = ref(false);
+const chartDrawerOpen = ref(false);
+const open = computed({
+  get: () => textDrawerOpen.value,
+  set: (val: boolean) => {
+    textDrawerOpen.value = val;
   }
-
-  // Render most-recent first
-  const keys = overlayOrder.value.slice().reverse()
-
-  for (const key of keys) {
-    switch (key) {
-      case 'smaplantor':
-        if (smaplantorVisible?.value) {
-          add(
-            'smaplantor',
-            'Yngre träd och småplantor som lämnats',
-            'Undviks underröjning före avverkning, kommer mykorrhizasvampar att överleva på dessa plantor och träd på samma sätt som de gör på rötterna av hänsynsträd.',
-            () => (smaplantorVisible.value = false),
-          )
-        }
-        break
-
-      case 'hogstubbar':
-        if (hogstubbarVisible?.value) {
-          add(
-            'hogstubbar',
-            'Högstubbar',
-            'Här finns inga levande mykorrhizamycel. Trädets rötter är döda.',
-            () => (hogstubbarVisible.value = false),
-          )
-        }
-        break
-
-      case 'retention':
-        if (retentionVisible?.value && (isTrakthygge || isLuckhuggning || isSkarmtrad)) {
-          add(
-            'retention',
-            'Hänsynsträd',
-            'De flesta mykorrhizasvamparna som växte med trädens rötter före avverkningen finns kvar och lever vidare. Mycel kan växa in i och spridas till uppväxande trädplantor.',
-            () => (retentionVisible.value = false),
-          )
-        }
-        break
-
-      case 'kanteffekt':
-        if (kanteffektVisible?.value && (isTrakthygge || isLuckhuggning || isSkarmtrad)) {
-          add(
-            'kanteffekt',
-            'Kanteffekt',
-            'Mykorrhizasvamp på trädens rötter i skogskanten kan sträcka sig 10–15 meter in på hygget; starkast närmast kanten.',
-            () => (kanteffektVisible.value = false),
-          )
-        }
-        break
-
-      case 'rottacke':
-        if (rottackeVisible?.value && (isBladning || isSkarmtrad)) {
-          add(
-            'rottacke',
-            'Kontinuerligt rottäcke',
-            'I princip är hela området täckt av rötter där mykorrhizasvampar kan överleva.',
-            () => (rottackeVisible.value = false),
-          )
-        }
-        break
-
-      case 'naturvardsarter':
-        if (naturvardsarterVisible?.value && (isTrakthygge || isLuckhuggning || isBladning || isSkarmtrad)) {
-          add(
-            'naturvardsarter',
-            'Naturvårdsarter',
-            'Naturvårdsarter har ofta speciella miljökrav, och förekommer främst i äldre skog. Generellt kan mycel av mykorrhizasvampar leva vidare på en plats så länge det finns levande träd. Svampindividers mycel kan likt träd bli många decennier till potentiellt sekler gamla.',
-            () => (naturvardsarterVisible.value = false),
-          )
-        }
-        break
-
-      case 'seedTree':
-        if (seedTreeVisible?.value && isSkarmtrad) {
-          add(
-            'seedTree',
-            'Fröträd',
-            'Mycel fortsätter leva på fröträdens rötter och kan koppla till nya plantor.',
-            () => (seedTreeVisible.value = false),
-          )
-        }
-        break
-
-      case 'tradplantor':
-        if (tradplantorVisible?.value && isTrakthygge) {
-          add(
-            'tradplantor',
-            'Planterade små trädplantor',
-            'Har med sig spontant etablerad mykorrhiza från plantskolan där de odlades upp. Det är dock få arter. Dessa ersätts succesivt med bättre anpassade och svamparter som finns på platsen.',
-            () => (tradplantorVisible.value = false),
-          )
-        }
-        break
-    }
+}) as Ref<boolean>;
+const open2 = ref(false);
+const open3 = computed({
+  get: () => chartDrawerOpen.value,
+  set: (val: boolean) => {
+    chartDrawerOpen.value = val;
   }
-
-  return cards
-})
-// Pin states for overlays (pinned overlays remain visible when others are toggled on)
-const pinned = reactive({
-  staticOverlay: false,
-  retention: false,
-  kanteffekt: false,
-  rottacke: false,
-  seedTree: false,
-  smaplantor: false,
-  hogstubbar: false,
-  naturvardsarter: false,
-  tradplantor: false,
-})
-
-function togglePinned(key) {
-  pinned[key] = !pinned[key]
-}
-
-const overlayRefMap = {
-  staticOverlay: staticOverlayVisible,
-  retention: retentionVisible,
-  kanteffekt: kanteffektVisible,
-  rottacke: rottackeVisible,
-  seedTree: seedTreeVisible,
-  smaplantor: smaplantorVisible,
-  hogstubbar: hogstubbarVisible,
-  naturvardsarter: naturvardsarterVisible,
-  tradplantor: tradplantorVisible,
-} as const
-
-const overlayBadgeItems = computed(() => ([
-  { key: 'staticOverlay', label: 'Beståndsgräns' },
-  { key: 'retention', label: 'Hänsynsträd' },
-  { key: 'kanteffekt', label: 'Kanteffekt' },
-  { key: 'rottacke', label: 'Rottäcke' },
-  { key: 'seedTree', label: 'Fröträd' },
-  { key: 'smaplantor', label: 'Småplantor' },
-  { key: 'hogstubbar', label: 'Högstubbar' },
-  { key: 'naturvardsarter', label: 'Naturvårdsarter' },
-  { key: 'tradplantor', label: 'Trädplantor' },
-]))
-
-function toggleOverlayBadge(key: keyof typeof overlayRefMap) {
-  const ref = overlayRefMap[key]
-  if (!ref) return
-  if (pinned[key]) {
-    pinned[key] = false
-    if (ref.value) ref.value = false
-  } else {
-    pinned[key] = true
-    if (!ref.value) ref.value = true
-  }
-}
-
-function enforceExclusive(activeKey) {
-  (Object.keys(overlayRefMap) as Array<keyof typeof overlayRefMap>).forEach((key) => {
-    if (key === activeKey) return
-    if (pinned[key]) return
-    if (overlayRefMap[key]?.value) overlayRefMap[key].value = false
-  })
-}
-
-// Make overlays mutually exclusive unless pinned
-watch(retentionVisible, (val) => { if (val) enforceExclusive('retention') })
-watch(kanteffektVisible, (val) => { if (val) enforceExclusive('kanteffekt') })
-watch(rottackeVisible, (val) => { if (val) enforceExclusive('rottacke') })
-watch(seedTreeVisible, (val) => { if (val) enforceExclusive('seedTree') })
-watch(smaplantorVisible, (val) => { if (val) enforceExclusive('smaplantor') })
-watch(hogstubbarVisible, (val) => { if (val) enforceExclusive('hogstubbar') })
-watch(naturvardsarterVisible, (val) => { if (val) enforceExclusive('naturvardsarter') })
-watch(tradplantorVisible, (val) => { if (val) enforceExclusive('tradplantor') })
-watch(staticOverlayVisible, (val) => { if (val) enforceExclusive('staticOverlay') })
-
-
-
-const currentFwValue = computed(() => currentFramework.value?.value);
-const isTrakthygge = computed(() => currentFwValue.value === 'trakthygge');
-const isLuckhuggning = computed(() => currentFwValue.value === 'luckhuggning');
-const isBladning = computed(() => currentFwValue.value === 'blädning' || currentFwValue.value === 'bladning');
-const isSkarmtrad = computed(() => currentFwValue.value === 'skärmträd' || currentFwValue.value === 'skarmtrad');
+}) as Ref<boolean>;
 
 // somewhere after your other refs:
 const retentionTrees = ref([])
@@ -1241,27 +1068,16 @@ function makeClickableHtml(text = '') {
   return html;
 }
 
-function handleTimelineClick(evt) {
-  const target = evt.target.closest('[data-overlay]');
+const overlayKeySet = new Set<OverlayKey>(overlayKeys);
+const isOverlayKeyString = (value: string | null): value is OverlayKey =>
+  typeof value === 'string' && overlayKeySet.has(value as OverlayKey);
+
+function handleTimelineClick(evt: MouseEvent) {
+  const target = (evt.target as HTMLElement | null)?.closest('[data-overlay]') as HTMLElement | null;
   if (!target) return;
   const key = target.getAttribute('data-overlay');
-  if (key === 'retention') {
-    retentionVisible.value = !retentionVisible.value;
-  } else if (key === 'kanteffekt') {
-    kanteffektVisible.value = !kanteffektVisible.value;
-  } else if (key === 'seedTree') {
-    seedTreeVisible.value = !seedTreeVisible.value;
-  } else if (key === 'rottacke') {
-    rottackeVisible.value = !rottackeVisible.value;
-  } else if (key === 'smaplantor') {
-    smaplantorVisible.value = !smaplantorVisible.value;
-  } else if (key === 'hogstubbar') {
-    hogstubbarVisible.value = !hogstubbarVisible.value;
-  } else if (key === 'naturvardsarter') {
-    naturvardsarterVisible.value = !naturvardsarterVisible.value;
-  } else if (key === 'tradplantor') {
-    tradplantorVisible.value = !tradplantorVisible.value;
-  }
+  if (!isOverlayKeyString(key)) return;
+  handleOverlayTrigger(key);
 }
 
 
@@ -1497,10 +1313,6 @@ watch([isFrameworkCompareMode, isCompare], ([frameworkCompare, compare]) => {
   }
 });
 
-const open = ref(false);
-const open2 = ref(false);
-const open3 = ref(false);
-
 onMounted(() => {
   removeShortcutsFn = defineShortcuts({
     o: () => (open.value = !open.value),
@@ -1511,6 +1323,12 @@ onBeforeUnmount(() => {
   if (typeof removeShortcutsFn === "function") {
     removeShortcutsFn();
   }
+  if (overlayCloseTimer) {
+    clearTimeout(overlayCloseTimer);
+    overlayCloseTimer = null;
+  }
+  overlayCloseRequested = false;
+  overlayCloseShouldHide = true;
 });
 
 // Function to handle selecting an option
@@ -1581,6 +1399,364 @@ const currentFramework = computed(() =>
 const currentStartskog = computed(
   () => startskog[selectedStartskogIndex.value]
 );
+
+const currentFwValue = computed(() => currentFramework.value?.value);
+const isTrakthygge = computed(() => currentFwValue.value === 'trakthygge');
+const isLuckhuggning = computed(() => currentFwValue.value === 'luckhuggning');
+const isBladning = computed(() => currentFwValue.value === 'blädning' || currentFwValue.value === 'bladning');
+const isSkarmtrad = computed(() => currentFwValue.value === 'skärmträd' || currentFwValue.value === 'skarmtrad');
+
+type OverlayContentConfig = {
+  title: string;
+  description: string;
+  condition: () => boolean;
+  close: () => void;
+};
+
+const overlayConfigs: Record<OverlayKey, OverlayContentConfig> = {
+  retention: {
+    title: 'Hänsynsträd',
+    description: 'De flesta mykorrhizasvamparna som växte med trädens rötter före avverkningen finns kvar och lever vidare. Mycel kan växa in i och spridas till uppväxande trädplantor.',
+    condition: () => retentionVisible.value && (isTrakthygge.value || isLuckhuggning.value || isSkarmtrad.value),
+    close: () => { retentionVisible.value = false },
+  },
+  kanteffekt: {
+    title: 'Kanteffekt',
+    description: 'Mykorrhizasvamp på trädens rötter i skogskanten kan sträcka sig 10–15 meter in på hygget; starkast närmast kanten.',
+    condition: () => kanteffektVisible.value && (isTrakthygge.value || isLuckhuggning.value || isSkarmtrad.value),
+    close: () => { kanteffektVisible.value = false },
+  },
+  rottacke: {
+    title: 'Kontinuerligt rottäcke',
+    description: 'I princip är hela området täckt av rötter där mykorrhizasvampar kan överleva.',
+    condition: () => rottackeVisible.value && (isBladning.value || isSkarmtrad.value),
+    close: () => { rottackeVisible.value = false },
+  },
+  seedTree: {
+    title: 'Fröträd',
+    description: 'Mycel fortsätter leva på fröträdens rötter och kan koppla till nya plantor.',
+    condition: () => seedTreeVisible.value && isSkarmtrad.value,
+    close: () => { seedTreeVisible.value = false },
+  },
+  smaplantor: {
+    title: 'Yngre träd och småplantor som lämnats',
+    description: 'Undviks underröjning före avverkning, kommer mykorrhizasvampar att överleva på dessa plantor och träd på samma sätt som de gör på rötterna av hänsynsträd.',
+    condition: () => smaplantorVisible.value,
+    close: () => { smaplantorVisible.value = false },
+  },
+  hogstubbar: {
+    title: 'Högstubbar',
+    description: 'Här finns inga levande mykorrhizamycel. Trädets rötter är döda.',
+    condition: () => hogstubbarVisible.value,
+    close: () => { hogstubbarVisible.value = false },
+  },
+  naturvardsarter: {
+    title: 'Naturvårdsarter',
+    description: 'Naturvårdsarter har ofta speciella miljökrav, och förekommer främst i äldre skog. Generellt kan mycel av mykorrhizasvampar leva vidare på en plats så länge det finns levande träd. Svampindividers mycel kan likt träd bli många decennier till potentiellt sekler gamla.',
+    condition: () => naturvardsarterVisible.value && (isTrakthygge.value || isLuckhuggning.value || isBladning.value || isSkarmtrad.value),
+    close: () => { naturvardsarterVisible.value = false },
+  },
+  tradplantor: {
+    title: 'Planterade små trädplantor',
+    description: 'Har med sig spontant etablerad mykorrhiza från plantskolan där de odlades upp. Det är dock få arter. Dessa ersätts succesivt med bättre anpassade och svamparter som finns på platsen.',
+    condition: () => tradplantorVisible.value && isTrakthygge.value,
+    close: () => { tradplantorVisible.value = false },
+  },
+};
+
+// Pin states for overlays (pinned overlays remain visible when others are toggled on)
+const pinned = reactive({
+  staticOverlay: false,
+  retention: false,
+  kanteffekt: false,
+  rottacke: false,
+  seedTree: false,
+  smaplantor: false,
+  hogstubbar: false,
+  naturvardsarter: false,
+  tradplantor: false,
+});
+
+const overlayRefMap = {
+  staticOverlay: staticOverlayVisible,
+  retention: retentionVisible,
+  kanteffekt: kanteffektVisible,
+  rottacke: rottackeVisible,
+  seedTree: seedTreeVisible,
+  smaplantor: smaplantorVisible,
+  hogstubbar: hogstubbarVisible,
+  naturvardsarter: naturvardsarterVisible,
+  tradplantor: tradplantorVisible,
+} as const;
+
+type OverlayMapKey = keyof typeof overlayRefMap;
+
+const isDrawerOverlayKey = (key: OverlayMapKey): key is OverlayKey =>
+  key !== 'staticOverlay';
+
+function togglePinned(rawKey: OverlayMapKey, options: { hideWhenUnpin?: boolean } = {}) {
+  const ref = overlayRefMap[rawKey];
+  if (!ref) return;
+
+  if (!isDrawerOverlayKey(rawKey)) {
+    const next = !pinned.staticOverlay;
+    pinned.staticOverlay = next;
+    ref.value = next;
+    return;
+  }
+
+  const key = rawKey as OverlayKey;
+  const hideWhenUnpin = options.hideWhenUnpin ?? true;
+  const next = !pinned[key];
+  pinned[key] = next;
+
+  if (next) {
+    if (!ref.value) ref.value = true;
+    activeOverlayKey.value = key;
+    overlayDrawerOpen.value = true;
+    return;
+  }
+
+  if (hideWhenUnpin) {
+    if (activeOverlayKey.value === key) {
+      closeActiveOverlay({ hideOverlay: true });
+    } else if (ref.value) {
+      ref.value = false;
+    }
+  }
+}
+
+const overlayBadgeItems = computed(() => ([
+  { key: 'staticOverlay', label: 'Beståndsgräns' },
+  { key: 'retention', label: 'Hänsynsträd' },
+  { key: 'kanteffekt', label: 'Kanteffekt' },
+  { key: 'rottacke', label: 'Rottäcke' },
+  { key: 'seedTree', label: 'Fröträd' },
+  { key: 'smaplantor', label: 'Småplantor' },
+  { key: 'hogstubbar', label: 'Högstubbar' },
+  { key: 'naturvardsarter', label: 'Naturvårdsarter' },
+  { key: 'tradplantor', label: 'Trädplantor' },
+]));
+
+const activeOverlayContent = computed(() => {
+  const key = activeOverlayKey.value;
+  if (!key) return null;
+  const config = overlayConfigs[key];
+  if (!config || !isOverlayActive(key)) return null;
+  return {
+    key,
+    title: config.title,
+    description: config.description,
+  };
+});
+
+const activeOverlayPinned = computed(() => {
+  const key = activeOverlayKey.value;
+  return key ? pinned[key] : false;
+});
+
+const pinnedOverlayBadges = computed(() =>
+  overlayKeys
+    .filter((key) => pinned[key])
+    .map((key) => ({ key, title: overlayConfigs[key].title }))
+);
+
+watch(textDrawerOpen, (isOpen) => {
+  if (isOpen && chartDrawerOpen.value) {
+    chartDrawerOpen.value = false;
+  }
+});
+
+watch(chartDrawerOpen, (isOpen) => {
+  if (isOpen && textDrawerOpen.value) {
+    textDrawerOpen.value = false;
+  }
+});
+
+const OVERLAY_DRAWER_CLOSE_DELAY = 220;
+let overlayCloseTimer: ReturnType<typeof setTimeout> | null = null;
+let overlayCloseShouldHide = true;
+let overlayCloseRequested = false;
+
+function toggleOverlayBadge(key: OverlayMapKey) {
+  togglePinned(key);
+}
+
+function enforceExclusive(activeKey: keyof typeof overlayRefMap) {
+  (Object.keys(overlayRefMap) as Array<keyof typeof overlayRefMap>).forEach((key) => {
+    if (key === activeKey) return;
+    if (pinned[key]) return;
+    if (overlayRefMap[key]?.value) overlayRefMap[key].value = false;
+  });
+}
+
+function isOverlayActive(key: OverlayKey) {
+  const config = overlayConfigs[key];
+  return !!config && config.condition();
+}
+
+function handleOverlayStateChange(key: OverlayKey) {
+  const visible = isOverlayActive(key);
+  updateOverlayOrder(key, visible);
+
+  if (visible) {
+    activeOverlayKey.value = key;
+    overlayDrawerOpen.value = true;
+    return;
+  }
+
+  if (activeOverlayKey.value === key) {
+    const fallback = overlayOrder.value.slice().reverse().find((candidate) => isOverlayActive(candidate));
+    if (fallback) {
+      activeOverlayKey.value = fallback;
+      overlayDrawerOpen.value = true;
+    } else {
+      closeActiveOverlay({ hideOverlay: false });
+    }
+  }
+}
+
+function handleOverlayTrigger(key: OverlayKey) {
+  const ref = overlayRefMap[key];
+  if (!ref) return;
+
+  if (ref.value) {
+    if (pinned[key]) {
+      openOverlayDrawer(key);
+    } else {
+      ref.value = false;
+    }
+    return;
+  }
+
+  ref.value = true;
+  openOverlayDrawer(key);
+}
+
+function openOverlayDrawer(key: OverlayKey) {
+  const ref = overlayRefMap[key];
+  if (!ref) return;
+  activeOverlayKey.value = key;
+  overlayDrawerOpen.value = true;
+}
+
+function closeActiveOverlay(options: { hideOverlay?: boolean } = {}) {
+  overlayCloseRequested = true;
+  const key = activeOverlayKey.value;
+  overlayCloseShouldHide = options.hideOverlay ?? (key ? !pinned[key] : true);
+
+  if (!key) {
+    overlayCloseRequested = false;
+    overlayCloseShouldHide = true;
+    overlayDrawerOpen.value = false;
+    return;
+  }
+
+  if (!overlayDrawerOpen.value) {
+    finalizeOverlayClose();
+    return;
+  }
+
+  overlayDrawerOpen.value = false;
+}
+
+function finalizeOverlayClose() {
+  if (overlayCloseTimer) {
+    clearTimeout(overlayCloseTimer);
+    overlayCloseTimer = null;
+  }
+
+  const key = activeOverlayKey.value;
+  if (!key) {
+    overlayCloseShouldHide = true;
+    overlayCloseRequested = false;
+    return;
+  }
+
+  const shouldHide = overlayCloseShouldHide;
+
+  activeOverlayKey.value = null;
+  overlayCloseShouldHide = true;
+  overlayCloseRequested = false;
+
+  if (shouldHide) {
+    const ref = overlayRefMap[key];
+    if (ref && ref.value) ref.value = false;
+  }
+}
+
+watch(overlayDrawerOpen, (isOpen, wasOpen) => {
+  if (overlayCloseTimer) {
+    clearTimeout(overlayCloseTimer);
+    overlayCloseTimer = null;
+  }
+
+  if (!isOpen && wasOpen) {
+    if (!overlayCloseRequested) {
+      const key = activeOverlayKey.value;
+      overlayCloseShouldHide = key ? !pinned[key] : true;
+    }
+    overlayCloseTimer = setTimeout(() => {
+      finalizeOverlayClose();
+    }, OVERLAY_DRAWER_CLOSE_DELAY);
+  } else if (isOpen) {
+    overlayCloseRequested = false;
+  }
+});
+
+watch(open, (isOpen) => {
+  if (!isOpen) {
+    closeActiveOverlay({ hideOverlay: false });
+  }
+});
+
+// Make overlays mutually exclusive unless pinned and drive nested drawer state
+watch(retentionVisible, (val) => {
+  if (val) enforceExclusive('retention');
+  handleOverlayStateChange('retention');
+}, { immediate: true });
+
+watch(kanteffektVisible, (val) => {
+  if (val) enforceExclusive('kanteffekt');
+  handleOverlayStateChange('kanteffekt');
+}, { immediate: true });
+
+watch(rottackeVisible, (val) => {
+  if (val) enforceExclusive('rottacke');
+  handleOverlayStateChange('rottacke');
+}, { immediate: true });
+
+watch(seedTreeVisible, (val) => {
+  if (val) enforceExclusive('seedTree');
+  handleOverlayStateChange('seedTree');
+}, { immediate: true });
+
+watch(smaplantorVisible, (val) => {
+  if (val) enforceExclusive('smaplantor');
+  handleOverlayStateChange('smaplantor');
+}, { immediate: true });
+
+watch(hogstubbarVisible, (val) => {
+  if (val) enforceExclusive('hogstubbar');
+  handleOverlayStateChange('hogstubbar');
+}, { immediate: true });
+
+watch(naturvardsarterVisible, (val) => {
+  if (val) enforceExclusive('naturvardsarter');
+  handleOverlayStateChange('naturvardsarter');
+}, { immediate: true });
+
+watch(tradplantorVisible, (val) => {
+  if (val) enforceExclusive('tradplantor');
+  handleOverlayStateChange('tradplantor');
+}, { immediate: true });
+
+watch(staticOverlayVisible, (val) => { if (val) enforceExclusive('staticOverlay') });
+
+watch(currentFwValue, () => {
+  overlayKeys.forEach((key) => handleOverlayStateChange(key));
+});
+
 
 // Time references
 const time = ref(3);
