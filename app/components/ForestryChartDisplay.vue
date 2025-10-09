@@ -1,7 +1,7 @@
 <template>
   <div class="custom-area" ref="rootEl" :style="{ '--vis-area-stroke-color': parentStrokeColor }">
     <ClientOnly>
-      <VisXYContainer v-if="isMounted && chartReady" :data="chartData" :height="200" :margin="margin" :xDomain="xDomain"
+      <VisXYContainer v-if="isMounted && chartReady" :data="chartData" :height="170" :margin="margin" :xDomain="xDomain"
         :yDomain="yDomain">
         <template v-if="props.chartType === 'area' && props.singleFrameworkSelection">
           <VisArea :x="xAccessor" :y="stackedYAccessors" :color="stackedColors" :interpolateMissingData="true" />

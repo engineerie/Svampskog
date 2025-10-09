@@ -6,8 +6,8 @@
       :class="['openseadragon-viewer ui-zoom-exempt col-span-3 relative overflow-hidden', fullscreenLayout ? '' : 'rounded-sm']"
       ref="viewerContainer" :style="{ backgroundColor: backgroundColor }" @mousedown.capture="handleActivate"
       @mousemove="updateMousePosition" @click="handleRetentionClick($event)">
-      <div v-if="!(layoutMode === 'slider' && comparisonMode) && fullscreenLayout"
-        class="absolute top-0 left-1/2 transform -translate-x-1/2 m-2 z-10 text-center">
+      <!-- <div v-if="!(layoutMode === 'slider' && comparisonMode) && fullscreenLayout"
+        class="absolute bottom-0 left-1/2 transform -translate-x-1/2 m-2 z-10 text-center">
         <div>
           <UBadge size="lg" class="backdrop-blur-xl bg-neutral-400/10 text-neutral-100 mb-0.5 z-50">{{
             frameworkLabel }}
@@ -15,7 +15,7 @@
         </div>
         <UBadge size="lg" class="backdrop-blur-xl bg-neutral-400/10 text-neutral-100 z-50">{{ timeLabel }}
         </UBadge>
-      </div>
+      </div> -->
 
       <!-- Display viewport coordinates for marker placement -->
       <!-- <div class="absolute top-32 right-0 m-2 p-1 bg-black bg-opacity-50 text-white text-xs z-50">

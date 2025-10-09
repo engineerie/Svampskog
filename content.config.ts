@@ -120,7 +120,6 @@ const forestryTimelineEntrySchema = z.object({
   startskog: z.string().nonempty(),
   atgard: z.string().nonempty(),
   tid: z.string().nonempty(),
-  label: z.string().nonempty(),
   skog: z.string().nonempty(),
   svamp: z.string().nonempty(),
 });

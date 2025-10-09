@@ -1,431 +1,399 @@
 <template>
-  <div :class="['mx-auto', isFullWidth ? 'w-full' : 'w-full']" class="transition-all duration-500">
-    <div class="transition-all duration-300">
-      <div class="">
-        <div class="flex">
+  <div class="relative flex flex-col w-full h-dvh">
+    <DefineSettingsTemplate>
+      <div class="space-y-0.5 p-3">
+        <div class="grid grid-cols-2 gap-2 ">
+          <UButton size="xs" variant="outline" color="neutral" @click="setCompareMode(false)"
+            :class="!compareEnabled ? 'bg-neutral-100 shadow ring-muted' : 'text-muted/60 hover:text-muted ring-muted/50'">
+            <div class="flex flex-col text-center items-center w-full space-y-1">
+              <UIcon name="i-bx-rectangle" class="size-4" />
+              <h1>Enkelvy</h1>
+            </div>
+          </UButton>
+          <UButton size="xs" variant="outline" color="neutral" @click="setCompareMode(true)"
+            :class="compareEnabled ? 'bg-neutral-100 shadow ring-muted' : 'text-muted/60 hover:text-muted ring-muted/50'">
+            <div class="flex flex-col text-center items-center w-full space-y-1">
+              <UIcon name="iconamoon:compare-duotone" class="size-4" />
+              <h1>Jämför</h1>
+            </div>
+          </UButton>
+        </div>
 
-          <div class="w-full relative">
+        <!-- <span class="text-sm tracking-wide text-neutral-400">Läge</span> -->
+        <UTabs v-if="compareEnabled" v-model="selectedCompareChoice" :items="compareOptions" size="xs"
+          placeholder="Välj" :clearable="true" class="w-full ring-muted -mb-2 mt-2" :ui="{
+            root: 'min-w-max flex-shrink-0',
+            list: 'flex-nowrap rounded-xl bg-muted/50 -mb-1.5 gap-2',
+            indicator: 'bg-white border border-muted/50 shadow ',
+            trigger: ' data-[state=active]:text-neutral-800 dark:data-[state=active]:text-violet-400/90 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary '
+          }" />
 
-
-            <!-- <div class="relative w-full h-[600px] resize-y overflow-auto flex p-1 pt-0 rounded-lg"> -->
-            <div ref="resizableContainer" class="relative flex flex-col w-full pt-0 h-screen ui-zoom-exempt">
-              <div class="flex justify-between border-b border-muted">
-                <div class="gap-1 flex">
-                  <!-- <UButton label="Visa info" variant="solid" color="neutral" @click="infoOpen = !infoOpen"
-                    class="ring-muted" icon="i-heroicons-book-open" /> -->
-                  <UDrawer :direction="isMobile ? 'bottom' : 'bottom'" :inset="isMobile ? false : false"
-                    :dismissible="isMobile ? true : false" :overlay="false" :handle="isMobile ? true : false"
-                    :modal="false" v-model:open="open"
-                    :ui="{ header: 'flex items-center justify-between', body: 'p-0', container: 'p-0 gap-0', content: 'max-w-[85rem] mx-auto', footer: 'gap-0' }"
-                    class="absolute bottom-24 z-50 right-4 sm:block">
-                    <UButton label="Visa info" variant="outline" color="neutral" class="border-none"
-                      icon="i-ph-sidebar-simple-duotone" />
-                    <!-- content: 'w-80 mt-12 mb-14' -->
-                    <!-- <template #content>
- 
-</template> -->
-                    <template #footer>
-                      <!-- <div class=" grid grid-cols-2 gap-4 p-4">
-                        <div class="w-full">
-                          <UButton size="md" v-if="hasPrevTime" @click="goPrevTime" variant="outline"
-                            class=" ring-muted w-full" :label="prevTitle" color="neutral"
-                            icon="i-heroicons-arrow-left-circle" />
-                        </div>
-                        <div class="w-full">
-                          <UButton size="md" v-if="hasNextTime" @click="goNextTime" variant="outline" color="neutral"
-                            class="w-full flex justify-end ring-muted" trailing :label="nextTitle"
-                            icon="i-heroicons-arrow-right-circle" />
-                        </div>
-                      </div> -->
-
-                      <div class="flex w-full gap-2 p-1 border-muted border-t overflow-x-scroll md:overflow-hidden">
-                        <UPopover class="shrink-0 cursor-pointer h-fit my-1" v-model:open="open2" destroy-on-close
-                          :popper="{ placement: 'bottom-start' }">
-                          <UButton variant="solid" color="neutral">{{ currentStartskog.label }}
-                          </UButton>
-
-                          <template #content>
-                            <div class="text-sm w-64 p-3 text-neutral-500 border-b border-neutral-200 ">
-                              Kort beskriving av betydelsen för skogens historik
-                            </div>
-                            <div class="p-1 flex flex-col gap-1">
-                              <div v-for="option in startskog" :key="option.value">
-                                <UButton @click="selectOption(option)" size="xl" color="white" variant="ghost"
-                                  class="hover:bg-neutral-100 w-full cursor-pointer" :class="{
-                                    'w-full  text-secondary-500':
-                                      currentStartskog.value === option.value,
-                                  }">{{ option.label }}
-                                </UButton>
-                              </div>
-                            </div>
-
-                          </template>
-                        </UPopover>
-                        <UTabs v-model="selectedTimeValue" :items="timeItems" :ui="{
-                          list: 'bg-transparent -mb-1.5',
-                          indicator: 'bg-white border border-muted/50 shadow',
-                          trigger: 'data-[state=active]:text-neutral-800 dark:data-[state=active]:text-violet-400/90 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary'
-                        }" />
-                      </div>
-                    </template>
-                    <template #body>
-                      <div class="relative">
-                        <DefineSettingsTemplate>
-                          <div class="space-y-0.5 p-3">
-                            <div class="grid grid-cols-2 gap-2 mb-4">
-                              <UButton size="xs" variant="outline" :color="!compareEnabled ? 'primary' : 'neutral'"
-                                @click="setCompareMode(false)">
-                                <div class="flex flex-col text-center items-center w-full space-y-1">
-                                  <UIcon name="i-bx-rectangle" class="size-4" />
-                                  <h1>Enkelvy</h1>
-                                </div>
-                              </UButton>
-                              <UButton size="xs" variant="outline" :color="compareEnabled ? 'primary' : 'neutral'"
-                                @click="setCompareMode(true)">
-                                <div class="flex flex-col text-center items-center w-full space-y-1">
-                                  <UIcon name="iconamoon:compare-duotone" class="size-4" />
-                                  <h1>Jämför</h1>
-                                </div>
-                              </UButton>
-                            </div>
-                            <div class="flex flex-col gap-3 py-1">
-                              <div class="flex items-center justify-between gap-12">
-                                <span class="text-sm tracking-wide text-neutral-400">Läge</span>
-                                <USelect v-model="selectedCompareChoice" :items="compareOptions" size="sm"
-                                  placeholder="Välj" :clearable="true" class="w-32 ring-muted" />
-                              </div>
-                            </div>
-                          </div>
-                          <USeparator :ui="{ border: 'border-muted/50' }" />
-                          <div class="p-3 flex flex-col gap-3">
-                            <div class="flex items-center justify-between gap-3">
-                              <span class="text-sm tracking-wide text-neutral-400">Trädens synlighet</span>
-                              <input type="range" min="0" max="1" step="0.01" v-model="globalOpacity"
-                                class="accent-primary-500 h-[5px] w-32" />
-                            </div>
-                            <div class="flex flex-wrap gap-1">
-                              <UBadge v-for="overlay in overlayBadgeItems" :key="overlay.key" :label="overlay.label"
-                                :color="pinned[overlay.key] ? 'primary' : 'neutral'"
-                                :variant="pinned[overlay.key] ? 'solid' : 'subtle'" class="cursor-pointer"
-                                :class="pinned[overlay.key] ? 'shadow-sm' : 'opacity-70 hover:opacity-100'"
-                                @click="toggleOverlayBadge(overlay.key)" />
-                            </div>
-                          </div>
-                        </DefineSettingsTemplate>
-                        <UDrawer v-if="isMobile" nested :ui="{ content: 'p-0', body: 'p-0', container: 'p-0 gap-0' }"
-                          class="absolute top-2 right-2 z-50">
-                          <UButton size="md" color="neutral" variant="outline" icon="i-heroicons-adjustments-horizontal"
-                            class="ring-muted" />
-                          <template #body>
-                            <reuseSettingsTemplate />
-                          </template>
-                        </UDrawer>
-                        <UPopover v-else :ui="{ content: 'p-0 w-80', }"
-                          :content="{ side: 'bottom', sideOffset: 8, collisionPadding: 8, align: 'start' }"
-                          class="absolute top-2 right-2 z-50">
-                          <UButton size="md" color="neutral" variant="outline" icon="i-heroicons-adjustments-horizontal"
-                            class="ring-muted" />
-                          <template #content>
-                            <reuseSettingsTemplate />
-                          </template>
-                        </UPopover>
-
-
-                        <UTabs :items="panelTabs" variant="link" size="md" class="w-full"
-                          :ui="{ indicator: 'hidden', trigger: 'ring ring-muted data-[state=active]:bg-muted data-[state=active]:text-neutral-700 py-1', list: 'gap-2 p-2', root: 'gap-0' }">
-                          <template #text>
-                            <div class="sm:grid sm:grid-cols-2 divide-y sm:divide-y-0 sm:divide-x divide-muted/70">
-                              <div v-for="section in timelineSections" :key="section.key"
-                                class="p-3 sm:p-6 sm:pb-8 group " @click="handleTimelineClick">
-                                <div class="flex items-center justify-between gap-3 mb-4">
-                                  <div class="flex items-center gap-2">
-                                    <USelect v-if="['single', 'before', 'after', 'framework1'].includes(section.key)"
-                                      :items="frameworkOptions" v-model="selectedFrameworkIndex" variant="outline"
-                                      class="min-w-[12rem]">
-                                      <template #item="{ item }">
-                                        <div class="flex flex-col">
-                                          <div class="text-sm font-medium">{{ item.label }}</div>
-                                          <div v-if="item.description" class="text-xs text-neutral-500">
-                                            {{ item.description }}
-                                          </div>
-                                        </div>
-                                      </template>
-                                    </USelect>
-                                    <USelect v-else-if="section.key === 'framework2'" :items="frameworkOptions"
-                                      v-model="selectedFrameworkIndex2" variant="outline" class="min-w-[12rem]">
-                                      <template #item="{ item }">
-                                        <div class="flex flex-col">
-                                          <div class="text-sm font-medium">{{ item.label }}</div>
-                                          <div v-if="item.description" class="text-xs text-neutral-500">
-                                            {{ item.description }}
-                                          </div>
-                                        </div>
-                                      </template>
-                                    </USelect>
-                                    <h2 v-else class="text-sm font-medium text-neutral-700">
-                                      {{ section.left }}
-                                    </h2>
-                                  </div>
-                                  <UBadge :label="section.right" class="ring-muted/50 py-1" variant="outline"
-                                    color="neutral" />
-
-                                </div>
-                                <div v-if="section.info" class="">
-                                  <div class="space-y-2">
-                                    <UButton type="button" variant="ghost" color="neutral"
-                                      class="flex w-full items-center font-semibold gap-2 tracking-wide text-neutral-500 transition"
-                                      @click.stop="toggleTimelineDetail(section.key, 'skog')">
-                                      <span>Utveckling i skogen</span>
-                                      <UIcon name="i-heroicons-chevron-down"
-                                        class="h-4 w-4 text-neutral-400 transition-transform duration-200"
-                                        :class="{ '-rotate-90': !isTimelineDetailOpen(section.key, 'skog') }" />
-                                    </UButton>
-                                    <p v-if="isTimelineDetailOpen(section.key, 'skog')"
-                                      class="text-sm text-neutral-800 leading-relaxed p-2 mb-2 bg-muted rounded"
-                                      v-html="makeClickableHtml(section.info.skog)"></p>
-                                  </div>
-                                  <div class="space-y-2">
-                                    <UButton type="button" variant="ghost" color="neutral"
-                                      class="flex w-full items-center gap-2 font-semibold  tracking-wide text-neutral-500 transition"
-                                      @click.stop="toggleTimelineDetail(section.key, 'svamp')">
-                                      <span>Påverkan på mykorrhizasvampar</span>
-                                      <UIcon name="i-heroicons-chevron-down"
-                                        class="h-4 w-4 text-neutral-400 transition-transform duration-200"
-                                        :class="{ '-rotate-90': !isTimelineDetailOpen(section.key, 'svamp') }" />
-                                    </UButton>
-                                    <span v-if="isTimelineDetailOpen(section.key, 'svamp')"
-                                      class="block text-sm text-neutral-800 leading-relaxed p-2 bg-muted rounded"
-                                      v-html="makeClickableHtml(section.info.svamp)"></span>
-                                  </div>
-                                </div>
-                                <div v-else class="text-sm text-neutral-400">
-                                  {{ section.emptyMessage || timelineEmptyMessage }}
-                                </div>
-                              </div>
-                            </div>
-                          </template>
-                          <template #chart>
-
-                            <ForestryChartMain
-                              :parentSelectedFrameworks="isFrameworkCompareMode ? [currentFramework.value, currentFramework2.value] : [currentFramework.value]"
-                              :currentTimeValue="currentTimeValue" :currentStartskog="currentStartskog.value" />
-
-
-                          </template>
-                        </UTabs>
-                      </div>
-
-                    </template>
-                  </UDrawer>
-
-
-
-                  <!-- <USelect size="lg" :items="frameworkOptions" v-model="selectedFrameworkIndex"
-                    :placeholder="currentFramework.label" variant="outline" class="ring-muted">
-                    <template #item="{ item }">
-                      <div class="flex flex-col">
-                        <div class="text-md font-medium">{{ item.label }}</div>
-                        <div v-if="item.description" class="text-sm text-neutral-500">{{ item.description }}
-                        </div>
-                      </div>
-                    </template>
-                  </USelect>
-                  <USelect v-if="isFrameworkCompareMode" size="lg" :items="frameworkOptions"
-                    v-model="selectedFrameworkIndex2" :placeholder="currentFramework2.label" append-to-body
-                    variant="outline" class="ring-muted">
-                    <template #item="{ item }">
-                      <div class="flex flex-col">
-                        <div class="text-md font-medium">{{ item.label }}</div>
-                        <div v-if="item.description" class="text-sm text-neutral-500">{{ item.description }}
-                        </div>
-                      </div>
-                    </template>
-                  </USelect> -->
-
-                </div>
-                <!-- <div class="flex gap-2 justify-end items-center">
-
-
-
-
-
-
-
-                  <UButton @click="emit('close')" color="error" variant="subtle" trailing icon="i-heroicons-x-mark"
-                    class="rounded-full h-fit" />
-
-                </div> -->
+      </div>
+      <USeparator :ui="{ border: 'border-muted/50' }" />
+      <div class="p-3 flex flex-col gap-3">
+        <div class="flex items-center justify-between gap-3">
+          <span class="text-sm tracking-wide text-neutral-400">Trädens synlighet</span>
+          <input type="range" min="0" max="1" step="0.01" v-model="globalOpacity"
+            class="accent-primary-500 h-[5px] w-32" />
+        </div>
+        <div class="flex flex-wrap gap-1">
+          <UBadge v-for="overlay in overlayBadgeItems" :key="overlay.key" :label="overlay.label"
+            :color="pinned[overlay.key] ? 'primary' : 'neutral'" :variant="pinned[overlay.key] ? 'solid' : 'subtle'"
+            class="cursor-pointer" :class="pinned[overlay.key] ? 'shadow-sm' : 'opacity-70 hover:opacity-100'"
+            @click="toggleOverlayBadge(overlay.key)" />
+        </div>
+      </div>
+    </DefineSettingsTemplate>
+    <div class="w-full sm:flex items-center bg-muted border-muted p-1 shadow-xl">
+      <div class="flex w-full sm:w-fit h-fit justify-center p-0 pb-0 sm:pb-0">
+        <div v-if="frameworkOptions.length"
+          class="grid sm:gap-4 gap-2 p-2 sm:py-1 sm:flex-row sm:items-center sm:justify-start h-fit w-full sm:w-fit"
+          :class="isFrameworkCompareMode ? 'grid-cols-2' : 'grid-cols-1'">
+          <USelect size="xl" :items="frameworkOptions" v-model="selectedFrameworkIndex"
+            :placeholder="currentFramework.label" append-to-body variant="outline" class="ring-muted rounded-2xl w-full"
+            :ui="{ content: 'min-w-fit', viewport: 'text-center' }" />
+          <USelect v-if="isFrameworkCompareMode" size="xl" :items="frameworkOptions" v-model="selectedFrameworkIndex2"
+            :placeholder="currentFramework2.label" append-to-body variant="outline" class="ring-muted rounded-2xl" />
+        </div>
+      </div>
+      <USeparator v-if="!isMobile" orientation="vertical" class="mx-3 h-8" />
+      <div class="flex sm:justify-center items-center overflow-x-scroll md:overflow-hidden px-2 my-1 gap-4">
+        <UPopover class="shrink-0 cursor-pointer h-fit z-50" v-model:open="open2"
+          :popper="{ placement: 'bottom-start' }">
+          <UButton :variant="isMobile ? 'outline' : 'outline'" color="neutral" icon="i-heroicons-clock" size="lg"
+            :label="isMobile ? null : null" class="rounded-full ring-muted">
+          </UButton>
+          <template #content>
+            <div class="text-sm w-64 p-3 text-neutral-500 border-b border-neutral-200 ">
+              Kort beskriving av betydelsen för skogens historik
+            </div>
+            <div class="p-1 flex flex-col gap-1">
+              <div v-for="option in startskog" :key="option.value">
+                <UButton @click="selectOption(option)" size="lg" color="white" variant="ghost"
+                  class="hover:bg-neutral-100 w-full cursor-pointer" :class="{
+                    'w-full  text-secondary-500':
+                      currentStartskog.value === option.value,
+                  }">
+                  {{ option.label }}
+                </UButton>
               </div>
+            </div>
+          </template>
+        </UPopover>
+        <UTabs v-model="selectedTimeValue" :items="timeItems" :ui="{
+          root: 'min-w-max flex-shrink-0',
+          list: 'flex-nowrap rounded-xl bg-muted/50 -mb-1.5 gap-2',
+          indicator: 'bg-white border border-muted/50 shadow rounded-2xl',
+          trigger: 'rounded-2xl data-[state=active]:text-neutral-800 dark:data-[state=active]:text-violet-400/90 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary '
+        }" />
+      </div>
+    </div>
+
+    <div class="ui-zoom-reapply relative flex flex-col flex-1 w-full">
 
 
-
-              <div class="ui-zoom-reapply relative flex flex-col flex-1 w-full">
-
-
-                <div class="flex flex-1">
-
-
-                  <div class="space-y-1.5 p-2 pt-1 max-w-sm z-50 absolute top-2 right-2 transform-all text-end">
-                    <template v-for="card in overlayCards" :key="card.key">
-                      <UBadge v-if="pinned[card.key]" :label="card.title" color="neutral" variant="outline"
-                        class="cursor-pointer shadow-sm ml-1.5" @click="togglePinned(card.key)" />
-                      <UCard v-else :ui="{ body: 'p-3 sm:p-4' }" class="z-50 transform-all text-start">
-                        <div>
-                          <div>
-                            <div class="flex items-start justify-between gap-4">
-                              <div class="font-medium ">{{ card.title }}</div>
-                              <div class="flex gap-1">
-                                <UButton color="neutral" variant="ghost" :ui="{ rounded: 'rounded-full' }"
-                                  @click="togglePinned(card.key)" icon="i-solar-minimize-square-3-linear" size="xs"
-                                  :class="pinned[card.key] ? 'text-primary-500' : 'text-neutral-500 hover:text-neutral-900'" />
-                                <UButton class="text-neutral-500 hover:text-neutral-900" icon="i-heroicons-x-mark"
-                                  variant="ghost" color="neutral" size="xs" @click="card.close()" />
-                              </div>
-                            </div>
-
-                            <p class="text-sm text-neutral-500 mt-1">
-                              {{ card.desc }}
-                            </p>
+      <div class="flex flex-1">
+        <div class="absolute bottom-0 right-0 sm:top-0 sm:left-0 z-50 p-4 space-y-2 pointer-events-none">
+          <div class="pointer-events-auto">
+            <UDrawer v-if="isMobile" :modal="false" :ui="{ content: 'p-0', body: 'p-0', container: 'p-0 gap-0' }">
+              <UButton size="xl" color="neutral" variant="outline" icon="i-heroicons-adjustments-horizontal"
+                class="ring-muted rounded-2xl" />
+              <template #body>
+                <reuseSettingsTemplate />
+              </template>
+            </UDrawer>
+            <UPopover v-else :ui="{ content: 'p-0 w-80', }"
+              :content="{ side: 'right', sideOffset: 8, collisionPadding: 8, align: 'start' }">
+              <UButton size="lg" color="neutral" variant="outline" label="Vyinställningar"
+                icon="i-heroicons-adjustments-horizontal" class="ring-muted rounded-2xl" />
+              <template #content>
+                <reuseSettingsTemplate />
+              </template>
+            </UPopover>
+          </div>
+          <div class="pointer-events-auto">
+            <UDrawer :direction="isMobile ? 'bottom' : 'bottom'" :inset="isMobile ? false : false" handle-only
+              :dismissible="isMobile ? true : false" :overlay="false" :handle="isMobile ? true : false" :modal="false"
+              v-model:open="open"
+              :ui="{ header: 'flex items-center justify-between', body: 'p-0', container: 'p-0 gap-0', content: 'max-w-[85rem] mx-auto', footer: 'gap-0' }">
+              <UButton :size="isMobile ? 'xl' : 'lg'" :label="isMobile ? null : 'Text'" variant="outline"
+                color="neutral" icon="i-heroicons-book-open" class="rounded-2xl" />
+              <template #body>
+                <div v-if="timelineCarouselEnabled" class="sm:hidden ">
+                  <UCarousel :items="timelineSections" :ui="{ item: 'basis-12/13', viewport: 'p-3' }">
+                    <template #default="{ item: section }">
+                      <UCard :ui="{ body: 'p-4 space-y-4' }" class="min-h-[18rem]" variant="soft"
+                        @click="handleTimelineClick">
+                        <div class="flex items-center justify-between gap-3">
+                          <h2 class="text-sm font-medium text-neutral-700">
+                            {{ section.left }}
+                          </h2>
+                          <UBadge :label="section.right" class="ring-muted/50 py-1" variant="outline" color="neutral" />
+                        </div>
+                        <div v-if="section.info" class="space-y-4">
+                          <div class="space-y-2">
+                            <UButton type="button" variant="ghost" color="neutral"
+                              class="flex w-full items-center font-semibold gap-2 tracking-wide text-neutral-500 transition"
+                              @click.stop="toggleTimelineDetail(section.key, 'skog')">
+                              <span>Utveckling i skogen</span>
+                              <UIcon name="i-heroicons-chevron-down"
+                                class="h-4 w-4 text-neutral-400 transition-transform duration-200"
+                                :class="{ '-rotate-90': !isTimelineDetailOpen(section.key, 'skog') }" />
+                            </UButton>
+                            <p v-if="isTimelineDetailOpen(section.key, 'skog')"
+                              class="text-sm text-neutral-800 leading-relaxed p-2 mb-2 bg-muted rounded"
+                              v-html="makeClickableHtml(section.info.skog)"></p>
+                          </div>
+                          <div class="space-y-2">
+                            <UButton type="button" variant="ghost" color="neutral"
+                              class="flex w-full items-center gap-2 font-semibold tracking-wide text-neutral-500 transition"
+                              @click.stop="toggleTimelineDetail(section.key, 'svamp')">
+                              <span>Påverkan på mykorrhizasvampar</span>
+                              <UIcon name="i-heroicons-chevron-down"
+                                class="h-4 w-4 text-neutral-400 transition-transform duration-200"
+                                :class="{ '-rotate-90': !isTimelineDetailOpen(section.key, 'svamp') }" />
+                            </UButton>
+                            <span v-if="isTimelineDetailOpen(section.key, 'svamp')"
+                              class="block text-sm text-neutral-800 leading-relaxed p-2 bg-muted rounded"
+                              v-html="makeClickableHtml(section.info.svamp)"></span>
                           </div>
                         </div>
-
-                        <template v-if="card.key === 'kanteffekt' && isLuckhuggning">
-                          <UCard variant="soft" :ui="{ body: 'sm:p-4 sm:pl-2' }"
-                            class="mt-2 backdrop-blur-xl bg-neutral-900/50 border border-white/10">
-                            <USwitch
-                              :ui="{ root: 'flex-row-reverse justify-between', label: 'text-white', description: 'text-neutral-200', base: 'data-[state=unchecked]:bg-neutral-600' }"
-                              size="xs" color="primary" v-model="oldKanteffektVisible" label="Tidigare kanteffekt"
-                              description="Visa spår från tidigare kanteffekt" />
-                          </UCard>
-                        </template>
+                        <div v-else class="text-sm text-neutral-400">
+                          {{ section.emptyMessage || timelineEmptyMessage }}
+                        </div>
                       </UCard>
                     </template>
-                  </div>
-
-                  <div :class="[
-                    'relative overflow-auto transition-all duration-300 ease-in-out ',
-                    menuOpen ? 'w-72 border-r border-neutral-300' : 'w-0'
-                  ]">
-                    <div class="absolute p-2 w-full" v-if="menuOpen">
-                      <div class="flex justify-between p-2 items-center mb-2">
-                        <h1 class="font-semibold text-lg">Inställningar</h1>
-
-                        <UButton :icon="menuOpen ? 'i-heroicons-chevron-left' : 'i-heroicons-chevron-right'"
-                          variant="outline" color="neutral" class="rounded-full left-4 z-10"
-                          @click="menuOpen = !menuOpen" />
+                  </UCarousel>
+                </div>
+                <div v-else class="sm:grid sm:grid-cols-2 divide-y sm:divide-y-0 sm:divide-x divide-muted/70">
+                  <div v-for="section in timelineSections" :key="section.key" class="p-3 sm:p-6 sm:pb-8 group"
+                    @click="handleTimelineClick">
+                    <div v-if="section.info" class="">
+                      <div class="space-y-2">
+                        <UButton type="button" variant="ghost" color="neutral"
+                          class="flex w-full items-center font-semibold gap-2 tracking-wide text-neutral-500 transition"
+                          @click.stop="toggleTimelineDetail(section.key, 'skog')">
+                          <span>Utveckling i skogen</span>
+                          <UIcon name="i-heroicons-chevron-down"
+                            class="h-4 w-4 text-neutral-400 transition-transform duration-200"
+                            :class="{ '-rotate-90': !isTimelineDetailOpen(section.key, 'skog') }" />
+                        </UButton>
+                        <p v-if="isTimelineDetailOpen(section.key, 'skog')"
+                          class="text-sm text-neutral-800 leading-relaxed p-2 mb-2 bg-muted rounded"
+                          v-html="makeClickableHtml(section.info.skog)"></p>
                       </div>
-
-                      <UCard variant="soft" :ui="{ body: 'p-2 sm:p-3' }" class="mb-2">
-                        <div class="flex items-center justify-between gap-2">
-                          <div class="text-xs text-neutral-500">UI‑zoom</div>
-                          <div class="flex items-center gap-1">
-                            <UButton color="neutral" variant="soft" size="xs" icon="i-heroicons-minus"
-                              @click="uiZoom = Math.max(0.75, +(uiZoom - 0.1).toFixed(2))" />
-                            <div class="min-w-[3ch] text-sm text-neutral-700 dark:text-neutral-200 text-center">
-                              {{ Math.round(uiZoom * 100) }}%
-                            </div>
-                            <UButton color="neutral" variant="soft" size="xs" icon="i-heroicons-plus"
-                              @click="uiZoom = Math.min(2, +(uiZoom + 0.1).toFixed(2))" />
-                            <UButton color="neutral" variant="ghost" size="xs" :title="'Återställ (100%)'"
-                              @click="uiZoom = 1">Reset
-                            </UButton>
-                          </div>
-                        </div>
-                      </UCard>
-                      <template v-if="isFrameworkCompareMode">
-                        <div class="space-y-2 w-full ">
-                          <USelect size="lg" :items="frameworkOptions" v-model="selectedFrameworkIndex"
-                            :placeholder="currentFramework.label" append-to-body variant="outline" class="w-full">
-                            <template #item="{ item }">
-                              <div class="flex flex-col">
-                                <div class="text-md font-medium">{{ item.label }}</div>
-                                <div v-if="item.description" class="text-sm text-neutral-500">{{ item.description }}
-                                </div>
-                              </div>
-                            </template>
-                          </USelect>
-
-                          <USelect size="lg" :items="frameworkOptions" v-model="selectedFrameworkIndex2"
-                            :placeholder="currentFramework2.label" append-to-body variant="outline" class="w-full">
-                            <template #item="{ item }">
-                              <div class="flex flex-col">
-                                <div class="text-md font-medium">{{ item.label }}</div>
-                                <div v-if="item.description" class="text-sm text-neutral-500">{{ item.description }}
-                                </div>
-                              </div>
-                            </template>
-                          </USelect>
-
-                        </div>
-                      </template>
-
-                      <template v-else>
-                        <!-- Replace popover with a select showing label + description -->
-                        <h1 class="text-xs text-neutral-400">Skogsbruksmetod</h1>
-                        <USelect size="xl" :items="frameworkOptions" v-model="selectedFrameworkIndex"
-                          :placeholder="currentFramework.label" append-to-body variant="subtle" class="w-full">
-                          <template #item="{ item }">
-                            <div class="flex flex-col">
-                              <div class="text-md font-medium">{{ item.label }}</div>
-                              <div v-if="item.description" class="text-sm text-neutral-500">
-                                {{ item.description }}
-                              </div>
-                            </div>
-                          </template>
-                        </USelect>
-                      </template>
-
-                      <div class="w-full mt-1 relative">
-
-                        <div class="">
-
-
-                          <div class="space-y-2">
-                            <!-- Trakthygge, Luckhuggning, Skärmträd: Hänsynsträd -->
-                            <USwitch v-if="isTrakthygge || isLuckhuggning || isSkarmtrad"
-                              :ui="{ root: 'flex-row-reverse justify-between' }" color="primary"
-                              v-model="retentionVisible" label="Hänsynsträd" />
-                            <!-- Trakthygge, Luckhuggning, Skärmträd: Kanteffekt (+ old toggle) -->
-                            <USwitch v-if="isTrakthygge || isLuckhuggning || isSkarmtrad"
-                              :ui="{ root: 'flex-row-reverse justify-between' }" color="primary"
-                              v-model="kanteffektVisible" label="Kanteffekt" />
-                            <!-- Småplantor: show small white circles from public JSON -->
-                            <USwitch :ui="{ root: 'flex-row-reverse justify-between' }" color="primary"
-                              v-model="smaplantorVisible" label="Småplantor" />
-                            <UCard v-if="(isLuckhuggning) && kanteffektVisible" variant="soft"
-                              :ui="{ body: 'sm:p-4 sm:pl-2' }">
-                              <USwitch :ui="{ root: 'flex-row-reverse justify-between' }" size="xs" color="neutral"
-                                v-model="oldKanteffektVisible" label="Tidigare kanteffekt" />
-                            </UCard>
-                            <!-- Blädning & Skärmträd: Kontinuerligt rottäcke -->
-                            <USwitch v-if="isBladning || isSkarmtrad" :ui="{ root: 'flex-row-reverse justify-between' }"
-                              color="primary" v-model="rottackeVisible" label="Kontinuerligt rottäcke" />
-                            <!-- Högstubbar: small black circles from public JSON -->
-                            <USwitch :ui="{ root: 'flex-row-reverse justify-between' }" color="primary"
-                              v-model="hogstubbarVisible" label="Högstubbar" />
-                            <!-- Naturvårdsarter: visible for Trakthygge, Luckhuggning, Blädning, Skärmträd -->
-                            <USwitch v-if="isTrakthygge || isLuckhuggning || isBladning || isSkarmtrad"
-                              :ui="{ root: 'flex-row-reverse justify-between' }" color="primary"
-                              v-model="naturvardsarterVisible" label="Naturvårdsarter" />
-                            <USwitch v-if="isSkarmtrad" :ui="{ root: 'flex-row-reverse justify-between' }"
-                              color="primary" v-model="seedTreeVisible" label="Fröträd" />
-                            <USwitch :ui="{ root: 'flex-row-reverse justify-between' }" color="primary"
-                              v-model="tradplantorVisible" label="Trädplantor" />
-                            <!-- Dev: Save clicks -->
-                            <USwitch :ui="{ root: 'flex-row-reverse justify-between' }" color="warning"
-                              v-model="devSaveClicks" label="Spara klick (dev)" />
-
-                          </div>
-
-
-
-                        </div>
-
+                      <div class="space-y-2">
+                        <UButton type="button" variant="ghost" color="neutral"
+                          class="flex w-full items-center gap-2 font-semibold  tracking-wide text-neutral-500 transition"
+                          @click.stop="toggleTimelineDetail(section.key, 'svamp')">
+                          <span>Påverkan på mykorrhizasvampar</span>
+                          <UIcon name="i-heroicons-chevron-down"
+                            class="h-4 w-4 text-neutral-400 transition-transform duration-200"
+                            :class="{ '-rotate-90': !isTimelineDetailOpen(section.key, 'svamp') }" />
+                        </UButton>
+                        <span v-if="isTimelineDetailOpen(section.key, 'svamp')"
+                          class="block text-sm text-neutral-800 leading-relaxed p-2 bg-muted rounded"
+                          v-html="makeClickableHtml(section.info.svamp)"></span>
                       </div>
                     </div>
+                    <div v-else class="text-sm text-neutral-400">
+                      {{ section.emptyMessage || timelineEmptyMessage }}
+                    </div>
                   </div>
-                  <div class="relative flex-1">
-                    <div class="absolute w-full bottom-0 z-50 p-1">
+                </div>
+                <!-- <div class="relative">
+                <UTabs :items="panelTabs" variant="link" size="md" class="w-full"
+                  :ui="{ indicator: 'hidden', trigger: 'ring ring-muted data-[state=active]:bg-muted data-[state=active]:text-neutral-700 py-1 flex-1 sm:flex-none', list: 'gap-2 p-2 bg-transparent', root: 'gap-0' }">
+                  <template #text>
+                  
+                  </template>
+                  <template #chart>
+                  
+                  </template>
+                </UTabs>
+              </div> -->
+              </template>
+            </UDrawer>
+          </div>
+          <div class="pointer-events-auto">
+            <UDrawer :direction="isMobile ? 'bottom' : 'bottom'" :inset="isMobile ? false : false" handle-only
+              :dismissible="isMobile ? true : false" :overlay="false" :handle="isMobile ? true : false" :modal="false"
+              v-model:open="open3"
+              :ui="{ header: 'flex items-center justify-between', body: 'p-0', container: 'p-0 gap-0', content: 'max-w-[85rem] mx-auto', footer: 'gap-0' }">
+              <UButton :size="isMobile ? 'xl' : 'lg'" :label="isMobile ? null : 'Diagram'" variant="outline"
+                color="neutral" class="rounded-2xl" icon="i-carbon-chart-line-smooth" />
+              <template #body>
+                <ForestryChartMain
+                  :parentSelectedFrameworks="isFrameworkCompareMode ? [currentFramework.value, currentFramework2.value] : [currentFramework.value]"
+                  :currentTimeValue="currentTimeValue" :currentStartskog="currentStartskog.value" />
+              </template>
+            </UDrawer>
+          </div>
+
+        </div>
+
+        <div class="space-y-1.5 sm:p-4 p-2 pt-3 max-w-sm z-50 absolute top-0 right-0 transform-all text-end">
+          <template v-for="card in overlayCards" :key="card.key">
+            <div v-if="pinned[card.key]" class="flex flex-col sm:flex sm:flex-wrap gap-1 items-end">
+              <UBadge :label="card.title" color="neutral" variant="outline"
+                class="cursor-pointer shadow-sm sm:ml-1.5 w-fit" @click="togglePinned(card.key)" />
+            </div>
+
+            <UCard v-else :ui="{ body: 'p-3 sm:p-4' }" class="z-50 transform-all text-start">
+              <div>
+                <div>
+                  <div class="flex items-start justify-between gap-4">
+                    <div class="font-medium ">{{ card.title }}</div>
+                    <div class="flex gap-1">
+                      <UButton color="neutral" variant="ghost" :ui="{ rounded: 'rounded-full' }"
+                        @click="togglePinned(card.key)" icon="i-solar-minimize-square-3-linear" size="xs"
+                        :class="pinned[card.key] ? 'text-primary-500' : 'text-neutral-500 hover:text-neutral-900'" />
+                      <UButton class="text-neutral-500 hover:text-neutral-900" icon="i-heroicons-x-mark" variant="ghost"
+                        color="neutral" size="xs" @click="card.close()" />
+                    </div>
+                  </div>
+
+                  <p class="text-sm text-neutral-500 mt-1">
+                    {{ card.desc }}
+                  </p>
+                </div>
+              </div>
+
+              <template v-if="card.key === 'kanteffekt' && isLuckhuggning">
+                <UCard variant="soft" :ui="{ body: 'sm:p-4 sm:pl-2' }"
+                  class="mt-2 backdrop-blur-xl bg-neutral-900/50 border border-white/10">
+                  <USwitch
+                    :ui="{ root: 'flex-row-reverse justify-between', label: 'text-white', description: 'text-neutral-200', base: 'data-[state=unchecked]:bg-neutral-600' }"
+                    size="xs" color="primary" v-model="oldKanteffektVisible" label="Tidigare kanteffekt"
+                    description="Visa spår från tidigare kanteffekt" />
+                </UCard>
+              </template>
+            </UCard>
+          </template>
+        </div>
+
+        <div :class="[
+          'relative overflow-auto transition-all duration-300 ease-in-out ',
+          menuOpen ? 'w-72 border-r border-neutral-300' : 'w-0'
+        ]">
+          <div class="absolute p-2 w-full" v-if="menuOpen">
+            <div class="flex justify-between p-2 items-center mb-2">
+              <h1 class="font-semibold text-lg">Inställningar</h1>
+
+              <UButton :icon="menuOpen ? 'i-heroicons-chevron-left' : 'i-heroicons-chevron-right'" variant="outline"
+                color="neutral" class="rounded-full left-4 z-10" @click="menuOpen = !menuOpen" />
+            </div>
+
+            <UCard variant="soft" :ui="{ body: 'p-2 sm:p-3' }" class="mb-2">
+              <div class="flex items-center justify-between gap-2">
+                <div class="text-xs text-neutral-500">UI‑zoom</div>
+                <div class="flex items-center gap-1">
+                  <UButton color="neutral" variant="soft" size="xs" icon="i-heroicons-minus"
+                    @click="uiZoom = Math.max(0.75, +(uiZoom - 0.1).toFixed(2))" />
+                  <div class="min-w-[3ch] text-sm text-neutral-700 dark:text-neutral-200 text-center">
+                    {{ Math.round(uiZoom * 100) }}%
+                  </div>
+                  <UButton color="neutral" variant="soft" size="xs" icon="i-heroicons-plus"
+                    @click="uiZoom = Math.min(2, +(uiZoom + 0.1).toFixed(2))" />
+                  <UButton color="neutral" variant="ghost" size="xs" :title="'Återställ (100%)'" @click="uiZoom = 1">
+                    Reset
+                  </UButton>
+                </div>
+              </div>
+            </UCard>
+            <template v-if="isFrameworkCompareMode">
+              <div class="space-y-2 w-full ">
+                <USelect size="lg" :items="frameworkOptions" v-model="selectedFrameworkIndex"
+                  :placeholder="currentFramework.label" append-to-body variant="outline" class="w-full">
+                  <template #item="{ item }">
+                    <div class="flex flex-col">
+                      <div class="text-md font-medium">{{ item.label }}</div>
+                      <div v-if="item.description" class="text-sm text-neutral-500">{{ item.description }}
+                      </div>
+                    </div>
+                  </template>
+                </USelect>
+
+                <USelect size="lg" :items="frameworkOptions" v-model="selectedFrameworkIndex2"
+                  :placeholder="currentFramework2.label" append-to-body variant="outline" class="w-full">
+                  <template #item="{ item }">
+                    <div class="flex flex-col">
+                      <div class="text-md font-medium">{{ item.label }}</div>
+                      <div v-if="item.description" class="text-sm text-neutral-500">{{ item.description }}
+                      </div>
+                    </div>
+                  </template>
+                </USelect>
+
+              </div>
+            </template>
+
+            <template v-else>
+              <!-- Replace popover with a select showing label + description -->
+              <h1 class="text-xs text-neutral-400">Skogsbruksmetod</h1>
+              <USelect size="xl" :items="frameworkOptions" v-model="selectedFrameworkIndex"
+                :placeholder="currentFramework.label" append-to-body variant="subtle" class="w-full">
+                <template #item="{ item }">
+                  <div class="flex flex-col">
+                    <div class="text-md font-medium">{{ item.label }}</div>
+                    <div v-if="item.description" class="text-sm text-neutral-500">
+                      {{ item.description }}
+                    </div>
+                  </div>
+                </template>
+              </USelect>
+            </template>
+
+            <div class="w-full mt-1 relative">
+
+              <div class="">
+
+
+                <div class="space-y-2">
+                  <!-- Trakthygge, Luckhuggning, Skärmträd: Hänsynsträd -->
+                  <USwitch v-if="isTrakthygge || isLuckhuggning || isSkarmtrad"
+                    :ui="{ root: 'flex-row-reverse justify-between' }" color="primary" v-model="retentionVisible"
+                    label="Hänsynsträd" />
+                  <!-- Trakthygge, Luckhuggning, Skärmträd: Kanteffekt (+ old toggle) -->
+                  <USwitch v-if="isTrakthygge || isLuckhuggning || isSkarmtrad"
+                    :ui="{ root: 'flex-row-reverse justify-between' }" color="primary" v-model="kanteffektVisible"
+                    label="Kanteffekt" />
+                  <!-- Småplantor: show small white circles from public JSON -->
+                  <USwitch :ui="{ root: 'flex-row-reverse justify-between' }" color="primary"
+                    v-model="smaplantorVisible" label="Småplantor" />
+                  <UCard v-if="(isLuckhuggning) && kanteffektVisible" variant="soft" :ui="{ body: 'sm:p-4 sm:pl-2' }">
+                    <USwitch :ui="{ root: 'flex-row-reverse justify-between' }" size="xs" color="neutral"
+                      v-model="oldKanteffektVisible" label="Tidigare kanteffekt" />
+                  </UCard>
+                  <!-- Blädning & Skärmträd: Kontinuerligt rottäcke -->
+                  <USwitch v-if="isBladning || isSkarmtrad" :ui="{ root: 'flex-row-reverse justify-between' }"
+                    color="primary" v-model="rottackeVisible" label="Kontinuerligt rottäcke" />
+                  <!-- Högstubbar: small black circles from public JSON -->
+                  <USwitch :ui="{ root: 'flex-row-reverse justify-between' }" color="primary"
+                    v-model="hogstubbarVisible" label="Högstubbar" />
+                  <!-- Naturvårdsarter: visible for Trakthygge, Luckhuggning, Blädning, Skärmträd -->
+                  <USwitch v-if="isTrakthygge || isLuckhuggning || isBladning || isSkarmtrad"
+                    :ui="{ root: 'flex-row-reverse justify-between' }" color="primary" v-model="naturvardsarterVisible"
+                    label="Naturvårdsarter" />
+                  <USwitch v-if="isSkarmtrad" :ui="{ root: 'flex-row-reverse justify-between' }" color="primary"
+                    v-model="seedTreeVisible" label="Fröträd" />
+                  <USwitch :ui="{ root: 'flex-row-reverse justify-between' }" color="primary"
+                    v-model="tradplantorVisible" label="Trädplantor" />
+                  <!-- Dev: Save clicks -->
+                  <USwitch :ui="{ root: 'flex-row-reverse justify-between' }" color="warning" v-model="devSaveClicks"
+                    label="Spara klick (dev)" />
+
+                </div>
+
+
+
+              </div>
+
+            </div>
+          </div>
+        </div>
+        <div class="relative flex-1">
+          <!-- <div class="absolute w-full bottom-0 z-50 p-1">
                       <div class="flex w-full justify-end mb-2">
                         <UFieldGroup orientation="vertical"
                           class="size-xs bg-neutral-900/80 backdrop-blur-2xl rounded-sm">
@@ -437,12 +405,12 @@
                             icon="i-heroicons-minus" />
                         </UFieldGroup>
                       </div>
-                    </div>
+                    </div> -->
 
 
-                    <!-- Single View -->
-                    <div v-if="!isCompare && !isFrameworkCompareMode" class="w-full h-full">
-                      <!-- <OpenSeadragonViewer :retention-visible="retentionVisible" :retention-trees="retentionTrees"
+          <!-- Single View -->
+          <div v-if="!isCompare && !isFrameworkCompareMode" class="w-full h-full">
+            <!-- <OpenSeadragonViewer :retention-visible="retentionVisible" :retention-trees="retentionTrees"
                   @retentionTreeAdded="retentionTrees.push($event)" :fullscreenLayout="true" :currentFramework="currentFramework" :currentTime="timeLabelForDataFiltering"
                     :currentStartskog="currentStartskog" :layoutMode="currentLayoutMode" ref="singleViewerRef"
                     :frameworkLabel="currentFramework.label" :timeLabel="currentTimeLabel"
@@ -450,388 +418,348 @@
                     :overlayDziUrl="currentImagePath" :allowPan="true"
                     :annotations="annotationsVisible ? filteredAnnotations : []" :selectedAnnotation="selectedAnnotation"
                     v-if="!opacitySyncEnabled" @annotationClicked="handleAnnotationClicked" class="w-full h-full" /> -->
-                      <OpenSeadragonViewer :tradplantor-visible="tradplantorVisible"
-                        :naturvardsarter-visible="naturvardsarterVisible" :hogstubbar-visible="hogstubbarVisible"
-                        :smaplantor-visible="smaplantorVisible" :dev-save-clicks="devSaveClicks"
-                        :seedTree-visible="seedTreeVisible" :rottacke-visible="rottackeVisible"
-                        :retention-visible="retentionVisible" :old-kanteffekt-visible="oldKanteffektVisible"
-                        :kanteffekt-visible="kanteffektVisible" :retention-trees="retentionTrees"
-                        @retentionTreeAdded="retentionTrees.push($event)" :fullscreenLayout="true"
-                        :currentFramework="currentFramework" :currentTime="timeLabelForDataFiltering"
-                        :currentStartskog="currentStartskog" :layoutMode="currentLayoutMode" ref="singleViewerRef"
-                        :frameworkLabel="currentFramework.label" :timeLabel="currentTimeLabel"
-                        :dziUrl="currentOverlayImagePath" :overlayDziUrl="currentImagePath" :allowPan="true"
-                        :annotations="annotationsVisible ? filteredAnnotations : []"
-                        :selectedAnnotation="selectedAnnotation" v-model:globalOpacity="globalOpacity"
-                        @annotationClicked="handleAnnotationClicked" class="w-full h-full ui-zoom-exempt " />
-                      <transition name="slide-out">
-                        <div v-if="selectedAnnotation"
-                          class="absolute inset-y-0 right-0  w-68 bg-white dark:bg-neutral-950/70 backdrop-blur-2xl overflow-auto z-10 pointer-events-auto border-neutral-300 dark:border-neutral-700 border-l ">
-                          <div class="h-64 flex items-center justify-center text-neutral-300">
-                            Bild kommer snart
-                          </div>
-
-                          <!-- <NuxtImg v-if="selectedAnnotation.thumbnail" :src="selectedAnnotation.thumbnail" width="300"
-                        height="300" alt="Thumbnail" class=" border-b border-neutral-300" /> -->
-                          <UButton color="white" :ui="{ rounded: 'rounded-full' }" icon="heroicons:x-mark"
-                            @click="closeAnnotation" class="absolute top-2 right-2" />
-                          <div class="px-4 py-2">
-                            <h3 class="text-lg font-semibold text-neutral-800 dark:text-neutral-200">
-                              {{ selectedAnnotation.title }}
-                            </h3>
-                            <p class="text-neutral-400">
-                              {{ selectedAnnotation.text }}
-                            </p>
-                          </div>
-                        </div>
-                      </transition>
-
-                    </div>
-
-                    <!-- Before/After Compare -->
-
-                    <CustomImageComparisonSlider class="w-full" ref="comparisonSliderRef" v-else-if="isCompare"
-                      :frameworkLabel="currentFramework.label" timeLabel="Före avverkning"
-                      :frameworkLabel2="currentFramework.label" :timeLabel2="currentTimeLabel"
-                      :layoutMode="currentLayoutMode">
-                      <template #first>
-                        <OpenSeadragonViewer :naturvardsarter-visible="naturvardsarterVisible" :fullscreenLayout="true"
-                          :currentFramework="currentFramework" currentTime="innan" :currentStartskog="currentStartskog"
-                          :layoutMode="currentLayoutMode" ref="beforeViewerRef" :comparisonMode="true"
-                          :frameworkLabel="currentFramework.label" timeLabel="Före avverkning"
-                          :dziUrl="comparisonOverlayImagePath1" :overlayDziUrl="comparisonImagePath1" :allowPan="true"
-                          @opened="onViewerOpened('before')" @activated="activeViewer.valueOf = 'before'"
-                          v-if="!opacitySyncEnabled" class="w-full h-full" />
-                        <OpenSeadragonViewer :naturvardsarter-visible="naturvardsarterVisible" :fullscreenLayout="true"
-                          :currentFramework="currentFramework" currentTime="innan" :currentStartskog="currentStartskog"
-                          :layoutMode="currentLayoutMode" ref="beforeViewerRef" :comparisonMode="true"
-                          :frameworkLabel="currentFramework.label" timeLabel="Före avverkning"
-                          :dziUrl="comparisonOverlayImagePath1" :overlayDziUrl="comparisonImagePath1" :allowPan="true"
-                          @opened="onViewerOpened('before')" @activated="activeViewer.valueOf = 'before'" v-else
-                          v-model:globalOpacity="globalOpacity" class="w-full h-full" />
-                      </template>
-                      <template #second>
-                        <OpenSeadragonViewer :naturvardsarter-visible="naturvardsarterVisible" :fullscreenLayout="true"
-                          :currentFramework="currentFramework" :currentTime="timeLabelForDataFiltering"
-                          :currentStartskog="currentStartskog" :layoutMode="currentLayoutMode" ref="afterViewerRef"
-                          :comparisonMode="true" :frameworkLabel="currentFramework.label" :timeLabel="currentTimeLabel"
-                          :dziUrl="comparisonOverlayImagePath2" :overlayDziUrl="currentImagePath" :allowPan="true"
-                          sliderPosition="right" @opened="onViewerOpened('after')"
-                          @activated="activeViewer.valueOf = 'after'" v-if="!opacitySyncEnabled"
-                          class="w-full h-full " />
-                        <OpenSeadragonViewer :naturvardsarter-visible="naturvardsarterVisible" :fullscreenLayout="true"
-                          :currentFramework="currentFramework" :currentTime="timeLabelForDataFiltering"
-                          :currentStartskog="currentStartskog" :layoutMode="currentLayoutMode" ref="afterViewerRef"
-                          :comparisonMode="true" :frameworkLabel="currentFramework.label" :timeLabel="currentTimeLabel"
-                          :dziUrl="comparisonOverlayImagePath2" :overlayDziUrl="currentImagePath" :allowPan="true"
-                          sliderPosition="right" @opened="onViewerOpened('after')"
-                          @activated="activeViewer.valueOf = 'after'" v-else v-model:globalOpacity="globalOpacity"
-                          class="w-full h-full  " />
-                      </template>
-                    </CustomImageComparisonSlider>
-
-                    <!-- Framework Compare -->
-                    <CustomImageComparisonSlider v-else-if="isFrameworkCompareMode" ref="comparisonSliderRef"
-                      :frameworkLabel="currentFramework.label" :timeLabel="currentTimeLabel"
-                      :frameworkLabel2="currentFramework2.label" :timeLabel2="currentTimeLabel"
-                      :layoutMode="currentLayoutMode" class="w-full">
-                      <template #first>
-                        <OpenSeadragonViewer :naturvardsarter-visible="naturvardsarterVisible" :fullscreenLayout="true"
-                          :currentFramework="currentFramework" :currentTime="timeLabelForDataFiltering"
-                          :currentStartskog="currentStartskog" :layoutMode="currentLayoutMode" ref="framework1ViewerRef"
-                          :comparisonMode="true" :frameworkLabel="currentFramework.label" :timeLabel="currentTimeLabel"
-                          :dziUrl="frameworkOverlayImagePath1" :overlayDziUrl="currentImagePath"
-                          :allowPan="!isCompare && !isFrameworkCompareMode" v-if="!opacitySyncEnabled"
-                          @viewportChanged="($event) => onViewportChanged('framework1', $event)"
-                          @opened="onViewerOpened('framework1')" @activated="activeViewer.valueOf = 'framework1'"
-                          class="w-full h-full" />
-                        <OpenSeadragonViewer :naturvardsarter-visible="naturvardsarterVisible" :fullscreenLayout="true"
-                          :currentFramework="currentFramework" :currentTime="timeLabelForDataFiltering"
-                          :currentStartskog="currentStartskog" :layoutMode="currentLayoutMode" ref="framework1ViewerRef"
-                          :comparisonMode="true" :frameworkLabel="currentFramework.label" :timeLabel="currentTimeLabel"
-                          :dziUrl="frameworkOverlayImagePath1" :overlayDziUrl="currentImagePath"
-                          :allowPan="!isCompare && !isFrameworkCompareMode" v-else v-model:globalOpacity="globalOpacity"
-                          @viewportChanged="($event) => onViewportChanged('framework1', $event)"
-                          @opened="onViewerOpened('framework1')" @activated="activeViewer.valueOf = 'framework1'"
-                          class="w-full h-full" />
-                      </template>
-                      <template #second>
-                        <OpenSeadragonViewer :naturvardsarter-visible="naturvardsarterVisible" :fullscreenLayout="true"
-                          :currentFramework="currentFramework2" :currentTime="timeLabelForDataFiltering"
-                          :currentStartskog="currentStartskog" :layoutMode="currentLayoutMode" ref="framework2ViewerRef"
-                          :comparisonMode="true" :frameworkLabel="currentFramework2.label" :timeLabel="currentTimeLabel"
-                          :dziUrl="frameworkOverlayImagePath2" :overlayDziUrl="currentImagePath2"
-                          v-if="!opacitySyncEnabled" :allowPan="!isCompare && !isFrameworkCompareMode"
-                          sliderPosition="right" @viewportChanged="($event) => onViewportChanged('framework2', $event)"
-                          @opened="onViewerOpened('framework2')" @activated="activeViewer.valueOf = 'framework2'"
-                          class="w-full h-full" />
-                        <OpenSeadragonViewer :naturvardsarter-visible="naturvardsarterVisible" :fullscreenLayout="true"
-                          :currentFramework="currentFramework2" :currentTime="timeLabelForDataFiltering"
-                          :currentStartskog="currentStartskog" :layoutMode="currentLayoutMode" ref="framework2ViewerRef"
-                          :comparisonMode="true" :frameworkLabel="currentFramework2.label" :timeLabel="currentTimeLabel"
-                          :dziUrl="frameworkOverlayImagePath2" :overlayDziUrl="currentImagePath2" v-else
-                          v-model:globalOpacity="globalOpacity" :allowPan="!isCompare && !isFrameworkCompareMode"
-                          sliderPosition="right" @viewportChanged="($event) => onViewportChanged('framework2', $event)"
-                          @opened="onViewerOpened('framework2')" @activated="activeViewer.valueOf = 'framework2'"
-                          class="w-full h-full" />
-
-                      </template>
-                    </CustomImageComparisonSlider>
-                  </div>
-                  <div :class="[
-                    'absolute max-h-screen z-50 top-0 w-sm left-0 overflow-auto transition-all shadow-2xl border-r bg-white border-neutral-100/10 rounded-br-sm duration-300 ease-in-out backdrop-blur-2xl hide-scrollbar',
-                  ]" v-if="!infoOpen">
-                    <div class=" p-4">
-                      <div v-if="!isCompare && !isFrameworkCompareMode">
-                        <div class="p-3 group text-base/7" @click="handleTimelineClick">
-                          <UPopover :ui="{ content: 'bg-neutral-950/50 backdrop-blur-2xl ring-neutral-900/50' }"
-                            destroy-on-close :content="{
-                              align: 'start',
-                              side: 'left',
-                              sideOffset: '1',
-                            }">
-                            <h2
-                              class="text-xl font-medium mb-1 hover:bg-neutral-500/20 w-fit p-2 px-3 -m-3 rounded-sm overflow-hidden cursor-pointer">
-                              {{ currentFramework.label }}</h2>
-                            <template #content>
-                              <div class="p-2 flex flex-col gap-2">
-                                <div v-for="(framework, index) in frameworks" :key="framework.id"
-                                  @click="selectedFrameworkIndex = index"
-                                  class="flex items-center text-white gap-2 cursor-pointer hover:bg-neutral-500/20 p-2 rounded-md">
-                                  <div>
-                                    <div class="font-medium">{{ framework.label }}</div>
-                                    <div class="text-sm text-neutral-300">{{ framework.text }}</div>
-                                  </div>
-                                </div>
-                              </div>
-                            </template>
-                          </UPopover>
-                          <div class="flex justify-between">
-                            <h3 class="text-md text-neutral-200">
-                              {{ currentTimeLabel }}
-                            </h3>
-                            <UButton class="h-fit text-white bg-transparent hover:bg-neutral-500/20" color="neutral"
-                              variant="soft" size="xs" :label="timeInfoVisible ? 'Dölj info' : 'Visa info'"
-                              @click="toggleTimeInfoVisible" />
-                          </div>
-                          <div v-if="timeInfoVisible && timelineInfo" class="my-4">
-                            <p class="mb-4 text-neutral-50" v-html="makeClickableHtml(timelineInfo.skog)"></p>
-                            <div>
-                              <p class="mb-2 text-white font-bold text-md">Påverkan på mykorrhizasvamp</p>
-                              <span class="text-neutral-50" v-html="makeClickableHtml(timelineInfo.svamp)"></span>
-                            </div>
-                          </div>
-                          <div v-else-if="timeInfoVisible" class="my-4 text-neutral-300 text-sm">
-                            Ingen tidslinjeinformation hittades för den här kombinationen.
-                          </div>
-                        </div>
-                      </div>
-
-                      <!-- Before/After compare: first always “före” (innan), then the selected time -->
-                      <div v-else-if="isCompare" class="space-y-2">
-                        <div class="p-3 group text-base/7" v-if="timelineInfoBefore" @click="handleTimelineClick">
-                          <UPopover :ui="{ content: 'bg-neutral-950/50 backdrop-blur-2xl ring-neutral-900/50' }"
-                            destroy-on-close :content="{
-                              align: 'start',
-                              side: 'left',
-                              sideOffset: '1',
-                            }">
-                            <h2
-                              class="text-2xl text-white font-medium mb-1 hover:bg-neutral-500/20 w-fit p-2 px-3 -m-3 rounded-sm overflow-hidden cursor-pointer">
-                              {{ currentFramework.label }}</h2>
-                            <template #content>
-                              <div class="p-2 flex flex-col gap-2">
-                                <div v-for="(framework, index) in frameworks" :key="framework.id"
-                                  @click="selectedFrameworkIndex = index"
-                                  class="flex items-center text-white gap-2 cursor-pointer hover:bg-neutral-500/20 p-2 rounded-md">
-                                  <div>
-                                    <div class="font-medium">{{ framework.label }}</div>
-                                    <div class="text-sm text-neutral-300">{{ framework.text }}</div>
-                                  </div>
-                                </div>
-                              </div>
-                            </template>
-                          </UPopover>
-                          <div class="flex justify-between  ">
-                            <h3 class="text-md text-neutral-200">
-                              Före avverkning
-                            </h3>
-                            <UButton class="h-fit text-white bg-transparent hover:bg-neutral-500/20" variant="soft"
-                              color="neutral" size="xs" :label="timeInfoVisible ? 'Dölj info' : 'Visa info'"
-                              @click="toggleTimeInfoVisible" />
-                          </div>
-                          <div v-if="timeInfoVisible" class="my-4">
-                            <p class="mb-2 text-neutral-50" v-html="makeClickableHtml(timelineInfoBefore.skog)"></p>
-                            <div>
-                              <p class="mb-2 text-white font-bold text-md">Påverkan på mykorrhizasvamp</p>
-                              <span class="text-neutral-50" v-html="makeClickableHtml(timelineInfoBefore.svamp)"></span>
-                            </div>
-                          </div>
-                        </div>
-                        <div class=" p-4 group border border-neutral-200/10 rounded-sm shadow bg-neutral-950/20"
-                          v-if="timelineInfo" @click="handleTimelineClick">
-                          <!-- <h2 class="text-2xl text-white font-medium mb-1">{{ currentFramework.label }}</h2> -->
-                          <div class="flex justify-between ">
-                            <h3 class="text-md text-neutral-200">
-                              {{ currentTimeLabel }}
-                            </h3>
-                            <UButton class="h-fit text-white bg-transparent hover:bg-neutral-500/20" variant="soft"
-                              color="neutral" size="xs" :label="timeInfo2Visible ? 'Dölj info' : 'Visa info'"
-                              @click="toggleTimeInfo2Visible" />
-                          </div>
-                          <div v-if="timeInfo2Visible" class="my-4">
-                            <p class="mb-2 text-neutral-50" v-html="makeClickableHtml(timelineInfo.skog)"></p>
-                            <div>
-                              <p class="mb-2 text-white font-bold text-md">Påverkan på mykorrhizasvamp</p>
-                              <span class="text-neutral-50" v-html="makeClickableHtml(timelineInfo.svamp)"></span>
-                            </div>
-                          </div>
-
-                        </div>
-                      </div>
-
-                      <!-- Framework compare: show both frameworks at current time -->
-                      <div v-else-if="isFrameworkCompareMode" class="space-y-2">
-                        <div class="p-3 group text-base/7" v-if="timelineInfo" @click="handleTimelineClick">
-                          <UPopover :ui="{ content: 'bg-neutral-950/50 backdrop-blur-2xl ring-neutral-900/50' }"
-                            destroy-on-close :content="{
-                              align: 'start',
-                              side: 'left',
-                              sideOffset: '1',
-                            }">
-                            <h2
-                              class="text-2xl text-white font-medium mb-1 hover:bg-neutral-500/20 w-fit p-2 px-3 -m-3 rounded-sm overflow-hidden cursor-pointer">
-                              {{ currentFramework.label }}</h2>
-                            <template #content>
-                              <div class="p-2 flex flex-col gap-2">
-                                <div v-for="(framework, index) in frameworks" :key="framework.id"
-                                  @click="selectedFrameworkIndex = index"
-                                  class="flex items-center text-white gap-2 cursor-pointer hover:bg-neutral-500/20 p-2 rounded-md">
-                                  <div>
-                                    <div class="font-medium">{{ framework.label }}</div>
-                                    <div class="text-sm text-neutral-300">{{ framework.text }}</div>
-                                  </div>
-                                </div>
-                              </div>
-                            </template>
-                          </UPopover>
-
-                          <div class="flex justify-between ">
-                            <h3 class="text-md text-neutral-200">
-                              {{ currentTimeLabel }}
-                            </h3>
-                            <UButton class="h-fit text-white bg-transparent hover:bg-neutral-500/20" variant="soft"
-                              color="neutral" size="xs" :label="timeInfoVisible ? 'Dölj info' : 'Visa info'"
-                              @click="toggleTimeInfoVisible" />
-                          </div>
-                          <div v-if="timeInfoVisible" class="my-4">
-                            <p class="mb-2 text-neutral-50" v-html="makeClickableHtml(timelineInfo.skog)"></p>
-                            <div>
-                              <p class="mb-2 text-white font-bold text-md">Påverkan på mykorrhizasvamp</p>
-                              <span class="text-neutral-50" v-html="makeClickableHtml(timelineInfo.svamp)"></span>
-                            </div>
-                          </div>
-                        </div>
-                        <div class="p-4 group border border-neutral-200/10 rounded-sm shadow bg-neutral-950/20"
-                          v-if="timelineInfo2" @click="handleTimelineClick">
-                          <UPopover :ui="{ content: 'bg-neutral-950/50 backdrop-blur-2xl ring-neutral-900/50' }"
-                            destroy-on-close :content="{
-                              align: 'start',
-                              side: 'left',
-                              sideOffset: '1',
-                            }">
-                            <h2
-                              class="text-2xl text-white font-medium mb-1 hover:bg-neutral-500/20 w-fit p-2 px-3 -m-3 rounded-sm overflow-hidden cursor-pointer">
-                              {{ currentFramework2.label }}</h2>
-                            <template #content>
-                              <div class="p-2 flex flex-col gap-2">
-                                <div v-for="(framework, index) in frameworks" :key="'framework2-' + framework.id"
-                                  @click="selectedFrameworkIndex2 = index"
-                                  class="flex items-center text-white gap-2 cursor-pointer hover:bg-neutral-500/20 p-2 rounded-md">
-                                  <div>
-                                    <div class="font-medium">{{ framework.label }}</div>
-                                    <div class="text-sm text-neutral-300">{{ framework.text }}</div>
-                                  </div>
-                                </div>
-                              </div>
-                            </template>
-                          </UPopover>
-                          <div class="flex justify-between ">
-                            <h3 class="text-md text-neutral-200">
-                              {{ currentTimeLabel }}
-                            </h3>
-                            <UButton class="h-fit text-white bg-transparent hover:bg-neutral-500/20" variant="soft"
-                              color="neutral" size="xs" :label="timeInfo2Visible ? 'Dölj info' : 'Visa info'"
-                              @click="toggleTimeInfo2Visible" />
-                          </div>
-                          <div v-if="timeInfo2Visible" class="my-4">
-                            <p class="mb-2 text-neutral-50" v-html="makeClickableHtml(timelineInfo2.skog)"></p>
-                            <div>
-                              <p class="mb-2 text-white font-bold text-md">Påverkan på mykorrhizasvamp</p>
-                              <span class="text-neutral-50" v-html="makeClickableHtml(timelineInfo2.svamp)"></span>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                      <!-- Time navigation (single view) -->
-                      <div class=" grid grid-cols-2 gap-4">
-                        <div class="w-full">
-                          <UButton size="xl" v-if="hasPrevTime" @click="goPrevTime" variant="ghost"
-                            class="text-white hover:bg-neutral-500/20 w-full" :label="prevTitle"
-                            icon="i-heroicons-arrow-left-circle" />
-                        </div>
-                        <div class="w-full">
-                          <UButton size="xl" v-if="hasNextTime" @click="goNextTime" variant="ghost"
-                            class="w-full text-white hover:bg-neutral-500/20 flex justify-end" trailing
-                            :label="nextTitle" icon="i-heroicons-arrow-right-circle" />
-                        </div>
-                      </div>
-                    </div>
-
-                  </div>
-
+            <OpenSeadragonViewer :tradplantor-visible="tradplantorVisible"
+              :naturvardsarter-visible="naturvardsarterVisible" :hogstubbar-visible="hogstubbarVisible"
+              :smaplantor-visible="smaplantorVisible" :dev-save-clicks="devSaveClicks"
+              :seedTree-visible="seedTreeVisible" :rottacke-visible="rottackeVisible"
+              :retention-visible="retentionVisible" :old-kanteffekt-visible="oldKanteffektVisible"
+              :kanteffekt-visible="kanteffektVisible" :retention-trees="retentionTrees"
+              @retentionTreeAdded="retentionTrees.push($event)" :fullscreenLayout="true"
+              :currentFramework="currentFramework" :currentTime="timeLabelForDataFiltering"
+              :currentStartskog="currentStartskog" :layoutMode="currentLayoutMode" ref="singleViewerRef"
+              :frameworkLabel="currentFramework.label" :timeLabel="currentTimeLabel" :dziUrl="currentOverlayImagePath"
+              :overlayDziUrl="currentImagePath" :allowPan="true"
+              :annotations="annotationsVisible ? filteredAnnotations : []" :selectedAnnotation="selectedAnnotation"
+              v-model:globalOpacity="globalOpacity" @annotationClicked="handleAnnotationClicked"
+              class="w-full h-full ui-zoom-exempt " />
+            <transition name="slide-out">
+              <div v-if="selectedAnnotation"
+                class="absolute inset-y-0 right-0  w-68 bg-white dark:bg-neutral-950/70 backdrop-blur-2xl overflow-auto z-10 pointer-events-auto border-neutral-300 dark:border-neutral-700 border-l ">
+                <div class="h-64 flex items-center justify-center text-neutral-300">
+                  Bild kommer snart
                 </div>
 
+                <!-- <NuxtImg v-if="selectedAnnotation.thumbnail" :src="selectedAnnotation.thumbnail" width="300"
+                        height="300" alt="Thumbnail" class=" border-b border-neutral-300" /> -->
+                <UButton color="white" :ui="{ rounded: 'rounded-full' }" icon="heroicons:x-mark"
+                  @click="closeAnnotation" class="absolute top-2 right-2" />
+                <div class="px-4 py-2">
+                  <h3 class="text-lg font-semibold text-neutral-800 dark:text-neutral-200">
+                    {{ selectedAnnotation.title }}
+                  </h3>
+                  <p class="text-neutral-400">
+                    {{ selectedAnnotation.text }}
+                  </p>
+                </div>
+              </div>
+            </transition>
 
+          </div>
 
+          <!-- Before/After Compare -->
 
-                <!-- <div class="flex w-full gap-2 p-1 border-muted border-t">
-                  <UPopover class="shrink-0 cursor-pointer h-fit my-1" v-model:open="open2" destroy-on-close
-                    :popper="{ placement: 'bottom-start' }">
-                    <UButton variant="solid" color="neutral">{{ currentStartskog.label }}
-                    </UButton>
+          <CustomImageComparisonSlider class="w-full" ref="comparisonSliderRef" v-else-if="isCompare"
+            :frameworkLabel="currentFramework.label" timeLabel="Före avverkning"
+            :frameworkLabel2="currentFramework.label" :timeLabel2="currentTimeLabel" :layoutMode="currentLayoutMode">
+            <template #first>
+              <OpenSeadragonViewer :naturvardsarter-visible="naturvardsarterVisible" :fullscreenLayout="true"
+                :currentFramework="currentFramework" currentTime="innan" :currentStartskog="currentStartskog"
+                :layoutMode="currentLayoutMode" ref="beforeViewerRef" :comparisonMode="true"
+                :frameworkLabel="currentFramework.label" timeLabel="Före avverkning"
+                :dziUrl="comparisonOverlayImagePath1" :overlayDziUrl="comparisonImagePath1" :allowPan="true"
+                @opened="onViewerOpened('before')" @activated="activeViewer.valueOf = 'before'"
+                v-if="!opacitySyncEnabled" class="w-full h-full" />
+              <OpenSeadragonViewer :naturvardsarter-visible="naturvardsarterVisible" :fullscreenLayout="true"
+                :currentFramework="currentFramework" currentTime="innan" :currentStartskog="currentStartskog"
+                :layoutMode="currentLayoutMode" ref="beforeViewerRef" :comparisonMode="true"
+                :frameworkLabel="currentFramework.label" timeLabel="Före avverkning"
+                :dziUrl="comparisonOverlayImagePath1" :overlayDziUrl="comparisonImagePath1" :allowPan="true"
+                @opened="onViewerOpened('before')" @activated="activeViewer.valueOf = 'before'" v-else
+                v-model:globalOpacity="globalOpacity" class="w-full h-full" />
+            </template>
+            <template #second>
+              <OpenSeadragonViewer :naturvardsarter-visible="naturvardsarterVisible" :fullscreenLayout="true"
+                :currentFramework="currentFramework" :currentTime="timeLabelForDataFiltering"
+                :currentStartskog="currentStartskog" :layoutMode="currentLayoutMode" ref="afterViewerRef"
+                :comparisonMode="true" :frameworkLabel="currentFramework.label" :timeLabel="currentTimeLabel"
+                :dziUrl="comparisonOverlayImagePath2" :overlayDziUrl="currentImagePath" :allowPan="true"
+                sliderPosition="right" @opened="onViewerOpened('after')" @activated="activeViewer.valueOf = 'after'"
+                v-if="!opacitySyncEnabled" class="w-full h-full " />
+              <OpenSeadragonViewer :naturvardsarter-visible="naturvardsarterVisible" :fullscreenLayout="true"
+                :currentFramework="currentFramework" :currentTime="timeLabelForDataFiltering"
+                :currentStartskog="currentStartskog" :layoutMode="currentLayoutMode" ref="afterViewerRef"
+                :comparisonMode="true" :frameworkLabel="currentFramework.label" :timeLabel="currentTimeLabel"
+                :dziUrl="comparisonOverlayImagePath2" :overlayDziUrl="currentImagePath" :allowPan="true"
+                sliderPosition="right" @opened="onViewerOpened('after')" @activated="activeViewer.valueOf = 'after'"
+                v-else v-model:globalOpacity="globalOpacity" class="w-full h-full  " />
+            </template>
+          </CustomImageComparisonSlider>
 
-                    <template #content>
-                      <div class="text-sm w-64 p-3 text-neutral-500 border-b border-neutral-200 ">
-                        Kort beskriving av betydelsen för skogens historik
-                      </div>
-                      <div class="p-1 flex flex-col gap-1">
-                        <div v-for="option in startskog" :key="option.value">
-                          <UButton @click="selectOption(option)" size="xl" color="white" variant="ghost"
-                            class="hover:bg-neutral-100 w-full cursor-pointer" :class="{
-                              'w-full  text-secondary-500':
-                                currentStartskog.value === option.value,
-                            }">{{ option.label }}
-                          </UButton>
+          <!-- Framework Compare -->
+          <CustomImageComparisonSlider v-else-if="isFrameworkCompareMode" ref="comparisonSliderRef"
+            :frameworkLabel="currentFramework.label" :timeLabel="currentTimeLabel"
+            :frameworkLabel2="currentFramework2.label" :timeLabel2="currentTimeLabel" :layoutMode="currentLayoutMode"
+            class="w-full">
+            <template #first>
+              <OpenSeadragonViewer :naturvardsarter-visible="naturvardsarterVisible" :fullscreenLayout="true"
+                :currentFramework="currentFramework" :currentTime="timeLabelForDataFiltering"
+                :currentStartskog="currentStartskog" :layoutMode="currentLayoutMode" ref="framework1ViewerRef"
+                :comparisonMode="true" :frameworkLabel="currentFramework.label" :timeLabel="currentTimeLabel"
+                :dziUrl="frameworkOverlayImagePath1" :overlayDziUrl="currentImagePath"
+                :allowPan="!isCompare && !isFrameworkCompareMode" v-if="!opacitySyncEnabled"
+                @viewportChanged="($event) => onViewportChanged('framework1', $event)"
+                @opened="onViewerOpened('framework1')" @activated="activeViewer.valueOf = 'framework1'"
+                class="w-full h-full" />
+              <OpenSeadragonViewer :naturvardsarter-visible="naturvardsarterVisible" :fullscreenLayout="true"
+                :currentFramework="currentFramework" :currentTime="timeLabelForDataFiltering"
+                :currentStartskog="currentStartskog" :layoutMode="currentLayoutMode" ref="framework1ViewerRef"
+                :comparisonMode="true" :frameworkLabel="currentFramework.label" :timeLabel="currentTimeLabel"
+                :dziUrl="frameworkOverlayImagePath1" :overlayDziUrl="currentImagePath"
+                :allowPan="!isCompare && !isFrameworkCompareMode" v-else v-model:globalOpacity="globalOpacity"
+                @viewportChanged="($event) => onViewportChanged('framework1', $event)"
+                @opened="onViewerOpened('framework1')" @activated="activeViewer.valueOf = 'framework1'"
+                class="w-full h-full" />
+            </template>
+            <template #second>
+              <OpenSeadragonViewer :naturvardsarter-visible="naturvardsarterVisible" :fullscreenLayout="true"
+                :currentFramework="currentFramework2" :currentTime="timeLabelForDataFiltering"
+                :currentStartskog="currentStartskog" :layoutMode="currentLayoutMode" ref="framework2ViewerRef"
+                :comparisonMode="true" :frameworkLabel="currentFramework2.label" :timeLabel="currentTimeLabel"
+                :dziUrl="frameworkOverlayImagePath2" :overlayDziUrl="currentImagePath2" v-if="!opacitySyncEnabled"
+                :allowPan="!isCompare && !isFrameworkCompareMode" sliderPosition="right"
+                @viewportChanged="($event) => onViewportChanged('framework2', $event)"
+                @opened="onViewerOpened('framework2')" @activated="activeViewer.valueOf = 'framework2'"
+                class="w-full h-full" />
+              <OpenSeadragonViewer :naturvardsarter-visible="naturvardsarterVisible" :fullscreenLayout="true"
+                :currentFramework="currentFramework2" :currentTime="timeLabelForDataFiltering"
+                :currentStartskog="currentStartskog" :layoutMode="currentLayoutMode" ref="framework2ViewerRef"
+                :comparisonMode="true" :frameworkLabel="currentFramework2.label" :timeLabel="currentTimeLabel"
+                :dziUrl="frameworkOverlayImagePath2" :overlayDziUrl="currentImagePath2" v-else
+                v-model:globalOpacity="globalOpacity" :allowPan="!isCompare && !isFrameworkCompareMode"
+                sliderPosition="right" @viewportChanged="($event) => onViewportChanged('framework2', $event)"
+                @opened="onViewerOpened('framework2')" @activated="activeViewer.valueOf = 'framework2'"
+                class="w-full h-full" />
+
+            </template>
+          </CustomImageComparisonSlider>
+        </div>
+        <div :class="[
+          'absolute max-h-screen z-50 top-0 w-sm left-0 overflow-auto transition-all shadow-2xl border-r bg-white border-neutral-100/10 rounded-br-sm duration-300 ease-in-out backdrop-blur-2xl hide-scrollbar',
+        ]" v-if="!infoOpen">
+          <div class=" p-4">
+            <div v-if="!isCompare && !isFrameworkCompareMode">
+              <div class="p-3 group text-base/7" @click="handleTimelineClick">
+                <UPopover :ui="{ content: 'bg-neutral-950/50 backdrop-blur-2xl ring-neutral-900/50' }" destroy-on-close
+                  :content="{
+                    align: 'start',
+                    side: 'left',
+                    sideOffset: '1',
+                  }">
+                  <h2
+                    class="text-xl font-medium mb-1 hover:bg-neutral-500/20 w-fit p-2 px-3 -m-3 rounded-sm overflow-hidden cursor-pointer">
+                    {{ currentFramework.label }}</h2>
+                  <template #content>
+                    <div class="p-2 flex flex-col gap-2">
+                      <div v-for="(framework, index) in frameworks" :key="framework.id"
+                        @click="selectedFrameworkIndex = index"
+                        class="flex items-center text-white gap-2 cursor-pointer hover:bg-neutral-500/20 p-2 rounded-md">
+                        <div>
+                          <div class="font-medium">{{ framework.label }}</div>
+                          <div class="text-sm text-neutral-300">{{ framework.text }}</div>
                         </div>
                       </div>
+                    </div>
+                  </template>
+                </UPopover>
+                <div class="flex justify-between">
+                  <h3 class="text-md text-neutral-200">
+                    {{ currentTimeLabel }}
+                  </h3>
+                  <UButton class="h-fit text-white bg-transparent hover:bg-neutral-500/20" color="neutral"
+                    variant="soft" size="xs" :label="timeInfoVisible ? 'Dölj info' : 'Visa info'"
+                    @click="toggleTimeInfoVisible" />
+                </div>
+                <div v-if="timeInfoVisible && timelineInfo" class="my-4">
+                  <p class="mb-4 text-neutral-50" v-html="makeClickableHtml(timelineInfo.skog)"></p>
+                  <div>
+                    <p class="mb-2 text-white font-bold text-md">Påverkan på mykorrhizasvamp</p>
+                    <span class="text-neutral-50" v-html="makeClickableHtml(timelineInfo.svamp)"></span>
+                  </div>
+                </div>
+                <div v-else-if="timeInfoVisible" class="my-4 text-neutral-300 text-sm">
+                  Ingen tidslinjeinformation hittades för den här kombinationen.
+                </div>
+              </div>
+            </div>
 
-                    </template>
-                  </UPopover>
-                  <UTabs v-model="selectedTimeValue" :items="timeItems" :ui="{
-                    list: 'bg-transparent -mb-1.5',
-                    indicator: 'bg-white border border-muted/50 shadow',
-                    trigger: 'data-[state=active]:text-neutral-800 dark:data-[state=active]:text-violet-400/90 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary'
-                  }" />
-                </div> -->
+            <!-- Before/After compare: first always “före” (innan), then the selected time -->
+            <div v-else-if="isCompare" class="space-y-2">
+              <div class="p-3 group text-base/7" v-if="timelineInfoBefore" @click="handleTimelineClick">
+                <UPopover :ui="{ content: 'bg-neutral-950/50 backdrop-blur-2xl ring-neutral-900/50' }" destroy-on-close
+                  :content="{
+                    align: 'start',
+                    side: 'left',
+                    sideOffset: '1',
+                  }">
+                  <h2
+                    class="text-2xl text-white font-medium mb-1 hover:bg-neutral-500/20 w-fit p-2 px-3 -m-3 rounded-sm overflow-hidden cursor-pointer">
+                    {{ currentFramework.label }}</h2>
+                  <template #content>
+                    <div class="p-2 flex flex-col gap-2">
+                      <div v-for="(framework, index) in frameworks" :key="framework.id"
+                        @click="selectedFrameworkIndex = index"
+                        class="flex items-center text-white gap-2 cursor-pointer hover:bg-neutral-500/20 p-2 rounded-md">
+                        <div>
+                          <div class="font-medium">{{ framework.label }}</div>
+                          <div class="text-sm text-neutral-300">{{ framework.text }}</div>
+                        </div>
+                      </div>
+                    </div>
+                  </template>
+                </UPopover>
+                <div class="flex justify-between  ">
+                  <h3 class="text-md text-neutral-200">
+                    Före avverkning
+                  </h3>
+                  <UButton class="h-fit text-white bg-transparent hover:bg-neutral-500/20" variant="soft"
+                    color="neutral" size="xs" :label="timeInfoVisible ? 'Dölj info' : 'Visa info'"
+                    @click="toggleTimeInfoVisible" />
+                </div>
+                <div v-if="timeInfoVisible" class="my-4">
+                  <p class="mb-2 text-neutral-50" v-html="makeClickableHtml(timelineInfoBefore.skog)"></p>
+                  <div>
+                    <p class="mb-2 text-white font-bold text-md">Påverkan på mykorrhizasvamp</p>
+                    <span class="text-neutral-50" v-html="makeClickableHtml(timelineInfoBefore.svamp)"></span>
+                  </div>
+                </div>
+              </div>
+              <div class=" p-4 group border border-neutral-200/10 rounded-sm shadow bg-neutral-950/20"
+                v-if="timelineInfo" @click="handleTimelineClick">
+                <!-- <h2 class="text-2xl text-white font-medium mb-1">{{ currentFramework.label }}</h2> -->
+                <div class="flex justify-between ">
+                  <h3 class="text-md text-neutral-200">
+                    {{ currentTimeLabel }}
+                  </h3>
+                  <UButton class="h-fit text-white bg-transparent hover:bg-neutral-500/20" variant="soft"
+                    color="neutral" size="xs" :label="timeInfo2Visible ? 'Dölj info' : 'Visa info'"
+                    @click="toggleTimeInfo2Visible" />
+                </div>
+                <div v-if="timeInfo2Visible" class="my-4">
+                  <p class="mb-2 text-neutral-50" v-html="makeClickableHtml(timelineInfo.skog)"></p>
+                  <div>
+                    <p class="mb-2 text-white font-bold text-md">Påverkan på mykorrhizasvamp</p>
+                    <span class="text-neutral-50" v-html="makeClickableHtml(timelineInfo.svamp)"></span>
+                  </div>
+                </div>
 
               </div>
             </div>
+
+            <!-- Framework compare: show both frameworks at current time -->
+            <div v-else-if="isFrameworkCompareMode" class="space-y-2">
+              <div class="p-3 group text-base/7" v-if="timelineInfo" @click="handleTimelineClick">
+                <UPopover :ui="{ content: 'bg-neutral-950/50 backdrop-blur-2xl ring-neutral-900/50' }" destroy-on-close
+                  :content="{
+                    align: 'start',
+                    side: 'left',
+                    sideOffset: '1',
+                  }">
+                  <h2
+                    class="text-2xl text-white font-medium mb-1 hover:bg-neutral-500/20 w-fit p-2 px-3 -m-3 rounded-sm overflow-hidden cursor-pointer">
+                    {{ currentFramework.label }}</h2>
+                  <template #content>
+                    <div class="p-2 flex flex-col gap-2">
+                      <div v-for="(framework, index) in frameworks" :key="framework.id"
+                        @click="selectedFrameworkIndex = index"
+                        class="flex items-center text-white gap-2 cursor-pointer hover:bg-neutral-500/20 p-2 rounded-md">
+                        <div>
+                          <div class="font-medium">{{ framework.label }}</div>
+                          <div class="text-sm text-neutral-300">{{ framework.text }}</div>
+                        </div>
+                      </div>
+                    </div>
+                  </template>
+                </UPopover>
+
+                <div class="flex justify-between ">
+                  <h3 class="text-md text-neutral-200">
+                    {{ currentTimeLabel }}
+                  </h3>
+                  <UButton class="h-fit text-white bg-transparent hover:bg-neutral-500/20" variant="soft"
+                    color="neutral" size="xs" :label="timeInfoVisible ? 'Dölj info' : 'Visa info'"
+                    @click="toggleTimeInfoVisible" />
+                </div>
+                <div v-if="timeInfoVisible" class="my-4">
+                  <p class="mb-2 text-neutral-50" v-html="makeClickableHtml(timelineInfo.skog)"></p>
+                  <div>
+                    <p class="mb-2 text-white font-bold text-md">Påverkan på mykorrhizasvamp</p>
+                    <span class="text-neutral-50" v-html="makeClickableHtml(timelineInfo.svamp)"></span>
+                  </div>
+                </div>
+              </div>
+              <div class="p-4 group border border-neutral-200/10 rounded-sm shadow bg-neutral-950/20"
+                v-if="timelineInfo2" @click="handleTimelineClick">
+                <UPopover :ui="{ content: 'bg-neutral-950/50 backdrop-blur-2xl ring-neutral-900/50' }" destroy-on-close
+                  :content="{
+                    align: 'start',
+                    side: 'left',
+                    sideOffset: '1',
+                  }">
+                  <h2
+                    class="text-2xl text-white font-medium mb-1 hover:bg-neutral-500/20 w-fit p-2 px-3 -m-3 rounded-sm overflow-hidden cursor-pointer">
+                    {{ currentFramework2.label }}</h2>
+                  <template #content>
+                    <div class="p-2 flex flex-col gap-2">
+                      <div v-for="(framework, index) in frameworks" :key="'framework2-' + framework.id"
+                        @click="selectedFrameworkIndex2 = index"
+                        class="flex items-center text-white gap-2 cursor-pointer hover:bg-neutral-500/20 p-2 rounded-md">
+                        <div>
+                          <div class="font-medium">{{ framework.label }}</div>
+                          <div class="text-sm text-neutral-300">{{ framework.text }}</div>
+                        </div>
+                      </div>
+                    </div>
+                  </template>
+                </UPopover>
+                <div class="flex justify-between ">
+                  <h3 class="text-md text-neutral-200">
+                    {{ currentTimeLabel }}
+                  </h3>
+                  <UButton class="h-fit text-white bg-transparent hover:bg-neutral-500/20" variant="soft"
+                    color="neutral" size="xs" :label="timeInfo2Visible ? 'Dölj info' : 'Visa info'"
+                    @click="toggleTimeInfo2Visible" />
+                </div>
+                <div v-if="timeInfo2Visible" class="my-4">
+                  <p class="mb-2 text-neutral-50" v-html="makeClickableHtml(timelineInfo2.skog)"></p>
+                  <div>
+                    <p class="mb-2 text-white font-bold text-md">Påverkan på mykorrhizasvamp</p>
+                    <span class="text-neutral-50" v-html="makeClickableHtml(timelineInfo2.svamp)"></span>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <!-- Time navigation (single view) -->
+            <div class=" grid grid-cols-2 gap-4">
+              <div class="w-full">
+                <UButton size="xl" v-if="hasPrevTime" @click="goPrevTime" variant="ghost"
+                  class="text-white hover:bg-neutral-500/20 w-full" :label="prevTitle"
+                  icon="i-heroicons-arrow-left-circle" />
+              </div>
+              <div class="w-full">
+                <UButton size="xl" v-if="hasNextTime" @click="goNextTime" variant="ghost"
+                  class="w-full text-white hover:bg-neutral-500/20 flex justify-end" trailing :label="nextTitle"
+                  icon="i-heroicons-arrow-right-circle" />
+              </div>
+            </div>
           </div>
+
         </div>
+
       </div>
+
     </div>
   </div>
+
 </template>
 
 
@@ -1571,11 +1499,8 @@ watch([isFrameworkCompareMode, isCompare], ([frameworkCompare, compare]) => {
 
 const open = ref(false);
 const open2 = ref(false);
+const open3 = ref(false);
 
-
-// defineShortcuts({
-//   o: () => (open.value = !open.value),
-// });
 onMounted(() => {
   removeShortcutsFn = defineShortcuts({
     o: () => (open.value = !open.value),
@@ -1594,7 +1519,7 @@ const selectOption = (option) => {
   if (newIndex !== -1) {
     selectedStartskogIndex.value = newIndex;
   }
-  open.value = false;
+  open2.value = false;
 };
 
 // Frameworks array
@@ -1831,6 +1756,11 @@ const timelineSections = computed<TimelineSection[]>(() => {
   }
 
   return sections;
+});
+
+const timelineCarouselEnabled = computed(() => {
+  const infoCount = timelineSections.value.filter((section) => !!section.info).length;
+  return isMobile.value && infoCount > 1 && (isCompare.value || isFrameworkCompareMode.value);
 });
 
 const timelineDetailState = reactive<Record<string, { skog: boolean; svamp: boolean }>>({});
@@ -2159,8 +2089,8 @@ const compareChoice = ref("none");
 
 // Define your compare options (same as before)
 const compareOptions = [
-  { label: 'Två metoder', value: 'frameworkCompare' },
-  { label: 'Före / efter', value: 'beforeAfterCompare' }
+  { label: 'Före / efter', value: 'beforeAfterCompare' },
+  { label: 'Två metoder', value: 'frameworkCompare' }
 ]
 
 // This reactive variable holds the currently selected compare option.

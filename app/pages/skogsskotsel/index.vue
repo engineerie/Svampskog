@@ -184,6 +184,19 @@ interface TimelineDoc {
     entries: TimelineEntry[]
 }
 
+const normalizeTimelineStartskog = (value: string) => {
+    const lower = value?.toLowerCase?.() ?? ''
+    if (lower === 'intekalavverkad') return 'naturskog'
+    if (lower === 'produktionsskog') return 'produktionsskog_'
+    return value
+}
+
+const normalizeTimelineAtgard = (value: string) => {
+    const lower = value?.toLowerCase?.() ?? ''
+    if (lower === 'ingenatgard') return 'naturskydd'
+    return value
+}
+
 const normalizeTimeToken = (t: string | number) => {
     const s = String(t).trim().toLowerCase()
     if (s.includes('efter')) return 'efter'
@@ -224,8 +237,14 @@ interface TimelineDisplayItem {
 const timelineItems = computed<TimelineDisplayItem[]>(() => {
     const list = forestryTimeline.value?.entries ?? []
     const method = selectedMethod.value.id
+    const canonicalMethod = normalizeTimelineAtgard(method)
     return list
-        .filter((entry) => entry.startskog === 'naturskog' && entry.atgard === method)
+        .map((entry) => ({
+            ...entry,
+            startskog: normalizeTimelineStartskog(entry.startskog),
+            atgard: normalizeTimelineAtgard(entry.atgard)
+        }))
+        .filter((entry) => entry.startskog === 'naturskog' && entry.atgard === canonicalMethod)
         .map((entry) => ({
             tid: entry.tid,
             skog: entry.skog,
