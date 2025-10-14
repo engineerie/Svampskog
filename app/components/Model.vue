@@ -371,6 +371,16 @@
                       icon="i-carbon-chart-line-smooth" @click.stop="openNaturvardsarterChart({ badgeKey: badge.key })">
                       Visa naturvårdsartsdiagram
                     </UButton>
+                    <UCard v-if="badge.key === 'kanteffekt'" variant="soft" :ui="{ body: 'sm:p-4 sm:pl-2' }"
+                      class="mt-2 backdrop-blur-xl border border-white/10">
+                      <USwitch :ui="{
+                        root: 'flex-row-reverse justify-between',
+                        label: '',
+                        description: '',
+                        base: 'data-[state=unchecked]:bg-neutral-600'
+                      }" size="md" color="primary" v-model="oldKanteffektVisible" label="Tidigare kanteffekt"
+                        description="Visa spår från tidigare kanteffekt" />
+                    </UCard>
                   </div>
                 </template>
               </UPopover>
@@ -471,9 +481,12 @@
                     <USwitch :ui="{ root: 'flex-row-reverse justify-between' }" size="xs" color="neutral"
                       v-model="oldKanteffektVisible" label="Tidigare kanteffekt" />
                   </UCard>
-                  <!-- Blädning & Skärmträd: Kontinuerligt rottäcke -->
-                  <USwitch v-if="isBladning || isSkarmtrad" :ui="{ root: 'flex-row-reverse justify-between' }"
-                    color="primary" v-model="rottackeVisible" label="Kontinuerligt rottäcke" />
+                  <!-- Skärmträd: Rottäcke skärmträd -->
+                  <USwitch v-if="isSkarmtrad" :ui="{ root: 'flex-row-reverse justify-between' }" color="primary"
+                    v-model="rottackeSkarmtradVisible" label="Rottäcke skärmträd" />
+                  <!-- Blädning: Rottäcke blädning -->
+                  <USwitch v-if="isBladning" :ui="{ root: 'flex-row-reverse justify-between' }" color="primary"
+                    v-model="rottackeBladningVisible" label="Rottäcke blädning" />
                   <!-- Högstubbar: small black circles from public JSON -->
                   <USwitch :ui="{ root: 'flex-row-reverse justify-between' }" color="primary"
                     v-model="hogstubbarVisible" label="Högstubbar" />
@@ -527,11 +540,11 @@
             <OpenSeadragonViewer :tradplantor-visible="tradplantorVisible"
               :naturvardsarter-visible="naturvardsarterVisible" :hogstubbar-visible="hogstubbarVisible"
               :smaplantor-visible="smaplantorVisible" :dev-save-clicks="devSaveClicks"
-              :seedTree-visible="seedTreeVisible" :rottacke-visible="rottackeVisible"
-              :retention-visible="retentionVisible" :old-kanteffekt-visible="oldKanteffektVisible"
-              :kanteffekt-visible="kanteffektVisible" :retention-points="filteredOverlayData.retention"
-              :seed-tree-points="filteredOverlayData.seedTree" :smaplantor-points="filteredOverlayData.smaplantor"
-              :hogstubbar-points="filteredOverlayData.hogstubbar"
+              :seedTree-visible="seedTreeVisible" :rottacke-skarmtrad-visible="rottackeSkarmtradVisible"
+              :rottacke-bladning-visible="rottackeBladningVisible" :retention-visible="retentionVisible"
+              :old-kanteffekt-visible="oldKanteffektVisible" :kanteffekt-visible="kanteffektVisible"
+              :retention-points="filteredOverlayData.retention" :seed-tree-points="filteredOverlayData.seedTree"
+              :smaplantor-points="filteredOverlayData.smaplantor" :hogstubbar-points="filteredOverlayData.hogstubbar"
               :naturvardsarter-points="filteredOverlayData.naturvardsarter"
               :kanteffekt-features="filteredOverlayData.kanteffekt" :fullscreenLayout="true"
               :currentFramework="currentFramework" :currentTime="timeLabelForDataFiltering"
@@ -573,10 +586,11 @@
             <template #first>
               <OpenSeadragonViewer :naturvardsarter-visible="naturvardsarterVisible"
                 :retention-visible="retentionVisible" :kanteffekt-visible="kanteffektVisible"
-                :old-kanteffekt-visible="oldKanteffektVisible" :rottacke-visible="rottackeVisible"
-                :seedTree-visible="seedTreeVisible" :smaplantor-visible="smaplantorVisible"
-                :hogstubbar-visible="hogstubbarVisible" :tradplantor-visible="tradplantorVisible"
-                :fullscreenLayout="true" :retention-points="filteredBeforeOverlayData.retention"
+                :old-kanteffekt-visible="oldKanteffektVisible" :rottacke-skarmtrad-visible="rottackeSkarmtradVisible"
+                :rottacke-bladning-visible="rottackeBladningVisible" :seedTree-visible="seedTreeVisible"
+                :smaplantor-visible="smaplantorVisible" :hogstubbar-visible="hogstubbarVisible"
+                :tradplantor-visible="tradplantorVisible" :fullscreenLayout="true"
+                :retention-points="filteredBeforeOverlayData.retention"
                 :seed-tree-points="filteredBeforeOverlayData.seedTree"
                 :smaplantor-points="filteredBeforeOverlayData.smaplantor"
                 :hogstubbar-points="filteredBeforeOverlayData.hogstubbar"
@@ -589,10 +603,11 @@
                 v-if="!opacitySyncEnabled" class="w-full h-full" />
               <OpenSeadragonViewer :naturvardsarter-visible="naturvardsarterVisible"
                 :retention-visible="retentionVisible" :kanteffekt-visible="kanteffektVisible"
-                :old-kanteffekt-visible="oldKanteffektVisible" :rottacke-visible="rottackeVisible"
-                :seedTree-visible="seedTreeVisible" :smaplantor-visible="smaplantorVisible"
-                :hogstubbar-visible="hogstubbarVisible" :tradplantor-visible="tradplantorVisible"
-                :fullscreenLayout="true" :retention-points="filteredBeforeOverlayData.retention"
+                :old-kanteffekt-visible="oldKanteffektVisible" :rottacke-skarmtrad-visible="rottackeSkarmtradVisible"
+                :rottacke-bladning-visible="rottackeBladningVisible" :seedTree-visible="seedTreeVisible"
+                :smaplantor-visible="smaplantorVisible" :hogstubbar-visible="hogstubbarVisible"
+                :tradplantor-visible="tradplantorVisible" :fullscreenLayout="true"
+                :retention-points="filteredBeforeOverlayData.retention"
                 :seed-tree-points="filteredBeforeOverlayData.seedTree"
                 :smaplantor-points="filteredBeforeOverlayData.smaplantor"
                 :hogstubbar-points="filteredBeforeOverlayData.hogstubbar"
@@ -607,12 +622,12 @@
             <template #second>
               <OpenSeadragonViewer :naturvardsarter-visible="naturvardsarterVisible"
                 :retention-visible="retentionVisible" :kanteffekt-visible="kanteffektVisible"
-                :old-kanteffekt-visible="oldKanteffektVisible" :rottacke-visible="rottackeVisible"
-                :seedTree-visible="seedTreeVisible" :smaplantor-visible="smaplantorVisible"
-                :hogstubbar-visible="hogstubbarVisible" :tradplantor-visible="tradplantorVisible"
-                :fullscreenLayout="true" :retention-points="filteredOverlayData.retention"
-                :seed-tree-points="filteredOverlayData.seedTree" :smaplantor-points="filteredOverlayData.smaplantor"
-                :hogstubbar-points="filteredOverlayData.hogstubbar"
+                :old-kanteffekt-visible="oldKanteffektVisible" :rottacke-skarmtrad-visible="rottackeSkarmtradVisible"
+                :rottacke-bladning-visible="rottackeBladningVisible" :seedTree-visible="seedTreeVisible"
+                :smaplantor-visible="smaplantorVisible" :hogstubbar-visible="hogstubbarVisible"
+                :tradplantor-visible="tradplantorVisible" :fullscreenLayout="true"
+                :retention-points="filteredOverlayData.retention" :seed-tree-points="filteredOverlayData.seedTree"
+                :smaplantor-points="filteredOverlayData.smaplantor" :hogstubbar-points="filteredOverlayData.hogstubbar"
                 :naturvardsarter-points="filteredOverlayData.naturvardsarter"
                 :kanteffekt-features="filteredOverlayData.kanteffekt" :currentFramework="currentFramework"
                 :currentTime="timeLabelForDataFiltering" :currentStartskog="currentStartskog"
@@ -623,12 +638,12 @@
                 v-if="!opacitySyncEnabled" class="w-full h-full " />
               <OpenSeadragonViewer :naturvardsarter-visible="naturvardsarterVisible"
                 :retention-visible="retentionVisible" :kanteffekt-visible="kanteffektVisible"
-                :old-kanteffekt-visible="oldKanteffektVisible" :rottacke-visible="rottackeVisible"
-                :seedTree-visible="seedTreeVisible" :smaplantor-visible="smaplantorVisible"
-                :hogstubbar-visible="hogstubbarVisible" :tradplantor-visible="tradplantorVisible"
-                :fullscreenLayout="true" :retention-points="filteredOverlayData.retention"
-                :seed-tree-points="filteredOverlayData.seedTree" :smaplantor-points="filteredOverlayData.smaplantor"
-                :hogstubbar-points="filteredOverlayData.hogstubbar"
+                :old-kanteffekt-visible="oldKanteffektVisible" :rottacke-skarmtrad-visible="rottackeSkarmtradVisible"
+                :rottacke-bladning-visible="rottackeBladningVisible" :seedTree-visible="seedTreeVisible"
+                :smaplantor-visible="smaplantorVisible" :hogstubbar-visible="hogstubbarVisible"
+                :tradplantor-visible="tradplantorVisible" :fullscreenLayout="true"
+                :retention-points="filteredOverlayData.retention" :seed-tree-points="filteredOverlayData.seedTree"
+                :smaplantor-points="filteredOverlayData.smaplantor" :hogstubbar-points="filteredOverlayData.hogstubbar"
                 :naturvardsarter-points="filteredOverlayData.naturvardsarter"
                 :kanteffekt-features="filteredOverlayData.kanteffekt" :currentFramework="currentFramework"
                 :currentTime="timeLabelForDataFiltering" :currentStartskog="currentStartskog"
@@ -648,12 +663,12 @@
             <template #first>
               <OpenSeadragonViewer :naturvardsarter-visible="naturvardsarterVisible"
                 :retention-visible="retentionVisible" :kanteffekt-visible="kanteffektVisible"
-                :old-kanteffekt-visible="oldKanteffektVisible" :rottacke-visible="rottackeVisible"
-                :seedTree-visible="seedTreeVisible" :smaplantor-visible="smaplantorVisible"
-                :hogstubbar-visible="hogstubbarVisible" :tradplantor-visible="tradplantorVisible"
-                :fullscreenLayout="true" :retention-points="filteredOverlayData.retention"
-                :seed-tree-points="filteredOverlayData.seedTree" :smaplantor-points="filteredOverlayData.smaplantor"
-                :hogstubbar-points="filteredOverlayData.hogstubbar"
+                :old-kanteffekt-visible="oldKanteffektVisible" :rottacke-skarmtrad-visible="rottackeSkarmtradVisible"
+                :rottacke-bladning-visible="rottackeBladningVisible" :seedTree-visible="seedTreeVisible"
+                :smaplantor-visible="smaplantorVisible" :hogstubbar-visible="hogstubbarVisible"
+                :tradplantor-visible="tradplantorVisible" :fullscreenLayout="true"
+                :retention-points="filteredOverlayData.retention" :seed-tree-points="filteredOverlayData.seedTree"
+                :smaplantor-points="filteredOverlayData.smaplantor" :hogstubbar-points="filteredOverlayData.hogstubbar"
                 :naturvardsarter-points="filteredOverlayData.naturvardsarter"
                 :kanteffekt-features="filteredOverlayData.kanteffekt" :currentFramework="currentFramework"
                 :currentTime="timeLabelForDataFiltering" :currentStartskog="currentStartskog"
@@ -666,12 +681,12 @@
                 class="w-full h-full" />
               <OpenSeadragonViewer :naturvardsarter-visible="naturvardsarterVisible"
                 :retention-visible="retentionVisible" :kanteffekt-visible="kanteffektVisible"
-                :old-kanteffekt-visible="oldKanteffektVisible" :rottacke-visible="rottackeVisible"
-                :seedTree-visible="seedTreeVisible" :smaplantor-visible="smaplantorVisible"
-                :hogstubbar-visible="hogstubbarVisible" :tradplantor-visible="tradplantorVisible"
-                :fullscreenLayout="true" :retention-points="filteredOverlayData.retention"
-                :seed-tree-points="filteredOverlayData.seedTree" :smaplantor-points="filteredOverlayData.smaplantor"
-                :hogstubbar-points="filteredOverlayData.hogstubbar"
+                :old-kanteffekt-visible="oldKanteffektVisible" :rottacke-skarmtrad-visible="rottackeSkarmtradVisible"
+                :rottacke-bladning-visible="rottackeBladningVisible" :seedTree-visible="seedTreeVisible"
+                :smaplantor-visible="smaplantorVisible" :hogstubbar-visible="hogstubbarVisible"
+                :tradplantor-visible="tradplantorVisible" :fullscreenLayout="true"
+                :retention-points="filteredOverlayData.retention" :seed-tree-points="filteredOverlayData.seedTree"
+                :smaplantor-points="filteredOverlayData.smaplantor" :hogstubbar-points="filteredOverlayData.hogstubbar"
                 :naturvardsarter-points="filteredOverlayData.naturvardsarter"
                 :kanteffekt-features="filteredOverlayData.kanteffekt" :currentFramework="currentFramework"
                 :currentTime="timeLabelForDataFiltering" :currentStartskog="currentStartskog"
@@ -686,10 +701,11 @@
             <template #second>
               <OpenSeadragonViewer :naturvardsarter-visible="naturvardsarterVisible"
                 :retention-visible="retentionVisible" :kanteffekt-visible="kanteffektVisible"
-                :old-kanteffekt-visible="oldKanteffektVisible" :rottacke-visible="rottackeVisible"
-                :seedTree-visible="seedTreeVisible" :smaplantor-visible="smaplantorVisible"
-                :hogstubbar-visible="hogstubbarVisible" :tradplantor-visible="tradplantorVisible"
-                :fullscreenLayout="true" :retention-points="filteredOverlayDataFramework2.retention"
+                :old-kanteffekt-visible="oldKanteffektVisible" :rottacke-skarmtrad-visible="rottackeSkarmtradVisible"
+                :rottacke-bladning-visible="rottackeBladningVisible" :seedTree-visible="seedTreeVisible"
+                :smaplantor-visible="smaplantorVisible" :hogstubbar-visible="hogstubbarVisible"
+                :tradplantor-visible="tradplantorVisible" :fullscreenLayout="true"
+                :retention-points="filteredOverlayDataFramework2.retention"
                 :seed-tree-points="filteredOverlayDataFramework2.seedTree"
                 :smaplantor-points="filteredOverlayDataFramework2.smaplantor"
                 :hogstubbar-points="filteredOverlayDataFramework2.hogstubbar"
@@ -705,10 +721,11 @@
                 class="w-full h-full" />
               <OpenSeadragonViewer :naturvardsarter-visible="naturvardsarterVisible"
                 :retention-visible="retentionVisible" :kanteffekt-visible="kanteffektVisible"
-                :old-kanteffekt-visible="oldKanteffektVisible" :rottacke-visible="rottackeVisible"
-                :seedTree-visible="seedTreeVisible" :smaplantor-visible="smaplantorVisible"
-                :hogstubbar-visible="hogstubbarVisible" :tradplantor-visible="tradplantorVisible"
-                :fullscreenLayout="true" :retention-points="filteredOverlayDataFramework2.retention"
+                :old-kanteffekt-visible="oldKanteffektVisible" :rottacke-skarmtrad-visible="rottackeSkarmtradVisible"
+                :rottacke-bladning-visible="rottackeBladningVisible" :seedTree-visible="seedTreeVisible"
+                :smaplantor-visible="smaplantorVisible" :hogstubbar-visible="hogstubbarVisible"
+                :tradplantor-visible="tradplantorVisible" :fullscreenLayout="true"
+                :retention-points="filteredOverlayDataFramework2.retention"
                 :seed-tree-points="filteredOverlayDataFramework2.seedTree"
                 :smaplantor-points="filteredOverlayDataFramework2.smaplantor"
                 :hogstubbar-points="filteredOverlayDataFramework2.hogstubbar"
@@ -990,7 +1007,8 @@ function fwToString(fw: any): string | null {
 const overlayToggleMap: Record<string, () => boolean> = {
   retention: () => !!retentionVisible.value,
   kanteffekt: () => !!kanteffektVisible.value,
-  rottacke: () => !!rottackeVisible.value,
+  rottackeSkarmtrad: () => !!rottackeSkarmtradVisible.value,
+  rottackeBladning: () => !!rottackeBladningVisible.value,
   seedTree: () => !!seedTreeVisible.value,
   smaplantor: () => !!smaplantorVisible.value,
   hogstubbar: () => !!hogstubbarVisible.value,
@@ -1002,12 +1020,22 @@ function isOverlayVisibleInContext(overlayKey: string, ctx: { framework: any, st
   // 1) Toggle must be ON
   const getter = overlayToggleMap[overlayKey];
   if (getter && !getter()) return false;
-  // 2) Data must be available for the given context
+  // 2) Special-case split rottäcke overlays to base association on framework/time
+  const fw = fwToString(ctx.framework) || '';
+  const time = typeof ctx.time === 'string' ? ctx.time : fwToString(ctx.time);
+  if (overlayKey === 'rottackeSkarmtrad') {
+    return (fw === 'skärmträd' || fw === 'skarmtrad') && time === 'efter';
+  }
+  if (overlayKey === 'rottackeBladning') {
+    if (!(fw === 'blädning' || fw === 'bladning')) return false;
+    return time === 'efter' || time === '20 år' || time === '50 år' || time === '80 år';
+  }
+  // 3) Data must be available for the given context
   try {
     const avail = overlayRegistry.availabilityFor({
-      framework: fwToString(ctx.framework),
+      framework: fw,
       startskog: fwToString(ctx.startskog),
-      time: typeof ctx.time === 'string' ? ctx.time : fwToString(ctx.time),
+      time,
     });
     return !!(avail && (avail as any)[overlayKey]);
   } catch (_) {
@@ -1131,7 +1159,8 @@ const retentionVisible = ref(false);
 const kanteffektVisible = ref(false);
 const oldKanteffektVisible = ref(false);
 const naturvardsarterVisible = ref(false);
-const rottackeVisible = ref(false);
+const rottackeSkarmtradVisible = ref(false);
+const rottackeBladningVisible = ref(false);
 const seedTreeVisible = ref(false);
 const smaplantorVisible = ref(false);
 const hogstubbarVisible = ref(false);
@@ -1151,8 +1180,8 @@ function toggleTimeInfo2Visible() {
 }
 
 // Overlay tracking helpers
-const overlayKeys = ['retention', 'kanteffekt', 'rottacke', 'seedTree', 'smaplantor', 'hogstubbar', 'naturvardsarter', 'tradplantor'] as const;
-type OverlayKey = typeof overlayKeys[number] | 'staticOverlay';
+const overlayKeys = ['retention', 'kanteffekt', 'rottackeSkarmtrad', 'rottackeBladning', 'seedTree', 'smaplantor', 'hogstubbar', 'naturvardsarter', 'tradplantor'] as const;
+type OverlayKey = typeof overlayKeys[number];
 
 const overlayOrder = ref<OverlayKey[]>([]);
 
@@ -1177,7 +1206,7 @@ function toggleOverlay() {
 }
 
 const overlayDrawerOpen = ref(false);
-const activeOverlayKey = ref<OverlayKey | null>(null);
+const activeOverlayKey = ref<string | null>(null);
 const textDrawerOpen = ref(false);
 const chartDrawerOpen = ref(false);
 const persistedChartKey = ref<string>('skogsskole');
@@ -1320,7 +1349,7 @@ const CLICK_RULES = [
   { re: /luckorna/gi, overlay: 'kanteffekt' },
   { re: /fröträdens rötter/gi, overlay: 'seedTree' },
   { re: /fröträd/gi, overlay: 'seedTree' },
-  { re: /skärmträdens rötter/gi, overlay: 'rottacke' },
+  { re: /skärmträdens rötter/gi, overlay: 'rottackeSkarmtrad' },
   { re: /småplantor/gi, overlay: 'smaplantor' },
   { re: /högstubbar/gi, overlay: 'hogstubbar' },
   { re: /rödlistade svampar/gi, overlay: 'naturvardsarter' },
@@ -1725,11 +1754,17 @@ const overlayConfigs: Record<OverlayKey, OverlayContentConfig> = {
     condition: () => kanteffektVisible.value && (isTrakthygge.value || isLuckhuggning.value || isSkarmtrad.value),
     close: () => { kanteffektVisible.value = false },
   },
-  rottacke: {
-    title: 'Kontinuerligt rottäcke',
-    description: 'I princip är hela området täckt av rötter där mykorrhizasvampar kan överleva.',
-    condition: () => rottackeVisible.value && (isBladning.value || isSkarmtrad.value),
-    close: () => { rottackeVisible.value = false },
+  rottackeSkarmtrad: {
+    title: 'Rottäcke skärmträd',
+    description: 'Kontinuerligt rottäcke kopplat till överhållen skärm (1 år efter).',
+    condition: () => rottackeSkarmtradVisible.value && isSkarmtrad.value,
+    close: () => { rottackeSkarmtradVisible.value = false },
+  },
+  rottackeBladning: {
+    title: 'Rottäcke blädning',
+    description: 'Kontinuerligt rottäcke kopplat till blädning (efter, 20, 50, 80 år).',
+    condition: () => rottackeBladningVisible.value && isBladning.value,
+    close: () => { rottackeBladningVisible.value = false },
   },
   seedTree: {
     title: 'Fröträd',
@@ -1767,7 +1802,8 @@ const overlayIcons: Record<string, string> = {
   staticOverlay: 'i-material-symbols-light-rectangle-outline',
   retention: 'i-pepicons-pop-tree-circle',
   kanteffekt: 'i-healthicons-square-medium-negative',
-  rottacke: 'i-fluent-emoji-high-contrast-blue-square',
+  rottackeSkarmtrad: 'i-fluent-emoji-high-contrast-blue-square',
+  rottackeBladning: 'i-fluent-emoji-high-contrast-blue-square',
   seedTree: 'i-teenyicons-redwoodjs-outline',
   smaplantor: 'i-pepicons-pop-seedling-circle',
   hogstubbar: 'i-fluent-emoji-high-contrast-wood',
@@ -1809,7 +1845,8 @@ const pinned = reactive({
   staticOverlay: false,
   retention: false,
   kanteffekt: false,
-  rottacke: false,
+  rottackeSkarmtrad: false,
+  rottackeBladning: false,
   seedTree: false,
   smaplantor: false,
   hogstubbar: false,
@@ -1821,7 +1858,8 @@ const overlayRefMap = {
   staticOverlay: staticOverlayVisible,
   retention: retentionVisible,
   kanteffekt: kanteffektVisible,
-  rottacke: rottackeVisible,
+  rottackeSkarmtrad: rottackeSkarmtradVisible,
+  rottackeBladning: rottackeBladningVisible,
   seedTree: seedTreeVisible,
   smaplantor: smaplantorVisible,
   hogstubbar: hogstubbarVisible,
@@ -2151,9 +2189,11 @@ watch(kanteffektVisible, (val) => {
   handleOverlayStateChange('kanteffekt');
 }, { immediate: true });
 
-watch(rottackeVisible, (val) => {
-  if (val) enforceExclusive('rottacke');
-  handleOverlayStateChange('rottacke');
+// split watchers defined above for rottackeSkarmtradVisible and rottackeBladningVisible
+
+watch(rottackeBladningVisible, (val) => {
+  if (val) enforceExclusive('rottackeBladning');
+  handleOverlayStateChange('rottackeBladning');
 }, { immediate: true });
 
 watch(seedTreeVisible, (val) => {

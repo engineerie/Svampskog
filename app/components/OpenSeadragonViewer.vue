@@ -183,7 +183,8 @@ export default {
     },
     kanteffektVisible: { type: Boolean, default: false },
     oldKanteffektVisible: { type: Boolean, default: true },
-    rottackeVisible: { type: Boolean, default: false },
+    rottackeSkarmtradVisible: { type: Boolean, default: false },
+    rottackeBladningVisible: { type: Boolean, default: false },
     seedTreeVisible: { type: Boolean, default: false },
     // Dev flag to enable saving clicks to a general store
     devSaveClicks: { type: Boolean, default: false },
@@ -630,6 +631,11 @@ export default {
               baseAlpha = map[props.currentTime] ?? 0.5;
             }
 
+            if (f.framework === 'skärmträd') {
+              const map = { '10 år': 1, '20 år': 1, '50 år': 0.45, '80 år': 0.45 };
+              baseAlpha = map[props.currentTime] ?? 0.5;
+            }
+
             // If this is an "old" kanteffekt and the toggle is off, skip drawing entirely
             if (!props.oldKanteffektVisible && baseAlpha === 0.5) {
               return;
@@ -832,15 +838,15 @@ export default {
           });
       }
       // Kontinuerligt rottäcke rectangle overlay (same dimensions as static overlay)
-      if (props.rottackeVisible) {
+      if (props.rottackeSkarmtradVisible || props.rottackeBladningVisible) {
         const fw = frameworkValue.value;
         const t = props.currentTime;
 
         const isSkarmtrad = fw === 'skärmträd' || fw === 'skarmtrad';
         const isBladning = fw === 'blädning' || fw === 'bladning';
 
-        const showForSkarmtrad = isSkarmtrad && (t === 'efter');
-        const showForBladning = isBladning && (t === 'efter' || t === '20 år' || t === '50 år' || t === '80 år');
+        const showForSkarmtrad = props.rottackeSkarmtradVisible && isSkarmtrad && (t === 'efter');
+        const showForBladning = props.rottackeBladningVisible && isBladning && (t === 'efter' || t === '20 år' || t === '50 år' || t === '80 år');
 
         if (showForSkarmtrad || showForBladning) {
           // Same normalized rect as the static overlay
@@ -852,7 +858,7 @@ export default {
           const h = p2.y - p1.y;
 
           // Set popover for Blädning at 'efter' only
-          if (isBladning && t === 'efter') {
+          if (props.rottackeBladningVisible && isBladning && t === 'efter') {
             rottackePopover.value = {
               visible: true,
               top: Math.min(p1.y, p2.y),
@@ -985,7 +991,10 @@ export default {
     watch(frameworkValue, () => {
       if (overlayCtx) drawAllOverlays();
     });
-    watch(() => props.rottackeVisible, () => {
+    watch(() => props.rottackeSkarmtradVisible, () => {
+      if (overlayCtx) drawAllOverlays();
+    });
+    watch(() => props.rottackeBladningVisible, () => {
       if (overlayCtx) drawAllOverlays();
     });
     watch(() => props.seedTreeVisible, () => {
