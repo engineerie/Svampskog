@@ -52,10 +52,10 @@
             class="grid sm:gap-4 gap-2 p-2 sm:py-1 sm:flex-row sm:items-center sm:justify-start h-fit w-full sm:w-fit"
             :class="isFrameworkCompareMode ? 'grid-cols-2' : 'grid-cols-1'">
             <USelect size="xl" :items="frameworkOptions" v-model="selectedFrameworkIndex"
-              :placeholder="currentFramework.label" append-to-body variant="soft" class="ring-muted  w-full"
+              :placeholder="currentFramework.label" append-to-body variant="soft" class="ring-muted  w-full shadow"
               :ui="{ content: 'min-w-fit', viewport: 'text-center' }" />
             <USelect v-if="isFrameworkCompareMode" size="xl" :items="frameworkOptions" v-model="selectedFrameworkIndex2"
-              :placeholder="currentFramework2.label" append-to-body variant="soft" class="ring-muted " />
+              :placeholder="currentFramework2.label" append-to-body variant="soft" class="ring-muted shadow " />
 
           </div>
           <UButton v-if="isMobile" icon="i-heroicons-x-mark" variant="soft" color="neutral"
@@ -106,15 +106,20 @@
                             :aria-pressed="activeOverlayPinned" :title="activeOverlayPinned ? 'Lossa' : 'Fäst'"
                             @click="togglePinned(activeOverlayContent.key, { hideWhenUnpin: false })" />
                         </div>
-                      </div>
-                      <p class="text-sm text-neutral-600 leading-relaxed">
-                        {{ activeOverlayContent.description }}
-                      </p>
-                      <UCard v-if="activeOverlayContent.key === 'kanteffekt'" variant="soft"
-                        :ui="{ body: 'sm:p-4 sm:pl-2' }" class="mt-2 backdrop-blur-xl border border-white/10">
-                        <USwitch :ui="{
-                          root: 'flex-row-reverse justify-between',
-                          label: '',
+                    </div>
+                    <p class="text-sm text-neutral-600 leading-relaxed">
+                      {{ activeOverlayContent.description }}
+                    </p>
+                    <UButton v-if="activeOverlayContent.key === 'naturvardsarter'" size="sm" color="primary"
+                      variant="soft" class="mt-2" icon="i-carbon-chart-line-smooth"
+                      @click="openNaturvardsarterChart()">
+                      Visa naturvårdsartsdiagram
+                    </UButton>
+                    <UCard v-if="activeOverlayContent.key === 'kanteffekt'" variant="soft"
+                      :ui="{ body: 'sm:p-4 sm:pl-2' }" class="mt-2 backdrop-blur-xl border border-white/10">
+                      <USwitch :ui="{
+                        root: 'flex-row-reverse justify-between',
+                        label: '',
                           description: '',
                           base: 'data-[state=unchecked]:bg-neutral-600'
                         }" size="md" color="primary" v-model="oldKanteffektVisible" label="Tidigare kanteffekt"
@@ -232,7 +237,7 @@
                   :variant="chartDrawerOpen ? 'subtle' : 'outline'" color="neutral" class="ring-muted"
                   icon="i-carbon-chart-line-smooth" />
                 <template #body>
-                  <ForestryChartMain
+                  <ForestryChartMain ref="chartMainRef"
                     :parentSelectedFrameworks="isFrameworkCompareMode ? [currentFramework.value, currentFramework2.value] : [currentFramework.value]"
                     :currentTimeValue="currentTimeValue" :currentStartskog="currentStartskog.value" />
                   <div class="px-4 pb-4 text-xs text-muted">
@@ -346,6 +351,10 @@
                       {{ getOverlayInfo(badge.key).description }}
                     </p>
                     <div v-else class="text-xs text-neutral-400">Ingen beskrivning tillgänglig.</div>
+                    <UButton v-if="badge.key === 'naturvardsarter'" size="sm" color="primary" variant="soft"
+                      icon="i-carbon-chart-line-smooth" @click.stop="openNaturvardsarterChart({ badgeKey: badge.key })">
+                      Visa naturvårdsartsdiagram
+                    </UButton>
                   </div>
                 </template>
               </UPopover>
@@ -928,7 +937,7 @@ import { defineAsyncComponent } from 'vue';
 const OpenSeadragonViewer = defineAsyncComponent(() =>
   import('~/components/OpenSeadragonViewer.vue')
 );
-import { ref, computed, watch, onMounted, onBeforeUnmount, onUnmounted, reactive } from "vue";
+import { ref, computed, watch, onMounted, onBeforeUnmount, onUnmounted, reactive, nextTick } from "vue";
 import type { Ref } from "vue";
 import { useRuntimeConfig } from '#imports';
 import { useAsyncData } from '#app';
@@ -939,10 +948,15 @@ import { useSelectedAnnotationStore } from "~/stores/selectedAnnotationStore";
 import { useOverlayStore } from "~/stores/overlayStore";
 import { useMediaQuery, createReusableTemplate } from '@vueuse/core'
 import { useOverlayRegistry } from '~/composables/useOverlayRegistry';
+import { useOverlayPopover } from '~/composables/useOverlayPopover';
 // Popover open state per badge key (for hover behavior)
 const badgePopoverOpen = reactive<Record<string, boolean>>({});
 
 const overlayRegistry = useOverlayRegistry();
+const { hide: hideOverlayPopover } = useOverlayPopover();
+
+const chartMainRef = ref<null | { setSelectedChart?: (value: string) => void }>(null);
+const NATURVARDSARTER_CHART_VALUE = 'rodlistade';
 
 function fwToString(fw: any): string | null {
   if (!fw) return null;
@@ -1894,6 +1908,9 @@ function handleOverlayStateChange(key: OverlayKey) {
   if (visible) {
     activeOverlayKey.value = key;
     overlayDrawerOpen.value = true;
+    if (!isMobile.value) {
+      hideOverlayPopover();
+    }
     return;
   }
 
@@ -1902,8 +1919,12 @@ function handleOverlayStateChange(key: OverlayKey) {
     if (fallback) {
       activeOverlayKey.value = fallback;
       overlayDrawerOpen.value = true;
+      if (!isMobile.value) {
+        hideOverlayPopover();
+      }
     } else {
       closeActiveOverlay({ hideOverlay: false });
+      hideOverlayPopover();
     }
   }
 }
@@ -1917,12 +1938,25 @@ function handleOverlayTrigger(key: OverlayKey) {
       openOverlayDrawer(key);
     } else {
       ref.value = false;
+      hideOverlayPopover();
     }
     return;
   }
 
   ref.value = true;
   openOverlayDrawer(key);
+}
+
+async function openNaturvardsarterChart(options: { badgeKey?: string } = {}) {
+  chartDrawerOpen.value = true;
+  await nextTick();
+  chartMainRef.value?.setSelectedChart?.(NATURVARDSARTER_CHART_VALUE);
+  if (options.badgeKey) {
+    badgePopoverOpen[options.badgeKey] = false;
+  }
+  if (!isMobile.value) {
+    hideOverlayPopover();
+  }
 }
 
 function openOverlayDrawer(key: OverlayKey) {
@@ -1941,6 +1975,7 @@ function closeActiveOverlay(options: { hideOverlay?: boolean } = {}) {
     overlayCloseRequested = false;
     overlayCloseShouldHide = true;
     overlayDrawerOpen.value = false;
+    hideOverlayPopover();
     return;
   }
 
@@ -1974,6 +2009,7 @@ function finalizeOverlayClose() {
   if (shouldHide) {
     const ref = overlayRefMap[key];
     if (ref && ref.value) ref.value = false;
+    hideOverlayPopover();
   }
 }
 
@@ -1999,6 +2035,9 @@ watch(overlayDrawerOpen, (isOpen, wasOpen) => {
 watch(open, (isOpen) => {
   if (!isOpen) {
     closeActiveOverlay({ hideOverlay: false });
+    if (!isMobile.value) {
+      hideOverlayPopover();
+    }
   }
 });
 
