@@ -503,6 +503,34 @@ export default {
         overlayCtx.fill();
         overlayCtx.restore();
       }
+      // Småplantor — very small WHITE circles (same size as saved clicks)
+      if (props.smaplantorVisible && smaplantorPoints.value.length) {
+        const arr = smaplantorPoints.value;
+        const activeFramework = frameworkValue.value;
+        const activeStartskog = startskogValue.value;
+        arr.forEach(p => {
+          if (!p) return;
+          if (activeFramework && p.framework && p.framework !== activeFramework) return;
+          if (activeStartskog && p.startskog && p.startskog !== activeStartskog) return;
+          if (p.time && !timeMatches(p.time, props.currentTime)) return;
+
+          const pt = new osdLib.Point(p.x, p.y);
+          const pixel = viewer.value.viewport.pixelFromPoint(pt, true);
+          const normalizedRadius = 0.0005; // same as saved clicks
+          const pixelRight = viewer.value.viewport.pixelFromPoint(new osdLib.Point(p.x + normalizedRadius, p.y), true);
+          const radius = Math.abs(pixelRight.x - pixel.x);
+
+          overlayCtx.save();
+          overlayCtx.beginPath();
+          overlayCtx.arc(pixel.x, pixel.y, radius, 0, 2 * Math.PI);
+          overlayCtx.fillStyle = 'rgba(255, 255, 255, 0.95)'; // white fill
+          overlayCtx.fill();
+          overlayCtx.lineWidth = 1;
+          overlayCtx.strokeStyle = 'rgba(255,255,255,1)'; // white outline
+          overlayCtx.stroke();
+          overlayCtx.restore();
+        });
+      }
       // Naturvårdsarter — draw award-star icon via canvas (same behavior as original stars)
       if (props.naturvardsarterVisible && naturvardPoints.value.length) {
         const arr = naturvardPoints.value;

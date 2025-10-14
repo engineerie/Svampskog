@@ -101,7 +101,7 @@
                         </div>
                         <div class="flex gap-1">
                           <UButton color="neutral" variant="ghost" size="xs" :ui="{ rounded: 'rounded-full' }"
-                            icon="codicon:pinned"
+                            icon="i-tabler-pinned"
                             :class="activeOverlayPinned ? 'text-primary-500' : 'text-neutral-500 hover:text-neutral-900'"
                             :aria-pressed="activeOverlayPinned" :title="activeOverlayPinned ? 'Lossa' : 'Fäst'"
                             @click="togglePinned(activeOverlayContent.key, { hideWhenUnpin: false })" />
@@ -338,7 +338,7 @@
                           {{ getOverlayInfo(badge.key).title || badge.title }}
                         </h3>
                       </div>
-                      <UButton label="Ta bort" variant="subtle" color="error" size="xs"
+                      <UButton label="Ta bort" variant="subtle" color="error" size="xs" icon="i-tabler-pinned-off"
                         @click="togglePinned(badge.key), badgePopoverOpen[badge.key] = true" />
                     </div>
 
