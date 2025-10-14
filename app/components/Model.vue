@@ -336,7 +336,7 @@
                 <div>
                   <UBadge color="neutral" variant="outline" size="lg" :class="[
                     'cursor-pointer shadow-sm sm:ml-1.5 w-fit transition-opacity',
-                    isOverlayAssociatedAny(badge.key) ? '' : 'opacity-50'
+                    (badge.key === 'staticOverlay' || isOverlayAssociatedAny(badge.key)) ? '' : 'opacity-50'
                   ]">
 
                     <div class="flex items-center gap-1">
@@ -1152,7 +1152,7 @@ function toggleTimeInfo2Visible() {
 
 // Overlay tracking helpers
 const overlayKeys = ['retention', 'kanteffekt', 'rottacke', 'seedTree', 'smaplantor', 'hogstubbar', 'naturvardsarter', 'tradplantor'] as const;
-type OverlayKey = typeof overlayKeys[number];
+type OverlayKey = typeof overlayKeys[number] | 'staticOverlay';
 
 const overlayOrder = ref<OverlayKey[]>([]);
 
@@ -1779,7 +1779,7 @@ const overlayInfo = computed<Record<string, { title: string; description: string
   const info: Record<string, { title: string; description: string }> = {
     staticOverlay: {
       title: 'Beståndsgräns',
-      description: '',
+      description: 'Visar gränsen för den berörda skogen',
     },
   };
 
@@ -1831,19 +1831,11 @@ const overlayRefMap = {
 
 type OverlayMapKey = keyof typeof overlayRefMap;
 
-const isDrawerOverlayKey = (key: OverlayMapKey): key is OverlayKey =>
-  key !== 'staticOverlay';
+const isDrawerOverlayKey = (key: OverlayMapKey): key is OverlayKey => true;
 
 function togglePinned(rawKey: OverlayMapKey, options: { hideWhenUnpin?: boolean } = {}) {
   const ref = overlayRefMap[rawKey];
   if (!ref) return;
-
-  if (!isDrawerOverlayKey(rawKey)) {
-    const next = !pinned.staticOverlay;
-    pinned.staticOverlay = next;
-    ref.value = next;
-    return;
-  }
 
   const key = rawKey as OverlayKey;
   const hideWhenUnpin = options.hideWhenUnpin ?? true;
@@ -1895,13 +1887,9 @@ const overlayMeta = computed<Record<string, { label: string; icon?: string }>>((
 const activeOverlayContent = computed(() => {
   const key = activeOverlayKey.value;
   if (!key) return null;
-  const config = overlayConfigs[key];
-  if (!config || !isOverlayActive(key)) return null;
-  return {
-    key,
-    title: config.title,
-    description: config.description,
-  };
+  if (!isOverlayActive(key)) return null;
+  const info = getOverlayInfo(key);
+  return { key, title: info.title, description: info.description };
 });
 
 const activeOverlayPinned = computed(() => {
@@ -1917,14 +1905,31 @@ const activeOverlayIcon = computed(() => {
 const pinnedOverlayBadges = computed(() => {
   const meta = overlayMeta.value;
   const availability = overlayAvailability.value;
-  return overlayKeys
-    .filter((key) => pinned[key])
-    .map((key) => ({
+
+  const items: Array<{ key: string; title: string; icon: string | null; isAssociated: boolean }> = [];
+
+  // Include static overlay when pinned
+  if (pinned.staticOverlay) {
+    items.push({
+      key: 'staticOverlay',
+      title: meta.staticOverlay?.label ?? 'Beståndsgräns',
+      icon: meta.staticOverlay?.icon || null,
+      isAssociated: true,
+    });
+  }
+
+  // Include all other overlays
+  overlayKeys.forEach((key) => {
+    if (!pinned[key]) return;
+    items.push({
       key,
       title: meta[key]?.label ?? overlayConfigs[key].title,
       icon: meta[key]?.icon || null,
       isAssociated: availability[key] ?? true,
-    }));
+    });
+  });
+
+  return items;
 });
 
 watch(infoDrawerOpen, (isOpen) => {
@@ -2125,6 +2130,14 @@ watch(open, (isOpen) => {
       hideOverlayPopover();
     }
   }
+});
+
+// Ensure Beståndsgräns (static overlay) is active and pinned by default
+onMounted(() => {
+  try {
+    if (!staticOverlayVisible.value) staticOverlayVisible.value = true;
+  } catch { }
+  pinned.staticOverlay = true;
 });
 
 // Make overlays mutually exclusive unless pinned and drive nested drawer state
