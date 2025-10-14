@@ -171,7 +171,7 @@ export default {
     },
     backgroundColor: {
       type: String,
-      default: "#544336",
+      default: "#f9f6f3",
     },
     annotations: {
       type: Array,
@@ -1405,7 +1405,7 @@ export default {
         homeFillsViewer: true,
         minZoomLevel: 1,
         wrapHorizontal: false,
-        wrapVertical: true,
+        wrapVertical: false,
         constrainDuringPan: true,
         panHorizontal: true,
         panVertical: true,

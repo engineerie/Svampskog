@@ -80,17 +80,17 @@
 
           <UDrawer :direction="isMobile ? 'bottom' : 'bottom'" :inset="isMobile ? false : true" handle-only
             :dismissible="isMobile ? true : false" :overlay="false" :handle="isMobile ? true : false" :modal="false"
-            v-model:open="textDrawerOpen" class="pointer-events-auto"
+            v-model:open="infoDrawerOpen" class="pointer-events-auto"
             :ui="{ header: 'flex items-center justify-between', body: 'p-0 ', container: 'p-0 gap-0 ', content: 'max-w-4xl mx-auto', footer: 'gap-0' }">
             <UButton :size="isMobile ? 'xl' : 'xl'" :label="isMobile ? 'Information' : 'Information'" color="neutral"
-              icon="i-heroicons-book-open" class="ring-muted rounded-full shadow "
-              :variant="textDrawerOpen ? 'subtle' : 'outline'" />
+              icon="i-heroicons-chevron-up" class="ring-muted rounded-full shadow "
+              :variant="infoDrawerOpen ? 'subtle' : 'outline'" />
             <template #body>
               <UButton v-if="!isMobile" icon="i-heroicons-chevron-down"
                 class="absolute top-1.5 right-1.5 z-50 rounded-full" variant="ghost" color="neutral"
-                @click="textDrawerOpen = false" />
+                @click="infoDrawerOpen = false" />
               <div class="relative">
-                <UTabs :items="panelTabs" variant="link" size="md" class="w-full"
+                <UTabs v-model="infoActiveTab" :items="panelTabs" variant="link" size="md" class="w-full"
                   :ui="{ indicator: 'hidden', trigger: 'ring ring-muted data-[state=active]:bg-muted data-[state=active]:text-neutral-700 py-1 flex-1 sm:flex-none', list: 'gap-2 p-2 bg-transparent', root: 'gap-0' }">
 
                   <template #text>
@@ -181,8 +181,9 @@
                       </div>
                     </div>
                   </template>
-                  <template #chart>
-                    <ForestryChartMain ref="chartMainRef"
+                  <template #diagram>
+                    <ForestryChartMain v-if="infoActiveTab === 'diagram'" ref="chartMainRef"
+                      v-model:selectedChart="persistedChartKey"
                       :parentSelectedFrameworks="isFrameworkCompareMode ? [currentFramework.value, currentFramework2.value] : [currentFramework.value]"
                       :currentTimeValue="currentTimeValue" :currentStartskog="currentStartskog.value" />
                     <div class="px-4 pb-4 text-xs text-muted">
@@ -307,7 +308,16 @@
 
       <div class="flex flex-1">
         <div class="absolute top-3 left-3 z-50">
-          <UDrawer :modal="false" :ui="{ content: 'p-0', body: 'p-0', container: 'p-0 gap-0' }">
+          <UPopover v-if="!isMobile" :ui="{ content: 'p-0 w-80', }"
+            :content="{ side: 'bottom', sideOffset: 8, collisionPadding: 8, align: 'start' }"
+            class="pointer-events-auto">
+            <UButton size="md" color="neutral" variant="outline" label="Display"
+              icon="i-heroicons-adjustments-horizontal" class="ring-muted" />
+            <template #content>
+              <reuseSettingsTemplate />
+            </template>
+          </UPopover>
+          <UDrawer v-else :modal="false" :ui="{ content: 'p-0', body: 'p-0', container: 'p-0 gap-0' }">
             <UButton :size="isMobile ? 'xl' : 'md'" color="neutral" variant="outline"
               :label="isMobile ? null : 'Display'" icon="i-heroicons-adjustments-horizontal"
               class="ring-muted rounded-full sm:rounded pointer-events-auto" />
@@ -1042,11 +1052,13 @@ const panelTabs = [
     label: 'Text',
     icon: 'i-heroicons-book-open',
     slot: 'text',
+    value: 'text',
   },
   {
     label: 'Diagram',
     icon: 'i-carbon-chart-line-smooth',
-    slot: 'chart',
+    slot: 'diagram',
+    value: 'diagram',
   }
 ]
 
@@ -1168,10 +1180,32 @@ const overlayDrawerOpen = ref(false);
 const activeOverlayKey = ref<OverlayKey | null>(null);
 const textDrawerOpen = ref(false);
 const chartDrawerOpen = ref(false);
+const persistedChartKey = ref<string>('skogsskole');
+const pendingSelectNaturvardsarter = ref(false);
+
+// Centralized Information drawer state (tabs: 'text' | 'diagram')
+const infoDrawerOpen = ref(false);
+const infoActiveTab = ref<'text' | 'diagram'>('text');
+
+function showDiagramTab() {
+  infoActiveTab.value = 'diagram';
+  infoDrawerOpen.value = true;
+  // Close desktop text popover if open for a clean transition
+  try {
+    if (!isMobile.value) {
+      hideOverlayPopover?.();
+    }
+  } catch { }
+}
+
+function showTextTab() {
+  infoActiveTab.value = 'text';
+  infoDrawerOpen.value = true;
+}
 const open = computed({
-  get: () => textDrawerOpen.value,
+  get: () => infoDrawerOpen.value,
   set: (val: boolean) => {
-    textDrawerOpen.value = val;
+    infoDrawerOpen.value = val;
   }
 }) as Ref<boolean>;
 const open2 = ref(false);
@@ -1304,6 +1338,10 @@ function escapeHtml(str = '') {
 
 function makeClickableHtml(text = '') {
   let html = escapeHtml(text);
+  // Add a delegated action link for opening the diagram tab
+  html = html.replace(/Visa\s+naturvårdsdiagram/gi, () => (
+    '<a href="#" data-action="show-diagram">Visa naturvårdsdiagram</a>'
+  ));
   for (const rule of CLICK_RULES) {
     html = html.replace(rule.re, (m) =>
       `<span class=\" text-primary-500 font-medium underline cursor-pointer hover:opacity-80\" data-overlay=\"${rule.overlay}\">${m}</span>`
@@ -1317,10 +1355,26 @@ const isOverlayKeyString = (value: string | null): value is OverlayKey =>
   typeof value === 'string' && overlayKeySet.has(value as OverlayKey);
 
 function handleTimelineClick(evt: MouseEvent) {
-  const target = (evt.target as HTMLElement | null)?.closest('[data-overlay]') as HTMLElement | null;
+  // First: delegated actions coming from v-html (e.g., <a data-action="show-diagram">)
+  const el = (evt.target as HTMLElement | null);
+  if (!el) return;
+
+  const actionEl = el.closest('[data-action]') as HTMLElement | null;
+  if (actionEl) {
+    const action = actionEl.getAttribute('data-action');
+    if (action === 'show-diagram') {
+      evt.preventDefault();
+      openNaturvardsarterChart();
+      return;
+    }
+  }
+
+  // Then: existing overlay trigger handling
+  const target = el.closest('[data-overlay]') as HTMLElement | null;
   if (!target) return;
   const key = target.getAttribute('data-overlay');
   if (!isOverlayKeyString(key)) return;
+
   handleOverlayTrigger(key);
 }
 
@@ -1873,15 +1927,15 @@ const pinnedOverlayBadges = computed(() => {
     }));
 });
 
-watch(textDrawerOpen, (isOpen) => {
+watch(infoDrawerOpen, (isOpen) => {
   if (isOpen && chartDrawerOpen.value) {
     chartDrawerOpen.value = false;
   }
 });
 
 watch(chartDrawerOpen, (isOpen) => {
-  if (isOpen && textDrawerOpen.value) {
-    textDrawerOpen.value = false;
+  if (isOpen && infoDrawerOpen.value) {
+    infoDrawerOpen.value = false;
   }
 });
 
@@ -1954,16 +2008,42 @@ function handleOverlayTrigger(key: OverlayKey) {
 }
 
 async function openNaturvardsarterChart(options: { badgeKey?: string } = {}) {
-  chartDrawerOpen.value = true;
+  showDiagramTab();
+  persistedChartKey.value = NATURVARDSARTER_CHART_VALUE;
+  pendingSelectNaturvardsarter.value = true;
   await nextTick();
-  chartMainRef.value?.setSelectedChart?.(NATURVARDSARTER_CHART_VALUE);
+  if (chartMainRef.value?.setSelectedChart) {
+    chartMainRef.value.setSelectedChart(NATURVARDSARTER_CHART_VALUE);
+    pendingSelectNaturvardsarter.value = false;
+  }
   if (options.badgeKey) {
     badgePopoverOpen[options.badgeKey] = false;
   }
   if (!isMobile.value) {
     hideOverlayPopover();
   }
+  // Close overlay info drawer to focus on the diagram
+  try {
+    closeActiveOverlay({ hideOverlay: false });
+  } catch { }
+  // Pin and show the Naturvårdsarter overlay without reopening the info drawer
+  try {
+    pinned.naturvardsarter = true;
+    const ref = overlayRefMap.naturvardsarter;
+    if (ref && !ref.value) ref.value = true;
+  } catch { }
 }
+
+watch([infoActiveTab, () => chartMainRef.value], async ([tab, refInst]) => {
+  if (tab === 'diagram' && pendingSelectNaturvardsarter.value && refInst?.setSelectedChart) {
+    await nextTick();
+    try {
+      refInst.setSelectedChart(NATURVARDSARTER_CHART_VALUE);
+    } finally {
+      pendingSelectNaturvardsarter.value = false;
+    }
+  }
+});
 
 function openOverlayDrawer(key: OverlayKey) {
   const ref = overlayRefMap[key];

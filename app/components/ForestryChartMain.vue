@@ -163,8 +163,12 @@ interface Props {
   parentSelectedFrameworks?: string[]
   currentTimeValue?: string
   currentStartskog?: string
+  selectedChart?: string
 }
 const props = defineProps<Props>()
+const emit = defineEmits<{
+  (e: 'update:selectedChart', value: string): void
+}>()
 
 const selectedStartskog = ref('naturskog');
 const selectedStartskog2 = ref('naturskog');
@@ -186,7 +190,11 @@ const chartOptions = [
   { label: 'Matsvampar', value: 'matsvampar' },
   { label: 'Olika svampgrupper', value: 'grupper' }
 ]
-const selectedChart = ref(chartOptions[0].value)
+const selectedChart = ref<string>(
+  chartOptions.some(opt => opt.value === (props.selectedChart as any))
+    ? (props.selectedChart as string)
+    : chartOptions[0].value
+)
 const isFrameworkCompareMode = computed(() => (props.parentSelectedFrameworks?.length ?? 0) === 2)
 
 function ToggleTreeChartType() {
@@ -201,6 +209,18 @@ function setSelectedChart(value: string) {
 
 defineExpose({
   setSelectedChart,
+})
+
+// Keep internal selection in sync with parent prop changes
+watch(() => props.selectedChart, (val) => {
+  if (typeof val === 'string' && chartOptions.some(opt => opt.value === val)) {
+    if (selectedChart.value !== val) selectedChart.value = val
+  }
+})
+
+// Emit updates to parent when selection changes locally
+watch(selectedChart, (val) => {
+  emit('update:selectedChart', val)
 })
 
 // Options for frameworks

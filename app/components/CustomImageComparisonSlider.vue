@@ -22,7 +22,7 @@
           <!-- <UBadge v-if="!isMobile" size="lg"
             class="backdrop-blur-xl bg-neutral-100/0 text-neutral-100 h-fit whitespace-nowrap mb-0.5">{{
               frameworkLabel }}</UBadge> -->
-          <UBadge size="lg" class="backdrop-blur-xl bg-neutral-100/00 text-neutral-100 h-fit whitespace-nowrap">{{
+          <UBadge size="lg" class="backdrop-blur-xl bg-neutral-950/50 text-neutral-100 h-fit whitespace-nowrap">{{
             timeLabel }}</UBadge>
         </div>
 
@@ -31,7 +31,7 @@
           <!-- <UBadge v-if="!isMobile" size="lg"
             class="backdrop-blur-xl bg-neutral-100/0 text-neutral-100 h-fit whitespace-nowrap mb-0.5">{{
               frameworkLabel2 }}</UBadge> -->
-          <UBadge size="lg" class="backdrop-blur-xl bg-neutral-100/0 text-neutral-100 h-fit whitespace-nowrap">{{
+          <UBadge size="lg" class="backdrop-blur-xl bg-neutral-950/50 text-neutral-100 h-fit whitespace-nowrap">{{
             timeLabel2 }}</UBadge>
         </div>
       </div>
