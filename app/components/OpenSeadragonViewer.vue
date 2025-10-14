@@ -110,7 +110,7 @@
 </template>
 
 <script>
-import { ref, computed, watch, onMounted, onBeforeUnmount, onActivated, nextTick, createApp } from "vue";
+import { ref, computed, watch, onMounted, onBeforeUnmount, onActivated, nextTick, createApp, unref } from "vue";
 import debounce from 'lodash/debounce';
 import { useRoute } from "vue-router";
 import AnnotationPopup from "./AnnotationPopup.vue";
@@ -126,7 +126,7 @@ const retentionOverlayIds = [];
 
 export default {
   name: "OpenSeadragonViewer",
-  emits: ["annotationClicked", "viewportChanged", "opened", "retentionTreeAdded"],
+  emits: ["annotationClicked", "viewportChanged", "opened"],
   props: {
     currentFramework: { type: Object, required: true },
     currentTime: { type: String, required: true },
@@ -191,39 +191,92 @@ export default {
     hogstubbarVisible: { type: Boolean, default: false },
     naturvardsarterVisible: { type: Boolean, default: false },
     tradplantorVisible: { type: Boolean, default: false },
+    retentionPoints: {
+      type: Array,
+      default: () => [],
+    },
+    seedTreePoints: {
+      type: Array,
+      default: () => [],
+    },
+    smaplantorPoints: {
+      type: Array,
+      default: () => [],
+    },
+    hogstubbarPoints: {
+      type: Array,
+      default: () => [],
+    },
+    naturvardsarterPoints: {
+      type: Array,
+      default: () => [],
+    },
+    kanteffektFeatures: {
+      type: Array,
+      default: () => [],
+    },
 
   },
   setup(props, { emit, expose }) {
 
-    const kanteffektOverlayIds = [];
-
-    // Naturvårdsarter points (public JSON)
-    const localNaturvard = ref([]);
-    onMounted(async () => {
-      try {
-        const res = await fetch('/naturvard.json');
-        const json = await res.json();
-        // Accept { mycelium: [...] } or a raw array
-        localNaturvard.value = Array.isArray(json?.mycelium) ? json.mycelium : (Array.isArray(json) ? json : []);
-      } catch (e) {
-        console.error('Failed fetching naturvårdsarter points:', e);
+    const frameworkValue = computed(() => {
+      const raw = unref(props.currentFramework);
+      if (raw == null) return null;
+      if (typeof raw === "string") return raw;
+      if (typeof raw === "object") {
+        if (
+          Object.prototype.hasOwnProperty.call(raw, "value") &&
+          typeof raw.value === "string"
+        ) {
+          return raw.value;
+        }
+        if (
+          Object.prototype.hasOwnProperty.call(raw, "framework") &&
+          typeof raw.framework === "string"
+        ) {
+          return raw.framework;
+        }
       }
+      return null;
     });
 
-    const localTrees = ref([])
-    // Seed trees (Fröträd) data
-    const localSeedTrees = ref([]);
-    onMounted(async () => {
-      try {
-        const res = await fetch('/retentionTrees.json');
-        const json = await res.json();
-        localTrees.value = json.trees || [];
-      } catch (e) {
-        console.error('Failed fetching public retentionTrees:', e);
+    const startskogValue = computed(() => {
+      const raw = unref(props.currentStartskog);
+      if (raw == null) return null;
+      if (typeof raw === "string") return raw;
+      if (typeof raw === "object") {
+        if (
+          Object.prototype.hasOwnProperty.call(raw, "value") &&
+          typeof raw.value === "string"
+        ) {
+          return raw.value;
+        }
       }
+      return null;
     });
 
-    // Småplantor points (public JSON)
+    // Overlay dataset points are provided via props from the parent component.
+    const retentionPoints = computed(() =>
+      Array.isArray(props.retentionPoints) ? props.retentionPoints : [],
+    );
+    const seedTreePoints = computed(() =>
+      Array.isArray(props.seedTreePoints) ? props.seedTreePoints : [],
+    );
+    const smaplantorPoints = computed(() =>
+      Array.isArray(props.smaplantorPoints) ? props.smaplantorPoints : [],
+    );
+    const hogstubbarPoints = computed(() =>
+      Array.isArray(props.hogstubbarPoints) ? props.hogstubbarPoints : [],
+    );
+    const naturvardPoints = computed(() =>
+      Array.isArray(props.naturvardsarterPoints) ? props.naturvardsarterPoints : [],
+    );
+    const kanteffektFeatures = computed(() =>
+      Array.isArray(props.kanteffektFeatures) ? props.kanteffektFeatures : [],
+    );
+
+
+    // Småplantor points (content dataset)
     const svamparDataset = ref([]);
     const totalSvamparDataset = ref([]);
 
@@ -236,49 +289,6 @@ export default {
       const value = data.value
       totalSvamparDataset.value = Array.isArray(value?.entries) ? value.entries : []
     })
-
-    const localSmaPlantor = ref([]);
-    onMounted(async () => {
-      try {
-        // Try NFC path first ("småplantor.json"), then fallback to NFD variant ("småplantor.json")
-        let res = await fetch('/småplantor.json');
-        if (!res.ok) {
-          res = await fetch('/småplantor.json');
-        }
-        const json = await res.json();
-        localSmaPlantor.value = Array.isArray(json?.trees) ? json.trees : (Array.isArray(json) ? json : []);
-      } catch (e) {
-        console.error('Failed fetching småplantor points:', e);
-      }
-    });
-
-    // Högstubbar points (public JSON)
-    const localHogstubbar = ref([]);
-    onMounted(async () => {
-      try {
-        const res = await fetch('/hogstubbar.json');
-        const json = await res.json();
-        // File format is { "stubbar": [ ... ] }
-        localHogstubbar.value = Array.isArray(json?.stubbar) ? json.stubbar : (Array.isArray(json) ? json : []);
-      } catch (e) {
-        console.error('Failed fetching högstubbar points:', e);
-      }
-    });
-
-    // fetch kanteffekt overlays
-    onMounted(async () => {
-      try {
-        const res = await fetch('/api/kanteffekt');
-        const json = await res.json();
-        // API should return { features: [...] }
-        localKanteffekt.value = json.features || [];
-      } catch (e) {
-        console.error('Failed fetching kanteffekt features:', e);
-      }
-    });
-
-    // kanteffekt overlays
-    const localKanteffekt = ref([]);
 
 
     // General saved clicks (developer capture)
@@ -334,7 +344,7 @@ export default {
       overlayCanvas.style.width = '100%';
       overlayCanvas.style.height = '100%';
       overlayCanvas.style.pointerEvents = 'none';
-      overlayCanvas.style.zIndex = '20';
+      overlayCanvas.style.zIndex = '10';
       viewerContainer.value.appendChild(overlayCanvas);
       overlayCanvas.width = viewerContainer.value.clientWidth;
       overlayCanvas.height = viewerContainer.value.clientHeight;
@@ -344,12 +354,40 @@ export default {
       resizeObserver = new ResizeObserver(resizeCanvas);
       resizeObserver.observe(viewerContainer.value);
       try {
-        viewer.value?.addHandler?.('animation', () => drawAllOverlays());
-        viewer.value?.addHandler?.('animation-finish', () => drawAllOverlays());
-        viewer.value?.addHandler?.('viewport-change', () => drawAllOverlays());
+        viewer.value?.addHandler?.('animation', () => { drawAllOverlays(); });
+        viewer.value?.addHandler?.('animation-finish', () => { drawAllOverlays(); });
+        viewer.value?.addHandler?.('viewport-change', () => { drawAllOverlays(); });
       } catch (e) {
         // ignore if not available yet
       }
+    }
+    // Canvas helper: draw Material Symbols award star (centered at (x,y) with radius r)
+    // Foreground (detailed) path (teal)
+    const AWARD_STAR_PATH_D = "M9.075 16.25L12 14.475l2.925 1.775l-.775-3.325l2.6-2.25l-3.425-.275L12 7.25l-1.325 3.15l-3.425.275l2.6 2.25zM12 23.3L8.65 20H4v-4.65L.7 12L4 8.65V4h4.65L12 .7L15.35 4H20v4.65L23.3 12L20 15.35V20h-4.65zm0-2.8l2.5-2.5H18v-3.5l2.5-2.5L18 9.5V6h-3.5L12 3.5L9.5 6H6v3.5L3.5 12L6 14.5V18h3.5zm0-8.5";
+    // Background (simplified outer) path (white) — from your snippet (no inner holes)
+    const AWARD_STAR_BG_PATH_D = "M9.075 16.25L12 14.475l2.925 1.775l-.775-3.325l2.6-2.25l-3.425-.275L12 7.25l-1.325 3.15l-3.425.275l2.6 2.25zM12 23.3L8.65 20H4v-4.65L.7 12L4 8.65V4h4.65L12 .7L15.35 4H20v4.65L23.3 12L20 15.35V20h-4.65z";
+
+    function drawAwardStar(ctx, x, y, r) {
+      ctx.save();
+
+      // The SVG viewBox is 24x24; scale so width ≈ 2r
+      const s = (r * 2.5) / 24;
+      ctx.translate(x, y);
+      ctx.scale(s, s);
+      // center the 24x24 paths on the origin
+      ctx.translate(-12, -12);
+
+      // 1) White background icon (outer contour only)
+      const bgPath = new Path2D(AWARD_STAR_BG_PATH_D);
+      ctx.fillStyle = 'rgb(20,184,166)';
+      ctx.fill(bgPath, 'nonzero');
+
+      // 2) Foreground detailed teal icon on top
+      const fgPath = new Path2D(AWARD_STAR_PATH_D);
+      ctx.fillStyle = 'white';
+      ctx.fill(fgPath, 'evenodd');
+
+      ctx.restore();
     }
 
     function resizeCanvas() {
@@ -383,17 +421,14 @@ export default {
       // Retention circles
       if (props.retentionVisible) {
         const sizeNorm = 0.03;
-        const treesArr = Array.isArray(localTrees.value)
-          ? localTrees.value
-          : (Array.isArray(localTrees.value?.trees) ? localTrees.value.trees : []);
-        if (!Array.isArray(localTrees.value)) {
-          console.warn('[OSD] localTrees.value was not an array; using fallback array.');
-        }
+        const treesArr = retentionPoints.value;
+        const activeFramework = frameworkValue.value;
+        const activeStartskog = startskogValue.value;
         treesArr.forEach(tree => {
           if (!tree) return;
-          if (tree.framework !== props.currentFramework.value) return;
+          if (activeFramework && tree.framework !== activeFramework) return;
           if (!timeMatches(tree.time, props.currentTime)) return;
-          if (tree.startskog !== props.currentStartskog.value) return;
+          if (activeStartskog && tree.startskog !== activeStartskog) return;
           const pt = new osdLib.Point(tree.x, tree.y);
           const pixel = viewer.value.viewport.pixelFromPoint(pt, true);
           const normalizedRadius = sizeNorm / 2;
@@ -423,7 +458,7 @@ export default {
       // Trädplantor — borderless rectangle with world-anchored dotted rows (trakthygge, 20 år)
       if (
         props.tradplantorVisible &&
-        props.currentFramework.value === 'trakthygge' &&
+        frameworkValue.value === 'trakthygge' &&
         props.currentTime === '20 år'
       ) {
         // Static overlay bounds in image-normalized coordinates
@@ -468,57 +503,39 @@ export default {
         overlayCtx.fill();
         overlayCtx.restore();
       }
-      // Naturvårdsarter — teal stars (rgb(94,234,212))
-      if (props.naturvardsarterVisible && localNaturvard.value && localNaturvard.value.length) {
-        const arr = Array.isArray(localNaturvard.value) ? localNaturvard.value : [];
-
-        // helper to draw a 5-point star
-        const drawStar = (ctx, x, y, r) => {
-          const spikes = 5;
-          const step = Math.PI / spikes; // 36° steps
-          const inner = r * 0.5;
-          ctx.beginPath();
-          let rot = -Math.PI / 2; // start at top
-          for (let i = 0; i < spikes; i++) {
-            ctx.lineTo(x + Math.cos(rot) * r, y + Math.sin(rot) * r);
-            rot += step;
-            ctx.lineTo(x + Math.cos(rot) * inner, y + Math.sin(rot) * inner);
-            rot += step;
-          }
-          ctx.closePath();
-        };
+      // Naturvårdsarter — draw award-star icon via canvas (same behavior as original stars)
+      if (props.naturvardsarterVisible && naturvardPoints.value.length) {
+        const arr = naturvardPoints.value;
+        const activeFramework = frameworkValue.value;
+        const activeStartskog = startskogValue.value;
 
         arr.forEach(p => {
           if (!p) return;
-          if (p.framework && !valueMatches(p.framework, props.currentFramework.value)) return;
-          if (p.startskog && p.startskog !== props.currentStartskog.value) return;
+          if (activeFramework && !valueMatches(p.framework, activeFramework)) return;
+          if (activeStartskog && p.startskog && p.startskog !== activeStartskog) return;
           if (p.time && !timeMatches(p.time, props.currentTime)) return;
 
           const pt = new osdLib.Point(p.x, p.y);
           const pixel = viewer.value.viewport.pixelFromPoint(pt, true);
-          const normalizedRadius = 0.012; // small star, slightly larger than click dots
+          // Keep the same normalized sizing approach as the original stars
+          const normalizedRadius = 0.012; // tweak if you want larger/smaller
           const pixelRight = viewer.value.viewport.pixelFromPoint(new osdLib.Point(p.x + normalizedRadius, p.y), true);
           const radius = Math.abs(pixelRight.x - pixel.x);
 
-          overlayCtx.save();
-          drawStar(overlayCtx, pixel.x, pixel.y, radius);
-          overlayCtx.fillStyle = 'rgba(153,246,228, 1)'; // teal fill
-          overlayCtx.fill();
-          overlayCtx.lineWidth = 2;
-          overlayCtx.strokeStyle = 'rgb(20,184,166)'; // teal outline
-          overlayCtx.stroke();
-          overlayCtx.restore();
+          drawAwardStar(overlayCtx, pixel.x, pixel.y, radius);
         });
       }
 
 
       // Småplantor — very small WHITE circles (same size as saved clicks)
-      if (props.smaplantorVisible && localSmaPlantor.value && localSmaPlantor.value.length) {
-        const arr = Array.isArray(localSmaPlantor.value) ? localSmaPlantor.value : [];
+      if (props.smaplantorVisible && smaplantorPoints.value.length) {
+        const arr = smaplantorPoints.value;
+        const activeFramework = frameworkValue.value;
+        const activeStartskog = startskogValue.value;
         arr.forEach(p => {
           if (!p) return;
-          if (p.framework && p.framework !== props.currentFramework.value) return;
-          if (p.startskog && p.startskog !== props.currentStartskog.value) return;
+          if (activeFramework && p.framework && p.framework !== activeFramework) return;
+          if (activeStartskog && p.startskog && p.startskog !== activeStartskog) return;
           if (p.time && !timeMatches(p.time, props.currentTime)) return;
 
           const pt = new osdLib.Point(p.x, p.y);
@@ -540,12 +557,14 @@ export default {
       }
 
       // Högstubbar — very small BLACK circles
-      if (props.hogstubbarVisible && localHogstubbar.value && localHogstubbar.value.length) {
-        const arr = Array.isArray(localHogstubbar.value) ? localHogstubbar.value : [];
+      if (props.hogstubbarVisible && hogstubbarPoints.value.length) {
+        const arr = hogstubbarPoints.value;
+        const activeFramework = frameworkValue.value;
+        const activeStartskog = startskogValue.value;
         arr.forEach(p => {
           if (!p) return;
-          if (p.framework && p.framework !== props.currentFramework.value) return;
-          if (p.startskog && p.startskog !== props.currentStartskog.value) return;
+          if (activeFramework && p.framework && p.framework !== activeFramework) return;
+          if (activeStartskog && p.startskog && p.startskog !== activeStartskog) return;
           if (p.time && !timeMatches(p.time, props.currentTime)) return;
 
           const pt = new osdLib.Point(p.x, p.y);
@@ -569,16 +588,13 @@ export default {
       // Seed trees (Fröträd) — same look as retention trees, but from seedTrees.json
       if (props.seedTreeVisible) {
         const sizeNorm = 0.03; // same radius as retention
-        const seedArr = Array.isArray(localSeedTrees.value)
-          ? localSeedTrees.value
-          : (Array.isArray(localSeedTrees.value?.trees) ? localSeedTrees.value.trees : []);
-        if (!Array.isArray(localSeedTrees.value)) {
-          console.warn('[OSD] localSeedTrees.value was not an array; using fallback array.');
-        }
+        const seedArr = seedTreePoints.value;
+        const activeFramework = frameworkValue.value;
+        const activeStartskog = startskogValue.value;
         seedArr.forEach(tree => {
-          if (tree.framework !== props.currentFramework.value) return;
+          if (activeFramework && tree.framework !== activeFramework) return;
           if (!timeMatches(tree.time, props.currentTime)) return;
-          if (tree.startskog !== props.currentStartskog.value) return;
+          if (activeStartskog && tree.startskog !== activeStartskog) return;
 
           const pt = new osdLib.Point(tree.x, tree.y);
           const pixel = viewer.value.viewport.pixelFromPoint(pt, true);
@@ -613,8 +629,9 @@ export default {
       }
 
       // Compute active kanteffekt features
-      const activeKanteffekt = localKanteffekt.value.filter(f =>
-        f.framework === props.currentFramework.value &&
+      const activeFramework = frameworkValue.value;
+      const activeKanteffekt = kanteffektFeatures.value.filter(f =>
+        (!activeFramework || f.framework === activeFramework) &&
         (Array.isArray(f.start)
           ? f.start.includes(props.currentTime)
           : f.start === props.currentTime)
@@ -838,7 +855,7 @@ export default {
       }
       // Kontinuerligt rottäcke rectangle overlay (same dimensions as static overlay)
       if (props.rottackeVisible) {
-        const fw = props.currentFramework.value;
+        const fw = frameworkValue.value;
         const t = props.currentTime;
 
         const isSkarmtrad = fw === 'skärmträd' || fw === 'skarmtrad';
@@ -912,10 +929,12 @@ export default {
       }
       // Saved clicks — small circles (dev)
       if (localSavedClicks.value.length) {
+        const activeFramework = frameworkValue.value;
+        const activeStartskog = startskogValue.value;
         localSavedClicks.value.forEach(c => {
           // Filter by current context if present on the click
-          if (c.framework && c.framework !== props.currentFramework.value) return;
-          if (c.startskog && c.startskog !== props.currentStartskog.value) return;
+          if (activeFramework && c.framework && c.framework !== activeFramework) return;
+          if (activeStartskog && c.startskog && c.startskog !== activeStartskog) return;
           if (c.time && !timeMatches(c.time, props.currentTime)) return;
 
           const pt = new osdLib.Point(c.x, c.y);
@@ -963,6 +982,9 @@ export default {
     watch(() => props.currentFramework, () => {
       if (overlayCtx) drawAllOverlays();
     });
+    watch(frameworkValue, () => {
+      if (overlayCtx) drawAllOverlays();
+    });
     watch(() => props.rottackeVisible, () => {
       if (overlayCtx) drawAllOverlays();
     });
@@ -985,18 +1007,54 @@ export default {
     watch(() => props.tradplantorVisible, () => {
       if (overlayCtx) drawAllOverlays();
     });
-
-
-
-    onMounted(async () => {
-      try {
-        const res = await fetch('/api/seedTrees');
-        const json = await res.json();
-        localSeedTrees.value = json.trees || [];
-      } catch (e) {
-        console.error('Failed fetching seedTrees:', e);
-      }
+    watch(startskogValue, () => {
+      if (overlayCtx) drawAllOverlays();
     });
+
+    watch(() => props.retentionPoints, () => {
+      if (overlayCtx) drawAllOverlays();
+    }, { deep: true });
+    watch(() => props.seedTreePoints, () => {
+      if (overlayCtx) drawAllOverlays();
+    }, { deep: true });
+    watch(() => props.smaplantorPoints, () => {
+      if (overlayCtx) drawAllOverlays();
+    }, { deep: true });
+    watch(() => props.hogstubbarPoints, () => {
+      if (overlayCtx) drawAllOverlays();
+    }, { deep: true });
+    watch(() => props.naturvardsarterPoints, () => {
+      if (overlayCtx) drawAllOverlays();
+    }, { deep: true });
+    watch(() => props.kanteffektFeatures, () => {
+      if (overlayCtx) drawAllOverlays();
+    }, { deep: true });
+
+    if (import.meta.dev) {
+      watch(
+        [
+          retentionPoints,
+          seedTreePoints,
+          smaplantorPoints,
+          hogstubbarPoints,
+          naturvardPoints,
+          kanteffektFeatures,
+        ],
+        ([ret, seed, small, stub, natur, kante]) => {
+          console.log('[OSD] overlay datasets', {
+            retention: ret?.length ?? 0,
+            seed: seed?.length ?? 0,
+            smaplantor: small?.length ?? 0,
+            hogstubbar: stub?.length ?? 0,
+            naturvardsarter: natur?.length ?? 0,
+            kanteffekt: kante?.length ?? 0,
+          });
+        },
+        { immediate: true },
+      );
+    }
+
+
 
     const viewerId = computed(
       () => "openseadragon-viewer-" + Math.random().toString(36).substr(2, 9)
@@ -1126,29 +1184,37 @@ export default {
     });
 
     const svampMycelValue = computed(() => {
+      const fw = frameworkValue.value;
+      if (!fw) return 'N/A';
       const match = totalSvamparDataset.value.find(item =>
         item.artkategori === "total" &&
-        item.frameworks === props.currentFramework.value &&
+        item.frameworks === fw &&
         Number(item.ålder) === adjustedTotalSvamparTime.value
       );
       return match ? match.klassning : 'N/A';
     });
 
     const matsvampMycelValue = computed(() => {
+      const fw = frameworkValue.value;
+      const skog = startskogValue.value;
+      if (!fw || !skog) return 'N/A';
       const match = svamparDataset.value.find(item =>
         item.artkategori === "matsvamp" &&
-        item.startskog === props.currentStartskog.value &&
-        item.frameworks === props.currentFramework.value &&
+        item.startskog === skog &&
+        item.frameworks === fw &&
         Number(item.ålder) === adjustedSvamparTime.value
       );
       return match ? match.klassning : 'N/A';
     });
 
     const rodlistadeMycelValue = computed(() => {
+      const fw = frameworkValue.value;
+      const skog = startskogValue.value;
+      if (!fw || !skog) return 'N/A';
       const match = svamparDataset.value.find(item =>
         item.artkategori === "rödlistade + signalarter" &&
-        item.startskog === props.currentStartskog.value &&
-        item.frameworks === props.currentFramework.value &&
+        item.startskog === skog &&
+        item.frameworks === fw &&
         Number(item.ålder) === adjustedSvamparTime.value
       );
       return match ? match.klassning : 'N/A';
@@ -1156,13 +1222,15 @@ export default {
 
 
     const timelineInfo = computed(() => {
-      if (!props.currentFramework?.value || !props.currentTime || !props.currentStartskog?.value) {
+      const fw = frameworkValue.value;
+      const skog = startskogValue.value;
+      if (!fw || !props.currentTime || !skog) {
         return null;
       }
       return timelineData.find(item =>
-        item.atgard === props.currentFramework.value &&
+        item.atgard === fw &&
         item.tid === props.currentTime &&
-        item.startskog === props.currentStartskog.value
+        item.startskog === skog
       );
     });
 
@@ -1193,11 +1261,14 @@ export default {
 
       const isAllClick = event.metaKey || event.ctrlKey;
       const timeValue = isAllClick ? 'alla' : props.currentTime;
+      const fw = frameworkValue.value;
+      const skog = startskogValue.value;
+      if (!fw || !skog) return;
 
       const click = {
-        framework: props.currentFramework.value,
+        framework: fw,
         time: timeValue,
-        startskog: props.currentStartskog.value,
+        startskog: skog,
         x: viewportPoint.x,
         y: viewportPoint.y,
         id: `click-${Date.now()}`
@@ -1328,6 +1399,7 @@ export default {
         crossOriginPolicy: 'Anonymous',
         ajaxWithCredentials: false,
         showNavigationControl: false,
+        imageLoaderLimit: 4,
         maxImageCacheCount: 50,
         visibilityRatio: 1,
         homeFillsViewer: true,
@@ -1717,8 +1789,7 @@ export default {
       matsvampMycelValue,
       rodlistadeMycelValue,
       rottackePopover,
-      rottackePopoverStyle,
-      localSeedTrees
+      rottackePopoverStyle
     };
   },
 };
@@ -1733,5 +1804,11 @@ export default {
 
 :deep(.highlight) {
   outline: 2px solid white;
+}
+
+.osd-natur-icon {
+  pointer-events: none;
+  user-select: none;
+  display: inline-block;
 }
 </style>

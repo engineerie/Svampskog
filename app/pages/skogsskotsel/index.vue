@@ -7,15 +7,14 @@
                 <!-- <NuxtImg :src="page.hero.src" width="700" format="webp" alt="Illustration"
                     class="rounded ring ring-neutral-300 " /> -->
                 <template v-if="page?.hero?.links?.[0]" #links>
-                    <UModal fullscreen>
-                        <UChip color="warning" size="2xl">
-                            <UButton :label="page.hero.links[0].label" :size="page.hero.links[0].size"
-                                :color="page.hero.links[0].color" :icon="page.hero.links[0].icon" />
-                        </UChip>
+                    <UChip color="warning" size="2xl">
+                        <UButton :label="page.hero.links[0].label" :size="page.hero.links[0].size"
+                            :color="page.hero.links[0].color" :icon="page.hero.links[0].icon"
+                            @click="modelOpen = true" />
+                    </UChip>
+                    <UModal v-model:open="modelOpen" fullscreen>
                         <template #content>
-                            <!-- <UAlert title="Denna funktion lanseras i November." color="warning"
-                                icon="i-fluent-emoji-high-contrast-construction" /> -->
-                            <Model />
+                            <Model @close="modelOpen = false" />
                         </template>
                     </UModal>
                 </template>
@@ -161,6 +160,8 @@
 <script setup lang="ts">
 import { ref, computed, watchEffect } from 'vue'
 import type { TabsItem } from '@nuxt/ui'
+
+const modelOpen = ref(false)
 
 const { data: page } = await useAsyncData('skogsskotsel', () => queryCollection('skogsskotsel').first())
 if (!page.value) {

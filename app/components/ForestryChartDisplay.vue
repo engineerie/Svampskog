@@ -1,31 +1,48 @@
 <template>
   <div class="custom-area" ref="rootEl" :style="{ '--vis-area-stroke-color': parentStrokeColor }">
     <ClientOnly>
-      <VisXYContainer v-if="isMounted && chartReady" :data="chartData" :height="170" :margin="margin" :xDomain="xDomain"
-        :yDomain="yDomain">
-        <template v-if="props.chartType === 'area' && props.singleFrameworkSelection">
+      <VisBulletLegend v-if="isMounted && chartReady && legendItems.length" :items="legendItems"
+        :onLegendItemClick="handleLegendItemClick" class="mx-4 flex flex-wrap gap-2" />
+      <VisXYContainer v-if="isMounted && chartReady" :data="chartData.length ? chartData : [emptyDataPoint]"
+        :height="170" :margin="margin" :xDomain="xDomain" :yDomain="yDomain">
+        <template v-if="props.chartType === 'area' && props.singleFrameworkSelection && !props.frameworkComparisonMode">
           <VisArea :x="xAccessor" :y="stackedYAccessors" :color="stackedColors" :interpolateMissingData="true" />
-          <VisCrosshair :template="crosshairTemplate" />
-          <VisTooltip :horizontalShift="30" />
+          <VisCrosshair v-if="hasActiveSeries" :template="crosshairTemplate" />
+          <VisTooltip v-if="hasActiveSeries" :horizontalShift="30" />
 
+        </template>
+        <template
+          v-else-if="props.chartType === 'area' && props.singleFrameworkSelection && props.frameworkComparisonMode">
+          <VisArea v-for="fw in activeFrameworks" :key="fw.key + '-compare-area'" :x="xAccessor" :y="(d: any) => {
+            const key = stackedCategories[0];
+            if (!key) return Number.isFinite(Number(d?.age)) ? 0 : NaN;
+            const namespace = fw.key + '__compare';
+            const value = d?.[namespace]?.[key];
+            if (value == null || value === '') return Number.isFinite(Number(d?.age)) ? 0 : NaN;
+            const num = Number(value);
+            return Number.isFinite(num) ? num : Number.isFinite(Number(d?.age)) ? 0 : NaN;
+          }" :color="() => fw.colorArea || fw.color" :interpolateMissingData="true" :zIndex="1" />
+          <VisCrosshair v-if="hasActiveSeries" :template="crosshairTemplate" />
+          <VisTooltip v-if="hasActiveSeries" :horizontalShift="30" />
         </template>
         <template v-else-if="props.chartType === 'area'">
           <VisArea v-for="fw in activeFrameworks" :key="fw.key + '-area'" :x="xAccessor" :y="(d: any) => {
             const v = Number(d?.[fw.key])
-            return Number.isFinite(v) ? v : NaN
-          }" :color="() => (fw.colorArea || fw.color)" :interpolateMissingData="true" />
-          <VisCrosshair :template="crosshairTemplate" />
-          <VisPlotline :value="currentTimeValue" color="rgba(220, 114, 0, 1)" axis="x" labelOrientation="vertical" />
-          <VisTooltip :horizontalShift="30" />
+            return Number.isFinite(v) ? v : Number.isFinite(Number(d?.age)) ? 0 : NaN
+          }" :color="() => (fw.colorArea || fw.color)" :interpolateMissingData="true" :zIndex="1" />
+
+          <VisCrosshair v-if="hasActiveSeries" :template="crosshairTemplate" />
+
+          <VisTooltip v-if="hasActiveSeries" :horizontalShift="30" />
+          <VisPlotline v-if="hasActiveSeries" :value="currentTimeValue" color="rgba(220, 114, 0, 1)" axis="x"
+            labelOrientation="vertical" :zIndex="20" />
         </template>
         <template v-else-if="props.chartType === 'bar'">
           <VisGroupedBar :color="computedLineColors" :x="xAccessor" :y="yAccessors" :groupPadding="0.5"
             :groupMaxWidth="20" />
         </template>
-        <VisAxis tickTextFontSize="12px" :gridLine="true" type="x"
-          :tickValues="[-5, 0, 10, 20, 30, 40, 50, 60, 70, 80, 90]" :tickFormat="(val: number) => {
-            if (val === -5) return ''
-            if (val === 0) return ''
+        <VisAxis tickTextFontSize="12px" :gridLine="true" type="x" :tickValues="[0, 10, 20, 30, 40, 50, 60, 70, 80, 90]"
+          :tickFormat="(val: number) => {
             if (val === 10) return ''
             if (val === 30) return ''
             if (val === 40) return ''
@@ -44,7 +61,7 @@
 
 <script setup lang="ts">
 
-import { computed, ref, onMounted, onBeforeUnmount, nextTick } from 'vue'
+import { computed, ref, onMounted, onBeforeUnmount, nextTick, reactive } from 'vue'
 import { VisXYContainer, VisAxis, VisLine, VisArea, VisGroupedBar, VisBulletLegend, VisBrush, VisCrosshair, VisTooltip, VisPlotline } from '@unovis/vue'
 import type { BulletLegendItemInterface } from '@unovis/ts'
 import { capitalize } from 'lodash-es'
@@ -67,8 +84,15 @@ const yDomain = computed<[number, number] | undefined>(() => {
   return Number.isFinite(max) ? [0, max] : undefined
 })
 
+const baseChartData = computed(() => {
+  if (props.singleFrameworkSelection && props.chartType === 'area') {
+    return mergedData.value;
+  }
+  return resampledMergedData.value;
+});
+
 const xDomain = computed<[number, number]>(() => {
-  const xs = chartData.value
+  const xs = baseChartData.value
     .map(d => Number(d?.age))
     .filter(v => Number.isFinite(v)) as number[]
   if (!xs.length) return [0, 1]
@@ -85,10 +109,15 @@ const chartKey = computed(() => {
   ].join('|')
 })
 
-const chartReady = computed(() => Array.isArray(chartData.value) && chartData.value.length > 0)
+const chartReady = computed(() => Array.isArray(baseChartData.value) && baseChartData.value.length > 0)
 
 const stackedCategories = computed<string[]>(() => {
   if (!props.singleFrameworkSelection) return []
+  if (props.frameworkComparisonMode) {
+    // when comparing frameworks we only allow a single artkategori at a time
+    const selected = props.selectedArtkategori?.[0]
+    return selected ? [selected.toLowerCase()] : []
+  }
   return (props.selectedArtkategori || [])
     .map(a => (a || '').toLowerCase())
     .filter(a => !inactiveArtkategoriKeys.value.has(a))
@@ -138,6 +167,7 @@ interface Props {
   chartType: string,
   currentTimeValue?: string
   singleFrameworkSelection?: boolean,
+  frameworkComparisonMode?: boolean,
   selectedStartskog?: string, // <-- Add this
   redColor?: boolean,
   yellowColor?: boolean,
@@ -147,6 +177,7 @@ interface Props {
 const props = withDefaults(defineProps<Props>(), {
   selectedFrameworks: () => [],
   singleFrameworkSelection: false,
+  frameworkComparisonMode: false,
   redColor: false,
   yellowColor: false
 });
@@ -211,6 +242,26 @@ const artkategoriColorMapping: Record<string, string> = {
   "rödlistade + signalarter": "#5eead4",
   "total": "#808080"
 };
+const artkategoriLegendOrder = [
+  'skinnsvampar',
+  'spindelskivlingar',
+  'kremlor och riskor',
+  'övriga svampar',
+  'matsvamp',
+  'rödlistade + signalarter',
+  'total'
+];
+const artkategoriLabelMap: Record<string, string> = {
+  'skinnsvampar': 'Skinnsvampar',
+  'spindelskivlingar': 'Spindelskivlingar',
+  'kremlor och riskor': 'Kremlor och riskor',
+  'övriga svampar': 'Övriga svampar',
+  'matsvamp': 'Matsvampar',
+  'rödlistade + signalarter': 'Rödlistade + signalarter',
+  'total': 'Total'
+};
+
+const formatArtLabel = (key: string) => artkategoriLabelMap[key] || capitalize(key);
 
 type LegendItem = BulletLegendItemInterface & {
   key: string;
@@ -237,17 +288,17 @@ function mapFrameworkLabel(label: string): string {
 }
 
 const legendOrder = ["naturskydd", "trakthygge", "skärmträd", "luckhuggning", "blädning"];
+const allFrameworkKeys = computed(() => (props.selectedFrameworks || []).map(f => f.toLowerCase()));
 
 // If exactly one framework is active (and we're not in singleFrameworkSelection),
 // color that framework by selected artkategori: total / matsvamp / rödlistade + signalarter
 const activeFrameworkKeys = computed(() => {
-  const passed = (props.selectedFrameworks || []).map(f => f.toLowerCase())
-  return passed.filter(key => legendOrder.includes(key) && !inactiveFrameworkKeys.value.has(key))
+  return allFrameworkKeys.value.filter(key => legendOrder.includes(key) && !inactiveFrameworkKeys.value.has(key))
 })
 
 const originalSeriesMap = computed<Record<string, Array<{ age: number; value: number }>>>(() => {
   const out: Record<string, Array<{ age: number; value: number }>> = {}
-  for (const key of activeFrameworkKeys.value) {
+  for (const key of allFrameworkKeys.value) {
     const s = filterDataForFramework(key).map(d => ({ age: Number(d.age), value: Number(d.klassning) }))
       .filter(p => Number.isFinite(p.age) && Number.isFinite(p.value))
       .sort((a, b) => a.age - b.age)
@@ -335,12 +386,29 @@ const singleFrameworkOverrideColor = computed<string | null>(() => {
 
 const legendItems = computed<LegendItem[]>(() => {
   if (props.singleFrameworkSelection) {
-    return props.selectedArtkategori.map(art => {
-      const key = art.toLowerCase();
+    if (props.frameworkComparisonMode) {
+      const items = (props.selectedFrameworks || []).map(fw => {
+        const key = fw.toLowerCase();
+        const color = frameworkColorMapping.value[key] || '#000000';
+        return {
+          key,
+          name: mapFrameworkLabel(key),
+          label: mapFrameworkLabel(key),
+          color,
+          colorArea: hexToRgba(color, 0.4),
+          colorLine: color,
+          inactive: inactiveFrameworkKeys.value.has(key),
+        };
+      });
+      return items;
+    }
+    const selected = props.selectedArtkategori.map(art => art.toLowerCase());
+    const ordered = artkategoriLegendOrder.filter(key => selected.includes(key));
+    return ordered.map(key => {
       return {
         key,
-        name: capitalize(art),
-        label: capitalize(art),
+        name: formatArtLabel(key),
+        label: formatArtLabel(key),
         color: artkategoriColorMapping[key] || "#000000",
         inactive: inactiveArtkategoriKeys.value.has(key),
       };
@@ -385,24 +453,27 @@ const legendItems = computed<LegendItem[]>(() => {
       ]
     }
 
-    // Default behavior when not exactly two active frameworks
-    return legendOrder
-      .filter(key => props.selectedFrameworks.map(f => f.toLowerCase()).includes(key))
-      .map(f => ({
-        key: f,
-        name: mapFrameworkLabel(f),
-        label: mapFrameworkLabel(f),
-        color: (singleFrameworkOverrideColor.value || frameworkColorMapping.value[f] || '#000000'),
-        colorArea: (singleFrameworkOverrideColor.value || frameworkColorMapping.value[f] || '#000000'),
-        colorLine: (singleFrameworkOverrideColor.value || frameworkColorMapping.value[f] || '#000000'),
-        inactive: inactiveFrameworkKeys.value.has(f),
-      }))
+    const orderedKeys = legendOrder.filter(key =>
+      props.selectedFrameworks.map(f => f.toLowerCase()).includes(key)
+    );
+    return orderedKeys.map(f => ({
+      key: f,
+      name: mapFrameworkLabel(f),
+      label: mapFrameworkLabel(f),
+      color: (singleFrameworkOverrideColor.value || frameworkColorMapping.value[f] || '#000000'),
+      colorArea: (singleFrameworkOverrideColor.value || frameworkColorMapping.value[f] || '#000000'),
+      colorLine: (singleFrameworkOverrideColor.value || frameworkColorMapping.value[f] || '#000000'),
+      inactive: inactiveFrameworkKeys.value.has(f),
+    }))
   }
 });
 
 const activeFrameworks = computed(() => {
-  if (props.singleFrameworkSelection) return [];
-
+  if (props.singleFrameworkSelection) {
+    if (!props.frameworkComparisonMode) return [];
+    return legendItems.value
+      .filter(item => !inactiveFrameworkKeys.value.has(item.key));
+  }
   return legendItems.value.filter(item => !item.inactive);
 });
 
@@ -428,33 +499,46 @@ const mergedData = computed(() => {
   const dataMap = new Map<number, any>();
 
   if (props.singleFrameworkSelection) {
-    const framework = props.selectedFrameworks[0];
+    const frameworks = props.frameworkComparisonMode
+      ? (props.selectedFrameworks || []).map(f => f.toLowerCase()).slice(0, 2)
+      : [props.selectedFrameworks[0]?.toLowerCase()].filter(Boolean);
+
     props.selectedArtkategori.forEach(artkategori => {
       const selected = artkategori.toLowerCase();
       const source = selected === 'total' ? totalDataset.value : dataset.value;
       const selectedStartskog = props.selectedStartskog ? props.selectedStartskog.toLowerCase() : null;
-      const series = (source as any[]).filter(d => {
-        const matchesCategory = d.artkategori?.toLowerCase() === selected;
-        const matchesFramework = d.frameworks?.toLowerCase() === framework;
-        const matchesStartskog = !selectedStartskog || (d.startskog?.toLowerCase() ?? selectedStartskog) === selectedStartskog;
-        return matchesCategory && matchesFramework && matchesStartskog;
-      }).map(d => ({
-        age: d["ålder"],
-        klassning: +d["klassning"]
-      }));
 
-      series.forEach(item => {
-        const existing = dataMap.get(item.age) || { age: item.age };
-        existing[selected] = item.klassning;
-        dataMap.set(item.age, existing);
+      frameworks.forEach(framework => {
+        const series = (source as any[]).filter(d => {
+          const matchesCategory = d.artkategori?.toLowerCase() === selected;
+          const matchesFramework = d.frameworks?.toLowerCase() === framework;
+          const matchesStartskog = !selectedStartskog || (d.startskog?.toLowerCase() ?? selectedStartskog) === selectedStartskog;
+          return matchesCategory && matchesFramework && matchesStartskog;
+        }).map(d => ({
+          age: d["ålder"],
+          klassning: +d["klassning"]
+        }));
+
+        series.forEach(item => {
+          const existing = dataMap.get(item.age) || { age: item.age };
+          if (props.frameworkComparisonMode) {
+            const namespace = `${framework}__compare`;
+            const bucket = existing[namespace] || {};
+            bucket[selected] = item.klassning;
+            existing[namespace] = bucket;
+          } else {
+            existing[selected] = item.klassning;
+          }
+          dataMap.set(item.age, existing);
+        });
       });
     });
   } else {
-    activeFrameworks.value.forEach(framework => {
-      const series = filterDataForFramework(framework.key);
+    allFrameworkKeys.value.forEach(frameworkKey => {
+      const series = filterDataForFramework(frameworkKey);
       series.forEach(item => {
         const existing = dataMap.get(item.age) || { age: item.age };
-        existing[framework.key] = item.klassning;
+        existing[frameworkKey] = item.klassning;
         dataMap.set(item.age, existing);
       });
     });
@@ -471,61 +555,118 @@ const markerAccessor = (d: any) => d.__markerY
 
 const yAccessors = computed(() => {
   if (props.singleFrameworkSelection) {
-    return props.selectedArtkategori
-      .filter(art => !inactiveArtkategoriKeys.value.has(art.toLowerCase()))
-      .map(art => (d: any) => d[art.toLowerCase()]);
-  } else {
-    return activeFrameworks.value.map(item => {
-      return (d: any) => d[item.key];
-    });
+    if (props.frameworkComparisonMode) {
+      const category = stackedCategories.value[0] || props.selectedArtkategori[0]?.toLowerCase();
+      return activeFrameworks.value.map(fw => {
+        const key = fw.key;
+        return (d: any) => {
+          const bucket = d?.[`${key}__compare`];
+          const value = bucket?.[category];
+          return Number.isFinite(Number(value)) ? Number(value) : NaN;
+        };
+      });
+    }
+    const categories = stackedCategories.value.length ? stackedCategories.value : props.selectedArtkategori.map(a => a.toLowerCase());
+    return categories
+      .filter(art => !inactiveArtkategoriKeys.value.has(art))
+      .map(art => (d: any) => d[art]);
   }
+  return activeFrameworks.value.map(item => {
+    return (d: any) => d[item.key];
+  });
 });
 
 const computedLineColors = computed(() => {
   if (props.singleFrameworkSelection) {
-    return legendItems.value
-      .filter(item => !item.inactive)
-      .map(item => item.color || "#000000");
+    if (props.frameworkComparisonMode) {
+      return activeFrameworks.value.map(fw => fw.colorLine || fw.color || '#000000');
+    }
+    const categories = stackedCategories.value.length ? stackedCategories.value : props.selectedArtkategori.map(a => a.toLowerCase());
+    return categories
+      .filter(cat => !inactiveArtkategoriKeys.value.has(cat))
+      .map(cat => artkategoriColorMapping[cat] || '#000000');
   } else {
     return activeFrameworks.value.map(f => f.color || "#000000");
   }
 });
 
-function updateLegendItem(d: BulletLegendItemInterface) {
-  const key = d.name?.toLowerCase();
+function handleLegendItemClick(item: LegendItem) {
+  const key = (item.key || item.name || '').toLowerCase();
   if (!key) return;
 
   if (props.singleFrameworkSelection) {
-    const current = new Set(inactiveArtkategoriKeys.value);
-    current.has(key) ? current.delete(key) : current.add(key);
-    inactiveArtkategoriKeys.value = current;
+    if (props.frameworkComparisonMode) {
+      const next = new Set(inactiveFrameworkKeys.value);
+      next.has(key) ? next.delete(key) : next.add(key);
+      inactiveFrameworkKeys.value = next;
+    } else {
+      const next = new Set(inactiveArtkategoriKeys.value);
+      next.has(key) ? next.delete(key) : next.add(key);
+      inactiveArtkategoriKeys.value = next;
+    }
   } else {
-    const frameworkKey = legendOrder.find(f => mapFrameworkLabel(f).toLowerCase() === key);
+    const frameworkKey = legendOrder.find(f => f === key) || legendOrder.find(f => mapFrameworkLabel(f).toLowerCase() === key);
     if (!frameworkKey) return;
-
-    const current = new Set(inactiveFrameworkKeys.value);
-    current.has(frameworkKey) ? current.delete(frameworkKey) : current.add(frameworkKey);
-    inactiveFrameworkKeys.value = current;
+    const next = new Set(inactiveFrameworkKeys.value);
+    next.has(frameworkKey) ? next.delete(frameworkKey) : next.add(frameworkKey);
+    inactiveFrameworkKeys.value = next;
   }
 }
 
 // Unovis stacked areas require an array of y accessors (one per series)
 const stackedYAccessors = computed<((d: any) => number)[]>(() => {
-  if (!props.singleFrameworkSelection) return []
+  if (!props.singleFrameworkSelection || props.frameworkComparisonMode) return []
   return stackedCategories.value.map(cat => (d: any) => Number(d?.[cat] ?? 0))
 })
 
 // Colors aligned with the stacked series order
 const stackedColors = computed<string[] | ((...args: any[]) => string)>(() => {
-  if (!props.singleFrameworkSelection) return []
+  if (!props.singleFrameworkSelection || props.frameworkComparisonMode) return []
   return stackedCategories.value.map(cat => artkategoriColorMapping[cat] || '#999')
 })
 
-const chartData = computed(() => {
-  if (props.singleFrameworkSelection && props.chartType === 'area') {
-    return [...mergedData.value]
+const emptyDataPoint = reactive({ age: 0 })
+
+function hasAnyValue(row: Record<string, any>): boolean {
+  if (!row) return false
+  const keys = Object.keys(row).filter(k => k !== 'age' && k !== '__markerY')
+  return keys.some(key => {
+    const value = row[key]
+    if (value && typeof value === 'object') {
+      return Object.values(value).some(v => Number.isFinite(Number(v)))
+    }
+    return Number.isFinite(Number(value))
+  })
+}
+
+const activeSeriesCount = computed(() => {
+  if (props.singleFrameworkSelection) {
+    if (props.frameworkComparisonMode) {
+      return activeFrameworks.value.length;
+    }
+    return stackedCategories.value.length;
   }
-  return [...resampledMergedData.value]
+  return activeFrameworks.value.length;
+});
+
+const hasActiveSeries = computed(() => activeSeriesCount.value > 0);
+
+const chartData = computed(() => {
+  const data = baseChartData.value;
+  if (!activeSeriesCount.value) {
+    if (props.frameworkComparisonMode && props.singleFrameworkSelection && data.length) {
+      return data.map(row => {
+        const clone = { age: row.age };
+        for (const fw of props.selectedFrameworks || []) {
+          const key = fw.toLowerCase();
+          clone[`${key}__compare`] = { [stackedCategories.value[0] || props.selectedArtkategori[0]?.toLowerCase() || '']: NaN };
+        }
+        return clone;
+      });
+    }
+    return data.length ? data : [emptyDataPoint];
+  }
+  return data.filter(row => hasAnyValue(row));
 })
 
 // Crosshair tooltip template — shows X label + value(s) for the visible series
@@ -537,22 +678,43 @@ const crosshairTemplate = (d: any): string => {
   const xLabel = age === -5 ? 'före' : (age === 1 ? '1 år' : `${formatAge(age)} år`)
 
   // Decide which series to show: frameworks (default) or artkategorier (singleFrameworkSelection)
-  const series = props.singleFrameworkSelection
-    ? props.selectedArtkategori.map(art => ({
-      key: art.toLowerCase(),
-      label: capitalize(art),
-      color: artkategoriColorMapping[art.toLowerCase()] || '#999'
-    }))
-    : activeFrameworks.value.map(fw => ({
+  let series: Array<{ key: string; label: string; color: string; category?: string }>;
+  if (props.singleFrameworkSelection) {
+    if (props.frameworkComparisonMode) {
+      const category = stackedCategories.value[0] || props.selectedArtkategori[0]?.toLowerCase();
+      series = activeFrameworks.value.map(fw => {
+        const key = fw.key;
+        return {
+          key: `${key}__compare`,
+          label: mapFrameworkLabel(key),
+          color: fw.color || frameworkColorMapping.value[key] || '#999',
+          category
+        };
+      });
+    } else {
+      series = props.selectedArtkategori.map(art => {
+        const key = art.toLowerCase();
+        return {
+          key,
+          label: formatArtLabel(key),
+          color: artkategoriColorMapping[key] || '#999'
+        };
+      });
+    }
+  } else {
+    series = activeFrameworks.value.map(fw => ({
       key: fw.key,
       label: mapFrameworkLabel(fw.key),
       color: fw.color || '#999'
-    }))
+    }));
+  }
 
   // Build rows only for series that have a value at this X
   const rows = series
     .map(s => {
-      const v = d[s.key]
+      const v = (props.singleFrameworkSelection && props.frameworkComparisonMode)
+        ? d?.[s.key]?.[s.category as string]
+        : d[s.key]
       if (v == null) return ''
       const formatted = typeof v === 'number' ? (v >= 10 ? Math.round(v).toString() : v.toFixed(2)) : String(v)
       return `
@@ -575,7 +737,7 @@ const crosshairTemplate = (d: any): string => {
 
 <style>
 .custom-area {
-  --vis-area-fill-opacity: 0.5;
+  --vis-area-fill-opacity: 0.7;
   --vis-area-hover-fill-opacity: 0.5;
   --vis-area-stroke-width: 0px;
   --vis-brush-handle-stroke-color: #ffffff00;
@@ -595,7 +757,6 @@ const crosshairTemplate = (d: any): string => {
   /* Ensure series visibly paint above overlays */
   --vis-line-stroke-width: 3px;
   --vis-line-stroke-opacity: 1;
-
 
 }
 

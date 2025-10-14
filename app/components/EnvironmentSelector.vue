@@ -4,7 +4,7 @@
       :class="[' block relative overflow-scroll -mx-4 w-screen', geography && forestType && standAge && vegetationType ? 'h-14' : 'h-0']">
       <div
         :class="['pt-0.5 top-16 z-20 w-screen inset-0 bg-neutral-50 dark:bg-neutral-950 border-b border-muted dark:border-neutral-800 transition-height', mobileCollapsed ? 'h-14' : 'h-14']">
-        <UModal fullscreen :overlay="true" title="Välj miljö" :ui="{ body: 'p-0', title: 'text-2xl' }">
+        <UDrawer fullscreen :overlay="true" :ui="{ body: 'p-0', title: 'text-2xl' }">
           <div class="flex justify-between w-full mx-auto max-w-full ">
             <div class="flex gap-2 p-2 overflow-scroll ">
               <UBadge v-for="category in categories" :key="category.key" size="xl" variant="outline" color="neutral"
@@ -13,11 +13,11 @@
             </div>
           </div>
           <template #body>
-            <div class=" w-full max-w-full p-4">
+            <div class=" w-full max-w-full">
               <!-- Use enabledOptions for USelect items as well -->
               <USelect size="xl" v-for="category in categories" :key="category.key"
                 :items="enabledOptions[category.key]" v-model="envStore[category.key]"
-                :placeholder="category.defaultLabel" class=" w-full my-1 text-lg ring-muted" variant="outline">
+                :placeholder="category.defaultLabel" class=" w-full my-1 text-lg ring-muted" variant="soft">
                 <template #item="{ item }">
                   <div class="flex flex-col">
                     <div class="text-lg font-medium">{{ item.label }}</div>
@@ -31,7 +31,7 @@
                 <UButton label="DNA-data" size="xl" trailing :icon="restrictionEnabled ? 'mdi:lock' : 'mdi:lock-open'"
                   @click="toggleRestriction" variant="subtle" :color="restrictionEnabled ? 'secondary' : 'neutral'" />
 
-                <UModal fullscreen title="Kombinationer" class="w-full" :ui="{ title: 'text-2xl' }">
+                <UDrawer nested fullscreen class="w-full" :ui="{ title: 'text-2xl' }">
                   <UButton label="Kombinationer" size="xl" shape="full" trailing icon="mdi:apps" color="neutral"
                     variant="outline" />
                   <template #body>
@@ -57,22 +57,22 @@
                       </UCard>
                     </div>
                   </template>
-                </UModal>
-                <UModal fullscreen title="Miljööversikt"
+                </UDrawer>
+                <!-- <UModal fullscreen title="Miljööversikt"
                   :ui="{ content: 'overflow-y-scroll px-0', body: 'p-0', title: 'text-2xl' }" class=" col-span-2">
                   <UButton size="xl" label="Alla miljöer" trailing icon="i-hugeicons-tree-06" color="neutral"
                     variant="subtle" />
                   <template #body>
                     <Miljoer />
                   </template>
-                </UModal>
+                </UModal> -->
               </div>
               <Transition name="fade" mode="out-in">
                 <SpatialForest class="rounded overflow-hidden border border-neutral-200 h-fit" />
               </Transition>
             </div>
           </template>
-        </UModal>
+        </UDrawer>
       </div>
     </div>
 

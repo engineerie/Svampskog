@@ -1,0 +1,127 @@
+title: "Naturvårdsarter"
+entries:
+  -
+    framework:
+      - "trakthygge"
+      - "luckhuggning"
+      - "skärmträd"
+      - "naturskydd"
+      - "blädning"
+    time:
+      - "innan"
+      - "efter"
+      - "20 år"
+      - "50 år"
+      - "80 år"
+    startskog: "naturskog"
+    x: 0.34642844056398947
+    y: 0.27569904016837044
+    id: "click-1754923858027"
+  -
+    framework:
+      - "trakthygge"
+      - "luckhuggning"
+      - "skärmträd"
+      - "naturskydd"
+      - "blädning"
+    time: "innan"
+    startskog: "naturskog"
+    x: 0.37109134531886717
+    y: 0.17688385925764072
+    id: "click-1754923866036"
+  -
+    framework:
+      - "trakthygge"
+      - "luckhuggning"
+      - "skärmträd"
+      - "naturskydd"
+      - "blädning"
+    time: "innan"
+    startskog: "naturskog"
+    x: 0.3328882776064328
+    y: 0.38524805554515074
+    id: "click-1754923945794"
+  -
+    framework:
+      - "trakthygge"
+      - "luckhuggning"
+      - "skärmträd"
+      - "naturskydd"
+      - "blädning"
+    time: "innan"
+    startskog: "naturskog"
+    x: 0.4109909525546888
+    y: 0.3133192257216232
+    id: "click-1754923952287"
+  -
+    framework:
+      - "trakthygge"
+      - "luckhuggning"
+      - "skärmträd"
+      - "naturskydd"
+      - "blädning"
+    time: "innan"
+    startskog: "naturskog"
+    x: 0.45102346938828547
+    y: 0.3130124631405228
+    id: "click-1754923955978"
+  -
+    framework:
+      - "trakthygge"
+      - "luckhuggning"
+      - "skärmträd"
+      - "naturskydd"
+      - "blädning"
+    time: "innan"
+    startskog: "naturskog"
+    x: 0.5885182258792122
+    y: 0.2270835329100318
+    id: "click-1754923963101"
+  -
+    framework:
+      - "trakthygge"
+      - "luckhuggning"
+      - "skärmträd"
+      - "naturskydd"
+      - "blädning"
+    time: "innan"
+    startskog: "naturskog"
+    x: 0.6272355421250287
+    y: 0.1438028427923464
+    id: "click-1754923968263"
+  -
+    framework:
+      - "trakthygge"
+      - "luckhuggning"
+      - "skärmträd"
+      - "naturskydd"
+      - "blädning"
+    time: "innan"
+    startskog: "naturskog"
+    x: 0.5447444606721092
+    y: 0.1462281637037525
+    id: "click-1754923971423"
+  -
+    framework:
+      - "trakthygge"
+      - "luckhuggning"
+      - "skärmträd"
+      - "naturskydd"
+      - "blädning"
+    time: "innan"
+    startskog: "naturskog"
+    x: 0.6550156075661783
+    y: 0.3407193763356159
+    id: "click-1754923976323"
+  -
+    framework:
+      - "trakthygge"
+      - "luckhuggning"
+      - "skärmträd"
+      - "naturskydd"
+      - "blädning"
+    time: "innan"
+    startskog: "naturskog"
+    x: 0.7169586708034054
+    y: 0.4178609159222422
+    id: "click-1754923980732"

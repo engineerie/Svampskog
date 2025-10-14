@@ -256,25 +256,29 @@ export const collections = {
     type: "data",
     source: "forestry/svampar-skogsbruk.yml",
     schema: z.object({
-      entries: z.array(z.object({
-        artkategori: z.string().nonempty(),
-        frameworks: z.string().nonempty(),
-        startskog: z.string().optional(),
-        ['ålder']: z.number(),
-        klassning: z.number(),
-      })),
+      entries: z.array(
+        z.object({
+          artkategori: z.string().nonempty(),
+          frameworks: z.string().nonempty(),
+          startskog: z.string().optional(),
+          ["ålder"]: z.number(),
+          klassning: z.number(),
+        }),
+      ),
     }),
   }),
   totalSvamparSkogsbruk: defineCollection({
     type: "data",
     source: "forestry/total-svampar-skogsbruk.yml",
     schema: z.object({
-      entries: z.array(z.object({
-        artkategori: z.string().nonempty(),
-        frameworks: z.string().nonempty(),
-        ['ålder']: z.number(),
-        klassning: z.number(),
-      })),
+      entries: z.array(
+        z.object({
+          artkategori: z.string().nonempty(),
+          frameworks: z.string().nonempty(),
+          ["ålder"]: z.number(),
+          klassning: z.number(),
+        }),
+      ),
     }),
   }),
   skogsskotsel: defineCollection({
@@ -307,5 +311,13 @@ export const collections = {
     type: "data",
     source: "timelines/**/*.yml",
     schema: forestryTimelineSchema,
+  }),
+  overlays: defineCollection({
+    type: "data",
+    source: "overlays/*.yml",
+    schema: z.object({
+      title: z.string().optional(),
+      entries: z.array(z.record(z.any())),
+    }),
   }),
 };

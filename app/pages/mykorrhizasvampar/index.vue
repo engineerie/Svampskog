@@ -137,7 +137,7 @@ function bentoImages(item: CarouselItem) {
             }">
               <NuxtImg src="/images/svampindex/Cortinarius sanguineus-179-.jpg" width="300" height="300" format="webp"
                 alt="Illustration"
-                class="size-24 rounded-xl ring ring-muted/50 inline-flex mb-12 lg:mb-18 h-fit shadow-xl" />
+                class="size-18 sm:size-24 rounded-xl ring ring-muted/50 inline-flex mb-12 lg:mb-18 h-fit shadow-xl" />
             </Motion>
             <Motion :initial="{
               scale: 0.5,
@@ -153,7 +153,7 @@ function bentoImages(item: CarouselItem) {
             }" class="-mx-4 z-50">
               <NuxtImg src="/images/svampgrid/Cantharellus cibarius-3.jpg" width="300" height="300" format="webp"
                 alt="Illustration"
-                class="size-40 rounded-xl ring ring-muted/50 inline-flex mb-12 lg:mb-18 h-fit  z-50 shadow-xl" />
+                class="size-28 sm:size-40 rounded-xl ring ring-muted/50 inline-flex mb-12 lg:mb-18 h-fit  z-50 shadow-xl" />
             </Motion>
             <Motion :initial="{
               scale: 0.5,
@@ -169,7 +169,7 @@ function bentoImages(item: CarouselItem) {
             }">
               <NuxtImg src="/images/svampgrid/Gomphus clavatus-1.jpg" width="300" height="300" format="webp"
                 alt="Illustration"
-                class=" size-28 rounded-xl ring ring-muted/50 inline-flex mb-12 lg:mb-18 h-fit shadow-xl" />
+                class="size-20 sm:size-28 rounded-xl ring ring-muted/50 inline-flex mb-12 lg:mb-18 h-fit shadow-xl" />
             </Motion>
           </div>
 
@@ -184,7 +184,7 @@ function bentoImages(item: CarouselItem) {
                 <USelect size="xl" v-for="category in categories" :key="category.key"
                   :items="enabledOptions[category.key]" v-model="envStore[category.key]"
                   :placeholder="category.defaultLabel" class="flex-1 w-full my-1 text-lg ring-muted" append-to-body
-                  variant="outline">
+                  variant="soft">
                   <template #item="{ item }">
                     <div class="flex flex-col">
                       <div class="text-lg font-medium">{{ item.label }}</div>

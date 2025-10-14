@@ -1,5 +1,6 @@
 <template>
   <div class="relative flex flex-col w-full h-dvh">
+
     <DefineSettingsTemplate>
       <div class="space-y-0.5 p-3">
         <div class="grid grid-cols-2 gap-2 ">
@@ -37,208 +38,178 @@
             class="accent-primary-500 h-[5px] w-32" />
         </div>
         <div class="flex flex-wrap gap-1">
-          <UBadge v-for="overlay in overlayBadgeItems" :key="overlay.key" :label="overlay.label"
+          <UBadge v-for="overlay in overlayBadgeItems" :key="overlay.key" :label="overlay.label" :icon="overlay.icon"
             :color="pinned[overlay.key] ? 'primary' : 'neutral'" :variant="pinned[overlay.key] ? 'solid' : 'subtle'"
             class="cursor-pointer" :class="pinned[overlay.key] ? 'shadow-sm' : 'opacity-70 hover:opacity-100'"
             @click="toggleOverlayBadge(overlay.key)" />
         </div>
       </div>
     </DefineSettingsTemplate>
-    <div class="w-full sm:flex items-center bg-muted border-muted p-1 shadow-xl">
-      <div class="flex w-full sm:w-fit h-fit justify-center p-0 pb-0 sm:pb-0">
-        <div v-if="frameworkOptions.length"
-          class="grid sm:gap-4 gap-2 p-2 sm:py-1 sm:flex-row sm:items-center sm:justify-start h-fit w-full sm:w-fit"
-          :class="isFrameworkCompareMode ? 'grid-cols-2' : 'grid-cols-1'">
-          <USelect size="xl" :items="frameworkOptions" v-model="selectedFrameworkIndex"
-            :placeholder="currentFramework.label" append-to-body variant="outline" class="ring-muted rounded-2xl w-full"
-            :ui="{ content: 'min-w-fit', viewport: 'text-center' }" />
-          <USelect v-if="isFrameworkCompareMode" size="xl" :items="frameworkOptions" v-model="selectedFrameworkIndex2"
-            :placeholder="currentFramework2.label" append-to-body variant="outline" class="ring-muted rounded-2xl" />
+    <div>
+      <div class="w-full sm:flex items-center justify-center border-muted sm:p-1">
+        <div class="flex w-full sm:w-fit h-fit justify-center p-0 pb-0 sm:pb-0 items-center">
+          <div v-if="frameworkOptions.length"
+            class="grid sm:gap-4 gap-2 p-2 sm:py-1 sm:flex-row sm:items-center sm:justify-start h-fit w-full sm:w-fit"
+            :class="isFrameworkCompareMode ? 'grid-cols-2' : 'grid-cols-1'">
+            <USelect size="xl" :items="frameworkOptions" v-model="selectedFrameworkIndex"
+              :placeholder="currentFramework.label" append-to-body variant="soft" class="ring-muted  w-full"
+              :ui="{ content: 'min-w-fit', viewport: 'text-center' }" />
+            <USelect v-if="isFrameworkCompareMode" size="xl" :items="frameworkOptions" v-model="selectedFrameworkIndex2"
+              :placeholder="currentFramework2.label" append-to-body variant="soft" class="ring-muted " />
+
+          </div>
+          <UButton v-if="isMobile" icon="i-heroicons-x-mark" variant="soft" color="neutral"
+            class="rounded-full h-fit mr-2 ml-1" :ui="{ rounded: 'rounded-full' }" @click="emit('close')"
+            aria-label="Stäng modellvy" size="lg" />
+          <!-- <USeparator v-if="!isMobile" orientation="vertical" class="mx-3 h-8" /> -->
+        </div>
+
+
+        <div v-if="!isMobile" class="absolute top-3 right-3">
+          <UButton icon="i-heroicons-x-mark" variant="ghost" color="neutral" class="rounded-full"
+            :ui="{ rounded: 'rounded-full' }" @click="emit('close')" aria-label="Stäng modellvy" />
         </div>
       </div>
-      <USeparator v-if="!isMobile" orientation="vertical" class="mx-3 h-8" />
-      <div class="flex sm:justify-center items-center overflow-x-scroll md:overflow-hidden px-2 my-1 gap-4">
-        <UPopover class="shrink-0 cursor-pointer h-fit z-50" v-model:open="open2"
-          :popper="{ placement: 'bottom-start' }">
-          <UButton :variant="isMobile ? 'outline' : 'outline'" color="neutral" icon="i-heroicons-clock" size="lg"
-            :label="isMobile ? null : null" class="rounded-full ring-muted">
-          </UButton>
-          <template #content>
-            <div class="text-sm w-64 p-3 text-neutral-500 border-b border-neutral-200 ">
-              Kort beskriving av betydelsen för skogens historik
-            </div>
-            <div class="p-1 flex flex-col gap-1">
-              <div v-for="option in startskog" :key="option.value">
-                <UButton @click="selectOption(option)" size="lg" color="white" variant="ghost"
-                  class="hover:bg-neutral-100 w-full cursor-pointer" :class="{
-                    'w-full  text-secondary-500':
-                      currentStartskog.value === option.value,
-                  }">
-                  {{ option.label }}
-                </UButton>
-              </div>
-            </div>
-          </template>
-        </UPopover>
-        <UTabs v-model="selectedTimeValue" :items="timeItems" :ui="{
-          root: 'min-w-max flex-shrink-0',
-          list: 'flex-nowrap rounded-xl bg-muted/50 -mb-1.5 gap-2',
-          indicator: 'bg-white border border-muted/50 shadow rounded-2xl',
-          trigger: 'rounded-2xl data-[state=active]:text-neutral-800 dark:data-[state=active]:text-violet-400/90 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary '
-        }" />
-      </div>
-    </div>
+      <UContainer>
+        <div class="flex justify-between sm:p-1 border-b border-muted">
+          <div
+            class="absolute sm:static bottom-0 right-0 sm:top-0 sm:left-0 z-50 p-4 sm:p-0 space-y-2 sm:space-y-0 pointer-events-none sm:flex gap-2 items-center">
 
-    <div class="ui-zoom-reapply relative flex flex-col flex-1 w-full">
-
-
-      <div class="flex flex-1">
-        <div class="absolute bottom-0 right-0 sm:top-0 sm:left-0 z-50 p-4 space-y-2 pointer-events-none">
-          <div class="pointer-events-auto">
-            <UDrawer v-if="isMobile" :modal="false" :ui="{ content: 'p-0', body: 'p-0', container: 'p-0 gap-0' }">
-              <UButton size="xl" color="neutral" variant="outline" icon="i-heroicons-adjustments-horizontal"
-                class="ring-muted rounded-2xl" />
-              <template #body>
-                <reuseSettingsTemplate />
-              </template>
-            </UDrawer>
-            <UPopover v-else :ui="{ content: 'p-0 w-80', }"
-              :content="{ side: 'right', sideOffset: 8, collisionPadding: 8, align: 'start' }">
-              <UButton size="lg" color="neutral" variant="outline" label="Vyinställningar"
-                icon="i-heroicons-adjustments-horizontal" class="ring-muted rounded-2xl" />
-              <template #content>
-                <reuseSettingsTemplate />
-              </template>
-            </UPopover>
-          </div>
-          <div class="pointer-events-auto">
-            <UDrawer :direction="isMobile ? 'bottom' : 'bottom'" :inset="isMobile ? false : false" handle-only
-              :dismissible="isMobile ? true : false" :overlay="false" :handle="isMobile ? true : false" :modal="false"
-              v-model:open="textDrawerOpen"
-              :ui="{ header: 'flex items-center justify-between', body: 'p-0', container: 'p-0 gap-0', content: 'max-w-[85rem] mx-auto ', footer: 'gap-0' }">
-              <UButton :size="isMobile ? 'xl' : 'lg'" :label="isMobile ? null : 'Text'" variant="outline"
-                color="neutral" icon="i-heroicons-book-open" class="rounded-2xl" />
-              <template #body>
-                <UDrawer v-if="activeOverlayContent" v-model:open="overlayDrawerOpen" nested :direction="'bottom'"
-                  :modal="false" :overlay="false" :inset="false" :ui="{
-                    container: 'p-0 gap-0',
-                    content: 'max-w-3xl w-full mx-auto',
-                    body: 'p-4 space-y-3'
-                  }">
-                  <template #body>
-
-                    <div class="flex items-start justify-between gap-3">
-                      <h3 class="text-base font-semibold text-neutral-800">
-                        {{ activeOverlayContent.title }}
-                      </h3>
-                      <div class="flex gap-1">
-                        <UButton color="neutral" variant="ghost" size="xs" :ui="{ rounded: 'rounded-full' }"
-                          icon="codicon:pinned"
-                          :class="activeOverlayPinned ? 'text-primary-500' : 'text-neutral-500 hover:text-neutral-900'"
-                          :aria-pressed="activeOverlayPinned" :title="activeOverlayPinned ? 'Lossa' : 'Fäst'"
-                          @click="togglePinned(activeOverlayContent.key, { hideWhenUnpin: false })" />
+            <div>
+              <UDrawer :direction="isMobile ? 'bottom' : 'bottom'" :inset="isMobile ? false : true" handle-only
+                :dismissible="isMobile ? true : false" :overlay="false" :handle="isMobile ? true : false" :modal="false"
+                v-model:open="textDrawerOpen" class="pointer-events-auto"
+                :ui="{ header: 'flex items-center justify-between', body: 'p-0 ', container: 'p-0 gap-0 ', content: 'max-w-4xl mx-auto', footer: 'gap-0' }">
+                <UButton :size="isMobile ? 'xl' : 'md'" :label="isMobile ? null : 'Text'" color="neutral"
+                  icon="i-heroicons-book-open" class="ring-muted" :variant="textDrawerOpen ? 'subtle' : 'outline'" />
+                <template #body>
+                  <UDrawer v-if="activeOverlayContent" v-model:open="overlayDrawerOpen" nested direction="bottom"
+                    :modal="true" :overlay="false" :inset="isMobile ? false : true" :handle="isMobile ? true : false"
+                    :ui="{
+                      container: 'p-0 gap-0',
+                      content: 'sm:max-w-sm w-full mx-auto',
+                      body: 'p-4 space-y-3'
+                    }">
+                    <template #body>
+                      <div class="flex items-start justify-between gap-3">
+                        <div class="flex items-start gap-2">
+                          <UIcon v-if="activeOverlayIcon" :name="activeOverlayIcon"
+                            class="size-5 text-primary-500 mt-0.5" />
+                          <h3 class="text-base font-semibold text-neutral-800">
+                            {{ activeOverlayContent.title }}
+                          </h3>
+                        </div>
+                        <div class="flex gap-1">
+                          <UButton color="neutral" variant="ghost" size="xs" :ui="{ rounded: 'rounded-full' }"
+                            icon="codicon:pinned"
+                            :class="activeOverlayPinned ? 'text-primary-500' : 'text-neutral-500 hover:text-neutral-900'"
+                            :aria-pressed="activeOverlayPinned" :title="activeOverlayPinned ? 'Lossa' : 'Fäst'"
+                            @click="togglePinned(activeOverlayContent.key, { hideWhenUnpin: false })" />
+                        </div>
                       </div>
-                    </div>
-                    <p class="text-sm text-neutral-600 leading-relaxed">
-                      {{ activeOverlayContent.description }}
-                    </p>
-                    <UCard v-if="activeOverlayContent.key === 'kanteffekt' && isLuckhuggning.value" variant="soft"
-                      :ui="{ body: 'sm:p-4 sm:pl-2' }"
-                      class="mt-2 backdrop-blur-xl bg-neutral-900/50 border border-white/10">
-                      <USwitch :ui="{
-                        root: 'flex-row-reverse justify-between',
-                        label: 'text-white',
-                        description: 'text-neutral-200',
-                        base: 'data-[state=unchecked]:bg-neutral-600'
-                      }" size="xs" color="primary" v-model="oldKanteffektVisible" label="Tidigare kanteffekt"
-                        description="Visa spår från tidigare kanteffekt" />
-                    </UCard>
-                  </template>
-                </UDrawer>
-                <div v-if="timelineCarouselEnabled" class="sm:hidden ">
-                  <UCarousel :items="timelineSections" :ui="{ item: 'basis-12/13', viewport: 'p-3' }">
-                    <template #default="{ item: section }">
-                      <UCard :ui="{ body: 'p-4 space-y-4' }" class="min-h-[18rem]" variant="soft"
-                        @click="handleTimelineClick">
-                        <div class="flex items-center justify-between gap-3">
-                          <h2 class="text-sm font-medium text-neutral-700">
-                            {{ section.left }}
-                          </h2>
-                          <UBadge :label="section.right" class="ring-muted/50 py-1" variant="outline" color="neutral" />
-                        </div>
-                        <div v-if="section.info" class="space-y-4">
-                          <div class="space-y-2">
-                            <UButton type="button" variant="ghost" color="neutral"
-                              class="flex w-full items-center font-semibold gap-2 tracking-wide text-neutral-500 transition"
-                              @click.stop="toggleTimelineDetail(section.key, 'skog')">
-                              <span>Utveckling i skogen</span>
-                              <UIcon name="i-heroicons-chevron-down"
-                                class="h-4 w-4 text-neutral-400 transition-transform duration-200"
-                                :class="{ '-rotate-90': !isTimelineDetailOpen(section.key, 'skog') }" />
-                            </UButton>
-                            <p v-if="isTimelineDetailOpen(section.key, 'skog')"
-                              class="text-sm text-neutral-800 leading-relaxed p-2 mb-2 bg-muted rounded"
-                              v-html="makeClickableHtml(section.info.skog)"></p>
-                          </div>
-                          <div class="space-y-2">
-                            <UButton type="button" variant="ghost" color="neutral"
-                              class="flex w-full items-center gap-2 font-semibold tracking-wide text-neutral-500 transition"
-                              @click.stop="toggleTimelineDetail(section.key, 'svamp')">
-                              <span>Påverkan på mykorrhizasvampar</span>
-                              <UIcon name="i-heroicons-chevron-down"
-                                class="h-4 w-4 text-neutral-400 transition-transform duration-200"
-                                :class="{ '-rotate-90': !isTimelineDetailOpen(section.key, 'svamp') }" />
-                            </UButton>
-                            <span v-if="isTimelineDetailOpen(section.key, 'svamp')"
-                              class="block text-sm text-neutral-800 leading-relaxed p-2 bg-muted rounded"
-                              v-html="makeClickableHtml(section.info.svamp)"></span>
-                          </div>
-                        </div>
-                        <div v-else class="text-sm text-neutral-400">
-                          {{ section.emptyMessage || timelineEmptyMessage }}
-                        </div>
+                      <p class="text-sm text-neutral-600 leading-relaxed">
+                        {{ activeOverlayContent.description }}
+                      </p>
+                      <UCard v-if="activeOverlayContent.key === 'kanteffekt'" variant="soft"
+                        :ui="{ body: 'sm:p-4 sm:pl-2' }" class="mt-2 backdrop-blur-xl border border-white/10">
+                        <USwitch :ui="{
+                          root: 'flex-row-reverse justify-between',
+                          label: '',
+                          description: '',
+                          base: 'data-[state=unchecked]:bg-neutral-600'
+                        }" size="md" color="primary" v-model="oldKanteffektVisible" label="Tidigare kanteffekt"
+                          description="Visa spår från tidigare kanteffekt" />
                       </UCard>
                     </template>
-                  </UCarousel>
-                </div>
-                <div v-else class="sm:grid divide-y sm:divide-y-0 sm:divide-x divide-muted/70"
-                  :class="compareEnabled ? 'sm:grid-cols-2' : 'sm:grid-cols-1'">
-                  <div v-for="section in timelineSections" :key="section.key" class="p-3 sm:p-6 sm:pb-8 group"
-                    @click="handleTimelineClick">
-                    <div v-if="section.info" class="">
-                      <div class="space-y-2">
-                        <UButton type="button" variant="ghost" color="neutral"
-                          class="flex w-full items-center font-semibold gap-2 tracking-wide text-neutral-500 transition"
-                          @click.stop="toggleTimelineDetail(section.key, 'skog')">
-                          <span>Utveckling i skogen</span>
-                          <UIcon name="i-heroicons-chevron-down"
-                            class="h-4 w-4 text-neutral-400 transition-transform duration-200"
-                            :class="{ '-rotate-90': !isTimelineDetailOpen(section.key, 'skog') }" />
-                        </UButton>
-                        <p v-if="isTimelineDetailOpen(section.key, 'skog')"
-                          class="text-sm text-neutral-800 leading-relaxed p-2 mb-2 bg-muted rounded"
-                          v-html="makeClickableHtml(section.info.skog)"></p>
-                      </div>
-                      <div class="space-y-2">
-                        <UButton type="button" variant="ghost" color="neutral"
-                          class="flex w-full items-center gap-2 font-semibold  tracking-wide text-neutral-500 transition"
-                          @click.stop="toggleTimelineDetail(section.key, 'svamp')">
-                          <span>Påverkan på mykorrhizasvampar</span>
-                          <UIcon name="i-heroicons-chevron-down"
-                            class="h-4 w-4 text-neutral-400 transition-transform duration-200"
-                            :class="{ '-rotate-90': !isTimelineDetailOpen(section.key, 'svamp') }" />
-                        </UButton>
-                        <span v-if="isTimelineDetailOpen(section.key, 'svamp')"
-                          class="block text-sm text-neutral-800 leading-relaxed p-2 bg-muted rounded"
-                          v-html="makeClickableHtml(section.info.svamp)"></span>
-                      </div>
+                  </UDrawer>
+                  <div v-if="timelineCarouselEnabled" class="sm:hidden ">
+                    <UCarousel :items="timelineSections" :ui="{ item: 'basis-12/13', viewport: 'p-3' }">
+                      <template #default="{ item: section }">
+                        <UCard :ui="{ body: 'p-4 space-y-4' }" class="min-h-[18rem]" variant="soft"
+                          @click="handleTimelineClick">
+                          <div class="flex items-center justify-between gap-3">
+                            <h2 class="text-sm font-medium text-neutral-700">
+                              {{ section.left }}
+                            </h2>
+                            <UBadge :label="section.right" class="ring-muted/50 py-1" variant="outline"
+                              color="neutral" />
+                          </div>
+                          <div v-if="section.info" class="space-y-4">
+                            <div class="space-y-2">
+                              <UButton type="button" variant="ghost" color="neutral"
+                                class="flex w-full items-center font-semibold gap-2 tracking-wide text-neutral-500 transition"
+                                @click.stop="toggleTimelineDetail(section.key, 'skog')">
+                                <span>Utveckling i skogen</span>
+                                <UIcon name="i-heroicons-chevron-down"
+                                  class="h-4 w-4 text-neutral-400 transition-transform duration-200"
+                                  :class="{ '-rotate-90': !isTimelineDetailOpen(section.key, 'skog') }" />
+                              </UButton>
+                              <p v-if="isTimelineDetailOpen(section.key, 'skog')"
+                                class="text-sm text-neutral-800 leading-relaxed p-2 mb-2 bg-muted rounded"
+                                v-html="makeClickableHtml(section.info.skog)"></p>
+                            </div>
+                            <div class="space-y-2">
+                              <UButton type="button" variant="ghost" color="neutral"
+                                class="flex w-full items-center gap-2 font-semibold tracking-wide text-neutral-500 transition"
+                                @click.stop="toggleTimelineDetail(section.key, 'svamp')">
+                                <span>Påverkan på mykorrhizasvampar</span>
+                                <UIcon name="i-heroicons-chevron-down"
+                                  class="h-4 w-4 text-neutral-400 transition-transform duration-200"
+                                  :class="{ '-rotate-90': !isTimelineDetailOpen(section.key, 'svamp') }" />
+                              </UButton>
+                              <span v-if="isTimelineDetailOpen(section.key, 'svamp')"
+                                class="block text-sm text-neutral-800 leading-relaxed p-2 bg-muted rounded"
+                                v-html="makeClickableHtml(section.info.svamp)"></span>
+                            </div>
+                          </div>
+                          <div v-else class="text-sm text-neutral-400">
+                            {{ section.emptyMessage || timelineEmptyMessage }}
+                          </div>
+                        </UCard>
+                      </template>
+                    </UCarousel>
+                  </div>
+                  <div v-else class="sm:grid divide-y sm:divide-y-0 sm:divide-x divide-muted/70 transition-all relative"
+                    :class="[compareEnabled ? 'sm:grid-cols-2' : 'sm:grid-cols-1', activeOverlayContent ? 'sm:opacity-40' : '']">
+                    <div class="absolute inset-0 bg-neutral-500 transition-all pointer-events-none"
+                      :class="activeOverlayContent ? 'opacity-0 sm:opacity-40 sm:bg-neutral-500/50' : 'opacity-0'">
                     </div>
-                    <div v-else class="text-sm text-neutral-400">
-                      {{ section.emptyMessage || timelineEmptyMessage }}
+                    <div v-for="section in timelineSections" :key="section.key" class="p-3 sm:p-6 sm:pb-8 group"
+                      @click="handleTimelineClick">
+                      <div v-if="section.info" class="">
+                        <div class="space-y-2 ">
+                          <UButton type="button" variant="ghost" color="neutral"
+                            class="flex w-full items-center font-semibold gap-2 tracking-wide text-neutral-500 transition"
+                            @click.stop="toggleTimelineDetail(section.key, 'skog')">
+                            <span>Utveckling i skogen</span>
+                            <UIcon name="i-heroicons-chevron-down"
+                              class="h-4 w-4 text-neutral-400 transition-transform duration-200"
+                              :class="{ '-rotate-90': !isTimelineDetailOpen(section.key, 'skog') }" />
+                          </UButton>
+                          <p v-if="isTimelineDetailOpen(section.key, 'skog')"
+                            class="text-sm text-neutral-800 leading-relaxed p-2 mb-2 bg-muted rounded"
+                            v-html="makeClickableHtml(section.info.skog)"></p>
+                        </div>
+                        <div class="space-y-2">
+                          <UButton type="button" variant="ghost" color="neutral"
+                            class="flex w-full items-center gap-2 font-semibold  tracking-wide text-neutral-500 transition"
+                            @click.stop="toggleTimelineDetail(section.key, 'svamp')">
+                            <span>Påverkan på mykorrhizasvampar</span>
+                            <UIcon name="i-heroicons-chevron-down"
+                              class="h-4 w-4 text-neutral-400 transition-transform duration-200"
+                              :class="{ '-rotate-90': !isTimelineDetailOpen(section.key, 'svamp') }" />
+                          </UButton>
+                          <span v-if="isTimelineDetailOpen(section.key, 'svamp')"
+                            class="block text-sm text-neutral-800 leading-relaxed p-2 bg-muted rounded"
+                            v-html="makeClickableHtml(section.info.svamp)"></span>
+                        </div>
+                      </div>
+                      <div v-else class="text-sm text-neutral-400">
+                        {{ section.emptyMessage || timelineEmptyMessage }}
+                      </div>
                     </div>
                   </div>
-                </div>
-                <!-- <div class="relative">
+                  <!-- <div class="relative">
                 <UTabs :items="panelTabs" variant="link" size="md" class="w-full"
                   :ui="{ indicator: 'hidden', trigger: 'ring ring-muted data-[state=active]:bg-muted data-[state=active]:text-neutral-700 py-1 flex-1 sm:flex-none', list: 'gap-2 p-2 bg-transparent', root: 'gap-0' }">
                   <template #text>
@@ -249,32 +220,135 @@
                   </template>
                 </UTabs>
               </div> -->
+                </template>
+              </UDrawer>
+            </div>
+            <div>
+              <UDrawer :direction="isMobile ? 'bottom' : 'bottom'" :inset="isMobile ? false : true" handle-only
+                :dismissible="isMobile ? true : false" :overlay="false" :handle="isMobile ? true : false" :modal="false"
+                v-model:open="chartDrawerOpen" class="pointer-events-auto"
+                :ui="{ header: 'flex items-center justify-between', body: 'p-0', container: 'p-0 gap-0', content: 'max-w-4xl mx-auto', footer: 'gap-0' }">
+                <UButton :size="isMobile ? 'xl' : 'md'" :label="isMobile ? null : 'Diagram'"
+                  :variant="chartDrawerOpen ? 'subtle' : 'outline'" color="neutral" class="ring-muted"
+                  icon="i-carbon-chart-line-smooth" />
+                <template #body>
+                  <ForestryChartMain
+                    :parentSelectedFrameworks="isFrameworkCompareMode ? [currentFramework.value, currentFramework2.value] : [currentFramework.value]"
+                    :currentTimeValue="currentTimeValue" :currentStartskog="currentStartskog.value" />
+                  <div class="px-4 pb-4 text-xs text-muted">
+                    Fugiat irure tempor nisi dolor. Sit irure reprehenderit sint est nostrud. Voluptate reprehenderit
+                    amet
+                    laboris non nostrud.
+                  </div>
+                </template>
+              </UDrawer>
+            </div>
+            <UDrawer v-if="isMobile" :modal="false" :ui="{ content: 'p-0', body: 'p-0', container: 'p-0 gap-0' }">
+              <UButton size="xl" color="neutral" variant="outline" icon="i-heroicons-adjustments-horizontal"
+                class="ring-muted  pointer-events-auto mt-8" />
+              <template #body>
+                <reuseSettingsTemplate />
               </template>
             </UDrawer>
           </div>
-          <div class="pointer-events-auto">
-            <UDrawer :direction="isMobile ? 'bottom' : 'bottom'" :inset="isMobile ? false : false" handle-only
-              :dismissible="isMobile ? true : false" :overlay="false" :handle="isMobile ? true : false" :modal="false"
-              v-model:open="chartDrawerOpen"
-              :ui="{ header: 'flex items-center justify-between', body: 'p-0', container: 'p-0 gap-0', content: 'max-w-[85rem] mx-auto', footer: 'gap-0' }">
-              <UButton :size="isMobile ? 'xl' : 'lg'" :label="isMobile ? null : 'Diagram'" variant="outline"
-                color="neutral" class="rounded-2xl" icon="i-carbon-chart-line-smooth" />
-              <template #body>
-                <ForestryChartMain
-                  :parentSelectedFrameworks="isFrameworkCompareMode ? [currentFramework.value, currentFramework2.value] : [currentFramework.value]"
-                  :currentTimeValue="currentTimeValue" :currentStartskog="currentStartskog.value" />
+          <div
+            class="flex sm:justify-center items-center overflow-x-scroll md:overflow-hidden sm:pl-6 px-2 my-1 sm:my-0 gap-4 ">
+            <UPopover class="shrink-0 cursor-pointer h-fit z-50" v-model:open="open2"
+              :popper="{ placement: 'bottom-start' }">
+              <UButton :variant="isMobile ? 'outline' : 'outline'" color="neutral" icon="i-heroicons-clock" size="lg"
+                :label="isMobile ? null : null" class="rounded-full ring-muted">
+              </UButton>
+              <template #content>
+                <div class="text-sm w-64 p-3 text-neutral-500 border-b border-neutral-200 ">
+                  Kort beskriving av betydelsen för skogens historik
+                </div>
+                <div class="p-1 flex flex-col gap-1">
+                  <div v-for="option in startskog" :key="option.value">
+                    <UButton @click="selectOption(option)" size="lg" color="white" variant="ghost"
+                      class="hover:bg-neutral-100 w-full cursor-pointer" :class="{
+                        'w-full  text-secondary-500':
+                          currentStartskog.value === option.value,
+                      }">
+                      {{ option.label }}
+                    </UButton>
+                  </div>
+                </div>
               </template>
-            </UDrawer>
+            </UPopover>
+            <UTabs v-model="selectedTimeValue" :items="timeItems" :ui="{
+              root: 'min-w-max flex-shrink-0',
+              list: 'flex-nowrap rounded-xl bg-transparent -mb-1.5 gap-2',
+              indicator: 'bg-white border border-muted/50 shadow ',
+              trigger: ' data-[state=active]:text-neutral-800 dark:data-[state=active]:text-violet-400/90 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary '
+            }" />
+          </div>
+          <div class=" flex items-center">
+            <UPopover v-if="!isMobile" :ui="{ content: 'p-0 w-80', }"
+              :content="{ side: 'bottom', sideOffset: 8, collisionPadding: 8, align: 'start' }"
+              class="pointer-events-auto">
+              <UButton size="md" color="neutral" variant="outline" label="Display"
+                icon="i-heroicons-adjustments-horizontal" class="ring-muted" />
+              <template #content>
+                <reuseSettingsTemplate />
+              </template>
+            </UPopover>
           </div>
 
         </div>
+      </UContainer>
+
+    </div>
+
+
+    <div class="ui-zoom-reapply relative flex flex-col flex-1 w-full">
+
+
+      <div class="flex flex-1">
+
 
         <div v-if="pinnedOverlayBadges.length"
           class="space-y-1.5 sm:p-4 p-2 pt-3 max-w-sm z-50 absolute top-0 right-0 transform-all text-end pointer-events-none">
           <template v-for="badge in pinnedOverlayBadges" :key="badge.key">
             <div class="pointer-events-auto flex flex-col sm:flex sm:flex-wrap gap-1 items-end">
-              <UBadge :label="badge.title" color="neutral" variant="outline"
-                class="cursor-pointer shadow-sm sm:ml-1.5 w-fit" @click="togglePinned(badge.key)" />
+              <UPopover :open-delay="500" :close-delay="300" mode="click" v-model:open="badgePopoverOpen[badge.key]"
+                :popper="{ placement: 'bottom-end' }" :ui="{ content: 'p-0 w-80' }">
+                <div>
+                  <UBadge color="neutral" variant="outline" size="lg" :class="[
+                    'cursor-pointer shadow-sm sm:ml-1.5 w-fit transition-opacity',
+                    isOverlayAssociatedAny(badge.key) ? '' : 'opacity-50'
+                  ]">
+
+                    <div class="flex items-center gap-1">
+                      <UIcon v-if="badge.icon" :name="badge.icon" class="size-5 text-primary-500" />
+                      <span>{{ badge.title }}</span>
+                      <!-- <UIcon name="i-heroicons-x-mark" /> -->
+                    </div>
+
+
+
+                  </UBadge>
+                </div>
+
+                <template #content>
+                  <div class="p-3 space-y-2">
+                    <div class="flex w-full justify-between">
+                      <div class="flex items-start gap-2">
+                        <UIcon v-if="badge.icon" :name="badge.icon" class="size-5 text-primary-500 mt-0.5" />
+                        <h3 class="text-sm font-semibold text-neutral-800">
+                          {{ getOverlayInfo(badge.key).title || badge.title }}
+                        </h3>
+                      </div>
+                      <UButton label="Ta bort" variant="subtle" color="error" size="xs"
+                        @click="togglePinned(badge.key), badgePopoverOpen[badge.key] = true" />
+                    </div>
+
+                    <p v-if="getOverlayInfo(badge.key).description" class="text-sm text-neutral-600 leading-relaxed">
+                      {{ getOverlayInfo(badge.key).description }}
+                    </p>
+                    <div v-else class="text-xs text-neutral-400">Ingen beskrivning tillgänglig.</div>
+                  </div>
+                </template>
+              </UPopover>
             </div>
           </template>
         </div>
@@ -430,8 +504,11 @@
               :smaplantor-visible="smaplantorVisible" :dev-save-clicks="devSaveClicks"
               :seedTree-visible="seedTreeVisible" :rottacke-visible="rottackeVisible"
               :retention-visible="retentionVisible" :old-kanteffekt-visible="oldKanteffektVisible"
-              :kanteffekt-visible="kanteffektVisible" :retention-trees="retentionTrees"
-              @retentionTreeAdded="retentionTrees.push($event)" :fullscreenLayout="true"
+              :kanteffekt-visible="kanteffektVisible" :retention-points="filteredOverlayData.retention"
+              :seed-tree-points="filteredOverlayData.seedTree" :smaplantor-points="filteredOverlayData.smaplantor"
+              :hogstubbar-points="filteredOverlayData.hogstubbar"
+              :naturvardsarter-points="filteredOverlayData.naturvardsarter"
+              :kanteffekt-features="filteredOverlayData.kanteffekt" :fullscreenLayout="true"
               :currentFramework="currentFramework" :currentTime="timeLabelForDataFiltering"
               :currentStartskog="currentStartskog" :layoutMode="currentLayoutMode" ref="singleViewerRef"
               :frameworkLabel="currentFramework.label" :timeLabel="currentTimeLabel" :dziUrl="currentOverlayImagePath"
@@ -469,33 +546,69 @@
             :frameworkLabel="currentFramework.label" timeLabel="Före avverkning"
             :frameworkLabel2="currentFramework.label" :timeLabel2="currentTimeLabel" :layoutMode="currentLayoutMode">
             <template #first>
-              <OpenSeadragonViewer :naturvardsarter-visible="naturvardsarterVisible" :fullscreenLayout="true"
-                :currentFramework="currentFramework" currentTime="innan" :currentStartskog="currentStartskog"
-                :layoutMode="currentLayoutMode" ref="beforeViewerRef" :comparisonMode="true"
-                :frameworkLabel="currentFramework.label" timeLabel="Före avverkning"
-                :dziUrl="comparisonOverlayImagePath1" :overlayDziUrl="comparisonImagePath1" :allowPan="true"
-                @opened="onViewerOpened('before')" @activated="activeViewer.valueOf = 'before'"
+              <OpenSeadragonViewer :naturvardsarter-visible="naturvardsarterVisible"
+                :retention-visible="retentionVisible" :kanteffekt-visible="kanteffektVisible"
+                :old-kanteffekt-visible="oldKanteffektVisible" :rottacke-visible="rottackeVisible"
+                :seedTree-visible="seedTreeVisible" :smaplantor-visible="smaplantorVisible"
+                :hogstubbar-visible="hogstubbarVisible" :tradplantor-visible="tradplantorVisible"
+                :fullscreenLayout="true" :retention-points="filteredBeforeOverlayData.retention"
+                :seed-tree-points="filteredBeforeOverlayData.seedTree"
+                :smaplantor-points="filteredBeforeOverlayData.smaplantor"
+                :hogstubbar-points="filteredBeforeOverlayData.hogstubbar"
+                :naturvardsarter-points="filteredBeforeOverlayData.naturvardsarter"
+                :kanteffekt-features="filteredBeforeOverlayData.kanteffekt" :currentFramework="currentFramework"
+                currentTime="innan" :currentStartskog="currentStartskog" :layoutMode="currentLayoutMode"
+                ref="beforeViewerRef" :comparisonMode="true" :frameworkLabel="currentFramework.label"
+                timeLabel="Före avverkning" :dziUrl="comparisonOverlayImagePath1" :overlayDziUrl="comparisonImagePath1"
+                :allowPan="true" @opened="onViewerOpened('before')" @activated="activeViewer.valueOf = 'before'"
                 v-if="!opacitySyncEnabled" class="w-full h-full" />
-              <OpenSeadragonViewer :naturvardsarter-visible="naturvardsarterVisible" :fullscreenLayout="true"
-                :currentFramework="currentFramework" currentTime="innan" :currentStartskog="currentStartskog"
-                :layoutMode="currentLayoutMode" ref="beforeViewerRef" :comparisonMode="true"
-                :frameworkLabel="currentFramework.label" timeLabel="Före avverkning"
-                :dziUrl="comparisonOverlayImagePath1" :overlayDziUrl="comparisonImagePath1" :allowPan="true"
-                @opened="onViewerOpened('before')" @activated="activeViewer.valueOf = 'before'" v-else
+              <OpenSeadragonViewer :naturvardsarter-visible="naturvardsarterVisible"
+                :retention-visible="retentionVisible" :kanteffekt-visible="kanteffektVisible"
+                :old-kanteffekt-visible="oldKanteffektVisible" :rottacke-visible="rottackeVisible"
+                :seedTree-visible="seedTreeVisible" :smaplantor-visible="smaplantorVisible"
+                :hogstubbar-visible="hogstubbarVisible" :tradplantor-visible="tradplantorVisible"
+                :fullscreenLayout="true" :retention-points="filteredBeforeOverlayData.retention"
+                :seed-tree-points="filteredBeforeOverlayData.seedTree"
+                :smaplantor-points="filteredBeforeOverlayData.smaplantor"
+                :hogstubbar-points="filteredBeforeOverlayData.hogstubbar"
+                :naturvardsarter-points="filteredBeforeOverlayData.naturvardsarter"
+                :kanteffekt-features="filteredBeforeOverlayData.kanteffekt" :currentFramework="currentFramework"
+                currentTime="innan" :currentStartskog="currentStartskog" :layoutMode="currentLayoutMode"
+                ref="beforeViewerRef" :comparisonMode="true" :frameworkLabel="currentFramework.label"
+                timeLabel="Före avverkning" :dziUrl="comparisonOverlayImagePath1" :overlayDziUrl="comparisonImagePath1"
+                :allowPan="true" @opened="onViewerOpened('before')" @activated="activeViewer.valueOf = 'before'" v-else
                 v-model:globalOpacity="globalOpacity" class="w-full h-full" />
             </template>
             <template #second>
-              <OpenSeadragonViewer :naturvardsarter-visible="naturvardsarterVisible" :fullscreenLayout="true"
-                :currentFramework="currentFramework" :currentTime="timeLabelForDataFiltering"
-                :currentStartskog="currentStartskog" :layoutMode="currentLayoutMode" ref="afterViewerRef"
-                :comparisonMode="true" :frameworkLabel="currentFramework.label" :timeLabel="currentTimeLabel"
+              <OpenSeadragonViewer :naturvardsarter-visible="naturvardsarterVisible"
+                :retention-visible="retentionVisible" :kanteffekt-visible="kanteffektVisible"
+                :old-kanteffekt-visible="oldKanteffektVisible" :rottacke-visible="rottackeVisible"
+                :seedTree-visible="seedTreeVisible" :smaplantor-visible="smaplantorVisible"
+                :hogstubbar-visible="hogstubbarVisible" :tradplantor-visible="tradplantorVisible"
+                :fullscreenLayout="true" :retention-points="filteredOverlayData.retention"
+                :seed-tree-points="filteredOverlayData.seedTree" :smaplantor-points="filteredOverlayData.smaplantor"
+                :hogstubbar-points="filteredOverlayData.hogstubbar"
+                :naturvardsarter-points="filteredOverlayData.naturvardsarter"
+                :kanteffekt-features="filteredOverlayData.kanteffekt" :currentFramework="currentFramework"
+                :currentTime="timeLabelForDataFiltering" :currentStartskog="currentStartskog"
+                :layoutMode="currentLayoutMode" ref="afterViewerRef" :comparisonMode="true"
+                :frameworkLabel="currentFramework.label" :timeLabel="currentTimeLabel"
                 :dziUrl="comparisonOverlayImagePath2" :overlayDziUrl="currentImagePath" :allowPan="true"
                 sliderPosition="right" @opened="onViewerOpened('after')" @activated="activeViewer.valueOf = 'after'"
                 v-if="!opacitySyncEnabled" class="w-full h-full " />
-              <OpenSeadragonViewer :naturvardsarter-visible="naturvardsarterVisible" :fullscreenLayout="true"
-                :currentFramework="currentFramework" :currentTime="timeLabelForDataFiltering"
-                :currentStartskog="currentStartskog" :layoutMode="currentLayoutMode" ref="afterViewerRef"
-                :comparisonMode="true" :frameworkLabel="currentFramework.label" :timeLabel="currentTimeLabel"
+              <OpenSeadragonViewer :naturvardsarter-visible="naturvardsarterVisible"
+                :retention-visible="retentionVisible" :kanteffekt-visible="kanteffektVisible"
+                :old-kanteffekt-visible="oldKanteffektVisible" :rottacke-visible="rottackeVisible"
+                :seedTree-visible="seedTreeVisible" :smaplantor-visible="smaplantorVisible"
+                :hogstubbar-visible="hogstubbarVisible" :tradplantor-visible="tradplantorVisible"
+                :fullscreenLayout="true" :retention-points="filteredOverlayData.retention"
+                :seed-tree-points="filteredOverlayData.seedTree" :smaplantor-points="filteredOverlayData.smaplantor"
+                :hogstubbar-points="filteredOverlayData.hogstubbar"
+                :naturvardsarter-points="filteredOverlayData.naturvardsarter"
+                :kanteffekt-features="filteredOverlayData.kanteffekt" :currentFramework="currentFramework"
+                :currentTime="timeLabelForDataFiltering" :currentStartskog="currentStartskog"
+                :layoutMode="currentLayoutMode" ref="afterViewerRef" :comparisonMode="true"
+                :frameworkLabel="currentFramework.label" :timeLabel="currentTimeLabel"
                 :dziUrl="comparisonOverlayImagePath2" :overlayDziUrl="currentImagePath" :allowPan="true"
                 sliderPosition="right" @opened="onViewerOpened('after')" @activated="activeViewer.valueOf = 'after'"
                 v-else v-model:globalOpacity="globalOpacity" class="w-full h-full  " />
@@ -508,19 +621,37 @@
             :frameworkLabel2="currentFramework2.label" :timeLabel2="currentTimeLabel" :layoutMode="currentLayoutMode"
             class="w-full">
             <template #first>
-              <OpenSeadragonViewer :naturvardsarter-visible="naturvardsarterVisible" :fullscreenLayout="true"
-                :currentFramework="currentFramework" :currentTime="timeLabelForDataFiltering"
-                :currentStartskog="currentStartskog" :layoutMode="currentLayoutMode" ref="framework1ViewerRef"
-                :comparisonMode="true" :frameworkLabel="currentFramework.label" :timeLabel="currentTimeLabel"
+              <OpenSeadragonViewer :naturvardsarter-visible="naturvardsarterVisible"
+                :retention-visible="retentionVisible" :kanteffekt-visible="kanteffektVisible"
+                :old-kanteffekt-visible="oldKanteffektVisible" :rottacke-visible="rottackeVisible"
+                :seedTree-visible="seedTreeVisible" :smaplantor-visible="smaplantorVisible"
+                :hogstubbar-visible="hogstubbarVisible" :tradplantor-visible="tradplantorVisible"
+                :fullscreenLayout="true" :retention-points="filteredOverlayData.retention"
+                :seed-tree-points="filteredOverlayData.seedTree" :smaplantor-points="filteredOverlayData.smaplantor"
+                :hogstubbar-points="filteredOverlayData.hogstubbar"
+                :naturvardsarter-points="filteredOverlayData.naturvardsarter"
+                :kanteffekt-features="filteredOverlayData.kanteffekt" :currentFramework="currentFramework"
+                :currentTime="timeLabelForDataFiltering" :currentStartskog="currentStartskog"
+                :layoutMode="currentLayoutMode" ref="framework1ViewerRef" :comparisonMode="true"
+                :frameworkLabel="currentFramework.label" :timeLabel="currentTimeLabel"
                 :dziUrl="frameworkOverlayImagePath1" :overlayDziUrl="currentImagePath"
                 :allowPan="!isCompare && !isFrameworkCompareMode" v-if="!opacitySyncEnabled"
                 @viewportChanged="($event) => onViewportChanged('framework1', $event)"
                 @opened="onViewerOpened('framework1')" @activated="activeViewer.valueOf = 'framework1'"
                 class="w-full h-full" />
-              <OpenSeadragonViewer :naturvardsarter-visible="naturvardsarterVisible" :fullscreenLayout="true"
-                :currentFramework="currentFramework" :currentTime="timeLabelForDataFiltering"
-                :currentStartskog="currentStartskog" :layoutMode="currentLayoutMode" ref="framework1ViewerRef"
-                :comparisonMode="true" :frameworkLabel="currentFramework.label" :timeLabel="currentTimeLabel"
+              <OpenSeadragonViewer :naturvardsarter-visible="naturvardsarterVisible"
+                :retention-visible="retentionVisible" :kanteffekt-visible="kanteffektVisible"
+                :old-kanteffekt-visible="oldKanteffektVisible" :rottacke-visible="rottackeVisible"
+                :seedTree-visible="seedTreeVisible" :smaplantor-visible="smaplantorVisible"
+                :hogstubbar-visible="hogstubbarVisible" :tradplantor-visible="tradplantorVisible"
+                :fullscreenLayout="true" :retention-points="filteredOverlayData.retention"
+                :seed-tree-points="filteredOverlayData.seedTree" :smaplantor-points="filteredOverlayData.smaplantor"
+                :hogstubbar-points="filteredOverlayData.hogstubbar"
+                :naturvardsarter-points="filteredOverlayData.naturvardsarter"
+                :kanteffekt-features="filteredOverlayData.kanteffekt" :currentFramework="currentFramework"
+                :currentTime="timeLabelForDataFiltering" :currentStartskog="currentStartskog"
+                :layoutMode="currentLayoutMode" ref="framework1ViewerRef" :comparisonMode="true"
+                :frameworkLabel="currentFramework.label" :timeLabel="currentTimeLabel"
                 :dziUrl="frameworkOverlayImagePath1" :overlayDziUrl="currentImagePath"
                 :allowPan="!isCompare && !isFrameworkCompareMode" v-else v-model:globalOpacity="globalOpacity"
                 @viewportChanged="($event) => onViewportChanged('framework1', $event)"
@@ -528,19 +659,39 @@
                 class="w-full h-full" />
             </template>
             <template #second>
-              <OpenSeadragonViewer :naturvardsarter-visible="naturvardsarterVisible" :fullscreenLayout="true"
-                :currentFramework="currentFramework2" :currentTime="timeLabelForDataFiltering"
-                :currentStartskog="currentStartskog" :layoutMode="currentLayoutMode" ref="framework2ViewerRef"
-                :comparisonMode="true" :frameworkLabel="currentFramework2.label" :timeLabel="currentTimeLabel"
+              <OpenSeadragonViewer :naturvardsarter-visible="naturvardsarterVisible"
+                :retention-visible="retentionVisible" :kanteffekt-visible="kanteffektVisible"
+                :old-kanteffekt-visible="oldKanteffektVisible" :rottacke-visible="rottackeVisible"
+                :seedTree-visible="seedTreeVisible" :smaplantor-visible="smaplantorVisible"
+                :hogstubbar-visible="hogstubbarVisible" :tradplantor-visible="tradplantorVisible"
+                :fullscreenLayout="true" :retention-points="filteredOverlayDataFramework2.retention"
+                :seed-tree-points="filteredOverlayDataFramework2.seedTree"
+                :smaplantor-points="filteredOverlayDataFramework2.smaplantor"
+                :hogstubbar-points="filteredOverlayDataFramework2.hogstubbar"
+                :naturvardsarter-points="filteredOverlayDataFramework2.naturvardsarter"
+                :kanteffekt-features="filteredOverlayDataFramework2.kanteffekt" :currentFramework="currentFramework2"
+                :currentTime="timeLabelForDataFiltering" :currentStartskog="currentStartskog"
+                :layoutMode="currentLayoutMode" ref="framework2ViewerRef" :comparisonMode="true"
+                :frameworkLabel="currentFramework2.label" :timeLabel="currentTimeLabel"
                 :dziUrl="frameworkOverlayImagePath2" :overlayDziUrl="currentImagePath2" v-if="!opacitySyncEnabled"
                 :allowPan="!isCompare && !isFrameworkCompareMode" sliderPosition="right"
                 @viewportChanged="($event) => onViewportChanged('framework2', $event)"
                 @opened="onViewerOpened('framework2')" @activated="activeViewer.valueOf = 'framework2'"
                 class="w-full h-full" />
-              <OpenSeadragonViewer :naturvardsarter-visible="naturvardsarterVisible" :fullscreenLayout="true"
-                :currentFramework="currentFramework2" :currentTime="timeLabelForDataFiltering"
-                :currentStartskog="currentStartskog" :layoutMode="currentLayoutMode" ref="framework2ViewerRef"
-                :comparisonMode="true" :frameworkLabel="currentFramework2.label" :timeLabel="currentTimeLabel"
+              <OpenSeadragonViewer :naturvardsarter-visible="naturvardsarterVisible"
+                :retention-visible="retentionVisible" :kanteffekt-visible="kanteffektVisible"
+                :old-kanteffekt-visible="oldKanteffektVisible" :rottacke-visible="rottackeVisible"
+                :seedTree-visible="seedTreeVisible" :smaplantor-visible="smaplantorVisible"
+                :hogstubbar-visible="hogstubbarVisible" :tradplantor-visible="tradplantorVisible"
+                :fullscreenLayout="true" :retention-points="filteredOverlayDataFramework2.retention"
+                :seed-tree-points="filteredOverlayDataFramework2.seedTree"
+                :smaplantor-points="filteredOverlayDataFramework2.smaplantor"
+                :hogstubbar-points="filteredOverlayDataFramework2.hogstubbar"
+                :naturvardsarter-points="filteredOverlayDataFramework2.naturvardsarter"
+                :kanteffekt-features="filteredOverlayDataFramework2.kanteffekt" :currentFramework="currentFramework2"
+                :currentTime="timeLabelForDataFiltering" :currentStartskog="currentStartskog"
+                :layoutMode="currentLayoutMode" ref="framework2ViewerRef" :comparisonMode="true"
+                :frameworkLabel="currentFramework2.label" :timeLabel="currentTimeLabel"
                 :dziUrl="frameworkOverlayImagePath2" :overlayDziUrl="currentImagePath2" v-else
                 v-model:globalOpacity="globalOpacity" :allowPan="!isCompare && !isFrameworkCompareMode"
                 sliderPosition="right" @viewportChanged="($event) => onViewportChanged('framework2', $event)"
@@ -787,10 +938,85 @@ import annotationsData from "public/annotations.json";
 import { useSelectedAnnotationStore } from "~/stores/selectedAnnotationStore";
 import { useOverlayStore } from "~/stores/overlayStore";
 import { useMediaQuery, createReusableTemplate } from '@vueuse/core'
+import { useOverlayRegistry } from '~/composables/useOverlayRegistry';
+// Popover open state per badge key (for hover behavior)
+const badgePopoverOpen = reactive<Record<string, boolean>>({});
+
+const overlayRegistry = useOverlayRegistry();
+
+function fwToString(fw: any): string | null {
+  if (!fw) return null;
+  if (typeof fw === 'string') return fw;
+  if (typeof fw === 'object') {
+    // common shapes we use throughout the app
+    if ('value' in fw && typeof (fw as any).value === 'string') return (fw as any).value;
+    if ('framework' in fw && typeof (fw as any).framework === 'string') return (fw as any).framework;
+    if ('label' in fw && typeof (fw as any).label === 'string') return (fw as any).label;
+  }
+  return String(fw ?? '');
+}
+
+// Map overlay key -> visibility ref getter
+const overlayToggleMap: Record<string, () => boolean> = {
+  retention: () => !!retentionVisible.value,
+  kanteffekt: () => !!kanteffektVisible.value,
+  rottacke: () => !!rottackeVisible.value,
+  seedTree: () => !!seedTreeVisible.value,
+  smaplantor: () => !!smaplantorVisible.value,
+  hogstubbar: () => !!hogstubbarVisible.value,
+  naturvardsarter: () => !!naturvardsarterVisible.value,
+  tradplantor: () => !!tradplantorVisible.value,
+};
+
+function isOverlayVisibleInContext(overlayKey: string, ctx: { framework: any, startskog?: any, time?: any }): boolean {
+  // 1) Toggle must be ON
+  const getter = overlayToggleMap[overlayKey];
+  if (getter && !getter()) return false;
+  // 2) Data must be available for the given context
+  try {
+    const avail = overlayRegistry.availabilityFor({
+      framework: fwToString(ctx.framework),
+      startskog: fwToString(ctx.startskog),
+      time: typeof ctx.time === 'string' ? ctx.time : fwToString(ctx.time),
+    });
+    return !!(avail && (avail as any)[overlayKey]);
+  } catch (_) {
+    return false;
+  }
+}
+
+const activeContexts = computed(() => {
+  const ctxs: Array<{ framework: any, startskog?: any, time?: any }> = [];
+  const fw1 = fwToString((currentFramework as any)?.value ?? currentFramework);
+  const fw2 = fwToString((currentFramework2 as any)?.value ?? currentFramework2);
+  const skog = (currentStartskog as any)?.value ?? currentStartskog;
+  const timeNow = (timeLabelForDataFiltering as any);
+
+  if (isCompare.value) {
+    // Before/After: same framework, two times
+    ctxs.push({ framework: fw1, startskog: skog?.value ?? skog, time: 'innan' });
+    ctxs.push({ framework: fw1, startskog: skog?.value ?? skog, time: timeNow });
+  } else if (isFrameworkCompareMode.value) {
+    // Framework compare: two frameworks, same time
+    ctxs.push({ framework: fw1, startskog: skog?.value ?? skog, time: timeNow });
+    ctxs.push({ framework: fw2, startskog: skog?.value ?? skog, time: timeNow });
+  } else {
+    // Single
+    ctxs.push({ framework: fw1, startskog: skog?.value ?? skog, time: timeNow });
+  }
+  return ctxs;
+});
+
+function isOverlayAssociatedAny(overlayKey: string): boolean {
+  const ctxs = activeContexts.value;
+  for (const ctx of ctxs) {
+    if (isOverlayVisibleInContext(overlayKey, ctx)) return true;
+  }
+  return false;
+}
 
 const [DefineSettingsTemplate, reuseSettingsTemplate] = createReusableTemplate()
 const isMobile = useMediaQuery('(max-width: 767px)')
-
 const panelTabs = [
   {
     label: 'Text',
@@ -937,8 +1163,6 @@ const open3 = computed({
 }) as Ref<boolean>;
 
 // somewhere after your other refs:
-const retentionTrees = ref([])
-
 // --- Time navigation that mirrors UTabs exactly (use selectedTimeValue + timeItems) ---
 function stepTabs(direction) {
   const items = Array.isArray(timeItems?.value) ? timeItems.value : []
@@ -1062,7 +1286,7 @@ function makeClickableHtml(text = '') {
   let html = escapeHtml(text);
   for (const rule of CLICK_RULES) {
     html = html.replace(rule.re, (m) =>
-      `<span class=\" py-0.5 px-1 rounded-md border bg-white border-muted/50 text-neutral-800 cursor-pointer hover:opacity-80\" data-overlay=\"${rule.overlay}\">${m}</span>`
+      `<span class=\" text-primary-500 font-medium underline cursor-pointer hover:opacity-80\" data-overlay=\"${rule.overlay}\">${m}</span>`
     );
   }
   return html;
@@ -1401,6 +1625,7 @@ const currentStartskog = computed(
 );
 
 const currentFwValue = computed(() => currentFramework.value?.value);
+const currentStartskogValue = computed(() => currentStartskog.value?.value ?? null);
 const isTrakthygge = computed(() => currentFwValue.value === 'trakthygge');
 const isLuckhuggning = computed(() => currentFwValue.value === 'luckhuggning');
 const isBladning = computed(() => currentFwValue.value === 'blädning' || currentFwValue.value === 'bladning');
@@ -1439,7 +1664,7 @@ const overlayConfigs: Record<OverlayKey, OverlayContentConfig> = {
     close: () => { seedTreeVisible.value = false },
   },
   smaplantor: {
-    title: 'Yngre träd och småplantor som lämnats',
+    title: 'Yngre träd och plantor som lämnats',
     description: 'Undviks underröjning före avverkning, kommer mykorrhizasvampar att överleva på dessa plantor och träd på samma sätt som de gör på rötterna av hänsynsträd.',
     condition: () => smaplantorVisible.value,
     close: () => { smaplantorVisible.value = false },
@@ -1463,6 +1688,47 @@ const overlayConfigs: Record<OverlayKey, OverlayContentConfig> = {
     close: () => { tradplantorVisible.value = false },
   },
 };
+
+const overlayIcons: Record<string, string> = {
+  staticOverlay: 'i-material-symbols-light-rectangle-outline',
+  retention: 'i-pepicons-pop-tree-circle',
+  kanteffekt: 'i-healthicons-square-medium-negative',
+  rottacke: 'i-fluent-emoji-high-contrast-blue-square',
+  seedTree: 'i-teenyicons-redwoodjs-outline',
+  smaplantor: 'i-pepicons-pop-seedling-circle',
+  hogstubbar: 'i-fluent-emoji-high-contrast-wood',
+  naturvardsarter: 'i-material-symbols-award-star-outline',
+  tradplantor: 'i-hugeicons-plant-02',
+};
+
+const overlayInfo = computed<Record<string, { title: string; description: string }>>(() => {
+  const info: Record<string, { title: string; description: string }> = {
+    staticOverlay: {
+      title: 'Beståndsgräns',
+      description: '',
+    },
+  };
+
+  overlayKeys.forEach((key) => {
+    const config = overlayConfigs[key];
+    info[key] = {
+      title: config.title,
+      description: config.description,
+    };
+  });
+
+  return info;
+});
+
+function getOverlayInfo(key: string): { title: string; description: string; icon?: string } {
+  const info = overlayInfo.value[key] ?? { title: key, description: '' };
+  const icon = overlayIcons[key];
+  return {
+    title: info.title,
+    description: info.description,
+    icon,
+  };
+}
 
 // Pin states for overlays (pinned overlays remain visible when others are toggled on)
 const pinned = reactive({
@@ -1526,17 +1792,31 @@ function togglePinned(rawKey: OverlayMapKey, options: { hideWhenUnpin?: boolean 
   }
 }
 
-const overlayBadgeItems = computed(() => ([
-  { key: 'staticOverlay', label: 'Beståndsgräns' },
-  { key: 'retention', label: 'Hänsynsträd' },
-  { key: 'kanteffekt', label: 'Kanteffekt' },
-  { key: 'rottacke', label: 'Rottäcke' },
-  { key: 'seedTree', label: 'Fröträd' },
-  { key: 'smaplantor', label: 'Småplantor' },
-  { key: 'hogstubbar', label: 'Högstubbar' },
-  { key: 'naturvardsarter', label: 'Naturvårdsarter' },
-  { key: 'tradplantor', label: 'Trädplantor' },
-]));
+const overlayBadgeItems = computed(() => {
+  const info = overlayInfo.value;
+  return [
+    {
+      key: 'staticOverlay',
+      label: info.staticOverlay?.title ?? 'Beståndsgräns',
+      description: info.staticOverlay?.description ?? '',
+      icon: overlayIcons.staticOverlay,
+    },
+    ...overlayKeys.map((key) => ({
+      key,
+      label: info[key]?.title ?? key,
+      description: info[key]?.description ?? '',
+      icon: overlayIcons[key] ?? undefined,
+    })),
+  ];
+});
+
+const overlayMeta = computed<Record<string, { label: string; icon?: string }>>(() => {
+  const meta: Record<string, { label: string; icon?: string }> = {}
+  overlayBadgeItems.value.forEach(item => {
+    meta[item.key] = { label: item.label, icon: item.icon }
+  })
+  return meta
+})
 
 const activeOverlayContent = computed(() => {
   const key = activeOverlayKey.value;
@@ -1555,11 +1835,23 @@ const activeOverlayPinned = computed(() => {
   return key ? pinned[key] : false;
 });
 
-const pinnedOverlayBadges = computed(() =>
-  overlayKeys
+const activeOverlayIcon = computed(() => {
+  const key = activeOverlayKey.value;
+  return key ? overlayMeta.value[key]?.icon ?? null : null;
+})
+
+const pinnedOverlayBadges = computed(() => {
+  const meta = overlayMeta.value;
+  const availability = overlayAvailability.value;
+  return overlayKeys
     .filter((key) => pinned[key])
-    .map((key) => ({ key, title: overlayConfigs[key].title }))
-);
+    .map((key) => ({
+      key,
+      title: meta[key]?.label ?? overlayConfigs[key].title,
+      icon: meta[key]?.icon || null,
+      isAssociated: availability[key] ?? true,
+    }));
+});
 
 watch(textDrawerOpen, (isOpen) => {
   if (isOpen && chartDrawerOpen.value) {
@@ -1851,6 +2143,65 @@ const timeLabelForDataFiltering2 = computed(() =>
 const timeLabelForDataFiltering = computed(() =>
   mapTimeValueToDataAlder(time.value)
 );
+
+const overlayContext = computed(() => ({
+  framework: currentFwValue.value ?? null,
+  startskog: currentStartskogValue.value ?? null,
+  time: timeLabelForDataFiltering.value ?? null,
+}));
+
+if (import.meta.dev) {
+  watch(
+    overlayContext,
+    (ctx) => {
+      console.log('[Model] overlay context', ctx);
+    },
+    { immediate: true, deep: true },
+  );
+}
+
+const overlayAvailability = computed<Record<OverlayKey, boolean>>(() =>
+  overlayRegistry.availabilityFor(overlayContext.value),
+);
+
+const filteredOverlayData = computed(() => overlayRegistry.filterAll(overlayContext.value));
+
+const beforeOverlayContext = computed(() => ({
+  framework: currentFwValue.value ?? null,
+  startskog: currentStartskogValue.value ?? null,
+  time: isCompare.value ? 'innan' : timeLabelForDataFiltering.value ?? null,
+}));
+
+const filteredBeforeOverlayData = computed(() =>
+  overlayRegistry.filterAll(beforeOverlayContext.value),
+);
+
+const overlayContextFramework2 = computed(() => ({
+  framework: currentFramework2.value?.value ?? null,
+  startskog: currentStartskogValue.value ?? null,
+  time: timeLabelForDataFiltering.value ?? null,
+}));
+
+const filteredOverlayDataFramework2 = computed(() =>
+  overlayRegistry.filterAll(overlayContextFramework2.value),
+);
+
+if (import.meta.dev) {
+  watch(
+    filteredOverlayData,
+    (data) => {
+      console.log('[Model] overlay data counts', {
+        retention: data.retention?.length ?? 0,
+        seedTree: data.seedTree?.length ?? 0,
+        smaplantor: data.smaplantor?.length ?? 0,
+        hogstubbar: data.hogstubbar?.length ?? 0,
+        naturvardsarter: data.naturvardsarter?.length ?? 0,
+        kanteffekt: data.kanteffekt?.length ?? 0,
+      });
+    },
+    { immediate: true },
+  );
+}
 
 const timelineInfo = computed(() => {
   if (!currentFramework.value?.value || !timeLabelForDataFiltering.value || !currentStartskog.value?.value) return null;

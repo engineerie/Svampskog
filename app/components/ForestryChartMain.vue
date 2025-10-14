@@ -2,31 +2,34 @@
   <div>
     <!-- Dropdown to select which chart to display -->
 
-    <div class="mt-2 ml-4 flex justify-between">
-      <UPopover :ui="{ content: 'bg-neutral-950/50 backdrop-blur-2xl ring-neutral-900/50' }" :content="{
+    <div class="mt-2 ml-2 flex justify-between">
+      <UPopover :content="{
         align: 'start',
         side: 'bottom',
         sideOffset: 8,
       }">
-        <div class="flex items-center cursor-pointer w-fit">
-          <h1
-            class="text-neutral-800 text-lg font-semibold leading-loose hover:bg-neutral-500/20 px-2 rounded-sm -mx-2">
+        <!-- <UButton variant="ghost" size="lg" icon="i-heroicons-chevron-up-down" :label="chartOptions.find(opt => opt.value === selectedChart)?.label || 'Välj diagram'" trailing /> -->
+        <div class="flex items-center cursor-pointer w-fit hover:bg-muted px-2">
+          <h1 class="text-neutral-800 text-md font-semibold leading-loose   pr-2 rounded-sm">
             {{
               chartOptions.find(opt => opt.value === selectedChart)?.label || 'Välj diagram'}}
           </h1>
-          <!-- <Icon name="i-mdi-chevron-down" class="text-white size-6 " /> -->
+          <Icon name="i-heroicons-chevron-up-down" class="size-4 " />
         </div>
 
 
         <template #content>
           <div class="p-2 flex flex-col gap-2">
-            <UButton size="xl" v-for="opt in chartOptions" :key="opt.value" color="neutral"
-              class="text-white hover:bg-neutral-500/20" variant="ghost" @click="selectedChart = opt.value">
+            <UButton size="lg" v-for="opt in chartOptions" :key="opt.value" color="neutral" variant="ghost"
+              @click="selectedChart = opt.value">
               {{ opt.label }}
             </UButton>
           </div>
         </template>
       </UPopover>
+      <USelect v-if="selectedChart === 'grupper' && isFrameworkCompareMode" v-model="selectedCompareArtkategori"
+        :items="compareArtkategoriOptions" size="sm" class="w-56"
+        placeholder="Välj svampgrupp" />
       <!-- <UButton color="neutral" variant="subtle"
                             :icon="chartType === 'area' ? 'i-carbon-chart-column' : 'i-carbon-chart-line-smooth'"
                             @click="ToggleChartType" /> -->
@@ -144,7 +147,9 @@
                             label="Välj skötselmetod" />
                     </div> -->
         <ForestryChartDisplay :selectedFrameworks="props.parentSelectedFrameworks ?? [selectedSingleFramework]"
-          :selectedArtkategori="selectedArtkategori" :chartType="chartType" :singleFrameworkSelection="true"
+          :selectedArtkategori="isFrameworkCompareMode ? [selectedCompareArtkategori] : selectedArtkategori"
+          :frameworkComparisonMode="isFrameworkCompareMode"
+          :chartType="chartType" :singleFrameworkSelection="true"
           :selectedStartskog="props.currentStartskog" :maxYValue="100" :currentTimeValue="props.currentTimeValue" />
       </div>
     </div>
@@ -152,7 +157,7 @@
 </template>
 
 <script setup lang="ts">
-import { ref, computed } from 'vue'
+import { ref, computed, watch } from 'vue'
 
 interface Props {
   parentSelectedFrameworks?: string[]
@@ -182,6 +187,7 @@ const chartOptions = [
   { label: 'Olika svampgrupper', value: 'grupper' }
 ]
 const selectedChart = ref(chartOptions[0].value)
+const isFrameworkCompareMode = computed(() => (props.parentSelectedFrameworks?.length ?? 0) === 2)
 
 function ToggleTreeChartType() {
   TreeChartLine.value = !TreeChartLine.value;
@@ -229,6 +235,27 @@ const selectedArtkategori = ref<string[]>([
   'spindelskivlingar',
   'övriga svampar'
 ]);
+
+const compareArtkategoriOptions = [
+  { label: 'Skinnsvampar', value: 'skinnsvampar' },
+  { label: 'Spindelskivlingar', value: 'spindelskivlingar' },
+  { label: 'Kremlor och riskor', value: 'kremlor och riskor' },
+  { label: 'Övriga svampar', value: 'övriga svampar' },
+]
+
+const selectedCompareArtkategori = ref(compareArtkategoriOptions[0].value)
+
+watch([selectedChart, isFrameworkCompareMode], ([chart, compare]) => {
+  if (!(chart === 'grupper' && compare)) {
+    selectedCompareArtkategori.value = compareArtkategoriOptions[0].value
+  }
+})
+
+watch(() => props.parentSelectedFrameworks?.length, () => {
+  if (selectedChart.value === 'grupper' && isFrameworkCompareMode.value) {
+    selectedCompareArtkategori.value = compareArtkategoriOptions[0].value
+  }
+})
 
 
 // Color mapping for artkategorier

@@ -1,12 +1,13 @@
 <template>
   <div v-if="layoutMode === 'slider'" ref="container" class="relative w-full h-full overflow-hidden select-none">
     <!-- "After" slot: full background -->
-    <div class="absolute inset-0">
+    <div class="absolute inset-0" style="z-index:0">
       <slot name="second" />
     </div>
-    <!-- "Before" slot: rendered with a clip-path -->
+    <!-- "Before" slot: rendered with a clip-path and higher z-index -->
     <div class="absolute inset-0 overflow-hidden" :style="{
       clipPath: 'inset(0 calc(100% - ' + sliderPercent * 100 + '%) 0 0)',
+      zIndex: 10,
     }">
       <slot name="first" />
     </div>
@@ -14,21 +15,22 @@
     <div class="absolute top-0 flex items-center justify-center h-full w-10 cursor-ew-resize" :style="{
       left: sliderPercent * 100 + '%',
       transform: 'translateX(-50%)',
+      zIndex: 20,
     }" @mousedown="startDrag" @touchstart="startDrag">
       <div class="flex h-full relative">
         <div class="absolute text-end  right-3 top-2">
-          <UBadge v-if="!isMobile" size="lg"
+          <!-- <UBadge v-if="!isMobile" size="lg"
             class="backdrop-blur-xl bg-neutral-100/0 text-neutral-100 h-fit whitespace-nowrap mb-0.5">{{
-              frameworkLabel }}</UBadge>
+              frameworkLabel }}</UBadge> -->
           <UBadge size="lg" class="backdrop-blur-xl bg-neutral-100/00 text-neutral-100 h-fit whitespace-nowrap">{{
             timeLabel }}</UBadge>
         </div>
 
         <div class="h-full w-1.5 bg-neutral-100/90 backdrop-blur-md inset-shadow-sm inset-shadow-neutral-400"></div>
         <div class="absolute top-2 left-3">
-          <UBadge v-if="!isMobile" size="lg"
+          <!-- <UBadge v-if="!isMobile" size="lg"
             class="backdrop-blur-xl bg-neutral-100/0 text-neutral-100 h-fit whitespace-nowrap mb-0.5">{{
-              frameworkLabel2 }}</UBadge>
+              frameworkLabel2 }}</UBadge> -->
           <UBadge size="lg" class="backdrop-blur-xl bg-neutral-100/0 text-neutral-100 h-fit whitespace-nowrap">{{
             timeLabel2 }}</UBadge>
         </div>
