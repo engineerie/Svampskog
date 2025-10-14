@@ -6,7 +6,6 @@
       "text": "På rötterna av äldre träd kan det finnas mycel av 50-100 olika arter mykorrhizasvampar.",
       "thumbnail": "/images/Skogsbruk.png",
       "icon": "i-material-symbols-light-circle",
-      "iconOutline": "",
       "color": "neutral-300",
       "positions": [
         {
@@ -47,7 +46,6 @@
       "text": "Mykorrhizasvamparnas mycel finns lika djupt ner i marken som rötter når, och så långt träds rötter breder ut sig, 10-15 meter från stammen. Men det är rikligast med mykorrhiza närmast trädet och i de översta 10 cm av skogsmarken.",
       "thumbnail": "/images/Skogsbruk.png",
       "icon": "i-material-symbols-light-circle",
-      "iconOutline": "",
       "color": "neutral-300",
       "positions": [
         {
@@ -71,7 +69,7 @@
         {
           "framework": ["skärmträd"],
           "times": ["före"],
-      
+
           "placement": "LEFT"
         },
         {
@@ -88,7 +86,6 @@
       "text": "Nästan alla matsvampar är mykorrhizasvampar och försvinner efter avverkning. De överlever om dess mycel växer med hänsynsträd som lämnats eller nära en skogskant. Annars behöver de återetableras i ungskog från sporer som sprids in från näraliggande skogar.",
       "thumbnail": "/images/Skogsbruk.png",
       "icon": "i-material-symbols-light-circle",
-      "iconOutline": "",
       "color": "neutral-300",
       "positions": [
         {
@@ -111,7 +108,6 @@
       "text": "Mängden matsvampar är större i äldre skog eftersom större träd har högre fotosyntes och kan skicka ner mer socker till sina rötter.",
       "thumbnail": "/images/Skogsbruk.png",
       "icon": "i-material-symbols-light-circle",
-      "iconOutline": "",
       "color": "neutral-300",
       "positions": [
         {
@@ -151,9 +147,8 @@
       "title": "Rödlistade svampar",
       "text": "Rödlistade mykorrhizasvampar har ofta speciella miljökrav, och förekommer främst i äldre skog. Generellt kan mycel av mykorrhizasvampar leva vidare på en plast så länge det finns levande träd. Svampindividers mycel kan bli många decennier till potentiellt sekler gamla.",
       "thumbnail": "/images/Skogsbruk.png",
-      "icon": "i-material-symbols-light-circle",
-      "iconOutline": "",
-      "color": "neutral-300",
+      "icon": "i-material-symbols-award-star-outline",
+      "color": "signal-500",
       "positions": [
         {
           "framework": ["naturskydd"],
@@ -192,8 +187,7 @@
       "title": "Högstubbe",
       "text": "Här finns inga levande mykorrhizamycel. Trädets rötter är döda.",
       "thumbnail": "/images/Skogsbruk.png",
-      "icon": "i-heroicons-map-pin-solid",
-      "iconOutline": "i-heroicons-outline-map-pin",
+      "icon": "i-fluent-emoji-high-contrast-wood",
       "color": "neutral-500",
       "positions": [
         {
@@ -217,8 +211,7 @@
       "title": "Stubbe",
       "text": "Trädets fotosyntes och flöde av energi till sina rötter har upphört. Efter avverkning tynar mykorrhizasvamparna bort och dör efter ett par månader - ett år.",
       "thumbnail": "/images/Skogsbruk.png",
-      "icon": "i-heroicons-map-pin-solid",
-      "iconOutline": "i-heroicons-outline-map-pin",
+      "icon": "i-fluent-emoji-high-contrast-wood",
       "color": "neutral-500",
       "positions": [
         {
@@ -242,8 +235,7 @@
       "title": "Hänsynsträd",
       "text": "De flesta mykorrhizasvamparna som växte med trädets rötter i skogen före avverkningen finns kvar och lever vidare. Dessa mycel kan växa in i och spridas till uppväxande trädplantor.",
       "thumbnail": "/images/Skogsbruk.png",
-      "icon": "i-heroicons-map-pin-solid",
-      "iconOutline": "i-heroicons-outline-map-pin",
+      "icon": "i-pepicons-pop-tree-circle",
       "color": "neutral-500",
       "positions": [
         {
@@ -274,8 +266,7 @@
       "title": "Grupp av hänsynsträd",
       "text": "De flesta mykorrhizasvampar som växte i denna trädgrupps rötter före avverkningen finns kvar och lever vidare. Fanns det mat- och naturvårdssvampar, kan de fortleva.",
       "thumbnail": "/images/Skogsbruk.png",
-      "icon": "i-heroicons-map-pin-solid",
-      "iconOutline": "i-heroicons-outline-map-pin",
+      "icon": "i-pepicons-pop-tree-circle",
       "color": "neutral-500",
       "positions": [
         {
@@ -292,8 +283,7 @@
       "title": "Självföryngrade trädplantor",
       "text": "Små mycel av mykorrhizasvampar växer i plantornas rötter. Om de växer nära hänsynsträd kan mycel vuxint in från dessas rötter. Annars etableras mycel från svampsporer som sprid in från näraliggande skogar. Vissa svamparter har också en sporbank i marken.",
       "thumbnail": "/images/Skogsbruk.png",
-      "icon": "i-heroicons-map-pin-solid",
-      "iconOutline": "i-heroicons-outline-map-pin",
+      "icon": "i-hugeicons-plant-03",
       "color": "neutral-500",
       "positions": [
         {
@@ -317,8 +307,7 @@
       "title": "Planterade små trädplantor",
       "text": "Har med sig spontant etablerad mykorrhiza från plantskolan där de odlades upp. Det är dock få arter. Dessa ersätts succesivt med bättre anpassade och svamparter som finns på platsen.",
       "thumbnail": "/images/Skogsbruk.png",
-      "icon": "i-heroicons-map-pin-solid",
-      "iconOutline": "i-heroicons-outline-map-pin",
+      "icon": "i-hugeicons-plant-02",
       "color": "neutral-500",
       "positions": [
         {
@@ -335,8 +324,7 @@
       "title": "Yngre träd som lämnats",
       "text": "Undviks underröjning före avverkning, kommer mykorrhizasvampar att överleva på dessa plantor och träd på samma sätt som de gör på rötterna av hänsynsträd.",
       "thumbnail": "/images/Skogsbruk.png",
-      "icon": "i-heroicons-map-pin-solid",
-      "iconOutline": "i-heroicons-outline-map-pin",
+      "icon": "i-pepicons-pop-seedling-circle",
       "color": "neutral-500",
       "positions": [
         {
@@ -353,8 +341,7 @@
       "title": "Trädkant mot avverkning",
       "text": "Mykorrhizasvampars mycel växer med i skogskantsträdens rötter så långt de sträcker sig in på avverkningen. Mest närmast skogskanten, men når 10–15 meter in på hygget.",
       "thumbnail": "/images/Skogsbruk.png",
-      "icon": "i-heroicons-map-pin-solid",
-      "iconOutline": "i-heroicons-outline-map-pin",
+      "icon": "i-healthicons-square-medium-negative",
       "color": "neutral-500",
       "positions": [
         {
