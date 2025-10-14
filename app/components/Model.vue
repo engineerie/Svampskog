@@ -100,9 +100,9 @@
                           </h3>
                         </div>
                         <div class="flex gap-1">
-                          <UButton color="neutral" variant="ghost" size="xs" :ui="{ rounded: 'rounded-full' }"
-                            icon="i-tabler-pinned"
-                            :class="activeOverlayPinned ? 'text-primary-500' : 'text-neutral-500 hover:text-neutral-900'"
+                          <UButton :color="activeOverlayPinned ? 'error' : 'primary'" variant="subtle" size="xs"
+                            :ui="{ rounded: 'rounded-full' }" :label="activeOverlayPinned ? 'Ta bort' : 'Fäst i vyn'"
+                            :icon="activeOverlayPinned ? 'i-tabler-pinned-off' : 'i-tabler-pinned'"
                             :aria-pressed="activeOverlayPinned" :title="activeOverlayPinned ? 'Lossa' : 'Fäst'"
                             @click="togglePinned(activeOverlayContent.key, { hideWhenUnpin: false })" />
                         </div>

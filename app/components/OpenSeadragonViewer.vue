@@ -503,30 +503,6 @@ export default {
         overlayCtx.fill();
         overlayCtx.restore();
       }
-      // Naturvårdsarter — draw award-star icon via canvas (same behavior as original stars)
-      if (props.naturvardsarterVisible && naturvardPoints.value.length) {
-        const arr = naturvardPoints.value;
-        const activeFramework = frameworkValue.value;
-        const activeStartskog = startskogValue.value;
-
-        arr.forEach(p => {
-          if (!p) return;
-          if (activeFramework && !valueMatches(p.framework, activeFramework)) return;
-          if (activeStartskog && p.startskog && p.startskog !== activeStartskog) return;
-          if (p.time && !timeMatches(p.time, props.currentTime)) return;
-
-          const pt = new osdLib.Point(p.x, p.y);
-          const pixel = viewer.value.viewport.pixelFromPoint(pt, true);
-          // Keep the same normalized sizing approach as the original stars
-          const normalizedRadius = 0.012; // tweak if you want larger/smaller
-          const pixelRight = viewer.value.viewport.pixelFromPoint(new osdLib.Point(p.x + normalizedRadius, p.y), true);
-          const radius = Math.abs(pixelRight.x - pixel.x);
-
-          drawAwardStar(overlayCtx, pixel.x, pixel.y, radius);
-        });
-      }
-
-
       // Småplantor — very small WHITE circles (same size as saved clicks)
       if (props.smaplantorVisible && smaplantorPoints.value.length) {
         const arr = smaplantorPoints.value;
@@ -913,6 +889,28 @@ export default {
           overlayCtx.strokeRect(p1.x, p1.y, w, h);
           overlayCtx.restore();
         }
+      }
+
+      // Naturvårdsarter — draw award-star icon last so it stays on top of other overlays
+      if (props.naturvardsarterVisible && naturvardPoints.value.length) {
+        const arr = naturvardPoints.value;
+        const activeFramework = frameworkValue.value;
+        const activeStartskog = startskogValue.value;
+
+        arr.forEach(p => {
+          if (!p) return;
+          if (activeFramework && !valueMatches(p.framework, activeFramework)) return;
+          if (activeStartskog && p.startskog && p.startskog !== activeStartskog) return;
+          if (p.time && !timeMatches(p.time, props.currentTime)) return;
+
+          const pt = new osdLib.Point(p.x, p.y);
+          const pixel = viewer.value.viewport.pixelFromPoint(pt, true);
+          const normalizedRadius = 0.012;
+          const pixelRight = viewer.value.viewport.pixelFromPoint(new osdLib.Point(p.x + normalizedRadius, p.y), true);
+          const radius = Math.abs(pixelRight.x - pixel.x);
+
+          drawAwardStar(overlayCtx, pixel.x, pixel.y, radius);
+        });
       }
 
       // Static rectangle overlay
