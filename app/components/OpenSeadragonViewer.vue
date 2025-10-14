@@ -465,7 +465,6 @@ export default {
         const x0 = 0.2671, y0 = 0.1383;
         const x1 = 0.7312, y1 = 0.4152;
 
-        // Clip to the exact rectangle in pixel space (no border)
         const tlPix = viewer.value.viewport.pixelFromPoint(new osdLib.Point(x0, y0), true);
         const brPix = viewer.value.viewport.pixelFromPoint(new osdLib.Point(x1, y1), true);
         const left = Math.min(tlPix.x, brPix.x);
@@ -478,16 +477,16 @@ export default {
         overlayCtx.rect(left, top, right - left, bottom - top);
         overlayCtx.clip();
 
-        // Grid in WORLD (image-normalized) space so dots stay locked when zooming
         const widthN = Math.abs(x1 - x0);
         const heightN = Math.abs(y1 - y0);
-        const cols = 100; // adjust density here
-        const rows = Math.max(1, Math.round(cols * (heightN / widthN)));
+
+        const spacingNorm = 0.013; // world-space spacing between dots (denser grid)
+        const cols = Math.max(1, Math.round(widthN / spacingNorm));
+        const rows = Math.max(1, Math.round(heightN / spacingNorm));
 
         const dx = widthN / cols;
         const dy = heightN / rows;
-
-        const dotR = 3; // constant pixel radius
+        const dotNorm = Math.min(dx, dy) * 0.1;
 
         overlayCtx.beginPath();
         for (let r = 0; r < rows; r++) {
@@ -495,8 +494,11 @@ export default {
           for (let c = 0; c < cols; c++) {
             const xN = x0 + (c + 0.5) * dx;
             const pix = viewer.value.viewport.pixelFromPoint(new osdLib.Point(xN, yN), true);
-            overlayCtx.moveTo(pix.x + dotR, pix.y);
-            overlayCtx.arc(pix.x, pix.y, dotR, 0, Math.PI * 2);
+            const pixelRight = viewer.value.viewport.pixelFromPoint(new osdLib.Point(xN + dotNorm, yN), true);
+            const radius = Math.abs(pixelRight.x - pix.x);
+            if (!isFinite(radius) || radius <= 0.2) continue;
+            overlayCtx.moveTo(pix.x + radius, pix.y);
+            overlayCtx.arc(pix.x, pix.y, radius, 0, Math.PI * 2);
           }
         }
         overlayCtx.fillStyle = 'rgba(255,255,255,0.85)';

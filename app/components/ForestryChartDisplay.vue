@@ -4,7 +4,7 @@
       <VisBulletLegend v-if="isMounted && chartReady && legendItems.length" :items="legendItems"
         :onLegendItemClick="handleLegendItemClick" class="mx-4 flex flex-wrap gap-2" />
       <VisXYContainer v-if="isMounted && chartReady" :data="chartData.length ? chartData : [emptyDataPoint]"
-        :height="170" :margin="margin" :xDomain="xDomain" :yDomain="yDomain">
+        :height="120" :margin="margin" :xDomain="xDomain" :yDomain="yDomain">
         <template v-if="props.chartType === 'area' && props.singleFrameworkSelection && !props.frameworkComparisonMode">
           <VisArea :x="xAccessor" :y="stackedYAccessors" :color="stackedColors" :interpolateMissingData="true" />
           <VisCrosshair v-if="hasActiveSeries" :template="crosshairTemplate" />

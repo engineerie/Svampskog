@@ -193,6 +193,16 @@ function ToggleTreeChartType() {
   TreeChartLine.value = !TreeChartLine.value;
 }
 
+function setSelectedChart(value: string) {
+  if (chartOptions.some(opt => opt.value === value)) {
+    selectedChart.value = value
+  }
+}
+
+defineExpose({
+  setSelectedChart,
+})
+
 // Options for frameworks
 const frameworkOptions = [
   { label: 'Naturskydd', value: 'naturskydd' },
