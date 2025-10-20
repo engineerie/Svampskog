@@ -21,6 +21,15 @@
       <div class="absolute top-90 right-0 m-2 p-1 bg-black bg-opacity-50 text-white text-xs z-50">
         X: {{ mousePos.x.toFixed(4) }}, Y: {{ mousePos.y.toFixed(4) }}
       </div>
+      <div v-if="naturvardCounter" class="absolute top-3 left-3 z-50 pointer-events-none">
+        <div
+          class="inline-flex items-center gap-2 rounded-full border border-[#f9f6f3] bg-white/95 px-3 py-1 text-xs font-medium text-neutral-700 shadow-sm">
+          <span class="uppercase tracking-wide text-[10px] text-neutral-400">Naturvård</span>
+          <span class="text-sm font-semibold text-neutral-900">{{ naturvardCounter.total }}</span>
+          <span v-if="naturvardCounter.gained" class="text-emerald-600 font-semibold">+{{ naturvardCounter.gained }}</span>
+          <span v-if="naturvardCounter.lost" class="text-red-500 font-semibold">-{{ naturvardCounter.lost }}</span>
+        </div>
+      </div>
       <!-- <div class="osd-opacity-slider-container bg-neutral-800 flex items-center p-1.5 gap-1 rounded-lg m-2" :style="{
       position: 'absolute',
       top: '0px',
@@ -122,6 +131,7 @@ import { useOverlayStore } from "~/stores/overlayStore";
 import timelineData from "public/timeline.json";
 import { usePanelStore } from '~/stores/panelStore';
 import { useViewerStore } from '~/stores/viewerStore';
+import { DEFAULT_NATURVARD_TIMES } from '~/composables/useOverlayRegistry';
 const retentionOverlayIds = [];
 
 function isVisibleForStartskog(tree, activeStartskog) {
@@ -215,6 +225,8 @@ export default {
     seedTreeVisible: { type: Boolean, default: false },
     // Dev flag to enable saving clicks to a general store
     devSaveClicks: { type: Boolean, default: false },
+    showOverlayLabels: { type: Boolean, default: true },
+    showNaturvardCounter: { type: Boolean, default: false },
     smaplantorVisible: { type: Boolean, default: false },
     hogstubbarVisible: { type: Boolean, default: false },
     naturvardsarterVisible: { type: Boolean, default: false },
@@ -299,6 +311,108 @@ export default {
     const naturvardPoints = computed(() =>
       Array.isArray(props.naturvardsarterPoints) ? props.naturvardsarterPoints : [],
     );
+    const naturvardCounter = computed(() => {
+      if (!props.showNaturvardCounter || !props.naturvardsarterVisible) return null;
+      const points = naturvardPoints.value;
+      if (!Array.isArray(points)) return null;
+
+      const activeFramework = frameworkValue.value;
+      const activeStartskog = startskogValue.value;
+      const currentTimeLabel = props.currentTime;
+      if (!currentTimeLabel) {
+        return { total: 0, gained: 0, lost: 0 };
+      }
+
+      const normalizeId = (id) => {
+        if (!id) return null;
+        return id === 'myc-7.1' ? 'myc-7' : id;
+      };
+
+      const matchesContextBase = (point) => {
+        if (!point) return false;
+        if (activeFramework && !valueMatches(point.framework, activeFramework)) return false;
+        if (activeStartskog && point.startskog && point.startskog !== activeStartskog) return false;
+        return true;
+      };
+
+      const matchesContext = (point, timeLabel) => {
+        if (!matchesContextBase(point)) return false;
+        if (timeLabel) {
+          if (!point.time) return false;
+          return timeMatches(point.time, timeLabel);
+        }
+        return true;
+      };
+
+      const buildSetForTime = (timeLabel) => {
+        const set = new Set();
+        points.forEach((point) => {
+          if (!matchesContext(point, timeLabel)) return;
+          if (point.removed) return;
+          const normalized = normalizeId(point.id);
+          if (normalized) set.add(normalized);
+        });
+        return set;
+      };
+
+      const availableTimes = (() => {
+        const unique = new Map();
+        points.forEach((point) => {
+          if (!matchesContextBase(point)) return;
+          const timeValue = typeof point.time === 'string' ? point.time : null;
+          if (!timeValue) return;
+          const key = timeValue.toLowerCase();
+          if (!unique.has(key)) {
+            unique.set(key, timeValue);
+          }
+        });
+        const times = Array.from(unique.values());
+        const ensureCurrent = () => {
+          const existing = times.some((t) => t.toLowerCase() === currentTimeLabel.toLowerCase());
+          if (!existing) times.push(currentTimeLabel);
+        };
+        ensureCurrent();
+        const indexFor = (time) => {
+          const idx = DEFAULT_NATURVARD_TIMES.findIndex(
+            (label) => label.toLowerCase() === time.toLowerCase(),
+          );
+          return idx === -1 ? Number.MAX_SAFE_INTEGER : idx;
+        };
+        times.sort((a, b) => indexFor(a) - indexFor(b));
+        return times;
+      })();
+
+      const currentLower = currentTimeLabel.toLowerCase();
+      const currentIndex = availableTimes.findIndex(
+        (time) => time.toLowerCase() === currentLower,
+      );
+      const previousTime =
+        currentIndex > 0 ? availableTimes[currentIndex - 1] : null;
+
+      const currentIds = buildSetForTime(currentTimeLabel);
+      const previousIds = previousTime ? buildSetForTime(previousTime) : new Set();
+
+      let lost = 0;
+      let gained = 0;
+
+      previousIds.forEach((id) => {
+        if (!currentIds.has(id)) lost += 1;
+      });
+      currentIds.forEach((id) => {
+        if (!previousIds.has(id)) gained += 1;
+      });
+
+      if (!previousTime) {
+        lost = 0;
+        gained = 0;
+      }
+
+      return {
+        total: currentIds.size,
+        gained,
+        lost,
+      };
+    });
     const kanteffektFeatures = computed(() =>
       Array.isArray(props.kanteffektFeatures) ? props.kanteffektFeatures : [],
     );
@@ -415,6 +529,66 @@ export default {
       ctx.fillStyle = 'white';
       ctx.fill(fgPath, 'evenodd');
 
+      ctx.restore();
+    }
+
+    const SAW_BLADE_PATH_D = "M20 15s-1.4 1.3 1.1 2l-2.8 2.8h-2.8s-1.9-.1-.5 2.2h-4l-2-2s-1.3-1.4-2 1.1l-2.8-2.8v-2.8s.1-1.9-2.2-.5v-4l2-2s1.4-1.3-1.2-1.9l2.8-2.9h2.9s1.9.1.5-2.2h4l2 2s1.3 1.4 2-1.2l2.8 2.8v2.9s-.1 1.9 2.2.5v4zm-6-3a2 2 0 0 0-2-2a2 2 0 0 0-2 2a2 2 0 0 0 2 2a2 2 0 0 0 2-2";
+    const RANDOM_LINE_PATH_D = "M18 3a3 3 0 0 1 2.995 2.824L21 6v12a3 3 0 0 1-2.824 2.995L18 21H6a3 3 0 0 1-2.995-2.824L3 18V6a3 3 0 0 1 2.824-2.995L6 3zM8.5 14a1.5 1.5 0 0 0-1.493 1.356L7 15.5l.007.154a1.5 1.5 0 0 0 2.986 0L10 15.51l-.007-.154A1.5 1.5 0 0 0 8.5 14m7 0a1.5 1.5 0 0 0-1.493 1.356L14 15.51a1.5 1.5 0 0 0 2.993.144L17 15.5a1.5 1.5 0 0 0-1.5-1.5M12 10.5a1.5 1.5 0 0 0-1.493 1.356l-.007.154a1.5 1.5 0 0 0 2.993.144L13.5 12a1.5 1.5 0 0 0-1.5-1.5M8.5 7a1.5 1.5 0 0 0-1.493 1.356L7 8.5l.007.154a1.5 1.5 0 0 0 2.986 0L10 8.51l-.007-.154A1.5 1.5 0 0 0 8.5 7m7 0a1.5 1.5 0 0 0-1.493 1.356L14 8.51a1.5 1.5 0 0 0 2.993.144L17 8.5A1.5 1.5 0 0 0 15.5 7";
+    const DUST_STORM_PATH_D = "M8 11a1 1 0 1 1 0-2a1 1 0 0 1 0 2m0 2.5a3.5 3.5 0 1 0 0-7a3.5 3.5 0 0 0 0 7M22.999 7c-4.301 0-7.833 3.407-7.998 7.702a1.25 1.25 0 0 0 2.498.096A5.51 5.51 0 0 1 23 9.5a5.501 5.501 0 0 1 .001 11H5.25a1.25 1.25 0 1 0 0 2.5H23a8 8 0 1 0-.001-16m14.988 11.5a6.035 6.035 0 0 0-5.854 4.562l-.096.385a1.25 1.25 0 0 0 2.426.606l.096-.384A3.535 3.535 0 0 1 37.987 21a3.51 3.51 0 0 1 3.513 3.5A3.5 3.5 0 0 1 38 28H5.25a1.25 1.25 0 1 0 0 2.5H30c1.642 0 3 1.368 3 3.04c0 1.628-1.323 2.96-2.922 2.96a2.92 2.92 0 0 1-2.613-1.615l-.097-.194a1.25 1.25 0 1 0-2.236 1.118l.097.194A5.42 5.42 0 0 0 30.079 39c3.009 0 5.421-2.481 5.421-5.46a5.54 5.54 0 0 0-.908-3.04H38a6 6 0 0 0 6-6c0-3.318-2.704-6-6.013-6M19 39a1 1 0 1 0-2 0a1 1 0 0 0 2 0m2.5 0a3.5 3.5 0 1 1-7 0a3.5 3.5 0 0 1 7 0M40 12a1 1 0 1 0-2 0a1 1 0 0 0 2 0m2.5 0a3.5 3.5 0 1 1-7 0a3.5 3.5 0 0 1 7 0";
+
+    function drawSvgIcon(ctx, pathD, x, y, size, color, baseSize = 24, flipX = false) {
+      if (typeof Path2D === 'undefined') return;
+      const path = new Path2D(pathD);
+      ctx.save();
+      ctx.translate(x, y);
+      const scale = size / baseSize;
+      ctx.scale(scale, scale);
+      if (flipX) {
+        ctx.scale(-1, 1);
+        ctx.translate(-baseSize / 2, -baseSize / 2);
+      } else {
+        ctx.translate(-baseSize / 2, -baseSize / 2);
+      }
+      ctx.fillStyle = color;
+      ctx.fill(path);
+      ctx.restore();
+    }
+
+    const MOVE_ARROW_PATH_D = "M20 21h-4v-4m0 4l5-5M6.5 9.504l-3.5-2L5 4M3 7.504l6.83-1.87M4 16l4-1l1 4m-1-4l-3.5 6M21 5l-.5 4l-4-.5m4 .5L16 3.5";
+
+    function drawSvgStrokeIcon(ctx, pathD, x, y, size, color, baseSize = 24) {
+      if (typeof Path2D === 'undefined') return;
+      const path = new Path2D(pathD);
+      ctx.save();
+      ctx.translate(x, y);
+      const scale = size / baseSize;
+      ctx.scale(scale, scale);
+      ctx.translate(-baseSize / 2, -baseSize / 2);
+      ctx.strokeStyle = color;
+      ctx.lineWidth = 2;
+      ctx.lineCap = 'round';
+      ctx.lineJoin = 'round';
+      ctx.stroke(path);
+      ctx.restore();
+    }
+
+    function drawBadgeCircle(ctx, x, y, r) {
+      ctx.save();
+      ctx.beginPath();
+      ctx.arc(x, y, r, 0, 2 * Math.PI);
+      ctx.fillStyle = '#ffffff';
+      ctx.shadowColor = 'rgba(15, 23, 42, 0.25)';
+      ctx.shadowBlur = Math.max(4, r * 0.6);
+      ctx.shadowOffsetX = 0;
+      ctx.shadowOffsetY = Math.max(1, r * 0.25);
+      ctx.fill();
+      ctx.shadowColor = 'transparent';
+      ctx.shadowBlur = 0;
+      ctx.shadowOffsetX = 0;
+      ctx.shadowOffsetY = 0;
+      ctx.lineWidth = Math.max(1, r * 0.05);
+      ctx.strokeStyle = '#f9f6f3';
+      ctx.stroke();
       ctx.restore();
     }
 
@@ -1032,7 +1206,17 @@ export default {
         const activeFramework = frameworkValue.value;
         const activeStartskog = startskogValue.value;
 
-        arr.forEach(p => {
+        const sortedPoints = [...arr].sort((a, b) => {
+          const priority = (point) => {
+            if (!point?.id) return 0;
+            if (point.id === 'myc-7') return 1;
+            if (point.id === 'myc-7.1') return 2;
+            return 0;
+          };
+          return priority(a) - priority(b);
+        });
+
+        sortedPoints.forEach(p => {
           if (!p) return;
           if (activeFramework && !valueMatches(p.framework, activeFramework)) return;
           if (activeStartskog && p.startskog && p.startskog !== activeStartskog) return;
@@ -1043,15 +1227,98 @@ export default {
           const normalizedRadius = 0.012;
           const pixelRight = viewer.value.viewport.pixelFromPoint(new osdLib.Point(p.x + normalizedRadius, p.y), true);
           const radius = Math.abs(pixelRight.x - pixel.x);
+          const isRemoved = !!p.removed;
+          const isMovementSource = p.id === 'myc-7';
+          const isMovementTarget = p.id === 'myc-7.1';
 
-          drawAwardStar(overlayCtx, pixel.x, pixel.y, radius);
-
-          if (p.id) {
+          if (isRemoved) {
             overlayCtx.save();
-            overlayCtx.font = `${Math.max(4, radius * 1).toFixed(0)}px "Segoe UI", system-ui, sans-serif`;
-            overlayCtx.fillStyle = 'rgba(17, 24, 39, 0.85)';
-            overlayCtx.strokeStyle = 'rgba(255, 255, 255, 0.8)';
-            overlayCtx.lineWidth = Math.max(1, radius * 0.1);
+            overlayCtx.globalAlpha = isMovementSource ? 0.4 : 0.5;
+            drawAwardStar(overlayCtx, pixel.x, pixel.y, radius);
+            overlayCtx.restore();
+
+            if (!isMovementSource) {
+              const crossRadius = radius * 1.2;
+              overlayCtx.save();
+              overlayCtx.strokeStyle = 'rgba(239,68,68,0.9)';
+              overlayCtx.lineWidth = Math.max(1, radius * 0.25);
+              overlayCtx.beginPath();
+              overlayCtx.moveTo(pixel.x - crossRadius, pixel.y - crossRadius);
+              overlayCtx.lineTo(pixel.x + crossRadius, pixel.y + crossRadius);
+              overlayCtx.moveTo(pixel.x - crossRadius, pixel.y + crossRadius);
+              overlayCtx.lineTo(pixel.x + crossRadius, pixel.y - crossRadius);
+              overlayCtx.stroke();
+              overlayCtx.restore();
+            }
+
+            if (isMovementTarget) {
+              const circleRadius = radius * 0.7;
+              const offset = radius * 0.9;
+              const circleX = pixel.x + offset;
+              const circleY = pixel.y - offset;
+
+              drawBadgeCircle(overlayCtx, circleX, circleY, circleRadius);
+
+              const iconSize = circleRadius * 1.5;
+              drawSvgStrokeIcon(overlayCtx, MOVE_ARROW_PATH_D, circleX, circleY, iconSize, '#30201a');
+            } else if (!isMovementSource) {
+              const circleRadius = radius * 0.7;
+              const offset = radius * 0.9;
+              const circleX = pixel.x + offset;
+              const circleY = pixel.y - offset;
+
+              drawBadgeCircle(overlayCtx, circleX, circleY, circleRadius);
+
+              const iconPath =
+                p.id === 'myc-2'
+                  ? RANDOM_LINE_PATH_D
+                  : p.id === 'myc-11' || p.id === 'myc-12'
+                    ? DUST_STORM_PATH_D
+                    : SAW_BLADE_PATH_D;
+              const isDustIcon = iconPath === DUST_STORM_PATH_D;
+              const iconSize = circleRadius * (isDustIcon ? 1.3 : 1.5);
+              const baseSize = isDustIcon ? 48 : 24;
+              const flipIcon = iconPath === DUST_STORM_PATH_D;
+              drawSvgIcon(overlayCtx, iconPath, circleX, circleY, iconSize, '#30201a', baseSize, flipIcon);
+            }
+          } else {
+            drawAwardStar(overlayCtx, pixel.x, pixel.y, radius);
+
+            if (isMovementTarget) {
+              const circleRadius = radius * 0.7;
+              const offset = radius * 0.9;
+              const circleX = pixel.x + offset;
+              const circleY = pixel.y - offset;
+
+              drawBadgeCircle(overlayCtx, circleX, circleY, circleRadius);
+
+              const iconSize = circleRadius * 1.5;
+              drawSvgStrokeIcon(overlayCtx, MOVE_ARROW_PATH_D, circleX, circleY, iconSize, '#5a3f34');
+            }
+            if (p.id === 'myc-11' || p.id === 'myc-12') {
+              const circleRadius = radius * 0.7;
+              const offset = radius * 0.9;
+              const circleX = pixel.x + offset;
+              const circleY = pixel.y - offset;
+
+              drawBadgeCircle(overlayCtx, circleX, circleY, circleRadius);
+
+              const iconSize = circleRadius * 1.3;
+              drawSvgIcon(overlayCtx, DUST_STORM_PATH_D, circleX, circleY, iconSize, '#5a3f34', 48, true);
+            }
+          }
+
+          if (props.showOverlayLabels && p.id) {
+            overlayCtx.save();
+            overlayCtx.font = `${Math.max(6, radius * 1.1).toFixed(0)}px "Segoe UI", system-ui, sans-serif`;
+            if (isRemoved) {
+              overlayCtx.fillStyle = 'rgba(239, 68, 68, 0.9)';
+              overlayCtx.strokeStyle = 'rgba(255, 255, 255, 0.85)';
+            } else {
+              overlayCtx.fillStyle = 'rgba(17, 24, 39, 0.85)';
+              overlayCtx.strokeStyle = 'rgba(255, 255, 255, 0.8)';
+            }
+            overlayCtx.lineWidth = Math.max(1, radius * 0.15);
             const labelX = pixel.x + radius * -1;
             const labelY = pixel.y - radius * 1.4;
             overlayCtx.strokeText(p.id, labelX, labelY);
@@ -1145,6 +1412,9 @@ export default {
     });
     // Redraw on dev flag toggle
     watch(() => props.devSaveClicks, () => {
+      if (overlayCtx) drawAllOverlays();
+    });
+    watch(() => props.showOverlayLabels, () => {
       if (overlayCtx) drawAllOverlays();
     });
     watch(() => props.smaplantorVisible, () => {
@@ -1943,7 +2213,8 @@ export default {
       matsvampMycelValue,
       rodlistadeMycelValue,
       rottackePopover,
-      rottackePopoverStyle
+      rottackePopoverStyle,
+      naturvardCounter,
     };
   },
 };

@@ -181,7 +181,14 @@ function filterEntries(
   return results;
 }
 
-const DEFAULT_NATURVARD_TIMES = ["innan", "efter", "20 år", "50 år", "80 år"];
+export const DEFAULT_NATURVARD_TIMES = [
+  "innan",
+  "efter",
+  "10 år",
+  "20 år",
+  "50 år",
+  "80 år",
+];
 
 const defaultAvailability: Record<OverlayKey, boolean> = {
   retention: true,
@@ -298,15 +305,18 @@ function expandNaturvardConfig(raw: any): any[] {
   const results: any[] = [];
 
   Object.entries(frameworksConfig).forEach(([frameworkName, perStartskog]) => {
-    const alias = getFrameworkAliases(frameworkName);
+    const aliases = getFrameworkAliases(frameworkName);
     const perStart = perStartskog ?? {};
+
     markerMaps.forEach((markerMap, startskog) => {
       if (!markerMap || markerMap.size === 0) return;
       const allIds = Array.from(markerMap.keys());
       const baseIds: string[] = Array.isArray(defaults[startskog])
         ? defaults[startskog]
         : allIds;
-      let current = new Set<string>(baseIds);
+
+      let previousCurrent = new Set<string>(baseIds);
+      let removedPersistent = new Set<string>();
 
       const timelineEntries = Array.isArray(perStart[startskog])
         ? perStart[startskog]
@@ -319,31 +329,49 @@ function expandNaturvardConfig(raw: any): any[] {
       });
 
       timeOrder.forEach((time) => {
-      const entry = timelineMap.get(time);
-      if (entry) {
-        if (entry.set) {
-          if (entry.set === "base") {
-            current = new Set(baseIds);
-          } else if (entry.set === "all") {
+        let current = new Set<string>(previousCurrent);
+        const entry = timelineMap.get(time);
+
+        if (entry) {
+          if (entry.set) {
+            if (entry.set === "base") {
+              current = new Set(baseIds);
+            } else if (entry.set === "all") {
               current = new Set(allIds);
             } else if (Array.isArray(entry.set)) {
               current = new Set(entry.set);
             }
           }
           if (Array.isArray(entry.remove)) {
-            entry.remove.forEach((id: string) => current.delete(id));
+            entry.remove.forEach((id: string) => {
+              current.delete(id);
+              removedPersistent.add(id);
+            });
           }
           if (Array.isArray(entry.add)) {
-            entry.add.forEach((id: string) => current.add(id));
+            entry.add.forEach((id: string) => {
+              current.add(id);
+              removedPersistent.delete(id);
+            });
           }
         }
 
-        if (current.size === 0) return;
+        previousCurrent.forEach((id) => {
+          if (!current.has(id)) {
+            removedPersistent.add(id);
+          }
+        });
 
         current.forEach((id) => {
-          const marker = markerMap.get(id);
-          if (!marker) return;
-          alias.forEach((fw) => {
+          if (removedPersistent.has(id)) {
+            removedPersistent.delete(id);
+          }
+        });
+
+        aliases.forEach((fw) => {
+          current.forEach((id) => {
+            const marker = markerMap.get(id) || pointMap.get(id);
+            if (!marker) return;
             results.push({
               id: marker.id,
               x: marker.x,
@@ -351,9 +379,25 @@ function expandNaturvardConfig(raw: any): any[] {
               framework: fw,
               startskog,
               time,
+              removed: false,
+            });
+          });
+          removedPersistent.forEach((id) => {
+            const marker = markerMap.get(id) || pointMap.get(id);
+            if (!marker) return;
+            results.push({
+              id: marker.id,
+              x: marker.x,
+              y: marker.y,
+              framework: fw,
+              startskog,
+              time,
+              removed: true,
             });
           });
         });
+
+        previousCurrent = new Set(current);
       });
     });
   });

@@ -72,8 +72,14 @@
       </div>
 
       <div class="flex justify-center sm:p-1 border-b border-muted ">
-        <USwitch :ui="{ root: 'flex-row-reverse justify-between' }" color="warning" v-model="devSaveClicks"
-          label="Spara klick (dev)" class="absolute top-3 left-3" />
+        <div class="absolute top-3 left-3 flex flex-col gap-1 pointer-events-auto">
+          <USwitch :ui="{ root: 'flex-row-reverse justify-between' }" color="warning" v-model="devSaveClicks"
+            label="Spara klick (dev)" />
+          <USwitch :ui="{ root: 'flex-row-reverse justify-between' }" color="warning" v-model="devOverlayLabelsVisible"
+            label="Visa myc-etiketter (dev)" />
+          <USwitch :ui="{ root: 'flex-row-reverse justify-between' }" color="warning"
+            v-model="devNaturvardCounterVisible" label="Visa naturvårdssiffra (dev)" />
+        </div>
 
 
         <div
@@ -505,6 +511,10 @@
                   <!-- Dev: Save clicks -->
                   <USwitch :ui="{ root: 'flex-row-reverse justify-between' }" color="warning" v-model="devSaveClicks"
                     label="Spara klick (dev)" />
+                  <USwitch :ui="{ root: 'flex-row-reverse justify-between' }" color="warning"
+                    v-model="devOverlayLabelsVisible" label="Visa myc-etiketter (dev)" />
+                  <USwitch :ui="{ root: 'flex-row-reverse justify-between' }" color="warning"
+                    v-model="devNaturvardCounterVisible" label="Visa naturvårdssiffra (dev)" />
 
                 </div>
 
@@ -544,6 +554,7 @@
             <OpenSeadragonViewer :tradplantor-visible="tradplantorVisible"
               :naturvardsarter-visible="naturvardsarterVisible" :hogstubbar-visible="hogstubbarVisible"
               :smaplantor-visible="smaplantorVisible" :dev-save-clicks="devSaveClicks"
+              :show-overlay-labels="devOverlayLabelsVisible" :show-naturvard-counter="devNaturvardCounterVisible"
               :seedTree-visible="seedTreeVisible" :rottacke-skarmtrad-visible="rottackeSkarmtradVisible"
               :rottacke-bladning-visible="rottackeBladningVisible" :retention-visible="retentionVisible"
               :old-kanteffekt-visible="oldKanteffektVisible" :kanteffekt-visible="kanteffektVisible"
@@ -596,6 +607,7 @@
                 :rottacke-bladning-visible="rottackeBladningVisible" :seedTree-visible="seedTreeVisible"
                 :smaplantor-visible="smaplantorVisible" :hogstubbar-visible="hogstubbarVisible"
                 :tradplantor-visible="tradplantorVisible" :fullscreenLayout="true"
+                :show-overlay-labels="devOverlayLabelsVisible" :show-naturvard-counter="devNaturvardCounterVisible"
                 :retention-points="filteredBeforeOverlayData.retention"
                 :seed-tree-points="filteredBeforeOverlayData.seedTree"
                 :smaplantor-points="filteredBeforeOverlayData.smaplantor"
@@ -614,6 +626,7 @@
                 :rottacke-bladning-visible="rottackeBladningVisible" :seedTree-visible="seedTreeVisible"
                 :smaplantor-visible="smaplantorVisible" :hogstubbar-visible="hogstubbarVisible"
                 :tradplantor-visible="tradplantorVisible" :fullscreenLayout="true"
+                :show-overlay-labels="devOverlayLabelsVisible" :show-naturvard-counter="devNaturvardCounterVisible"
                 :retention-points="filteredBeforeOverlayData.retention"
                 :seed-tree-points="filteredBeforeOverlayData.seedTree"
                 :smaplantor-points="filteredBeforeOverlayData.smaplantor"
@@ -634,6 +647,7 @@
                 :rottacke-bladning-visible="rottackeBladningVisible" :seedTree-visible="seedTreeVisible"
                 :smaplantor-visible="smaplantorVisible" :hogstubbar-visible="hogstubbarVisible"
                 :tradplantor-visible="tradplantorVisible" :fullscreenLayout="true"
+                :show-overlay-labels="devOverlayLabelsVisible" :show-naturvard-counter="devNaturvardCounterVisible"
                 :retention-points="filteredOverlayData.retention" :seed-tree-points="filteredOverlayData.seedTree"
                 :smaplantor-points="filteredOverlayData.smaplantor" :hogstubbar-points="filteredOverlayData.hogstubbar"
                 :naturvardsarter-points="filteredOverlayData.naturvardsarter"
@@ -651,6 +665,7 @@
                 :rottacke-bladning-visible="rottackeBladningVisible" :seedTree-visible="seedTreeVisible"
                 :smaplantor-visible="smaplantorVisible" :hogstubbar-visible="hogstubbarVisible"
                 :tradplantor-visible="tradplantorVisible" :fullscreenLayout="true"
+                :show-overlay-labels="devOverlayLabelsVisible" :show-naturvard-counter="devNaturvardCounterVisible"
                 :retention-points="filteredOverlayData.retention" :seed-tree-points="filteredOverlayData.seedTree"
                 :smaplantor-points="filteredOverlayData.smaplantor" :hogstubbar-points="filteredOverlayData.hogstubbar"
                 :naturvardsarter-points="filteredOverlayData.naturvardsarter"
@@ -677,6 +692,7 @@
                 :rottacke-bladning-visible="rottackeBladningVisible" :seedTree-visible="seedTreeVisible"
                 :smaplantor-visible="smaplantorVisible" :hogstubbar-visible="hogstubbarVisible"
                 :tradplantor-visible="tradplantorVisible" :fullscreenLayout="true"
+                :show-overlay-labels="devOverlayLabelsVisible" :show-naturvard-counter="devNaturvardCounterVisible"
                 :retention-points="filteredOverlayData.retention" :seed-tree-points="filteredOverlayData.seedTree"
                 :smaplantor-points="filteredOverlayData.smaplantor" :hogstubbar-points="filteredOverlayData.hogstubbar"
                 :naturvardsarter-points="filteredOverlayData.naturvardsarter"
@@ -695,6 +711,7 @@
                 :rottacke-bladning-visible="rottackeBladningVisible" :seedTree-visible="seedTreeVisible"
                 :smaplantor-visible="smaplantorVisible" :hogstubbar-visible="hogstubbarVisible"
                 :tradplantor-visible="tradplantorVisible" :fullscreenLayout="true"
+                :show-overlay-labels="devOverlayLabelsVisible" :show-naturvard-counter="devNaturvardCounterVisible"
                 :retention-points="filteredOverlayData.retention" :seed-tree-points="filteredOverlayData.seedTree"
                 :smaplantor-points="filteredOverlayData.smaplantor" :hogstubbar-points="filteredOverlayData.hogstubbar"
                 :naturvardsarter-points="filteredOverlayData.naturvardsarter"
@@ -715,6 +732,7 @@
                 :rottacke-bladning-visible="rottackeBladningVisible" :seedTree-visible="seedTreeVisible"
                 :smaplantor-visible="smaplantorVisible" :hogstubbar-visible="hogstubbarVisible"
                 :tradplantor-visible="tradplantorVisible" :fullscreenLayout="true"
+                :show-overlay-labels="devOverlayLabelsVisible" :show-naturvard-counter="devNaturvardCounterVisible"
                 :retention-points="filteredOverlayDataFramework2.retention"
                 :seed-tree-points="filteredOverlayDataFramework2.seedTree"
                 :smaplantor-points="filteredOverlayDataFramework2.smaplantor"
@@ -735,6 +753,7 @@
                 :rottacke-bladning-visible="rottackeBladningVisible" :seedTree-visible="seedTreeVisible"
                 :smaplantor-visible="smaplantorVisible" :hogstubbar-visible="hogstubbarVisible"
                 :tradplantor-visible="tradplantorVisible" :fullscreenLayout="true"
+                :show-overlay-labels="devOverlayLabelsVisible" :show-naturvard-counter="devNaturvardCounterVisible"
                 :retention-points="filteredOverlayDataFramework2.retention"
                 :seed-tree-points="filteredOverlayDataFramework2.seedTree"
                 :smaplantor-points="filteredOverlayDataFramework2.smaplantor"
@@ -1179,6 +1198,8 @@ const currentLayoutMode = ref('slider')                 // 'slider' | 'sideBySid
 const emit = defineEmits(['close'])
 
 const devSaveClicks = ref(false);
+const devOverlayLabelsVisible = ref(true);
+const devNaturvardCounterVisible = ref(false);
 const retentionVisible = ref(false);
 const kanteffektVisible = ref(false);
 const omkringSkogVisible = ref(false);
