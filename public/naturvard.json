@@ -1,84 +1,154 @@
 {
-  "mycelium": [
-    {
-      "framework": ["trakthygge", "luckhuggning", "skärmträd", "naturskydd", "blädning"],
-      "time": ["innan", "efter", "20 år", "50 år", "80 år"],
-      "startskog": "naturskog",
-      "x": 0.34642844056398947,
-      "y": 0.27569904016837044,
-      "id": "click-1754923858027"
+  "timelineOrder": ["innan", "efter", "10 år", "20 år", "50 år", "80 år"],
+  "points": [
+    { "id": "myc-1", "x": 0.34642844056398947, "y": 0.27569904016837044 },
+    { "id": "myc-2", "x": 0.448074807480748, "y": 0.13976897689768986 },
+    { "id": "myc-5", "x": 0.3328882776064328, "y": 0.38524805554515074 },
+    { "id": "myc-3", "x": 0.4202, "y": 0.2763 },
+    { "id": "myc-6", "x": 0.45102346938828547, "y": 0.3130124631405228 },
+    { "id": "myc-4", "x": 0.5995, "y": 0.185 },
+    { "id": "myc-7", "x": 0.5295, "y": 0.1436 },
+    { "id": "myc-7.1", "x": 0.5326, "y": 0.1558 },
+    { "id": "myc-8", "x": 0.5127, "y": 0.2766 },
+    { "id": "myc-9", "x": 0.6759, "y": 0.3555 },
+    { "id": "myc-10", "x": 0.4249, "y": 0.1418 },
+    { "id": "myc-11", "x": 0.3275194470162458, "y": 0.2550350475697622 },
+    { "id": "myc-12", "x": 0.6424092409240925, "y": 0.3135313531353135 }
+  ],
+  "startskogSets": {
+    "naturskog": [
+      "myc-1",
+      "myc-2",
+      "myc-3",
+      "myc-4",
+      "myc-5",
+      "myc-6",
+      "myc-7",
+      "myc-7.1",
+      "myc-8",
+      "myc-9",
+      "myc-10",
+      "myc-11",
+      "myc-12"
+    ],
+    "produktionsskog_": ["myc-1", "myc-2", "myc-3", "myc-4", "myc-11", "myc-12"]
+  },
+  "defaults": {
+    "naturskog": [
+      "myc-1",
+      "myc-2",
+      "myc-3",
+      "myc-4",
+      "myc-5",
+      "myc-6",
+      "myc-7",
+      "myc-8",
+      "myc-9"
+    ],
+    "produktionsskog_": ["myc-1", "myc-2", "myc-3", "myc-4"]
+  },
+  "frameworks": {
+    "naturskydd": {
+      "naturskog": [{ "time": "innan", "set": "base" }],
+      "produktionsskog_": [{ "time": "innan", "set": "base" }]
     },
-    {
-      "framework": ["trakthygge", "luckhuggning", "skärmträd", "naturskydd", "blädning"],
-      "time": "innan",
-      "startskog": "naturskog",
-      "x": 0.37109134531886717,
-      "y": 0.17688385925764072,
-      "id": "click-1754923866036"
+    "trakthygge": {
+      "naturskog": [
+        { "time": "innan", "set": "base" },
+        { "time": "efter", "set": ["myc-1", "myc-2", "myc-7"] },
+        { "time": "20 år", "set": ["myc-1", "myc-7"] },
+        { "time": "50 år", "set": ["myc-1", "myc-7.1", "myc-11"] },
+        { "time": "80 år", "add": ["myc-12"] }
+      ],
+      "produktionsskog_": [
+        { "time": "innan", "set": "base" },
+        { "time": "efter", "set": ["myc-1", "myc-2"] },
+        { "time": "20 år", "set": ["myc-1"] },
+        { "time": "50 år", "set": ["myc-1", "myc-11"] }
+      ]
     },
-    {
-      "framework": ["trakthygge", "luckhuggning", "skärmträd", "naturskydd", "blädning"],
-      "time": "innan",
-      "startskog": "naturskog",
-      "x": 0.3328882776064328,
-      "y": 0.38524805554515074,
-      "id": "click-1754923945794"
+    "blädning": {
+      "naturskog": [
+        { "time": "innan", "set": "base" },
+        {
+          "time": "80 år",
+          "set": ["myc-1", "myc-2", "myc-3", "myc-4", "myc-5", "myc-6", "myc-7"]
+        }
+      ],
+      "produktionsskog_": [
+        { "time": "innan", "set": "base" },
+        { "time": "80 år", "set": ["myc-1", "myc-5", "myc-6", "myc-9"] }
+      ]
     },
-    {
-      "framework": ["trakthygge", "luckhuggning", "skärmträd", "naturskydd", "blädning"],
-      "time": "innan",
-      "startskog": "naturskog",
-      "x": 0.4109909525546888,
-      "y": 0.3133192257216232,
-      "id": "click-1754923952287"
+    "luckhuggning": {
+      "naturskog": [
+        { "time": "innan", "set": "base" },
+        {
+          "time": "efter",
+          "set": ["myc-1", "myc-2", "myc-3", "myc-5", "myc-6", "myc-7", "myc-9"]
+        },
+        {
+          "time": "20 år",
+          "set": ["myc-1", "myc-3", "myc-5", "myc-6", "myc-7", "myc-9"]
+        },
+        {
+          "time": "50 år",
+          "set": ["myc-1", "myc-6", "myc-5", "myc-7", "myc-9", "myc-11"]
+        },
+        {
+          "time": "80 år",
+          "set": ["myc-1", "myc-6", "myc-5", "myc-7", "myc-11", "myc-12"]
+        }
+      ],
+      "produktionsskog_": [
+        { "time": "innan", "set": "base" },
+        { "time": "efter", "set": ["myc-1", "myc-2", "myc-3"] },
+        { "time": "20 år", "set": ["myc-1", "myc-3"] },
+        { "time": "50 år", "set": ["myc-1", "myc-11"] },
+        { "time": "80 år", "set": ["myc-1", "myc-11", "myc-12"] }
+      ]
     },
-    {
-      "framework": ["trakthygge", "luckhuggning", "skärmträd", "naturskydd", "blädning"],
-      "time": "innan",
-      "startskog": "naturskog",
-      "x": 0.45102346938828547,
-      "y": 0.3130124631405228,
-      "id": "click-1754923955978"
-    },
-    {
-      "framework": ["trakthygge", "luckhuggning", "skärmträd", "naturskydd", "blädning"],
-      "time": "innan",
-      "startskog": "naturskog",
-      "x": 0.5885182258792122,
-      "y": 0.2270835329100318,
-      "id": "click-1754923963101"
-    },
-    {
-      "framework": ["trakthygge", "luckhuggning", "skärmträd", "naturskydd", "blädning"],
-      "time": "innan",
-      "startskog": "naturskog",
-      "x": 0.6272355421250287,
-      "y": 0.1438028427923464,
-      "id": "click-1754923968263"
-    },
-    {
-      "framework": ["trakthygge", "luckhuggning", "skärmträd", "naturskydd", "blädning"],
-      "time": "innan",
-      "startskog": "naturskog",
-      "x": 0.5447444606721092,
-      "y": 0.1462281637037525,
-      "id": "click-1754923971423"
-    },
-    {
-      "framework": ["trakthygge", "luckhuggning", "skärmträd", "naturskydd", "blädning"],
-      "time": "innan",
-      "startskog": "naturskog",
-      "x": 0.6550156075661783,
-      "y": 0.3407193763356159,
-      "id": "click-1754923976323"
-    },
-    {
-      "framework": ["trakthygge", "luckhuggning", "skärmträd", "naturskydd", "blädning"],
-      "time": "innan",
-      "startskog": "naturskog",
-      "x": 0.7169586708034054,
-      "y": 0.4178609159222422,
-      "id": "click-1754923980732"
+    "skärmträd": {
+      "naturskog": [
+        { "time": "innan", "set": "base" },
+        {
+          "time": "efter",
+          "set": ["myc-1", "myc-2", "myc-3", "myc-5", "myc-6", "myc-7", "myc-9"]
+        },
+        {
+          "time": "10 år",
+          "set": ["myc-1", "myc-2", "myc-3", "myc-5", "myc-7"]
+        },
+        { "time": "20 år", "set": ["myc-1", "myc-5", "myc-7"] },
+        {
+          "time": "50 år",
+          "set": ["myc-1", "myc-5", "myc-7", "myc-11"]
+        },
+        {
+          "time": "80 år",
+          "set": ["myc-1", "myc-5", "myc-7", "myc-11", "myc-12"]
+        }
+      ],
+      "produktionsskog_": [
+        { "time": "innan", "set": "base" },
+        {
+          "time": "efter",
+          "set": ["myc-1", "myc-2", "myc-3"]
+        },
+        {
+          "time": "10 år",
+          "set": ["myc-1", "myc-2", "myc-3"]
+        },
+        { "time": "20 år", "set": ["myc-1"] },
+        {
+          "time": "50 år",
+          "set": ["myc-1", "myc-11"]
+        },
+        {
+          "time": "80 år",
+          "set": ["myc-1", "myc-11"]
+        }
+      ]
     }
-  ]
+  }
 }

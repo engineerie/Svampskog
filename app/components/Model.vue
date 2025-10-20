@@ -72,26 +72,27 @@
       </div>
 
       <div class="flex justify-center sm:p-1 border-b border-muted ">
+        <USwitch :ui="{ root: 'flex-row-reverse justify-between' }" color="warning" v-model="devSaveClicks"
+          label="Spara klick (dev)" class="absolute top-3 left-3" />
 
 
         <div
           class="absolute bottom-8 left-1/2 transform -translate-x-1/2 z-50 p-4 sm:p-0 space-y-2 sm:space-y-0 pointer-events-none sm:flex gap-2 items-center">
 
 
-          <UDrawer :direction="isMobile ? 'bottom' : 'bottom'" :inset="isMobile ? false : true" handle-only
-            :dismissible="isMobile ? true : false" :overlay="false" :handle="isMobile ? true : false" :modal="false"
-            v-model:open="infoDrawerOpen" class="pointer-events-auto"
-            :ui="{ header: 'flex items-center justify-between', body: 'p-0 ', container: 'p-0 gap-0 ', content: 'max-w-4xl mx-auto', footer: 'gap-0' }">
+          <UDrawer :direction="isMobile ? 'bottom' : 'bottom'" :inset="isMobile ? false : true"
+            :dismissible="isMobile ? true : false" :overlay="false" :handle="isMobile ? false : false" :modal="false"
+            v-model:open="infoDrawerOpen" class="pointer-events-auto "
+            :ui="{ header: 'flex items-center justify-between', body: 'p-0 ', container: 'p-0 gap-0 ', content: 'max-w-4xl mx-auto ring-muted/50', footer: 'gap-0' }">
             <UButton :size="isMobile ? 'xl' : 'xl'" :label="isMobile ? 'Information' : 'Information'" color="neutral"
               icon="i-heroicons-chevron-up" class="ring-muted rounded-full shadow "
               :variant="infoDrawerOpen ? 'subtle' : 'outline'" />
             <template #body>
-              <UButton v-if="!isMobile" icon="i-heroicons-chevron-down"
-                class="absolute top-1.5 right-1.5 z-50 rounded-full" variant="ghost" color="neutral"
+              <UButton class="absolute top-1.5 right-1.5 z-50" variant="ghost" color="neutral" label="Stäng"
                 @click="infoDrawerOpen = false" />
               <div class="relative">
-                <UTabs v-model="infoActiveTab" :items="panelTabs" variant="link" size="md" class="w-full"
-                  :ui="{ indicator: 'hidden', trigger: 'ring ring-muted data-[state=active]:bg-muted data-[state=active]:text-neutral-700 py-1 flex-1 sm:flex-none', list: 'gap-2 p-2 bg-transparent', root: 'gap-0' }">
+                <UTabs v-model="infoActiveTab" :items="panelTabs" variant="pill" size="xs" color="neutral"
+                  :ui="{ indicator: 'bg-white shadow', trigger: 'data-[state=active]:text-neutral-700 ', list: 'bg-muted gap-2 m-1.5 w-fit', root: 'gap-0' }">
 
                   <template #text>
                     <div class="sm:grid divide-y sm:divide-y-0 sm:divide-x divide-muted/70 transition-all relative"
@@ -335,7 +336,7 @@
                 :popper="{ placement: 'bottom-end' }" :ui="{ content: 'p-0 w-80' }">
                 <div>
                   <UBadge color="neutral" variant="outline" size="lg" :class="[
-                    'cursor-pointer shadow-sm sm:ml-1.5 w-fit transition-opacity',
+                    'cursor-pointer shadow-sm sm:ml-1.5 w-fit transition-opacity ring-muted/50',
                     (badge.key === 'staticOverlay' || isOverlayAssociatedAny(badge.key)) ? '' : 'opacity-50'
                   ]">
 
@@ -474,6 +475,9 @@
                   <USwitch v-if="isTrakthygge || isLuckhuggning || isSkarmtrad"
                     :ui="{ root: 'flex-row-reverse justify-between' }" color="primary" v-model="kanteffektVisible"
                     label="Kanteffekt" />
+                  <USwitch v-if="isTrakthygge || isLuckhuggning || isSkarmtrad"
+                    :ui="{ root: 'flex-row-reverse justify-between' }" color="primary" v-model="omkringSkogVisible"
+                    label="Omkringliggande skog" />
                   <!-- Småplantor: show small white circles from public JSON -->
                   <USwitch :ui="{ root: 'flex-row-reverse justify-between' }" color="primary"
                     v-model="smaplantorVisible" label="Småplantor" />
@@ -543,8 +547,9 @@
               :seedTree-visible="seedTreeVisible" :rottacke-skarmtrad-visible="rottackeSkarmtradVisible"
               :rottacke-bladning-visible="rottackeBladningVisible" :retention-visible="retentionVisible"
               :old-kanteffekt-visible="oldKanteffektVisible" :kanteffekt-visible="kanteffektVisible"
-              :retention-points="filteredOverlayData.retention" :seed-tree-points="filteredOverlayData.seedTree"
-              :smaplantor-points="filteredOverlayData.smaplantor" :hogstubbar-points="filteredOverlayData.hogstubbar"
+              :omkringliggande-skog-visible="omkringSkogVisible" :retention-points="filteredOverlayData.retention"
+              :seed-tree-points="filteredOverlayData.seedTree" :smaplantor-points="filteredOverlayData.smaplantor"
+              :hogstubbar-points="filteredOverlayData.hogstubbar"
               :naturvardsarter-points="filteredOverlayData.naturvardsarter"
               :kanteffekt-features="filteredOverlayData.kanteffekt" :fullscreenLayout="true"
               :currentFramework="currentFramework" :currentTime="timeLabelForDataFiltering"
@@ -586,7 +591,8 @@
             <template #first>
               <OpenSeadragonViewer :naturvardsarter-visible="naturvardsarterVisible"
                 :retention-visible="retentionVisible" :kanteffekt-visible="kanteffektVisible"
-                :old-kanteffekt-visible="oldKanteffektVisible" :rottacke-skarmtrad-visible="rottackeSkarmtradVisible"
+                :omkringliggande-skog-visible="omkringSkogVisible" :old-kanteffekt-visible="oldKanteffektVisible"
+                :rottacke-skarmtrad-visible="rottackeSkarmtradVisible"
                 :rottacke-bladning-visible="rottackeBladningVisible" :seedTree-visible="seedTreeVisible"
                 :smaplantor-visible="smaplantorVisible" :hogstubbar-visible="hogstubbarVisible"
                 :tradplantor-visible="tradplantorVisible" :fullscreenLayout="true"
@@ -603,7 +609,8 @@
                 v-if="!opacitySyncEnabled" class="w-full h-full" />
               <OpenSeadragonViewer :naturvardsarter-visible="naturvardsarterVisible"
                 :retention-visible="retentionVisible" :kanteffekt-visible="kanteffektVisible"
-                :old-kanteffekt-visible="oldKanteffektVisible" :rottacke-skarmtrad-visible="rottackeSkarmtradVisible"
+                :omkringliggande-skog-visible="omkringSkogVisible" :old-kanteffekt-visible="oldKanteffektVisible"
+                :rottacke-skarmtrad-visible="rottackeSkarmtradVisible"
                 :rottacke-bladning-visible="rottackeBladningVisible" :seedTree-visible="seedTreeVisible"
                 :smaplantor-visible="smaplantorVisible" :hogstubbar-visible="hogstubbarVisible"
                 :tradplantor-visible="tradplantorVisible" :fullscreenLayout="true"
@@ -622,7 +629,8 @@
             <template #second>
               <OpenSeadragonViewer :naturvardsarter-visible="naturvardsarterVisible"
                 :retention-visible="retentionVisible" :kanteffekt-visible="kanteffektVisible"
-                :old-kanteffekt-visible="oldKanteffektVisible" :rottacke-skarmtrad-visible="rottackeSkarmtradVisible"
+                :omkringliggande-skog-visible="omkringSkogVisible" :old-kanteffekt-visible="oldKanteffektVisible"
+                :rottacke-skarmtrad-visible="rottackeSkarmtradVisible"
                 :rottacke-bladning-visible="rottackeBladningVisible" :seedTree-visible="seedTreeVisible"
                 :smaplantor-visible="smaplantorVisible" :hogstubbar-visible="hogstubbarVisible"
                 :tradplantor-visible="tradplantorVisible" :fullscreenLayout="true"
@@ -638,7 +646,8 @@
                 v-if="!opacitySyncEnabled" class="w-full h-full " />
               <OpenSeadragonViewer :naturvardsarter-visible="naturvardsarterVisible"
                 :retention-visible="retentionVisible" :kanteffekt-visible="kanteffektVisible"
-                :old-kanteffekt-visible="oldKanteffektVisible" :rottacke-skarmtrad-visible="rottackeSkarmtradVisible"
+                :omkringliggande-skog-visible="omkringSkogVisible" :old-kanteffekt-visible="oldKanteffektVisible"
+                :rottacke-skarmtrad-visible="rottackeSkarmtradVisible"
                 :rottacke-bladning-visible="rottackeBladningVisible" :seedTree-visible="seedTreeVisible"
                 :smaplantor-visible="smaplantorVisible" :hogstubbar-visible="hogstubbarVisible"
                 :tradplantor-visible="tradplantorVisible" :fullscreenLayout="true"
@@ -663,7 +672,8 @@
             <template #first>
               <OpenSeadragonViewer :naturvardsarter-visible="naturvardsarterVisible"
                 :retention-visible="retentionVisible" :kanteffekt-visible="kanteffektVisible"
-                :old-kanteffekt-visible="oldKanteffektVisible" :rottacke-skarmtrad-visible="rottackeSkarmtradVisible"
+                :omkringliggande-skog-visible="omkringSkogVisible" :old-kanteffekt-visible="oldKanteffektVisible"
+                :rottacke-skarmtrad-visible="rottackeSkarmtradVisible"
                 :rottacke-bladning-visible="rottackeBladningVisible" :seedTree-visible="seedTreeVisible"
                 :smaplantor-visible="smaplantorVisible" :hogstubbar-visible="hogstubbarVisible"
                 :tradplantor-visible="tradplantorVisible" :fullscreenLayout="true"
@@ -1007,6 +1017,7 @@ function fwToString(fw: any): string | null {
 const overlayToggleMap: Record<string, () => boolean> = {
   retention: () => !!retentionVisible.value,
   kanteffekt: () => !!kanteffektVisible.value,
+  omkringSkog: () => !!omkringSkogVisible.value,
   rottackeSkarmtrad: () => !!rottackeSkarmtradVisible.value,
   rottackeBladning: () => !!rottackeBladningVisible.value,
   seedTree: () => !!seedTreeVisible.value,
@@ -1030,7 +1041,20 @@ function isOverlayVisibleInContext(overlayKey: string, ctx: { framework: any, st
     if (!(fw === 'blädning' || fw === 'bladning')) return false;
     return time === 'efter' || time === '20 år' || time === '50 år' || time === '80 år';
   }
-  // 3) Data must be available for the given context
+  // 3) Special-case omkringSkog to follow kanteffekt availability
+  if (overlayKey === 'omkringSkog') {
+    try {
+      const avail = overlayRegistry.availabilityFor({
+        framework: fw,
+        startskog: fwToString(ctx.startskog),
+        time,
+      });
+      return !!(avail && (avail as any)['kanteffekt']);
+    } catch (_) {
+      return false;
+    }
+  }
+  // 4) Data must be available for the given context
   try {
     const avail = overlayRegistry.availabilityFor({
       framework: fw,
@@ -1157,6 +1181,7 @@ const emit = defineEmits(['close'])
 const devSaveClicks = ref(false);
 const retentionVisible = ref(false);
 const kanteffektVisible = ref(false);
+const omkringSkogVisible = ref(false);
 const oldKanteffektVisible = ref(false);
 const naturvardsarterVisible = ref(false);
 const rottackeSkarmtradVisible = ref(false);
@@ -1180,7 +1205,7 @@ function toggleTimeInfo2Visible() {
 }
 
 // Overlay tracking helpers
-const overlayKeys = ['retention', 'kanteffekt', 'rottackeSkarmtrad', 'rottackeBladning', 'seedTree', 'smaplantor', 'hogstubbar', 'naturvardsarter', 'tradplantor'] as const;
+const overlayKeys = ['retention', 'kanteffekt', 'omkringSkog', 'rottackeSkarmtrad', 'rottackeBladning', 'seedTree', 'smaplantor', 'hogstubbar', 'naturvardsarter', 'tradplantor'] as const;
 type OverlayKey = typeof overlayKeys[number];
 
 const overlayOrder = ref<OverlayKey[]>([]);
@@ -1343,6 +1368,7 @@ function goNextTime() { stepTabs(1) }
 
 // --- Clickable phrases in timeline text -> overlay toggles ---
 const CLICK_RULES = [
+  { re: /näraliggande skogar/gi, overlay: 'omkringSkog' },
   { re: /hänsynsträd/gi, overlay: 'retention' },
   { re: /evighetsträd/gi, overlay: 'retention' },
   { re: /hyggeskanterna/gi, overlay: 'kanteffekt' },
@@ -1643,6 +1669,9 @@ watch([isFrameworkCompareMode, isCompare], ([frameworkCompare, compare]) => {
 onMounted(() => {
   removeShortcutsFn = defineShortcuts({
     o: () => (open.value = !open.value),
+    n: () => {
+      naturvardsarterVisible.value = !naturvardsarterVisible.value;
+    },
   });
 });
 
@@ -1754,6 +1783,12 @@ const overlayConfigs: Record<OverlayKey, OverlayContentConfig> = {
     condition: () => kanteffektVisible.value && (isTrakthygge.value || isLuckhuggning.value || isSkarmtrad.value),
     close: () => { kanteffektVisible.value = false },
   },
+  omkringSkog: {
+    title: 'Näraliggande skog',
+    description: 'Vanliga arter sprids in med sporer från närheten. Sporer sprids bara korta sträckor med vinden. Ovanliga arter har svårt att komma tillbaka eftersom de är ovanliga. ',
+    condition: () => omkringSkogVisible.value && (isTrakthygge.value || isLuckhuggning.value || isSkarmtrad.value),
+    close: () => { omkringSkogVisible.value = false },
+  },
   rottackeSkarmtrad: {
     title: 'Rottäcke skärmträd',
     description: 'Kontinuerligt rottäcke kopplat till överhållen skärm (1 år efter).',
@@ -1802,6 +1837,7 @@ const overlayIcons: Record<string, string> = {
   staticOverlay: 'i-material-symbols-light-rectangle-outline',
   retention: 'i-pepicons-pop-tree-circle',
   kanteffekt: 'i-healthicons-square-medium-negative',
+  omkringSkog: 'fluent-weather-duststorm-48-regular',
   rottackeSkarmtrad: 'i-fluent-emoji-high-contrast-blue-square',
   rottackeBladning: 'i-fluent-emoji-high-contrast-blue-square',
   seedTree: 'i-teenyicons-redwoodjs-outline',
@@ -1845,6 +1881,7 @@ const pinned = reactive({
   staticOverlay: false,
   retention: false,
   kanteffekt: false,
+  omkringSkog: false,
   rottackeSkarmtrad: false,
   rottackeBladning: false,
   seedTree: false,
@@ -1858,6 +1895,7 @@ const overlayRefMap = {
   staticOverlay: staticOverlayVisible,
   retention: retentionVisible,
   kanteffekt: kanteffektVisible,
+  omkringSkog: omkringSkogVisible,
   rottackeSkarmtrad: rottackeSkarmtradVisible,
   rottackeBladning: rottackeBladningVisible,
   seedTree: seedTreeVisible,
@@ -2187,6 +2225,11 @@ watch(retentionVisible, (val) => {
 watch(kanteffektVisible, (val) => {
   if (val) enforceExclusive('kanteffekt');
   handleOverlayStateChange('kanteffekt');
+}, { immediate: true });
+
+watch(omkringSkogVisible, (val) => {
+  if (val) enforceExclusive('omkringSkog');
+  handleOverlayStateChange('omkringSkog');
 }, { immediate: true });
 
 // split watchers defined above for rottackeSkarmtradVisible and rottackeBladningVisible

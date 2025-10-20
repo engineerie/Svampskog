@@ -18,9 +18,9 @@
       </div> -->
 
       <!-- Display viewport coordinates for marker placement -->
-      <!-- <div class="absolute top-32 right-0 m-2 p-1 bg-black bg-opacity-50 text-white text-xs z-50">
-      X: {{ mousePos.x.toFixed(4) }}, Y: {{ mousePos.y.toFixed(4) }}
-    </div> -->
+      <div class="absolute top-90 right-0 m-2 p-1 bg-black bg-opacity-50 text-white text-xs z-50">
+        X: {{ mousePos.x.toFixed(4) }}, Y: {{ mousePos.y.toFixed(4) }}
+      </div>
       <!-- <div class="osd-opacity-slider-container bg-neutral-800 flex items-center p-1.5 gap-1 rounded-lg m-2" :style="{
       position: 'absolute',
       top: '0px',
@@ -124,6 +124,32 @@ import { usePanelStore } from '~/stores/panelStore';
 import { useViewerStore } from '~/stores/viewerStore';
 const retentionOverlayIds = [];
 
+function isVisibleForStartskog(tree, activeStartskog) {
+  if (!activeStartskog) return true;
+  if (!tree) return false;
+
+  const entry = tree.startskog;
+  const exclusive = tree.startskogExclusive === true;
+
+  if (Array.isArray(entry)) {
+    return entry.includes(activeStartskog);
+  }
+
+  if (typeof entry === 'string') {
+    if (entry === 'all') return true;
+
+    if (!exclusive && tree.framework === 'trakthygge') {
+      if (entry === 'naturskog' || entry === 'produktionsskog_') {
+        return activeStartskog === 'naturskog' || activeStartskog === 'produktionsskog_';
+      }
+    }
+
+    return entry === activeStartskog;
+  }
+
+  return true;
+}
+
 export default {
   name: "OpenSeadragonViewer",
   emits: ["annotationClicked", "viewportChanged", "opened"],
@@ -169,10 +195,10 @@ export default {
       type: Boolean,
       default: true,
     },
-    backgroundColor: {
-      type: String,
-      default: "#f9f6f3",
-    },
+    // backgroundColor: {
+    //   type: String,
+    //   default: "#f9f6f3",
+    // },
     annotations: {
       type: Array,
       default: () => [],
@@ -182,6 +208,7 @@ export default {
       default: null,
     },
     kanteffektVisible: { type: Boolean, default: false },
+    omkringliggandeSkogVisible: { type: Boolean, default: false },
     oldKanteffektVisible: { type: Boolean, default: true },
     rottackeSkarmtradVisible: { type: Boolean, default: false },
     rottackeBladningVisible: { type: Boolean, default: false },
@@ -429,7 +456,7 @@ export default {
           if (!tree) return;
           if (activeFramework && tree.framework !== activeFramework) return;
           if (!timeMatches(tree.time, props.currentTime)) return;
-          if (activeStartskog && tree.startskog !== activeStartskog) return;
+          if (!isVisibleForStartskog(tree, activeStartskog)) return;
           const pt = new osdLib.Point(tree.x, tree.y);
           const pixel = viewer.value.viewport.pixelFromPoint(pt, true);
           const normalizedRadius = sizeNorm / 2;
@@ -514,7 +541,7 @@ export default {
         arr.forEach(p => {
           if (!p) return;
           if (activeFramework && p.framework && p.framework !== activeFramework) return;
-          if (activeStartskog && p.startskog && p.startskog !== activeStartskog) return;
+          if (!isVisibleForStartskog(p, activeStartskog)) return;
           if (p.time && !timeMatches(p.time, props.currentTime)) return;
 
           const pt = new osdLib.Point(p.x, p.y);
@@ -543,7 +570,7 @@ export default {
         arr.forEach(p => {
           if (!p) return;
           if (activeFramework && p.framework && p.framework !== activeFramework) return;
-          if (activeStartskog && p.startskog && p.startskog !== activeStartskog) return;
+          if (!isVisibleForStartskog(p, activeStartskog)) return;
           if (p.time && !timeMatches(p.time, props.currentTime)) return;
 
           const pt = new osdLib.Point(p.x, p.y);
@@ -573,7 +600,7 @@ export default {
         seedArr.forEach(tree => {
           if (activeFramework && tree.framework !== activeFramework) return;
           if (!timeMatches(tree.time, props.currentTime)) return;
-          if (activeStartskog && tree.startskog !== activeStartskog) return;
+          if (!isVisibleForStartskog(tree, activeStartskog)) return;
 
           const pt = new osdLib.Point(tree.x, tree.y);
           const pixel = viewer.value.viewport.pixelFromPoint(pt, true);
@@ -617,7 +644,8 @@ export default {
       );
 
       // Kanteffekt polygon overlays
-      if (props.kanteffektVisible) {
+      // Allow Omkringliggande skog to render outer border even when Kanteffekt stripes are hidden
+      if (props.kanteffektVisible || props.omkringliggandeSkogVisible) {
         activeKanteffekt
           .filter(f => f.shape === 'polygon')
           .forEach(f => {
@@ -627,7 +655,7 @@ export default {
             // For trakthygge, treat "efter" and "20 år" as current (1),
             // and "50 år"/"80 år" as old (0.5)
             if (f.framework === 'trakthygge') {
-              const map = { 'efter': 1, '20 år': 0.5, '50 år': 0.5, '80 år': 0.5 };
+              const map = { 'efter': 1, '20 år': 1, '50 år': 0.5, '80 år': 0.5 };
               baseAlpha = map[props.currentTime] ?? 0.5;
             }
 
@@ -652,58 +680,91 @@ export default {
               [0.2800, 0.1528], [0.2800, 0.4030], [0.7190, 0.4030]
             ].map(([x, y]) => viewer.value.viewport.pixelFromPoint(new osdLib.Point(x, y), true));
 
-            // Draw kanteffekt polygon with 45° stripes
-            overlayCtx.save();
-            // Create clipping path for polygon with hole
-            overlayCtx.beginPath();
-            outer.forEach((p, i) => i === 0 ? overlayCtx.moveTo(p.x, p.y) : overlayCtx.lineTo(p.x, p.y));
-            overlayCtx.closePath();
-            overlayCtx.moveTo(inner[0].x, inner[0].y);
-            inner.forEach((p, i) => overlayCtx.lineTo(p.x, p.y));
-            overlayCtx.closePath();
-            overlayCtx.clip('evenodd');
+            if (props.kanteffektVisible) {
+              // Draw kanteffekt polygon with 45° stripes
+              overlayCtx.save();
+              // Create clipping path for polygon with hole
+              overlayCtx.beginPath();
+              outer.forEach((p, i) => i === 0 ? overlayCtx.moveTo(p.x, p.y) : overlayCtx.lineTo(p.x, p.y));
+              overlayCtx.closePath();
+              overlayCtx.moveTo(inner[0].x, inner[0].y);
+              inner.forEach((p, i) => overlayCtx.lineTo(p.x, p.y));
+              overlayCtx.closePath();
+              overlayCtx.clip('evenodd');
 
-            // Apply alpha for fill stripes
-            overlayCtx.globalAlpha = alpha;
+              // Apply alpha for fill stripes
+              overlayCtx.globalAlpha = alpha;
 
-            // Draw diagonal stripes
-            overlayCtx.translate(0, 0);
-            overlayCtx.rotate(-45 * Math.PI / 180);
-            const stripeWidth = 4; // px
-            // Use the diagonal of the canvas to cover the entire polygon
-            const w = overlayCanvas.width;
-            const h = overlayCanvas.height;
-            const diag = Math.hypot(w, h);
-            const count = Math.ceil((diag + stripeWidth * 2) / (stripeWidth * 2));
-            for (let i = -count; i <= count; i++) {
-              const x = i * stripeWidth * 2;
-              // white stripe
-              overlayCtx.fillStyle = 'rgba(255,255,255,1)';
-              overlayCtx.fillRect(x, -diag, stripeWidth, diag * 2);
-              // gray stripe
-              overlayCtx.fillStyle = 'rgba(115,115,115,0.5)';
-              overlayCtx.fillRect(x + stripeWidth, -diag, stripeWidth, diag * 2);
+              // Draw diagonal stripes
+              overlayCtx.translate(0, 0);
+              overlayCtx.rotate(-45 * Math.PI / 180);
+              const stripeWidth = 4; // px
+              // Use the diagonal of the canvas to cover the entire polygon
+              const w = overlayCanvas.width;
+              const h = overlayCanvas.height;
+              const diag = Math.hypot(w, h);
+              const count = Math.ceil((diag + stripeWidth * 2) / (stripeWidth * 2));
+              for (let i = -count; i <= count; i++) {
+                const x = i * stripeWidth * 2;
+                // white stripe
+                overlayCtx.fillStyle = 'rgba(255,255,255,1)';
+                overlayCtx.fillRect(x, -diag, stripeWidth, diag * 2);
+                // gray stripe
+                overlayCtx.fillStyle = 'rgba(115,115,115,0.5)';
+                overlayCtx.fillRect(x + stripeWidth, -diag, stripeWidth, diag * 2);
+              }
+              overlayCtx.restore();
+
+              // Draw polygon outline with the same alpha
+              overlayCtx.save();
+              overlayCtx.globalAlpha = alpha;
+              overlayCtx.beginPath();
+              outer.forEach((p, i) => i === 0 ? overlayCtx.moveTo(p.x, p.y) : overlayCtx.lineTo(p.x, p.y));
+              overlayCtx.closePath();
+              overlayCtx.moveTo(inner[0].x, inner[0].y);
+              inner.forEach((p, i) => overlayCtx.lineTo(p.x, p.y));
+              overlayCtx.closePath();
+              overlayCtx.strokeStyle = 'rgba(255,255,255,0.8)';
+              overlayCtx.lineWidth = 1;
+              overlayCtx.stroke();
+              overlayCtx.restore();
             }
-            overlayCtx.restore();
 
-            // Draw polygon outline with the same alpha
-            overlayCtx.save();
-            overlayCtx.globalAlpha = alpha;
-            overlayCtx.beginPath();
-            outer.forEach((p, i) => i === 0 ? overlayCtx.moveTo(p.x, p.y) : overlayCtx.lineTo(p.x, p.y));
-            overlayCtx.closePath();
-            overlayCtx.moveTo(inner[0].x, inner[0].y);
-            inner.forEach((p, i) => overlayCtx.lineTo(p.x, p.y));
-            overlayCtx.closePath();
-            overlayCtx.strokeStyle = 'rgba(255,255,255,0.8)';
-            overlayCtx.lineWidth = 1;
-            overlayCtx.stroke();
-            overlayCtx.restore();
+            // Omkringliggande skog: draw an outward-only ring hugging the outer boundary (present time only)
+            // Use an offscreen canvas to avoid erasing previously drawn kanteffekt stripes/outline
+            if (props.omkringliggandeSkogVisible && baseAlpha === 1) {
+              const ringCanvas = document.createElement('canvas');
+              ringCanvas.width = overlayCanvas.width;
+              ringCanvas.height = overlayCanvas.height;
+              const ringCtx = ringCanvas.getContext('2d');
+              const zoom = viewer.value?.viewport?.getZoom?.(true) || 1;
+              ringCtx.save();
+              // Thick stroke of the outer polygon
+              ringCtx.beginPath();
+              outer.forEach((p, i) => i === 0 ? ringCtx.moveTo(p.x, p.y) : ringCtx.lineTo(p.x, p.y));
+              ringCtx.closePath();
+              ringCtx.strokeStyle = 'rgba(255,255,255,0.2)';
+              ringCtx.lineWidth = 200 * zoom;
+              ringCtx.lineJoin = 'round';
+              ringCtx.lineCap = 'round';
+              ringCtx.stroke();
+              // Cut away the inner half so it only expands outward
+              ringCtx.globalCompositeOperation = 'destination-out';
+              ringCtx.fillStyle = 'rgba(0,0,0,1)';
+              ringCtx.beginPath();
+              outer.forEach((p, i) => i === 0 ? ringCtx.moveTo(p.x, p.y) : ringCtx.lineTo(p.x, p.y));
+              ringCtx.closePath();
+              ringCtx.fill();
+              ringCtx.restore();
+              // Composite onto main overlay
+              overlayCtx.drawImage(ringCanvas, 0, 0);
+            }
           });
       }
 
       // Draw squareHole overlays for luckhuggning
-      if (props.kanteffektVisible) {
+      // Allow Omkringliggande skog to render independently of Kanteffekt toggle
+      if (props.kanteffektVisible || props.omkringliggandeSkogVisible) {
         activeKanteffekt
           .filter(f => f.shape === 'squareHole')
           .forEach(f => {
@@ -755,36 +816,102 @@ export default {
               alpha = baseAlpha;
             }
 
-            // Clip path: outer rect minus inner hole (ring style)
-            overlayCtx.save();
-            overlayCtx.globalAlpha = alpha;
-            overlayCtx.beginPath();
-            overlayCtx.rect(centerPixel.x - halfSide, centerPixel.y - halfSide, side, side);
-            overlayCtx.rect(centerPixel.x - holeHalfSide, centerPixel.y - holeHalfSide, holeHalfSide * 2, holeHalfSide * 2);
-            overlayCtx.clip('evenodd');
-            // Draw stripes
-            overlayCtx.translate(centerPixel.x, centerPixel.y);
-            overlayCtx.rotate(-45 * Math.PI / 180);
-            const stripeWidth = 4;
-            const diagRect = Math.hypot(side, side);
-            const count = Math.ceil((diagRect + stripeWidth * 2) / (stripeWidth * 2));
-            for (let i = -count; i <= count; i++) {
-              const x = i * stripeWidth * 2;
-              overlayCtx.fillStyle = 'rgba(255,255,255,1)';
-              overlayCtx.fillRect(x, -diagRect, stripeWidth, diagRect * 2);
-              overlayCtx.fillStyle = 'rgba(115,115,115,0.8)';
-              overlayCtx.fillRect(x + stripeWidth, -diagRect, stripeWidth, diagRect * 2);
+            // Draw Kanteffekt stripes+outline only when Kanteffekt is visible
+            if (props.kanteffektVisible) {
+              // Clip path: outer rect minus inner hole (ring style)
+              overlayCtx.save();
+              overlayCtx.globalAlpha = alpha;
+              overlayCtx.beginPath();
+              overlayCtx.rect(centerPixel.x - halfSide, centerPixel.y - halfSide, side, side);
+              overlayCtx.rect(centerPixel.x - holeHalfSide, centerPixel.y - holeHalfSide, holeHalfSide * 2, holeHalfSide * 2);
+              overlayCtx.clip('evenodd');
+              // Draw stripes
+              overlayCtx.translate(centerPixel.x, centerPixel.y);
+              overlayCtx.rotate(-45 * Math.PI / 180);
+              const stripeWidth = 4;
+              const diagRect = Math.hypot(side, side);
+              const count = Math.ceil((diagRect + stripeWidth * 2) / (stripeWidth * 2));
+              for (let i = -count; i <= count; i++) {
+                const x = i * stripeWidth * 2;
+                overlayCtx.fillStyle = 'rgba(255,255,255,1)';
+                overlayCtx.fillRect(x, -diagRect, stripeWidth, diagRect * 2);
+                overlayCtx.fillStyle = 'rgba(115,115,115,0.8)';
+                overlayCtx.fillRect(x + stripeWidth, -diagRect, stripeWidth, diagRect * 2);
+              }
+              overlayCtx.restore();
+              // Draw outer square outline
+              overlayCtx.save();
+              overlayCtx.globalAlpha = alpha;
+              overlayCtx.beginPath();
+              overlayCtx.rect(centerPixel.x - halfSide, centerPixel.y - halfSide, side, side);
+              overlayCtx.strokeStyle = 'rgba(255,255,255,1)';
+              overlayCtx.lineWidth = 1;
+              overlayCtx.stroke();
+              overlayCtx.restore();
             }
-            overlayCtx.restore();
-            // Draw outer square outline
-            overlayCtx.save();
-            overlayCtx.globalAlpha = alpha;
-            overlayCtx.beginPath();
-            overlayCtx.rect(centerPixel.x - halfSide, centerPixel.y - halfSide, side, side);
-            overlayCtx.strokeStyle = 'rgba(255,255,255,1)';
-            overlayCtx.lineWidth = 1;
-            overlayCtx.stroke();
-            overlayCtx.restore();
+
+            // Omkringliggande skog: outward-only ring for the outer square (offscreen to preserve kanteffekt)
+            // Present time only (do not show traces from previous times)
+            if (props.omkringliggandeSkogVisible && alpha === 1) {
+              const ringCanvas = document.createElement('canvas');
+              ringCanvas.width = overlayCanvas.width;
+              ringCanvas.height = overlayCanvas.height;
+              const ringCtx = ringCanvas.getContext('2d');
+              const zoom = viewer.value?.viewport?.getZoom?.(true) || 1;
+              ringCtx.save();
+              ringCtx.strokeStyle = 'rgba(255,255,255,0.2)';
+              ringCtx.lineWidth = 200 * zoom;
+              ringCtx.lineJoin = 'round';
+              ringCtx.lineCap = 'round';
+              ringCtx.beginPath();
+              ringCtx.rect(centerPixel.x - halfSide, centerPixel.y - halfSide, side, side);
+              ringCtx.stroke();
+              // Carve out inner area (remove inner half so thickness is outward-only)
+              ringCtx.globalCompositeOperation = 'destination-out';
+              ringCtx.fillStyle = 'rgba(0,0,0,1)';
+              ringCtx.fillRect(centerPixel.x - halfSide, centerPixel.y - halfSide, side, side);
+              // Also cut the ring wherever it overlaps any other visible (present-time) lucka's outer area
+              try {
+                activeKanteffekt
+                  .filter(g => g.shape === 'squareHole')
+                  .forEach(g => {
+                    // Determine if this patch is visible in the current view
+                    let visible2 = true;
+                    let luckaNum2 = null;
+                    const m2 = typeof g.id === 'string' ? g.id.match(/ke-luckh-(\d+)/) : null;
+                    if (m2) luckaNum2 = parseInt(m2[1], 10);
+                    if (luckaNum2 != null) {
+                      const efterGroup2 = [2, 4, 8, 11, 14];
+                      const fiftyGroup2 = [1, 3, 7, 10, 13];
+                      const eightyGroup2 = [5, 6, 9, 12, 15];
+                      const t2 = props.currentTime;
+                      let baseAlpha2 = 0.5;
+                      if (efterGroup2.includes(luckaNum2)) {
+                        const map2 = { 'efter': 1, '20 år': 1, '50 år': 0.5, '80 år': 0.5 };
+                        baseAlpha2 = map2[t2] ?? 0.5;
+                      } else if (fiftyGroup2.includes(luckaNum2)) {
+                        const map2 = { '50 år': 1, '80 år': 0.5 };
+                        baseAlpha2 = map2[t2] ?? 0.5;
+                      } else if (eightyGroup2.includes(luckaNum2)) {
+                        const map2 = { '80 år': 1 };
+                        baseAlpha2 = map2[t2] ?? 0.5;
+                      }
+                      // Only consider present-time patches for cutting
+                      if (baseAlpha2 !== 1) visible2 = false;
+                    }
+                    if (!visible2) return;
+                    const halfNorm2 = g.size / 2;
+                    const centerPt2 = new osdLib.Point(g.x, g.y);
+                    const centerPixel2 = viewer.value.viewport.pixelFromPoint(centerPt2, true);
+                    const pixelRight2 = viewer.value.viewport.pixelFromPoint(new osdLib.Point(g.x + halfNorm2, g.y), true);
+                    const halfSide2 = Math.abs(pixelRight2.x - centerPixel2.x);
+                    const side2 = halfSide2 * 2;
+                    ringCtx.fillRect(centerPixel2.x - halfSide2, centerPixel2.y - halfSide2, side2, side2);
+                  });
+              } catch { }
+              ringCtx.restore();
+              overlayCtx.drawImage(ringCanvas, 0, 0);
+            }
 
             // ---- Corner label: harvest year per start set ----
             // Decide label from group membership
@@ -918,6 +1045,19 @@ export default {
           const radius = Math.abs(pixelRight.x - pixel.x);
 
           drawAwardStar(overlayCtx, pixel.x, pixel.y, radius);
+
+          if (p.id) {
+            overlayCtx.save();
+            overlayCtx.font = `${Math.max(4, radius * 1).toFixed(0)}px "Segoe UI", system-ui, sans-serif`;
+            overlayCtx.fillStyle = 'rgba(17, 24, 39, 0.85)';
+            overlayCtx.strokeStyle = 'rgba(255, 255, 255, 0.8)';
+            overlayCtx.lineWidth = Math.max(1, radius * 0.1);
+            const labelX = pixel.x + radius * -1;
+            const labelY = pixel.y - radius * 1.4;
+            overlayCtx.strokeText(p.id, labelX, labelY);
+            overlayCtx.fillText(p.id, labelX, labelY);
+            overlayCtx.restore();
+          }
         });
       }
 
@@ -977,6 +1117,9 @@ export default {
       if (overlayCtx) drawAllOverlays();
     });
     watch(() => overlayStore.staticOverlayVisible, () => {
+      if (overlayCtx) drawAllOverlays();
+    });
+    watch(() => props.omkringliggandeSkogVisible, () => {
       if (overlayCtx) drawAllOverlays();
     });
     watch(() => props.oldKanteffektVisible, () => {
@@ -1269,9 +1412,11 @@ export default {
       const viewportPoint = viewer.value.viewport.pointFromPixel(pixelPoint);
 
       const isAllClick = event.metaKey || event.ctrlKey;
+      const isBothSkogClick = event.metaKey || event.shiftKey;
       const timeValue = isAllClick ? 'alla' : props.currentTime;
+      const skog = isBothSkogClick ? ['naturskog', 'produktionsskog_'] : startskogValue.value;
       const fw = frameworkValue.value;
-      const skog = startskogValue.value;
+
       if (!fw || !skog) return;
 
       const click = {
@@ -1808,7 +1953,9 @@ export default {
 .openseadragon-viewer {
   width: 100%;
   height: 100%;
-  background: #d50000;
+  background-color: #f9f6f3;
+  background-image: linear-gradient(#f2ece2 1px, transparent 1px), linear-gradient(to right, #f2ece2 1px, #f9f6f3 1px);
+  background-size: 20px 20px;
 }
 
 :deep(.highlight) {

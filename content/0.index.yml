@@ -20,7 +20,7 @@ hero:
       target:
       size: xl
       color: neutral
-      variant: subtle
+      variant: solid
   headline:
     label:
     to: /blog

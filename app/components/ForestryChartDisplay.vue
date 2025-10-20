@@ -7,7 +7,7 @@
         :height="120" :margin="margin" :xDomain="xDomain" :yDomain="yDomain">
         <template v-if="props.chartType === 'area' && props.singleFrameworkSelection && !props.frameworkComparisonMode">
           <VisArea :x="xAccessor" :y="stackedYAccessors" :color="stackedColors" :interpolateMissingData="true" />
-          <VisCrosshair v-if="hasActiveSeries" :template="crosshairTemplate" />
+          <!-- <VisCrosshair v-if="hasActiveSeries" :template="crosshairTemplate" /> -->
           <VisTooltip v-if="hasActiveSeries" :horizontalShift="30" />
 
         </template>
@@ -22,7 +22,7 @@
             const num = Number(value);
             return Number.isFinite(num) ? num : Number.isFinite(Number(d?.age)) ? 0 : NaN;
           }" :color="() => fw.colorArea || fw.color" :interpolateMissingData="true" :zIndex="1" />
-          <VisCrosshair v-if="hasActiveSeries" :template="crosshairTemplate" />
+          <!-- <VisCrosshair v-if="hasActiveSeries" :template="crosshairTemplate" /> -->
           <VisTooltip v-if="hasActiveSeries" :horizontalShift="30" />
         </template>
         <template v-else-if="props.chartType === 'area'">
@@ -31,7 +31,7 @@
             return Number.isFinite(v) ? v : Number.isFinite(Number(d?.age)) ? 0 : NaN
           }" :color="() => (fw.colorArea || fw.color)" :interpolateMissingData="true" :zIndex="1" />
 
-          <VisCrosshair v-if="hasActiveSeries" :template="crosshairTemplate" />
+          <!-- <VisCrosshair v-if="hasActiveSeries" :template="crosshairTemplate" /> -->
 
           <VisTooltip v-if="hasActiveSeries" :horizontalShift="30" />
           <VisPlotline v-if="hasActiveSeries" :value="currentTimeValue" color="rgba(220, 114, 0, 1)" axis="x"

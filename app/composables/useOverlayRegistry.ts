@@ -181,6 +181,8 @@ function filterEntries(
   return results;
 }
 
+const DEFAULT_NATURVARD_TIMES = ["innan", "efter", "20 år", "50 år", "80 år"];
+
 const defaultAvailability: Record<OverlayKey, boolean> = {
   retention: true,
   kanteffekt: true,
@@ -219,6 +221,158 @@ async function fetchJson(path: string) {
   }
 }
 
+function getFrameworkAliases(name: string): string[] {
+  switch (name) {
+    case "blädning":
+      return ["blädning", "bladning"];
+    case "skärmträd":
+      return ["skärmträd", "skarmtrad"];
+    default:
+      return [name];
+  }
+}
+
+function expandNaturvardConfig(raw: any): any[] {
+  if (!raw || typeof raw !== "object") return [];
+
+  const pointsArray = Array.isArray(raw.points) ? raw.points : [];
+  const pointMap = new Map<string, any>();
+  if (pointsArray.length) {
+    pointsArray.forEach((point: any) => {
+      if (point?.id != null) {
+        pointMap.set(point.id, point);
+      }
+    });
+  }
+
+  const startskogSets = raw.startskogSets ?? null;
+  const markersByStartskogRaw = raw.markers ?? {};
+  const defaults = raw.defaults ?? {};
+  const frameworksConfig = raw.frameworks ?? {};
+
+  const baseTimeOrder: string[] = Array.isArray(raw.timelineOrder)
+    ? [...raw.timelineOrder]
+    : [...DEFAULT_NATURVARD_TIMES];
+
+  const seenTimes = new Set(baseTimeOrder);
+  Object.values(frameworksConfig).forEach((perStartskog: any) => {
+    if (!perStartskog || typeof perStartskog !== "object") return;
+    Object.values(perStartskog).forEach((timeline: any) => {
+      if (!Array.isArray(timeline)) return;
+      timeline.forEach((entry) => {
+        const time = entry?.time;
+        if (time && !seenTimes.has(time)) {
+          seenTimes.add(time);
+          baseTimeOrder.push(time);
+        }
+      });
+    });
+  });
+
+  const timeOrder = baseTimeOrder;
+
+  const markerMaps = new Map<string, Map<string, any>>();
+  if (pointsArray.length && startskogSets && typeof startskogSets === "object") {
+    Object.entries(startskogSets).forEach(([startskog, ids]) => {
+      const map = new Map<string, any>();
+      if (Array.isArray(ids)) {
+        ids.forEach((id) => {
+          const marker = pointMap.get(id);
+          if (marker) map.set(id, marker);
+        });
+      }
+      markerMaps.set(startskog, map);
+    });
+  } else {
+    Object.entries(markersByStartskogRaw).forEach(([startskog, list]) => {
+      const map = new Map<string, any>();
+      if (Array.isArray(list)) {
+        list.forEach((marker) => {
+          if (marker?.id != null) map.set(marker.id, marker);
+        });
+      }
+      markerMaps.set(startskog, map);
+    });
+  }
+
+  const results: any[] = [];
+
+  Object.entries(frameworksConfig).forEach(([frameworkName, perStartskog]) => {
+    const alias = getFrameworkAliases(frameworkName);
+    const perStart = perStartskog ?? {};
+    markerMaps.forEach((markerMap, startskog) => {
+      if (!markerMap || markerMap.size === 0) return;
+      const allIds = Array.from(markerMap.keys());
+      const baseIds: string[] = Array.isArray(defaults[startskog])
+        ? defaults[startskog]
+        : allIds;
+      let current = new Set<string>(baseIds);
+
+      const timelineEntries = Array.isArray(perStart[startskog])
+        ? perStart[startskog]
+        : [];
+      const timelineMap = new Map<string, any>();
+      timelineEntries.forEach((entry: any) => {
+        if (entry?.time) {
+          timelineMap.set(entry.time, entry);
+        }
+      });
+
+      timeOrder.forEach((time) => {
+      const entry = timelineMap.get(time);
+      if (entry) {
+        if (entry.set) {
+          if (entry.set === "base") {
+            current = new Set(baseIds);
+          } else if (entry.set === "all") {
+              current = new Set(allIds);
+            } else if (Array.isArray(entry.set)) {
+              current = new Set(entry.set);
+            }
+          }
+          if (Array.isArray(entry.remove)) {
+            entry.remove.forEach((id: string) => current.delete(id));
+          }
+          if (Array.isArray(entry.add)) {
+            entry.add.forEach((id: string) => current.add(id));
+          }
+        }
+
+        if (current.size === 0) return;
+
+        current.forEach((id) => {
+          const marker = markerMap.get(id);
+          if (!marker) return;
+          alias.forEach((fw) => {
+            results.push({
+              id: marker.id,
+              x: marker.x,
+              y: marker.y,
+              framework: fw,
+              startskog,
+              time,
+            });
+          });
+        });
+      });
+    });
+  });
+
+  return results;
+}
+
+function expandNaturvardDataset(raw: any): any[] {
+  if (!raw) return [];
+  if (Array.isArray(raw.mycelium)) return raw.mycelium;
+  if (
+    (raw.markers && raw.frameworks) ||
+    (raw.points && raw.startskogSets && raw.frameworks)
+  ) {
+    return expandNaturvardConfig(raw);
+  }
+  return [];
+}
+
 async function loadSmaplantor() {
   const candidates = ['/småplantor.json', '/småplantor.json'];
   for (const path of candidates) {
@@ -250,7 +404,7 @@ export function useOverlayRegistry() {
             ? smaplantor
             : [],
         hogstubbar: Array.isArray(hogstubbar?.stubbar) ? hogstubbar.stubbar : [],
-        naturvard: Array.isArray(naturvard?.mycelium) ? naturvard.mycelium : [],
+        naturvard: expandNaturvardDataset(naturvard),
         kanteffekt: Array.isArray(kanteffekt?.features) ? kanteffekt.features : [],
       } as Record<string, any[]>;
     },
