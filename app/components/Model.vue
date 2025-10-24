@@ -72,14 +72,14 @@
       </div>
 
       <div class="flex justify-center sm:p-1 border-b border-muted ">
-        <div class="absolute top-3 left-3 flex flex-col gap-1 pointer-events-auto">
+        <!-- <div class="absolute top-3 left-3 flex flex-col gap-1 pointer-events-auto">
           <USwitch :ui="{ root: 'flex-row-reverse justify-between' }" color="warning" v-model="devSaveClicks"
             label="Spara klick (dev)" />
           <USwitch :ui="{ root: 'flex-row-reverse justify-between' }" color="warning" v-model="devOverlayLabelsVisible"
             label="Visa myc-etiketter (dev)" />
           <USwitch :ui="{ root: 'flex-row-reverse justify-between' }" color="warning"
             v-model="devNaturvardCounterVisible" label="Visa naturvårdssiffra (dev)" />
-        </div>
+        </div> -->
 
 
         <div
@@ -1198,7 +1198,7 @@ const currentLayoutMode = ref('slider')                 // 'slider' | 'sideBySid
 const emit = defineEmits(['close'])
 
 const devSaveClicks = ref(false);
-const devOverlayLabelsVisible = ref(true);
+const devOverlayLabelsVisible = ref(false);
 const devNaturvardCounterVisible = ref(false);
 const retentionVisible = ref(false);
 const kanteffektVisible = ref(false);

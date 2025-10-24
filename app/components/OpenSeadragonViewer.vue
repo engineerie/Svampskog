@@ -4,8 +4,8 @@
     <!-- <client-only> -->
     <div v-if="isClient" :id="viewerId"
       :class="['openseadragon-viewer ui-zoom-exempt col-span-3 relative overflow-hidden', fullscreenLayout ? '' : 'rounded-sm']"
-      ref="viewerContainer" :style="{ backgroundColor: backgroundColor }" @mousedown.capture="handleActivate"
-      @mousemove="updateMousePosition" @click="handleRetentionClick($event)">
+      ref="viewerContainer" @mousedown.capture="handleActivate" @mousemove="updateMousePosition"
+      @click="handleRetentionClick($event)">
       <!-- <div v-if="!(layoutMode === 'slider' && comparisonMode) && fullscreenLayout"
         class="absolute bottom-0 left-1/2 transform -translate-x-1/2 m-2 z-10 text-center">
         <div>
@@ -21,12 +21,20 @@
       <div class="absolute top-90 right-0 m-2 p-1 bg-black bg-opacity-50 text-white text-xs z-50">
         X: {{ mousePos.x.toFixed(4) }}, Y: {{ mousePos.y.toFixed(4) }}
       </div>
+      <!-- Simple, predictable tooltip anchored in viewer pixels (no Popper/UPopover) -->
+      <div class="absolute z-[60] pointer-events-none" v-show="naturvardTooltipOpen && naturvardTooltip"
+        :style="naturvardTooltip ? { left: naturvardTooltip.left + 'px', top: naturvardTooltip.top + 'px' } : {}">
+        <div class="rounded-md border border-[#f9f6f3] bg-white px-3 py-1 text-xs text-neutral-700 shadow">
+          {{ naturvardTooltip && naturvardTooltip.message }}
+        </div>
+      </div>
       <div v-if="naturvardCounter" class="absolute top-3 left-3 z-50 pointer-events-none">
         <div
           class="inline-flex items-center gap-2 rounded-full border border-[#f9f6f3] bg-white/95 px-3 py-1 text-xs font-medium text-neutral-700 shadow-sm">
           <span class="uppercase tracking-wide text-[10px] text-neutral-400">Naturvård</span>
           <span class="text-sm font-semibold text-neutral-900">{{ naturvardCounter.total }}</span>
-          <span v-if="naturvardCounter.gained" class="text-emerald-600 font-semibold">+{{ naturvardCounter.gained }}</span>
+          <span v-if="naturvardCounter.gained" class="text-emerald-600 font-semibold">+{{ naturvardCounter.gained
+          }}</span>
           <span v-if="naturvardCounter.lost" class="text-red-500 font-semibold">-{{ naturvardCounter.lost }}</span>
         </div>
       </div>
@@ -452,6 +460,12 @@ export default {
     const viewer = ref(null);
     const isClient = ref(false);
     const viewerContainer = ref(null);
+    const naturvardHitboxes = ref([]);
+    const naturvardTooltip = ref(null);
+    const naturvardTooltipOpen = ref(false);
+    // Click-based tooltip handlers
+    let naturvardClickHandler = null;
+    let outsideClickHandler = null;
     // Popover state for Kontinuerligt rottäcke (Blädning @ efter)
     const rottackePopover = ref({ visible: false, top: 0, left: 0, width: 0, height: 0 });
     const rottackePopoverStyle = computed(() => ({
@@ -1200,6 +1214,14 @@ export default {
         }
       }
 
+      // Clean up previously-added Naturvård DOM overlays; we'll rebuild them each draw
+      if (viewer.value && naturvardDomOverlayIds.length) {
+        naturvardDomOverlayIds.forEach((id) => {
+          try { viewer.value.removeOverlay(id); } catch { }
+        });
+        naturvardDomOverlayIds = [];
+      }
+
       // Naturvårdsarter — draw award-star icon last so it stays on top of other overlays
       if (props.naturvardsarterVisible && naturvardPoints.value.length) {
         const arr = naturvardPoints.value;
@@ -1216,7 +1238,20 @@ export default {
           return priority(a) - priority(b);
         });
 
-        sortedPoints.forEach(p => {
+        // Special rule support: if myc-7.1 is visible, suppress tooltip for myc-7
+        const hasMyc71Visible = sortedPoints.some((q) => {
+          if (!q) return false;
+          if (q.id !== 'myc-7.1') return false;
+          if (activeFramework && !valueMatches(q.framework, activeFramework)) return false;
+          if (activeStartskog && q.startskog && q.startskog !== activeStartskog) return false;
+          if (q.time && !timeMatches(q.time, props.currentTime)) return false;
+          if (q.removed) return false; // removed is not visible for this rule
+          return true;
+        });
+
+        const hitboxes = [];
+
+        sortedPoints.forEach((p) => {
           if (!p) return;
           if (activeFramework && !valueMatches(p.framework, activeFramework)) return;
           if (activeStartskog && p.startskog && p.startskog !== activeStartskog) return;
@@ -1224,12 +1259,17 @@ export default {
 
           const pt = new osdLib.Point(p.x, p.y);
           const pixel = viewer.value.viewport.pixelFromPoint(pt, true);
-          const normalizedRadius = 0.012;
+          const normalizedRadius = 0.008;
           const pixelRight = viewer.value.viewport.pixelFromPoint(new osdLib.Point(p.x + normalizedRadius, p.y), true);
           const radius = Math.abs(pixelRight.x - pixel.x);
           const isRemoved = !!p.removed;
           const isMovementSource = p.id === 'myc-7';
           const isMovementTarget = p.id === 'myc-7.1';
+
+          let tooltipMessage = 'Naturvårdsart som fanns i beståndet från början';
+          let hoverX = pixel.x;
+          let hoverY = pixel.y;
+          let hoverRadius = Math.max(radius * 1.6, 18);
 
           if (isRemoved) {
             overlayCtx.save();
@@ -1249,62 +1289,60 @@ export default {
               overlayCtx.lineTo(pixel.x + crossRadius, pixel.y - crossRadius);
               overlayCtx.stroke();
               overlayCtx.restore();
-            }
 
-            if (isMovementTarget) {
-              const circleRadius = radius * 0.7;
+              const iconRadius = radius * 0.7;
               const offset = radius * 0.9;
-              const circleX = pixel.x + offset;
-              const circleY = pixel.y - offset;
+              const iconX = pixel.x + offset;
+              const iconY = pixel.y - offset;
 
-              drawBadgeCircle(overlayCtx, circleX, circleY, circleRadius);
+              drawBadgeCircle(overlayCtx, iconX, iconY, iconRadius);
 
-              const iconSize = circleRadius * 1.5;
-              drawSvgStrokeIcon(overlayCtx, MOVE_ARROW_PATH_D, circleX, circleY, iconSize, '#30201a');
-            } else if (!isMovementSource) {
-              const circleRadius = radius * 0.7;
-              const offset = radius * 0.9;
-              const circleX = pixel.x + offset;
-              const circleY = pixel.y - offset;
-
-              drawBadgeCircle(overlayCtx, circleX, circleY, circleRadius);
-
-              const iconPath =
-                p.id === 'myc-2'
-                  ? RANDOM_LINE_PATH_D
-                  : p.id === 'myc-11' || p.id === 'myc-12'
-                    ? DUST_STORM_PATH_D
-                    : SAW_BLADE_PATH_D;
-              const isDustIcon = iconPath === DUST_STORM_PATH_D;
-              const iconSize = circleRadius * (isDustIcon ? 1.3 : 1.5);
-              const baseSize = isDustIcon ? 48 : 24;
+              const iconPath = p.id === 'myc-2' ? RANDOM_LINE_PATH_D : SAW_BLADE_PATH_D;
+              const iconSize = iconRadius * 1.5;
+              const baseSize = iconPath === DUST_STORM_PATH_D ? 48 : 24;
               const flipIcon = iconPath === DUST_STORM_PATH_D;
-              drawSvgIcon(overlayCtx, iconPath, circleX, circleY, iconSize, '#30201a', baseSize, flipIcon);
+              drawSvgIcon(overlayCtx, iconPath, iconX, iconY, iconSize, '#5a3f34', baseSize, flipIcon);
+
+              tooltipMessage = p.id === 'myc-2'
+                ? 'Naturvårdsart som dött av ålder eller blivit utkonkurerad av annan art'
+                : 'Naturvårdsart som försvann vid avverkning';
+              hoverX = iconX;
+              hoverY = iconY;
+              hoverRadius = Math.max(iconRadius * 1.6, hoverRadius);
             }
           } else {
             drawAwardStar(overlayCtx, pixel.x, pixel.y, radius);
 
             if (isMovementTarget) {
-              const circleRadius = radius * 0.7;
+              const iconRadius = radius * 0.7;
               const offset = radius * 0.9;
-              const circleX = pixel.x + offset;
-              const circleY = pixel.y - offset;
+              const iconX = pixel.x + offset;
+              const iconY = pixel.y - offset;
 
-              drawBadgeCircle(overlayCtx, circleX, circleY, circleRadius);
+              drawBadgeCircle(overlayCtx, iconX, iconY, iconRadius);
 
-              const iconSize = circleRadius * 1.5;
-              drawSvgStrokeIcon(overlayCtx, MOVE_ARROW_PATH_D, circleX, circleY, iconSize, '#5a3f34');
-            }
-            if (p.id === 'myc-11' || p.id === 'myc-12') {
-              const circleRadius = radius * 0.7;
+              const iconSize = iconRadius * 1.5;
+              drawSvgStrokeIcon(overlayCtx, MOVE_ARROW_PATH_D, iconX, iconY, iconSize, '#5a3f34');
+
+              tooltipMessage = 'Arten har förflyttat sig själv';
+              hoverX = iconX;
+              hoverY = iconY;
+              hoverRadius = Math.max(iconRadius * 1.6, hoverRadius);
+            } else if (p.id === 'myc-11' || p.id === 'myc-12') {
+              const iconRadius = radius * 0.7;
               const offset = radius * 0.9;
-              const circleX = pixel.x + offset;
-              const circleY = pixel.y - offset;
+              const iconX = pixel.x + offset;
+              const iconY = pixel.y - offset;
 
-              drawBadgeCircle(overlayCtx, circleX, circleY, circleRadius);
+              drawBadgeCircle(overlayCtx, iconX, iconY, iconRadius);
 
-              const iconSize = circleRadius * 1.3;
-              drawSvgIcon(overlayCtx, DUST_STORM_PATH_D, circleX, circleY, iconSize, '#5a3f34', 48, true);
+              const iconSize = iconRadius * 1.3;
+              drawSvgIcon(overlayCtx, DUST_STORM_PATH_D, iconX, iconY, iconSize, '#5a3f34', 48, true);
+
+              tooltipMessage = 'Naturvårdsart som etablerats med spridda sporer';
+              hoverX = iconX;
+              hoverY = iconY;
+              hoverRadius = Math.max(iconRadius * 1.6, hoverRadius);
             }
           }
 
@@ -1325,7 +1363,86 @@ export default {
             overlayCtx.fillText(p.id, labelX, labelY);
             overlayCtx.restore();
           }
+
+          // Center the trigger on the main award star, not the auxiliary icon.
+          // Expand the radius to also cover the optional top-right icon when present.
+          let captureRadius = Math.max(radius * 1.6, 18);
+          // If there's an icon rendered in the top-right corner, include it in the capture radius
+          if ((isRemoved && !isMovementSource) || isMovementTarget || p.id === 'myc-11' || p.id === 'myc-12') {
+            const iconRadius = radius * 0.7;
+            const offset = radius * 0.9; // icon is placed at (+offset, -offset)
+            const distCenterToIcon = Math.hypot(offset, offset);
+            captureRadius = Math.max(captureRadius, distCenterToIcon + iconRadius);
+          }
+
+          // Special rule: when myc-7.1 is visible, do NOT show tooltip for myc-7
+          if (p.id === 'myc-7' && hasMyc71Visible) {
+            return; // skip adding hitbox for myc-7
+          }
+
+          // Create an OSD DOM overlay so we can apply CSS cursor:pointer via className
+          try {
+            // Center in viewport coordinates at the star’s image position
+            const anchorVp = viewer.value.viewport.imageToViewportCoordinates(p.x, p.y);
+            // Convert our pixel capture radius to viewport-space width/height
+            const deltaVp = viewer.value.viewport.deltaPointsFromPixels(new osdLib.Point(captureRadius * 2, captureRadius * 2), true);
+            const rect = new osdLib.Rect(
+              anchorVp.x - deltaVp.x / 2,
+              anchorVp.y - deltaVp.y / 2,
+              Math.max(deltaVp.x, 1e-8),
+              Math.max(deltaVp.y, 1e-8)
+            );
+
+            const el = document.createElement('div');
+            el.className = 'clickable-overlay';
+            const overlayId = `nv-click-${p.id}-${Math.round(pixel.x)}-${Math.round(pixel.y)}`;
+            el.id = overlayId;
+
+            // Use viewport rect directly
+            viewer.value.addOverlay({ element: el, location: rect, id: overlayId });
+            naturvardDomOverlayIds.push(overlayId);
+          } catch { }
+
+          hitboxes.push({
+            x: pixel.x,          // CENTER on main overlay
+            y: pixel.y,
+            radius: captureRadius,
+            message: tooltipMessage,
+            worldX: p.x,         // NEW: anchor in world/image-normalized coordinates
+            worldY: p.y
+          });
         });
+
+        naturvardHitboxes.value = hitboxes;
+        if (!hitboxes.length) {
+          naturvardTooltip.value = null;
+          naturvardTooltipOpen.value = false;
+        }
+      } else {
+        naturvardHitboxes.value = [];
+        naturvardTooltip.value = null;
+        naturvardTooltipOpen.value = false;
+        if (viewer.value && naturvardDomOverlayIds.length) {
+          naturvardDomOverlayIds.forEach((id) => {
+            try { viewer.value.removeOverlay(id); } catch { }
+          });
+          naturvardDomOverlayIds = [];
+        }
+      }
+
+      // Keep Naturvård tooltip following the overlay during pan/zoom
+      if (naturvardTooltipOpen.value && naturvardTooltip.value && naturvardTooltip.value.anchorWorldX != null) {
+        try {
+          const pt = new osdLib.Point(naturvardTooltip.value.anchorWorldX, naturvardTooltip.value.anchorWorldY);
+          const pix = viewer.value.viewport.pixelFromPoint(pt, true);
+          const containerWidth = viewerContainer.value.clientWidth;
+          const containerHeight = viewerContainer.value.clientHeight;
+          const offX = naturvardTooltip.value.offsetX ?? 12;
+          const offY = naturvardTooltip.value.offsetY ?? -28;
+          const left = Math.min(Math.max(pix.x + offX, 0), containerWidth - 10);
+          const top = Math.min(Math.max(pix.y + offY, 0), containerHeight - 10);
+          naturvardTooltip.value = { ...naturvardTooltip.value, left, top };
+        } catch { }
       }
 
       // Static rectangle overlay
@@ -1426,6 +1543,13 @@ export default {
     watch(() => props.naturvardsarterVisible, () => {
       if (overlayCtx) drawAllOverlays();
     });
+    watch(() => props.naturvardsarterVisible, (visible) => {
+      if (!visible) {
+        naturvardTooltip.value = null;
+        naturvardHitboxes.value = [];
+        naturvardTooltipOpen.value = false;
+      }
+    });
     watch(() => props.tradplantorVisible, () => {
       if (overlayCtx) drawAllOverlays();
     });
@@ -1506,6 +1630,9 @@ export default {
 
     // Track annotation overlays as { id, app } objects for teardown
     let annotationOverlayApps = [];
+
+    // Track DOM overlays created for Naturvård clickable areas (className passed to OSD)
+    let naturvardDomOverlayIds = [];
     // Track MouseTracker instances and animation handler for cleanup
     let mouseTrackers = [];
     let animationHandler;
@@ -1556,10 +1683,127 @@ export default {
       window.removeEventListener('resize', resizeCanvas);
       if (overlayCanvas.parentNode) overlayCanvas.parentNode.removeChild(overlayCanvas);
       viewer.value.clearOverlays();
+      naturvardDomOverlayIds = [];
       viewer.value.destroy();
       viewer.value = null;
       currentTile.value = null;
       overlayImage.value = null;
+    }
+
+    function handleNaturvardClick(event) {
+      if (!viewerContainer.value) return;
+      if (!props.naturvardsarterVisible || naturvardHitboxes.value.length === 0) {
+        naturvardTooltip.value = null;
+        naturvardTooltipOpen.value = false;
+        return;
+      }
+      const rect = viewerContainer.value.getBoundingClientRect();
+      const pointerX = event.clientX - rect.left;
+      const pointerY = event.clientY - rect.top;
+
+      let matched = null;
+      for (const hit of naturvardHitboxes.value) {
+        const dx = pointerX - hit.x;
+        const dy = pointerY - hit.y;
+        if (dx * dx + dy * dy <= hit.radius * hit.radius) {
+          matched = hit;
+          break;
+        }
+      }
+
+      if (matched) {
+        const containerWidth = viewerContainer.value.clientWidth;
+        const containerHeight = viewerContainer.value.clientHeight;
+        // Compute current pixel position from anchor world coords
+        const pt = new osdLib.Point(matched.worldX ?? 0, matched.worldY ?? 0);
+        const pix = viewer.value.viewport.pixelFromPoint(pt, true);
+        const offsetX = 12; // same visual offset as before
+        const offsetY = -28;
+        const left = Math.min(Math.max(pix.x + offsetX, 0), containerWidth - 10);
+        const top = Math.min(Math.max(pix.y + offsetY, 0), containerHeight - 10);
+        naturvardTooltip.value = {
+          message: matched.message,
+          left,
+          top,
+          anchorWorldX: matched.worldX ?? null,
+          anchorWorldY: matched.worldY ?? null,
+          offsetX,
+          offsetY,
+        };
+        naturvardTooltipOpen.value = true;
+      } else {
+        naturvardTooltipOpen.value = false;
+        nextTick(() => { naturvardTooltip.value = null; });
+      }
+    }
+
+    function handleNaturvardCursor(event) {
+      if (!viewerContainer.value) return;
+      if (!props.naturvardsarterVisible || naturvardHitboxes.value.length === 0) {
+        viewerContainer.value.style.cursor = 'default';
+        return;
+      }
+      const rect = viewerContainer.value.getBoundingClientRect();
+      const pointerX = event.clientX - rect.left;
+      const pointerY = event.clientY - rect.top;
+
+      let hovering = false;
+      for (const hit of naturvardHitboxes.value) {
+        const dx = pointerX - hit.x;
+        const dy = pointerY - hit.y;
+        if (dx * dx + dy * dy <= hit.radius * hit.radius) {
+          hovering = true;
+          break;
+        }
+      }
+      viewerContainer.value.style.cursor = hovering ? 'pointer' : 'default';
+    }
+
+    function attachClickHandlers() {
+      if (!viewerContainer.value) return;
+      if (!naturvardClickHandler) {
+        naturvardClickHandler = (event) => handleNaturvardClick(event);
+        // capture so we run before OSD’s internal handlers
+        viewerContainer.value.addEventListener('click', naturvardClickHandler, { capture: true, passive: true });
+        viewerContainer.value.addEventListener('mousemove', handleNaturvardCursor, { passive: true });
+      }
+      if (!outsideClickHandler) {
+        outsideClickHandler = (event) => {
+          const el = viewerContainer.value;
+          if (!el) return;
+          if (!el.contains(event.target)) {
+            naturvardTooltipOpen.value = false;
+            nextTick(() => { naturvardTooltip.value = null; });
+          }
+        };
+        // capture to catch outside clicks reliably
+        document.addEventListener('click', outsideClickHandler, true);
+      }
+    }
+
+    function detachClickHandlers() {
+      if (viewerContainer.value && naturvardClickHandler) {
+        viewerContainer.value.removeEventListener('click', naturvardClickHandler, { capture: true });
+      }
+      if (viewerContainer.value) {
+        viewerContainer.value.removeEventListener('mousemove', handleNaturvardCursor);
+        viewerContainer.value.style.cursor = 'default';
+      }
+      if (outsideClickHandler) {
+        document.removeEventListener('click', outsideClickHandler, true);
+      }
+      naturvardClickHandler = null;
+      outsideClickHandler = null;
+      naturvardTooltip.value = null;
+      naturvardTooltipOpen.value = false;
+    }
+
+    // Legacy shims: map old hover API to new click-based API
+    function attachHoverHandlers() {
+      attachClickHandlers();
+    }
+    function detachHoverHandlers() {
+      detachClickHandlers();
     }
 
     // Debounced tile transition
@@ -1778,7 +2022,9 @@ export default {
           element: markerContainer,
           location: new osdLib.Point(annotation.position.x, annotation.position.y),
           placement: "BOTTOM",
+          className: 'clickable-overlay',
           checkResize: false,
+          id: p.id
         });
         annotationOverlayApps.push({ id: markerId, app: markerApp });
       });
@@ -1796,6 +2042,10 @@ export default {
       viewer.value.addOverlay({
         element: popupContainer,
         location: new osdLib.Point(annotation.position.x, annotation.position.y),
+        className: 'clickable-overlay',
+        id: p.id,
+        placement: "BOTTOM",
+        checkResize: false,
       });
       const app = createApp(AnnotationPopup, { annotation });
       app.mount(popupContainer);
@@ -1853,6 +2103,8 @@ export default {
       drawAllOverlays();
       viewer.value.addHandler('animation', drawAllOverlays);
       viewer.value.addHandler('open', drawAllOverlays);
+      // Ensure hover listeners are active immediately
+      attachClickHandlers();
       // window.addEventListener('resize', resizeCanvas); // REMOVE: now handled by ResizeObserver
 
       // Attach scale bar plugin
@@ -1956,6 +2208,19 @@ export default {
 
     const overlayOpacityLocal = ref(props.globalOpacity !== undefined ? props.globalOpacity : 1);
 
+    watch(() => props.naturvardsarterVisible, (visible) => {
+      if (visible) {
+        attachClickHandlers();
+      } else {
+        detachClickHandlers();
+        naturvardTooltip.value = null;
+        naturvardHitboxes.value = [];
+        naturvardTooltipOpen.value = false;
+        if (viewerContainer.value) viewerContainer.value.style.cursor = 'default'; // add this
+
+      }
+    });
+
     watch(
       () => props.globalOpacity,
       (newVal) => {
@@ -2047,6 +2312,7 @@ export default {
     );
 
     onBeforeUnmount(() => {
+      detachClickHandlers();
       destroyViewer();
       unmounted = true;
     });
@@ -2125,6 +2391,7 @@ export default {
       if (typeof window === "undefined") return;
       isClient.value = true;
       nextTick(() => {
+        attachHoverHandlers();
         initViewer().then(() => {
           // (Removed DOM static overlay block)
         });
@@ -2214,6 +2481,8 @@ export default {
       rodlistadeMycelValue,
       rottackePopover,
       rottackePopoverStyle,
+      naturvardTooltip,
+      naturvardTooltipOpen,
       naturvardCounter,
     };
   },
@@ -2225,7 +2494,7 @@ export default {
   width: 100%;
   height: 100%;
   background-color: #f9f6f3;
-  background-image: linear-gradient(#f2ece2 1px, transparent 1px), linear-gradient(to right, #f2ece2 1px, #f9f6f3 1px);
+  background-image: linear-gradient(#1a110e 1px, transparent 1px), linear-gradient(to right, #1a110e 1px, #0b0706 1px);
   background-size: 20px 20px;
 }
 
@@ -2237,5 +2506,18 @@ export default {
   pointer-events: none;
   user-select: none;
   display: inline-block;
+}
+
+/* Applies to OpenSeadragon HTML overlays added with className */
+.clickable-overlay {
+  cursor: pointer;
+  background: transparent;
+  /* invisible box over the star hit area */
+}
+
+/* Optional: outline for debugging; uses outline so it doesn't shift the overlay like border would */
+.clickable-overlay:hover {
+  outline: 2px solid rgba(90, 63, 52, 0.35);
+  outline-offset: 2px;
 }
 </style>
