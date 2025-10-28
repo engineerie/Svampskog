@@ -547,28 +547,31 @@ export default {
     }
 
     const SAW_BLADE_PATH_D = "M20 15s-1.4 1.3 1.1 2l-2.8 2.8h-2.8s-1.9-.1-.5 2.2h-4l-2-2s-1.3-1.4-2 1.1l-2.8-2.8v-2.8s.1-1.9-2.2-.5v-4l2-2s1.4-1.3-1.2-1.9l2.8-2.9h2.9s1.9.1.5-2.2h4l2 2s1.3 1.4 2-1.2l2.8 2.8v2.9s-.1 1.9 2.2.5v4zm-6-3a2 2 0 0 0-2-2a2 2 0 0 0-2 2a2 2 0 0 0 2 2a2 2 0 0 0 2-2";
-    const RANDOM_LINE_PATH_D = "M18 3a3 3 0 0 1 2.995 2.824L21 6v12a3 3 0 0 1-2.824 2.995L18 21H6a3 3 0 0 1-2.995-2.824L3 18V6a3 3 0 0 1 2.824-2.995L6 3zM8.5 14a1.5 1.5 0 0 0-1.493 1.356L7 15.5l.007.154a1.5 1.5 0 0 0 2.986 0L10 15.51l-.007-.154A1.5 1.5 0 0 0 8.5 14m7 0a1.5 1.5 0 0 0-1.493 1.356L14 15.51a1.5 1.5 0 0 0 2.993.144L17 15.5a1.5 1.5 0 0 0-1.5-1.5M12 10.5a1.5 1.5 0 0 0-1.493 1.356l-.007.154a1.5 1.5 0 0 0 2.993.144L13.5 12a1.5 1.5 0 0 0-1.5-1.5M8.5 7a1.5 1.5 0 0 0-1.493 1.356L7 8.5l.007.154a1.5 1.5 0 0 0 2.986 0L10 8.51l-.007-.154A1.5 1.5 0 0 0 8.5 7m7 0a1.5 1.5 0 0 0-1.493 1.356L14 8.51a1.5 1.5 0 0 0 2.993.144L17 8.5A1.5 1.5 0 0 0 15.5 7";
+    const RANDOM_LINE_PATH_D = "M5.874 5.89A8.13 8.13 0 0 0 4 11.1a.9.9 0 0 0 .9.9H12m4 0h3.1a.9.9 0 0 0 .9-.9C20 6.626 16.418 3 12 3c-1.43 0-2.774.38-3.936 1.047M10 12v7a2 2 0 1 0 4 0v-5M3 3l18 18";
     const DUST_STORM_PATH_D = "M8 11a1 1 0 1 1 0-2a1 1 0 0 1 0 2m0 2.5a3.5 3.5 0 1 0 0-7a3.5 3.5 0 0 0 0 7M22.999 7c-4.301 0-7.833 3.407-7.998 7.702a1.25 1.25 0 0 0 2.498.096A5.51 5.51 0 0 1 23 9.5a5.501 5.501 0 0 1 .001 11H5.25a1.25 1.25 0 1 0 0 2.5H23a8 8 0 1 0-.001-16m14.988 11.5a6.035 6.035 0 0 0-5.854 4.562l-.096.385a1.25 1.25 0 0 0 2.426.606l.096-.384A3.535 3.535 0 0 1 37.987 21a3.51 3.51 0 0 1 3.513 3.5A3.5 3.5 0 0 1 38 28H5.25a1.25 1.25 0 1 0 0 2.5H30c1.642 0 3 1.368 3 3.04c0 1.628-1.323 2.96-2.922 2.96a2.92 2.92 0 0 1-2.613-1.615l-.097-.194a1.25 1.25 0 1 0-2.236 1.118l.097.194A5.42 5.42 0 0 0 30.079 39c3.009 0 5.421-2.481 5.421-5.46a5.54 5.54 0 0 0-.908-3.04H38a6 6 0 0 0 6-6c0-3.318-2.704-6-6.013-6M19 39a1 1 0 1 0-2 0a1 1 0 0 0 2 0m2.5 0a3.5 3.5 0 1 1-7 0a3.5 3.5 0 0 1 7 0M40 12a1 1 0 1 0-2 0a1 1 0 0 0 2 0m2.5 0a3.5 3.5 0 1 1-7 0a3.5 3.5 0 0 1 7 0";
+    const FLUENT_DUST_PATH_D = "M7 3a1 1 0 1 1-2 0a1 1 0 0 1 2 0m14 10a1 1 0 1 0 0-2a1 1 0 0 0 0 2M6 22a1 1 0 1 0 0-2a1 1 0 0 0 0 2m7.75-19a5.25 5.25 0 0 0-5.086 3.943a5.25 5.25 0 1 0 0 10.114A5.252 5.252 0 0 0 19 15.75c0-1.47-.604-2.798-1.576-3.75a5.25 5.25 0 0 0-3.674-9m-3.743 5.018a3.75 3.75 0 1 1 5.816 3.358a.75.75 0 0 0 0 1.249a3.75 3.75 0 1 1-5.816 3.358a.75.75 0 0 0-1.084-.626a3.75 3.75 0 1 1 0-6.714a.75.75 0 0 0 1.084-.625";
 
-    function drawSvgIcon(ctx, pathD, x, y, size, color, baseSize = 24, flipX = false) {
+
+    function drawSvgIcon(ctx, pathD, x, y, size, color, baseSize = 24, flipX = false, rotation = 0) {
       if (typeof Path2D === 'undefined') return;
       const path = new Path2D(pathD);
       ctx.save();
       ctx.translate(x, y);
+      if (rotation) {
+        ctx.rotate(rotation);
+      }
       const scale = size / baseSize;
       ctx.scale(scale, scale);
       if (flipX) {
         ctx.scale(-1, 1);
-        ctx.translate(-baseSize / 2, -baseSize / 2);
-      } else {
-        ctx.translate(-baseSize / 2, -baseSize / 2);
       }
+      ctx.translate(-baseSize / 2, -baseSize / 2);
       ctx.fillStyle = color;
       ctx.fill(path);
       ctx.restore();
     }
 
-    const MOVE_ARROW_PATH_D = "M20 21h-4v-4m0 4l5-5M6.5 9.504l-3.5-2L5 4M3 7.504l6.83-1.87M4 16l4-1l1 4m-1-4l-3.5 6M21 5l-.5 4l-4-.5m4 .5L16 3.5";
+    const MOVE_ARROW_PATH_D = "M5 6.41L6.41 5L17 15.59V9h2v10H9v-2h6.59z";
 
     function drawSvgStrokeIcon(ctx, pathD, x, y, size, color, baseSize = 24) {
       if (typeof Path2D === 'undefined') return;
@@ -1297,11 +1300,12 @@ export default {
 
               drawBadgeCircle(overlayCtx, iconX, iconY, iconRadius);
 
-              const iconPath = p.id === 'myc-2' ? RANDOM_LINE_PATH_D : SAW_BLADE_PATH_D;
               const iconSize = iconRadius * 1.5;
-              const baseSize = iconPath === DUST_STORM_PATH_D ? 48 : 24;
-              const flipIcon = iconPath === DUST_STORM_PATH_D;
-              drawSvgIcon(overlayCtx, iconPath, iconX, iconY, iconSize, '#5a3f34', baseSize, flipIcon);
+              if (p.id === 'myc-2') {
+                drawSvgStrokeIcon(overlayCtx, RANDOM_LINE_PATH_D, iconX, iconY, iconSize, '#5a3f34');
+              } else {
+                drawSvgIcon(overlayCtx, SAW_BLADE_PATH_D, iconX, iconY, iconSize, '#5a3f34');
+              }
 
               tooltipMessage = p.id === 'myc-2'
                 ? 'Naturvårdsart som dött av ålder eller blivit utkonkurerad av annan art'
@@ -1322,7 +1326,7 @@ export default {
               drawBadgeCircle(overlayCtx, iconX, iconY, iconRadius);
 
               const iconSize = iconRadius * 1.5;
-              drawSvgStrokeIcon(overlayCtx, MOVE_ARROW_PATH_D, iconX, iconY, iconSize, '#5a3f34');
+              drawSvgIcon(overlayCtx, MOVE_ARROW_PATH_D, iconX, iconY, iconSize, '#5a3f34');
 
               tooltipMessage = 'Arten har förflyttat sig själv';
               hoverX = iconX;
@@ -1331,18 +1335,35 @@ export default {
             } else if (p.id === 'myc-11' || p.id === 'myc-12') {
               const iconRadius = radius * 0.7;
               const offset = radius * 0.9;
-              const iconX = pixel.x + offset;
+              const baseX = pixel.x + offset;
               const iconY = pixel.y - offset;
-
-              drawBadgeCircle(overlayCtx, iconX, iconY, iconRadius);
-
               const iconSize = iconRadius * 1.3;
-              drawSvgIcon(overlayCtx, DUST_STORM_PATH_D, iconX, iconY, iconSize, '#5a3f34', 48, true);
 
-              tooltipMessage = 'Naturvårdsart som etablerats med spridda sporer';
-              hoverX = iconX;
-              hoverY = iconY;
-              hoverRadius = Math.max(iconRadius * 1.6, hoverRadius);
+              if (p.id === 'myc-11') {
+                const spacing = iconRadius * 1.3;
+                const firstX = baseX - spacing / 2;
+                const secondX = baseX + spacing / 1.5;
+                drawBadgeCircle(overlayCtx, firstX, iconY, iconRadius);
+                drawSvgIcon(overlayCtx, FLUENT_DUST_PATH_D, firstX, iconY, iconSize, '#5a3f34', 24);
+
+
+                drawBadgeCircle(overlayCtx, secondX, iconY, iconRadius);
+                drawSvgIcon(overlayCtx, MOVE_ARROW_PATH_D, secondX, iconY, iconSize, '#5a3f34', 24, false, Math.PI);
+
+
+                tooltipMessage = 'Naturvårdsart som etablerats med spridda sporer';
+                hoverX = baseX;
+                hoverY = iconY;
+                hoverRadius = Math.max(iconRadius * 2.2, hoverRadius);
+              } else {
+                drawBadgeCircle(overlayCtx, baseX, iconY, iconRadius);
+                drawSvgIcon(overlayCtx, DUST_STORM_PATH_D, baseX, iconY, iconSize, '#5a3f34', 48, true);
+
+                tooltipMessage = 'Naturvårdsart som etablerats med spridda sporer';
+                hoverX = baseX;
+                hoverY = iconY;
+                hoverRadius = Math.max(iconRadius * 1.6, hoverRadius);
+              }
             }
           }
 
