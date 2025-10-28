@@ -210,11 +210,11 @@
         { "time": "20 år", "set": ["myc-1", "myc-5", "myc-7"] },
         {
           "time": "50 år",
-          "set": ["myc-1", "myc-5", "myc-7", "myc-11"]
+          "set": ["myc-1", "myc-5", "myc-7.1", "myc-11"]
         },
         {
           "time": "80 år",
-          "set": ["myc-1", "myc-5", "myc-7", "myc-11", "myc-12"]
+          "set": ["myc-1", "myc-5", "myc-7.1", "myc-11", "myc-12"]
         }
       ],
       "produktionsskog_": [
