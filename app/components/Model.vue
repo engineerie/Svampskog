@@ -276,7 +276,7 @@
           <UPopover class="shrink-0 cursor-pointer h-fit z-50" v-model:open="open2"
             :popper="{ placement: 'bottom-start' }">
             <UButton :variant="isMobile ? 'outline' : 'outline'" color="neutral" icon="i-heroicons-clock" size="lg"
-              :label="isMobile ? null : null" class="rounded-full ring-muted">
+              :label="isMobile ? null : currentStartskog.label" class="rounded-full ring-muted">
             </UButton>
             <template #content>
               <div class="text-sm w-64 p-3 text-neutral-500 border-b border-neutral-200 ">
@@ -285,8 +285,8 @@
               <div class="p-1 flex flex-col gap-1">
                 <div v-for="option in startskog" :key="option.value">
                   <UButton @click="selectOption(option)" size="lg" color="white" variant="ghost"
-                    class="hover:bg-neutral-100 w-full cursor-pointer" :class="{
-                      'w-full  text-secondary-500':
+                    class="hover:bg-neutral-100 w-full cursor-pointer text-neutral-400" :class="{
+                      'w-full bg-neutral-100  text-neutral-800':
                         currentStartskog.value === option.value,
                     }">
                     {{ option.label }}
@@ -1763,8 +1763,8 @@ const frameworks = [
 
 // Startskog array
 const startskog = [
-  { label: "Inte tidigare kalavverkad", value: "naturskog" },
-  { label: "Tidigare kalavverkad", value: "produktionsskog_" },
+  { label: "Kontinuitetsskog", value: "naturskog" },
+  { label: "Kalavverkad", value: "produktionsskog_" },
 ];
 
 // Current framework and startskog
@@ -2321,8 +2321,11 @@ function mapTimeToLabel(value) {
 
 // Slider steps
 const sliderSteps = computed(() => {
+  const beforeLabel = currentFramework.value?.value === "naturskydd"
+    ? "Ingen avverkning"
+    : "Före avverkning";
   const steps = [
-    { value: 3, label: "Före avverkning", timeLabel: "före" },
+    { value: 3, label: beforeLabel, timeLabel: "före" },
     { value: 15, label: "1 år efter ", timeLabel: "efter" },
   ];
   if (

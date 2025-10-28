@@ -2131,7 +2131,7 @@ export default {
       // Attach scale bar plugin
       viewer.value.scalebar({
         type: osdLib.ScalebarType.MAP,
-        pixelsPerMeter: 10, // adjust to your image's real-world scale
+        pixelsPerMeter: 12, // adjust to your image's real-world scale
         minWidth: '75px',
         location: osdLib.ScalebarLocation.BOTTOM_LEFT,
         color: 'white',
