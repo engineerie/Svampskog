@@ -1,0 +1,426 @@
+entries:
+  - artkategori: atheliales
+    startskog: naturskog
+    frameworks: trakthygge
+    ålder: 0
+    klassning: 0.2
+  - artkategori: atheliales
+    startskog: naturskog
+    frameworks: trakthygge
+    ålder: 1
+    klassning: 0.008
+  - artkategori: atheliales
+    startskog: naturskog
+    frameworks: trakthygge
+    ålder: 10
+    klassning: 0.045
+  - artkategori: atheliales
+    startskog: naturskog
+    frameworks: trakthygge
+    ålder: 11
+    klassning: 0.045
+  - artkategori: atheliales
+    startskog: naturskog
+    frameworks: trakthygge
+    ålder: 20
+    klassning: 0.21
+  - artkategori: atheliales
+    startskog: naturskog
+    frameworks: trakthygge
+    ålder: 21
+    klassning: 0.21
+  - artkategori: atheliales
+    startskog: naturskog
+    frameworks: trakthygge
+    ålder: 30
+    klassning: 0.384
+  - artkategori: atheliales
+    startskog: naturskog
+    frameworks: trakthygge
+    ålder: 31
+    klassning: 0.384
+  - artkategori: atheliales
+    startskog: naturskog
+    frameworks: trakthygge
+    ålder: 40
+    klassning: 0.3936
+  - artkategori: atheliales
+    startskog: naturskog
+    frameworks: trakthygge
+    ålder: 50
+    klassning: 0.363
+  - artkategori: atheliales
+    startskog: naturskog
+    frameworks: trakthygge
+    ålder: 60
+    klassning: 0.348
+  - artkategori: atheliales
+    startskog: naturskog
+    frameworks: trakthygge
+    ålder: 61
+    klassning: 0.348
+  - artkategori: atheliales
+    startskog: naturskog
+    frameworks: trakthygge
+    ålder: 70
+    klassning: 0.32775
+  - artkategori: atheliales
+    startskog: naturskog
+    frameworks: trakthygge
+    ålder: 80
+    klassning: 0.3136
+  - artkategori: atheliales
+    startskog: naturskog
+    frameworks: trakthygge
+    ålder: 90
+    klassning: 0.297
+  - artkategori: atheliales
+    startskog: naturskog
+    frameworks: trakthygge
+    ålder: 91
+    klassning: 0.297
+  - artkategori: atheliales
+    startskog: naturskog
+    frameworks: trakthygge
+    ålder: 100
+    klassning: 0.286
+  - artkategori: atheliales
+    startskog: naturskog
+    frameworks: blädning
+    ålder: 0
+    klassning: 0.2
+  - artkategori: atheliales
+    startskog: naturskog
+    frameworks: blädning
+    ålder: 1
+    klassning: 0.12
+  - artkategori: atheliales
+    startskog: naturskog
+    frameworks: blädning
+    ålder: 10
+    klassning: 0.255
+  - artkategori: atheliales
+    startskog: naturskog
+    frameworks: blädning
+    ålder: 11
+    klassning: 0.255
+  - artkategori: atheliales
+    startskog: naturskog
+    frameworks: blädning
+    ålder: 20
+    klassning: 0.35
+  - artkategori: atheliales
+    startskog: naturskog
+    frameworks: blädning
+    ålder: 21
+    klassning: 0.35
+  - artkategori: atheliales
+    startskog: naturskog
+    frameworks: blädning
+    ålder: 30
+    klassning: 0.32
+  - artkategori: atheliales
+    startskog: naturskog
+    frameworks: blädning
+    ålder: 31
+    klassning: 0.24
+  - artkategori: atheliales
+    startskog: naturskog
+    frameworks: blädning
+    ålder: 40
+    klassning: 0.272
+  - artkategori: atheliales
+    startskog: naturskog
+    frameworks: blädning
+    ålder: 50
+    klassning: 0.3
+  - artkategori: atheliales
+    startskog: naturskog
+    frameworks: blädning
+    ålder: 60
+    klassning: 0.29
+  - artkategori: atheliales
+    startskog: naturskog
+    frameworks: blädning
+    ålder: 61
+    klassning: 0.2175
+  - artkategori: atheliales
+    startskog: naturskog
+    frameworks: blädning
+    ålder: 70
+    klassning: 0.24225
+  - artkategori: atheliales
+    startskog: naturskog
+    frameworks: blädning
+    ålder: 80
+    klassning: 0.28
+  - artkategori: atheliales
+    startskog: naturskog
+    frameworks: blädning
+    ålder: 90
+    klassning: 0.27
+  - artkategori: atheliales
+    startskog: naturskog
+    frameworks: blädning
+    ålder: 91
+    klassning: 0.2025
+  - artkategori: atheliales
+    startskog: naturskog
+    frameworks: blädning
+    ålder: 100
+    klassning: 0.221
+  - artkategori: atheliales
+    startskog: naturskog
+    frameworks: luckhuggning
+    ålder: 0
+    klassning: 0.2
+  - artkategori: atheliales
+    startskog: naturskog
+    frameworks: luckhuggning
+    ålder: 1
+    klassning: 0.12
+  - artkategori: atheliales
+    startskog: naturskog
+    frameworks: luckhuggning
+    ålder: 10
+    klassning: 0.255
+  - artkategori: atheliales
+    startskog: naturskog
+    frameworks: luckhuggning
+    ålder: 11
+    klassning: 0.255
+  - artkategori: atheliales
+    startskog: naturskog
+    frameworks: luckhuggning
+    ålder: 20
+    klassning: 0.35
+  - artkategori: atheliales
+    startskog: naturskog
+    frameworks: luckhuggning
+    ålder: 21
+    klassning: 0.35
+  - artkategori: atheliales
+    startskog: naturskog
+    frameworks: luckhuggning
+    ålder: 30
+    klassning: 0.32
+  - artkategori: atheliales
+    startskog: naturskog
+    frameworks: luckhuggning
+    ålder: 31
+    klassning: 0.24
+  - artkategori: atheliales
+    startskog: naturskog
+    frameworks: luckhuggning
+    ålder: 40
+    klassning: 0.272
+  - artkategori: atheliales
+    startskog: naturskog
+    frameworks: luckhuggning
+    ålder: 50
+    klassning: 0.3
+  - artkategori: atheliales
+    startskog: naturskog
+    frameworks: luckhuggning
+    ålder: 60
+    klassning: 0.29
+  - artkategori: atheliales
+    startskog: naturskog
+    frameworks: luckhuggning
+    ålder: 61
+    klassning: 0.2175
+  - artkategori: atheliales
+    startskog: naturskog
+    frameworks: luckhuggning
+    ålder: 70
+    klassning: 0.24225
+  - artkategori: atheliales
+    startskog: naturskog
+    frameworks: luckhuggning
+    ålder: 80
+    klassning: 0.28
+  - artkategori: atheliales
+    startskog: naturskog
+    frameworks: luckhuggning
+    ålder: 90
+    klassning: 0.27
+  - artkategori: atheliales
+    startskog: naturskog
+    frameworks: luckhuggning
+    ålder: 91
+    klassning: 0.2025
+  - artkategori: atheliales
+    startskog: naturskog
+    frameworks: luckhuggning
+    ålder: 100
+    klassning: 0.221
+  - artkategori: atheliales
+    startskog: naturskog
+    frameworks: skärmträd
+    ålder: 0
+    klassning: 0.2
+  - artkategori: atheliales
+    startskog: naturskog
+    frameworks: skärmträd
+    ålder: 1
+    klassning: 0.096
+  - artkategori: atheliales
+    startskog: naturskog
+    frameworks: skärmträd
+    ålder: 10
+    klassning: 0.195
+  - artkategori: atheliales
+    startskog: naturskog
+    frameworks: skärmträd
+    ålder: 11
+    klassning: 0.12
+  - artkategori: atheliales
+    startskog: naturskog
+    frameworks: skärmträd
+    ålder: 20
+    klassning: 0.21
+  - artkategori: atheliales
+    startskog: naturskog
+    frameworks: skärmträd
+    ålder: 21
+    klassning: 0.175
+  - artkategori: atheliales
+    startskog: naturskog
+    frameworks: skärmträd
+    ålder: 30
+    klassning: 0.288
+  - artkategori: atheliales
+    startskog: naturskog
+    frameworks: skärmträd
+    ålder: 31
+    klassning: 0.32
+  - artkategori: atheliales
+    startskog: naturskog
+    frameworks: skärmträd
+    ålder: 40
+    klassning: 0.368
+  - artkategori: atheliales
+    startskog: naturskog
+    frameworks: skärmträd
+    ålder: 50
+    klassning: 0.36
+  - artkategori: atheliales
+    startskog: naturskog
+    frameworks: skärmträd
+    ålder: 60
+    klassning: 0.348
+  - artkategori: atheliales
+    startskog: naturskog
+    frameworks: skärmträd
+    ålder: 61
+    klassning: 0.348
+  - artkategori: atheliales
+    startskog: naturskog
+    frameworks: skärmträd
+    ålder: 70
+    klassning: 0.32775
+  - artkategori: atheliales
+    startskog: naturskog
+    frameworks: skärmträd
+    ålder: 80
+    klassning: 0.3136
+  - artkategori: atheliales
+    startskog: naturskog
+    frameworks: skärmträd
+    ålder: 90
+    klassning: 0.297
+  - artkategori: atheliales
+    startskog: naturskog
+    frameworks: skärmträd
+    ålder: 91
+    klassning: 0.297
+  - artkategori: atheliales
+    startskog: naturskog
+    frameworks: skärmträd
+    ålder: 100
+    klassning: 0.286
+  - artkategori: atheliales
+    startskog: naturskog
+    frameworks: naturskydd
+    ålder: 0
+    klassning: 0.2
+  - artkategori: atheliales
+    startskog: naturskog
+    frameworks: naturskydd
+    ålder: 1
+    klassning: 0.2
+  - artkategori: atheliales
+    startskog: naturskog
+    frameworks: naturskydd
+    ålder: 10
+    klassning: 0.2
+  - artkategori: atheliales
+    startskog: naturskog
+    frameworks: naturskydd
+    ålder: 11
+    klassning: 0.2
+  - artkategori: atheliales
+    startskog: naturskog
+    frameworks: naturskydd
+    ålder: 20
+    klassning: 0.2
+  - artkategori: atheliales
+    startskog: naturskog
+    frameworks: naturskydd
+    ålder: 21
+    klassning: 0.2
+  - artkategori: atheliales
+    startskog: naturskog
+    frameworks: naturskydd
+    ålder: 30
+    klassning: 0.2
+  - artkategori: atheliales
+    startskog: naturskog
+    frameworks: naturskydd
+    ålder: 31
+    klassning: 0.2
+  - artkategori: atheliales
+    startskog: naturskog
+    frameworks: naturskydd
+    ålder: 40
+    klassning: 0.2
+  - artkategori: atheliales
+    startskog: naturskog
+    frameworks: naturskydd
+    ålder: 50
+    klassning: 0.2
+  - artkategori: atheliales
+    startskog: naturskog
+    frameworks: naturskydd
+    ålder: 60
+    klassning: 0.2
+  - artkategori: atheliales
+    startskog: naturskog
+    frameworks: naturskydd
+    ålder: 61
+    klassning: 0.2
+  - artkategori: atheliales
+    startskog: naturskog
+    frameworks: naturskydd
+    ålder: 70
+    klassning: 0.2
+  - artkategori: atheliales
+    startskog: naturskog
+    frameworks: naturskydd
+    ålder: 80
+    klassning: 0.2
+  - artkategori: atheliales
+    startskog: naturskog
+    frameworks: naturskydd
+    ålder: 90
+    klassning: 0.2
+  - artkategori: atheliales
+    startskog: naturskog
+    frameworks: naturskydd
+    ålder: 91
+    klassning: 0.2
+  - artkategori: atheliales
+    startskog: naturskog
+    frameworks: naturskydd
+    ålder: 100
+    klassning: 0.2

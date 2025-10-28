@@ -267,6 +267,141 @@ export const collections = {
       ),
     }),
   }),
+  matsvampSkogsbruk: defineCollection({
+    type: "data",
+    source: "forestry/matsvamp-skogsbruk.yml",
+    schema: z.object({
+      entries: z.array(
+        z.object({
+          artkategori: z.string().nonempty(),
+          frameworks: z.string().nonempty(),
+          startskog: z.string().optional(),
+          ["ålder"]: z.number(),
+          klassning: z.number(),
+        }),
+      ),
+    }),
+  }),
+  godaMatsvamparSkogsbruk: defineCollection({
+    type: "data",
+    source: "forestry/goda-matsvampar-skogsbruk.yml",
+    schema: z.object({
+      entries: z.array(
+        z.object({
+          artkategori: z.string().nonempty(),
+          frameworks: z.string().nonempty(),
+          startskog: z.string().optional(),
+          ["ålder"]: z.number(),
+          klassning: z.number(),
+        }),
+      ),
+    }),
+  }),
+  signalRodlistadeSkogsbruk: defineCollection({
+    type: "data",
+    source: "forestry/signal-rodlistade-skogsbruk.yml",
+    schema: z.object({
+      entries: z.array(
+        z.object({
+          artkategori: z.string().nonempty(),
+          frameworks: z.string().nonempty(),
+          startskog: z.string().optional(),
+          ["ålder"]: z.number(),
+          klassning: z.number(),
+        }),
+      ),
+    }),
+  }),
+  athelialesSkogsbruk: defineCollection({
+    type: "data",
+    source: "forestry/atheliales-skogsbruk.yml",
+    schema: z.object({
+      entries: z.array(
+        z.object({
+          artkategori: z.string().nonempty(),
+          frameworks: z.string().nonempty(),
+          startskog: z.string().optional(),
+          ["ålder"]: z.number(),
+          klassning: z.number(),
+        }),
+      ),
+    }),
+  }),
+  boletalesSkogsbruk: defineCollection({
+    type: "data",
+    source: "forestry/boletales-skogsbruk.yml",
+    schema: z.object({
+      entries: z.array(
+        z.object({
+          artkategori: z.string().nonempty(),
+          frameworks: z.string().nonempty(),
+          startskog: z.string().optional(),
+          ["ålder"]: z.number(),
+          klassning: z.number(),
+        }),
+      ),
+    }),
+  }),
+  cantharellalesSkogsbruk: defineCollection({
+    type: "data",
+    source: "forestry/cantharellales-skogsbruk.yml",
+    schema: z.object({
+      entries: z.array(
+        z.object({
+          artkategori: z.string().nonempty(),
+          frameworks: z.string().nonempty(),
+          startskog: z.string().optional(),
+          ["ålder"]: z.number(),
+          klassning: z.number(),
+        }),
+      ),
+    }),
+  }),
+  spindlingarSkogsbruk: defineCollection({
+    type: "data",
+    source: "forestry/spindlingar-skogsbruk.yml",
+    schema: z.object({
+      entries: z.array(
+        z.object({
+          artkategori: z.string().nonempty(),
+          frameworks: z.string().nonempty(),
+          startskog: z.string().optional(),
+          ["ålder"]: z.number(),
+          klassning: z.number(),
+        }),
+      ),
+    }),
+  }),
+  russulalesSkogsbruk: defineCollection({
+    type: "data",
+    source: "forestry/russulales-skogsbruk.yml",
+    schema: z.object({
+      entries: z.array(
+        z.object({
+          artkategori: z.string().nonempty(),
+          frameworks: z.string().nonempty(),
+          startskog: z.string().optional(),
+          ["ålder"]: z.number(),
+          klassning: z.number(),
+        }),
+      ),
+    }),
+  }),
+  thelephoralesSkogsbruk: defineCollection({
+    type: "data",
+    source: "forestry/thelephorales-skogsbruk.yml",
+    schema: z.object({
+      entries: z.array(
+        z.object({
+          artkategori: z.string().nonempty(),
+          frameworks: z.string().nonempty(),
+          startskog: z.string().optional(),
+          ["ålder"]: z.number(),
+          klassning: z.number(),
+        }),
+      ),
+    }),
+  }),
   totalSvamparSkogsbruk: defineCollection({
     type: "data",
     source: "forestry/total-svampar-skogsbruk.yml",

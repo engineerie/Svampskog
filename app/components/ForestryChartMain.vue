@@ -114,6 +114,10 @@
           Phasellus rutrum bibendum lacinia. Fusce aliquam aliquet lectus, eget gravida purus lobortis id. Curabitur
           viverra quam a risus sagittis maximus.
         </p>
+        <div class="px-2 pb-2">
+          <USelect v-model="selectedMatsvampVariant" :items="matsvampVariantOptions" size="sm"
+            class="w-56" placeholder="Välj dataset" />
+        </div>
         <!-- <div class="controls w-full flex my-2">
                         <USelect class="min-w-32" v-model="selectedStartskog2" :items="[
                             { label: 'Äldre skog som inte varit kalavverkad tidigare', value: 'naturskog' },
@@ -123,7 +127,8 @@
         <ForestryChartDisplay
           :selectedFrameworks="props.parentSelectedFrameworks ?? ['naturskydd', 'trakthygge', 'luckhuggning', 'blädning', 'skärmträd']"
           :selectedArtkategori="['matsvamp']" :chartType="chartType" :selectedStartskog="props.currentStartskog"
-          :yellowColor="true" :maxYValue="28" :currentTimeValue="props.currentTimeValue" />
+          :yellowColor="true" :maxYValue="28" :currentTimeValue="props.currentTimeValue"
+          :matsvampVariant="selectedMatsvampVariant" />
       </div>
       <div v-if="selectedChart === 'grupper'">
         <!-- <h1 class="text-3xl leading-loose font-semibold">Olika svampgrupper</h1> -->
@@ -150,7 +155,7 @@
           :selectedArtkategori="isFrameworkCompareMode ? [selectedCompareArtkategori] : selectedArtkategori"
           :frameworkComparisonMode="isFrameworkCompareMode"
           :chartType="chartType" :singleFrameworkSelection="true"
-          :selectedStartskog="props.currentStartskog" :maxYValue="100" :currentTimeValue="props.currentTimeValue" />
+          :selectedStartskog="props.currentStartskog" :currentTimeValue="props.currentTimeValue" />
       </div>
     </div>
   </div>
@@ -233,11 +238,22 @@ const frameworkOptions = [
 ]
 
 // Options for artkategorier
+const defaultGrupperArtkategori = [
+  'atheliales',
+  'boletales',
+  'cantharellales',
+  'spindlingar',
+  'russulales',
+  'thelephorales',
+]
+
 const artkategoriOptions = [
-  { label: 'Skinnsvampar', value: 'skinnsvampar' },
-  { label: 'Spindelskivlingar', value: 'spindelskivlingar' },
-  { label: 'Kremlor och riskor', value: 'kremlor och riskor' },
-  { label: 'Övriga svampar', value: 'övriga svampar' },
+  { label: 'Atheliales', value: 'atheliales' },
+  { label: 'Boletales', value: 'boletales' },
+  { label: 'Cantharellales', value: 'cantharellales' },
+  { label: 'Spindlingar', value: 'spindlingar' },
+  { label: 'Russulales', value: 'russulales' },
+  { label: 'Thelephorales', value: 'thelephorales' },
   { label: 'matsvamp', value: 'matsvamp' },
   { label: 'rödlistade + signalarter', value: 'rödlistade + signalarter' },
   { label: 'total', value: 'total' },
@@ -255,22 +271,26 @@ function ToggleChartType2() {
   chartType2.value = chartType2.value === 'area' ? 'bar' : 'area';
 }
 
+const matsvampVariantOptions = [
+  { label: 'Standard matsvampar', value: 'standard' },
+  { label: 'Goda matsvampar', value: 'goda' }
+]
+
+const selectedMatsvampVariant = ref<'standard' | 'goda'>('standard')
+
 // Reactive selections:
 // Default: all frameworks selected
 const selectedFrameworks = ref(frameworkOptions.map(opt => opt.value))
 // Default: first artkategori option selected
-const selectedArtkategori = ref<string[]>([
-  'skinnsvampar',
-  'kremlor och riskor',
-  'spindelskivlingar',
-  'övriga svampar'
-]);
+const selectedArtkategori = ref<string[]>([...defaultGrupperArtkategori]);
 
 const compareArtkategoriOptions = [
-  { label: 'Skinnsvampar', value: 'skinnsvampar' },
-  { label: 'Spindelskivlingar', value: 'spindelskivlingar' },
-  { label: 'Kremlor och riskor', value: 'kremlor och riskor' },
-  { label: 'Övriga svampar', value: 'övriga svampar' },
+  { label: 'Atheliales', value: 'atheliales' },
+  { label: 'Boletales', value: 'boletales' },
+  { label: 'Cantharellales', value: 'cantharellales' },
+  { label: 'Spindlingar', value: 'spindlingar' },
+  { label: 'Russulales', value: 'russulales' },
+  { label: 'Thelephorales', value: 'thelephorales' },
 ]
 
 const selectedCompareArtkategori = ref(compareArtkategoriOptions[0].value)
@@ -278,6 +298,9 @@ const selectedCompareArtkategori = ref(compareArtkategoriOptions[0].value)
 watch([selectedChart, isFrameworkCompareMode], ([chart, compare]) => {
   if (!(chart === 'grupper' && compare)) {
     selectedCompareArtkategori.value = compareArtkategoriOptions[0].value
+  }
+  if (chart === 'grupper' && !compare) {
+    selectedArtkategori.value = [...defaultGrupperArtkategori]
   }
 })
 
@@ -290,12 +313,15 @@ watch(() => props.parentSelectedFrameworks?.length, () => {
 
 // Color mapping for artkategorier
 const artkategoriColorMapping: Record<string, string> = {
-  "skinnsvampar": "#8B5CF6",
-  "spindelskivlingar": "#EC4899",
-  "kremlor och riskor": "#0EA5E9",
-  "övriga svampar": "#14B8A6",
+  "atheliales": "#8B5CF6",
+  "boletales": "#EC4899",
+  "cantharellales": "#0EA5E9",
+  "spindlingar": "#F97316",
+  "russulales": "#22C55E",
+  "thelephorales": "#A855F7",
   "matsvamp": "#eab308",
-  "rödlistade + signalarter": "#14B8A6",
+  "goda matsvampar": "#eab308",
+  "rödlistade + signalarter": "#5eead4",
   "total": "#808080"
 }
 

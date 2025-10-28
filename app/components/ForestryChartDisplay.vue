@@ -71,11 +71,63 @@ const { data: svamparDataDoc } = await useAsyncData('svampar-skogsbruk', () =>
   queryCollection('svamparSkogsbruk').first()
 )
 
+const { data: matsvampDataDoc } = await useAsyncData('matsvamp-skogsbruk', () =>
+  queryCollection('matsvampSkogsbruk').first()
+)
+
+const { data: godaMatsvampDataDoc } = await useAsyncData('goda-matsvampar-skogsbruk', () =>
+  queryCollection('godaMatsvamparSkogsbruk').first()
+)
+
+const { data: signalRodlistadeDataDoc } = await useAsyncData('signal-rodlistade-skogsbruk', () =>
+  queryCollection('signalRodlistadeSkogsbruk').first()
+)
+
+const { data: athelialesDataDoc } = await useAsyncData('atheliales-skogsbruk', () =>
+  queryCollection('athelialesSkogsbruk').first()
+)
+
+const { data: boletalesDataDoc } = await useAsyncData('boletales-skogsbruk', () =>
+  queryCollection('boletalesSkogsbruk').first()
+)
+
+const { data: cantharellalesDataDoc } = await useAsyncData('cantharellales-skogsbruk', () =>
+  queryCollection('cantharellalesSkogsbruk').first()
+)
+
+const { data: spindlingarDataDoc } = await useAsyncData('spindlingar-skogsbruk', () =>
+  queryCollection('spindlingarSkogsbruk').first()
+)
+
+const { data: russulalesDataDoc } = await useAsyncData('russulales-skogsbruk', () =>
+  queryCollection('russulalesSkogsbruk').first()
+)
+
+const { data: thelephoralesDataDoc } = await useAsyncData('thelephorales-skogsbruk', () =>
+  queryCollection('thelephoralesSkogsbruk').first()
+)
+
 const { data: totalSvamparDataDoc } = await useAsyncData('total-svampar-skogsbruk', () =>
   queryCollection('totalSvamparSkogsbruk').first()
 )
 
 const dataset = computed(() => Array.isArray(svamparDataDoc.value?.entries) ? svamparDataDoc.value.entries : [])
+const matsvampDataset = computed(() => Array.isArray(matsvampDataDoc.value?.entries) ? matsvampDataDoc.value.entries : [])
+const godaMatsvampDataset = computed(() => Array.isArray(godaMatsvampDataDoc.value?.entries) ? godaMatsvampDataDoc.value.entries : [])
+const signalRodlistadeDataset = computed(() => Array.isArray(signalRodlistadeDataDoc.value?.entries) ? signalRodlistadeDataDoc.value.entries : [])
+const combinedRodlistadeDataset = computed(() => {
+  const extra = Array.isArray(signalRodlistadeDataset.value) ? signalRodlistadeDataset.value : []
+  const base = Array.isArray(dataset.value)
+    ? dataset.value.filter(d => d.artkategori?.toLowerCase() === 'rödlistade + signalarter' && (d.startskog?.toLowerCase() || '') !== 'naturskog')
+    : []
+  return [...extra, ...base]
+})
+const athelialesDataset = computed(() => Array.isArray(athelialesDataDoc.value?.entries) ? athelialesDataDoc.value.entries : [])
+const boletalesDataset = computed(() => Array.isArray(boletalesDataDoc.value?.entries) ? boletalesDataDoc.value.entries : [])
+const cantharellalesDataset = computed(() => Array.isArray(cantharellalesDataDoc.value?.entries) ? cantharellalesDataDoc.value.entries : [])
+const spindlingarDataset = computed(() => Array.isArray(spindlingarDataDoc.value?.entries) ? spindlingarDataDoc.value.entries : [])
+const russulalesDataset = computed(() => Array.isArray(russulalesDataDoc.value?.entries) ? russulalesDataDoc.value.entries : [])
+const thelephoralesDataset = computed(() => Array.isArray(thelephoralesDataDoc.value?.entries) ? thelephoralesDataDoc.value.entries : [])
 const totalDataset = computed(() => Array.isArray(totalSvamparDataDoc.value?.entries) ? totalSvamparDataDoc.value.entries : [])
 
 
@@ -171,7 +223,8 @@ interface Props {
   selectedStartskog?: string, // <-- Add this
   redColor?: boolean,
   yellowColor?: boolean,
-  maxYValue?: number // <-- Add this
+  maxYValue?: number, // <-- Add this
+  matsvampVariant?: 'standard' | 'goda'
 }
 
 const props = withDefaults(defineProps<Props>(), {
@@ -179,8 +232,12 @@ const props = withDefaults(defineProps<Props>(), {
   singleFrameworkSelection: false,
   frameworkComparisonMode: false,
   redColor: false,
-  yellowColor: false
+  yellowColor: false,
+  matsvampVariant: 'standard'
 });
+
+const matsvampVariant = computed(() => props.matsvampVariant === 'goda' ? 'goda' : 'standard')
+const matsvampVariantArtKey = computed(() => matsvampVariant.value === 'goda' ? 'goda matsvampar' : 'matsvamp')
 
 const frameworkColorMapping = computed(() => {
   if (props.redColor) {
@@ -234,34 +291,46 @@ const brushSelection = computed<[number, number]>(() => {
 })
 
 const artkategoriColorMapping: Record<string, string> = {
-  "skinnsvampar": "#8B5CF6",
-  "spindelskivlingar": "#EC4899",
-  "kremlor och riskor": "#0EA5E9",
-  "övriga svampar": "#5eead4",
+  "atheliales": "#8B5CF6",
+  "boletales": "#EC4899",
+  "cantharellales": "#0EA5E9",
+  "spindlingar": "#F97316",
+  "russulales": "#22C55E",
+  "thelephorales": "#A855F7",
   "matsvamp": "#eab308",
+  "goda matsvampar": "#eab308",
   "rödlistade + signalarter": "#5eead4",
   "total": "#808080"
 };
 const artkategoriLegendOrder = [
-  'skinnsvampar',
-  'spindelskivlingar',
-  'kremlor och riskor',
-  'övriga svampar',
+  'atheliales',
+  'boletales',
+  'cantharellales',
+  'spindlingar',
+  'russulales',
+  'thelephorales',
   'matsvamp',
+  'goda matsvampar',
   'rödlistade + signalarter',
   'total'
 ];
 const artkategoriLabelMap: Record<string, string> = {
-  'skinnsvampar': 'Skinnsvampar',
-  'spindelskivlingar': 'Spindelskivlingar',
-  'kremlor och riskor': 'Kremlor och riskor',
-  'övriga svampar': 'Övriga svampar',
+  'atheliales': 'Atheliales',
+  'boletales': 'Boletales',
+  'cantharellales': 'Cantharellales',
+  'spindlingar': 'Spindlingar',
+  'russulales': 'Russulales',
+  'thelephorales': 'Thelephorales',
   'matsvamp': 'Matsvampar',
+  'goda matsvampar': 'Goda matsvampar',
   'rödlistade + signalarter': 'Rödlistade + signalarter',
   'total': 'Total'
 };
 
-const formatArtLabel = (key: string) => artkategoriLabelMap[key] || capitalize(key);
+const formatArtLabel = (key: string) => {
+  if (key === 'matsvamp' && matsvampVariant.value === 'goda') return 'Goda matsvampar';
+  return artkategoriLabelMap[key] || capitalize(key);
+};
 
 type LegendItem = BulletLegendItemInterface & {
   key: string;
@@ -417,10 +486,7 @@ const legendItems = computed<LegendItem[]>(() => {
     const keys = activeFrameworkKeys.value
     // Base color used when only one framework is shown (depends on selected artkategori)
     const primaryCat = (props.selectedArtkategori?.[0] || '').toLowerCase()
-    const singleColor = primaryCat === 'total' ? '#808080'
-      : primaryCat === 'matsvamp' ? '#eab308'
-        : primaryCat === 'rödlistade + signalarter' ? '#5eead4'
-          : null
+    const singleColor = artkategoriColorMapping[primaryCat] || null
 
     if (keys.length === 2) {
       const [k1, k2] = keys
@@ -477,21 +543,68 @@ const activeFrameworks = computed(() => {
   return legendItems.value.filter(item => !item.inactive);
 });
 
+function resolveDatasetForCategory(category: string) {
+  if (category === 'total') {
+    return totalDataset.value;
+  }
+  if (category === 'matsvamp') {
+    return matsvampVariant.value === 'goda' ? godaMatsvampDataset.value : matsvampDataset.value;
+  }
+  if (category === 'goda matsvampar') {
+    return godaMatsvampDataset.value;
+  }
+  if (category === 'rödlistade + signalarter') {
+    return combinedRodlistadeDataset.value;
+  }
+  if (category === 'atheliales') {
+    return athelialesDataset.value;
+  }
+  if (category === 'boletales') {
+    return boletalesDataset.value;
+  }
+  if (category === 'cantharellales') {
+    return cantharellalesDataset.value;
+  }
+  if (category === 'spindlingar') {
+    return spindlingarDataset.value;
+  }
+  if (category === 'russulales') {
+    return russulalesDataset.value;
+  }
+  if (category === 'thelephorales') {
+    return thelephoralesDataset.value;
+  }
+  return dataset.value;
+}
+
+function resolveArtkategoriKey(category: string) {
+  const lower = category.toLowerCase();
+  if (lower === 'matsvamp') return matsvampVariantArtKey.value;
+  return lower;
+}
+
 function filterDataForFramework(framework: string) {
   const selected = props.selectedArtkategori.map(s => s.toLowerCase());
 
-  const source = selected.includes('total') ? totalDataset.value : dataset.value;
   const selectedStartskog = props.selectedStartskog ? props.selectedStartskog.toLowerCase() : null;
 
-  return (source as any[]).filter(d => {
-    const matchesCategory = selected.includes(d.artkategori?.toLowerCase());
-    const matchesFramework = d.frameworks?.toLowerCase() === framework.toLowerCase();
-    const matchesStartskog = !selectedStartskog || (d.startskog?.toLowerCase() ?? selectedStartskog) === selectedStartskog;
-    return matchesCategory && matchesFramework && matchesStartskog;
-  }).map(d => ({
-    age: d["ålder"],
-    klassning: +d["klassning"]
-  }));
+  const rows: { age: number; klassning: number }[] = [];
+
+  selected.forEach(category => {
+    const sourceCategoryKey = resolveArtkategoriKey(category);
+    const source = resolveDatasetForCategory(category);
+    (source as any[] || []).forEach(d => {
+      if (d.artkategori?.toLowerCase() !== sourceCategoryKey) return;
+      if (d.frameworks?.toLowerCase() !== framework.toLowerCase()) return;
+      if (selectedStartskog && (d.startskog?.toLowerCase() ?? selectedStartskog) !== selectedStartskog) return;
+      rows.push({
+        age: d["ålder"],
+        klassning: +d["klassning"]
+      });
+    });
+  });
+
+  return rows;
 }
 
 
@@ -505,12 +618,13 @@ const mergedData = computed(() => {
 
     props.selectedArtkategori.forEach(artkategori => {
       const selected = artkategori.toLowerCase();
-      const source = selected === 'total' ? totalDataset.value : dataset.value;
+      const source = resolveDatasetForCategory(selected);
       const selectedStartskog = props.selectedStartskog ? props.selectedStartskog.toLowerCase() : null;
+      const artKey = resolveArtkategoriKey(selected);
 
       frameworks.forEach(framework => {
-        const series = (source as any[]).filter(d => {
-          const matchesCategory = d.artkategori?.toLowerCase() === selected;
+        const series = ((source as any[]) || []).filter(d => {
+          const matchesCategory = d.artkategori?.toLowerCase() === artKey;
           const matchesFramework = d.frameworks?.toLowerCase() === framework;
           const matchesStartskog = !selectedStartskog || (d.startskog?.toLowerCase() ?? selectedStartskog) === selectedStartskog;
           return matchesCategory && matchesFramework && matchesStartskog;

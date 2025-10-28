@@ -224,11 +224,23 @@ export default {
 
         // Småplantor points (public JSON)
         const svamparDataset = ref([]);
+        const matsvampDataset = ref([]);
+        const signalRodlistadeDataset = ref([]);
         const totalSvamparDataset = ref([]);
 
         useAsyncData('svampar-skogsbruk', () => queryCollection('svamparSkogsbruk').first()).then(({ data }) => {
             const value = data.value
             svamparDataset.value = Array.isArray(value?.entries) ? value.entries : []
+        })
+
+        useAsyncData('matsvamp-skogsbruk', () => queryCollection('matsvampSkogsbruk').first()).then(({ data }) => {
+            const value = data.value
+            matsvampDataset.value = Array.isArray(value?.entries) ? value.entries : []
+        })
+
+        useAsyncData('signal-rodlistade-skogsbruk', () => queryCollection('signalRodlistadeSkogsbruk').first()).then(({ data }) => {
+            const value = data.value
+            signalRodlistadeDataset.value = Array.isArray(value?.entries) ? value.entries : []
         })
 
         useAsyncData('total-svampar-skogsbruk', () => queryCollection('totalSvamparSkogsbruk').first()).then(({ data }) => {
@@ -1134,7 +1146,7 @@ export default {
         });
 
         const matsvampMycelValue = computed(() => {
-            const match = svamparDataset.value.find(item =>
+            const match = matsvampDataset.value.find(item =>
                 item.artkategori === "matsvamp" &&
                 item.startskog === props.currentStartskog.value &&
                 item.frameworks === props.currentFramework.value &&
@@ -1144,12 +1156,17 @@ export default {
         });
 
         const rodlistadeMycelValue = computed(() => {
-            const match = svamparDataset.value.find(item =>
+            const match = (signalRodlistadeDataset.value.find(item =>
                 item.artkategori === "rödlistade + signalarter" &&
                 item.startskog === props.currentStartskog.value &&
                 item.frameworks === props.currentFramework.value &&
                 Number(item.ålder) === adjustedSvamparTime.value
-            );
+            ) || svamparDataset.value.find(item =>
+                item.artkategori === "rödlistade + signalarter" &&
+                item.startskog === props.currentStartskog.value &&
+                item.frameworks === props.currentFramework.value &&
+                Number(item.ålder) === adjustedSvamparTime.value
+            ));
             return match ? match.klassning : 'N/A';
         });
 

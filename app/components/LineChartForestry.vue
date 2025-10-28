@@ -5,12 +5,60 @@ import { useAsyncData } from '#app'
 const { data: svamparDataDoc } = await useAsyncData('svampar-skogsbruk', () =>
     queryCollection('svamparSkogsbruk').first()
 )
+const { data: matsvampDataDoc } = await useAsyncData('matsvamp-skogsbruk', () =>
+    queryCollection('matsvampSkogsbruk').first()
+)
+const { data: godaMatsvampDataDoc } = await useAsyncData('goda-matsvampar-skogsbruk', () =>
+    queryCollection('godaMatsvamparSkogsbruk').first()
+)
+const { data: signalRodlistadeDataDoc } = await useAsyncData('signal-rodlistade-skogsbruk', () =>
+    queryCollection('signalRodlistadeSkogsbruk').first()
+)
+const { data: athelialesDataDoc } = await useAsyncData('atheliales-skogsbruk', () =>
+    queryCollection('athelialesSkogsbruk').first()
+)
+const { data: boletalesDataDoc } = await useAsyncData('boletales-skogsbruk', () =>
+    queryCollection('boletalesSkogsbruk').first()
+)
+const { data: cantharellalesDataDoc } = await useAsyncData('cantharellales-skogsbruk', () =>
+    queryCollection('cantharellalesSkogsbruk').first()
+)
+const { data: spindlingarDataDoc } = await useAsyncData('spindlingar-skogsbruk', () =>
+    queryCollection('spindlingarSkogsbruk').first()
+)
+const { data: russulalesDataDoc } = await useAsyncData('russulales-skogsbruk', () =>
+    queryCollection('russulalesSkogsbruk').first()
+)
+const { data: thelephoralesDataDoc } = await useAsyncData('thelephorales-skogsbruk', () =>
+    queryCollection('thelephoralesSkogsbruk').first()
+)
 const { data: totalSvamparDataDoc } = await useAsyncData('total-svampar-skogsbruk', () =>
     queryCollection('totalSvamparSkogsbruk').first()
 )
 const svamparDataset = computed(() => Array.isArray(svamparDataDoc.value?.entries) ? svamparDataDoc.value.entries : [])
+const matsvampDataset = computed(() => Array.isArray(matsvampDataDoc.value?.entries) ? matsvampDataDoc.value.entries : [])
+const godaMatsvampDataset = computed(() => Array.isArray(godaMatsvampDataDoc.value?.entries) ? godaMatsvampDataDoc.value.entries : [])
+const signalRodlistadeDataset = computed(() => Array.isArray(signalRodlistadeDataDoc.value?.entries) ? signalRodlistadeDataDoc.value.entries : [])
+const athelialesDataset = computed(() => Array.isArray(athelialesDataDoc.value?.entries) ? athelialesDataDoc.value.entries : [])
+const boletalesDataset = computed(() => Array.isArray(boletalesDataDoc.value?.entries) ? boletalesDataDoc.value.entries : [])
+const cantharellalesDataset = computed(() => Array.isArray(cantharellalesDataDoc.value?.entries) ? cantharellalesDataDoc.value.entries : [])
+const spindlingarDataset = computed(() => Array.isArray(spindlingarDataDoc.value?.entries) ? spindlingarDataDoc.value.entries : [])
+const russulalesDataset = computed(() => Array.isArray(russulalesDataDoc.value?.entries) ? russulalesDataDoc.value.entries : [])
+const thelephoralesDataset = computed(() => Array.isArray(thelephoralesDataDoc.value?.entries) ? thelephoralesDataDoc.value.entries : [])
 const totalSvamparDataset = computed(() => Array.isArray(totalSvamparDataDoc.value?.entries) ? totalSvamparDataDoc.value.entries : [])
 import { capitalize } from 'lodash-es'
+
+const speciesColorMap: Record<string, string> = {
+    'atheliales': '#8B5CF6',
+    'boletales': '#EC4899',
+    'cantharellales': '#0EA5E9',
+    'spindlingar': '#F97316',
+    'russulales': '#22C55E',
+    'thelephorales': '#A855F7',
+    'matsvamp': '#eab308',
+    'rödlistade + signalarter': '#5eead4',
+    'goda matsvampar': '#eab308'
+}
 
 // Define the props for the component.
 interface Props {
@@ -20,14 +68,18 @@ interface Props {
     isComparison: boolean,        // whether to show two lines
     secondFramework?: string,
     chartType?: string,   // 'line' or 'bar'
-    dataSource?: string   // "svampar" (default) or "total"
+    dataSource?: string,   // "svampar" (default) or "total"
+    matsvampVariant?: 'standard' | 'goda'
 }
 
 const props = withDefaults(defineProps<Props>(), {
     chartType: 'line',
-    selectedStartskog: ''
+    selectedStartskog: '',
+    matsvampVariant: 'standard'
 
 })
+
+const matsvampVariant = computed(() => props.matsvampVariant === 'goda' ? 'goda' : 'standard')
 
 const chartData = computed(() => {
     if (props.chartType === 'bar') {
@@ -45,15 +97,7 @@ const computedLineColors = computed(() => {
         }
         return "#22c55e"; // gray color for total svamp instance when not comparing
     }
-    // Determine the original color based on species.
-    let originalColor = "";
-    if (speciesLower.includes("rödlistade")) {
-        originalColor = "#ef4444";
-    } else if (speciesLower.includes("matsvamp")) {
-        originalColor = "#eab308";
-    } else {
-        originalColor = "#ef4444"; // fallback color
-    }
+    const originalColor = speciesColorMap[speciesLower] || "#ef4444";
 
     // If in comparison mode and a second framework is provided, return an array of colors.
     if (props.isComparison && props.secondFramework && props.secondFramework !== props.selectedFramework) {
@@ -68,7 +112,7 @@ function filterData(framework: string, startskog: string) {
     const speciesLower = props.species?.toLowerCase() || ''
     const frameworkLower = framework?.toLowerCase() || ''
     const selectedStartskogLower = props.selectedStartskog ? props.selectedStartskog.toLowerCase() : null
-    if (props.dataSource === 'total') {
+    if (props.dataSource === 'total' || speciesLower === 'total') {
         // For total data, ignore startskog filtering.
         return (totalSvamparDataset.value as any[]).filter(d =>
             d.artkategori?.toLowerCase() === speciesLower &&
@@ -78,7 +122,55 @@ function filterData(framework: string, startskog: string) {
             klassning: +d["klassning"]
         }))
     } else {
-        return (svamparDataset.value as any[]).filter(d =>
+        if (speciesLower === 'matsvamp') {
+            const matsvampKey = matsvampVariant.value === 'goda' ? 'goda matsvampar' : 'matsvamp';
+            const source = matsvampVariant.value === 'goda' ? godaMatsvampDataset.value : matsvampDataset.value
+            return (source as any[]).filter(d =>
+                d.artkategori?.toLowerCase() === matsvampKey &&
+                (!selectedStartskogLower || (d.startskog?.toLowerCase() ?? selectedStartskogLower) === selectedStartskogLower) &&
+                d.frameworks?.toLowerCase() === frameworkLower
+            ).map(d => ({
+                age: d["ålder"],
+                klassning: +d["klassning"]
+            }))
+        }
+        const perSpeciesDataset: Record<string, any[]> = {
+            'atheliales': Array.isArray(athelialesDataset.value) ? athelialesDataset.value : [],
+            'boletales': Array.isArray(boletalesDataset.value) ? boletalesDataset.value : [],
+            'cantharellales': Array.isArray(cantharellalesDataset.value) ? cantharellalesDataset.value : [],
+            'spindlingar': Array.isArray(spindlingarDataset.value) ? spindlingarDataset.value : [],
+            'russulales': Array.isArray(russulalesDataset.value) ? russulalesDataset.value : [],
+            'thelephorales': Array.isArray(thelephoralesDataset.value) ? thelephoralesDataset.value : [],
+            'goda matsvampar': Array.isArray(godaMatsvampDataset.value) ? godaMatsvampDataset.value : [],
+        }
+        if (speciesLower in perSpeciesDataset) {
+            const source = perSpeciesDataset[speciesLower];
+            return source.filter(d =>
+                d.artkategori?.toLowerCase() === speciesLower &&
+                (!selectedStartskogLower || (d.startskog?.toLowerCase() ?? selectedStartskogLower) === selectedStartskogLower) &&
+                d.frameworks?.toLowerCase() === frameworkLower
+            ).map(d => ({
+                age: d["ålder"],
+                klassning: +d["klassning"]
+            }))
+        }
+        if (speciesLower === 'rödlistade + signalarter') {
+            const extra = Array.isArray(signalRodlistadeDataset.value) ? signalRodlistadeDataset.value : []
+            const base = Array.isArray(svamparDataset.value)
+                ? svamparDataset.value.filter(d => (d.startskog?.toLowerCase() || '') !== 'naturskog')
+                : []
+            const combined = [...extra, ...base]
+            return combined.filter(d =>
+                d.artkategori?.toLowerCase() === 'rödlistade + signalarter' &&
+                (!selectedStartskogLower || (d.startskog?.toLowerCase() ?? selectedStartskogLower) === selectedStartskogLower) &&
+                d.frameworks?.toLowerCase() === frameworkLower
+            ).map(d => ({
+                age: d["ålder"],
+                klassning: +d["klassning"]
+            }))
+        }
+        const source = svamparDataset.value
+        return (source as any[]).filter(d =>
             d.artkategori?.toLowerCase() === speciesLower &&
             (!selectedStartskogLower || (d.startskog?.toLowerCase() ?? selectedStartskogLower) === selectedStartskogLower) &&
             d.frameworks?.toLowerCase() === frameworkLower
@@ -158,17 +250,10 @@ function tooltipTemplate(d: any): string {
     }
 
     // Determine the color for the primary framework based on species.
-    let selectedColor = "";
     const speciesLower = props.species.toLowerCase();
-    if (speciesLower.includes("rödlistade")) {
-        selectedColor = "#ef4444"; // red for rödlistade
-    } else if (speciesLower.includes("matsvamp")) {
-        selectedColor = "#eab308"; // yellow for matsvamp
-    } else if (speciesLower === "total") {
-        selectedColor = "#9ca3af"; // gray for total svamp
-    } else {
-        selectedColor = "#000000"; // fallback color
-    }
+    let selectedColor = speciesLower === "total"
+        ? "#22c55e"
+        : (speciesColorMap[speciesLower] || "#000000");
 
     // Blue color for the second framework.
     const secondColor = "#3b82f6";
