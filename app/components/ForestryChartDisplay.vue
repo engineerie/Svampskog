@@ -23,15 +23,15 @@
             :y="(d: any) => getComparisonValue(d, fw.key, comparisonCategory)"
             :color="() => (hexToRgba(fw.colorLine || fw.color, 0.4))" :duration=1 />
 
-          <VisCrosshair v-if="hasActiveSeries" :template="crosshairTemplate" />
-          <VisTooltip v-if="hasActiveSeries" :horizontalShift="30" />
+          <!-- <VisCrosshair v-if="hasActiveSeries" :template="crosshairTemplate" />
+          <VisTooltip v-if="hasActiveSeries" :horizontalShift="30" /> -->
         </template>
         <template v-else-if="props.chartType === 'area'">
           <VisArea :duration=1 v-for="fw in activeFrameworks" :key="fw.key + '-area'" :x="xAccessor"
             :y="(d: any) => getFrameworkValue(d, fw.key)" :baseline="baselineForFramework(fw.key)"
             :color="() => (fw.colorArea || fw.color)" :interpolateMissingData="true" :zIndex="1" />
 
-          <VisCrosshair v-if="hasActiveSeries" :template="crosshairTemplate" />
+          <!-- <VisCrosshair v-if="hasActiveSeries" :template="crosshairTemplate" /> -->
           <VisLine v-for="fw in activeFrameworks" :key="fw.key + '-line'" :x="xAccessor"
             :y="(d: any) => getFrameworkValue(d, fw.key)" :color="() => (hexToRgba(fw.colorLine || fw.color, 0.4))"
             :duration=1 />
@@ -45,11 +45,15 @@
         </template>
         <VisAxis tickTextFontSize="12px" :gridLine="true" type="x" :tickValues="[0, 10, 20, 30, 40, 50, 60, 70, 80, 90]"
           :tickFormat="(val: number) => {
+            if (val === 0) return '0 år'
             if (val === 10) return ''
+            if (val === 20) return '20 år'
             if (val === 30) return ''
             if (val === 40) return ''
+            if (val === 50) return '50 år'
             if (val === 60) return ''
             if (val === 70) return ''
+            if (val === 80) return '80 år'
             if (val === 90) return ''
             return val
           }" />
@@ -649,17 +653,25 @@ const legendItems = computed<LegendItem[]>(() => {
       });
     }
 
-    const selected = stackedCategories.value.length ? stackedCategories.value : selectedArtCategories.value;
-    const ordered = artkategoriLegendOrder.filter(key => selected.includes(key));
-    const categories = ordered.length ? ordered : selected;
+    const fromProps = (props.selectedArtkategori || [])
+      .map(a => (a || '').toLowerCase())
+      .filter(Boolean)
+    const baseList = fromProps.length
+      ? fromProps
+      : stackedCategories.value.concat(Array.from(inactiveArtkategoriKeys.value))
+    const selectedSet = new Set(baseList)
+    const ordered = artkategoriLegendOrder.filter(key => selectedSet.has(key))
+    const extras = Array.from(selectedSet).filter(key => !artkategoriLegendOrder.includes(key)).sort()
+    const categories = ordered.concat(extras)
     return categories.map(key => {
       const color = getArtColor(key);
+      const label = formatArtLabel(key);
       return {
         key,
-        name: formatArtLabel(key),
-        label: formatArtLabel(key),
+        name: label,
+        label,
         color,
-        colorArea: color,
+        colorArea: hexToRgba(color, 0.5),
         colorLine: color,
         inactive: inactiveArtkategoriKeys.value.has(key),
       };
