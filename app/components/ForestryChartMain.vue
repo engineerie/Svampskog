@@ -243,6 +243,7 @@ const defaultGrupperArtkategori = [
   'spindlingar',
   'russulales',
   'thelephorales',
+  'ascomycota',
 ]
 
 const artkategoriOptions = [
@@ -252,6 +253,7 @@ const artkategoriOptions = [
   { label: 'Spindlingar', value: 'spindlingar' },
   { label: 'Russulales', value: 'russulales' },
   { label: 'Thelephorales', value: 'thelephorales' },
+  { label: 'Sporsäckssvampar', value: 'ascomycota' },
   { label: 'matsvamp', value: 'matsvamp' },
   { label: 'rödlistade + signalarter', value: 'rödlistade + signalarter' },
   { label: 'total', value: 'total' },
@@ -292,6 +294,7 @@ const compareArtkategoriOptions = [
   { label: 'Spindlingar', value: 'spindlingar' },
   { label: 'Russulales', value: 'russulales' },
   { label: 'Thelephorales', value: 'thelephorales' },
+  { label: 'Sporsäckssvampar', value: 'ascomycota' },
 ]
 
 const selectedCompareArtkategori = ref(compareArtkategoriOptions[0].value)
@@ -320,6 +323,7 @@ const artkategoriColorMapping: Record<string, string> = {
   "spindlingar": "#F97316",
   "russulales": "#22C55E",
   "thelephorales": "#A855F7",
+  "ascomycota": "#DC2626",
   "matsvamp": "#eab308",
   "goda matsvampar": "#eab308",
   "rödlistade + signalarter": "#5eead4",

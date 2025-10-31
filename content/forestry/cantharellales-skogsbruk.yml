@@ -343,87 +343,87 @@ entries:
     startskog: naturskog
     frameworks: naturskydd
     ålder: 0
-    klassning: 1
+    klassning: 8
   - artkategori: cantharellales
     startskog: naturskog
     frameworks: naturskydd
     ålder: 1
-    klassning: 1
+    klassning: 8
   - artkategori: cantharellales
     startskog: naturskog
     frameworks: naturskydd
     ålder: 10
-    klassning: 1
+    klassning: 8
   - artkategori: cantharellales
     startskog: naturskog
     frameworks: naturskydd
     ålder: 11
-    klassning: 1
+    klassning: 8
   - artkategori: cantharellales
     startskog: naturskog
     frameworks: naturskydd
     ålder: 20
-    klassning: 1
+    klassning: 8
   - artkategori: cantharellales
     startskog: naturskog
     frameworks: naturskydd
     ålder: 21
-    klassning: 1
+    klassning: 8
   - artkategori: cantharellales
     startskog: naturskog
     frameworks: naturskydd
     ålder: 30
-    klassning: 1
+    klassning: 8
   - artkategori: cantharellales
     startskog: naturskog
     frameworks: naturskydd
     ålder: 31
-    klassning: 1
+    klassning: 8
   - artkategori: cantharellales
     startskog: naturskog
     frameworks: naturskydd
     ålder: 40
-    klassning: 1
+    klassning: 8
   - artkategori: cantharellales
     startskog: naturskog
     frameworks: naturskydd
     ålder: 50
-    klassning: 1
+    klassning: 8
   - artkategori: cantharellales
     startskog: naturskog
     frameworks: naturskydd
     ålder: 60
-    klassning: 1
+    klassning: 8
   - artkategori: cantharellales
     startskog: naturskog
     frameworks: naturskydd
     ålder: 61
-    klassning: 1
+    klassning: 8
   - artkategori: cantharellales
     startskog: naturskog
     frameworks: naturskydd
     ålder: 70
-    klassning: 1
+    klassning: 8
   - artkategori: cantharellales
     startskog: naturskog
     frameworks: naturskydd
     ålder: 80
-    klassning: 1
+    klassning: 8
   - artkategori: cantharellales
     startskog: naturskog
     frameworks: naturskydd
     ålder: 90
-    klassning: 1
+    klassning: 8
   - artkategori: cantharellales
     startskog: naturskog
     frameworks: naturskydd
     ålder: 91
-    klassning: 1
+    klassning: 8
   - artkategori: cantharellales
     startskog: naturskog
     frameworks: naturskydd
     ålder: 100
-    klassning: 1
+    klassning: 8
 
   - artkategori: cantharellales
     startskog: produktionsskog_
@@ -773,84 +773,84 @@ entries:
     startskog: produktionsskog_
     frameworks: naturskydd
     ålder: 0
-    klassning: 1
+    klassning: 0.7
   - artkategori: cantharellales
     startskog: produktionsskog_
     frameworks: naturskydd
     ålder: 1
-    klassning: 1
+    klassning: 0.7
   - artkategori: cantharellales
     startskog: produktionsskog_
     frameworks: naturskydd
     ålder: 10
-    klassning: 1
+    klassning: 0.7
   - artkategori: cantharellales
     startskog: produktionsskog_
     frameworks: naturskydd
     ålder: 11
-    klassning: 1
+    klassning: 0.7
   - artkategori: cantharellales
     startskog: produktionsskog_
     frameworks: naturskydd
     ålder: 20
-    klassning: 1
+    klassning: 0.7
   - artkategori: cantharellales
     startskog: produktionsskog_
     frameworks: naturskydd
     ålder: 21
-    klassning: 1
+    klassning: 0.7
   - artkategori: cantharellales
     startskog: produktionsskog_
     frameworks: naturskydd
     ålder: 30
-    klassning: 1
+    klassning: 0.7
   - artkategori: cantharellales
     startskog: produktionsskog_
     frameworks: naturskydd
     ålder: 31
-    klassning: 1
+    klassning: 0.7
   - artkategori: cantharellales
     startskog: produktionsskog_
     frameworks: naturskydd
     ålder: 40
-    klassning: 1
+    klassning: 0.7
   - artkategori: cantharellales
     startskog: produktionsskog_
     frameworks: naturskydd
     ålder: 50
-    klassning: 1
+    klassning: 0.7
   - artkategori: cantharellales
     startskog: produktionsskog_
     frameworks: naturskydd
     ålder: 60
-    klassning: 1
+    klassning: 0.7
   - artkategori: cantharellales
     startskog: produktionsskog_
     frameworks: naturskydd
     ålder: 61
-    klassning: 1
+    klassning: 0.7
   - artkategori: cantharellales
     startskog: produktionsskog_
     frameworks: naturskydd
     ålder: 70
-    klassning: 1
+    klassning: 0.7
   - artkategori: cantharellales
     startskog: produktionsskog_
     frameworks: naturskydd
     ålder: 80
-    klassning: 1
+    klassning: 0.7
   - artkategori: cantharellales
     startskog: produktionsskog_
     frameworks: naturskydd
     ålder: 90
-    klassning: 1
+    klassning: 0.7
   - artkategori: cantharellales
     startskog: produktionsskog_
     frameworks: naturskydd
     ålder: 91
-    klassning: 1
+    klassning: 0.7
   - artkategori: cantharellales
     startskog: produktionsskog_
     frameworks: naturskydd
     ålder: 100
-    klassning: 1
+    klassning: 0.7

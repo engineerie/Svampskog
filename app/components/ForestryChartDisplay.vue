@@ -8,8 +8,8 @@
         <template v-if="props.chartType === 'area' && props.singleFrameworkSelection && !props.frameworkComparisonMode">
           <VisArea :x="xAccessor" :y="stackedYAccessors" :color="stackedColors" :interpolateMissingData="true"
             :baseline="stackedBaseline" />
-          <VisCrosshair v-if="hasActiveSeries" :template="crosshairTemplate" />
-          <VisTooltip v-if="hasActiveSeries" :horizontalShift="30" />
+          <!-- <VisCrosshair v-if="hasActiveSeries" :template="crosshairTemplate" />
+          <VisTooltip v-if="hasActiveSeries" :horizontalShift="30" /> -->
         </template>
         <template
           v-else-if="props.chartType === 'area' && props.singleFrameworkSelection && props.frameworkComparisonMode">
@@ -21,8 +21,8 @@
             return Number.isFinite(num) ? (isKgMatsvamp ? (2 * num) - (num / 20) : num) : NaN;
           }" :baseline="compareBaselineForFramework(fw.key)" :color="() => fw.colorArea || fw.color"
             :interpolateMissingData="true" :zIndex="1" />
-          <VisCrosshair v-if="hasActiveSeries" :template="crosshairTemplate" />
-          <VisTooltip v-if="hasActiveSeries" :horizontalShift="30" />
+          <!-- <VisCrosshair v-if="hasActiveSeries" :template="crosshairTemplate" />
+          <VisTooltip v-if="hasActiveSeries" :horizontalShift="30" /> -->
         </template>
         <template v-else-if="props.chartType === 'area'">
           <VisArea v-for="fw in activeFrameworks" :key="fw.key + '-area'" :x="xAccessor" :y="(d: any) => {
@@ -38,9 +38,9 @@
               return Number.isFinite(v) ? v : NaN;
             }" :color="() => (fw.colorLine || fw.color)" :dashArray="[4, 4]" />
           </template>
-          <VisTooltip v-if="hasActiveSeries" :horizontalShift="30" />
+          <!-- <VisTooltip v-if="hasActiveSeries" :horizontalShift="30" />
           <VisPlotline v-if="hasActiveSeries" :value="currentTimeValue" color="rgba(220, 114, 0, 1)" axis="x"
-            labelOrientation="vertical" :zIndex="20" />
+            labelOrientation="vertical" :zIndex="20" /> -->
         </template>
         <template v-else-if="props.chartType === 'bar'">
           <VisGroupedBar :color="computedLineColors" :x="xAccessor" :y="yAccessors" :groupPadding="0.5"
