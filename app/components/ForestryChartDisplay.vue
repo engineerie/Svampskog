@@ -21,10 +21,9 @@
             return Number.isFinite(num) ? (isKgMatsvamp ? (2 * num) - (num / 20) : num) : NaN;
           }" :baseline="compareBaselineForFramework(fw.key)" :color="() => fw.colorArea || fw.color"
             :interpolateMissingData="true" :zIndex="1" />
-          <VisPlotline v-if="hasActiveSeries" :value="currentTimeValue" color="rgba(220, 114, 0, 1)" axis="x"
-            labelOrientation="vertical" :zIndex="20" />
-          <!-- <VisCrosshair v-if="hasActiveSeries" :template="crosshairTemplate" />
-          <VisTooltip v-if="hasActiveSeries" :horizontalShift="30" /> -->
+
+          <VisCrosshair v-if="hasActiveSeries" :template="crosshairTemplate" />
+          <VisTooltip v-if="hasActiveSeries" :horizontalShift="30" />
         </template>
         <template v-else-if="props.chartType === 'area'">
           <VisArea v-for="fw in activeFrameworks" :key="fw.key + '-area'" :x="xAccessor" :y="(d: any) => {
@@ -33,7 +32,7 @@
           }" :baseline="baselineForFramework(fw.key)" :color="() => (fw.colorArea || fw.color)"
             :interpolateMissingData="true" :zIndex="1" />
 
-          <!-- <VisCrosshair v-if="hasActiveSeries" :template="crosshairTemplate" /> -->
+          <VisCrosshair v-if="hasActiveSeries" :template="crosshairTemplate" />
           <template v-if="isKgMatsvamp">
             <VisLine v-for="fw in activeFrameworks" :key="fw.key + '-line-overlay'" :x="xAccessor" :y="(d: any) => {
               const v = Number(d?.[fw.key]);
@@ -200,7 +199,15 @@ const yDomain = computed<[number, number] | undefined>(() => {
   return [lowerBound, upperBound];
 })
 
-const baseChartData = computed(() => mergedData.value);
+const baseChartData = computed(() => {
+  if (props.chartType === 'bar') {
+    return mergedData.value;
+  }
+  if (props.singleFrameworkSelection && props.frameworkComparisonMode) {
+    return comparisonInterpolatedData.value;
+  }
+  return resampledMergedData.value;
+});
 
 const xDomain = computed<[number, number]>(() => {
   const xs = baseChartData.value
@@ -508,10 +515,24 @@ const resampledMergedData = computed(() => {
   const rows: any[] = []
   for (const age of allAges.value) {
     const row: any = { age }
-    for (const key of activeFrameworkKeys.value) {
-      const series = originalSeriesMap.value[key] || []
-      const v = interpolateValue(series, age)
-      if (typeof v === 'number' && Number.isFinite(v)) row[key] = v
+    if (props.singleFrameworkSelection && props.frameworkComparisonMode) {
+      const frameworks = legendOrder.filter(key => props.selectedFrameworks.map(f => f.toLowerCase()).includes(key))
+      const category = stackedCategories.value[0] || props.selectedArtkategori[0]?.toLowerCase()
+      for (const key of frameworks) {
+        const series = originalSeriesMap.value[key] || []
+        const v = interpolateValue(series, age)
+        if (typeof v === 'number' && Number.isFinite(v)) {
+          const namespace = `${key}__compare`
+          row[namespace] = row[namespace] || {}
+          if (category) row[namespace][category] = v
+        }
+      }
+    } else {
+      for (const key of activeFrameworkKeys.value) {
+        const series = originalSeriesMap.value[key] || []
+        const v = interpolateValue(series, age)
+        if (typeof v === 'number' && Number.isFinite(v)) row[key] = v
+      }
     }
     rows.push(row)
   }
