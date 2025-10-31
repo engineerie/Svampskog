@@ -21,6 +21,8 @@
             return Number.isFinite(num) ? (isKgMatsvamp ? (2 * num) - (num / 20) : num) : NaN;
           }" :baseline="compareBaselineForFramework(fw.key)" :color="() => fw.colorArea || fw.color"
             :interpolateMissingData="true" :zIndex="1" />
+          <VisPlotline v-if="hasActiveSeries" :value="currentTimeValue" color="rgba(220, 114, 0, 1)" axis="x"
+            labelOrientation="vertical" :zIndex="20" />
           <!-- <VisCrosshair v-if="hasActiveSeries" :template="crosshairTemplate" />
           <VisTooltip v-if="hasActiveSeries" :horizontalShift="30" /> -->
         </template>
@@ -31,16 +33,16 @@
           }" :baseline="baselineForFramework(fw.key)" :color="() => (fw.colorArea || fw.color)"
             :interpolateMissingData="true" :zIndex="1" />
 
-          <VisCrosshair v-if="hasActiveSeries" :template="crosshairTemplate" />
+          <!-- <VisCrosshair v-if="hasActiveSeries" :template="crosshairTemplate" /> -->
           <template v-if="isKgMatsvamp">
             <VisLine v-for="fw in activeFrameworks" :key="fw.key + '-line-overlay'" :x="xAccessor" :y="(d: any) => {
               const v = Number(d?.[fw.key]);
               return Number.isFinite(v) ? v : NaN;
             }" :color="() => (fw.colorLine || fw.color)" :dashArray="[4, 4]" />
           </template>
-          <!-- <VisTooltip v-if="hasActiveSeries" :horizontalShift="30" />
+          <!-- <VisTooltip v-if="hasActiveSeries" :horizontalShift="30" /> -->
           <VisPlotline v-if="hasActiveSeries" :value="currentTimeValue" color="rgba(220, 114, 0, 1)" axis="x"
-            labelOrientation="vertical" :zIndex="20" /> -->
+            labelOrientation="vertical" :zIndex="20" />
         </template>
         <template v-else-if="props.chartType === 'bar'">
           <VisGroupedBar :color="computedLineColors" :x="xAccessor" :y="yAccessors" :groupPadding="0.5"
@@ -71,10 +73,6 @@ import { VisXYContainer, VisAxis, VisLine, VisArea, VisGroupedBar, VisBulletLege
 import type { BulletLegendItemInterface } from '@unovis/ts'
 import { capitalize } from 'lodash-es'
 import { useAsyncData } from '#app'
-
-const { data: svamparDataDoc } = await useAsyncData('svampar-skogsbruk', () =>
-  queryCollection('svamparSkogsbruk').first()
-)
 
 const { data: matsvampDataDoc } = await useAsyncData('matsvamp-skogsbruk', () =>
   queryCollection('matsvampSkogsbruk').first()
@@ -122,18 +120,11 @@ const { data: totalSvamparDataDoc } = await useAsyncData('total-svampar-skogsbru
   queryCollection('totalSvamparSkogsbruk').first()
 )
 
-const dataset = computed(() => Array.isArray(svamparDataDoc.value?.entries) ? svamparDataDoc.value.entries : [])
 const matsvampDataset = computed(() => Array.isArray(matsvampDataDoc.value?.entries) ? matsvampDataDoc.value.entries : [])
 const godaMatsvampDataset = computed(() => Array.isArray(godaMatsvampDataDoc.value?.entries) ? godaMatsvampDataDoc.value.entries : [])
 const kgMatsvampDataset = computed(() => Array.isArray(kgMatsvampDataDoc.value?.entries) ? kgMatsvampDataDoc.value.entries : [])
 const signalRodlistadeDataset = computed(() => Array.isArray(signalRodlistadeDataDoc.value?.entries) ? signalRodlistadeDataDoc.value.entries : [])
-const combinedRodlistadeDataset = computed(() => {
-  const extra = Array.isArray(signalRodlistadeDataset.value) ? signalRodlistadeDataset.value : []
-  const base = Array.isArray(dataset.value)
-    ? dataset.value.filter(d => d.artkategori?.toLowerCase() === 'rödlistade + signalarter' && (d.startskog?.toLowerCase() || '') !== 'naturskog')
-    : []
-  return [...extra, ...base]
-})
+const combinedRodlistadeDataset = computed(() => Array.isArray(signalRodlistadeDataset.value) ? signalRodlistadeDataset.value : [])
 const athelialesDataset = computed(() => Array.isArray(athelialesDataDoc.value?.entries) ? athelialesDataDoc.value.entries : [])
 const boletalesDataset = computed(() => Array.isArray(boletalesDataDoc.value?.entries) ? boletalesDataDoc.value.entries : [])
 const cantharellalesDataset = computed(() => Array.isArray(cantharellalesDataDoc.value?.entries) ? cantharellalesDataDoc.value.entries : [])
@@ -209,12 +200,7 @@ const yDomain = computed<[number, number] | undefined>(() => {
   return [lowerBound, upperBound];
 })
 
-const baseChartData = computed(() => {
-  if (props.singleFrameworkSelection && props.chartType === 'area') {
-    return mergedData.value;
-  }
-  return resampledMergedData.value;
-});
+const baseChartData = computed(() => mergedData.value);
 
 const xDomain = computed<[number, number]>(() => {
   const xs = baseChartData.value
@@ -248,12 +234,7 @@ const stackedCategories = computed<string[]>(() => {
     .filter(a => !inactiveArtkategoriKeys.value.has(a))
 })
 
-const parentStrokeColor = computed(() => {
-  if (activeFrameworks.value.length === 1) {
-    return activeFrameworks.value[0].color;
-  }
-  return '#000000'; // fallback or neutral if multiple
-});
+const parentStrokeColor = computed(() => primaryArtColor.value || '#64748b');
 
 const margin = { left: 10, right: 10, top: 10, bottom: 10 }
 
@@ -344,34 +325,6 @@ const stackedBaseline = (d: any, _i: number) => {
   return Number.isFinite(num) ? num / 20 : NaN;
 };
 
-const frameworkColorMapping = computed(() => {
-  if (props.redColor) {
-    return {
-      naturskydd: "#808080",
-      trakthygge: "#7f1d1d",
-      "skärmträd": "#b91c1c",
-      luckhuggning: "#f87171",
-      blädning: "#fca5a5",
-    };
-  } else if (props.yellowColor) {
-    return {
-      naturskydd: "#808080",
-      trakthygge: "#713f12",
-      "skärmträd": "#a16207",
-      luckhuggning: "#eab308",
-      blädning: "#fde047",
-    };
-  } else {
-    return {
-      naturskydd: "#808080",
-      trakthygge: "#a855f7",
-      luckhuggning: "#3b82f6",
-      "skärmträd": "#eab308",
-      blädning: "#22c55e",
-    };
-  }
-});
-
 function hexToRgba(hex: string, alpha = 1): string {
   const m = hex.replace('#', '')
   const s = m.length === 3 ? m.split('').map(c => c + c).join('') : m
@@ -405,8 +358,9 @@ const artkategoriColorMapping: Record<string, string> = {
   "ascomycota": "#DC2626",
   "matsvamp": "#eab308",
   "goda matsvampar": "#eab308",
+  "kg matsvamp": "#eab308",
   "rödlistade + signalarter": "#5eead4",
-  "total": "#808080"
+  "total": "#64748b"
 };
 const artkategoriLegendOrder = [
   'atheliales',
@@ -434,6 +388,31 @@ const artkategoriLabelMap: Record<string, string> = {
   'rödlistade + signalarter': 'Rödlistade + signalarter',
   'total': 'Total'
 };
+
+const selectedArtCategories = computed(() =>
+  (props.selectedArtkategori || []).map(a => (a || '').toLowerCase())
+);
+
+function normalizeArtKey(category: string): string {
+  const key = (category || '').toLowerCase();
+  if (key === 'kg matsvampar') return 'kg matsvamp';
+  return key;
+}
+
+function getArtColor(category: string | undefined): string {
+  if (!category) return artkategoriColorMapping['total'] || '#64748b';
+  const key = normalizeArtKey(category);
+  return artkategoriColorMapping[key] || artkategoriColorMapping['total'] || '#64748b';
+}
+
+const primaryArtCategory = computed(() => {
+  if (props.singleFrameworkSelection && !props.frameworkComparisonMode) {
+    return stackedCategories.value[0] || selectedArtCategories.value[0] || 'total';
+  }
+  return selectedArtCategories.value[0] || 'total';
+});
+
+const primaryArtColor = computed(() => getArtColor(primaryArtCategory.value));
 
 
 const formatArtLabel = (key: string) => {
@@ -553,102 +532,71 @@ const seriesDataMap = computed<Record<string, Array<{ age: number; value: number
   return out
 })
 
-const singleFrameworkOverrideColor = computed<string | null>(() => {
-  if (props.singleFrameworkSelection) return null
-  if (activeFrameworkKeys.value.length !== 1) return null
-  const primaryCat = (props.selectedArtkategori?.[0] || '').toLowerCase()
-  if (primaryCat === 'total') return '#808080'
-  if (primaryCat === 'matsvamp') return '#eab308'
-  if (primaryCat === 'rödlistade + signalarter') return '#5eead4'
-  return null
-})
-
 const legendItems = computed<LegendItem[]>(() => {
   if (props.singleFrameworkSelection) {
     if (props.frameworkComparisonMode) {
-      const items = (props.selectedFrameworks || []).map(fw => {
-        const key = fw.toLowerCase();
-        const color = frameworkColorMapping.value[key] || '#000000';
+      const frameworks = legendOrder.filter(key =>
+        props.selectedFrameworks.map(f => f.toLowerCase()).includes(key)
+      );
+      const activeCount = frameworks.filter(key => !inactiveFrameworkKeys.value.has(key)).length;
+      const baseColor = primaryArtColor.value;
+      const alpha = activeCount > 1 ? 0.5 : 1;
+      return frameworks.map(key => {
+        const label = mapFrameworkLabel(key);
+        const inactive = inactiveFrameworkKeys.value.has(key);
         return {
           key,
-          name: mapFrameworkLabel(key),
-          label: mapFrameworkLabel(key),
-          color,
-          colorArea: hexToRgba(color, 0.4),
-          colorLine: color,
-          inactive: inactiveFrameworkKeys.value.has(key),
+          name: label,
+          label,
+          color: baseColor,
+          colorArea: hexToRgba(baseColor, alpha),
+          colorLine: baseColor,
+          inactive,
         };
       });
-      return items;
     }
-    const selected = props.selectedArtkategori.map(art => art.toLowerCase());
+
+    const selected = stackedCategories.value.length ? stackedCategories.value : selectedArtCategories.value;
     const ordered = artkategoriLegendOrder.filter(key => selected.includes(key));
-    return ordered.map(key => {
+    const categories = ordered.length ? ordered : selected;
+    return categories.map(key => {
+      const color = getArtColor(key);
       return {
         key,
         name: formatArtLabel(key),
         label: formatArtLabel(key),
-        color: artkategoriColorMapping[key] || "#000000",
+        color,
+        colorArea: color,
+        colorLine: color,
         inactive: inactiveArtkategoriKeys.value.has(key),
       };
     });
-  } else {
-    const keys = activeFrameworkKeys.value
-    // Base color used when only one framework is shown (depends on selected artkategori)
-    const primaryCat = (props.selectedArtkategori?.[0] || '').toLowerCase()
-    const singleColor = artkategoriColorMapping[primaryCat] || null
-
-    if (keys.length === 2) {
-      const [k1, k2] = keys
-      const base1 = singleColor || frameworkColorMapping.value[k1] || '#000000'
-      const base2 = '#0a0a0a'
-      return [
-        {
-          key: k1,
-          name: mapFrameworkLabel(k1),
-          label: mapFrameworkLabel(k1),
-          color: base1,
-          colorArea: hexToRgba(base1, 0.5), // faint area fill
-          colorLine: hexToRgba(base1, 0.5),
-
-          inactive: inactiveFrameworkKeys.value.has(k1),
-          isSecondary: true,
-        },
-        {
-          key: k2,
-          name: mapFrameworkLabel(k2),
-          label: mapFrameworkLabel(k2),
-          color: base2,
-          colorArea: hexToRgba(base2, 0.5), // faint area fill
-          colorLine: hexToRgba(base2, 0.5),
-          lineDashArray: [5],     // dashed line (same as your example)
-          inactive: inactiveFrameworkKeys.value.has(k2),
-          isSecondary: false,
-        },
-
-      ]
-    }
-
-    const orderedKeys = legendOrder.filter(key =>
-      props.selectedFrameworks.map(f => f.toLowerCase()).includes(key)
-    );
-    return orderedKeys.map(f => ({
-      key: f,
-      name: mapFrameworkLabel(f),
-      label: mapFrameworkLabel(f),
-      color: (singleFrameworkOverrideColor.value || frameworkColorMapping.value[f] || '#000000'),
-      colorArea: (singleFrameworkOverrideColor.value || frameworkColorMapping.value[f] || '#000000'),
-      colorLine: (singleFrameworkOverrideColor.value || frameworkColorMapping.value[f] || '#000000'),
-      inactive: inactiveFrameworkKeys.value.has(f),
-    }))
   }
+
+  const frameworks = legendOrder.filter(key =>
+    props.selectedFrameworks.map(f => f.toLowerCase()).includes(key)
+  );
+  const activeCount = frameworks.filter(key => !inactiveFrameworkKeys.value.has(key)).length;
+  const baseColor = primaryArtColor.value;
+  const alpha = activeCount > 1 ? 0.5 : 1;
+  return frameworks.map(key => {
+    const label = mapFrameworkLabel(key);
+    const inactive = inactiveFrameworkKeys.value.has(key);
+    return {
+      key,
+      name: label,
+      label,
+      color: baseColor,
+      colorArea: hexToRgba(baseColor, alpha),
+      colorLine: baseColor,
+      inactive,
+    };
+  });
 });
 
 const activeFrameworks = computed(() => {
-  if (props.singleFrameworkSelection) {
-    if (!props.frameworkComparisonMode) return [];
-    return legendItems.value
-      .filter(item => !inactiveFrameworkKeys.value.has(item.key));
+  if (props.singleFrameworkSelection && !props.frameworkComparisonMode) {
+    return [];
   }
   return legendItems.value.filter(item => !item.inactive);
 });
@@ -689,7 +637,7 @@ function resolveDatasetForCategory(category: string) {
   if (category === 'ascomycota') {
     return ascomycotaDataset.value;
   }
-  return dataset.value;
+  return [];
 }
 
 function resolveArtkategoriKey(category: string) {
@@ -813,7 +761,7 @@ const computedLineColors = computed(() => {
     const categories = stackedCategories.value.length ? stackedCategories.value : props.selectedArtkategori.map(a => a.toLowerCase());
     return categories
       .filter(cat => !inactiveArtkategoriKeys.value.has(cat))
-      .map(cat => artkategoriColorMapping[cat] || '#000000');
+      .map(cat => getArtColor(cat));
   } else {
     return activeFrameworks.value.map(f => f.color || "#000000");
   }
@@ -855,7 +803,7 @@ const stackedYAccessors = computed<((d: any) => number)[]>(() => {
 // Colors aligned with the stacked series order
 const stackedColors = computed<string[] | ((...args: any[]) => string)>(() => {
   if (!props.singleFrameworkSelection || props.frameworkComparisonMode) return []
-  return stackedCategories.value.map(cat => artkategoriColorMapping[cat] || '#999')
+  return stackedCategories.value.map(cat => getArtColor(cat))
 })
 
 const emptyDataPoint = reactive({ age: 0 })
@@ -920,7 +868,7 @@ const crosshairTemplate = (d: any): string => {
         return {
           key: `${key}__compare`,
           label: mapFrameworkLabel(key),
-          color: fw.color || frameworkColorMapping.value[key] || '#999',
+          color: fw.color || '#999',
           category
         };
       });
@@ -930,7 +878,7 @@ const crosshairTemplate = (d: any): string => {
         return {
           key,
           label: formatArtLabel(key),
-          color: artkategoriColorMapping[key] || '#999'
+          color: getArtColor(key)
         };
       });
     }
