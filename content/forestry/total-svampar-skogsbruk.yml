@@ -80,22 +80,6 @@ entries:
     ålder: 10
     klassning: 65
   - artkategori: total
-    frameworks: naturskydd
-    ålder: 11
-    klassning: 100
-  - artkategori: total
-    frameworks: trakthygge
-    ålder: 11
-    klassning: 15
-  - artkategori: total
-    frameworks: blädning
-    ålder: 11
-    klassning: 85
-  - artkategori: total
-    frameworks: luckhuggning
-    ålder: 11
-    klassning: 85
-  - artkategori: total
     frameworks: skärmträd
     ålder: 11
     klassning: 40
@@ -119,22 +103,6 @@ entries:
     frameworks: skärmträd
     ålder: 20
     klassning: 60
-  - artkategori: total
-    frameworks: naturskydd
-    ålder: 21
-    klassning: 100
-  - artkategori: total
-    frameworks: trakthygge
-    ålder: 21
-    klassning: 60
-  - artkategori: total
-    frameworks: blädning
-    ålder: 21
-    klassning: 100
-  - artkategori: total
-    frameworks: luckhuggning
-    ålder: 21
-    klassning: 100
   - artkategori: total
     frameworks: skärmträd
     ålder: 21
@@ -160,14 +128,6 @@ entries:
     ålder: 30
     klassning: 90
   - artkategori: total
-    frameworks: naturskydd
-    ålder: 31
-    klassning: 100
-  - artkategori: total
-    frameworks: trakthygge
-    ålder: 31
-    klassning: 120
-  - artkategori: total
     frameworks: blädning
     ålder: 31
     klassning: 75
@@ -175,10 +135,6 @@ entries:
     frameworks: luckhuggning
     ålder: 31
     klassning: 75
-  - artkategori: total
-    frameworks: skärmträd
-    ålder: 31
-    klassning: 100
   - artkategori: total
     frameworks: naturskydd
     ålder: 40
@@ -240,14 +196,6 @@ entries:
     ålder: 60
     klassning: 120
   - artkategori: total
-    frameworks: naturskydd
-    ålder: 61
-    klassning: 100
-  - artkategori: total
-    frameworks: trakthygge
-    ålder: 61
-    klassning: 120
-  - artkategori: total
     frameworks: blädning
     ålder: 61
     klassning: 75
@@ -255,10 +203,6 @@ entries:
     frameworks: luckhuggning
     ålder: 61
     klassning: 75
-  - artkategori: total
-    frameworks: skärmträd
-    ålder: 61
-    klassning: 120
   - artkategori: total
     frameworks: naturskydd
     ålder: 70
@@ -320,14 +264,6 @@ entries:
     ålder: 90
     klassning: 110
   - artkategori: total
-    frameworks: naturskydd
-    ålder: 91
-    klassning: 100
-  - artkategori: total
-    frameworks: trakthygge
-    ålder: 91
-    klassning: 110
-  - artkategori: total
     frameworks: blädning
     ålder: 91
     klassning: 75
@@ -335,10 +271,6 @@ entries:
     frameworks: luckhuggning
     ålder: 91
     klassning: 75
-  - artkategori: total
-    frameworks: skärmträd
-    ålder: 91
-    klassning: 110
   - artkategori: total
     frameworks: naturskydd
     ålder: 100

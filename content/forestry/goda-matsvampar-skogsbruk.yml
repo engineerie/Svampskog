@@ -17,27 +17,12 @@ entries:
   - artkategori: goda matsvampar
     startskog: naturskog
     frameworks: trakthygge
-    ålder: 11
-    klassning: 1.5
-  - artkategori: goda matsvampar
-    startskog: naturskog
-    frameworks: trakthygge
     ålder: 20
     klassning: 6
   - artkategori: goda matsvampar
     startskog: naturskog
     frameworks: trakthygge
-    ålder: 21
-    klassning: 6
-  - artkategori: goda matsvampar
-    startskog: naturskog
-    frameworks: trakthygge
     ålder: 30
-    klassning: 12
-  - artkategori: goda matsvampar
-    startskog: naturskog
-    frameworks: trakthygge
-    ålder: 31
     klassning: 12
   - artkategori: goda matsvampar
     startskog: naturskog
@@ -57,11 +42,6 @@ entries:
   - artkategori: goda matsvampar
     startskog: naturskog
     frameworks: trakthygge
-    ålder: 61
-    klassning: 12
-  - artkategori: goda matsvampar
-    startskog: naturskog
-    frameworks: trakthygge
     ålder: 70
     klassning: 11.5
   - artkategori: goda matsvampar
@@ -73,11 +53,6 @@ entries:
     startskog: naturskog
     frameworks: trakthygge
     ålder: 90
-    klassning: 11
-  - artkategori: goda matsvampar
-    startskog: naturskog
-    frameworks: trakthygge
-    ålder: 91
     klassning: 11
   - artkategori: goda matsvampar
     startskog: naturskog
@@ -102,17 +77,7 @@ entries:
   - artkategori: goda matsvampar
     startskog: naturskog
     frameworks: blädning
-    ålder: 11
-    klassning: 8.5
-  - artkategori: goda matsvampar
-    startskog: naturskog
-    frameworks: blädning
     ålder: 20
-    klassning: 10
-  - artkategori: goda matsvampar
-    startskog: naturskog
-    frameworks: blädning
-    ålder: 21
     klassning: 10
   - artkategori: goda matsvampar
     startskog: naturskog
@@ -187,17 +152,7 @@ entries:
   - artkategori: goda matsvampar
     startskog: naturskog
     frameworks: luckhuggning
-    ålder: 11
-    klassning: 8.5
-  - artkategori: goda matsvampar
-    startskog: naturskog
-    frameworks: luckhuggning
     ålder: 20
-    klassning: 10
-  - artkategori: goda matsvampar
-    startskog: naturskog
-    frameworks: luckhuggning
-    ålder: 21
     klassning: 10
   - artkategori: goda matsvampar
     startskog: naturskog
@@ -292,11 +247,6 @@ entries:
   - artkategori: goda matsvampar
     startskog: naturskog
     frameworks: skärmträd
-    ålder: 31
-    klassning: 10
-  - artkategori: goda matsvampar
-    startskog: naturskog
-    frameworks: skärmträd
     ålder: 40
     klassning: 11.5
   - artkategori: goda matsvampar
@@ -312,11 +262,6 @@ entries:
   - artkategori: goda matsvampar
     startskog: naturskog
     frameworks: skärmträd
-    ålder: 61
-    klassning: 12
-  - artkategori: goda matsvampar
-    startskog: naturskog
-    frameworks: skärmträd
     ålder: 70
     klassning: 11.5
   - artkategori: goda matsvampar
@@ -328,11 +273,6 @@ entries:
     startskog: naturskog
     frameworks: skärmträd
     ålder: 90
-    klassning: 11
-  - artkategori: goda matsvampar
-    startskog: naturskog
-    frameworks: skärmträd
-    ålder: 91
     klassning: 11
   - artkategori: goda matsvampar
     startskog: naturskog
@@ -357,27 +297,12 @@ entries:
   - artkategori: goda matsvampar
     startskog: naturskog
     frameworks: naturskydd
-    ålder: 11
-    klassning: 10
-  - artkategori: goda matsvampar
-    startskog: naturskog
-    frameworks: naturskydd
     ålder: 20
     klassning: 10
   - artkategori: goda matsvampar
     startskog: naturskog
     frameworks: naturskydd
-    ålder: 21
-    klassning: 10
-  - artkategori: goda matsvampar
-    startskog: naturskog
-    frameworks: naturskydd
     ålder: 30
-    klassning: 10
-  - artkategori: goda matsvampar
-    startskog: naturskog
-    frameworks: naturskydd
-    ålder: 31
     klassning: 10
   - artkategori: goda matsvampar
     startskog: naturskog
@@ -397,11 +322,6 @@ entries:
   - artkategori: goda matsvampar
     startskog: naturskog
     frameworks: naturskydd
-    ålder: 61
-    klassning: 10
-  - artkategori: goda matsvampar
-    startskog: naturskog
-    frameworks: naturskydd
     ålder: 70
     klassning: 10
   - artkategori: goda matsvampar
@@ -413,11 +333,6 @@ entries:
     startskog: naturskog
     frameworks: naturskydd
     ålder: 90
-    klassning: 10
-  - artkategori: goda matsvampar
-    startskog: naturskog
-    frameworks: naturskydd
-    ålder: 91
     klassning: 10
   - artkategori: goda matsvampar
     startskog: naturskog
@@ -442,27 +357,12 @@ entries:
   - artkategori: goda matsvampar
     startskog: produktionsskog_
     frameworks: trakthygge
-    ålder: 11
-    klassning: 1.5
-  - artkategori: goda matsvampar
-    startskog: produktionsskog_
-    frameworks: trakthygge
     ålder: 20
     klassning: 6
   - artkategori: goda matsvampar
     startskog: produktionsskog_
     frameworks: trakthygge
-    ålder: 21
-    klassning: 6
-  - artkategori: goda matsvampar
-    startskog: produktionsskog_
-    frameworks: trakthygge
     ålder: 30
-    klassning: 12
-  - artkategori: goda matsvampar
-    startskog: produktionsskog_
-    frameworks: trakthygge
-    ålder: 31
     klassning: 12
   - artkategori: goda matsvampar
     startskog: produktionsskog_
@@ -482,11 +382,6 @@ entries:
   - artkategori: goda matsvampar
     startskog: produktionsskog_
     frameworks: trakthygge
-    ålder: 61
-    klassning: 12
-  - artkategori: goda matsvampar
-    startskog: produktionsskog_
-    frameworks: trakthygge
     ålder: 70
     klassning: 11.5
   - artkategori: goda matsvampar
@@ -498,11 +393,6 @@ entries:
     startskog: produktionsskog_
     frameworks: trakthygge
     ålder: 90
-    klassning: 11
-  - artkategori: goda matsvampar
-    startskog: produktionsskog_
-    frameworks: trakthygge
-    ålder: 91
     klassning: 11
   - artkategori: goda matsvampar
     startskog: produktionsskog_
@@ -527,17 +417,7 @@ entries:
   - artkategori: goda matsvampar
     startskog: produktionsskog_
     frameworks: blädning
-    ålder: 11
-    klassning: 8.5
-  - artkategori: goda matsvampar
-    startskog: produktionsskog_
-    frameworks: blädning
     ålder: 20
-    klassning: 10
-  - artkategori: goda matsvampar
-    startskog: produktionsskog_
-    frameworks: blädning
-    ålder: 21
     klassning: 10
   - artkategori: goda matsvampar
     startskog: produktionsskog_
@@ -612,17 +492,7 @@ entries:
   - artkategori: goda matsvampar
     startskog: produktionsskog_
     frameworks: luckhuggning
-    ålder: 11
-    klassning: 8.5
-  - artkategori: goda matsvampar
-    startskog: produktionsskog_
-    frameworks: luckhuggning
     ålder: 20
-    klassning: 10
-  - artkategori: goda matsvampar
-    startskog: produktionsskog_
-    frameworks: luckhuggning
-    ålder: 21
     klassning: 10
   - artkategori: goda matsvampar
     startskog: produktionsskog_
@@ -717,11 +587,6 @@ entries:
   - artkategori: goda matsvampar
     startskog: produktionsskog_
     frameworks: skärmträd
-    ålder: 31
-    klassning: 10
-  - artkategori: goda matsvampar
-    startskog: produktionsskog_
-    frameworks: skärmträd
     ålder: 40
     klassning: 11.5
   - artkategori: goda matsvampar
@@ -737,11 +602,6 @@ entries:
   - artkategori: goda matsvampar
     startskog: produktionsskog_
     frameworks: skärmträd
-    ålder: 61
-    klassning: 12
-  - artkategori: goda matsvampar
-    startskog: produktionsskog_
-    frameworks: skärmträd
     ålder: 70
     klassning: 11.5
   - artkategori: goda matsvampar
@@ -753,11 +613,6 @@ entries:
     startskog: produktionsskog_
     frameworks: skärmträd
     ålder: 90
-    klassning: 11
-  - artkategori: goda matsvampar
-    startskog: produktionsskog_
-    frameworks: skärmträd
-    ålder: 91
     klassning: 11
   - artkategori: goda matsvampar
     startskog: produktionsskog_
@@ -782,27 +637,12 @@ entries:
   - artkategori: goda matsvampar
     startskog: produktionsskog_
     frameworks: naturskydd
-    ålder: 11
-    klassning: 10
-  - artkategori: goda matsvampar
-    startskog: produktionsskog_
-    frameworks: naturskydd
     ålder: 20
     klassning: 10
   - artkategori: goda matsvampar
     startskog: produktionsskog_
     frameworks: naturskydd
-    ålder: 21
-    klassning: 10
-  - artkategori: goda matsvampar
-    startskog: produktionsskog_
-    frameworks: naturskydd
     ålder: 30
-    klassning: 10
-  - artkategori: goda matsvampar
-    startskog: produktionsskog_
-    frameworks: naturskydd
-    ålder: 31
     klassning: 10
   - artkategori: goda matsvampar
     startskog: produktionsskog_
@@ -822,11 +662,6 @@ entries:
   - artkategori: goda matsvampar
     startskog: produktionsskog_
     frameworks: naturskydd
-    ålder: 61
-    klassning: 10
-  - artkategori: goda matsvampar
-    startskog: produktionsskog_
-    frameworks: naturskydd
     ålder: 70
     klassning: 10
   - artkategori: goda matsvampar
@@ -838,11 +673,6 @@ entries:
     startskog: produktionsskog_
     frameworks: naturskydd
     ålder: 90
-    klassning: 10
-  - artkategori: goda matsvampar
-    startskog: produktionsskog_
-    frameworks: naturskydd
-    ålder: 91
     klassning: 10
   - artkategori: goda matsvampar
     startskog: produktionsskog_

@@ -17,27 +17,12 @@ entries:
   - artkategori: rödlistade + signalarter
     startskog: naturskog
     frameworks: trakthygge
-    ålder: 11
-    klassning: 0.009
-  - artkategori: rödlistade + signalarter
-    startskog: naturskog
-    frameworks: trakthygge
     ålder: 20
     klassning: 0.036
   - artkategori: rödlistade + signalarter
     startskog: naturskog
     frameworks: trakthygge
-    ålder: 21
-    klassning: 0.036
-  - artkategori: rödlistade + signalarter
-    startskog: naturskog
-    frameworks: trakthygge
     ålder: 30
-    klassning: 0.096
-  - artkategori: rödlistade + signalarter
-    startskog: naturskog
-    frameworks: trakthygge
-    ålder: 31
     klassning: 0.096
   - artkategori: rödlistade + signalarter
     startskog: naturskog
@@ -57,11 +42,6 @@ entries:
   - artkategori: rödlistade + signalarter
     startskog: naturskog
     frameworks: trakthygge
-    ålder: 61
-    klassning: 0.18
-  - artkategori: rödlistade + signalarter
-    startskog: naturskog
-    frameworks: trakthygge
     ålder: 70
     klassning: 0.23
   - artkategori: rödlistade + signalarter
@@ -73,11 +53,6 @@ entries:
     startskog: naturskog
     frameworks: trakthygge
     ålder: 90
-    klassning: 0.33
-  - artkategori: rödlistade + signalarter
-    startskog: naturskog
-    frameworks: trakthygge
-    ålder: 91
     klassning: 0.33
   - artkategori: rödlistade + signalarter
     startskog: naturskog
@@ -102,17 +77,7 @@ entries:
   - artkategori: rödlistade + signalarter
     startskog: naturskog
     frameworks: blädning
-    ålder: 11
-    klassning: 0.051
-  - artkategori: rödlistade + signalarter
-    startskog: naturskog
-    frameworks: blädning
     ålder: 20
-    klassning: 0.06
-  - artkategori: rödlistade + signalarter
-    startskog: naturskog
-    frameworks: blädning
-    ålder: 21
     klassning: 0.06
   - artkategori: rödlistade + signalarter
     startskog: naturskog
@@ -187,17 +152,7 @@ entries:
   - artkategori: rödlistade + signalarter
     startskog: naturskog
     frameworks: luckhuggning
-    ålder: 11
-    klassning: 0.051
-  - artkategori: rödlistade + signalarter
-    startskog: naturskog
-    frameworks: luckhuggning
     ålder: 20
-    klassning: 0.06
-  - artkategori: rödlistade + signalarter
-    startskog: naturskog
-    frameworks: luckhuggning
-    ålder: 21
     klassning: 0.06
   - artkategori: rödlistade + signalarter
     startskog: naturskog
@@ -292,11 +247,6 @@ entries:
   - artkategori: rödlistade + signalarter
     startskog: naturskog
     frameworks: skärmträd
-    ålder: 31
-    klassning: 0.08
-  - artkategori: rödlistade + signalarter
-    startskog: naturskog
-    frameworks: skärmträd
     ålder: 40
     klassning: 0.115
   - artkategori: rödlistade + signalarter
@@ -312,11 +262,6 @@ entries:
   - artkategori: rödlistade + signalarter
     startskog: naturskog
     frameworks: skärmträd
-    ålder: 61
-    klassning: 0.18
-  - artkategori: rödlistade + signalarter
-    startskog: naturskog
-    frameworks: skärmträd
     ålder: 70
     klassning: 0.23
   - artkategori: rödlistade + signalarter
@@ -328,11 +273,6 @@ entries:
     startskog: naturskog
     frameworks: skärmträd
     ålder: 90
-    klassning: 0.33
-  - artkategori: rödlistade + signalarter
-    startskog: naturskog
-    frameworks: skärmträd
-    ålder: 91
     klassning: 0.33
   - artkategori: rödlistade + signalarter
     startskog: naturskog
@@ -357,27 +297,12 @@ entries:
   - artkategori: rödlistade + signalarter
     startskog: naturskog
     frameworks: naturskydd
-    ålder: 11
-    klassning: 0.6
-  - artkategori: rödlistade + signalarter
-    startskog: naturskog
-    frameworks: naturskydd
     ålder: 20
     klassning: 0.6
   - artkategori: rödlistade + signalarter
     startskog: naturskog
     frameworks: naturskydd
-    ålder: 21
-    klassning: 0.6
-  - artkategori: rödlistade + signalarter
-    startskog: naturskog
-    frameworks: naturskydd
     ålder: 30
-    klassning: 0.6
-  - artkategori: rödlistade + signalarter
-    startskog: naturskog
-    frameworks: naturskydd
-    ålder: 31
     klassning: 0.6
   - artkategori: rödlistade + signalarter
     startskog: naturskog
@@ -397,11 +322,6 @@ entries:
   - artkategori: rödlistade + signalarter
     startskog: naturskog
     frameworks: naturskydd
-    ålder: 61
-    klassning: 0.6
-  - artkategori: rödlistade + signalarter
-    startskog: naturskog
-    frameworks: naturskydd
     ålder: 70
     klassning: 0.6
   - artkategori: rödlistade + signalarter
@@ -413,11 +333,6 @@ entries:
     startskog: naturskog
     frameworks: naturskydd
     ålder: 90
-    klassning: 0.6
-  - artkategori: rödlistade + signalarter
-    startskog: naturskog
-    frameworks: naturskydd
-    ålder: 91
     klassning: 0.6
   - artkategori: rödlistade + signalarter
     startskog: naturskog
@@ -442,27 +357,12 @@ entries:
   - artkategori: rödlistade + signalarter
     startskog: produktionsskog_
     frameworks: trakthygge
-    ålder: 11
-    klassning: 0.009
-  - artkategori: rödlistade + signalarter
-    startskog: produktionsskog_
-    frameworks: trakthygge
     ålder: 20
     klassning: 0.036
   - artkategori: rödlistade + signalarter
     startskog: produktionsskog_
     frameworks: trakthygge
-    ålder: 21
-    klassning: 0.036
-  - artkategori: rödlistade + signalarter
-    startskog: produktionsskog_
-    frameworks: trakthygge
     ålder: 30
-    klassning: 0.096
-  - artkategori: rödlistade + signalarter
-    startskog: produktionsskog_
-    frameworks: trakthygge
-    ålder: 31
     klassning: 0.096
   - artkategori: rödlistade + signalarter
     startskog: produktionsskog_
@@ -482,11 +382,6 @@ entries:
   - artkategori: rödlistade + signalarter
     startskog: produktionsskog_
     frameworks: trakthygge
-    ålder: 61
-    klassning: 0.18
-  - artkategori: rödlistade + signalarter
-    startskog: produktionsskog_
-    frameworks: trakthygge
     ålder: 70
     klassning: 0.23
   - artkategori: rödlistade + signalarter
@@ -502,14 +397,8 @@ entries:
   - artkategori: rödlistade + signalarter
     startskog: produktionsskog_
     frameworks: trakthygge
-    ålder: 91
-    klassning: 0.33
-  - artkategori: rödlistade + signalarter
-    startskog: produktionsskog_
-    frameworks: trakthygge
     ålder: 100
     klassning: 0.33
-
   - artkategori: rödlistade + signalarter
     startskog: produktionsskog_
     frameworks: blädning
@@ -528,17 +417,7 @@ entries:
   - artkategori: rödlistade + signalarter
     startskog: produktionsskog_
     frameworks: blädning
-    ålder: 11
-    klassning: 0.051
-  - artkategori: rödlistade + signalarter
-    startskog: produktionsskog_
-    frameworks: blädning
     ålder: 20
-    klassning: 0.06
-  - artkategori: rödlistade + signalarter
-    startskog: produktionsskog_
-    frameworks: blädning
-    ålder: 21
     klassning: 0.06
   - artkategori: rödlistade + signalarter
     startskog: produktionsskog_
@@ -595,7 +474,6 @@ entries:
     frameworks: blädning
     ålder: 100
     klassning: 0.255
-
   - artkategori: rödlistade + signalarter
     startskog: produktionsskog_
     frameworks: luckhuggning
@@ -614,17 +492,7 @@ entries:
   - artkategori: rödlistade + signalarter
     startskog: produktionsskog_
     frameworks: luckhuggning
-    ålder: 11
-    klassning: 0.051
-  - artkategori: rödlistade + signalarter
-    startskog: produktionsskog_
-    frameworks: luckhuggning
     ålder: 20
-    klassning: 0.06
-  - artkategori: rödlistade + signalarter
-    startskog: produktionsskog_
-    frameworks: luckhuggning
-    ålder: 21
     klassning: 0.06
   - artkategori: rödlistade + signalarter
     startskog: produktionsskog_
@@ -681,7 +549,6 @@ entries:
     frameworks: luckhuggning
     ålder: 100
     klassning: 0.255
-
   - artkategori: rödlistade + signalarter
     startskog: produktionsskog_
     frameworks: skärmträd
@@ -720,11 +587,6 @@ entries:
   - artkategori: rödlistade + signalarter
     startskog: produktionsskog_
     frameworks: skärmträd
-    ålder: 31
-    klassning: 0.08
-  - artkategori: rödlistade + signalarter
-    startskog: produktionsskog_
-    frameworks: skärmträd
     ålder: 40
     klassning: 0.115
   - artkategori: rödlistade + signalarter
@@ -736,11 +598,6 @@ entries:
     startskog: produktionsskog_
     frameworks: skärmträd
     ålder: 60
-    klassning: 0.18
-  - artkategori: rödlistade + signalarter
-    startskog: produktionsskog_
-    frameworks: skärmträd
-    ålder: 61
     klassning: 0.18
   - artkategori: rödlistade + signalarter
     startskog: produktionsskog_
@@ -760,14 +617,8 @@ entries:
   - artkategori: rödlistade + signalarter
     startskog: produktionsskog_
     frameworks: skärmträd
-    ålder: 91
-    klassning: 0.33
-  - artkategori: rödlistade + signalarter
-    startskog: produktionsskog_
-    frameworks: skärmträd
     ålder: 100
     klassning: 0.33
-
   - artkategori: rödlistade + signalarter
     startskog: produktionsskog_
     frameworks: naturskydd
@@ -786,27 +637,12 @@ entries:
   - artkategori: rödlistade + signalarter
     startskog: produktionsskog_
     frameworks: naturskydd
-    ålder: 11
-    klassning: 0.3
-  - artkategori: rödlistade + signalarter
-    startskog: produktionsskog_
-    frameworks: naturskydd
     ålder: 20
     klassning: 0.3
   - artkategori: rödlistade + signalarter
     startskog: produktionsskog_
     frameworks: naturskydd
-    ålder: 21
-    klassning: 0.3
-  - artkategori: rödlistade + signalarter
-    startskog: produktionsskog_
-    frameworks: naturskydd
     ålder: 30
-    klassning: 0.3
-  - artkategori: rödlistade + signalarter
-    startskog: produktionsskog_
-    frameworks: naturskydd
-    ålder: 31
     klassning: 0.3
   - artkategori: rödlistade + signalarter
     startskog: produktionsskog_
@@ -826,11 +662,6 @@ entries:
   - artkategori: rödlistade + signalarter
     startskog: produktionsskog_
     frameworks: naturskydd
-    ålder: 61
-    klassning: 0.3
-  - artkategori: rödlistade + signalarter
-    startskog: produktionsskog_
-    frameworks: naturskydd
     ålder: 70
     klassning: 0.3
   - artkategori: rödlistade + signalarter
@@ -842,11 +673,6 @@ entries:
     startskog: produktionsskog_
     frameworks: naturskydd
     ålder: 90
-    klassning: 0.3
-  - artkategori: rödlistade + signalarter
-    startskog: produktionsskog_
-    frameworks: naturskydd
-    ålder: 91
     klassning: 0.3
   - artkategori: rödlistade + signalarter
     startskog: produktionsskog_

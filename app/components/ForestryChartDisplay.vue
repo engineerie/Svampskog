@@ -422,18 +422,19 @@ const artkategoriLegendOrder = [
   'total'
 ];
 const artkategoriLabelMap: Record<string, string> = {
-  'atheliales': 'Skinnsvampar',
-  'boletales': 'Soppar',
-  'cantharellales': 'Kantarellsvampar',
-  'spindlingar': 'Spindelskivlingar',
-  'russulales': 'Kremlor & riskor',
-  'thelephorales': 'Tagg- och tomentelloida svampar',
-  'ascomycota': 'Sporsäckssvampar',
+  'atheliales': 'Skinnsvampar (Atheliales)',
+  'boletales': 'Soppar i vid bemärkelse (Boletales)',
+  'cantharellales': 'Kantarellsläktingar (Cantharellales)',
+  'spindlingar': 'Spindelskivlingar (Cortinarius)',
+  'russulales': 'Kremlor & riskor (Russulales)',
+  'thelephorales': 'Skinn- & taggsvampar (Theleophorales)',
+  'ascomycota': 'Sporsäckssvampar (Ascomycota)',
   'matsvamp': 'Matsvampar',
   'goda matsvampar': 'Goda matsvampar',
   'rödlistade + signalarter': 'Rödlistade + signalarter',
   'total': 'Total'
 };
+
 
 const formatArtLabel = (key: string) => {
   if (key === 'matsvamp' && matsvampVariant.value === 'goda') return 'Goda matsvampar';

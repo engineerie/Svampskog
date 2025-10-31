@@ -17,27 +17,12 @@ entries:
   - artkategori: russulales
     startskog: naturskog
     frameworks: trakthygge
-    ålder: 11
-    klassning: 1.35
-  - artkategori: russulales
-    startskog: naturskog
-    frameworks: trakthygge
     ålder: 20
     klassning: 6
   - artkategori: russulales
     startskog: naturskog
     frameworks: trakthygge
-    ålder: 21
-    klassning: 6
-  - artkategori: russulales
-    startskog: naturskog
-    frameworks: trakthygge
     ålder: 30
-    klassning: 13.2
-  - artkategori: russulales
-    startskog: naturskog
-    frameworks: trakthygge
-    ålder: 31
     klassning: 13.2
   - artkategori: russulales
     startskog: naturskog
@@ -57,11 +42,6 @@ entries:
   - artkategori: russulales
     startskog: naturskog
     frameworks: trakthygge
-    ålder: 61
-    klassning: 16.8
-  - artkategori: russulales
-    startskog: naturskog
-    frameworks: trakthygge
     ålder: 70
     klassning: 17.25
   - artkategori: russulales
@@ -77,14 +57,8 @@ entries:
   - artkategori: russulales
     startskog: naturskog
     frameworks: trakthygge
-    ålder: 91
-    klassning: 19.8
-  - artkategori: russulales
-    startskog: naturskog
-    frameworks: trakthygge
     ålder: 100
     klassning: 20
-
   - artkategori: russulales
     startskog: naturskog
     frameworks: blädning
@@ -103,17 +77,7 @@ entries:
   - artkategori: russulales
     startskog: naturskog
     frameworks: blädning
-    ålder: 11
-    klassning: 7.65
-  - artkategori: russulales
-    startskog: naturskog
-    frameworks: blädning
     ålder: 20
-    klassning: 10
-  - artkategori: russulales
-    startskog: naturskog
-    frameworks: blädning
-    ålder: 21
     klassning: 10
   - artkategori: russulales
     startskog: naturskog
@@ -170,7 +134,6 @@ entries:
     frameworks: blädning
     ålder: 100
     klassning: 17
-
   - artkategori: russulales
     startskog: naturskog
     frameworks: luckhuggning
@@ -189,17 +152,7 @@ entries:
   - artkategori: russulales
     startskog: naturskog
     frameworks: luckhuggning
-    ålder: 11
-    klassning: 7.65
-  - artkategori: russulales
-    startskog: naturskog
-    frameworks: luckhuggning
     ålder: 20
-    klassning: 10
-  - artkategori: russulales
-    startskog: naturskog
-    frameworks: luckhuggning
-    ålder: 21
     klassning: 10
   - artkategori: russulales
     startskog: naturskog
@@ -256,7 +209,6 @@ entries:
     frameworks: luckhuggning
     ålder: 100
     klassning: 17
-
   - artkategori: russulales
     startskog: naturskog
     frameworks: skärmträd
@@ -295,11 +247,6 @@ entries:
   - artkategori: russulales
     startskog: naturskog
     frameworks: skärmträd
-    ålder: 31
-    klassning: 11
-  - artkategori: russulales
-    startskog: naturskog
-    frameworks: skärmträd
     ålder: 40
     klassning: 12.65
   - artkategori: russulales
@@ -311,11 +258,6 @@ entries:
     startskog: naturskog
     frameworks: skärmträd
     ålder: 60
-    klassning: 16.8
-  - artkategori: russulales
-    startskog: naturskog
-    frameworks: skärmträd
-    ålder: 61
     klassning: 16.8
   - artkategori: russulales
     startskog: naturskog
@@ -335,14 +277,8 @@ entries:
   - artkategori: russulales
     startskog: naturskog
     frameworks: skärmträd
-    ålder: 91
-    klassning: 19.8
-  - artkategori: russulales
-    startskog: naturskog
-    frameworks: skärmträd
     ålder: 100
     klassning: 20
-
   - artkategori: russulales
     startskog: naturskog
     frameworks: naturskydd
@@ -361,27 +297,12 @@ entries:
   - artkategori: russulales
     startskog: naturskog
     frameworks: naturskydd
-    ålder: 11
-    klassning: 22
-  - artkategori: russulales
-    startskog: naturskog
-    frameworks: naturskydd
     ålder: 20
     klassning: 22
   - artkategori: russulales
     startskog: naturskog
     frameworks: naturskydd
-    ålder: 21
-    klassning: 22
-  - artkategori: russulales
-    startskog: naturskog
-    frameworks: naturskydd
     ålder: 30
-    klassning: 22
-  - artkategori: russulales
-    startskog: naturskog
-    frameworks: naturskydd
-    ålder: 31
     klassning: 22
   - artkategori: russulales
     startskog: naturskog
@@ -401,11 +322,6 @@ entries:
   - artkategori: russulales
     startskog: naturskog
     frameworks: naturskydd
-    ålder: 61
-    klassning: 22
-  - artkategori: russulales
-    startskog: naturskog
-    frameworks: naturskydd
     ålder: 70
     klassning: 22
   - artkategori: russulales
@@ -421,14 +337,8 @@ entries:
   - artkategori: russulales
     startskog: naturskog
     frameworks: naturskydd
-    ålder: 91
-    klassning: 22
-  - artkategori: russulales
-    startskog: naturskog
-    frameworks: naturskydd
     ålder: 100
     klassning: 22
-
   - artkategori: russulales
     startskog: produktionsskog_
     frameworks: trakthygge
@@ -447,27 +357,12 @@ entries:
   - artkategori: russulales
     startskog: produktionsskog_
     frameworks: trakthygge
-    ålder: 11
-    klassning: 1.35
-  - artkategori: russulales
-    startskog: produktionsskog_
-    frameworks: trakthygge
     ålder: 20
     klassning: 6
   - artkategori: russulales
     startskog: produktionsskog_
     frameworks: trakthygge
-    ålder: 21
-    klassning: 6
-  - artkategori: russulales
-    startskog: produktionsskog_
-    frameworks: trakthygge
     ålder: 30
-    klassning: 13.2
-  - artkategori: russulales
-    startskog: produktionsskog_
-    frameworks: trakthygge
-    ålder: 31
     klassning: 13.2
   - artkategori: russulales
     startskog: produktionsskog_
@@ -487,11 +382,6 @@ entries:
   - artkategori: russulales
     startskog: produktionsskog_
     frameworks: trakthygge
-    ålder: 61
-    klassning: 16.8
-  - artkategori: russulales
-    startskog: produktionsskog_
-    frameworks: trakthygge
     ålder: 70
     klassning: 17.25
   - artkategori: russulales
@@ -507,14 +397,8 @@ entries:
   - artkategori: russulales
     startskog: produktionsskog_
     frameworks: trakthygge
-    ålder: 91
-    klassning: 19.8
-  - artkategori: russulales
-    startskog: produktionsskog_
-    frameworks: trakthygge
     ålder: 100
     klassning: 20
-
   - artkategori: russulales
     startskog: produktionsskog_
     frameworks: blädning
@@ -533,17 +417,7 @@ entries:
   - artkategori: russulales
     startskog: produktionsskog_
     frameworks: blädning
-    ålder: 11
-    klassning: 7.65
-  - artkategori: russulales
-    startskog: produktionsskog_
-    frameworks: blädning
     ålder: 20
-    klassning: 10
-  - artkategori: russulales
-    startskog: produktionsskog_
-    frameworks: blädning
-    ålder: 21
     klassning: 10
   - artkategori: russulales
     startskog: produktionsskog_
@@ -600,7 +474,6 @@ entries:
     frameworks: blädning
     ålder: 100
     klassning: 16.15
-
   - artkategori: russulales
     startskog: produktionsskog_
     frameworks: luckhuggning
@@ -619,17 +492,7 @@ entries:
   - artkategori: russulales
     startskog: produktionsskog_
     frameworks: luckhuggning
-    ålder: 11
-    klassning: 7.65
-  - artkategori: russulales
-    startskog: produktionsskog_
-    frameworks: luckhuggning
     ålder: 20
-    klassning: 10
-  - artkategori: russulales
-    startskog: produktionsskog_
-    frameworks: luckhuggning
-    ålder: 21
     klassning: 10
   - artkategori: russulales
     startskog: produktionsskog_
@@ -686,7 +549,6 @@ entries:
     frameworks: luckhuggning
     ålder: 100
     klassning: 16.15
-
   - artkategori: russulales
     startskog: produktionsskog_
     frameworks: skärmträd
@@ -725,11 +587,6 @@ entries:
   - artkategori: russulales
     startskog: produktionsskog_
     frameworks: skärmträd
-    ålder: 31
-    klassning: 11
-  - artkategori: russulales
-    startskog: produktionsskog_
-    frameworks: skärmträd
     ålder: 40
     klassning: 12.65
   - artkategori: russulales
@@ -741,11 +598,6 @@ entries:
     startskog: produktionsskog_
     frameworks: skärmträd
     ålder: 60
-    klassning: 16.8
-  - artkategori: russulales
-    startskog: produktionsskog_
-    frameworks: skärmträd
-    ålder: 61
     klassning: 16.8
   - artkategori: russulales
     startskog: produktionsskog_
@@ -765,14 +617,8 @@ entries:
   - artkategori: russulales
     startskog: produktionsskog_
     frameworks: skärmträd
-    ålder: 91
-    klassning: 19.8
-  - artkategori: russulales
-    startskog: produktionsskog_
-    frameworks: skärmträd
     ålder: 100
     klassning: 20
-
   - artkategori: russulales
     startskog: produktionsskog_
     frameworks: naturskydd
@@ -791,27 +637,12 @@ entries:
   - artkategori: russulales
     startskog: produktionsskog_
     frameworks: naturskydd
-    ålder: 11
-    klassning: 19
-  - artkategori: russulales
-    startskog: produktionsskog_
-    frameworks: naturskydd
     ålder: 20
     klassning: 19
   - artkategori: russulales
     startskog: produktionsskog_
     frameworks: naturskydd
-    ålder: 21
-    klassning: 19
-  - artkategori: russulales
-    startskog: produktionsskog_
-    frameworks: naturskydd
     ålder: 30
-    klassning: 19
-  - artkategori: russulales
-    startskog: produktionsskog_
-    frameworks: naturskydd
-    ålder: 31
     klassning: 19
   - artkategori: russulales
     startskog: produktionsskog_
@@ -831,11 +662,6 @@ entries:
   - artkategori: russulales
     startskog: produktionsskog_
     frameworks: naturskydd
-    ålder: 61
-    klassning: 19
-  - artkategori: russulales
-    startskog: produktionsskog_
-    frameworks: naturskydd
     ålder: 70
     klassning: 19
   - artkategori: russulales
@@ -847,11 +673,6 @@ entries:
     startskog: produktionsskog_
     frameworks: naturskydd
     ålder: 90
-    klassning: 19
-  - artkategori: russulales
-    startskog: produktionsskog_
-    frameworks: naturskydd
-    ålder: 91
     klassning: 19
   - artkategori: russulales
     startskog: produktionsskog_
