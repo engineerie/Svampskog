@@ -252,21 +252,6 @@ export const collections = {
       gallery: gallerySectionSchema.optional(),
     }),
   }),
-  svamparSkogsbruk: defineCollection({
-    type: "data",
-    source: "forestry/svampar-skogsbruk.yml",
-    schema: z.object({
-      entries: z.array(
-        z.object({
-          artkategori: z.string().nonempty(),
-          frameworks: z.string().nonempty(),
-          startskog: z.string().optional(),
-          ["ålder"]: z.number(),
-          klassning: z.number(),
-        }),
-      ),
-    }),
-  }),
   matsvampSkogsbruk: defineCollection({
     type: "data",
     source: "forestry/matsvamp-skogsbruk.yml",

@@ -2,9 +2,6 @@
 import { computed } from 'vue'
 import { VisXYContainer, VisLine, VisAxis, VisCrosshair, VisGroupedBar, VisTooltip } from '@unovis/vue'
 import { useAsyncData } from '#app'
-const { data: svamparDataDoc } = await useAsyncData('svampar-skogsbruk', () =>
-    queryCollection('svamparSkogsbruk').first()
-)
 const { data: matsvampDataDoc } = await useAsyncData('matsvamp-skogsbruk', () =>
     queryCollection('matsvampSkogsbruk').first()
 )
@@ -35,7 +32,6 @@ const { data: thelephoralesDataDoc } = await useAsyncData('thelephorales-skogsbr
 const { data: totalSvamparDataDoc } = await useAsyncData('total-svampar-skogsbruk', () =>
     queryCollection('totalSvamparSkogsbruk').first()
 )
-const svamparDataset = computed(() => Array.isArray(svamparDataDoc.value?.entries) ? svamparDataDoc.value.entries : [])
 const matsvampDataset = computed(() => Array.isArray(matsvampDataDoc.value?.entries) ? matsvampDataDoc.value.entries : [])
 const godaMatsvampDataset = computed(() => Array.isArray(godaMatsvampDataDoc.value?.entries) ? godaMatsvampDataDoc.value.entries : [])
 const signalRodlistadeDataset = computed(() => Array.isArray(signalRodlistadeDataDoc.value?.entries) ? signalRodlistadeDataDoc.value.entries : [])
@@ -155,12 +151,8 @@ function filterData(framework: string, startskog: string) {
             }))
         }
         if (speciesLower === 'rödlistade + signalarter') {
-            const extra = Array.isArray(signalRodlistadeDataset.value) ? signalRodlistadeDataset.value : []
-            const base = Array.isArray(svamparDataset.value)
-                ? svamparDataset.value.filter(d => (d.startskog?.toLowerCase() || '') !== 'naturskog')
-                : []
-            const combined = [...extra, ...base]
-            return combined.filter(d =>
+            const source = Array.isArray(signalRodlistadeDataset.value) ? signalRodlistadeDataset.value : []
+            return source.filter(d =>
                 d.artkategori?.toLowerCase() === 'rödlistade + signalarter' &&
                 (!selectedStartskogLower || (d.startskog?.toLowerCase() ?? selectedStartskogLower) === selectedStartskogLower) &&
                 d.frameworks?.toLowerCase() === frameworkLower
@@ -169,15 +161,7 @@ function filterData(framework: string, startskog: string) {
                 klassning: +d["klassning"]
             }))
         }
-        const source = svamparDataset.value
-        return (source as any[]).filter(d =>
-            d.artkategori?.toLowerCase() === speciesLower &&
-            (!selectedStartskogLower || (d.startskog?.toLowerCase() ?? selectedStartskogLower) === selectedStartskogLower) &&
-            d.frameworks?.toLowerCase() === frameworkLower
-        ).map(d => ({
-            age: d["ålder"],
-            klassning: +d["klassning"]
-        }))
+        return []
     }
 }
 

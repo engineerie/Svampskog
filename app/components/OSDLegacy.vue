@@ -223,15 +223,9 @@ export default {
         });
 
         // Småplantor points (public JSON)
-        const svamparDataset = ref([]);
         const matsvampDataset = ref([]);
         const signalRodlistadeDataset = ref([]);
         const totalSvamparDataset = ref([]);
-
-        useAsyncData('svampar-skogsbruk', () => queryCollection('svamparSkogsbruk').first()).then(({ data }) => {
-            const value = data.value
-            svamparDataset.value = Array.isArray(value?.entries) ? value.entries : []
-        })
 
         useAsyncData('matsvamp-skogsbruk', () => queryCollection('matsvampSkogsbruk').first()).then(({ data }) => {
             const value = data.value
@@ -1156,17 +1150,12 @@ export default {
         });
 
         const rodlistadeMycelValue = computed(() => {
-            const match = (signalRodlistadeDataset.value.find(item =>
+            const match = signalRodlistadeDataset.value.find(item =>
                 item.artkategori === "rödlistade + signalarter" &&
                 item.startskog === props.currentStartskog.value &&
                 item.frameworks === props.currentFramework.value &&
                 Number(item.ålder) === adjustedSvamparTime.value
-            ) || svamparDataset.value.find(item =>
-                item.artkategori === "rödlistade + signalarter" &&
-                item.startskog === props.currentStartskog.value &&
-                item.frameworks === props.currentFramework.value &&
-                Number(item.ålder) === adjustedSvamparTime.value
-            ));
+            );
             return match ? match.klassning : 'N/A';
         });
 
