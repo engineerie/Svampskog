@@ -28,8 +28,7 @@
         </template>
       </UPopover>
       <USelect v-if="selectedChart === 'grupper' && isFrameworkCompareMode" v-model="selectedCompareArtkategori"
-        :items="compareArtkategoriOptions" size="sm" class="w-56"
-        placeholder="Välj svampgrupp" />
+        :items="compareArtkategoriOptions" size="sm" class="w-56" placeholder="Välj svampgrupp" />
       <!-- <UButton color="neutral" variant="subtle"
                             :icon="chartType === 'area' ? 'i-carbon-chart-column' : 'i-carbon-chart-line-smooth'"
                             @click="ToggleChartType" /> -->
@@ -115,8 +114,8 @@
           viverra quam a risus sagittis maximus.
         </p>
         <div class="px-2 pb-2">
-          <USelect v-model="selectedMatsvampVariant" :items="matsvampVariantOptions" size="sm"
-            class="w-56" placeholder="Välj dataset" />
+          <USelect v-model="selectedMatsvampVariant" :items="matsvampVariantOptions" size="sm" class="w-56"
+            placeholder="Välj dataset" />
         </div>
         <!-- <div class="controls w-full flex my-2">
                         <USelect class="min-w-32" v-model="selectedStartskog2" :items="[
@@ -127,7 +126,7 @@
         <ForestryChartDisplay
           :selectedFrameworks="props.parentSelectedFrameworks ?? ['naturskydd', 'trakthygge', 'luckhuggning', 'blädning', 'skärmträd']"
           :selectedArtkategori="['matsvamp']" :chartType="chartType" :selectedStartskog="props.currentStartskog"
-          :yellowColor="true" :maxYValue="28" :currentTimeValue="props.currentTimeValue"
+          :yellowColor="true" :maxYValue="matsvampMaxY" :currentTimeValue="props.currentTimeValue"
           :matsvampVariant="selectedMatsvampVariant" />
       </div>
       <div v-if="selectedChart === 'grupper'">
@@ -153,8 +152,7 @@
                     </div> -->
         <ForestryChartDisplay :selectedFrameworks="props.parentSelectedFrameworks ?? [selectedSingleFramework]"
           :selectedArtkategori="isFrameworkCompareMode ? [selectedCompareArtkategori] : selectedArtkategori"
-          :frameworkComparisonMode="isFrameworkCompareMode"
-          :chartType="chartType" :singleFrameworkSelection="true"
+          :frameworkComparisonMode="isFrameworkCompareMode" :chartType="chartType" :singleFrameworkSelection="true"
           :selectedStartskog="props.currentStartskog" :currentTimeValue="props.currentTimeValue" />
       </div>
     </div>
@@ -273,10 +271,13 @@ function ToggleChartType2() {
 
 const matsvampVariantOptions = [
   { label: 'Standard matsvampar', value: 'standard' },
-  { label: 'Goda matsvampar', value: 'goda' }
+  { label: 'Goda matsvampar', value: 'goda' },
+  { label: 'Kg matsvampar', value: 'kg' },
 ]
 
-const selectedMatsvampVariant = ref<'standard' | 'goda'>('standard')
+const selectedMatsvampVariant = ref<'standard' | 'goda' | 'kg'>('standard')
+
+const matsvampMaxY = computed(() => selectedMatsvampVariant.value === 'kg' ? 55 : 28)
 
 // Reactive selections:
 // Default: all frameworks selected

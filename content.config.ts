@@ -282,6 +282,21 @@ export const collections = {
       ),
     }),
   }),
+  kgMatsvampSkogsbruk: defineCollection({
+    type: "data",
+    source: "forestry/kg-matsvamp-skogsbruk.yml",
+    schema: z.object({
+      entries: z.array(
+        z.object({
+          artkategori: z.string().nonempty(),
+          frameworks: z.string().nonempty(),
+          startskog: z.string().optional(),
+          ["ålder"]: z.number(),
+          klassning: z.number(),
+        }),
+      ),
+    }),
+  }),
   godaMatsvamparSkogsbruk: defineCollection({
     type: "data",
     source: "forestry/goda-matsvampar-skogsbruk.yml",
@@ -390,6 +405,21 @@ export const collections = {
   thelephoralesSkogsbruk: defineCollection({
     type: "data",
     source: "forestry/thelephorales-skogsbruk.yml",
+    schema: z.object({
+      entries: z.array(
+        z.object({
+          artkategori: z.string().nonempty(),
+          frameworks: z.string().nonempty(),
+          startskog: z.string().optional(),
+          ["ålder"]: z.number(),
+          klassning: z.number(),
+        }),
+      ),
+    }),
+  }),
+  ascomycotaSkogsbruk: defineCollection({
+    type: "data",
+    source: "forestry/ascomycota-skogsbruk.yml",
     schema: z.object({
       entries: z.array(
         z.object({

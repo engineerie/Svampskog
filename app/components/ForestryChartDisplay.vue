@@ -6,33 +6,38 @@
       <VisXYContainer v-if="isMounted && chartReady" :data="chartData.length ? chartData : [emptyDataPoint]"
         :height="120" :margin="margin" :xDomain="xDomain" :yDomain="yDomain">
         <template v-if="props.chartType === 'area' && props.singleFrameworkSelection && !props.frameworkComparisonMode">
-          <VisArea :x="xAccessor" :y="stackedYAccessors" :color="stackedColors" :interpolateMissingData="true" />
-          <!-- <VisCrosshair v-if="hasActiveSeries" :template="crosshairTemplate" /> -->
+          <VisArea :x="xAccessor" :y="stackedYAccessors" :color="stackedColors" :interpolateMissingData="true"
+            :baseline="stackedBaseline" />
+          <VisCrosshair v-if="hasActiveSeries" :template="crosshairTemplate" />
           <VisTooltip v-if="hasActiveSeries" :horizontalShift="30" />
-
         </template>
         <template
           v-else-if="props.chartType === 'area' && props.singleFrameworkSelection && props.frameworkComparisonMode">
           <VisArea v-for="fw in activeFrameworks" :key="fw.key + '-compare-area'" :x="xAccessor" :y="(d: any) => {
-            const key = stackedCategories[0];
-            if (!key) return Number.isFinite(Number(d?.age)) ? 0 : NaN;
+            const key = stackedCategories[0] || props.selectedArtkategori[0]?.toLowerCase();
             const namespace = fw.key + '__compare';
             const value = d?.[namespace]?.[key];
-            if (value == null || value === '') return Number.isFinite(Number(d?.age)) ? 0 : NaN;
             const num = Number(value);
-            return Number.isFinite(num) ? num : Number.isFinite(Number(d?.age)) ? 0 : NaN;
-          }" :color="() => fw.colorArea || fw.color" :interpolateMissingData="true" :zIndex="1" />
-          <!-- <VisCrosshair v-if="hasActiveSeries" :template="crosshairTemplate" /> -->
+            return Number.isFinite(num) ? (isKgMatsvamp ? (2 * num) - (num / 20) : num) : NaN;
+          }" :baseline="compareBaselineForFramework(fw.key)" :color="() => fw.colorArea || fw.color"
+            :interpolateMissingData="true" :zIndex="1" />
+          <VisCrosshair v-if="hasActiveSeries" :template="crosshairTemplate" />
           <VisTooltip v-if="hasActiveSeries" :horizontalShift="30" />
         </template>
         <template v-else-if="props.chartType === 'area'">
           <VisArea v-for="fw in activeFrameworks" :key="fw.key + '-area'" :x="xAccessor" :y="(d: any) => {
-            const v = Number(d?.[fw.key])
-            return Number.isFinite(v) ? v : Number.isFinite(Number(d?.age)) ? 0 : NaN
-          }" :color="() => (fw.colorArea || fw.color)" :interpolateMissingData="true" :zIndex="1" />
+            const v = Number(d?.[fw.key]);
+            return Number.isFinite(v) ? (isKgMatsvamp ? (2 * v) - (v / 20) : v) : NaN;
+          }" :baseline="baselineForFramework(fw.key)" :color="() => (fw.colorArea || fw.color)"
+            :interpolateMissingData="true" :zIndex="1" />
 
-          <!-- <VisCrosshair v-if="hasActiveSeries" :template="crosshairTemplate" /> -->
-
+          <VisCrosshair v-if="hasActiveSeries" :template="crosshairTemplate" />
+          <template v-if="isKgMatsvamp">
+            <VisLine v-for="fw in activeFrameworks" :key="fw.key + '-line-overlay'" :x="xAccessor" :y="(d: any) => {
+              const v = Number(d?.[fw.key]);
+              return Number.isFinite(v) ? v : NaN;
+            }" :color="() => (fw.colorLine || fw.color)" :dashArray="[4, 4]" />
+          </template>
           <VisTooltip v-if="hasActiveSeries" :horizontalShift="30" />
           <VisPlotline v-if="hasActiveSeries" :value="currentTimeValue" color="rgba(220, 114, 0, 1)" axis="x"
             labelOrientation="vertical" :zIndex="20" />
@@ -78,6 +83,9 @@ const { data: matsvampDataDoc } = await useAsyncData('matsvamp-skogsbruk', () =>
 const { data: godaMatsvampDataDoc } = await useAsyncData('goda-matsvampar-skogsbruk', () =>
   queryCollection('godaMatsvamparSkogsbruk').first()
 )
+const { data: kgMatsvampDataDoc } = await useAsyncData('kg-matsvamp-skogsbruk', () =>
+  queryCollection('kgMatsvampSkogsbruk').first()
+)
 
 const { data: signalRodlistadeDataDoc } = await useAsyncData('signal-rodlistade-skogsbruk', () =>
   queryCollection('signalRodlistadeSkogsbruk').first()
@@ -106,6 +114,9 @@ const { data: russulalesDataDoc } = await useAsyncData('russulales-skogsbruk', (
 const { data: thelephoralesDataDoc } = await useAsyncData('thelephorales-skogsbruk', () =>
   queryCollection('thelephoralesSkogsbruk').first()
 )
+const { data: ascomycotaDataDoc } = await useAsyncData('ascomycota-skogsbruk', () =>
+  queryCollection('ascomycotaSkogsbruk').first()
+)
 
 const { data: totalSvamparDataDoc } = await useAsyncData('total-svampar-skogsbruk', () =>
   queryCollection('totalSvamparSkogsbruk').first()
@@ -114,6 +125,7 @@ const { data: totalSvamparDataDoc } = await useAsyncData('total-svampar-skogsbru
 const dataset = computed(() => Array.isArray(svamparDataDoc.value?.entries) ? svamparDataDoc.value.entries : [])
 const matsvampDataset = computed(() => Array.isArray(matsvampDataDoc.value?.entries) ? matsvampDataDoc.value.entries : [])
 const godaMatsvampDataset = computed(() => Array.isArray(godaMatsvampDataDoc.value?.entries) ? godaMatsvampDataDoc.value.entries : [])
+const kgMatsvampDataset = computed(() => Array.isArray(kgMatsvampDataDoc.value?.entries) ? kgMatsvampDataDoc.value.entries : [])
 const signalRodlistadeDataset = computed(() => Array.isArray(signalRodlistadeDataDoc.value?.entries) ? signalRodlistadeDataDoc.value.entries : [])
 const combinedRodlistadeDataset = computed(() => {
   const extra = Array.isArray(signalRodlistadeDataset.value) ? signalRodlistadeDataset.value : []
@@ -128,12 +140,73 @@ const cantharellalesDataset = computed(() => Array.isArray(cantharellalesDataDoc
 const spindlingarDataset = computed(() => Array.isArray(spindlingarDataDoc.value?.entries) ? spindlingarDataDoc.value.entries : [])
 const russulalesDataset = computed(() => Array.isArray(russulalesDataDoc.value?.entries) ? russulalesDataDoc.value.entries : [])
 const thelephoralesDataset = computed(() => Array.isArray(thelephoralesDataDoc.value?.entries) ? thelephoralesDataDoc.value.entries : [])
+const ascomycotaDataset = computed(() => Array.isArray(ascomycotaDataDoc.value?.entries) ? ascomycotaDataDoc.value.entries : [])
 const totalDataset = computed(() => Array.isArray(totalSvamparDataDoc.value?.entries) ? totalSvamparDataDoc.value.entries : [])
 
 
 const yDomain = computed<[number, number] | undefined>(() => {
-  const max = Number(props.maxYValue)
-  return Number.isFinite(max) ? [0, max] : undefined
+  // If we're not in an area chart or not in Kg matsvamp, keep the existing behavior
+  const fixedMax = Number(props.maxYValue);
+  const isArea = props.chartType === 'area';
+  if (!isArea || !isKgMatsvamp.value) {
+    return Number.isFinite(fixedMax) ? [0, fixedMax] : undefined;
+  }
+
+  // Compute dynamic bounds that include the baseline (v/20) and the transformed top ((2*v) - (v/20))
+  const data = Array.isArray((chartData as any).value) ? (chartData as any).value : [];
+  if (!data.length) return Number.isFinite(fixedMax) ? [0, fixedMax] : undefined;
+
+  let maxY = -Infinity;
+
+  const topVal = (v: number) => (2 * v) - (v / 20);
+  // We keep the axis starting at 0 for readability
+  const lowerBound = 0;
+
+  if (props.singleFrameworkSelection) {
+    if (props.frameworkComparisonMode) {
+      const cat = (stackedCategories as any).value[0] || (props.selectedArtkategori?.[0] || '').toLowerCase();
+      const keys = (activeFrameworkKeys as any).value || [];
+      for (const row of data) {
+        for (const key of keys) {
+          const bucket = row?.[`${key}__compare`];
+          const val = Number(bucket?.[cat]);
+          if (!Number.isFinite(val)) continue;
+          const top = topVal(val);
+          if (Number.isFinite(top)) maxY = Math.max(maxY, top);
+        }
+      }
+    } else {
+      const cats: string[] = (stackedCategories as any).value.length
+        ? (stackedCategories as any).value
+        : (props.selectedArtkategori || []).map(a => (a || '').toLowerCase());
+      for (const row of data) {
+        for (const c of cats) {
+          const v = Number(row?.[c]);
+          if (!Number.isFinite(v)) continue;
+          const top = topVal(v);
+          if (Number.isFinite(top)) maxY = Math.max(maxY, top);
+        }
+      }
+    }
+  } else {
+    const keys = (activeFrameworkKeys as any).value || [];
+    for (const row of data) {
+      for (const key of keys) {
+        const v = Number(row?.[key]);
+        if (!Number.isFinite(v)) continue;
+        const top = topVal(v);
+        if (Number.isFinite(top)) maxY = Math.max(maxY, top);
+      }
+    }
+  }
+
+  if (!Number.isFinite(maxY)) {
+    return Number.isFinite(fixedMax) ? [0, fixedMax] : undefined;
+  }
+
+  // Respect an explicit maxYValue if provided, ensuring we never clip the area top
+  const upperBound = Number.isFinite(fixedMax) ? Math.max(fixedMax, maxY) : maxY;
+  return [lowerBound, upperBound];
 })
 
 const baseChartData = computed(() => {
@@ -224,7 +297,7 @@ interface Props {
   redColor?: boolean,
   yellowColor?: boolean,
   maxYValue?: number, // <-- Add this
-  matsvampVariant?: 'standard' | 'goda'
+  matsvampVariant?: 'standard' | 'goda' | 'kg'
 }
 
 const props = withDefaults(defineProps<Props>(), {
@@ -236,8 +309,40 @@ const props = withDefaults(defineProps<Props>(), {
   matsvampVariant: 'standard'
 });
 
-const matsvampVariant = computed(() => props.matsvampVariant === 'goda' ? 'goda' : 'standard')
-const matsvampVariantArtKey = computed(() => matsvampVariant.value === 'goda' ? 'goda matsvampar' : 'matsvamp')
+const matsvampVariant = computed(() => props.matsvampVariant === 'goda' ? 'goda' : (props.matsvampVariant === 'kg' ? 'kg' : 'standard'))
+const matsvampVariantArtKey = computed(() =>
+  matsvampVariant.value === 'goda'
+    ? 'goda matsvampar'
+    : (matsvampVariant.value === 'kg' ? 'kg matsvamp' : 'matsvamp')
+)
+
+const isKgMatsvamp = computed(() => {
+  const selected = (props.selectedArtkategori || []).map(a => (a || '').toLowerCase());
+  return selected.includes('matsvamp') && matsvampVariant.value === 'kg';
+});
+
+// --- Baseline helpers for area charts ---
+const baselineForFramework = (fwKey: string) => (d: any, _i: number) => {
+  if (!isKgMatsvamp.value) return 0;
+  const v = Number(d?.[fwKey]);
+  return Number.isFinite(v) ? v / 20 : NaN;
+};
+
+const compareBaselineForFramework = (fwKey: string) => (d: any, _i: number) => {
+  if (!isKgMatsvamp.value) return 0;
+  const key = stackedCategories.value[0] || props.selectedArtkategori[0]?.toLowerCase();
+  const namespace = fwKey + '__compare';
+  const value = d?.[namespace]?.[key];
+  const num = Number(value);
+  return Number.isFinite(num) ? num / 20 : NaN;
+};
+
+const stackedBaseline = (d: any, _i: number) => {
+  if (!isKgMatsvamp.value) return 0;
+  const firstCat = stackedCategories.value[0] || props.selectedArtkategori[0]?.toLowerCase();
+  const num = Number(d?.[firstCat]);
+  return Number.isFinite(num) ? num / 20 : NaN;
+};
 
 const frameworkColorMapping = computed(() => {
   if (props.redColor) {
@@ -297,6 +402,7 @@ const artkategoriColorMapping: Record<string, string> = {
   "spindlingar": "#F97316",
   "russulales": "#22C55E",
   "thelephorales": "#A855F7",
+  "ascomycota": "#DC2626",
   "matsvamp": "#eab308",
   "goda matsvampar": "#eab308",
   "rödlistade + signalarter": "#5eead4",
@@ -309,18 +415,20 @@ const artkategoriLegendOrder = [
   'spindlingar',
   'russulales',
   'thelephorales',
+  'ascomycota',
   'matsvamp',
   'goda matsvampar',
   'rödlistade + signalarter',
   'total'
 ];
 const artkategoriLabelMap: Record<string, string> = {
-  'atheliales': 'Atheliales',
-  'boletales': 'Boletales',
-  'cantharellales': 'Cantharellales',
-  'spindlingar': 'Spindlingar',
-  'russulales': 'Russulales',
-  'thelephorales': 'Thelephorales',
+  'atheliales': 'Skinnsvampar',
+  'boletales': 'Soppar',
+  'cantharellales': 'Kantarellsvampar',
+  'spindlingar': 'Spindelskivlingar',
+  'russulales': 'Kremlor & riskor',
+  'thelephorales': 'Tagg- och tomentelloida svampar',
+  'ascomycota': 'Sporsäckssvampar',
   'matsvamp': 'Matsvampar',
   'goda matsvampar': 'Goda matsvampar',
   'rödlistade + signalarter': 'Rödlistade + signalarter',
@@ -329,6 +437,7 @@ const artkategoriLabelMap: Record<string, string> = {
 
 const formatArtLabel = (key: string) => {
   if (key === 'matsvamp' && matsvampVariant.value === 'goda') return 'Goda matsvampar';
+  if (key === 'matsvamp' && matsvampVariant.value === 'kg') return 'Kg matsvampar';
   return artkategoriLabelMap[key] || capitalize(key);
 };
 
@@ -548,7 +657,9 @@ function resolveDatasetForCategory(category: string) {
     return totalDataset.value;
   }
   if (category === 'matsvamp') {
-    return matsvampVariant.value === 'goda' ? godaMatsvampDataset.value : matsvampDataset.value;
+    if (matsvampVariant.value === 'goda') return godaMatsvampDataset.value;
+    if (matsvampVariant.value === 'kg') return kgMatsvampDataset.value;
+    return matsvampDataset.value;
   }
   if (category === 'goda matsvampar') {
     return godaMatsvampDataset.value;
@@ -573,6 +684,9 @@ function resolveDatasetForCategory(category: string) {
   }
   if (category === 'thelephorales') {
     return thelephoralesDataset.value;
+  }
+  if (category === 'ascomycota') {
+    return ascomycotaDataset.value;
   }
   return dataset.value;
 }
@@ -730,7 +844,11 @@ function handleLegendItemClick(item: LegendItem) {
 // Unovis stacked areas require an array of y accessors (one per series)
 const stackedYAccessors = computed<((d: any) => number)[]>(() => {
   if (!props.singleFrameworkSelection || props.frameworkComparisonMode) return []
-  return stackedCategories.value.map(cat => (d: any) => Number(d?.[cat] ?? 0))
+  return stackedCategories.value.map(cat => (d: any) => {
+    const v = Number(d?.[cat])
+    if (!Number.isFinite(v)) return NaN
+    return isKgMatsvamp.value ? (2 * v) - (v / 20) : v
+  })
 })
 
 // Colors aligned with the stacked series order
