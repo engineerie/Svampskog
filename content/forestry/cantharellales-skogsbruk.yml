@@ -2,6 +2,11 @@ entries:
   - artkategori: cantharellales
     startskog: naturskog
     frameworks: trakthygge
+    ålder: -7
+    klassning: 8
+  - artkategori: cantharellales
+    startskog: naturskog
+    frameworks: trakthygge
     ålder: 0
     klassning: 8
   - artkategori: cantharellales
@@ -62,6 +67,11 @@ entries:
   - artkategori: cantharellales
     startskog: naturskog
     frameworks: blädning
+    ålder: -7
+    klassning: 8
+  - artkategori: cantharellales
+    startskog: naturskog
+    frameworks: blädning
     ålder: 0
     klassning: 8
   - artkategori: cantharellales
@@ -137,6 +147,11 @@ entries:
   - artkategori: cantharellales
     startskog: naturskog
     frameworks: luckhuggning
+    ålder: -7
+    klassning: 8
+  - artkategori: cantharellales
+    startskog: naturskog
+    frameworks: luckhuggning
     ålder: 0
     klassning: 8
   - artkategori: cantharellales
@@ -209,6 +224,11 @@ entries:
     frameworks: luckhuggning
     ålder: 100
     klassning: 0.595
+  - artkategori: cantharellales
+    startskog: naturskog
+    frameworks: skärmträd
+    ålder: -7
+    klassning: 8
   - artkategori: cantharellales
     startskog: naturskog
     frameworks: skärmträd
@@ -282,6 +302,11 @@ entries:
   - artkategori: cantharellales
     startskog: naturskog
     frameworks: naturskydd
+    ålder: -7
+    klassning: 8
+  - artkategori: cantharellales
+    startskog: naturskog
+    frameworks: naturskydd
     ålder: 0
     klassning: 8
   - artkategori: cantharellales
@@ -339,6 +364,11 @@ entries:
     frameworks: naturskydd
     ålder: 100
     klassning: 8
+  - artkategori: cantharellales
+    startskog: produktionsskog_
+    frameworks: trakthygge
+    ålder: -7
+    klassning: 0.7
   - artkategori: cantharellales
     startskog: produktionsskog_
     frameworks: trakthygge
@@ -402,6 +432,11 @@ entries:
   - artkategori: cantharellales
     startskog: produktionsskog_
     frameworks: blädning
+    ålder: -7
+    klassning: 0.7
+  - artkategori: cantharellales
+    startskog: produktionsskog_
+    frameworks: blädning
     ålder: 0
     klassning: 0.7
   - artkategori: cantharellales
@@ -477,6 +512,11 @@ entries:
   - artkategori: cantharellales
     startskog: produktionsskog_
     frameworks: luckhuggning
+    ålder: -7
+    klassning: 0.7
+  - artkategori: cantharellales
+    startskog: produktionsskog_
+    frameworks: luckhuggning
     ålder: 0
     klassning: 0.7
   - artkategori: cantharellales
@@ -549,6 +589,11 @@ entries:
     frameworks: luckhuggning
     ålder: 100
     klassning: 0.595
+  - artkategori: cantharellales
+    startskog: produktionsskog_
+    frameworks: skärmträd
+    ålder: -7
+    klassning: 0.7
   - artkategori: cantharellales
     startskog: produktionsskog_
     frameworks: skärmträd
@@ -619,6 +664,11 @@ entries:
     frameworks: skärmträd
     ålder: 100
     klassning: 0.77
+  - artkategori: cantharellales
+    startskog: produktionsskog_
+    frameworks: naturskydd
+    ålder: -7
+    klassning: 0.7
   - artkategori: cantharellales
     startskog: produktionsskog_
     frameworks: naturskydd

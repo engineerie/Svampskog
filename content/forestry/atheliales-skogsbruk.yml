@@ -2,6 +2,11 @@ entries:
   - artkategori: atheliales
     startskog: naturskog
     frameworks: trakthygge
+    ålder: -7
+    klassning: 22
+  - artkategori: atheliales
+    startskog: naturskog
+    frameworks: trakthygge
     ålder: 0
     klassning: 22
   - artkategori: atheliales
@@ -62,6 +67,11 @@ entries:
   - artkategori: atheliales
     startskog: naturskog
     frameworks: blädning
+    ålder: -7
+    klassning: 22
+  - artkategori: atheliales
+    startskog: naturskog
+    frameworks: blädning
     ålder: 0
     klassning: 22
   - artkategori: atheliales
@@ -137,6 +147,11 @@ entries:
   - artkategori: atheliales
     startskog: naturskog
     frameworks: luckhuggning
+    ålder: -7
+    klassning: 22
+  - artkategori: atheliales
+    startskog: naturskog
+    frameworks: luckhuggning
     ålder: 0
     klassning: 22
   - artkategori: atheliales
@@ -209,6 +224,11 @@ entries:
     frameworks: luckhuggning
     ålder: 100
     klassning: 22.1
+  - artkategori: atheliales
+    startskog: naturskog
+    frameworks: skärmträd
+    ålder: -7
+    klassning: 22
   - artkategori: atheliales
     startskog: naturskog
     frameworks: skärmträd
@@ -282,6 +302,11 @@ entries:
   - artkategori: atheliales
     startskog: naturskog
     frameworks: naturskydd
+    ålder: -7
+    klassning: 22
+  - artkategori: atheliales
+    startskog: naturskog
+    frameworks: naturskydd
     ålder: 0
     klassning: 22
   - artkategori: atheliales
@@ -339,6 +364,11 @@ entries:
     frameworks: naturskydd
     ålder: 100
     klassning: 22
+  - artkategori: atheliales
+    startskog: produktionsskog_
+    frameworks: trakthygge
+    ålder: -7
+    klassning: 26
   - artkategori: atheliales
     startskog: produktionsskog_
     frameworks: trakthygge
@@ -402,6 +432,11 @@ entries:
   - artkategori: atheliales
     startskog: produktionsskog_
     frameworks: blädning
+    ålder: -7
+    klassning: 26
+  - artkategori: atheliales
+    startskog: produktionsskog_
+    frameworks: blädning
     ålder: 0
     klassning: 26
   - artkategori: atheliales
@@ -477,6 +512,11 @@ entries:
   - artkategori: atheliales
     startskog: produktionsskog_
     frameworks: luckhuggning
+    ålder: -7
+    klassning: 26
+  - artkategori: atheliales
+    startskog: produktionsskog_
+    frameworks: luckhuggning
     ålder: 0
     klassning: 26
   - artkategori: atheliales
@@ -549,6 +589,11 @@ entries:
     frameworks: luckhuggning
     ålder: 100
     klassning: 22.1
+  - artkategori: atheliales
+    startskog: produktionsskog_
+    frameworks: skärmträd
+    ålder: -7
+    klassning: 26
   - artkategori: atheliales
     startskog: produktionsskog_
     frameworks: skärmträd
@@ -619,6 +664,11 @@ entries:
     frameworks: skärmträd
     ålder: 100
     klassning: 28.6
+  - artkategori: atheliales
+    startskog: produktionsskog_
+    frameworks: naturskydd
+    ålder: -7
+    klassning: 26
   - artkategori: atheliales
     startskog: produktionsskog_
     frameworks: naturskydd
