@@ -8,8 +8,8 @@
         <template v-if="props.chartType === 'area' && props.singleFrameworkSelection && !props.frameworkComparisonMode">
           <VisArea :duration=1 :x="xAccessor" :y="stackedYAccessors" :color="stackedColors"
             :interpolateMissingData="true" :baseline="stackedBaseline" />
-          <VisLine v-for="cfg in stackedLineConfigs" :key="cfg.key + '-stack-line'" :x="xAccessor" :y="cfg.accessor"
-            :color="() => cfg.color" :duration=1 />
+          <!-- <VisLine v-for="cfg in stackedLineConfigs" :key="cfg.key + '-stack-line'" :x="xAccessor" :y="cfg.accessor"
+            :color="() => cfg.color" :duration=1 /> -->
           <!-- <VisCrosshair v-if="hasActiveSeries" :template="crosshairTemplate" />
           <VisTooltip v-if="hasActiveSeries" :horizontalShift="30" /> -->
         </template>
@@ -536,14 +536,48 @@ const resampledMergedData = computed(() => {
   const rows: any[] = []
   for (const age of allAges.value) {
     const row: any = { age }
-    for (const key of activeFrameworkKeys.value) {
-      const series = originalSeriesMap.value[key] || []
-      const v = interpolateValue(series, age)
-      if (typeof v === 'number' && Number.isFinite(v)) row[key] = v
+    if (props.singleFrameworkSelection && !props.frameworkComparisonMode) {
+      const categories = stackedCategories.value.length
+        ? stackedCategories.value
+        : (props.selectedArtkategori || []).map(a => (a || '').toLowerCase()).filter(Boolean)
+      const categorySeries = categorySeriesMap.value
+      for (const cat of categories) {
+        const series = categorySeries[cat] || []
+        const v = interpolateValue(series, age)
+        if (typeof v === 'number' && Number.isFinite(v)) row[cat] = v
+      }
+    } else {
+      for (const key of activeFrameworkKeys.value) {
+        const series = originalSeriesMap.value[key] || []
+        const v = interpolateValue(series, age)
+        if (typeof v === 'number' && Number.isFinite(v)) row[key] = v
+      }
     }
     rows.push(row)
   }
   return rows
+})
+
+const categorySeriesMap = computed<Record<string, Array<{ age: number; value: number }>>>(() => {
+  if (!(props.singleFrameworkSelection && !props.frameworkComparisonMode)) return {}
+  const result: Record<string, Array<{ age: number; value: number }>> = {}
+  const categories = stackedCategories.value.length
+    ? stackedCategories.value
+    : (props.selectedArtkategori || []).map(a => (a || '').toLowerCase()).filter(Boolean)
+  const rows = Array.isArray(mergedData.value) ? mergedData.value : []
+  for (const row of rows) {
+    const age = Number(row?.age)
+    if (!Number.isFinite(age)) continue
+    for (const cat of categories) {
+      const val = Number(row?.[cat])
+      if (!Number.isFinite(val)) continue
+        ; (result[cat] = result[cat] || []).push({ age, value: val })
+    }
+  }
+  for (const cat of Object.keys(result)) {
+    result[cat].sort((a, b) => a.age - b.age)
+  }
+  return result
 })
 
 const comparisonCategory = computed(() => stackedCategories.value[0] || (props.selectedArtkategori?.[0]?.toLowerCase() || ''))
@@ -858,15 +892,7 @@ const stackedYAccessors = computed<((d: any) => number)[]>(() => {
 const stackedColors = computed<string[] | ((...args: any[]) => string)>(() => {
   if (!props.singleFrameworkSelection || props.frameworkComparisonMode) return []
   return stackedCategories.value.map(cat => getArtColor(cat))
-})
 
-const stackedLineConfigs = computed<Array<{ key: string; accessor: (d: any) => number; color: string }>>(() => {
-  if (!props.singleFrameworkSelection || props.frameworkComparisonMode) return []
-  return stackedCategories.value.map(cat => ({
-    key: cat,
-    accessor: (d: any) => getCategoryValue(d, cat),
-    color: hexToRgba(getArtColor(cat), 0.7),
-  }))
 })
 
 const emptyDataPoint = reactive({ age: 0 })
