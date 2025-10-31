@@ -7,7 +7,7 @@ entries:
   - artkategori: boletales
     startskog: naturskog
     frameworks: trakthygge
-    ålder: 1
+    ålder: 0.1
     klassning: 0.55
   - artkategori: boletales
     startskog: naturskog
@@ -67,7 +67,7 @@ entries:
   - artkategori: boletales
     startskog: naturskog
     frameworks: blädning
-    ålder: 1
+    ålder: 0.1
     klassning: 8.25
   - artkategori: boletales
     startskog: naturskog
@@ -87,7 +87,7 @@ entries:
   - artkategori: boletales
     startskog: naturskog
     frameworks: blädning
-    ålder: 31
+    ålder: 30.1
     klassning: 9.75
   - artkategori: boletales
     startskog: naturskog
@@ -107,7 +107,7 @@ entries:
   - artkategori: boletales
     startskog: naturskog
     frameworks: blädning
-    ålder: 61
+    ålder: 60.1
     klassning: 9
   - artkategori: boletales
     startskog: naturskog
@@ -127,7 +127,7 @@ entries:
   - artkategori: boletales
     startskog: naturskog
     frameworks: blädning
-    ålder: 91
+    ålder: 90.1
     klassning: 9
   - artkategori: boletales
     startskog: naturskog
@@ -142,7 +142,7 @@ entries:
   - artkategori: boletales
     startskog: naturskog
     frameworks: luckhuggning
-    ålder: 1
+    ålder: 0.1
     klassning: 8.25
   - artkategori: boletales
     startskog: naturskog
@@ -162,7 +162,7 @@ entries:
   - artkategori: boletales
     startskog: naturskog
     frameworks: luckhuggning
-    ålder: 31
+    ålder: 30.1
     klassning: 9.75
   - artkategori: boletales
     startskog: naturskog
@@ -182,7 +182,7 @@ entries:
   - artkategori: boletales
     startskog: naturskog
     frameworks: luckhuggning
-    ålder: 61
+    ålder: 60.1
     klassning: 9
   - artkategori: boletales
     startskog: naturskog
@@ -202,7 +202,7 @@ entries:
   - artkategori: boletales
     startskog: naturskog
     frameworks: luckhuggning
-    ålder: 91
+    ålder: 90.1
     klassning: 9
   - artkategori: boletales
     startskog: naturskog
@@ -217,7 +217,7 @@ entries:
   - artkategori: boletales
     startskog: naturskog
     frameworks: skärmträd
-    ålder: 1
+    ålder: 0.1
     klassning: 6.6
   - artkategori: boletales
     startskog: naturskog
@@ -227,7 +227,7 @@ entries:
   - artkategori: boletales
     startskog: naturskog
     frameworks: skärmträd
-    ålder: 11
+    ålder: 10.1
     klassning: 4.8
   - artkategori: boletales
     startskog: naturskog
@@ -237,7 +237,7 @@ entries:
   - artkategori: boletales
     startskog: naturskog
     frameworks: skärmträd
-    ålder: 21
+    ålder: 20.1
     klassning: 7
   - artkategori: boletales
     startskog: naturskog
@@ -287,7 +287,7 @@ entries:
   - artkategori: boletales
     startskog: naturskog
     frameworks: naturskydd
-    ålder: 1
+    ålder: 0.1
     klassning: 12
   - artkategori: boletales
     startskog: naturskog
@@ -347,7 +347,7 @@ entries:
   - artkategori: boletales
     startskog: produktionsskog_
     frameworks: trakthygge
-    ålder: 1
+    ålder: 0.1
     klassning: 0.55
   - artkategori: boletales
     startskog: produktionsskog_
@@ -407,7 +407,7 @@ entries:
   - artkategori: boletales
     startskog: produktionsskog_
     frameworks: blädning
-    ålder: 1
+    ålder: 0.1
     klassning: 8.25
   - artkategori: boletales
     startskog: produktionsskog_
@@ -427,7 +427,7 @@ entries:
   - artkategori: boletales
     startskog: produktionsskog_
     frameworks: blädning
-    ålder: 31
+    ålder: 30.1
     klassning: 9.75
   - artkategori: boletales
     startskog: produktionsskog_
@@ -447,7 +447,7 @@ entries:
   - artkategori: boletales
     startskog: produktionsskog_
     frameworks: blädning
-    ålder: 61
+    ålder: 60.1
     klassning: 9
   - artkategori: boletales
     startskog: produktionsskog_
@@ -467,7 +467,7 @@ entries:
   - artkategori: boletales
     startskog: produktionsskog_
     frameworks: blädning
-    ålder: 91
+    ålder: 90.1
     klassning: 9
   - artkategori: boletales
     startskog: produktionsskog_
@@ -482,7 +482,7 @@ entries:
   - artkategori: boletales
     startskog: produktionsskog_
     frameworks: luckhuggning
-    ålder: 1
+    ålder: 0.1
     klassning: 8.25
   - artkategori: boletales
     startskog: produktionsskog_
@@ -502,7 +502,7 @@ entries:
   - artkategori: boletales
     startskog: produktionsskog_
     frameworks: luckhuggning
-    ålder: 31
+    ålder: 30.1
     klassning: 9.75
   - artkategori: boletales
     startskog: produktionsskog_
@@ -522,7 +522,7 @@ entries:
   - artkategori: boletales
     startskog: produktionsskog_
     frameworks: luckhuggning
-    ålder: 61
+    ålder: 60.1
     klassning: 9
   - artkategori: boletales
     startskog: produktionsskog_
@@ -542,7 +542,7 @@ entries:
   - artkategori: boletales
     startskog: produktionsskog_
     frameworks: luckhuggning
-    ålder: 91
+    ålder: 90.1
     klassning: 9
   - artkategori: boletales
     startskog: produktionsskog_
@@ -557,7 +557,7 @@ entries:
   - artkategori: boletales
     startskog: produktionsskog_
     frameworks: skärmträd
-    ålder: 1
+    ålder: 0.1
     klassning: 6.6
   - artkategori: boletales
     startskog: produktionsskog_
@@ -567,7 +567,7 @@ entries:
   - artkategori: boletales
     startskog: produktionsskog_
     frameworks: skärmträd
-    ålder: 11
+    ålder: 10.1
     klassning: 4.8
   - artkategori: boletales
     startskog: produktionsskog_
@@ -577,7 +577,7 @@ entries:
   - artkategori: boletales
     startskog: produktionsskog_
     frameworks: skärmträd
-    ålder: 21
+    ålder: 20.1
     klassning: 7
   - artkategori: boletales
     startskog: produktionsskog_
@@ -627,7 +627,7 @@ entries:
   - artkategori: boletales
     startskog: produktionsskog_
     frameworks: naturskydd
-    ålder: 1
+    ålder: 0.1
     klassning: 12
   - artkategori: boletales
     startskog: produktionsskog_

@@ -1,44 +1,40 @@
 <template>
-  <div class="custom-area" ref="rootEl" :style="{ '--vis-area-stroke-color': parentStrokeColor }">
+  <div class="custom-area" ref="rootEl" :style="{ '--vis-area-stroke-color': 'none' }">
     <ClientOnly>
       <VisBulletLegend v-if="isMounted && chartReady && legendItems.length" :items="legendItems"
         :onLegendItemClick="handleLegendItemClick" class="mx-4 flex flex-wrap gap-2" />
       <VisXYContainer v-if="isMounted && chartReady" :data="chartData.length ? chartData : [emptyDataPoint]"
         :height="120" :margin="margin" :xDomain="xDomain" :yDomain="yDomain">
         <template v-if="props.chartType === 'area' && props.singleFrameworkSelection && !props.frameworkComparisonMode">
-          <VisArea :x="xAccessor" :y="stackedYAccessors" :color="stackedColors" :interpolateMissingData="true"
-            :baseline="stackedBaseline" />
+          <VisArea :duration=1 :x="xAccessor" :y="stackedYAccessors" :color="stackedColors"
+            :interpolateMissingData="true" :baseline="stackedBaseline" />
+          <VisLine v-for="cfg in stackedLineConfigs" :key="cfg.key + '-stack-line'" :x="xAccessor" :y="cfg.accessor"
+            :color="() => cfg.color" :duration=1 />
           <!-- <VisCrosshair v-if="hasActiveSeries" :template="crosshairTemplate" />
           <VisTooltip v-if="hasActiveSeries" :horizontalShift="30" /> -->
         </template>
         <template
           v-else-if="props.chartType === 'area' && props.singleFrameworkSelection && props.frameworkComparisonMode">
-          <VisArea v-for="fw in activeFrameworks" :key="fw.key + '-compare-area'" :x="xAccessor" :y="(d: any) => {
-            const key = stackedCategories[0] || props.selectedArtkategori[0]?.toLowerCase();
-            const namespace = fw.key + '__compare';
-            const value = d?.[namespace]?.[key];
-            const num = Number(value);
-            return Number.isFinite(num) ? (isKgMatsvamp ? (2 * num) - (num / 20) : num) : NaN;
-          }" :baseline="compareBaselineForFramework(fw.key)" :color="() => fw.colorArea || fw.color"
+          <VisArea :duration=1 v-for="fw in activeFrameworks" :key="fw.key + '-compare-area'" :x="xAccessor"
+            :y="(d: any) => getComparisonValue(d, fw.key, comparisonCategory)"
+            :baseline="compareBaselineForFramework(fw.key)" :color="() => fw.colorArea || fw.color"
             :interpolateMissingData="true" :zIndex="1" />
+          <VisLine v-for="fw in activeFrameworks" :key="fw.key + '-compare-line'" :x="xAccessor"
+            :y="(d: any) => getComparisonValue(d, fw.key, comparisonCategory)"
+            :color="() => (hexToRgba(fw.colorLine || fw.color, 0.4))" :duration=1 />
 
           <VisCrosshair v-if="hasActiveSeries" :template="crosshairTemplate" />
           <VisTooltip v-if="hasActiveSeries" :horizontalShift="30" />
         </template>
         <template v-else-if="props.chartType === 'area'">
-          <VisArea v-for="fw in activeFrameworks" :key="fw.key + '-area'" :x="xAccessor" :y="(d: any) => {
-            const v = Number(d?.[fw.key]);
-            return Number.isFinite(v) ? (isKgMatsvamp ? (2 * v) - (v / 20) : v) : NaN;
-          }" :baseline="baselineForFramework(fw.key)" :color="() => (fw.colorArea || fw.color)"
-            :interpolateMissingData="true" :zIndex="1" />
+          <VisArea :duration=1 v-for="fw in activeFrameworks" :key="fw.key + '-area'" :x="xAccessor"
+            :y="(d: any) => getFrameworkValue(d, fw.key)" :baseline="baselineForFramework(fw.key)"
+            :color="() => (fw.colorArea || fw.color)" :interpolateMissingData="true" :zIndex="1" />
 
           <VisCrosshair v-if="hasActiveSeries" :template="crosshairTemplate" />
-          <template v-if="isKgMatsvamp">
-            <VisLine v-for="fw in activeFrameworks" :key="fw.key + '-line-overlay'" :x="xAccessor" :y="(d: any) => {
-              const v = Number(d?.[fw.key]);
-              return Number.isFinite(v) ? v : NaN;
-            }" :color="() => (fw.colorLine || fw.color)" :dashArray="[4, 4]" />
-          </template>
+          <VisLine v-for="fw in activeFrameworks" :key="fw.key + '-line'" :x="xAccessor"
+            :y="(d: any) => getFrameworkValue(d, fw.key)" :color="() => (hexToRgba(fw.colorLine || fw.color, 0.4))"
+            :duration=1 />
           <!-- <VisTooltip v-if="hasActiveSeries" :horizontalShift="30" /> -->
           <VisPlotline v-if="hasActiveSeries" :value="currentTimeValue" color="rgba(220, 114, 0, 1)" axis="x"
             labelOrientation="vertical" :zIndex="20" />
@@ -241,8 +237,6 @@ const stackedCategories = computed<string[]>(() => {
     .filter(a => !inactiveArtkategoriKeys.value.has(a))
 })
 
-const parentStrokeColor = computed(() => primaryArtColor.value || '#64748b');
-
 const margin = { left: 10, right: 10, top: 10, bottom: 10 }
 
 const rootEl = ref<HTMLElement | null>(null)
@@ -309,6 +303,24 @@ const isKgMatsvamp = computed(() => {
   return selected.includes('matsvamp') && matsvampVariant.value === 'kg';
 });
 
+const transformValue = (value: number) => (isKgMatsvamp.value ? (2 * value) - (value / 20) : value);
+
+const getFrameworkValue = (row: any, frameworkKey: string) => {
+  const num = Number(row?.[frameworkKey]);
+  return Number.isFinite(num) ? transformValue(num) : NaN;
+};
+
+const getCategoryValue = (row: any, category: string) => {
+  const num = Number(row?.[category]);
+  return Number.isFinite(num) ? transformValue(num) : NaN;
+};
+
+const getComparisonValue = (row: any, frameworkKey: string, category: string) => {
+  const namespace = frameworkKey + '__compare';
+  const num = Number(row?.[namespace]?.[category]);
+  return Number.isFinite(num) ? transformValue(num) : NaN;
+};
+
 // --- Baseline helpers for area charts ---
 const baselineForFramework = (fwKey: string) => (d: any, _i: number) => {
   if (!isKgMatsvamp.value) return 0;
@@ -318,7 +330,7 @@ const baselineForFramework = (fwKey: string) => (d: any, _i: number) => {
 
 const compareBaselineForFramework = (fwKey: string) => (d: any, _i: number) => {
   if (!isKgMatsvamp.value) return 0;
-  const key = stackedCategories.value[0] || props.selectedArtkategori[0]?.toLowerCase();
+  const key = comparisonCategory.value;
   const namespace = fwKey + '__compare';
   const value = d?.[namespace]?.[key];
   const num = Number(value);
@@ -366,7 +378,7 @@ const artkategoriColorMapping: Record<string, string> = {
   "matsvamp": "#eab308",
   "goda matsvampar": "#eab308",
   "kg matsvamp": "#eab308",
-  "rödlistade + signalarter": "#5eead4",
+  "rödlistade + signalarter": "#14b8a6",
   "total": "#64748b"
 };
 const artkategoriLegendOrder = [
@@ -472,23 +484,32 @@ const originalSeriesMap = computed<Record<string, Array<{ age: number; value: nu
   return out
 })
 
-// Canonical, sorted union of ages across active frameworks
+// Canonical, sorted union of ages across active frameworks (integers + original float stops)
 const allAges = computed<number[]>(() => {
   const seriesList = Object.values(originalSeriesMap.value)
   if (!seriesList.length) return []
-  const mins = seriesList.map(s => s.length ? s[0].age : Infinity)
-  const maxs = seriesList.map(s => s.length ? s[s.length - 1].age : -Infinity)
-  const minAge = Math.min(...mins)
-  const maxAge = Math.max(...maxs)
-  if (!Number.isFinite(minAge) || !Number.isFinite(maxAge)) return []
-  const out: number[] = []
-  const step = 1
-  for (let a = minAge; a <= maxAge + 1e-9; a += step) {
-    // round to nearest integer to avoid FP drift
-    const r = Math.round(a)
-    out.push(r)
+
+  let minAge = Infinity
+  let maxAge = -Infinity
+  const ages = new Set<number>()
+
+  for (const series of seriesList) {
+    for (const point of series) {
+      const age = Number(point.age)
+      if (!Number.isFinite(age)) continue
+      ages.add(age)
+      if (age < minAge) minAge = age
+      if (age > maxAge) maxAge = age
+    }
   }
-  return out
+
+  if (!Number.isFinite(minAge) || !Number.isFinite(maxAge)) return []
+
+  for (let a = Math.floor(minAge); a <= Math.ceil(maxAge) + 1e-9; a += 1) {
+    ages.add(Number(a.toFixed(6)))
+  }
+
+  return Array.from(ages).sort((a, b) => a - b)
 })
 
 function interpolateValue(series: Array<{ age: number; value: number }>, x: number): number | undefined {
@@ -515,26 +536,44 @@ const resampledMergedData = computed(() => {
   const rows: any[] = []
   for (const age of allAges.value) {
     const row: any = { age }
-    if (props.singleFrameworkSelection && props.frameworkComparisonMode) {
-      const frameworks = legendOrder.filter(key => props.selectedFrameworks.map(f => f.toLowerCase()).includes(key))
-      const category = stackedCategories.value[0] || props.selectedArtkategori[0]?.toLowerCase()
-      for (const key of frameworks) {
-        const series = originalSeriesMap.value[key] || []
-        const v = interpolateValue(series, age)
-        if (typeof v === 'number' && Number.isFinite(v)) {
-          const namespace = `${key}__compare`
-          row[namespace] = row[namespace] || {}
-          if (category) row[namespace][category] = v
-        }
-      }
-    } else {
-      for (const key of activeFrameworkKeys.value) {
-        const series = originalSeriesMap.value[key] || []
-        const v = interpolateValue(series, age)
-        if (typeof v === 'number' && Number.isFinite(v)) row[key] = v
-      }
+    for (const key of activeFrameworkKeys.value) {
+      const series = originalSeriesMap.value[key] || []
+      const v = interpolateValue(series, age)
+      if (typeof v === 'number' && Number.isFinite(v)) row[key] = v
     }
     rows.push(row)
+  }
+  return rows
+})
+
+const comparisonCategory = computed(() => stackedCategories.value[0] || (props.selectedArtkategori?.[0]?.toLowerCase() || ''))
+
+const comparisonInterpolatedData = computed(() => {
+  if (!(props.singleFrameworkSelection && props.frameworkComparisonMode && props.chartType === 'area')) {
+    return [] as Array<Record<string, any>>
+  }
+  const category = comparisonCategory.value
+  if (!category) return []
+  const inactive = inactiveFrameworkKeys.value
+  const frameworks = legendOrder.filter(key =>
+    props.selectedFrameworks.map(f => f.toLowerCase()).includes(key) && !inactive.has(key)
+  )
+  const rows: Array<Record<string, any>> = []
+  for (const age of allAges.value) {
+    const row: Record<string, any> = { age }
+    let hasValue = false
+    for (const fw of frameworks) {
+      const series = originalSeriesMap.value[fw] || []
+      const v = interpolateValue(series, age)
+      if (typeof v === 'number' && Number.isFinite(v)) {
+        const namespace = fw + '__compare'
+        const bucket = row[namespace] || {}
+        bucket[category] = v
+        row[namespace] = bucket
+        hasValue = true
+      }
+    }
+    if (hasValue) rows.push(row)
   }
   return rows
 })
@@ -559,9 +598,8 @@ const legendItems = computed<LegendItem[]>(() => {
       const frameworks = legendOrder.filter(key =>
         props.selectedFrameworks.map(f => f.toLowerCase()).includes(key)
       );
-      const activeCount = frameworks.filter(key => !inactiveFrameworkKeys.value.has(key)).length;
       const baseColor = primaryArtColor.value;
-      const alpha = activeCount > 1 ? 0.5 : 1;
+      const alpha = 0.5;
       return frameworks.map(key => {
         const label = mapFrameworkLabel(key);
         const inactive = inactiveFrameworkKeys.value.has(key);
@@ -597,9 +635,8 @@ const legendItems = computed<LegendItem[]>(() => {
   const frameworks = legendOrder.filter(key =>
     props.selectedFrameworks.map(f => f.toLowerCase()).includes(key)
   );
-  const activeCount = frameworks.filter(key => !inactiveFrameworkKeys.value.has(key)).length;
   const baseColor = primaryArtColor.value;
-  const alpha = activeCount > 1 ? 0.5 : 1;
+  const alpha = 0.5;
   return frameworks.map(key => {
     const label = mapFrameworkLabel(key);
     const inactive = inactiveFrameworkKeys.value.has(key);
@@ -777,7 +814,7 @@ const yAccessors = computed(() => {
 const computedLineColors = computed(() => {
   if (props.singleFrameworkSelection) {
     if (props.frameworkComparisonMode) {
-      return activeFrameworks.value.map(fw => fw.colorLine || fw.color || '#000000');
+      return activeFrameworks.value.map(fw => hexToRgba(fw.colorLine || fw.color, 0.7) || '#000000');
     }
     const categories = stackedCategories.value.length ? stackedCategories.value : props.selectedArtkategori.map(a => a.toLowerCase());
     return categories
@@ -814,17 +851,22 @@ function handleLegendItemClick(item: LegendItem) {
 // Unovis stacked areas require an array of y accessors (one per series)
 const stackedYAccessors = computed<((d: any) => number)[]>(() => {
   if (!props.singleFrameworkSelection || props.frameworkComparisonMode) return []
-  return stackedCategories.value.map(cat => (d: any) => {
-    const v = Number(d?.[cat])
-    if (!Number.isFinite(v)) return NaN
-    return isKgMatsvamp.value ? (2 * v) - (v / 20) : v
-  })
+  return stackedCategories.value.map(cat => (d: any) => getCategoryValue(d, cat))
 })
 
 // Colors aligned with the stacked series order
 const stackedColors = computed<string[] | ((...args: any[]) => string)>(() => {
   if (!props.singleFrameworkSelection || props.frameworkComparisonMode) return []
   return stackedCategories.value.map(cat => getArtColor(cat))
+})
+
+const stackedLineConfigs = computed<Array<{ key: string; accessor: (d: any) => number; color: string }>>(() => {
+  if (!props.singleFrameworkSelection || props.frameworkComparisonMode) return []
+  return stackedCategories.value.map(cat => ({
+    key: cat,
+    accessor: (d: any) => getCategoryValue(d, cat),
+    color: hexToRgba(getArtColor(cat), 0.7),
+  }))
 })
 
 const emptyDataPoint = reactive({ age: 0 })
