@@ -12,6 +12,10 @@
             :color="() => cfg.color" :duration=1 /> -->
           <!-- <VisCrosshair v-if="hasActiveSeries" :template="crosshairTemplate" />
           <VisTooltip v-if="hasActiveSeries" :horizontalShift="30" /> -->
+          <VisPlotband :duration=1 v-if="hasActiveSeries && currentTimeX !== null" :key="plotbandRenderKey" axis="x"
+            :from="-7" :to="currentTimeX" :color="'rgba(255, 255, 255, 0.4)'" :zIndex="20" />
+          <VisPlotline :duration=1 v-if="hasActiveSeries" :value="currentTimeX" color="rgba(234,88,12,1)" axis="x"
+            labelOrientation="vertical" :zIndex="20" :lineWidth="1" />
         </template>
         <template
           v-else-if="props.chartType === 'area' && props.singleFrameworkSelection && props.frameworkComparisonMode">
@@ -22,6 +26,10 @@
           <VisLine v-for="fw in activeFrameworks" :key="fw.key + '-compare-line'" :x="xAccessor"
             :y="(d: any) => getComparisonValue(d, fw.key, comparisonCategory)"
             :color="() => (hexToRgba(fw.colorLine || fw.color, 0.4))" :duration=1 />
+          <VisPlotband :duration=1 v-if="hasActiveSeries && currentTimeX !== null" :key="plotbandRenderKey" axis="x"
+            :from="-7" :to="currentTimeX" :color="'rgba(255, 255, 255, 0.4)'" :zIndex="20" />
+          <VisPlotline :duration=1 v-if="hasActiveSeries" :value="currentTimeX" color="rgba(234,88,12,1)" axis="x"
+            labelOrientation="vertical" :zIndex="20" :lineWidth="1" />
 
           <!-- <VisCrosshair v-if="hasActiveSeries" :template="crosshairTemplate" />
           <VisTooltip v-if="hasActiveSeries" :horizontalShift="30" /> -->
@@ -36,13 +44,18 @@
             :y="(d: any) => getFrameworkValue(d, fw.key)" :color="() => (hexToRgba(fw.colorLine || fw.color, 0.4))"
             :duration=1 />
           <!-- <VisTooltip v-if="hasActiveSeries" :horizontalShift="30" /> -->
-          <VisPlotline v-if="hasActiveSeries" :value="currentTimeValue" color="rgba(220, 114, 0, 1)" axis="x"
-            labelOrientation="vertical" :zIndex="20" />
+          <VisPlotband :duration=1 v-if="hasActiveSeries && currentTimeX !== null" :key="plotbandRenderKey" axis="x"
+            :from="-7" :to="currentTimeX" :color="'rgba(255, 255, 255, 0.4)'" :zIndex="20" />
+          <VisPlotline :duration=1 v-if="hasActiveSeries" :value="currentTimeX" color="rgba(234,88,12,1)" axis="x"
+            labelOrientation="vertical" :zIndex="20" :lineWidth="1" />
         </template>
         <template v-else-if="props.chartType === 'bar'">
           <VisGroupedBar :color="computedLineColors" :x="xAccessor" :y="yAccessors" :groupPadding="0.5"
             :groupMaxWidth="20" />
         </template>
+        <VisPlotline :duration="1" v-for="band in plotBands" :key="band.id" axis="x" :value="band.value"
+          :color="`rgba(69,10,10, 0.5)`" :lineStyle="[2, 3]" :label="band.labelText" :labelColor="band.labelColor"
+          :zIndex="100" :lineWidth="1" />
         <VisAxis tickTextFontSize="12px" :gridLine="true" type="x" :tickValues="[0, 10, 20, 30, 40, 50, 60, 70, 80, 90]"
           :tickFormat="(val: number) => {
             if (val === 0) return '0 år'
@@ -68,8 +81,9 @@
 <script setup lang="ts">
 
 import { computed, ref, onMounted, onBeforeUnmount, nextTick, reactive } from 'vue'
-import { VisXYContainer, VisAxis, VisLine, VisArea, VisGroupedBar, VisBulletLegend, VisBrush, VisCrosshair, VisTooltip, VisPlotline } from '@unovis/vue'
+import { VisXYContainer, VisAxis, VisLine, VisArea, VisGroupedBar, VisBulletLegend, VisBrush, VisCrosshair, VisTooltip, VisPlotline, VisPlotband } from '@unovis/vue'
 import type { BulletLegendItemInterface } from '@unovis/ts'
+import { PlotbandLabelPosition } from '@unovis/ts'
 import { capitalize } from 'lodash-es'
 import { useAsyncData } from '#app'
 
@@ -246,18 +260,29 @@ const margin = { left: 10, right: 10, top: 10, bottom: 10 }
 const rootEl = ref<HTMLElement | null>(null)
 const isMounted = ref(false)
 let __ro: ResizeObserver | null = null
+const chartSize = reactive({ width: 0, height: 0 })
+
+function updateChartSize() {
+  if (!rootEl.value) {
+    chartSize.width = 0
+    chartSize.height = 0
+    return
+  }
+  const bounds = rootEl.value.getBoundingClientRect()
+  chartSize.width = bounds.width
+  chartSize.height = bounds.height
+}
 
 onMounted(async () => {
   await nextTick()
   isMounted.value = true
-  // Nudge Safari to paint after real layout
+  updateChartSize()
   requestAnimationFrame(() => {
-    void rootEl.value?.offsetWidth
+    updateChartSize()
   })
   if (typeof window !== 'undefined' && 'ResizeObserver' in window) {
     __ro = new ResizeObserver(() => {
-      // Read size to trigger a fresh paint when container changes
-      void rootEl.value?.offsetWidth
+      updateChartSize()
     })
     if (rootEl.value) __ro.observe(rootEl.value)
   }
@@ -371,6 +396,28 @@ const brushSelection = computed<[number, number]>(() => {
   return [start, xDomain.value[1]]
 })
 
+const currentTimeX = computed<number | null>(() => {
+  const val = props.currentTimeValue;
+  if (!val) return null;
+  const map: Record<string, number> = {
+    'före': -5,
+    'efter': 1,
+    '10': 10,
+    '20': 20,
+    '50': 50,
+    '80': 80,
+  };
+  if (val in map) return map[val];
+  const n = Number(val);
+  return Number.isFinite(n) ? n : null;
+});
+
+const plotbandRenderKey = computed(() => {
+  const fw = (props.selectedFrameworks || []).map(f => f.toLowerCase()).join(',');
+  const art = (props.selectedArtkategori || []).map(a => a.toLowerCase()).join(',');
+  return `${fw}|${art}|${props.currentTimeValue || ''}`;
+});
+
 const artkategoriColorMapping: Record<string, string> = {
   "atheliales": "#8B5CF6",
   "boletales": "#EC4899",
@@ -410,6 +457,27 @@ const artkategoriLabelMap: Record<string, string> = {
   'goda matsvampar': 'Goda matsvampar',
   'rödlistade + signalarter': 'Rödlistade + signalarter',
   'total': 'Total'
+};
+
+const frameworkAnnotations: Record<string, Array<{ age: number; text: string }>> = {
+  trakthygge: [
+    { age: 0, text: 'Avverkning' },
+  ],
+  luckhuggning: [
+    { age: 30, text: 'Avverkning 3 luckor' },
+    { age: 60, text: 'Avverkning 3 luckor' },
+    { age: 90, text: 'Avverkning 3 luckor' },
+  ],
+  blädning: [
+    { age: 30, text: 'Avverkning 30% av träden' },
+    { age: 60, text: 'Avverkning 30% av träden' },
+    { age: 90, text: 'Avverkning 30% av träden' },
+  ],
+  skärmträd: [
+    { age: 0, text: 'Förberedande avverkning' },
+    { age: 10, text: 'Fröträdsställning' },
+    { age: 20, text: 'Avverkning av fröträden' },
+  ],
 };
 
 const selectedArtCategories = computed(() =>
@@ -705,6 +773,79 @@ const activeFrameworks = computed(() => {
   return legendItems.value.filter(item => !item.inactive);
 });
 
+const plotBandLabelPosition = PlotbandLabelPosition.TopOutside;
+
+const visibleFrameworkKeys = computed<string[]>(() => {
+  if (props.singleFrameworkSelection) {
+    if (props.frameworkComparisonMode) {
+      return activeFrameworks.value.map(item => item.key);
+    }
+    const selected = (props.selectedFrameworks || [])
+      .map(f => (f || '').toLowerCase())
+      .filter(key => legendOrder.includes(key))
+      .filter(key => !inactiveFrameworkKeys.value.has(key));
+    if (selected.length) return selected;
+    return activeFrameworkKeys.value;
+  }
+  return activeFrameworks.value.map(item => item.key);
+});
+
+
+function getChartRowByAge(age: number): Record<string, any> | undefined {
+  const rows = Array.isArray(chartData.value) ? chartData.value : [];
+  if (!rows.length) return undefined;
+  const direct = rows.find(row => Math.abs(Number(row?.age) - age) < 1e-6);
+  if (direct) return direct;
+  let closestRow: Record<string, any> | undefined;
+  let minDiff = Infinity;
+  for (const row of rows) {
+    const diff = Math.abs(Number(row?.age) - age);
+    if (!Number.isFinite(diff)) continue;
+    if (diff < minDiff) {
+      minDiff = diff;
+      closestRow = row;
+    }
+  }
+  return minDiff < 1e-3 ? closestRow : undefined;
+}
+
+function getFrameworkDisplayValueAtAge(frameworkKey: string, age: number): number | undefined {
+  const row = getChartRowByAge(age);
+  if (row) {
+    if (!props.singleFrameworkSelection) {
+      const raw = Number(row[frameworkKey]);
+      if (Number.isFinite(raw)) return transformValue(raw);
+    } else if (props.frameworkComparisonMode) {
+      const category = stackedCategories.value[0] || props.selectedArtkategori[0]?.toLowerCase();
+      if (category) {
+        const raw = Number(row?.[`${frameworkKey}__compare`]?.[category]);
+        if (Number.isFinite(raw)) return transformValue(raw);
+      }
+    } else {
+      const categories = stackedCategories.value.length
+        ? stackedCategories.value
+        : (props.selectedArtkategori || []).map(a => (a || '').toLowerCase()).filter(Boolean);
+      if (categories.length) {
+        let sum = 0;
+        let hasValues = false;
+        for (const cat of categories) {
+          const raw = Number(row[cat]);
+          if (!Number.isFinite(raw)) continue;
+          sum += transformValue(raw);
+          hasValues = true;
+        }
+        if (hasValues) return sum;
+      }
+    }
+  }
+
+  const series = originalSeriesMap.value[frameworkKey] || [];
+  if (!series.length) return undefined;
+  const raw = interpolateValue(series, age);
+  if (typeof raw !== 'number' || !Number.isFinite(raw)) return undefined;
+  return transformValue(raw);
+}
+
 function resolveDatasetForCategory(category: string) {
   if (category === 'total') {
     return totalDataset.value;
@@ -832,8 +973,6 @@ const xAccessor = (d: any) => {
   const v = Number(d?.age)
   return Number.isFinite(v) ? v : undefined
 }
-const markerAccessor = (d: any) => d.__markerY
-
 const yAccessors = computed(() => {
   if (props.singleFrameworkSelection) {
     if (props.frameworkComparisonMode) {
@@ -951,6 +1090,43 @@ const chartData = computed(() => {
   return data.filter(row => hasAnyValue(row));
 })
 
+const plotBands = computed(() => {
+  if (!chartReady.value) return [];
+  const frameworks = visibleFrameworkKeys.value;
+  if (!frameworks.length) return [];
+  const [xMin, xMax] = xDomain.value;
+  if (!Number.isFinite(xMin) || !Number.isFinite(xMax) || xMin === xMax) return [];
+  const bands: Array<{ id: string; value: number; color: string; labelText: string; labelColor: string }> = [];
+  const getColorForFramework = (fwKey: string) => {
+    const legend = legendItems.value.find(item => item.key === fwKey);
+    const base = legend?.colorLine || legend?.colorArea || legend?.color || primaryArtColor.value || '#64748b';
+    return base;
+  };
+  const getLabelColor = (fwKey: string) => {
+    const legend = legendItems.value.find(item => item.key === fwKey);
+    return legend?.colorLine || legend?.color || primaryArtColor.value || '#1f2937';
+  };
+  frameworks.forEach(fw => {
+    const defs = frameworkAnnotations[fw];
+    if (!defs?.length) return;
+    const color = getColorForFramework(fw);
+    const labelColor = getLabelColor(fw);
+    defs.forEach((def, idx2) => {
+      const age = Number(def.age);
+      if (!Number.isFinite(age)) return;
+      if (age < xMin || age > xMax) return;
+      bands.push({
+        id: `${fw}-${age}-${idx2}`,
+        value: age,
+        color,
+        labelText: def.text,
+        labelColor,
+      });
+    });
+  });
+  return bands;
+});
+
 // Crosshair tooltip template — shows X label + value(s) for the visible series
 const crosshairTemplate = (d: any): string => {
   if (!d) return ''
@@ -1008,10 +1184,21 @@ const crosshairTemplate = (d: any): string => {
     .filter(Boolean)
     .join('')
 
+  // If we're hovering near one of the plotline/annotations, show its label too
+  const plotlineTolerance = 0.6; // adjust if your x spacing is denser/sparser
+  const nearbyPlotline = plotBands.value.find(pb => Math.abs(Number(pb.value) - Number(age)) < plotlineTolerance);
+  const plotlineRow = nearbyPlotline
+    ? `<div style="margin-top:4px;font-size:0.7rem;opacity:0.8;display:flex;gap:0.35rem;align-items:center;">
+         <span style="display:inline-block;width:6px;height:6px;border-radius:9999px;background:${nearbyPlotline.color};"></span>
+         <span>${nearbyPlotline.labelText}</span>
+       </div>`
+    : '';
+
   return `
     <div style="min-width:120px">
       <div style="font-weight:600;margin-bottom:4px">${xLabel}</div>
       ${rows}
+      ${plotlineRow}
     </div>`
 }
 
@@ -1040,6 +1227,7 @@ const crosshairTemplate = (d: any): string => {
   --vis-line-stroke-width: 3px;
   --vis-line-stroke-opacity: 1;
 
+  position: relative;
 }
 
 /* Safari SVG layout nudges */
