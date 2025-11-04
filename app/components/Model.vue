@@ -193,12 +193,7 @@
                       v-model:selectedChart="persistedChartKey"
                       :parentSelectedFrameworks="isFrameworkCompareMode ? [currentFramework.value, currentFramework2.value] : [currentFramework.value]"
                       :currentTimeValue="currentTimeValue" :currentStartskog="currentStartskog.value" />
-                    <div class="px-4 pb-4 text-xs text-muted">
-                      Fugiat irure tempor nisi dolor. Sit irure reprehenderit sint est nostrud. Voluptate
-                      reprehenderit
-                      amet
-                      laboris non nostrud.
-                    </div>
+
                   </template>
                 </UTabs>
               </div>

@@ -68,7 +68,7 @@ entries:
     startskog: naturskog
     frameworks: luckhuggning
     ålder: 0.1
-    klassning: 40
+    klassning: 42
   - artkategori: kg matsvamp
     startskog: naturskog
     frameworks: skärmträd
@@ -108,7 +108,7 @@ entries:
     startskog: naturskog
     frameworks: luckhuggning
     ålder: 20
-    klassning: 50
+    klassning: 45
   - artkategori: kg matsvamp
     startskog: naturskog
     frameworks: skärmträd
@@ -138,7 +138,7 @@ entries:
     startskog: naturskog
     frameworks: luckhuggning
     ålder: 30
-    klassning: 50
+    klassning: 47
   - artkategori: kg matsvamp
     startskog: naturskog
     frameworks: blädning
@@ -148,7 +148,7 @@ entries:
     startskog: naturskog
     frameworks: luckhuggning
     ålder: 30.1
-    klassning: 40
+    klassning: 42
   - artkategori: kg matsvamp
     startskog: naturskog
     frameworks: naturskydd
@@ -188,7 +188,7 @@ entries:
     startskog: naturskog
     frameworks: luckhuggning
     ålder: 50
-    klassning: 50
+    klassning: 45
   - artkategori: kg matsvamp
     startskog: naturskog
     frameworks: skärmträd
@@ -213,7 +213,7 @@ entries:
     startskog: naturskog
     frameworks: luckhuggning
     ålder: 60
-    klassning: 50
+    klassning: 47
   - artkategori: kg matsvamp
     startskog: naturskog
     frameworks: skärmträd
@@ -228,7 +228,7 @@ entries:
     startskog: naturskog
     frameworks: luckhuggning
     ålder: 60.1
-    klassning: 40
+    klassning: 42
   - artkategori: kg matsvamp
     startskog: naturskog
     frameworks: naturskydd
@@ -268,7 +268,7 @@ entries:
     startskog: naturskog
     frameworks: luckhuggning
     ålder: 80
-    klassning: 50
+    klassning: 45
   - artkategori: kg matsvamp
     startskog: naturskog
     frameworks: skärmträd
@@ -293,7 +293,7 @@ entries:
     startskog: naturskog
     frameworks: luckhuggning
     ålder: 90
-    klassning: 50
+    klassning: 47
   - artkategori: kg matsvamp
     startskog: naturskog
     frameworks: skärmträd
@@ -308,7 +308,7 @@ entries:
     startskog: naturskog
     frameworks: luckhuggning
     ålder: 90.1
-    klassning: 40
+    klassning: 42
   - artkategori: kg matsvamp
     startskog: naturskog
     frameworks: naturskydd
@@ -324,6 +324,11 @@ entries:
     frameworks: blädning
     ålder: 100
     klassning: 48
+  - artkategori: kg matsvamp
+    startskog: naturskog
+    frameworks: luckhuggning
+    ålder: 100
+    klassning: 43
   - artkategori: kg matsvamp
     startskog: naturskog
     frameworks: skärmträd
@@ -398,7 +403,7 @@ entries:
     startskog: produktionsskog_
     frameworks: luckhuggning
     ålder: 0.1
-    klassning: 40
+    klassning: 42
   - artkategori: kg matsvamp
     startskog: produktionsskog_
     frameworks: skärmträd
@@ -438,7 +443,7 @@ entries:
     startskog: produktionsskog_
     frameworks: luckhuggning
     ålder: 20
-    klassning: 50
+    klassning: 45
   - artkategori: kg matsvamp
     startskog: produktionsskog_
     frameworks: skärmträd
@@ -468,7 +473,7 @@ entries:
     startskog: produktionsskog_
     frameworks: luckhuggning
     ålder: 30
-    klassning: 50
+    klassning: 47
   - artkategori: kg matsvamp
     startskog: produktionsskog_
     frameworks: blädning
@@ -478,7 +483,7 @@ entries:
     startskog: produktionsskog_
     frameworks: luckhuggning
     ålder: 30.1
-    klassning: 40
+    klassning: 42
   - artkategori: kg matsvamp
     startskog: produktionsskog_
     frameworks: naturskydd
@@ -518,7 +523,7 @@ entries:
     startskog: produktionsskog_
     frameworks: luckhuggning
     ålder: 50
-    klassning: 50
+    klassning: 45
   - artkategori: kg matsvamp
     startskog: produktionsskog_
     frameworks: skärmträd
@@ -543,7 +548,7 @@ entries:
     startskog: produktionsskog_
     frameworks: luckhuggning
     ålder: 60
-    klassning: 50
+    klassning: 47
   - artkategori: kg matsvamp
     startskog: produktionsskog_
     frameworks: skärmträd
@@ -558,7 +563,7 @@ entries:
     startskog: produktionsskog_
     frameworks: luckhuggning
     ålder: 60.1
-    klassning: 40
+    klassning: 42
   - artkategori: kg matsvamp
     startskog: produktionsskog_
     frameworks: naturskydd
@@ -598,7 +603,7 @@ entries:
     startskog: produktionsskog_
     frameworks: luckhuggning
     ålder: 80
-    klassning: 50
+    klassning: 45
   - artkategori: kg matsvamp
     startskog: produktionsskog_
     frameworks: skärmträd
@@ -623,7 +628,7 @@ entries:
     startskog: produktionsskog_
     frameworks: luckhuggning
     ålder: 90
-    klassning: 50
+    klassning: 47
   - artkategori: kg matsvamp
     startskog: produktionsskog_
     frameworks: skärmträd
@@ -638,7 +643,7 @@ entries:
     startskog: produktionsskog_
     frameworks: luckhuggning
     ålder: 90.1
-    klassning: 40
+    klassning: 42
   - artkategori: kg matsvamp
     startskog: produktionsskog_
     frameworks: naturskydd
@@ -654,6 +659,11 @@ entries:
     frameworks: blädning
     ålder: 100
     klassning: 48
+  - artkategori: kg matsvamp
+    startskog: naturskog
+    frameworks: luckhuggning
+    ålder: 100
+    klassning: 43
   - artkategori: kg matsvamp
     startskog: produktionsskog_
     frameworks: skärmträd

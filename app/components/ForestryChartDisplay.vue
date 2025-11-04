@@ -7,7 +7,8 @@
         :height="120" :margin="margin" :xDomain="xDomain" :yDomain="yDomain">
         <template v-if="props.chartType === 'area' && props.singleFrameworkSelection && !props.frameworkComparisonMode">
           <VisArea :duration=1 :x="xAccessor" :y="stackedYAccessors" :color="stackedColors"
-            :interpolateMissingData="true" :baseline="stackedBaseline" />
+            :interpolateMissingData="true" />
+
           <!-- <VisLine v-for="cfg in stackedLineConfigs" :key="cfg.key + '-stack-line'" :x="xAccessor" :y="cfg.accessor"
             :color="() => cfg.color" :duration=1 /> -->
           <!-- <VisCrosshair v-if="hasActiveSeries" :template="crosshairTemplate" />
@@ -16,16 +17,17 @@
             :from="-7" :to="currentTimeX" :color="'rgba(255, 255, 255, 0.4)'" :zIndex="20" />
           <VisPlotline :duration=1 v-if="hasActiveSeries" :value="currentTimeX" color="rgba(234,88,12,1)" axis="x"
             labelOrientation="vertical" :zIndex="20" :lineWidth="1" />
+
         </template>
         <template
           v-else-if="props.chartType === 'area' && props.singleFrameworkSelection && props.frameworkComparisonMode">
           <VisArea :duration=1 v-for="fw in activeFrameworks" :key="fw.key + '-compare-area'" :x="xAccessor"
-            :y="(d: any) => getComparisonValue(d, fw.key, comparisonCategory)"
-            :baseline="compareBaselineForFramework(fw.key)" :color="() => fw.colorArea || fw.color"
+            :y="(d: any) => getComparisonValue(d, fw.key, comparisonCategory)" :color="() => fw.colorArea || fw.color"
             :interpolateMissingData="true" :zIndex="1" />
           <VisLine v-for="fw in activeFrameworks" :key="fw.key + '-compare-line'" :x="xAccessor"
             :y="(d: any) => getComparisonValue(d, fw.key, comparisonCategory)"
             :color="() => (hexToRgba(fw.colorLine || fw.color, 0.4))" :duration=1 />
+
           <VisPlotband :duration=1 v-if="hasActiveSeries && currentTimeX !== null" :key="plotbandRenderKey" axis="x"
             :from="-7" :to="currentTimeX" :color="'rgba(255, 255, 255, 0.4)'" :zIndex="20" />
           <VisPlotline :duration=1 v-if="hasActiveSeries" :value="currentTimeX" color="rgba(234,88,12,1)" axis="x"
@@ -36,13 +38,15 @@
         </template>
         <template v-else-if="props.chartType === 'area'">
           <VisArea :duration=1 v-for="fw in activeFrameworks" :key="fw.key + '-area'" :x="xAccessor"
-            :y="(d: any) => getFrameworkValue(d, fw.key)" :baseline="baselineForFramework(fw.key)"
-            :color="() => (fw.colorArea || fw.color)" :interpolateMissingData="true" :zIndex="1" />
+            :y="(d: any) => getFrameworkValue(d, fw.key)" :color="() => (fw.colorArea || fw.color)"
+            :interpolateMissingData="true" :zIndex="1" />
 
           <!-- <VisCrosshair v-if="hasActiveSeries" :template="crosshairTemplate" /> -->
           <VisLine v-for="fw in activeFrameworks" :key="fw.key + '-line'" :x="xAccessor"
-            :y="(d: any) => getFrameworkValue(d, fw.key)" :color="() => (hexToRgba(fw.colorLine || fw.color, 0.4))"
+            :y="(d: any) => getFrameworkValue(d, fw.key)" :color="() => (hexToRgba(fw.colorLine || fw.color, 0.5))"
             :duration=1 />
+          <VisLine v-if="isKgMatsvamp" v-for="fw in activeFrameworks" :key="fw.key + '-kg-x2'" :x="xAccessor"
+            :y="kgDoubleAccessorFor(fw.key)" :color="() => 'rgba(34,197,94, 0.5)'" :duration="1" />
           <!-- <VisTooltip v-if="hasActiveSeries" :horizontalShift="30" /> -->
           <VisPlotband :duration=1 v-if="hasActiveSeries && currentTimeX !== null" :key="plotbandRenderKey" axis="x"
             :from="-7" :to="currentTimeX" :color="'rgba(255, 255, 255, 0.4)'" :zIndex="20" />
@@ -149,68 +153,26 @@ const totalDataset = computed(() => Array.isArray(totalSvamparDataDoc.value?.ent
 
 
 const yDomain = computed<[number, number] | undefined>(() => {
-  // If we're not in an area chart or not in Kg matsvamp, keep the existing behavior
   const fixedMax = Number(props.maxYValue);
-  const isArea = props.chartType === 'area';
-  if (!isArea || !isKgMatsvamp.value) {
-    return Number.isFinite(fixedMax) ? [0, fixedMax] : undefined;
-  }
-
-  // Compute dynamic bounds that include the baseline (v/20) and the transformed top ((2*v) - (v/20))
-  const data = Array.isArray((chartData as any).value) ? (chartData as any).value : [];
-  if (!data.length) return Number.isFinite(fixedMax) ? [0, fixedMax] : undefined;
-
-  let maxY = -Infinity;
-
-  const topVal = (v: number) => (2 * v) - (v / 20);
-  // We keep the axis starting at 0 for readability
-  const lowerBound = 0;
-
-  if (props.singleFrameworkSelection) {
-    if (props.frameworkComparisonMode) {
-      const cat = (stackedCategories as any).value[0] || (props.selectedArtkategori?.[0] || '').toLowerCase();
-      const keys = (activeFrameworkKeys as any).value || [];
-      for (const row of data) {
-        for (const key of keys) {
-          const bucket = row?.[`${key}__compare`];
-          const val = Number(bucket?.[cat]);
-          if (!Number.isFinite(val)) continue;
-          const top = topVal(val);
-          if (Number.isFinite(top)) maxY = Math.max(maxY, top);
-        }
-      }
-    } else {
-      const cats: string[] = (stackedCategories as any).value.length
-        ? (stackedCategories as any).value
-        : (props.selectedArtkategori || []).map(a => (a || '').toLowerCase());
-      for (const row of data) {
-        for (const c of cats) {
-          const v = Number(row?.[c]);
-          if (!Number.isFinite(v)) continue;
-          const top = topVal(v);
-          if (Number.isFinite(top)) maxY = Math.max(maxY, top);
-        }
+  // If we are in kg mode we need to be able to show the extra x2 line
+  if (isKgMatsvamp.value) {
+    if (Number.isFinite(fixedMax)) {
+      return [0, fixedMax * 2];
+    }
+    // fallback: look at chartData and take its max * 2
+    const rows = Array.isArray(baseChartData.value) ? baseChartData.value : [];
+    let maxVal = 0;
+    for (const row of rows) {
+      const cat = stackedCategories.value[0] || (props.selectedArtkategori[0]?.toLowerCase() ?? '');
+      if (!cat) continue;
+      const v = Number(row?.[cat]);
+      if (Number.isFinite(v)) {
+        if (v > maxVal) maxVal = v;
       }
     }
-  } else {
-    const keys = (activeFrameworkKeys as any).value || [];
-    for (const row of data) {
-      for (const key of keys) {
-        const v = Number(row?.[key]);
-        if (!Number.isFinite(v)) continue;
-        const top = topVal(v);
-        if (Number.isFinite(top)) maxY = Math.max(maxY, top);
-      }
-    }
+    return [0, maxVal * 2 || 1];
   }
-
-  if (!Number.isFinite(maxY)) {
-    return Number.isFinite(fixedMax) ? [0, fixedMax] : undefined;
-  }
-
-  // Respect an explicit maxYValue if provided, ensuring we never clip the area top
-  const upperBound = Number.isFinite(fixedMax) ? Math.max(fixedMax, maxY) : maxY;
-  return [lowerBound, upperBound];
+  return Number.isFinite(fixedMax) ? [0, fixedMax] : undefined;
 })
 
 const baseChartData = computed(() => {
@@ -332,7 +294,15 @@ const isKgMatsvamp = computed(() => {
   return selected.includes('matsvamp') && matsvampVariant.value === 'kg';
 });
 
-const transformValue = (value: number) => (isKgMatsvamp.value ? (2 * value) - (value / 20) : value);
+const transformValue = (value: number) => value;
+
+const kgDoubleAccessorFor = (fwKey: string) => {
+  return (d: any) => {
+    if (!isKgMatsvamp.value) return NaN;
+    const v = Number(d?.[fwKey]);
+    return Number.isFinite(v) ? v * 2 : NaN;
+  };
+};
 
 const getFrameworkValue = (row: any, frameworkKey: string) => {
   const num = Number(row?.[frameworkKey]);
@@ -350,28 +320,6 @@ const getComparisonValue = (row: any, frameworkKey: string, category: string) =>
   return Number.isFinite(num) ? transformValue(num) : NaN;
 };
 
-// --- Baseline helpers for area charts ---
-const baselineForFramework = (fwKey: string) => (d: any, _i: number) => {
-  if (!isKgMatsvamp.value) return 0;
-  const v = Number(d?.[fwKey]);
-  return Number.isFinite(v) ? v / 20 : NaN;
-};
-
-const compareBaselineForFramework = (fwKey: string) => (d: any, _i: number) => {
-  if (!isKgMatsvamp.value) return 0;
-  const key = comparisonCategory.value;
-  const namespace = fwKey + '__compare';
-  const value = d?.[namespace]?.[key];
-  const num = Number(value);
-  return Number.isFinite(num) ? num / 20 : NaN;
-};
-
-const stackedBaseline = (d: any, _i: number) => {
-  if (!isKgMatsvamp.value) return 0;
-  const firstCat = stackedCategories.value[0] || props.selectedArtkategori[0]?.toLowerCase();
-  const num = Number(d?.[firstCat]);
-  return Number.isFinite(num) ? num / 20 : NaN;
-};
 
 function hexToRgba(hex: string, alpha = 1): string {
   const m = hex.replace('#', '')
@@ -446,16 +394,16 @@ const artkategoriLegendOrder = [
   'total'
 ];
 const artkategoriLabelMap: Record<string, string> = {
-  'atheliales': 'Skinnsvampar (Atheliales)',
-  'boletales': 'Soppar i vid bemärkelse (Boletales)',
-  'cantharellales': 'Kantarellsläktingar (Cantharellales)',
-  'spindlingar': 'Spindelskivlingar (Cortinarius)',
-  'russulales': 'Kremlor & riskor (Russulales)',
-  'thelephorales': 'Skinn- & taggsvampar (Theleophorales)',
-  'ascomycota': 'Sporsäckssvampar (Ascomycota)',
-  'matsvamp': 'Matsvampar',
+  'atheliales': 'Skinnsvampar',
+  'boletales': 'Soppar',
+  'cantharellales': 'Kantarellsläktingar',
+  'spindlingar': 'Spindelskivlingar',
+  'russulales': 'Kremlor & riskor',
+  'thelephorales': 'Tagg- och tomentelloida svampar',
+  'ascomycota': 'Sporsäckssvampar',
+  'matsvamp': 'Alla matsvampar',
   'goda matsvampar': 'Goda matsvampar',
-  'rödlistade + signalarter': 'Rödlistade + signalarter',
+  'rödlistade + signalarter': 'Naturvårdssvampar',
   'total': 'Total'
 };
 

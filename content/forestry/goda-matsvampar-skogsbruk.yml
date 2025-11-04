@@ -78,72 +78,72 @@ entries:
     startskog: naturskog
     frameworks: blädning
     ålder: 0.1
-    klassning: 3.75
+    klassning: 9.1875
   - artkategori: goda matsvampar
     startskog: naturskog
     frameworks: blädning
     ålder: 10
-    klassning: 7.65
+    klassning: 9.279166667
   - artkategori: goda matsvampar
     startskog: naturskog
     frameworks: blädning
     ålder: 20
-    klassning: 10
+    klassning: 9.666666667
   - artkategori: goda matsvampar
     startskog: naturskog
     frameworks: blädning
     ålder: 30
-    klassning: 10
+    klassning: 10.16666667
   - artkategori: goda matsvampar
     startskog: naturskog
     frameworks: blädning
     ålder: 30.1
-    klassning: 7.5
+    klassning: 9.354166667
   - artkategori: goda matsvampar
     startskog: naturskog
     frameworks: blädning
     ålder: 40
-    klassning: 8.5
+    klassning: 9.470833333
   - artkategori: goda matsvampar
     startskog: naturskog
     frameworks: blädning
     ålder: 50
-    klassning: 10
+    klassning: 9.466666667
   - artkategori: goda matsvampar
     startskog: naturskog
     frameworks: blädning
     ålder: 60
-    klassning: 10
+    klassning: 9.833333333
   - artkategori: goda matsvampar
     startskog: naturskog
     frameworks: blädning
     ålder: 60.1
-    klassning: 7.5
+    klassning: 9.020833333
   - artkategori: goda matsvampar
     startskog: naturskog
     frameworks: blädning
     ålder: 70
-    klassning: 8.5
+    klassning: 9.570833333
   - artkategori: goda matsvampar
     startskog: naturskog
     frameworks: blädning
     ålder: 80
-    klassning: 10
+    klassning: 9.558333333
   - artkategori: goda matsvampar
     startskog: naturskog
     frameworks: blädning
     ålder: 90
-    klassning: 10
+    klassning: 9.941666667
   - artkategori: goda matsvampar
     startskog: naturskog
     frameworks: blädning
     ålder: 90.1
-    klassning: 7.5
+    klassning: 9.029166667
   - artkategori: goda matsvampar
     startskog: naturskog
     frameworks: blädning
     ålder: 100
-    klassning: 8.5
+    klassning: 9.6125
   - artkategori: goda matsvampar
     startskog: naturskog
     frameworks: luckhuggning
@@ -158,72 +158,72 @@ entries:
     startskog: naturskog
     frameworks: luckhuggning
     ålder: 0.1
-    klassning: 3.75
+    klassning: 8.375
   - artkategori: goda matsvampar
     startskog: naturskog
     frameworks: luckhuggning
     ålder: 10
-    klassning: 7.65
+    klassning: 8.558333333
   - artkategori: goda matsvampar
     startskog: naturskog
     frameworks: luckhuggning
     ålder: 20
-    klassning: 10
+    klassning: 9.333333333
   - artkategori: goda matsvampar
     startskog: naturskog
     frameworks: luckhuggning
     ålder: 30
-    klassning: 10
+    klassning: 10.33333333
   - artkategori: goda matsvampar
     startskog: naturskog
     frameworks: luckhuggning
     ålder: 30.1
-    klassning: 7.5
+    klassning: 8.708333333
   - artkategori: goda matsvampar
     startskog: naturskog
     frameworks: luckhuggning
     ålder: 40
-    klassning: 8.5
+    klassning: 8.941666667
   - artkategori: goda matsvampar
     startskog: naturskog
     frameworks: luckhuggning
     ålder: 50
-    klassning: 10
+    klassning: 8.933333333
   - artkategori: goda matsvampar
     startskog: naturskog
     frameworks: luckhuggning
     ålder: 60
-    klassning: 10
+    klassning: 9.666666667
   - artkategori: goda matsvampar
     startskog: naturskog
     frameworks: luckhuggning
     ålder: 60.1
-    klassning: 7.5
+    klassning: 8.041666667
   - artkategori: goda matsvampar
     startskog: naturskog
     frameworks: luckhuggning
     ålder: 70
-    klassning: 8.5
+    klassning: 9.141666667
   - artkategori: goda matsvampar
     startskog: naturskog
     frameworks: luckhuggning
     ålder: 80
-    klassning: 10
+    klassning: 9.116666667
   - artkategori: goda matsvampar
     startskog: naturskog
     frameworks: luckhuggning
     ålder: 90
-    klassning: 10
+    klassning: 9.883333333
   - artkategori: goda matsvampar
     startskog: naturskog
     frameworks: luckhuggning
     ålder: 90.1
-    klassning: 7.5
+    klassning: 8.058333333
   - artkategori: goda matsvampar
     startskog: naturskog
     frameworks: luckhuggning
     ålder: 100
-    klassning: 8.5
+    klassning: 9.225
   - artkategori: goda matsvampar
     startskog: naturskog
     frameworks: skärmträd
@@ -443,72 +443,82 @@ entries:
     startskog: produktionsskog_
     frameworks: blädning
     ålder: 0.1
-    klassning: 3.75
+    klassning: 9.1875
   - artkategori: goda matsvampar
     startskog: produktionsskog_
     frameworks: blädning
     ålder: 10
-    klassning: 7.65
+    klassning: 9.279166667
+  - artkategori: goda matsvampar
+    startskog: produktionsskog_
+    frameworks: blädning
+    ålder: 11
+    klassning: 9.291666667
   - artkategori: goda matsvampar
     startskog: produktionsskog_
     frameworks: blädning
     ålder: 20
-    klassning: 10
+    klassning: 9.666666667
+  - artkategori: goda matsvampar
+    startskog: produktionsskog_
+    frameworks: blädning
+    ålder: 21
+    klassning: 9.666666667
   - artkategori: goda matsvampar
     startskog: produktionsskog_
     frameworks: blädning
     ålder: 30
-    klassning: 10
+    klassning: 10.16666667
   - artkategori: goda matsvampar
     startskog: produktionsskog_
     frameworks: blädning
     ålder: 30.1
-    klassning: 7.5
+    klassning: 9.354166667
   - artkategori: goda matsvampar
     startskog: produktionsskog_
     frameworks: blädning
     ålder: 40
-    klassning: 8.5
+    klassning: 9.470833333
   - artkategori: goda matsvampar
     startskog: produktionsskog_
     frameworks: blädning
     ålder: 50
-    klassning: 10
+    klassning: 9.466666667
   - artkategori: goda matsvampar
     startskog: produktionsskog_
     frameworks: blädning
     ålder: 60
-    klassning: 10
+    klassning: 9.833333333
   - artkategori: goda matsvampar
     startskog: produktionsskog_
     frameworks: blädning
     ålder: 60.1
-    klassning: 7.5
+    klassning: 9.020833333
   - artkategori: goda matsvampar
     startskog: produktionsskog_
     frameworks: blädning
     ålder: 70
-    klassning: 8.5
+    klassning: 9.570833333
   - artkategori: goda matsvampar
     startskog: produktionsskog_
     frameworks: blädning
     ålder: 80
-    klassning: 10
+    klassning: 9.558333333
   - artkategori: goda matsvampar
     startskog: produktionsskog_
     frameworks: blädning
     ålder: 90
-    klassning: 10
+    klassning: 9.941666667
   - artkategori: goda matsvampar
     startskog: produktionsskog_
     frameworks: blädning
     ålder: 90.1
-    klassning: 7.5
+    klassning: 9.029166667
   - artkategori: goda matsvampar
     startskog: produktionsskog_
     frameworks: blädning
     ålder: 100
-    klassning: 8.5
+    klassning: 9.6125
   - artkategori: goda matsvampar
     startskog: produktionsskog_
     frameworks: luckhuggning
@@ -523,72 +533,72 @@ entries:
     startskog: produktionsskog_
     frameworks: luckhuggning
     ålder: 0.1
-    klassning: 3.75
+    klassning: 8.375
   - artkategori: goda matsvampar
     startskog: produktionsskog_
     frameworks: luckhuggning
     ålder: 10
-    klassning: 7.65
+    klassning: 8.558333333
   - artkategori: goda matsvampar
     startskog: produktionsskog_
     frameworks: luckhuggning
     ålder: 20
-    klassning: 10
+    klassning: 9.333333333
   - artkategori: goda matsvampar
     startskog: produktionsskog_
     frameworks: luckhuggning
     ålder: 30
-    klassning: 10
+    klassning: 10.33333333
   - artkategori: goda matsvampar
     startskog: produktionsskog_
     frameworks: luckhuggning
     ålder: 30.1
-    klassning: 7.5
+    klassning: 8.708333333
   - artkategori: goda matsvampar
     startskog: produktionsskog_
     frameworks: luckhuggning
     ålder: 40
-    klassning: 8.5
+    klassning: 8.941666667
   - artkategori: goda matsvampar
     startskog: produktionsskog_
     frameworks: luckhuggning
     ålder: 50
-    klassning: 10
+    klassning: 8.933333333
   - artkategori: goda matsvampar
     startskog: produktionsskog_
     frameworks: luckhuggning
     ålder: 60
-    klassning: 10
+    klassning: 9.666666667
   - artkategori: goda matsvampar
     startskog: produktionsskog_
     frameworks: luckhuggning
     ålder: 60.1
-    klassning: 7.5
+    klassning: 8.041666667
   - artkategori: goda matsvampar
     startskog: produktionsskog_
     frameworks: luckhuggning
     ålder: 70
-    klassning: 8.5
+    klassning: 9.141666667
   - artkategori: goda matsvampar
     startskog: produktionsskog_
     frameworks: luckhuggning
     ålder: 80
-    klassning: 10
+    klassning: 9.116666667
   - artkategori: goda matsvampar
     startskog: produktionsskog_
     frameworks: luckhuggning
     ålder: 90
-    klassning: 10
+    klassning: 9.883333333
   - artkategori: goda matsvampar
     startskog: produktionsskog_
     frameworks: luckhuggning
     ålder: 90.1
-    klassning: 7.5
+    klassning: 8.058333333
   - artkategori: goda matsvampar
     startskog: produktionsskog_
     frameworks: luckhuggning
     ålder: 100
-    klassning: 8.5
+    klassning: 9.225
   - artkategori: goda matsvampar
     startskog: produktionsskog_
     frameworks: skärmträd

@@ -34,7 +34,7 @@
           <span class="uppercase tracking-wide text-[10px] text-neutral-400">Naturvård</span>
           <span class="text-sm font-semibold text-neutral-900">{{ naturvardCounter.total }}</span>
           <span v-if="naturvardCounter.gained" class="text-emerald-600 font-semibold">+{{ naturvardCounter.gained
-          }}</span>
+            }}</span>
           <span v-if="naturvardCounter.lost" class="text-red-500 font-semibold">-{{ naturvardCounter.lost }}</span>
         </div>
       </div>
@@ -551,6 +551,7 @@ export default {
 
       ctx.restore();
     }
+
 
     const SAW_BLADE_PATH_D = "M20 15s-1.4 1.3 1.1 2l-2.8 2.8h-2.8s-1.9-.1-.5 2.2h-4l-2-2s-1.3-1.4-2 1.1l-2.8-2.8v-2.8s.1-1.9-2.2-.5v-4l2-2s1.4-1.3-1.2-1.9l2.8-2.9h2.9s1.9.1.5-2.2h4l2 2s1.3 1.4 2-1.2l2.8 2.8v2.9s-.1 1.9 2.2.5v4zm-6-3a2 2 0 0 0-2-2a2 2 0 0 0-2 2a2 2 0 0 0 2 2a2 2 0 0 0 2-2";
     const RANDOM_LINE_PATH_D = "M5.874 5.89A8.13 8.13 0 0 0 4 11.1a.9.9 0 0 0 .9.9H12m4 0h3.1a.9.9 0 0 0 .9-.9C20 6.626 16.418 3 12 3c-1.43 0-2.774.38-3.936 1.047M10 12v7a2 2 0 1 0 4 0v-5M3 3l18 18";

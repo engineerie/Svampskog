@@ -27,133 +27,59 @@
           </div>
         </template>
       </UPopover>
-      <USelect v-if="selectedChart === 'grupper' && isFrameworkCompareMode" v-model="selectedCompareArtkategori"
-        :items="compareArtkategoriOptions" size="sm" class="w-56" placeholder="Välj svampgrupp" />
+      <div class="pr-4">
+        <USelect v-if="selectedChart === 'grupper' && isFrameworkCompareMode" v-model="selectedCompareArtkategori"
+          :items="compareArtkategoriOptions" size="sm" placeholder="Välj svampgrupp" />
+        <USelect v-if="selectedChart === 'matsvampar'" v-model="selectedMatsvampVariant" :items="matsvampVariantOptions"
+          size="sm" placeholder="Välj dataset" />
+      </div>
+
+
       <!-- <UButton color="neutral" variant="subtle"
-                            :icon="chartType === 'area' ? 'i-carbon-chart-column' : 'i-carbon-chart-line-smooth'"
-                            @click="ToggleChartType" /> -->
+        :icon="chartType === 'area' ? 'i-carbon-chart-column' : 'i-carbon-chart-line-smooth'"
+        @click="ToggleChartType" /> -->
     </div>
 
     <div>
 
       <div v-if="selectedChart === 'skogsskole'">
-        <!-- <h1 class="text-3xl font-semibold leading-loose">Total mängd mykorrhizasvamp</h1> -->
-        <!-- <div class="mt-2">
-                      <UButton size="sm" @click="showDesc2 = !showDesc2">
-                        {{ showDesc2 ? 'Dölj beskrivning' : 'Visa beskrivning' }}
-                      </UButton>
-                    </div> -->
-        <p v-if="showDesc2" class="text-base/7 ">
-          Vid trakthyggesbruk minskar mängden mykorrhizasvamp nästan till noll direkt efter avverkning. I takt med att
-          träden växer upp etableras ett nytt svampsamhälle. När träden är mellan 40-70 år, är
-          fotosyntesen som mest effektiv — vilket kan leda till att mängden mykorrhiza blir större än innan
-          avverkningen. Överhållen skärm följer ett
-          liknande mönster, men eftersom marken aldrig blir helt kal minskar svampmängden inte lika mycket. Blädning
-          och luckhuggning innebär återkommande mindre ingrepp, där svampmängden sjunker något ungefär vart trettionde
-          år men i övrigt hålls relativt stabil över tid.
-        </p>
-        <!-- <div class="controls w-full flex my-2">
-                        <USelect class="min-w-32  " v-model="selectedFrameworks" :items="frameworkOptions" multiple
-                            label="Select Frameworks" />
-                        <USelect class="min-w-32" v-model="selectedArtkategori" :items="artkategoriOptions"
-                            label="Select Artkategori" />
-                        <USelect class="min-w-32" v-model="chartType" :items="chartTypeOptions" label="Chart Type" />
-                        
-                    </div> -->
         <ForestryChartDisplay
           :selectedFrameworks="props.parentSelectedFrameworks ?? ['naturskydd', 'trakthygge', 'luckhuggning', 'blädning', 'skärmträd']"
           :selectedArtkategori="['total']" :chartType="chartType" :maxYValue="130"
           :currentTimeValue="props.currentTimeValue" />
-
-        <!-- <p class="text-sm text-neutral-500 my-1.5">
-                             Vid trakthyggesbruk minskar mängden mykorrhizasvamp nästan till noll direkt efter avverkning. I takt med att
-                        träden växer upp etableras ett nytt svampsamhälle. När träden är mellan 40-70 år, är
-                        fotosyntesen som mest effektiv — vilket kan leda till att mängden mykorrhiza blir större än innan
-                        avverkningen. Överhållen skärm följer ett
-                        liknande mönster, men eftersom marken aldrig blir helt kal minskar svampmängden inte lika mycket. Blädning
-                        och luckhuggning innebär återkommande mindre ingrepp, där svampmängden sjunker något ungefär vart trettionde
-                        år men i övrigt hålls relativt stabil över tid.
-                        </p> -->
+        <div class="px-4 pb-4 text-xs text-muted">
+          Mängd mykorrhizasvamp i marken i förhållande till förekomsten i äldre skog/före avverkning (%).
+        </div>
       </div>
       <div v-if="selectedChart === 'rodlistade'">
-        <!-- <h1 class="text-3xl leading-loose font-semibold">Rödlistade och signalarter</h1> -->
-        <!-- <div class="mt-2">
-                      <UButton size="sm" @click="showDesc3 = !showDesc3">
-                        {{ showDesc3 ? 'Dölj beskrivning' : 'Visa beskrivning' }}
-                      </UButton>
-                    </div> -->
-        <p v-if="showDesc3" class="text-base/7 ">
-          Praesent elementum ut lacus a pharetra. Sed a malesuada mauris. Morbi et convallis libero. Aliquam
-          vestibulum, felis eu fringilla elementum, nibh nunc tincidunt ex, quis vulputate nunc erat eu quam.
-          Phasellus rutrum bibendum lacinia. Fusce aliquam aliquet lectus, eget gravida purus lobortis id. Curabitur
-          viverra quam a risus sagittis maximus.
-        </p>
-        <!-- <div class="controls w-full flex my-2">
-                        <USelect class="min-w-32" v-model="selectedStartskog3" :items="[
-                            { label: 'Äldre skog som inte varit kalavverkad tidigare', value: 'naturskog' },
-                            { label: 'Tidigare kalavverkad skog', value: 'produktionsskog_' }
-                        ]" label="Välj startskog" />
-                    </div> -->
         <ForestryChartDisplay
           :selectedFrameworks="props.parentSelectedFrameworks ?? ['naturskydd', 'trakthygge', 'luckhuggning', 'blädning', 'skärmträd']"
           :selectedArtkategori="['rödlistade + signalarter']" :chartType="chartType"
           :selectedStartskog="props.currentStartskog" :redColor="true" :maxYValue="0.65"
           :currentTimeValue="props.currentTimeValue" />
+        <div class="px-4 pb-4 text-xs text-muted">
+          Mängden av mykorrhizasvampar som är rödlistade/signalarter i marken i förhållande till förekomsten i äldre
+          skog/före avverkning (%).
+        </div>
       </div>
       <div v-if="selectedChart === 'matsvampar'">
-        <!-- <h1 class="text-3xl leading-loose font-semibold">Matsvampar</h1> -->
-        <!-- <div class="mt-2">
-                      <UButton size="sm" @click="showDesc4 = !showDesc4">
-                        {{ showDesc4 ? 'Dölj beskrivning' : 'Visa beskrivning' }}
-                      </UButton>
-                    </div> -->
-        <p v-if="showDesc4" class="text-base/7 ">
-          Praesent elementum ut lacus a pharetra. Sed a malesuada mauris. Morbi et convallis libero. Aliquam
-          vestibulum, felis eu fringilla elementum, nibh nunc tincidunt ex, quis vulputate nunc erat eu quam.
-          Phasellus rutrum bibendum lacinia. Fusce aliquam aliquet lectus, eget gravida purus lobortis id. Curabitur
-          viverra quam a risus sagittis maximus.
-        </p>
-        <div class="px-2 pb-2">
-          <USelect v-model="selectedMatsvampVariant" :items="matsvampVariantOptions" size="sm" class="w-56"
-            placeholder="Välj dataset" />
-        </div>
-        <!-- <div class="controls w-full flex my-2">
-                        <USelect class="min-w-32" v-model="selectedStartskog2" :items="[
-                            { label: 'Äldre skog som inte varit kalavverkad tidigare', value: 'naturskog' },
-                            { label: 'Tidigare kalavverkad skog', value: 'produktionsskog_' }
-                        ]" label="Välj startskog" />
-                    </div> -->
         <ForestryChartDisplay
           :selectedFrameworks="props.parentSelectedFrameworks ?? ['naturskydd', 'trakthygge', 'luckhuggning', 'blädning', 'skärmträd']"
           :selectedArtkategori="['matsvamp']" :chartType="chartType" :selectedStartskog="props.currentStartskog"
           :yellowColor="true" :maxYValue="matsvampMaxY" :currentTimeValue="props.currentTimeValue"
           :matsvampVariant="selectedMatsvampVariant" />
+        <div class="px-4 pb-4 text-xs text-muted">
+          {{ matsvampDescription }}
+        </div>
       </div>
       <div v-if="selectedChart === 'grupper'">
-        <!-- <h1 class="text-3xl leading-loose font-semibold">Olika svampgrupper</h1> -->
-        <!-- <div class="mt-2">
-                      <UButton size="sm" @click="showDesc5 = !showDesc5">
-                        {{ showDesc5 ? 'Dölj beskrivning' : 'Visa beskrivning' }}
-                      </UButton>
-                    </div> -->
-        <p v-if="showDesc5" class="text-base/7 ">
-          Praesent elementum ut lacus a pharetra. Sed a malesuada mauris. Morbi et convallis
-          libero. Aliquam vestibulum, felis eu fringilla elementum, nibh nunc tincidunt ex, quis vulputate nunc erat
-          eu quam. Phasellus rutrum bibendum lacinia. Fusce aliquam aliquet lectus, eget gravida purus lobortis id.
-          Curabitur viverra quam a risus sagittis maximus.
-        </p>
-        <!-- <div class="controls w-full flex my-2">
-                        <USelect class="min-w-32" v-model="selectedStartskog" :items="[
-                            { label: 'Äldre skog som inte varit kalavverkad tidigare', value: 'naturskog' },
-                            { label: 'Tidigare kalavverkad skog', value: 'produktionsskog_' }
-                        ]" label="Välj startskog" />
-                        <USelect class="min-w-32" v-model="selectedSingleFramework" :items="frameworkOptions"
-                            label="Välj skötselmetod" />
-                    </div> -->
         <ForestryChartDisplay :selectedFrameworks="props.parentSelectedFrameworks ?? [selectedSingleFramework]"
           :selectedArtkategori="isFrameworkCompareMode ? [selectedCompareArtkategori] : selectedArtkategori"
           :frameworkComparisonMode="isFrameworkCompareMode" :chartType="chartType" :singleFrameworkSelection="true"
           :selectedStartskog="props.currentStartskog" :currentTimeValue="props.currentTimeValue" />
+        <div class="px-4 pb-4 text-xs text-muted">
+          Mängden av olika grupper svampar i förhållande till förekomsten i äldre skog/före avverkning (%).
+        </div>
       </div>
     </div>
   </div>
@@ -272,19 +198,25 @@ function ToggleChartType2() {
 }
 
 const matsvampVariantOptions = [
-  { label: 'Standard matsvampar', value: 'standard' },
+  { label: 'Alla matsvampar', value: 'standard' },
   { label: 'Goda matsvampar', value: 'goda' },
   { label: 'Kg matsvampar', value: 'kg' },
 ]
 
 const selectedMatsvampVariant = ref<'standard' | 'goda' | 'kg'>('standard')
 
+const matsvampDescription = computed(() => {
+  if (selectedMatsvampVariant.value === 'goda') {
+    return 'Mängden av alla goda matsvampar i förhållande till förekomsten i äldre skog/före avverkning (%).';
+  }
+  if (selectedMatsvampVariant.value === 'kg') {
+    return 'Färskvikten av alla matsvampar (kg/ha) under en säsong i förhållande till förekomsten i äldre skog/före avverkning. Medel- samt min-maxvärde.';
+  }
+  return 'Mängden av alla matsvampar i marken förhållande till förekomsten i äldre skog/före avverkning (%).';
+})
+
 const matsvampMaxY = computed(() => selectedMatsvampVariant.value === 'kg' ? 55 : 28)
 
-// Reactive selections:
-// Default: all frameworks selected
-const selectedFrameworks = ref(frameworkOptions.map(opt => opt.value))
-// Default: first artkategori option selected
 const selectedArtkategori = ref<string[]>([...defaultGrupperArtkategori]);
 
 const compareArtkategoriOptions = [
@@ -314,45 +246,6 @@ watch(() => props.parentSelectedFrameworks?.length, () => {
   }
 })
 
-
-// Color mapping for artkategorier
-const artkategoriColorMapping: Record<string, string> = {
-  "atheliales": "#8B5CF6",
-  "boletales": "#EC4899",
-  "cantharellales": "#0EA5E9",
-  "spindlingar": "#F97316",
-  "russulales": "#22C55E",
-  "thelephorales": "#A855F7",
-  "ascomycota": "#DC2626",
-  "matsvamp": "#eab308",
-  "goda matsvampar": "#eab308",
-  "rödlistade + signalarter": "#5eead4",
-  "total": "#808080"
-}
-
-// If exactly one framework is active (and we're not in singleFrameworkSelection),
-// color that framework by selected artkategori: total / matsvamp / rödlistade + signalarter
-// const legendOrder = ["naturskydd", "trakthygge", "skärmträd", "luckhuggning", "blädning"];
-
-// const activeFrameworkKeys = computed(() => {
-//   const selectedKeys = legendOrder.filter(key => props.selectedFrameworks.map(f => f.toLowerCase()).includes(key))
-//   return selectedKeys.filter(key => !inactiveFrameworkKeys.value.has(key))
-// })
-
-// const singleFrameworkOverrideColor = computed<string | null>(() => {
-//   if (props.singleFrameworkSelection) return null
-//   if (activeFrameworkKeys.value.length !== 1) return null
-//   const primaryCat = (props.selectedArtkategori?.[0] || '').toLowerCase()
-//   if (primaryCat === 'total') return '#808080'
-//   if (primaryCat === 'matsvamp') return '#eab308'
-//   if (primaryCat === 'rödlistade + signalarter') return '#14B8A6'
-//   return null
-// })
-
-// Tooltip formatting function
-// const tooltipFormat = (d: any) => {
-//     return `Time: ${chartX(d)} år, Value: ${chartLine2(d)}`
-// }
 
 </script>
 
