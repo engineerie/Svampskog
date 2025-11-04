@@ -3,35 +3,37 @@
     <!-- Dropdown to select which chart to display -->
 
     <div class="mt-2 ml-2 flex justify-between">
-      <UPopover :content="{
-        align: 'start',
-        side: 'bottom',
-        sideOffset: 8,
-      }">
-        <!-- <UButton variant="ghost" size="lg" icon="i-heroicons-chevron-up-down" :label="chartOptions.find(opt => opt.value === selectedChart)?.label || 'Välj diagram'" trailing /> -->
-        <div class="flex items-center cursor-pointer w-fit hover:bg-muted px-2">
-          <h1 class="text-neutral-800 text-md font-semibold leading-loose   pr-2 rounded-sm">
-            {{
-              chartOptions.find(opt => opt.value === selectedChart)?.label || 'Välj diagram'}}
-          </h1>
-          <Icon name="i-heroicons-chevron-up-down" class="size-4 " />
-        </div>
-
-
-        <template #content>
-          <div class="p-2 flex flex-col gap-2">
-            <UButton size="lg" v-for="opt in chartOptions" :key="opt.value" color="neutral" variant="ghost"
-              @click="selectedChart = opt.value">
-              {{ opt.label }}
-            </UButton>
-          </div>
-        </template>
-      </UPopover>
+      <USelect v-model="selectedChart" :items="chartOptions" value-key="value" option-attribute="label" size="lg"
+        variant="none" class="hover:cursor-pointer" :icon="selectedChartIcon" :ui="{ content: 'min-w-fit' }" />
       <div class="pr-4">
         <USelect v-if="selectedChart === 'grupper' && isFrameworkCompareMode" v-model="selectedCompareArtkategori"
-          :items="compareArtkategoriOptions" size="sm" placeholder="Välj svampgrupp" />
+          :items="compareArtkategoriOptions" option-attribute="label" value-key="value" size="md" variant="soft"
+          placeholder="Välj svampgrupp" class="hover:cursor-pointer rounded-full" :ui="{ content: 'min-w-fit' }"
+          :avatar="selectedCompareAvatar">
+          <template #item="{ item }">
+            <div class="flex items-center gap-2">
+              <img v-if="item.icon" :src="item.icon" alt="" class="size-5 rounded-sm object-contain" />
+              <span>{{ item.label }}</span>
+            </div>
+          </template>
+        </USelect>
         <USelect v-if="selectedChart === 'matsvampar'" v-model="selectedMatsvampVariant" :items="matsvampVariantOptions"
-          size="sm" placeholder="Välj dataset" />
+          option-attribute="label" value-key="value" placeholder="Välj dataset"
+          class="hover:cursor-pointer rounded-full" size="md" variant="soft" :ui="{ content: 'min-w-fit' }"
+          :icon="selectedMatsvampIcon">
+          <template #item="{ item }">
+            <div class="flex items-center gap-2">
+              <UIcon v-if="item.icon" :name="item.icon" class="size-4" />
+              <span>{{ item.label }}</span>
+            </div>
+          </template>
+          <template #selected="{ item }">
+            <div class="flex items-center gap-2">
+              <UIcon v-if="item?.icon" :name="item.icon" class="size-4" />
+              <span>{{ item?.label }}</span>
+            </div>
+          </template>
+        </USelect>
       </div>
 
 
@@ -114,15 +116,18 @@ const showDesc4 = ref(false)
 const showDesc5 = ref(false)
 
 const chartOptions = [
-  { label: 'Total mängd mykorrhizasvamp', value: 'skogsskole' },
-  { label: 'Naturvårdsarter', value: 'rodlistade' },
-  { label: 'Matsvampar', value: 'matsvampar' },
-  { label: 'Olika svampgrupper', value: 'grupper' }
+  { label: 'Total mängd mykorrhizasvamp', value: 'skogsskole', icon: 'i-fluent-shape-organic-20-filled' },
+  { label: 'Naturvårdssvampar', value: 'rodlistade', icon: 'i-material-symbols-award-star' },
+  { label: 'Matsvampar', value: 'matsvampar', icon: 'icon-park-solid:knife-fork' },
+  { label: 'Olika svampgrupper', value: 'grupper', icon: 'i-material-symbols-category-rounded' }
 ]
 const selectedChart = ref<string>(
   chartOptions.some(opt => opt.value === (props.selectedChart as any))
     ? (props.selectedChart as string)
     : chartOptions[0].value
+)
+const selectedChartIcon = computed(() =>
+  chartOptions.find(opt => opt.value === selectedChart.value)?.icon
 )
 const isFrameworkCompareMode = computed(() => (props.parentSelectedFrameworks?.length ?? 0) === 2)
 
@@ -198,12 +203,16 @@ function ToggleChartType2() {
 }
 
 const matsvampVariantOptions = [
-  { label: 'Alla matsvampar', value: 'standard' },
-  { label: 'Goda matsvampar', value: 'goda' },
-  { label: 'Kg matsvampar', value: 'kg' },
+  { label: 'Alla matsvampar', value: 'standard', icon: 'i-lineicons-mushroom-1' },
+  { label: 'Goda matsvampar', value: 'goda', icon: 'i-heroicons-star-16-solid' },
+  { label: 'Kg matsvampar', value: 'kg', icon: 'i-material-symbols-scale-outline-rounded' },
 ]
 
 const selectedMatsvampVariant = ref<'standard' | 'goda' | 'kg'>('standard')
+
+const selectedMatsvampIcon = computed(() =>
+  matsvampVariantOptions.find(opt => opt.value === selectedMatsvampVariant.value)?.icon
+)
 
 const matsvampDescription = computed(() => {
   if (selectedMatsvampVariant.value === 'goda') {
@@ -220,16 +229,76 @@ const matsvampMaxY = computed(() => selectedMatsvampVariant.value === 'kg' ? 55 
 const selectedArtkategori = ref<string[]>([...defaultGrupperArtkategori]);
 
 const compareArtkategoriOptions = [
-  { label: 'Atheliales', value: 'atheliales' },
-  { label: 'Boletales', value: 'boletales' },
-  { label: 'Cantharellales', value: 'cantharellales' },
-  { label: 'Spindlingar', value: 'spindlingar' },
-  { label: 'Russulales', value: 'russulales' },
-  { label: 'Thelephorales', value: 'thelephorales' },
-  { label: 'Sporsäckssvampar', value: 'ascomycota' },
+  {
+    label: 'Skinnsvampar',
+    value: 'atheliales',
+    icon: '/images/svampgrupp/skinnsvamp.png',
+    avatar: {
+      src: '/images/svampgrupp/skinnsvamp.png',
+      alt: 'Skinnsvampar'
+    }
+  },
+  {
+    label: 'Soppar',
+    value: 'boletales',
+    icon: '/images/svampgrupp/sopp.png',
+    avatar: {
+      src: '/images/svampgrupp/sopp.png',
+      alt: 'Soppar'
+    }
+  },
+  {
+    label: 'Kantarellsläktingar',
+    value: 'cantharellales',
+    icon: '/images/svampgrupp/kantarell.png',
+    avatar: {
+      src: '/images/svampgrupp/kantarell.png',
+      alt: 'Kantarellsläktingar'
+    }
+  },
+  {
+    label: 'Spindelskivlingar',
+    value: 'spindlingar',
+    icon: '/images/svampgrupp/hattsvamp.png',
+    avatar: {
+      src: '/images/svampgrupp/hattsvamp.png',
+      alt: 'Spindelskivlingar'
+    }
+  },
+  {
+    label: 'Kremlor & riskor',
+    value: 'russulales',
+    icon: '/images/svampgrupp/hattsvamp.png',
+    avatar: {
+      src: '/images/svampgrupp/hattsvamp.png',
+      alt: 'Kremlor & riskor'
+    }
+  },
+  {
+    label: 'Tagg- och tomentelloida svampar',
+    value: 'thelephorales',
+    icon: '/images/svampgrupp/taggsvamp.png',
+    avatar: {
+      src: '/images/svampgrupp/taggsvamp.png',
+      alt: 'Tagg- och tomentelloida svampar'
+    }
+  },
+  {
+    label: 'Sporsäckssvampar',
+    value: 'ascomycota',
+    icon: '/images/svampgrupp/skalsvamp.png',
+    avatar: {
+      src: '/images/svampgrupp/skalsvamp.png',
+      alt: 'Sporsäckssvampar'
+    }
+  }
 ]
 
 const selectedCompareArtkategori = ref(compareArtkategoriOptions[0].value)
+
+const selectedCompareAvatar = computed(() =>
+  compareArtkategoriOptions.find(opt => opt.value === selectedCompareArtkategori.value)?.avatar
+)
 
 watch([selectedChart, isFrameworkCompareMode], ([chart, compare]) => {
   if (!(chart === 'grupper' && compare)) {

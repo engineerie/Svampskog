@@ -1,20 +1,23 @@
 <template>
-  <div class="custom-area" ref="rootEl" :style="{ '--vis-area-stroke-color': 'none' }">
+  <div class="custom-area" ref="rootEl">
     <ClientOnly>
       <VisBulletLegend v-if="isMounted && chartReady && legendItems.length" :items="legendItems"
         :onLegendItemClick="handleLegendItemClick" class="mx-4 flex flex-wrap gap-2" />
       <VisXYContainer v-if="isMounted && chartReady" :data="chartData.length ? chartData : [emptyDataPoint]"
         :height="120" :margin="margin" :xDomain="xDomain" :yDomain="yDomain">
         <template v-if="props.chartType === 'area' && props.singleFrameworkSelection && !props.frameworkComparisonMode">
+
           <VisArea :duration=1 :x="xAccessor" :y="stackedYAccessors" :color="stackedColors"
             :interpolateMissingData="true" />
+
+
 
           <!-- <VisLine v-for="cfg in stackedLineConfigs" :key="cfg.key + '-stack-line'" :x="xAccessor" :y="cfg.accessor"
             :color="() => cfg.color" :duration=1 /> -->
           <!-- <VisCrosshair v-if="hasActiveSeries" :template="crosshairTemplate" />
           <VisTooltip v-if="hasActiveSeries" :horizontalShift="30" /> -->
           <VisPlotband :duration=1 v-if="hasActiveSeries && currentTimeX !== null" :key="plotbandRenderKey" axis="x"
-            :from="-7" :to="currentTimeX" :color="'rgba(255, 255, 255, 0.4)'" :zIndex="20" />
+            :from="-7" :to="currentTimeX" :color="'rgba(255, 255, 255, 0.7)'" :zIndex="20" />
           <VisPlotline :duration=1 v-if="hasActiveSeries" :value="currentTimeX" color="rgba(234,88,12,1)" axis="x"
             labelOrientation="vertical" :zIndex="20" :lineWidth="1" />
 
@@ -26,10 +29,10 @@
             :interpolateMissingData="true" :zIndex="1" />
           <VisLine v-for="fw in activeFrameworks" :key="fw.key + '-compare-line'" :x="xAccessor"
             :y="(d: any) => getComparisonValue(d, fw.key, comparisonCategory)"
-            :color="() => (hexToRgba(fw.colorLine || fw.color, 0.4))" :duration=1 />
+            :color="() => (hexToRgba(fw.colorLine || fw.color, 0.6))" :duration=1 />
 
           <VisPlotband :duration=1 v-if="hasActiveSeries && currentTimeX !== null" :key="plotbandRenderKey" axis="x"
-            :from="-7" :to="currentTimeX" :color="'rgba(255, 255, 255, 0.4)'" :zIndex="20" />
+            :from="-7" :to="currentTimeX" :color="'rgba(255, 255, 255, 0.7)'" :zIndex="20" />
           <VisPlotline :duration=1 v-if="hasActiveSeries" :value="currentTimeX" color="rgba(234,88,12,1)" axis="x"
             labelOrientation="vertical" :zIndex="20" :lineWidth="1" />
 
@@ -43,13 +46,13 @@
 
           <!-- <VisCrosshair v-if="hasActiveSeries" :template="crosshairTemplate" /> -->
           <VisLine v-for="fw in activeFrameworks" :key="fw.key + '-line'" :x="xAccessor"
-            :y="(d: any) => getFrameworkValue(d, fw.key)" :color="() => (hexToRgba(fw.colorLine || fw.color, 0.5))"
+            :y="(d: any) => getFrameworkValue(d, fw.key)" :color="() => (hexToRgba(fw.colorLine || fw.color, 0.6))"
             :duration=1 />
           <VisLine v-if="isKgMatsvamp" v-for="fw in activeFrameworks" :key="fw.key + '-kg-x2'" :x="xAccessor"
-            :y="kgDoubleAccessorFor(fw.key)" :color="() => 'rgba(34,197,94, 0.5)'" :duration="1" />
+            :y="kgDoubleAccessorFor(fw.key)" :color="() => 'rgba(34,197,94, 0.6)'" :duration="1" />
           <!-- <VisTooltip v-if="hasActiveSeries" :horizontalShift="30" /> -->
           <VisPlotband :duration=1 v-if="hasActiveSeries && currentTimeX !== null" :key="plotbandRenderKey" axis="x"
-            :from="-7" :to="currentTimeX" :color="'rgba(255, 255, 255, 0.4)'" :zIndex="20" />
+            :from="-7" :to="currentTimeX" :color="'rgba(255, 255, 255, 0.7)'" :zIndex="20" />
           <VisPlotline :duration=1 v-if="hasActiveSeries" :value="currentTimeX" color="rgba(234,88,12,1)" axis="x"
             labelOrientation="vertical" :zIndex="20" :lineWidth="1" />
         </template>
@@ -656,16 +659,17 @@ const legendItems = computed<LegendItem[]>(() => {
       );
       const baseColor = primaryArtColor.value;
       const alpha = 0.5;
-      return frameworks.map(key => {
+      return frameworks.map((key, index) => {
         const label = mapFrameworkLabel(key);
         const inactive = inactiveFrameworkKeys.value.has(key);
+        const color = index === 1 ? '#c3a283' : baseColor;
         return {
           key,
           name: label,
           label,
-          color: baseColor,
-          colorArea: hexToRgba(baseColor, alpha),
-          colorLine: baseColor,
+          color,
+          colorArea: hexToRgba(color, alpha),
+          colorLine: color,
           inactive,
         };
       });
@@ -701,16 +705,17 @@ const legendItems = computed<LegendItem[]>(() => {
   );
   const baseColor = primaryArtColor.value;
   const alpha = 0.5;
-  return frameworks.map(key => {
+  return frameworks.map((key, index) => {
     const label = mapFrameworkLabel(key);
     const inactive = inactiveFrameworkKeys.value.has(key);
+    const color = index === 1 ? '#c3a283' : baseColor;
     return {
       key,
       name: label,
       label,
-      color: baseColor,
-      colorArea: hexToRgba(baseColor, alpha),
-      colorLine: baseColor,
+      color,
+      colorArea: hexToRgba(color, alpha),
+      colorLine: color,
       inactive,
     };
   });
@@ -1156,8 +1161,8 @@ const crosshairTemplate = (d: any): string => {
 
 <style>
 .custom-area {
-  --vis-area-fill-opacity: 0.7;
-  --vis-area-hover-fill-opacity: 0.5;
+  --vis-area-fill-opacity: 0.6;
+  --vis-area-hover-fill-opacity: 0.6;
   --vis-area-stroke-width: 0px;
   --vis-brush-handle-stroke-color: #ffffff00;
   --vis-axis-tick-color: #a3a3a37c;
