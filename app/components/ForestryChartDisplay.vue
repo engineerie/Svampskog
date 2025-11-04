@@ -464,11 +464,13 @@ const frameworkAnnotations: Record<string, Array<{ age: number; text: string }>>
     { age: 0, text: 'Avverkning' },
   ],
   luckhuggning: [
+    { age: 0, text: 'Avverkning 3 luckor' },
     { age: 30, text: 'Avverkning 3 luckor' },
     { age: 60, text: 'Avverkning 3 luckor' },
     { age: 90, text: 'Avverkning 3 luckor' },
   ],
   blädning: [
+    { age: 0, text: 'Avverkning 30% av träden' },
     { age: 30, text: 'Avverkning 30% av träden' },
     { age: 60, text: 'Avverkning 30% av träden' },
     { age: 90, text: 'Avverkning 30% av träden' },

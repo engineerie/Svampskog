@@ -73,77 +73,77 @@ entries:
     startskog: naturskog
     frameworks: blädning
     ålder: 0
-    klassning: 8
+    klassning: 0.8
   - artkategori: cantharellales
     startskog: naturskog
     frameworks: blädning
     ålder: 0.1
-    klassning: 1.5
+    klassning: 0.734166667
   - artkategori: cantharellales
     startskog: naturskog
     frameworks: blädning
     ålder: 10
-    klassning: 1.7
+    klassning: 0.735833333
   - artkategori: cantharellales
     startskog: naturskog
     frameworks: blädning
     ålder: 20
-    klassning: 0.25
+    klassning: 0.745833333
   - artkategori: cantharellales
     startskog: naturskog
     frameworks: blädning
     ålder: 30
-    klassning: 0.3
+    klassning: 0.763333333
   - artkategori: cantharellales
     startskog: naturskog
     frameworks: blädning
     ålder: 30.1
-    klassning: 0.225
+    klassning: 0.6975
   - artkategori: cantharellales
     startskog: naturskog
     frameworks: blädning
     ålder: 40
-    klassning: 0.255
+    klassning: 0.699916667
   - artkategori: cantharellales
     startskog: naturskog
     frameworks: blädning
     ålder: 50
-    klassning: 0.5
+    klassning: 0.719583333
   - artkategori: cantharellales
     startskog: naturskog
     frameworks: blädning
     ålder: 60
-    klassning: 0.55
+    klassning: 0.734166667
   - artkategori: cantharellales
     startskog: naturskog
     frameworks: blädning
     ålder: 60.1
-    klassning: 0.4125
+    klassning: 0.668333333
   - artkategori: cantharellales
     startskog: naturskog
     frameworks: blädning
     ålder: 70
-    klassning: 0.493
+    klassning: 0.688083333
   - artkategori: cantharellales
     startskog: naturskog
     frameworks: blädning
     ålder: 80
-    klassning: 0.6
+    klassning: 0.6885
   - artkategori: cantharellales
     startskog: naturskog
     frameworks: blädning
     ålder: 90
-    klassning: 0.65
+    klassning: 0.702833333
   - artkategori: cantharellales
     startskog: naturskog
     frameworks: blädning
     ålder: 90.1
-    klassning: 0.4875
+    klassning: 0.66375
   - artkategori: cantharellales
     startskog: naturskog
     frameworks: blädning
     ålder: 100
-    klassning: 0.595
+    klassning: 0.6875
   - artkategori: cantharellales
     startskog: naturskog
     frameworks: luckhuggning
@@ -153,77 +153,77 @@ entries:
     startskog: naturskog
     frameworks: luckhuggning
     ålder: 0
-    klassning: 8
+    klassning: 0.8
   - artkategori: cantharellales
     startskog: naturskog
     frameworks: luckhuggning
     ålder: 0.1
-    klassning: 1.5
+    klassning: 0.668333333
   - artkategori: cantharellales
     startskog: naturskog
     frameworks: luckhuggning
     ålder: 10
-    klassning: 1.7
+    klassning: 0.671666667
   - artkategori: cantharellales
     startskog: naturskog
     frameworks: luckhuggning
     ålder: 20
-    klassning: 0.25
+    klassning: 0.691666667
   - artkategori: cantharellales
     startskog: naturskog
     frameworks: luckhuggning
     ålder: 30
-    klassning: 0.3
+    klassning: 0.726666667
   - artkategori: cantharellales
     startskog: naturskog
     frameworks: luckhuggning
     ålder: 30.1
-    klassning: 0.225
+    klassning: 0.595
   - artkategori: cantharellales
     startskog: naturskog
     frameworks: luckhuggning
     ålder: 40
-    klassning: 0.255
+    klassning: 0.599833333
   - artkategori: cantharellales
     startskog: naturskog
     frameworks: luckhuggning
     ålder: 50
-    klassning: 0.5
+    klassning: 0.639166667
   - artkategori: cantharellales
     startskog: naturskog
     frameworks: luckhuggning
     ålder: 60
-    klassning: 0.55
+    klassning: 0.668333333
   - artkategori: cantharellales
     startskog: naturskog
     frameworks: luckhuggning
     ålder: 60.1
-    klassning: 0.4125
+    klassning: 0.536666667
   - artkategori: cantharellales
     startskog: naturskog
     frameworks: luckhuggning
     ålder: 70
-    klassning: 0.493
+    klassning: 0.576166667
   - artkategori: cantharellales
     startskog: naturskog
     frameworks: luckhuggning
     ålder: 80
-    klassning: 0.6
+    klassning: 0.577
   - artkategori: cantharellales
     startskog: naturskog
     frameworks: luckhuggning
     ålder: 90
-    klassning: 0.65
+    klassning: 0.605666667
   - artkategori: cantharellales
     startskog: naturskog
     frameworks: luckhuggning
     ålder: 90.1
-    klassning: 0.4875
+    klassning: 0.5275
   - artkategori: cantharellales
     startskog: naturskog
     frameworks: luckhuggning
     ålder: 100
-    klassning: 0.595
+    klassning: 0.575
   - artkategori: cantharellales
     startskog: naturskog
     frameworks: skärmträd
@@ -443,72 +443,82 @@ entries:
     startskog: produktionsskog_
     frameworks: blädning
     ålder: 0.1
-    klassning: 1.5
+    klassning: 0.6425
   - artkategori: cantharellales
     startskog: produktionsskog_
     frameworks: blädning
     ålder: 10
-    klassning: 1.7
+    klassning: 0.644166667
+  - artkategori: cantharellales
+    startskog: produktionsskog_
+    frameworks: blädning
+    ålder: 11
+    klassning: 0.644166667
   - artkategori: cantharellales
     startskog: produktionsskog_
     frameworks: blädning
     ålder: 20
-    klassning: 0.25
+    klassning: 0.654166667
+  - artkategori: cantharellales
+    startskog: produktionsskog_
+    frameworks: blädning
+    ålder: 21
+    klassning: 0.654166667
   - artkategori: cantharellales
     startskog: produktionsskog_
     frameworks: blädning
     ålder: 30
-    klassning: 0.3
+    klassning: 0.671666667
   - artkategori: cantharellales
     startskog: produktionsskog_
     frameworks: blädning
     ålder: 30.1
-    klassning: 0.225
+    klassning: 0.614166667
   - artkategori: cantharellales
     startskog: produktionsskog_
     frameworks: blädning
     ålder: 40
-    klassning: 0.255
+    klassning: 0.616583333
   - artkategori: cantharellales
     startskog: produktionsskog_
     frameworks: blädning
     ålder: 50
-    klassning: 0.5
+    klassning: 0.63625
   - artkategori: cantharellales
     startskog: produktionsskog_
     frameworks: blädning
     ålder: 60
-    klassning: 0.55
+    klassning: 0.650833333
   - artkategori: cantharellales
     startskog: produktionsskog_
     frameworks: blädning
     ålder: 60.1
-    klassning: 0.4125
+    klassning: 0.593333333
   - artkategori: cantharellales
     startskog: produktionsskog_
     frameworks: blädning
     ålder: 70
-    klassning: 0.493
+    klassning: 0.613083333
   - artkategori: cantharellales
     startskog: produktionsskog_
     frameworks: blädning
     ålder: 80
-    klassning: 0.6
+    klassning: 0.6135
   - artkategori: cantharellales
     startskog: produktionsskog_
     frameworks: blädning
     ålder: 90
-    klassning: 0.65
+    klassning: 0.627833333
   - artkategori: cantharellales
     startskog: produktionsskog_
     frameworks: blädning
     ålder: 90.1
-    klassning: 0.4875
+    klassning: 0.58875
   - artkategori: cantharellales
     startskog: produktionsskog_
     frameworks: blädning
     ålder: 100
-    klassning: 0.595
+    klassning: 0.6125
   - artkategori: cantharellales
     startskog: produktionsskog_
     frameworks: luckhuggning
@@ -523,72 +533,72 @@ entries:
     startskog: produktionsskog_
     frameworks: luckhuggning
     ålder: 0.1
-    klassning: 1.5
+    klassning: 0.585
   - artkategori: cantharellales
     startskog: produktionsskog_
     frameworks: luckhuggning
     ålder: 10
-    klassning: 1.7
+    klassning: 0.588333333
   - artkategori: cantharellales
     startskog: produktionsskog_
     frameworks: luckhuggning
     ålder: 20
-    klassning: 0.25
+    klassning: 0.608333333
   - artkategori: cantharellales
     startskog: produktionsskog_
     frameworks: luckhuggning
     ålder: 30
-    klassning: 0.3
+    klassning: 0.643333333
   - artkategori: cantharellales
     startskog: produktionsskog_
     frameworks: luckhuggning
     ålder: 30.1
-    klassning: 0.225
+    klassning: 0.528333333
   - artkategori: cantharellales
     startskog: produktionsskog_
     frameworks: luckhuggning
     ålder: 40
-    klassning: 0.255
+    klassning: 0.533166667
   - artkategori: cantharellales
     startskog: produktionsskog_
     frameworks: luckhuggning
     ålder: 50
-    klassning: 0.5
+    klassning: 0.5725
   - artkategori: cantharellales
     startskog: produktionsskog_
     frameworks: luckhuggning
     ålder: 60
-    klassning: 0.55
+    klassning: 0.601666667
   - artkategori: cantharellales
     startskog: produktionsskog_
     frameworks: luckhuggning
     ålder: 60.1
-    klassning: 0.4125
+    klassning: 0.486666667
   - artkategori: cantharellales
     startskog: produktionsskog_
     frameworks: luckhuggning
     ålder: 70
-    klassning: 0.493
+    klassning: 0.526166667
   - artkategori: cantharellales
     startskog: produktionsskog_
     frameworks: luckhuggning
     ålder: 80
-    klassning: 0.6
+    klassning: 0.527
   - artkategori: cantharellales
     startskog: produktionsskog_
     frameworks: luckhuggning
     ålder: 90
-    klassning: 0.65
+    klassning: 0.555666667
   - artkategori: cantharellales
     startskog: produktionsskog_
     frameworks: luckhuggning
     ålder: 90.1
-    klassning: 0.4875
+    klassning: 0.4775
   - artkategori: cantharellales
     startskog: produktionsskog_
     frameworks: luckhuggning
     ålder: 100
-    klassning: 0.595
+    klassning: 0.525
   - artkategori: cantharellales
     startskog: produktionsskog_
     frameworks: skärmträd
