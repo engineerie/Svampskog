@@ -2,14 +2,14 @@
   <div>
     <!-- Dropdown to select which chart to display -->
 
-    <div class="mt-2 ml-2 flex justify-between">
-      <USelect v-model="selectedChart" :items="chartOptions" value-key="value" option-attribute="label" size="lg"
+    <div class="mt-2 mb-1 flex justify-between">
+      <USelect v-model="selectedChart" :items="chartOptions" value-key="value" option-attribute="label" size="xl"
         variant="none" class="hover:cursor-pointer" :icon="selectedChartIcon" :ui="{ content: 'min-w-fit' }" />
-      <div class="pr-4">
+      <div class="pr-2">
         <USelect v-if="selectedChart === 'grupper' && isFrameworkCompareMode" v-model="selectedCompareArtkategori"
-          :items="compareArtkategoriOptions" option-attribute="label" value-key="value" size="md" variant="soft"
-          placeholder="Välj svampgrupp" class="hover:cursor-pointer rounded-full" :ui="{ content: 'min-w-fit' }"
-          :avatar="selectedCompareAvatar">
+          :items="compareArtkategoriOptions" option-attribute="label" value-key="value" size="lg" variant="soft"
+          placeholder="Välj svampgrupp" class="hover:cursor-pointer rounded-full"
+          :ui="{ content: 'min-w-fit', value: 'hidden sm:flex', base: 'min-h-8' }" :avatar="selectedCompareAvatar">
           <template #item="{ item }">
             <div class="flex items-center gap-2">
               <img v-if="item.icon" :src="item.icon" alt="" class="size-5 rounded-sm object-contain" />
@@ -18,19 +18,18 @@
           </template>
         </USelect>
         <USelect v-if="selectedChart === 'matsvampar'" v-model="selectedMatsvampVariant" :items="matsvampVariantOptions"
-          option-attribute="label" value-key="value" placeholder="Välj dataset"
-          class="hover:cursor-pointer rounded-full" size="md" variant="soft" :ui="{ content: 'min-w-fit' }"
+          :content="{
+            align: 'end',
+            side: 'bottom',
+            sideOffset: 8
+          }" option-attribute="label" value-key="value" placeholder="Välj dataset"
+          class="hover:cursor-pointer rounded-full" size="lg" variant="soft"
+          :ui="{ content: 'w-fit shrink-0', value: 'hidden sm:flex gap-0', base: 'min-h-8', item: 'gap-0' }"
           :icon="selectedMatsvampIcon">
           <template #item="{ item }">
             <div class="flex items-center gap-2">
               <UIcon v-if="item.icon" :name="item.icon" class="size-4" />
               <span>{{ item.label }}</span>
-            </div>
-          </template>
-          <template #selected="{ item }">
-            <div class="flex items-center gap-2">
-              <UIcon v-if="item?.icon" :name="item.icon" class="size-4" />
-              <span>{{ item?.label }}</span>
             </div>
           </template>
         </USelect>
@@ -116,10 +115,10 @@ const showDesc4 = ref(false)
 const showDesc5 = ref(false)
 
 const chartOptions = [
-  { label: 'Total mängd mykorrhizasvamp', value: 'skogsskole', icon: 'i-fluent-shape-organic-20-filled' },
+  { label: 'Total mängd', value: 'skogsskole', icon: 'i-fluent-shape-organic-20-filled' },
   { label: 'Naturvårdssvampar', value: 'rodlistade', icon: 'i-material-symbols-award-star' },
   { label: 'Matsvampar', value: 'matsvampar', icon: 'icon-park-solid:knife-fork' },
-  { label: 'Olika svampgrupper', value: 'grupper', icon: 'i-material-symbols-category-rounded' }
+  { label: 'Olika grupper', value: 'grupper', icon: 'i-material-symbols-category-rounded' }
 ]
 const selectedChart = ref<string>(
   chartOptions.some(opt => opt.value === (props.selectedChart as any))
@@ -204,7 +203,7 @@ function ToggleChartType2() {
 
 const matsvampVariantOptions = [
   { label: 'Alla matsvampar', value: 'standard', icon: 'i-lineicons-mushroom-1' },
-  { label: 'Goda matsvampar', value: 'goda', icon: 'i-heroicons-star-16-solid' },
+  { label: 'Populära matsvampar', value: 'goda', icon: 'i-heroicons-star-16-solid' },
   { label: 'Kg matsvampar', value: 'kg', icon: 'i-material-symbols-scale-outline-rounded' },
 ]
 

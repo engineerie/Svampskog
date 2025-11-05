@@ -72,14 +72,14 @@
       </div>
 
       <div class="flex justify-center sm:p-1 border-b border-muted ">
-        <div class="absolute top-3 left-3 flex flex-col gap-1 pointer-events-auto">
+        <!-- <div class="absolute top-3 left-3 flex flex-col gap-1 pointer-events-auto">
           <USwitch :ui="{ root: 'flex-row-reverse justify-between' }" color="warning" v-model="devSaveClicks"
             label="Spara klick (dev)" />
           <USwitch :ui="{ root: 'flex-row-reverse justify-between' }" color="warning" v-model="devOverlayLabelsVisible"
             label="Visa myc-etiketter (dev)" />
           <USwitch :ui="{ root: 'flex-row-reverse justify-between' }" color="warning"
             v-model="devNaturvardCounterVisible" label="Visa naturvårdssiffra (dev)" />
-        </div>
+        </div> -->
 
 
         <div
@@ -94,11 +94,11 @@
               icon="i-heroicons-chevron-up" class="ring-muted rounded-full shadow "
               :variant="infoDrawerOpen ? 'subtle' : 'outline'" />
             <template #body>
-              <UButton class="absolute top-1.5 right-1.5 z-50" variant="ghost" color="neutral" label="Stäng"
-                @click="infoDrawerOpen = false" />
+              <UButton class="absolute top-1.5 right-1.5 z-50" variant="ghost" color="neutral"
+                @click="infoDrawerOpen = false" icon="i-heroicons-x-mark" />
               <div class="relative">
-                <UTabs v-model="infoActiveTab" :items="panelTabs" variant="pill" size="xs" color="neutral"
-                  :ui="{ indicator: 'bg-white shadow', trigger: 'data-[state=active]:text-neutral-700 ', list: 'bg-muted gap-2 m-1.5 w-fit', root: 'gap-0' }">
+                <UTabs v-model="infoActiveTab" :items="panelTabs" variant="link" size="lg" color="primary"
+                  :ui="{ root: 'gap-0', content: 'border-t border-muted/50' }">
 
                   <template #text>
                     <div class="sm:grid divide-y sm:divide-y-0 sm:divide-x divide-muted/70 transition-all relative"
@@ -270,8 +270,9 @@
         <div class="flex sm:justify-center items-center overflow-x-scroll md:overflow-hidden my-1 sm:my-0 gap-4 px-3 ">
           <UPopover class="shrink-0 cursor-pointer h-fit z-50" v-model:open="open2"
             :popper="{ placement: 'bottom-start' }">
-            <UButton :variant="isMobile ? 'outline' : 'outline'" color="neutral" icon="i-heroicons-clock" size="lg"
-              :label="isMobile ? null : currentStartskog.label" class="rounded-full ring-muted">
+            <UButton :variant="isMobile ? 'soft' : 'soft'" color="neutral"
+              :icon="currentStartskog.value == 'naturskog' ? 'i-material-symbols-light-forest-rounded' : 'i-ph-farm'"
+              size="lg" :label="isMobile ? null : currentStartskog.label" class="rounded-full ring-muted">
             </UButton>
             <template #content>
               <div class="text-sm w-64 p-3 text-neutral-500 border-b border-neutral-200 ">
@@ -1758,8 +1759,8 @@ const frameworks = [
 
 // Startskog array
 const startskog = [
-  { label: "Kontinuitetsskog", value: "naturskog" },
-  { label: "Kalavverkad", value: "produktionsskog_" },
+  { label: "Inte kalavverkad", value: "naturskog" },
+  { label: "Åkermark eller kalavverkad", value: "produktionsskog_" },
 ];
 
 // Current framework and startskog

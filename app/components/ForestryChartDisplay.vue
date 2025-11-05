@@ -1,8 +1,26 @@
 <template>
   <div class="custom-area" ref="rootEl">
     <ClientOnly>
-      <VisBulletLegend v-if="isMounted && chartReady && legendItems.length" :items="legendItems"
-        :onLegendItemClick="handleLegendItemClick" class="mx-4 flex flex-wrap gap-2" />
+      <VisBulletLegend
+        v-if="isMounted && chartReady && legendItems.length && !(props.singleFrameworkSelection && !props.frameworkComparisonMode)"
+        :items="legendItems" :onLegendItemClick="handleLegendItemClick" class="mx-4 flex flex-wrap gap-2" />
+      <div
+        v-if="isMounted && chartReady && legendItems.length && (props.singleFrameworkSelection && !props.frameworkComparisonMode)"
+        class="mx-4 flex flex-wrap gap-2">
+        <UButton v-for="item in legendItems" :key="item.key" type="button" variant="ghost" color="neutral" size="sm"
+          class="flex items-center gap-2 rounded-full px-3 py-1 hover:opacity-95 transition ring-muted/50"
+          @click="handleLegendItemClick(item)">
+          <div v-if="item.icon" class="h-5 w-5" :style="{
+            backgroundColor: item.color || item.colorLine || item.colorArea || '#000',
+            WebkitMask: `url(${item.icon}) center / contain no-repeat`,
+            mask: `url(${item.icon}) center / contain no-repeat`,
+            opacity: item.inactive ? 0.2 : 1,
+          }" />
+          <span class="text-slate-900 dark:text-slate-50" :style="{ opacity: item.inactive ? 0.2 : 1 }">
+            {{ item.label }}
+          </span>
+        </UButton>
+      </div>
       <VisXYContainer v-if="isMounted && chartReady" :data="chartData.length ? chartData : [emptyDataPoint]"
         :height="120" :margin="margin" :xDomain="xDomain" :yDomain="yDomain">
         <template v-if="props.chartType === 'area' && props.singleFrameworkSelection && !props.frameworkComparisonMode">
@@ -375,7 +393,7 @@ const artkategoriColorMapping: Record<string, string> = {
   "cantharellales": "#0EA5E9",
   "spindlingar": "#F97316",
   "russulales": "#22C55E",
-  "thelephorales": "#A855F7",
+  "thelephorales": "#eab308",
   "ascomycota": "#DC2626",
   "matsvamp": "#eab308",
   "goda matsvampar": "#eab308",
@@ -409,6 +427,16 @@ const artkategoriLabelMap: Record<string, string> = {
   'rödlistade + signalarter': 'Naturvårdssvampar',
   'total': 'Total'
 };
+
+const artkategoriIconMap: Record<string, string> = {
+  atheliales: '/images/svampgrupp/skinnsvamp.png',
+  boletales: '/images/svampgrupp/sopp.png',
+  cantharellales: '/images/svampgrupp/kantarell.png',
+  spindlingar: '/images/svampgrupp/hattsvamp.png',
+  russulales: '/images/svampgrupp/hattsvamp.png',
+  thelephorales: '/images/svampgrupp/taggsvamp.png',
+  ascomycota: '/images/svampgrupp/skalsvamp.png',
+}
 
 const frameworkAnnotations: Record<string, Array<{ age: number; text: string }>> = {
   trakthygge: [
@@ -696,6 +724,7 @@ const legendItems = computed<LegendItem[]>(() => {
         colorArea: hexToRgba(color, 0.5),
         colorLine: color,
         inactive: inactiveArtkategoriKeys.value.has(key),
+        icon: artkategoriIconMap[key],
       };
     });
   }
