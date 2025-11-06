@@ -16,7 +16,7 @@
             mask: `url(${item.icon}) center / contain no-repeat`,
             opacity: item.inactive ? 0.2 : 1,
           }" />
-          <span class="text-slate-900 dark:text-slate-50" :style="{ opacity: item.inactive ? 0.2 : 1 }">
+          <span :style="{ opacity: item.inactive ? 0.2 : 1 }">
             {{ item.label }}
           </span>
         </UButton>
@@ -147,11 +147,13 @@ const { data: russulalesDataDoc } = await useAsyncData('russulales-skogsbruk', (
   queryCollection('russulalesSkogsbruk').first()
 )
 
-const { data: thelephoralesDataDoc } = await useAsyncData('thelephorales-skogsbruk', () =>
-  queryCollection('thelephoralesSkogsbruk').first()
-)
+
 const { data: ascomycotaDataDoc } = await useAsyncData('ascomycota-skogsbruk', () =>
   queryCollection('ascomycotaSkogsbruk').first()
+)
+
+const { data: thelephoralesDataDoc } = await useAsyncData('thelephorales-skogsbruk', () =>
+  queryCollection('thelephoralesSkogsbruk').first()
 )
 
 const { data: totalSvamparDataDoc } = await useAsyncData('total-svampar-skogsbruk', () =>
@@ -168,8 +170,8 @@ const boletalesDataset = computed(() => Array.isArray(boletalesDataDoc.value?.en
 const cantharellalesDataset = computed(() => Array.isArray(cantharellalesDataDoc.value?.entries) ? cantharellalesDataDoc.value.entries : [])
 const spindlingarDataset = computed(() => Array.isArray(spindlingarDataDoc.value?.entries) ? spindlingarDataDoc.value.entries : [])
 const russulalesDataset = computed(() => Array.isArray(russulalesDataDoc.value?.entries) ? russulalesDataDoc.value.entries : [])
-const thelephoralesDataset = computed(() => Array.isArray(thelephoralesDataDoc.value?.entries) ? thelephoralesDataDoc.value.entries : [])
 const ascomycotaDataset = computed(() => Array.isArray(ascomycotaDataDoc.value?.entries) ? ascomycotaDataDoc.value.entries : [])
+const thelephoralesDataset = computed(() => Array.isArray(thelephoralesDataDoc.value?.entries) ? thelephoralesDataDoc.value.entries : [])
 const totalDataset = computed(() => Array.isArray(totalSvamparDataDoc.value?.entries) ? totalSvamparDataDoc.value.entries : [])
 
 
@@ -233,9 +235,13 @@ const stackedCategories = computed<string[]>(() => {
     const selected = props.selectedArtkategori?.[0]
     return selected ? [selected.toLowerCase()] : []
   }
-  return (props.selectedArtkategori || [])
+  // sort according to artkategoriLegendOrder so the stacked areas follow the same order as the legend
+  const raw = (props.selectedArtkategori || [])
     .map(a => (a || '').toLowerCase())
     .filter(a => !inactiveArtkategoriKeys.value.has(a))
+  const ordered = artkategoriLegendOrder.filter(key => raw.includes(key))
+  const extras = raw.filter(key => !artkategoriLegendOrder.includes(key))
+  return ordered.concat(extras)
 })
 
 const margin = { left: 10, right: 10, top: 10, bottom: 10 }
@@ -390,11 +396,12 @@ const plotbandRenderKey = computed(() => {
 const artkategoriColorMapping: Record<string, string> = {
   "atheliales": "#8B5CF6",
   "boletales": "#EC4899",
-  "cantharellales": "#0EA5E9",
+  "cantharellales": "#eab308",
   "spindlingar": "#F97316",
   "russulales": "#22C55E",
-  "thelephorales": "#eab308",
   "ascomycota": "#DC2626",
+  "thelephorales": "#0EA5E9",
+
   "matsvamp": "#eab308",
   "goda matsvampar": "#eab308",
   "kg matsvamp": "#eab308",
@@ -403,12 +410,13 @@ const artkategoriColorMapping: Record<string, string> = {
 };
 const artkategoriLegendOrder = [
   'atheliales',
-  'boletales',
-  'cantharellales',
+  'ascomycota',
   'spindlingar',
   'russulales',
+
+  'boletales',
+  'cantharellales',
   'thelephorales',
-  'ascomycota',
   'matsvamp',
   'goda matsvampar',
   'rödlistade + signalarter',
@@ -420,8 +428,8 @@ const artkategoriLabelMap: Record<string, string> = {
   'cantharellales': 'Kantarellsläktingar',
   'spindlingar': 'Spindelskivlingar',
   'russulales': 'Kremlor & riskor',
-  'thelephorales': 'Tagg- och tomentelloida svampar',
   'ascomycota': 'Sporsäckssvampar',
+  'thelephorales': 'Tagg- och tomentelloida svampar',
   'matsvamp': 'Alla matsvampar',
   'goda matsvampar': 'Goda matsvampar',
   'rödlistade + signalarter': 'Naturvårdssvampar',
@@ -860,11 +868,12 @@ function resolveDatasetForCategory(category: string) {
   if (category === 'russulales') {
     return russulalesDataset.value;
   }
-  if (category === 'thelephorales') {
-    return thelephoralesDataset.value;
-  }
+
   if (category === 'ascomycota') {
     return ascomycotaDataset.value;
+  }
+  if (category === 'thelephorales') {
+    return thelephoralesDataset.value;
   }
   return [];
 }

@@ -115,7 +115,7 @@ const showDesc4 = ref(false)
 const showDesc5 = ref(false)
 
 const chartOptions = [
-  { label: 'Total mängd', value: 'skogsskole', icon: 'i-fluent-shape-organic-20-filled' },
+  { label: 'Total mängd mykorrhizasvampar', value: 'skogsskole', icon: 'i-fluent-shape-organic-20-filled' },
   { label: 'Naturvårdssvampar', value: 'rodlistade', icon: 'i-material-symbols-award-star' },
   { label: 'Matsvampar', value: 'matsvampar', icon: 'icon-park-solid:knife-fork' },
   { label: 'Olika grupper', value: 'grupper', icon: 'i-material-symbols-category-rounded' }

@@ -268,29 +268,36 @@
 
         </div>
         <div class="flex sm:justify-center items-center overflow-x-scroll md:overflow-hidden my-1 sm:my-0 gap-4 px-3 ">
+
           <UPopover class="shrink-0 cursor-pointer h-fit z-50" v-model:open="open2"
             :popper="{ placement: 'bottom-start' }">
-            <UButton :variant="isMobile ? 'soft' : 'soft'" color="neutral"
-              :icon="currentStartskog.value == 'naturskog' ? 'i-material-symbols-light-forest-rounded' : 'i-ph-farm'"
-              size="lg" :label="isMobile ? null : currentStartskog.label" class="rounded-full ring-muted">
+            <UButton :variant="isMobile ? 'soft' : 'soft'" color="neutral" size="lg" class="rounded-full ring-muted">
+              <div class="flex items-center gap-2">
+                <UIcon
+                  :name="currentStartskog.value == 'naturskog' ? 'i-material-symbols-light-forest-rounded' : 'i-ph-farm'"
+                  class="w-5 h-5" />
+                <span v-if="!isMobile">{{ currentStartskog.label }}</span>
+                <UIcon v-if="currentStartskog && currentStartskog.value" name="i-heroicons-chevron-down"
+                  class="w-4 h-4 " />
+              </div>
             </UButton>
             <template #content>
               <div class="text-sm w-64 p-3 text-neutral-500 border-b border-neutral-200 ">
-                Kort beskriving av betydelsen för skogens historik
+                Skogens historik påverkar särskilt förekomsten av naturvårdssvampar.
               </div>
               <div class="p-1 flex flex-col gap-1">
                 <div v-for="option in startskog" :key="option.value">
-                  <UButton @click="selectOption(option)" size="lg" color="white" variant="ghost"
-                    class="hover:bg-neutral-100 w-full cursor-pointer text-neutral-400" :class="{
-                      'w-full bg-neutral-100  text-neutral-800':
-                        currentStartskog.value === option.value,
-                    }">
-                    {{ option.label }}
+                  <UButton @click="selectOption(option)" size="lg" color="white" variant="ghost" :label="option.label"
+                    class="hover:bg-neutral-100 cursor-pointer text-neutral-400 w-full" :class="{
+                      ' bg-neutral-100 text-neutral-800': currentStartskog.value === option.value,
+                    }" :icon="option.value === 'naturskog' ? 'i-material-symbols-light-forest-rounded' : 'i-ph-farm'">
+
                   </UButton>
                 </div>
               </div>
             </template>
           </UPopover>
+
           <UTabs v-model="selectedTimeValue" :items="timeItems" :ui="{
             root: 'min-w-max flex-shrink-0',
             list: 'flex-nowrap rounded-xl bg-transparent -mb-1.5 gap-2',
@@ -1759,7 +1766,7 @@ const frameworks = [
 
 // Startskog array
 const startskog = [
-  { label: "Inte kalavverkad", value: "naturskog" },
+  { label: "Ständigt trädbevuxen mark", value: "naturskog" },
   { label: "Åkermark eller kalavverkad", value: "produktionsskog_" },
 ];
 
