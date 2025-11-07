@@ -1866,7 +1866,7 @@ const overlayIcons: Record<string, string> = {
   rottackeBladning: 'i-fluent-emoji-high-contrast-blue-square',
   seedTree: 'i-teenyicons-redwoodjs-outline',
   smaplantor: 'i-pepicons-pop-seedling-circle',
-  hogstubbar: 'i-fluent-emoji-high-contrast-wood',
+  hogstubbar: 'i-roentgen-wood',
   naturvardsarter: 'i-material-symbols-award-star-outline',
   tradplantor: 'i-hugeicons-plant-02',
 };
@@ -2542,7 +2542,7 @@ const timelineDetailState = reactive<Record<string, { skog: boolean; svamp: bool
 
 function ensureTimelineDetailState(key: string) {
   if (!timelineDetailState[key]) {
-    timelineDetailState[key] = { skog: false, svamp: false };
+    timelineDetailState[key] = { skog: true, svamp: true };
   }
 }
 
