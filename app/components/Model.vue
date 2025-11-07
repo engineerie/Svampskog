@@ -283,7 +283,7 @@
             </UButton>
             <template #content>
               <div class="text-sm w-64 p-3 text-neutral-500 border-b border-neutral-200 ">
-                Skogens historik påverkar särskilt förekomsten av naturvårdssvampar.
+                Har skogen varit kalavverkad tidigare?
               </div>
               <div class="p-1 flex flex-col gap-1">
                 <div v-for="option in startskog" :key="option.value">
@@ -1766,8 +1766,8 @@ const frameworks = [
 
 // Startskog array
 const startskog = [
-  { label: "Ständigt trädbevuxen mark", value: "naturskog" },
-  { label: "Åkermark eller kalavverkad", value: "produktionsskog_" },
+  { label: "Inte kalavverkad", value: "naturskog" },
+  { label: "Kalavverkad", value: "produktionsskog_" },
 ];
 
 // Current framework and startskog

@@ -112,66 +112,120 @@ import { PlotbandLabelPosition } from '@unovis/ts'
 import { capitalize } from 'lodash-es'
 import { useAsyncData } from '#app'
 
-const { data: matsvampDataDoc } = await useAsyncData('matsvamp-skogsbruk', () =>
-  queryCollection('matsvampSkogsbruk').first()
+type SkogsbrukSvamparRow = Record<string, string | number | undefined>
+type SkogsbrukSvampEntry = {
+  artkategori: string
+  startskog: string
+  frameworks: string
+  ["ålder"]: number
+  klassning: number
+}
+
+const svampCategoryFieldMap: Record<string, string> = {
+  matsvamp: 'Alla matsvampar',
+  'goda matsvampar': 'Goda matsvampar',
+  'rödlistade + signalarter': 'Signal + rödlistade',
+  atheliales: 'Atheliales',
+  boletales: 'Boletales',
+  cantharellales: 'Cantharellales',
+  spindlingar: 'Cortinariaceae',
+  russulales: 'Russulales',
+  thelephorales: 'Thelephorales',
+  ascomycota: 'Ascomyceter',
+}
+
+const methodToFrameworkMap: Record<string, string> = {
+  'trakthygge': 'trakthygge',
+  'blädning': 'blädning',
+  'luckhuggning': 'luckhuggning',
+  'skärm': 'skärmträd',
+  'skarm': 'skärmträd',
+  'ingen åtgärd': 'naturskydd',
+}
+
+function normalizeFrameworkKey(value: string) {
+  const key = (value || '').trim().toLowerCase()
+  if (!key) return ''
+  return methodToFrameworkMap[key] || key
+}
+
+function normalizeStartskog(value: unknown) {
+  if (typeof value === 'string') return value
+  if (typeof value === 'number') return String(value)
+  return ''
+}
+
+function toNumber(value: unknown): number {
+  if (typeof value === 'number') return value
+  if (typeof value === 'string') {
+    const normalized = value.replace(',', '.')
+    const parsed = Number(normalized)
+    return Number.isFinite(parsed) ? parsed : NaN
+  }
+  return NaN
+}
+
+const { data: skogsbrukSvamparDoc } = await useAsyncData('skogsbruk-svampar', () =>
+  queryCollection('skogsbrukSvampar').first()
 )
 
-const { data: godaMatsvampDataDoc } = await useAsyncData('goda-matsvampar-skogsbruk', () =>
-  queryCollection('godaMatsvamparSkogsbruk').first()
-)
+function extractSkogsbrukRows(payload: any): SkogsbrukSvamparRow[] {
+  if (!payload) return []
+  if (Array.isArray(payload)) return payload as SkogsbrukSvamparRow[]
+  if (Array.isArray(payload?.entries)) return payload.entries as SkogsbrukSvamparRow[]
+  if (Array.isArray(payload?.body)) return payload.body as SkogsbrukSvamparRow[]
+  if (Array.isArray(payload?.data)) return payload.data as SkogsbrukSvamparRow[]
+  return []
+}
+
+const skogsbrukSvamparRows = computed<SkogsbrukSvamparRow[]>(() => extractSkogsbrukRows(skogsbrukSvamparDoc.value))
+
+const svampCategoryDatasets = computed<Record<string, SkogsbrukSvampEntry[]>>(() => {
+  const map: Record<string, SkogsbrukSvampEntry[]> = {}
+  for (const row of skogsbrukSvamparRows.value) {
+    const frameworks = normalizeFrameworkKey(String((row?.metod ?? '')))
+    const startskog = normalizeStartskog(row?.startskog)
+    const age = toNumber(row?.['ålder'])
+    if (!Number.isFinite(age) || !frameworks) continue
+
+    for (const [key, fieldName] of Object.entries(svampCategoryFieldMap)) {
+      const klassning = toNumber(row?.[fieldName])
+      if (!Number.isFinite(klassning)) continue
+      if (!map[key]) map[key] = []
+      map[key].push({
+        artkategori: key,
+        startskog,
+        frameworks,
+        ['ålder']: age,
+        klassning,
+      })
+    }
+  }
+
+  Object.values(map).forEach(entries => entries.sort((a, b) => a['ålder'] - b['ålder']))
+  return map
+})
+
 const { data: kgMatsvampDataDoc } = await useAsyncData('kg-matsvamp-skogsbruk', () =>
   queryCollection('kgMatsvampSkogsbruk').first()
-)
-
-const { data: signalRodlistadeDataDoc } = await useAsyncData('signal-rodlistade-skogsbruk', () =>
-  queryCollection('signalRodlistadeSkogsbruk').first()
-)
-
-const { data: athelialesDataDoc } = await useAsyncData('atheliales-skogsbruk', () =>
-  queryCollection('athelialesSkogsbruk').first()
-)
-
-const { data: boletalesDataDoc } = await useAsyncData('boletales-skogsbruk', () =>
-  queryCollection('boletalesSkogsbruk').first()
-)
-
-const { data: cantharellalesDataDoc } = await useAsyncData('cantharellales-skogsbruk', () =>
-  queryCollection('cantharellalesSkogsbruk').first()
-)
-
-const { data: spindlingarDataDoc } = await useAsyncData('spindlingar-skogsbruk', () =>
-  queryCollection('spindlingarSkogsbruk').first()
-)
-
-const { data: russulalesDataDoc } = await useAsyncData('russulales-skogsbruk', () =>
-  queryCollection('russulalesSkogsbruk').first()
-)
-
-
-const { data: ascomycotaDataDoc } = await useAsyncData('ascomycota-skogsbruk', () =>
-  queryCollection('ascomycotaSkogsbruk').first()
-)
-
-const { data: thelephoralesDataDoc } = await useAsyncData('thelephorales-skogsbruk', () =>
-  queryCollection('thelephoralesSkogsbruk').first()
 )
 
 const { data: totalSvamparDataDoc } = await useAsyncData('total-svampar-skogsbruk', () =>
   queryCollection('totalSvamparSkogsbruk').first()
 )
 
-const matsvampDataset = computed(() => Array.isArray(matsvampDataDoc.value?.entries) ? matsvampDataDoc.value.entries : [])
-const godaMatsvampDataset = computed(() => Array.isArray(godaMatsvampDataDoc.value?.entries) ? godaMatsvampDataDoc.value.entries : [])
+const matsvampDataset = computed(() => svampCategoryDatasets.value['matsvamp'] ?? [])
+const godaMatsvampDataset = computed(() => svampCategoryDatasets.value['goda matsvampar'] ?? [])
 const kgMatsvampDataset = computed(() => Array.isArray(kgMatsvampDataDoc.value?.entries) ? kgMatsvampDataDoc.value.entries : [])
-const signalRodlistadeDataset = computed(() => Array.isArray(signalRodlistadeDataDoc.value?.entries) ? signalRodlistadeDataDoc.value.entries : [])
-const combinedRodlistadeDataset = computed(() => Array.isArray(signalRodlistadeDataset.value) ? signalRodlistadeDataset.value : [])
-const athelialesDataset = computed(() => Array.isArray(athelialesDataDoc.value?.entries) ? athelialesDataDoc.value.entries : [])
-const boletalesDataset = computed(() => Array.isArray(boletalesDataDoc.value?.entries) ? boletalesDataDoc.value.entries : [])
-const cantharellalesDataset = computed(() => Array.isArray(cantharellalesDataDoc.value?.entries) ? cantharellalesDataDoc.value.entries : [])
-const spindlingarDataset = computed(() => Array.isArray(spindlingarDataDoc.value?.entries) ? spindlingarDataDoc.value.entries : [])
-const russulalesDataset = computed(() => Array.isArray(russulalesDataDoc.value?.entries) ? russulalesDataDoc.value.entries : [])
-const ascomycotaDataset = computed(() => Array.isArray(ascomycotaDataDoc.value?.entries) ? ascomycotaDataDoc.value.entries : [])
-const thelephoralesDataset = computed(() => Array.isArray(thelephoralesDataDoc.value?.entries) ? thelephoralesDataDoc.value.entries : [])
+const signalRodlistadeDataset = computed(() => svampCategoryDatasets.value['rödlistade + signalarter'] ?? [])
+const combinedRodlistadeDataset = computed(() => signalRodlistadeDataset.value)
+const athelialesDataset = computed(() => svampCategoryDatasets.value['atheliales'] ?? [])
+const boletalesDataset = computed(() => svampCategoryDatasets.value['boletales'] ?? [])
+const cantharellalesDataset = computed(() => svampCategoryDatasets.value['cantharellales'] ?? [])
+const spindlingarDataset = computed(() => svampCategoryDatasets.value['spindlingar'] ?? [])
+const russulalesDataset = computed(() => svampCategoryDatasets.value['russulales'] ?? [])
+const ascomycotaDataset = computed(() => svampCategoryDatasets.value['ascomycota'] ?? [])
+const thelephoralesDataset = computed(() => svampCategoryDatasets.value['thelephorales'] ?? [])
 const totalDataset = computed(() => Array.isArray(totalSvamparDataDoc.value?.entries) ? totalSvamparDataDoc.value.entries : [])
 
 

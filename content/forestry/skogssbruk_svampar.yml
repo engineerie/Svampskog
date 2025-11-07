@@ -1,0 +1,1873 @@
+entries:
+  - startskog: produktionsskog_
+    metod: trakthygge
+    ålder: -7
+    Alla matsvampar: 25
+    Goda matsvampar: 10
+    Signal + rödlistade: 0.3
+    Atheliales: 26
+    Boletales: 12
+    Cantharellales: 0.7
+    Cortinariaceae: 16
+    Russulales: 19
+    Thelephorales: 5
+    Ascomyceter: 20
+  - startskog: produktionsskog_
+    metod: trakthygge
+    ålder: 0
+    Alla matsvampar: 25
+    Goda matsvampar: 10
+    Signal + rödlistade: 0.3
+    Atheliales: 26
+    Boletales: 12
+    Cantharellales: 0.7
+    Cortinariaceae: 16
+    Russulales: 19
+    Thelephorales: 5
+    Ascomyceter: 20
+  - startskog: produktionsskog_
+    metod: trakthygge
+    ålder: 0.1
+    Alla matsvampar: 0.75
+    Goda matsvampar: 0.25
+    Signal + rödlistade: 0.001
+    Atheliales: 0.8
+    Boletales: 0.55
+    Cantharellales: 0.01
+    Cortinariaceae: 0.75
+    Russulales: 0.5
+    Thelephorales: 0.7
+    Ascomyceter: 1.15
+  - startskog: produktionsskog_
+    metod: trakthygge
+    ålder: 10
+    Alla matsvampar: 2.55
+    Goda matsvampar: 1.35
+    Signal + rödlistade: 0.009
+    Atheliales: 4.5
+    Boletales: 1.8
+    Cantharellales: 0.03
+    Cortinariaceae: 1.5
+    Russulales: 1.35
+    Thelephorales: 2.4
+    Ascomyceter: 3
+  - startskog: produktionsskog_
+    metod: trakthygge
+    ålder: 20
+    Alla matsvampar: 12
+    Goda matsvampar: 6
+    Signal + rödlistade: 0.036
+    Atheliales: 21
+    Boletales: 8.4
+    Cantharellales: 0.15
+    Cortinariaceae: 6.6
+    Russulales: 6
+    Thelephorales: 3.6
+    Ascomyceter: 13.2
+  - startskog: produktionsskog_
+    metod: trakthygge
+    ålder: 30
+    Alla matsvampar: 24
+    Goda matsvampar: 12
+    Signal + rödlistade: 0.096
+    Atheliales: 38.4
+    Boletales: 15.6
+    Cantharellales: 0.36
+    Cortinariaceae: 13.8
+    Russulales: 13.2
+    Thelephorales: 7.2
+    Ascomyceter: 30
+  - startskog: produktionsskog_
+    metod: trakthygge
+    ålder: 40
+    Alla matsvampar: 24.6
+    Goda matsvampar: 12.3
+    Signal + rödlistade: 0.123
+    Atheliales: 39.36
+    Boletales: 15.99
+    Cantharellales: 0.369
+    Cortinariaceae: 14.145
+    Russulales: 13.53
+    Thelephorales: 7.38
+    Ascomyceter: 29.52
+  - startskog: produktionsskog_
+    metod: trakthygge
+    ålder: 50
+    Alla matsvampar: 24.2
+    Goda matsvampar: 12.1
+    Signal + rödlistade: 0.1452
+    Atheliales: 36.3
+    Boletales: 15.73
+    Cantharellales: 0.605
+    Cortinariaceae: 14.52
+    Russulales: 15.73
+    Thelephorales: 7.26
+    Ascomyceter: 27.83
+  - startskog: produktionsskog_
+    metod: trakthygge
+    ålder: 60
+    Alla matsvampar: 25.2
+    Goda matsvampar: 12
+    Signal + rödlistade: 0.18
+    Atheliales: 34.8
+    Boletales: 14.4
+    Cantharellales: 0.66
+    Cortinariaceae: 15.6
+    Russulales: 16.8
+    Thelephorales: 6.6
+    Ascomyceter: 28.2
+  - startskog: produktionsskog_
+    metod: trakthygge
+    ålder: 70
+    Alla matsvampar: 25.3
+    Goda matsvampar: 11.5
+    Signal + rödlistade: 0.23
+    Atheliales: 32.775
+    Boletales: 13.8
+    Cantharellales: 0.667
+    Cortinariaceae: 15.525
+    Russulales: 17.25
+    Thelephorales: 5.98
+    Ascomyceter: 25.3
+  - startskog: produktionsskog_
+    metod: trakthygge
+    ålder: 80
+    Alla matsvampar: 25.76
+    Goda matsvampar: 11.2
+    Signal + rödlistade: 0.28
+    Atheliales: 31.36
+    Boletales: 13.44
+    Cantharellales: 0.672
+    Cortinariaceae: 15.68
+    Russulales: 17.92
+    Thelephorales: 5.6
+    Ascomyceter: 23.52
+  - startskog: produktionsskog_
+    metod: trakthygge
+    ålder: 90
+    Alla matsvampar: 26.4
+    Goda matsvampar: 11
+    Signal + rödlistade: 0.33
+    Atheliales: 29.7
+    Boletales: 13.2
+    Cantharellales: 0.715
+    Cortinariaceae: 16.5
+    Russulales: 19.8
+    Thelephorales: 5.5
+    Ascomyceter: 22.55
+  - startskog: produktionsskog_
+    metod: trakthygge
+    ålder: 100
+    Alla matsvampar: 27.5
+    Goda matsvampar: 11
+    Signal + rödlistade: 0.33
+    Atheliales: 28.6
+    Boletales: 13.2
+    Cantharellales: 0.77
+    Cortinariaceae: 17.6
+    Russulales: 20
+    Thelephorales: 5.5
+    Ascomyceter: 22
+  - startskog: produktionsskog_
+    metod: blädning
+    ålder: -7
+    Alla matsvampar: 25
+    Goda matsvampar: 10
+    Signal + rödlistade: 0.3
+    Atheliales: 26
+    Boletales: 12
+    Cantharellales: 0.7
+    Cortinariaceae: 16
+    Russulales: 19
+    Thelephorales: 5
+    Ascomyceter: 20
+  - startskog: produktionsskog_
+    metod: blädning
+    ålder: 0
+    Alla matsvampar: 25
+    Goda matsvampar: 10
+    Signal + rödlistade: 0.3
+    Atheliales: 26
+    Boletales: 12
+    Cantharellales: 0.7
+    Cortinariaceae: 16
+    Russulales: 19
+    Thelephorales: 5
+    Ascomyceter: 20
+  - startskog: produktionsskog_
+    metod: blädning
+    ålder: 0.1
+    Alla matsvampar: 22.97916667
+    Goda matsvampar: 9.1875
+    Signal + rödlistade: 0.275083333
+    Atheliales: 23.9
+    Boletales: 11.04583333
+    Cantharellales: 0.6425
+    Cortinariaceae: 14.72916667
+    Russulales: 17.45833333
+    Thelephorales: 4.641666667
+    Ascomyceter: 18.42916667
+  - startskog: produktionsskog_
+    metod: blädning
+    ålder: 10
+    Alla matsvampar: 23.12916667
+    Goda matsvampar: 9.279166667
+    Signal + rödlistade: 0.27575
+    Atheliales: 24.20833333
+    Boletales: 11.15
+    Cantharellales: 0.644166667
+    Cortinariaceae: 14.79166667
+    Russulales: 17.52916667
+    Thelephorales: 4.783333333
+    Ascomyceter: 18.58333333
+  - startskog: produktionsskog_
+    metod: blädning
+    ålder: 20
+    Alla matsvampar: 23.91666667
+    Goda matsvampar: 9.666666667
+    Signal + rödlistade: 0.278
+    Atheliales: 25.58333333
+    Boletales: 11.7
+    Cantharellales: 0.654166667
+    Cortinariaceae: 15.21666667
+    Russulales: 17.91666667
+    Thelephorales: 4.883333333
+    Ascomyceter: 19.43333333
+  - startskog: produktionsskog_
+    metod: blädning
+    ålder: 30
+    Alla matsvampar: 24.91666667
+    Goda matsvampar: 10.16666667
+    Signal + rödlistade: 0.283
+    Atheliales: 27.03333333
+    Boletales: 12.3
+    Cantharellales: 0.671666667
+    Cortinariaceae: 15.81666667
+    Russulales: 18.51666667
+    Thelephorales: 5.183333333
+    Ascomyceter: 20.83333333
+  - startskog: produktionsskog_
+    metod: blädning
+    ålder: 30.1
+    Alla matsvampar: 22.89583333
+    Goda matsvampar: 9.354166667
+    Signal + rödlistade: 0.258083333
+    Atheliales: 24.93333333
+    Boletales: 11.34583333
+    Cantharellales: 0.614166667
+    Cortinariaceae: 14.54583333
+    Russulales: 16.975
+    Thelephorales: 4.825
+    Ascomyceter: 19.2625
+  - startskog: produktionsskog_
+    metod: blädning
+    ålder: 40
+    Alla matsvampar: 23.09583333
+    Goda matsvampar: 9.470833333
+    Signal + rödlistade: 0.261
+    Atheliales: 25.32166667
+    Boletales: 11.4825
+    Cantharellales: 0.616583333
+    Cortinariaceae: 14.63708333
+    Russulales: 17.07333333
+    Thelephorales: 4.981666667
+    Ascomyceter: 19.37666667
+  - startskog: produktionsskog_
+    metod: blädning
+    ålder: 50
+    Alla matsvampar: 23.0625
+    Goda matsvampar: 9.466666667
+    Signal + rödlistade: 0.26285
+    Atheliales: 25.06666667
+    Boletales: 11.46083333
+    Cantharellales: 0.63625
+    Cortinariaceae: 14.66833333
+    Russulales: 17.25666667
+    Thelephorales: 4.971666667
+    Ascomyceter: 19.23583333
+  - startskog: produktionsskog_
+    metod: blädning
+    ålder: 60
+    Alla matsvampar: 23.93333333
+    Goda matsvampar: 9.833333333
+    Signal + rödlistade: 0.268
+    Atheliales: 26.31666667
+    Boletales: 11.9
+    Cantharellales: 0.650833333
+    Cortinariaceae: 15.18333333
+    Russulales: 17.73333333
+    Thelephorales: 5.016666667
+    Ascomyceter: 20.11666667
+  - startskog: produktionsskog_
+    metod: blädning
+    ålder: 60.1
+    Alla matsvampar: 21.9125
+    Goda matsvampar: 9.020833333
+    Signal + rödlistade: 0.243083333
+    Atheliales: 24.21666667
+    Boletales: 10.94583333
+    Cantharellales: 0.593333333
+    Cortinariaceae: 13.9125
+    Russulales: 16.19166667
+    Thelephorales: 4.658333333
+    Ascomyceter: 18.54583333
+  - startskog: produktionsskog_
+    metod: blädning
+    ålder: 70
+    Alla matsvampar: 22.975
+    Goda matsvampar: 9.570833333
+    Signal + rödlistade: 0.252916667
+    Atheliales: 25.80625
+    Boletales: 11.6
+    Cantharellales: 0.613083333
+    Cortinariaceae: 14.56875
+    Russulales: 16.9
+    Thelephorales: 5.048333333
+    Ascomyceter: 19.85833333
+  - startskog: produktionsskog_
+    metod: blädning
+    ålder: 80
+    Alla matsvampar: 23.10916667
+    Goda matsvampar: 9.558333333
+    Signal + rödlistade: 0.257083333
+    Atheliales: 25.68833333
+    Boletales: 11.57
+    Cantharellales: 0.6135
+    Cortinariaceae: 14.58166667
+    Russulales: 16.95583333
+    Thelephorales: 5.016666667
+    Ascomyceter: 19.71
+  - startskog: produktionsskog_
+    metod: blädning
+    ålder: 90
+    Alla matsvampar: 24
+    Goda matsvampar: 9.941666667
+    Signal + rödlistade: 0.26575
+    Atheliales: 27.005
+    Boletales: 12.1325
+    Cantharellales: 0.627833333
+    Cortinariaceae: 15.10375
+    Russulales: 17.5275
+    Thelephorales: 5.123333333
+    Ascomyceter: 20.43916667
+  - startskog: produktionsskog_
+    metod: blädning
+    ålder: 90.1
+    Alla matsvampar: 21.82916667
+    Goda matsvampar: 9.029166667
+    Signal + rödlistade: 0.240183333
+    Atheliales: 24.34166667
+    Boletales: 11.05666667
+    Cantharellales: 0.58875
+    Cortinariaceae: 13.8225
+    Russulales: 16.1025
+    Thelephorales: 4.713333333
+    Ascomyceter: 18.515
+  - startskog: produktionsskog_
+    metod: blädning
+    ålder: 100
+    Alla matsvampar: 23.0625
+    Goda matsvampar: 9.6125
+    Signal + rödlistade: 0.24875
+    Atheliales: 25.975
+    Boletales: 11.65
+    Cantharellales: 0.6125
+    Cortinariaceae: 14.575
+    Russulales: 16.8625
+    Thelephorales: 5.1
+    Ascomyceter: 20.1
+  - startskog: produktionsskog_
+    metod: luckhuggning
+    ålder: -7
+    Alla matsvampar: 25
+    Goda matsvampar: 10
+    Signal + rödlistade: 0.3
+    Atheliales: 26
+    Boletales: 12
+    Cantharellales: 0.7
+    Cortinariaceae: 16
+    Russulales: 19
+    Thelephorales: 5
+    Ascomyceter: 20
+  - startskog: produktionsskog_
+    metod: luckhuggning
+    ålder: 0
+    Alla matsvampar: 25
+    Goda matsvampar: 10
+    Signal + rödlistade: 0.3
+    Atheliales: 26
+    Boletales: 12
+    Cantharellales: 0.7
+    Cortinariaceae: 16
+    Russulales: 19
+    Thelephorales: 5
+    Ascomyceter: 20
+  - startskog: produktionsskog_
+    metod: luckhuggning
+    ålder: 0.1
+    Alla matsvampar: 20.95833333
+    Goda matsvampar: 8.375
+    Signal + rödlistade: 0.250166667
+    Atheliales: 21.8
+    Boletales: 10.09166667
+    Cantharellales: 0.585
+    Cortinariaceae: 13.45833333
+    Russulales: 15.91666667
+    Thelephorales: 4.283333333
+    Ascomyceter: 16.85833333
+  - startskog: produktionsskog_
+    metod: luckhuggning
+    ålder: 10
+    Alla matsvampar: 21.25833333
+    Goda matsvampar: 8.558333333
+    Signal + rödlistade: 0.2515
+    Atheliales: 22.41666667
+    Boletales: 10.3
+    Cantharellales: 0.588333333
+    Cortinariaceae: 13.58333333
+    Russulales: 16.05833333
+    Thelephorales: 4.566666667
+    Ascomyceter: 17.16666667
+  - startskog: produktionsskog_
+    metod: luckhuggning
+    ålder: 20
+    Alla matsvampar: 22.83333333
+    Goda matsvampar: 9.333333333
+    Signal + rödlistade: 0.256
+    Atheliales: 25.16666667
+    Boletales: 11.4
+    Cantharellales: 0.608333333
+    Cortinariaceae: 14.43333333
+    Russulales: 16.83333333
+    Thelephorales: 4.766666667
+    Ascomyceter: 18.86666667
+  - startskog: produktionsskog_
+    metod: luckhuggning
+    ålder: 30
+    Alla matsvampar: 24.83333333
+    Goda matsvampar: 10.33333333
+    Signal + rödlistade: 0.266
+    Atheliales: 28.06666667
+    Boletales: 12.6
+    Cantharellales: 0.643333333
+    Cortinariaceae: 15.63333333
+    Russulales: 18.03333333
+    Thelephorales: 5.366666667
+    Ascomyceter: 21.66666667
+  - startskog: produktionsskog_
+    metod: luckhuggning
+    ålder: 30.1
+    Alla matsvampar: 20.79166667
+    Goda matsvampar: 8.708333333
+    Signal + rödlistade: 0.216166667
+    Atheliales: 23.86666667
+    Boletales: 10.69166667
+    Cantharellales: 0.528333333
+    Cortinariaceae: 13.09166667
+    Russulales: 14.95
+    Thelephorales: 4.65
+    Ascomyceter: 18.525
+  - startskog: produktionsskog_
+    metod: luckhuggning
+    ålder: 40
+    Alla matsvampar: 21.19166667
+    Goda matsvampar: 8.941666667
+    Signal + rödlistade: 0.222
+    Atheliales: 24.64333333
+    Boletales: 10.965
+    Cantharellales: 0.533166667
+    Cortinariaceae: 13.27416667
+    Russulales: 15.14666667
+    Thelephorales: 4.963333333
+    Ascomyceter: 18.75333333
+  - startskog: produktionsskog_
+    metod: luckhuggning
+    ålder: 50
+    Alla matsvampar: 21.125
+    Goda matsvampar: 8.933333333
+    Signal + rödlistade: 0.2257
+    Atheliales: 24.13333333
+    Boletales: 10.92166667
+    Cantharellales: 0.5725
+    Cortinariaceae: 13.33666667
+    Russulales: 15.51333333
+    Thelephorales: 4.943333333
+    Ascomyceter: 18.47166667
+  - startskog: produktionsskog_
+    metod: luckhuggning
+    ålder: 60
+    Alla matsvampar: 22.86666667
+    Goda matsvampar: 9.666666667
+    Signal + rödlistade: 0.236
+    Atheliales: 26.63333333
+    Boletales: 11.8
+    Cantharellales: 0.601666667
+    Cortinariaceae: 14.36666667
+    Russulales: 16.46666667
+    Thelephorales: 5.033333333
+    Ascomyceter: 20.23333333
+  - startskog: produktionsskog_
+    metod: luckhuggning
+    ålder: 60.1
+    Alla matsvampar: 18.825
+    Goda matsvampar: 8.041666667
+    Signal + rödlistade: 0.186166667
+    Atheliales: 22.43333333
+    Boletales: 9.891666667
+    Cantharellales: 0.486666667
+    Cortinariaceae: 11.825
+    Russulales: 13.38333333
+    Thelephorales: 4.316666667
+    Ascomyceter: 17.09166667
+  - startskog: produktionsskog_
+    metod: luckhuggning
+    ålder: 70
+    Alla matsvampar: 20.95
+    Goda matsvampar: 9.141666667
+    Signal + rödlistade: 0.205833333
+    Atheliales: 25.6125
+    Boletales: 11.2
+    Cantharellales: 0.526166667
+    Cortinariaceae: 13.1375
+    Russulales: 14.8
+    Thelephorales: 5.096666667
+    Ascomyceter: 19.71666667
+  - startskog: produktionsskog_
+    metod: luckhuggning
+    ålder: 80
+    Alla matsvampar: 21.21833333
+    Goda matsvampar: 9.116666667
+    Signal + rödlistade: 0.214166667
+    Atheliales: 25.37666667
+    Boletales: 11.14
+    Cantharellales: 0.527
+    Cortinariaceae: 13.16333333
+    Russulales: 14.91166667
+    Thelephorales: 5.033333333
+    Ascomyceter: 19.42
+  - startskog: produktionsskog_
+    metod: luckhuggning
+    ålder: 90
+    Alla matsvampar: 23
+    Goda matsvampar: 9.883333333
+    Signal + rödlistade: 0.2315
+    Atheliales: 28.01
+    Boletales: 12.265
+    Cantharellales: 0.555666667
+    Cortinariaceae: 14.2075
+    Russulales: 16.055
+    Thelephorales: 5.246666667
+    Ascomyceter: 20.87833333
+  - startskog: produktionsskog_
+    metod: luckhuggning
+    ålder: 90.1
+    Alla matsvampar: 18.65833333
+    Goda matsvampar: 8.058333333
+    Signal + rödlistade: 0.180366667
+    Atheliales: 22.68333333
+    Boletales: 10.11333333
+    Cantharellales: 0.4775
+    Cortinariaceae: 11.645
+    Russulales: 13.205
+    Thelephorales: 4.426666667
+    Ascomyceter: 17.03
+  - startskog: produktionsskog_
+    metod: luckhuggning
+    ålder: 100
+    Alla matsvampar: 21.125
+    Goda matsvampar: 9.225
+    Signal + rödlistade: 0.1975
+    Atheliales: 25.95
+    Boletales: 11.3
+    Cantharellales: 0.525
+    Cortinariaceae: 13.15
+    Russulales: 14.725
+    Thelephorales: 5.2
+    Ascomyceter: 20.2
+  - startskog: produktionsskog_
+    metod: skärm
+    ålder: -7
+    Alla matsvampar: 25
+    Goda matsvampar: 10
+    Signal + rödlistade: 0.3
+    Atheliales: 26
+    Boletales: 12
+    Cantharellales: 0.7
+    Cortinariaceae: 16
+    Russulales: 19
+    Thelephorales: 5
+    Ascomyceter: 20
+  - startskog: produktionsskog_
+    metod: skärm
+    ålder: 0
+    Alla matsvampar: 25
+    Goda matsvampar: 10
+    Signal + rödlistade: 0.3
+    Atheliales: 26
+    Boletales: 12
+    Cantharellales: 0.7
+    Cortinariaceae: 16
+    Russulales: 19
+    Thelephorales: 5
+    Ascomyceter: 20
+  - startskog: produktionsskog_
+    metod: skärm
+    ålder: 0.1
+    Alla matsvampar: 17
+    Goda matsvampar: 6.5
+    Signal + rödlistade: 0.156
+    Atheliales: 17.8
+    Boletales: 9.3
+    Cantharellales: 0.41
+    Cortinariaceae: 12.5
+    Russulales: 12.5
+    Thelephorales: 6.7
+    Ascomyceter: 16.9
+  - startskog: produktionsskog_
+    metod: skärm
+    ålder: 10
+    Alla matsvampar: 18.025
+    Goda matsvampar: 7.925
+    Signal + rödlistade: 0.1695
+    Atheliales: 22.75
+    Boletales: 9.9
+    Cantharellales: 0.415
+    Cortinariaceae: 11.25
+    Russulales: 12.425
+    Thelephorales: 7.7
+    Ascomyceter: 16.5
+  - startskog: produktionsskog_
+    metod: skärm
+    ålder: 10.1
+    Alla matsvampar: 10.44
+    Goda matsvampar: 5.2
+    Signal + rödlistade: 0.0792
+    Atheliales: 14.8
+    Boletales: 6.24
+    Cantharellales: 0.204
+    Cortinariaceae: 6.4
+    Russulales: 6.68
+    Thelephorales: 6.12
+    Ascomyceter: 10.4
+  - startskog: produktionsskog_
+    metod: skärm
+    ålder: 20
+    Alla matsvampar: 14.6
+    Goda matsvampar: 6.8
+    Signal + rödlistade: 0.0888
+    Atheliales: 22
+    Boletales: 9.12
+    Cantharellales: 0.26
+    Cortinariaceae: 8.48
+    Russulales: 8.6
+    Thelephorales: 3.88
+    Ascomyceter: 14.56
+  - startskog: produktionsskog_
+    metod: skärm
+    ålder: 20.1
+    Alla matsvampar: 9.5
+    Goda matsvampar: 4.75
+    Signal + rödlistade: 0.0285
+    Atheliales: 16.625
+    Boletales: 6.65
+    Cantharellales: 0.11875
+    Cortinariaceae: 5.225
+    Russulales: 4.75
+    Thelephorales: 2.85
+    Ascomyceter: 10.45
+  - startskog: produktionsskog_
+    metod: skärm
+    ålder: 30
+    Alla matsvampar: 17.1
+    Goda matsvampar: 8.55
+    Signal + rödlistade: 0.0684
+    Atheliales: 27.36
+    Boletales: 11.115
+    Cantharellales: 0.2565
+    Cortinariaceae: 9.8325
+    Russulales: 9.405
+    Thelephorales: 5.13
+    Ascomyceter: 21.375
+  - startskog: produktionsskog_
+    metod: skärm
+    ålder: 40
+    Alla matsvampar: 21.85
+    Goda matsvampar: 10.925
+    Signal + rödlistade: 0.10925
+    Atheliales: 34.96
+    Boletales: 14.2025
+    Cantharellales: 0.32775
+    Cortinariaceae: 12.56375
+    Russulales: 12.0175
+    Thelephorales: 6.555
+    Ascomyceter: 26.22
+  - startskog: produktionsskog_
+    metod: skärm
+    ålder: 50
+    Alla matsvampar: 22.8
+    Goda matsvampar: 11.4
+    Signal + rödlistade: 0.1368
+    Atheliales: 34.2
+    Boletales: 14.82
+    Cantharellales: 0.57
+    Cortinariaceae: 13.68
+    Russulales: 14.82
+    Thelephorales: 6.84
+    Ascomyceter: 26.22
+  - startskog: produktionsskog_
+    metod: skärm
+    ålder: 60
+    Alla matsvampar: 23.94
+    Goda matsvampar: 11.4
+    Signal + rödlistade: 0.171
+    Atheliales: 33.06
+    Boletales: 13.68
+    Cantharellales: 0.627
+    Cortinariaceae: 14.82
+    Russulales: 15.96
+    Thelephorales: 6.27
+    Ascomyceter: 26.79
+  - startskog: produktionsskog_
+    metod: skärm
+    ålder: 70
+    Alla matsvampar: 22.9425
+    Goda matsvampar: 10.925
+    Signal + rödlistade: 0.2185
+    Atheliales: 31.13625
+    Boletales: 13.11
+    Cantharellales: 0.63365
+    Cortinariaceae: 14.74875
+    Russulales: 16.3875
+    Thelephorales: 5.681
+    Ascomyceter: 24.035
+  - startskog: produktionsskog_
+    metod: skärm
+    ålder: 80
+    Alla matsvampar: 24.472
+    Goda matsvampar: 10.64
+    Signal + rödlistade: 0.266
+    Atheliales: 29.792
+    Boletales: 12.768
+    Cantharellales: 0.6384
+    Cortinariaceae: 14.896
+    Russulales: 17.024
+    Thelephorales: 5.32
+    Ascomyceter: 22.344
+  - startskog: produktionsskog_
+    metod: skärm
+    ålder: 90
+    Alla matsvampar: 25.08
+    Goda matsvampar: 10.45
+    Signal + rödlistade: 0.3135
+    Atheliales: 28.215
+    Boletales: 12.54
+    Cantharellales: 0.67925
+    Cortinariaceae: 15.675
+    Russulales: 18.81
+    Thelephorales: 5.225
+    Ascomyceter: 21.4225
+  - startskog: produktionsskog_
+    metod: skärm
+    ålder: 100
+    Alla matsvampar: 26.125
+    Goda matsvampar: 10.45
+    Signal + rödlistade: 0.3135
+    Atheliales: 27.17
+    Boletales: 12.54
+    Cantharellales: 0.7315
+    Cortinariaceae: 16.72
+    Russulales: 19.855
+    Thelephorales: 5.225
+    Ascomyceter: 20.9
+  - startskog: produktionsskog_
+    metod: ingen åtgärd
+    ålder: -7
+    Alla matsvampar: 25
+    Goda matsvampar: 10
+    Signal + rödlistade: 0.3
+    Atheliales: 26
+    Boletales: 12
+    Cantharellales: 0.7
+    Cortinariaceae: 16
+    Russulales: 19
+    Thelephorales: 5
+    Ascomyceter: 20
+  - startskog: produktionsskog_
+    metod: ingen åtgärd
+    ålder: 0
+    Alla matsvampar: 25
+    Goda matsvampar: 10
+    Signal + rödlistade: 0.3
+    Atheliales: 26
+    Boletales: 12
+    Cantharellales: 0.7
+    Cortinariaceae: 16
+    Russulales: 19
+    Thelephorales: 5
+    Ascomyceter: 20
+  - startskog: produktionsskog_
+    metod: ingen åtgärd
+    ålder: 10
+    Alla matsvampar: 25
+    Goda matsvampar: 10
+    Signal + rödlistade: 0.3
+    Atheliales: 26
+    Boletales: 12
+    Cantharellales: 0.7
+    Cortinariaceae: 16
+    Russulales: 19
+    Thelephorales: 5
+    Ascomyceter: 20
+  - startskog: produktionsskog_
+    metod: ingen åtgärd
+    ålder: 20
+    Alla matsvampar: 25
+    Goda matsvampar: 10
+    Signal + rödlistade: 0.3
+    Atheliales: 26
+    Boletales: 12
+    Cantharellales: 0.7
+    Cortinariaceae: 16
+    Russulales: 19
+    Thelephorales: 5
+    Ascomyceter: 20
+  - startskog: produktionsskog_
+    metod: ingen åtgärd
+    ålder: 30
+    Alla matsvampar: 25
+    Goda matsvampar: 10
+    Signal + rödlistade: 0.3
+    Atheliales: 26
+    Boletales: 12
+    Cantharellales: 0.7
+    Cortinariaceae: 16
+    Russulales: 19
+    Thelephorales: 5
+    Ascomyceter: 20
+  - startskog: produktionsskog_
+    metod: ingen åtgärd
+    ålder: 40
+    Alla matsvampar: 25
+    Goda matsvampar: 10
+    Signal + rödlistade: 0.3
+    Atheliales: 26
+    Boletales: 12
+    Cantharellales: 0.7
+    Cortinariaceae: 16
+    Russulales: 19
+    Thelephorales: 5
+    Ascomyceter: 20
+  - startskog: produktionsskog_
+    metod: ingen åtgärd
+    ålder: 50
+    Alla matsvampar: 25
+    Goda matsvampar: 10
+    Signal + rödlistade: 0.3
+    Atheliales: 26
+    Boletales: 12
+    Cantharellales: 0.7
+    Cortinariaceae: 16
+    Russulales: 19
+    Thelephorales: 5
+    Ascomyceter: 20
+  - startskog: produktionsskog_
+    metod: ingen åtgärd
+    ålder: 60
+    Alla matsvampar: 25
+    Goda matsvampar: 10
+    Signal + rödlistade: 0.3
+    Atheliales: 26
+    Boletales: 12
+    Cantharellales: 0.7
+    Cortinariaceae: 16
+    Russulales: 19
+    Thelephorales: 5
+    Ascomyceter: 20
+  - startskog: produktionsskog_
+    metod: ingen åtgärd
+    ålder: 70
+    Alla matsvampar: 25
+    Goda matsvampar: 10
+    Signal + rödlistade: 0.3
+    Atheliales: 26
+    Boletales: 12
+    Cantharellales: 0.7
+    Cortinariaceae: 16
+    Russulales: 19
+    Thelephorales: 5
+    Ascomyceter: 20
+  - startskog: produktionsskog_
+    metod: ingen åtgärd
+    ålder: 80
+    Alla matsvampar: 25
+    Goda matsvampar: 10
+    Signal + rödlistade: 0.3
+    Atheliales: 26
+    Boletales: 12
+    Cantharellales: 0.7
+    Cortinariaceae: 16
+    Russulales: 19
+    Thelephorales: 5
+    Ascomyceter: 20
+  - startskog: produktionsskog_
+    metod: ingen åtgärd
+    ålder: 90
+    Alla matsvampar: 25
+    Goda matsvampar: 10
+    Signal + rödlistade: 0.3
+    Atheliales: 26
+    Boletales: 12
+    Cantharellales: 0.7
+    Cortinariaceae: 16
+    Russulales: 19
+    Thelephorales: 5
+    Ascomyceter: 20
+  - startskog: produktionsskog_
+    metod: ingen åtgärd
+    ålder: 100
+    Alla matsvampar: 25
+    Goda matsvampar: 10
+    Signal + rödlistade: 0.3
+    Atheliales: 26
+    Boletales: 12
+    Cantharellales: 0.7
+    Cortinariaceae: 16
+    Russulales: 19
+    Thelephorales: 5
+    Ascomyceter: 20
+  - startskog: naturskog
+    metod: trakthygge
+    ålder: -7
+    Alla matsvampar: 30
+    Goda matsvampar: 10
+    Signal + rödlistade: 0.6
+    Atheliales: 22
+    Boletales: 12
+    Cantharellales: 0.8
+    Cortinariaceae: 25
+    Russulales: 22
+    Thelephorales: 2
+    Ascomyceter: 18
+  - startskog: naturskog
+    metod: trakthygge
+    ålder: 0
+    Alla matsvampar: 30
+    Goda matsvampar: 10
+    Signal + rödlistade: 0.6
+    Atheliales: 22
+    Boletales: 12
+    Cantharellales: 0.8
+    Cortinariaceae: 25
+    Russulales: 22
+    Thelephorales: 2
+    Ascomyceter: 18
+  - startskog: naturskog
+    metod: trakthygge
+    ålder: 0.1
+    Alla matsvampar: 0.75
+    Goda matsvampar: 0.25
+    Signal + rödlistade: 0.001
+    Atheliales: 0.8
+    Boletales: 0.55
+    Cantharellales: 0.01
+    Cortinariaceae: 0.75
+    Russulales: 0.5
+    Thelephorales: 0.7
+    Ascomyceter: 1.15
+  - startskog: naturskog
+    metod: trakthygge
+    ålder: 10
+    Alla matsvampar: 2.55
+    Goda matsvampar: 1.35
+    Signal + rödlistade: 0.009
+    Atheliales: 4.5
+    Boletales: 1.8
+    Cantharellales: 0.03
+    Cortinariaceae: 1.5
+    Russulales: 1.35
+    Thelephorales: 2.4
+    Ascomyceter: 3
+  - startskog: naturskog
+    metod: trakthygge
+    ålder: 20
+    Alla matsvampar: 12
+    Goda matsvampar: 6
+    Signal + rödlistade: 0.036
+    Atheliales: 21
+    Boletales: 8.4
+    Cantharellales: 0.15
+    Cortinariaceae: 6.6
+    Russulales: 6
+    Thelephorales: 3.6
+    Ascomyceter: 13.2
+  - startskog: naturskog
+    metod: trakthygge
+    ålder: 30
+    Alla matsvampar: 24
+    Goda matsvampar: 12
+    Signal + rödlistade: 0.096
+    Atheliales: 38.4
+    Boletales: 15.6
+    Cantharellales: 0.36
+    Cortinariaceae: 13.8
+    Russulales: 13.2
+    Thelephorales: 7.2
+    Ascomyceter: 30
+  - startskog: naturskog
+    metod: trakthygge
+    ålder: 40
+    Alla matsvampar: 24.6
+    Goda matsvampar: 12.3
+    Signal + rödlistade: 0.123
+    Atheliales: 39.36
+    Boletales: 15.99
+    Cantharellales: 0.369
+    Cortinariaceae: 14.145
+    Russulales: 13.53
+    Thelephorales: 7.38
+    Ascomyceter: 29.52
+  - startskog: naturskog
+    metod: trakthygge
+    ålder: 50
+    Alla matsvampar: 24.2
+    Goda matsvampar: 12.1
+    Signal + rödlistade: 0.1452
+    Atheliales: 36.3
+    Boletales: 15.73
+    Cantharellales: 0.605
+    Cortinariaceae: 14.52
+    Russulales: 15.73
+    Thelephorales: 7.26
+    Ascomyceter: 27.83
+  - startskog: naturskog
+    metod: trakthygge
+    ålder: 60
+    Alla matsvampar: 25.2
+    Goda matsvampar: 12
+    Signal + rödlistade: 0.18
+    Atheliales: 34.8
+    Boletales: 14.4
+    Cantharellales: 0.66
+    Cortinariaceae: 15.6
+    Russulales: 16.8
+    Thelephorales: 6.6
+    Ascomyceter: 28.2
+  - startskog: naturskog
+    metod: trakthygge
+    ålder: 70
+    Alla matsvampar: 24.15
+    Goda matsvampar: 11.5
+    Signal + rödlistade: 0.23
+    Atheliales: 32.775
+    Boletales: 13.8
+    Cantharellales: 0.667
+    Cortinariaceae: 15.525
+    Russulales: 17.25
+    Thelephorales: 5.98
+    Ascomyceter: 25.3
+  - startskog: naturskog
+    metod: trakthygge
+    ålder: 80
+    Alla matsvampar: 25.76
+    Goda matsvampar: 11.2
+    Signal + rödlistade: 0.28
+    Atheliales: 31.36
+    Boletales: 13.44
+    Cantharellales: 0.672
+    Cortinariaceae: 15.68
+    Russulales: 17.92
+    Thelephorales: 5.6
+    Ascomyceter: 23.52
+  - startskog: naturskog
+    metod: trakthygge
+    ålder: 90
+    Alla matsvampar: 26.4
+    Goda matsvampar: 11
+    Signal + rödlistade: 0.33
+    Atheliales: 29.7
+    Boletales: 13.2
+    Cantharellales: 0.715
+    Cortinariaceae: 16.5
+    Russulales: 19.8
+    Thelephorales: 5.5
+    Ascomyceter: 22.55
+  - startskog: naturskog
+    metod: trakthygge
+    ålder: 100
+    Alla matsvampar: 27.5
+    Goda matsvampar: 11
+    Signal + rödlistade: 0.44
+    Atheliales: 28.6
+    Boletales: 13.2
+    Cantharellales: 0.77
+    Cortinariaceae: 17.6
+    Russulales: 20
+    Thelephorales: 5.5
+    Ascomyceter: 22
+  - startskog: naturskog
+    metod: blädning
+    ålder: -7
+    Alla matsvampar: 30
+    Goda matsvampar: 10
+    Signal + rödlistade: 0.6
+    Atheliales: 22
+    Boletales: 12
+    Cantharellales: 0.8
+    Cortinariaceae: 25
+    Russulales: 22
+    Thelephorales: 2
+    Ascomyceter: 18
+  - startskog: naturskog
+    metod: blädning
+    ålder: 0
+    Alla matsvampar: 30
+    Goda matsvampar: 10
+    Signal + rödlistade: 0.6
+    Atheliales: 22
+    Boletales: 12
+    Cantharellales: 0.8
+    Cortinariaceae: 25
+    Russulales: 22
+    Thelephorales: 2
+    Ascomyceter: 18
+  - startskog: naturskog
+    metod: blädning
+    ålder: 0.1
+    Alla matsvampar: 27.5625
+    Goda matsvampar: 9.1875
+    Signal + rödlistade: 0.550083333
+    Atheliales: 20.23333333
+    Boletales: 11.04583333
+    Cantharellales: 0.734166667
+    Cortinariaceae: 20.95833333
+    Russulales: 18.41666667
+    Thelephorales: 1.783333333
+    Ascomyceter: 15.19166667
+  - startskog: naturskog
+    metod: blädning
+    ålder: 10
+    Alla matsvampar: 27.7125
+    Goda matsvampar: 9.279166667
+    Signal + rödlistade: 0.55075
+    Atheliales: 20.54166667
+    Boletales: 11.15
+    Cantharellales: 0.735833333
+    Cortinariaceae: 21.08333333
+    Russulales: 18.55833333
+    Thelephorales: 2.066666667
+    Ascomyceter: 15.5
+  - startskog: naturskog
+    metod: blädning
+    ålder: 20
+    Alla matsvampar: 28.5
+    Goda matsvampar: 9.666666667
+    Signal + rödlistade: 0.553
+    Atheliales: 21.91666667
+    Boletales: 11.7
+    Cantharellales: 0.745833333
+    Cortinariaceae: 21.93333333
+    Russulales: 19.33333333
+    Thelephorales: 2.266666667
+    Ascomyceter: 17.2
+  - startskog: naturskog
+    metod: blädning
+    ålder: 30
+    Alla matsvampar: 29.5
+    Goda matsvampar: 10.16666667
+    Signal + rödlistade: 0.558
+    Atheliales: 23.36666667
+    Boletales: 12.3
+    Cantharellales: 0.763333333
+    Cortinariaceae: 23.13333333
+    Russulales: 20.53333333
+    Thelephorales: 2.866666667
+    Ascomyceter: 20
+  - startskog: naturskog
+    metod: blädning
+    ålder: 30.1
+    Alla matsvampar: 27.0625
+    Goda matsvampar: 9.354166667
+    Signal + rödlistade: 0.508083333
+    Atheliales: 21.6
+    Boletales: 11.34583333
+    Cantharellales: 0.6975
+    Cortinariaceae: 19.09166667
+    Russulales: 16.95
+    Thelephorales: 2.65
+    Ascomyceter: 17.19166667
+  - startskog: naturskog
+    metod: blädning
+    ålder: 40
+    Alla matsvampar: 27.2625
+    Goda matsvampar: 9.470833333
+    Signal + rödlistade: 0.511
+    Atheliales: 21.98833333
+    Boletales: 11.4825
+    Cantharellales: 0.699916667
+    Cortinariaceae: 19.27416667
+    Russulales: 17.14666667
+    Thelephorales: 2.963333333
+    Ascomyceter: 17.42
+  - startskog: naturskog
+    metod: blädning
+    ålder: 50
+    Alla matsvampar: 27.22916667
+    Goda matsvampar: 9.466666667
+    Signal + rödlistade: 0.51285
+    Atheliales: 21.73333333
+    Boletales: 11.46083333
+    Cantharellales: 0.719583333
+    Cortinariaceae: 19.33666667
+    Russulales: 17.51333333
+    Thelephorales: 2.943333333
+    Ascomyceter: 17.13833333
+  - startskog: naturskog
+    metod: blädning
+    ålder: 60
+    Alla matsvampar: 28.1
+    Goda matsvampar: 9.833333333
+    Signal + rödlistade: 0.518
+    Atheliales: 22.98333333
+    Boletales: 11.9
+    Cantharellales: 0.734166667
+    Cortinariaceae: 20.36666667
+    Russulales: 18.46666667
+    Thelephorales: 3.033333333
+    Ascomyceter: 18.9
+  - startskog: naturskog
+    metod: blädning
+    ålder: 60.1
+    Alla matsvampar: 25.6625
+    Goda matsvampar: 9.020833333
+    Signal + rödlistade: 0.468083333
+    Atheliales: 21.21666667
+    Boletales: 10.94583333
+    Cantharellales: 0.668333333
+    Cortinariaceae: 16.325
+    Russulales: 14.88333333
+    Thelephorales: 2.816666667
+    Ascomyceter: 16.09166667
+  - startskog: naturskog
+    metod: blädning
+    ålder: 70
+    Alla matsvampar: 26.725
+    Goda matsvampar: 9.570833333
+    Signal + rödlistade: 0.477916667
+    Atheliales: 22.80625
+    Boletales: 11.6
+    Cantharellales: 0.688083333
+    Cortinariaceae: 17.6375
+    Russulales: 16.3
+    Thelephorales: 3.596666667
+    Ascomyceter: 18.71666667
+  - startskog: naturskog
+    metod: blädning
+    ålder: 80
+    Alla matsvampar: 26.85916667
+    Goda matsvampar: 9.558333333
+    Signal + rödlistade: 0.482083333
+    Atheliales: 22.68833333
+    Boletales: 11.57
+    Cantharellales: 0.6885
+    Cortinariaceae: 17.66333333
+    Russulales: 16.41166667
+    Thelephorales: 3.533333333
+    Ascomyceter: 18.42
+  - startskog: naturskog
+    metod: blädning
+    ålder: 90
+    Alla matsvampar: 27.75
+    Goda matsvampar: 9.941666667
+    Signal + rödlistade: 0.49075
+    Atheliales: 24.005
+    Boletales: 12.1325
+    Cantharellales: 0.702833333
+    Cortinariaceae: 18.7075
+    Russulales: 17.555
+    Thelephorales: 3.746666667
+    Ascomyceter: 19.87833333
+  - startskog: naturskog
+    metod: blädning
+    ålder: 90.1
+    Alla matsvampar: 25.57916667
+    Goda matsvampar: 9.029166667
+    Signal + rödlistade: 0.465183333
+    Atheliales: 21.34166667
+    Boletales: 11.05666667
+    Cantharellales: 0.66375
+    Cortinariaceae: 16.145
+    Russulales: 14.705
+    Thelephorales: 2.926666667
+    Ascomyceter: 16.03
+  - startskog: naturskog
+    metod: blädning
+    ålder: 100
+    Alla matsvampar: 26.8125
+    Goda matsvampar: 9.6125
+    Signal + rödlistade: 0.47375
+    Atheliales: 22.975
+    Boletales: 11.65
+    Cantharellales: 0.6875
+    Cortinariaceae: 17.65
+    Russulales: 16.225
+    Thelephorales: 3.7
+    Ascomyceter: 19.2
+  - startskog: naturskog
+    metod: luckhuggning
+    ålder: -7
+    Alla matsvampar: 30
+    Goda matsvampar: 10
+    Signal + rödlistade: 0.6
+    Atheliales: 22
+    Boletales: 12
+    Cantharellales: 0.8
+    Cortinariaceae: 25
+    Russulales: 22
+    Thelephorales: 2
+    Ascomyceter: 18
+  - startskog: naturskog
+    metod: luckhuggning
+    ålder: 0
+    Alla matsvampar: 30
+    Goda matsvampar: 10
+    Signal + rödlistade: 0.6
+    Atheliales: 22
+    Boletales: 12
+    Cantharellales: 0.8
+    Cortinariaceae: 25
+    Russulales: 22
+    Thelephorales: 2
+    Ascomyceter: 18
+  - startskog: naturskog
+    metod: luckhuggning
+    ålder: 0.1
+    Alla matsvampar: 25.125
+    Goda matsvampar: 8.375
+    Signal + rödlistade: 0.500166667
+    Atheliales: 18.46666667
+    Boletales: 10.09166667
+    Cantharellales: 0.668333333
+    Cortinariaceae: 20.95833333
+    Russulales: 18.41666667
+    Thelephorales: 1.783333333
+    Ascomyceter: 15.19166667
+  - startskog: naturskog
+    metod: luckhuggning
+    ålder: 10
+    Alla matsvampar: 25.425
+    Goda matsvampar: 8.558333333
+    Signal + rödlistade: 0.5015
+    Atheliales: 19.08333333
+    Boletales: 10.3
+    Cantharellales: 0.671666667
+    Cortinariaceae: 21.08333333
+    Russulales: 18.55833333
+    Thelephorales: 2.066666667
+    Ascomyceter: 15.5
+  - startskog: naturskog
+    metod: luckhuggning
+    ålder: 20
+    Alla matsvampar: 27
+    Goda matsvampar: 9.333333333
+    Signal + rödlistade: 0.506
+    Atheliales: 21.83333333
+    Boletales: 11.4
+    Cantharellales: 0.691666667
+    Cortinariaceae: 21.93333333
+    Russulales: 19.33333333
+    Thelephorales: 2.266666667
+    Ascomyceter: 17.2
+  - startskog: naturskog
+    metod: luckhuggning
+    ålder: 30
+    Alla matsvampar: 29
+    Goda matsvampar: 10.33333333
+    Signal + rödlistade: 0.516
+    Atheliales: 24.73333333
+    Boletales: 12.6
+    Cantharellales: 0.726666667
+    Cortinariaceae: 23.13333333
+    Russulales: 20.53333333
+    Thelephorales: 2.866666667
+    Ascomyceter: 20
+  - startskog: naturskog
+    metod: luckhuggning
+    ålder: 30.1
+    Alla matsvampar: 24.125
+    Goda matsvampar: 8.708333333
+    Signal + rödlistade: 0.416166667
+    Atheliales: 21.2
+    Boletales: 10.69166667
+    Cantharellales: 0.595
+    Cortinariaceae: 19.09166667
+    Russulales: 16.95
+    Thelephorales: 2.65
+    Ascomyceter: 17.19166667
+  - startskog: naturskog
+    metod: luckhuggning
+    ålder: 40
+    Alla matsvampar: 24.525
+    Goda matsvampar: 8.941666667
+    Signal + rödlistade: 0.422
+    Atheliales: 21.97666667
+    Boletales: 10.965
+    Cantharellales: 0.599833333
+    Cortinariaceae: 19.27416667
+    Russulales: 17.14666667
+    Thelephorales: 2.963333333
+    Ascomyceter: 17.42
+  - startskog: naturskog
+    metod: luckhuggning
+    ålder: 50
+    Alla matsvampar: 24.45833333
+    Goda matsvampar: 8.933333333
+    Signal + rödlistade: 0.4257
+    Atheliales: 21.46666667
+    Boletales: 10.92166667
+    Cantharellales: 0.639166667
+    Cortinariaceae: 19.33666667
+    Russulales: 17.51333333
+    Thelephorales: 2.943333333
+    Ascomyceter: 17.13833333
+  - startskog: naturskog
+    metod: luckhuggning
+    ålder: 60
+    Alla matsvampar: 26.2
+    Goda matsvampar: 9.666666667
+    Signal + rödlistade: 0.436
+    Atheliales: 23.96666667
+    Boletales: 11.8
+    Cantharellales: 0.668333333
+    Cortinariaceae: 20.36666667
+    Russulales: 18.46666667
+    Thelephorales: 3.033333333
+    Ascomyceter: 18.9
+  - startskog: naturskog
+    metod: luckhuggning
+    ålder: 60.1
+    Alla matsvampar: 21.325
+    Goda matsvampar: 8.041666667
+    Signal + rödlistade: 0.336166667
+    Atheliales: 20.43333333
+    Boletales: 9.891666667
+    Cantharellales: 0.536666667
+    Cortinariaceae: 16.325
+    Russulales: 14.88333333
+    Thelephorales: 2.816666667
+    Ascomyceter: 16.09166667
+  - startskog: naturskog
+    metod: luckhuggning
+    ålder: 70
+    Alla matsvampar: 23.45
+    Goda matsvampar: 9.141666667
+    Signal + rödlistade: 0.355833333
+    Atheliales: 23.6125
+    Boletales: 11.2
+    Cantharellales: 0.576166667
+    Cortinariaceae: 17.6375
+    Russulales: 16.3
+    Thelephorales: 3.596666667
+    Ascomyceter: 18.71666667
+  - startskog: naturskog
+    metod: luckhuggning
+    ålder: 80
+    Alla matsvampar: 23.71833333
+    Goda matsvampar: 9.116666667
+    Signal + rödlistade: 0.364166667
+    Atheliales: 23.37666667
+    Boletales: 11.14
+    Cantharellales: 0.577
+    Cortinariaceae: 17.66333333
+    Russulales: 16.41166667
+    Thelephorales: 3.533333333
+    Ascomyceter: 18.42
+  - startskog: naturskog
+    metod: luckhuggning
+    ålder: 90
+    Alla matsvampar: 25.5
+    Goda matsvampar: 9.883333333
+    Signal + rödlistade: 0.3815
+    Atheliales: 26.01
+    Boletales: 12.265
+    Cantharellales: 0.605666667
+    Cortinariaceae: 18.7075
+    Russulales: 17.555
+    Thelephorales: 3.746666667
+    Ascomyceter: 19.87833333
+  - startskog: naturskog
+    metod: luckhuggning
+    ålder: 90.1
+    Alla matsvampar: 21.15833333
+    Goda matsvampar: 8.058333333
+    Signal + rödlistade: 0.330366667
+    Atheliales: 20.68333333
+    Boletales: 10.11333333
+    Cantharellales: 0.5275
+    Cortinariaceae: 16.145
+    Russulales: 14.705
+    Thelephorales: 2.926666667
+    Ascomyceter: 16.03
+  - startskog: naturskog
+    metod: luckhuggning
+    ålder: 100
+    Alla matsvampar: 23.625
+    Goda matsvampar: 9.225
+    Signal + rödlistade: 0.3475
+    Atheliales: 23.95
+    Boletales: 11.3
+    Cantharellales: 0.575
+    Cortinariaceae: 17.65
+    Russulales: 16.225
+    Thelephorales: 3.7
+    Ascomyceter: 19.2
+  - startskog: naturskog
+    metod: skärm
+    ålder: -7
+    Alla matsvampar: 30
+    Goda matsvampar: 10
+    Signal + rödlistade: 0.6
+    Atheliales: 22
+    Boletales: 12
+    Cantharellales: 0.8
+    Cortinariaceae: 25
+    Russulales: 22
+    Thelephorales: 2
+    Ascomyceter: 18
+  - startskog: naturskog
+    metod: skärm
+    ålder: 0
+    Alla matsvampar: 30
+    Goda matsvampar: 10
+    Signal + rödlistade: 0.6
+    Atheliales: 22
+    Boletales: 12
+    Cantharellales: 0.8
+    Cortinariaceae: 25
+    Russulales: 22
+    Thelephorales: 2
+    Ascomyceter: 18
+  - startskog: naturskog
+    metod: skärm
+    ålder: 0.1
+    Alla matsvampar: 15.375
+    Goda matsvampar: 5.125
+    Signal + rödlistade: 0.3005
+    Atheliales: 11.4
+    Boletales: 6.275
+    Cantharellales: 0.405
+    Cortinariaceae: 12.875
+    Russulales: 11.25
+    Thelephorales: 1.35
+    Ascomyceter: 9.575
+  - startskog: naturskog
+    metod: skärm
+    ålder: 10
+    Alla matsvampar: 16.275
+    Goda matsvampar: 5.675
+    Signal + rödlistade: 0.3045
+    Atheliales: 13.25
+    Boletales: 6.9
+    Cantharellales: 0.415
+    Cortinariaceae: 13.25
+    Russulales: 11.675
+    Thelephorales: 2.2
+    Ascomyceter: 10.5
+  - startskog: naturskog
+    metod: skärm
+    ålder: 10.1
+    Alla matsvampar: 7.04
+    Goda matsvampar: 3.2
+    Signal + rödlistade: 0.0672
+    Atheliales: 8.8
+    Boletales: 3.84
+    Cantharellales: 0.164
+    Cortinariaceae: 4.4
+    Russulales: 4.88
+    Thelephorales: 2.92
+    Ascomyceter: 6.4
+  - startskog: naturskog
+    metod: skärm
+    ålder: 20
+    Alla matsvampar: 14.6
+    Goda matsvampar: 6.8
+    Signal + rödlistade: 0.0888
+    Atheliales: 22
+    Boletales: 9.12
+    Cantharellales: 0.26
+    Cortinariaceae: 8.48
+    Russulales: 8.6
+    Thelephorales: 3.88
+    Ascomyceter: 14.56
+  - startskog: naturskog
+    metod: skärm
+    ålder: 20.1
+    Alla matsvampar: 11.4
+    Goda matsvampar: 5.7
+    Signal + rödlistade: 0.0342
+    Atheliales: 19.95
+    Boletales: 7.98
+    Cantharellales: 0.1425
+    Cortinariaceae: 6.27
+    Russulales: 5.7
+    Thelephorales: 3.42
+    Ascomyceter: 12.54
+  - startskog: naturskog
+    metod: skärm
+    ålder: 30
+    Alla matsvampar: 22.8
+    Goda matsvampar: 11.4
+    Signal + rödlistade: 0.0912
+    Atheliales: 36.48
+    Boletales: 14.82
+    Cantharellales: 0.342
+    Cortinariaceae: 13.11
+    Russulales: 12.54
+    Thelephorales: 6.84
+    Ascomyceter: 28.5
+  - startskog: naturskog
+    metod: skärm
+    ålder: 40
+    Alla matsvampar: 23.37
+    Goda matsvampar: 11.685
+    Signal + rödlistade: 0.11685
+    Atheliales: 37.392
+    Boletales: 15.1905
+    Cantharellales: 0.35055
+    Cortinariaceae: 13.43775
+    Russulales: 12.8535
+    Thelephorales: 7.011
+    Ascomyceter: 28.044
+  - startskog: naturskog
+    metod: skärm
+    ålder: 50
+    Alla matsvampar: 22.99
+    Goda matsvampar: 11.495
+    Signal + rödlistade: 0.13794
+    Atheliales: 34.485
+    Boletales: 14.9435
+    Cantharellales: 0.57475
+    Cortinariaceae: 13.794
+    Russulales: 14.9435
+    Thelephorales: 6.897
+    Ascomyceter: 26.4385
+  - startskog: naturskog
+    metod: skärm
+    ålder: 60
+    Alla matsvampar: 23.94
+    Goda matsvampar: 11.4
+    Signal + rödlistade: 0.171
+    Atheliales: 33.06
+    Boletales: 13.68
+    Cantharellales: 0.627
+    Cortinariaceae: 14.82
+    Russulales: 15.96
+    Thelephorales: 6.27
+    Ascomyceter: 26.79
+  - startskog: naturskog
+    metod: skärm
+    ålder: 70
+    Alla matsvampar: 22.9425
+    Goda matsvampar: 10.925
+    Signal + rödlistade: 0.2185
+    Atheliales: 31.13625
+    Boletales: 13.11
+    Cantharellales: 0.63365
+    Cortinariaceae: 14.74875
+    Russulales: 16.3875
+    Thelephorales: 5.681
+    Ascomyceter: 24.035
+  - startskog: naturskog
+    metod: skärm
+    ålder: 80
+    Alla matsvampar: 24.472
+    Goda matsvampar: 10.64
+    Signal + rödlistade: 0.266
+    Atheliales: 29.792
+    Boletales: 12.768
+    Cantharellales: 0.6384
+    Cortinariaceae: 14.896
+    Russulales: 17.024
+    Thelephorales: 5.32
+    Ascomyceter: 22.344
+  - startskog: naturskog
+    metod: skärm
+    ålder: 90
+    Alla matsvampar: 25.08
+    Goda matsvampar: 10.45
+    Signal + rödlistade: 0.3135
+    Atheliales: 28.215
+    Boletales: 12.54
+    Cantharellales: 0.67925
+    Cortinariaceae: 15.675
+    Russulales: 18.81
+    Thelephorales: 5.225
+    Ascomyceter: 21.4225
+  - startskog: naturskog
+    metod: skärm
+    ålder: 100
+    Alla matsvampar: 26.125
+    Goda matsvampar: 10.45
+    Signal + rödlistade: 0.418
+    Atheliales: 27.17
+    Boletales: 12.54
+    Cantharellales: 0.7315
+    Cortinariaceae: 16.72
+    Russulales: 20.9
+    Thelephorales: 5.225
+    Ascomyceter: 20.9
+  - startskog: naturskog
+    metod: ingen åtgärd
+    ålder: -7
+    Alla matsvampar: 30
+    Goda matsvampar: 10
+    Signal + rödlistade: 0.6
+    Atheliales: 22
+    Boletales: 12
+    Cantharellales: 0.8
+    Cortinariaceae: 25
+    Russulales: 22
+    Thelephorales: 2
+    Ascomyceter: 18
+  - startskog: naturskog
+    metod: ingen åtgärd
+    ålder: 0
+    Alla matsvampar: 30
+    Goda matsvampar: 10
+    Signal + rödlistade: 0.6
+    Atheliales: 22
+    Boletales: 12
+    Cantharellales: 0.8
+    Cortinariaceae: 25
+    Russulales: 22
+    Thelephorales: 2
+    Ascomyceter: 18
+  - startskog: naturskog
+    metod: ingen åtgärd
+    ålder: 10
+    Alla matsvampar: 30
+    Goda matsvampar: 10
+    Signal + rödlistade: 0.6
+    Atheliales: 22
+    Boletales: 12
+    Cantharellales: 8
+    Cortinariaceae: 25
+    Russulales: 22
+    Thelephorales: 2
+    Ascomyceter: 18
+  - startskog: naturskog
+    metod: ingen åtgärd
+    ålder: 20
+    Alla matsvampar: 30
+    Goda matsvampar: 10
+    Signal + rödlistade: 0.6
+    Atheliales: 22
+    Boletales: 12
+    Cantharellales: 8
+    Cortinariaceae: 25
+    Russulales: 22
+    Thelephorales: 2
+    Ascomyceter: 18
+  - startskog: naturskog
+    metod: ingen åtgärd
+    ålder: 30
+    Alla matsvampar: 30
+    Goda matsvampar: 10
+    Signal + rödlistade: 0.6
+    Atheliales: 22
+    Boletales: 12
+    Cantharellales: 8
+    Cortinariaceae: 25
+    Russulales: 22
+    Thelephorales: 2
+    Ascomyceter: 18
+  - startskog: naturskog
+    metod: ingen åtgärd
+    ålder: 40
+    Alla matsvampar: 30
+    Goda matsvampar: 10
+    Signal + rödlistade: 0.6
+    Atheliales: 22
+    Boletales: 12
+    Cantharellales: 8
+    Cortinariaceae: 25
+    Russulales: 22
+    Thelephorales: 2
+    Ascomyceter: 18
+  - startskog: naturskog
+    metod: ingen åtgärd
+    ålder: 50
+    Alla matsvampar: 30
+    Goda matsvampar: 10
+    Signal + rödlistade: 0.6
+    Atheliales: 22
+    Boletales: 12
+    Cantharellales: 8
+    Cortinariaceae: 25
+    Russulales: 22
+    Thelephorales: 2
+    Ascomyceter: 18
+  - startskog: naturskog
+    metod: ingen åtgärd
+    ålder: 60
+    Alla matsvampar: 30
+    Goda matsvampar: 10
+    Signal + rödlistade: 0.6
+    Atheliales: 22
+    Boletales: 12
+    Cantharellales: 8
+    Cortinariaceae: 25
+    Russulales: 22
+    Thelephorales: 2
+    Ascomyceter: 18
+  - startskog: naturskog
+    metod: ingen åtgärd
+    ålder: 70
+    Alla matsvampar: 30
+    Goda matsvampar: 10
+    Signal + rödlistade: 0.6
+    Atheliales: 22
+    Boletales: 12
+    Cantharellales: 8
+    Cortinariaceae: 25
+    Russulales: 22
+    Thelephorales: 2
+    Ascomyceter: 18
+  - startskog: naturskog
+    metod: ingen åtgärd
+    ålder: 80
+    Alla matsvampar: 30
+    Goda matsvampar: 10
+    Signal + rödlistade: 0.6
+    Atheliales: 22
+    Boletales: 12
+    Cantharellales: 8
+    Cortinariaceae: 25
+    Russulales: 22
+    Thelephorales: 2
+    Ascomyceter: 18
+  - startskog: naturskog
+    metod: ingen åtgärd
+    ålder: 90
+    Alla matsvampar: 30
+    Goda matsvampar: 10
+    Signal + rödlistade: 0.6
+    Atheliales: 22
+    Boletales: 12
+    Cantharellales: 8
+    Cortinariaceae: 25
+    Russulales: 22
+    Thelephorales: 2
+    Ascomyceter: 18
+  - startskog: naturskog
+    metod: ingen åtgärd
+    ålder: 100
+    Alla matsvampar: 30
+    Goda matsvampar: 10
+    Signal + rödlistade: 0.6
+    Atheliales: 22
+    Boletales: 12
+    Cantharellales: 8
+    Cortinariaceae: 25
+    Russulales: 22
+    Thelephorales: 2
+    Ascomyceter: 18

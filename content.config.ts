@@ -26,6 +26,7 @@ const colorEnum = z.enum([
 ]);
 const sizeEnum = z.enum(["xs", "sm", "md", "lg", "xl"]);
 const orientationEnum = z.enum(["vertical", "horizontal"]);
+const numericStringSchema = z.union([z.number(), z.string()]);
 
 const baseSchema = {
   title: z.string().nonempty(),
@@ -413,6 +414,29 @@ export const collections = {
           startskog: z.string().optional(),
           ["ålder"]: z.number(),
           klassning: z.number(),
+        }),
+      ),
+    }),
+  }),
+  skogsbrukSvampar: defineCollection({
+    type: "data",
+    source: "forestry/skogssbruk_svampar.yml",
+    schema: z.object({
+      entries: z.array(
+        z.object({
+          startskog: z.string().nonempty(),
+          metod: z.string().nonempty(),
+          ["ålder"]: numericStringSchema,
+          ["Alla matsvampar"]: numericStringSchema.optional(),
+          ["Goda matsvampar"]: numericStringSchema.optional(),
+          ["Signal + rödlistade"]: numericStringSchema.optional(),
+          Atheliales: numericStringSchema.optional(),
+          Boletales: numericStringSchema.optional(),
+          Cantharellales: numericStringSchema.optional(),
+          Cortinariaceae: numericStringSchema.optional(),
+          Russulales: numericStringSchema.optional(),
+          Thelephorales: numericStringSchema.optional(),
+          Ascomyceter: numericStringSchema.optional(),
         }),
       ),
     }),

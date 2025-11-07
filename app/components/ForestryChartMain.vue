@@ -66,7 +66,7 @@
       <div v-if="selectedChart === 'matsvampar'">
         <ForestryChartDisplay
           :selectedFrameworks="props.parentSelectedFrameworks ?? ['naturskydd', 'trakthygge', 'luckhuggning', 'blädning', 'skärmträd']"
-          :selectedArtkategori="['matsvamp']" :chartType="chartType" :selectedStartskog="props.currentStartskog"
+          :selectedArtkategori="[matsvampChartArtkategori]" :chartType="chartType" :selectedStartskog="props.currentStartskog"
           :yellowColor="true" :maxYValue="matsvampMaxY" :currentTimeValue="props.currentTimeValue"
           :matsvampVariant="selectedMatsvampVariant" />
         <div class="px-4 pb-4 text-xs text-muted">
@@ -208,6 +208,7 @@ const matsvampVariantOptions = [
 ]
 
 const selectedMatsvampVariant = ref<'standard' | 'goda' | 'kg'>('standard')
+const matsvampChartArtkategori = computed(() => selectedMatsvampVariant.value === 'goda' ? 'goda matsvampar' : 'matsvamp')
 
 const selectedMatsvampIcon = computed(() =>
   matsvampVariantOptions.find(opt => opt.value === selectedMatsvampVariant.value)?.icon
