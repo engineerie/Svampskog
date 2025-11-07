@@ -6,6 +6,26 @@
       <USelect v-model="selectedChart" :items="chartOptions" value-key="value" option-attribute="label" size="xl"
         variant="none" class="hover:cursor-pointer" :icon="selectedChartIcon" :ui="{ content: 'min-w-fit' }" />
       <div class="pr-2">
+
+        <UModal v-if="selectedChart === 'grupper'">
+
+          <UButton size="sm" variant="soft" color="neutral" icon="i-ph-chart-line-up-light"
+            label="Relativ mängd vid olika åldrar" />
+          <template #content>
+            <div class="flex flex-col gap-4 p-4">
+              <div class="space-y-1">
+                <p class="text-xs uppercase tracking-wide text-muted">Relativ mängd</p>
+                <h2 class="text-lg font-semibold">Svampgruppernas relativa fördelning</h2>
+                <p class="text-sm text-muted">
+                  Visar hur stor andel varje svampgrupp utgör genom skogsgenerationen, oberoende av vald skötselmetod.
+                </p>
+              </div>
+              <ForestryChartDisplay :selectedFrameworks="['trakthygge']"
+                :selectedArtkategori="defaultGrupperArtkategori" chartType="area" :singleFrameworkSelection="true"
+                :relativeChart="true" />
+            </div>
+          </template>
+        </UModal>
         <USelect v-if="selectedChart === 'grupper' && isFrameworkCompareMode" v-model="selectedCompareArtkategori"
           :items="compareArtkategoriOptions" option-attribute="label" value-key="value" size="lg" variant="soft"
           placeholder="Välj svampgrupp" class="hover:cursor-pointer rounded-full"
@@ -66,9 +86,9 @@
       <div v-if="selectedChart === 'matsvampar'">
         <ForestryChartDisplay
           :selectedFrameworks="props.parentSelectedFrameworks ?? ['naturskydd', 'trakthygge', 'luckhuggning', 'blädning', 'skärmträd']"
-          :selectedArtkategori="[matsvampChartArtkategori]" :chartType="chartType" :selectedStartskog="props.currentStartskog"
-          :yellowColor="true" :maxYValue="matsvampMaxY" :currentTimeValue="props.currentTimeValue"
-          :matsvampVariant="selectedMatsvampVariant" />
+          :selectedArtkategori="[matsvampChartArtkategori]" :chartType="chartType"
+          :selectedStartskog="props.currentStartskog" :yellowColor="true" :maxYValue="matsvampMaxY"
+          :currentTimeValue="props.currentTimeValue" :matsvampVariant="selectedMatsvampVariant" />
         <div class="px-4 pb-4 text-xs text-muted">
           {{ matsvampDescription }}
         </div>

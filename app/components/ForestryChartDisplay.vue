@@ -228,6 +228,58 @@ const ascomycotaDataset = computed(() => svampCategoryDatasets.value['ascomycota
 const thelephoralesDataset = computed(() => svampCategoryDatasets.value['thelephorales'] ?? [])
 const totalDataset = computed(() => Array.isArray(totalSvamparDataDoc.value?.entries) ? totalSvamparDataDoc.value.entries : [])
 
+const { data: relativeSvampgrupperDoc } = await useAsyncData('svampgrupper-relative-skogsbruk', () =>
+  queryCollection('svampgrupperRelativeSkogsbruk').first()
+)
+
+const relativeCategoryKeys = ['atheliales', 'boletales', 'cantharellales', 'spindlingar', 'russulales', 'thelephorales', 'ascomycota']
+
+const relativeChartRows = computed(() => {
+  const entries = Array.isArray(relativeSvampgrupperDoc.value?.entries)
+    ? (relativeSvampgrupperDoc.value.entries as Array<Record<string, any>>)
+    : []
+
+  const ageMap = new Map<number, Record<string, any>>()
+
+  for (const entry of entries) {
+    if (!entry) continue
+    const age = Number(entry?.['ålder'])
+    if (!Number.isFinite(age)) continue
+
+    const row = ageMap.get(age) || { age }
+
+    if (typeof entry.artkategori === 'string' && entry.klassning !== undefined) {
+      const key = normalizeArtKey(entry.artkategori)
+      const klassning = Number(entry.klassning)
+      if (key && Number.isFinite(klassning)) {
+        row[key] = klassning
+      }
+    } else {
+      for (const key of relativeCategoryKeys) {
+        const fieldName = svampCategoryFieldMap[key]
+        const raw = entry?.[fieldName]
+        if (raw === undefined || raw === null) continue
+        const klassning = Number(raw)
+        if (Number.isFinite(klassning)) {
+          row[key] = klassning
+        }
+      }
+    }
+    ageMap.set(age, row)
+  }
+
+  const rows = Array.from(ageMap.values()).map(row => {
+    for (const key of relativeCategoryKeys) {
+      if (!Number.isFinite(Number(row[key]))) {
+        row[key] = 0
+      }
+    }
+    return row
+  })
+
+  return rows.sort((a, b) => Number(a.age) - Number(b.age))
+})
+
 
 const yDomain = computed<[number, number] | undefined>(() => {
   const fixedMax = Number(props.maxYValue);
@@ -351,7 +403,8 @@ interface Props {
   redColor?: boolean,
   yellowColor?: boolean,
   maxYValue?: number, // <-- Add this
-  matsvampVariant?: 'standard' | 'goda' | 'kg'
+  matsvampVariant?: 'standard' | 'goda' | 'kg',
+  relativeChart?: boolean,
 }
 
 const props = withDefaults(defineProps<Props>(), {
@@ -360,7 +413,8 @@ const props = withDefaults(defineProps<Props>(), {
   frameworkComparisonMode: false,
   redColor: false,
   yellowColor: false,
-  matsvampVariant: 'standard'
+  matsvampVariant: 'standard',
+  relativeChart: false,
 });
 
 const matsvampVariant = computed(() => props.matsvampVariant === 'goda' ? 'goda' : (props.matsvampVariant === 'kg' ? 'kg' : 'standard'))
@@ -530,6 +584,8 @@ const selectedArtCategories = computed(() =>
 function normalizeArtKey(category: string): string {
   const key = (category || '').toLowerCase();
   if (key === 'kg matsvampar') return 'kg matsvamp';
+  if (key === 'cortinariaceae') return 'spindlingar';
+  if (key === 'ascomyceter') return 'ascomycota';
   return key;
 }
 
@@ -964,6 +1020,9 @@ function filterDataForFramework(framework: string) {
 
 
 const mergedData = computed(() => {
+  if (props.relativeChart) {
+    return relativeChartRows.value;
+  }
   const dataMap = new Map<number, any>();
 
   if (props.singleFrameworkSelection) {
