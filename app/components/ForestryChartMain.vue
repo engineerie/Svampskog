@@ -9,15 +9,15 @@
 
         <UModal v-if="selectedChart === 'grupper'">
 
-          <UButton size="sm" variant="soft" color="neutral" icon="i-ph-chart-line-up-light"
-            label="Relativ mängd vid olika åldrar" />
+          <UButton size="md" color="neutral" icon="i-carbon-diagram-reference" label="Relativ mängd vid olika åldrar" />
           <template #content>
             <div class="flex flex-col gap-4 p-4">
               <div class="space-y-1">
                 <p class="text-xs uppercase tracking-wide text-muted">Relativ mängd</p>
                 <h2 class="text-lg font-semibold">Svampgruppernas relativa fördelning</h2>
                 <p class="text-sm text-muted">
-                  Visar hur stor andel varje svampgrupp utgör genom skogsgenerationen, oberoende av vald skötselmetod.
+                  Information enligt markinventeringen som visar hur stor andel varje svampgrupp utgör i olika
+                  skogsåldrar.
                 </p>
               </div>
               <ForestryChartDisplay :selectedFrameworks="['trakthygge']"

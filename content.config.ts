@@ -441,6 +441,24 @@ export const collections = {
       ),
     }),
   }),
+  svampgrupperRelativeSkogsbruk: defineCollection({
+    type: "data",
+    source: "forestry/svampgrupper-relative-skogsbruk.yml",
+    schema: z.object({
+      entries: z.array(
+        z.object({
+          ["ålder"]: numericStringSchema,
+          Atheliales: numericStringSchema.optional(),
+          Boletales: numericStringSchema.optional(),
+          Cantharellales: numericStringSchema.optional(),
+          Cortinariaceae: numericStringSchema.optional(),
+          Russulales: numericStringSchema.optional(),
+          Thelephorales: numericStringSchema.optional(),
+          Ascomyceter: numericStringSchema.optional(),
+        }),
+      ),
+    }),
+  }),
   totalSvamparSkogsbruk: defineCollection({
     type: "data",
     source: "forestry/total-svampar-skogsbruk.yml",

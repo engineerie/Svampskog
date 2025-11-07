@@ -6,9 +6,9 @@
         :items="legendItems" :onLegendItemClick="handleLegendItemClick" class="mx-4 flex flex-wrap gap-2" />
       <div
         v-if="isMounted && chartReady && legendItems.length && (props.singleFrameworkSelection && !props.frameworkComparisonMode)"
-        class="mx-4 flex flex-wrap gap-2">
+        class="mx-4 flex flex-wrap gap-1">
         <UButton v-for="item in legendItems" :key="item.key" type="button" variant="ghost" color="neutral" size="sm"
-          class="flex items-center gap-2 rounded-full px-3 py-1 hover:opacity-95 transition ring-muted/50"
+          class="flex items-center px-3 py-1 gap-2 hover:opacity-95 transition ring-muted/50"
           @click="handleLegendItemClick(item)">
           <div v-if="item.icon" class="h-5 w-5" :style="{
             backgroundColor: item.color || item.colorLine || item.colorArea || '#000',
@@ -81,20 +81,8 @@
         <VisPlotline :duration="1" v-for="band in plotBands" :key="band.id" axis="x" :value="band.value"
           :color="`rgba(69,10,10, 0.5)`" :lineStyle="[2, 3]" :label="band.labelText" :labelColor="band.labelColor"
           :zIndex="100" :lineWidth="1" />
-        <VisAxis tickTextFontSize="12px" :gridLine="true" type="x" :tickValues="[0, 10, 20, 30, 40, 50, 60, 70, 80, 90]"
-          :tickFormat="(val: number) => {
-            if (val === 0) return '0 år'
-            if (val === 10) return ''
-            if (val === 20) return '20 år'
-            if (val === 30) return ''
-            if (val === 40) return ''
-            if (val === 50) return '50 år'
-            if (val === 60) return ''
-            if (val === 70) return ''
-            if (val === 80) return '80 år'
-            if (val === 90) return ''
-            return val
-          }" />
+        <VisAxis tickTextFontSize="12px" :gridLine="true" type="x" :tickValues="xTickValues"
+          :tickFormat="formatXTicks" />
         <VisAxis tickTextFontSize="12px" type="y" />
       </VisXYContainer>
     </ClientOnly>
@@ -315,12 +303,37 @@ const baseChartData = computed(() => {
 });
 
 const xDomain = computed<[number, number]>(() => {
-  const xs = baseChartData.value
-    .map(d => Number(d?.age))
-    .filter(v => Number.isFinite(v)) as number[]
+  const source = props.relativeChart ? relativeChartRows.value : baseChartData.value
+  const xs = source.map(d => Number(d?.age)).filter(v => Number.isFinite(v)) as number[]
   if (!xs.length) return [0, 1]
-  return [Math.min(...xs), Math.max(...xs)]
+  const min = props.relativeChart ? Math.max(0, Math.min(...xs)) : Math.min(...xs)
+  return [min, Math.max(...xs)]
 })
+
+const xTickValues = computed(() =>
+  props.relativeChart ? [0, 20, 50, 80] : [0, 10, 20, 30, 40, 50, 60, 70, 80, 90]
+)
+
+const formatXTicks = (val: number) => {
+  if (props.relativeChart) {
+    if (val === 0) return '0 år'
+    if (val === 20) return '20 år'
+    if (val === 50) return '50 år'
+    if (val === 80) return '80 år'
+    return ''
+  }
+  if (val === 0) return 'Avverkning'
+  if (val === 10) return ''
+  if (val === 20) return isMobile.value ? '20 år' : '20 år efter'
+  if (val === 30) return ''
+  if (val === 40) return ''
+  if (val === 50) return isMobile.value ? '50 år' : '50 år efter'
+  if (val === 60) return ''
+  if (val === 70) return ''
+  if (val === 80) return isMobile.value ? '80 år' : '80 år efter'
+  if (val === 90) return ''
+  return ''
+}
 
 const chartKey = computed(() => {
   return [
@@ -356,6 +369,7 @@ const rootEl = ref<HTMLElement | null>(null)
 const isMounted = ref(false)
 let __ro: ResizeObserver | null = null
 const chartSize = reactive({ width: 0, height: 0 })
+const isMobile = ref(false)
 
 function updateChartSize() {
   if (!rootEl.value) {
@@ -366,12 +380,19 @@ function updateChartSize() {
   const bounds = rootEl.value.getBoundingClientRect()
   chartSize.width = bounds.width
   chartSize.height = bounds.height
+  syncDeviceFlags()
+}
+
+function syncDeviceFlags() {
+  if (typeof window === 'undefined') return
+  isMobile.value = window.innerWidth <= 640
 }
 
 onMounted(async () => {
   await nextTick()
   isMounted.value = true
   updateChartSize()
+  syncDeviceFlags()
   requestAnimationFrame(() => {
     updateChartSize()
   })

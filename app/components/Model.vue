@@ -2329,7 +2329,7 @@ const sliderSteps = computed(() => {
     : "Före avverkning";
   const steps = [
     { value: 3, label: beforeLabel, timeLabel: "före" },
-    { value: 15, label: "1 år efter ", timeLabel: "efter" },
+    { value: 15, label: "Strax efter ", timeLabel: "efter" },
   ];
   if (
     currentFramework.value?.value === "skärmträd" &&
