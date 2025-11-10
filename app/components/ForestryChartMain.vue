@@ -7,22 +7,19 @@
         variant="none" class="hover:cursor-pointer" :icon="selectedChartIcon" :ui="{ content: 'min-w-fit' }" />
       <div class="pr-2">
 
-        <UModal v-if="selectedChart === 'grupper'">
+        <UModal v-if="selectedChart === 'grupper'" :fullscreen="isMobile ? true : false" title="Relativ mängd"
+          description="">
 
           <UButton size="md" color="neutral" icon="i-carbon-diagram-reference" label="Relativ mängd vid olika åldrar" />
-          <template #content>
-            <div class="flex flex-col gap-4 p-4">
-              <div class="space-y-1">
-                <p class="text-xs uppercase tracking-wide text-muted">Relativ mängd</p>
-                <h2 class="text-lg font-semibold">Svampgruppernas relativa fördelning</h2>
-                <p class="text-sm text-muted">
-                  Information enligt markinventeringen som visar hur stor andel varje svampgrupp utgör i olika
-                  skogsåldrar.
-                </p>
-              </div>
+          <template #body>
+            <div class="flex flex-col gap-4">
               <ForestryChartDisplay :selectedFrameworks="['trakthygge']"
                 :selectedArtkategori="defaultGrupperArtkategori" chartType="area" :singleFrameworkSelection="true"
                 :relativeChart="true" />
+              <p class="text-sm text-muted">
+                Den relativa fördelningen av olika grupper mykorrhizasvampar i förhållande till alla mykorrhizasvampar i
+                äldre skog och vid olika skogsåldrar efter avverkning.
+              </p>
             </div>
           </template>
         </UModal>
@@ -108,6 +105,9 @@
 
 <script setup lang="ts">
 import { ref, computed, watch } from 'vue'
+import { useMediaQuery } from '@vueuse/core'
+
+const isMobile = useMediaQuery('(max-width: 767px)')
 
 interface Props {
   parentSelectedFrameworks?: string[]
@@ -135,10 +135,11 @@ const showDesc4 = ref(false)
 const showDesc5 = ref(false)
 
 const chartOptions = [
-  { label: 'Total mängd mykorrhizasvampar', value: 'skogsskole', icon: 'i-fluent-shape-organic-20-filled' },
+  { label: 'Mängd mykorrhizasvamp', value: 'skogsskole', icon: 'i-fluent-shape-organic-20-filled' },
+  { label: 'Svampgrupper', value: 'grupper', icon: 'i-material-symbols-category-rounded' },
   { label: 'Naturvårdssvampar', value: 'rodlistade', icon: 'i-material-symbols-award-star' },
   { label: 'Matsvampar', value: 'matsvampar', icon: 'icon-park-solid:knife-fork' },
-  { label: 'Olika grupper', value: 'grupper', icon: 'i-material-symbols-category-rounded' }
+
 ]
 const selectedChart = ref<string>(
   chartOptions.some(opt => opt.value === (props.selectedChart as any))

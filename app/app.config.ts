@@ -91,6 +91,9 @@ export default defineAppConfig({
       kalkmark: "slate",
       vanligmark: "emerald",
       time: "orange",
+      chetwood: "chetwode-blue",
+      blackrose: "black-rose",
+      neutral2: "stone",
     },
   },
 });

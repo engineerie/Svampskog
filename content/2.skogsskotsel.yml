@@ -18,7 +18,7 @@ hero:
       to:
       target:
       size: xl
-      color: neutral
+      color: vanligmark
       variant: solid
 carousel:
   title: Svamp och skogsbruk på 5 minuter

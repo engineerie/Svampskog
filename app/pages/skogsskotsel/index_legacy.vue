@@ -53,7 +53,7 @@
         <!-- <div class="w-full bg-neutral-50 border-t border-muted"> -->
 
 
-        <UContainer class="w-full pt-2 px-1 sm:px-6 ">
+        <UContainer class="w-full pt-2 px-0 sm:px-6 ">
             <Motion class="flex justify-center w-full" :initial="{
                 opacity: 0,
                 transform: 'translateY(10px)'
@@ -66,55 +66,86 @@
                 duration: 0.5,
                 delay: 1
             }">
-                <div class="w-full sm:ring ring-muted/30 rounded-xl relative overflow-hidden sm:shadow-lg">
+                <div class="w-full ring ring-muted/50 rounded relative overflow-hidden shadow">
                     <!-- <div class="absolute top-0 right-0 p-3 flex gap-4">
                         <h1 class="text-lg font-medium">{{ selectedMethod.title }}</h1>
                         <UBadge v-if="selectedMethod.type" :label="selectedMethod.type" color="neutral" variant="subtle"
                             size="lg" />
                     </div> -->
-                    <UPage class="p-3 sm:p-6 ">
-                        <!-- <template #left>
+                    <UTabs :ui="{ list: 'p-2 justify-center sm:justify-start', root: '' }" :items="tabs" color="primary"
+                        size="md" class="w-full" variant="link">
+                        <template #text>
+                            <UPage class="pt-4 sm:p-6 ">
+                                <!-- <template #left>
                                     <div></div>
                                 </template> -->
-                        <div class="grid gap-3 sm:gap-6 sm:grid-cols-3">
-                            <div class="space-y-6">
-                                <NuxtImg v-if="!isMobile" :src="selectedMethod.image" width="400" height="250"
-                                    class="rounded ring ring-muted/50" />
-                                <UCard variant="soft" :ui="{ body: 'sm:p-3' }">
-                                    <ForestryChartMain :parentSelectedFrameworks=[selectedMethod.id]
-                                        currentStartskog="naturskog" />
-                                </UCard>
+                                <div class="sm:grid grid-cols-2 gap-6">
+                                    <div class="px-6 sm:px-12 sm:border-r border-muted/50">
+                                        <h1 class="my-4  text-3xl sm:text-4xl font-medium text-neutral-900">{{
+                                            selectedMethod.title
+                                            }}
+                                        </h1>
+                                        <MDC class="text-lg text-neutral-800  mb-8"
+                                            :value="selectedMethod.description" />
 
-                            </div>
+                                    </div>
+                                    <div class="px-6 sm:px-12">
+                                        <h1 class="my-4 text-2xl font-medium text-neutral-900">Påverkan på
+                                            mykorrhizasvampar
+                                        </h1>
+                                        <MDC class="text-lg text-neutral-800"
+                                            :value="selectedMethod.descriptionsvamp" />
+                                    </div>
+                                </div>
 
-
-
-
-
-
-
-                            <UCard variant="soft" class="h-fit">
-
-                                <h1 class="mb-4 text-2xl font-medium text-neutral-900">{{
-                                    selectedMethod.title
-                                }}
-                                </h1>
-                                <MDC class="text-md text-neutral-800" :value="selectedMethod.description" />
-                            </UCard>
-                            <UCard variant="soft" class="bg-stone-100 h-fit">
-                                <h1 class="mb-4 text-2xl font-medium text-neutral-900">Påverkan på
-                                    mykorrhizasvampar
-                                </h1>
-                                <MDC class="text-md text-neutral-800" :value="selectedMethod.descriptionsvamp" />
-                            </UCard>
-                        </div>
-
-                        <!-- <template #right>
+                                <!-- <template #right>
                                     <UAlert v-if="selectedMethod.type" color="neutral" variant="subtle"
                                         description="Hyggesfritt skogsbruk innebär att det kontinuerligt finns ett trädtäcke i skogen."
                                         class="h-fit mx-4 mb-4" />
                                 </template> -->
-                    </UPage>
+                            </UPage>
+                        </template>
+                        <template #diagram>
+                            <!-- <UAlert title="Denna funktion lanseras i November." color="warning"
+                                icon="i-fluent-emoji-high-contrast-construction" /> -->
+                            <!-- <h1
+                                class="text-3xl tracking-tight lg:text-5xl font-medium text-neutral-900 my-4 mx-2 lg:mt-8 mb-2">
+                                {{
+                                    selectedMethod.title
+                                }}
+                            </h1> -->
+                            <ForestryChartMain :parentSelectedFrameworks=[selectedMethod.id]
+                                currentStartskog="naturskog" />
+                        </template>
+                        <template #timeline>
+                            <div class="p-6 pb-2">
+                                <UTimeline :items="timelineItems" size="3xs"
+                                    :ui="{ indicator: 'bg-neutral-200/50 ', separator: 'bg-neutral-200/50', description: 'p-0 mt-2 text-default' }">
+                                    <template #title="{ item }">
+                                        <span class="font-semibold">{{ item.tid }}</span>
+                                    </template>
+                                    <template #description="{ item }" :key="item.tid">
+                                        <div class=" lg:flex gap-4 space-y-2 lg:space-y-0">
+                                            <img :src="item.thumb" class="w-80 h-fit rounded" />
+                                            <div class="w-full px-6 border border-muted/50 bg-muted/50 rounded h-fit">
+                                                <MDC :value="item.skog" />
+                                            </div>
+                                            <div class="w-full bg-white px-6 border border-muted/50 rounded h-fit">
+                                                <MDC :value="item.svamp" />
+                                            </div>
+
+                                        </div>
+                                    </template>
+                                </UTimeline>
+                            </div>
+
+                            <!-- <h1
+                                class="text-3xl tracking-tight lg:text-5xl font-medium text-neutral-900 my-4 mx-2 lg:my-8 mb-2">
+                                {{ selectedMethod.title }}
+                            </h1> -->
+
+                        </template>
+                    </UTabs>
                 </div>
             </Motion>
 
@@ -129,9 +160,6 @@
 <script setup lang="ts">
 import { ref, computed, watchEffect } from 'vue'
 import type { TabsItem } from '@nuxt/ui'
-import { useMediaQuery } from '@vueuse/core'
-
-const isMobile = useMediaQuery('(max-width: 767px)')
 
 const modelOpen = ref(false)
 
@@ -227,11 +255,6 @@ const timelineItems = computed<TimelineDisplayItem[]>(() => {
 })
 
 const tabs = ref<TabsItem[]>([
-    {
-        label: 'Intro',
-        icon: 'i-heroicons-book-open',
-        slot: 'text' as const
-    },
 
     {
         label: 'Diagram',
@@ -243,7 +266,11 @@ const tabs = ref<TabsItem[]>([
         icon: 'i-heroicons-list-bullet',
         slot: 'timeline' as const
     },
-
+    {
+        label: 'Text',
+        icon: 'i-heroicons-book-open',
+        slot: 'text' as const
+    },
 ])
 
 interface Method {

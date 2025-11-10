@@ -324,13 +324,13 @@ const formatXTicks = (val: number) => {
   }
   if (val === 0) return 'Avverkning'
   if (val === 10) return ''
-  if (val === 20) return isMobile.value ? '20 år' : '20 år efter'
+  if (val === 20) return isMobile.value ? '20 år' : '20 år'
   if (val === 30) return ''
   if (val === 40) return ''
-  if (val === 50) return isMobile.value ? '50 år' : '50 år efter'
+  if (val === 50) return isMobile.value ? '50 år' : '50 år'
   if (val === 60) return ''
   if (val === 70) return ''
-  if (val === 80) return isMobile.value ? '80 år' : '80 år efter'
+  if (val === 80) return isMobile.value ? '80 år' : '80 år'
   if (val === 90) return ''
   return ''
 }

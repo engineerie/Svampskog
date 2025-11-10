@@ -29,6 +29,30 @@
   --color-rodeo-dust-800: #6f4c3d;
   --color-rodeo-dust-900: #5a3f34;
   --color-rodeo-dust-950: #30201a;
+
+  --color-chetwode-blue-50: #f2f4fb;
+  --color-chetwode-blue-100: #e7ebf8;
+  --color-chetwode-blue-200: #d4dbf1;
+  --color-chetwode-blue-300: #b9c2e8;
+  --color-chetwode-blue-400: #9ca4dd;
+  --color-chetwode-blue-500: #7e82ce;
+  --color-chetwode-blue-600: #6e6bc0;
+  --color-chetwode-blue-700: #5e5aa8;
+  --color-chetwode-blue-800: #4c4b88;
+  --color-chetwode-blue-900: #42416e;
+  --color-chetwode-blue-950: #272640;
+
+  --color-black-rose-50: #fcf3f8;
+  --color-black-rose-100: #fbe8f3;
+  --color-black-rose-200: #f9d1e8;
+  --color-black-rose-300: #f5acd3;
+  --color-black-rose-400: #ed79b5;
+  --color-black-rose-500: #e35198;
+  --color-black-rose-600: #d13177;
+  --color-black-rose-700: #b5215d;
+  --color-black-rose-800: #961e4d;
+  --color-black-rose-900: #7d1e43;
+  --color-black-rose-950: #690f32;
 }
 
 .dark {

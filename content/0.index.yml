@@ -19,7 +19,7 @@ hero:
       to: /skogsskotsel
       target:
       size: xl
-      color: neutral
+      color: signal
       variant: solid
   headline:
     label:
@@ -49,7 +49,7 @@ sections:
       - label: Gå till skogsskötsel
         to: /skogsskotsel
         icon: i-hugeicons-tree-06
-        color: neutral
+        color: primary
         variant: solid
         size: xl
     orientation: horizontal
