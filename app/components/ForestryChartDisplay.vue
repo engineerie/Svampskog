@@ -66,8 +66,8 @@
           <VisLine v-for="fw in activeFrameworks" :key="fw.key + '-line'" :x="xAccessor"
             :y="(d: any) => getFrameworkValue(d, fw.key)" :color="() => (hexToRgba(fw.colorLine || fw.color, 0.6))"
             :duration=1 />
-          <VisLine v-if="isKgMatsvamp" v-for="fw in activeFrameworks" :key="fw.key + '-kg-x2'" :x="xAccessor"
-            :y="kgDoubleAccessorFor(fw.key)" :color="() => 'rgba(34,197,94, 0.6)'" :duration="1" />
+          <VisArea v-if="isKgMatsvamp" v-for="fw in activeFrameworks" :key="fw.key + '-kg-x2'" :x="xAccessor"
+            :y="kgDoubleAccessorFor(fw.key)" :color="() => 'rgba(234,179,8,0.3)'" :duration="1" />
           <!-- <VisTooltip v-if="hasActiveSeries" :horizontalShift="30" /> -->
           <VisPlotband :duration=1 v-if="hasActiveSeries && currentTimeX !== null" :key="plotbandRenderKey" axis="x"
             :from="-7" :to="currentTimeX" :color="'rgba(255, 255, 255, 0.7)'" :zIndex="20" />
