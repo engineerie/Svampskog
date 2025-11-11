@@ -6,7 +6,7 @@
                 class="">
                 <!-- <NuxtImg :src="page.hero.src" width="700" format="webp" alt="Illustration"
                     class="rounded ring ring-neutral-300 " /> -->
-                <template v-if="page?.hero?.links?.[0]" #links>
+                <!-- <template v-if="page?.hero?.links?.[0]" #links>
                     <UChip color="warning" size="2xl">
                         <UButton :label="page.hero.links[0].label" :size="page.hero.links[0].size"
                             :color="page.hero.links[0].color" :icon="page.hero.links[0].icon"
@@ -16,8 +16,8 @@
                         <template #content>
                             <Model @close="modelOpen = false" />
                         </template>
-                    </UModal>
-                </template>
+</UModal>
+</template> -->
             </UPageHero>
         </UContainer>
 
@@ -66,25 +66,78 @@
                 duration: 0.5,
                 delay: 1
             }">
-                <div class="w-full sm:ring ring-muted/30 rounded-xl relative overflow-hidden sm:shadow-lg">
+                <div class="w-full  rounded-xl relative overflow-hidden">
                     <!-- <div class="absolute top-0 right-0 p-3 flex gap-4">
                         <h1 class="text-lg font-medium">{{ selectedMethod.title }}</h1>
                         <UBadge v-if="selectedMethod.type" :label="selectedMethod.type" color="neutral" variant="subtle"
                             size="lg" />
                     </div> -->
-                    <UPage class="p-3 sm:p-6 ">
+                    <UPage class="p-3 pt-0 sm:pt-3">
                         <!-- <template #left>
                                     <div></div>
                                 </template> -->
-                        <div class="grid gap-3 sm:gap-6 sm:grid-cols-3">
+                        <div class="grid gap-3 sm:gap-6 lg:grid-cols-3">
+                            <UCard class="h-fit" variant="soft" :ui="{ body: 'py-1 sm:py-1' }">
+                                <UAccordion :items="accordionItems" :unmount-on-hide="false"
+                                    :default-value="['description']" :ui="{
+                                        trigger: 'text-base font-medium',
+                                        body: 'text-md/7 text-neutral-800'
+                                    }">
+                                    <template #body="{ item }">
+                                        <MDC :value="item.content" unwrap="p" />
+                                    </template>
+                                </UAccordion>
+                            </UCard>
                             <div class="space-y-6">
-                                <NuxtImg v-if="!isMobile" :src="selectedMethod.image" width="400" height="250"
-                                    class="rounded ring ring-muted/50" />
-                                <UCard variant="soft" :ui="{ body: 'sm:p-3' }">
-                                    <ForestryChartMain :parentSelectedFrameworks=[selectedMethod.id]
-                                        currentStartskog="naturskog" />
-                                </UCard>
+                                <!-- <NuxtImg v-if="!isMobile" :src="selectedMethod.image" width="400" height="250"
+                                    class="rounded ring ring-muted/50" /> -->
 
+                                <UCard variant="soft" :ui="{ body: 'p-1 sm:p-3' }" class="ring-muted/50 bg-stone-50">
+                                    <ForestryChartMain :parentSelectedFrameworks=[selectedMethod.id]
+                                        currentStartskog="naturskog" :currentTimeValue="currentTimelineTime" />
+                                </UCard>
+                                <!-- <UPageCard title="Tailwind CSS"
+                                    description="Nuxt UI integrates with latest Tailwind CSS v4, bringing significant improvements."
+                                    icon="i-material-symbols:interactive-space" /> -->
+                            </div>
+
+                            <div v-if="timelineItems.length" class="space-y-4">
+
+                                <UCarousel ref="timelineCarousel" v-slot="{ item }" :items="timelineItems"
+                                    :prev="{ onClick: handleTimelinePrev }" :next="{ onClick: handleTimelineNext }"
+                                    class="w-full bg-neutral-950 overflow-hidden rounded-lg ring-muted/50 " fade
+                                    @select="handleTimelineSelect">
+
+                                    <NuxtImg :src="item.thumb" :alt="`Foto ${item.tid}`" width="960" height="540"
+                                        class="w-full aspect-video object-cover" />
+                                    <!-- <div
+                                            class="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent text-white p-4 space-y-1">
+                                            <p class="text-sm font-semibold">{{ item.tid }}</p>
+                                            <p class="text-xs uppercase tracking-wide text-white/70">{{ item.skog }}</p>
+                                            <p class="text-sm">{{ item.svamp }}</p>
+                                        </div> -->
+
+                                </UCarousel>
+                                <div class="flex w-full gap-2">
+                                    <UButton v-for="(item, index) in timelineItems" :key="`timeline-thumb-${index}`"
+                                        color="neutral" class="ring-muted/50 w-full flex justify-center"
+                                        variant="outline"
+                                        :class="index === activeTimelineIndex ? 'border-neutral-900 opacity-100 shadow' : 'border-transparent opacity-60 hover:opacity-100'"
+                                        type="button" @click="selectTimelineSlide(index)" :label="item.tid" />
+                                </div>
+                                <div class="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-2">
+                                    <div class="space-y-2">
+                                        <!-- <p class="text-xs uppercase tracking-wide text-muted">Tidslinje</p> -->
+                                        <h3 class="text-xl font-semibold text-neutral-900"> {{
+                                            timelineItems[activeTimelineIndex].tid }}</h3>
+                                        <p class="text-sm text-muted" v-if="timelineItems[activeTimelineIndex]">
+                                            {{
+                                                timelineItems[activeTimelineIndex].skog }}
+                                        </p>
+                                        <p class="text-sm">{{ timelineItems[activeTimelineIndex].svamp }}</p>
+                                    </div>
+
+                                </div>
                             </div>
 
 
@@ -93,21 +146,20 @@
 
 
 
-                            <UCard variant="soft" class="h-fit">
 
-                                <h1 class="mb-4 text-2xl font-medium text-neutral-900">{{
-                                    selectedMethod.title
-                                }}
-                                </h1>
-                                <MDC class="text-md text-neutral-800" :value="selectedMethod.description" />
-                            </UCard>
-                            <UCard variant="soft" class="bg-stone-100 h-fit">
-                                <h1 class="mb-4 text-2xl font-medium text-neutral-900">Påverkan på
-                                    mykorrhizasvampar
-                                </h1>
-                                <MDC class="text-md text-neutral-800" :value="selectedMethod.descriptionsvamp" />
-                            </UCard>
+
+
+
+
+
+
+
                         </div>
+                        <!-- <div class="w-full flex justify-end mt-6">
+                            <UPageCard title="Tailwind CSS"
+                                description="Nuxt UI integrates with latest Tailwind CSS v4, bringing significant improvements."
+                                icon="i-material-symbols:interactive-space" />
+                        </div> -->
 
                         <!-- <template #right>
                                     <UAlert v-if="selectedMethod.type" color="neutral" variant="subtle"
@@ -127,7 +179,7 @@
 </template>
 
 <script setup lang="ts">
-import { ref, computed, watchEffect } from 'vue'
+import { ref, computed, watch, watchEffect } from 'vue'
 import type { TabsItem } from '@nuxt/ui'
 import { useMediaQuery } from '@vueuse/core'
 
@@ -143,6 +195,43 @@ if (!page.value) {
         fatal: true
     })
 }
+interface Method {
+    index?: number
+    id: string
+    title: string
+    image: string
+    shortdescription: string
+    description: string
+    descriptionsvamp: string
+    type?: string
+}
+
+const methods = computed<Method[]>(() => page.value?.methods ?? [])
+
+const emptyMethod: Method = {
+    id: '',
+    title: '',
+    image: '',
+    shortdescription: '',
+    description: '',
+    descriptionsvamp: ''
+}
+const selectedId = ref<string>('trakthygge')
+
+watchEffect(() => {
+    const first = methods.value[0]
+    if (first && !selectedId.value) {
+        selectedId.value = first.id
+    }
+})
+
+const selectedMethod = computed<Method>(() => {
+    const list = methods.value
+    if (!list.length) {
+        return emptyMethod
+    }
+    return list.find(method => method.id === selectedId.value) ?? list[0]
+})
 
 interface TimelineEntry {
     startskog: string
@@ -226,6 +315,48 @@ const timelineItems = computed<TimelineDisplayItem[]>(() => {
         }))
 })
 
+const timelineCarousel = ref<any>(null)
+const activeTimelineIndex = ref(0)
+
+function handleTimelinePrev() {
+    timelineCarousel.value?.emblaApi?.scrollPrev?.()
+}
+
+function handleTimelineNext() {
+    timelineCarousel.value?.emblaApi?.scrollNext?.()
+}
+
+function handleTimelineSelect(index: number) {
+    activeTimelineIndex.value = index
+}
+
+function selectTimelineSlide(index: number) {
+    activeTimelineIndex.value = index
+    timelineCarousel.value?.emblaApi?.scrollTo?.(index)
+}
+
+watch(timelineItems, (items) => {
+    activeTimelineIndex.value = 0
+    if (items.length) {
+        requestAnimationFrame(() => {
+            timelineCarousel.value?.emblaApi?.scrollTo?.(0)
+        })
+    }
+})
+
+const mapTimelineTidToChartValue = (tid?: string) => {
+    if (!tid) return undefined
+    const token = normalizeTimeToken(tid)
+    if (!token) return undefined
+    if (token === 'fore') return 'före'
+    if (token === 'efter') return 'efter'
+    const num = Number(token)
+    if (!Number.isNaN(num)) return String(num)
+    return undefined
+}
+
+const currentTimelineTime = computed(() => mapTimelineTidToChartValue(timelineItems.value[activeTimelineIndex.value]?.tid))
+
 const tabs = ref<TabsItem[]>([
     {
         label: 'Intro',
@@ -246,41 +377,21 @@ const tabs = ref<TabsItem[]>([
 
 ])
 
-interface Method {
-    index?: number
-    id: string
-    title: string
-    image: string
-    shortdescription: string
-    description: string
-    descriptionsvamp: string
-    type?: string
-}
+const expandedCard = ref<'description' | 'svamp' | ''>('description')
 
-const methods = computed<Method[]>(() => page.value?.methods ?? [])
-
-const emptyMethod: Method = {
-    id: '',
-    title: '',
-    image: '',
-    shortdescription: '',
-    description: '',
-    descriptionsvamp: ''
-}
-const selectedId = ref<string>('')
-
-watchEffect(() => {
-    const first = methods.value[0]
-    if (first && !selectedId.value) {
-        selectedId.value = first.id
+// Accordion items for the selected method
+const accordionItems = computed(() => [
+    {
+        label: 'Om metoden',
+        icon: 'i-hugeicons-tree-06',
+        value: 'description',
+        content: selectedMethod.value.description || ''
+    },
+    {
+        label: 'Påverkan på mykorrhizasvampar',
+        icon: 'i-hugeicons-mushroom',
+        value: 'svamp',
+        content: selectedMethod.value.descriptionsvamp || ''
     }
-})
-
-const selectedMethod = computed<Method>(() => {
-    const list = methods.value
-    if (!list.length) {
-        return emptyMethod
-    }
-    return list.find(method => method.id === selectedId.value) ?? list[0]
-})
+])
 </script>

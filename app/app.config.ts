@@ -92,7 +92,7 @@ export default defineAppConfig({
       vanligmark: "emerald",
       time: "orange",
       chetwood: "chetwode-blue",
-      blackrose: "black-rose",
+      duststorm: "dust-storm",
       neutral2: "stone",
     },
   },

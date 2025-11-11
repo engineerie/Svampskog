@@ -2,7 +2,7 @@
   <div class="custom-area" ref="rootEl">
     <ClientOnly>
       <VisBulletLegend
-        v-if="isMounted && chartReady && legendItems.length && !(props.singleFrameworkSelection && !props.frameworkComparisonMode)"
+        v-if="isMounted && chartReady && showLegend && legendItems.length && !(props.singleFrameworkSelection && !props.frameworkComparisonMode)"
         :items="legendItems" :onLegendItemClick="handleLegendItemClick" class="mx-4 flex flex-wrap gap-2" />
       <div
         v-if="isMounted && chartReady && legendItems.length && (props.singleFrameworkSelection && !props.frameworkComparisonMode)"
@@ -22,7 +22,7 @@
         </UButton>
       </div>
       <VisXYContainer v-if="isMounted && chartReady" :data="chartData.length ? chartData : [emptyDataPoint]"
-        :height="120" :margin="margin" :xDomain="xDomain" :yDomain="yDomain">
+        :height="200" :margin="margin" :xDomain="xDomain" :yDomain="yDomain">
         <template v-if="props.chartType === 'area' && props.singleFrameworkSelection && !props.frameworkComparisonMode">
 
           <VisArea :duration=1 :x="xAccessor" :y="stackedYAccessors" :color="stackedColors"
@@ -410,6 +410,7 @@ onBeforeUnmount(() => {
 
 const inactiveArtkategoriKeys = ref<Set<string>>(new Set());
 const inactiveFrameworkKeys = ref<Set<string>>(new Set());
+const showLegend = computed(() => props.frameworkComparisonMode || props.singleFrameworkSelection);
 
 
 

@@ -2,7 +2,7 @@ title: Skogsskötsel
 description: Se hur skogsskötsel påverka mykorrhizasvampar.
 navigation: false
 hero:
-  title: Hur påverkas svampar av skogsskötsel?
+  title: Svamp efter skogsskötsel
   description: Lär dig hur trakthyggesbruk och hygesfria metoder kan påverka förekomsten av mykorrhizasvampar.
   orientation: vertical
   src: /images/Landing/Stock Photo 563535222.jpeg
@@ -18,7 +18,7 @@ hero:
       to:
       target:
       size: xl
-      color: vanligmark
+      color: rodeodust
       variant: solid
 carousel:
   title: Svamp och skogsbruk på 5 minuter
@@ -69,38 +69,18 @@ methods:
     image: images/metoder/ingen_åtgärd.png
     shortdescription: Orörd skog
     description: |
-      Beståndet lämnas för fri utveckling tills vidare. Kan t ex vara en frivillig naturvårdsavsättning eller en skog med områdesskydd.
+      Beståndet lämnas för fri utveckling tills vidare, till exempel som en frivillig naturvårdsavsättning eller en skog med områdesskydd.
     descriptionsvamp: |
-      Samhället mykorrhizasvampar lever vidare med de arter som finns i skogen. 
-
-      Förekomst av matsvampar är oftast bra i skogar som sköts på detta sätt. 
-
-      Rödlistade arter på platsen fortlever. 
-
-      Svamparnas mycelindivider i marken kan bli lika gamla som träden eller äldre, och växa och bli många kvadratmeter stora där det kontinuerligt finns träd. 
-
-      Sker plockhuggning av enstaka träd utspritt i beståndet har det minimal påverkan på förekomsten av mykorrhizasvampar.
+      Mykorrhizasvampsamhället lever vidare med de arter som redan finns i skogen. I bestånd som sköts på det här sättet är tillgången på matsvampar oftast god. Även rödlistade arter kan fortleva på platsen. Mycelen i marken kan bli lika gamla som träden eller äldre och bre ut sig över många kvadratmeter så länge det kontinuerligt finns levande träd. Om man plockhugger enstaka träd spritt i beståndet blir påverkan på mykorrhizasvamparna därför mycket liten.
   - index: 1
     id: trakthygge
     title: Trakthygge
     image: images/metoder/kalhygge.png
     shortdescription: Kalavverkning med hänsyn
     description: |
-      Sedan 1950-talet det dominerande skogsskötselsystemet som går ut på att skapa likåldriga, större bestånd, trakter, med normalt ett trädslag. Hela beståndet behandlas samtidigt. 
-
-      Standardskötseln är: avverkning &rarr; markberedning &rarr; plantering &rarr; röjning &rarr; ett par gallringar &rarr; åter avverkning efter 60 till +100 år, beroende på bördighet och var i Sverige. 
-
-      Trakthuggning sker nästan uteslutande med kalavverkning och plantering, undantagsvis med fröträd som avverkas efter plantföryngring skett naturligt.
+      Trakthygge har sedan 1950-talet varit det dominerande skogsskötselsystemet. Det går ut på att skapa likåldriga, större bestånd (trakter), vanligtvis med ett trädslag, och hela beståndet sköts samtidigt. Standardskötseln är: avverkning &rarr; markberedning &rarr; plantering &rarr; röjning &rarr; ett par gallringar &rarr; åter avverkning efter 60 till +100 år, beroende på bördighet och var i Sverige skogen ligger. Trakthuggning sker nästan uteslutande med kalavverkning och plantering, undantagsvis med fröträd som avverkas efter plantföryngring skett naturligt.
     descriptionsvamp: |
-      Mykorrhizasvampar försvinner nästan helt efter avverkning eftersom de är beroende av sin symbios med träd. 
-
-      Svampmycel överlever på rötter av hänsynsträd, småplantor som lämnas med naturlig föryngring och längs skogskanter. 
-
-      Plantskoleplantor medför några få arter mykorrhizasvampar som ersätts med tiden av arter etablerade från sporer. 
-
-      Matsvampar saknas direkt efter avverkning men återkommer efter 10-20 år. 
-
-      Rödlistade arter är oftast för ovanliga för att spridas in och etableras.
+      Mykorrhizasvampar försvinner nästan helt efter avverkning eftersom de är beroende av sin symbios med levande träd. En del svampmycel överlever på rötter från hänsynsträd, på småplantor som lämnas kvar vid naturlig föryngring och längs skogskanter. De planterade plantskoleplantorna har med sig ett fåtal mykorrhizaarter, men dessa byts så småningom ut mot arter som sprids in med sporer från omgivande skog. Matsvampar saknas direkt efter avverkning men brukar återkomma efter ungefär 10-20 år. Rödlistade arter kommer däremot sällan tillbaka, eftersom de oftast är för ovanliga för att spridas in och etablera sig på nytt.
   - index: 2
     id: luckhuggning
     title: Luckhuggning

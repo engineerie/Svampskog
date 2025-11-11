@@ -135,7 +135,7 @@ const showDesc4 = ref(false)
 const showDesc5 = ref(false)
 
 const chartOptions = [
-  { label: 'Mängd mykorrhizasvamp', value: 'skogsskole', icon: 'i-fluent-shape-organic-20-filled' },
+  { label: 'Mängd mykorrhizasvamp', value: 'skogsskole', icon: 'i-lineicons-mushroom-1' },
   { label: 'Svampgrupper', value: 'grupper', icon: 'i-material-symbols-category-rounded' },
   { label: 'Naturvårdssvampar', value: 'rodlistade', icon: 'i-material-symbols-award-star' },
   { label: 'Matsvampar', value: 'matsvampar', icon: 'icon-park-solid:knife-fork' },
@@ -224,7 +224,7 @@ function ToggleChartType2() {
 
 const matsvampVariantOptions = [
   { label: 'Alla matsvampar', value: 'standard', icon: 'i-lineicons-mushroom-1' },
-  { label: 'Populära matsvampar', value: 'goda', icon: 'i-heroicons-star-16-solid' },
+  { label: 'Goda matsvampar', value: 'goda', icon: 'i-heroicons-star-16-solid' },
   { label: 'Kg matsvampar', value: 'kg', icon: 'i-material-symbols-scale-outline-rounded' },
 ]
 

@@ -61,7 +61,7 @@ export default defineNuxtConfig({
         "vanligmark",
         "time",
         "chetwood",
-        "blackrose",
+        "duststorm",
         "neutral2",
       ],
       transitions: true,
