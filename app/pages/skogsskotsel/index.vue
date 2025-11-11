@@ -123,13 +123,15 @@
                                         color="neutral" class="ring-muted/50 w-full flex justify-center"
                                         variant="outline"
                                         :class="index === activeTimelineIndex ? 'border-neutral-900 opacity-100 shadow' : 'border-transparent opacity-60 hover:opacity-100'"
-                                        type="button" @click="selectTimelineSlide(index)" :label="item.tid" />
+                                        type="button" @click="selectTimelineSlide(index)"
+                                        :label="formatTimelineButtonLabel(item.tid)" />
                                 </div>
                                 <div class="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-2">
                                     <div class="space-y-2">
                                         <!-- <p class="text-xs uppercase tracking-wide text-muted">Tidslinje</p> -->
-                                        <h3 class="text-xl font-semibold text-neutral-900"> {{
-                                            timelineItems[activeTimelineIndex].tid }}</h3>
+                                        <h3 class="text-xl font-semibold text-neutral-900">{{
+                                            formatTimelineCurrentLabel(timelineItems[activeTimelineIndex]?.tid) }}
+                                        </h3>
                                         <p class="text-sm text-muted" v-if="timelineItems[activeTimelineIndex]">
                                             {{
                                                 timelineItems[activeTimelineIndex].skog }}
@@ -138,6 +140,7 @@
                                     </div>
 
                                 </div>
+
                             </div>
 
 
@@ -155,11 +158,20 @@
 
 
                         </div>
-                        <!-- <div class="w-full flex justify-end mt-6">
-                            <UPageCard title="Tailwind CSS"
-                                description="Nuxt UI integrates with latest Tailwind CSS v4, bringing significant improvements."
-                                icon="i-material-symbols:interactive-space" />
-                        </div> -->
+                        <UModal v-model:open="modelOpen" fullscreen>
+                            <template #content>
+                                <Model @close="modelOpen = false" />
+                            </template>
+                        </UModal>
+                        <UPageCard reverse title="Öppna modell i helskärm"
+                            description="I helskärm går det att jämföra olika metoder och visa fler lager med mer information. "
+                            icon="i-material-symbols:interactive-space" class="mt-6 sm:mt-12 cursor-pointer"
+                            variant="soft" orientation="horizontal" @click="openModelWithCurrentFramework">
+                            <div class="flex justify-center">
+                                <NuxtImg src="images/modell.png" height="150" />
+                            </div>
+                        </UPageCard>
+
 
                         <!-- <template #right>
                                     <UAlert v-if="selectedMethod.type" color="neutral" variant="subtle"
@@ -182,10 +194,12 @@
 import { ref, computed, watch, watchEffect } from 'vue'
 import type { TabsItem } from '@nuxt/ui'
 import { useMediaQuery } from '@vueuse/core'
+import { useOnboardingStore } from '~/stores/onboardingStore'
 
 const isMobile = useMediaQuery('(max-width: 767px)')
 
 const modelOpen = ref(false)
+const onboardingStore = useOnboardingStore()
 
 const { data: page } = await useAsyncData('skogsskotsel', () => queryCollection('skogsskotsel').first())
 if (!page.value) {
@@ -357,6 +371,23 @@ const mapTimelineTidToChartValue = (tid?: string) => {
 
 const currentTimelineTime = computed(() => mapTimelineTidToChartValue(timelineItems.value[activeTimelineIndex.value]?.tid))
 
+function formatTimelineButtonLabel(tid?: string) {
+    if (!tid) return ''
+    return tid.charAt(0).toUpperCase() + tid.slice(1)
+}
+
+function formatTimelineCurrentLabel(tid?: string) {
+    if (!tid) return ''
+    const token = normalizeTimeToken(tid)
+    if (token === 'fore') return 'Innan avverkning'
+    if (token === 'efter') return 'Efter avverkning'
+    const num = Number(token)
+    if (!Number.isNaN(num)) {
+        return `${num} år efter avverkning`
+    }
+    return tid.charAt(0).toUpperCase() + tid.slice(1)
+}
+
 const tabs = ref<TabsItem[]>([
     {
         label: 'Intro',
@@ -382,7 +413,7 @@ const expandedCard = ref<'description' | 'svamp' | ''>('description')
 // Accordion items for the selected method
 const accordionItems = computed(() => [
     {
-        label: 'Om metoden',
+        label: `Om ${(selectedMethod.value.title || '').toLowerCase()}`,
         icon: 'i-hugeicons-tree-06',
         value: 'description',
         content: selectedMethod.value.description || ''
@@ -394,4 +425,34 @@ const accordionItems = computed(() => [
         content: selectedMethod.value.descriptionsvamp || ''
     }
 ])
+
+function toggleCard(key: 'description' | 'svamp') {
+    expandedCard.value = expandedCard.value === key ? '' : key
+}
+
+const frameworkIndexMap: Record<string, number> = {
+    naturskydd: 0,
+    trakthygge: 1,
+    luckhuggning: 2,
+    skarmtrad: 3,
+    'skärmträd': 3,
+    bladning: 4,
+    'blädning': 4,
+}
+
+const normalizeFrameworkId = (value: string) =>
+    (value || '')
+        .trim()
+        .normalize('NFD')
+        .replace(/\p{Diacritic}+/gu, '')
+        .toLowerCase()
+
+function openModelWithCurrentFramework() {
+    const normalized = normalizeFrameworkId(selectedMethod.value.id)
+    const index = frameworkIndexMap[normalized]
+    if (typeof index === 'number') {
+        onboardingStore.selectedFramework = index
+    }
+    modelOpen.value = true
+}
 </script>
