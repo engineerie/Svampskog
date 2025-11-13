@@ -5,13 +5,65 @@
                 <UPageHero :ui="{ container: 'py-12 lg:py-24', title: 'sm:text-7xl', headline: 'text-neutral' }"
                     :title="page.hero.title" :description="page.hero.description" :orientation="page.hero.orientation"
                     class="">
+                    <template #headline v-if="page.hero.headline">
+                        <NuxtLink :to="page.hero.headline.to">
+                            <UBadge :icon="page.hero.headline.icon" :label="page.hero.headline.label"
+                                :color="page.hero.headline.color" variant="subtle" size="lg" trailing
+                                :ui="{ base: 'rounded-full' }" />
+                        </NuxtLink>
+                        <!-- <div class="flex justify-center items-center">
+                            <Motion :initial="{
+                                scale: 0.5,
+                                opacity: 0,
+                            }" :animate="{
+                                scale: 1,
+                                opacity: 1,
+                            }" :transition="{
+                                duration: 0.2,
+                                delay: 0.2
+                            }">
+                                <NuxtImg src="/images/svampindex/Cortinarius sanguineus-179-.jpg" width="300"
+                                    height="300" format="webp" alt="Illustration"
+                                    class="size-18 sm:size-24 rounded-xl ring ring-muted/50 inline-flex mb-12 lg:mb-18 h-fit shadow-xl" />
+                            </Motion>
+                            <Motion :initial="{
+                                scale: 0.5,
+                                opacity: 0,
+                            }" :animate="{
+                                scale: 1,
+                                opacity: 1,
+                            }" :transition="{
+                                duration: 0.2,
+                                delay: 0.3
+                            }" class="-mx-4 z-50">
+                                <NuxtImg src="/images/Landing/Stock Photo 563535222.jpeg" width="300" height="300"
+                                    format="webp" alt="Illustration"
+                                    class="size-28 sm:size-40 rounded-xl ring ring-muted/50 inline-flex mb-12 lg:mb-18 h-fit  z-50 shadow-xl" />
+                            </Motion>
+                            <Motion :initial="{
+                                scale: 0.5,
+                                opacity: 0,
+                            }" :animate="{
+                                scale: 1,
+                                opacity: 1,
+                            }" :transition="{
+                                duration: 0.2,
+                                delay: 0.25
+                            }">
+                                <NuxtImg src="/images/svampgrid/Gomphus clavatus-1.jpg" width="300" height="300"
+                                    format="webp" alt="Illustration"
+                                    class="size-20 sm:size-28 rounded-xl ring ring-muted/50 inline-flex mb-12 lg:mb-18 h-fit shadow-xl" />
+                            </Motion>
+                        </div> -->
+
+                    </template>
                 </UPageHero>
             </UContainer>
         </Transition>
 
         <UContainer
-            class="w-full flex flex-col sm:flex-row  justify-between py-4 gap-6 overflow-scroll lg:overflow-hidden transition-all "
-            :class="selectedMethod.id ? 'mt-0' : 'mt-8'">
+            class="w-full flex flex-col sm:flex-row  justify-between py-4 gap-3 sm:gap-6 overflow-x-auto transition-all "
+            :class="[selectedMethod.id ? 'mt-0 flex-row' : 'mt-8 flex-col']">
             <Motion v-for="method in methods" :key="method.id" class="relative" :initial="{
                 scale: 1,
                 transform: 'translateY(10px)',
@@ -36,7 +88,7 @@
                         color="neutral" variant="subtle" />
                     <NuxtImg v-if="!selectedMethod.id" :src="method.image" width="300" height="160"
                         class=" w-full h-full" />
-                    <h1 class="text-lg p-2 px-3 font-medium">{{ method.title }}</h1>
+                    <h1 class="text-lg p-2 px-3 font-medium text-nowrap ">{{ method.title }}</h1>
                 </div>
             </Motion>
         </UContainer>
@@ -68,7 +120,7 @@
                                     <div></div>
                                 </template> -->
                         <div class="grid gap-3 sm:gap-6 lg:grid-cols-3">
-                            <div class="flex flex-col gap-6">
+                            <div class="flex flex-col gap-6 min-w-0 max-w-full">
                                 <h1 class="text-4xl font-medium">{{ selectedMethod.title }}</h1>
                                 <NuxtImg :src="selectedMethod.image" width="420" height="250"
                                     class="rounded ring ring-muted/50" />
@@ -86,10 +138,8 @@
                             </div>
                             <!-- <div class="space-y-6"> -->
 
-                            <div class="flex flex-col gap-1">
-                                <UTabs :items="startskogTabs" v-model="selectedStartskogTab"
-                                    @change="handleStartskogTabChange" variant="solid" size="lg" class="w-full"
-                                    :ui="{ list: 'grid grid-cols-2 gap-1 p-1 bg-muted/60 ring ring-muted/50 rounded', trigger: 'data-[state=active]:bg-white data-[state=active]:text-neutral-900 px-4 py-2 text-sm font-medium' }" />
+                            <div class="flex flex-col gap-1 min-w-0 max-w-full">
+
 
                                 <UCard :ui="{ body: 'p-1 sm:p-1' }" class="ring-muted/50 h-full">
                                     <ForestryChartMain :parentSelectedFrameworks=[selectedMethod.id]
@@ -102,7 +152,14 @@
                                     icon="i-material-symbols:interactive-space" /> -->
                             <!-- </div> -->
 
-                            <div v-if="timelineItems.length" class="space-y-4">
+                            <div v-if="timelineItems.length" class="flex flex-col gap-4 min-w-0 max-w-full">
+
+
+                                <UTabs :items="startskogTabs" v-model="selectedStartskogTab"
+                                    @change="handleStartskogTabChange" variant="solid" size="lg" class="w-full -mb-3"
+                                    :ui="{ list: 'grid grid-cols-2 gap-1 p-1 bg-muted/60 ring ring-muted/50 rounded', trigger: 'data-[state=active]:bg-white data-[state=active]:text-neutral-900 px-4 py-2 text-sm font-medium' }" />
+
+
 
                                 <UCarousel ref="timelineCarousel" v-slot="{ item }" :items="timelineItems"
                                     :prev="{ onClick: handleTimelinePrev }" :next="{ onClick: handleTimelineNext }"
@@ -119,14 +176,18 @@
                                         </div> -->
 
                                 </UCarousel>
-                                <div class="flex w-full gap-2">
-                                    <UButton v-for="(item, index) in timelineItems" :key="`timeline-thumb-${index}`"
-                                        color="neutral" class="ring-muted/50 w-full flex justify-center"
-                                        variant="outline"
-                                        :class="index === activeTimelineIndex ? 'border-neutral-900 opacity-100 shadow' : 'border-transparent opacity-60 hover:opacity-100'"
-                                        type="button" @click="selectTimelineSlide(index)"
-                                        :label="formatTimelineButtonLabel(item.tid)" />
+                                <div class="w-full max-w-full min-w-0 overflow-x-auto overflow-y-visible">
+                                    <div class="flex flex-nowrap whitespace-nowrap gap-2 w-full">
+                                        <UButton v-for="(item, index) in timelineItems" :key="`timeline-thumb-${index}`"
+                                            color="neutral"
+                                            class="ring-muted/50 flex-none shrink-0 justify-center whitespace-nowrap"
+                                            variant="outline"
+                                            :class="index === activeTimelineIndex ? 'border-neutral-900 opacity-100 shadow' : 'border-transparent opacity-60 hover:opacity-100'"
+                                            type="button" @click="selectTimelineSlide(index)"
+                                            :label="formatTimelineButtonLabel(item.tid)" />
+                                    </div>
                                 </div>
+
                                 <UCard
                                     class="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-2 ring-muted/50">
                                     <div class="space-y-2">
@@ -135,9 +196,9 @@
                                             formatTimelineCurrentLabel(timelineItems[activeTimelineIndex]?.tid) }}
                                         </h3>
                                         <p class="text-sm text-muted">
-                                            {{ selectedStartskogLabel }}
+                                            {{ timelineItems[activeTimelineIndex]?.skog }}
                                         </p>
-                                        <p class="text-sm">{{ timelineItems[activeTimelineIndex].svamp }}</p>
+                                        <p class="text-sm">{{ timelineItems[activeTimelineIndex]?.svamp }}</p>
                                     </div>
 
                                 </UCard>
@@ -164,7 +225,7 @@
                                 <Model @close="modelOpen = false" />
                             </template>
                         </UModal>
-                        <div class="grid grid-cols-2">
+                        <div class="grid sm:grid-cols-2">
                             <div></div>
                             <UPageCard title="Öppna modell i helskärm"
                                 description="I helskärm går det att jämföra olika metoder och visa fler lager med mer information. "
@@ -189,14 +250,14 @@
 
 
         </UContainer>
-        <!-- <div class="bg-muted border-t border-muted mt-18">
+        <div class="bg-muted border-t border-muted mt-18">
             <SCarousel :section="page.carousel" />
-        </div> -->
+        </div>
     </div>
 </template>
 
 <script setup lang="ts">
-import { ref, computed, watch } from 'vue'
+import { ref, computed, watch, nextTick } from 'vue'
 import type { TabsItem } from '@nuxt/ui'
 import { useMediaQuery } from '@vueuse/core'
 import { useOnboardingStore } from '~/stores/onboardingStore'
@@ -236,6 +297,19 @@ const emptyMethod: Method = {
     descriptionsvamp: ''
 }
 const selectedId = ref<string | null>(null)
+
+const hasScrolledOnFirstSelect = ref(false)
+
+watch(selectedId, async (newVal, oldVal) => {
+    // Only on the first transition from no selection -> some selection
+    if (newVal && !oldVal && !hasScrolledOnFirstSelect.value) {
+        hasScrolledOnFirstSelect.value = true
+        await nextTick()
+        if (process.client) {
+            window.scrollTo({ top: 0 })
+        }
+    }
+})
 
 const selectedMethod = computed<Method>(() => {
     const list = methods.value

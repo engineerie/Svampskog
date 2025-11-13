@@ -25,8 +25,7 @@
         :height="200" :margin="margin" :xDomain="xDomain" :yDomain="yDomain">
         <template v-if="props.chartType === 'area' && props.singleFrameworkSelection && !props.frameworkComparisonMode">
 
-          <VisArea :duration=1 :x="xAccessor" :y="stackedYAccessors" :color="stackedColors"
-            :interpolateMissingData="true" />
+          <VisArea :x="xAccessor" :y="stackedYAccessors" :color="stackedColors" :interpolateMissingData="true" />
 
 
 
@@ -34,51 +33,49 @@
             :color="() => cfg.color" :duration=1 /> -->
           <!-- <VisCrosshair v-if="hasActiveSeries" :template="crosshairTemplate" />
           <VisTooltip v-if="hasActiveSeries" :horizontalShift="30" /> -->
-          <VisPlotband :duration=1 v-if="hasActiveSeries && currentTimeX !== null" :key="plotbandRenderKey" axis="x"
-            :from="-7" :to="currentTimeX" :color="'rgba(255, 255, 255, 0.7)'" :zIndex="20" />
-          <VisPlotline :duration=1 v-if="hasActiveSeries" :value="currentTimeX" color="rgba(234,88,12,1)" axis="x"
+          <VisPlotband v-if="hasActiveSeries && currentTimeX !== null" axis="x" :from="-7" :to="currentTimeX"
+            :color="'rgba(255, 255, 255, 0.7)'" :zIndex="20" />
+          <VisPlotline v-if="hasActiveSeries" :value="currentTimeX" color="rgba(234,88,12,1)" axis="x"
             labelOrientation="vertical" :zIndex="20" :lineWidth="1" />
 
         </template>
         <template
           v-else-if="props.chartType === 'area' && props.singleFrameworkSelection && props.frameworkComparisonMode">
-          <VisArea :duration=1 v-for="fw in activeFrameworks" :key="fw.key + '-compare-area'" :x="xAccessor"
+          <VisArea v-for="fw in activeFrameworks" :x="xAccessor"
             :y="(d: any) => getComparisonValue(d, fw.key, comparisonCategory)" :color="() => fw.colorArea || fw.color"
             :interpolateMissingData="true" :zIndex="1" />
-          <VisLine v-for="fw in activeFrameworks" :key="fw.key + '-compare-line'" :x="xAccessor"
+          <VisLine v-for="fw in activeFrameworks" :x="xAccessor"
             :y="(d: any) => getComparisonValue(d, fw.key, comparisonCategory)"
-            :color="() => (hexToRgba(fw.colorLine || fw.color, 0.6))" :duration=1 />
+            :color="() => (hexToRgba(fw.colorLine || fw.color, 0.6))" />
 
-          <VisPlotband :duration=1 v-if="hasActiveSeries && currentTimeX !== null" :key="plotbandRenderKey" axis="x"
-            :from="-7" :to="currentTimeX" :color="'rgba(255, 255, 255, 0.7)'" :zIndex="20" />
-          <VisPlotline :duration=1 v-if="hasActiveSeries" :value="currentTimeX" color="rgba(234,88,12,1)" axis="x"
+          <VisPlotband v-if="hasActiveSeries && currentTimeX !== null" axis="x" :from="-7" :to="currentTimeX"
+            :color="'rgba(255, 255, 255, 0.7)'" :zIndex="20" />
+          <VisPlotline v-if="hasActiveSeries" :value="currentTimeX" color="rgba(234,88,12,1)" axis="x"
             labelOrientation="vertical" :zIndex="20" :lineWidth="1" />
 
           <!-- <VisCrosshair v-if="hasActiveSeries" :template="crosshairTemplate" />
           <VisTooltip v-if="hasActiveSeries" :horizontalShift="30" /> -->
         </template>
         <template v-else-if="props.chartType === 'area'">
-          <VisArea :duration=1 v-for="fw in activeFrameworks" :key="fw.key + '-area'" :x="xAccessor"
-            :y="(d: any) => getFrameworkValue(d, fw.key)" :color="() => (fw.colorArea || fw.color)"
-            :interpolateMissingData="true" :zIndex="1" />
+          <VisArea v-for="fw in activeFrameworks" :x="xAccessor" :y="(d: any) => getFrameworkValue(d, fw.key)"
+            :color="() => (fw.colorArea || fw.color)" :interpolateMissingData="true" :zIndex="1" />
 
           <!-- <VisCrosshair v-if="hasActiveSeries" :template="crosshairTemplate" /> -->
-          <VisLine v-for="fw in activeFrameworks" :key="fw.key + '-line'" :x="xAccessor"
-            :y="(d: any) => getFrameworkValue(d, fw.key)" :color="() => (hexToRgba(fw.colorLine || fw.color, 0.6))"
-            :duration=1 />
+          <VisLine v-for="fw in activeFrameworks" :x="xAccessor" :y="(d: any) => getFrameworkValue(d, fw.key)"
+            :color="() => (hexToRgba(fw.colorLine || fw.color, 0.6))" />
           <VisArea v-if="isKgMatsvamp" v-for="fw in activeFrameworks" :key="fw.key + '-kg-x2'" :x="xAccessor"
-            :y="kgDoubleAccessorFor(fw.key)" :color="() => 'rgba(234,179,8,0.3)'" :duration="1" />
+            :y="kgDoubleAccessorFor(fw.key)" :color="() => 'rgba(234,179,8,0.3)'" />
           <!-- <VisTooltip v-if="hasActiveSeries" :horizontalShift="30" /> -->
-          <VisPlotband :duration=1 v-if="hasActiveSeries && currentTimeX !== null" :key="plotbandRenderKey" axis="x"
-            :from="-7" :to="currentTimeX" :color="'rgba(255, 255, 255, 0.7)'" :zIndex="20" />
-          <VisPlotline :duration=1 v-if="hasActiveSeries" :value="currentTimeX" color="rgba(234,88,12,1)" axis="x"
+          <VisPlotband v-if="hasActiveSeries && currentTimeX !== null" axis="x" :from="-7" :to="currentTimeX"
+            :color="'rgba(255, 255, 255, 0.7)'" :zIndex="20" />
+          <VisPlotline v-if="hasActiveSeries" :value="currentTimeX" color="rgba(234,88,12,1)" axis="x"
             labelOrientation="vertical" :zIndex="20" :lineWidth="1" />
         </template>
         <template v-else-if="props.chartType === 'bar'">
           <VisGroupedBar :color="computedLineColors" :x="xAccessor" :y="yAccessors" :groupPadding="0.5"
             :groupMaxWidth="20" />
         </template>
-        <VisPlotline :duration="1" v-for="band in plotBands" :key="band.id" axis="x" :value="band.value"
+        <VisPlotline v-for="band in plotBands" :key="band.id" axis="x" :value="band.value"
           :color="`rgba(69,10,10, 0.5)`" :lineStyle="[2, 3]" :label="band.labelText" :labelColor="band.labelColor"
           :zIndex="100" :lineWidth="1" />
         <VisAxis tickTextFontSize="12px" :gridLine="true" type="x" :tickValues="xTickValues"

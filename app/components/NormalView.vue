@@ -3,16 +3,17 @@
     <div class="col-span-12">
 
       <div class="flex p-3 border-b border-muted/50 gap-3" v-if="!isMobile">
-        <UButton @click="activeTab = 'knowledge'"
-          class="hover:bg-neutral-100 text-start ring-muted/50 cursor-pointer p-3 px-4 rounded-xl"
-          :variant="activeTab === 'knowledge' ? 'soft' : 'outline'" color="neutral">
-          <UPageFeature title="Enligt samlad kunskap" description="Framförallt vart fruktkroppar förekommer" />
-        </UButton>
         <UButton @click="activeTab = 'dna'"
           class="hover:bg-neutral-100 text-start ring-muted/50 cursor-pointer p-3 px-4 rounded-xl"
-          :variant="activeTab === 'dna' ? 'soft' : 'outline'" color="neutral">
+          :variant="activeTab === 'dna' ? 'subtle' : 'outline'" color="neutral">
           <UPageFeature title="Enligt DNA" description="Från markinventeringens jordprover" />
         </UButton>
+        <UButton @click="activeTab = 'knowledge'"
+          class="hover:bg-neutral-100 text-start ring-muted/50 cursor-pointer p-3 px-4 rounded-xl"
+          :variant="activeTab === 'knowledge' ? 'subtle' : 'outline'" color="neutral">
+          <UPageFeature title="Enligt fruktkroppar" description="Utifrån var fruktkroppar förekommer" />
+        </UButton>
+
 
 
 
@@ -171,7 +172,7 @@ const emitEnlarge = (componentName) => {
   emit("enlarge", componentName);
 };
 
-const activeTab = ref('knowledge')
+const activeTab = ref('dna')
 const tabs = [
   { label: 'Samlad kunskap', value: 'knowledge', icon: 'lineicons:mushroom-1' },
   { label: 'DNA från markinventeringens provytor', value: 'dna', icon: 'solar:dna-linear' },
@@ -228,7 +229,7 @@ const isEdnaExpanded = computed(() => props.activeView === 'FullScreenEdna')
 const currentViewLabel = computed(() => viewLabels[props.activeView ?? ''] ?? '')
 
 function handleCloseDetail() {
-  activeTab.value = 'knowledge'
+  activeTab.value = 'dna'
   emit('closeView')
 }
 

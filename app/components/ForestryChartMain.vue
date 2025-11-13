@@ -49,7 +49,7 @@
         <ForestryChartDisplay
           :selectedFrameworks="props.parentSelectedFrameworks ?? ['naturskydd', 'trakthygge', 'luckhuggning', 'blädning', 'skärmträd']"
           :selectedArtkategori="['total']" :chartType="chartType" :maxYValue="130"
-          :currentTimeValue="props.currentTimeValue" />
+          :currentTimeValue="props.currentTimeValue" :frameworkComparisonMode="isFrameworkCompareMode" />
         <div class="px-4 pb-4 text-sm text-muted">
           Mängd mykorrhizasvamp i marken i förhållande till förekomsten i äldre skog/före avverkning (%).
         </div>
@@ -59,7 +59,7 @@
           :selectedFrameworks="props.parentSelectedFrameworks ?? ['naturskydd', 'trakthygge', 'luckhuggning', 'blädning', 'skärmträd']"
           :selectedArtkategori="['rödlistade + signalarter']" :chartType="chartType"
           :selectedStartskog="props.currentStartskog" :redColor="true" :maxYValue="0.65"
-          :currentTimeValue="props.currentTimeValue" />
+          :currentTimeValue="props.currentTimeValue" :frameworkComparisonMode="isFrameworkCompareMode" />
         <div class="px-4 pb-4 text-sm text-muted">
           Mängden av mykorrhizasvampar som är rödlistade/signalarter i marken i förhållande till förekomsten i äldre
           skog/före avverkning (%).
@@ -70,7 +70,8 @@
           :selectedFrameworks="props.parentSelectedFrameworks ?? ['naturskydd', 'trakthygge', 'luckhuggning', 'blädning', 'skärmträd']"
           :selectedArtkategori="[matsvampChartArtkategori]" :chartType="chartType"
           :selectedStartskog="props.currentStartskog" :yellowColor="true" :maxYValue="matsvampMaxY"
-          :currentTimeValue="props.currentTimeValue" :matsvampVariant="selectedMatsvampVariant" />
+          :currentTimeValue="props.currentTimeValue" :matsvampVariant="selectedMatsvampVariant"
+          :frameworkComparisonMode="isFrameworkCompareMode" />
         <div class="px-4 pb-4 text-sm text-muted">
           {{ matsvampDescription }}
         </div>

@@ -264,7 +264,7 @@ function bentoImages(item: CarouselItem) {
           duration: 0.3,
           delay: 0.6
         }">
-          <EnvironmentSelector class="bg-neutral-50/50 p-4 pr-8 ring ring-muted/50 rounded sm:mb-4" />
+          <EnvironmentSelector class="" />
 
           <div class="flex w-full justify-center mb-4">
             <UButton size="xl" trailing :disabled="!allSelected" @click="redirect" color="primary"

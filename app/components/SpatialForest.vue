@@ -13,8 +13,8 @@
       duration: 0.5,
       delay: 0.2
     }">
-      <img :key="imageUrl" :src="imageUrl" alt="Vald skogsmiljö" class="h-full rounded ring ring-muted/50" width="805"
-        height="505" />
+      <img :key="imageUrl" :src="imageUrl" alt="Vald skogsmiljö" class="h-full rounded-xl ring ring-muted/50"
+        width="805" height="505" />
     </Motion>
     <USkeleton v-else class="h-20 flex items-center justify-center">Välj miljö för att visa bild</USkeleton>
     <!-- <div class="hidden">

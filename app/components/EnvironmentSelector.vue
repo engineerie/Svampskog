@@ -80,10 +80,10 @@
       <div ref="contentRef" class="original-content w-full">
         <!-- Parameter Popover Grid -->
 
-        <div class="grid grid-cols-12 md:gap-4 gap-2 mb-4 ">
+        <div class="grid grid-cols-12 gap-2 mb-4 ">
           <UCard
-            :class="[' relative h-full col-span-9 items-center ring-0 bg-transparent', geography && forestType && standAge && vegetationType ? 'col-span-9' : 'col-span-12']">
-            <div class="flex ">
+            :class="[' relative h-full col-span-9 items-center ring-0 bg-transparent transition-all', geography && forestType && standAge && vegetationType ? 'col-span-9' : 'col-span-12']">
+            <div class="flex transition-all">
               <div v-for="category in categories" :key="category.key" class="flex md:justify-center w-full m-3 mb-8">
                 <UPopover :content="{
                   align: 'start',
@@ -92,7 +92,7 @@
                   <div class="w-full">
                     <transition name="slide-up" mode="out-in">
                       <div :key="getLabel(category.key)"
-                        class="flex items-center md:justify-center cursor-pointer hover:bg-neutral-50 py-4 rounded-xl w-full">
+                        class="flex items-center md:justify-center cursor-pointer ring ring-muted/50 shadow bg-white hover:bg-neutral-100/70 py-4 rounded-xl w-full">
                         <div class="md:text-center">
                           <h1 class="text-neutral-500">{{ category.title }}</h1>
                           <h1 class="md:text-2xl font-medium">
@@ -159,13 +159,13 @@
                 variant="outline">
                 {{ listBoxRowVisible ? "Dölj kombinationer" : "Visa kombinationer" }}
               </UButton>
-              <UModal title="Miljööversikt" :ui="{ content: 'max-w-[83rem]', body: 'sm:p-0', title: 'text-2xl' }">
+              <!-- <UModal title="Miljööversikt" :ui="{ content: 'max-w-[83rem]', body: 'sm:p-0', title: 'text-2xl' }">
                 <UButton class="ring-muted/60" label="Alla miljöer" trailing icon="i-hugeicons-tree-06" color="neutral"
                   variant="outline" />
                 <template #body>
                   <Miljoer />
                 </template>
-              </UModal>
+              </UModal> -->
             </div>
           </UCard>
           <div class="col-span-3 flex w-full justify-end" v-if="geography && forestType && standAge && vegetationType">
@@ -182,9 +182,9 @@
             <div v-show="listBoxRowVisible">
               <div class="p-0.5 grid md:grid-cols-4 gap-2 md:gap-5">
 
-                <UCard v-for="category in categories" :key="category.key" variant="soft">
+                <UCard v-for="category in categories" :key="category.key" variant="outline" class="ring-muted/50">
                   <div v-for="option in enabledOptions[category.key]" :key="option.value"
-                    class="flex justify-between mb-2 text-neutral-600 dark:text-neutral-300 items-center">
+                    class="flex justify-between mb-2 text-neutral-600 dark:text-neutral-300 items-center ">
                     <label :for="`${category.key}-${option.value}`" :class="{
                       'opacity-40 cursor-not-allowed': option.disabled,
                       'cursor-pointer': !option.disabled
