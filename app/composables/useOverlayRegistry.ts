@@ -152,6 +152,26 @@ function filterEntries(
     time: ctx.time,
   };
 
+  const isRetention = config.slug === "retention-trees";
+  if (isRetention) {
+    const framework = normalizedCtx.framework;
+    const time = normalizedCtx.time;
+    if (!framework || framework === "naturskydd") {
+      return [];
+    }
+    if (!time || time === "innan") {
+      return [];
+    }
+    // surface every retention tree for all frameworks/times (post avverkning) by normalizing to 'alla'
+    const base = Array.isArray(collection) ? collection : [];
+    return base.map(point => ({
+      ...point,
+      framework: "alla",
+      startskog: "alla",
+      time: "alla",
+    }));
+  }
+
   let results = applyFilter(collection, normalizedCtx, config);
 
   if (

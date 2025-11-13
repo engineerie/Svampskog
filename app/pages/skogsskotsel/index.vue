@@ -1,27 +1,17 @@
 <template>
-    <div class=" flex-1" v-if="page">
-        <UContainer class="w-full px-0">
-            <UPageHero :ui="{ container: 'py-12 lg:py-24', title: 'sm:text-7xl', headline: 'text-neutral' }"
-                :title="page.hero.title" :description="page.hero.description" :orientation="page.hero.orientation"
-                class="">
-                <!-- <NuxtImg :src="page.hero.src" width="700" format="webp" alt="Illustration"
-                    class="rounded ring ring-neutral-300 " /> -->
-                <!-- <template v-if="page?.hero?.links?.[0]" #links>
-                    <UChip color="warning" size="2xl">
-                        <UButton :label="page.hero.links[0].label" :size="page.hero.links[0].size"
-                            :color="page.hero.links[0].color" :icon="page.hero.links[0].icon"
-                            @click="modelOpen = true" />
-                    </UChip>
-                    <UModal v-model:open="modelOpen" fullscreen>
-                        <template #content>
-                            <Model @close="modelOpen = false" />
-                        </template>
-</UModal>
-</template> -->
-            </UPageHero>
-        </UContainer>
+    <div class="flex-1 transition-all" :class="selectedMethod.id ? 'bg-neutral-50' : ''" v-if="page">
+        <Transition name="fade">
+            <UContainer v-if="!selectedMethod.id" class="w-full px-0">
+                <UPageHero :ui="{ container: 'py-12 lg:py-24', title: 'sm:text-7xl', headline: 'text-neutral' }"
+                    :title="page.hero.title" :description="page.hero.description" :orientation="page.hero.orientation"
+                    class="">
+                </UPageHero>
+            </UContainer>
+        </Transition>
 
-        <UContainer class="w-full flex justify-between py-4 gap-6 overflow-scroll lg:overflow-hidden">
+        <UContainer
+            class="w-full flex flex-col sm:flex-row  justify-between py-4 gap-6 overflow-scroll lg:overflow-hidden transition-all "
+            :class="selectedMethod.id ? 'mt-0' : 'mt-8'">
             <Motion v-for="method in methods" :key="method.id" class="relative" :initial="{
                 scale: 1,
                 transform: 'translateY(10px)',
@@ -38,13 +28,14 @@
                 delay: 0.3 + 0.05 * (method.index ?? 0)
             }">
                 <div @click="selectedId = method.id" :class="[
-                    'shrink-0 lg:shrink w-58 lg:w-full bg-white transition-all hover:opacity-100 border border-muted/50 overflow-hidden rounded h-fit shadow hover:shadow-md relative cursor-pointer',
-                    selectedId === method.id ? 'opacity-100' : 'opacity-30'
+                    'shrink-0 lg:shrink sm:w-58 lg:w-full bg-white transition-all hover:opacity-100 border border-muted/50 overflow-hidden rounded h-fit shadow hover:shadow-md relative cursor-pointer',
+                    !selectedId ? 'opacity-100' : (selectedId === method.id ? 'opacity-100 ring-primary/40 shadow-lg' : 'opacity-50')
                 ]">
 
-                    <UBadge v-if="method.type" class="absolute top-2 left-2" :label="method.type" color="neutral"
-                        variant="subtle" />
-                    <NuxtImg :src="method.image" width="300" height="160" class=" w-full h-full" />
+                    <UBadge v-if="method.type && !selectedMethod.id" class="absolute top-2 left-2" :label="method.type"
+                        color="neutral" variant="subtle" />
+                    <NuxtImg v-if="!selectedMethod.id" :src="method.image" width="300" height="160"
+                        class=" w-full h-full" />
                     <h1 class="text-lg p-2 px-3 font-medium">{{ method.title }}</h1>
                 </div>
             </Motion>
@@ -53,7 +44,7 @@
         <!-- <div class="w-full bg-neutral-50 border-t border-muted"> -->
 
 
-        <UContainer class="w-full pt-2 px-1 sm:px-6 ">
+        <UContainer class="w-full pt-2 px-1 sm:px-6 " v-if="selectedMethod.id">
             <Motion class="flex justify-center w-full" :initial="{
                 opacity: 0,
                 transform: 'translateY(10px)'
@@ -64,7 +55,7 @@
                 // filter: 'blur(0px)'
             }" :transition="{
                 duration: 0.5,
-                delay: 1
+                delay: 0.5
             }">
                 <div class="w-full  rounded-xl relative overflow-hidden">
                     <!-- <div class="absolute top-0 right-0 p-3 flex gap-4">
@@ -77,29 +68,39 @@
                                     <div></div>
                                 </template> -->
                         <div class="grid gap-3 sm:gap-6 lg:grid-cols-3">
-                            <UCard class="h-fit" variant="soft" :ui="{ body: 'py-1 sm:py-1' }">
-                                <UAccordion :items="accordionItems" :unmount-on-hide="false"
-                                    :default-value="['description']" :ui="{
-                                        trigger: 'text-base font-medium',
-                                        body: 'text-md/7 text-neutral-800'
-                                    }">
-                                    <template #body="{ item }">
-                                        <MDC :value="item.content" unwrap="p" />
-                                    </template>
-                                </UAccordion>
-                            </UCard>
-                            <div class="space-y-6">
-                                <!-- <NuxtImg v-if="!isMobile" :src="selectedMethod.image" width="400" height="250"
-                                    class="rounded ring ring-muted/50" /> -->
-
-                                <UCard variant="soft" :ui="{ body: 'p-1 sm:p-3' }" class="ring-muted/50 bg-stone-50">
-                                    <ForestryChartMain :parentSelectedFrameworks=[selectedMethod.id]
-                                        currentStartskog="naturskog" :currentTimeValue="currentTimelineTime" />
+                            <div class="flex flex-col gap-6">
+                                <h1 class="text-4xl font-medium">{{ selectedMethod.title }}</h1>
+                                <NuxtImg :src="selectedMethod.image" width="420" height="250"
+                                    class="rounded ring ring-muted/50" />
+                                <UCard variant="soft" :ui="{ body: 'py-1 sm:py-1' }">
+                                    <UAccordion :items="accordionItems" :unmount-on-hide="false"
+                                        :default-value="['description']" :ui="{
+                                            trigger: 'text-base font-medium',
+                                            body: 'text-md/7 text-neutral-800'
+                                        }">
+                                        <template #body="{ item }">
+                                            <MDC :value="item.content" unwrap="p" />
+                                        </template>
+                                    </UAccordion>
                                 </UCard>
-                                <!-- <UPageCard title="Tailwind CSS"
+                            </div>
+                            <!-- <div class="space-y-6"> -->
+
+                            <div class="flex flex-col gap-1">
+                                <UTabs :items="startskogTabs" v-model="selectedStartskogTab"
+                                    @change="handleStartskogTabChange" variant="solid" size="lg" class="w-full"
+                                    :ui="{ list: 'grid grid-cols-2 gap-1 p-1 bg-muted/60 ring ring-muted/50 rounded', trigger: 'data-[state=active]:bg-white data-[state=active]:text-neutral-900 px-4 py-2 text-sm font-medium' }" />
+
+                                <UCard :ui="{ body: 'p-1 sm:p-1' }" class="ring-muted/50 h-full">
+                                    <ForestryChartMain :parentSelectedFrameworks=[selectedMethod.id]
+                                        :currentStartskog="selectedStartskogTab"
+                                        :currentTimeValue="currentTimelineTime" />
+                                </UCard>
+                            </div>
+                            <!-- <UPageCard title="Tailwind CSS"
                                     description="Nuxt UI integrates with latest Tailwind CSS v4, bringing significant improvements."
                                     icon="i-material-symbols:interactive-space" /> -->
-                            </div>
+                            <!-- </div> -->
 
                             <div v-if="timelineItems.length" class="space-y-4">
 
@@ -126,20 +127,20 @@
                                         type="button" @click="selectTimelineSlide(index)"
                                         :label="formatTimelineButtonLabel(item.tid)" />
                                 </div>
-                                <div class="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-2">
+                                <UCard
+                                    class="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-2 ring-muted/50">
                                     <div class="space-y-2">
                                         <!-- <p class="text-xs uppercase tracking-wide text-muted">Tidslinje</p> -->
                                         <h3 class="text-xl font-semibold text-neutral-900">{{
                                             formatTimelineCurrentLabel(timelineItems[activeTimelineIndex]?.tid) }}
                                         </h3>
-                                        <p class="text-sm text-muted" v-if="timelineItems[activeTimelineIndex]">
-                                            {{
-                                                timelineItems[activeTimelineIndex].skog }}
+                                        <p class="text-sm text-muted">
+                                            {{ selectedStartskogLabel }}
                                         </p>
                                         <p class="text-sm">{{ timelineItems[activeTimelineIndex].svamp }}</p>
                                     </div>
 
-                                </div>
+                                </UCard>
 
                             </div>
 
@@ -163,14 +164,18 @@
                                 <Model @close="modelOpen = false" />
                             </template>
                         </UModal>
-                        <UPageCard reverse title="Öppna modell i helskärm"
-                            description="I helskärm går det att jämföra olika metoder och visa fler lager med mer information. "
-                            icon="i-material-symbols:interactive-space" class="mt-6 sm:mt-12 cursor-pointer"
-                            variant="soft" orientation="horizontal" @click="openModelWithCurrentFramework">
-                            <div class="flex justify-center">
-                                <NuxtImg src="images/modell.png" height="150" />
-                            </div>
-                        </UPageCard>
+                        <div class="grid grid-cols-2">
+                            <div></div>
+                            <UPageCard title="Öppna modell i helskärm"
+                                description="I helskärm går det att jämföra olika metoder och visa fler lager med mer information. "
+                                icon="i-material-symbols:interactive-space" class="mt-6 sm:mt-12 cursor-pointer"
+                                variant="soft" orientation="horizontal" @click="openModelWithCurrentFramework">
+                                <div class="flex justify-end">
+                                    <NuxtImg src="images/modell.png" height="150" />
+                                </div>
+                            </UPageCard>
+                        </div>
+
 
 
                         <!-- <template #right>
@@ -184,14 +189,14 @@
 
 
         </UContainer>
-        <div class="bg-muted border-t border-muted mt-18">
+        <!-- <div class="bg-muted border-t border-muted mt-18">
             <SCarousel :section="page.carousel" />
-        </div>
+        </div> -->
     </div>
 </template>
 
 <script setup lang="ts">
-import { ref, computed, watch, watchEffect } from 'vue'
+import { ref, computed, watch } from 'vue'
 import type { TabsItem } from '@nuxt/ui'
 import { useMediaQuery } from '@vueuse/core'
 import { useOnboardingStore } from '~/stores/onboardingStore'
@@ -230,21 +235,15 @@ const emptyMethod: Method = {
     description: '',
     descriptionsvamp: ''
 }
-const selectedId = ref<string>('trakthygge')
-
-watchEffect(() => {
-    const first = methods.value[0]
-    if (first && !selectedId.value) {
-        selectedId.value = first.id
-    }
-})
+const selectedId = ref<string | null>(null)
 
 const selectedMethod = computed<Method>(() => {
     const list = methods.value
     if (!list.length) {
         return emptyMethod
     }
-    return list.find(method => method.id === selectedId.value) ?? list[0]
+    if (!selectedId.value) return emptyMethod
+    return list.find(method => method.id === selectedId.value) ?? emptyMethod
 })
 
 interface TimelineEntry {
@@ -310,6 +309,37 @@ interface TimelineDisplayItem {
     thumb: string
 }
 
+
+const startskogOptions = [
+    { label: 'Inte kalavverkad', value: 'naturskog' },
+    { label: 'Kalavverkad', value: 'produktionsskog_' },
+]
+
+const startskogTabs = startskogOptions.map(option => ({
+    label: option.label,
+    value: option.value,
+    icon: option.value === 'naturskog' ? 'i-material-symbols-light-forest-rounded' : 'i-ph-farm'
+}))
+
+const selectedStartskogTab = ref(startskogTabs[onboardingStore.selectedStartskog ?? 0]?.value || startskogTabs[0].value)
+
+watch(() => onboardingStore.selectedStartskog, (val) => {
+    const option = startskogOptions[val ?? 0]
+    if (option && option.value !== selectedStartskogTab.value) {
+        selectedStartskogTab.value = option.value
+    }
+}, { immediate: true })
+
+function handleStartskogTabChange(value: string) {
+    selectedStartskogTab.value = value
+    const index = startskogOptions.findIndex(option => option.value === value)
+    if (index !== -1) {
+        onboardingStore.selectedStartskog = index
+    }
+}
+
+const selectedStartskogLabel = computed(() => startskogOptions.find(opt => opt.value === selectedStartskogTab.value)?.label ?? '')
+
 const timelineItems = computed<TimelineDisplayItem[]>(() => {
     const list = forestryTimeline.value?.entries ?? []
     const method = selectedMethod.value.id
@@ -320,7 +350,7 @@ const timelineItems = computed<TimelineDisplayItem[]>(() => {
             startskog: normalizeTimelineStartskog(entry.startskog),
             atgard: normalizeTimelineAtgard(entry.atgard)
         }))
-        .filter((entry) => entry.startskog === 'naturskog' && entry.atgard === canonicalMethod)
+        .filter((entry) => entry.startskog === normalizeTimelineStartskog(selectedStartskogTab.value) && entry.atgard === canonicalMethod)
         .map((entry) => ({
             tid: entry.tid,
             skog: entry.skog,
@@ -456,3 +486,15 @@ function openModelWithCurrentFramework() {
     modelOpen.value = true
 }
 </script>
+
+<style scoped>
+.fade-enter-active,
+.fade-leave-active {
+    transition: opacity 0s ease-in-out;
+}
+
+.fade-enter-from,
+.fade-leave-to {
+    opacity: 0;
+}
+</style>

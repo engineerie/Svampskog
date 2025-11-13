@@ -7,22 +7,7 @@
         variant="none" class="hover:cursor-pointer" :icon="selectedChartIcon" :ui="{ content: 'min-w-fit' }" />
       <div class="pr-2">
 
-        <UModal v-if="selectedChart === 'grupper'" :fullscreen="isMobile ? true : false" title="Relativ mängd"
-          description="">
 
-          <UButton size="md" color="neutral" icon="i-carbon-diagram-reference" label="Relativ mängd vid olika åldrar" />
-          <template #body>
-            <div class="flex flex-col gap-4">
-              <ForestryChartDisplay :selectedFrameworks="['trakthygge']"
-                :selectedArtkategori="defaultGrupperArtkategori" chartType="area" :singleFrameworkSelection="true"
-                :relativeChart="true" />
-              <p class="text-sm text-muted">
-                Den relativa fördelningen av olika grupper mykorrhizasvampar i förhållande till alla mykorrhizasvampar i
-                äldre skog och vid olika skogsåldrar efter avverkning.
-              </p>
-            </div>
-          </template>
-        </UModal>
         <USelect v-if="selectedChart === 'grupper' && isFrameworkCompareMode" v-model="selectedCompareArtkategori"
           :items="compareArtkategoriOptions" option-attribute="label" value-key="value" size="lg" variant="soft"
           placeholder="Välj svampgrupp" class="hover:cursor-pointer rounded-full"
@@ -65,7 +50,7 @@
           :selectedFrameworks="props.parentSelectedFrameworks ?? ['naturskydd', 'trakthygge', 'luckhuggning', 'blädning', 'skärmträd']"
           :selectedArtkategori="['total']" :chartType="chartType" :maxYValue="130"
           :currentTimeValue="props.currentTimeValue" />
-        <div class="px-4 pb-4 text-xs text-muted">
+        <div class="px-4 pb-4 text-sm text-muted">
           Mängd mykorrhizasvamp i marken i förhållande till förekomsten i äldre skog/före avverkning (%).
         </div>
       </div>
@@ -75,7 +60,7 @@
           :selectedArtkategori="['rödlistade + signalarter']" :chartType="chartType"
           :selectedStartskog="props.currentStartskog" :redColor="true" :maxYValue="0.65"
           :currentTimeValue="props.currentTimeValue" />
-        <div class="px-4 pb-4 text-xs text-muted">
+        <div class="px-4 pb-4 text-sm text-muted">
           Mängden av mykorrhizasvampar som är rödlistade/signalarter i marken i förhållande till förekomsten i äldre
           skog/före avverkning (%).
         </div>
@@ -86,7 +71,7 @@
           :selectedArtkategori="[matsvampChartArtkategori]" :chartType="chartType"
           :selectedStartskog="props.currentStartskog" :yellowColor="true" :maxYValue="matsvampMaxY"
           :currentTimeValue="props.currentTimeValue" :matsvampVariant="selectedMatsvampVariant" />
-        <div class="px-4 pb-4 text-xs text-muted">
+        <div class="px-4 pb-4 text-sm text-muted">
           {{ matsvampDescription }}
         </div>
       </div>
@@ -95,9 +80,30 @@
           :selectedArtkategori="isFrameworkCompareMode ? [selectedCompareArtkategori] : selectedArtkategori"
           :frameworkComparisonMode="isFrameworkCompareMode" :chartType="chartType" :singleFrameworkSelection="true"
           :selectedStartskog="props.currentStartskog" :currentTimeValue="props.currentTimeValue" />
-        <div class="px-4 pb-4 text-xs text-muted">
+        <div class="px-4 pb-4 text-sm text-muted">
           Mängden av olika grupper svampar i förhållande till förekomsten i äldre skog/före avverkning (%).
         </div>
+        <div class="mx-2">
+          <UModal v-if="selectedChart === 'grupper'" :fullscreen="isMobile ? true : false" title="Relativ mängd"
+            description="">
+
+            <UButton size="lg" class="px-3 w-full flex justify-center" color="neutral" icon="i-carbon-diagram-reference"
+              label="Visa diagram för relativ mängd vid olika åldrar" />
+            <template #body>
+              <div class="flex flex-col gap-4">
+                <ForestryChartDisplay :selectedFrameworks="['trakthygge']"
+                  :selectedArtkategori="defaultGrupperArtkategori" chartType="area" :singleFrameworkSelection="true"
+                  :relativeChart="true" />
+                <p class="text-sm text-muted">
+                  Den relativa fördelningen av olika grupper mykorrhizasvampar i förhållande till alla mykorrhizasvampar
+                  i
+                  äldre skog och vid olika skogsåldrar efter avverkning.
+                </p>
+              </div>
+            </template>
+          </UModal>
+        </div>
+
       </div>
     </div>
   </div>

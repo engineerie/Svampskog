@@ -72,14 +72,14 @@
       </div>
 
       <div class="flex justify-center sm:p-1 border-b border-muted ">
-        <!-- <div class="absolute top-3 left-3 flex flex-col gap-1 pointer-events-auto">
+        <div class="absolute top-3 left-3 flex flex-col gap-1 pointer-events-auto">
           <USwitch :ui="{ root: 'flex-row-reverse justify-between' }" color="warning" v-model="devSaveClicks"
             label="Spara klick (dev)" />
           <USwitch :ui="{ root: 'flex-row-reverse justify-between' }" color="warning" v-model="devOverlayLabelsVisible"
             label="Visa myc-etiketter (dev)" />
           <USwitch :ui="{ root: 'flex-row-reverse justify-between' }" color="warning"
             v-model="devNaturvardCounterVisible" label="Visa naturvårdssiffra (dev)" />
-        </div> -->
+        </div>
 
 
         <div
@@ -496,10 +496,10 @@
                   </UCard>
                   <!-- Skärmträd: Rottäcke skärmträd -->
                   <USwitch v-if="isSkarmtrad" :ui="{ root: 'flex-row-reverse justify-between' }" color="primary"
-                    v-model="rottackeSkarmtradVisible" label="Rottäcke skärmträd" />
+                    v-model="rottackeSkarmtradVisible" label="Rötter skärmträd" />
                   <!-- Blädning: Rottäcke blädning -->
                   <USwitch v-if="isBladning" :ui="{ root: 'flex-row-reverse justify-between' }" color="primary"
-                    v-model="rottackeBladningVisible" label="Rottäcke blädning" />
+                    v-model="rottackeBladningVisible" label="Rötter blädning" />
                   <!-- Högstubbar: small black circles from public JSON -->
                   <USwitch :ui="{ root: 'flex-row-reverse justify-between' }" color="primary"
                     v-model="hogstubbarVisible" label="Högstubbar" />
@@ -1138,7 +1138,7 @@ const panelTabs = [
 
 const {
   public: {
-    dziBaseUrl: runtimeDziBaseUrl = 'https://assets.svampskog.se/dzi_v2',
+    dziBaseUrl: runtimeDziBaseUrl = 'https://assets.svampskog.se/dzi_v3',
     dziVersionSuffix: runtimeDziVersionSuffix = '',
   } = {},
 } = useRuntimeConfig();
@@ -1798,7 +1798,7 @@ const overlayConfigs: Record<OverlayKey, OverlayContentConfig> = {
   retention: {
     title: 'Hänsynsträd',
     description: 'De flesta mykorrhizasvamparna som växte med trädens rötter före avverkningen finns kvar och lever vidare. Mycel kan växa in i och spridas till uppväxande trädplantor.',
-    condition: () => retentionVisible.value && (isTrakthygge.value || isLuckhuggning.value || isSkarmtrad.value),
+    condition: () => retentionVisible.value && (currentFwValue.value !== 'naturskydd'),
     close: () => { retentionVisible.value = false },
   },
   kanteffekt: {

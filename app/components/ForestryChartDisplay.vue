@@ -3,12 +3,12 @@
     <ClientOnly>
       <VisBulletLegend
         v-if="isMounted && chartReady && showLegend && legendItems.length && !(props.singleFrameworkSelection && !props.frameworkComparisonMode)"
-        :items="legendItems" :onLegendItemClick="handleLegendItemClick" class="mx-4 flex flex-wrap gap-2" />
+        :items="legendItems" :onLegendItemClick="handleLegendItemClick" class="mx-2 flex flex-wrap gap-2" />
       <div
         v-if="isMounted && chartReady && legendItems.length && (props.singleFrameworkSelection && !props.frameworkComparisonMode)"
-        class="mx-4 flex flex-wrap gap-1">
+        class="mx-1.5 flex flex-wrap gap-0 gap-y-1">
         <UButton v-for="item in legendItems" :key="item.key" type="button" variant="ghost" color="neutral" size="sm"
-          class="flex items-center px-3 py-1 gap-2 hover:opacity-95 transition ring-muted/50"
+          class="flex items-center px-2 py-1 gap-2 hover:opacity-95 transition ring-muted/50"
           @click="handleLegendItemClick(item)">
           <div v-if="item.icon" class="h-5 w-5" :style="{
             backgroundColor: item.color || item.colorLine || item.colorArea || '#000',

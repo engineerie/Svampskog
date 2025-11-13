@@ -32,7 +32,7 @@
         @input="handleSliderInput" class="accent-neutral-100 h-[5px] w-20 " />
     </div> -->
 
-            <!-- Popover trigger for Kontinuerligt rottäcke (Blädning @ efter) -->
+            <!-- Popover trigger for Kontinuerligt rötter(Blädning @ efter) -->
             <UPopover class="hover:cursor-pointer" :open-delay="500" :close-delay="300">
                 <!-- Trigger element positioned over the rectangle -->
                 <div :style="rottackePopover.visible
@@ -93,7 +93,7 @@
                                 <p class=" mb-6" v-if="timelineInfo"> {{ timelineInfo.skog }}</p>
                                 <p class=" " v-if="timelineInfo">
                                 <div class="font-bold mb-1.5 text-lg">Påverkan på mykorrizasvamp</div> {{
-                                timelineInfo.svamp }}
+                                    timelineInfo.svamp }}
                                 </p>
                                 <div class="overflow-hidden mt-1 px-2  w-full flex">
                                 </div>
@@ -305,7 +305,7 @@ export default {
         const viewer = ref(null);
         const isClient = ref(false);
         const viewerContainer = ref(null);
-        // Popover state for Kontinuerligt rottäcke (Blädning @ efter)
+        // Popover state for Kontinuerligt rötter(Blädning @ efter)
         const rottackePopover = ref({ visible: false, top: 0, left: 0, width: 0, height: 0 });
         const rottackePopoverStyle = computed(() => ({
             position: 'absolute',
@@ -841,7 +841,7 @@ export default {
                         overlayCtx.globalAlpha = 1;
                     });
             }
-            // Kontinuerligt rottäcke rectangle overlay (same dimensions as static overlay)
+            // Kontinuerligt rötterrectangle overlay (same dimensions as static overlay)
             if (props.rottackeVisible) {
                 const fw = props.currentFramework.value;
                 const t = props.currentTime;

@@ -32,7 +32,7 @@ const items = computed(() => [
 </script>
 
 <template>
-  <UHeader mode="modal" class="bg-white" :toggle="{
+  <UHeader mode="modal" class="bg-white border-muted/50" :toggle="{
     size: 'xl',
   }">
     <template #left>

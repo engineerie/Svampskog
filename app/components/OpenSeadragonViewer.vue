@@ -34,7 +34,7 @@
           <span class="uppercase tracking-wide text-[10px] text-neutral-400">Naturvård</span>
           <span class="text-sm font-semibold text-neutral-900">{{ naturvardCounter.total }}</span>
           <span v-if="naturvardCounter.gained" class="text-emerald-600 font-semibold">+{{ naturvardCounter.gained
-            }}</span>
+          }}</span>
           <span v-if="naturvardCounter.lost" class="text-red-500 font-semibold">-{{ naturvardCounter.lost }}</span>
         </div>
       </div>
@@ -49,7 +49,7 @@
         @input="handleSliderInput" class="accent-neutral-100 h-[5px] w-20 " />
     </div> -->
 
-      <!-- Popover trigger for Kontinuerligt rottäcke (Blädning @ efter) -->
+      <!-- Popover trigger for Kontinuerligt rötter(Blädning @ efter) -->
       <UPopover class="hover:cursor-pointer" :open-delay="500" :close-delay="300">
         <!-- Trigger element positioned over the rectangle -->
         <div
@@ -154,7 +154,7 @@ function isVisibleForStartskog(tree, activeStartskog) {
   }
 
   if (typeof entry === 'string') {
-    if (entry === 'all') return true;
+    if (entry === 'all' || entry === 'alla') return true;
 
     if (!exclusive && tree.framework === 'trakthygge') {
       if (entry === 'naturskog' || entry === 'produktionsskog_') {
@@ -339,7 +339,7 @@ export default {
       const matchesContextBase = (point) => {
         if (!point) return false;
         if (activeFramework && !valueMatches(point.framework, activeFramework)) return false;
-        if (activeStartskog && point.startskog && point.startskog !== activeStartskog) return false;
+        if (activeStartskog && point.startskog && !valueMatches(point.startskog, activeStartskog)) return false;
         return true;
       };
 
@@ -472,7 +472,7 @@ export default {
     // Click-based tooltip handlers
     let naturvardClickHandler = null;
     let outsideClickHandler = null;
-    // Popover state for Kontinuerligt rottäcke (Blädning @ efter)
+    // Popover state for Kontinuerligt rötter(Blädning @ efter)
     const rottackePopover = ref({ visible: false, top: 0, left: 0, width: 0, height: 0 });
     const rottackePopoverStyle = computed(() => ({
       position: 'absolute',
@@ -651,7 +651,14 @@ export default {
         const activeStartskog = startskogValue.value;
         treesArr.forEach(tree => {
           if (!tree) return;
-          if (activeFramework && tree.framework !== activeFramework) return;
+          if (
+            activeFramework &&
+            tree.framework &&
+            tree.framework !== 'alla' &&
+            tree.framework !== activeFramework
+          ) {
+            return;
+          }
           if (!timeMatches(tree.time, props.currentTime)) return;
           if (!isVisibleForStartskog(tree, activeStartskog)) return;
           const pt = new osdLib.Point(tree.x, tree.y);
@@ -1161,7 +1168,7 @@ export default {
             overlayCtx.globalAlpha = 1;
           });
       }
-      // Kontinuerligt rottäcke rectangle overlay (same dimensions as static overlay)
+      // Kontinuerligt rötterrectangle overlay (same dimensions as static overlay)
       if (props.rottackeSkarmtradVisible || props.rottackeBladningVisible) {
         const fw = frameworkValue.value;
         const t = props.currentTime;
