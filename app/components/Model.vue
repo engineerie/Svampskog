@@ -85,14 +85,14 @@
       </div>
 
       <div class="flex justify-center sm:p-1 border-b border-muted ">
-        <div class="absolute top-3 left-3 flex flex-col gap-1 pointer-events-auto">
+        <!-- <div class="absolute top-3 left-3 flex flex-col gap-1 pointer-events-auto">
           <USwitch :ui="{ root: 'flex-row-reverse justify-between' }" color="warning" v-model="devSaveClicks"
             label="Spara klick (dev)" />
           <USwitch :ui="{ root: 'flex-row-reverse justify-between' }" color="warning" v-model="devOverlayLabelsVisible"
             label="Visa myc-etiketter (dev)" />
           <USwitch :ui="{ root: 'flex-row-reverse justify-between' }" color="warning"
             v-model="devNaturvardCounterVisible" label="Visa naturvårdssiffra (dev)" />
-        </div>
+        </div> -->
 
 
         <div
@@ -331,35 +331,39 @@
 
       <div class="flex flex-1">
         <div class="absolute top-3 left-3 z-50">
-
-          <UCard :ui="{ body: 'sm:p-5' }">
-            <div class="flex flex-col gap-2">
-              <div class="flex flex-col gap-2">
-                <span class="text-sm tracking-wide text-neutral-400">Trädens synlighet</span>
-                <USlider :min="0" :max="1" step="0.01" v-model="globalOpacity"
-                  class="accent-primary-500 h-[5px] w-full" />
-              </div>
-              <span class="text-sm tracking-wide text-neutral-400 mt-4">Legend</span>
-              <div class="flex w-full">
-                <UIcon name="i-fluent-shape-organic-16-filled" class="size-6 text-gray-300 z-20" />
-                <UIcon name="i-fluent-shape-organic-16-filled" class="size-6 -ml-4 text-gray-400 z-10" />
-                <UIcon name="i-fluent-shape-organic-16-filled" class="size-6 -ml-4 mr-4 text-gray-500" />
-                <h1 class="font-medium">Mykorrhizasvampar</h1>
-              </div>
-              <div class="flex w-full justify-between">
-                <UIcon name="i-fluent-shape-organic-16-filled" class="size-6 text-signal-400" />
-
-                <h1 class="font-medium">Naturvårdssvampar</h1>
-              </div>
-              <div class="flex w-full justify-between">
-                <UIcon name="i-fluent-shape-organic-16-filled" class="size-6 text-yellow-400" />
-
-                <h1 class="font-medium">Matsvampar</h1>
-              </div>
-
+          <div class="flex items-center gap-2">
+            <!-- <UIcon name="i-hugeicons-tree-06" class="size-5" /> -->
+            <USlider orientation="vertical" :min="0" :max="1" :step="0.01" v-model="globalOpacity"
+              class="accent-primary-500 h-28 m-3" />
+          </div>
+          <UPopover>
+            <div class="flex w-full mt-4">
+              <UIcon name="i-fluent-shape-organic-16-filled" class="size-6 text-gray-300 z-20" />
+              <UIcon name="i-fluent-shape-organic-16-filled" class="size-6 -ml-4 text-signal-400 z-10" />
+              <UIcon name="i-fluent-shape-organic-16-filled" class="size-6 -ml-4 mr-4 text-yellow-400" />
             </div>
+            <template #content>
+              <div class="flex flex-col gap-2 p-4">
+                <div class="flex w-full">
+                  <UIcon name="i-fluent-shape-organic-16-filled" class="size-6 text-gray-300 z-20" />
+                  <UIcon name="i-fluent-shape-organic-16-filled" class="size-6 -ml-4 text-gray-400 z-10" />
+                  <UIcon name="i-fluent-shape-organic-16-filled" class="size-6 -ml-4 mr-4 text-gray-500" />
+                  <h1 class="font-medium">Mykorrhizasvampar</h1>
+                </div>
+                <div class="flex w-full justify-between">
+                  <UIcon name="i-fluent-shape-organic-16-filled" class="size-6 text-signal-400" />
 
-          </UCard>
+                  <h1 class="font-medium">Naturvårdssvampar</h1>
+                </div>
+                <div class="flex w-full justify-between">
+                  <UIcon name="i-fluent-shape-organic-16-filled" class="size-6 text-yellow-400" />
+
+                  <h1 class="font-medium">Matsvampar</h1>
+                </div>
+
+              </div>
+            </template>
+          </UPopover>
         </div>
 
         <div v-if="pinnedOverlayBadges.length"
@@ -376,7 +380,7 @@
 
                     <div class="flex items-center gap-1">
                       <UIcon v-if="badge.icon" :name="badge.icon" class="size-5 text-primary-500" />
-                      <span>{{ badge.title }}</span>
+                      <span v-if="!isMobile">{{ badge.title }}</span>
                       <!-- <UIcon name="i-heroicons-x-mark" /> -->
                     </div>
 
@@ -682,10 +686,10 @@
                 :kanteffekt-features="filteredOverlayData.kanteffekt" :currentFramework="currentFramework"
                 :currentTime="timeLabelForDataFiltering" :currentStartskog="currentStartskog"
                 :layoutMode="currentLayoutMode" ref="afterViewerRef" :comparisonMode="true"
-                :frameworkLabel="currentFramework.label" :timeLabel="currentTimeLabel"
-                :dziUrl="currentImagePath" :overlayDziUrl="comparisonOverlayImagePath2" :allowPan="true"
-                sliderPosition="right" @opened="onViewerOpened('after')" @activated="activeViewer.valueOf = 'after'"
-                v-if="!opacitySyncEnabled" class="w-full h-full " />
+                :frameworkLabel="currentFramework.label" :timeLabel="currentTimeLabel" :dziUrl="currentImagePath"
+                :overlayDziUrl="comparisonOverlayImagePath2" :allowPan="true" sliderPosition="right"
+                @opened="onViewerOpened('after')" @activated="activeViewer.valueOf = 'after'" v-if="!opacitySyncEnabled"
+                class="w-full h-full " />
               <OpenSeadragonViewer :naturvardsarter-visible="naturvardsarterVisible"
                 :retention-visible="retentionVisible" :kanteffekt-visible="kanteffektVisible"
                 :omkringliggande-skog-visible="omkringSkogVisible" :old-kanteffekt-visible="oldKanteffektVisible"
@@ -700,10 +704,10 @@
                 :kanteffekt-features="filteredOverlayData.kanteffekt" :currentFramework="currentFramework"
                 :currentTime="timeLabelForDataFiltering" :currentStartskog="currentStartskog"
                 :layoutMode="currentLayoutMode" ref="afterViewerRef" :comparisonMode="true"
-                :frameworkLabel="currentFramework.label" :timeLabel="currentTimeLabel"
-                :dziUrl="currentImagePath" :overlayDziUrl="comparisonOverlayImagePath2" :allowPan="true"
-                sliderPosition="right" @opened="onViewerOpened('after')" @activated="activeViewer.valueOf = 'after'"
-                v-else v-model:globalOpacity="globalOpacity" class="w-full h-full  " />
+                :frameworkLabel="currentFramework.label" :timeLabel="currentTimeLabel" :dziUrl="currentImagePath"
+                :overlayDziUrl="comparisonOverlayImagePath2" :allowPan="true" sliderPosition="right"
+                @opened="onViewerOpened('after')" @activated="activeViewer.valueOf = 'after'" v-else
+                v-model:globalOpacity="globalOpacity" class="w-full h-full  " />
             </template>
           </CustomImageComparisonSlider>
 
@@ -727,10 +731,9 @@
                 :kanteffekt-features="filteredOverlayData.kanteffekt" :currentFramework="currentFramework"
                 :currentTime="timeLabelForDataFiltering" :currentStartskog="currentStartskog"
                 :layoutMode="currentLayoutMode" ref="framework1ViewerRef" :comparisonMode="true"
-                :frameworkLabel="currentFramework.label" :timeLabel="currentTimeLabel"
-                :dziUrl="currentImagePath" :overlayDziUrl="frameworkOverlayImagePath1"
-                :allowPan="!isCompare && !isFrameworkCompareMode" v-if="!opacitySyncEnabled"
-                @viewportChanged="($event) => onViewportChanged('framework1', $event)"
+                :frameworkLabel="currentFramework.label" :timeLabel="currentTimeLabel" :dziUrl="currentImagePath"
+                :overlayDziUrl="frameworkOverlayImagePath1" :allowPan="!isCompare && !isFrameworkCompareMode"
+                v-if="!opacitySyncEnabled" @viewportChanged="($event) => onViewportChanged('framework1', $event)"
                 @opened="onViewerOpened('framework1')" @activated="activeViewer.valueOf = 'framework1'"
                 class="w-full h-full" />
               <OpenSeadragonViewer :naturvardsarter-visible="naturvardsarterVisible"
@@ -746,9 +749,9 @@
                 :kanteffekt-features="filteredOverlayData.kanteffekt" :currentFramework="currentFramework"
                 :currentTime="timeLabelForDataFiltering" :currentStartskog="currentStartskog"
                 :layoutMode="currentLayoutMode" ref="framework1ViewerRef" :comparisonMode="true"
-                :frameworkLabel="currentFramework.label" :timeLabel="currentTimeLabel"
-                :dziUrl="currentImagePath" :overlayDziUrl="frameworkOverlayImagePath1"
-                :allowPan="!isCompare && !isFrameworkCompareMode" v-else v-model:globalOpacity="globalOpacity"
+                :frameworkLabel="currentFramework.label" :timeLabel="currentTimeLabel" :dziUrl="currentImagePath"
+                :overlayDziUrl="frameworkOverlayImagePath1" :allowPan="!isCompare && !isFrameworkCompareMode" v-else
+                v-model:globalOpacity="globalOpacity"
                 @viewportChanged="($event) => onViewportChanged('framework1', $event)"
                 @opened="onViewerOpened('framework1')" @activated="activeViewer.valueOf = 'framework1'"
                 class="w-full h-full" />
@@ -769,8 +772,8 @@
                 :kanteffekt-features="filteredOverlayDataFramework2.kanteffekt" :currentFramework="currentFramework2"
                 :currentTime="timeLabelForDataFiltering" :currentStartskog="currentStartskog"
                 :layoutMode="currentLayoutMode" ref="framework2ViewerRef" :comparisonMode="true"
-                :frameworkLabel="currentFramework2.label" :timeLabel="currentTimeLabel"
-                :dziUrl="currentImagePath2" :overlayDziUrl="frameworkOverlayImagePath2" v-if="!opacitySyncEnabled"
+                :frameworkLabel="currentFramework2.label" :timeLabel="currentTimeLabel" :dziUrl="currentImagePath2"
+                :overlayDziUrl="frameworkOverlayImagePath2" v-if="!opacitySyncEnabled"
                 :allowPan="!isCompare && !isFrameworkCompareMode" sliderPosition="right"
                 @viewportChanged="($event) => onViewportChanged('framework2', $event)"
                 @opened="onViewerOpened('framework2')" @activated="activeViewer.valueOf = 'framework2'"
@@ -790,10 +793,10 @@
                 :kanteffekt-features="filteredOverlayDataFramework2.kanteffekt" :currentFramework="currentFramework2"
                 :currentTime="timeLabelForDataFiltering" :currentStartskog="currentStartskog"
                 :layoutMode="currentLayoutMode" ref="framework2ViewerRef" :comparisonMode="true"
-                :frameworkLabel="currentFramework2.label" :timeLabel="currentTimeLabel"
-                :dziUrl="currentImagePath2" :overlayDziUrl="frameworkOverlayImagePath2" v-else
-                v-model:globalOpacity="globalOpacity" :allowPan="!isCompare && !isFrameworkCompareMode"
-                sliderPosition="right" @viewportChanged="($event) => onViewportChanged('framework2', $event)"
+                :frameworkLabel="currentFramework2.label" :timeLabel="currentTimeLabel" :dziUrl="currentImagePath2"
+                :overlayDziUrl="frameworkOverlayImagePath2" v-else v-model:globalOpacity="globalOpacity"
+                :allowPan="!isCompare && !isFrameworkCompareMode" sliderPosition="right"
+                @viewportChanged="($event) => onViewportChanged('framework2', $event)"
                 @opened="onViewerOpened('framework2')" @activated="activeViewer.valueOf = 'framework2'"
                 class="w-full h-full" />
 
@@ -1589,7 +1592,7 @@ function toggleChartVisible() {
 }
 // Global opacity sync state
 const opacitySyncEnabled = ref(true);
-const globalOpacity = ref(0);
+const globalOpacity = ref(1);
 
 // Assuming the base image is currentImagePath (trees off)
 // For the overlay image, force trees to be visible.
@@ -2354,7 +2357,7 @@ const sliderSteps = computed(() => {
     : "Före avverkning";
   const steps = [
     { value: 3, label: beforeLabel, timeLabel: "före" },
-    { value: 15, label: "Strax efter ", timeLabel: "efter" },
+    { value: 15, label: "1 år efter", timeLabel: "efter" },
   ];
   if (
     currentFramework.value?.value === "skärmträd" &&

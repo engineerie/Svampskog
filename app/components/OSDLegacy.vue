@@ -1012,18 +1012,27 @@ export default {
         const overlayImage = ref(null);
         function refreshOverlayTile(tileSource) {
             if (!viewer.value) return;
-            if (overlayImage.value) {
-                viewer.value.world.removeItem(overlayImage.value);
-                overlayImage.value.destroy();
+
+            const previousOverlay = overlayImage.value;
+            if (!tileSource) {
+                if (previousOverlay) {
+                    viewer.value.world.removeItem(previousOverlay);
+                    previousOverlay.destroy();
+                }
                 overlayImage.value = null;
+                return;
             }
-            if (!tileSource) return;
+
             viewer.value.addTiledImage({
                 tileSource,
                 crossOriginPolicy: 'Anonymous',
                 ajaxWithCredentials: false,
                 opacity: overlayOpacityLocal.value,
                 success: event => {
+                    if (previousOverlay) {
+                        viewer.value.world.removeItem(previousOverlay);
+                        previousOverlay.destroy();
+                    }
                     overlayImage.value = event.item;
                 }
             });
