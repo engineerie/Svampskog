@@ -32,11 +32,7 @@
       </div>
       <USeparator :ui="{ border: 'border-muted/50' }" />
       <div class="p-3 flex flex-col gap-3">
-        <div class="flex items-center justify-between gap-3">
-          <span class="text-sm tracking-wide text-neutral-400">Trädens synlighet</span>
-          <input type="range" min="0" max="1" step="0.01" v-model="globalOpacity"
-            class="accent-primary-500 h-[5px] w-32" />
-        </div>
+
         <div class="flex flex-wrap gap-1">
           <UBadge v-for="overlay in overlayBadgeItems" :key="overlay.key" :label="overlay.label" :icon="overlay.icon"
             :color="pinned[overlay.key] ? 'primary' : 'neutral'" :variant="pinned[overlay.key] ? 'solid' : 'subtle'"
@@ -58,6 +54,23 @@
               :placeholder="currentFramework2.label" append-to-body variant="soft" class="ring-muted shadow " />
 
           </div>
+          <UPopover v-if="!isMobile" :ui="{ content: 'p-0 w-80', }"
+            :content="{ side: 'bottom', sideOffset: 8, collisionPadding: 8, align: 'start' }"
+            class="pointer-events-auto">
+            <UButton size="xl" color="neutral" variant="outline" label="Jämför" icon="iconamoon:compare-duotone"
+              class="ring-muted/50" />
+            <template #content>
+              <reuseSettingsTemplate />
+            </template>
+          </UPopover>
+          <UDrawer v-else :modal="false" :ui="{ content: 'p-0', body: 'p-0', container: 'p-0 gap-0' }">
+            <UButton :size="isMobile ? 'xl' : 'md'" color="neutral" variant="outline"
+              :label="isMobile ? null : 'Display'" icon="i-heroicons-adjustments-horizontal"
+              class="ring-muted rounded-full sm:rounded pointer-events-auto" />
+            <template #body>
+              <reuseSettingsTemplate />
+            </template>
+          </UDrawer>
           <UButton v-if="isMobile" icon="i-heroicons-x-mark" variant="soft" color="neutral"
             class="rounded-full h-fit mr-2 ml-1" :ui="{ rounded: 'rounded-full' }" @click="emit('close')"
             aria-label="Stäng modellvy" size="lg" />
@@ -318,23 +331,35 @@
 
       <div class="flex flex-1">
         <div class="absolute top-3 left-3 z-50">
-          <UPopover v-if="!isMobile" :ui="{ content: 'p-0 w-80', }"
-            :content="{ side: 'bottom', sideOffset: 8, collisionPadding: 8, align: 'start' }"
-            class="pointer-events-auto">
-            <UButton size="md" color="neutral" variant="outline" label="Display"
-              icon="i-heroicons-adjustments-horizontal" class="ring-muted" />
-            <template #content>
-              <reuseSettingsTemplate />
-            </template>
-          </UPopover>
-          <UDrawer v-else :modal="false" :ui="{ content: 'p-0', body: 'p-0', container: 'p-0 gap-0' }">
-            <UButton :size="isMobile ? 'xl' : 'md'" color="neutral" variant="outline"
-              :label="isMobile ? null : 'Display'" icon="i-heroicons-adjustments-horizontal"
-              class="ring-muted rounded-full sm:rounded pointer-events-auto" />
-            <template #body>
-              <reuseSettingsTemplate />
-            </template>
-          </UDrawer>
+
+          <UCard :ui="{ body: 'sm:p-5' }">
+            <div class="flex flex-col gap-2">
+              <div class="flex flex-col gap-2">
+                <span class="text-sm tracking-wide text-neutral-400">Trädens synlighet</span>
+                <USlider :min="0" :max="1" step="0.01" v-model="globalOpacity"
+                  class="accent-primary-500 h-[5px] w-full" />
+              </div>
+              <span class="text-sm tracking-wide text-neutral-400 mt-4">Legend</span>
+              <div class="flex w-full">
+                <UIcon name="i-fluent-shape-organic-16-filled" class="size-6 text-gray-300 z-20" />
+                <UIcon name="i-fluent-shape-organic-16-filled" class="size-6 -ml-4 text-gray-400 z-10" />
+                <UIcon name="i-fluent-shape-organic-16-filled" class="size-6 -ml-4 mr-4 text-gray-500" />
+                <h1 class="font-medium">Mykorrhizasvampar</h1>
+              </div>
+              <div class="flex w-full justify-between">
+                <UIcon name="i-fluent-shape-organic-16-filled" class="size-6 text-signal-400" />
+
+                <h1 class="font-medium">Naturvårdssvampar</h1>
+              </div>
+              <div class="flex w-full justify-between">
+                <UIcon name="i-fluent-shape-organic-16-filled" class="size-6 text-yellow-400" />
+
+                <h1 class="font-medium">Matsvampar</h1>
+              </div>
+
+            </div>
+
+          </UCard>
         </div>
 
         <div v-if="pinnedOverlayBadges.length"
@@ -568,8 +593,8 @@
               :kanteffekt-features="filteredOverlayData.kanteffekt" :fullscreenLayout="true"
               :currentFramework="currentFramework" :currentTime="timeLabelForDataFiltering"
               :currentStartskog="currentStartskog" :layoutMode="currentLayoutMode" ref="singleViewerRef"
-              :frameworkLabel="currentFramework.label" :timeLabel="currentTimeLabel" :dziUrl="currentOverlayImagePath"
-              :overlayDziUrl="currentImagePath" :allowPan="true"
+              :frameworkLabel="currentFramework.label" :timeLabel="currentTimeLabel" :dziUrl="currentImagePath"
+              :overlayDziUrl="currentOverlayImagePath" :allowPan="true"
               :annotations="annotationsVisible ? filteredAnnotations : []" :selectedAnnotation="selectedAnnotation"
               v-model:globalOpacity="globalOpacity" @annotationClicked="handleAnnotationClicked"
               class="w-full h-full ui-zoom-exempt " />
@@ -619,7 +644,7 @@
                 :kanteffekt-features="filteredBeforeOverlayData.kanteffekt" :currentFramework="currentFramework"
                 currentTime="innan" :currentStartskog="currentStartskog" :layoutMode="currentLayoutMode"
                 ref="beforeViewerRef" :comparisonMode="true" :frameworkLabel="currentFramework.label"
-                timeLabel="Före avverkning" :dziUrl="comparisonOverlayImagePath1" :overlayDziUrl="comparisonImagePath1"
+                timeLabel="Före avverkning" :dziUrl="comparisonImagePath1" :overlayDziUrl="comparisonOverlayImagePath1"
                 :allowPan="true" @opened="onViewerOpened('before')" @activated="activeViewer.valueOf = 'before'"
                 v-if="!opacitySyncEnabled" class="w-full h-full" />
               <OpenSeadragonViewer :naturvardsarter-visible="naturvardsarterVisible"
@@ -638,7 +663,7 @@
                 :kanteffekt-features="filteredBeforeOverlayData.kanteffekt" :currentFramework="currentFramework"
                 currentTime="innan" :currentStartskog="currentStartskog" :layoutMode="currentLayoutMode"
                 ref="beforeViewerRef" :comparisonMode="true" :frameworkLabel="currentFramework.label"
-                timeLabel="Före avverkning" :dziUrl="comparisonOverlayImagePath1" :overlayDziUrl="comparisonImagePath1"
+                timeLabel="Före avverkning" :dziUrl="comparisonImagePath1" :overlayDziUrl="comparisonOverlayImagePath1"
                 :allowPan="true" @opened="onViewerOpened('before')" @activated="activeViewer.valueOf = 'before'" v-else
                 v-model:globalOpacity="globalOpacity" class="w-full h-full" />
             </template>
@@ -658,7 +683,7 @@
                 :currentTime="timeLabelForDataFiltering" :currentStartskog="currentStartskog"
                 :layoutMode="currentLayoutMode" ref="afterViewerRef" :comparisonMode="true"
                 :frameworkLabel="currentFramework.label" :timeLabel="currentTimeLabel"
-                :dziUrl="comparisonOverlayImagePath2" :overlayDziUrl="currentImagePath" :allowPan="true"
+                :dziUrl="currentImagePath" :overlayDziUrl="comparisonOverlayImagePath2" :allowPan="true"
                 sliderPosition="right" @opened="onViewerOpened('after')" @activated="activeViewer.valueOf = 'after'"
                 v-if="!opacitySyncEnabled" class="w-full h-full " />
               <OpenSeadragonViewer :naturvardsarter-visible="naturvardsarterVisible"
@@ -676,7 +701,7 @@
                 :currentTime="timeLabelForDataFiltering" :currentStartskog="currentStartskog"
                 :layoutMode="currentLayoutMode" ref="afterViewerRef" :comparisonMode="true"
                 :frameworkLabel="currentFramework.label" :timeLabel="currentTimeLabel"
-                :dziUrl="comparisonOverlayImagePath2" :overlayDziUrl="currentImagePath" :allowPan="true"
+                :dziUrl="currentImagePath" :overlayDziUrl="comparisonOverlayImagePath2" :allowPan="true"
                 sliderPosition="right" @opened="onViewerOpened('after')" @activated="activeViewer.valueOf = 'after'"
                 v-else v-model:globalOpacity="globalOpacity" class="w-full h-full  " />
             </template>
@@ -703,7 +728,7 @@
                 :currentTime="timeLabelForDataFiltering" :currentStartskog="currentStartskog"
                 :layoutMode="currentLayoutMode" ref="framework1ViewerRef" :comparisonMode="true"
                 :frameworkLabel="currentFramework.label" :timeLabel="currentTimeLabel"
-                :dziUrl="frameworkOverlayImagePath1" :overlayDziUrl="currentImagePath"
+                :dziUrl="currentImagePath" :overlayDziUrl="frameworkOverlayImagePath1"
                 :allowPan="!isCompare && !isFrameworkCompareMode" v-if="!opacitySyncEnabled"
                 @viewportChanged="($event) => onViewportChanged('framework1', $event)"
                 @opened="onViewerOpened('framework1')" @activated="activeViewer.valueOf = 'framework1'"
@@ -722,7 +747,7 @@
                 :currentTime="timeLabelForDataFiltering" :currentStartskog="currentStartskog"
                 :layoutMode="currentLayoutMode" ref="framework1ViewerRef" :comparisonMode="true"
                 :frameworkLabel="currentFramework.label" :timeLabel="currentTimeLabel"
-                :dziUrl="frameworkOverlayImagePath1" :overlayDziUrl="currentImagePath"
+                :dziUrl="currentImagePath" :overlayDziUrl="frameworkOverlayImagePath1"
                 :allowPan="!isCompare && !isFrameworkCompareMode" v-else v-model:globalOpacity="globalOpacity"
                 @viewportChanged="($event) => onViewportChanged('framework1', $event)"
                 @opened="onViewerOpened('framework1')" @activated="activeViewer.valueOf = 'framework1'"
@@ -745,7 +770,7 @@
                 :currentTime="timeLabelForDataFiltering" :currentStartskog="currentStartskog"
                 :layoutMode="currentLayoutMode" ref="framework2ViewerRef" :comparisonMode="true"
                 :frameworkLabel="currentFramework2.label" :timeLabel="currentTimeLabel"
-                :dziUrl="frameworkOverlayImagePath2" :overlayDziUrl="currentImagePath2" v-if="!opacitySyncEnabled"
+                :dziUrl="currentImagePath2" :overlayDziUrl="frameworkOverlayImagePath2" v-if="!opacitySyncEnabled"
                 :allowPan="!isCompare && !isFrameworkCompareMode" sliderPosition="right"
                 @viewportChanged="($event) => onViewportChanged('framework2', $event)"
                 @opened="onViewerOpened('framework2')" @activated="activeViewer.valueOf = 'framework2'"
@@ -766,7 +791,7 @@
                 :currentTime="timeLabelForDataFiltering" :currentStartskog="currentStartskog"
                 :layoutMode="currentLayoutMode" ref="framework2ViewerRef" :comparisonMode="true"
                 :frameworkLabel="currentFramework2.label" :timeLabel="currentTimeLabel"
-                :dziUrl="frameworkOverlayImagePath2" :overlayDziUrl="currentImagePath2" v-else
+                :dziUrl="currentImagePath2" :overlayDziUrl="frameworkOverlayImagePath2" v-else
                 v-model:globalOpacity="globalOpacity" :allowPan="!isCompare && !isFrameworkCompareMode"
                 sliderPosition="right" @viewportChanged="($event) => onViewportChanged('framework2', $event)"
                 @opened="onViewerOpened('framework2')" @activated="activeViewer.valueOf = 'framework2'"

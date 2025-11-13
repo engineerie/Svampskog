@@ -75,9 +75,8 @@
           <VisGroupedBar :color="computedLineColors" :x="xAccessor" :y="yAccessors" :groupPadding="0.5"
             :groupMaxWidth="20" />
         </template>
-        <VisPlotline v-for="band in plotBands" :key="band.id" axis="x" :value="band.value"
-          :color="`rgba(69,10,10, 0.5)`" :lineStyle="[2, 3]" :label="band.labelText" :labelColor="band.labelColor"
-          :zIndex="100" :lineWidth="1" />
+        <VisPlotline v-for="band in plotBands" axis="x" :value="band.value" :color="`rgba(69,10,10, 0.5)`"
+          :lineStyle="[2, 3]" :label="band.labelText" :labelColor="band.labelColor" :zIndex="100" :lineWidth="1" />
         <VisAxis tickTextFontSize="12px" :gridLine="true" type="x" :tickValues="xTickValues"
           :tickFormat="formatXTicks" />
         <VisAxis tickTextFontSize="12px" type="y" />
