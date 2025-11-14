@@ -42,13 +42,13 @@
       </div>
     </DefineSettingsTemplate>
     <div>
-      <div class="w-full sm:flex items-center justify-center border-muted sm:p-1">
+      <div class="w-full absolute top-0 sm:flex items-center justify-center border-muted sm:p-1 z-50">
         <div class="flex w-full sm:w-fit h-fit justify-center p-0 pb-0 sm:pb-0 items-center">
           <div v-if="frameworkOptions.length"
             class="grid sm:gap-4 gap-2 p-2 sm:py-1 sm:flex-row sm:items-center sm:justify-start h-fit w-full sm:w-fit"
             :class="isFrameworkCompareMode ? 'grid-cols-2' : 'grid-cols-1'">
             <USelect size="xl" :items="frameworkOptions" v-model="selectedFrameworkIndex"
-              :placeholder="currentFramework.label" append-to-body variant="soft" class="ring-muted  w-full shadow"
+              :placeholder="currentFramework.label" append-to-body variant="outline" class="ring-muted  w-full shadow"
               :ui="{ content: 'min-w-fit', viewport: 'text-center' }" />
             <USelect v-if="isFrameworkCompareMode" size="xl" :items="frameworkOptions" v-model="selectedFrameworkIndex2"
               :placeholder="currentFramework2.label" append-to-body variant="soft" class="ring-muted shadow " />
@@ -84,7 +84,7 @@
         </div>
       </div>
 
-      <div class="flex justify-center sm:p-1 border-b border-muted ">
+      <div class="flex justify-center">
         <!-- <div class="absolute top-3 left-3 flex flex-col gap-1 pointer-events-auto">
           <USwitch :ui="{ root: 'flex-row-reverse justify-between' }" color="warning" v-model="devSaveClicks"
             label="Spara klick (dev)" />
@@ -98,15 +98,55 @@
         <div
           class="absolute bottom-8 left-1/2 transform -translate-x-1/2 z-50 p-4 sm:p-0 space-y-2 sm:space-y-0 pointer-events-none sm:flex gap-2 items-center">
 
+          <div
+            class="flex sm:justify-center items-center overflow-x-scroll md:overflow-hidden my-1 sm:my-0 gap-4 px-3 pointer-events-auto">
 
-          <UDrawer :direction="isMobile ? 'bottom' : 'bottom'" :inset="isMobile ? false : true"
+            <UPopover class="shrink-0 cursor-pointer h-fit z-50" v-model:open="open2"
+              :popper="{ placement: 'bottom-start' }">
+              <UButton :variant="isMobile ? 'soft' : 'soft'" color="neutral" size="lg" class="rounded-full ring-muted">
+                <div class="flex items-center gap-2">
+                  <UIcon
+                    :name="currentStartskog.value == 'naturskog' ? 'i-material-symbols-light-forest-rounded' : 'i-ph-farm'"
+                    class="w-5 h-5" />
+                  <span v-if="!isMobile">{{ currentStartskog.label }}</span>
+                  <UIcon v-if="currentStartskog && currentStartskog.value" name="i-heroicons-chevron-down"
+                    class="w-4 h-4 " />
+                </div>
+              </UButton>
+              <template #content>
+                <div class="text-sm w-64 p-3 text-neutral-500 border-b border-neutral-200 ">
+                  Har skogen varit kalavverkad tidigare?
+                </div>
+                <div class="p-1 flex flex-col gap-1">
+                  <div v-for="option in startskog" :key="option.value">
+                    <UButton @click="selectOption(option)" size="lg" color="white" variant="ghost" :label="option.label"
+                      class="hover:bg-neutral-100 cursor-pointer text-neutral-400 w-full" :class="{
+                        ' bg-neutral-100 text-neutral-800': currentStartskog.value === option.value,
+                      }"
+                      :icon="option.value === 'naturskog' ? 'i-material-symbols-light-forest-rounded' : 'i-ph-farm'">
+
+                    </UButton>
+                  </div>
+                </div>
+              </template>
+            </UPopover>
+
+            <UTabs v-model="selectedTimeValue" :items="timeItems" :ui="{
+              root: 'min-w-max flex-shrink-0',
+              list: 'flex-nowrap rounded-xl bg-transparent -mb-1.5 gap-2',
+              indicator: 'bg-white border border-muted/50 shadow ',
+              trigger: ' data-[state=active]:text-neutral-800 dark:data-[state=active]:text-violet-400/90 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary '
+            }" />
+          </div>
+          <UDrawer :direction="isMobile ? 'bottom' : 'left'" :inset="isMobile ? false : true"
             :dismissible="isMobile ? true : false" :overlay="false" :handle="isMobile ? false : false" :modal="false"
             v-model:open="infoDrawerOpen" class="pointer-events-auto "
-            :ui="{ header: 'flex items-center justify-between', body: 'p-0 ', container: 'p-0 gap-0 ', content: 'max-w-4xl mx-auto ring-muted/50', footer: 'gap-0' }">
+            :ui="{ header: 'flex items-center justify-between', body: 'p-0 ', container: 'p-0 gap-0 ', content: 'sm:max-w-xs mx-auto ring-muted/50', footer: 'gap-0' }">
             <UButton :size="isMobile ? 'xl' : 'xl'" :label="isMobile ? 'Information' : 'Information'" color="neutral"
               icon="i-heroicons-chevron-up" class="ring-muted rounded-full shadow "
               :variant="infoDrawerOpen ? 'subtle' : 'outline'" />
             <template #body>
+
               <UButton class="absolute top-1.5 right-1.5 z-50" variant="ghost" color="neutral"
                 @click="infoDrawerOpen = false" icon="i-heroicons-x-mark" />
               <div class="relative">
@@ -280,7 +320,7 @@
             </div> -->
 
         </div>
-        <div class="flex sm:justify-center items-center overflow-x-scroll md:overflow-hidden my-1 sm:my-0 gap-4 px-3 ">
+        <!-- <div class="flex sm:justify-center items-center overflow-x-scroll md:overflow-hidden my-1 sm:my-0 gap-4 px-3 ">
 
           <UPopover class="shrink-0 cursor-pointer h-fit z-50" v-model:open="open2"
             :popper="{ placement: 'bottom-start' }">
@@ -317,7 +357,7 @@
             indicator: 'bg-white border border-muted/50 shadow ',
             trigger: ' data-[state=active]:text-neutral-800 dark:data-[state=active]:text-violet-400/90 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary '
           }" />
-        </div>
+        </div> -->
 
 
       </div>
