@@ -69,7 +69,7 @@
               </div>
             </div>
             <div>
-              <UPopover :ui="{ content: 'p-0 w-80 rounded-2xl mr-2', }"
+              <UPopover :ui="{ content: 'p-0 w-80 rounded-2xl mr-2 z-50', }"
                 :content="{ side: 'bottom', sideOffset: 8, collisionPadding: 8, align: 'start' }"
                 class="pointer-events-auto mr-4 sm:mt-1">
                 <UButton size="xl" color="neutral" variant="outline" icon="iconamoon:compare-duotone"
@@ -104,8 +104,9 @@
         <div
           class="flex sm:justify-center items-center overflow-x-scroll md:overflow-hidden my-3 h-fit sm:p-1 sm:ring ring-muted/50 sm:mt-7 sm:my-0 gap-2 sm:bg-white sm:rounded-full">
 
-          <UPopover class=" cursor-pointer z-50" v-model:open="open2" :popper="{ placement: 'bottom-start' }"
-            :ui="{ content: 'rounded-3xl' }">
+          <UPopover class=" cursor-pointer z-50" v-model:open="open2"
+            :content="{ side: 'bottom', sideOffset: 8, collisionPadding: 8, align: 'start' }"
+            :ui="{ content: 'rounded-3xl z-50' }">
             <UButton :variant="isMobile ? 'soft' : 'soft'" color="neutral" :size="isMobile ? 'lg' : 'md'"
               class="rounded-full ring-muted h-fit ml-3 sm:ml-0"
               :icon="currentStartskog.value == 'naturskog' ? 'i-material-symbols-light-forest-rounded' : 'i-ph-farm'">
@@ -122,11 +123,10 @@
               </div>
               <div class="p-1 flex flex-col gap-1">
                 <div v-for="option in startskog" :key="option.value">
-                  <UButton @click="selectOption(option)" size="lg" color="white" variant="ghost" :label="option.label"
+                  <UButton @click="selectOption(option)" size="lg" color="neutral" variant="ghost" :label="option.label"
                     class="hover:bg-neutral-100 cursor-pointer text-neutral-400 w-full rounded-2xl" :class="{
                       ' bg-neutral-100 text-neutral-800': currentStartskog.value === option.value,
                     }" :icon="option.value === 'naturskog' ? 'i-material-symbols-light-forest-rounded' : 'i-ph-farm'">
-
                   </UButton>
                 </div>
               </div>
@@ -136,10 +136,9 @@
           <div class="w-full max-w-full">
             <div class="inline-flex flex-nowrap whitespace-nowrap gap-2">
               <UButton v-for="(it, idx) in timeItems" :key="'time-btn-' + idx" :disabled="it?.disabled"
-                :size="isMobile ? 'md' : 'sm'" color="neutral"
-                :variant="String(selectedTimeValue) === String(it?.value) ? 'solid' : 'outline'"
+                :size="isMobile ? 'md' : 'sm'" color="neutral" variant="outline"
                 class="rounded-full ring-muted/50 flex-none shrink-0" :class="String(selectedTimeValue) === String(it?.value)
-                  ? 'bg-white text-neutral-900 border border-muted/50 shadow'
+                  ? 'bg-neutral-900 text-white shadow hover:bg-neutral-900 '
                   : 'opacity-80 hover:opacity-100'" :label="String(it?.label ?? it?.value)"
                 :aria-pressed="String(selectedTimeValue) === String(it?.value)"
                 @click="!it?.disabled && (selectedTimeValue = String(it?.value))" />
@@ -161,7 +160,7 @@
 
 
         <div
-          class="absolute bottom-8 left-1/2 transform -translate-x-1/2 z-50 p-4 sm:p-0 space-y-2 sm:space-y-0 pointer-events-none sm:flex gap-2 items-center">
+          class="absolute bottom-8 left-1/2 transform -translate-x-1/2 p-4 sm:p-0 space-y-2 sm:space-y-0 pointer-events-none sm:flex gap-2 items-center">
 
 
           <UDrawer :direction="isMobile ? 'bottom' : 'left'" :inset="isMobile ? false : true"
@@ -175,7 +174,7 @@
             <template #body>
 
               <UButton
-                class="absolute top-1.5 sm:top-0 sm:-right-12 right-1.5 z-50 rounded-full transition-all ring-muted/50"
+                class="absolute top-1.5 sm:top-0 sm:-right-12 right-1.5 rounded-full transition-all ring-muted/50"
                 :class="infoDrawerOpen ? '' : 'hidden'" variant="outline" color="neutral"
                 @click="infoDrawerOpen = false" :icon="isMobile ? 'i-heroicons-x-mark' : 'i-heroicons-chevron-left'"
                 size="lg" />

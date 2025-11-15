@@ -68,9 +68,9 @@
 }
 
 /* app/assets/css/main.css */
-html {
+/* html {
   scrollbar-gutter: stable;
-}
+} */
 
 /* Nuxt UI’s scroll lock adds inline padding-right – just drop it */
 body[style*="padding-right"] {
