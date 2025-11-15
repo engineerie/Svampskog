@@ -18,9 +18,9 @@
       </div> -->
 
       <!-- Display viewport coordinates for marker placement -->
-      <div class="absolute top-90 right-0 m-2 p-1 bg-black bg-opacity-50 text-white text-xs z-50">
+      <!-- <div class="absolute top-90 right-0 m-2 p-1 bg-black bg-opacity-50 text-white text-xs z-50">
         X: {{ mousePos.x.toFixed(4) }}, Y: {{ mousePos.y.toFixed(4) }}
-      </div>
+      </div> -->
       <!-- Simple, predictable tooltip anchored in viewer pixels (no Popper/UPopover) -->
       <div class="absolute z-[60] pointer-events-none" v-show="naturvardTooltipOpen && naturvardTooltip"
         :style="naturvardTooltip ? { left: naturvardTooltip.left + 'px', top: naturvardTooltip.top + 'px' } : {}">
@@ -218,6 +218,10 @@ export default {
     //   default: "#f9f6f3",
     // },
     annotations: {
+      type: Array,
+      default: () => [],
+    },
+    preloadDziUrls: {
       type: Array,
       default: () => [],
     },
@@ -1646,6 +1650,10 @@ export default {
     const baseImage = ref(null);
     let baseLoadToken = 0;
     let overlayLoadToken = 0;
+    const preloadedDziUrls = new Set();
+    const queuedPreloadUrls = new Set();
+    const preloadQueue = [];
+    let isProcessingPreloadQueue = false;
 
     function removeTiledImage(item) {
       if (!item) return;
@@ -1688,6 +1696,83 @@ export default {
         item.removeHandler('tile-drawn', handler);
         callback();
       }, 300);
+    }
+
+    function enqueuePreloadUrls(urls = []) {
+      if (!Array.isArray(urls)) return;
+      const currentBase = props.dziUrl;
+      const currentOverlay = props.overlayDziUrl;
+      for (const url of urls) {
+        if (typeof url !== 'string' || !url) continue;
+        if (preloadedDziUrls.has(url)) continue;
+        if (queuedPreloadUrls.has(url)) continue;
+        if (url === currentBase || url === currentOverlay) continue;
+        queuedPreloadUrls.add(url);
+        preloadQueue.push(url);
+      }
+      processPreloadQueue();
+    }
+
+    function processPreloadQueue() {
+      if (isProcessingPreloadQueue) return;
+      if (!viewer.value) return;
+      if (!preloadQueue.length) return;
+      isProcessingPreloadQueue = true;
+      const runNext = () => {
+        if (!viewer.value) {
+          isProcessingPreloadQueue = false;
+          return;
+        }
+        const nextUrl = preloadQueue.shift();
+        if (!nextUrl) {
+          isProcessingPreloadQueue = false;
+          return;
+        }
+        queuedPreloadUrls.delete(nextUrl);
+        preloadDzi(nextUrl).finally(() => {
+          if (preloadQueue.length) {
+            runNext();
+          } else {
+            isProcessingPreloadQueue = false;
+          }
+        });
+      };
+      runNext();
+    }
+
+    function preloadDzi(url) {
+      return new Promise(resolve => {
+        if (!url || preloadedDziUrls.has(url)) {
+          resolve();
+          return;
+        }
+        if (!viewer.value) {
+          preloadQueue.unshift(url);
+          queuedPreloadUrls.add(url);
+          resolve();
+          return;
+        }
+        viewer.value.addTiledImage({
+          tileSource: url,
+          crossOriginPolicy: 'Anonymous',
+          ajaxWithCredentials: false,
+          opacity: 0,
+          preload: true,
+          index: viewer.value.world.getItemCount(),
+          success: event => {
+            const tempItem = event.item;
+            waitForTiledImageReady(tempItem, () => {
+              preloadedDziUrls.add(url);
+              removeTiledImage(tempItem);
+              resolve();
+            });
+          },
+          error: err => {
+            console.warn('[OSD] preload failed for', url, err);
+            resolve();
+          }
+        });
+      });
     }
     function refreshOverlayTile(tileSource) {
       if (!viewer.value) return;
@@ -1796,6 +1881,9 @@ export default {
       baseImage.value = null;
       baseLoadToken = 0;
       overlayLoadToken = 0;
+      preloadQueue.length = 0;
+      queuedPreloadUrls.clear();
+      isProcessingPreloadQueue = false;
     }
 
     function handleNaturvardClick(event) {
@@ -2245,6 +2333,7 @@ export default {
       viewer.value.addHandler('animation', animationHandler);
 
       transitionToNewTile(props.dziUrl);
+      processPreloadQueue();
     }
 
 
@@ -2353,6 +2442,15 @@ export default {
 
       }
     });
+
+    watch(
+      () => (props.preloadDziUrls || []).join('|'),
+      () => {
+        enqueuePreloadUrls(props.preloadDziUrls || []);
+        processPreloadQueue();
+      },
+      { immediate: true }
+    );
 
     watch(
       () => props.globalOpacity,
@@ -2627,9 +2725,11 @@ export default {
   width: 100%;
   height: 100%;
   background-color: #f9f6f3;
-  background-image: linear-gradient(#1a110e 1px, transparent 1px), linear-gradient(to right, #1a110e 1px, #0b0706 1px);
+  background-image: linear-gradient(#f2ece2 1px, transparent 1px), linear-gradient(to right, #f2ece2 1px, #f9f6f3 1px);
   background-size: 20px 20px;
+
 }
+
 
 :deep(.highlight) {
   outline: 2px solid white;

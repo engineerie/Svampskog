@@ -13,8 +13,10 @@
       duration: 0.5,
       delay: 0.2
     }">
-      <img :key="imageUrl" :src="imageUrl" alt="Vald skogsmiljö" class="h-full rounded-xl ring ring-muted/50"
-        width="805" height="505" />
+      <Transition name="fade" mode="out-in">
+        <img :key="imageUrl" :src="imageUrl" alt="Vald skogsmiljö" class="h-full rounded-xl ring ring-muted/50"
+          width="805" height="505" />
+      </Transition>
     </Motion>
     <USkeleton v-else class="h-20 flex items-center justify-center">Välj miljö för att visa bild</USkeleton>
     <!-- <div class="hidden">
@@ -84,7 +86,7 @@ const allImageUrls = computed(() => {
 <style>
 .fade-enter-active,
 .fade-leave-active {
-  transition: opacity 0.2s ease;
+  transition: opacity 0.3s ease;
 }
 
 .fade-enter-from,

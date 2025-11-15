@@ -1,6 +1,8 @@
 <template>
   <div class="relative flex flex-col w-full h-dvh">
-
+    <UButton v-if="isMobile" icon="i-heroicons-x-mark" variant="solid" color="error"
+      class="rounded-full h-fit absolute bottom-4 left-4 z-50" :ui="{ rounded: 'rounded-full' }" @click="emit('close')"
+      aria-label="Stäng modellvy" size="xl" />
     <DefineSettingsTemplate>
       <div class="space-y-0.5 p-3">
         <div class="grid grid-cols-2 gap-2 ">
@@ -21,7 +23,7 @@
         </div>
 
         <!-- <span class="text-sm tracking-wide text-neutral-400">Läge</span> -->
-        <UTabs v-if="compareEnabled" v-model="selectedCompareChoice" :items="compareOptions" size="xs"
+        <UTabs v-if="compareEnabled" v-model="selectedCompareChoice" :items="compareOptions" size="sm"
           placeholder="Välj" :clearable="true" class="w-full ring-muted -mb-2 mt-2" :ui="{
             root: 'min-w-max flex-shrink-0',
             list: 'flex-nowrap rounded-xl bg-muted/50 -mb-1.5 gap-2',
@@ -30,7 +32,7 @@
           }" />
 
       </div>
-      <USeparator :ui="{ border: 'border-muted/50' }" />
+      <!-- <USeparator :ui="{ border: 'border-muted/50' }" />
       <div class="p-3 flex flex-col gap-3">
 
         <div class="flex flex-wrap gap-1">
@@ -39,50 +41,113 @@
             class="cursor-pointer" :class="pinned[overlay.key] ? 'shadow-sm' : 'opacity-70 hover:opacity-100'"
             @click="toggleOverlayBadge(overlay.key)" />
         </div>
-      </div>
+      </div> -->
     </DefineSettingsTemplate>
     <div>
-      <div class="w-full absolute top-0 sm:flex items-center justify-center border-muted sm:p-1 z-50">
-        <div class="flex w-full sm:w-fit h-fit justify-center p-0 pb-0 sm:pb-0 items-center">
-          <div v-if="frameworkOptions.length"
-            class="grid sm:gap-4 gap-2 p-2 sm:py-1 sm:flex-row sm:items-center sm:justify-start h-fit w-full sm:w-fit"
-            :class="isFrameworkCompareMode ? 'grid-cols-2' : 'grid-cols-1'">
-            <USelect size="xl" :items="frameworkOptions" v-model="selectedFrameworkIndex"
-              :placeholder="currentFramework.label" append-to-body variant="outline" class="ring-muted  w-full shadow"
-              :ui="{ content: 'min-w-fit', viewport: 'text-center' }" />
-            <USelect v-if="isFrameworkCompareMode" size="xl" :items="frameworkOptions" v-model="selectedFrameworkIndex2"
-              :placeholder="currentFramework2.label" append-to-body variant="soft" class="ring-muted shadow " />
+      <div class="absolute top-0 z-50 w-full sm:flex">
+        <div class="sm:flex items-center border-muted sm:p-1 ">
+          <div class="flex w-full sm:w-fit h-fit justify-center pt-5 pb-0 sm:pb-0 items-center sm:items-start">
+            <div class="w-full">
 
+
+              <div v-if="frameworkOptions.length"
+                class="grid sm:gap-4 gap-2 pl-4 pr-2.5 sm:py-1 flex-row sm:items-center sm:justify-start h-fit w-full sm:w-fit"
+                :class="isFrameworkCompareMode ? 'grid-cols-2' : 'grid-cols-1'">
+                <USelect size="xl" :items="frameworkOptions" v-model="selectedFrameworkIndex"
+                  :placeholder="currentFramework.label" append-to-body variant="outline"
+                  class="ring-muted  w-full shadow rounded-full"
+                  :ui="{ content: 'min-w-fit rounded-3xl', viewport: 'text-center' }" />
+                <USelect v-if="isFrameworkCompareMode" size="xl" :items="frameworkOptions"
+                  v-model="selectedFrameworkIndex2" :placeholder="currentFramework2.label" append-to-body
+                  variant="outline" class="ring-muted  w-full shadow rounded-full"
+                  :ui="{ content: 'rounded-3xl min-w-fit' }" />
+              </div>
+              <div class="hidden sm:block pl-4 pt-4">
+                <UButton size="lg" color="neutral" variant="outline" class="ring-muted rounded-full shadow"
+                  :icon="infoDrawerOpen ? 'i-heroicons-chevron-left' : 'i-heroicons-chevron-right'"
+                  @click="infoDrawerOpen = !infoDrawerOpen" />
+              </div>
+            </div>
+            <div>
+              <UPopover :ui="{ content: 'p-0 w-80 rounded-2xl mr-2', }"
+                :content="{ side: 'bottom', sideOffset: 8, collisionPadding: 8, align: 'start' }"
+                class="pointer-events-auto mr-4 sm:mt-1">
+                <UButton size="xl" color="neutral" variant="outline" icon="iconamoon:compare-duotone"
+                  class="ring-muted/50 shadow  rounded-full" />
+                <template #content>
+                  <reuseSettingsTemplate />
+                </template>
+              </UPopover>
+              <!-- <UDrawer v-else :modal="false" :ui="{ content: 'p-0', body: 'p-0', container: 'p-0 gap-0' }">
+                <UButton :size="isMobile ? 'xl' : 'md'" color="neutral" variant="outline"
+                  :label="isMobile ? null : 'Display'" icon="iconamoon:compare-duotone"
+                  class="ring-muted rounded-full sm:rounded pointer-events-auto mr-4 shadow" />
+                <template #body>
+                  <reuseSettingsTemplate />
+                </template>
+              </UDrawer> -->
+            </div>
+
+
+            <!-- <USeparator v-if="!isMobile" orientation="vertical" class="mx-3 h-8" /> -->
           </div>
-          <UPopover v-if="!isMobile" :ui="{ content: 'p-0 w-80', }"
-            :content="{ side: 'bottom', sideOffset: 8, collisionPadding: 8, align: 'start' }"
-            class="pointer-events-auto">
-            <UButton size="xl" color="neutral" variant="outline" label="Jämför" icon="iconamoon:compare-duotone"
-              class="ring-muted/50" />
+
+
+          <div v-if="!isMobile" class="absolute top-3 right-3">
+            <UButton icon="i-heroicons-x-mark" variant="solid" color="error" class="rounded-full"
+              :ui="{ rounded: 'rounded-full' }" @click="emit('close')" aria-label="Stäng modellvy" />
+          </div>
+
+
+
+        </div>
+        <div
+          class="flex sm:justify-center items-center overflow-x-scroll md:overflow-hidden my-3 h-fit sm:p-1 sm:ring ring-muted/50 sm:mt-7 sm:my-0 gap-2 sm:bg-white sm:rounded-full">
+
+          <UPopover class=" cursor-pointer z-50" v-model:open="open2" :popper="{ placement: 'bottom-start' }"
+            :ui="{ content: 'rounded-3xl' }">
+            <UButton :variant="isMobile ? 'soft' : 'soft'" color="neutral" :size="isMobile ? 'lg' : 'md'"
+              class="rounded-full ring-muted h-fit ml-3 sm:ml-0"
+              :icon="currentStartskog.value == 'naturskog' ? 'i-material-symbols-light-forest-rounded' : 'i-ph-farm'">
+              <!-- <div v-if="!isMobile" class="flex items-center gap-2">
+
+                <span>{{ currentStartskog.label }}</span>
+                <UIcon v-if="currentStartskog && currentStartskog.value && !isMobile" name="i-heroicons-chevron-down"
+                  class="w-4 h-4 " />
+              </div> -->
+            </UButton>
             <template #content>
-              <reuseSettingsTemplate />
+              <div class="text-sm w-64 p-3 text-neutral-500 border-b border-neutral-200 ">
+                Har skogen varit kalavverkad tidigare?
+              </div>
+              <div class="p-1 flex flex-col gap-1">
+                <div v-for="option in startskog" :key="option.value">
+                  <UButton @click="selectOption(option)" size="lg" color="white" variant="ghost" :label="option.label"
+                    class="hover:bg-neutral-100 cursor-pointer text-neutral-400 w-full rounded-2xl" :class="{
+                      ' bg-neutral-100 text-neutral-800': currentStartskog.value === option.value,
+                    }" :icon="option.value === 'naturskog' ? 'i-material-symbols-light-forest-rounded' : 'i-ph-farm'">
+
+                  </UButton>
+                </div>
+              </div>
             </template>
           </UPopover>
-          <UDrawer v-else :modal="false" :ui="{ content: 'p-0', body: 'p-0', container: 'p-0 gap-0' }">
-            <UButton :size="isMobile ? 'xl' : 'md'" color="neutral" variant="outline"
-              :label="isMobile ? null : 'Display'" icon="i-heroicons-adjustments-horizontal"
-              class="ring-muted rounded-full sm:rounded pointer-events-auto" />
-            <template #body>
-              <reuseSettingsTemplate />
-            </template>
-          </UDrawer>
-          <UButton v-if="isMobile" icon="i-heroicons-x-mark" variant="soft" color="neutral"
-            class="rounded-full h-fit mr-2 ml-1" :ui="{ rounded: 'rounded-full' }" @click="emit('close')"
-            aria-label="Stäng modellvy" size="lg" />
-          <!-- <USeparator v-if="!isMobile" orientation="vertical" class="mx-3 h-8" /> -->
-        </div>
 
-
-        <div v-if="!isMobile" class="absolute top-3 right-3">
-          <UButton icon="i-heroicons-x-mark" variant="ghost" color="neutral" class="rounded-full"
-            :ui="{ rounded: 'rounded-full' }" @click="emit('close')" aria-label="Stäng modellvy" />
+          <div class="w-full max-w-full">
+            <div class="inline-flex flex-nowrap whitespace-nowrap gap-2">
+              <UButton v-for="(it, idx) in timeItems" :key="'time-btn-' + idx" :disabled="it?.disabled"
+                :size="isMobile ? 'md' : 'sm'" color="neutral"
+                :variant="String(selectedTimeValue) === String(it?.value) ? 'solid' : 'outline'"
+                class="rounded-full ring-muted/50 flex-none shrink-0" :class="String(selectedTimeValue) === String(it?.value)
+                  ? 'bg-white text-neutral-900 border border-muted/50 shadow'
+                  : 'opacity-80 hover:opacity-100'" :label="String(it?.label ?? it?.value)"
+                :aria-pressed="String(selectedTimeValue) === String(it?.value)"
+                @click="!it?.disabled && (selectedTimeValue = String(it?.value))" />
+            </div>
+          </div>
         </div>
       </div>
+
 
       <div class="flex justify-center">
         <!-- <div class="absolute top-3 left-3 flex flex-col gap-1 pointer-events-auto">
@@ -98,103 +163,66 @@
         <div
           class="absolute bottom-8 left-1/2 transform -translate-x-1/2 z-50 p-4 sm:p-0 space-y-2 sm:space-y-0 pointer-events-none sm:flex gap-2 items-center">
 
-          <div
-            class="flex sm:justify-center items-center overflow-x-scroll md:overflow-hidden my-1 sm:my-0 gap-4 px-3 pointer-events-auto">
 
-            <UPopover class="shrink-0 cursor-pointer h-fit z-50" v-model:open="open2"
-              :popper="{ placement: 'bottom-start' }">
-              <UButton :variant="isMobile ? 'soft' : 'soft'" color="neutral" size="lg" class="rounded-full ring-muted">
-                <div class="flex items-center gap-2">
-                  <UIcon
-                    :name="currentStartskog.value == 'naturskog' ? 'i-material-symbols-light-forest-rounded' : 'i-ph-farm'"
-                    class="w-5 h-5" />
-                  <span v-if="!isMobile">{{ currentStartskog.label }}</span>
-                  <UIcon v-if="currentStartskog && currentStartskog.value" name="i-heroicons-chevron-down"
-                    class="w-4 h-4 " />
-                </div>
-              </UButton>
-              <template #content>
-                <div class="text-sm w-64 p-3 text-neutral-500 border-b border-neutral-200 ">
-                  Har skogen varit kalavverkad tidigare?
-                </div>
-                <div class="p-1 flex flex-col gap-1">
-                  <div v-for="option in startskog" :key="option.value">
-                    <UButton @click="selectOption(option)" size="lg" color="white" variant="ghost" :label="option.label"
-                      class="hover:bg-neutral-100 cursor-pointer text-neutral-400 w-full" :class="{
-                        ' bg-neutral-100 text-neutral-800': currentStartskog.value === option.value,
-                      }"
-                      :icon="option.value === 'naturskog' ? 'i-material-symbols-light-forest-rounded' : 'i-ph-farm'">
-
-                    </UButton>
-                  </div>
-                </div>
-              </template>
-            </UPopover>
-
-            <UTabs v-model="selectedTimeValue" :items="timeItems" :ui="{
-              root: 'min-w-max flex-shrink-0',
-              list: 'flex-nowrap rounded-xl bg-transparent -mb-1.5 gap-2',
-              indicator: 'bg-white border border-muted/50 shadow ',
-              trigger: ' data-[state=active]:text-neutral-800 dark:data-[state=active]:text-violet-400/90 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary '
-            }" />
-          </div>
           <UDrawer :direction="isMobile ? 'bottom' : 'left'" :inset="isMobile ? false : true"
             :dismissible="isMobile ? true : false" :overlay="false" :handle="isMobile ? false : false" :modal="false"
             v-model:open="infoDrawerOpen" class="pointer-events-auto "
-            :ui="{ header: 'flex items-center justify-between', body: 'p-0 ', container: 'p-0 gap-0 ', content: 'sm:max-w-xs mx-auto ring-muted/50', footer: 'gap-0' }">
-            <UButton :size="isMobile ? 'xl' : 'xl'" :label="isMobile ? 'Information' : 'Information'" color="neutral"
-              icon="i-heroicons-chevron-up" class="ring-muted rounded-full shadow "
-              :variant="infoDrawerOpen ? 'subtle' : 'outline'" />
+            :ui="{ header: 'flex items-center justify-between', body: 'p-0 ', container: 'p-0 gap-0 ', content: 'sm:max-w-xs mx-auto ring-muted/50 rounded-3xl shadow sm:mt-18 h-fit overflow-visible', footer: 'gap-0' }">
+            <div class="sm:hidden">
+              <UButton :size="'xl'" :label="'Information'" color="neutral" :icon="'i-heroicons-chevron-up'"
+                class="ring-muted rounded-full shadow " :variant="infoDrawerOpen ? 'subtle' : 'outline'" />
+            </div>
             <template #body>
 
-              <UButton class="absolute top-1.5 right-1.5 z-50" variant="ghost" color="neutral"
-                @click="infoDrawerOpen = false" icon="i-heroicons-x-mark" />
+              <UButton
+                class="absolute top-1.5 sm:top-0 sm:-right-12 right-1.5 z-50 rounded-full transition-all ring-muted/50"
+                :class="infoDrawerOpen ? '' : 'hidden'" variant="outline" color="neutral"
+                @click="infoDrawerOpen = false" :icon="isMobile ? 'i-heroicons-x-mark' : 'i-heroicons-chevron-left'"
+                size="lg" />
               <div class="relative">
-                <UTabs v-model="infoActiveTab" :items="panelTabs" variant="link" size="lg" color="primary"
-                  :ui="{ root: 'gap-0', content: 'border-t border-muted/50' }">
+                <UTabs v-model="infoActiveTab" :items="panelTabs" variant="pill" size="sm" color="neutral"
+                  :ui="{ root: 'gap-0', content: '', list: 'w-fit m-2 p-0.5 px-1 bg-muted/50', indicator: 'shadow  bg-white active:text-neutral-900', trigger: 'data-[state=active]:text-neutral-900' }"
+                  class="">
 
                   <template #text>
                     <div class="sm:grid divide-y sm:divide-y-0 sm:divide-x divide-muted/70 transition-all relative"
-                      :class="[compareEnabled ? 'sm:grid-cols-2' : 'sm:grid-cols-1', activeOverlayContent ? 'sm:opacity-40' : '']">
+                      :class="[compareEnabled ? 'sm:grid-cols-1' : 'sm:grid-cols-1', activeOverlayContent ? 'sm:opacity-40' : '']">
                       <div class="absolute inset-0 bg-neutral-500 transition-all pointer-events-none"
                         :class="activeOverlayContent ? 'opacity-0 sm:opacity-40 sm:bg-neutral-500/50' : 'opacity-0'">
                       </div>
-                      <div v-if="!timelineCarouselEnabled" v-for="section in timelineSections" :key="section.key"
-                        class="p-3 sm:p-3 group" @click="handleTimelineClick">
-                        <div v-if="section.info" class="">
+                      <div v-if="!(isFrameworkCompareMode || isCompare)" v-for="section in timelineSections"
+                        :key="section.key" class="p-4 sm:p-5 group" @click="handleTimelineClick">
+                        <div v-if="section.info" class="space-y-4">
                           <div class="space-y-2 ">
-                            <UButton type="button" variant="ghost" color="neutral"
+                            <!-- <UButton type="button" variant="ghost" color="neutral"
                               class="flex w-full items-center font-semibold gap-2 tracking-wide text-neutral-500 transition"
                               @click.stop="toggleTimelineDetail(section.key, 'skog')">
                               <span>Utveckling i skogen</span>
                               <UIcon name="i-heroicons-chevron-down"
                                 class="h-4 w-4 text-neutral-400 transition-transform duration-200"
                                 :class="{ '-rotate-90': !isTimelineDetailOpen(section.key, 'skog') }" />
-                            </UButton>
-                            <p v-if="isTimelineDetailOpen(section.key, 'skog')"
-                              class="text-sm text-neutral-800 leading-relaxed p-2 mb-2 bg-muted rounded"
-                              v-html="makeClickableHtml(section.info.skog)"></p>
+                            </UButton> -->
+                            <p class="text-sm text-muted" v-html="makeClickableHtml(section.info.skog)"></p>
                           </div>
                           <div class="space-y-2">
-                            <UButton type="button" variant="ghost" color="neutral"
+                            <!-- <UButton type="button" variant="ghost" color="neutral"
                               class="flex w-full items-center gap-2 font-semibold  tracking-wide text-neutral-500 transition"
                               @click.stop="toggleTimelineDetail(section.key, 'svamp')">
                               <span>Påverkan på mykorrhizasvampar</span>
                               <UIcon name="i-heroicons-chevron-down"
                                 class="h-4 w-4 text-neutral-400 transition-transform duration-200"
                                 :class="{ '-rotate-90': !isTimelineDetailOpen(section.key, 'svamp') }" />
-                            </UButton>
-                            <span v-if="isTimelineDetailOpen(section.key, 'svamp')"
-                              class="block text-sm text-neutral-800 leading-relaxed p-2 bg-muted rounded"
-                              v-html="makeClickableHtml(section.info.svamp)"></span>
+                            </UButton> -->
+                            <span class="text-sm" v-html="makeClickableHtml(section.info.svamp)"></span>
                           </div>
                         </div>
                         <div v-else class="text-sm text-neutral-400">
                           {{ section.emptyMessage || timelineEmptyMessage }}
                         </div>
                       </div>
-                      <div v-if="timelineCarouselEnabled" class="sm:hidden ">
-                        <UCarousel :items="timelineSections" :ui="{ item: 'basis-12/13', viewport: 'p-3' }">
+                      <div v-else class="w-full">
+                        <UCarousel :dots="isMobile ? false : true" :items="timelineSections" class="max-w-4xl mx-auto"
+                          :ui="{ item: 'basis-12/13', viewport: 'p-3 sm:mb-12' }">
                           <template #default="{ item: section }">
                             <UCard :ui="{ body: 'p-4 space-y-4' }" class="" variant="soft" @click="handleTimelineClick">
                               <div class="flex items-center justify-between gap-3">
@@ -204,32 +232,28 @@
                                 <UBadge :label="section.right" class="ring-muted/50 py-1" variant="outline"
                                   color="neutral" />
                               </div>
-                              <div v-if="section.info">
-                                <div class="space-y-2">
-                                  <UButton type="button" variant="ghost" color="neutral"
+                              <div v-if="section.info" class="space-y-2">
+                                <div>
+                                  <!-- <UButton type="button" variant="ghost" color="neutral"
                                     class="-mx-2 flex w-full items-center font-semibold gap-2 tracking-wide text-neutral-500 transition"
                                     @click.stop="toggleTimelineDetail(section.key, 'skog')">
                                     <span>Utveckling i skogen</span>
                                     <UIcon name="i-heroicons-chevron-down"
                                       class="h-4 w-4 text-neutral-400 transition-transform duration-200"
                                       :class="{ '-rotate-90': !isTimelineDetailOpen(section.key, 'skog') }" />
-                                  </UButton>
-                                  <p v-if="isTimelineDetailOpen(section.key, 'skog')"
-                                    class="text-sm text-neutral-800 leading-relaxed mb-2 bg-muted rounded"
-                                    v-html="makeClickableHtml(section.info.skog)"></p>
+                                  </UButton> -->
+                                  <p class="text-sm text-muted" v-html="makeClickableHtml(section.info.skog)"></p>
                                 </div>
                                 <div class="space-y-2">
-                                  <UButton type="button" variant="ghost" color="neutral"
+                                  <!-- <UButton type="button" variant="ghost" color="neutral"
                                     class="-mx-2 flex w-full items-center gap-2 font-semibold tracking-wide text-neutral-500 transition"
                                     @click.stop="toggleTimelineDetail(section.key, 'svamp')">
                                     <span>Påverkan på mykorrhizasvampar</span>
                                     <UIcon name="i-heroicons-chevron-down"
                                       class="h-4 w-4 text-neutral-400 transition-transform duration-200"
                                       :class="{ '-rotate-90': !isTimelineDetailOpen(section.key, 'svamp') }" />
-                                  </UButton>
-                                  <span v-if="isTimelineDetailOpen(section.key, 'svamp')"
-                                    class="block text-sm text-neutral-800 leading-relaxed bg-muted rounded"
-                                    v-html="makeClickableHtml(section.info.svamp)"></span>
+                                  </UButton> -->
+                                  <span class="text-sm" v-html="makeClickableHtml(section.info.svamp)"></span>
                                 </div>
                               </div>
                               <div v-else class="text-sm text-neutral-400">
@@ -242,11 +266,23 @@
                     </div>
                   </template>
                   <template #diagram>
-                    <ForestryChartMain v-if="infoActiveTab === 'diagram'" ref="chartMainRef"
-                      v-model:selectedChart="persistedChartKey"
-                      :parentSelectedFrameworks="isFrameworkCompareMode ? [currentFramework.value, currentFramework2.value] : [currentFramework.value]"
-                      :currentTimeValue="currentTimeValue" :currentStartskog="currentStartskog.value" />
+                    <div class="sm:p-3 sm:pt-0">
 
+
+                      <ForestryChartMain v-if="infoActiveTab === 'diagram'" ref="chartMainRef"
+                        v-model:selectedChart="persistedChartKey"
+                        :parentSelectedFrameworks="isFrameworkCompareMode ? [currentFramework.value, currentFramework2.value] : [currentFramework.value]"
+                        :currentTimeValue="currentTimeValue" :currentStartskog="currentStartskog.value" />
+                    </div>
+                  </template>
+                  <template #markers>
+                    <div class="flex flex-wrap gap-1.5 sm:gap-2 p-2 sm:p-4">
+                      <UBadge v-for="overlay in overlayBadgeItems" :key="overlay.key" :label="overlay.label"
+                        :icon="overlay.icon" :color="pinned[overlay.key] ? 'primary' : 'neutral'"
+                        :variant="pinned[overlay.key] ? 'solid' : 'subtle'" class="cursor-pointer"
+                        :class="pinned[overlay.key] ? 'shadow-sm' : 'opacity-70 hover:opacity-100'"
+                        @click="toggleOverlayBadge(overlay.key)" />
+                    </div>
                   </template>
                 </UTabs>
               </div>
@@ -320,44 +356,6 @@
             </div> -->
 
         </div>
-        <!-- <div class="flex sm:justify-center items-center overflow-x-scroll md:overflow-hidden my-1 sm:my-0 gap-4 px-3 ">
-
-          <UPopover class="shrink-0 cursor-pointer h-fit z-50" v-model:open="open2"
-            :popper="{ placement: 'bottom-start' }">
-            <UButton :variant="isMobile ? 'soft' : 'soft'" color="neutral" size="lg" class="rounded-full ring-muted">
-              <div class="flex items-center gap-2">
-                <UIcon
-                  :name="currentStartskog.value == 'naturskog' ? 'i-material-symbols-light-forest-rounded' : 'i-ph-farm'"
-                  class="w-5 h-5" />
-                <span v-if="!isMobile">{{ currentStartskog.label }}</span>
-                <UIcon v-if="currentStartskog && currentStartskog.value" name="i-heroicons-chevron-down"
-                  class="w-4 h-4 " />
-              </div>
-            </UButton>
-            <template #content>
-              <div class="text-sm w-64 p-3 text-neutral-500 border-b border-neutral-200 ">
-                Har skogen varit kalavverkad tidigare?
-              </div>
-              <div class="p-1 flex flex-col gap-1">
-                <div v-for="option in startskog" :key="option.value">
-                  <UButton @click="selectOption(option)" size="lg" color="white" variant="ghost" :label="option.label"
-                    class="hover:bg-neutral-100 cursor-pointer text-neutral-400 w-full" :class="{
-                      ' bg-neutral-100 text-neutral-800': currentStartskog.value === option.value,
-                    }" :icon="option.value === 'naturskog' ? 'i-material-symbols-light-forest-rounded' : 'i-ph-farm'">
-
-                  </UButton>
-                </div>
-              </div>
-            </template>
-          </UPopover>
-
-          <UTabs v-model="selectedTimeValue" :items="timeItems" :ui="{
-            root: 'min-w-max flex-shrink-0',
-            list: 'flex-nowrap rounded-xl bg-transparent -mb-1.5 gap-2',
-            indicator: 'bg-white border border-muted/50 shadow ',
-            trigger: ' data-[state=active]:text-neutral-800 dark:data-[state=active]:text-violet-400/90 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary '
-          }" />
-        </div> -->
 
 
       </div>
@@ -370,11 +368,12 @@
 
 
       <div class="flex flex-1">
-        <div class="absolute top-3 left-3 z-50">
-          <div class="flex items-center gap-2">
-            <!-- <UIcon name="i-hugeicons-tree-06" class="size-5" /> -->
-            <USlider orientation="vertical" :min="0" :max="1" :step="0.01" v-model="globalOpacity"
-              class="accent-primary-500 h-28 m-3" />
+        <div class="absolute bottom-4 right-0 z-50 flex flex-col items-center">
+          <UIcon name="i-mingcute-tree-fill" class="size-7 mb-3 text-primary" />
+          <div class="flex items-center justify-center gap-2">
+
+            <USlider orientation="vertical" :min="0" :max="1" :step="0.01" v-model="globalOpacity" class="h-28 w-full "
+              color="primary" />
           </div>
           <UPopover>
             <div class="flex w-full mt-4">
@@ -407,7 +406,7 @@
         </div>
 
         <div v-if="pinnedOverlayBadges.length"
-          class="space-y-1.5 sm:p-4 p-2 pt-3 max-w-sm z-50 absolute top-0 right-0 transform-all text-end pointer-events-none">
+          class="space-y-1.5 sm:p-4 p-2 max-w-sm z-50 absolute top-28 right-0 transform-all text-end pointer-events-none">
           <template v-for="badge in pinnedOverlayBadges" :key="badge.key">
             <div class="pointer-events-auto flex flex-col sm:flex sm:flex-wrap gap-1 items-end">
               <UPopover :open-delay="500" :close-delay="300" mode="click" v-model:open="badgePopoverOpen[badge.key]"
@@ -638,7 +637,7 @@
               :currentFramework="currentFramework" :currentTime="timeLabelForDataFiltering"
               :currentStartskog="currentStartskog" :layoutMode="currentLayoutMode" ref="singleViewerRef"
               :frameworkLabel="currentFramework.label" :timeLabel="currentTimeLabel" :dziUrl="currentImagePath"
-              :overlayDziUrl="currentOverlayImagePath" :allowPan="true"
+              :overlayDziUrl="currentOverlayImagePath" :allowPan="true" :preload-dzi-urls="preloadUrlsFramework1"
               :annotations="annotationsVisible ? filteredAnnotations : []" :selectedAnnotation="selectedAnnotation"
               v-model:globalOpacity="globalOpacity" @annotationClicked="handleAnnotationClicked"
               class="w-full h-full ui-zoom-exempt " />
@@ -689,8 +688,8 @@
                 currentTime="innan" :currentStartskog="currentStartskog" :layoutMode="currentLayoutMode"
                 ref="beforeViewerRef" :comparisonMode="true" :frameworkLabel="currentFramework.label"
                 timeLabel="Före avverkning" :dziUrl="comparisonImagePath1" :overlayDziUrl="comparisonOverlayImagePath1"
-                :allowPan="true" @opened="onViewerOpened('before')" @activated="activeViewer.valueOf = 'before'"
-                v-if="!opacitySyncEnabled" class="w-full h-full" />
+                :allowPan="true" :preload-dzi-urls="preloadUrlsFramework1" @opened="onViewerOpened('before')"
+                @activated="activeViewer.valueOf = 'before'" v-if="!opacitySyncEnabled" class="w-full h-full" />
               <OpenSeadragonViewer :naturvardsarter-visible="naturvardsarterVisible"
                 :retention-visible="retentionVisible" :kanteffekt-visible="kanteffektVisible"
                 :omkringliggande-skog-visible="omkringSkogVisible" :old-kanteffekt-visible="oldKanteffektVisible"
@@ -708,8 +707,9 @@
                 currentTime="innan" :currentStartskog="currentStartskog" :layoutMode="currentLayoutMode"
                 ref="beforeViewerRef" :comparisonMode="true" :frameworkLabel="currentFramework.label"
                 timeLabel="Före avverkning" :dziUrl="comparisonImagePath1" :overlayDziUrl="comparisonOverlayImagePath1"
-                :allowPan="true" @opened="onViewerOpened('before')" @activated="activeViewer.valueOf = 'before'" v-else
-                v-model:globalOpacity="globalOpacity" class="w-full h-full" />
+                :allowPan="true" :preload-dzi-urls="preloadUrlsFramework1" @opened="onViewerOpened('before')"
+                @activated="activeViewer.valueOf = 'before'" v-else v-model:globalOpacity="globalOpacity"
+                class="w-full h-full" />
             </template>
             <template #second>
               <OpenSeadragonViewer :naturvardsarter-visible="naturvardsarterVisible"
@@ -728,8 +728,8 @@
                 :layoutMode="currentLayoutMode" ref="afterViewerRef" :comparisonMode="true"
                 :frameworkLabel="currentFramework.label" :timeLabel="currentTimeLabel" :dziUrl="currentImagePath"
                 :overlayDziUrl="comparisonOverlayImagePath2" :allowPan="true" sliderPosition="right"
-                @opened="onViewerOpened('after')" @activated="activeViewer.valueOf = 'after'" v-if="!opacitySyncEnabled"
-                class="w-full h-full " />
+                :preload-dzi-urls="preloadUrlsFramework1" @opened="onViewerOpened('after')"
+                @activated="activeViewer.valueOf = 'after'" v-if="!opacitySyncEnabled" class="w-full h-full " />
               <OpenSeadragonViewer :naturvardsarter-visible="naturvardsarterVisible"
                 :retention-visible="retentionVisible" :kanteffekt-visible="kanteffektVisible"
                 :omkringliggande-skog-visible="omkringSkogVisible" :old-kanteffekt-visible="oldKanteffektVisible"
@@ -746,8 +746,9 @@
                 :layoutMode="currentLayoutMode" ref="afterViewerRef" :comparisonMode="true"
                 :frameworkLabel="currentFramework.label" :timeLabel="currentTimeLabel" :dziUrl="currentImagePath"
                 :overlayDziUrl="comparisonOverlayImagePath2" :allowPan="true" sliderPosition="right"
-                @opened="onViewerOpened('after')" @activated="activeViewer.valueOf = 'after'" v-else
-                v-model:globalOpacity="globalOpacity" class="w-full h-full  " />
+                :preload-dzi-urls="preloadUrlsFramework1" @opened="onViewerOpened('after')"
+                @activated="activeViewer.valueOf = 'after'" v-else v-model:globalOpacity="globalOpacity"
+                class="w-full h-full  " />
             </template>
           </CustomImageComparisonSlider>
 
@@ -773,7 +774,8 @@
                 :layoutMode="currentLayoutMode" ref="framework1ViewerRef" :comparisonMode="true"
                 :frameworkLabel="currentFramework.label" :timeLabel="currentTimeLabel" :dziUrl="currentImagePath"
                 :overlayDziUrl="frameworkOverlayImagePath1" :allowPan="!isCompare && !isFrameworkCompareMode"
-                v-if="!opacitySyncEnabled" @viewportChanged="($event) => onViewportChanged('framework1', $event)"
+                :preload-dzi-urls="preloadUrlsFramework1" v-if="!opacitySyncEnabled"
+                @viewportChanged="($event) => onViewportChanged('framework1', $event)"
                 @opened="onViewerOpened('framework1')" @activated="activeViewer.valueOf = 'framework1'"
                 class="w-full h-full" />
               <OpenSeadragonViewer :naturvardsarter-visible="naturvardsarterVisible"
@@ -790,8 +792,8 @@
                 :currentTime="timeLabelForDataFiltering" :currentStartskog="currentStartskog"
                 :layoutMode="currentLayoutMode" ref="framework1ViewerRef" :comparisonMode="true"
                 :frameworkLabel="currentFramework.label" :timeLabel="currentTimeLabel" :dziUrl="currentImagePath"
-                :overlayDziUrl="frameworkOverlayImagePath1" :allowPan="!isCompare && !isFrameworkCompareMode" v-else
-                v-model:globalOpacity="globalOpacity"
+                :overlayDziUrl="frameworkOverlayImagePath1" :allowPan="!isCompare && !isFrameworkCompareMode"
+                :preload-dzi-urls="preloadUrlsFramework1" v-else v-model:globalOpacity="globalOpacity"
                 @viewportChanged="($event) => onViewportChanged('framework1', $event)"
                 @opened="onViewerOpened('framework1')" @activated="activeViewer.valueOf = 'framework1'"
                 class="w-full h-full" />
@@ -814,8 +816,8 @@
                 :layoutMode="currentLayoutMode" ref="framework2ViewerRef" :comparisonMode="true"
                 :frameworkLabel="currentFramework2.label" :timeLabel="currentTimeLabel" :dziUrl="currentImagePath2"
                 :overlayDziUrl="frameworkOverlayImagePath2" v-if="!opacitySyncEnabled"
-                :allowPan="!isCompare && !isFrameworkCompareMode" sliderPosition="right"
-                @viewportChanged="($event) => onViewportChanged('framework2', $event)"
+                :preload-dzi-urls="preloadUrlsFramework2" :allowPan="!isCompare && !isFrameworkCompareMode"
+                sliderPosition="right" @viewportChanged="($event) => onViewportChanged('framework2', $event)"
                 @opened="onViewerOpened('framework2')" @activated="activeViewer.valueOf = 'framework2'"
                 class="w-full h-full" />
               <OpenSeadragonViewer :naturvardsarter-visible="naturvardsarterVisible"
@@ -835,8 +837,8 @@
                 :layoutMode="currentLayoutMode" ref="framework2ViewerRef" :comparisonMode="true"
                 :frameworkLabel="currentFramework2.label" :timeLabel="currentTimeLabel" :dziUrl="currentImagePath2"
                 :overlayDziUrl="frameworkOverlayImagePath2" v-else v-model:globalOpacity="globalOpacity"
-                :allowPan="!isCompare && !isFrameworkCompareMode" sliderPosition="right"
-                @viewportChanged="($event) => onViewportChanged('framework2', $event)"
+                :preload-dzi-urls="preloadUrlsFramework2" :allowPan="!isCompare && !isFrameworkCompareMode"
+                sliderPosition="right" @viewportChanged="($event) => onViewportChanged('framework2', $event)"
                 @opened="onViewerOpened('framework2')" @activated="activeViewer.valueOf = 'framework2'"
                 class="w-full h-full" />
 
@@ -1195,6 +1197,12 @@ const panelTabs = [
     icon: 'i-heroicons-book-open',
     slot: 'text',
     value: 'text',
+  },
+  {
+    label: 'Markörer',
+    icon: 'i-material-symbols-location-on',
+    slot: 'markers',
+    value: 'markers',
   },
   {
     label: 'Diagram',
@@ -1751,6 +1759,42 @@ const currentFramework2 = computed(() => {
   // This ensures that if selectedFrameworkIndex2 is out of bounds, we still get the first framework
   return frameworks[selectedFrameworkIndex2.value] || frameworks[0];
 });
+
+function timeLabelsForFrameworkValue(frameworkValue) {
+  if (!frameworkValue) return [];
+  const labels = ["före", "efter"];
+  if (frameworkValue === "skärmträd" && !isFrameworkCompareMode.value) {
+    labels.push("10");
+  }
+  labels.push("20", "50", "80");
+  return labels;
+}
+
+function buildPreloadUrlsForFramework(frameworkValue) {
+  if (!frameworkValue) return [];
+  const startskogVal = currentStartskog.value?.value;
+  if (!startskogVal) return [];
+  const fungiVisibility = showFungi.value ? "visa" : "dölj";
+  const labels = timeLabelsForFrameworkValue(frameworkValue);
+  const urls = [];
+  for (const timeLabel of labels) {
+    urls.push(buildDziUrl({
+      framework: frameworkValue,
+      timeLabel,
+      fungiVisibility,
+      treeVisibility: "dölj",
+      startskog: startskogVal,
+    }));
+  }
+  return Array.from(new Set(urls));
+}
+
+const preloadUrlsFramework1 = computed(() =>
+  buildPreloadUrlsForFramework(currentFramework.value?.value)
+);
+const preloadUrlsFramework2 = computed(() =>
+  buildPreloadUrlsForFramework(currentFramework2.value?.value)
+);
 
 watch([isFrameworkCompareMode, isCompare], ([frameworkCompare, compare]) => {
   if (!frameworkCompare || !compare) {

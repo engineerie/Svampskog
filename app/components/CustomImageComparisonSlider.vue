@@ -22,17 +22,17 @@
           <!-- <UBadge v-if="!isMobile" size="lg"
             class="backdrop-blur-xl bg-neutral-100/0 text-neutral-100 h-fit whitespace-nowrap mb-0.5">{{
               frameworkLabel }}</UBadge> -->
-          <UBadge size="lg" class="backdrop-blur-xl bg-neutral-950/50 text-neutral-100 h-fit whitespace-nowrap">{{
-            timeLabel }}</UBadge>
+          <!-- <UBadge size="lg" class="backdrop-blur-xl bg-neutral-950/50 text-neutral-100 h-fit whitespace-nowrap">{{
+            timeLabel }}</UBadge> -->
         </div>
 
-        <div class="h-full w-1.5 bg-neutral-100/90 backdrop-blur-md inset-shadow-sm inset-shadow-neutral-400"></div>
+        <div class="h-full w-1.5 bg-neutral-50/90 backdrop-blur-md inset-shadow-sm inset-shadow-neutral-300"></div>
         <div class="absolute top-14 left-3">
           <!-- <UBadge v-if="!isMobile" size="lg"
             class="backdrop-blur-xl bg-neutral-100/0 text-neutral-100 h-fit whitespace-nowrap mb-0.5">{{
               frameworkLabel2 }}</UBadge> -->
-          <UBadge size="lg" class="backdrop-blur-xl bg-neutral-950/50 text-neutral-100 h-fit whitespace-nowrap">{{
-            timeLabel2 }}</UBadge>
+          <!-- <UBadge size="lg" class="backdrop-blur-xl bg-neutral-950/50 text-neutral-100 h-fit whitespace-nowrap">{{
+            timeLabel2 }}</UBadge> -->
         </div>
       </div>
     </div>

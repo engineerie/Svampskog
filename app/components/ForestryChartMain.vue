@@ -26,8 +26,8 @@
             sideOffset: 8
           }" option-attribute="label" value-key="value" placeholder="Välj dataset"
           class="hover:cursor-pointer rounded-full" size="lg" variant="soft"
-          :ui="{ content: 'w-fit shrink-0', value: 'hidden sm:flex gap-0', base: 'min-h-8', item: 'gap-0' }"
-          :icon="selectedMatsvampIcon">
+          :ui="{ content: 'w-fit shrink-0', value: 'hidden', base: 'min-h-8', item: 'gap-0' }"
+          :icon="selectedMatsvampIcon" :aria-label="selectedMatsvampLabel">
           <template #item="{ item }">
             <div class="flex items-center gap-2">
               <UIcon v-if="item.icon" :name="item.icon" class="size-4" />
@@ -240,6 +240,10 @@ const matsvampChartArtkategori = computed(() => selectedMatsvampVariant.value ==
 
 const selectedMatsvampIcon = computed(() =>
   matsvampVariantOptions.find(opt => opt.value === selectedMatsvampVariant.value)?.icon
+)
+
+const selectedMatsvampLabel = computed(() =>
+  matsvampVariantOptions.find(opt => opt.value === selectedMatsvampVariant.value)?.label ?? 'Välj dataset'
 )
 
 const matsvampDescription = computed(() => {

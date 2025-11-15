@@ -138,15 +138,7 @@
                             </div>
                             <!-- <div class="space-y-6"> -->
 
-                            <div class="flex flex-col gap-1 min-w-0 max-w-full">
 
-
-                                <UCard :ui="{ body: 'p-1 sm:p-1' }" class="ring-muted/50 h-full">
-                                    <ForestryChartMain :parentSelectedFrameworks=[selectedMethod.id]
-                                        :currentStartskog="selectedStartskogTab"
-                                        :currentTimeValue="currentTimelineTime" />
-                                </UCard>
-                            </div>
                             <!-- <UPageCard title="Tailwind CSS"
                                     description="Nuxt UI integrates with latest Tailwind CSS v4, bringing significant improvements."
                                     icon="i-material-symbols:interactive-space" /> -->
@@ -205,37 +197,47 @@
 
                             </div>
 
+                            <div class="flex flex-col gap-1 min-w-0 max-w-full">
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-                        </div>
-                        <UModal v-model:open="modelOpen" fullscreen>
-                            <template #content>
-                                <Model @close="modelOpen = false" />
-                            </template>
-                        </UModal>
-                        <div class="grid sm:grid-cols-2">
-                            <div></div>
-                            <UPageCard title="Öppna modell i helskärm"
-                                description="I helskärm går det att jämföra olika metoder och visa fler lager med mer information. "
-                                icon="i-material-symbols:interactive-space" class="mt-6 sm:mt-12 cursor-pointer"
-                                variant="soft" orientation="horizontal" @click="openModelWithCurrentFramework">
-                                <div class="flex justify-end">
-                                    <NuxtImg src="images/modell.png" height="150" />
+                                <UCard :ui="{ body: 'p-1 sm:p-1' }" class="ring-muted/50 h-fit">
+                                    <ForestryChartMain :parentSelectedFrameworks=[selectedMethod.id]
+                                        :currentStartskog="selectedStartskogTab"
+                                        :currentTimeValue="currentTimelineTime" />
+                                </UCard>
+                                <UModal v-model:open="modelOpen" fullscreen>
+                                    <template #content>
+                                        <Model @close="modelOpen = false" />
+                                    </template>
+                                </UModal>
+                                <div class="grid sm:grid-cols-1">
+                                    <div></div>
+                                    <UPageCard title="Öppna modell i helskärm"
+                                        description="I helskärm går det att jämföra olika metoder och visa fler lager med mer information. "
+                                        icon="i-material-symbols:interactive-space" class="mt-6 cursor-pointer"
+                                        color="primary" variant="soft" orientation="vertical"
+                                        @click="openModelWithCurrentFramework">
+                                        <div class="flex justify-center">
+                                            <NuxtImg src="images/modell.png" height="150" />
+                                        </div>
+                                    </UPageCard>
                                 </div>
-                            </UPageCard>
+                            </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
                         </div>
+
 
 
 
