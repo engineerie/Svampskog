@@ -35,7 +35,7 @@
     <div class="flex flex-col min-h-screen ">
       <UContainer class="w-full px-0 ">
         <transition name="fade" mode="out-in">
-          <NormalView class="block sm:border border-muted/50 bg-white sm:rounded sm:shadow"
+          <NormalView class="block sm:border border-muted/50 bg-white sm:rounded-xl sm:shadow mb-4"
             :active-view="activeKnowledgeView" @enlarge="handleFullScreen" @close-view="handleCloseFullScreen" />
         </transition>
       </UContainer>

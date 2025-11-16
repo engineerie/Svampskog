@@ -715,7 +715,7 @@ const Icon = resolveComponent('Icon')
 const desktopColumns = [
   {
     accessorKey: "images",
-    header: "Bild",
+    header: "",
     sortable: false,
     cell: ({ row }) => {
       const images = row.getValue("images") || [];
@@ -743,14 +743,14 @@ const desktopColumns = [
         UButton,
         {
           color: 'neutral',
-          variant: 'ghost',
+          variant: 'outline',
           label: 'Namn',
           icon: isSorted
             ? (isSorted === 'asc'
               ? 'i-lucide-arrow-up-narrow-wide'
               : 'i-lucide-arrow-down-wide-narrow')
             : 'i-lucide-arrow-up-down',
-          class: '-mx-2.5',
+          class: '-mx-2.5 ring-muted/50 shadow',
           onClick: () => column.toggleSorting(isSorted === 'asc')
         }
       );
@@ -776,14 +776,14 @@ const desktopColumns = [
         UButton,
         {
           color: 'neutral',
-          variant: 'ghost',
+          variant: 'outline',
           label: 'Latinskt namn',
           icon: isSorted
             ? (isSorted === 'asc'
               ? 'i-lucide-arrow-up-narrow-wide'
               : 'i-lucide-arrow-down-wide-narrow')
             : 'i-lucide-arrow-up-down',
-          class: '-mx-2.5',
+          class: '-mx-2.5 ring-muted/50 shadow',
           onClick: () => column.toggleSorting(isSorted === 'asc')
         }
       );
@@ -800,7 +800,7 @@ const desktopColumns = [
       content: { align: 'start' },
       ui: { content: 'w-48' }
     }, {
-      default: () => h(UButton, { label: 'Grupp', variant: 'ghost', color: 'neutral', icon: "i-lucide-list-filter" })
+      default: () => h(UButton, { label: 'Grupp', variant: 'outline', color: 'neutral', icon: "i-lucide-list-filter", class: '-mx-2.5 ring-muted/50 shadow', })
     }),
     filterFn: (row, columnId, filterValue) => {
       if (!filterValue || filterValue.length === 0) return true;
@@ -836,9 +836,10 @@ const desktopColumns = [
           default: () =>
             h(UButton, {
               label: "Mark",
-              variant: "ghost",
+              variant: "outline",
               color: "neutral",
-              icon: "i-lucide-list-filter"
+              icon: "i-lucide-list-filter",
+              class: '-mx-2.5 ring-muted/50 shadow',
             })
         }
       ),
@@ -868,7 +869,7 @@ const desktopColumns = [
       content: { align: 'start' },
       ui: { content: 'w-48' }
     }, {
-      default: () => h(UButton, { label: 'Matsvamp', variant: 'ghost', color: 'neutral', icon: "i-lucide-list-filter" })
+      default: () => h(UButton, { label: 'Matsvamp', variant: 'outline', color: 'neutral', icon: "i-lucide-list-filter", class: '-mx-2.5 ring-muted/50 shadow', })
     }),
     filterFn: (row, columnId, filterValue) => {
       if (!filterValue || filterValue.length === 0) return true;
@@ -902,7 +903,7 @@ const desktopColumns = [
       content: { align: 'start' },
       ui: { content: 'w-48' }
     }, {
-      default: () => h(UButton, { label: 'Status', variant: 'ghost', color: 'neutral', icon: "i-lucide-list-filter" })
+      default: () => h(UButton, { label: 'Status', variant: 'outline', color: 'neutral', icon: "i-lucide-list-filter", class: '-mx-2.5 ring-muted/50 shadow', })
     }),
     filterFn: (row, columnId, filterValue) => {
       if (!filterValue || filterValue.length === 0) return true;
@@ -948,14 +949,14 @@ const desktopColumns = [
         UButton,
         {
           color: 'neutral',
-          variant: 'ghost',
+          variant: 'outline',
           label: props.obsLabel,
           icon: isSorted
             ? (isSorted === 'asc'
               ? 'i-lucide-arrow-up-narrow-wide'
               : 'i-lucide-arrow-down-wide-narrow')
             : 'i-lucide-arrow-up-down',
-          class: '-mx-2.5',
+          class: '-mx-2.5 ring-muted/50 shadow',
           onClick: () => column.toggleSorting(isSorted === 'asc')
         }
       );
@@ -1077,7 +1078,7 @@ const columns = computed(() =>
 const tableUi = computed(() => ({
   thead: useMobileLayout.value
     ? 'hidden'
-    : 'hidden md:table-header-group bg-neutral-50 dark:bg-neutral-800/40',
+    : 'hidden md:table-header-group',
   tbody: useMobileLayout.value
     ? 'divide-none'
     : 'divide-none md:divide-dotted',

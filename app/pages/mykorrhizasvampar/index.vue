@@ -137,7 +137,7 @@ function bentoImages(item: CarouselItem) {
             }">
               <NuxtImg src="/images/svampindex/Cortinarius sanguineus-179-.jpg" width="300" height="300" format="webp"
                 alt="Illustration"
-                class="size-18 sm:size-24 rounded-xl ring ring-muted/50 inline-flex mb-12 lg:mb-18 h-fit shadow-xl" />
+                class="size-18 sm:size-24 rounded-lg ring ring-muted/50 inline-flex mb-12 lg:mb-18 h-fit shadow-xl" />
             </Motion>
             <Motion :initial="{
               scale: 0.5,
@@ -151,9 +151,9 @@ function bentoImages(item: CarouselItem) {
               duration: 0.2,
               delay: 0.3
             }" class="-mx-4 z-50">
-              <NuxtImg src="/images/svampgrid/Cantharellus cibarius-3.jpg" width="300" height="300" format="webp"
+              <NuxtImg src="/images/svampgrid/Tricholoma matsutake-166-6276.jpg" width="300" height="300" format="webp"
                 alt="Illustration"
-                class="size-28 sm:size-40 rounded-xl ring ring-muted/50 inline-flex mb-12 lg:mb-18 h-fit  z-50 shadow-xl" />
+                class="size-28 sm:size-40 rounded-lg ring ring-muted/50 inline-flex mb-12 lg:mb-18 h-fit  z-50 shadow-xl" />
             </Motion>
             <Motion :initial="{
               scale: 0.5,
@@ -169,7 +169,7 @@ function bentoImages(item: CarouselItem) {
             }">
               <NuxtImg src="/images/svampgrid/Gomphus clavatus-1.jpg" width="300" height="300" format="webp"
                 alt="Illustration"
-                class="size-20 sm:size-28 rounded-xl ring ring-muted/50 inline-flex mb-12 lg:mb-18 h-fit shadow-xl" />
+                class="size-20 sm:size-28 rounded-lg ring ring-muted/50 inline-flex mb-12 lg:mb-18 h-fit shadow-xl" />
             </Motion>
           </div>
 
@@ -320,7 +320,7 @@ function bentoImages(item: CarouselItem) {
       </UContainer>
     </div> -->
 
-    <SCarousel :section="page.carousel" />
+    <!-- <SCarousel :section="page.carousel" /> -->
 
 
   </UPage>

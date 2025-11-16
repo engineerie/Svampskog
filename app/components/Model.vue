@@ -55,12 +55,12 @@
                 :class="isFrameworkCompareMode ? 'grid-cols-2' : 'grid-cols-1'">
                 <USelect size="xl" :items="frameworkOptions" v-model="selectedFrameworkIndex"
                   :placeholder="currentFramework.label" append-to-body variant="outline"
-                  class="ring-muted  w-full shadow rounded-full"
-                  :ui="{ content: 'min-w-fit rounded-3xl', viewport: 'text-center' }" />
+                  class="ring-muted  w-full shadow rounded-full "
+                  :ui="{ content: 'min-w-fit rounded-xl z-50', viewport: 'text-center' }" />
                 <USelect v-if="isFrameworkCompareMode" size="xl" :items="frameworkOptions"
                   v-model="selectedFrameworkIndex2" :placeholder="currentFramework2.label" append-to-body
-                  variant="outline" class="ring-muted  w-full shadow rounded-full"
-                  :ui="{ content: 'rounded-3xl min-w-fit' }" />
+                  variant="outline" class="ring-muted  w-full shadow rounded-full "
+                  :ui="{ content: 'rounded-xl min-w-fit z-50' }" />
               </div>
               <div class="hidden sm:block pl-4 pt-4">
                 <UButton size="lg" color="neutral" variant="outline" class="ring-muted rounded-full shadow"
@@ -69,7 +69,7 @@
               </div>
             </div>
             <div>
-              <UPopover :ui="{ content: 'p-0 w-80 rounded-2xl mr-2 z-50', }"
+              <UPopover :ui="{ content: 'p-0 w-80 rounded-lg mr-2 z-50', }"
                 :content="{ side: 'bottom', sideOffset: 8, collisionPadding: 8, align: 'start' }"
                 class="pointer-events-auto mr-4 sm:mt-1">
                 <UButton size="xl" color="neutral" variant="outline" icon="iconamoon:compare-duotone"
@@ -102,11 +102,11 @@
 
         </div>
         <div
-          class="flex sm:justify-center items-center overflow-x-scroll md:overflow-hidden my-3 h-fit sm:p-1 sm:ring ring-muted/50 sm:mt-7 sm:my-0 gap-2 sm:bg-white sm:rounded-full">
+          class="flex sm:justify-center items-center overflow-x-scroll md:overflow-hidden my-3 h-fit sm:mt-8 sm:my-0 gap-2 ">
 
           <UPopover class=" cursor-pointer z-50" v-model:open="open2"
             :content="{ side: 'bottom', sideOffset: 8, collisionPadding: 8, align: 'start' }"
-            :ui="{ content: 'rounded-3xl z-50' }">
+            :ui="{ content: 'rounded-xl z-50' }">
             <UButton :variant="isMobile ? 'soft' : 'soft'" color="neutral" :size="isMobile ? 'lg' : 'md'"
               class="rounded-full ring-muted h-fit ml-3 sm:ml-0"
               :icon="currentStartskog.value == 'naturskog' ? 'i-material-symbols-light-forest-rounded' : 'i-ph-farm'">
@@ -124,7 +124,7 @@
               <div class="p-1 flex flex-col gap-1">
                 <div v-for="option in startskog" :key="option.value">
                   <UButton @click="selectOption(option)" size="lg" color="neutral" variant="ghost" :label="option.label"
-                    class="hover:bg-neutral-100 cursor-pointer text-neutral-400 w-full rounded-2xl" :class="{
+                    class="hover:bg-neutral-100 cursor-pointer text-neutral-400 w-full rounded-lg" :class="{
                       ' bg-neutral-100 text-neutral-800': currentStartskog.value === option.value,
                     }" :icon="option.value === 'naturskog' ? 'i-material-symbols-light-forest-rounded' : 'i-ph-farm'">
                   </UButton>
@@ -136,10 +136,11 @@
           <div class="w-full max-w-full">
             <div class="inline-flex flex-nowrap whitespace-nowrap gap-2">
               <UButton v-for="(it, idx) in timeItems" :key="'time-btn-' + idx" :disabled="it?.disabled"
-                :size="isMobile ? 'md' : 'sm'" color="neutral" variant="outline"
-                class="rounded-full ring-muted/50 flex-none shrink-0" :class="String(selectedTimeValue) === String(it?.value)
+                :size="isMobile ? 'md' : 'md'" color="neutral" variant="outline"
+                class="rounded-full ring-muted/50 flex-none shrink-0 disabled:bg-neutral-900 disabled:text-white"
+                :class="String(selectedTimeValue) === String(it?.value)
                   ? 'bg-neutral-900 text-white shadow hover:bg-neutral-900 '
-                  : 'opacity-80 hover:opacity-100'" :label="String(it?.label ?? it?.value)"
+                  : 'opacity-100 hover:opacity-100'" :label="String(it?.label ?? it?.value)"
                 :aria-pressed="String(selectedTimeValue) === String(it?.value)"
                 @click="!it?.disabled && (selectedTimeValue = String(it?.value))" />
             </div>
@@ -160,21 +161,21 @@
 
 
         <div
-          class="absolute bottom-8 left-1/2 transform -translate-x-1/2 p-4 sm:p-0 space-y-2 sm:space-y-0 pointer-events-none sm:flex gap-2 items-center">
+          class="absolute bottom-8 left-1/2 transform -translate-x-1/2 p-4 sm:p-0 space-y-2 sm:space-y-0 pointer-events-none sm:flex gap-2 items-center z-40">
 
 
           <UDrawer :direction="isMobile ? 'bottom' : 'left'" :inset="isMobile ? false : true"
-            :dismissible="isMobile ? true : false" :overlay="false" :handle="isMobile ? false : false" :modal="false"
+            :dismissible="isMobile ? false : false" :overlay="false" :handle="isMobile ? false : false" :modal="false"
             v-model:open="infoDrawerOpen" class="pointer-events-auto "
-            :ui="{ header: 'flex items-center justify-between', body: 'p-0 ', container: 'p-0 gap-0 ', content: 'sm:max-w-xs mx-auto ring-muted/50 rounded-3xl shadow sm:mt-18 h-fit overflow-visible', footer: 'gap-0' }">
-            <div class="sm:hidden">
+            :ui="{ header: 'flex items-center justify-between', body: 'p-0 ', container: 'p-0 gap-0 ', content: 'sm:max-w-xs sm:ring-muted/50 rounded-t-xl sm:rounded-xl sm:shadow sm:mt-18 sm:h-fit sm:overflow-visible', footer: 'gap-0' }">
+            <div class="sm:hidden z-50">
               <UButton :size="'xl'" :label="'Information'" color="neutral" :icon="'i-heroicons-chevron-up'"
-                class="ring-muted rounded-full shadow " :variant="infoDrawerOpen ? 'subtle' : 'outline'" />
+                class="ring-muted rounded-full shadow z-50" :variant="infoDrawerOpen ? 'subtle' : 'outline'" />
             </div>
             <template #body>
 
               <UButton
-                class="absolute top-1.5 sm:top-0 sm:-right-12 right-1.5 rounded-full transition-all ring-muted/50"
+                class="absolute top-1.5 sm:top-0 sm:-right-12 right-1.5 rounded-full transition-all ring-muted/50 pointer-events-auto z-50"
                 :class="infoDrawerOpen ? '' : 'hidden'" variant="outline" color="neutral"
                 @click="infoDrawerOpen = false" :icon="isMobile ? 'i-heroicons-x-mark' : 'i-heroicons-chevron-left'"
                 size="lg" />
@@ -185,10 +186,10 @@
 
                   <template #text>
                     <div class="sm:grid divide-y sm:divide-y-0 sm:divide-x divide-muted/70 transition-all relative"
-                      :class="[compareEnabled ? 'sm:grid-cols-1' : 'sm:grid-cols-1', activeOverlayContent ? 'sm:opacity-40' : '']">
-                      <div class="absolute inset-0 bg-neutral-500 transition-all pointer-events-none"
-                        :class="activeOverlayContent ? 'opacity-0 sm:opacity-40 sm:bg-neutral-500/50' : 'opacity-0'">
-                      </div>
+                      :class="[compareEnabled ? 'sm:grid-cols-1' : 'sm:grid-cols-1',]">
+                      <!-- <div class="absolute inset-0 bg-neutral-500 transition-all pointer-events-none"
+                        :class="activeOverlayContent ? 'opacity-0 sm:bg-neutral-500/50' : 'opacity-0'">
+                      </div> -->
                       <div v-if="!(isFrameworkCompareMode || isCompare)" v-for="section in timelineSections"
                         :key="section.key" class="p-4 sm:p-5 group" @click="handleTimelineClick">
                         <div v-if="section.info" class="space-y-4">
@@ -285,8 +286,9 @@
                   </template>
                 </UTabs>
               </div>
-              <UDrawer v-if="activeOverlayContent" v-model:open="overlayDrawerOpen" nested direction="bottom"
-                :modal="true" :overlay="false" :inset="isMobile ? false : true" :handle="isMobile ? true : false" :ui="{
+              <UDrawer v-if="activeOverlayContent" v-model:open="overlayDrawerOpen" :nested="isMobile ? true : false"
+                direction="bottom" :modal="true" :overlay="false" :inset="isMobile ? false : true"
+                :handle="isMobile ? true : false" :ui="{
                   container: 'p-0 gap-0',
                   content: 'sm:max-w-sm w-full mx-auto',
                   body: 'p-4 space-y-3'
@@ -551,9 +553,6 @@
                   <USwitch v-if="isTrakthygge || isLuckhuggning || isSkarmtrad"
                     :ui="{ root: 'flex-row-reverse justify-between' }" color="primary" v-model="kanteffektVisible"
                     label="Kanteffekt" />
-                  <USwitch v-if="isTrakthygge || isLuckhuggning || isSkarmtrad"
-                    :ui="{ root: 'flex-row-reverse justify-between' }" color="primary" v-model="omkringSkogVisible"
-                    label="Omkringliggande skog" />
                   <!-- Småplantor: show small white circles from public JSON -->
                   <USwitch :ui="{ root: 'flex-row-reverse justify-between' }" color="primary"
                     v-model="smaplantorVisible" label="Småplantor" />
@@ -628,9 +627,8 @@
               :seedTree-visible="seedTreeVisible" :rottacke-skarmtrad-visible="rottackeSkarmtradVisible"
               :rottacke-bladning-visible="rottackeBladningVisible" :retention-visible="retentionVisible"
               :old-kanteffekt-visible="oldKanteffektVisible" :kanteffekt-visible="kanteffektVisible"
-              :omkringliggande-skog-visible="omkringSkogVisible" :retention-points="filteredOverlayData.retention"
-              :seed-tree-points="filteredOverlayData.seedTree" :smaplantor-points="filteredOverlayData.smaplantor"
-              :hogstubbar-points="filteredOverlayData.hogstubbar"
+              :retention-points="filteredOverlayData.retention" :seed-tree-points="filteredOverlayData.seedTree"
+              :smaplantor-points="filteredOverlayData.smaplantor" :hogstubbar-points="filteredOverlayData.hogstubbar"
               :naturvardsarter-points="filteredOverlayData.naturvardsarter"
               :kanteffekt-features="filteredOverlayData.kanteffekt" :fullscreenLayout="true"
               :currentFramework="currentFramework" :currentTime="timeLabelForDataFiltering"
@@ -672,8 +670,7 @@
             <template #first>
               <OpenSeadragonViewer :naturvardsarter-visible="naturvardsarterVisible"
                 :retention-visible="retentionVisible" :kanteffekt-visible="kanteffektVisible"
-                :omkringliggande-skog-visible="omkringSkogVisible" :old-kanteffekt-visible="oldKanteffektVisible"
-                :rottacke-skarmtrad-visible="rottackeSkarmtradVisible"
+                :old-kanteffekt-visible="oldKanteffektVisible" :rottacke-skarmtrad-visible="rottackeSkarmtradVisible"
                 :rottacke-bladning-visible="rottackeBladningVisible" :seedTree-visible="seedTreeVisible"
                 :smaplantor-visible="smaplantorVisible" :hogstubbar-visible="hogstubbarVisible"
                 :tradplantor-visible="tradplantorVisible" :fullscreenLayout="true"
@@ -691,8 +688,7 @@
                 @activated="activeViewer.valueOf = 'before'" v-if="!opacitySyncEnabled" class="w-full h-full" />
               <OpenSeadragonViewer :naturvardsarter-visible="naturvardsarterVisible"
                 :retention-visible="retentionVisible" :kanteffekt-visible="kanteffektVisible"
-                :omkringliggande-skog-visible="omkringSkogVisible" :old-kanteffekt-visible="oldKanteffektVisible"
-                :rottacke-skarmtrad-visible="rottackeSkarmtradVisible"
+                :old-kanteffekt-visible="oldKanteffektVisible" :rottacke-skarmtrad-visible="rottackeSkarmtradVisible"
                 :rottacke-bladning-visible="rottackeBladningVisible" :seedTree-visible="seedTreeVisible"
                 :smaplantor-visible="smaplantorVisible" :hogstubbar-visible="hogstubbarVisible"
                 :tradplantor-visible="tradplantorVisible" :fullscreenLayout="true"
@@ -713,8 +709,7 @@
             <template #second>
               <OpenSeadragonViewer :naturvardsarter-visible="naturvardsarterVisible"
                 :retention-visible="retentionVisible" :kanteffekt-visible="kanteffektVisible"
-                :omkringliggande-skog-visible="omkringSkogVisible" :old-kanteffekt-visible="oldKanteffektVisible"
-                :rottacke-skarmtrad-visible="rottackeSkarmtradVisible"
+                :old-kanteffekt-visible="oldKanteffektVisible" :rottacke-skarmtrad-visible="rottackeSkarmtradVisible"
                 :rottacke-bladning-visible="rottackeBladningVisible" :seedTree-visible="seedTreeVisible"
                 :smaplantor-visible="smaplantorVisible" :hogstubbar-visible="hogstubbarVisible"
                 :tradplantor-visible="tradplantorVisible" :fullscreenLayout="true"
@@ -731,8 +726,7 @@
                 @activated="activeViewer.valueOf = 'after'" v-if="!opacitySyncEnabled" class="w-full h-full " />
               <OpenSeadragonViewer :naturvardsarter-visible="naturvardsarterVisible"
                 :retention-visible="retentionVisible" :kanteffekt-visible="kanteffektVisible"
-                :omkringliggande-skog-visible="omkringSkogVisible" :old-kanteffekt-visible="oldKanteffektVisible"
-                :rottacke-skarmtrad-visible="rottackeSkarmtradVisible"
+                :old-kanteffekt-visible="oldKanteffektVisible" :rottacke-skarmtrad-visible="rottackeSkarmtradVisible"
                 :rottacke-bladning-visible="rottackeBladningVisible" :seedTree-visible="seedTreeVisible"
                 :smaplantor-visible="smaplantorVisible" :hogstubbar-visible="hogstubbarVisible"
                 :tradplantor-visible="tradplantorVisible" :fullscreenLayout="true"
@@ -759,8 +753,7 @@
             <template #first>
               <OpenSeadragonViewer :naturvardsarter-visible="naturvardsarterVisible"
                 :retention-visible="retentionVisible" :kanteffekt-visible="kanteffektVisible"
-                :omkringliggande-skog-visible="omkringSkogVisible" :old-kanteffekt-visible="oldKanteffektVisible"
-                :rottacke-skarmtrad-visible="rottackeSkarmtradVisible"
+                :old-kanteffekt-visible="oldKanteffektVisible" :rottacke-skarmtrad-visible="rottackeSkarmtradVisible"
                 :rottacke-bladning-visible="rottackeBladningVisible" :seedTree-visible="seedTreeVisible"
                 :smaplantor-visible="smaplantorVisible" :hogstubbar-visible="hogstubbarVisible"
                 :tradplantor-visible="tradplantorVisible" :fullscreenLayout="true"
@@ -1108,7 +1101,6 @@ function fwToString(fw: any): string | null {
 const overlayToggleMap: Record<string, () => boolean> = {
   retention: () => !!retentionVisible.value,
   kanteffekt: () => !!kanteffektVisible.value,
-  omkringSkog: () => !!omkringSkogVisible.value,
   rottackeSkarmtrad: () => !!rottackeSkarmtradVisible.value,
   rottackeBladning: () => !!rottackeBladningVisible.value,
   seedTree: () => !!seedTreeVisible.value,
@@ -1132,20 +1124,7 @@ function isOverlayVisibleInContext(overlayKey: string, ctx: { framework: any, st
     if (!(fw === 'blädning' || fw === 'bladning')) return false;
     return time === 'efter' || time === '20 år' || time === '50 år' || time === '80 år';
   }
-  // 3) Special-case omkringSkog to follow kanteffekt availability
-  if (overlayKey === 'omkringSkog') {
-    try {
-      const avail = overlayRegistry.availabilityFor({
-        framework: fw,
-        startskog: fwToString(ctx.startskog),
-        time,
-      });
-      return !!(avail && (avail as any)['kanteffekt']);
-    } catch (_) {
-      return false;
-    }
-  }
-  // 4) Data must be available for the given context
+  // 3) Data must be available for the given context
   try {
     const avail = overlayRegistry.availabilityFor({
       framework: fw,
@@ -1280,7 +1259,6 @@ const devOverlayLabelsVisible = ref(false);
 const devNaturvardCounterVisible = ref(false);
 const retentionVisible = ref(false);
 const kanteffektVisible = ref(false);
-const omkringSkogVisible = ref(false);
 const oldKanteffektVisible = ref(false);
 const naturvardsarterVisible = ref(false);
 const rottackeSkarmtradVisible = ref(false);
@@ -1304,7 +1282,7 @@ function toggleTimeInfo2Visible() {
 }
 
 // Overlay tracking helpers
-const overlayKeys = ['retention', 'kanteffekt', 'omkringSkog', 'rottackeSkarmtrad', 'rottackeBladning', 'seedTree', 'smaplantor', 'hogstubbar', 'naturvardsarter', 'tradplantor'] as const;
+const overlayKeys = ['retention', 'kanteffekt', 'rottackeSkarmtrad', 'rottackeBladning', 'seedTree', 'smaplantor', 'hogstubbar', 'naturvardsarter', 'tradplantor'] as const;
 type OverlayKey = typeof overlayKeys[number];
 
 const overlayOrder = ref<OverlayKey[]>([]);
@@ -1330,6 +1308,7 @@ function toggleOverlay() {
 }
 
 const overlayDrawerOpen = ref(false);
+const overlayDrawerPending = ref(false);
 const activeOverlayKey = ref<string | null>(null);
 const textDrawerOpen = ref(false);
 const chartDrawerOpen = ref(false);
@@ -1467,7 +1446,6 @@ function goNextTime() { stepTabs(1) }
 
 // --- Clickable phrases in timeline text -> overlay toggles ---
 const CLICK_RULES = [
-  { re: /näraliggande skogar/gi, overlay: 'omkringSkog' },
   { re: /hänsynsträd/gi, overlay: 'retention' },
   { re: /evighetsträd/gi, overlay: 'retention' },
   { re: /hyggeskanterna/gi, overlay: 'kanteffekt' },
@@ -1918,12 +1896,6 @@ const overlayConfigs: Record<OverlayKey, OverlayContentConfig> = {
     condition: () => kanteffektVisible.value && (isTrakthygge.value || isLuckhuggning.value || isSkarmtrad.value),
     close: () => { kanteffektVisible.value = false },
   },
-  omkringSkog: {
-    title: 'Näraliggande skog',
-    description: 'Vanliga arter sprids in med sporer från närheten. Sporer sprids bara korta sträckor med vinden. Ovanliga arter har svårt att komma tillbaka eftersom de är ovanliga. ',
-    condition: () => omkringSkogVisible.value && (isTrakthygge.value || isLuckhuggning.value || isSkarmtrad.value),
-    close: () => { omkringSkogVisible.value = false },
-  },
   rottackeSkarmtrad: {
     title: 'Rottäcke skärmträd',
     description: 'Kontinuerligt rottäcke kopplat till överhållen skärm (1 år efter).',
@@ -1972,7 +1944,6 @@ const overlayIcons: Record<string, string> = {
   staticOverlay: 'i-material-symbols-light-rectangle-outline',
   retention: 'i-pepicons-pop-tree-circle',
   kanteffekt: 'i-healthicons-square-medium-negative',
-  omkringSkog: 'fluent-weather-duststorm-48-regular',
   rottackeSkarmtrad: 'i-fluent-emoji-high-contrast-blue-square',
   rottackeBladning: 'i-fluent-emoji-high-contrast-blue-square',
   seedTree: 'i-teenyicons-redwoodjs-outline',
@@ -2016,7 +1987,6 @@ const pinned = reactive({
   staticOverlay: false,
   retention: false,
   kanteffekt: false,
-  omkringSkog: false,
   rottackeSkarmtrad: false,
   rottackeBladning: false,
   seedTree: false,
@@ -2030,7 +2000,6 @@ const overlayRefMap = {
   staticOverlay: staticOverlayVisible,
   retention: retentionVisible,
   kanteffekt: kanteffektVisible,
-  omkringSkog: omkringSkogVisible,
   rottackeSkarmtrad: rottackeSkarmtradVisible,
   rottackeBladning: rottackeBladningVisible,
   seedTree: seedTreeVisible,
@@ -2056,7 +2025,6 @@ function togglePinned(rawKey: OverlayMapKey, options: { hideWhenUnpin?: boolean 
   if (next) {
     if (!ref.value) ref.value = true;
     activeOverlayKey.value = key;
-    overlayDrawerOpen.value = true;
     return;
   }
 
@@ -2069,30 +2037,88 @@ function togglePinned(rawKey: OverlayMapKey, options: { hideWhenUnpin?: boolean 
   }
 }
 
+const normalizeFrameworkKey = (value?: string | null) => {
+  return (value || '')
+    .normalize('NFD')
+    .replace(/[\u0300-\u036f]/g, '')
+    .toLowerCase();
+};
+
+const visibleFrameworkKeys = computed(() => {
+  const set = new Set<string>();
+  const add = (fw?: string | null) => {
+    const key = normalizeFrameworkKey(fw);
+    if (key) set.add(key);
+  };
+  add(currentFramework.value?.value);
+  if (isFrameworkCompareMode.value) {
+    add(currentFramework2.value?.value);
+  }
+  return set;
+});
+
+const overlayFrameworkRules: Record<string, 'all' | string[]> = {
+  staticOverlay: 'all',
+  naturvardsarter: 'all',
+  retention: ['trakthygge', 'luckhuggning', 'skarmtrad', 'bladning'],
+  kanteffekt: ['trakthygge', 'luckhuggning', 'skarmtrad'],
+  tradplantor: ['trakthygge'],
+  smaplantor: ['trakthygge'],
+  hogstubbar: ['trakthygge'],
+  rottackeBladning: ['bladning'],
+  rottackeSkarmtrad: ['skarmtrad'],
+  seedTree: ['skarmtrad'],
+};
+
+function overlayAllowedForFramework(key: string) {
+  const rule = overlayFrameworkRules[key];
+  if (!rule || rule === 'all') return true;
+  const visible = visibleFrameworkKeys.value;
+  if (!visible.size) return true;
+  return rule.some(fw => visible.has(fw));
+}
+
 const overlayBadgeItems = computed(() => {
   const info = overlayInfo.value;
-  return [
-    {
+  const items: Array<{ key: string; label: string; description: string; icon?: string }> = [];
+  if (overlayAllowedForFramework('staticOverlay')) {
+    items.push({
       key: 'staticOverlay',
       label: info.staticOverlay?.title ?? 'Beståndsgräns',
       description: info.staticOverlay?.description ?? '',
       icon: overlayIcons.staticOverlay,
-    },
-    ...overlayKeys.map((key) => ({
+    });
+  }
+  overlayKeys.forEach((key) => {
+    if (!overlayAllowedForFramework(key)) return;
+    items.push({
       key,
       label: info[key]?.title ?? key,
       description: info[key]?.description ?? '',
       icon: overlayIcons[key] ?? undefined,
-    })),
-  ];
+    });
+  });
+  return items;
 });
 
 const overlayMeta = computed<Record<string, { label: string; icon?: string }>>(() => {
-  const meta: Record<string, { label: string; icon?: string }> = {}
+  const meta: Record<string, { label: string; icon?: string }> = {
+    staticOverlay: {
+      label: overlayInfo.value.staticOverlay?.title ?? 'Beståndsgräns',
+      icon: overlayIcons.staticOverlay,
+    },
+  };
+  overlayKeys.forEach((key) => {
+    meta[key] = {
+      label: overlayConfigs[key].title,
+      icon: overlayIcons[key] ?? undefined,
+    };
+  });
+  // Override with filtered badge labels/icons
   overlayBadgeItems.value.forEach(item => {
-    meta[item.key] = { label: item.label, icon: item.icon }
-  })
-  return meta
+    meta[item.key] = { label: item.label, icon: item.icon };
+  });
+  return meta;
 })
 
 const activeOverlayContent = computed(() => {
@@ -2183,9 +2209,12 @@ function handleOverlayStateChange(key: OverlayKey) {
 
   if (visible) {
     activeOverlayKey.value = key;
-    overlayDrawerOpen.value = true;
-    if (!isMobile.value) {
-      hideOverlayPopover();
+    if (overlayDrawerPending.value) {
+      overlayDrawerOpen.value = true;
+      overlayDrawerPending.value = false;
+      if (!isMobile.value) {
+        hideOverlayPopover();
+      }
     }
     return;
   }
@@ -2194,9 +2223,12 @@ function handleOverlayStateChange(key: OverlayKey) {
     const fallback = overlayOrder.value.slice().reverse().find((candidate) => isOverlayActive(candidate));
     if (fallback) {
       activeOverlayKey.value = fallback;
-      overlayDrawerOpen.value = true;
-      if (!isMobile.value) {
-        hideOverlayPopover();
+      if (overlayDrawerPending.value) {
+        overlayDrawerOpen.value = true;
+        overlayDrawerPending.value = false;
+        if (!isMobile.value) {
+          hideOverlayPopover();
+        }
       }
     } else {
       closeActiveOverlay({ hideOverlay: false });
@@ -2209,18 +2241,15 @@ function handleOverlayTrigger(key: OverlayKey) {
   const ref = overlayRefMap[key];
   if (!ref) return;
 
-  if (ref.value) {
-    if (pinned[key]) {
-      openOverlayDrawer(key);
-    } else {
-      ref.value = false;
-      hideOverlayPopover();
-    }
+  overlayDrawerPending.value = true;
+  if (!ref.value) {
+    ref.value = true;
     return;
   }
-
-  ref.value = true;
-  openOverlayDrawer(key);
+  activeOverlayKey.value = key;
+  overlayDrawerOpen.value = true;
+  overlayDrawerPending.value = false;
+  hideOverlayPopover();
 }
 
 async function openNaturvardsarterChart(options: { badgeKey?: string } = {}) {
@@ -2266,6 +2295,8 @@ function openOverlayDrawer(key: OverlayKey) {
   if (!ref) return;
   activeOverlayKey.value = key;
   overlayDrawerOpen.value = true;
+  overlayDrawerPending.value = false;
+  hideOverlayPopover();
 }
 
 function closeActiveOverlay(options: { hideOverlay?: boolean } = {}) {
@@ -2360,11 +2391,6 @@ watch(retentionVisible, (val) => {
 watch(kanteffektVisible, (val) => {
   if (val) enforceExclusive('kanteffekt');
   handleOverlayStateChange('kanteffekt');
-}, { immediate: true });
-
-watch(omkringSkogVisible, (val) => {
-  if (val) enforceExclusive('omkringSkog');
-  handleOverlayStateChange('omkringSkog');
 }, { immediate: true });
 
 // split watchers defined above for rottackeSkarmtradVisible and rottackeBladningVisible

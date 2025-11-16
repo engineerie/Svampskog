@@ -92,7 +92,7 @@
                   <div class="w-full">
                     <transition name="slide-up" mode="out-in">
                       <div :key="getLabel(category.key)"
-                        class="flex items-center md:justify-center cursor-pointer ring ring-muted/50 shadow bg-white hover:bg-neutral-100/70 py-4 rounded-xl w-full">
+                        class="flex items-center md:justify-center cursor-pointer ring ring-muted/50 shadow bg-white hover:bg-neutral-100/70 py-4 rounded-md w-full">
                         <div class="md:text-center">
                           <h1 class="text-neutral-500">{{ category.title }}</h1>
                           <h1 class="md:text-2xl font-medium">

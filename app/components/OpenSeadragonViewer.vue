@@ -230,7 +230,6 @@ export default {
       default: null,
     },
     kanteffektVisible: { type: Boolean, default: false },
-    omkringliggandeSkogVisible: { type: Boolean, default: false },
     oldKanteffektVisible: { type: Boolean, default: true },
     rottackeSkarmtradVisible: { type: Boolean, default: false },
     rottackeBladningVisible: { type: Boolean, default: false },
@@ -853,7 +852,7 @@ export default {
 
       // Kanteffekt polygon overlays
       // Allow Omkringliggande skog to render outer border even when Kanteffekt stripes are hidden
-      if (props.kanteffektVisible || props.omkringliggandeSkogVisible) {
+      if (props.kanteffektVisible) {
         activeKanteffekt
           .filter(f => f.shape === 'polygon')
           .forEach(f => {
@@ -938,41 +937,12 @@ export default {
               overlayCtx.restore();
             }
 
-            // Omkringliggande skog: draw an outward-only ring hugging the outer boundary (present time only)
-            // Use an offscreen canvas to avoid erasing previously drawn kanteffekt stripes/outline
-            if (props.omkringliggandeSkogVisible && baseAlpha === 1) {
-              const ringCanvas = document.createElement('canvas');
-              ringCanvas.width = overlayCanvas.width;
-              ringCanvas.height = overlayCanvas.height;
-              const ringCtx = ringCanvas.getContext('2d');
-              const zoom = viewer.value?.viewport?.getZoom?.(true) || 1;
-              ringCtx.save();
-              // Thick stroke of the outer polygon
-              ringCtx.beginPath();
-              outer.forEach((p, i) => i === 0 ? ringCtx.moveTo(p.x, p.y) : ringCtx.lineTo(p.x, p.y));
-              ringCtx.closePath();
-              ringCtx.strokeStyle = 'rgba(255,255,255,0.2)';
-              ringCtx.lineWidth = 200 * zoom;
-              ringCtx.lineJoin = 'round';
-              ringCtx.lineCap = 'round';
-              ringCtx.stroke();
-              // Cut away the inner half so it only expands outward
-              ringCtx.globalCompositeOperation = 'destination-out';
-              ringCtx.fillStyle = 'rgba(0,0,0,1)';
-              ringCtx.beginPath();
-              outer.forEach((p, i) => i === 0 ? ringCtx.moveTo(p.x, p.y) : ringCtx.lineTo(p.x, p.y));
-              ringCtx.closePath();
-              ringCtx.fill();
-              ringCtx.restore();
-              // Composite onto main overlay
-              overlayCtx.drawImage(ringCanvas, 0, 0);
-            }
           });
       }
 
       // Draw squareHole overlays for luckhuggning
       // Allow Omkringliggande skog to render independently of Kanteffekt toggle
-      if (props.kanteffektVisible || props.omkringliggandeSkogVisible) {
+      if (props.kanteffektVisible) {
         activeKanteffekt
           .filter(f => f.shape === 'squareHole')
           .forEach(f => {
@@ -1056,69 +1026,6 @@ export default {
               overlayCtx.lineWidth = 1;
               overlayCtx.stroke();
               overlayCtx.restore();
-            }
-
-            // Omkringliggande skog: outward-only ring for the outer square (offscreen to preserve kanteffekt)
-            // Present time only (do not show traces from previous times)
-            if (props.omkringliggandeSkogVisible && alpha === 1) {
-              const ringCanvas = document.createElement('canvas');
-              ringCanvas.width = overlayCanvas.width;
-              ringCanvas.height = overlayCanvas.height;
-              const ringCtx = ringCanvas.getContext('2d');
-              const zoom = viewer.value?.viewport?.getZoom?.(true) || 1;
-              ringCtx.save();
-              ringCtx.strokeStyle = 'rgba(255,255,255,0.2)';
-              ringCtx.lineWidth = 200 * zoom;
-              ringCtx.lineJoin = 'round';
-              ringCtx.lineCap = 'round';
-              ringCtx.beginPath();
-              ringCtx.rect(centerPixel.x - halfSide, centerPixel.y - halfSide, side, side);
-              ringCtx.stroke();
-              // Carve out inner area (remove inner half so thickness is outward-only)
-              ringCtx.globalCompositeOperation = 'destination-out';
-              ringCtx.fillStyle = 'rgba(0,0,0,1)';
-              ringCtx.fillRect(centerPixel.x - halfSide, centerPixel.y - halfSide, side, side);
-              // Also cut the ring wherever it overlaps any other visible (present-time) lucka's outer area
-              try {
-                activeKanteffekt
-                  .filter(g => g.shape === 'squareHole')
-                  .forEach(g => {
-                    // Determine if this patch is visible in the current view
-                    let visible2 = true;
-                    let luckaNum2 = null;
-                    const m2 = typeof g.id === 'string' ? g.id.match(/ke-luckh-(\d+)/) : null;
-                    if (m2) luckaNum2 = parseInt(m2[1], 10);
-                    if (luckaNum2 != null) {
-                      const efterGroup2 = [2, 4, 8, 11, 14];
-                      const fiftyGroup2 = [1, 3, 7, 10, 13];
-                      const eightyGroup2 = [5, 6, 9, 12, 15];
-                      const t2 = props.currentTime;
-                      let baseAlpha2 = 0.5;
-                      if (efterGroup2.includes(luckaNum2)) {
-                        const map2 = { 'efter': 1, '20 år': 1, '50 år': 0.5, '80 år': 0.5 };
-                        baseAlpha2 = map2[t2] ?? 0.5;
-                      } else if (fiftyGroup2.includes(luckaNum2)) {
-                        const map2 = { '50 år': 1, '80 år': 0.5 };
-                        baseAlpha2 = map2[t2] ?? 0.5;
-                      } else if (eightyGroup2.includes(luckaNum2)) {
-                        const map2 = { '80 år': 1 };
-                        baseAlpha2 = map2[t2] ?? 0.5;
-                      }
-                      // Only consider present-time patches for cutting
-                      if (baseAlpha2 !== 1) visible2 = false;
-                    }
-                    if (!visible2) return;
-                    const halfNorm2 = g.size / 2;
-                    const centerPt2 = new osdLib.Point(g.x, g.y);
-                    const centerPixel2 = viewer.value.viewport.pixelFromPoint(centerPt2, true);
-                    const pixelRight2 = viewer.value.viewport.pixelFromPoint(new osdLib.Point(g.x + halfNorm2, g.y), true);
-                    const halfSide2 = Math.abs(pixelRight2.x - centerPixel2.x);
-                    const side2 = halfSide2 * 2;
-                    ringCtx.fillRect(centerPixel2.x - halfSide2, centerPixel2.y - halfSide2, side2, side2);
-                  });
-              } catch { }
-              ringCtx.restore();
-              overlayCtx.drawImage(ringCanvas, 0, 0);
             }
 
             // ---- Corner label: harvest year per start set ----
@@ -1539,9 +1446,6 @@ export default {
       if (overlayCtx) drawAllOverlays();
     });
     watch(() => overlayStore.staticOverlayVisible, () => {
-      if (overlayCtx) drawAllOverlays();
-    });
-    watch(() => props.omkringliggandeSkogVisible, () => {
       if (overlayCtx) drawAllOverlays();
     });
     watch(() => props.oldKanteffektVisible, () => {

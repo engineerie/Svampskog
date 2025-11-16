@@ -4,12 +4,12 @@
 
       <div class="flex p-3 border-b border-muted/50 gap-3" v-if="!isMobile">
         <UButton @click="activeTab = 'dna'"
-          class="hover:bg-neutral-100 text-start ring-muted/50 cursor-pointer p-3 px-4 rounded-xl"
+          class="hover:bg-neutral-100 text-start ring-muted/50 cursor-pointer p-3 px-4 rounded-lg"
           :variant="activeTab === 'dna' ? 'subtle' : 'outline'" color="neutral">
           <UPageFeature title="Enligt DNA" description="Från markinventeringens jordprover" />
         </UButton>
         <UButton @click="activeTab = 'knowledge'"
-          class="hover:bg-neutral-100 text-start ring-muted/50 cursor-pointer p-3 px-4 rounded-xl"
+          class="hover:bg-neutral-100 text-start ring-muted/50 cursor-pointer p-3 px-4 rounded-lg"
           :variant="activeTab === 'knowledge' ? 'subtle' : 'outline'" color="neutral">
           <UPageFeature title="Enligt fruktkroppar" description="Utifrån var fruktkroppar förekommer" />
         </UButton>

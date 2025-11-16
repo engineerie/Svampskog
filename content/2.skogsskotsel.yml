@@ -2,14 +2,14 @@ title: Skogsskötsel
 description: Se hur skogsskötsel påverka mykorrhizasvampar.
 navigation: false
 hero:
-  title: Svamp efter skogsskötsel
-  description: Lär dig hur trakthyggesbruk och hygesfria metoder kan påverka förekomsten av mykorrhizasvampar.
+  title: Svampar efter skogsskötsel
+  description: Se hur olika skötselåtgärder kan påverka förekomsten av mykorrhizasvampar.
   orientation: vertical
-  src: /images/Landing/Stock Photo 563535222.jpeg
+  src: /images/Landing/skogsbruk.jpeg
   headline:
-    label:
+    label: Interaktiv modell
     to:
-    icon:
+    icon: i-material-symbols:interactive-space
     color: secondary
   links:
     - label: Visa modell för påverkan över tid
