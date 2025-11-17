@@ -47,15 +47,15 @@ function resolveDescription(item: CarouselItem) {
       </p>
     </UContainer> -->
 
-    <div class="px-0 sm:px-6">
+    <div class="sm:px-6 my-4 sm:my-6">
       <div class="flex flex-col gap-4 sm:gap-6 ">
         <article v-for="(item, i) in slides" :key="i"
           class=" flex flex-col gap-4 rounded-2xl border border-muted/50 bg-white shadow-sm overflow-hidden">
           <div v-if="resolveImage(item)" class="relative w-full overflow-hidden bg-muted">
-            <NuxtImg :src="resolveImage(item)" :alt="item.title || ''" fit="cover" class="w-full h-full object-cover"
-              loading="lazy" decoding="async" />
+            <NuxtImg :src="resolveImage(item)" :alt="item.title || ''" fit="cover" class="w-full object-cover"
+              width="800" />
           </div>
-          <div class="p-5 sm:p-6 space-y-3">
+          <div class="px-6 py-3 sm:p-6">
             <h3 v-if="item.title" class="text-2xl font-semibold text-neutral-900">
               {{ item.title }}
             </h3>

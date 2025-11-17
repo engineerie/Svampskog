@@ -17,18 +17,9 @@
 
 
 
-        <!-- <UButton label="samlad kunskap" @click="activeTab = 'knowledge'" />
-        <UButton label="DNA" @click="activeTab = 'dna'" /> -->
+
       </div>
-      <!-- <UTabs v-if="!isMobile" :ui="{
-        indicator: 'hidden',
-        trigger: 'hover:bg-neutral-50 bg-white ring ring-muted/50 m-1 -mt-1 sm:mt-1 data-[state=active]:bg-primary data-[state=active]:text-white data-[state=active]:ring-primary',
-        list: 'border-muted/50 bg-muted sm:bg-transparent'
-      }" v-model="activeTab" :items="tabs" :content="false" class="md:mx-0" :size="tabSize" color="primary"
-        variant="link" /> -->
-      <!-- <div class="relative">
-        <UBreadcrumb v-if="activeDetailComponent && !isMobile" :items="breadcrumbItems" class="px-3 absolute top-1" />
-      </div> -->
+
 
       <transition name="view-transition" mode="out-in">
         <div v-if="activeTab === 'dna'" key="dna" class="col-span-12 sm:pt-2">
@@ -95,7 +86,14 @@
                   size="xl" />
               </div>
             </UCard>
+            <UModal title="test"
+              :ui="{ content: 'bg-transparent shadow-none ring-0 rounded-none max-h-full sm:max-h-full', body: 'p-0' }">
+              <UPageCard color="info" variant="subtle" title="test" description="tejhtekht eklrjl" class="sm:w-fit" />
 
+              <template #content>
+                <InfoCarousel :section="page.carousel" />
+              </template>
+            </UModal>
           </UContainer>
         </div>
         <div v-else key="knowledge" class="col-span-12 sm:pt-2">
@@ -138,6 +136,16 @@ import { useRoute } from "vue-router";
 import { ref, computed, watch, onMounted, onUnmounted } from 'vue';
 import { useEnvParamsStore } from '~/stores/envParamsStore';
 import { hasEdnaDataset } from '~/utils/edna';
+
+const { data: page } = await useAsyncData('mykorrhizasvampar', () => queryCollection('mykorrhizasvampar').first())
+if (!page.value) {
+  throw createError({
+    statusCode: 404,
+    statusMessage: 'Page not found',
+    fatal: true
+  })
+}
+
 const envStore = useEnvParamsStore();
 const route = useRoute();
 

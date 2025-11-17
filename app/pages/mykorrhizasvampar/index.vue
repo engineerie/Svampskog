@@ -110,12 +110,14 @@ function buildGrid(item: CarouselItem) {
 function bentoImages(item: CarouselItem) {
   return Array.isArray(item.bentoImgs) ? item.bentoImgs.filter(Boolean) : []
 }
+
+const open = ref(false)
 </script>
 <template>
 
   <UPage v-if="page" class="flex-1">
     <UContainer class="w-full px-0">
-      <UPageHero :ui="{ container: ' py-20 lg:py-24', title: ' sm:text-7xl', headline: 'text-neutral' }"
+      <UPageHero :ui="{ container: ' py-12 lg:py-24', title: ' sm:text-7xl', headline: 'text-neutral' }"
         :title="page.hero.title" :description="page.hero.description" :orientation="page.hero.orientation" class="">
         <template #headline v-if="page.hero.headline">
           <!-- <NuxtLink :to="page.hero.headline.to">
@@ -321,7 +323,33 @@ function bentoImages(item: CarouselItem) {
     </div> -->
 
     <!-- <SCarousel :section="page.carousel" /> -->
+    <Motion :initial="{
+      opacity: 0,
+      transform: 'translatex(-10px)'
+      // filter: 'blur(20px)'
+    }" :animate="{
+      opacity: 1,
+      transform: 'translateY(0px)'
+      // filter: 'blur(0px)'
+    }" :transition="{
+      duration: 0.5,
+      delay: 1
+    }">
 
+      <UContainer class="mb-4">
+        <UModal v-model:open="open"
+          :ui="{ content: 'bg-transparent shadow-none ring-0 rounded-none max-h-full sm:max-h-full', body: 'p-0' }">
+          <UAlert icon="i-heroicons-newspaper" color="neutral" variant="outline" title="Mykorrhizans ekologi i korthet"
+            class="sm:w-fit shadow ring-muted/50 hover:opacity-85 hover:cursor-pointer" />
+          <template #content>
+            <UButton @click="open = false"
+              class="fixed top-6 sm:top-10 right-2 sm:right-10 rounded-full z-10 ring-muted/50" variant="outline"
+              color="neutral" icon="i-heroicons-x-mark" size="xl" />
+            <InfoCarousel :section="page.carousel" />
+          </template>
+        </UModal>
+      </UContainer>
+    </Motion>
 
   </UPage>
 </template>

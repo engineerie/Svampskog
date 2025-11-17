@@ -8,7 +8,7 @@
                 class="fixed top-18 inset-x-3 z-50 pointer-events-auto origin-top">
                 <USelect size="xl" :items="frameworkOptions" v-model="selectedFrameworkIndex"
                     :placeholder="selectedMethod.title || 'Välj metod'" append-to-body variant="outline"
-                    class="ring-muted w-full shadow rounded-full"
+                    class="ring-muted w-full shadow rounded-lg"
                     :ui="{ content: 'min-w-fit rounded-lg z-50', viewport: 'text-center' }" />
             </div>
         </Transition>
@@ -42,7 +42,7 @@
                 // filter: 'blur(0px)'
             }" :transition="{
                 duration: 0.3,
-                delay: 0.7 + 0.05 * (method.index ?? 0)
+                delay: 0.5 + 0.05 * (method.index ?? 0)
             }">
                 <div @click="selectedId = method.id" :class="[
                     'shrink-0 lg:shrink sm:w-58 lg:w-full bg-white transition-all hover:opacity-100 border border-muted/50 overflow-hidden rounded-lg h-fit shadow-lg hover:shadow-md relative cursor-pointer',
@@ -51,7 +51,7 @@
 
                     <UBadge v-if="method.type && !selectedMethod.id" class="absolute top-2 left-2" :label="method.type"
                         color="neutral" variant="subtle" />
-                    <NuxtImg v-if="!selectedMethod.id" :src="method.image" width="300" height="160"
+                    <NuxtImg v-if="!selectedMethod.id" :src="method.image" width="300" height="160" quality="80"
                         class=" w-full h-full" />
                     <h1 class="text-lg p-2 px-3 font-medium text-nowrap ">{{ method.title }}</h1>
                 </div>
@@ -61,7 +61,7 @@
         <div v-else-if="selectedMethod.id" class="p-4">
             <USelect size="xl" :items="frameworkOptions" v-model="selectedFrameworkIndex"
                 :placeholder="selectedMethod.title || 'Välj metod'" append-to-body variant="outline"
-                class="ring-muted w-full shadow rounded-full"
+                class="ring-muted w-full shadow rounded-lg"
                 :ui="{ content: 'min-w-fit rounded-lg z-50', viewport: 'text-center' }" />
         </div>
 
@@ -81,12 +81,12 @@
             <UCarousel v-slot="{ item }" :items="methods" loop :speed="4" :ui="{ item: 'basis-3/5 md:basis-1/3 p-2' }">
 
                 <div @click="selectedId = item.id" :class="[
-                    'shrink-0 bg-white transition-all hover:opacity-100 border border-muted/50 overflow-hidden rounded-lg h-fit shadow hover:shadow-md relative cursor-pointer',
+                    'shrink-0 bg-white transition-all hover:opacity-100 border border-muted/50 overflow-hidden rounded-lg h-fit shadow hover:shadow-md relative cursor-pointer mb-4',
                     !selectedId ? 'opacity-100' : (selectedId === item.id ? 'opacity-100 ring-primary/40 shadow-lg' : 'opacity-50')
                 ]">
                     <UBadge v-if="item.type && !selectedMethod.id" class="absolute top-2 left-2" :label="item.type"
                         color="neutral" variant="subtle" />
-                    <NuxtImg v-if="!selectedMethod.id" :src="item.image" width="300" height="160"
+                    <NuxtImg preload v-if="!selectedMethod.id" :src="item.image" width="300" height="160"
                         class="w-full h-full" />
                     <h1 class="text-lg p-2 px-3 font-medium text-nowrap ">{{ item.title }}</h1>
                 </div>
@@ -110,7 +110,7 @@
                 // filter: 'blur(0px)'
             }" :transition="{
                 duration: 0.5,
-                delay: 0.5
+                delay: 0.2
             }">
                 <div class="w-full  rounded-xl relative overflow-hidden">
                     <!-- <div class="absolute top-0 right-0 p-3 flex gap-4">
@@ -227,7 +227,7 @@
                                     <UPageCard title="Öppna modell i helskärm"
                                         description="I helskärm går det att jämföra olika metoder och visa fler lager med mer information. "
                                         icon="i-material-symbols:interactive-space" class="mt-6 cursor-pointer"
-                                        color="neutral" variant="subtle" orientation="vertical"
+                                        color="neutral" variant="outline" orientation="vertical"
                                         @click="openModelWithCurrentFramework">
                                         <!-- <div class="flex justify-center">
                                             <NuxtImg src="images/modell.png" height="150" />
@@ -267,17 +267,34 @@
         <!-- <div class="bg-muted border-t border-muted mt-18">
            
         </div> -->
+        <Motion :initial="{
+            opacity: 0,
+            transform: 'translatex(-10px)'
+            // filter: 'blur(20px)'
+        }" :animate="{
+            opacity: 1,
+            transform: 'translateY(0px)'
+            // filter: 'blur(0px)'
+        }" :transition="{
+            duration: 0.5,
+            delay: 0.8
+        }">
 
-        <UContainer>
-            <UModal :ui="{ content: 'bg-transparent shadow-none ring-0 rounded-2xl' }">
-                <UPageCard title="test" description="tejhtekht eklrjl" class="w-fit" />
-
-                <template #content>
-                    <InfoCarousel :section="page.carousel" />
-                </template>
-            </UModal>
-        </UContainer>
-
+            <UContainer class="mb-4">
+                <UModal v-model:open="open"
+                    :ui="{ content: 'bg-transparent shadow-none ring-0 rounded-none max-h-full sm:max-h-full', body: 'p-0' }">
+                    <UAlert icon="i-heroicons-newspaper" color="neutral" variant="outline"
+                        title="Mykorrhiza & skogsbruk i korthet"
+                        class="sm:w-fit shadow ring-muted/50 hover:opacity-85 hover:cursor-pointer" />
+                    <template #content>
+                        <UButton @click="open = false"
+                            class="fixed top-6 sm:top-10 right-2 sm:right-10 rounded-full z-10 ring-muted/50"
+                            variant="outline" color="neutral" icon="i-heroicons-x-mark" size="xl" />
+                        <InfoCarousel :section="page.carousel" />
+                    </template>
+                </UModal>
+            </UContainer>
+        </Motion>
     </div>
 </template>
 
@@ -286,6 +303,8 @@ import { ref, computed, watch, nextTick, onMounted, onBeforeUnmount } from 'vue'
 import type { TabsItem } from '@nuxt/ui'
 import { useMediaQuery } from '@vueuse/core'
 import { useOnboardingStore } from '~/stores/onboardingStore'
+
+const open = ref(false)
 
 const isMobile = useMediaQuery('(max-width: 767px)')
 const showMobileStickySelect = ref(false)
