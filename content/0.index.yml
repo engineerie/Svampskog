@@ -28,7 +28,7 @@ hero:
     color: secondary
 sections:
   - title: Utforska svampar i svenska skogar
-    description: Här kan du ta reda på vilka mykorrhizasvampar som kan finns i en skog baserat på dels DNA-analyser av svampmycel i jordprover, dels vår samlade kunskap om var olika arters fruktkroppar förekommer.
+    description: Här kan du ta reda på vilka mykorrhizasvampar som kan finnas i en skog baserat på dels DNA-analyser av svampmycel i jordprover, dels vår samlade kunskap om var olika arters fruktkroppar förekommer.
     headline:
     id: svampar
     links:

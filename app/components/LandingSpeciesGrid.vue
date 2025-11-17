@@ -2,55 +2,41 @@
   <div>
     <!-- Environment Row -->
     <div class="sm:px-2 text-lg font-semibold py-2 flex overflow-hidden   gap-2 sm:gap-4 w-full">
-  <transition name="slide-up" mode="out-in">
-    <UBadge :key="currentEnvLabels.geography" size="lg" color="neutral" variant="soft" class="shrink-0">
-      {{ currentEnvLabels.geography }}
-    </UBadge>
-  </transition>
-  <transition name="slide-up" mode="out-in">
-    <UBadge :key="currentEnvLabels.forestType" size="lg" color="neutral" variant="soft" class="shrink-0">
-      {{ currentEnvLabels.forestType }}
-    </UBadge>
-  </transition>
-  <transition name="slide-up" mode="out-in">
-    <UBadge :key="currentEnvLabels.standAge" size="lg" color="neutral" variant="soft" class="shrink-0">
-      {{ currentEnvLabels.standAge }}
-    </UBadge>
-  </transition>
-  <transition name="slide-up" mode="out-in">
-    <UBadge :key="currentEnvLabels.vegetationType" size="lg" color="neutral" variant="soft" class="shrink-0">
-      {{ currentEnvLabels.vegetationType }}
-    </UBadge>
-  </transition>
-</div>
+      <transition name="slide-up" mode="out-in">
+        <UBadge :key="currentEnvLabels.geography" size="lg" color="neutral" variant="soft" class="shrink-0">
+          {{ currentEnvLabels.geography }}
+        </UBadge>
+      </transition>
+      <transition name="slide-up" mode="out-in">
+        <UBadge :key="currentEnvLabels.forestType" size="lg" color="neutral" variant="soft" class="shrink-0">
+          {{ currentEnvLabels.forestType }}
+        </UBadge>
+      </transition>
+      <transition name="slide-up" mode="out-in">
+        <UBadge :key="currentEnvLabels.standAge" size="lg" color="neutral" variant="soft" class="shrink-0">
+          {{ currentEnvLabels.standAge }}
+        </UBadge>
+      </transition>
+      <transition name="slide-up" mode="out-in">
+        <UBadge :key="currentEnvLabels.vegetationType" size="lg" color="neutral" variant="soft" class="shrink-0">
+          {{ currentEnvLabels.vegetationType }}
+        </UBadge>
+      </transition>
+    </div>
 
     <!-- Grid of species with group transition -->
     <transition mode="out-in" name="fade">
-      <transition-group
-        name="fade"
-        tag="div"
-        :key="currentFileIndex"
-        class="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 gap-2 sm:gap-4 sm:p-2"
-      >
-        <div
-          v-for="(row, index) in gridPaginatedData"
-          :key="row.Commonname + row.Scientificname + index"
-          class="bg-white dark:bg-neutral-900 rounded-md border border-neutral-200 dark:border-neutral-800 h-[142px]"
-          @click="selectRow(row)"
-        >
+      <transition-group name="fade" tag="div" :key="currentFileIndex"
+        class="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 gap-2 sm:gap-4 sm:p-2">
+        <div v-for="(row, index) in gridPaginatedData" :key="row.Commonname + row.Scientificname + index"
+          class="bg-white overflow-hidden dark:bg-neutral-900 rounded-md border border-neutral-200 dark:border-neutral-800 h-[142px]"
+          @click="selectRow(row)">
           <!-- Image Thumbnail -->
-          <div class="w-full h-28 relative rounded-t-md overflow-hidden">
-            <img v-if="row.images && row.images.length" :src="row.images[0]"
-              class="w-full h-full object-cover" alt="Species image" height="300" width="450" loading="lazy"
-              decoding="async" />
-            <div
-              v-else
-              class="w-full h-full flex items-center justify-center bg-gray-200 dark:bg-gray-700"
-            >
-              <Icon
-                name="material-symbols:photo"
-                class="w-8 h-8 text-neutral-500"
-              />
+          <div class="w-full h-28 relative overflow-hidden">
+            <img v-if="row.images && row.images.length" :src="row.images[0]" class="w-full h-full object-cover"
+              alt="Species image" height="300" width="450" loading="lazy" decoding="async" />
+            <div v-else class="w-full h-full flex items-center justify-center bg-gray-200 dark:bg-gray-700">
+              <Icon name="material-symbols:photo" class="w-8 h-8 text-neutral-500" />
             </div>
             <!-- <div class="absolute bottom-2 left-2 flex gap-1">
               <UBadge
@@ -92,7 +78,7 @@
         </div>
       </transition-group>
     </transition>
-    
+
     <!-- GRID VIEW PAGINATION (currently commented out) -->
     <!--
     <div class="flex justify-between items-center px-5 py-2">
@@ -115,10 +101,7 @@
     <!-- Animated progress bar -->
     <div class="mt-2 px-4">
       <div class="w-full bg-gray-200 dark:bg-gray-700 h-0.5 rounded overflow-hidden">
-        <div
-          :key="currentFileIndex"
-          class="h-1 bg-primary-500 rounded animate-progress"
-        ></div>
+        <div :key="currentFileIndex" class="h-1 bg-primary-500 rounded animate-progress"></div>
       </div>
     </div>
   </div>
@@ -394,10 +377,12 @@ function selectRow(row) {
 .fade-leave-active {
   transition: opacity 1s ease, transform 1s ease;
 }
+
 .fade-enter-from,
 .fade-leave-to {
   opacity: 0;
 }
+
 .fade-enter-to,
 .fade-leave-from {
   opacity: 1;
@@ -408,10 +393,12 @@ function selectRow(row) {
 .slide-up-leave-active {
   transition: all 0.4s ease-out;
 }
+
 .slide-up-enter-from {
   opacity: 0;
   transform: translateY(30px);
 }
+
 .slide-up-leave-to {
   opacity: 0;
   transform: translateY(-30px);
@@ -420,9 +407,15 @@ function selectRow(row) {
 
 <style scoped>
 @keyframes progressAnimation {
-  from { width: 0%; }
-  to { width: 100%; }
+  from {
+    width: 0%;
+  }
+
+  to {
+    width: 100%;
+  }
 }
+
 .animate-progress {
   width: 100%;
   animation: progressAnimation 15s linear forwards;

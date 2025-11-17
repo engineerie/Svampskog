@@ -4,7 +4,7 @@
       :class="[' block relative overflow-scroll -mx-4 w-screen', geography && forestType && standAge && vegetationType ? 'h-14' : 'h-0']">
       <div
         :class="['pt-0.5 top-16 z-20 w-screen inset-0 bg-neutral-50 dark:bg-neutral-950 border-b border-muted dark:border-neutral-800 transition-height', mobileCollapsed ? 'h-14' : 'h-14']">
-        <UDrawer fullscreen :overlay="true" :ui="{ body: 'p-0', title: 'text-2xl' }">
+        <UDrawer fullscreen :overlay="true" :ui="{ body: 'p-0', title: 'text-2xl', content: 'bg-neutral-50' }">
           <div class="flex justify-between w-full mx-auto max-w-full ">
             <div class="flex gap-2 p-2 overflow-scroll ">
               <UBadge v-for="category in categories" :key="category.key" size="xl" variant="outline" color="neutral"
@@ -17,7 +17,7 @@
               <!-- Use enabledOptions for USelect items as well -->
               <USelect size="xl" v-for="category in categories" :key="category.key"
                 :items="enabledOptions[category.key]" v-model="envStore[category.key]"
-                :placeholder="category.defaultLabel" class=" w-full my-1 text-lg ring-muted" variant="soft">
+                :placeholder="category.defaultLabel" class=" w-full my-1 text-lg ring-muted" variant="outline">
                 <template #item="{ item }">
                   <div class="flex flex-col">
                     <div class="text-lg font-medium">{{ item.label }}</div>
@@ -31,9 +31,9 @@
                 <UButton label="DNA-data" size="xl" trailing :icon="restrictionEnabled ? 'mdi:lock' : 'mdi:lock-open'"
                   @click="toggleRestriction" variant="subtle" :color="restrictionEnabled ? 'secondary' : 'neutral'" />
 
-                <UDrawer nested fullscreen class="w-full" :ui="{ title: 'text-2xl' }">
+                <UDrawer nested fullscreen class="w-full" :ui="{ title: 'text-2xl', content: 'bg-neutral-50' }">
                   <UButton label="Kombinationer" size="xl" shape="full" trailing icon="mdi:apps" color="neutral"
-                    variant="outline" />
+                    variant="outline" class="ring-muted" />
                   <template #body>
                     <UButton size="xl" trailing :icon="restrictionEnabled ? 'mdi:lock' : 'mdi:lock-open'"
                       @click="toggleRestriction" shape="full" class="transition-all shrink-0 mb-2 w-full" variant="soft"
@@ -41,7 +41,7 @@
                       {{ restrictionEnabled ? "Begränsar till där det finns DNA-data" : "Inkluderar alla miljöer" }}
                     </UButton>
                     <div class="grid gap-2 ">
-                      <UCard v-for="category in categories" :key="category.key" variant="soft">
+                      <UCard v-for="category in categories" :key="category.key" variant="outline" class="ring-muted/50">
                         <div v-for="option in enabledOptions[category.key]" :key="option.value"
                           class="flex justify-between mb-2 text-neutral-500 items-center">
                           <label :for="`${category.key}-${option.value}`"
@@ -68,7 +68,7 @@
                 </UModal> -->
               </div>
               <Transition name="fade" mode="out-in">
-                <SpatialForest class="rounded overflow-hidden border border-neutral-200 h-fit" />
+                <SpatialForest class="overflow-hidden h-fit" />
               </Transition>
             </div>
           </template>
@@ -103,18 +103,18 @@
                     </transition>
                   </div>
                   <template #content>
-                    <div class="px-2 py-1 min-w-60 max-w-96">
+                    <div class="px-2 py-1 min-w-60 max-w-110">
                       <!-- Use enabledOptions so that restriction applies here -->
                       <div v-for="option in enabledOptions[category.key]" :key="option.value">
-                        <UPopover :open-delay="300" mode="hover" v-if="imageMap[option.value]" :content="{
-                          align: 'start',
-                          side: 'left',
-                          sideOffset: 1
-                        }">
-                          <div class="hover:bg-neutral-50 p-3 rounded-sm overflow-hidden my-1 cursor-pointer" :class="{
+
+                        <div v-if="imageMap[option.value]"
+                          class="hover:bg-neutral-50 p-3 w-full justify-between flex items-center gap-4 rounded-sm overflow-hidden my-1 cursor-pointer"
+                          :class="{
                             'bg-neutral-100': option.value === envStore[category.key],
                             'opacity-40 cursor-not-allowed': option.disabled
                           }" @click="() => { if (!option.disabled) selectOption(category.key, option.value) }">
+
+                          <div>
                             <h1 class="text-md font-semibold text-neutral-900">
                               {{ option.label }}
                             </h1>
@@ -122,24 +122,44 @@
                               {{ option.description || '' }}
                             </p>
                           </div>
-                          <template #content>
-                            <img :src="imageMap[option.value]" :alt="`${option.label} miljö`"
-                              class="rounded-sm max-w-xs max-h-52 object-cover" width="300" height="180" loading="lazy"
-                              decoding="async" />
-                          </template>
-                        </UPopover>
+                          <UPopover :open-delay="500" mode="hover" :content="{
+                            align: 'start',
+                            side: 'right',
+                            sideOffset: 8
+                          }" :ui="{ content: 'ring-muted/50' }">
+                            <img v-if="imageMap[option.value]" :src="imageMap[option.value]"
+                              :alt="`${option.label} miljö`"
+                              class="rounded-md w-12 h-12 object-cover ring ring-muted/50" width="300" height="180"
+                              loading="lazy" decoding="async" />
 
-                        <div v-else :key="option.value" class="hover:bg-neutral-50 p-3 rounded-md my-1 cursor-pointer"
+                            <template #content>
+                              <img :src="imageMap[option.value]" :alt="`${option.label} miljö`"
+                                class="rounded-md max-w-xs max-h-52 object-cover" width="300" height="180"
+                                loading="lazy" decoding="async" />
+                            </template>
+                          </UPopover>
+                        </div>
+
+
+                        <div v-else :key="option.value"
+                          class="hover:bg-neutral-50 p-3 w-full justify-between  flex gap-4 items-center rounded-md my-1 cursor-pointer"
                           :class="{
                             'bg-neutral-100': option.value === envStore[category.key],
                             'opacity-40 cursor-not-allowed': option.disabled
                           }" @click="() => { if (!option.disabled) selectOption(category.key, option.value) }">
-                          <h1 class="text-md font-semibold text-neutral-900">
-                            {{ option.label }}
-                          </h1>
-                          <p class="text-sm text-neutral-500 font-light">
-                            {{ option.description || '' }}
-                          </p>
+
+                          <div>
+                            <h1 class="text-md font-semibold text-neutral-900">
+                              {{ option.label }}
+                            </h1>
+                            <p class="text-sm text-neutral-500 font-light">
+                              {{ option.description || '' }}
+                            </p>
+                          </div>
+                          <div v-if="category.key === 'forestType'"
+                            class="size-12 flex justify-center items-center bg-muted rounded-md">
+                            <UIcon name="i-heroicons-photo" />
+                          </div>
                         </div>
                       </div>
                     </div>

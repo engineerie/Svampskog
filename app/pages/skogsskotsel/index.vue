@@ -210,7 +210,7 @@
                             <div class="flex flex-col gap-1 min-w-0 max-w-full">
 
 
-                                <UCard :ui="{ body: 'p-1 sm:p-1' }" class="ring-muted/50 h-fit">
+                                <UCard :ui="{ body: 'p-1 sm:p-1 sm:pb-3' }" class="ring-muted/50 h-fit">
                                     <ForestryChartMain :parentSelectedFrameworks=[selectedMethod.id]
                                         :currentStartskog="selectedStartskogTab"
                                         :currentTimeValue="currentTimelineTime" />
@@ -227,9 +227,9 @@
                                         icon="i-material-symbols:interactive-space" class="mt-6 cursor-pointer"
                                         color="neutral" variant="subtle" orientation="vertical"
                                         @click="openModelWithCurrentFramework">
-                                        <div class="flex justify-center">
+                                        <!-- <div class="flex justify-center">
                                             <NuxtImg src="images/modell.png" height="150" />
-                                        </div>
+                                        </div> -->
                                     </UPageCard>
                                 </div>
                             </div>

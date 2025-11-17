@@ -177,14 +177,14 @@ function bentoImages(item: CarouselItem) {
         <!-- <NuxtImg :src="page.hero.src" width="700" format="webp" alt="Illustration"
           class=" rounded ring ring-neutral-300 " /> -->
         <template v-if="isMobile && page?.hero?.links?.[0]" #links>
-          <UModal title="Välj miljö" :ui="{ body: 'p-0', title: 'text-2xl' }" fullscreen>
+          <UModal title="Välj miljö" :ui="{ body: 'p-0 bg-neutral-50', title: 'text-2xl', content: '' }" fullscreen>
             <UButton :label="page.hero.links[0].label" size="xl" color="neutral" icon="i-heroicons-magnifying-glass" />
             <template #body>
               <div class=" w-full max-w-full p-4">
                 <USelect size="xl" v-for="category in categories" :key="category.key"
                   :items="enabledOptions[category.key]" v-model="envStore[category.key]"
                   :placeholder="category.defaultLabel" class="flex-1 w-full my-1 text-lg ring-muted" append-to-body
-                  variant="soft">
+                  variant="outline">
                   <template #item="{ item }">
                     <div class="flex flex-col">
                       <div class="text-lg font-medium">{{ item.label }}</div>
@@ -231,18 +231,18 @@ function bentoImages(item: CarouselItem) {
                       </div>
                     </template>
                   </UModal>
-                  <UModal fullscreen title="Miljööversikt" class="col-span-2"
+                  <!-- <UModal fullscreen title="Miljööversikt" class="col-span-2"
                     :ui="{ content: 'overflow-y-scroll px-0', body: 'p-0', title: 'text-2xl' }">
                     <UButton size="xl" label="Alla miljöer" trailing icon="i-hugeicons-tree-06" color="neutral"
                       variant="subtle" />
                     <template #body>
                       <Miljoer />
                     </template>
-                  </UModal>
+                  </UModal> -->
                 </div>
 
                 <Transition name="fade" mode="out-in">
-                  <SpatialForest class="rounded overflow-hidden border border-neutral-200 h-fit" />
+                  <SpatialForest class=" h-fit" />
                 </Transition>
               </div>
             </template>

@@ -45,10 +45,10 @@ useSeoMeta({
           transform: 'translateY(0px)'
           // filter: 'blur(0px)'
         }" :transition="{
-              duration: 0.5,
-              delay: 0.2
-            }">
-          <NuxtImg src="/images/Landing/boleto_small.png" width="1500" height="2100" quality="80" format="webp"
+          duration: 0.5,
+          delay: 0.2
+        }">
+          <NuxtImg src="/images/Landing/boleto_small.png" width="750" height="1050" quality="80" format="webp"
             class=" sm:-mt-90 -mb-32 -mt-10 sm:-mb-80" />
         </Motion>
 

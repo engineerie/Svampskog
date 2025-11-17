@@ -17,7 +17,7 @@ defineOgImageComponent('Saas')
 <template>
   <div class="bg-neutral-50">
     <UContainer>
-      <UPageHero :ui="{ container: 'lg:py-24', title: 'sm:text-6xl', headline: 'text-neutral' }" v-bind="page"
+      <UPageHeader :ui="{ container: 'lg:py-24', title: 'sm:text-6xl', headline: 'text-neutral' }" v-bind="page"
         class="py-[50px]" />
 
 
