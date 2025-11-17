@@ -14,17 +14,17 @@
         </Transition>
 
 
-        <Transition name="fade">
-            <UContainer v-if="!selectedMethod.id" class="w-full px-0">
-                <UPageHero :ui="{ container: 'py-20 pb-16 lg:py-24', title: 'sm:text-7xl', headline: 'text-neutral' }"
-                    :title="page.hero.title" :description="page.hero.description" :orientation="page.hero.orientation"
-                    class="">
+        <!-- <Transition name="fade"> -->
+        <UContainer v-if="!selectedMethod.id" class="w-full px-0">
+            <UPageHero :ui="{ container: 'py-20 pb-16 lg:py-24', title: 'sm:text-7xl', headline: 'text-neutral' }"
+                :title="page.hero.title" :description="page.hero.description" :orientation="page.hero.orientation"
+                class="">
 
 
 
-                </UPageHero>
-            </UContainer>
-        </Transition>
+            </UPageHero>
+        </UContainer>
+        <!-- </Transition> -->
 
         <UContainer v-if="!isMobile"
             class="w-full flex flex-col sm:flex-row  justify-between py-4 gap-3 sm:gap-6 overflow-x-auto transition-all overflow-visible"
@@ -125,8 +125,10 @@
                         <div class="grid gap-3 sm:gap-6 lg:grid-cols-3">
                             <div class="flex flex-col gap-6 min-w-0 max-w-full">
                                 <h1 class="text-4xl font-medium">{{ selectedMethod.title }}</h1>
-                                <NuxtImg :src="selectedMethod.image" width="420" height="250"
-                                    class="rounded-lg ring ring-muted/50" />
+                                <Transition name="fade" mode="out-in">
+                                    <NuxtImg :src="selectedMethod.image" :key="selectedMethod.image" width="420"
+                                        height="250" class="rounded-lg ring ring-muted/50" quality="80" />
+                                </Transition>
                                 <UCard class="ring-muted/50" variant="outline" :ui="{ body: 'py-1 sm:py-1' }">
                                     <UAccordion :items="accordionItems" :unmount-on-hide="false"
                                         :default-value="['description']" :ui="{
@@ -267,11 +269,11 @@
         </div> -->
 
         <UContainer>
-            <UModal>
+            <UModal :ui="{ content: 'bg-transparent shadow-none ring-0 rounded-2xl' }">
                 <UPageCard title="test" description="tejhtekht eklrjl" class="w-fit" />
 
                 <template #content>
-                    <SCarousel :section="page.carousel" />
+                    <InfoCarousel :section="page.carousel" />
                 </template>
             </UModal>
         </UContainer>
@@ -650,7 +652,7 @@ function openModelWithCurrentFramework() {
 <style scoped>
 .fade-enter-active,
 .fade-leave-active {
-    transition: opacity 0s ease-in-out;
+    transition: opacity 0.2s ease-in-out;
 }
 
 .fade-enter-from,
