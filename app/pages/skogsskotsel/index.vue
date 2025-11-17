@@ -1,6 +1,8 @@
 <template>
     <div class="flex-1 transition-all" :class="selectedMethod.id ? 'bg-neutral-50' : ''" v-if="page">
 
+
+
         <Transition name="fold-down">
             <div v-if="isMobile && showMobileStickySelect"
                 class="fixed top-18 inset-x-3 z-50 pointer-events-auto origin-top">
@@ -14,7 +16,7 @@
 
         <Transition name="fade">
             <UContainer v-if="!selectedMethod.id" class="w-full px-0">
-                <UPageHero :ui="{ container: 'py-20 pb-8 lg:py-24', title: 'sm:text-7xl', headline: 'text-neutral' }"
+                <UPageHero :ui="{ container: 'py-20 pb-16 lg:py-24', title: 'sm:text-7xl', headline: 'text-neutral' }"
                     :title="page.hero.title" :description="page.hero.description" :orientation="page.hero.orientation"
                     class="">
 
@@ -64,19 +66,17 @@
         </div>
 
         <Motion v-else class="relative" :initial="{
-            scale: 1,
-            transform: 'translateY(10px)',
+            transform: 'translateX(10px)',
             opacity: 0,
-            // filter: 'blur(20px)'
+            filter: 'blur(5px)'
 
         }" :animate="{
-            scale: 1,
-            transform: 'translateY(0px)',
+            transform: 'translateX(0px)',
             opacity: 1,
-            // filter: 'blur(0px)'
+            filter: 'blur(0px)'
         }" :transition="{
-            duration: 0.3,
-            delay: 0.5
+            duration: 0.5,
+            delay: 0.2
         }">
             <UCarousel v-slot="{ item }" :items="methods" loop :speed="4" :ui="{ item: 'basis-3/5 md:basis-1/3 p-2' }">
 
@@ -263,8 +263,19 @@
 
         </UContainer>
         <!-- <div class="bg-muted border-t border-muted mt-18">
-            <SCarousel :section="page.carousel" />
+           
         </div> -->
+
+        <UContainer>
+            <UModal>
+                <UPageCard title="test" description="tejhtekht eklrjl" class="w-fit" />
+
+                <template #content>
+                    <SCarousel :section="page.carousel" />
+                </template>
+            </UModal>
+        </UContainer>
+
     </div>
 </template>
 
@@ -307,6 +318,21 @@ watch(isMobile, () => {
 })
 
 const modelOpen = ref(false)
+const MODAL_SCROLL_CLASS = 'modal-no-scrollbar'
+
+const updateScrollState = (open: boolean) => {
+    if (!process.client) return
+    const root = document.documentElement
+    if (open) {
+        root.classList.add(MODAL_SCROLL_CLASS)
+    } else {
+        root.classList.remove(MODAL_SCROLL_CLASS)
+    }
+}
+
+watch(modelOpen, (open) => updateScrollState(open))
+onBeforeUnmount(() => updateScrollState(false))
+
 const onboardingStore = useOnboardingStore()
 
 const { data: page } = await useAsyncData('skogsskotsel', () => queryCollection('skogsskotsel').first())

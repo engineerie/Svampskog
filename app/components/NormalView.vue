@@ -30,99 +30,100 @@
         <UBreadcrumb v-if="activeDetailComponent && !isMobile" :items="breadcrumbItems" class="px-3 absolute top-1" />
       </div> -->
 
-      <div v-if="activeTab === 'dna'" class="col-span-12 sm:pt-2">
-        <div class="hidden md:flex">
-          <EdnaComponent :isNormalView="!isEdnaExpanded" @enlarge="handleEdnaToggle" />
-        </div>
-        <UContainer class="md:hidden space-y-3 pt-3 bg-muted/50">
-          <UPageFeature title="Enligt DNA" description="Från markinventeringens jordprover" />
-          <UCard @click="emitEnlarge('FullScreenEdna')" class="ring-muted/50">
-            <div class="flex justify-between items-center text-secondary-500">
-              <div class="truncate">
-                <div class="text-2xl font-semibold flex items-center ">
-                  <UIcon name="solar:dna-linear" class="mr-2" />
-                  <h1 class="truncate">Alla mykorrhizasvampar</h1>
-                </div>
-                <USkeleton v-if="dnaCount === null" class="h-4 w-12 mt-2" />
-                <h1 v-else class="text-neutral-500">{{ dnaCount }} arter</h1>
-              </div>
-              <UButton icon="i-heroicons-chevron-right" class="rounded-full " variant="ghost" color="neutral"
-                size="xl" />
-            </div>
-          </UCard>
-          <!-- <USeparator /> -->
-
-          <UPageFeature class="mt-6" title="Enligt fruktkroppar" description="Utifrån vart fruktkroppar förekommer" />
-
-          <UCard @click="emitEnlarge('FullScreenEdible')" class="ring-muted/50">
-            <div class="flex justify-between items-center text-warning-500">
-              <div>
-                <h1 class="text-2xl font-semibold flex items-center">
-                  <UIcon name="icon-park-solid:knife-fork" class="mr-2" />Matsvampar
-                </h1>
-                <USkeleton v-if="edibleCount === null" class="h-4 w-12 mt-2" />
-                <h1 v-else class="text-neutral-500">{{ edibleCount }} arter</h1>
-              </div>
-              <UButton icon="i-heroicons-chevron-right" class="rounded-full ring-muted/50" variant="ghost"
-                color="neutral" size="xl" />
-            </div>
-          </UCard>
-          <UCard @click="emitEnlarge('FullScreenPoison')" class="ring-muted/50">
-            <div class="flex justify-between items-center text-poison-500">
-              <div>
-                <h1 class="text-2xl font-semibold flex items-center ">
-                  <UIcon name="i-hugeicons-danger" class="mr-2" />Giftsvampar
-                </h1>
-                <USkeleton v-if="edibleCount === null" class="h-4 w-12 mt-2" />
-                <h1 v-else class="text-neutral-500">{{ poisonCount }} arter</h1>
-              </div>
-              <UButton icon="i-heroicons-chevron-right" class="rounded-full " variant="ghost" color="neutral"
-                size="xl" />
-            </div>
-          </UCard>
-          <UCard @click="emitEnlarge('RedlistedComponent')" class="ring-muted/50">
-            <div class="flex justify-between items-center text-signal-500">
-              <div>
-                <h1 class="text-2xl font-semibold flex items-center">
-                  <UIcon name="i-material-symbols-award-star-outline" class="mr-2" />
-                  Naturvårdsarter
-                </h1>
-                <USkeleton v-if="redlistCount === null" class="h-4 w-12 mt-2" />
-                <h1 v-else class="text-neutral-500">{{ redlistCount }} arter</h1>
-              </div>
-              <UButton icon="i-heroicons-chevron-right" class="rounded-full " variant="ghost" color="neutral"
-                size="xl" />
-            </div>
-          </UCard>
-
-        </UContainer>
-      </div>
-    </div>
-
-    <div v-if="activeTab === 'knowledge'" class="col-span-12 sm:pt-2">
-      <transition name="fade" mode="out-in">
-        <div v-if="activeDetailComponent" class="space-y-4">
-          <component :is="activeDetailComponent" v-bind="detailComponentProps" :key="detailComponentKey"
-            @enlarge="handleCloseDetail" class="w-full" />
-        </div>
-        <template v-else>
-          <div class="col-span-12 grid-cols-12 rounded-2xl gap-y-3 hidden md:grid gap-4">
-            <div class="col-span-4 flex flex-col h-full">
-              <FullScreenEdible :geography="geography" :forestType="forestType" :standAge="standAge"
-                :vegetationType="vegetationType" :isNormalView="true" @enlarge="emitEnlarge('FullScreenEdible')"
-                :key="route.fullPath" />
-            </div>
-            <div class="col-span-4 flex flex-col">
-              <FullScreenPoison :geography="geography" :forestType="forestType" :standAge="standAge"
-                :vegetationType="vegetationType" :isNormalView="true" @enlarge="emitEnlarge('FullScreenPoison')"
-                :key="route.fullPath" />
-            </div>
-            <div class="col-span-4 flex flex-col">
-              <RedlistedComponent :isNormalView="true" @enlarge="emitEnlarge('RedlistedComponent')" />
-            </div>
+      <transition name="view-transition" mode="out-in">
+        <div v-if="activeTab === 'dna'" key="dna" class="col-span-12 sm:pt-2">
+          <div class="hidden md:flex">
+            <EdnaComponent :isNormalView="!isEdnaExpanded" @enlarge="handleEdnaToggle" />
           </div>
+          <UContainer class="md:hidden space-y-3 pt-3 bg-muted/50">
+            <UPageFeature title="Enligt DNA" description="Från markinventeringens jordprover" />
+            <UCard @click="emitEnlarge('FullScreenEdna')" class="ring-muted/50">
+              <div class="flex justify-between items-center text-secondary-500">
+                <div class="truncate">
+                  <div class="text-2xl font-semibold flex items-center ">
+                    <UIcon name="solar:dna-linear" class="mr-2" />
+                    <h1 class="truncate">Alla mykorrhizasvampar</h1>
+                  </div>
+                  <USkeleton v-if="dnaCount === null" class="h-4 w-12 mt-2" />
+                  <h1 v-else class="text-neutral-500">{{ dnaCount }} arter</h1>
+                </div>
+                <UButton icon="i-heroicons-chevron-right" class="rounded-full " variant="ghost" color="neutral"
+                  size="xl" />
+              </div>
+            </UCard>
+            <!-- <USeparator /> -->
 
-        </template>
+            <UPageFeature class="mt-6" title="Enligt fruktkroppar" description="Utifrån vart fruktkroppar förekommer" />
+
+            <UCard @click="emitEnlarge('FullScreenEdible')" class="ring-muted/50">
+              <div class="flex justify-between items-center text-warning-500">
+                <div>
+                  <h1 class="text-2xl font-semibold flex items-center">
+                    <UIcon name="icon-park-solid:knife-fork" class="mr-2" />Matsvampar
+                  </h1>
+                  <USkeleton v-if="edibleCount === null" class="h-4 w-12 mt-2" />
+                  <h1 v-else class="text-neutral-500">{{ edibleCount }} arter</h1>
+                </div>
+                <UButton icon="i-heroicons-chevron-right" class="rounded-full ring-muted/50" variant="ghost"
+                  color="neutral" size="xl" />
+              </div>
+            </UCard>
+            <UCard @click="emitEnlarge('FullScreenPoison')" class="ring-muted/50">
+              <div class="flex justify-between items-center text-poison-500">
+                <div>
+                  <h1 class="text-2xl font-semibold flex items-center ">
+                    <UIcon name="i-hugeicons-danger" class="mr-2" />Giftsvampar
+                  </h1>
+                  <USkeleton v-if="edibleCount === null" class="h-4 w-12 mt-2" />
+                  <h1 v-else class="text-neutral-500">{{ poisonCount }} arter</h1>
+                </div>
+                <UButton icon="i-heroicons-chevron-right" class="rounded-full " variant="ghost" color="neutral"
+                  size="xl" />
+              </div>
+            </UCard>
+            <UCard @click="emitEnlarge('RedlistedComponent')" class="ring-muted/50">
+              <div class="flex justify-between items-center text-signal-500">
+                <div>
+                  <h1 class="text-2xl font-semibold flex items-center">
+                    <UIcon name="i-material-symbols-award-star-outline" class="mr-2" />
+                    Naturvårdsarter
+                  </h1>
+                  <USkeleton v-if="redlistCount === null" class="h-4 w-12 mt-2" />
+                  <h1 v-else class="text-neutral-500">{{ redlistCount }} arter</h1>
+                </div>
+                <UButton icon="i-heroicons-chevron-right" class="rounded-full " variant="ghost" color="neutral"
+                  size="xl" />
+              </div>
+            </UCard>
+
+          </UContainer>
+        </div>
+        <div v-else key="knowledge" class="col-span-12 sm:pt-2">
+          <transition name="fade" mode="out-in">
+            <div v-if="activeDetailComponent" class="space-y-4">
+              <component :is="activeDetailComponent" v-bind="detailComponentProps" :key="detailComponentKey"
+                @enlarge="handleCloseDetail" class="w-full" />
+            </div>
+            <template v-else>
+              <div class="col-span-12 grid-cols-12 rounded-2xl gap-y-3 hidden md:grid gap-4">
+                <div class="col-span-4 flex flex-col h-full">
+                  <FullScreenEdible :geography="geography" :forestType="forestType" :standAge="standAge"
+                    :vegetationType="vegetationType" :isNormalView="true" @enlarge="emitEnlarge('FullScreenEdible')"
+                    :key="route.fullPath" />
+                </div>
+                <div class="col-span-4 flex flex-col">
+                  <FullScreenPoison :geography="geography" :forestType="forestType" :standAge="standAge"
+                    :vegetationType="vegetationType" :isNormalView="true" @enlarge="emitEnlarge('FullScreenPoison')"
+                    :key="route.fullPath" />
+                </div>
+                <div class="col-span-4 flex flex-col">
+                  <RedlistedComponent :isNormalView="true" @enlarge="emitEnlarge('RedlistedComponent')" />
+                </div>
+              </div>
+
+            </template>
+          </transition>
+        </div>
       </transition>
     </div>
   </div>
@@ -348,6 +349,17 @@ watch(
 .fade-leave-to {
   opacity: 0;
 }
+
+/* .view-transition-enter-active,
+.view-transition-leave-active {
+  transition: opacity 0.3s ease-in-out;
+}
+
+.view-transition-enter-from,
+.view-transition-leave-to {
+  opacity: 0;
+  transform: translateY(10px);
+} */
 
 .rounded-tab {
   --r: 0.8em;

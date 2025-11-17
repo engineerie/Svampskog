@@ -116,6 +116,7 @@ const svampCategoryFieldMap: Record<string, string> = {
   russulales: 'Russulales',
   thelephorales: 'Thelephorales',
   ascomycota: 'Ascomyceter',
+  'övriga': 'Övriga',
 }
 
 const methodToFrameworkMap: Record<string, string> = {
@@ -210,13 +211,14 @@ const spindlingarDataset = computed(() => svampCategoryDatasets.value['spindling
 const russulalesDataset = computed(() => svampCategoryDatasets.value['russulales'] ?? [])
 const ascomycotaDataset = computed(() => svampCategoryDatasets.value['ascomycota'] ?? [])
 const thelephoralesDataset = computed(() => svampCategoryDatasets.value['thelephorales'] ?? [])
+const ovrigaDataset = computed(() => svampCategoryDatasets.value['övriga'] ?? [])
 const totalDataset = computed(() => Array.isArray(totalSvamparDataDoc.value?.entries) ? totalSvamparDataDoc.value.entries : [])
 
 const { data: relativeSvampgrupperDoc } = await useAsyncData('svampgrupper-relative-skogsbruk', () =>
   queryCollection('svampgrupperRelativeSkogsbruk').first()
 )
 
-const relativeCategoryKeys = ['atheliales', 'boletales', 'cantharellales', 'spindlingar', 'russulales', 'thelephorales', 'ascomycota']
+const relativeCategoryKeys = ['atheliales', 'boletales', 'cantharellales', 'spindlingar', 'russulales', 'thelephorales', 'ascomycota', 'övriga']
 
 const relativeChartRows = computed(() => {
   const entries = Array.isArray(relativeSvampgrupperDoc.value?.entries)
@@ -289,6 +291,9 @@ const yDomain = computed<[number, number] | undefined>(() => {
 })
 
 const baseChartData = computed(() => {
+  if (props.relativeChart) {
+    return relativeChartRows.value;
+  }
   if (props.chartType === 'bar') {
     return mergedData.value;
   }
@@ -306,16 +311,38 @@ const xDomain = computed<[number, number]>(() => {
   return [min, Math.max(...xs)]
 })
 
+const relativeTickValues = computed<number[]>(() => {
+  const ages = relativeChartRows.value
+    .map(row => Number(row?.age))
+    .filter(age => Number.isFinite(age)) as number[]
+  if (!ages.length) {
+    return [0, 50, 100, 150, 200]
+  }
+  const maxAge = Math.max(...ages)
+  if (maxAge <= 80) {
+    return [0, 20, 50, 80]
+  }
+  const ticks: number[] = [0]
+  const step = 50
+  for (let val = step; val <= maxAge; val += step) {
+    ticks.push(val)
+  }
+  if (ticks[ticks.length - 1] !== maxAge) {
+    ticks.push(maxAge)
+  }
+  return ticks
+})
+
 const xTickValues = computed(() =>
-  props.relativeChart ? [0, 20, 50, 80] : [0, 10, 20, 30, 40, 50, 60, 70, 80, 90]
+  props.relativeChart ? relativeTickValues.value : [0, 10, 20, 30, 40, 50, 60, 70, 80, 90]
 )
 
 const formatXTicks = (val: number) => {
   if (props.relativeChart) {
     if (val === 0) return '0 år'
-    if (val === 20) return '20 år'
-    if (val === 50) return '50 år'
-    if (val === 80) return '80 år'
+    if (relativeTickValues.value.includes(val)) {
+      return `${val} år`
+    }
     return ''
   }
   if (val === 0) return 'Avverkning'
@@ -526,6 +553,7 @@ const artkategoriColorMapping: Record<string, string> = {
   "spindlingar": "#F97316",
   "russulales": "#22C55E",
   "ascomycota": "#DC2626",
+  "övriga": "#94A3B8",
   "thelephorales": "#0EA5E9",
 
   "matsvamp": "#eab308",
@@ -537,6 +565,7 @@ const artkategoriColorMapping: Record<string, string> = {
 const artkategoriLegendOrder = [
   'atheliales',
   'ascomycota',
+  'övriga',
   'spindlingar',
   'russulales',
 
@@ -555,6 +584,7 @@ const artkategoriLabelMap: Record<string, string> = {
   'spindlingar': 'Spindelskivlingar',
   'russulales': 'Kremlor & riskor',
   'ascomycota': 'Sporsäckssvampar',
+  'övriga': 'Övriga',
   'thelephorales': 'Tagg- och tomentelloida svampar',
   'matsvamp': 'Alla matsvampar',
   'goda matsvampar': 'Goda matsvampar',
@@ -570,6 +600,7 @@ const artkategoriIconMap: Record<string, string> = {
   russulales: '/images/svampgrupp/hattsvamp.png',
   thelephorales: '/images/svampgrupp/taggsvamp.png',
   ascomycota: '/images/svampgrupp/skalsvamp.png',
+  'övriga': '/images/svampgrupp/ovrigt.png',
 }
 
 const frameworkAnnotations: Record<string, Array<{ age: number; text: string }>> = {
@@ -604,6 +635,7 @@ function normalizeArtKey(category: string): string {
   if (key === 'kg matsvampar') return 'kg matsvamp';
   if (key === 'cortinariaceae') return 'spindlingar';
   if (key === 'ascomyceter') return 'ascomycota';
+  if (key === 'ovriga' || key === 'övrigt' || key === 'ovrigt') return 'övriga';
   return key;
 }
 
@@ -1002,6 +1034,9 @@ function resolveDatasetForCategory(category: string) {
   }
   if (category === 'thelephorales') {
     return thelephoralesDataset.value;
+  }
+  if (category === 'övriga') {
+    return ovrigaDataset.value;
   }
   return [];
 }

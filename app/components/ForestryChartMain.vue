@@ -96,10 +96,9 @@
                   :selectedArtkategori="defaultGrupperArtkategori" chartType="area" :singleFrameworkSelection="true"
                   :relativeChart="true" />
                 <p class="text-sm text-muted">
-                  Den relativa fördelningen av olika grupper mykorrhizasvampar i förhållande till alla mykorrhizasvampar
-                  i
-                  äldre skog och vid olika skogsåldrar efter avverkning.
-                </p>
+                  Den relativa fördelningen av olika grupper mykorrhizasvampar vid olika skogsåldrar. Uppgifterna
+                  baseras enbart på förekomst i skogar av olika åldrar och är inte kopplade till vilken
+                  skogsskötselmetod som använts. </p>
               </div>
             </template>
           </UModal>
@@ -202,6 +201,7 @@ const defaultGrupperArtkategori = [
   'russulales',
   'thelephorales',
   'ascomycota',
+  'övriga',
 ]
 
 const artkategoriOptions = [
@@ -212,6 +212,7 @@ const artkategoriOptions = [
   { label: 'Russulales', value: 'russulales' },
   { label: 'Thelephorales', value: 'thelephorales' },
   { label: 'Sporsäckssvampar', value: 'ascomycota' },
+  { label: 'Övriga', value: 'övriga' },
   { label: 'matsvamp', value: 'matsvamp' },
   { label: 'rödlistade + signalarter', value: 'rödlistade + signalarter' },
   { label: 'total', value: 'total' },
@@ -322,6 +323,15 @@ const compareArtkategoriOptions = [
     avatar: {
       src: '/images/svampgrupp/skalsvamp.png',
       alt: 'Sporsäckssvampar'
+    }
+  },
+  {
+    label: 'Övriga svampar',
+    value: 'övriga',
+    icon: '/images/svampgrupp/ovrigt.png',
+    avatar: {
+      src: '/images/svampgrupp/ovrigt.png',
+      alt: 'Övriga svampar'
     }
   }
 ]
