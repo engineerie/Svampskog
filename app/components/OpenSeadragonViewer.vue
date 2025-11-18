@@ -431,6 +431,35 @@ export default {
       Array.isArray(props.kanteffektFeatures) ? props.kanteffektFeatures : [],
     );
 
+    const bestandBounds = {
+      xMin: 0.2675,
+      xMax: 0.7325,
+      yMin: 0.1393,
+      yMax: 0.4143,
+    };
+    const mapNormalizedPoints = (bounds, points) => {
+      const width = bounds.xMax - bounds.xMin;
+      const height = bounds.yMax - bounds.yMin;
+      return points.map(([nx, ny]) => [
+        bounds.xMin + nx * width,
+        bounds.yMin + ny * height,
+      ]);
+    };
+    const OUTER_TEMPLATE = [
+      [1, 0],
+      [1, 1],
+      [0, 1],
+      [0, 0],
+    ];
+    const INNER_TEMPLATE = [
+      [0.970968, 0.02],
+      [0.671828, 0.02],
+      [0.671828, 0.049091],
+      [0.026882, 0.049091],
+      [0.026882, 0.958909],
+      [0.970968, 0.958909],
+    ];
+
 
     // Småplantor points (content dataset)
     const matsvampDataset = ref([]);
@@ -700,8 +729,7 @@ export default {
         props.currentTime === '20 år'
       ) {
         // Static overlay bounds in image-normalized coordinates
-        const x0 = 0.2671, y0 = 0.1383;
-        const x1 = 0.7312, y1 = 0.4152;
+        const { xMin: x0, yMin: y0, xMax: x1, yMax: y1 } = bestandBounds;
 
         const tlPix = viewer.value.viewport.pixelFromPoint(new osdLib.Point(x0, y0), true);
         const brPix = viewer.value.viewport.pixelFromPoint(new osdLib.Point(x1, y1), true);
@@ -801,7 +829,7 @@ export default {
         });
       }
 
-      // Seed trees (Fröträd) — same look as retention trees, but from seedTrees.json
+      // Seed trees (Fröträd) — tinted soft orange with radial fade
       if (props.seedTreeVisible) {
         const sizeNorm = 0.03; // same radius as retention
         const seedArr = seedTreePoints.value;
@@ -824,8 +852,8 @@ export default {
 
           // Same radial fade as retention (center 1.0 → edge 0.85 currently)
           const grad = overlayCtx.createRadialGradient(pixel.x, pixel.y, 0, pixel.x, pixel.y, radius);
-          grad.addColorStop(0, 'rgba(255,255,255,0.55)');
-          grad.addColorStop(1, 'rgba(255,255,255,0.85)');
+          grad.addColorStop(0, 'rgba(253, 186, 116, 0.3)');
+          grad.addColorStop(1, 'rgba(253, 186, 116, 0.95)');
 
           overlayCtx.save();
           overlayCtx.beginPath();
@@ -834,13 +862,6 @@ export default {
           overlayCtx.fillStyle = grad;
           overlayCtx.fill();
           overlayCtx.restore();
-
-          // Outline (same as retention)
-          overlayCtx.beginPath();
-          overlayCtx.arc(pixel.x, pixel.y, radius, 0, Math.PI * 2);
-          overlayCtx.strokeStyle = 'rgba(255,255,255,0)'; // matches your retention outline
-          overlayCtx.lineWidth = 2;
-          overlayCtx.stroke();
         });
       }
 
@@ -882,13 +903,12 @@ export default {
             const alpha = baseAlpha;
 
             // Use hardcoded coordinates for now (replace with f.outer/f.inner if present)
-            const outer = [
-              [0.7312, 0.1383], [0.7312, 0.4152], [0.2672, 0.4152], [0.2671, 0.1383]
-            ].map(([x, y]) => viewer.value.viewport.pixelFromPoint(new osdLib.Point(x, y), true));
-            const inner = [
-              [0.7190, 0.1448], [0.5799, 0.1448], [0.5799, 0.1528],
-              [0.2800, 0.1528], [0.2800, 0.4030], [0.7190, 0.4030]
-            ].map(([x, y]) => viewer.value.viewport.pixelFromPoint(new osdLib.Point(x, y), true));
+            const outer = mapNormalizedPoints(bestandBounds, OUTER_TEMPLATE).map(([x, y]) =>
+              viewer.value.viewport.pixelFromPoint(new osdLib.Point(x, y), true),
+            );
+            const inner = mapNormalizedPoints(bestandBounds, INNER_TEMPLATE).map(([x, y]) =>
+              viewer.value.viewport.pixelFromPoint(new osdLib.Point(x, y), true),
+            );
 
             if (props.kanteffektVisible) {
               // Draw kanteffekt polygon with 45° stripes
@@ -1395,15 +1415,12 @@ export default {
 
       // Static rectangle overlay
       if (overlayStore.staticOverlayVisible) {
-        // Normalized rectangle coords
-        const norm = { x: 0.2675, y: 0.1393, width: 0.465, height: 0.275 };
-        const p1 = viewer.value.viewport.pixelFromPoint(new osdLib.Point(norm.x, norm.y), true);
-        const p2 = viewer.value.viewport.pixelFromPoint(new osdLib.Point(norm.x + norm.width, norm.y + norm.height), true);
-        const w = p2.x - p1.x;
-        const h = p2.y - p1.y;
+        const { xMin, yMin, xMax, yMax } = bestandBounds;
+        const p1 = viewer.value.viewport.pixelFromPoint(new osdLib.Point(xMin, yMin), true);
+        const p2 = viewer.value.viewport.pixelFromPoint(new osdLib.Point(xMax, yMax), true);
         overlayCtx.strokeStyle = 'white';
         overlayCtx.lineWidth = 2;
-        overlayCtx.strokeRect(p1.x, p1.y, w, h);
+        overlayCtx.strokeRect(p1.x, p1.y, p2.x - p1.x, p2.y - p1.y);
       }
       // Saved clicks — small circles (dev)
       if (localSavedClicks.value.length) {
