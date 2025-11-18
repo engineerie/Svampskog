@@ -2327,6 +2327,7 @@ export default {
       };
       viewer.value.addHandler('animation', animationHandler);
 
+      pendingOverlayUrl.value = props.overlayDziUrl || null;
       transitionToNewTile(props.dziUrl);
       processPreloadQueue();
     }
