@@ -2,12 +2,10 @@
   <div :class="['relative', fullscreenLayout ? ' gap-4' : 'grid md:grid-cols-5 gap-8']">
 
     <!-- <client-only> -->
-    <div v-if="isClient" :id="viewerId"
-      :class="[
-        'openseadragon-viewer ui-zoom-exempt col-span-3 relative overflow-hidden',
-        fullscreenLayout ? '' : 'rounded-sm'
-      ]"
-      ref="viewerContainer" @mousedown.capture="handleActivate" @mousemove="updateMousePosition"
+    <div v-if="isClient" :id="viewerId" :class="[
+      'openseadragon-viewer ui-zoom-exempt col-span-3 relative overflow-hidden',
+      fullscreenLayout ? '' : 'rounded-sm'
+    ]" ref="viewerContainer" @mousedown.capture="handleActivate" @mousemove="updateMousePosition"
       @click="handleRetentionClick($event)">
       <!-- <div v-if="!(layoutMode === 'slider' && comparisonMode) && fullscreenLayout"
         class="absolute bottom-0 left-1/2 transform -translate-x-1/2 m-2 z-10 text-center">
@@ -37,7 +35,7 @@
           <span class="uppercase tracking-wide text-[10px] text-neutral-400">Naturvård</span>
           <span class="text-sm font-semibold text-neutral-900">{{ naturvardCounter.total }}</span>
           <span v-if="naturvardCounter.gained" class="text-emerald-600 font-semibold">+{{ naturvardCounter.gained
-          }}</span>
+            }}</span>
           <span v-if="naturvardCounter.lost" class="text-red-500 font-semibold">-{{ naturvardCounter.lost }}</span>
         </div>
       </div>
@@ -430,7 +428,6 @@ export default {
     const kanteffektFeatures = computed(() =>
       Array.isArray(props.kanteffektFeatures) ? props.kanteffektFeatures : [],
     );
-
     const bestandBounds = {
       xMin: 0.2675,
       xMax: 0.7325,
@@ -452,12 +449,12 @@ export default {
       [0, 0],
     ];
     const INNER_TEMPLATE = [
-      [0.970968, 0.02],
-      [0.671828, 0.02],
-      [0.671828, 0.049091],
-      [0.026882, 0.049091],
-      [0.026882, 0.958909],
-      [0.970968, 0.958909],
+      [0.973713, 0.023474],
+      [0.673993, 0.023474],
+      [0.673993, 0.052365],
+      [0.027796, 0.052365],
+      [0.027796, 0.955941],
+      [0.973713, 0.955941],
     ];
 
 
@@ -729,7 +726,8 @@ export default {
         props.currentTime === '20 år'
       ) {
         // Static overlay bounds in image-normalized coordinates
-        const { xMin: x0, yMin: y0, xMax: x1, yMax: y1 } = bestandBounds;
+        const x0 = 0.2671, y0 = 0.1383;
+        const x1 = 0.7312, y1 = 0.4152;
 
         const tlPix = viewer.value.viewport.pixelFromPoint(new osdLib.Point(x0, y0), true);
         const brPix = viewer.value.viewport.pixelFromPoint(new osdLib.Point(x1, y1), true);
@@ -829,7 +827,7 @@ export default {
         });
       }
 
-      // Seed trees (Fröträd) — tinted soft orange with radial fade
+      // Seed trees (Fröträd) — same look as retention trees, but from seedTrees.json
       if (props.seedTreeVisible) {
         const sizeNorm = 0.03; // same radius as retention
         const seedArr = seedTreePoints.value;
@@ -852,8 +850,8 @@ export default {
 
           // Same radial fade as retention (center 1.0 → edge 0.85 currently)
           const grad = overlayCtx.createRadialGradient(pixel.x, pixel.y, 0, pixel.x, pixel.y, radius);
-          grad.addColorStop(0, 'rgba(253, 186, 116, 0.3)');
-          grad.addColorStop(1, 'rgba(253, 186, 116, 0.95)');
+          grad.addColorStop(0, 'rgba(255,255,255,0.55)');
+          grad.addColorStop(1, 'rgba(255,255,255,0.85)');
 
           overlayCtx.save();
           overlayCtx.beginPath();
@@ -862,6 +860,13 @@ export default {
           overlayCtx.fillStyle = grad;
           overlayCtx.fill();
           overlayCtx.restore();
+
+          // Outline (same as retention)
+          overlayCtx.beginPath();
+          overlayCtx.arc(pixel.x, pixel.y, radius, 0, Math.PI * 2);
+          overlayCtx.strokeStyle = 'rgba(255,255,255,0)'; // matches your retention outline
+          overlayCtx.lineWidth = 2;
+          overlayCtx.stroke();
         });
       }
 
@@ -903,12 +908,10 @@ export default {
             const alpha = baseAlpha;
 
             // Use hardcoded coordinates for now (replace with f.outer/f.inner if present)
-            const outer = mapNormalizedPoints(bestandBounds, OUTER_TEMPLATE).map(([x, y]) =>
-              viewer.value.viewport.pixelFromPoint(new osdLib.Point(x, y), true),
-            );
-            const inner = mapNormalizedPoints(bestandBounds, INNER_TEMPLATE).map(([x, y]) =>
-              viewer.value.viewport.pixelFromPoint(new osdLib.Point(x, y), true),
-            );
+            const outer = mapNormalizedPoints(bestandBounds, OUTER_TEMPLATE)
+              .map(([x, y]) => viewer.value.viewport.pixelFromPoint(new osdLib.Point(x, y), true));
+            const inner = mapNormalizedPoints(bestandBounds, INNER_TEMPLATE)
+              .map(([x, y]) => viewer.value.viewport.pixelFromPoint(new osdLib.Point(x, y), true));
 
             if (props.kanteffektVisible) {
               // Draw kanteffekt polygon with 45° stripes
@@ -969,15 +972,15 @@ export default {
         activeKanteffekt
           .filter(f => f.shape === 'squareHole')
           .forEach(f => {
+            const centerX = f.x;
+            const centerPt = new osdLib.Point(centerX, f.y);
+            const centerPixel = viewer.value.viewport.pixelFromPoint(centerPt, true);
             const halfNorm = f.size / 2;
             const holeHalfNorm = f.holeSize / 2;
-            // Coordinates in pixels
-            const centerPt = new osdLib.Point(f.x, f.y);
-            const centerPixel = viewer.value.viewport.pixelFromPoint(centerPt, true);
-            const pixelRight = viewer.value.viewport.pixelFromPoint(new osdLib.Point(f.x + halfNorm, f.y), true);
+            const pixelRight = viewer.value.viewport.pixelFromPoint(new osdLib.Point(centerX + halfNorm, f.y), true);
             const halfSide = Math.abs(pixelRight.x - centerPixel.x);
             const side = halfSide * 2;
-            const pixelHoleRight = viewer.value.viewport.pixelFromPoint(new osdLib.Point(f.x + holeHalfNorm, f.y), true);
+            const pixelHoleRight = viewer.value.viewport.pixelFromPoint(new osdLib.Point(centerX + holeHalfNorm, f.y), true);
             const holeHalfSide = Math.abs(pixelHoleRight.x - centerPixel.x);
             // ---- Opacity per lucka & time ----
             let luckaNum = null;
@@ -1413,7 +1416,6 @@ export default {
         } catch { }
       }
 
-      // Static rectangle overlay
       if (overlayStore.staticOverlayVisible) {
         const { xMin, yMin, xMax, yMax } = bestandBounds;
         const p1 = viewer.value.viewport.pixelFromPoint(new osdLib.Point(xMin, yMin), true);
@@ -2417,7 +2419,7 @@ export default {
       }
 
       if (overlayResult?.item && previousOverlay && previousOverlay !== overlayImage.value) {
-          if (typeof previousOverlay.setOpacity === 'function') {
+        if (typeof previousOverlay.setOpacity === 'function') {
           fadeOutPromises.push(new Promise(resolve => {
             let start = null;
             const initial = previousOverlay.getOpacity?.() ?? 1;
