@@ -1204,6 +1204,8 @@ export default {
 
         const hitboxes = [];
 
+        const BASE_RADIUS = 14;
+
         sortedPoints.forEach((p) => {
           if (!p) return;
           if (activeFramework && !valueMatches(p.framework, activeFramework)) return;
@@ -1212,9 +1214,7 @@ export default {
 
           const pt = new osdLib.Point(p.x, p.y);
           const pixel = viewer.value.viewport.pixelFromPoint(pt, true);
-          const normalizedRadius = 0.008;
-          const pixelRight = viewer.value.viewport.pixelFromPoint(new osdLib.Point(p.x + normalizedRadius, p.y), true);
-          const radius = Math.abs(pixelRight.x - pixel.x);
+          const radius = BASE_RADIUS;
           const isRemoved = !!p.removed;
           const isMovementSource = p.id === 'myc-7';
           const isMovementTarget = p.id === 'myc-7.1';
