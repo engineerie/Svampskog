@@ -75,6 +75,12 @@ export default defineNuxtConfig({
   compatibilityDate: "2024-07-11",
 
   nitro: {
+    serverAssets: [
+      {
+        baseName: "storage",
+        dir: "storage",
+      },
+    ],
     prerender: {
       routes: ["/", "/info"],
       crawlLinks: true,
