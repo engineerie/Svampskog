@@ -3,7 +3,10 @@
 
     <!-- <client-only> -->
     <div v-if="isClient" :id="viewerId"
-      :class="['openseadragon-viewer ui-zoom-exempt col-span-3 relative overflow-hidden', fullscreenLayout ? '' : 'rounded-sm']"
+      :class="[
+        'openseadragon-viewer ui-zoom-exempt col-span-3 relative overflow-hidden',
+        fullscreenLayout ? '' : 'rounded-sm'
+      ]"
       ref="viewerContainer" @mousedown.capture="handleActivate" @mousemove="updateMousePosition"
       @click="handleRetentionClick($event)">
       <!-- <div v-if="!(layoutMode === 'slider' && comparisonMode) && fullscreenLayout"
@@ -1579,27 +1582,46 @@ export default {
       }
     }
 
-    function waitForTiledImageReady(item, callback) {
+    function waitForTiledImageReady(item, callback, requireFullyLoaded = false) {
       if (!item) {
         callback();
         return;
       }
       let resolved = false;
       let timeoutId;
-      const handler = () => {
+      const cleanup = () => {
+        if (timeoutId) clearTimeout(timeoutId);
+        item.removeHandler('fully-loaded', fullyHandler);
+        item.removeHandler('tile-drawn', drawnHandler);
+      }
+
+      const finish = () => {
         if (resolved) return;
         resolved = true;
-        if (timeoutId) clearTimeout(timeoutId);
-        item.removeHandler('tile-drawn', handler);
+        cleanup();
         callback();
       };
-      item.addHandler('tile-drawn', handler);
-      timeoutId = setTimeout(() => {
-        if (resolved) return;
-        resolved = true;
-        item.removeHandler('tile-drawn', handler);
-        callback();
-      }, 300);
+
+      const fullyHandler = () => finish();
+      const drawnHandler = () => {
+        if (!requireFullyLoaded || !item.getFullyLoaded || item.getFullyLoaded()) {
+          finish();
+        }
+      };
+
+      if (!requireFullyLoaded) {
+        item.addHandler('tile-drawn', drawnHandler);
+        timeoutId = setTimeout(finish, 500);
+        return;
+      }
+
+      if (typeof item.getFullyLoaded === 'function' && item.getFullyLoaded()) {
+        finish();
+        return;
+      }
+      item.addHandler('fully-loaded', fullyHandler);
+      item.addHandler('tile-drawn', drawnHandler);
+      timeoutId = setTimeout(finish, 2000);
     }
 
     function enqueuePreloadUrls(urls = []) {
@@ -1669,7 +1691,7 @@ export default {
               preloadedDziUrls.add(url);
               removeTiledImage(tempItem);
               resolve();
-            });
+            }, true);
           },
           error: err => {
             console.warn('[OSD] preload failed for', url, err);
