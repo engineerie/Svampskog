@@ -1557,6 +1557,7 @@ export default {
     const baseImage = ref(null);
     let baseLoadToken = 0;
     let overlayLoadToken = 0;
+    const pendingOverlayUrl = ref(null);
     const preloadedDziUrls = new Set();
     const queuedPreloadUrls = new Set();
     const preloadQueue = [];
@@ -1744,6 +1745,75 @@ export default {
       });
     }
 
+    function loadBaseTileForTransition(tileSource, previousBase) {
+      if (!viewer.value || !tileSource) return Promise.resolve(null);
+      const loadToken = ++baseLoadToken;
+      const existingIndex = previousBase ? viewer.value.world.getIndexOfItem(previousBase) : undefined;
+      const index = typeof existingIndex === 'number' && existingIndex >= 0 ? existingIndex : undefined;
+      return new Promise(resolve => {
+        viewer.value.addTiledImage({
+          tileSource,
+          crossOriginPolicy: 'Anonymous',
+          ajaxWithCredentials: false,
+          opacity: 0,
+          index,
+          success: event => {
+            const newItem = event.item;
+            waitForTiledImageReady(newItem, () => {
+              if (!viewer.value || loadToken !== baseLoadToken) {
+                removeTiledImage(newItem);
+                resolve(null);
+                return;
+              }
+              const targetOpacity = previousBase && typeof previousBase.getOpacity === 'function'
+                ? previousBase.getOpacity()
+                : 1;
+              resolve({ item: newItem, targetOpacity });
+            });
+          },
+          error: err => {
+            console.error('[OSD] failed to load tile source', err);
+            resolve(null);
+          }
+        });
+      });
+    }
+
+    function loadOverlayTileForTransition(tileSource, previousOverlay) {
+      if (!viewer.value || !tileSource) return Promise.resolve(null);
+      const loadToken = ++overlayLoadToken;
+      const insertionIndex = previousOverlay
+        ? viewer.value.world.getIndexOfItem(previousOverlay)
+        : viewer.value.world.getItemCount();
+      return new Promise(resolve => {
+        viewer.value.addTiledImage({
+          tileSource,
+          crossOriginPolicy: 'Anonymous',
+          ajaxWithCredentials: false,
+          opacity: 0,
+          index: insertionIndex,
+          success: event => {
+            const newItem = event.item;
+            waitForTiledImageReady(newItem, () => {
+              if (!viewer.value || loadToken !== overlayLoadToken) {
+                removeTiledImage(newItem);
+                resolve(null);
+                return;
+              }
+              resolve({
+                item: newItem,
+                targetOpacity: overlayOpacityLocal.value ?? 1,
+              });
+            });
+          },
+          error: err => {
+            console.error('[OSD] failed to load overlay tile source', err);
+            resolve(null);
+          }
+        });
+      });
+    }
+
     // Track annotation overlays as { id, app } objects for teardown
     let annotationOverlayApps = [];
 
@@ -1778,9 +1848,6 @@ export default {
         viewer.value.removeOverlay(id);
       });
       annotationOverlayApps = [];
-      viewerContainer.value
-        .querySelectorAll('.osd-snapshot')
-        .forEach(el => el.remove());
       // Force GPU memory to be released for WebGL contexts
       const canvas = viewerContainer.value.querySelector('canvas');
       if (canvas) {
@@ -1932,12 +1999,14 @@ export default {
     const doTileTransition = debounce(newUrl => transitionToNewTile(newUrl), 100);
     watch(() => props.dziUrl, (newUrl, oldUrl) => {
       if (viewer.value && newUrl !== oldUrl) {
+        pendingOverlayUrl.value = props.overlayDziUrl || null;
         doTileTransition(newUrl);
       }
     });
 
     watch(() => props.overlayDziUrl, (newUrl, oldUrl) => {
       if (!viewer.value || newUrl === oldUrl) return;
+      if (pendingOverlayUrl.value === newUrl) return;
       refreshOverlayTile(newUrl);
     });
 
@@ -2263,95 +2332,96 @@ export default {
     }
 
 
-    // Snapshot-based crossfade for tile transitions
-    function transitionToNewTile(newUrl) {
+    async function transitionToNewTile(newUrl) {
       if (!viewer.value || !newUrl) return;
 
-      const loadToken = ++baseLoadToken;
       const zoom = viewer.value.viewport.getZoom();
       const center = viewer.value.viewport.getCenter();
       const previousBase = baseImage.value;
-      const previousIndex = previousBase ? viewer.value.world.getIndexOfItem(previousBase) : 0;
-      const insertionIndex = previousIndex >= 0 ? previousIndex : 0;
+      const previousOverlay = overlayImage.value;
 
-      // Remove any leftover snapshots before creating a new one
-      const existingSnapshots = viewerContainer.value.querySelectorAll('.osd-snapshot');
-      existingSnapshots.forEach(el => viewerContainer.value.removeChild(el));
-
-      // Try to capture a snapshot from the current canvas
-      let snapshotUrl = null;
-      try {
-        const canvas = viewer.value.drawer.canvas;
-        snapshotUrl = canvas.toDataURL("image/png");
-      } catch (e) {
-        console.warn("Snapshot capture failed:", e);
+      const baseResult = await loadBaseTileForTransition(newUrl, previousBase);
+      if (!baseResult) {
+        pendingOverlayUrl.value = null;
+        return;
       }
 
-      let snapshotImg = null;
-      if (snapshotUrl) {
-        snapshotImg = document.createElement("img");
-        snapshotImg.classList.add('osd-snapshot');
-        snapshotImg.src = snapshotUrl;
-        snapshotImg.style.position = "absolute";
-        snapshotImg.style.top = "0";
-        snapshotImg.style.left = "0";
-        snapshotImg.style.width = "100%";
-        snapshotImg.style.height = "100%";
-        snapshotImg.style.objectFit = "cover";
-        snapshotImg.style.zIndex = "0";
-        snapshotImg.style.opacity = "1";
-        snapshotImg.style.transition = "opacity 0.5s ease";
-        viewerContainer.value.appendChild(snapshotImg);
+      let overlayResult = null;
+      if (previousOverlay && pendingOverlayUrl.value) {
+        overlayResult = await loadOverlayTileForTransition(pendingOverlayUrl.value, previousOverlay);
       }
 
-      viewer.value.addTiledImage({
-        tileSource: newUrl,
-        crossOriginPolicy: 'Anonymous',
-        ajaxWithCredentials: false,
-        opacity: 1,
-        index: insertionIndex,
-        success: event => {
-          const newBase = event.item;
-          waitForTiledImageReady(newBase, () => {
-            if (!viewer.value || loadToken !== baseLoadToken) {
-              removeTiledImage(newBase);
-              return;
-            }
+      baseImage.value = baseResult.item;
+      currentTile.value = baseResult.item;
 
-            baseImage.value = newBase;
-            currentTile.value = newBase;
+      viewer.value.viewport.zoomTo(zoom, null, true);
+      viewer.value.viewport.panTo(center, true);
+      viewer.value.viewport.applyConstraints();
 
-            viewer.value.viewport.zoomTo(zoom, null, true);
-            viewer.value.viewport.panTo(center, true);
-            viewer.value.viewport.applyConstraints();
+      emit('opened');
 
-            emit('opened');
+      if (typeof baseResult.item.setOpacity === 'function') {
+        baseResult.item.setOpacity(baseResult.targetOpacity ?? 1);
+      }
 
-            refreshOverlayTile(props.overlayDziUrl);
-
-            if (previousBase && previousBase !== newBase) {
-              removeTiledImage(previousBase);
-            }
-
-            if (snapshotImg) {
-              setTimeout(() => {
-                snapshotImg.style.opacity = "0";
-                setTimeout(() => {
-                  if (viewerContainer.value && viewerContainer.value.contains(snapshotImg)) {
-                    viewerContainer.value.removeChild(snapshotImg);
-                  }
-                }, 500);
-              }, 50);
-            }
-          });
-        },
-        error: err => {
-          console.error('[OSD] failed to load tile source', err);
-          if (snapshotImg && viewerContainer.value && viewerContainer.value.contains(snapshotImg)) {
-            viewerContainer.value.removeChild(snapshotImg);
-          }
+      if (overlayResult?.item) {
+        overlayImage.value = overlayResult.item;
+        if (typeof overlayResult.item.setOpacity === 'function') {
+          overlayResult.item.setOpacity(overlayResult.targetOpacity ?? (overlayOpacityLocal.value ?? 1));
         }
-      });
+      } else if (pendingOverlayUrl.value) {
+        refreshOverlayTile(pendingOverlayUrl.value)
+      }
+
+      const fadeDuration = 250;
+      const fadeOutPromises = [];
+
+      if (previousBase && previousBase !== baseResult.item) {
+        if (typeof previousBase.setOpacity === 'function') {
+          fadeOutPromises.push(new Promise(resolve => {
+            let start = null;
+            const initial = previousBase.getOpacity?.() ?? 1;
+            const step = timestamp => {
+              if (start === null) start = timestamp;
+              const progress = Math.min((timestamp - start) / fadeDuration, 1);
+              previousBase.setOpacity(initial * (1 - progress));
+              if (progress < 1) {
+                requestAnimationFrame(step);
+              } else {
+                resolve();
+              }
+            };
+            requestAnimationFrame(step);
+          }).finally(() => removeTiledImage(previousBase)));
+        } else {
+          removeTiledImage(previousBase);
+        }
+      }
+
+      if (overlayResult?.item && previousOverlay && previousOverlay !== overlayImage.value) {
+          if (typeof previousOverlay.setOpacity === 'function') {
+          fadeOutPromises.push(new Promise(resolve => {
+            let start = null;
+            const initial = previousOverlay.getOpacity?.() ?? 1;
+            const step = timestamp => {
+              if (start === null) start = timestamp;
+              const progress = Math.min((timestamp - start) / fadeDuration, 1);
+              previousOverlay.setOpacity(initial * (1 - progress));
+              if (progress < 1) {
+                requestAnimationFrame(step);
+              } else {
+                resolve();
+              }
+            };
+            requestAnimationFrame(step);
+          }).finally(() => removeTiledImage(previousOverlay)));
+        } else {
+          removeTiledImage(previousOverlay);
+        }
+      }
+
+      await Promise.allSettled(fadeOutPromises);
+      pendingOverlayUrl.value = null;
     }
 
     const overlayOpacityLocal = ref(props.globalOpacity !== undefined ? props.globalOpacity : 1);

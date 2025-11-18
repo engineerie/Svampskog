@@ -1755,13 +1755,24 @@ function buildPreloadUrlsForFramework(frameworkValue) {
   const labels = timeLabelsForFrameworkValue(frameworkValue);
   const urls = [];
   for (const timeLabel of labels) {
-    urls.push(buildDziUrl({
-      framework: frameworkValue,
-      timeLabel,
-      fungiVisibility,
-      treeVisibility: "dölj",
-      startskog: startskogVal,
-    }));
+    urls.push(
+      buildDziUrl({
+        framework: frameworkValue,
+        timeLabel,
+        fungiVisibility,
+        treeVisibility: "dölj",
+        startskog: startskogVal,
+      })
+    );
+    urls.push(
+      buildDziUrl({
+        framework: frameworkValue,
+        timeLabel,
+        fungiVisibility,
+        treeVisibility: "visa",
+        startskog: startskogVal,
+      })
+    );
   }
   return Array.from(new Set(urls));
 }
