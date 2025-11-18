@@ -1,0 +1,224 @@
+{
+  "features": [
+    {
+      "id": "ke-trakhygge",
+      "framework": "trakthygge",
+      "start": ["efter", "20 år", "50 år", "80 år"],
+      "shape": "polygon",
+      "x": 0.5,
+      "y": 0.5
+    },
+    {
+      "id": "ke-trakhygge",
+      "framework": "skärmträd",
+      "start": ["10 år", "20 år", "50 år", "80 år"],
+      "shape": "polygon",
+      "x": 0.5,
+      "y": 0.5
+    },
+    {
+      "id": "ke-luckh-1",
+      "framework": "luckhuggning",
+      "start": ["50 år", "80 år"],
+      "shape": "squareHole",
+      "size": 0.09,
+      "holeSize": 0.062,
+      "x": 0.32351,
+      "y": 0.18445,
+      "sides": {
+    "efter": "full",          
+    "20 år": "full",
+    "50 år": "full",          
+    "80 år": ["up", "left", "right"]
+  }
+    },
+{
+  "id": "ke-luckh-2",
+  "framework": "luckhuggning",
+  "start": ["efter", "20 år", "50 år", "80 år"],
+  "shape": "squareHole",
+  "size": 0.09,
+  "holeSize": 0.062,
+  "x": 0.41633,
+  "y": 0.18445,
+  "sides": {
+    "efter": "full",          
+    "20 år": "full",
+    "50 år": ["up"],          
+    "80 år": ["up"]
+  }
+},
+    {
+      "id": "ke-luckh-3",
+      "framework": "luckhuggning",
+      "start": ["50 år", "80 år"],
+      "shape": "squareHole",
+      "size": 0.09,
+      "holeSize": 0.062,
+      "x": 0.50915,
+      "y": 0.18445
+    },
+    {
+      "id": "ke-luckh-4",
+      "framework": "luckhuggning",
+      "start": ["efter", "20 år", "50 år", "80 år"],
+      "shape": "squareHole",
+      "size": 0.09,
+      "holeSize": 0.062,
+      "x": 0.60197,
+      "y": 0.18445,
+        "sides": {
+    "efter": "full",          
+    "20 år": "full",
+    "50 år": ["up", "down", "right"],          
+    "80 år": ["up"]
+  }
+    },
+    {
+      "id": "ke-luckh-5",
+      "framework": "luckhuggning",
+      "start": ["80 år"],
+      "shape": "squareHole",
+      "size": 0.09,
+      "holeSize": 0.062,
+      "x": 0.69479,
+      "y": 0.18445
+    },
+    {
+      "id": "ke-luckh-6",
+      "framework": "luckhuggning",
+      "start": ["80 år"],
+      "shape": "squareHole",
+      "size": 0.09,
+      "holeSize": 0.062,
+      "x": 0.32351,
+      "y": 0.27675
+    },
+    {
+      "id": "ke-luckh-7",
+      "framework": "luckhuggning",
+      "start": ["50 år", "80 år"],
+      "shape": "squareHole",
+      "size": 0.09,
+      "holeSize": 0.062,
+      "x": 0.41633,
+      "y": 0.27675,
+      "sides": {
+    "efter": "full",          
+    "20 år": "full",
+    "50 år": "full",          
+    "80 år": ["up", "right"]
+  }
+    },
+    {
+      "id": "ke-luckh-8",
+      "framework": "luckhuggning",
+      "start": ["efter", "20 år", "50 år", "80 år"],
+      "shape": "squareHole",
+      "size": 0.09,
+      "holeSize": 0.062,
+      "x": 0.50915,
+      "y": 0.27675,
+      "sides": {
+    "efter": "full",          
+    "20 år": "full",
+    "50 år": ["right"],          
+    "80 år": []
+  }
+    },
+    {
+      "id": "ke-luckh-9",
+      "framework": "luckhuggning",
+      "start": ["80 år"],
+      "shape": "squareHole",
+      "size": 0.09,
+      "holeSize": 0.062,
+      "x": 0.60197,
+      "y": 0.27675
+    },
+    {
+      "id": "ke-luckh-10",
+      "framework": "luckhuggning",
+      "start": ["50 år", "80 år"],
+      "shape": "squareHole",
+      "size": 0.09,
+      "holeSize": 0.062,
+      "x": 0.69479,
+      "y": 0.27675,
+      "sides": {
+    "efter": "full",          
+    "20 år": "full",
+    "50 år": "full",          
+    "80 år": ["right"]
+  }
+    },
+    {
+      "id": "ke-luckh-11",
+      "framework": "luckhuggning",
+      "start": ["efter", "20 år", "50 år", "80 år"],
+      "shape": "squareHole",
+      "size": 0.09,
+      "holeSize": 0.062,
+      "x": 0.32351,
+      "y": 0.36905,
+      "sides": {
+    "efter": "full",          
+    "20 år": "full",
+    "50 år": "full",          
+    "80 år": ["left", "down"]
+  }
+    },
+    {
+      "id": "ke-luckh-12",
+      "framework": "luckhuggning",
+      "start": ["80 år"],
+      "shape": "squareHole",
+      "size": 0.09,
+      "holeSize": 0.062,
+      "x": 0.41633,
+      "y": 0.36905
+    },
+    {
+      "id": "ke-luckh-13",
+      "framework": "luckhuggning",
+      "start": ["50 år", "80 år"],
+      "shape": "squareHole",
+      "size": 0.09,
+      "holeSize": 0.062,
+      "x": 0.50915,
+      "y": 0.36905,
+      "sides": {
+    "efter": "full",          
+    "20 år": "full",
+    "50 år": "full",          
+    "80 år": ["up", "down", "right"]
+  }
+    },
+    {
+      "id": "ke-luckh-14",
+      "framework": "luckhuggning",
+      "start": ["efter", "20 år", "50 år", "80 år"],
+      "shape": "squareHole",
+      "size": 0.09,
+      "holeSize": 0.062,
+      "x": 0.60197,
+      "y": 0.36905,
+      "sides": {
+    "efter": "full",          
+    "20 år": "full",
+    "50 år": ["right", "up", "down"],          
+    "80 år": ["down"]
+  }
+    },
+    {
+      "id": "ke-luckh-15",
+      "framework": "luckhuggning",
+      "start": ["80 år"],
+      "shape": "squareHole",
+      "size": 0.09,
+      "holeSize": 0.062,
+      "x": 0.69479,
+      "y": 0.36905
+    }
+  ]
+}
