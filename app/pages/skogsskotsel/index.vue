@@ -44,17 +44,19 @@
                 duration: 0.3,
                 delay: 0.5 + 0.05 * (method.index ?? 0)
             }">
-                <div @click="selectedId = method.id" :class="[
-                    'shrink-0 lg:shrink sm:w-58 lg:w-full bg-white transition-all hover:opacity-100 border border-muted/50 overflow-hidden rounded-lg h-fit shadow-lg hover:shadow-md relative cursor-pointer',
-                    !selectedId ? 'opacity-100' : (selectedId === method.id ? 'opacity-100 ring-primary/40 shadow-lg' : 'opacity-50')
-                ]">
+                <UTooltip :text="method.descriptionshort">
+                    <div @click="selectedId = method.id" :class="[
+                        'shrink-0 lg:shrink sm:w-58 lg:w-full bg-white transition-all hover:opacity-100 border border-muted/50 overflow-hidden rounded-lg h-fit shadow-lg hover:shadow-md relative cursor-pointer',
+                        !selectedId ? 'opacity-100' : (selectedId === method.id ? 'opacity-100 ring-primary/40 shadow-lg' : 'opacity-50')
+                    ]">
 
-                    <UBadge v-if="method.type && !selectedMethod.id" class="absolute top-2 left-2" :label="method.type"
-                        color="neutral" variant="subtle" />
-                    <NuxtImg v-if="!selectedMethod.id" :src="method.image" width="300" height="160" quality="80"
-                        class=" w-full h-full" />
-                    <h1 class="text-lg p-2 px-3 font-medium text-nowrap ">{{ method.title }}</h1>
-                </div>
+                        <UBadge v-if="method.type && !selectedMethod.id" class="absolute top-2 left-2"
+                            :label="method.type" color="neutral" variant="subtle" />
+                        <NuxtImg v-if="!selectedMethod.id" :src="method.image" width="300" height="160" quality="80"
+                            class=" w-full h-full" />
+                        <h1 class="text-lg p-2 px-3 font-medium text-nowrap ">{{ method.title }}</h1>
+                    </div>
+                </UTooltip>
             </Motion>
         </UContainer>
 

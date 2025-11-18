@@ -200,7 +200,8 @@ export const collections = {
         }),
       ),
       date: z.string().nonempty(),
-      badge: z.object({ label: z.string().nonempty() }),
+      category: z.string().nonempty(),
+      badge: z.object({ label: z.string().nonempty() }).optional(),
     }),
   }),
   index: defineCollection({

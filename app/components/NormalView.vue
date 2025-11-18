@@ -23,7 +23,7 @@
 
       <transition name="view-transition" mode="out-in">
         <div v-if="activeTab === 'dna'" key="dna" class="col-span-12 sm:pt-2">
-          <div class="hidden md:flex">
+          <div class="hidden md:block">
             <EdnaComponent :isNormalView="!isEdnaExpanded" @enlarge="handleEdnaToggle" />
           </div>
           <UContainer class="md:hidden space-y-3 pt-3 bg-muted/50">
