@@ -130,6 +130,18 @@ const forestryTimelineSchema = z.object({
   entries: z.array(forestryTimelineEntrySchema),
 });
 
+const forestryChartTextVariantSchema = z.object({
+  id: z.string().nonempty(),
+  description: z.string().nonempty(),
+});
+
+const forestryChartTextSchema = z.object({
+  id: z.string().nonempty(),
+  description: z.string().nonempty(),
+  modalDescription: z.string().optional(),
+  variants: z.array(forestryChartTextVariantSchema).optional(),
+});
+
 const methodSchema = z.object({
   index: z.number().optional(),
   id: z.string().nonempty(),
@@ -277,6 +289,13 @@ export const collections = {
       }),
       carousel: carouselSectionSchema.optional(),
       methods: z.array(methodSchema).optional(),
+    }),
+  }),
+  forestryChartTexts: defineCollection({
+    type: "data",
+    source: "forestry/forestry-chart-texts.yml",
+    schema: z.object({
+      entries: z.array(forestryChartTextSchema),
     }),
   }),
   matsvampSkogsbruk: defineCollection({

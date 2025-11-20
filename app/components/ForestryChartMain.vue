@@ -51,7 +51,7 @@
           :selectedArtkategori="['total']" :chartType="chartType" :maxYValue="130"
           :currentTimeValue="props.currentTimeValue" :frameworkComparisonMode="isFrameworkCompareMode" />
         <div class="px-4 pb-4 text-sm text-muted">
-          Mängd mykorrhizasvamp i marken i förhållande till förekomsten i äldre skog/före avverkning (%).
+          {{ skogsskoleDescription }}
         </div>
       </div>
       <div v-if="selectedChart === 'rodlistade'">
@@ -61,8 +61,7 @@
           :selectedStartskog="props.currentStartskog" :redColor="true" :maxYValue="0.65"
           :currentTimeValue="props.currentTimeValue" :frameworkComparisonMode="isFrameworkCompareMode" />
         <div class="px-4 pb-4 text-sm text-muted">
-          Mängden av mykorrhizasvampar som är rödlistade/signalarter i marken i förhållande till förekomsten i äldre
-          skog/före avverkning (%).
+          {{ rodlistadeDescription }}
         </div>
       </div>
       <div v-if="selectedChart === 'matsvampar'">
@@ -82,7 +81,7 @@
           :frameworkComparisonMode="isFrameworkCompareMode" :chartType="chartType" :singleFrameworkSelection="true"
           :selectedStartskog="props.currentStartskog" :currentTimeValue="props.currentTimeValue" />
         <div class="px-4 pb-4 text-sm text-muted">
-          Mängden av olika grupper svampar i förhållande till förekomsten i äldre skog/före avverkning (%).
+          {{ grupperDescription }}
         </div>
         <div class="mx-2">
           <UModal v-if="selectedChart === 'grupper'" :fullscreen="isMobile ? true : false" title="Relativ mängd"
@@ -96,9 +95,8 @@
                   :selectedArtkategori="defaultGrupperArtkategori" chartType="area" :singleFrameworkSelection="true"
                   :relativeChart="true" />
                 <p class="text-sm text-muted">
-                  Den relativa fördelningen av olika grupper mykorrhizasvampar vid olika skogsåldrar. Uppgifterna
-                  baseras enbart på förekomst i skogar av olika åldrar och är inte kopplade till vilken
-                  skogsskötselmetod som använts. </p>
+                  {{ grupperModalDescription }}
+                </p>
               </div>
             </template>
           </UModal>
@@ -112,8 +110,100 @@
 <script setup lang="ts">
 import { ref, computed, watch } from 'vue'
 import { useMediaQuery } from '@vueuse/core'
+import { useAsyncData } from '#app'
 
 const isMobile = useMediaQuery('(max-width: 767px)')
+
+type MatsvampVariant = 'standard' | 'goda' | 'kg'
+
+interface ForestryChartTextVariant {
+  id: string
+  description: string
+}
+
+interface ForestryChartTextEntry {
+  id: string
+  description: string
+  modalDescription?: string
+  variants?: ForestryChartTextVariant[]
+}
+
+const fallbackChartDescriptions = {
+  skogsskole: 'Mängd mykorrhizasvamp i marken i förhållande till förekomsten i äldre skog/före avverkning (%).',
+  rodlistade: 'Mängden av mykorrhizasvampar som är rödlistade/signalarter i marken i förhållande till förekomsten i äldre skog/före avverkning (%).',
+  grupper: 'Mängden av olika grupper svampar i förhållande till förekomsten i äldre skog/före avverkning (%).'
+} as const
+
+const fallbackGrupperModalDescription = 'Den relativa fördelningen av olika grupper mykorrhizasvampar vid olika skogsåldrar. Uppgifterna baseras enbart på förekomst i skogar av olika åldrar och är inte kopplade till vilken skogsskötselmetod som använts.'
+
+const fallbackMatsvampVariantDescriptions: Record<MatsvampVariant, string> = {
+  standard: 'Mängden av alla matsvampar i marken förhållande till förekomsten i äldre skog/före avverkning (%).',
+  goda: 'Mängden av alla goda matsvampar i förhållande till förekomsten i äldre skog/före avverkning (%).',
+  kg: 'Färskvikten av alla matsvampar (kg/ha) under en säsong i förhållande till förekomsten i äldre skog/före avverkning. Medel- samt min-maxvärde.'
+}
+
+const matsvampVariantKeys: MatsvampVariant[] = ['standard', 'goda', 'kg']
+
+const { data: forestryChartTextsDoc } = await useAsyncData('forestry-chart-texts', () =>
+  queryCollection('forestryChartTexts').first()
+)
+
+function extractChartTextEntries(payload: any): ForestryChartTextEntry[] {
+  if (!payload) return []
+  if (Array.isArray(payload)) return payload as ForestryChartTextEntry[]
+  if (Array.isArray(payload?.entries)) return payload.entries as ForestryChartTextEntry[]
+  if (Array.isArray(payload?.body)) return payload.body as ForestryChartTextEntry[]
+  if (Array.isArray(payload?.data)) return payload.data as ForestryChartTextEntry[]
+  return []
+}
+
+const chartTextEntries = computed<ForestryChartTextEntry[]>(() => extractChartTextEntries(forestryChartTextsDoc.value))
+
+const chartTextMap = computed<Record<string, ForestryChartTextEntry>>(() => {
+  const map: Record<string, ForestryChartTextEntry> = {}
+  for (const entry of chartTextEntries.value) {
+    if (entry?.id) {
+      map[entry.id] = entry
+    }
+  }
+  return map
+})
+
+const skogsskoleDescription = computed(() =>
+  chartTextMap.value['skogsskole']?.description ?? fallbackChartDescriptions.skogsskole
+)
+
+const rodlistadeDescription = computed(() =>
+  chartTextMap.value['rodlistade']?.description ?? fallbackChartDescriptions.rodlistade
+)
+
+const grupperDescription = computed(() =>
+  chartTextMap.value['grupper']?.description ?? fallbackChartDescriptions.grupper
+)
+
+const grupperModalDescription = computed(() =>
+  chartTextMap.value['grupper']?.modalDescription ?? fallbackGrupperModalDescription
+)
+
+const matsvampVariantDescriptions = computed<Record<MatsvampVariant, string>>(() => {
+  const map: Record<MatsvampVariant, string> = { ...fallbackMatsvampVariantDescriptions }
+  const entry = chartTextMap.value['matsvampar']
+  if (entry?.variants?.length) {
+    for (const variant of entry.variants) {
+      if (isMatsvampVariant(variant?.id) && variant.description) {
+        map[variant.id] = variant.description
+      }
+    }
+  } else if (entry?.description) {
+    map.standard = entry.description
+  }
+  return map
+})
+
+function isMatsvampVariant(value: string | undefined): value is MatsvampVariant {
+  if (!value) return false
+  return matsvampVariantKeys.includes(value as MatsvampVariant)
+}
 
 interface Props {
   parentSelectedFrameworks?: string[]
@@ -236,7 +326,7 @@ const matsvampVariantOptions = [
   { label: 'Kg matsvampar', value: 'kg', icon: 'i-material-symbols-scale-outline-rounded' },
 ]
 
-const selectedMatsvampVariant = ref<'standard' | 'goda' | 'kg'>('standard')
+const selectedMatsvampVariant = ref<MatsvampVariant>('standard')
 const matsvampChartArtkategori = computed(() => selectedMatsvampVariant.value === 'goda' ? 'goda matsvampar' : 'matsvamp')
 
 const selectedMatsvampIcon = computed(() =>
@@ -247,15 +337,9 @@ const selectedMatsvampLabel = computed(() =>
   matsvampVariantOptions.find(opt => opt.value === selectedMatsvampVariant.value)?.label ?? 'Välj dataset'
 )
 
-const matsvampDescription = computed(() => {
-  if (selectedMatsvampVariant.value === 'goda') {
-    return 'Mängden av alla goda matsvampar i förhållande till förekomsten i äldre skog/före avverkning (%).';
-  }
-  if (selectedMatsvampVariant.value === 'kg') {
-    return 'Färskvikten av alla matsvampar (kg/ha) under en säsong i förhållande till förekomsten i äldre skog/före avverkning. Medel- samt min-maxvärde.';
-  }
-  return 'Mängden av alla matsvampar i marken förhållande till förekomsten i äldre skog/före avverkning (%).';
-})
+const matsvampDescription = computed(() =>
+  matsvampVariantDescriptions.value[selectedMatsvampVariant.value]
+)
 
 const matsvampMaxY = computed(() => selectedMatsvampVariant.value === 'kg' ? 55 : 28)
 
