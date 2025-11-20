@@ -82,16 +82,15 @@ export default defineAppConfig({
     },
     colors: {
       primary: "green",
-      neutral: "rodeo-dust",
+      neutral: "rodeo",
       secondary: "violet",
       tertiary: "amber",
-      rodeodust: "rodeo-dust",
+      rodeodust: "rodeo",
       poison: "lime",
       signal: "teal",
       kalkmark: "slate",
       vanligmark: "emerald",
       time: "orange",
-      neutral2: "stone",
     },
   },
 });

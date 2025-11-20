@@ -18,41 +18,17 @@
   --color-asphalt-900: #4e4035;
   --color-asphalt-950: #16110e;
 
-  --color-rodeo-dust-50: #f9f6f3;
-  --color-rodeo-dust-100: #f2ece2;
-  --color-rodeo-dust-200: #e3d6c5;
-  --color-rodeo-dust-300: #d1bba0;
-  --color-rodeo-dust-400: #c3a283;
-  --color-rodeo-dust-500: #b1835e;
-  --color-rodeo-dust-600: #a37153;
-  --color-rodeo-dust-700: #885b46;
-  --color-rodeo-dust-800: #6f4c3d;
-  --color-rodeo-dust-900: #5a3f34;
-  --color-rodeo-dust-950: #30201a;
-
-  --color-chetwode-blue-50: #f2f4fb;
-  --color-chetwode-blue-100: #e7ebf8;
-  --color-chetwode-blue-200: #d4dbf1;
-  --color-chetwode-blue-300: #b9c2e8;
-  --color-chetwode-blue-400: #9ca4dd;
-  --color-chetwode-blue-500: #7e82ce;
-  --color-chetwode-blue-600: #6e6bc0;
-  --color-chetwode-blue-700: #5e5aa8;
-  --color-chetwode-blue-800: #4c4b88;
-  --color-chetwode-blue-900: #42416e;
-  --color-chetwode-blue-950: #272640;
-
-  --color-dust-storm-50: #fbf6f5;
-  --color-dust-storm-100: #f7ece9;
-  --color-dust-storm-200: #f1ddd7;
-  --color-dust-storm-300: #eaccc3;
-  --color-dust-storm-400: #d7a292;
-  --color-dust-storm-500: #c6826d;
-  --color-dust-storm-600: #b06852;
-  --color-dust-storm-700: #935542;
-  --color-dust-storm-800: #7a493a;
-  --color-dust-storm-900: #674135;
-  --color-dust-storm-950: #371f18;
+  --color-rodeo-50: #f9f6f3;
+  --color-rodeo-100: #f2ece2;
+  --color-rodeo-200: #e3d6c5;
+  --color-rodeo-300: #d1bba0;
+  --color-rodeo-400: #c3a283;
+  --color-rodeo-500: #b1835e;
+  --color-rodeo-600: #a37153;
+  --color-rodeo-700: #885b46;
+  --color-rodeo-800: #6f4c3d;
+  --color-rodeo-900: #5a3f34;
+  --color-rodeo-950: #30201a;
 }
 
 .dark {
