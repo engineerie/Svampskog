@@ -1,5 +1,5 @@
 title: Svampar
-description: Sök på vilka mykorrhizasvampar som kan finnas i olika skogar baserat på miljö-DNA och sammanställd kunskap om vart fruktkroppar förekommer.
+description: Sök på vilka mykorrhizasvampar som kan finnas i olika skogar baserat på miljö-DNA och sammanställd kunskap om vart fruktkroppar förekommer
 underlag: |
   Informationen visas på två sätt eftersom många svampar inte bildar synliga fruktkroppar. Fruktkroppar ger dessutom bara en delvis bild av både artrikedomen och hur vanliga svamparna är i marken.
 
@@ -16,16 +16,16 @@ hero:
   orientation: vertical
   src: /images/svampgrid/Cantharellus cibarius-3.jpg
   headline:
-    label:
-    to:
-    icon:
+    label: ''
+    to: ''
+    icon: ''
     color: secondary
   links:
     - label: Sök skogssmiljö
       icon: i-lineicons-mushroom-1
       trailing: false
       to: /mykorrhizasvampar
-      target:
+      target: ''
       size: xl
       color: neutral
       variant: solid
@@ -53,3 +53,5 @@ carousel:
       description: |
         #### Varje mycel är en individ
         Varje mycel i marken är en svampindivid, ofta ungefär någon kvadratmeter stor. I en skog finns många individer, precis som det finns många hos växter och djur.
+gallery:
+  items: []
