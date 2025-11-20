@@ -336,18 +336,32 @@ const open = ref(false)
       delay: 1
     }">
 
-      <UContainer class="mb-4">
-        <UModal v-model:open="open"
-          :ui="{ content: 'bg-transparent shadow-none ring-0 rounded-none max-h-full sm:max-h-full', body: 'p-0' }">
-          <UAlert icon="i-heroicons-newspaper" color="neutral" variant="outline" title="Mykorrhizans ekologi i korthet"
-            class="sm:w-fit shadow ring-muted/50 hover:opacity-85 hover:cursor-pointer" />
-          <template #content>
-            <UButton @click="open = false"
+      <UContainer>
+        <div class="mb-4 flex flex-col sm:flex-row gap-1.5 p-1 rounded-lg ring ring-muted/50 sm:w-fit bg-muted/30">
+          <UModal :fullscreen="isMobile ? true : false" title="Mykorrhizans ekologi i korthet">
+            <UAlert icon="i-heroicons-newspaper" color="neutral" variant="outline"
+              title="Mykorrhizans ekologi i korthet"
+              class="sm:w-fit shadow ring-muted/50 hover:opacity-85 hover:cursor-pointer" />
+            <template #body>
+              <!-- <UButton @click="open = false"
               class="fixed top-6 sm:top-10 right-2 sm:right-10 rounded-full z-10 ring-muted/50" variant="outline"
-              color="neutral" icon="i-heroicons-x-mark" size="xl" />
-            <InfoCarousel :section="page.carousel" />
-          </template>
-        </UModal>
+              color="neutral" icon="i-heroicons-x-mark" size="xl" /> -->
+              <InfoCarousel :section="page.carousel" />
+            </template>
+          </UModal>
+          <UModal :fullscreen="isMobile ? true : false" title="Underlag för svampars förekomst"
+            :description="page.underlagdescription">
+            <UAlert icon="i-heroicons-document-magnifying-glass" color="neutral" variant="outline"
+              title="Underlag för svampars förekomst"
+              class="sm:w-fit shadow ring-muted/50 hover:opacity-85 hover:cursor-pointer" />
+            <template #body>
+              <ImagePlaceholder />
+              <MDC :value="page.underlag" />
+              <NuxtLink to="/info" class="text-primary underline">Läs mer i dokumentationen</NuxtLink>
+            </template>
+          </UModal>
+        </div>
+
       </UContainer>
     </Motion>
 

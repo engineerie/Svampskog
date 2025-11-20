@@ -1,5 +1,14 @@
 title: Svampar
 description: Sök på vilka mykorrhizasvampar som kan finnas i olika skogar baserat på miljö-DNA och sammanställd kunskap om vart fruktkroppar förekommer.
+underlag: |
+  Informationen visas på två sätt eftersom många svampar inte bildar synliga fruktkroppar. Fruktkroppar ger dessutom bara en delvis bild av både artrikedomen och hur vanliga svamparna är i marken.
+
+  #### Enligt DNA
+  Enligt DNA bygger på DNA-analyser av svampmycel från ca 2000 markprover tagna i SLU:s permanenta provytor i skog (Markinventeringen och Riksskogstaxeringen) under 2015-2021.
+
+  #### Enligt fruktkroppar
+  Enligt fruktkroppar bygger främst på Artdatabankens sammanställningar över arters förekomst, ekologi och naturvårdsstatus.
+underlagdescription: Kombination av mark-DNA och fruktkroppssammanställningar
 navigation: false
 hero:
   title: Sök svampar i svenska skogar
@@ -24,20 +33,23 @@ carousel:
   title: Svampar i fokus
   description: Utforska några av våra favoritarter och se hur miljöerna förändras när du öppnar korten.
   items:
-    - title: Alla träd har mykorrhiza
-      image: /images/Carousel/Mycorrhiza Image.jpeg
-      description: |
-        Alla träd samarbetar med mykorrhizasvampar i symbios. Svamparna förstorar trädens rotsystem och förser dem med näring och vatten. I utbyte får svamparna socker från trädens fotosyntes.
     - title: Många skogssvampar bildar mykorrhiza
       image: /images/svampindex/Cortinarius sanguineus-179-.jpg
-      description: De flesta större svampar i skogen bildar mykorrhiza - både ätliga och giftiga. Dit hör bland annat spindelskivlingar, kremlor, riskor, soppar och kantareller.
+      description: |
+        #### Många skogssvampar bildar mykorrhiza
+        De flesta större svampar i skogen bildar mykorrhiza - både ätliga och giftiga. Dit hör bland annat spindelskivlingar, kremlor, riskor, soppar och kantareller.
     - title: Över 2000 arter i Sverige
       image: /images/Carousel/ArterDiagram2.jpg
       description: |
+        #### Över 2000 arter i Sverige
         I Sverige finns över 2 000 olika mykorrhizasvampar. Några är vanliga, men de flesta är ovanliga. I en äldre skog kan det finnas ett par hundra arter. Många bildar små och oansenliga fruktkroppar och är därför dåligt kända.
     - title: Det mesta är mycel i marken
       image: /images/svampindex/Ramaria pallida-256756.jpg
-      description: Fruktkropparna är bara en liten del av svampen. Den största delen är mycel i marken, som växer året runt och kan leva i många år.
+      description: |
+        #### Det mesta är mycel i marken
+        Fruktkropparna är bara en liten del av svampen. Den största delen är mycel i marken, som växer året runt och kan leva i många år.
     - title: Varje mycel är en individ
       image: /images/Carousel/Söder_Tallskog_91_Blåbär_grupp.png
-      description: Varje mycel i marken är en svampindivid, ofta ungefär någon kvadratmeter stor. I en skog finns många individer, precis som det finns många hos växter och djur.
+      description: |
+        #### Varje mycel är en individ
+        Varje mycel i marken är en svampindivid, ofta ungefär någon kvadratmeter stor. I en skog finns många individer, precis som det finns många hos växter och djur.

@@ -2,19 +2,44 @@
   <div class="grid grid-cols-12 ">
     <div class="col-span-12">
 
-      <div class="flex p-3 border-b border-muted/50 gap-3" v-if="!isMobile">
-        <UButton @click="activeTab = 'dna'"
-          class="hover:bg-neutral-100 text-start ring-muted/50 cursor-pointer p-3 px-4 rounded-lg"
-          :variant="activeTab === 'dna' ? 'subtle' : 'outline'" color="neutral">
-          <UPageFeature title="Enligt DNA" description="Från markinventeringens jordprover" />
-        </UButton>
-        <UButton @click="activeTab = 'knowledge'"
-          class="hover:bg-neutral-100 text-start ring-muted/50 cursor-pointer p-3 px-4 rounded-lg"
-          :variant="activeTab === 'knowledge' ? 'subtle' : 'outline'" color="neutral">
-          <UPageFeature title="Enligt fruktkroppar" description="Utifrån var fruktkroppar förekommer" />
-        </UButton>
+      <div class="flex justify-between p-3 border-b border-muted/50" v-if="!isMobile">
+        <div class="flex gap-3">
+          <UButton @click="activeTab = 'dna'"
+            class="hover:bg-neutral-100 text-start ring-muted/50 cursor-pointer p-3 px-4 rounded-lg"
+            :variant="activeTab === 'dna' ? 'subtle' : 'outline'" color="neutral">
+            <UPageFeature title="Enligt DNA" description="Från markinventeringens jordprover" />
+          </UButton>
+          <UButton @click="activeTab = 'knowledge'"
+            class="hover:bg-neutral-100 text-start ring-muted/50 cursor-pointer p-3 px-4 rounded-lg"
+            :variant="activeTab === 'knowledge' ? 'subtle' : 'outline'" color="neutral">
+            <UPageFeature title="Enligt fruktkroppar" description="Utifrån var fruktkroppar förekommer" />
+          </UButton>
+        </div>
 
+        <div class=" flex flex-col sm:flex-row gap-1.5 p-1 rounded-lg ring ring-muted/50 w-fit h-fit bg-muted/30">
 
+          <UModal :fullscreen="isMobile ? true : false" title="Mykorrhizans ekologi i korthet">
+            <UAlert icon="i-heroicons-newspaper" color="neutral" variant="outline" title="Ekologi"
+              class="sm:w-fit h-fit  ring-muted/50 hover:opacity-85 hover:cursor-pointer" />
+            <template #body>
+              <!-- <UButton @click="open = false"
+              class="fixed top-6 sm:top-10 right-2 sm:right-10 rounded-full z-10 ring-muted/50" variant="outline"
+              color="neutral" icon="i-heroicons-x-mark" size="xl" /> -->
+              <InfoCarousel :section="page.carousel" />
+            </template>
+          </UModal>
+          <UModal :fullscreen="isMobile ? true : false" title="Underlag för svampars förekomst"
+            :description="page.underlagdescription">
+            <UAlert icon="i-heroicons-document-magnifying-glass" color="neutral" variant="outline" title="Underlag"
+              class="sm:w-fit h-fit  ring-muted/50 hover:opacity-85 hover:cursor-pointer" />
+            <template #body>
+              <ImagePlaceholder />
+              <MDC :value="page.underlag" />
+              <NuxtLink to="/info" class="text-primary underline">Läs mer i dokumentationen</NuxtLink>
+            </template>
+          </UModal>
+
+        </div>
 
 
 
@@ -146,6 +171,8 @@ if (!page.value) {
   })
 }
 
+
+const open = ref(false)
 const envStore = useEnvParamsStore();
 const route = useRoute();
 

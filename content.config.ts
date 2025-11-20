@@ -239,6 +239,8 @@ export const collections = {
     schema: z.object({
       title: z.string().nonempty(),
       description: z.string().nonempty(),
+      underlag: z.string().nonempty(),
+      underlagdescription: z.string().nonempty(),
       hero: sectionSchema.extend({
         headline: z.object({
           label: z.string().optional(),
@@ -252,6 +254,29 @@ export const collections = {
       }),
       carousel: carouselSectionSchema.optional(),
       gallery: gallerySectionSchema.optional(),
+    }),
+  }),
+  skogsskotsel: defineCollection({
+    type: "page",
+    source: "2.skogsskotsel.yml",
+    schema: z.object({
+      title: z.string().nonempty(),
+      description: z.string().nonempty(),
+      underlag: z.string().nonempty(),
+      underlagdescription: z.string().nonempty(),
+      hero: sectionSchema.extend({
+        headline: z.object({
+          label: z.string().optional(),
+          to: z.string().optional(),
+          icon: z.string().optional().editor({ input: "icon" }),
+          color: colorEnum.optional(),
+        }),
+        links: z.array(linkSchema),
+        src: z.string().nonempty(),
+        orientation: orientationEnum.optional(),
+      }),
+      carousel: carouselSectionSchema.optional(),
+      methods: z.array(methodSchema).optional(),
     }),
   }),
   matsvampSkogsbruk: defineCollection({
@@ -472,27 +497,6 @@ export const collections = {
           klassning: z.number(),
         }),
       ),
-    }),
-  }),
-  skogsskotsel: defineCollection({
-    type: "page",
-    source: "2.skogsskotsel.yml",
-    schema: z.object({
-      title: z.string().nonempty(),
-      description: z.string().nonempty(),
-      hero: sectionSchema.extend({
-        headline: z.object({
-          label: z.string().optional(),
-          to: z.string().optional(),
-          icon: z.string().optional().editor({ input: "icon" }),
-          color: colorEnum.optional(),
-        }),
-        links: z.array(linkSchema),
-        src: z.string().nonempty(),
-        orientation: orientationEnum.optional(),
-      }),
-      carousel: carouselSectionSchema.optional(),
-      methods: z.array(methodSchema).optional(),
     }),
   }),
   blog: defineCollection({

@@ -1,6 +1,16 @@
 title: Skogsskötsel
 description: Se hur skogsskötsel påverka mykorrhizasvampar.
 navigation: false
+underlag: |
+  #### Bilderna bygger på två typer av underlag
+  1. Forskning om hur mykorrhizasvampars markmycel varierar vid olika former av skogsskötsel, miljöhänsyn och skogsålder.
+  2. Relativ förekomst av svampmycel baserad på DNA-analyser från Markinventeringen.
+
+  #### Diagrammen baseras på
+  1. Markinventeringens DNA-analyser av svampmycel i marken vid olika skogsåldrar.
+  2. Dessa värden vägs mot den relativa skogstillväxten jämfört med orörd skog. Trädtillväxten ger en ungefärlig bild av hur mycket mykorrhizasvamp som kan finnas.
+  3. Diagrammen över matsvampar som redovisas i kg/ha bygger på fältundersökningar.
+underlagdescription: Baseras på forskning, mark-DNA och fältundersökningar
 hero:
   title: Svampar efter skogsskötsel
   description: Se hur olika skötselåtgärder kan påverka förekomsten av mykorrhizasvampar.
@@ -27,34 +37,44 @@ carousel:
     - title: Alla träd har mykorrhiza
       image: /images/Carousel/Mycorrhiza Image.jpeg
       description: |
+        #### Alla träd har mykorrhiza
         Alla träd samarbetar med mykorrhizasvampar i symbios. Svamparna förstorar trädens rotsystem och förser dem med näring och vatten. I utbyte får svamparna socker från trädens fotosyntes.
-    - title: Träd och svampar är beroende av varandra
+    - title:
       description: |
+        #### Rötter invuxna av svampmycel
         Alla träds finrötter, ofta mer än hundratusen per kvadratmeter, är om- och invuxna av mykorrhizasvampars mycel. Svamparnas tunna hyfer sträcker likt en diskborste ut sig från rotspetsarna och förstorar trädens rotsystem hundrafalt och mer.
       img: /images/Carousel/DavidReed.jpg
       img2: /images/Carousel/Mushroom Hyphae and Root Growth.png
-    - title: Fler och äldre träd ger mer mykorrhiza
+    - title: Mer träd ger mer mykorrhiza
       description: |
+        #### Mer träd ger mer mykorrhiza
         Mängden träd avgör hur mycket mykorrhizasvampar det finns. Små och få träd ger mindre och fler och större träd ger större mängd och aktivitet av svamparna. Äldre skogar har också fler olika arter än yngre skogar.
       img: /images/Carousel/MushrommTreeDiagram4.jpg
       noBorder: true
-    - title: När träden avverkas försvinner svamparna
+    - title: Utan träd dör mykorrhizan
       description: |
+        ####  Utan träd dör mykorrhizan
         När träden avverkas upphör sockerflödet till rötterna. Då tynar mykorrhizasvamparna bort och dör. Ett trakthygge innebär att omkring 95% av mängden mykorrhizasvampar försvinner.
       img: /images/Carousel/Stock Image 481542412.jpeg
     - title: Svamparna överlever vid levande rötter
-      description: Mykorrhizasvampar kan bara överleva där det finns levande trädrötter - till exempel längs skogskanter, vid hänsynsträd eller på småplantor.
+      description: |
+        #### Mykorrhiza kräver levande rötter
+        Mykorrhizasvampar kan bara överleva där det finns levande trädrötter - till exempel längs skogskanter, vid hänsynsträd eller på småplantor.
       img: /images/Carousel/Skogsbruk.png
     - title: Vanliga svampar kommer tillbaka
       description: |
+        #### Vanliga svampar kommer tillbaka
+
         Efter avverkning återvänder de vanligaste svamparna. De kan antingen överleva i marken eller spridas in med sporer från närliggande skog. Ovanliga arter lyckas sällan återetablera sig.
       img: /images/Carousel/Spores Image.jpeg
     - title: Val av skogsskötsel påverkar
       description: |
+        #### Val av skogsskötsel påverkar
         Vid trakthygge försvinner de flesta arterna och mängden mykorrhiza minskar kraftigt. Med hyggesfria metoder blir påverkan betydligt mindre, eftersom det hela tiden finns många träd. Svampställen och ovanliga arter på platsen kan då fortleva.
       img: /images/Carousel/TraktBlad.png
     - title: Hur kan man gynna mykorrhizasvampar?
       description: |
+        #### Hur kan man gynna mykorrhizasvampar?
         Så här gör man om man vill måna om de mykorrhizasvampar som finns i en skog:
         1. Spara skogsområdet.
         2. Låt skogen bli äldre, då kan svamparna fortleva längre. 

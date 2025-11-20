@@ -55,11 +55,11 @@
                 :class="isFrameworkCompareMode ? 'grid-cols-2' : 'grid-cols-1'">
                 <USelect size="xl" :items="frameworkOptions" v-model="selectedFrameworkIndex"
                   :placeholder="currentFramework.label" append-to-body variant="outline"
-                  class="ring-muted  w-full shadow rounded-full "
+                  class="ring-muted  w-full shadow rounded-xl "
                   :ui="{ content: 'min-w-fit rounded-xl z-50', viewport: 'text-center' }" />
                 <USelect v-if="isFrameworkCompareMode" size="xl" :items="frameworkOptions"
                   v-model="selectedFrameworkIndex2" :placeholder="currentFramework2.label" append-to-body
-                  variant="outline" class="ring-muted  w-full shadow rounded-full "
+                  variant="outline" class="ring-muted  w-full shadow rounded-xl "
                   :ui="{ content: 'rounded-xl min-w-fit z-50' }" />
               </div>
               <div class="hidden sm:block pl-4 pt-4">
