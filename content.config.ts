@@ -56,24 +56,19 @@ const badgeSchema = z.object({
   color: colorEnum.optional(),
 });
 
-const carouselItemSchema = z.object({
-  title: z.string().nonempty(),
-  description: z.string().nonempty(),
+const ecologyIntroItemSchema = z.object({
+  title: z.string().optional(),
+  description: z.string().optional(),
+  image: z.string().optional(),
   img: z.string().optional(),
-  specialBento: z.boolean().optional(),
-  bentoImgs: z.array(z.string()).optional(),
-  specialGrid: z.boolean().optional(),
-  gridTop: z.string().optional(),
-  gridRest: z.string().optional(),
-  gridCols: z.number().optional(),
-  gridRows: z.number().optional(),
+  img2: z.string().optional(),
   noBorder: z.boolean().optional(),
 });
 
-const carouselSectionSchema = z.object({
+const ecologyIntroSectionSchema = z.object({
   title: z.string().optional(),
   description: z.string().optional(),
-  items: z.array(carouselItemSchema),
+  items: z.array(ecologyIntroItemSchema),
 });
 
 const galleryItemSchema = z.object({
@@ -264,7 +259,7 @@ export const collections = {
         src: z.string().nonempty(),
         orientation: orientationEnum.optional(),
       }),
-      carousel: carouselSectionSchema.optional(),
+      ecologyintro: ecologyIntroSectionSchema.optional(),
       gallery: gallerySectionSchema.optional(),
     }),
   }),
@@ -287,7 +282,7 @@ export const collections = {
         src: z.string().nonempty(),
         orientation: orientationEnum.optional(),
       }),
-      carousel: carouselSectionSchema.optional(),
+      ecologyintro: ecologyIntroSectionSchema.optional(),
       methods: z.array(methodSchema).optional(),
     }),
   }),

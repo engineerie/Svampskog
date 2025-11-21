@@ -18,6 +18,7 @@ if (!page.value) {
     fatal: true
   })
 }
+const ecologyIntro = computed(() => page.value?.ecologyintro ?? { title: '', description: '', items: [] })
 
 // Access the shared environment store
 const envStore = useEnvParamsStore()
@@ -83,33 +84,33 @@ function redirect() {
   }
 }
 
-type CarouselItem = {
-  title: string
-  description: string
-  img?: string
-  specialBento?: boolean
-  bentoImgs?: string[]
-  specialGrid?: boolean
-  gridTop?: string
-  gridRest?: string
-  gridCols?: number
-  gridRows?: number
-  noBorder?: boolean
-}
+// type CarouselItem = {
+//   title: string
+//   description: string
+//   img?: string
+//   specialBento?: boolean
+//   bentoImgs?: string[]
+//   specialGrid?: boolean
+//   gridTop?: string
+//   gridRest?: string
+//   gridCols?: number
+//   gridRows?: number
+//   noBorder?: boolean
+// }
 
-function buildGrid(item: CarouselItem) {
-  const cols = item.gridCols ?? 5
-  const rows = item.gridRows ?? 4
-  const total = cols * rows
-  const top = item.gridTop || item.img || ''
-  const rest = item.gridRest || item.img || ''
-  const grid = [top, ...Array(Math.max(total - 1, 0)).fill(rest)]
-  return grid.filter((src): src is string => Boolean(src))
-}
+// function buildGrid(item: CarouselItem) {
+//   const cols = item.gridCols ?? 5
+//   const rows = item.gridRows ?? 4
+//   const total = cols * rows
+//   const top = item.gridTop || item.img || ''
+//   const rest = item.gridRest || item.img || ''
+//   const grid = [top, ...Array(Math.max(total - 1, 0)).fill(rest)]
+//   return grid.filter((src): src is string => Boolean(src))
+// }
 
-function bentoImages(item: CarouselItem) {
-  return Array.isArray(item.bentoImgs) ? item.bentoImgs.filter(Boolean) : []
-}
+// function bentoImages(item: CarouselItem) {
+//   return Array.isArray(item.bentoImgs) ? item.bentoImgs.filter(Boolean) : []
+// }
 
 const open = ref(false)
 </script>
@@ -343,10 +344,7 @@ const open = ref(false)
               title="Mykorrhizans ekologi i korthet"
               class="sm:w-fit shadow ring-muted/50 hover:opacity-85 hover:cursor-pointer" />
             <template #body>
-              <!-- <UButton @click="open = false"
-              class="fixed top-6 sm:top-10 right-2 sm:right-10 rounded-full z-10 ring-muted/50" variant="outline"
-              color="neutral" icon="i-heroicons-x-mark" size="xl" /> -->
-              <InfoCarousel :section="page.carousel" />
+              <EcologyIntro :section="ecologyIntro" />
             </template>
           </UModal>
           <UModal :fullscreen="isMobile ? true : false" title="Underlag för svampars förekomst"

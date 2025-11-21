@@ -18,14 +18,12 @@
 
         <div class=" flex flex-col sm:flex-row gap-1.5 p-1 rounded-lg ring ring-muted/50 w-fit h-fit bg-muted/30">
 
-          <UModal :fullscreen="isMobile ? true : false" title="Mykorrhizans ekologi i korthet">
+          <UModal :fullscreen="isMobile ? true : false" :title="ecologyIntro.title"
+            :description="ecologyIntro.description">
             <UAlert icon="i-heroicons-newspaper" color="neutral" variant="outline" title="Ekologi"
               class="sm:w-fit h-fit  ring-muted/50 hover:opacity-85 hover:cursor-pointer" />
             <template #body>
-              <!-- <UButton @click="open = false"
-              class="fixed top-6 sm:top-10 right-2 sm:right-10 rounded-full z-10 ring-muted/50" variant="outline"
-              color="neutral" icon="i-heroicons-x-mark" size="xl" /> -->
-              <InfoCarousel :section="page.carousel" />
+              <EcologyIntro :section="ecologyIntro" />
             </template>
           </UModal>
           <UModal :fullscreen="isMobile ? true : false" title="Underlag för svampars förekomst"
@@ -116,7 +114,7 @@
               <UPageCard color="info" variant="subtle" title="test" description="tejhtekht eklrjl" class="sm:w-fit" />
 
               <template #content>
-                <InfoCarousel :section="page.carousel" />
+                <EcologyIntro :section="ecologyIntro" />
               </template>
             </UModal>
           </UContainer>
@@ -170,6 +168,8 @@ if (!page.value) {
     fatal: true
   })
 }
+
+const ecologyIntro = computed(() => page.value?.ecologyintro ?? { title: '', description: '', items: [] })
 
 
 const open = ref(false)

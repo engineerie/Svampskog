@@ -16,20 +16,20 @@ hero:
   orientation: vertical
   src: /images/svampgrid/Cantharellus cibarius-3.jpg
   headline:
-    label: ''
-    to: ''
-    icon: ''
+    label: ""
+    to: ""
+    icon: ""
     color: secondary
   links:
     - label: Sök skogssmiljö
       icon: i-lineicons-mushroom-1
       trailing: false
       to: /mykorrhizasvampar
-      target: ''
+      target: ""
       size: xl
       color: neutral
       variant: solid
-carousel:
+ecologyintro:
   title: Svampar i fokus
   description: Utforska några av våra favoritarter och se hur miljöerna förändras när du öppnar korten.
   items:

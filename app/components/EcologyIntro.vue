@@ -1,57 +1,52 @@
 <script setup lang="ts">
 import { computed } from 'vue'
 
-interface CarouselItem {
+interface EcologyIntroItem {
   title?: string
   image?: string
   img?: string
+  img2?: string
   description?: string
-  [key: string]: unknown
+  noBorder?: boolean
 }
 
-interface CarouselSection {
+interface EcologyIntroSection {
   title?: string
   description?: string
-  items: CarouselItem[]
+  items: EcologyIntroItem[]
 }
 
 const props = defineProps<{
-  section?: CarouselSection | null
-  items?: CarouselItem[] | null
+  section?: EcologyIntroSection | null
+  items?: EcologyIntroItem[] | null
   title?: string
   description?: string
 }>()
 
-const slides = computed<CarouselItem[]>(() => props.items ?? props.section?.items ?? [])
-const headingTitle = computed(() => props.section?.title ?? props.title ?? null)
-const headingDescription = computed(() => props.section?.description ?? props.description ?? null)
-const hasHeading = computed(() => Boolean(headingTitle.value || headingDescription.value))
+const slides = computed<EcologyIntroItem[]>(() => props.items ?? props.section?.items ?? [])
 
-function resolveImage(item: CarouselItem) {
+function resolvePrimaryImage(item: EcologyIntroItem) {
   return (item?.image ?? item?.img ?? '') as string
 }
 
-function resolveDescription(item: CarouselItem) {
+function resolveSecondaryImage(item: EcologyIntroItem) {
+  return (item?.img2 ?? '') as string
+}
+
+function resolveDescription(item: EcologyIntroItem) {
   return (item?.description ?? '') as string
 }
 </script>
 
 <template>
   <section v-if="slides.length" class="hide-scrollbar overflow-scroll">
-    <!-- <UContainer v-if="hasHeading" class="mb-8 sm:mb-10 px-6">
-      <h2 v-if="headingTitle" class="text-3xl font-semibold sm:text-4xl text-neutral-900">
-        {{ headingTitle }}
-      </h2>
-      <p v-if="headingDescription" class="mt-2 text-neutral-600 max-w-2xl">
-        {{ headingDescription }}
-      </p>
-    </UContainer> -->
-
     <div class="">
       <div class="flex flex-col gap-4 sm:gap-6 ">
         <article v-for="(item, i) in slides" :key="i" class=" flex flex-col">
-          <div v-if="resolveImage(item)" class="relative w-full">
-            <NuxtImg :src="resolveImage(item)" :alt="item.title || ''" fit="cover"
+          <div v-if="resolvePrimaryImage(item) || resolveSecondaryImage(item)" class="relative w-full space-y-3">
+            <NuxtImg v-if="resolvePrimaryImage(item)" :src="resolvePrimaryImage(item)" :alt="item.title || ''" fit="cover"
+              class=" rounded-lg w-full object-cover" width="800" />
+            <NuxtImg v-if="resolveSecondaryImage(item)" :src="resolveSecondaryImage(item)" :alt="item.title || ''" fit="cover"
               class=" rounded-lg w-full object-cover" width="800" />
           </div>
           <!-- <div class="px-6 py-3 sm:py-3"> -->

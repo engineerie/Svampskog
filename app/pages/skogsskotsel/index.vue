@@ -44,19 +44,19 @@
                 duration: 0.3,
                 delay: 0.5 + 0.05 * (method.index ?? 0)
             }">
-                <UTooltip :text="method.descriptionshort">
-                    <div @click="selectedId = method.id" :class="[
-                        'shrink-0 lg:shrink sm:w-58 lg:w-full bg-white transition-all hover:opacity-100 border border-muted/50 overflow-hidden rounded-lg h-fit shadow-lg hover:shadow-md relative cursor-pointer',
-                        !selectedId ? 'opacity-100' : (selectedId === method.id ? 'opacity-100 ring-primary/40 shadow-lg' : 'opacity-50')
-                    ]">
 
-                        <UBadge v-if="method.type && !selectedMethod.id" class="absolute top-2 left-2"
-                            :label="method.type" color="neutral" variant="subtle" />
-                        <NuxtImg v-if="!selectedMethod.id" :src="method.image" width="300" height="160" quality="80"
-                            class=" w-full h-full" />
-                        <h1 class="text-lg p-2 px-3 font-medium text-nowrap ">{{ method.title }}</h1>
-                    </div>
-                </UTooltip>
+                <div @click="selectedId = method.id" :class="[
+                    'shrink-0 lg:shrink sm:w-58 lg:w-full bg-white transition-all hover:opacity-100 border border-muted/50 overflow-hidden rounded-lg h-fit shadow-lg hover:shadow-md relative cursor-pointer',
+                    !selectedId ? 'opacity-100' : (selectedId === method.id ? 'opacity-100 ring-primary/40 shadow-lg' : 'opacity-50')
+                ]">
+
+                    <UBadge v-if="method.type && !selectedMethod.id" class="absolute top-2 left-2" :label="method.type"
+                        color="neutral" variant="subtle" />
+                    <NuxtImg v-if="!selectedMethod.id" :src="method.image" width="300" height="160" quality="80"
+                        class=" w-full h-full" />
+                    <h1 class="text-lg p-2 px-3 font-medium text-nowrap ">{{ method.title }}</h1>
+                </div>
+
             </Motion>
         </UContainer>
 
@@ -255,20 +255,12 @@
 
 
 
-                        <!-- <template #right>
-                                    <UAlert v-if="selectedMethod.type" color="neutral" variant="subtle"
-                                        description="Hyggesfritt skogsbruk innebär att det kontinuerligt finns ett trädtäcke i skogen."
-                                        class="h-fit mx-4 mb-4" />
-                                </template> -->
                     </UPage>
                 </div>
             </Motion>
 
 
         </UContainer>
-        <!-- <div class="bg-muted border-t border-muted mt-18">
-           
-        </div> -->
         <Motion :initial="{
             opacity: 0,
             transform: 'translatex(-10px)'
@@ -285,13 +277,13 @@
             <UContainer>
                 <div
                     class="mb-4 flex flex-col sm:flex-row gap-1.5 p-1 rounded-lg ring ring-muted/50 sm:w-fit bg-muted/30">
-                    <UModal :fullscreen="isMobile ? true : false" title="Mykorrhiza & skogsbruk i korthet">
+                    <UModal :fullscreen="isMobile ? true : false" :title="ecologyIntro.title"
+                        :description="ecologyIntro.description">
                         <UAlert icon="i-heroicons-newspaper" color="neutral" variant="outline"
                             title="Mykorrhiza & skogsbruk i korthet"
                             class="sm:w-fit shadow ring-muted/50 hover:opacity-85 hover:cursor-pointer" />
                         <template #body>
-
-                            <InfoCarousel :section="page.carousel" />
+                            <EcologyIntro :section="ecologyIntro" />
                         </template>
                     </UModal>
                     <UModal :fullscreen="isMobile ? true : false" title="Underlag för skogsskötsel och svampar"
@@ -377,6 +369,7 @@ if (!page.value) {
         fatal: true
     })
 }
+const ecologyIntro = computed(() => page.value?.ecologyintro ?? { title: '', description: '', items: [] })
 interface Method {
     index?: number
     id: string
