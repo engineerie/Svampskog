@@ -18,12 +18,16 @@
 
         <div class=" flex flex-col sm:flex-row gap-1.5 p-1 rounded-lg ring ring-muted/50 w-fit h-fit bg-muted/30">
 
-          <UModal :fullscreen="isMobile ? true : false" :title="ecologyIntro.title"
-            :description="ecologyIntro.description">
+          <UModal :fullscreen="isMobile ? true : false" :title="page.ecologyintro?.title ?? ''"
+            :description="page.ecologyintro?.description ?? ''" :ui="{
+              header: 'items-start gap-2 shrink-0',
+              title: 'whitespace-normal',
+              description: 'whitespace-normal leading-snug'
+            }">
             <UAlert icon="i-heroicons-newspaper" color="neutral" variant="outline" title="Ekologi"
               class="sm:w-fit h-fit  ring-muted/50 hover:opacity-85 hover:cursor-pointer" />
             <template #body>
-              <EcologyIntro :section="ecologyIntro" />
+              <EcologyIntro :section="page.ecologyintro" />
             </template>
           </UModal>
           <UModal :fullscreen="isMobile ? true : false" title="Underlag för svampars förekomst"
@@ -109,12 +113,12 @@
                   size="xl" />
               </div>
             </UCard>
-            <UModal title="test"
+            <UModal v-if="page.ecologyintro" title="test"
               :ui="{ content: 'bg-transparent shadow-none ring-0 rounded-none max-h-full sm:max-h-full', body: 'p-0' }">
               <UPageCard color="info" variant="subtle" title="test" description="tejhtekht eklrjl" class="sm:w-fit" />
 
               <template #content>
-                <EcologyIntro :section="ecologyIntro" />
+                <EcologyIntro :section="page.ecologyintro" />
               </template>
             </UModal>
           </UContainer>
@@ -168,8 +172,6 @@ if (!page.value) {
     fatal: true
   })
 }
-
-const ecologyIntro = computed(() => page.value?.ecologyintro ?? { title: '', description: '', items: [] })
 
 
 const open = ref(false)

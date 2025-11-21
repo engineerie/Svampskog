@@ -18,7 +18,6 @@ if (!page.value) {
     fatal: true
   })
 }
-const ecologyIntro = computed(() => page.value?.ecologyintro ?? { title: '', description: '', items: [] })
 
 // Access the shared environment store
 const envStore = useEnvParamsStore()
@@ -84,34 +83,6 @@ function redirect() {
   }
 }
 
-// type CarouselItem = {
-//   title: string
-//   description: string
-//   img?: string
-//   specialBento?: boolean
-//   bentoImgs?: string[]
-//   specialGrid?: boolean
-//   gridTop?: string
-//   gridRest?: string
-//   gridCols?: number
-//   gridRows?: number
-//   noBorder?: boolean
-// }
-
-// function buildGrid(item: CarouselItem) {
-//   const cols = item.gridCols ?? 5
-//   const rows = item.gridRows ?? 4
-//   const total = cols * rows
-//   const top = item.gridTop || item.img || ''
-//   const rest = item.gridRest || item.img || ''
-//   const grid = [top, ...Array(Math.max(total - 1, 0)).fill(rest)]
-//   return grid.filter((src): src is string => Boolean(src))
-// }
-
-// function bentoImages(item: CarouselItem) {
-//   return Array.isArray(item.bentoImgs) ? item.bentoImgs.filter(Boolean) : []
-// }
-
 const open = ref(false)
 </script>
 <template>
@@ -121,10 +92,6 @@ const open = ref(false)
       <UPageHero :ui="{ container: ' py-12 lg:py-24', title: ' sm:text-7xl', headline: 'text-neutral' }"
         :title="page.hero.title" :description="page.hero.description" :orientation="page.hero.orientation" class="">
         <template #headline v-if="page.hero.headline">
-          <!-- <NuxtLink :to="page.hero.headline.to">
-            <UBadge :icon="page.hero.headline.icon" :label="page.hero.headline.label" :color="page.hero.headline.color"
-              variant="subtle" size="lg" trailing :ui="{ base: 'rounded-full' }" />
-          </NuxtLink> -->
           <div class="flex justify-center items-center">
             <Motion :initial="{
               scale: 0.5,
@@ -339,12 +306,15 @@ const open = ref(false)
 
       <UContainer>
         <div class="mb-4 flex flex-col sm:flex-row gap-1.5 p-1 rounded-lg ring ring-muted/50 sm:w-fit bg-muted/30">
-          <UModal :fullscreen="isMobile ? true : false" title="Mykorrhizans ekologi i korthet">
+          <UModal v-if="page.ecologyintro" :fullscreen="isMobile ? true : false" :title="page.ecologyintro.title"
+            :description="page.ecologyintro.description" :ui="{
+              header: ' shrink-0',
+            }">
             <UAlert icon="i-heroicons-newspaper" color="neutral" variant="outline"
               title="Mykorrhizans ekologi i korthet"
               class="sm:w-fit shadow ring-muted/50 hover:opacity-85 hover:cursor-pointer" />
             <template #body>
-              <EcologyIntro :section="ecologyIntro" />
+              <EcologyIntro :section="page.ecologyintro" />
             </template>
           </UModal>
           <UModal :fullscreen="isMobile ? true : false" title="Underlag för svampars förekomst"
@@ -359,7 +329,6 @@ const open = ref(false)
             </template>
           </UModal>
         </div>
-
       </UContainer>
     </Motion>
 

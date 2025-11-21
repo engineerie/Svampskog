@@ -277,13 +277,17 @@
             <UContainer>
                 <div
                     class="mb-4 flex flex-col sm:flex-row gap-1.5 p-1 rounded-lg ring ring-muted/50 sm:w-fit bg-muted/30">
-                    <UModal :fullscreen="isMobile ? true : false" :title="ecologyIntro.title"
-                        :description="ecologyIntro.description">
+                    <UModal :fullscreen="isMobile ? true : false" :title="page.ecologyintro?.title ?? ''"
+                        :description="page.ecologyintro?.description ?? ''" :ui="{
+                            header: 'items-start gap-2 shrink-0',
+                            title: 'whitespace-normal',
+                            description: 'whitespace-normal leading-snug'
+                        }">
                         <UAlert icon="i-heroicons-newspaper" color="neutral" variant="outline"
                             title="Mykorrhiza & skogsbruk i korthet"
                             class="sm:w-fit shadow ring-muted/50 hover:opacity-85 hover:cursor-pointer" />
                         <template #body>
-                            <EcologyIntro :section="ecologyIntro" />
+                            <EcologyIntro :section="page.ecologyintro" />
                         </template>
                     </UModal>
                     <UModal :fullscreen="isMobile ? true : false" title="Underlag för skogsskötsel och svampar"
@@ -369,7 +373,6 @@ if (!page.value) {
         fatal: true
     })
 }
-const ecologyIntro = computed(() => page.value?.ecologyintro ?? { title: '', description: '', items: [] })
 interface Method {
     index?: number
     id: string

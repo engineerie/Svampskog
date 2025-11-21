@@ -57,8 +57,8 @@ const badgeSchema = z.object({
 });
 
 const ecologyIntroItemSchema = z.object({
-  title: z.string().optional(),
-  description: z.string().optional(),
+  title: z.string().nonempty(),
+  description: z.string().nonempty(),
   image: z.string().optional(),
   img: z.string().optional(),
   img2: z.string().optional(),
@@ -66,8 +66,8 @@ const ecologyIntroItemSchema = z.object({
 });
 
 const ecologyIntroSectionSchema = z.object({
-  title: z.string().optional(),
-  description: z.string().optional(),
+  title: z.string().nonempty(),
+  description: z.string().nonempty(),
   items: z.array(ecologyIntroItemSchema),
 });
 
@@ -259,7 +259,7 @@ export const collections = {
         src: z.string().nonempty(),
         orientation: orientationEnum.optional(),
       }),
-      ecologyintro: ecologyIntroSectionSchema.optional(),
+      ecologyintro: ecologyIntroSectionSchema,
       gallery: gallerySectionSchema.optional(),
     }),
   }),

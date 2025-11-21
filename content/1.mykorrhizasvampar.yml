@@ -30,7 +30,7 @@ hero:
       color: neutral
       variant: solid
 ecologyintro:
-  title: Svampar i fokus
+  title: Mykorrhizans ekologi i korthet
   description: Utforska några av våra favoritarter och se hur miljöerna förändras när du öppnar korten.
   items:
     - title: Många skogssvampar bildar mykorrhiza
