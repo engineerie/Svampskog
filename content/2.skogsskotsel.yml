@@ -18,15 +18,15 @@ hero:
   src: /images/Landing/skogsbruk.jpeg
   headline:
     label: Interaktiv modell
-    to: ""
+    to: ''
     icon: i-material-symbols:interactive-space
     color: secondary
   links:
     - label: Visa modell för påverkan över tid
       icon: i-material-symbols:interactive-space
       trailing: false
-      to: ""
-      target: ""
+      to: ''
+      target: ''
       size: xl
       color: rodeodust
       variant: solid
@@ -39,7 +39,7 @@ ecologyintro:
       description: |
         #### Alla träd har mykorrhiza
         Alla träd samarbetar med mykorrhizasvampar i symbios. Svamparna förstorar trädens rotsystem och förser dem med näring och vatten. I utbyte får svamparna socker från trädens fotosyntes.
-    - title: ""
+    - title: ''
       description: |
         #### Rötter invuxna av svampmycel
         Alla träds finrötter, ofta mer än hundratusen per kvadratmeter, är om- och invuxna av mykorrhizasvampars mycel. Svamparnas tunna hyfer sträcker likt en diskborste ut sig från rotspetsarna och förstorar trädens rotsystem hundrafalt och mer.
