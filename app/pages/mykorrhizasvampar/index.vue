@@ -89,7 +89,7 @@ const open = ref(false)
 
   <UPage v-if="page" class="flex-1">
     <UContainer class="w-full px-0">
-      <UPageHero :ui="{ container: ' py-12 lg:py-24', title: ' sm:text-7xl', headline: 'text-neutral' }"
+      <UPageHero :ui="{ container: ' py-12 lg:py-24 lg:pb-12', title: ' sm:text-7xl', headline: 'text-neutral' }"
         :title="page.hero.title" :description="page.hero.description" :orientation="page.hero.orientation" class="">
         <template #headline v-if="page.hero.headline">
           <div class="flex justify-center items-center">
@@ -107,7 +107,7 @@ const open = ref(false)
             }">
               <NuxtImg src="/images/svampindex/Cortinarius sanguineus-179-.jpg" width="300" height="300" format="webp"
                 alt="Illustration"
-                class="size-18 sm:size-24 rounded-lg ring ring-muted/50 inline-flex mb-12 lg:mb-18 h-fit shadow-xl" />
+                class="size-18 rounded-lg ring ring-muted/50 inline-flex mb-12 lg:mb-18 h-fit shadow-xl" />
             </Motion>
             <Motion :initial="{
               scale: 0.5,
@@ -123,7 +123,7 @@ const open = ref(false)
             }" class="-mx-4 z-50">
               <NuxtImg src="/images/svampgrid/Tricholoma matsutake-166-6276.jpg" width="300" height="300" format="webp"
                 alt="Illustration"
-                class="size-28 sm:size-40 rounded-lg ring ring-muted/50 inline-flex mb-12 lg:mb-18 h-fit  z-50 shadow-xl" />
+                class="size-28 rounded-lg ring ring-muted/50 inline-flex mb-12 lg:mb-18 h-fit  z-50 shadow-xl" />
             </Motion>
             <Motion :initial="{
               scale: 0.5,
@@ -139,7 +139,7 @@ const open = ref(false)
             }">
               <NuxtImg src="/images/svampgrid/Gomphus clavatus-1.jpg" width="300" height="300" format="webp"
                 alt="Illustration"
-                class="size-20 sm:size-28 rounded-lg ring ring-muted/50 inline-flex mb-12 lg:mb-18 h-fit shadow-xl" />
+                class="size-20 rounded-lg ring ring-muted/50 inline-flex mb-12 lg:mb-18 h-fit shadow-xl" />
             </Motion>
           </div>
 
