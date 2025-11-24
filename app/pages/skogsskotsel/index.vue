@@ -50,11 +50,19 @@
                     !selectedId ? 'opacity-100' : (selectedId === method.id ? 'opacity-100 ring-primary/40 shadow-lg' : 'opacity-50')
                 ]">
 
-                    <UBadge v-if="method.type && !selectedMethod.id" class="absolute top-2 left-2" :label="method.type"
-                        color="neutral" variant="subtle" />
-                    <NuxtImg v-if="!selectedMethod.id" :src="method.image" width="300" height="160" quality="80"
-                        class=" w-full h-full" />
-                    <h1 class="text-lg p-2 px-3 font-medium text-nowrap ">{{ method.title }}</h1>
+                    <template v-if="!selectedMethod.id">
+                        <UBadge v-if="method.type" class="absolute top-2 left-2" :label="method.type" color="neutral"
+                            variant="subtle" />
+                        <NuxtImg :src="method.image" width="300" height="160" quality="80" class=" w-full h-full" />
+                        <h1 class="text-lg p-2 px-3 font-medium text-nowrap ">{{ method.title }}</h1>
+                    </template>
+                    <template v-else>
+                        <div class="flex items-center gap-3 p-1 pr-3">
+                            <NuxtImg :src="method.image" width="64" height="64" quality="80"
+                                class="size-12 rounded-md object-cover ring-1 ring-muted/50" />
+                            <h1 class="text-lg font-medium text-nowrap">{{ method.title }}</h1>
+                        </div>
+                    </template>
                 </div>
 
             </Motion>
@@ -86,11 +94,19 @@
                     'shrink-0 bg-white transition-all hover:opacity-100 border border-muted/50 overflow-hidden rounded-lg h-fit shadow hover:shadow-md relative cursor-pointer mb-4',
                     !selectedId ? 'opacity-100' : (selectedId === item.id ? 'opacity-100 ring-primary/40 shadow-lg' : 'opacity-50')
                 ]">
-                    <UBadge v-if="item.type && !selectedMethod.id" class="absolute top-2 left-2" :label="item.type"
-                        color="neutral" variant="subtle" />
-                    <NuxtImg preload v-if="!selectedMethod.id" :src="item.image" width="300" height="160"
-                        class="w-full h-full" />
-                    <h1 class="text-lg p-2 px-3 font-medium text-nowrap ">{{ item.title }}</h1>
+                    <template v-if="!selectedMethod.id">
+                        <UBadge v-if="item.type" class="absolute top-2 left-2" :label="item.type" color="neutral"
+                            variant="subtle" />
+                        <NuxtImg preload :src="item.image" width="300" height="160" class="w-full h-full" />
+                        <h1 class="text-lg p-2 px-3 font-medium text-nowrap ">{{ item.title }}</h1>
+                    </template>
+                    <template v-else>
+                        <div class="flex items-center gap-3 p-3">
+                            <NuxtImg v-if="selectedId === item.id" :src="item.image" width="64" height="64" quality="80"
+                                class="w-16 h-16 rounded-md object-cover ring-1 ring-muted/50" />
+                            <h1 class="text-lg font-medium text-nowrap">{{ item.title }}</h1>
+                        </div>
+                    </template>
                 </div>
 
             </UCarousel>
@@ -229,7 +245,7 @@
                                     <UPageCard title="Öppna modell i helskärm"
                                         description="I helskärm går det att jämföra olika metoder och visa fler lager med mer information. "
                                         icon="i-material-symbols:interactive-space"
-                                        class="mt-6 cursor-pointer ring-muted/50" color="neutral" variant="outline"
+                                        class="mt-6 cursor-pointer ring-muted/50" color="neutral" variant="subtle"
                                         orientation="vertical" @click="openModelWithCurrentFramework">
                                         <!-- <div class="flex justify-center">
                                             <NuxtImg src="images/modell.png" height="150" />
