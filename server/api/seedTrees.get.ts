@@ -3,7 +3,10 @@ import { join } from 'node:path';
 
 export default defineEventHandler(async () => {
   const storage = useStorage('assets:storage');
-  const publicPath = join(process.cwd(), 'public', 'overlays', 'seedTrees.json');
+  const publicPaths = [
+    join(process.cwd(), 'public', 'seedTrees.json'),
+    join(process.cwd(), 'public', 'overlays', 'seedTrees.json'),
+  ];
 
   const tryParse = async (rawLoader: () => Promise<string | Buffer | null>) => {
     try {
@@ -16,11 +19,13 @@ export default defineEventHandler(async () => {
     }
   };
 
+  for (const path of publicPaths) {
+    const fileData = await tryParse(() => fs.readFile(path, 'utf8'));
+    if (fileData) return fileData;
+  }
+
   const storageData = await tryParse(() => storage.getItemRaw('seedTrees.json'));
   if (storageData) return storageData;
-
-  const fileData = await tryParse(() => fs.readFile(publicPath, 'utf8'));
-  if (fileData) return fileData;
 
   return { trees: [] };
 });
