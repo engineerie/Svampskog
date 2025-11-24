@@ -1,6 +1,94 @@
 <script setup lang="ts">
+import { computed, ref, watch, onMounted, onUnmounted } from 'vue'
 
 const { data: page } = await useAsyncData('index', () => queryCollection('index').first())
+const { data: forestryPage } = await useAsyncData('landing-skogsskotsel', () => queryCollection('skogsskotsel').first())
+
+type StackCard = { image: string; title?: string }
+
+const stackImages = ref<StackCard[]>([])
+const windowWidth = ref(typeof window !== 'undefined' ? window.innerWidth : 1024)
+let rotateTimer: number | null = null
+let resizeHandler: (() => void) | null = null
+
+const buildStack = () => {
+  const imgs =
+    forestryPage.value?.methods?.slice(0, 5).map(method => ({
+      image: method.image,
+      title: method.title
+    })) ?? []
+  stackImages.value = imgs.length ? [...imgs].reverse() : []
+}
+
+watch(forestryPage, buildStack, { immediate: true })
+
+const hoveredStackIndex = ref<number | null>(null)
+const fadingKey = ref<string | null>(null)
+let isCycling = false
+const cardWidth = computed(() => {
+  const w = windowWidth.value * 0.32
+  return Math.min(Math.max(w, 220), 420)
+})
+const cardHeight = computed(() => Math.round(cardWidth.value * 0.6))
+const offsetX = computed(() => cardWidth.value * 0.14)
+const offsetY = computed(() => cardWidth.value * 0.1)
+const stackHeight = computed(() => {
+  const layers = Math.max(stackImages.value.length - 1, 0)
+  return Math.round(cardHeight.value + layers * offsetY.value + 16)
+})
+
+const cycleStack = () => {
+  if (stackImages.value.length <= 1 || isCycling) return
+  isCycling = true
+  const frontIndex = stackImages.value.length - 1
+  fadingKey.value = stackImages.value[frontIndex]?.image ?? null
+
+  window.setTimeout(() => {
+    const item = stackImages.value.pop()
+    if (item) {
+      stackImages.value.unshift(item)
+    }
+  }, 500)
+
+  window.setTimeout(() => {
+    fadingKey.value = null
+    isCycling = false
+  }, 1100)
+}
+
+onMounted(() => {
+  rotateTimer = window.setInterval(cycleStack, 15000)
+  resizeHandler = () => {
+    windowWidth.value = window.innerWidth || 1024
+  }
+  window.addEventListener('resize', resizeHandler)
+})
+
+onUnmounted(() => {
+  if (rotateTimer) {
+    window.clearInterval(rotateTimer)
+  }
+  if (resizeHandler) {
+    window.removeEventListener('resize', resizeHandler)
+  }
+})
+
+const cardHoverStyles = (index: number) => {
+  const baseX = index * offsetX.value
+  const baseY = index * offsetY.value
+  const isHovered = hoveredStackIndex.value === index
+  const isDimmed = hoveredStackIndex.value !== null && hoveredStackIndex.value !== index
+  const isFading = fadingKey.value === stackImages.value[index]?.image
+
+  return {
+    transform: `translate(${baseX}px, ${baseY}px) translateY(${isHovered ? '-12px' : '0'}) `,
+    filter: isDimmed ? 'brightness(0.55)' : 'none',
+    opacity: isFading ? 0 : 1,
+    zIndex: index + 1,
+    transition: 'transform 650ms ease, opacity 650ms ease, filter 650ms ease, box-shadow 650ms ease',
+    boxShadow: isHovered ? '0 12px 32px rgba(0,0,0,0.18)' : '0 6px 16px rgba(0,0,0,0.10)'
+  }
+}
 
 useSeoMeta({
   titleTemplate: '',
@@ -16,7 +104,7 @@ useSeoMeta({
   <div v-if="page">
     <div class="bg-neutral-50 border-b border-neutral-100">
       <UPageHero :ui="{
-        container: ''
+        container: '',
       }" :title="page.hero.title" :description="page.hero.description" :links="page.hero.links"
         orientation="horizontal">
         <template #headline v-if="page.hero.headline.label">
@@ -72,7 +160,25 @@ useSeoMeta({
       <UPageSection v-if="page?.sections?.[1]" :title="page.sections[1].title"
         :description="page.sections[1].description" :headline="page.sections[1].headline"
         :orientation="page.sections[1].orientation" :links="page.sections[1].links">
-        <NuxtImg :src="page.sections[1].src" width="1000" type="webp" class="rounded-md border border-neutral-200" />
+        <div v-if="stackImages.length" class="relative w-full" :style="{ height: `${stackHeight}px` }">
+          <div v-for="(item, index) in stackImages" :key="item.image" class="absolute top-0 left-0 rounded-lg" :style="{
+            ...cardHoverStyles(index),
+            width: `${cardWidth}px`,
+            height: `${cardHeight}px`
+          }" @mouseenter="hoveredStackIndex = index" @mouseleave="hoveredStackIndex = null">
+            <div v-if="hoveredStackIndex === index"
+              class="absolute -top-10 left-0 bg-white text-neutral-900 px-3 py-1 rounded-lg text-sm font-medium">
+              {{ item.title }}
+            </div>
+            <Motion :initial="{ opacity: 0, y: 20 }" :while-in-view="{ opacity: 1, y: 0 }"
+              :in-view-options="{ once: true }" :transition="{ duration: 0.5, delay: 0.1 * index }"
+              class="shadow-lg rounded-lg ring ring-muted/50 overflow-hidden ">
+              <NuxtImg :src="item.image" width="1000" height="600" format="webp" class="w-full h-full object-cover" />
+            </Motion>
+          </div>
+        </div>
+        <NuxtImg v-else :src="page.sections[1].src" width="1000" type="webp"
+          class="rounded-md border border-neutral-200" />
       </UPageSection>
     </Motion>
     <Motion :initial="{ opacity: 0, transform: 'translateY(20px)' }"
