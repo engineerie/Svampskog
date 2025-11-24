@@ -113,14 +113,34 @@
                   size="xl" />
               </div>
             </UCard>
-            <UModal v-if="page.ecologyintro" title="test"
-              :ui="{ content: 'bg-transparent shadow-none ring-0 rounded-none max-h-full sm:max-h-full', body: 'p-0' }">
-              <UPageCard color="info" variant="subtle" title="test" description="tejhtekht eklrjl" class="sm:w-fit" />
+            <USeparator class="my-6" />
+            <div
+              class=" flex flex-col sm:flex-row gap-1.5 p-1 rounded-lg ring ring-muted/50  sm:w-fit h-fit bg-muted/30">
 
-              <template #content>
-                <EcologyIntro :section="page.ecologyintro" />
-              </template>
-            </UModal>
+              <UModal :fullscreen="isMobile ? true : false" :title="page.ecologyintro?.title ?? ''"
+                :description="page.ecologyintro?.description ?? ''" :ui="{
+                  header: 'items-start gap-2 shrink-0',
+                  title: 'whitespace-normal',
+                  description: 'whitespace-normal leading-snug'
+                }">
+                <UAlert icon="i-heroicons-newspaper" color="neutral" variant="outline" title="Ekologi"
+                  class="sm:w-fit h-fit  ring-muted/50 hover:opacity-85 hover:cursor-pointer" />
+                <template #body>
+                  <EcologyIntro :section="page.ecologyintro" />
+                </template>
+              </UModal>
+              <UModal :fullscreen="isMobile ? true : false" title="Underlag för svampars förekomst"
+                :description="page.underlagdescription">
+                <UAlert icon="i-heroicons-document-magnifying-glass" color="neutral" variant="outline" title="Underlag"
+                  class="sm:w-fit h-fit  ring-muted/50 hover:opacity-85 hover:cursor-pointer" />
+                <template #body>
+                  <ImagePlaceholder />
+                  <MDC :value="page.underlag" />
+                  <NuxtLink to="/info" class="text-primary underline">Läs mer i dokumentationen</NuxtLink>
+                </template>
+              </UModal>
+
+            </div>
           </UContainer>
         </div>
         <div v-else key="knowledge" class="col-span-12 sm:pt-2">

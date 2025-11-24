@@ -11,6 +11,7 @@ underlag: |
   2. Dessa värden vägs mot den relativa skogstillväxten jämfört med orörd skog. Trädtillväxten ger en ungefärlig bild av hur mycket mykorrhizasvamp som kan finnas.
   3. Diagrammen över matsvampar som redovisas i kg/ha bygger på fältundersökningar.
 underlagdescription: Baseras på forskning, mark-DNA och fältundersökningar
+underlagbild: /images/Sources/markinventering.png
 hero:
   title: Svampar efter skogsskötsel
   description: Se hur olika skötselåtgärder kan påverka förekomsten av mykorrhizasvampar.
@@ -18,15 +19,15 @@ hero:
   src: /images/Landing/skogsbruk.jpeg
   headline:
     label: Interaktiv modell
-    to: ''
+    to: ""
     icon: i-material-symbols:interactive-space
     color: secondary
   links:
     - label: Visa modell för påverkan över tid
       icon: i-material-symbols:interactive-space
       trailing: false
-      to: ''
-      target: ''
+      to: ""
+      target: ""
       size: xl
       color: rodeodust
       variant: solid
@@ -34,17 +35,16 @@ ecologyintro:
   title: Mykorrhiza & skogsbruk i korthet
   description: Grunderna för hur skogsskötsel påverkar mykorrhizasvampar
   items:
-    - title: Alla träd har mykorrhiza
-      image: /images/Carousel/Mycorrhiza Image.jpeg
+    # - title: Alla träd har mykorrhiza
+    #   image: /images/Carousel/Mycorrhiza Image.jpeg
+    #   description: |
+    #     #### Alla träd har mykorrhiza
+    #     Alla träd samarbetar med mykorrhizasvampar i symbios. Svamparna förstorar trädens rotsystem och förser dem med näring och vatten. I utbyte får svamparna socker från trädens fotosyntes.
+    - title: ""
       description: |
         #### Alla träd har mykorrhiza
-        Alla träd samarbetar med mykorrhizasvampar i symbios. Svamparna förstorar trädens rotsystem och förser dem med näring och vatten. I utbyte får svamparna socker från trädens fotosyntes.
-    - title: ''
-      description: |
-        #### Rötter invuxna av svampmycel
-        Alla träds finrötter, ofta mer än hundratusen per kvadratmeter, är om- och invuxna av mykorrhizasvampars mycel. Svamparnas tunna hyfer sträcker likt en diskborste ut sig från rotspetsarna och förstorar trädens rotsystem hundrafalt och mer.
+        Trädens finrötter, ofta mer än hundratusen per kvadratmeter, är om- och invuxna av mykorrhizasvampars mycel. Svamparnas tunna hyfer sträcker likt en diskborste ut sig från rotspetsarna och förstorar trädens rotsystem hundrafalt och mer. Svamparna förser träden med näring och vatten, och i utbyte får de socker från trädens fotosyntes.
       img: /images/Carousel/DavidReed.jpg
-      img2: /images/Carousel/Mushroom Hyphae and Root Growth.png
     - title: Mer träd ger mer mykorrhiza
       description: |
         #### Mer träd ger mer mykorrhiza

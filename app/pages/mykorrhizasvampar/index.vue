@@ -317,13 +317,16 @@ const open = ref(false)
               <EcologyIntro :section="page.ecologyintro" />
             </template>
           </UModal>
-          <UModal :fullscreen="isMobile ? true : false" title="Underlag för svampars förekomst"
-            :description="page.underlagdescription">
+          <UModal :fullscreen="isMobile ? true : false" title="Underlag för skogsskötsel och svampar"
+            :description="page.underlagdescription" :ui="{
+              header: 'shrink-0',
+            }">
             <UAlert icon="i-heroicons-document-magnifying-glass" color="neutral" variant="outline"
-              title="Underlag för svampars förekomst"
+              title="Underlag för skogsskötsel och svampar"
               class="sm:w-fit shadow ring-muted/50 hover:opacity-85 hover:cursor-pointer" />
             <template #body>
-              <ImagePlaceholder />
+              <NuxtImg :src="page.underlagbild" class="rounded-lg" />
+              <!-- <ImagePlaceholder /> -->
               <MDC :value="page.underlag" />
               <NuxtLink to="/info" class="text-primary underline">Läs mer i dokumentationen</NuxtLink>
             </template>

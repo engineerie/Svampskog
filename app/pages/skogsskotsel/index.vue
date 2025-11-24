@@ -275,13 +275,14 @@
         }">
 
             <UContainer>
+                <USeparator class="my-6" v-if="isMobile" />
+
                 <div
                     class="mb-4 flex flex-col sm:flex-row gap-1.5 p-1 rounded-lg ring ring-muted/50 sm:w-fit bg-muted/30">
                     <UModal :fullscreen="isMobile ? true : false" :title="page.ecologyintro?.title ?? ''"
                         :description="page.ecologyintro?.description ?? ''" :ui="{
-                            header: 'items-start gap-2 shrink-0',
-                            title: 'whitespace-normal',
-                            description: 'whitespace-normal leading-snug'
+                            header: 'shrink-0',
+
                         }">
                         <UAlert icon="i-heroicons-newspaper" color="neutral" variant="outline"
                             title="Mykorrhiza & skogsbruk i korthet"
@@ -291,12 +292,15 @@
                         </template>
                     </UModal>
                     <UModal :fullscreen="isMobile ? true : false" title="Underlag för skogsskötsel och svampar"
-                        :description="page.underlagdescription">
+                        :description="page.underlagdescription" :ui="{
+                            header: 'shrink-0',
+                        }">
                         <UAlert icon="i-heroicons-document-magnifying-glass" color="neutral" variant="outline"
                             title="Underlag för skogsskötsel och svampar"
                             class="sm:w-fit shadow ring-muted/50 hover:opacity-85 hover:cursor-pointer" />
                         <template #body>
-                            <ImagePlaceholder />
+                            <NuxtImg :src="page.underlagbild" class="rounded-lg" />
+                            <!-- <ImagePlaceholder /> -->
                             <MDC :value="page.underlag" />
                             <NuxtLink to="/info" class="text-primary underline">Läs mer i dokumentationen</NuxtLink>
                         </template>

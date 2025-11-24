@@ -9,7 +9,7 @@ hero:
       icon: i-lineicons-mushroom-1
       trailing: false
       to: /mykorrhizasvampar
-      target: ''
+      target: ""
       size: xl
       color: neutral
       variant: solid
@@ -17,19 +17,19 @@ hero:
       icon: i-hugeicons-tree-06
       trailing: false
       to: /skogsskotsel
-      target: ''
+      target: ""
       size: xl
-      color: rodeodust
-      variant: solid
+      color: neutral
+      variant: outline
   headline:
-    label: ''
+    label: ""
     to: /blog
-    icon: ''
+    icon: ""
     color: secondary
 sections:
   - title: Utforska svampar i svenska skogar
-    description: Här kan du ta reda på vilka mykorrhizasvampar som kan finnas i en skog baserat på dels DNA-analyser av svampmycel i jordprover, dels vår samlade kunskap om var olika arters fruktkroppar förekommer.
-    headline: ''
+    description: Se vilka mykorrhizasvampar som kan finnas i en skog baserat på DNA-analyser av svampmycel i jordprover och vår samlade kunskap om var olika arters fruktkroppar förekommer.
+    headline: ""
     id: svampar
     links:
       - label: Gå till svampar
@@ -41,15 +41,15 @@ sections:
     orientation: horizontal
     reverse: true
   - title: Hur påverkar olika skogsskötsel svampar?
-    description: Här försöker vi att visualisera hur trakthyggesbruk och olika former av hyggesfria metoder kan påverka förekomsten av mykorrhizasvampar under en skogsgeneration. Informationen baseras på sammanställda forskningsresultat, bl a från ett samarbete med Markinventeringen och Riksskogstaxeringen.
-    headline: ''
+    description: Vi visar hur trakthyggesbruk och hyggesfria metoder kan påverka mykorrhizasvampar under en skogsgeneration, baserat på sammanställd forskning.
+    headline: ""
     id: skogsbruk
     src: /images/Landing/Stock Photo 563535222.jpeg
     links:
       - label: Gå till skogsskötsel
         to: /skogsskotsel
         icon: i-hugeicons-tree-06
-        color: rodeodust
+        color: neutral
         variant: solid
         size: xl
     orientation: horizontal
@@ -58,7 +58,7 @@ press:
   title: Aktuellt & lästips
   description: Läs om projektet i media, lyssna på poddar om skog och svamp eller anmäl dig till webbinarier.
   items:
-    - title: 'Webbinarium: Skogens svampar - Del 2'
+    - title: "Webbinarium: Skogens svampar - Del 2"
       publication: Plockhugget.se
       publicationDate: 9 december 2025 kl 9-10.30
       url: https://www.plockhugget.se/events/skogens-svampar-del-2-mykorrhizasvamparnas-mangfald-och-betydelse/
@@ -82,12 +82,12 @@ press:
       url: https://www.skogen.se/nyheter/da-stannar-kantarellen/
       icon: i-heroicons-newspaper
       description: Måste svampställena försvinna efter avverkning? Inte om man sparar träden där svamparna växer. En ny app visar hur svampar påverkas av skötselåtgärder.
-    - title: 'Ny teknik: Se svampen i din skog'
+    - title: "Ny teknik: Se svampen i din skog"
       publication: Skogsvärden
       publicationDate: 2 oktober 2024
       url: https://www.skogssallskapet.se/kunskapsbank/artiklar/2024-10-02-ny-teknik-se-svampen-i-din-skog.html
       icon: i-heroicons-newspaper
-      description: ''
+      description: ""
     - title: Svamparnas rike - osynligt men viktigt
       publication: Korta föreläsningar om svamp
       publicationDate: 14 mars 2024
@@ -99,7 +99,7 @@ press:
       publicationDate: 3 september 2023
       url: https://www.dn.se/sverige/sa-paverkar-skogsbruket-dina-svampstallen/
       icon: i-heroicons-film
-      description: ''
+      description: ""
     - title: Sporen - en podd om svampar
       publication: Anna Rosling - Spotify
       publicationDate: 1 september 2023
@@ -111,7 +111,7 @@ press:
       publicationDate: Nr 3 2022
       url: https://e-tidning.skogseko.se/p/skogseko/skogseko-nr-3-2022/a/viktigt-samspel-mellan-trad-och-svamp/1525/587953/31172107
       icon: i-heroicons-newspaper
-      description: ''
+      description: ""
 timeline:
   title: Kommande innehåll
   description: Svampskog.se vidareutvecklas stegvis. Här hittar du en översikt över planerade funktioner och material som publiceras under året.
@@ -153,7 +153,7 @@ financing:
       height: 80
   notes:
     - Verktyget är utvecklat med data från Markinventeringen, SLU riksskogstaxeringen och SLU Artdatabanken.
-    - 'Referensgrupp: Representanter från Bitzner, Skogforsk, Skogsstyrelsen, SLU-Artdatabanken, Sveaskog och Södra Skogsägarna.'
-    - 'Ansvarig för projektet och för informationsinnehåll: Anders Dahlberg, SLU'
-    - 'Webb och konceptutveckling: Jacob Bertilsson'
-    - 'Kontakt: Anders Dahlberg, anders.dahlberg@slu.se'
+    - "Referensgrupp: Representanter från Bitzner, Skogforsk, Skogsstyrelsen, SLU-Artdatabanken, Sveaskog och Södra Skogsägarna."
+    - "Ansvarig för projektet och för informationsinnehåll: Anders Dahlberg, SLU"
+    - "Webb och konceptutveckling: Jacob Bertilsson"
+    - "Kontakt: Anders Dahlberg, anders.dahlberg@slu.se"

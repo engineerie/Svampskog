@@ -29,51 +29,22 @@
       <transition-group name="fade" tag="div" :key="currentFileIndex"
         class="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 gap-2 sm:gap-4 sm:p-2">
         <div v-for="(row, index) in gridPaginatedData" :key="row.Commonname + row.Scientificname + index"
-          class="bg-white overflow-hidden dark:bg-neutral-900 rounded-md border border-neutral-200 dark:border-neutral-800 h-[142px]"
+          class="group relative bg-white overflow-hidden rounded-lg border border-muted/50 h-[142px] transition-transform duration-200 hover:scale-[1.03]"
           @click="selectRow(row)">
-          <!-- Image Thumbnail -->
-          <div class="w-full h-28 relative overflow-hidden">
-            <img v-if="row.images && row.images.length" :src="row.images[0]" class="w-full h-full object-cover"
+          <div class="w-full h-full relative overflow-hidden">
+            <img v-if="row.images && row.images.length" :src="row.images[0]"
+              class="w-full h-full object-cover transition-transform duration-200 group-hover:scale-[1.03]"
               alt="Species image" height="300" width="450" loading="lazy" decoding="async" />
             <div v-else class="w-full h-full flex items-center justify-center bg-gray-200 dark:bg-gray-700">
               <Icon name="material-symbols:photo" class="w-8 h-8 text-neutral-500" />
             </div>
-            <!-- <div class="absolute bottom-2 left-2 flex gap-1">
-              <UBadge
-                v-if="row.SIGNAL_art !== 'S' && !(['LC', '0', 'NA', 'NE', 'Saknas', null].includes(row.RL2020kat))"
-                class="bg-error-50 dark:bg-error-950/80"
-                color="error"
-                variant="subtle"
-                :label="row.RL2020kat !== 'Saknas' ? getStatusTooltip(row.RL2020kat) : 'Ej bedömd'"
-              />
-              <UBadge
-                v-if="row.SIGNAL_art === 'S'"
-                color="signal"
-                variant="subtle"
-                label="Signalart"
-              />
-              <UBadge
-                v-if="row['Nyasvamp-boken'] === 'x'"
-                color="warning"
-                variant="subtle"
-                label="Matsvamp"
-              />
-              <UBadge
-                v-if="row['Giftsvamp'] === 'x'"
-                color="poison"
-                variant="subtle"
-                label="Giftsvamp"
-              />
-            </div> -->
-          </div>
-          <!-- Species Names -->
-          <div class="p-2.5 pt-1">
-            <div class="text-sm font-medium text-neutral-500 dark:text-neutral-300 truncate">
-              {{ capitalize(row.Commonname) }}
+            <div
+              class="pointer-events-none absolute inset-0 bg-gradient-to-t from-black/45 via-black/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-200">
             </div>
-            <!-- <div class="text-sm font-medium text-neutral-400 dark:text-neutral-300 truncate">
-              {{ capitalize(row.Scientificname) }}
-            </div> -->
+            <UBadge variant="outline" color="neutral"
+              class="ring-muted/50 pointer-events-none absolute left-2 bottom-2 opacity-0 group-hover:opacity-100 transition duration-200">
+              {{ capitalize(row.Commonname) }}
+            </UBadge>
           </div>
         </div>
       </transition-group>

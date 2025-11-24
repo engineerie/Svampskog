@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { computed, ref, watch, onMounted, onUnmounted } from 'vue'
+import { useMediaQuery } from '@vueuse/core'
 
 const { data: page } = await useAsyncData('index', () => queryCollection('index').first())
 const { data: forestryPage } = await useAsyncData('landing-skogsskotsel', () => queryCollection('skogsskotsel').first())
@@ -7,9 +8,7 @@ const { data: forestryPage } = await useAsyncData('landing-skogsskotsel', () => 
 type StackCard = { image: string; title?: string }
 
 const stackImages = ref<StackCard[]>([])
-const windowWidth = ref(typeof window !== 'undefined' ? window.innerWidth : 1024)
 let rotateTimer: number | null = null
-let resizeHandler: (() => void) | null = null
 
 const buildStack = () => {
   const imgs =
@@ -25,16 +24,16 @@ watch(forestryPage, buildStack, { immediate: true })
 const hoveredStackIndex = ref<number | null>(null)
 const fadingKey = ref<string | null>(null)
 let isCycling = false
-const cardWidth = computed(() => {
-  const w = windowWidth.value * 0.32
-  return Math.min(Math.max(w, 220), 420)
-})
-const cardHeight = computed(() => Math.round(cardWidth.value * 0.6))
-const offsetX = computed(() => cardWidth.value * 0.14)
-const offsetY = computed(() => cardWidth.value * 0.1)
-const stackHeight = computed(() => {
+const isDesktop = useMediaQuery('(min-width: 768px)')
+const cardVars = computed(() => {
   const layers = Math.max(stackImages.value.length - 1, 0)
-  return Math.round(cardHeight.value + layers * offsetY.value + 16)
+  return {
+    '--card-w': isDesktop.value ? 'clamp(220px, 30vw, 380px)' : 'clamp(200px, 70vw, 260px)',
+    '--card-h': 'calc(var(--card-w) * 0.6)',
+    '--offset-x': isDesktop.value ? 'calc(var(--card-w) * 0.1)' : 'calc(var(--card-w) * 0.08)',
+    '--offset-y': isDesktop.value ? 'calc(var(--card-w) * 0.075)' : 'calc(var(--card-w) * 0.06)',
+    height: `calc(var(--card-h) + ${layers} * var(--offset-y) + 12px)`
+  } as Record<string, string>
 })
 
 const cycleStack = () => {
@@ -58,30 +57,23 @@ const cycleStack = () => {
 
 onMounted(() => {
   rotateTimer = window.setInterval(cycleStack, 15000)
-  resizeHandler = () => {
-    windowWidth.value = window.innerWidth || 1024
-  }
-  window.addEventListener('resize', resizeHandler)
 })
 
 onUnmounted(() => {
   if (rotateTimer) {
     window.clearInterval(rotateTimer)
   }
-  if (resizeHandler) {
-    window.removeEventListener('resize', resizeHandler)
-  }
 })
 
 const cardHoverStyles = (index: number) => {
-  const baseX = index * offsetX.value
-  const baseY = index * offsetY.value
+  const baseX = `calc(var(--offset-x) * ${index})`
+  const baseY = `calc(var(--offset-y) * ${index})`
   const isHovered = hoveredStackIndex.value === index
   const isDimmed = hoveredStackIndex.value !== null && hoveredStackIndex.value !== index
   const isFading = fadingKey.value === stackImages.value[index]?.image
 
   return {
-    transform: `translate(${baseX}px, ${baseY}px) translateY(${isHovered ? '-12px' : '0'}) `,
+    transform: `translate(${baseX}, ${baseY}) translateY(${isHovered ? '-12px' : '0'}) `,
     filter: isDimmed ? 'brightness(0.55)' : 'none',
     opacity: isFading ? 0 : 1,
     zIndex: index + 1,
@@ -160,21 +152,25 @@ useSeoMeta({
       <UPageSection v-if="page?.sections?.[1]" :title="page.sections[1].title"
         :description="page.sections[1].description" :headline="page.sections[1].headline"
         :orientation="page.sections[1].orientation" :links="page.sections[1].links">
-        <div v-if="stackImages.length" class="relative w-full" :style="{ height: `${stackHeight}px` }">
+        <div v-if="stackImages.length" class="pointer-events-none sm:pointer-events-auto relative w-full"
+          :style="cardVars">
           <div v-for="(item, index) in stackImages" :key="item.image" class="absolute top-0 left-0 rounded-lg" :style="{
             ...cardHoverStyles(index),
-            width: `${cardWidth}px`,
-            height: `${cardHeight}px`
+            width: 'var(--card-w)',
+            height: 'var(--card-h)'
           }" @mouseenter="hoveredStackIndex = index" @mouseleave="hoveredStackIndex = null">
-            <div v-if="hoveredStackIndex === index"
-              class="absolute -top-10 left-0 bg-white text-neutral-900 px-3 py-1 rounded-lg text-sm font-medium">
-              {{ item.title }}
-            </div>
-            <Motion :initial="{ opacity: 0, y: 20 }" :while-in-view="{ opacity: 1, y: 0 }"
-              :in-view-options="{ once: true }" :transition="{ duration: 0.5, delay: 0.1 * index }"
-              class="shadow-lg rounded-lg ring ring-muted/50 overflow-hidden ">
+            <Transition name="fade-delay" mode="out-in">
+              <div v-if="hoveredStackIndex === index"
+                class="absolute -top-10 left-0 bg-white text-neutral-900 px-3 py-1 rounded-lg text-sm font-medium pointer-events-none">
+                {{ item.title }}
+              </div>
+            </Transition>
+            <Motion v-if="isDesktop" class="shadow-lg rounded-lg ring ring-muted/50 overflow-hidden ">
               <NuxtImg :src="item.image" width="1000" height="600" format="webp" class="w-full h-full object-cover" />
             </Motion>
+            <div v-else class="shadow-lg rounded-lg ring ring-muted/50 overflow-hidden w-full h-full">
+              <NuxtImg :src="item.image" width="1000" height="600" format="webp" class="w-full h-full object-cover" />
+            </div>
           </div>
         </div>
         <NuxtImg v-else :src="page.sections[1].src" width="1000" type="webp"
@@ -213,7 +209,7 @@ useSeoMeta({
       :transition="{ duration: 0.6, delay: 0.3 }">
       <UPageSection v-if="page.timeline" :title="page.timeline.title" :description="page.timeline.description"
         :ui="{ container: 'flex-col', title: 'text-start lg:text-center', description: 'text-start lg:text-center text-pretty' }">
-        <UTimeline :default-value="1" :items="page.timeline.items" size="3xl" orientation="vertical" :ui="{
+        <UTimeline :default-value="2" :items="page.timeline.items" size="3xl" orientation="vertical" :ui="{
           root: 'lg:flex-row lg:w-full',
           item: 'lg:flex-col',
           container: 'lg:flex-row',
@@ -244,3 +240,15 @@ useSeoMeta({
     </Motion>
   </div>
 </template>
+
+<style>
+.fade-delay-enter-active,
+.fade-delay-leave-active {
+  transition: opacity 0.25s ease 0.12s;
+}
+
+.fade-delay-enter-from,
+.fade-delay-leave-to {
+  opacity: 0;
+}
+</style>

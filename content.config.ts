@@ -248,6 +248,7 @@ export const collections = {
       description: z.string().nonempty(),
       underlag: z.string().nonempty(),
       underlagdescription: z.string().nonempty(),
+      underlagbild: z.string().nonempty(),
       hero: sectionSchema.extend({
         headline: z.object({
           label: z.string().optional(),
@@ -271,6 +272,7 @@ export const collections = {
       description: z.string().nonempty(),
       underlag: z.string().nonempty(),
       underlagdescription: z.string().nonempty(),
+      underlagbild: z.string().nonempty(),
       hero: sectionSchema.extend({
         headline: z.object({
           label: z.string().optional(),
