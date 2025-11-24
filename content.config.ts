@@ -255,6 +255,15 @@ export const collections = {
       underlag: z.string().nonempty(),
       underlagdescription: z.string().nonempty(),
       underlagbild: z.string().nonempty(),
+      underlagSections: z
+        .array(
+          z.object({
+            title: z.string().optional(),
+            paragraphs: z.array(z.string()).optional(),
+            content: z.string().optional(),
+          }),
+        )
+        .optional(),
       hero: sectionSchema.extend({
         headline: z.object({
           label: z.string().optional(),
@@ -279,6 +288,15 @@ export const collections = {
       underlag: z.string().nonempty(),
       underlagdescription: z.string().nonempty(),
       underlagbild: z.string().nonempty(),
+      underlagSections: z
+        .array(
+          z.object({
+            title: z.string().optional(),
+            paragraphs: z.array(z.string()).optional(),
+            content: z.string().optional(),
+          }),
+        )
+        .optional(),
       hero: sectionSchema.extend({
         headline: z.object({
           label: z.string().optional(),

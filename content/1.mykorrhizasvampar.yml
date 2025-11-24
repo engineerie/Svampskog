@@ -1,13 +1,18 @@
 title: Svampar
 description: Sök på vilka mykorrhizasvampar som kan finnas i olika skogar baserat på miljö-DNA och sammanställd kunskap om vart fruktkroppar förekommer.
 underlag: |
-  Informationen visas på två sätt eftersom många svampar inte bildar synliga fruktkroppar. Fruktkroppar ger dessutom bara en delvis bild av både artrikedomen och hur vanliga svamparna är i marken.
-
-  #### Enligt DNA
-  Enligt DNA bygger på DNA-analyser av svampmycel från ca 2000 markprover tagna i SLU:s permanenta provytor i skog (Markinventeringen och Riksskogstaxeringen) under 2015-2021.
-
-  #### Enligt fruktkroppar
-  Enligt fruktkroppar bygger främst på Artdatabankens sammanställningar över arters förekomst, ekologi och naturvårdsstatus.
+  Artlistor på två sätt. Se sektionerna nedan för detaljer.
+underlagSections:
+  - title: "Artlistor på två sätt"
+    paragraphs:
+      - "Vi presenterar artlistor dels enligt DNA-analyser av jordprover, dels enligt var fruktkroppar förekommer. Fruktkroppar ger bara en delvis bild av både artrikedomen och hur vanliga svamparna är, eftersom många arter aldrig bildar synliga fruktkroppar. Samtidigt är DNA-prover stickprover från små ytor och fångar därför sällan ovanliga arter."
+      - "De två metoderna kompletterar varandra och ger tillsammans en god bild av svamplivet i skogen."
+  - title: "Enligt DNA"
+    paragraphs:
+      - "Bygger på DNA-analyser av svampmycel från ca 2000 markprover tagna i SLU:s permanenta provytor i skog (Markinventeringen och Riksskogstaxeringen) under 2015-2021."
+  - title: "Enligt fruktkroppar"
+    paragraphs:
+      - "Bygger främst på Artdatabankens sammanställningar över arters förekomst, ekologi och naturvårdsstatus."
 underlagdescription: Kombination av mark-DNA och fruktkroppssammanställningar
 underlagbild: /images/Sources/samladkunskap.png
 navigation: false

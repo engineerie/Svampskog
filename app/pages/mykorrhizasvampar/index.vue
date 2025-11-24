@@ -325,10 +325,8 @@ const open = ref(false)
               title="Underlag för skogsskötsel och svampar"
               class="sm:w-fit shadow ring-muted/50 hover:opacity-85 hover:cursor-pointer" />
             <template #body>
-              <NuxtImg :src="page.underlagbild" class="rounded-lg" />
-              <!-- <ImagePlaceholder /> -->
-              <MDC :value="page.underlag" />
-              <NuxtLink to="/info" class="text-primary underline">Läs mer i dokumentationen</NuxtLink>
+              <UnderlagContent :underlag="page.underlag" :underlagbild="page.underlagbild"
+                :sections="page.underlagSections" />
             </template>
           </UModal>
         </div>

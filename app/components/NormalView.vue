@@ -35,9 +35,8 @@
             <UAlert icon="i-heroicons-document-magnifying-glass" color="neutral" variant="outline" title="Underlag"
               class="sm:w-fit h-fit  ring-muted/50 hover:opacity-85 hover:cursor-pointer" />
             <template #body>
-              <ImagePlaceholder />
-              <MDC :value="page.underlag" />
-              <NuxtLink to="/info" class="text-primary underline">Läs mer i dokumentationen</NuxtLink>
+              <UnderlagContent :underlag="page.underlag" :underlagbild="page.underlagbild"
+                :sections="page.underlagSections" />
             </template>
           </UModal>
 
@@ -129,16 +128,15 @@
                   <EcologyIntro :section="page.ecologyintro" />
                 </template>
               </UModal>
-              <UModal :fullscreen="isMobile ? true : false" title="Underlag för svampars förekomst"
-                :description="page.underlagdescription">
-                <UAlert icon="i-heroicons-document-magnifying-glass" color="neutral" variant="outline" title="Underlag"
-                  class="sm:w-fit h-fit  ring-muted/50 hover:opacity-85 hover:cursor-pointer" />
-                <template #body>
-                  <ImagePlaceholder />
-                  <MDC :value="page.underlag" />
-                  <NuxtLink to="/info" class="text-primary underline">Läs mer i dokumentationen</NuxtLink>
-                </template>
-              </UModal>
+          <UModal :fullscreen="isMobile ? true : false" title="Underlag för svampars förekomst"
+            :description="page.underlagdescription">
+            <UAlert icon="i-heroicons-document-magnifying-glass" color="neutral" variant="outline" title="Underlag"
+              class="sm:w-fit h-fit  ring-muted/50 hover:opacity-85 hover:cursor-pointer" />
+            <template #body>
+              <UnderlagContent :underlag="page.underlag" :underlagbild="page.underlagbild"
+                :sections="page.underlagSections" />
+            </template>
+          </UModal>
 
             </div>
           </UContainer>

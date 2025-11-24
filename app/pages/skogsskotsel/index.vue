@@ -295,6 +295,7 @@
 
                 <div
                     class="mb-4 flex flex-col sm:flex-row gap-1.5 p-1 rounded-lg ring ring-muted/50 sm:w-fit bg-muted/30">
+
                     <UModal :fullscreen="isMobile ? true : false" :title="page.ecologyintro?.title ?? ''"
                         :description="page.ecologyintro?.description ?? ''" :ui="{
                             header: 'shrink-0',
@@ -315,10 +316,8 @@
                             title="Underlag för skogsskötsel och svampar"
                             class="sm:w-fit shadow ring-muted/50 hover:opacity-85 hover:cursor-pointer" />
                         <template #body>
-                            <NuxtImg :src="page.underlagbild" class="rounded-lg" />
-                            <!-- <ImagePlaceholder /> -->
-                            <MDC :value="page.underlag" />
-                            <NuxtLink to="/info" class="text-primary underline">Läs mer i dokumentationen</NuxtLink>
+                            <UnderlagContent :underlag="page.underlag" :underlagbild="page.underlagbild"
+                                :sections="page.underlagSections" />
                         </template>
                     </UModal>
                 </div>

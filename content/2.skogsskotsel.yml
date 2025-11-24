@@ -2,14 +2,17 @@ title: Skogsskötsel
 description: Se hur skogsskötsel påverka mykorrhizasvampar.
 navigation: false
 underlag: |
-  #### Bilderna bygger på två typer av underlag
-  1. Forskning om hur mykorrhizasvampars markmycel varierar vid olika former av skogsskötsel, miljöhänsyn och skogsålder.
-  2. Relativ förekomst av svampmycel baserad på DNA-analyser från Markinventeringen.
-
-  #### Diagrammen baseras på
-  1. Markinventeringens DNA-analyser av svampmycel i marken vid olika skogsåldrar.
-  2. Dessa värden vägs mot den relativa skogstillväxten jämfört med orörd skog. Trädtillväxten ger en ungefärlig bild av hur mycket mykorrhizasvamp som kan finnas.
-  3. Diagrammen över matsvampar som redovisas i kg/ha bygger på fältundersökningar.
+  Sammanfattning av underlag för bilder och diagram. Se sektionerna nedan för detaljer.
+underlagSections:
+  - title: "Bilderna bygger på två typer av underlag"
+    paragraphs:
+      - "Forskning om hur mykorrhizasvampars markmycel varierar vid olika former av skogsskötsel, miljöhänsyn och skogsålder."
+      - "Relativ förekomst av svampmycel baserad på DNA-analyser från Markinventeringen."
+  - title: "Diagrammen baseras på"
+    paragraphs:
+      - "Markinventeringens DNA-analyser av svampmycel i marken vid olika skogsåldrar."
+      - "Dessa värden vägs mot den relativa skogstillväxten jämfört med orörd skog. Trädtillväxten ger en ungefärlig bild av hur mycket mykorrhizasvamp som kan finnas."
+      - "Diagrammen över matsvampar som redovisas i kg/ha bygger på fältundersökningar."
 underlagdescription: Baseras på forskning, mark-DNA och fältundersökningar
 underlagbild: /images/Sources/markinventering.png
 hero:

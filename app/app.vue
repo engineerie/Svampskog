@@ -47,8 +47,11 @@ provide('blognavigation', blognavigation)
     <!-- <UBanner class="" icon="i-fluent-emoji-high-contrast-construction" color="warning"
       title="Utvecklingsarbete och dokumentation pågår. Genomarbetad version planeras till 1 nov" /> -->
     <NuxtLoadingIndicator />
-    <NuxtLayout>
-      <NuxtPage />
-    </NuxtLayout>
+    <div data-vaul-drawer-wrapper>
+      <NuxtLayout>
+        <NuxtPage />
+      </NuxtLayout>
+    </div>
+
   </UApp>
 </template>

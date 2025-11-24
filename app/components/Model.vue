@@ -314,7 +314,7 @@
                     {{ activeOverlayContent.description }}
                   </p>
                   <UButton v-if="activeOverlayContent.key === 'naturvardsarter'" size="sm" color="primary"
-                    variant="soft" class="mt-2" icon="i-carbon-chart-line-smooth" @click="openNaturvardsarterChart()">
+                    variant="solid" class="mt-2" icon="i-carbon-chart-line-smooth" @click="openNaturvardsarterChart()">
                     Visa naturvårdsartsdiagram
                   </UButton>
                   <UCard v-if="activeOverlayContent.key === 'kanteffekt'" variant="soft"
@@ -446,7 +446,7 @@
                       {{ getOverlayInfo(badge.key).description }}
                     </p>
                     <div v-else class="text-xs text-neutral-400">Ingen beskrivning tillgänglig.</div>
-                    <UButton v-if="badge.key === 'naturvardsarter'" size="sm" color="primary" variant="soft"
+                    <UButton v-if="badge.key === 'naturvardsarter'" size="sm" color="primary" variant="solid"
                       icon="i-carbon-chart-line-smooth" @click.stop="openNaturvardsarterChart({ badgeKey: badge.key })">
                       Visa naturvårdsartsdiagram
                     </UButton>
