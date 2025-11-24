@@ -273,10 +273,15 @@ export default {
         // fetch kanteffekt overlays
         onMounted(async () => {
             try {
-                const res = await fetch('/api/kanteffekt');
-                const json = await res.json();
-                // API should return { features: [...] }
-                localKanteffekt.value = json.features || [];
+                const candidates = ['/kanteffekt.json', '/overlays/kanteffekt.json', '/api/kanteffekt'];
+                let json = null;
+                for (const path of candidates) {
+                    const res = await fetch(path);
+                    if (!res.ok) continue;
+                    json = await res.json();
+                    break;
+                }
+                localKanteffekt.value = json?.features || [];
             } catch (e) {
                 console.error('Failed fetching kanteffekt features:', e);
             }
@@ -995,9 +1000,15 @@ export default {
 
         onMounted(async () => {
             try {
-                const res = await fetch('/api/seedTrees');
-                const json = await res.json();
-                localSeedTrees.value = json.trees || [];
+                const candidates = ['/seedTrees.json', '/overlays/seedTrees.json', '/api/seedTrees'];
+                let json = null;
+                for (const path of candidates) {
+                    const res = await fetch(path);
+                    if (!res.ok) continue;
+                    json = await res.json();
+                    break;
+                }
+                localSeedTrees.value = json?.trees || [];
             } catch (e) {
                 console.error('Failed fetching seedTrees:', e);
             }

@@ -446,17 +446,35 @@ async function loadSmaplantor() {
   return null;
 }
 
+async function loadSeedTrees() {
+  const candidates = ['/seedTrees.json', '/overlays/seedTrees.json', '/api/seedTrees'];
+  for (const path of candidates) {
+    const data = await fetchJson(path);
+    if (data) return data;
+  }
+  return null;
+}
+
+async function loadKanteffekt() {
+  const candidates = ['/kanteffekt.json', '/overlays/kanteffekt.json', '/api/kanteffekt'];
+  for (const path of candidates) {
+    const data = await fetchJson(path);
+    if (data) return data;
+  }
+  return null;
+}
+
 export function useOverlayRegistry() {
   const { data: overlayData, pending: overlaysPending } = useAsyncData(
     'overlay-datasets-json',
     async () => {
       const [retention, seedTrees, smaplantor, hogstubbar, naturvard, kanteffekt] = await Promise.all([
         fetchJson('/retentionTrees.json'),
-        fetchJson('/api/seedTrees'),
+        loadSeedTrees(),
         loadSmaplantor(),
         fetchJson('/hogstubbar.json'),
         fetchJson('/naturvard.json'),
-        fetchJson('/api/kanteffekt'),
+        loadKanteffekt(),
       ]);
 
       return {
