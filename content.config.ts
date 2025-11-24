@@ -161,6 +161,12 @@ const financingSchema = z.object({
   notes: z.array(z.string()),
 });
 
+const overlayTextSchema = z.object({
+  key: z.string().nonempty(),
+  title: z.string().nonempty(),
+  description: z.string().nonempty(),
+});
+
 const sectionSchema = z.object({
   headline: z.string().optional(),
   ...baseSchema,
@@ -524,6 +530,13 @@ export const collections = {
     type: "data",
     source: "timelines/**/*.yml",
     schema: forestryTimelineSchema,
+  }),
+  overlayTexts: defineCollection({
+    type: "data",
+    source: "overlays/overlay-texts.yml",
+    schema: z.object({
+      entries: z.array(overlayTextSchema),
+    }),
   }),
   overlays: defineCollection({
     type: "data",

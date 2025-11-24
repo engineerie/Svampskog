@@ -1231,6 +1231,11 @@ const { data: forestryTimeline } = await useAsyncData(
   () => queryCollection('forestryTimelines').first()
 );
 
+const { data: overlayTextData } = await useAsyncData(
+  'overlay-texts-model',
+  () => queryCollection('overlayTexts').first()
+);
+
 const timelineEntries = computed(() => {
   const value = forestryTimeline.value;
   if (!value) return [];
@@ -1951,6 +1956,33 @@ const overlayConfigs: Record<OverlayKey, OverlayContentConfig> = {
   },
 };
 
+const overlayTextMap = computed<Record<OverlayKey, { title: string; description: string }>>(() => {
+  const value = overlayTextData.value as any;
+  const entries = Array.isArray(value)
+    ? (value.find((item: any) => Array.isArray(item?.entries))?.entries ?? [])
+    : value?.entries ?? [];
+  const map = {} as Record<OverlayKey, { title: string; description: string }>;
+
+  entries.forEach((entry: any) => {
+    const key = entry?.key as OverlayKey;
+    if (!key || !(key in overlayConfigs)) return;
+    const base = overlayConfigs[key];
+    map[key] = {
+      title: entry.title ?? base.title,
+      description: entry.description ?? base.description,
+    };
+  });
+
+  overlayKeys.forEach((key) => {
+    if (!map[key]) {
+      const base = overlayConfigs[key];
+      map[key] = { title: base.title, description: base.description };
+    }
+  });
+
+  return map;
+});
+
 const overlayIcons: Record<string, string> = {
   staticOverlay: 'i-material-symbols-light-rectangle-outline',
   retention: 'i-pepicons-pop-tree-circle',
@@ -1973,10 +2005,11 @@ const overlayInfo = computed<Record<string, { title: string; description: string
   };
 
   overlayKeys.forEach((key) => {
-    const config = overlayConfigs[key];
+    const fallback = overlayConfigs[key];
+    const content = overlayTextMap.value[key];
     info[key] = {
-      title: config.title,
-      description: config.description,
+      title: content?.title ?? fallback.title,
+      description: content?.description ?? fallback.description,
     };
   });
 
@@ -2121,7 +2154,7 @@ const overlayMeta = computed<Record<string, { label: string; icon?: string }>>((
   };
   overlayKeys.forEach((key) => {
     meta[key] = {
-      label: overlayConfigs[key].title,
+      label: overlayTextMap.value[key]?.title ?? overlayConfigs[key].title,
       icon: overlayIcons[key] ?? undefined,
     };
   });
