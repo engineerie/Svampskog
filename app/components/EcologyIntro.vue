@@ -34,10 +34,6 @@ const collageImagesMap: Record<string, string[]> = {
     '/images/svampgrid/Tricholoma matsutake-166-6276.jpg',
     '/images/svampgrid/Tricholoma virgatum-60-.jpg',
   ],
-  // 'Det mesta är mycel i marken': [
-  //   '/images/svampgrid/Cantharellus cibarius-3.jpg',
-  //   ...Array(14).fill('/images/Carousel/web/Mycorrhizae.webp'),
-  // ],
 }
 
 function resolvePrimaryImage(item: EcologyIntroItem) {
@@ -65,7 +61,6 @@ function collageImagesFor(item: EcologyIntroItem) {
 function collageGridClass(item: EcologyIntroItem) {
   const title = (item?.title ?? '').trim()
   if (title === 'Många skogssvampar bildar mykorrhiza') return 'grid grid-cols-3'
-  // if (title === 'Det mesta är mycel i marken') return 'grid grid-cols-5'
   return 'grid grid-cols-3'
 }
 </script>
@@ -84,12 +79,7 @@ function collageGridClass(item: EcologyIntroItem) {
           <img v-if="resolveSecondaryImage(item)" :src="resolveSecondaryImage(item)" :alt="item.title || ''" fit="cover"
             class=" rounded-lg w-full object-cover" />
         </div>
-        <!-- <div class="px-6 py-3 sm:py-3"> -->
-        <!-- <h3 v-if="item.title" class="text-2xl font-semibold text-neutral-900">
-              {{ item.title }}
-            </h3> -->
         <MDC v-if="resolveDescription(item)" :value="resolveDescription(item)" class="prose prose-neutral max-w-none" />
-        <!-- </div> -->
       </article>
     </div>
 
