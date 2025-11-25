@@ -14,7 +14,7 @@ underlagSections:
     paragraphs:
       - "Bygger främst på Artdatabankens sammanställningar över arters förekomst, ekologi och naturvårdsstatus."
 underlagdescription: Kombination av mark-DNA och fruktkroppssammanställningar
-underlagbild: images/Sources/web/samladkunskap_500.webp
+underlagbild: /images/Sources/web/samladkunskap_500.webp
 navigation: false
 hero:
   title: Sök svampar i svenska skogar
