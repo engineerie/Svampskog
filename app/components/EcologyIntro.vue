@@ -25,6 +25,21 @@ const props = defineProps<{
 
 const slides = computed<EcologyIntroItem[]>(() => props.items ?? props.section?.items ?? [])
 
+const collageImagesMap: Record<string, string[]> = {
+  'Många skogssvampar bildar mykorrhiza': [
+    '/images/svampgrid/Cantharellus cibarius-3.jpg',
+    '/images/svampgrid/Entoloma sinuatum-4-4037.jpg',
+    '/images/svampgrid/Gomphus clavatus-1.jpg',
+    '/images/svampgrid/Hygrocybe ovina-804.jpg',
+    '/images/svampgrid/Tricholoma matsutake-166-6276.jpg',
+    '/images/svampgrid/Tricholoma virgatum-60-.jpg',
+  ],
+  'Det mesta är mycel i marken': [
+    '/images/svampgrid/Cantharellus cibarius-3.jpg',
+    ...Array(14).fill('/images/Carousel/web/Mycorrhizae.webp'),
+  ],
+}
+
 function resolvePrimaryImage(item: EcologyIntroItem) {
   return (item?.image ?? item?.img ?? '') as string
 }
@@ -36,17 +51,38 @@ function resolveSecondaryImage(item: EcologyIntroItem) {
 function resolveDescription(item: EcologyIntroItem) {
   return (item?.description ?? '') as string
 }
+
+function isCollage(item: EcologyIntroItem) {
+  const title = (item?.title ?? '').trim()
+  return !!collageImagesMap[title]
+}
+
+function collageImagesFor(item: EcologyIntroItem) {
+  const title = (item?.title ?? '').trim()
+  return collageImagesMap[title] ?? []
+}
+
+function collageGridClass(item: EcologyIntroItem) {
+  const title = (item?.title ?? '').trim()
+  if (title === 'Många skogssvampar bildar mykorrhiza') return 'grid grid-cols-3'
+  if (title === 'Det mesta är mycel i marken') return 'grid grid-cols-5'
+  return 'grid grid-cols-3'
+}
 </script>
 
 <template>
   <section>
     <div class="flex flex-col gap-4 sm:gap-6 ">
       <article v-for="(item, i) in slides" :key="i" class=" flex flex-col">
-        <div v-if="resolvePrimaryImage(item) || resolveSecondaryImage(item)" class="relative w-full space-y-3">
-          <NuxtImg v-if="resolvePrimaryImage(item)" :src="resolvePrimaryImage(item)" :alt="item.title || ''" fit="cover"
-            class=" rounded-lg w-full object-cover" width="800" />
-          <NuxtImg v-if="resolveSecondaryImage(item)" :src="resolveSecondaryImage(item)" :alt="item.title || ''"
-            fit="cover" class=" rounded-lg w-full object-cover" width="800" />
+        <div v-if="isCollage(item)" :class="`${collageGridClass(item)} rounded-lg overflow-hidden`">
+          <img v-for="(src, idx) in collageImagesFor(item)" :key="idx" :src="src" :alt="item.title || ''"
+            class="rounded-none w-full h-full object-cover ring-1 ring-muted/50" />
+        </div>
+        <div v-else-if="resolvePrimaryImage(item) || resolveSecondaryImage(item)" class="relative w-full space-y-3">
+          <img v-if="resolvePrimaryImage(item)" :src="resolvePrimaryImage(item)" :alt="item.title || ''"
+            class=" rounded-lg w-full object-cover" />
+          <img v-if="resolveSecondaryImage(item)" :src="resolveSecondaryImage(item)" :alt="item.title || ''" fit="cover"
+            class=" rounded-lg w-full object-cover" />
         </div>
         <!-- <div class="px-6 py-3 sm:py-3"> -->
         <!-- <h3 v-if="item.title" class="text-2xl font-semibold text-neutral-900">
