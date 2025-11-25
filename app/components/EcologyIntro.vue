@@ -34,10 +34,10 @@ const collageImagesMap: Record<string, string[]> = {
     '/images/svampgrid/Tricholoma matsutake-166-6276.jpg',
     '/images/svampgrid/Tricholoma virgatum-60-.jpg',
   ],
-  'Det mesta är mycel i marken': [
-    '/images/svampgrid/Cantharellus cibarius-3.jpg',
-    ...Array(14).fill('/images/Carousel/web/Mycorrhizae.webp'),
-  ],
+  // 'Det mesta är mycel i marken': [
+  //   '/images/svampgrid/Cantharellus cibarius-3.jpg',
+  //   ...Array(14).fill('/images/Carousel/web/Mycorrhizae.webp'),
+  // ],
 }
 
 function resolvePrimaryImage(item: EcologyIntroItem) {
@@ -65,7 +65,7 @@ function collageImagesFor(item: EcologyIntroItem) {
 function collageGridClass(item: EcologyIntroItem) {
   const title = (item?.title ?? '').trim()
   if (title === 'Många skogssvampar bildar mykorrhiza') return 'grid grid-cols-3'
-  if (title === 'Det mesta är mycel i marken') return 'grid grid-cols-5'
+  // if (title === 'Det mesta är mycel i marken') return 'grid grid-cols-5'
   return 'grid grid-cols-3'
 }
 </script>
@@ -76,7 +76,7 @@ function collageGridClass(item: EcologyIntroItem) {
       <article v-for="(item, i) in slides" :key="i" class=" flex flex-col">
         <div v-if="isCollage(item)" :class="`${collageGridClass(item)} rounded-lg overflow-hidden`">
           <img v-for="(src, idx) in collageImagesFor(item)" :key="idx" :src="src" :alt="item.title || ''"
-            class="rounded-none w-full h-full object-cover ring-1 ring-muted/50" />
+            class="rounded-none w-full h-full object-cover " />
         </div>
         <div v-else-if="resolvePrimaryImage(item) || resolveSecondaryImage(item)" class="relative w-full space-y-3">
           <img v-if="resolvePrimaryImage(item)" :src="resolvePrimaryImage(item)" :alt="item.title || ''"
