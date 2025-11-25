@@ -53,18 +53,19 @@
                     <template v-if="!selectedMethod.id">
                         <UBadge v-if="method.type" class="absolute top-2 left-2" :label="method.type" color="neutral"
                             variant="subtle" />
-                        <NuxtImg :src="method.image" width="300" height="160" quality="80" class=" w-full h-full" />
+                        <img :src="methodImage(method, 'card')" :alt="method.title" width="300" height="160"
+                            class=" w-full h-full" loading="lazy" decoding="async" />
                         <h1 class="text-lg p-2 px-3 font-medium text-nowrap ">{{ method.title }}</h1>
                     </template>
                     <template v-else>
                         <div class="flex items-center gap-3 p-1 pr-3">
-                            <NuxtImg :src="method.image" width="64" height="64" quality="80"
-                                class="size-12 rounded-md object-cover ring-1 ring-muted/50" />
+                            <img :src="methodImage(method, 'thumb')" :alt="method.title" width="64" height="64"
+                                class="size-12 rounded-md object-cover ring-1 ring-muted/50" loading="lazy"
+                                decoding="async" />
                             <h1 class="text-lg font-medium text-nowrap">{{ method.title }}</h1>
                         </div>
                     </template>
                 </div>
-
             </Motion>
         </UContainer>
 
@@ -97,13 +98,15 @@
                     <template v-if="!selectedMethod.id">
                         <UBadge v-if="item.type" class="absolute top-2 left-2" :label="item.type" color="neutral"
                             variant="subtle" />
-                        <NuxtImg preload :src="item.image" width="300" height="160" class="w-full h-full" />
+                        <img :src="methodImage(item, 'card')" :alt="item.title" width="300" height="160"
+                            class="w-full h-full" loading="lazy" decoding="async" />
                         <h1 class="text-lg p-2 px-3 font-medium text-nowrap ">{{ item.title }}</h1>
                     </template>
                     <template v-else>
                         <div class="flex items-center gap-3 p-3">
-                            <NuxtImg v-if="selectedId === item.id" :src="item.image" width="64" height="64" quality="80"
-                                class="w-16 h-16 rounded-md object-cover ring-1 ring-muted/50" />
+                            <img v-if="selectedId === item.id" :src="methodImage(item, 'thumb')" :alt="item.title"
+                                width="64" height="64" class="w-16 h-16 rounded-md object-cover ring-1 ring-muted/50"
+                                loading="lazy" decoding="async" />
                             <h1 class="text-lg font-medium text-nowrap">{{ item.title }}</h1>
                         </div>
                     </template>
@@ -144,8 +147,9 @@
                             <div class="flex flex-col gap-6 min-w-0 max-w-full">
                                 <h1 class="text-4xl font-medium">{{ selectedMethod.title }}</h1>
                                 <Transition name="fade" mode="out-in">
-                                    <NuxtImg :src="selectedMethod.image" :key="selectedMethod.image" width="420"
-                                        height="250" class="rounded-lg ring ring-muted/50" quality="80" />
+                                    <img :src="methodImage(selectedMethod, 'detail')"
+                                        :alt="`Bild för ${selectedMethod.title}`" width="420" height="250"
+                                        class="rounded-lg ring ring-muted/50" loading="lazy" decoding="async" />
                                 </Transition>
                                 <UCard class="ring-muted/50" variant="outline" :ui="{ body: 'py-1 sm:py-1' }">
                                     <UAccordion :items="accordionItems" :unmount-on-hide="false"
@@ -295,13 +299,11 @@
 
                 <div
                     class="mb-4 flex flex-col sm:flex-row gap-1.5 p-1 rounded-lg ring ring-muted/50 sm:w-fit bg-muted/30">
-
                     <UModal :fullscreen="isMobile ? true : false" :title="page.ecologyintro?.title ?? ''"
                         :description="page.ecologyintro?.description ?? ''" :ui="{
                             header: 'shrink-0',
-
                         }">
-                        <UAlert icon="i-heroicons-newspaper" color="neutral" variant="outline"
+                        <UAlert icon="i-heroicons-book-open" color="neutral" variant="outline"
                             title="Mykorrhiza & skogsbruk i korthet"
                             class="sm:w-fit shadow ring-muted/50 hover:opacity-85 hover:cursor-pointer" />
                         <template #body>
@@ -333,6 +335,16 @@ import { useMediaQuery } from '@vueuse/core'
 import { useOnboardingStore } from '~/stores/onboardingStore'
 
 const open = ref(false)
+const methodImage = (method: any, variant: 'thumb' | 'card' | 'detail') => {
+  const src = method?.image ?? '';
+  const base = src.split('/').pop()?.split('.')[0] ?? '';
+  const size = variant === 'thumb'
+    ? '64'
+    : variant === 'detail'
+      ? '420x250'
+      : '300x160';
+  return base ? `/images/metoder/web/${base}_${size}.webp` : src;
+};
 
 const isMobile = useMediaQuery('(max-width: 767px)')
 const showMobileStickySelect = ref(false)

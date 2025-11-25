@@ -9,7 +9,7 @@
   <!-- min-h-[399px] -->
   <div class="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-8 gap-4   p-2">
     <div v-for="(row, index) in gridPaginatedData" :key="row.Commonname + row.Scientificname + index"
-      class="bg-white dark:bg-neutral-800 rounded border overflow-hidden border-muted/50 dark:border-neutral-700/40 hover:shadow-md transition-shadow cursor-pointer h-[126px]"
+      class="bg-white dark:bg-neutral-800 rounded-lg border overflow-hidden border-muted/50 dark:border-neutral-700/40 hover:shadow-md transition-shadow cursor-pointer h-[126px]"
       @click="selectRow(row)">
       <!-- Image Thumbnail -->
       <div class="w-full h-24 relative ">

@@ -20,18 +20,18 @@
 
           <UModal :fullscreen="isMobile ? true : false" :title="page.ecologyintro?.title ?? ''"
             :description="page.ecologyintro?.description ?? ''" :ui="{
-              header: 'items-start gap-2 shrink-0',
-              title: 'whitespace-normal',
-              description: 'whitespace-normal leading-snug'
+              header: 'shrink-0',
             }">
-            <UAlert icon="i-heroicons-newspaper" color="neutral" variant="outline" title="Ekologi"
+            <UAlert icon="i-material-symbols-network-node" color="neutral" variant="outline" title="Ekologi"
               class="sm:w-fit h-fit  ring-muted/50 hover:opacity-85 hover:cursor-pointer" />
             <template #body>
               <EcologyIntro :section="page.ecologyintro" />
             </template>
           </UModal>
           <UModal :fullscreen="isMobile ? true : false" title="Underlag för svampars förekomst"
-            :description="page.underlagdescription">
+            :description="page.underlagdescription" :ui="{
+              header: 'shrink-0',
+            }">
             <UAlert icon="i-heroicons-document-magnifying-glass" color="neutral" variant="outline" title="Underlag"
               class="sm:w-fit h-fit  ring-muted/50 hover:opacity-85 hover:cursor-pointer" />
             <template #body>
@@ -128,15 +128,15 @@
                   <EcologyIntro :section="page.ecologyintro" />
                 </template>
               </UModal>
-          <UModal :fullscreen="isMobile ? true : false" title="Underlag för svampars förekomst"
-            :description="page.underlagdescription">
-            <UAlert icon="i-heroicons-document-magnifying-glass" color="neutral" variant="outline" title="Underlag"
-              class="sm:w-fit h-fit  ring-muted/50 hover:opacity-85 hover:cursor-pointer" />
-            <template #body>
-              <UnderlagContent :underlag="page.underlag" :underlagbild="page.underlagbild"
-                :sections="page.underlagSections" />
-            </template>
-          </UModal>
+              <UModal :fullscreen="isMobile ? true : false" title="Underlag för svampars förekomst"
+                :description="page.underlagdescription">
+                <UAlert icon="i-heroicons-document-magnifying-glass" color="neutral" variant="outline" title="Underlag"
+                  class="sm:w-fit h-fit  ring-muted/50 hover:opacity-85 hover:cursor-pointer" />
+                <template #body>
+                  <UnderlagContent :underlag="page.underlag" :underlagbild="page.underlagbild"
+                    :sections="page.underlagSections" />
+                </template>
+              </UModal>
 
             </div>
           </UContainer>
@@ -405,7 +405,7 @@ watch(
   opacity: 0;
 }
 
-/* .view-transition-enter-active,
+.view-transition-enter-active,
 .view-transition-leave-active {
   transition: opacity 0.3s ease-in-out;
 }
@@ -413,8 +413,7 @@ watch(
 .view-transition-enter-from,
 .view-transition-leave-to {
   opacity: 0;
-  transform: translateY(10px);
-} */
+}
 
 .rounded-tab {
   --r: 0.8em;

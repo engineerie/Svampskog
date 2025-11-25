@@ -14,7 +14,7 @@ underlagSections:
       - "Dessa värden vägs mot den relativa skogstillväxten jämfört med orörd skog. Trädtillväxten ger en ungefärlig bild av hur mycket mykorrhizasvamp som kan finnas."
       - "Diagrammen över matsvampar som redovisas i kg/ha bygger på fältundersökningar."
 underlagdescription: Baseras på forskning, mark-DNA och fältundersökningar
-underlagbild: /images/Sources/markinventering.png
+underlagbild: /images/Sources/web/markinventering_500.webp
 hero:
   title: Svampar efter skogsskötsel
   description: Se hur olika skötselåtgärder kan påverka förekomsten av mykorrhizasvampar.

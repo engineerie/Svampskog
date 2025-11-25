@@ -1,6 +1,6 @@
 <template>
   <div class="space-y-4">
-    <NuxtImg v-if="underlagbild" :src="underlagbild" class="rounded-lg" />
+    <img v-if="underlagbild" :src="underlagbild" class="rounded-lg w-full" />
 
     <div v-if="sections.length" class="space-y-4">
       <div v-for="(section, idx) in sections" :key="idx" class="space-y-2">
