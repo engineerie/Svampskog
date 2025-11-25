@@ -68,7 +68,8 @@ function collageGridClass(item: EcologyIntroItem) {
 <template>
   <section>
     <div class="flex flex-col gap-4 sm:gap-6 ">
-      <article v-for="(item, i) in slides" :key="i" class=" flex flex-col">
+      <article v-for="(item, i) in slides" :key="i" class=" flex flex-col bg-muted p-3 rounded-lg">
+
         <div v-if="isCollage(item)" :class="`${collageGridClass(item)} rounded-lg overflow-hidden`">
           <img v-for="(src, idx) in collageImagesFor(item)" :key="idx" :src="src" :alt="item.title || ''"
             class="rounded-none w-full h-full object-cover " />
@@ -79,7 +80,8 @@ function collageGridClass(item: EcologyIntroItem) {
           <img v-if="resolveSecondaryImage(item)" :src="resolveSecondaryImage(item)" :alt="item.title || ''" fit="cover"
             class=" rounded-lg w-full object-cover" />
         </div>
-        <MDC v-if="resolveDescription(item)" :value="resolveDescription(item)" class="prose prose-neutral max-w-none" />
+        <MDC v-if="resolveDescription(item)" :value="resolveDescription(item)"
+          class="prose prose-neutral max-w-none p-3" />
       </article>
     </div>
 
