@@ -55,8 +55,8 @@ sections:
     orientation: horizontal
     reverse: false
 press:
-  title: Aktuellt & lästips
-  description: Läs om projektet i media, lyssna på poddar om skog och svamp eller anmäl dig till webbinarier.
+  title: Webbinarier
+  description: Missa inte att anmäla dig till våra webbinarium om svamp och skogsbruk.
   items:
     - title: "Webbinarium: Skogens svampar - Del 2"
       publication: Plockhugget.se
@@ -76,42 +76,42 @@ press:
       badge:
         label: Anmäl intresse
         color: info
-    - title: Då stannar kantarellen
-      publication: Föreningen & tidningen Skogen
-      publicationDate: 2 april 2025
-      url: https://www.skogen.se/nyheter/da-stannar-kantarellen/
-      icon: i-heroicons-newspaper
-      description: Måste svampställena försvinna efter avverkning? Inte om man sparar träden där svamparna växer. En ny app visar hur svampar påverkas av skötselåtgärder.
-    - title: "Ny teknik: Se svampen i din skog"
-      publication: Skogsvärden
-      publicationDate: 2 oktober 2024
-      url: https://www.skogssallskapet.se/kunskapsbank/artiklar/2024-10-02-ny-teknik-se-svampen-i-din-skog.html
-      icon: i-heroicons-newspaper
-      description: ""
-    - title: Svamparnas rike - osynligt men viktigt
-      publication: Korta föreläsningar om svamp
-      publicationDate: 14 mars 2024
-      url: https://www.ksla.se/aktiviteter/svamparnas-rike-osynligt-men-viktigt/
-      icon: i-heroicons-film
-      description: Fyra presentationer på Kungliga Skogs- och lantbruksakademien
-    - title: Så påverkar skogsbruket dina svampställen
-      publication: Dagens Nyheter
-      publicationDate: 3 september 2023
-      url: https://www.dn.se/sverige/sa-paverkar-skogsbruket-dina-svampstallen/
-      icon: i-heroicons-film
-      description: ""
-    - title: Sporen - en podd om svampar
-      publication: Anna Rosling - Spotify
-      publicationDate: 1 september 2023
-      url: https://open.spotify.com/show/77UlUrR6SbIrsyFBOLHC8c
-      icon: i-heroicons-radio
-      description: 6 avsnitt från hösten 2023 där Anna Rosling från Uppsala universitet och Hanna Johannesson på Kungliga vetenskapsakademien/Stockholms universitet pratar om svamp.
-    - title: Viktigt samspel mellan träd och svamp
-      publication: Skogseko
-      publicationDate: Nr 3 2022
-      url: https://e-tidning.skogseko.se/p/skogseko/skogseko-nr-3-2022/a/viktigt-samspel-mellan-trad-och-svamp/1525/587953/31172107
-      icon: i-heroicons-newspaper
-      description: ""
+    # - title: Då stannar kantarellen
+    #   publication: Föreningen & tidningen Skogen
+    #   publicationDate: 2 april 2025
+    #   url: https://www.skogen.se/nyheter/da-stannar-kantarellen/
+    #   icon: i-heroicons-newspaper
+    #   description: Måste svampställena försvinna efter avverkning? Inte om man sparar träden där svamparna växer. En ny app visar hur svampar påverkas av skötselåtgärder.
+    # - title: "Ny teknik: Se svampen i din skog"
+    #   publication: Skogsvärden
+    #   publicationDate: 2 oktober 2024
+    #   url: https://www.skogssallskapet.se/kunskapsbank/artiklar/2024-10-02-ny-teknik-se-svampen-i-din-skog.html
+    #   icon: i-heroicons-newspaper
+    #   description: ""
+    # - title: Svamparnas rike - osynligt men viktigt
+    #   publication: Korta föreläsningar om svamp
+    #   publicationDate: 14 mars 2024
+    #   url: https://www.ksla.se/aktiviteter/svamparnas-rike-osynligt-men-viktigt/
+    #   icon: i-heroicons-film
+    #   description: Fyra presentationer på Kungliga Skogs- och lantbruksakademien
+    # - title: Så påverkar skogsbruket dina svampställen
+    #   publication: Dagens Nyheter
+    #   publicationDate: 3 september 2023
+    #   url: https://www.dn.se/sverige/sa-paverkar-skogsbruket-dina-svampstallen/
+    #   icon: i-heroicons-film
+    #   description: ""
+    # - title: Sporen - en podd om svampar
+    #   publication: Anna Rosling - Spotify
+    #   publicationDate: 1 september 2023
+    #   url: https://open.spotify.com/show/77UlUrR6SbIrsyFBOLHC8c
+    #   icon: i-heroicons-radio
+    #   description: 6 avsnitt från hösten 2023 där Anna Rosling från Uppsala universitet och Hanna Johannesson på Kungliga vetenskapsakademien/Stockholms universitet pratar om svamp.
+    # - title: Viktigt samspel mellan träd och svamp
+    #   publication: Skogseko
+    #   publicationDate: Nr 3 2022
+    #   url: https://e-tidning.skogseko.se/p/skogseko/skogseko-nr-3-2022/a/viktigt-samspel-mellan-trad-och-svamp/1525/587953/31172107
+    #   icon: i-heroicons-newspaper
+    #   description: ""
 timeline:
   title: Kommande innehåll
   description: Svampskog.se vidareutvecklas stegvis. Här hittar du en översikt över planerade funktioner och material som publiceras under året.

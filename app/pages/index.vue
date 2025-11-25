@@ -181,13 +181,14 @@ useSeoMeta({
       :while-in-view="{ opacity: 1, transform: 'translateY(0)' }" :in-view-options="{ once: true }"
       :transition="{ duration: 0.6, delay: 0.3 }">
       <UPageSection v-if="page.press" :title="page.press.title" :description="page.press.description"
-        :ui="{ container: 'bg-neutral-50 lg:rounded ring ring-neutral-100 py-12 sm:py-16 lg:py-20 my-4 sm:my-8 lg:my-10', title: 'text-start lg:text-center', description: 'text-start lg:text-center text-pretty' }">
+        :ui="{ container: 'bg-neutral-50 lg:rounded-2xl ring ring-neutral-100 py-12 sm:py-16 lg:py-20 my-4 sm:my-8 lg:my-10', title: 'text-start lg:text-center', description: 'text-start lg:text-center text-pretty' }">
         <UPageColumns>
           <Motion v-for="(article, index) in page.press.items" :key="index"
             :initial="{ opacity: 0, transform: 'translateY(20px)' }"
             :while-in-view="{ opacity: 1, transform: 'translateY(0)' }" :in-view-options="{ once: true }"
             :transition="{ delay: 0.2 }">
-            <UPageCard :title="article.title" class="ring-0 border border-muted bg-white hover:bg-transparent"
+            <UPageCard :title="article.title"
+              class="rounded-xl ring-0 border border-muted/50 bg-white hover:bg-white shadow-md hover:shadow-lg"
               :description="article.description"
               :ui="{ description: 'before:content-[open-quote] after:content-[close-quote]', header: 'w-full' }"
               :to="article.url">

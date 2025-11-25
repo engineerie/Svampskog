@@ -37,7 +37,7 @@ hero:
       variant: solid
 ecologyintro:
   title: Mykorrhizans ekologi i korthet
-  description: Utforska några av våra favoritarter och se hur miljöerna förändras när du öppnar korten.
+  description: Introduktion till mykorrhizasvampar i skogen.
   items:
     - title: Många skogssvampar bildar mykorrhiza
       image: /images/svampindex/Cortinarius sanguineus-179-.jpg

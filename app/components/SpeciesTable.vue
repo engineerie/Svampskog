@@ -998,7 +998,7 @@ const mobileColumns = [
         ? h('img', {
           src: images[0],
           alt: row.original.Commonname || 'Svampbild',
-          class: "h-20 w-26 object-cover rounded border-[0.5px] border-neutral-200 dark:border-neutral-800 md:ml-2",
+          class: "h-20 w-26 object-cover rounded sm:rounded-md border-[0.5px] border-neutral-200 dark:border-neutral-800 md:ml-2",
           loading: 'lazy',
           decoding: 'async',
           height: 300,
