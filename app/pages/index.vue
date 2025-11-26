@@ -5,7 +5,7 @@ const { data: page } = await useAsyncData('index', () => queryCollection('index'
 const { data: forestryPage } = await useAsyncData('landing-skogsskotsel', () => queryCollection('skogsskotsel').first())
 
 const trakthyggeHover = ref(false)
-const trakthyggeImage = '/images/metoder/web/kalhygge_420x250.webp'
+const trakthyggeImage = '/images/metoder/kalhygge.png'
 const trakthyggePoints = [
   { age: -7, value: 100 },
   { age: 0, value: 100 },
@@ -114,6 +114,7 @@ useSeoMeta({
   from {
     opacity: 0;
   }
+
   to {
     opacity: 0.4;
   }
@@ -181,19 +182,16 @@ useSeoMeta({
         :description="page.sections[1].description" :headline="page.sections[1].headline"
         :orientation="page.sections[1].orientation" :links="page.sections[1].links">
         <div class="relative inline-block">
-          <img :src="trakthyggeImage" alt="Trakthygge"
-            class="rounded-xl ring ring-muted/50 shadow-lg transition duration-500 w-full max-w-none"
-            :class="trakthyggeHover ? 'brightness-50' : 'brightness-100'" @mouseenter="trakthyggeHover = true"
+          <NuxtImg :src="trakthyggeImage" alt="Trakthygge" height="450" width="750"
+            class="rounded-xl ring ring-muted/50 shadow-lg transition-all duration-500 w-full max-w-none overflow-hidden"
+            :class="trakthyggeHover ? 'opacity-50' : 'opacity-100'" @mouseenter="trakthyggeHover = true"
             @mouseleave="trakthyggeHover = false" />
-          <svg v-if="trakthyggeHover" class="absolute inset-0 w-full h-full pointer-events-none" viewBox="0 0 420 250"
-            fill="none">
+          <svg v-if="trakthyggeHover" class="absolute inset-0 w-full h-full pointer-events-none rounded-xl"
+            viewBox="0 0 420 250" fill="none">
             <defs>
-              <pattern id="trak-grid" width="20" height="20" patternUnits="userSpaceOnUse">
-                <path d="M 20 0 L 0 0 0 20" fill="none" stroke="white" stroke-opacity="0.7" stroke-width="1.25" />
-              </pattern>
               <linearGradient id="trak-gradient" x1="0" y1="0" x2="0" y2="1">
-                <stop offset="0%" stop-color="white" stop-opacity="0.5" />
-                <stop offset="100%" stop-color="white" stop-opacity="0.05" />
+                <stop offset="0%" stop-color="##cbd5e1" stop-opacity="1" />
+                <stop offset="100%" stop-color="#5a3f34" stop-opacity="0.1" />
               </linearGradient>
               <mask id="trak-reveal">
                 <rect x="0" y="0" height="250" width="0" fill="white">
@@ -201,13 +199,9 @@ useSeoMeta({
                 </rect>
               </mask>
             </defs>
-            <rect width="100%" height="100%" fill="url(#trak-grid)" class="grid-fade" />
-            <line x1="32" x2="32" y1="0" y2="250" stroke="white" stroke-opacity="0.7" stroke-width="1.5"
-              stroke-dasharray="6 6" class="transition-opacity duration-500" />
-            <text x="32" y="16" fill="white" font-size="10" text-anchor="middle" opacity="0.85">avverkning</text>
             <path v-if="trakthyggePath" :d="trakthyggePath + ' L 420 250 L 0 250 Z'" fill="url(#trak-gradient)"
               class="trak-area" mask="url(#trak-reveal)" />
-            <path v-if="trakthyggePath" :d="trakthyggePath" stroke="white" stroke-width="3"
+            <path v-if="trakthyggePath" :d="trakthyggePath" opacity="0.7" stroke="#5a3f34" stroke-width="1"
               stroke-linejoin="round" stroke-linecap="round" fill="none" mask="url(#trak-reveal)" />
           </svg>
         </div>
