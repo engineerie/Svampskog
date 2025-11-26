@@ -123,15 +123,17 @@
         <UContainer class="w-full pt-2 px-1 sm:px-6 " v-if="selectedMethod.id">
             <Motion class="flex justify-center w-full" :initial="{
                 opacity: 0,
-                transform: 'translateY(10px)'
+                // transform: 'translateY(10px)',
+                scale: 1.02,
                 // filter: 'blur(20px)'
             }" :animate="{
                 opacity: 1,
-                transform: 'translateY(0px)'
+                // transform: 'translateY(0px)',
+                scale: 1,
                 // filter: 'blur(0px)'
             }" :transition="{
                 duration: 0.5,
-                delay: 0.2
+                delay: 0.5,
             }">
                 <div class="w-full  rounded-xl relative overflow-hidden">
                     <!-- <div class="absolute top-0 right-0 p-3 flex gap-4">
@@ -336,14 +338,14 @@ import { useOnboardingStore } from '~/stores/onboardingStore'
 
 const open = ref(false)
 const methodImage = (method: any, variant: 'thumb' | 'card' | 'detail') => {
-  const src = method?.image ?? '';
-  const base = src.split('/').pop()?.split('.')[0] ?? '';
-  const size = variant === 'thumb'
-    ? '64'
-    : variant === 'detail'
-      ? '420x250'
-      : '300x160';
-  return base ? `/images/metoder/web/${base}_${size}.webp` : src;
+    const src = method?.image ?? '';
+    const base = src.split('/').pop()?.split('.')[0] ?? '';
+    const size = variant === 'thumb'
+        ? '64'
+        : variant === 'detail'
+            ? '420x250'
+            : '300x160';
+    return base ? `/images/metoder/web/${base}_${size}.webp` : src;
 };
 
 const isMobile = useMediaQuery('(max-width: 767px)')

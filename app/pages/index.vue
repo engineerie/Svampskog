@@ -1,86 +1,82 @@
 <script setup lang="ts">
-import { computed, ref, watch, onMounted, onUnmounted } from 'vue'
-import { useMediaQuery } from '@vueuse/core'
+import { computed, ref } from 'vue'
 
 const { data: page } = await useAsyncData('index', () => queryCollection('index').first())
 const { data: forestryPage } = await useAsyncData('landing-skogsskotsel', () => queryCollection('skogsskotsel').first())
 
-type StackCard = { image: string; title?: string }
+const trakthyggeHover = ref(false)
+const trakthyggeImage = '/images/metoder/web/kalhygge_420x250.webp'
+const trakthyggePoints = [
+  { age: -7, value: 100 },
+  { age: 0, value: 100 },
+  { age: 0.1, value: 5 },
+  { age: 10, value: 15 },
+  { age: 20, value: 60 },
+  { age: 30, value: 120 },
+  { age: 40, value: 123 },
+  { age: 50, value: 121 },
+  { age: 60, value: 120 },
+  { age: 70, value: 115 },
+  { age: 80, value: 112 },
+  { age: 90, value: 110 },
+  { age: 100, value: 110 },
+]
 
-const stackImages = ref<StackCard[]>([])
-let rotateTimer: number | null = null
+const trakthyggePath = computed(() => {
+  const minAge = -7
+  const maxAge = 100
+  const maxVal = 130
+  const width = 420
+  const height = 250
+  const topPad = 12
+  const bottomPad = 16
+  const leftPad = 0
+  const rightPad = 0
+  const usableHeight = height - topPad - bottomPad
+  const usableWidth = width - leftPad - rightPad
+  const normalizeX = (age: number) => leftPad + ((age - minAge) / (maxAge - minAge)) * usableWidth
+  const normalizeY = (val: number) => height - bottomPad - (Math.max(val, 0) / maxVal) * usableHeight
+  const pts = trakthyggePoints.map(p => ({
+    x: normalizeX(p.age),
+    y: normalizeY(p.value),
+    age: p.age,
+  }))
 
-const buildStack = () => {
-  const imgs =
-    forestryPage.value?.methods?.slice(0, 5).map(method => ({
-      image: method.image,
-      title: method.title
-    })) ?? []
-  stackImages.value = imgs.length ? [...imgs].reverse() : []
-}
+  if (!pts.length) return ''
 
-watch(forestryPage, buildStack, { immediate: true })
+  const clamp = (v: number, min: number, max: number) => Math.max(min, Math.min(max, v))
+  const toStr = (p: { x: number; y: number }) => `${p.x.toFixed(2)},${p.y.toFixed(2)}`
+  let d = `M ${toStr(pts[0])}`
 
-const hoveredStackIndex = ref<number | null>(null)
-const fadingKey = ref<string | null>(null)
-let isCycling = false
-const isDesktop = useMediaQuery('(min-width: 768px)')
-const cardVars = computed(() => {
-  const layers = Math.max(stackImages.value.length - 1, 0)
-  return {
-    '--card-w': isDesktop.value ? 'clamp(220px, 30vw, 380px)' : 'clamp(200px, 70vw, 260px)',
-    '--card-h': 'calc(var(--card-w) * 0.6)',
-    '--offset-x': isDesktop.value ? 'calc(var(--card-w) * 0.1)' : 'calc(var(--card-w) * 0.08)',
-    '--offset-y': isDesktop.value ? 'calc(var(--card-w) * 0.075)' : 'calc(var(--card-w) * 0.06)',
-    height: `calc(var(--card-h) + ${layers} * var(--offset-y) + 12px)`
-  } as Record<string, string>
-})
+  const tension = 0.1
 
-const cycleStack = () => {
-  if (stackImages.value.length <= 1 || isCycling) return
-  isCycling = true
-  const frontIndex = stackImages.value.length - 1
-  fadingKey.value = stackImages.value[frontIndex]?.image ?? null
-
-  window.setTimeout(() => {
-    const item = stackImages.value.pop()
-    if (item) {
-      stackImages.value.unshift(item)
+  for (let i = 1; i < pts.length; i++) {
+    const p0 = pts[i - 1]
+    const p1 = pts[i]
+    const isSharpDrop = p0.age === 0 && p1.age === 0.1
+    if (isSharpDrop) {
+      d += ` L ${toStr(p1)}`
+      continue
     }
-  }, 500)
 
-  window.setTimeout(() => {
-    fadingKey.value = null
-    isCycling = false
-  }, 1100)
-}
+    const pPrev = pts[i - 2] ?? p0
+    const pNext = pts[i + 1] ?? p1
 
-onMounted(() => {
-  rotateTimer = window.setInterval(cycleStack, 15000)
-})
+    const cp1x = p0.x + (p1.x - pPrev.x) * tension
+    const cp1yRaw = p0.y + (p1.y - pPrev.y) * tension
+    const cp2x = p1.x - (pNext.x - p0.x) * tension
+    const cp2yRaw = p1.y - (pNext.y - p0.y) * tension
 
-onUnmounted(() => {
-  if (rotateTimer) {
-    window.clearInterval(rotateTimer)
+    const minY = Math.min(p0.y, p1.y)
+    const maxY = Math.max(p0.y, p1.y)
+    const cp1y = clamp(cp1yRaw, minY, maxY)
+    const cp2y = clamp(cp2yRaw, minY, maxY)
+
+    d += ` C ${cp1x.toFixed(2)},${cp1y.toFixed(2)} ${cp2x.toFixed(2)},${cp2y.toFixed(2)} ${toStr(p1)}`
   }
+
+  return d
 })
-
-const cardHoverStyles = (index: number) => {
-  const baseX = `calc(var(--offset-x) * ${index})`
-  const baseY = `calc(var(--offset-y) * ${index})`
-  const isHovered = hoveredStackIndex.value === index
-  const isDimmed = hoveredStackIndex.value !== null && hoveredStackIndex.value !== index
-  const isFading = fadingKey.value === stackImages.value[index]?.image
-
-  return {
-    transform: `translate(${baseX}, ${baseY}) translateY(${isHovered ? '-12px' : '0'}) `,
-    filter: isDimmed ? 'brightness(0.55)' : 'none',
-    opacity: isFading ? 0 : 1,
-    zIndex: index + 1,
-    transition: 'transform 650ms ease, opacity 650ms ease, filter 650ms ease, box-shadow 650ms ease',
-    boxShadow: isHovered ? '0 12px 32px rgba(0,0,0,0.18)' : '0 6px 16px rgba(0,0,0,0.10)'
-  }
-}
 
 useSeoMeta({
   titleTemplate: '',
@@ -91,6 +87,38 @@ useSeoMeta({
 })
 
 </script>
+
+<style scoped>
+@keyframes drawLine {
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+
+.trak-line {
+  stroke-dasharray: 1;
+  stroke-dashoffset: 1;
+  animation: drawLine 1.8s ease forwards;
+}
+
+.grid-fade {
+  opacity: 0;
+  animation: fadeGrid 0.6s ease forwards;
+}
+
+.trak-area {
+  opacity: 0.75;
+}
+
+@keyframes fadeGrid {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 0.4;
+  }
+}
+</style>
 
 <template>
   <div v-if="page">
@@ -152,29 +180,37 @@ useSeoMeta({
       <UPageSection v-if="page?.sections?.[1]" :title="page.sections[1].title"
         :description="page.sections[1].description" :headline="page.sections[1].headline"
         :orientation="page.sections[1].orientation" :links="page.sections[1].links">
-        <div v-if="stackImages.length" class="pointer-events-none sm:pointer-events-auto relative w-full"
-          :style="cardVars">
-          <div v-for="(item, index) in stackImages" :key="item.image" class="absolute top-0 left-0 rounded-lg" :style="{
-            ...cardHoverStyles(index),
-            width: 'var(--card-w)',
-            height: 'var(--card-h)'
-          }" @mouseenter="hoveredStackIndex = index" @mouseleave="hoveredStackIndex = null">
-            <Transition name="fade-delay" mode="out-in">
-              <div v-if="hoveredStackIndex === index"
-                class="absolute -top-10 left-0 bg-white text-neutral-900 px-3 py-1 rounded-lg text-sm font-medium pointer-events-none">
-                {{ item.title }}
-              </div>
-            </Transition>
-            <Motion v-if="isDesktop" class="shadow-lg rounded-lg ring ring-muted/50 overflow-hidden ">
-              <NuxtImg :src="item.image" width="1000" height="600" format="webp" class="w-full h-full object-cover" />
-            </Motion>
-            <div v-else class="shadow-lg rounded-lg ring ring-muted/50 overflow-hidden w-full h-full">
-              <NuxtImg :src="item.image" width="1000" height="600" format="webp" class="w-full h-full object-cover" />
-            </div>
-          </div>
+        <div class="relative inline-block">
+          <img :src="trakthyggeImage" alt="Trakthygge"
+            class="rounded-xl ring ring-muted/50 shadow-lg transition duration-500 w-full max-w-none"
+            :class="trakthyggeHover ? 'brightness-50' : 'brightness-100'" @mouseenter="trakthyggeHover = true"
+            @mouseleave="trakthyggeHover = false" />
+          <svg v-if="trakthyggeHover" class="absolute inset-0 w-full h-full pointer-events-none" viewBox="0 0 420 250"
+            fill="none">
+            <defs>
+              <pattern id="trak-grid" width="20" height="20" patternUnits="userSpaceOnUse">
+                <path d="M 20 0 L 0 0 0 20" fill="none" stroke="white" stroke-opacity="0.7" stroke-width="1.25" />
+              </pattern>
+              <linearGradient id="trak-gradient" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="0%" stop-color="white" stop-opacity="0.5" />
+                <stop offset="100%" stop-color="white" stop-opacity="0.05" />
+              </linearGradient>
+              <mask id="trak-reveal">
+                <rect x="0" y="0" height="250" width="0" fill="white">
+                  <animate attributeName="width" from="0" to="420" dur="1.8s" begin="0.5s" fill="freeze" />
+                </rect>
+              </mask>
+            </defs>
+            <rect width="100%" height="100%" fill="url(#trak-grid)" class="grid-fade" />
+            <line x1="32" x2="32" y1="0" y2="250" stroke="white" stroke-opacity="0.7" stroke-width="1.5"
+              stroke-dasharray="6 6" class="transition-opacity duration-500" />
+            <text x="32" y="16" fill="white" font-size="10" text-anchor="middle" opacity="0.85">avverkning</text>
+            <path v-if="trakthyggePath" :d="trakthyggePath + ' L 420 250 L 0 250 Z'" fill="url(#trak-gradient)"
+              class="trak-area" mask="url(#trak-reveal)" />
+            <path v-if="trakthyggePath" :d="trakthyggePath" stroke="white" stroke-width="3"
+              stroke-linejoin="round" stroke-linecap="round" fill="none" mask="url(#trak-reveal)" />
+          </svg>
         </div>
-        <NuxtImg v-else :src="page.sections[1].src" width="1000" type="webp"
-          class="rounded-md border border-neutral-200" />
       </UPageSection>
     </Motion>
     <Motion :initial="{ opacity: 0, transform: 'translateY(20px)' }"
