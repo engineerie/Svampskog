@@ -86,6 +86,16 @@ useSeoMeta({
   ogDescription: page.value?.description
 })
 
+const heroDescriptionParts = computed(() => {
+  const desc = page.value?.hero?.description || ''
+  const needle = 'mykorrhizasvampar'
+  const idx = desc.toLowerCase().indexOf(needle)
+  if (idx === -1) return { before: desc, after: '' }
+  return {
+    before: desc.slice(0, idx),
+    after: desc.slice(idx + needle.length),
+  }
+})
 </script>
 
 <style scoped>
@@ -139,7 +149,23 @@ useSeoMeta({
           <MDC :value="page.hero.title" class="*:leading-13 sm:*:leading-19 max-w-3xl mx-auto  " />
         </template>
         <template #description>
-          <MDC :value="page.hero.description" class="*:leading-7  sm:*:leading-8 max-w-3xl mx-auto " />
+          <p class="max-w-3xl mx-auto text-lg text-neutral-700 sm:leading-8 leading-7">
+            {{ heroDescriptionParts.before }}
+            <UPopover :ui="{ content: 'ring-muted/50' }">
+              <span class="text-primary font-semibold cursor-help">mykorrhizasvampar</span>
+              <!-- <UBadge label="mykorrhizasvampar" color="neutral" variant="outline" class="cursor-pointer" size="xl" /> -->
+              <template #content>
+                <div class="p-4 max-w-xs">
+                  <span class="font-semibold ">Mykorrhizasvampar är svampar som lever i symbios med träd. </span>
+                  <span class="text-muted">Symbiosen innebär att svamparna får sin energi från träden och i utbyte
+                    sköter
+                    de om trädens
+                    näringsförsörjning.</span>
+                </div>
+              </template>
+            </UPopover>
+            {{ heroDescriptionParts.after }}
+          </p>
         </template>
         <template #links>
           <UButton v-for="link in page.hero.links" :label="link.label" :icon="link.icon" :color="link.color"
@@ -201,7 +227,7 @@ useSeoMeta({
             </defs>
             <path v-if="trakthyggePath" :d="trakthyggePath + ' L 420 250 L 0 250 Z'" fill="url(#trak-gradient)"
               class="trak-area" mask="url(#trak-reveal)" />
-            <path v-if="trakthyggePath" :d="trakthyggePath" opacity="0.7" stroke="#5a3f34" stroke-width="1"
+            <path v-if="trakthyggePath" :d="trakthyggePath" opacity="1" stroke="#5a3f34" stroke-width="2"
               stroke-linejoin="round" stroke-linecap="round" fill="none" mask="url(#trak-reveal)" />
           </svg>
         </div>

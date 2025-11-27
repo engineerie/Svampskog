@@ -4,7 +4,8 @@
 
     <div class="mt-2 mb-1 flex justify-between">
       <USelect v-model="selectedChart" :items="chartOptions" value-key="value" option-attribute="label" size="xl"
-        variant="none" class="hover:cursor-pointer" :icon="selectedChartIcon" :ui="{ content: 'min-w-fit' }" />
+        variant="none" class="hover:cursor-pointer" :icon="selectedChartIcon"
+        :ui="{ content: 'min-w-fit', value: 'sm:text-lg sm:font-medium text-neutral-700' }" />
       <div class="pr-2">
 
 

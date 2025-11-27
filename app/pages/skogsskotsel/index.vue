@@ -89,7 +89,8 @@
             duration: 0.5,
             delay: 0.2
         }">
-            <UCarousel v-slot="{ item }" :items="methods" loop :speed="4" :ui="{ item: 'basis-3/5 md:basis-1/3 p-2' }">
+            <UCarousel v-slot="{ item }" :items="methods" loop :speed="4" :ui="{ item: 'basis-3/5 md:basis-1/3 p-2' }"
+                class="mobile-carousel">
 
                 <div @click="selectedId = item.id" :class="[
                     'shrink-0 bg-white transition-all hover:opacity-100 border border-muted/50 overflow-hidden rounded-lg h-fit shadow hover:shadow-md relative cursor-pointer mb-4',
@@ -124,16 +125,16 @@
             <Motion class="flex justify-center w-full" :initial="{
                 opacity: 0,
                 // transform: 'translateY(10px)',
-                scale: 1.02,
+
                 // filter: 'blur(20px)'
             }" :animate="{
                 opacity: 1,
                 // transform: 'translateY(0px)',
-                scale: 1,
+
                 // filter: 'blur(0px)'
             }" :transition="{
                 duration: 0.5,
-                delay: 0.5,
+                delay: 0.3,
             }">
                 <div class="w-full  rounded-xl relative overflow-hidden">
                     <!-- <div class="absolute top-0 right-0 p-3 flex gap-4">
@@ -146,24 +147,24 @@
                                     <div></div>
                                 </template> -->
                         <div class="grid gap-3 sm:gap-6 lg:grid-cols-3">
-                            <div class="flex flex-col gap-6 min-w-0 max-w-full">
+                            <div class="flex flex-col gap-6 min-w-0 max-w-full mb-2">
                                 <h1 class="text-4xl font-medium">{{ selectedMethod.title }}</h1>
                                 <Transition name="fade" mode="out-in">
                                     <img :src="methodImage(selectedMethod, 'detail')"
                                         :alt="`Bild för ${selectedMethod.title}`" width="420" height="250"
                                         class="rounded-lg ring ring-muted/50" loading="lazy" decoding="async" />
                                 </Transition>
-                                <UCard class="ring-muted/50" variant="outline" :ui="{ body: 'py-1 sm:py-1' }">
-                                    <UAccordion :items="accordionItems" :unmount-on-hide="false"
-                                        :default-value="['description']" :ui="{
-                                            trigger: 'text-base font-medium',
-                                            body: 'text-md/7 text-neutral-800'
-                                        }">
-                                        <template #body="{ item }">
-                                            <MDC :value="item.content" unwrap="p" />
-                                        </template>
-                                    </UAccordion>
-                                </UCard>
+
+                                <UAccordion :items="accordionItems" :unmount-on-hide="false"
+                                    :default-value="['description']" :ui="{
+                                        root: '', item: 'border-none px-4 py-1 ring ring-muted/50 rounded-lg bg-white mb-2 text-md', trigger: 'text-base font-medium',
+                                        body: 'text-md/7 text-neutral-800 px-2'
+                                    }">
+                                    <template #body="{ item }">
+                                        <MDC :value="item.content" unwrap="p" />
+                                    </template>
+                                </UAccordion>
+
                             </div>
                             <!-- <div class="space-y-6"> -->
 
@@ -176,16 +177,23 @@
                             <div v-if="timelineItems.length" class="flex flex-col gap-4 min-w-0 max-w-full">
 
                                 <!-- <UCard variant="subtle" :ui="{ body: 'p-2 sm:p-2' }"> -->
-                                <div class="flex">
-                                    <span class="text-xs text-muted">Har skogen varit kalavverkad tidigare?</span>
-                                    <!-- <UTooltip text="Har skogen varit kallavverkad tidigare?">
-                                        <UIcon name="i-heroicons-question-mark-circle" />
-                                    </UTooltip> -->
-
-
+                                <div class=" ">
+                                    <div class="flex w-full justify-between items-center">
+                                        <span class="text-md">Har skogen varit kalavverkad tidigare?</span>
+                                        <UIcon name="i-heroicons-question-mark-circle" class="size-5 cursor-pointer"
+                                            @click="toggleHistorikOpen" />
+                                    </div>
+                                    <div v-if="HistorikInfoOpen" class="text-sm text-muted mt-1">
+                                        Tidigare kalavverkning påverkar vilka mykorrhizasvampar som finns. Framförallt
+                                        är
+                                        naturvårdssvampar
+                                        vanligare i skogar som inte har kalavverkats.
+                                    </div>
                                 </div>
+
                                 <UTabs :items="startskogTabs" v-model="selectedStartskogTab"
-                                    @change="handleStartskogTabChange" variant="pill" size="lg" class="w-full -my-3"
+                                    @change="handleStartskogTabChange" variant="pill" size="lg"
+                                    class="w-full -mb-3 -mt-2 transition-all "
                                     :ui="{ list: 'grid grid-cols-2 gap-1 p-1', trigger: ' data-[state=active]:text-neutral-900 px-4 py-2 text-sm font-medium', indicator: 'bg-white' }" />
                                 <!-- </UCard> -->
 
@@ -194,8 +202,13 @@
                                     class="w-full bg-neutral-950 overflow-hidden rounded-lg ring-muted/50 " fade
                                     @select="handleTimelineSelect">
 
-                                    <NuxtImg :src="item.thumb" :alt="`Foto ${item.tid}`" width="960" height="540"
-                                        class="w-full aspect-video object-cover" />
+                                    <div class="relative w-full aspect-video">
+                                        <img :src="item.thumbHidden" :alt="`Foto ${item.tid}`" width="960" height="540"
+                                            class="w-full h-full object-cover absolute inset-0" />
+                                        <img :src="item.thumb" :alt="`Foto ${item.tid}`" width="960" height="540"
+                                            class="w-full h-full object-cover absolute inset-0 transition-opacity duration-700"
+                                            :style="{ opacity: treeFade }" />
+                                    </div>
                                     <!-- <div
                                             class="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent text-white p-4 space-y-1">
                                             <p class="text-sm font-semibold">{{ item.tid }}</p>
@@ -204,6 +217,48 @@
                                         </div> -->
 
                                 </UCarousel>
+                                <div class="flex items-center gap-2 text-xs text-neutral-500">
+                                    <UPopover>
+                                        <div class="flex cursor-help ">
+                                            <UIcon name="i-fluent-shape-organic-16-filled"
+                                                class="size-6 text-gray-300 z-20" />
+                                            <UIcon name="i-fluent-shape-organic-16-filled"
+                                                class="size-6 -ml-4 text-signal-400 z-10" />
+                                            <UIcon name="i-fluent-shape-organic-16-filled"
+                                                class="size-6 -ml-4 text-yellow-400" />
+                                        </div>
+                                        <template #content>
+                                            <div class="flex flex-col gap-2 p-4">
+                                                <div class="flex w-full">
+                                                    <UIcon name="i-fluent-shape-organic-16-filled"
+                                                        class="size-6 text-gray-300 z-20" />
+                                                    <UIcon name="i-fluent-shape-organic-16-filled"
+                                                        class="size-6 -ml-4 text-gray-400 z-10" />
+                                                    <UIcon name="i-fluent-shape-organic-16-filled"
+                                                        class="size-6 -ml-4 mr-4 text-gray-500" />
+                                                    <h1 class="font-medium">Mykorrhizasvampar</h1>
+                                                </div>
+                                                <div class="flex w-full justify-between">
+                                                    <UIcon name="i-fluent-shape-organic-16-filled"
+                                                        class="size-6 text-signal-400" />
+
+                                                    <h1 class="font-medium">Naturvårdssvampar</h1>
+                                                </div>
+                                                <div class="flex w-full justify-between">
+                                                    <UIcon name="i-fluent-shape-organic-16-filled"
+                                                        class="size-6 text-yellow-400" />
+
+                                                    <h1 class="font-medium">Matsvampar</h1>
+                                                </div>
+
+                                            </div>
+                                        </template>
+                                    </UPopover>
+                                    <USlider v-model="treeFade" :min="0" :max="1" :step="0.05" class="flex-1"
+                                        color="neutral" />
+                                    <UIcon name="i-mingcute-tree-fill" class="size-7 text-primary" />
+                                </div>
+
                                 <div class="w-full max-w-full min-w-0 overflow-x-auto overflow-y-visible">
                                     <div class="flex flex-nowrap whitespace-nowrap gap-2 w-full my-1">
                                         <UButton v-for="(item, index) in timelineItems" :key="`timeline-thumb-${index}`"
@@ -223,10 +278,10 @@
                                         <h3 class="text-xl font-semibold text-neutral-900">{{
                                             formatTimelineCurrentLabel(timelineItems[activeTimelineIndex]?.tid) }}
                                         </h3>
-                                        <p class="text-sm text-muted">
+                                        <p class="text-md text-muted">
                                             {{ timelineItems[activeTimelineIndex]?.skog }}
                                         </p>
-                                        <p class="text-sm">{{ timelineItems[activeTimelineIndex]?.svamp }}</p>
+                                        <p class="text-md">{{ timelineItems[activeTimelineIndex]?.svamp }}</p>
                                     </div>
 
                                 </UCard>
@@ -236,28 +291,38 @@
                             <div class="flex flex-col gap-1 min-w-0 max-w-full">
 
 
-                                <UCard :ui="{ body: 'p-1 sm:p-1 sm:pb-3' }" class="ring-muted/50 h-fit">
+                                <UCard variant="soft" :ui="{ body: 'p-1 sm:p-1 sm:pb-3' }"
+                                    class="ring-muted/50 h-fit bg-white/80">
                                     <ForestryChartMain :parentSelectedFrameworks=[selectedMethod.id]
                                         :currentStartskog="selectedStartskogTab"
                                         :currentTimeValue="currentTimelineTime" />
+                                </UCard>
+                                <UCard variant="soft" class="mt-3 flex flex-col gap-5 ring-muted/50"
+                                    :ui="{ body: 'sm:p-4 text-base' }">
+                                    <h1 class="font-semibold mb-3">Fokusområden i {{ selectedMethod.title }}</h1>
+                                    <!-- <p class="text-muted text-sm">I helskärm är fokusområden även markerade i bilden.
+                                    </p> -->
+                                    <UAccordion :ui="{
+                                        root: '', item: 'border-none px-4 ring ring-muted/50 rounded-lg bg-white my-2', trigger: 'text-base font-medium',
+                                        body: 'text-md/7 text-neutral-800 px-2'
+                                    }" :items="markerCards.map(card => ({ ...card, label: card.title, content: card.description }))"
+                                        multiple />
+                                    <UPageCard title="Öppna modell i helskärm"
+                                        description="I helskärm kan du jämföra metoder, visa fler informationslager och se fokusområden markerade i bilden."
+                                        icon="i-material-symbols:interactive-space"
+                                        class="mt-6 cursor-pointer ring-muted/50 shadow" color="neutral"
+                                        variant="subtle" orientation="vertical" @click="openModelWithCurrentFramework">
+                                        <!-- <div class="flex justify-center">
+                                            <NuxtImg src="images/modell.png" height="150" />
+                                        </div> -->
+                                    </UPageCard>
                                 </UCard>
                                 <UModal v-model:open="modelOpen" fullscreen>
                                     <template #content>
                                         <Model @close="modelOpen = false" />
                                     </template>
                                 </UModal>
-                                <div class="grid sm:grid-cols-1">
-                                    <div></div>
-                                    <UPageCard title="Öppna modell i helskärm"
-                                        description="I helskärm går det att jämföra olika metoder och visa fler lager med mer information. "
-                                        icon="i-material-symbols:interactive-space"
-                                        class="mt-6 cursor-pointer ring-muted/50" color="neutral" variant="subtle"
-                                        orientation="vertical" @click="openModelWithCurrentFramework">
-                                        <!-- <div class="flex justify-center">
-                                            <NuxtImg src="images/modell.png" height="150" />
-                                        </div> -->
-                                    </UPageCard>
-                                </div>
+
                             </div>
 
 
@@ -335,8 +400,18 @@ import { ref, computed, watch, nextTick, onMounted, onBeforeUnmount } from 'vue'
 import type { TabsItem } from '@nuxt/ui'
 import { useMediaQuery } from '@vueuse/core'
 import { useOnboardingStore } from '~/stores/onboardingStore'
+import { useOverlayRegistry } from '~/composables/useOverlayRegistry'
+import { useAsyncData } from '#app'
+
+const HistorikInfoOpen = ref(false)
+
+function toggleHistorikOpen() {
+    HistorikInfoOpen.value = !HistorikInfoOpen.value
+}
 
 const open = ref(false)
+const treeFade = ref(1)
+const expandedMarker = ref<string | null>(null)
 const methodImage = (method: any, variant: 'thumb' | 'card' | 'detail') => {
     const src = method?.image ?? '';
     const base = src.split('/').pop()?.split('.')[0] ?? '';
@@ -498,26 +573,21 @@ const normalizeTimelineAtgard = (value: string) => {
 const normalizeTimeToken = (t: string | number) => {
     const s = String(t).trim().toLowerCase()
     if (s.includes('efter')) return 'efter'
-    if (s.includes('innan')) return 'fore'
-    if (s.includes('före') || s.includes('fore')) return 'fore'
+    if (s.includes('innan')) return 'före'
+    if (s.includes('före') || s.includes('fore')) return 'före'
     const nums = s.replace(/[^0-9]/g, '')
     return nums || s
 }
 
-const makeThumbSrc = (atgard: string, tid: string | number, startskog: string) => {
+const makeThumbSrc = (atgard: string, tid: string | number, startskog: string, visibility: 'visa_visa' | 'visa_dölj' = 'visa_visa') => {
     const slug = (v: string) => v
         .trim()
-        .normalize('NFD')
-        .replace(/å/gi, 'a')
-        .replace(/ä/gi, 'a')
-        .replace(/ö/gi, 'o')
-        .replace(/\p{Diacritic}+/gu, '')
         .toLowerCase()
-        .replace(/[^a-z0-9]+/g, '_')
+        // keep Swedish chars, collapse everything else to underscores
+        .replace(/[^a-z0-9_åäö]+/g, '_')
         .replace(/_+/g, '_')
-        .replace(/^_+|_+$/g, '')
 
-    const fileName = `${slug(atgard)}_${normalizeTimeToken(String(tid))}_visa_visa_${slug(startskog)}.webp`
+    const fileName = `${slug(atgard)}_${normalizeTimeToken(String(tid))}_${visibility}_${slug(startskog)}.webp`
     return `/images/thumbnails/${fileName}`
 }
 
@@ -530,6 +600,7 @@ interface TimelineDisplayItem {
     skog: string
     svamp: string
     thumb: string
+    thumbHidden: string
 }
 
 
@@ -578,7 +649,8 @@ const timelineItems = computed<TimelineDisplayItem[]>(() => {
             tid: entry.tid,
             skog: entry.skog,
             svamp: entry.svamp,
-            thumb: makeThumbSrc(entry.atgard, entry.tid, entry.startskog)
+            thumb: makeThumbSrc(entry.atgard, entry.tid, entry.startskog, 'visa_visa'),
+            thumbHidden: makeThumbSrc(entry.atgard, entry.tid, entry.startskog, 'visa_dölj')
         }))
 })
 
@@ -615,7 +687,7 @@ const mapTimelineTidToChartValue = (tid?: string) => {
     if (!tid) return undefined
     const token = normalizeTimeToken(tid)
     if (!token) return undefined
-    if (token === 'fore') return 'före'
+    if (token === 'före') return 'före'
     if (token === 'efter') return 'efter'
     const num = Number(token)
     if (!Number.isNaN(num)) return String(num)
@@ -632,13 +704,80 @@ function formatTimelineButtonLabel(tid?: string) {
 function formatTimelineCurrentLabel(tid?: string) {
     if (!tid) return ''
     const token = normalizeTimeToken(tid)
-    if (token === 'fore') return 'Innan avverkning'
+    if (token === 'före') return 'Innan avverkning'
     if (token === 'efter') return 'Efter avverkning'
     const num = Number(token)
     if (!Number.isNaN(num)) {
         return `${num} år efter avverkning`
     }
     return tid.charAt(0).toUpperCase() + tid.slice(1)
+}
+
+const overlayRegistry = useOverlayRegistry()
+const { data: overlayTextData } = await useAsyncData('overlay-texts-skogs', () => queryCollection('overlayTexts').first())
+
+const overlayTextMap = computed<Record<string, { title: string; description: string }>>(() => {
+    const value = overlayTextData.value as any
+    const entries = Array.isArray(value)
+        ? (value.find((item: any) => Array.isArray(item?.entries))?.entries ?? [])
+        : value?.entries ?? []
+    const map: Record<string, { title: string; description: string }> = {}
+    entries.forEach((entry: any) => {
+        const key = entry?.key
+        if (!key) return
+        map[key] = {
+            title: entry.title ?? key,
+            description: entry.description ?? '',
+        }
+    })
+    return map
+})
+
+const markerDefinitions = [
+    { key: 'retention', icon: 'i-pepicons-pop-tree-circle' },
+    { key: 'kanteffekt', icon: 'i-healthicons-square-medium-negative' },
+    { key: 'rottacke', icon: 'i-fluent-emoji-high-contrast-blue-square' },
+    { key: 'rottackeSkarmtrad', icon: 'i-fluent-emoji-high-contrast-blue-square' },
+    { key: 'rottackeBladning', icon: 'i-fluent-emoji-high-contrast-blue-square' },
+    { key: 'seedTree', icon: 'i-teenyicons-redwoodjs-outline' },
+    { key: 'smaplantor', icon: 'i-pepicons-pop-seedling-circle' },
+    { key: 'hogstubbar', icon: 'i-roentgen-wood' },
+    { key: 'naturvardsarter', icon: 'i-material-symbols-award-star-outline' },
+    { key: 'tradplantor', icon: 'i-hugeicons-plant-02' },
+]
+
+const markerCards = computed(() => {
+    const currentMethod = selectedMethod.value.id
+    const allowedByMethod: Record<string, string[] | 'all'> = {
+        naturvardsarter: 'all',
+        retention: ['trakthygge', 'luckhuggning', 'skärmträd', 'skarmtrad', 'blädning', 'bladning'],
+        kanteffekt: ['trakthygge', 'luckhuggning', 'skärmträd', 'skarmtrad'],
+        tradplantor: ['trakthygge'],
+        smaplantor: ['trakthygge'],
+        hogstubbar: ['trakthygge'],
+        rottackeBladning: ['blädning', 'bladning'],
+        rottackeSkarmtrad: ['skärmträd', 'skarmtrad'],
+        seedTree: ['skärmträd', 'skarmtrad'],
+    }
+
+    return markerDefinitions
+        .filter(def => {
+            const allow = allowedByMethod[def.key] ?? []
+            if (allow === 'all') return true
+            return allow.includes(currentMethod)
+        })
+        .map(def => {
+            const copy = overlayTextMap.value[def.key] ?? { title: def.key, description: '' }
+            return {
+                ...def,
+                title: copy.title,
+                description: copy.description,
+            }
+        })
+})
+
+function toggleMarkerCard(key: string) {
+    expandedMarker.value = expandedMarker.value === key ? null : key
 }
 
 const tabs = ref<TabsItem[]>([
@@ -719,6 +858,20 @@ function openModelWithCurrentFramework() {
 .fade-enter-from,
 .fade-leave-to {
     opacity: 0;
+}
+
+.mobile-carousel {
+    width: 100vw;
+    margin-left: 50%;
+    transform: translateX(-50%);
+}
+
+@media (min-width: 768px) {
+    .mobile-carousel {
+        width: auto;
+        margin-left: 0;
+        transform: none;
+    }
 }
 
 .fold-down-enter-active,
