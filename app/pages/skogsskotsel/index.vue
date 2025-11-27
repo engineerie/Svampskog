@@ -308,7 +308,7 @@
                                     }" :items="markerCards.map(card => ({ ...card, label: card.title, content: card.description }))"
                                         multiple />
                                     <UPageCard title="Öppna modell i helskärm"
-                                        description="I helskärm kan du jämföra metoder, visa fler informationslager och se fokusområden markerade i bilden."
+                                        description="I helskärm kan du jämföra metoder och se fokusområden markerade i bilden."
                                         icon="i-material-symbols:interactive-space"
                                         class="mt-6 cursor-pointer ring-muted/50 shadow" color="neutral"
                                         variant="subtle" orientation="vertical" @click="openModelWithCurrentFramework">
@@ -736,9 +736,9 @@ const overlayTextMap = computed<Record<string, { title: string; description: str
 const markerDefinitions = [
     { key: 'retention', icon: 'i-pepicons-pop-tree-circle' },
     { key: 'kanteffekt', icon: 'i-healthicons-square-medium-negative' },
-    { key: 'rottacke', icon: 'i-fluent-emoji-high-contrast-blue-square' },
-    { key: 'rottackeSkarmtrad', icon: 'i-fluent-emoji-high-contrast-blue-square' },
-    { key: 'rottackeBladning', icon: 'i-fluent-emoji-high-contrast-blue-square' },
+    { key: 'rottacke', icon: 'i-game-icons-tree-roots' },
+    { key: 'rottackeSkarmtrad', icon: 'i-game-icons-tree-roots' },
+    { key: 'rottackeBladning', icon: 'i-game-icons-tree-roots' },
     { key: 'seedTree', icon: 'i-teenyicons-redwoodjs-outline' },
     { key: 'smaplantor', icon: 'i-pepicons-pop-seedling-circle' },
     { key: 'hogstubbar', icon: 'i-roentgen-wood' },

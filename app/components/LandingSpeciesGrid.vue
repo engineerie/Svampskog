@@ -29,17 +29,14 @@
       <transition-group name="fade" tag="div" :key="currentFileIndex"
         class="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 gap-2 sm:gap-4 sm:p-2">
         <div v-for="(row, index) in gridPaginatedData" :key="row.Commonname + row.Scientificname + index"
-          class="group relative bg-white overflow-hidden rounded-lg border border-muted/50 h-[142px] transition-transform duration-200 hover:scale-[1.03]"
+          class="group relative bg-white overflow-hidden rounded-lg border border-muted/50 h-[142px]"
           @click="selectRow(row)">
           <div class="w-full h-full relative overflow-hidden">
             <img v-if="row.images && row.images.length" :src="row.images[0]"
-              class="w-full h-full object-cover transition-transform duration-200 group-hover:scale-[1.03]"
+              class="w-full h-full object-cover"
               alt="Species image" height="300" width="450" loading="lazy" decoding="async" />
             <div v-else class="w-full h-full flex items-center justify-center bg-gray-200 dark:bg-gray-700">
               <Icon name="material-symbols:photo" class="w-8 h-8 text-neutral-500" />
-            </div>
-            <div
-              class="pointer-events-none absolute inset-0 bg-gradient-to-t from-black/45 via-black/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-200">
             </div>
             <UBadge variant="outline" color="neutral"
               class="ring-muted/50 pointer-events-none absolute left-2 bottom-2 opacity-0 group-hover:opacity-100 transition duration-200">

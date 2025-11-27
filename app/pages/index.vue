@@ -1,81 +1,74 @@
 <script setup lang="ts">
-import { computed, ref } from 'vue'
+import { computed, onMounted, onUnmounted, ref, watch } from 'vue'
+import { useIntersectionObserver } from '@vueuse/core'
 
 const { data: page } = await useAsyncData('index', () => queryCollection('index').first())
 const { data: forestryPage } = await useAsyncData('landing-skogsskotsel', () => queryCollection('skogsskotsel').first())
 
-const trakthyggeHover = ref(false)
-const trakthyggeImage = '/images/metoder/kalhygge.png'
-const trakthyggePoints = [
-  { age: -7, value: 100 },
-  { age: 0, value: 100 },
-  { age: 0.1, value: 5 },
-  { age: 10, value: 15 },
-  { age: 20, value: 60 },
-  { age: 30, value: 120 },
-  { age: 40, value: 123 },
-  { age: 50, value: 121 },
-  { age: 60, value: 120 },
-  { age: 70, value: 115 },
-  { age: 80, value: 112 },
-  { age: 90, value: 110 },
-  { age: 100, value: 110 },
-]
+type StackCard = { image: string; title?: string }
 
-const trakthyggePath = computed(() => {
-  const minAge = -7
-  const maxAge = 100
-  const maxVal = 130
-  const width = 420
-  const height = 250
-  const topPad = 12
-  const bottomPad = 16
-  const leftPad = 0
-  const rightPad = 0
-  const usableHeight = height - topPad - bottomPad
-  const usableWidth = width - leftPad - rightPad
-  const normalizeX = (age: number) => leftPad + ((age - minAge) / (maxAge - minAge)) * usableWidth
-  const normalizeY = (val: number) => height - bottomPad - (Math.max(val, 0) / maxVal) * usableHeight
-  const pts = trakthyggePoints.map(p => ({
-    x: normalizeX(p.age),
-    y: normalizeY(p.value),
-    age: p.age,
-  }))
+const stackImages = ref<StackCard[]>([])
+let rotateTimer: number | null = null
+const currentImageIndex = ref(0)
+const currentImage = computed(() => stackImages.value[currentImageIndex.value] ?? null)
+const progressKey = ref(0)
+const imageSectionRef = ref<HTMLElement | null>(null)
+const isImageInView = ref(false)
 
-  if (!pts.length) return ''
-
-  const clamp = (v: number, min: number, max: number) => Math.max(min, Math.min(max, v))
-  const toStr = (p: { x: number; y: number }) => `${p.x.toFixed(2)},${p.y.toFixed(2)}`
-  let d = `M ${toStr(pts[0])}`
-
-  const tension = 0.1
-
-  for (let i = 1; i < pts.length; i++) {
-    const p0 = pts[i - 1]
-    const p1 = pts[i]
-    const isSharpDrop = p0.age === 0 && p1.age === 0.1
-    if (isSharpDrop) {
-      d += ` L ${toStr(p1)}`
-      continue
-    }
-
-    const pPrev = pts[i - 2] ?? p0
-    const pNext = pts[i + 1] ?? p1
-
-    const cp1x = p0.x + (p1.x - pPrev.x) * tension
-    const cp1yRaw = p0.y + (p1.y - pPrev.y) * tension
-    const cp2x = p1.x - (pNext.x - p0.x) * tension
-    const cp2yRaw = p1.y - (pNext.y - p0.y) * tension
-
-    const minY = Math.min(p0.y, p1.y)
-    const maxY = Math.max(p0.y, p1.y)
-    const cp1y = clamp(cp1yRaw, minY, maxY)
-    const cp2y = clamp(cp2yRaw, minY, maxY)
-
-    d += ` C ${cp1x.toFixed(2)},${cp1y.toFixed(2)} ${cp2x.toFixed(2)},${cp2y.toFixed(2)} ${toStr(p1)}`
+const buildStack = () => {
+  const imgs =
+    forestryPage.value?.methods?.map(method => ({
+      image: method.image,
+      title: method.title
+    })) ?? []
+  stackImages.value = imgs.length ? [...imgs] : []
+  currentImageIndex.value = 0
+  if (stackImages.value.length && isImageInView.value) {
+    restartProgress()
   }
+}
 
-  return d
+watch(forestryPage, buildStack, { immediate: true })
+
+const restartProgress = () => {
+  progressKey.value += 1
+}
+
+const cycleStack = () => {
+  if (stackImages.value.length <= 1) return
+  currentImageIndex.value = (currentImageIndex.value + 1) % stackImages.value.length
+  restartProgress()
+}
+
+const startTimer = () => {
+  if (rotateTimer || !isImageInView.value) return
+  restartProgress()
+  rotateTimer = window.setInterval(cycleStack, 15000)
+}
+
+const stopTimer = () => {
+  if (!rotateTimer) return
+  window.clearInterval(rotateTimer)
+  rotateTimer = null
+}
+
+useIntersectionObserver(imageSectionRef, ([entry]) => {
+  const visible = entry?.isIntersecting ?? false
+  if (visible && !isImageInView.value) {
+    isImageInView.value = true
+    startTimer()
+  } else if (!visible && isImageInView.value) {
+    isImageInView.value = false
+    stopTimer()
+  }
+}, { threshold: 0.4 })
+
+onMounted(() => {
+  startTimer()
+})
+
+onUnmounted(() => {
+  stopTimer()
 })
 
 useSeoMeta({
@@ -97,39 +90,6 @@ const heroDescriptionParts = computed(() => {
   }
 })
 </script>
-
-<style scoped>
-@keyframes drawLine {
-  to {
-    stroke-dashoffset: 0;
-  }
-}
-
-.trak-line {
-  stroke-dasharray: 1;
-  stroke-dashoffset: 1;
-  animation: drawLine 1.8s ease forwards;
-}
-
-.grid-fade {
-  opacity: 0;
-  animation: fadeGrid 0.6s ease forwards;
-}
-
-.trak-area {
-  opacity: 0.75;
-}
-
-@keyframes fadeGrid {
-  from {
-    opacity: 0;
-  }
-
-  to {
-    opacity: 0.4;
-  }
-}
-</style>
 
 <template>
   <div v-if="page">
@@ -207,30 +167,29 @@ const heroDescriptionParts = computed(() => {
       <UPageSection v-if="page?.sections?.[1]" :title="page.sections[1].title"
         :description="page.sections[1].description" :headline="page.sections[1].headline"
         :orientation="page.sections[1].orientation" :links="page.sections[1].links">
-        <div class="relative inline-block">
-          <NuxtImg :src="trakthyggeImage" alt="Trakthygge" height="450" width="750"
-            class="rounded-xl ring ring-muted/50 shadow-lg transition-all duration-500 w-full max-w-none overflow-hidden"
-            :class="trakthyggeHover ? 'opacity-50' : 'opacity-100'" @mouseenter="trakthyggeHover = true"
-            @mouseleave="trakthyggeHover = false" />
-          <svg v-if="trakthyggeHover" class="absolute inset-0 w-full h-full pointer-events-none rounded-xl"
-            viewBox="0 0 420 250" fill="none">
-            <defs>
-              <linearGradient id="trak-gradient" x1="0" y1="0" x2="0" y2="1">
-                <stop offset="0%" stop-color="##cbd5e1" stop-opacity="1" />
-                <stop offset="100%" stop-color="#5a3f34" stop-opacity="0.1" />
-              </linearGradient>
-              <mask id="trak-reveal">
-                <rect x="0" y="0" height="250" width="0" fill="white">
-                  <animate attributeName="width" from="0" to="420" dur="1.8s" begin="0.5s" fill="freeze" />
-                </rect>
-              </mask>
-            </defs>
-            <path v-if="trakthyggePath" :d="trakthyggePath + ' L 420 250 L 0 250 Z'" fill="url(#trak-gradient)"
-              class="trak-area" mask="url(#trak-reveal)" />
-            <path v-if="trakthyggePath" :d="trakthyggePath" opacity="1" stroke="#5a3f34" stroke-width="2"
-              stroke-linejoin="round" stroke-linecap="round" fill="none" mask="url(#trak-reveal)" />
-          </svg>
+        <div v-if="stackImages.length" ref="imageSectionRef"
+          class="relative w-full max-w-3xl ml-auto flex flex-col items-center group">
+          <div class="relative w-full" style="padding-top: 60%">
+            <Transition name="fade-slow" mode="out-in" appear>
+              <NuxtImg :key="currentImageIndex" :src="currentImage?.image" width="1000" height="600" format="webp"
+                class="rounded-xl ring ring-muted/50 shadow-lg w-full h-full object-cover absolute inset-0" />
+            </Transition>
+          </div>
+          <div v-if="stackImages.length" class="mt-3 w-full flex justify-end px-4">
+            <div class="w-full max-w-3xl ml-auto bg-gray-200 dark:bg-gray-700 h-0.5 rounded overflow-hidden">
+              <div :key="progressKey" class="h-1 bg-primary-500 rounded"
+                :class="isImageInView ? 'animate-progress' : ''"></div>
+            </div>
+          </div>
+          <div v-if="currentImage?.title"
+            class="absolute top-3 left-3 opacity-0 group-hover:opacity-100 transition-opacity duration-200 pointer-events-none">
+
+            <UBadge variant="outline" color="neutral" :label="currentImage.title" class="ring-muted/50" />
+          </div>
         </div>
+
+        <NuxtImg v-else :src="page.sections[1].src" width="1000" type="webp"
+          class="rounded-md border border-neutral-200" />
       </UPageSection>
     </Motion>
     <Motion :initial="{ opacity: 0, transform: 'translateY(20px)' }"
@@ -307,5 +266,30 @@ const heroDescriptionParts = computed(() => {
 .fade-delay-enter-from,
 .fade-delay-leave-to {
   opacity: 0;
+}
+
+.fade-slow-enter-active,
+.fade-slow-leave-active {
+  transition: opacity 0.8s ease-in-out;
+}
+
+.fade-slow-enter-from,
+.fade-slow-leave-to {
+  opacity: 0;
+}
+
+@keyframes progressAnimation {
+  from {
+    width: 0%;
+  }
+
+  to {
+    width: 100%;
+  }
+}
+
+.animate-progress {
+  width: 100%;
+  animation: progressAnimation 15s linear forwards;
 }
 </style>

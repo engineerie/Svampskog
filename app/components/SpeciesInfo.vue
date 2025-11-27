@@ -3,8 +3,8 @@
     <div v-if="imageUrls.length > 1" class="group overflow-hidden">
       <UCarousel v-slot="{ item }" @select="currentIndex = $event" :items="imageUrls" :ui="{ item: 'basis-full' }">
         <div class="w-full relative" :key="item">
-          <img :src="item" class="w-full" draggable="false" height="300" width="450" loading="lazy"
-            decoding="async" alt="Artbild" />
+          <img :src="item" class="w-full" draggable="false" height="300" width="450" loading="lazy" decoding="async"
+            alt="Artbild" />
         </div>
       </UCarousel>
 
@@ -21,8 +21,8 @@
       </div>
     </div>
     <div v-else-if="imageUrls.length === 1" class=" overflow-hidden relative group">
-      <img :src="imageUrls[0]" class="w-full" draggable="false" height="300" width="450" loading="lazy"
-        decoding="async" alt="Artbild" />
+      <img :src="imageUrls[0]" class="w-full" draggable="false" height="300" width="450" loading="lazy" decoding="async"
+        alt="Artbild" />
       <div class="flex w-full bg-neutral-50 p-1 px-3 justify-between">
         <div class="flex ">
           <Icon name="i-mingcute-copyright-line" class="h-4 w-4 my-1 mr-1" />
@@ -198,15 +198,16 @@
       <!-- <hr class="my-2" v-if="species.Kriteriedokumentation" /> -->
 
       <!-- Links Section -->
-      <h1 class="text-lg font-medium  mt-4">Läs mer på</h1>
-      <NuxtLink v-if="species.Artfakta != 'Information saknas'" :to="stripDetailsFromURL(species.Artfakta)"
-        target="_blank" class="text-lg mb-3 underline text-primary-500">
-        Artfakta.se
-      </NuxtLink>
+      <h1 class="text-md font-medium mx-2 mt-4">Läs mer på</h1>
+      <UButton v-if="species.Artfakta != 'Information saknas'" :to="stripDetailsFromURL(species.Artfakta)"
+        variant="ghost" target="_blank" class="text-primary-500 w-full" size="xl"
+        icon="i-heroicons-arrow-up-right-20-solid" label="Artfakta.se" trailing />
       <br />
-      <NuxtLink v-if="species.Svampguiden && species.Svampguiden !== '0'" :to="stripDetailsFromURL(species.Svampguiden)"
-        target="_blank" class="text-lg  mb-3 underline text-primary-500">
-        Svampguiden.com
+      <UButton v-if="species.Svampguiden && species.Svampguiden !== '0'" :to="stripDetailsFromURL(species.Svampguiden)"
+        trailing label="Svampguiden.com" icon="i-heroicons-arrow-up-right-20-solid" target="_blank" variant="ghost"
+        class=" text-primary-500 w-full" size="xl" />
+      <NuxtLink>
+
       </NuxtLink>
     </div>
   </div>
