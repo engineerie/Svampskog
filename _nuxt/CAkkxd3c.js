@@ -1,1 +1,0 @@
-import{_ as c,d as a,e as s,g as e,cu as r,w as l,O as p,cv as m,cw as u,F as d}from"#entry";const f={};function i(n,x){const t=r,o=m,_=u;return s(),a(d,null,[e(t),e(o,null,{default:l(()=>[p(n.$slots,"default")]),_:3}),e(_)],64)}const F=c(f,[["render",i]]);export{F as default};
