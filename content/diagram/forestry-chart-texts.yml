@@ -11,7 +11,7 @@ entries:
       - id: goda
         description: "Mängden av alla goda matsvampar i förhållande till förekomsten i äldre skog/före avverkning (%)."
       - id: kg
-        description: "Färskvikten av alla matsvampar (kg/ha) under en säsong i förhållande till förekomsten i äldre skog/före avverkning. Medel- samt min-maxvärde."
+        description: "Färskvikten av alla matsvampar (kg/ha) under en säsong i förhållande till förekomsten i äldre skog/före avverkning. Medel- samt maxvärde."
   - id: grupper
     description: "Mängden av olika grupper svampar i förhållande till förekomsten i äldre skog/före avverkning (%)."
     modalDescription: "Den relativa fördelningen av olika grupper mykorrhizasvampar vid olika skogsåldrar. Uppgifterna baseras enbart på förekomst i skogar av olika åldrar och är inte kopplade till vilken skogsskötselmetod som använts."

@@ -3,7 +3,7 @@ description: Sök på vilka mykorrhizasvampar som kan finnas i olika skogar base
 navigation: false
 hero:
   title: Sök svampar i svenska skogar
-  description: Enligt DNA-analyser av jordprover, och sammanställda uppgifter om var fruktkroppar finns.
+  description: Enligt DNA-analyser av jordprover och sammanställda uppgifter om var fruktkroppar finns.
   orientation: vertical
   src: /images/svampgrid/Cantharellus cibarius-3.jpg
   headline:
@@ -21,8 +21,8 @@ hero:
       color: neutral
       variant: solid
 ecologyintro:
-  title: Mykorrhizans ekologi i korthet
-  description: Introduktion till mykorrhizasvampar i skogen.
+  title: Introduktion till skogens mykorrhizasvampar
+  description: 
   items:
     - title: Många skogssvampar bildar mykorrhiza
       image: /images/svampindex/Cortinarius sanguineus-179-.jpg
@@ -40,12 +40,12 @@ ecologyintro:
       image: /images/Carousel/web/Söder_Tallskog_91_Blåbär_grupp.webp
       description: |
         Varje mycel i marken är en svampindivid, ofta ungefär någon kvadratmeter stor. I en skog finns många individer, precis som det finns många hos växter och djur.
-underlag: Underlag för svampars förekomst
+underlag: Underlag för information om svampars förekomst
 underlagdescription: Kombination av mark-DNA och fruktkroppssammanställningar
 underlagSections:
   - title: "Artlistor på två sätt"
     paragraphs:
-      - "Vi presenterar artlistor dels enligt DNA-analyser av jordprover, dels enligt var fruktkroppar förekommer. Fruktkroppar ger bara en delvis bild av både artrikedomen och hur vanliga svamparna är, eftersom många arter aldrig bildar synliga fruktkroppar. Samtidigt är DNA-prover stickprover från små ytor och fångar därför sällan ovanliga arter."
+      - "Vi presenterar artlistor dels enligt DNA-analyser av jordprover, dels enligt var fruktkroppar förekommer. Fruktkroppar ger bara en delvis bild av artrikedomen och hur vanliga svamparna är, eftersom många arter aldrig bildar synliga fruktkroppar. Samtidigt är DNA-prover stickprover från små ytor och fångar därför sällan ovanliga arter."
       - "De två metoderna kompletterar varandra och ger tillsammans en god bild av svamplivet i skogen."
   - title: "Enligt DNA"
     paragraphs:

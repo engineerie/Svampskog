@@ -27,8 +27,8 @@ hero:
     icon: ""
     color: secondary
   mykorrhiza:
-    title: Mykorrhizasvampar är svampar som lever i symbios med träd.
-    body: Symbiosen innebär att svamparna får sin energi från träden och i utbyte sköter de om trädens näringsförsörjning.
+    title: Mykorrhiza är en 500 miljoner år gammal symbios mellan växter och svampar. 
+    body: Symbiosen innebär att mykorrhizasvamparna får sin energi från träden och i utbyte sköter de om trädens näringsförsörjning.
 sections:
   - title: Utforska svampar i svenska skogar
     description: Se vilka mykorrhizasvampar som kan finnas i en skog baserat på DNA-analyser av svampmycel i jordprover och vår samlade kunskap om var olika arters fruktkroppar förekommer.
@@ -44,7 +44,7 @@ sections:
     orientation: horizontal
     reverse: true
   - title: Hur påverkar olika skogsskötsel svampar?
-    description: Vi visar hur trakthyggesbruk och hyggesfria metoder kan påverka mykorrhizasvampar under en skogsgeneration, baserat på sammanställd forskning.
+    description: Utifrån sammanställd forskning visar vi hur trakthyggesbruk och hyggesfria metoder kan påverka mykorrhizasvampar under en skogsgeneration.
     headline: ""
     id: skogsbruk
     src: /images/Landing/Stock Photo 563535222.jpeg
@@ -59,7 +59,7 @@ sections:
     reverse: false
 press:
   title: Webbinarier
-  description: Fördjupa dig i svampar och skogsbruk och ställ dina frågor direkt till forskare under våra webbinarier.
+  description: Fördjupa dig i svampar och skogsbruk och ställ dina frågor direkt till forskare.
   items:
     - title: "Webbinarium: Skogens svampar - Del 2"
       publication: Plockhugget.se
@@ -117,7 +117,7 @@ press:
     #   description: ""
 timeline:
   title: Kommande innehåll
-  description: Svampskog.se vidareutvecklas stegvis. Här hittar du en översikt över planerade funktioner och material som publiceras under året.
+  description: Svampskog.se vidareutvecklas stegvis med nya funktioner och material.
   items:
     - date: Vår 2025
       title: Mjuklansering
@@ -127,11 +127,11 @@ timeline:
       title: Mobilanpassning
       description: Hemsidan utvecklas löpande och mobilanpassas under sommaren 2025.
       icon: i-heroicons-sun
-    - date: November 2025
+    - date: Höst 2025
       title: Skogsskötsel
       description: Information om skogsskötsel färdigställs och lanseras.
       icon: i-hugeicons-tree-06
-    - date: November 2025
+    - date: Vinter 2025/26
       title: Svampkunskap
       description: Modul för svampkunskap med tillhörande lärarhandledning läggs upp på svampskog.se
       icon: i-hugeicons-book-03
