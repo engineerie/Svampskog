@@ -1,19 +1,6 @@
 title: Skogsskötsel
 description: Se hur skogsskötsel påverka mykorrhizasvampar.
 navigation: false
-underlag: Underlag för skogsskötsel och svampar.
-underlagdescription: Baseras på forskning, mark-DNA och fältundersökningar
-underlagSections:
-  - title: "Bilderna bygger på två typer av underlag"
-    paragraphs:
-      - "Forskning om hur mykorrhizasvampars markmycel varierar vid olika former av skogsskötsel, miljöhänsyn och skogsålder."
-      - "Relativ förekomst av svampmycel baserad på DNA-analyser från Markinventeringen."
-  - title: "Diagrammen baseras på"
-    paragraphs:
-      - "Markinventeringens DNA-analyser av svampmycel i marken vid olika skogsåldrar."
-      - "Dessa värden vägs mot den relativa skogstillväxten jämfört med orörd skog. Trädtillväxten ger en ungefärlig bild av hur mycket mykorrhizasvamp som kan finnas."
-      - "Diagrammen över matsvampar som redovisas i kg/ha bygger på fältundersökningar."
-underlagbild: /images/Sources/web/markinventering_500.webp
 hero:
   title: Svampar efter skogsskötsel
   description: Se hur olika skötselåtgärder kan påverka förekomsten av mykorrhizasvampar.
@@ -70,6 +57,19 @@ ecologyintro:
         3. Välj hyggesfria metoder. 
         4. Om skogen kallavverkas, lämna väl tilltagna grupper med hänsynsträd.
       img: /images/Carousel/web/Mushroom Images.webp
+underlag: Underlag för skogsskötsel och svampar.
+underlagdescription: Baseras på forskning, mark-DNA och fältundersökningar
+underlagSections:
+  - title: "Bilderna bygger på två typer av underlag"
+    paragraphs:
+      - "Forskning om hur mykorrhizasvampars markmycel varierar vid olika former av skogsskötsel, miljöhänsyn och skogsålder."
+      - "Relativ förekomst av svampmycel baserad på DNA-analyser från Markinventeringen."
+  - title: "Diagrammen baseras på"
+    paragraphs:
+      - "Markinventeringens DNA-analyser av svampmycel i marken vid olika skogsåldrar."
+      - "Dessa värden vägs mot den relativa skogstillväxten jämfört med orörd skog. Trädtillväxten ger en ungefärlig bild av hur mycket mykorrhizasvamp som kan finnas."
+      - "Diagrammen över matsvampar som redovisas i kg/ha bygger på fältundersökningar."
+underlagbild: /images/Sources/web/markinventering_500.webp
 methods:
   - index: 0
     id: naturskydd
