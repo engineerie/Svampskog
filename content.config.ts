@@ -137,7 +137,9 @@ const methodSchema = z.object({
   image: z.string().nonempty(),
   shortdescription: z.string().nonempty(),
   description: z.string().nonempty(),
+  descriptionParagraphs: z.array(z.string()).optional(),
   descriptionsvamp: z.string().nonempty(),
+  descriptionsvampParagraphs: z.array(z.string()).optional(),
   type: z.string().optional(),
 });
 

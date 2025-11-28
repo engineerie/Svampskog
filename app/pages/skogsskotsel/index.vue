@@ -818,13 +818,17 @@ const accordionItems = computed(() => [
         label: `Om ${(selectedMethod.value.title || '').toLowerCase()}`,
         icon: 'i-hugeicons-tree-06',
         value: 'description',
-        paragraphs: splitParagraphs(selectedMethod.value.description),
+        paragraphs: selectedMethod.value.descriptionParagraphs?.length
+            ? selectedMethod.value.descriptionParagraphs
+            : splitParagraphs(selectedMethod.value.description),
     },
     {
         label: 'Påverkan på mykorrhizasvampar',
         icon: 'i-hugeicons-mushroom',
         value: 'svamp',
-        paragraphs: splitParagraphs(selectedMethod.value.descriptionsvamp),
+        paragraphs: selectedMethod.value.descriptionsvampParagraphs?.length
+            ? selectedMethod.value.descriptionsvampParagraphs
+            : splitParagraphs(selectedMethod.value.descriptionsvamp),
     }
 ])
 
