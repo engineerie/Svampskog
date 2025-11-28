@@ -161,7 +161,10 @@
                                         body: 'text-md/7 text-neutral-800 px-2'
                                     }">
                                     <template #body="{ item }">
-                                        <MDC :value="item.content" unwrap="p" />
+                                        <div class="space-y-3">
+                                            <MDC v-for="(para, idx) in item.paragraphs" :key="idx" :value="para"
+                                                unwrap="p" />
+                                        </div>
                                     </template>
                                 </UAccordion>
 
@@ -803,19 +806,25 @@ const tabs = ref<TabsItem[]>([
 
 const expandedCard = ref<'description' | 'svamp' | ''>('description')
 
+const splitParagraphs = (text: string | undefined | null) =>
+    (text || '')
+        .split(/\n\s*\n/g)
+        .map(p => p.trim())
+        .filter(Boolean)
+
 // Accordion items for the selected method
 const accordionItems = computed(() => [
     {
         label: `Om ${(selectedMethod.value.title || '').toLowerCase()}`,
         icon: 'i-hugeicons-tree-06',
         value: 'description',
-        content: selectedMethod.value.description || ''
+        paragraphs: splitParagraphs(selectedMethod.value.description),
     },
     {
         label: 'Påverkan på mykorrhizasvampar',
         icon: 'i-hugeicons-mushroom',
         value: 'svamp',
-        content: selectedMethod.value.descriptionsvamp || ''
+        paragraphs: splitParagraphs(selectedMethod.value.descriptionsvamp),
     }
 ])
 
