@@ -226,6 +226,10 @@ export const collections = {
           color: colorEnum.optional(),
         }),
         links: z.array(linkSchema),
+        mykorrhiza: z.object({
+          title: z.string().nonempty(),
+          body: z.string().nonempty(),
+        }).optional(),
       }),
       sections: z.array(
         sectionSchema.extend({

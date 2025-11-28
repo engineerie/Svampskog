@@ -26,6 +26,9 @@ hero:
     to: /blog
     icon: ""
     color: secondary
+  mykorrhiza:
+    title: Mykorrhizasvampar är svampar som lever i symbios med träd.
+    body: Symbiosen innebär att svamparna får sin energi från träden och i utbyte sköter de om trädens näringsförsörjning.
 sections:
   - title: Utforska svampar i svenska skogar
     description: Se vilka mykorrhizasvampar som kan finnas i en skog baserat på DNA-analyser av svampmycel i jordprover och vår samlade kunskap om var olika arters fruktkroppar förekommer.

@@ -120,12 +120,9 @@ const heroDescriptionParts = computed(() => {
               <span class="text-primary font-semibold cursor-help">mykorrhizasvampar</span>
               <!-- <UBadge label="mykorrhizasvampar" color="neutral" variant="outline" class="cursor-pointer" size="xl" /> -->
               <template #content>
-                <div class="p-4 max-w-xs">
-                  <span class="font-semibold ">Mykorrhizasvampar är svampar som lever i symbios med träd. </span>
-                  <span class="text-muted">Symbiosen innebär att svamparna får sin energi från träden och i utbyte
-                    sköter
-                    de om trädens
-                    näringsförsörjning.</span>
+                <div v-if="page.hero.mykorrhiza" class="p-4 max-w-xs">
+                  <span class="font-semibold">{{ page.hero.mykorrhiza.title }}</span>
+                  <span class="text-muted ml-1">{{ page.hero.mykorrhiza.body }}</span>
                 </div>
               </template>
             </UPopover>
@@ -200,30 +197,34 @@ const heroDescriptionParts = computed(() => {
     <Motion :initial="{ opacity: 0, transform: 'translateY(20px)' }"
       :while-in-view="{ opacity: 1, transform: 'translateY(0)' }" :in-view-options="{ once: true }"
       :transition="{ duration: 0.6, delay: 0.3 }">
-      <UPageSection v-if="page.press" :title="page.press.title" :description="page.press.description"
-        :ui="{ container: 'bg-neutral-50 lg:rounded-2xl ring ring-neutral-100 py-12 sm:py-16 lg:py-20 my-4 sm:my-8 lg:my-10', title: 'text-start lg:text-center', description: 'text-start lg:text-center text-pretty' }">
-        <UPageColumns>
-          <Motion v-for="(article, index) in page.press.items" :key="index"
-            :initial="{ opacity: 0, transform: 'translateY(20px)' }"
-            :while-in-view="{ opacity: 1, transform: 'translateY(0)' }" :in-view-options="{ once: true }"
-            :transition="{ delay: 0.2 }">
-            <UPageCard :title="article.title"
-              class="rounded-xl ring-0 border border-muted/50 bg-white hover:bg-white shadow-md hover:shadow-lg"
-              :description="article.description"
-              :ui="{ description: 'before:content-[open-quote] after:content-[close-quote]', header: 'w-full' }"
-              :to="article.url">
-              <template #header>
-                <div class="flex justify-between">
-                  <UIcon v-if="article.icon" :name="article.icon" class="text-4xl" />
-                  <UBadge v-if="article.badge" :label="article.badge.label" size="md"
-                    :color="article.badge.color || 'neutral'" variant="subtle" class="h-fit" />
-                </div>
-                <h1 class="text-sm mt-2">{{ article.publicationDate }} | {{ article.publication }}</h1>
-              </template>
-            </UPageCard>
-          </Motion>
-        </UPageColumns>
-      </UPageSection>
+      <div class="w-full bg-neutral-50 border-y border-muted/50">
+
+
+        <UPageSection v-if="page.press" :title="page.press.title" :description="page.press.description"
+          :ui="{ container: '', title: 'text-start lg:text-center', description: 'text-start lg:text-center text-pretty' }">
+          <UPageColumns>
+            <Motion v-for="(article, index) in page.press.items" :key="index"
+              :initial="{ opacity: 0, transform: 'translateY(20px)' }"
+              :while-in-view="{ opacity: 1, transform: 'translateY(0)' }" :in-view-options="{ once: true }"
+              :transition="{ delay: 0.2 }">
+              <UPageCard :title="article.title"
+                class="rounded-xl ring-0 border border-muted/50 bg-white hover:bg-white shadow-md hover:shadow-lg"
+                :description="article.description"
+                :ui="{ description: 'before:content-[open-quote] after:content-[close-quote]', header: 'w-full' }"
+                :to="article.url">
+                <template #header>
+                  <div class="flex justify-between">
+                    <UIcon v-if="article.icon" :name="article.icon" class="text-4xl" />
+                    <UBadge v-if="article.badge" :label="article.badge.label" size="md"
+                      :color="article.badge.color || 'neutral'" variant="subtle" class="h-fit" />
+                  </div>
+                  <h1 class="text-sm mt-2">{{ article.publicationDate }} | {{ article.publication }}</h1>
+                </template>
+              </UPageCard>
+            </Motion>
+          </UPageColumns>
+        </UPageSection>
+      </div>
     </Motion>
     <Motion :initial="{ opacity: 0, transform: 'translateY(20px)' }"
       :while-in-view="{ opacity: 1, transform: 'translateY(0)' }" :in-view-options="{ once: true }"
