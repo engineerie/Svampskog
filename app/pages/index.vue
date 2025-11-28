@@ -17,10 +17,15 @@ const isImageInView = ref(false)
 
 const buildStack = () => {
   const imgs =
-    skotselMethods.value?.methods?.map(method => ({
-      image: method.image,
-      title: method.title
-    })) ?? []
+    skotselMethods.value?.methods?.map(method => {
+      const base = (method.image || '').split('/').pop() || ''
+      const name = base.replace(/\.[^.]+$/, '')
+      const webPath = name ? `/images/metoder/web/${name}_1000.webp` : method.image
+      return {
+        image: webPath,
+        title: method.title
+      }
+    }) ?? []
   stackImages.value = imgs.length ? [...imgs] : []
   currentImageIndex.value = 0
   if (stackImages.value.length && isImageInView.value) {
@@ -171,14 +176,15 @@ const heroDescriptionParts = computed(() => {
           class="relative w-full max-w-3xl ml-auto flex flex-col items-center group">
           <div class="relative w-full" style="padding-top: 60%">
             <Transition name="fade-slow" mode="out-in" appear>
-              <NuxtImg :key="currentImageIndex" :src="currentImage?.image" width="1000" height="600" format="webp"
+              <img :key="currentImageIndex" :src="currentImage?.image"
                 class="rounded-xl ring ring-muted/50 shadow-lg w-full h-full object-cover absolute inset-0" />
             </Transition>
           </div>
           <div v-if="stackImages.length" class="mt-3 w-full flex justify-end px-4">
             <div class="w-full max-w-3xl ml-auto bg-gray-200 dark:bg-gray-700 h-0.5 rounded overflow-hidden">
               <div :key="progressKey" class="h-1 bg-primary-500 rounded"
-                :class="isImageInView ? 'animate-progress' : ''"></div>
+                :class="isImageInView ? 'animate-progress' : ''">
+              </div>
             </div>
           </div>
           <div v-if="currentImage?.title"
@@ -188,8 +194,7 @@ const heroDescriptionParts = computed(() => {
           </div>
         </div>
 
-        <NuxtImg v-else :src="page.sections[1].src" width="1000" type="webp"
-          class="rounded-md border border-neutral-200" />
+
       </UPageSection>
     </Motion>
     <Motion :initial="{ opacity: 0, transform: 'translateY(20px)' }"
