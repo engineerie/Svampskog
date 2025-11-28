@@ -3,8 +3,6 @@ methods:
     id: naturskydd
     title: Inga åtgärder
     image: images/metoder/ingen_åtgärd.png
-    description: |
-      Beståndet lämnas för fri utveckling tills vidare, till exempel som en frivillig naturvårdsavsättning eller en skog med områdesskydd.
     descriptionParagraphs:
       - Beståndet lämnas för fri utveckling tills vidare, till exempel som en frivillig naturvårdsavsättning eller en skog med områdesskydd.
     descriptionsvampParagraphs:
@@ -20,7 +18,6 @@ methods:
       - Mykorrhizasvampar försvinner nästan helt efter avverkning eftersom de är beroende av sin symbios med levande träd. En del svampmycel överlever på rötter från hänsynsträd, på småplantor som lämnas kvar vid naturlig föryngring och längs skogskanter.
       - De planterade plantskoleplantorna har med sig ett fåtal mykorrhizaarter, men dessa byts så småningom ut mot arter som sprids in med sporer från omgivande skog.
       - Matsvampar saknas direkt efter avverkning men brukar återkomma efter ungefär 10-20 år. Rödlistade arter och signalarter är oftast för ovanliga i näraliggande skogar för att spridas in och etableras.
-
   - index: 2
     id: luckhuggning
     title: Luckhuggning
