@@ -474,6 +474,7 @@ onBeforeUnmount(() => updateScrollState(false))
 const onboardingStore = useOnboardingStore()
 
 const { data: page } = await useAsyncData('skogsskotsel', () => queryCollection('skogsskotsel').first())
+const { data: methodsData } = await useAsyncData('skotselmetoder', () => queryCollection('skotselmetoder').first())
 if (!page.value) {
     throw createError({
         statusCode: 404,
@@ -492,7 +493,7 @@ interface Method {
     type?: string
 }
 
-const methods = computed<Method[]>(() => page.value?.methods ?? [])
+const methods = computed<Method[]>(() => methodsData.value?.methods ?? [])
 const frameworkOptions = computed(() =>
     methods.value.map((method, index) => ({
         label: method.title,

@@ -164,11 +164,12 @@ import type { TabsItem } from '@nuxt/ui'
 const modelOpen = ref(false)
 
 const { data: page } = await useAsyncData('skogsskotsel', () => queryCollection('skogsskotsel').first())
+const { data: methodsData } = await useAsyncData('skotselmetoder', () => queryCollection('skotselmetoder').first())
 if (!page.value) {
-    throw createError({
-        statusCode: 404,
-        statusMessage: 'Page not found',
-        fatal: true
+  throw createError({
+    statusCode: 404,
+    statusMessage: 'Page not found',
+    fatal: true
     })
 }
 
@@ -284,7 +285,7 @@ interface Method {
     type?: string
 }
 
-const methods = computed<Method[]>(() => page.value?.methods ?? [])
+const methods = computed<Method[]>(() => methodsData.value?.methods ?? [])
 
 const emptyMethod: Method = {
     id: '',

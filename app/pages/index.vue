@@ -3,7 +3,7 @@ import { computed, onMounted, onUnmounted, ref, watch } from 'vue'
 import { useIntersectionObserver } from '@vueuse/core'
 
 const { data: page } = await useAsyncData('index', () => queryCollection('index').first())
-const { data: forestryPage } = await useAsyncData('landing-skogsskotsel', () => queryCollection('skogsskotsel').first())
+const { data: skotselMethods } = await useAsyncData('landing-skogsskotsel-metoder', () => queryCollection('skotselmetoder').first())
 
 type StackCard = { image: string; title?: string }
 
@@ -17,7 +17,7 @@ const isImageInView = ref(false)
 
 const buildStack = () => {
   const imgs =
-    forestryPage.value?.methods?.map(method => ({
+    skotselMethods.value?.methods?.map(method => ({
       image: method.image,
       title: method.title
     })) ?? []
@@ -28,7 +28,7 @@ const buildStack = () => {
   }
 }
 
-watch(forestryPage, buildStack, { immediate: true })
+watch(skotselMethods, buildStack, { immediate: true })
 
 const restartProgress = () => {
   progressKey.value += 1

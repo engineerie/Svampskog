@@ -242,7 +242,9 @@ function computeTradplantorAvailability(ctx: OverlayContext) {
 
 async function fetchJson(path: string) {
   try {
-    return await $fetch<any>(path);
+    const res = await fetch(encodeURI(path));
+    if (!res.ok) return null;
+    return await res.json();
   } catch {
     return null;
   }

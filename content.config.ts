@@ -301,19 +301,25 @@ export const collections = {
         orientation: orientationEnum.optional(),
       }),
       ecologyintro: ecologyIntroSectionSchema.optional(),
-      methods: z.array(methodSchema).optional(),
+    }),
+  }),
+  skotselmetoder: defineCollection({
+    type: "data",
+    source: "skogsskotsel/skotselmetoder.yml",
+    schema: z.object({
+      methods: z.array(methodSchema),
     }),
   }),
   forestryChartTexts: defineCollection({
     type: "data",
-    source: "forestry/forestry-chart-texts.yml",
+    source: "diagram/forestry-chart-texts.yml",
     schema: z.object({
       entries: z.array(forestryChartTextSchema),
     }),
   }),
   matsvampSkogsbruk: defineCollection({
     type: "data",
-    source: "forestry/matsvamp-skogsbruk.yml",
+    source: "diagram/matsvamp-skogsbruk.yml",
     schema: z.object({
       entries: z.array(
         z.object({
@@ -328,7 +334,7 @@ export const collections = {
   }),
   kgMatsvampSkogsbruk: defineCollection({
     type: "data",
-    source: "forestry/kg-matsvamp-skogsbruk.yml",
+    source: "diagram/kg-matsvamp-skogsbruk.yml",
     schema: z.object({
       entries: z.array(
         z.object({
@@ -343,7 +349,7 @@ export const collections = {
   }),
   godaMatsvamparSkogsbruk: defineCollection({
     type: "data",
-    source: "forestry/goda-matsvampar-skogsbruk.yml",
+    source: "diagram/goda-matsvampar-skogsbruk.yml",
     schema: z.object({
       entries: z.array(
         z.object({
@@ -358,7 +364,7 @@ export const collections = {
   }),
   signalRodlistadeSkogsbruk: defineCollection({
     type: "data",
-    source: "forestry/signal-rodlistade-skogsbruk.yml",
+    source: "diagram/signal-rodlistade-skogsbruk.yml",
     schema: z.object({
       entries: z.array(
         z.object({
@@ -373,7 +379,7 @@ export const collections = {
   }),
   athelialesSkogsbruk: defineCollection({
     type: "data",
-    source: "forestry/atheliales-skogsbruk.yml",
+    source: "diagram/atheliales-skogsbruk.yml",
     schema: z.object({
       entries: z.array(
         z.object({
@@ -388,7 +394,7 @@ export const collections = {
   }),
   boletalesSkogsbruk: defineCollection({
     type: "data",
-    source: "forestry/boletales-skogsbruk.yml",
+    source: "diagram/boletales-skogsbruk.yml",
     schema: z.object({
       entries: z.array(
         z.object({
@@ -403,7 +409,7 @@ export const collections = {
   }),
   cantharellalesSkogsbruk: defineCollection({
     type: "data",
-    source: "forestry/cantharellales-skogsbruk.yml",
+    source: "diagram/cantharellales-skogsbruk.yml",
     schema: z.object({
       entries: z.array(
         z.object({
@@ -418,7 +424,7 @@ export const collections = {
   }),
   spindlingarSkogsbruk: defineCollection({
     type: "data",
-    source: "forestry/spindlingar-skogsbruk.yml",
+    source: "diagram/spindlingar-skogsbruk.yml",
     schema: z.object({
       entries: z.array(
         z.object({
@@ -433,7 +439,7 @@ export const collections = {
   }),
   russulalesSkogsbruk: defineCollection({
     type: "data",
-    source: "forestry/russulales-skogsbruk.yml",
+    source: "diagram/russulales-skogsbruk.yml",
     schema: z.object({
       entries: z.array(
         z.object({
@@ -448,7 +454,7 @@ export const collections = {
   }),
   thelephoralesSkogsbruk: defineCollection({
     type: "data",
-    source: "forestry/thelephorales-skogsbruk.yml",
+    source: "diagram/thelephorales-skogsbruk.yml",
     schema: z.object({
       entries: z.array(
         z.object({
@@ -463,7 +469,7 @@ export const collections = {
   }),
   ascomycotaSkogsbruk: defineCollection({
     type: "data",
-    source: "forestry/ascomycota-skogsbruk.yml",
+    source: "diagram/ascomycota-skogsbruk.yml",
     schema: z.object({
       entries: z.array(
         z.object({
@@ -478,7 +484,7 @@ export const collections = {
   }),
   skogsbrukSvampar: defineCollection({
     type: "data",
-    source: "forestry/skogssbruk_svampar.yml",
+    source: "diagram/skogssbruk_svampar.yml",
     schema: z.object({
       entries: z.array(
         z.object({
@@ -501,7 +507,7 @@ export const collections = {
   }),
   svampgrupperRelativeSkogsbruk: defineCollection({
     type: "data",
-    source: "forestry/svampgrupper-relative-skogsbruk.yml",
+    source: "diagram/svampgrupper-relative-skogsbruk.yml",
     schema: z.object({
       entries: z.array(
         z.object({
@@ -519,7 +525,7 @@ export const collections = {
   }),
   totalSvamparSkogsbruk: defineCollection({
     type: "data",
-    source: "forestry/total-svampar-skogsbruk.yml",
+    source: "diagram/total-svampar-skogsbruk.yml",
     schema: z.object({
       entries: z.array(
         z.object({
@@ -538,19 +544,19 @@ export const collections = {
   }),
   forestryTimelines: defineCollection({
     type: "data",
-    source: "timelines/**/*.yml",
+    source: "skogsskotsel/tidslinjer.yml",
     schema: forestryTimelineSchema,
   }),
   overlayTexts: defineCollection({
     type: "data",
-    source: "overlays/overlay-texts.yml",
+    source: "skogsskotsel/overlays/overlay-texts.yml",
     schema: z.object({
       entries: z.array(overlayTextSchema),
     }),
   }),
   overlays: defineCollection({
     type: "data",
-    source: "overlays/*.yml",
+    source: "skogsskotsel/overlays/*.yml",
     schema: z.object({
       title: z.string().optional(),
       entries: z.array(z.record(z.any())),
