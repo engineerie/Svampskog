@@ -317,13 +317,12 @@ const open = ref(false)
               <EcologyIntro :section="page.ecologyintro" />
             </template>
           </UModal>
-          <UModal :fullscreen="isMobile ? true : false" title="Underlag för skogsskötsel och svampar"
-            :description="page.underlagdescription" :ui="{
+          <UModal :fullscreen="isMobile ? true : false" :title="page.underlag" :description="page.underlagdescription"
+            :ui="{
               header: 'shrink-0',
             }">
             <UAlert icon="i-heroicons-document-magnifying-glass" color="neutral" variant="outline"
-              title="Underlag för skogsskötsel och svampar"
-              class="sm:w-fit shadow ring-muted/50 hover:opacity-85 hover:cursor-pointer" />
+              :title="page.underlag" class="sm:w-fit shadow ring-muted/50 hover:opacity-85 hover:cursor-pointer" />
             <template #body>
               <UnderlagContent :underlag="page.underlag" :underlagbild="page.underlagbild"
                 :sections="page.underlagSections" />

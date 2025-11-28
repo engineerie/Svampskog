@@ -1,7 +1,7 @@
 title: Svampar
 description: Sök på vilka mykorrhizasvampar som kan finnas i olika skogar baserat på miljö-DNA och sammanställd kunskap om vart fruktkroppar förekommer.
-underlag: |
-  Artlistor på två sätt. Se sektionerna nedan för detaljer.
+underlag: Underlag för svampars förekomst
+underlagdescription: Kombination av mark-DNA och fruktkroppssammanställningar
 underlagSections:
   - title: "Artlistor på två sätt"
     paragraphs:
@@ -13,7 +13,6 @@ underlagSections:
   - title: "Enligt fruktkroppar"
     paragraphs:
       - "Bygger främst på Artdatabankens sammanställningar över arters förekomst, ekologi och naturvårdsstatus."
-underlagdescription: Kombination av mark-DNA och fruktkroppssammanställningar
 underlagbild: /images/Sources/web/samladkunskap_500.webp
 navigation: false
 hero:
@@ -42,22 +41,16 @@ ecologyintro:
     - title: Många skogssvampar bildar mykorrhiza
       image: /images/svampindex/Cortinarius sanguineus-179-.jpg
       description: |
-        #### Många skogssvampar bildar mykorrhiza
         De flesta större svampar i skogen bildar mykorrhiza - både ätliga och giftiga. Dit hör bland annat spindelskivlingar, kremlor, riskor, soppar och kantareller.
     - title: Över 2000 arter i Sverige
       image: /images/Carousel/web/ArterDiagram2.webp
       description: |
-        #### Över 2000 arter i Sverige
         I Sverige finns över 2 000 olika mykorrhizasvampar. Några är vanliga, men de flesta är ovanliga. I en äldre skog kan det finnas ett par hundra arter. Många bildar små och oansenliga fruktkroppar och är därför dåligt kända.
     - title: Det mesta är mycel i marken
       image: /images/Carousel/web/mainlymycelium.webp
       description: |
-        #### Det mesta är mycel i marken
         Fruktkropparna är bara en liten del av svampen. Den största delen är mycel i marken, som växer året runt och kan leva i många år.
     - title: Varje mycel är en individ
       image: /images/Carousel/web/Söder_Tallskog_91_Blåbär_grupp.webp
       description: |
-        #### Varje mycel är en individ
         Varje mycel i marken är en svampindivid, ofta ungefär någon kvadratmeter stor. I en skog finns många individer, precis som det finns många hos växter och djur.
-gallery:
-  items: []

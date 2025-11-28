@@ -8,12 +8,14 @@ const items = computed(() => [
     description: 'Vilka arter finns i olika skogar.',
     to: '/mykorrhizasvampar',
     active: route.path.startsWith('/mykorrhizasvampar'),
+    icon: 'i-lineicons-mushroom-1'
   },
   {
     label: 'Skogsskötsel',
     description: 'Hur skogsskötsel påverkar svampar.',
     to: '/skogsskotsel',
     active: route.path.startsWith('/skogsskotsel'),
+    icon: 'i-hugeicons-tree-06'
   },
   // {
   //   label: 'Om projektet',
@@ -54,8 +56,8 @@ const itemsright = computed(() => [
       </NuxtLink>
     </template>
 
-    <UNavigationMenu :items="items" variant="link" color="primary"
-      :ui="{ link: 'text-md hover:bg-neutral-50 rounded', item: 'mx-0.5' }" class="hidden lg:flex " />
+    <UNavigationMenu :items="items" variant="pill" color="primary"
+      :ui="{ link: 'text-md hover:bg-muted rounded', item: 'mx-0.5' }" class="hidden lg:flex " />
 
     <template #right>
       <UNavigationMenu :items="itemsright" variant="pill" color="neutral"

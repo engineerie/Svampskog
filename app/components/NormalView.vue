@@ -28,8 +28,8 @@
               <EcologyIntro :section="page.ecologyintro" />
             </template>
           </UModal>
-          <UModal :fullscreen="isMobile ? true : false" title="Underlag för svampars förekomst"
-            :description="page.underlagdescription" :ui="{
+          <UModal :fullscreen="isMobile ? true : false" :title="page.underlag" :description="page.underlagdescription"
+            :ui="{
               header: 'shrink-0',
             }">
             <UAlert icon="i-heroicons-document-magnifying-glass" color="neutral" variant="outline" title="Underlag"
@@ -128,7 +128,7 @@
                   <EcologyIntro :section="page.ecologyintro" />
                 </template>
               </UModal>
-              <UModal :fullscreen="isMobile ? true : false" title="Underlag för svampars förekomst"
+              <UModal :fullscreen="isMobile ? true : false" :title="page.underlag"
                 :description="page.underlagdescription">
                 <UAlert icon="i-heroicons-document-magnifying-glass" color="neutral" variant="outline" title="Underlag"
                   class="sm:w-fit h-fit  ring-muted/50 hover:opacity-85 hover:cursor-pointer" />

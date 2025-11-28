@@ -148,7 +148,7 @@
                                 </template> -->
                         <div class="grid gap-3 sm:gap-6 lg:grid-cols-3">
                             <div class="flex flex-col gap-6 min-w-0 max-w-full mb-2">
-                                <h1 class="text-4xl font-medium">{{ selectedMethod.title }}</h1>
+                                <h1 class="text-4xl font-medium text-neutral-800">{{ selectedMethod.title }}</h1>
                                 <Transition name="fade" mode="out-in">
                                     <img :src="methodImage(selectedMethod, 'detail')"
                                         :alt="`Bild för ${selectedMethod.title}`" width="420" height="250"
@@ -307,11 +307,11 @@
                                         body: 'text-md/7 text-neutral-800 px-2'
                                     }" :items="markerCards.map(card => ({ ...card, label: card.title, content: card.description }))"
                                         multiple />
-                                    <UPageCard title="Öppna modell i helskärm"
+                                    <UPageCard title="Öppna modell i helskärm" :ui="{ description: 'text-neutral-100' }"
                                         description="I helskärm kan du jämföra metoder och se fokusområden markerade i bilden."
                                         icon="i-material-symbols:interactive-space"
-                                        class="mt-6 cursor-pointer ring-muted/50 shadow" color="neutral"
-                                        variant="subtle" orientation="vertical" @click="openModelWithCurrentFramework">
+                                        class="mt-6 cursor-pointer ring-muted/50 shadow" color="neutral" variant="solid"
+                                        orientation="vertical" @click="openModelWithCurrentFramework">
                                         <!-- <div class="flex justify-center">
                                             <NuxtImg src="images/modell.png" height="150" />
                                         </div> -->
@@ -377,12 +377,12 @@
                             <EcologyIntro :section="page.ecologyintro" />
                         </template>
                     </UModal>
-                    <UModal :fullscreen="isMobile ? true : false" title="Underlag för skogsskötsel och svampar"
+                    <UModal :fullscreen="isMobile ? true : false" :title="page.underlag"
                         :description="page.underlagdescription" :ui="{
                             header: 'shrink-0',
                         }">
                         <UAlert icon="i-heroicons-document-magnifying-glass" color="neutral" variant="outline"
-                            title="Underlag för skogsskötsel och svampar"
+                            :title="page.underlag"
                             class="sm:w-fit shadow ring-muted/50 hover:opacity-85 hover:cursor-pointer" />
                         <template #body>
                             <UnderlagContent :underlag="page.underlag" :underlagbild="page.underlagbild"

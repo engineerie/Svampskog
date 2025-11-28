@@ -44,13 +44,6 @@ const linkSchema = z.object({
   variant: variantEnum.optional(),
 });
 
-const imageSchema = z.object({
-  src: z.string().nonempty(),
-  alt: z.string().optional(),
-  loading: z.string().optional(),
-  srcset: z.string().optional(),
-});
-
 const badgeSchema = z.object({
   label: z.string().nonempty(),
   color: colorEnum.optional(),
@@ -276,7 +269,6 @@ export const collections = {
         orientation: orientationEnum.optional(),
       }),
       ecologyintro: ecologyIntroSectionSchema,
-      gallery: gallerySectionSchema.optional(),
     }),
   }),
   skogsskotsel: defineCollection({
