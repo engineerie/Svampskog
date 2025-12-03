@@ -45,7 +45,7 @@ provide('blognavigation', blognavigation)
 <template>
   <UApp>
     <!-- <UBanner class="" icon="i-fluent-emoji-high-contrast-construction" color="warning"
-      title="Utvecklingsarbete och dokumentation pågår. Genomarbetad version planeras till 1 nov" /> -->
+      title="Utvecklingsarbete pågår," /> -->
     <NuxtLoadingIndicator />
     <div data-vaul-drawer-wrapper>
       <NuxtLayout>

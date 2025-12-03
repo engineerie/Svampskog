@@ -227,7 +227,7 @@
       <!-- Sticky header that folds down from behind the AppHeader -->
       <transition name="fold-down">
         <UContainer v-if="isSticky"
-          class="shadow hidden md:block fixed top-0 pt-16 z-20 bg-neutral-50 dark:bg-black border-b border-x rounded border-neutral-200 dark:border-neutral-800 left-0 right-0">
+          class="shadow hidden md:block fixed top-0 pt-16 z-20 bg-neutral-50 dark:bg-black border-b border-x rounded-xl border-neutral-200 dark:border-neutral-800 left-0 right-0">
           <div class="flex space-x-4 w-full mx-auto max-w-7xl py-3">
             <!-- Use enabledOptions for USelect items as well -->
             <USelect v-for="category in categories" :key="category.key" :items="enabledOptions[category.key]"

@@ -9,6 +9,7 @@
               table?.tableApi?.getColumn('Commonname')?.setFilterValue(value);
               onSearchInput(value);
             }" variant="ghost" />
+
           <div class="flex gap-2">
             <div class="flex my-1 gap-2 overflow-scroll" id="scrollbar">
               <template v-if="selectedMark.length">
@@ -78,8 +79,11 @@
               ]" item-value="value" item-label="label" placeholder="Rader per sida" variant="ghost" />
             </div>
           </div>
+
         </div>
+
       </div>
+
 
       <div class="flex my-1 gap-2 overflow-scroll" id="scrollbar" v-if="useMobileLayout">
         <template v-if="selectedMark.length">
@@ -203,6 +207,8 @@ import { useEnvParamsStore } from '~/stores/envParamsStore'
 import { getPaginationRowModel } from '@tanstack/vue-table'
 import { upperFirst } from 'scule'
 import { hasEdnaDataset } from '~/utils/edna'
+
+
 
 
 const isMobile = useMediaQuery('(max-width: 767px)');

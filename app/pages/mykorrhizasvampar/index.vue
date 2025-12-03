@@ -310,8 +310,7 @@ const open = ref(false)
             :description="page.ecologyintro.description" :ui="{
               header: ' shrink-0',
             }">
-            <UAlert icon="i-material-symbols-network-node" color="neutral" variant="outline"
-              title="Mykorrhizans ekologi i korthet"
+            <UAlert icon="i-heroicons-book-open" color="neutral" variant="outline" title="Fakta i korthet"
               class="sm:w-fit shadow ring-muted/50 hover:opacity-85 hover:cursor-pointer" />
             <template #body>
               <EcologyIntro :section="page.ecologyintro" />

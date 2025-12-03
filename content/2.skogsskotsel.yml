@@ -21,7 +21,7 @@ hero:
       color: rodeodust
       variant: solid
 ecologyintro:
-  title: Mykorrhiza & skogsbruk i korthet
+  title: Fakta i korthet
   description: Grunderna för hur skogsskötsel påverkar mykorrhizasvampar
   items:
     - title: Alla träd har mykorrhiza
@@ -30,7 +30,7 @@ ecologyintro:
       img: /images/Carousel/web/DavidReed.webp
     - title: Mer träd ger mer mykorrhiza
       description: |
-       Mykorrhizasvampar får sin energi med socker från trädens fotosyntes. Svampmängden och aktiviteten större med många och stora träd än med små och få träd. Äldre skogar har också fler olika arter än yngre skogar.
+        Mykorrhizasvampar får sin energi med socker från trädens fotosyntes. Svampmängden och aktiviteten större med många och stora träd än med små och få träd. Äldre skogar har också fler olika arter än yngre skogar.
       img: /images/Carousel/web/MushrommTreeDiagram4.webp
       noBorder: true
     - title: Utan träd dör mykorrhizasvampar

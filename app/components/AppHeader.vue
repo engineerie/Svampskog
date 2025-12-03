@@ -8,14 +8,14 @@ const items = computed(() => [
     description: 'Vilka arter finns i olika skogar.',
     to: '/mykorrhizasvampar',
     active: route.path.startsWith('/mykorrhizasvampar'),
-    icon: 'i-lineicons-mushroom-1'
+    // icon: 'i-lineicons-mushroom-1'
   },
   {
     label: 'Skogsskötsel',
     description: 'Hur skogsskötsel påverkar svampar.',
     to: '/skogsskotsel',
     active: route.path.startsWith('/skogsskotsel'),
-    icon: 'i-hugeicons-tree-06'
+    // icon: 'i-hugeicons-tree-06'
   },
   // {
   //   label: 'Om projektet',
@@ -43,10 +43,35 @@ const itemsright = computed(() => [
   }
 ])
 
+const itemsmobile = computed(() => [
+  {
+    label: 'Svampar',
+    description: 'Vilka arter finns i olika skogar.',
+    to: '/mykorrhizasvampar',
+    active: route.path.startsWith('/mykorrhizasvampar'),
+    // icon: 'i-lineicons-mushroom-1'
+  },
+  {
+    label: 'Skogsskötsel',
+    description: 'Hur skogsskötsel påverkar svampar.',
+    to: '/skogsskotsel',
+    active: route.path.startsWith('/skogsskotsel'),
+    // icon: 'i-hugeicons-tree-06'
+  },
+  {
+    label: 'Om projektet',
+    description: 'Information om bakgrund och syfte.',
+    to: '/info',
+    active: route.path.startsWith('/info'),
+    children: [
+    ]
+  }
+])
+
 </script>
 
 <template>
-  <UHeader mode="modal" class="bg-white border-muted" :toggle="{
+  <UHeader mode="slideover" class="bg-white border-muted" :toggle="{
     size: 'xl',
   }">
     <template #left>
@@ -65,7 +90,7 @@ const itemsright = computed(() => [
     </template>
 
     <template #body>
-      <UNavigationMenu :items="items" orientation="vertical" color="neutral" variant="pill"
+      <UNavigationMenu :items="itemsmobile" orientation="vertical" color="neutral" variant="pill"
         :ui="{ link: 'text-3xl/10' }" />
     </template>
   </UHeader>
