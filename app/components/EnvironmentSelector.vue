@@ -231,7 +231,8 @@
           <div class="flex space-x-4 w-full mx-auto max-w-7xl py-3">
             <!-- Use enabledOptions for USelect items as well -->
             <USelect v-for="category in categories" :key="category.key" :items="enabledOptions[category.key]"
-              v-model="envStore[category.key]" :placeholder="category.defaultLabel" class="flex-1" append-to-body />
+              v-model="envStore[category.key]" :placeholder="category.defaultLabel" class="flex-1 ring-muted/80"
+              append-to-body />
             <UButton trailing :icon="restrictionEnabled ? 'mdi:lock' : 'mdi:lock-open'" @click="toggleRestriction"
               shape="full" class="transition-all" variant="ghost" :color="restrictionEnabled ? 'secondary' : 'neutral'">
               {{ restrictionEnabled ? "Markinventeringsdata" : "Markinventeringsdata" }}

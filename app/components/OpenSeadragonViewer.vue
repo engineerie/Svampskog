@@ -35,7 +35,7 @@
           <span class="uppercase tracking-wide text-[10px] text-neutral-400">Naturvård</span>
           <span class="text-sm font-semibold text-neutral-900">{{ naturvardCounter.total }}</span>
           <span v-if="naturvardCounter.gained" class="text-emerald-600 font-semibold">+{{ naturvardCounter.gained
-            }}</span>
+          }}</span>
           <span v-if="naturvardCounter.lost" class="text-red-500 font-semibold">-{{ naturvardCounter.lost }}</span>
         </div>
       </div>
@@ -1258,8 +1258,8 @@ export default {
               }
 
               tooltipMessage = p.id === 'myc-2'
-                ? 'Naturvårdsart som dött av ålder eller blivit utkonkurerad av annan art'
-                : 'Naturvårdsart som försvann vid avverkning';
+                ? 'Naturvårdssvamp som dött av ålder, konkurrens eller annat.'
+                : 'Naturvårdssvamp som tynade bort och dog efter trädet avverkats.';
               hoverX = iconX;
               hoverY = iconY;
               hoverRadius = Math.max(iconRadius * 1.6, hoverRadius);
@@ -1278,7 +1278,7 @@ export default {
               const iconSize = iconRadius * 1.5;
               drawSvgIcon(overlayCtx, MOVE_ARROW_PATH_D, iconX, iconY, iconSize, '#5a3f34');
 
-              tooltipMessage = 'Arten har förflyttat sig själv';
+              tooltipMessage = 'Naturvårdssvamp som förflyttat sig genom att mycelet vuxit och expanderat. ';
               hoverX = iconX;
               hoverY = iconY;
               hoverRadius = Math.max(iconRadius * 1.6, hoverRadius);
@@ -1301,7 +1301,7 @@ export default {
                 drawSvgIcon(overlayCtx, MOVE_ARROW_PATH_D, secondX, iconY, iconSize, '#5a3f34', 24, false, Math.PI);
 
 
-                tooltipMessage = 'Naturvårdsart som etablerats med spridda sporer';
+                tooltipMessage = 'Naturvårdssvamp som etablerats med sporer från svamp som överlevt på hänsynsträd i närheten.';
                 hoverX = baseX;
                 hoverY = iconY;
                 hoverRadius = Math.max(iconRadius * 2.2, hoverRadius);
@@ -1309,7 +1309,7 @@ export default {
                 drawBadgeCircle(overlayCtx, baseX, iconY, iconRadius);
                 drawSvgIcon(overlayCtx, DUST_STORM_PATH_D, baseX, iconY, iconSize, '#5a3f34', 48, true);
 
-                tooltipMessage = 'Naturvårdsart som etablerats med spridda sporer';
+                tooltipMessage = 'Naturvårdssvamp som etablerats med inspridda sporer från näraliggande skogar.';
                 hoverX = baseX;
                 hoverY = iconY;
                 hoverRadius = Math.max(iconRadius * 1.6, hoverRadius);
