@@ -1,5 +1,5 @@
 <template>
-    <div class="flex-1 transition-all" :class="selectedMethod.id ? 'bg-neutral-50' : ''" v-if="page">
+    <div class="flex-1 transition-all" :class="selectedMethod.id ? '' : ''" v-if="page">
 
 
 
@@ -45,7 +45,7 @@
                 delay: 0.5 + 0.05 * (method.index ?? 0)
             }">
 
-                <div @click="selectedId = method.id" :class="[
+                <div v-if="!selectedMethod.id" @click="selectedId = method.id" :class="[
                     'shrink-0 lg:shrink sm:w-58 lg:w-full bg-white transition-all hover:opacity-100 border border-muted/50 overflow-hidden rounded-lg h-fit shadow-lg hover:shadow-md relative cursor-pointer',
                     !selectedId ? 'opacity-100' : (selectedId === method.id ? 'opacity-100 ring-primary/40 shadow-lg' : 'opacity-50')
                 ]">
@@ -57,15 +57,23 @@
                             class=" w-full h-full" loading="lazy" decoding="async" />
                         <h1 class="text-lg p-2 px-3 font-medium text-nowrap ">{{ method.title }}</h1>
                     </template>
-                    <template v-else>
+                    <!-- <template v-else>
+                        <UButton :label="method.title"/>
                         <div class="flex items-center gap-3 p-1 pr-3">
                             <img :src="methodImage(method, 'thumb')" :alt="method.title" width="64" height="64"
                                 class="size-12 rounded-md object-cover ring-1 ring-muted/50" loading="lazy"
                                 decoding="async" />
                             <h1 class="text-lg font-medium text-nowrap">{{ method.title }}</h1>
                         </div>
-                    </template>
+                    </template> -->
                 </div>
+
+
+                <!-- <div v-else class="flex items-center gap-3 p-1 pr-3 ">
+                    <img :src="methodImage(method, 'thumb')" :alt="method.title" width="64" height="64"
+                        class="size-12 rounded-md object-cover ring-1 ring-muted/50" loading="lazy" decoding="async" />
+                    <h1 class="text-lg font-medium text-nowrap">{{ method.title }}</h1>
+                </div> -->
             </Motion>
         </UContainer>
 
@@ -136,38 +144,96 @@
                 duration: 0.5,
                 delay: 0.3,
             }">
-                <div class="w-full  rounded-xl relative overflow-hidden">
+                <div class="w-full  rounded-xl relative">
                     <!-- <div class="absolute top-0 right-0 p-3 flex gap-4">
                         <h1 class="text-lg font-medium">{{ selectedMethod.title }}</h1>
                         <UBadge v-if="selectedMethod.type" :label="selectedMethod.type" color="neutral" variant="subtle"
                             size="lg" />
                     </div> -->
                     <UPage class="p-3 pt-0 sm:pt-3">
-                        <!-- <template #left>
-                                    <div></div>
-                                </template> -->
-                        <div class="grid gap-3 sm:gap-6 lg:grid-cols-3">
-                            <div class="flex flex-col gap-6 min-w-0 max-w-full mb-2">
-                                <h1 class="text-4xl font-medium text-neutral-800">{{ selectedMethod.title }}</h1>
-                                <Transition name="fade" mode="out-in">
-                                    <img :src="methodImage(selectedMethod, 'detail')"
-                                        :alt="`Bild för ${selectedMethod.title}`" width="420" height="250"
-                                        class="rounded-lg ring ring-muted/50" loading="lazy" decoding="async" />
-                                </Transition>
-
-                                <UAccordion :items="accordionItems" :unmount-on-hide="false"
-                                    :default-value="['description']" :ui="{
-                                        root: '', item: 'border-none px-4 py-1 ring ring-muted/50 rounded-lg bg-white mb-2 text-md', trigger: 'text-base font-medium',
-                                        body: 'text-md/7 text-neutral-800 px-2'
-                                    }">
-                                    <template #body="{ item }">
-                                        <div class="space-y-3">
-                                            <MDC v-for="(para, idx) in item.paragraphs" :key="idx" :value="para"
-                                                unwrap="p" />
+                        <template #left>
+                            <div class="sticky top-32 self-start">
+                                <div v-for="method in methods" class="space-y-1">
+                                    <UButton :label="method.title" @click="selectedId = method.id"
+                                        :color="selectedId === method.id ? 'primary' : 'neutral'" variant="ghost"
+                                        class="ring-muted/50 w-full" />
+                                </div>
+                                <USeparator class="my-4" />
+                                <div class="mt-1 flex flex-col gap-1">
+                                    <UModal :fullscreen="isMobile ? true : false"
+                                        :title="page.ecologyintro?.title ?? ''"
+                                        :description="page.ecologyintro?.description ?? ''" :ui="{
+                                            header: 'shrink-0',
+                                        }">
+                                        <div>
+                                            <UButton icon="i-heroicons-book-open" color="neutral" variant="ghost"
+                                                label="Fakta i korthet" class="sm:w-full ring-muted/50" />
                                         </div>
-                                    </template>
-                                </UAccordion>
+                                        <!-- <UAlert icon="i-heroicons-book-open" color="neutral" variant="outline" title="Fakta i korthet"
+                            class="sm:w-fit shadow ring-muted/50 hover:opacity-85 hover:cursor-pointer" /> -->
+                                        <template #body>
+                                            <EcologyIntro :section="page.ecologyintro" />
+                                        </template>
+                                    </UModal>
+                                    <UModal :fullscreen="isMobile ? true : false" :title="page.underlag"
+                                        :description="page.underlagdescription" :ui="{
+                                            header: 'shrink-0',
+                                        }">
+                                        <div>
+                                            <UButton icon="i-heroicons-document-magnifying-glass" color="neutral"
+                                                variant="ghost" :label="page.underlag"
+                                                class="sm:w-full ring-muted/50" />
+                                        </div>
+                                        <!-- <UAlert icon="i-heroicons-document-magnifying-glass" color="neutral" variant="outline"
+                            :title="page.underlag"
+                            class="sm:w-fit shadow ring-muted/50 hover:opacity-85 hover:cursor-pointer" /> -->
+                                        <template #body>
+                                            <UnderlagContent :underlag="page.underlag" :underlagbild="page.underlagbild"
+                                                :sections="page.underlagSections" />
+                                        </template>
+                                    </UModal>
+                                </div>
+                            </div>
 
+
+
+                        </template>
+                        <template #right>
+                            <div></div>
+                        </template>
+                        <div class="grid gap-3 sm:gap-6 ">
+                            <div class="flex flex-col gap-6 min-w-0 max-w-full mb-2">
+                                <!-- <div class="flex justify-center w-full">
+                                    <h1 class="text-5xl font-medium text-neutral-900 my-12">{{ selectedMethod.title }}
+                                    </h1>
+                                </div> -->
+                                <UPageHero :title="selectedMethod.title"
+                                    :ui="{ container: 'lg:py-12', title: 'sm:text-6xl' }" />
+                                <Transition name="fade" mode="out-in">
+                                    <NuxtImg :src="methodImage(selectedMethod, 'detail')"
+                                        :alt="`Bild för ${selectedMethod.title}`" width="800" height="400"
+                                        class="rounded-lg ring ring-muted/50 w-full" loading="lazy" decoding="async" />
+                                </Transition>
+                                <div class="w-full flex justify-center my-12">
+                                    <div class="space-y-8 max-w-2xl sm:px-6">
+                                        <section v-for="section in accordionItems" :key="section.value"
+                                            class="space-y-3">
+                                            <h2 class="text-2xl font-semibold text-neutral-900">{{ section.label }}</h2>
+                                            <div class="space-y-3 text-lg text-neutral-800">
+                                                <MDC v-for="(para, idx) in section.paragraphs"
+                                                    :key="`${section.value}-${idx}`" :value="para" unwrap="p" />
+                                            </div>
+                                        </section>
+                                    </div>
+                                </div>
+
+                                <h1 class="text-3xl">Diagram</h1>
+                                <UCard variant="soft" :ui="{ body: 'p-1 sm:p-1 sm:pb-3' }"
+                                    class="ring-muted/50 h-fit bg-white/80">
+                                    <ForestryChartMain :parentSelectedFrameworks=[selectedMethod.id]
+                                        :currentStartskog="selectedStartskogTab"
+                                        :currentTimeValue="currentTimelineTime" />
+                                </UCard>
                             </div>
                             <!-- <div class="space-y-6"> -->
 
@@ -294,12 +360,7 @@
                             <div class="flex flex-col gap-1 min-w-0 max-w-full">
 
 
-                                <UCard variant="soft" :ui="{ body: 'p-1 sm:p-1 sm:pb-3' }"
-                                    class="ring-muted/50 h-fit bg-white/80">
-                                    <ForestryChartMain :parentSelectedFrameworks=[selectedMethod.id]
-                                        :currentStartskog="selectedStartskogTab"
-                                        :currentTimeValue="currentTimelineTime" />
-                                </UCard>
+
                                 <UCard variant="soft" class="mt-3 flex flex-col gap-5 ring-muted/50"
                                     :ui="{ body: 'sm:p-4 text-base' }">
                                     <h1 class="font-semibold mb-3">Fokusområden i {{ selectedMethod.title }}</h1>
@@ -420,7 +481,7 @@ const methodImage = (method: any, variant: 'thumb' | 'card' | 'detail') => {
     const size = variant === 'thumb'
         ? '64'
         : variant === 'detail'
-            ? '420x250'
+            ? '1000'
             : '300x160';
     return base ? `/images/metoder/web/${base}_${size}.webp` : src;
 };

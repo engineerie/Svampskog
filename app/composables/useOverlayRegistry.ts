@@ -164,7 +164,7 @@ function filterEntries(
     }
     // surface every retention tree for all frameworks/times (post avverkning) by normalizing to 'alla'
     const base = Array.isArray(collection) ? collection : [];
-    return base.map(point => ({
+    return base.map((point) => ({
       ...point,
       framework: "alla",
       startskog: "alla",
@@ -237,7 +237,7 @@ function computeTradplantorAvailability(ctx: OverlayContext) {
   const fw = ctx.framework;
   const time = ctx.time;
   if (!fw || !time) return true;
-  return fw === "trakthygge" && time === "20 år";
+  return fw === "trakthygge" && time === "efter";
 }
 
 async function fetchJson(path: string) {
@@ -301,7 +301,11 @@ function expandNaturvardConfig(raw: any): any[] {
   const timeOrder = baseTimeOrder;
 
   const markerMaps = new Map<string, Map<string, any>>();
-  if (pointsArray.length && startskogSets && typeof startskogSets === "object") {
+  if (
+    pointsArray.length &&
+    startskogSets &&
+    typeof startskogSets === "object"
+  ) {
     Object.entries(startskogSets).forEach(([startskog, ids]) => {
       const map = new Map<string, any>();
       if (Array.isArray(ids)) {
@@ -440,7 +444,7 @@ function expandNaturvardDataset(raw: any): any[] {
 }
 
 async function loadSmaplantor() {
-  const candidates = ['/småplantor.json', '/småplantor.json'];
+  const candidates = ["/småplantor.json", "/småplantor.json"];
   for (const path of candidates) {
     const data = await fetchJson(path);
     if (data) return data;
@@ -449,7 +453,11 @@ async function loadSmaplantor() {
 }
 
 async function loadSeedTrees() {
-  const candidates = ['/seedTrees.json', '/overlays/seedTrees.json', '/api/seedTrees'];
+  const candidates = [
+    "/seedTrees.json",
+    "/overlays/seedTrees.json",
+    "/api/seedTrees",
+  ];
   for (const path of candidates) {
     const data = await fetchJson(path);
     if (data) return data;
@@ -458,7 +466,11 @@ async function loadSeedTrees() {
 }
 
 async function loadKanteffekt() {
-  const candidates = ['/kanteffekt.json', '/overlays/kanteffekt.json', '/api/kanteffekt'];
+  const candidates = [
+    "/kanteffekt.json",
+    "/overlays/kanteffekt.json",
+    "/api/kanteffekt",
+  ];
   for (const path of candidates) {
     const data = await fetchJson(path);
     if (data) return data;
@@ -468,29 +480,47 @@ async function loadKanteffekt() {
 
 export function useOverlayRegistry() {
   const { data: overlayData, pending: overlaysPending } = useAsyncData(
-    'overlay-datasets-json',
+    "overlay-datasets-json",
     async () => {
-      const [retention, seedTrees, smaplantor, hogstubbar, naturvard, kanteffekt] = await Promise.all([
-        fetchJson('/retentionTrees.json'),
+      const [
+        retention,
+        seedTrees,
+        smaplantor,
+        hogstubbar,
+        naturvard,
+        kanteffekt,
+      ] = await Promise.all([
+        fetchJson("/retentionTrees.json"),
         loadSeedTrees(),
         loadSmaplantor(),
-        fetchJson('/hogstubbar.json'),
-        fetchJson('/naturvard.json'),
+        fetchJson("/hogstubbar.json"),
+        fetchJson("/naturvard.json"),
         loadKanteffekt(),
       ]);
 
       return {
-        'retention-trees': Array.isArray(retention?.trees) ? retention.trees : [],
-        'seed-trees': Array.isArray(seedTrees?.trees) ? seedTrees.trees : [],
+        "retention-trees": Array.isArray(retention?.trees)
+          ? retention.trees
+          : [],
+        "seed-trees": Array.isArray(seedTrees?.trees) ? seedTrees.trees : [],
         smaplantor: Array.isArray(smaplantor?.trees)
           ? smaplantor.trees
           : Array.isArray(smaplantor)
             ? smaplantor
             : [],
-        hogstubbar: Array.isArray(hogstubbar?.stubbar) ? hogstubbar.stubbar : [],
+        hogstubbar: Array.isArray(hogstubbar?.stubbar)
+          ? hogstubbar.stubbar
+          : [],
         naturvard: expandNaturvardDataset(naturvard),
-        kanteffekt: Array.isArray(kanteffekt?.features) ? kanteffekt.features : [],
+        kanteffekt: Array.isArray(kanteffekt?.features)
+          ? kanteffekt.features
+          : [],
       } as Record<string, any[]>;
+    },
+    {
+      // Force client-side fetch so static/prerender builds still load overlay JSON at runtime
+      server: false,
+      lazy: true,
     },
   );
 

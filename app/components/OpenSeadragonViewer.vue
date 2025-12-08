@@ -463,20 +463,20 @@ export default {
     const signalRodlistadeDataset = ref([]);
     const totalSvamparDataset = ref([]);
 
-    useAsyncData('matsvamp-skogsbruk', () => queryCollection('matsvampSkogsbruk').first()).then(({ data }) => {
-      const value = data.value
-      matsvampDataset.value = Array.isArray(value?.entries) ? value.entries : []
-    })
+    // useAsyncData('matsvamp-skogsbruk', () => queryCollection('matsvampSkogsbruk').first()).then(({ data }) => {
+    //   const value = data.value
+    //   matsvampDataset.value = Array.isArray(value?.entries) ? value.entries : []
+    // })
 
-    useAsyncData('signal-rodlistade-skogsbruk', () => queryCollection('signalRodlistadeSkogsbruk').first()).then(({ data }) => {
-      const value = data.value
-      signalRodlistadeDataset.value = Array.isArray(value?.entries) ? value.entries : []
-    })
+    // useAsyncData('signal-rodlistade-skogsbruk', () => queryCollection('signalRodlistadeSkogsbruk').first()).then(({ data }) => {
+    //   const value = data.value
+    //   signalRodlistadeDataset.value = Array.isArray(value?.entries) ? value.entries : []
+    // })
 
-    useAsyncData('total-svampar-skogsbruk', () => queryCollection('totalSvamparSkogsbruk').first()).then(({ data }) => {
-      const value = data.value
-      totalSvamparDataset.value = Array.isArray(value?.entries) ? value.entries : []
-    })
+    // useAsyncData('total-svampar-skogsbruk', () => queryCollection('totalSvamparSkogsbruk').first()).then(({ data }) => {
+    //   const value = data.value
+    //   totalSvamparDataset.value = Array.isArray(value?.entries) ? value.entries : []
+    // })
 
 
     // General saved clicks (developer capture)
@@ -719,11 +719,11 @@ export default {
           overlayCtx.stroke();
         });
       }
-      // Trädplantor — borderless rectangle with world-anchored dotted rows (trakthygge, 20 år)
+      // Trädplantor — borderless rectangle with world-anchored dotted rows (trakthygge, direkt efter)
       if (
         props.tradplantorVisible &&
         frameworkValue.value === 'trakthygge' &&
-        props.currentTime === '20 år'
+        props.currentTime === 'efter'
       ) {
         // Static overlay bounds in image-normalized coordinates
         const x0 = 0.2671, y0 = 0.1383;

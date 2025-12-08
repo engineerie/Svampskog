@@ -289,47 +289,5 @@ const open = ref(false)
         </div>
       </UContainer>
     </div> -->
-
-    <!-- <SCarousel :section="page.carousel" /> -->
-    <Motion :initial="{
-      opacity: 0,
-      transform: 'translatex(-10px)'
-      // filter: 'blur(20px)'
-    }" :animate="{
-      opacity: 1,
-      transform: 'translateY(0px)'
-      // filter: 'blur(0px)'
-    }" :transition="{
-      duration: 0.5,
-      delay: 1
-    }">
-
-      <UContainer>
-        <div class="mb-4 flex flex-col sm:flex-row gap-1.5 p-1 rounded-lg ring ring-muted/50 sm:w-fit bg-muted/30">
-          <UModal v-if="page.ecologyintro" :fullscreen="isMobile ? true : false" :title="page.ecologyintro.title"
-            :description="page.ecologyintro.description" :ui="{
-              header: ' shrink-0',
-            }">
-            <UAlert icon="i-heroicons-book-open" color="neutral" variant="outline" title="Fakta i korthet"
-              class="sm:w-fit shadow ring-muted/50 hover:opacity-85 hover:cursor-pointer" />
-            <template #body>
-              <EcologyIntro :section="page.ecologyintro" />
-            </template>
-          </UModal>
-          <UModal :fullscreen="isMobile ? true : false" :title="page.underlag" :description="page.underlagdescription"
-            :ui="{
-              header: 'shrink-0',
-            }">
-            <UAlert icon="i-heroicons-document-magnifying-glass" color="neutral" variant="outline"
-              :title="page.underlag" class="sm:w-fit shadow ring-muted/50 hover:opacity-85 hover:cursor-pointer" />
-            <template #body>
-              <UnderlagContent :underlag="page.underlag" :underlagbild="page.underlagbild"
-                :sections="page.underlagSections" />
-            </template>
-          </UModal>
-        </div>
-      </UContainer>
-    </Motion>
-
   </UPage>
 </template>

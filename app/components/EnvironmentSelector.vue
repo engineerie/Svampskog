@@ -168,7 +168,30 @@
               </div>
             </div>
 
-            <div class="absolute bottom-0 right-3 flex justify-end gap-2">
+            <div class="absolute bottom-0 right-3 flex justify-end gap-2 items-center">
+              <UModal :fullscreen="isMobile ? true : false" :title="page.ecologyintro?.title ?? ''"
+                :description="page.ecologyintro?.description ?? ''" :ui="{
+                  header: 'shrink-0',
+                }">
+                <UButton icon="i-heroicons-book-open" color="neutral" variant="outline" label="Fakta i korthet"
+                  class="sm:w-fit h-fit  ring-muted/50 hover:opacity-85 hover:cursor-pointer" />
+                <template #body>
+                  <EcologyIntro :section="page.ecologyintro" />
+                </template>
+              </UModal>
+              <UModal :fullscreen="isMobile ? true : false" :title="page.underlag"
+                :description="page.underlagdescription" :ui="{
+                  header: 'shrink-0',
+                }">
+                <UButton icon="i-heroicons-document-magnifying-glass" color="neutral" variant="outline" label="Underlag"
+                  class="sm:w-fit h-fit  ring-muted/50 hover:opacity-85 hover:cursor-pointer" />
+                <template #body>
+                  <UnderlagContent :underlag="page.underlag" :underlagbild="page.underlagbild"
+                    :sections="page.underlagSections" />
+                </template>
+              </UModal>
+              <USeparator orientation="vertical" class="h-6" />
+
               <UButton trailing :icon="restrictionEnabled ? 'mdi:lock' : 'mdi:lock-open'" @click="toggleRestriction"
                 shape="full" class="transition-all bg-white"
                 :class="restrictionEnabled ? 'ring-secondary-200/60' : 'ring-muted/60'" variant="outline"
@@ -177,7 +200,7 @@
               </UButton>
               <UButton trailing icon="mdi:apps" @click="toggleHeight" class="ring-muted/60" color="neutral"
                 variant="outline">
-                {{ listBoxRowVisible ? "Dölj kombinationer" : "Visa kombinationer" }}
+                {{ listBoxRowVisible ? "Kombinationer" : "Kombinationer" }}
               </UButton>
               <!-- <UModal title="Miljööversikt" :ui="{ content: 'max-w-[83rem]', body: 'sm:p-0', title: 'text-2xl' }">
                 <UButton class="ring-muted/60" label="Alla miljöer" trailing icon="i-hugeicons-tree-06" color="neutral"
@@ -295,6 +318,15 @@ onBeforeUnmount(() => {
   }
 })
 
+
+const { data: page } = await useAsyncData('mykorrhizasvampar', () => queryCollection('mykorrhizasvampar').first())
+if (!page.value) {
+  throw createError({
+    statusCode: 404,
+    statusMessage: 'Page not found',
+    fatal: true
+  })
+}
 // --- Environment Selector Data & Methods ---
 
 interface Category {

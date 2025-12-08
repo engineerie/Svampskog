@@ -17,10 +17,12 @@
         </div>
 
         <div class=" flex flex-col sm:flex-row gap-1.5  w-fit h-fit">
-          <UAlert v-if="showImagesAlert" color="info" variant="subtle" icon="i-heroicons-photo"
-            :ui="{ close: 'text-info hover:text-info cursor-pointer' }" title="Fler artbilder kommer snart"
-            class=" h-fit w-fit" close @update:open="showImagesAlert = $event" />
-          <UModal :fullscreen="isMobile ? true : false" :title="page.ecologyintro?.title ?? ''"
+          <UAlert v-if="activeTab !== 'dna'" :color="activeTab === 'dna' ? 'secondary' : 'neutral'" variant="outline"
+            :ui="{ close: ' cursor-pointer' }"
+            :title="activeTab === 'dna' ? 'Arterna är sorterade i fallande ordning baserat på hur många skogar deras DNA påträffats i.' : 'Arterna är sorterade i fallande ordning baserat på hur många gånger de har rapporterats i Artportalen.'"
+            class=" h-fit max-w-96 text-muted ring-muted/50" @update:open="showImagesAlert = $event" />
+          <!-- <UCard ><p>Arterna är sorterade i fallande ordning baserat på hur många gånger de har rapporterats i Artportalen.</p></UCard> -->
+          <!-- <UModal :fullscreen="isMobile ? true : false" :title="page.ecologyintro?.title ?? ''"
             :description="page.ecologyintro?.description ?? ''" :ui="{
               header: 'shrink-0',
             }">
@@ -29,18 +31,17 @@
             <template #body>
               <EcologyIntro :section="page.ecologyintro" />
             </template>
-          </UModal>
-          <UModal :fullscreen="isMobile ? true : false" :title="page.underlag" :description="page.underlagdescription"
-            :ui="{
+</UModal>
+<UModal :fullscreen="isMobile ? true : false" :title="page.underlag" :description="page.underlagdescription" :ui="{
               header: 'shrink-0',
             }">
-            <UAlert icon="i-heroicons-document-magnifying-glass" color="neutral" variant="outline" title="Underlag"
-              class="sm:w-fit h-fit  ring-muted/50 hover:opacity-85 hover:cursor-pointer" />
-            <template #body>
+  <UAlert icon="i-heroicons-document-magnifying-glass" color="neutral" variant="outline" title="Underlag"
+    class="sm:w-fit h-fit  ring-muted/50 hover:opacity-85 hover:cursor-pointer" />
+  <template #body>
               <UnderlagContent :underlag="page.underlag" :underlagbild="page.underlagbild"
                 :sections="page.underlagSections" />
             </template>
-          </UModal>
+</UModal> -->
 
         </div>
 

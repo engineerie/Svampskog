@@ -16,7 +16,8 @@
                 <span v-for="filter in selectedMark" :key="'mark-' + filter">
                   <UBadge trailing-icon="i-heroicons-x-mark-solid" variant="subtle"
                     :color="filter === 'KALKmark' ? 'kalkmark' : filter === 'ANNANmark' ? 'vanligmark' : 'neutral'"
-                    class="cursor-pointer mb-2 md:mb-0 " @click="selectedMark = selectedMark.filter(f => f !== filter)">
+                    :class="['cursor-pointer mb-2 md:mb-0', isFilterActive('mark', filter) ? '' : 'opacity-50']"
+                    @click="selectedMark = selectedMark.filter(f => f !== filter)">
                     {{ filter === 'KALKmark' ? 'Kalkmark' : filter === 'ANNANmark' ? 'Vanlig skogsmark' :
                       capitalize(filter) }}
                   </UBadge>
@@ -26,7 +27,7 @@
                 <span v-for="filter in selectedFilter" :key="'svamp-' + filter">
                   <UBadge trailing-icon="i-heroicons-x-mark-solid" variant="subtle"
                     :color="filter === 'Matsvamp' ? 'warning' : filter === 'Giftsvamp' ? 'poison' : 'neutral'"
-                    class="cursor-pointer mb-2 md:mb-0 "
+                    :class="['cursor-pointer mb-2 md:mb-0', isFilterActive(props.mat, filter) ? '' : 'opacity-50']"
                     @click="selectedFilter = selectedFilter.filter(f => f !== filter)">
                     {{ capitalize(filter) }}
                   </UBadge>
@@ -35,7 +36,7 @@
               <template v-if="selectedGrupp.length">
                 <span v-for="filter in selectedGrupp" :key="'grupp-' + filter">
                   <UBadge trailing-icon="i-heroicons-x-mark-solid" variant="subtle" color="neutral"
-                    class="cursor-pointer mb-2 md:mb-0 "
+                    :class="['cursor-pointer mb-2 md:mb-0', isFilterActive(props.grupp, filter) ? '' : 'opacity-50']"
                     @click="selectedGrupp = selectedGrupp.filter(f => f !== filter)">
                     {{ capitalize(filter) }}
                   </UBadge>
@@ -45,7 +46,7 @@
                 <span v-for="filter in selectedStatus" :key="'status-' + filter">
                   <UBadge trailing-icon="i-heroicons-x-mark-solid" variant="subtle"
                     :color="filter === 'Signalart' ? 'signal' : getStatusColor(filter)"
-                    class="cursor-pointer mb-2 md:mb-0 "
+                    :class="['cursor-pointer mb-2 md:mb-0', isFilterActive('RL2020kat', filter) ? '' : 'opacity-50']"
                     @click="selectedStatus = selectedStatus.filter(f => f !== filter)">
                     {{ filter === 'Signalart' ? 'Signalart' : getStatusTooltip(filter) }}
                   </UBadge>
@@ -64,7 +65,7 @@
               onSelect(e) {
                 e?.preventDefault()
               }
-            }))" :content="{ align: 'end' }">
+            }))" :content="{ align: 'end' }" :ui="{ content: 'min-w-fit' }">
               <UButton label="Kolumner" color="neutral" variant="ghost" trailing-icon="i-lucide-chevron-down" />
             </UDropdownMenu>
 
@@ -132,11 +133,13 @@
     <div v-if="useMobileLayout" class="flex gap-2 w-full mb-2">
 
 
-      <UDropdownMenu :size="isMobile ? 'xl' : 'md'" :items="sortMenuItems" :content="{ align: 'start' }">
+      <UDropdownMenu :size="isMobile ? 'xl' : 'md'" :items="sortMenuItems" :content="{ align: 'start' }"
+        :ui="{ content: 'min-w-fit' }">
         <UButton :variant="isMobile ? 'soft' : 'ghost'" icon="i-lucide-arrow-up-down" :size="isMobile ? 'xl' : 'md'"
           :label="isMobile ? null : null" color="neutral" trailing />
       </UDropdownMenu>
-      <UDropdownMenu :size="isMobile ? 'xl' : 'md'" :items="filterMenuItems" :content="{ align: 'start' }">
+      <UDropdownMenu :size="isMobile ? 'xl' : 'md'" :items="filterMenuItems" :content="{ align: 'start' }"
+        :ui="{ content: 'min-w-fit' }">
         <UButton :variant="isMobile ? 'soft' : 'ghost'" icon="i-lucide-list-filter" :size="isMobile ? 'xl' : 'md'"
           :label="isMobile ? null : null" color="neutral" />
       </UDropdownMenu>
@@ -295,6 +298,11 @@ const columnVisibility = ref({ ...defaultVisibility, ...props.columnVisibilityOv
 // Define a reactive array for selected mark filters
 const selectedMark = ref([]);
 // Create computed mark options – these will include the count of matches.
+const formatCountLabel = (visible = 0, total = 0) => {
+  if (!total) return null;
+  return visible === total ? `${total}` : `${visible}/${total}`;
+};
+
 const markOptions = computed(() => {
   const totalCounts = {};
   // Total counts from filteredData (before column filters)
@@ -318,16 +326,27 @@ const markOptions = computed(() => {
       visibleCounts["ANNANmark"] = (visibleCounts["ANNANmark"] || 0) + 1;
     }
   });
-  return [
+  const opts = [
     {
-      label: `Kalkmark (${visibleCounts["KALKmark"] || 0}/${totalCounts["KALKmark"] || 0})`,
-      value: "KALKmark"
+      label: 'Kalkmark',
+      value: 'KALKmark',
+      visible: visibleCounts["KALKmark"] || 0,
+      total: totalCounts["KALKmark"] || 0
     },
     {
-      label: `Vanlig skogsmark (${visibleCounts["ANNANmark"] || 0}/${totalCounts["ANNANmark"] || 0})`,
-      value: "ANNANmark"
+      label: 'Vanlig skogsmark',
+      value: 'ANNANmark',
+      visible: visibleCounts["ANNANmark"] || 0,
+      total: totalCounts["ANNANmark"] || 0
     }
   ];
+  return opts
+    .map(opt => {
+      const suffix = formatCountLabel(opt.visible, opt.total);
+      if (!suffix) return null;
+      return { label: `${opt.label} (${suffix})`, value: opt.value };
+    })
+    .filter(Boolean);
 });
 
 // Create the markMenuItems computed property similar to statusMenuItems:
@@ -391,19 +410,35 @@ const svampOptions = computed(() => {
       visibleCounts['Giftsvamp'] = (visibleCounts['Giftsvamp'] || 0) + 1;
     }
   });
-  return options.map(opt => {
-    const total = totalCounts[opt] || 0;
-    const visible = visibleCounts[opt] || 0;
-    return {
-      label: `${opt} (${visible}/${total})`,
-      value: opt
-    };
-  });
+  return options
+    .map(opt => {
+      const total = totalCounts[opt] || 0;
+      const visible = visibleCounts[opt] || 0;
+      const suffix = formatCountLabel(visible, total);
+      if (!suffix) return null;
+      return {
+        label: `${opt} (${suffix})`,
+        value: opt
+      };
+    })
+    .filter(Boolean);
 });
 
 const rowsPerPage = ref(props.isNormalView ? 500 : 10);
 const selectedFilter = ref([]);
 const selectedStatus = ref([]);
+const naturvardsStatuses = ['VU', 'NT', 'EN', 'CR', 'DD', 'Signalart'];
+const isNaturvardsGroupSelected = computed(() =>
+  naturvardsStatuses.every(status => selectedStatus.value.includes(status))
+);
+const toggleNaturvardsGroup = (checked) => {
+  if (checked) {
+    const merged = new Set([...selectedStatus.value, ...naturvardsStatuses]);
+    selectedStatus.value = Array.from(merged);
+  } else {
+    selectedStatus.value = selectedStatus.value.filter(status => !naturvardsStatuses.includes(status));
+  }
+};
 const selectedGrupp = ref([]);
 const gruppMenuItems = computed(() => {
   return gruppOptions.value.map(option => ({
@@ -446,23 +481,34 @@ const svampMenuItems = computed(() => {
 });
 
 const statusMenuItems = computed(() => {
-  return statusOptions.value.map(option => ({
-    label: option.label,
-    type: 'checkbox',
-    checked: selectedStatus.value.includes(option.value),
-    onUpdateChecked(checked) {
-      if (checked) {
-        if (!selectedStatus.value.includes(option.value)) {
-          selectedStatus.value.push(option.value);
-        }
-      } else {
-        selectedStatus.value = selectedStatus.value.filter(val => val !== option.value);
-      }
-    },
-    onSelect(e) {
-      e.preventDefault();
+  return statusOptions.value.map(option => {
+    if (option.type === 'separator') {
+      return option;
     }
-  }));
+    const isGroup = option.value === 'Naturvårdsarter';
+    return {
+      label: option.label,
+      type: 'checkbox',
+      icon: option.icon,
+      checked: isGroup ? isNaturvardsGroupSelected.value : selectedStatus.value.includes(option.value),
+      onUpdateChecked(checked) {
+        if (isGroup) {
+          toggleNaturvardsGroup(checked);
+          return;
+        }
+        if (checked) {
+          if (!selectedStatus.value.includes(option.value)) {
+            selectedStatus.value.push(option.value);
+          }
+        } else {
+          selectedStatus.value = selectedStatus.value.filter(val => val !== option.value);
+        }
+      },
+      onSelect(e) {
+        e.preventDefault();
+      }
+    };
+  });
 });
 
 const sortMenuItems = computed(() => [
@@ -553,19 +599,23 @@ const gruppOptions = computed(() => {
     }
   });
 
-  return Object.keys(totalCounts).map(group => {
-    const total = totalCounts[group] || 0;
-    const visible = visibleCounts[group] || 0;
-    return {
-      label: `${capitalize(group)} (${visible}/${total})`,
-      value: group
-    };
-  });
+  return Object.keys(totalCounts)
+    .map(group => {
+      const total = totalCounts[group] || 0;
+      const visible = visibleCounts[group] || 0;
+      const suffix = formatCountLabel(visible, total);
+      if (!suffix) return null;
+      return {
+        label: `${capitalize(group)} (${suffix})`,
+        value: group
+      };
+    })
+    .filter(Boolean);
 });
 
 const statusOptions = computed(() => {
 
-  const statuses = ['LC', 'NT', 'EN', 'VU', 'CR', 'RE', 'DD'];
+  const statuses = ['LC', 'NT', 'EN', 'VU', 'CR', 'DD'];
 
   const totalCounts = {};
   filteredData.value.forEach(row => {
@@ -609,31 +659,61 @@ const statusOptions = computed(() => {
     }
   });
 
-  return [
-    ...statuses.map(s => {
-      const total = totalCounts[s] || 0;
-      const visible = visibleCounts[s] || 0;
-      return {
-        label: `${getStatusTooltip(s)} (${visible}/${total})`,
-        value: s
-      };
-    }),
-    (() => {
-      const total = totalCounts['Ej bedömd'] || 0;
-      const visible = visibleCounts['Ej bedömd'] || 0;
-      return { label: `Ej bedömd (${visible}/${total})`, value: 'Ej bedömd' };
-    })(),
-    (() => {
-      const total = totalCounts['Ej tillämplig'] || 0;
-      const visible = visibleCounts['Ej tillämplig'] || 0;
-      return { label: `Ej tillämplig (${visible}/${total})`, value: 'Ej tillämplig' };
-    })(),
-    (() => {
-      const total = totalCounts['Signalart'] || 0;
-      const visible = visibleCounts['Signalart'] || 0;
-      return { label: `Signalart (${visible}/${total})`, value: 'Signalart' };
-    })()
-  ];
+  const naturvardsTotal = naturvardsStatuses.reduce((sum, status) => sum + (totalCounts[status] || 0), 0);
+  const naturvardsVisible = naturvardsStatuses.reduce((sum, status) => sum + (visibleCounts[status] || 0), 0);
+
+  const items = [];
+
+  const pushStatus = (value, text, visible = 0, total = 0, extra = {}) => {
+    const suffix = formatCountLabel(visible, total);
+    if (!suffix) return;
+    items.push({ label: `${text} (${suffix})`, value, ...extra });
+  };
+
+  // 1. Livskraftig
+  pushStatus('LC', 'Livskraftig', visibleCounts['LC'] || 0, totalCounts['LC'] || 0, { icon: 'i-heroicons-check-circle' });
+
+  // 2. Ej bedömd
+  pushStatus('Ej bedömd', 'Ej bedömd', visibleCounts['Ej bedömd'] || 0, totalCounts['Ej bedömd'] || 0, { icon: 'i-heroicons-question-mark-circle' });
+
+  // 3. Ej tillämplig
+  pushStatus('Ej tillämplig', 'Ej tillämplig', visibleCounts['Ej tillämplig'] || 0, totalCounts['Ej tillämplig'] || 0, { icon: 'i-heroicons-minus-circle' });
+
+  // 4. Naturvårdssvampar group toggle
+  const naturSuffix = formatCountLabel(naturvardsVisible, naturvardsTotal);
+  if (naturSuffix) {
+    items.push({
+      label: `Naturvårdssvampar (${naturSuffix})`,
+      value: 'Naturvårdsarter',
+      icon: 'i-material-symbols-award-star-outline'
+    });
+  }
+
+  // 5. Separator
+  if (items.length) items.push({ type: 'separator' });
+
+  // 6. All naturvårdsarter options
+  naturvardsStatuses.forEach(status => {
+    pushStatus(
+      status,
+      getStatusTooltip(status),
+      visibleCounts[status] || 0,
+      totalCounts[status] || 0
+    );
+  });
+
+  // 7. Separator
+  if (items.length && items[items.length - 1]?.type !== 'separator') {
+    items.push({ type: 'separator' });
+  }
+
+
+  // Remove trailing separator if nothing follows
+  while (items.length && items[items.length - 1]?.type === 'separator') {
+    items.pop();
+  }
+
+  return items;
 });
 
 const pagination = ref({
@@ -686,6 +766,8 @@ const getStatusColor = (status) => {
 };
 
 const getStatusTooltip = (status) => {
+  if (status === 'Ej bedömd') return 'Ej bedömd';
+  if (status === 'Ej tillämplig') return 'Ej tillämplig';
   const tooltips = {
     LC: "Livskraftig",
     NT: "Nära hotad",
@@ -804,7 +886,7 @@ const desktopColumns = [
     header: () => h(UDropdownMenu, {
       items: gruppMenuItems.value,
       content: { align: 'start' },
-      ui: { content: 'w-48' }
+      ui: { content: 'w-48 min-w-fit' }
     }, {
       default: () => h(UButton, { label: 'Grupp', variant: 'outline', color: 'neutral', icon: "i-lucide-list-filter", class: '-mx-2.5 ring-muted/50 shadow', })
     }),
@@ -836,7 +918,7 @@ const desktopColumns = [
         {
           items: markMenuItems.value,
           content: { align: "start" },
-          ui: { content: "w-48" }
+          ui: { content: "w-48 min-w-fit" }
         },
         {
           default: () =>
@@ -873,7 +955,7 @@ const desktopColumns = [
     header: () => h(UDropdownMenu, {
       items: svampMenuItems.value,
       content: { align: 'start' },
-      ui: { content: 'w-48' }
+      ui: { content: 'w-48 min-w-fit' }
     }, {
       default: () => h(UButton, { label: 'Matsvamp', variant: 'outline', color: 'neutral', icon: "i-lucide-list-filter", class: '-mx-2.5 ring-muted/50 shadow', })
     }),
@@ -907,7 +989,7 @@ const desktopColumns = [
     header: () => h(UDropdownMenu, {
       items: statusMenuItems.value,
       content: { align: 'start' },
-      ui: { content: 'w-48' }
+      ui: { content: 'w-48 min-w-fit' }
     }, {
       default: () => h(UButton, { label: 'Status', variant: 'outline', color: 'neutral', icon: "i-lucide-list-filter", class: '-mx-2.5 ring-muted/50 shadow', })
     }),
@@ -1352,6 +1434,50 @@ const columnFilters = computed(() => {
   }
   return filters;
 });
+
+const isFilterActive = (columnId, value) => {
+  const rows = table.value?.tableApi?.getFilteredRowModel()?.rows || [];
+  if (!rows.length) return false;
+  if (columnId === 'mark') {
+    if (value === 'KALKmark') return rows.some(row => row.original.KALKmark);
+    if (value === 'ANNANmark') return rows.some(row => row.original.ANNANmark);
+    return false;
+  }
+  if (columnId === props.mat) {
+    if (value === 'Matsvamp') {
+      return rows.some(row => {
+        const matVal = row.original[props.mat];
+        return props.mat === 'Nyasvamp-boken'
+          ? matVal && String(matVal).toLowerCase() === 'x'
+          : matVal == 1;
+      });
+    }
+    if (value === 'Giftsvamp') {
+      return rows.some(row => (row.original.Giftsvamp || '').toLowerCase() === 'x');
+    }
+  }
+  return rows.some(row => {
+    if (columnId === 'RL2020kat') {
+      if (value === 'Ej bedömd') {
+        const statusVal = row.original.RL2020kat;
+        return (
+          statusVal === null ||
+          statusVal === 0 ||
+          statusVal === '0' ||
+          String(statusVal).toUpperCase() === 'NE'
+        );
+      }
+      if (value === 'Ej tillämplig') {
+        return String(row.original.RL2020kat).toUpperCase() === 'NA';
+      }
+      if (value === 'Signalart') {
+        return row.original.SIGNAL_art === 'S';
+      }
+      return row.original.RL2020kat === value;
+    }
+    return row.getValue(columnId) === value;
+  });
+};
 
 watch(columnFilters, (newFilters) => {
   if (table.value?.tableApi) {

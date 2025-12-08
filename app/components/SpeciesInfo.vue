@@ -49,20 +49,20 @@
 
         <div v-if="species['Rank matsvamp'] === 3" class="text-sm text-red-700 shrink-0 flex gap-1 items-center ">
           <UIcon name="codicon:circle-large-filled" class="size-3" />
-          Sällsynt matsvamp
+          Minst vanlig matsvamp
         </div>
         <div v-if="species['Rank matsvamp'] === 2" class="text-sm text-yellow-600 shrink-0 flex gap-1 items-center">
           <UIcon name="codicon:color-mode" class="size-3" />
-          Ovanlig matsvamp
+          Mindre vanlig matsvamp
         </div>
         <div v-if="species['Rank giftsvamp'] === 3" class="text-sm shrink-0 text-red-700 flex gap-1 items-center">
           <UIcon name="codicon:circle-large-filled" class="size-3" />
-          Sällsynt giftsvamp
+          Minst vanlig giftsvamp
         </div>
         <div v-if="species['Rank giftsvamp'] === 2" class="text-sm text-yellow-600 shrink-0 flex gap-1 items-center">
           <UIcon name="codicon:color-mode" class="size-3" />
 
-          Ovanlig giftsvamp
+          Mindre vanlig giftsvamp
         </div>
         <div v-if="species.RankRed === 3" class="text-sm text-red-700 shrink-0 flex gap-1 items-center">
           <UIcon name="codicon:circle-large-filled" class="size-3" />
