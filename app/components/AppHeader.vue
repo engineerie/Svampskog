@@ -81,16 +81,16 @@ const itemsmobile = computed(() => [
       </NuxtLink>
     </template>
 
-    <UNavigationMenu :items="items" variant="pill" color="primary"
+    <UNavigationMenu :items="items" variant="link" color="primary"
       :ui="{ link: 'text-md hover:bg-muted rounded', item: 'mx-0.5' }" class="hidden lg:flex " />
 
     <template #right>
-      <UNavigationMenu :items="itemsright" variant="pill" color="neutral"
+      <UNavigationMenu :items="itemsright" variant="link" color="primary"
         :ui="{ link: 'text-md hover:bg-neutral-50 rounded', item: 'mx-0.5' }" class="hidden lg:flex " />
     </template>
 
     <template #body>
-      <UNavigationMenu :items="itemsmobile" orientation="vertical" color="neutral" variant="pill"
+      <UNavigationMenu :items="itemsmobile" orientation="vertical" color="neutral" variant="link"
         :ui="{ link: 'text-3xl/10' }" />
     </template>
   </UHeader>
