@@ -88,8 +88,8 @@
           <UModal v-if="selectedChart === 'grupper'" :fullscreen="isMobile ? true : false" title="Relativ mängd"
             description="">
 
-            <UButton size="lg" class="px-3 w-full flex justify-center" color="neutral" icon="i-carbon-diagram-reference"
-              label="Visa diagram för relativ mängd vid olika åldrar" />
+            <UButton size="lg" variant="outline" class="px-3 flex justify-center ring-muted/50" color="neutral"
+              icon="i-carbon-diagram-reference" label="Visa diagram för relativ mängd vid olika åldrar" />
             <template #body>
               <div class="flex flex-col gap-4">
                 <ForestryChartDisplay :selectedFrameworks="['trakthygge']"

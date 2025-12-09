@@ -36,9 +36,17 @@ const { data: blognavigation } = await useAsyncData('blognavigation', () => quer
   transform: data => data.find(item => item.path === '/blog')?.children || []
 })
 
+const { data: skogsskotselNavigation } = await useAsyncData('skogsskotselnavigation', () => queryCollectionNavigation('forestryFrameworks'), {
+  transform: data => {
+    const root = data.find(item => item.path?.startsWith('/skogsskotsel'))
+    return root?.children || []
+  }
+})
+
 provide('navigation', navigation)
 provide('svamparnavigation', svamparnavigation)
 provide('blognavigation', blognavigation)
+provide('skogsskotselnavigation', skogsskotselNavigation)
 
 </script>
 

@@ -68,7 +68,7 @@ function collageGridClass(item: EcologyIntroItem) {
 <template>
   <section>
     <div class="flex flex-col gap-4 sm:gap-6 ">
-      <article v-for="(item, i) in slides" :key="i" class="flex flex-col bg-muted p-3 rounded-lg">
+      <article v-for="(item, i) in slides" :key="i" class="flex flex-col rounded-lg">
         <div v-if="isCollage(item)" :class="`${collageGridClass(item)} rounded-lg overflow-hidden`">
           <img v-for="(src, idx) in collageImagesFor(item)" :key="idx" :src="src" :alt="item.title || ''"
             class="rounded-none w-full h-full object-cover " />

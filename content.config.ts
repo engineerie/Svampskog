@@ -141,6 +141,7 @@ const methodSchema = z.object({
   descriptionsvamp: z.string().nonempty(),
   descriptionsvampParagraphs: z.array(z.string()).optional(),
   type: z.string().optional(),
+  icon: z.string().optional(),
 });
 
 const logoSchema = z.object({
@@ -314,6 +315,20 @@ export const collections = {
     source: "skogsskotsel/skotselmetoder.yml",
     schema: z.object({
       methods: z.array(methodSchema),
+    }),
+  }),
+  forestryFrameworks: defineCollection({
+    type: "page",
+    source: "skogsskotsel/frameworks/**/*",
+    schema: z.object({
+      title: z.string().nonempty(),
+      description: z.string().nonempty(),
+      frameworkId: z.string().nonempty(),
+      image: z.string().nonempty(),
+      shortdescription: z.string().optional(),
+      type: z.string().optional(),
+      heroTitle: z.string().optional(),
+      heroDescription: z.string().optional(),
     }),
   }),
   forestryChartTexts: defineCollection({

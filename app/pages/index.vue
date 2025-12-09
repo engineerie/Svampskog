@@ -100,7 +100,7 @@ const heroDescriptionParts = computed(() => {
   <div v-if="page">
     <div class="bg-neutral-50 border-b border-neutral-100">
       <UPageHero :ui="{
-        container: '',
+        container: 'py-12',
       }" :title="page.hero.title" :description="page.hero.description" :links="page.hero.links"
         orientation="horizontal">
         <template #headline v-if="page.hero.headline.label">
