@@ -258,6 +258,7 @@
                                                 variant="ghost" class="ring-muted/50 w-full justify-start" />
                                         </div>
                                         <template #body>
+                                            <img v-if="card.image" :src="card.image" class="rounded-md mb-4" />
                                             <p class="text-neutral-800">{{ card.description }}</p>
                                         </template>
                                     </UModal>
@@ -394,7 +395,7 @@
 
                                             <UIcon name="i-mingcute-tree-fill" class="size-7 text-primary" />
                                             <USlider v-model="treeFade" :min="0" :max="1" :step="0.05" class="h-32"
-                                                color="primary" orientation="vertical" inverse />
+                                                color="primary" orientation="vertical" inverse size="xs" />
                                             <UPopover>
                                                 <div class="flex cursor-help ">
                                                     <UIcon name="i-fluent-shape-organic-16-filled"
@@ -629,7 +630,7 @@ import { useAsyncData, useRoute, useRouter, navigateTo } from '#app'
 definePageMeta({
     scrollToTop: false,
     pageTransition: false,
-    key: () => 'skogsskotsel-method',
+    key: (route) => `skogsskotsel-method-${route.params.id || route.fullPath}`,
 })
 
 const HistorikInfoOpen = ref(false)
@@ -977,18 +978,19 @@ function formatTimelineCurrentLabel(tid?: string) {
 const overlayRegistry = useOverlayRegistry()
 const { data: overlayTextData } = await useAsyncData('overlay-texts-skogs', () => queryCollection('overlayTexts').first())
 
-const overlayTextMap = computed<Record<string, { title: string; description: string }>>(() => {
+const overlayTextMap = computed<Record<string, { title: string; description: string; image?: string }>>(() => {
     const value = overlayTextData.value as any
     const entries = Array.isArray(value)
         ? (value.find((item: any) => Array.isArray(item?.entries))?.entries ?? [])
         : value?.entries ?? []
-    const map: Record<string, { title: string; description: string }> = {}
+    const map: Record<string, { title: string; description: string; image?: string }> = {}
     entries.forEach((entry: any) => {
         const key = entry?.key
         if (!key) return
         map[key] = {
             title: entry.title ?? key,
             description: entry.description ?? '',
+            image: entry.image,
         }
     })
     return map
@@ -1033,6 +1035,7 @@ const markerCards = computed(() => {
                 ...def,
                 title: copy.title,
                 description: copy.description,
+                image: copy.image,
             }
         })
 })
