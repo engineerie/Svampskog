@@ -2,7 +2,7 @@
 key: naturvardsarter
 title: Naturvårdssvampar
 description: Samlingsnamn för rödlistade svampar och signalarter.
-image: "/images/svampbilder/RödlistadeSvampar/Coprinopsis insignis-409.jpg"
+image: /images/svampbilder/RödlistadeSvampar/Coprinopsis insignis-409.jpg
 ---
 
 Naturvårdssvampar har ofta speciella miljökrav och förekommer främst i äldre skog.
