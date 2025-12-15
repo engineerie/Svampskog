@@ -16,20 +16,19 @@ const frameworkContext = inject<{
 const frameworkId = computed(() => props.frameworkId || frameworkContext?.id?.value || '')
 const frameworkTitle = computed(() => props.title || frameworkContext?.title?.value || '')
 
-const { data: overlayTextData } = await useAsyncData('overlay-texts-skogs', () => queryCollection('overlayTexts').first())
+const { data: overlayTextData } = await useAsyncData('overlay-texts-skogs', () => queryCollection('overlayTexts').all())
 
-const overlayTextMap = computed<Record<string, { title: string; description: string }>>(() => {
-  const value = overlayTextData.value as any
-  const entries = Array.isArray(value)
-    ? (value.find((item: any) => Array.isArray(item?.entries))?.entries ?? [])
-    : value?.entries ?? []
-  const map: Record<string, { title: string; description: string }> = {}
-  entries.forEach((entry: any) => {
-    const key = entry?.key
+const overlayTextMap = computed<Record<string, { title: string; description: string; image?: string; doc?: any }>>(() => {
+  const docs = (overlayTextData.value as any[]) || []
+  const map: Record<string, { title: string; description: string; image?: string; doc?: any }> = {}
+  docs.forEach((doc: any) => {
+    const key = doc?.key
     if (!key) return
     map[key] = {
-      title: entry.title ?? key,
-      description: entry.description ?? '',
+      title: doc.title ?? key,
+      description: doc.description ?? '',
+      image: doc.image,
+      doc,
     }
   })
   return map
@@ -74,6 +73,8 @@ const markerCards = computed(() => {
         ...def,
         title: copy.title,
         description: copy.description,
+        image: copy.image,
+        doc: copy.doc,
       }
     })
 })

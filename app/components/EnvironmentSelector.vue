@@ -82,7 +82,7 @@
 
         <div class="grid grid-cols-12 gap-2 mb-4 min-h-44">
           <UCard
-            :class="[' relative h-full col-span-9 items-center ring-0 bg-transparent transition-all', geography && forestType && standAge && vegetationType ? 'col-span-9' : 'col-span-12']">
+            :class="[' relative h-full col-span-9 items-center ring-0 bg-transparent transition-all', geography && forestType && standAge && vegetationType ? 'col-span-9' : 'col-span-9']">
             <div class="flex transition-all">
               <div v-for="category in categories" :key="category.key" class="flex md:justify-center w-full m-3">
                 <UPopover :ui="{ content: 'max-h-96 overflow-y-auto bar-chart-container' }" :content="{
@@ -211,7 +211,7 @@
               </UModal> -->
             </div>
           </UCard>
-          <div class="col-span-3 flex w-full justify-end" v-if="geography && forestType && standAge && vegetationType">
+          <div class="col-span-3 flex w-full justify-end">
             <Transition name="fade" mode="out-in">
               <SpatialForest />
             </Transition>

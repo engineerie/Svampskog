@@ -1233,7 +1233,7 @@ const { data: forestryTimeline } = await useAsyncData(
 
 const { data: overlayTextData } = await useAsyncData(
   'overlay-texts-model',
-  () => queryCollection('overlayTexts').first()
+  () => queryCollection('overlayTexts').all()
 );
 
 const timelineEntries = computed(() => {
@@ -1956,20 +1956,19 @@ const overlayConfigs: Record<OverlayKey, OverlayContentConfig> = {
   },
 };
 
-const overlayTextMap = computed<Record<OverlayKey, { title: string; description: string }>>(() => {
-  const value = overlayTextData.value as any;
-  const entries = Array.isArray(value)
-    ? (value.find((item: any) => Array.isArray(item?.entries))?.entries ?? [])
-    : value?.entries ?? [];
-  const map = {} as Record<OverlayKey, { title: string; description: string }>;
+const overlayTextMap = computed<Record<OverlayKey, { title: string; description: string; image?: string; doc?: any }>>(() => {
+  const docs = (overlayTextData.value as any[]) || [];
+  const map = {} as Record<OverlayKey, { title: string; description: string; image?: string; doc?: any }>;
 
-  entries.forEach((entry: any) => {
-    const key = entry?.key as OverlayKey;
+  docs.forEach((doc: any) => {
+    const key = doc?.key as OverlayKey;
     if (!key || !(key in overlayConfigs)) return;
     const base = overlayConfigs[key];
     map[key] = {
-      title: entry.title ?? base.title,
-      description: entry.description ?? base.description,
+      title: doc.title ?? base.title,
+      description: doc.description ?? base.description,
+      image: doc.image,
+      doc,
     };
   });
 

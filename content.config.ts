@@ -569,10 +569,15 @@ export const collections = {
     schema: forestryTimelineSchema,
   }),
   overlayTexts: defineCollection({
-    type: "data",
-    source: "skogsskotsel/overlays/overlay-texts.yml",
+    type: "page",
+    source: "skogsskotsel/overlays/**/*.md",
     schema: z.object({
-      entries: z.array(overlayTextSchema),
+      key: z.string().nonempty(),
+      title: z.string().nonempty(),
+      description: z.string().nonempty(),
+      images: z.array(z.string()).optional(),
+      imageDescriptions: z.array(z.string()).optional(),
+      image: z.string().optional(),
     }),
   }),
   overlays: defineCollection({

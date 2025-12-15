@@ -44,65 +44,29 @@
         @click="ToggleChartType" /> -->
     </div>
 
-    <div>
+    <div class="space-y-3">
 
-      <div v-if="selectedChart === 'skogsskole'">
-        <ForestryChartDisplay
-          :selectedFrameworks="props.parentSelectedFrameworks ?? ['naturskydd', 'trakthygge', 'luckhuggning', 'blädning', 'skärmträd']"
-          :selectedArtkategori="['total']" :chartType="chartType" :maxYValue="130"
-          :currentTimeValue="props.currentTimeValue" :frameworkComparisonMode="isFrameworkCompareMode" />
-        <div class="px-4 pb-4 text-sm text-muted">
-          {{ skogsskoleDescription }}
-        </div>
-      </div>
-      <div v-if="selectedChart === 'rodlistade'">
-        <ForestryChartDisplay
-          :selectedFrameworks="props.parentSelectedFrameworks ?? ['naturskydd', 'trakthygge', 'luckhuggning', 'blädning', 'skärmträd']"
-          :selectedArtkategori="['rödlistade + signalarter']" :chartType="chartType"
-          :selectedStartskog="props.currentStartskog" :redColor="true" :maxYValue="0.65"
-          :currentTimeValue="props.currentTimeValue" :frameworkComparisonMode="isFrameworkCompareMode" />
-        <div class="px-4 pb-4 text-sm text-muted">
-          {{ rodlistadeDescription }}
-        </div>
-      </div>
-      <div v-if="selectedChart === 'matsvampar'">
-        <ForestryChartDisplay
-          :selectedFrameworks="props.parentSelectedFrameworks ?? ['naturskydd', 'trakthygge', 'luckhuggning', 'blädning', 'skärmträd']"
-          :selectedArtkategori="[matsvampChartArtkategori]" :chartType="chartType"
-          :selectedStartskog="props.currentStartskog" :yellowColor="true" :maxYValue="matsvampMaxY"
-          :currentTimeValue="props.currentTimeValue" :matsvampVariant="selectedMatsvampVariant"
-          :frameworkComparisonMode="isFrameworkCompareMode" />
-        <div class="px-4 pb-4 text-sm text-muted">
-          {{ matsvampDescription }}
-        </div>
-      </div>
-      <div v-if="selectedChart === 'grupper'">
-        <ForestryChartDisplay :selectedFrameworks="props.parentSelectedFrameworks ?? [selectedSingleFramework]"
-          :selectedArtkategori="isFrameworkCompareMode ? [selectedCompareArtkategori] : selectedArtkategori"
-          :frameworkComparisonMode="isFrameworkCompareMode" :chartType="chartType" :singleFrameworkSelection="true"
-          :selectedStartskog="props.currentStartskog" :currentTimeValue="props.currentTimeValue" />
-        <div class="px-4 pb-4 text-sm text-muted">
-          {{ grupperDescription }}
-        </div>
-        <div class="mx-2">
-          <UModal v-if="selectedChart === 'grupper'" :fullscreen="isMobile ? true : false" title="Relativ mängd"
-            description="">
+      <ForestryChartDisplay v-bind="chartDisplayProps" />
 
-            <UButton size="lg" variant="outline" class="px-3 flex justify-center ring-muted/50" color="neutral"
-              icon="i-carbon-diagram-reference" label="Visa diagram för relativ mängd vid olika åldrar" />
-            <template #body>
-              <div class="flex flex-col gap-4">
-                <ForestryChartDisplay :selectedFrameworks="['trakthygge']"
-                  :selectedArtkategori="defaultGrupperArtkategori" chartType="area" :singleFrameworkSelection="true"
-                  :relativeChart="true" />
-                <p class="text-sm text-muted">
-                  {{ grupperModalDescription }}
-                </p>
-              </div>
-            </template>
-          </UModal>
-        </div>
+      <div class="px-4 pb-4 text-sm text-muted" v-if="chartDescription">
+        {{ chartDescription }}
+      </div>
+      <div v-if="selectedChart === 'grupper'" class="mx-2">
+        <UModal :fullscreen="isMobile ? true : false" title="Relativ mängd" description="">
 
+          <UButton size="lg" variant="outline" class="px-3 flex justify-center ring-muted/50" color="neutral"
+            icon="i-carbon-diagram-reference" label="Relativ mängd vid olika åldrar" />
+          <template #body>
+            <div class="flex flex-col gap-4">
+              <ForestryChartDisplay :selectedFrameworks="['trakthygge']"
+                :selectedArtkategori="defaultGrupperArtkategori" chartType="area" :singleFrameworkSelection="true"
+                :relativeChart="true" />
+              <p class="text-sm text-muted">
+                {{ grupperModalDescription }}
+              </p>
+            </div>
+          </template>
+        </UModal>
       </div>
     </div>
   </div>
@@ -185,6 +149,66 @@ const grupperDescription = computed(() =>
 const grupperModalDescription = computed(() =>
   chartTextMap.value['grupper']?.modalDescription ?? fallbackGrupperModalDescription
 )
+
+const chartDisplayProps = computed(() => {
+  const baseFrameworks = props.parentSelectedFrameworks ?? ['naturskydd', 'trakthygge', 'luckhuggning', 'blädning', 'skärmträd']
+
+  if (selectedChart.value === 'rodlistade') {
+    return {
+      selectedFrameworks: baseFrameworks,
+      selectedArtkategori: ['rödlistade + signalarter'],
+      chartType: chartType.value,
+      selectedStartskog: props.currentStartskog,
+      redColor: true,
+      maxYValue: 0.65,
+      currentTimeValue: props.currentTimeValue,
+      frameworkComparisonMode: isFrameworkCompareMode.value
+    }
+  }
+
+  if (selectedChart.value === 'matsvampar') {
+    return {
+      selectedFrameworks: baseFrameworks,
+      selectedArtkategori: [matsvampChartArtkategori.value],
+      chartType: chartType.value,
+      selectedStartskog: props.currentStartskog,
+      yellowColor: true,
+      maxYValue: matsvampMaxY.value,
+      currentTimeValue: props.currentTimeValue,
+      matsvampVariant: selectedMatsvampVariant.value,
+      frameworkComparisonMode: isFrameworkCompareMode.value
+    }
+  }
+
+  if (selectedChart.value === 'grupper') {
+    return {
+      selectedFrameworks: props.parentSelectedFrameworks ?? [selectedSingleFramework.value],
+      selectedArtkategori: isFrameworkCompareMode.value ? [selectedCompareArtkategori.value] : selectedArtkategori.value,
+      frameworkComparisonMode: isFrameworkCompareMode.value,
+      chartType: chartType.value,
+      singleFrameworkSelection: true,
+      selectedStartskog: props.currentStartskog,
+      currentTimeValue: props.currentTimeValue
+    }
+  }
+
+  // skogsskole default
+  return {
+    selectedFrameworks: baseFrameworks,
+    selectedArtkategori: ['total'],
+    chartType: chartType.value,
+    maxYValue: 130,
+    currentTimeValue: props.currentTimeValue,
+    frameworkComparisonMode: isFrameworkCompareMode.value
+  }
+})
+
+const chartDescription = computed(() => {
+  if (selectedChart.value === 'rodlistade') return rodlistadeDescription.value
+  if (selectedChart.value === 'matsvampar') return matsvampDescription.value
+  if (selectedChart.value === 'grupper') return grupperDescription.value
+  return skogsskoleDescription.value
+})
 
 const matsvampVariantDescriptions = computed<Record<MatsvampVariant, string>>(() => {
   const map: Record<MatsvampVariant, string> = { ...fallbackMatsvampVariantDescriptions }

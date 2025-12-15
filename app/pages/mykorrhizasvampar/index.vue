@@ -96,11 +96,10 @@ const open = ref(false)
             <Motion :initial="{
               scale: 0.5,
               opacity: 0,
-              // filter: 'blur(20px)'
+
             }" :animate="{
               scale: 1,
               opacity: 1,
-              // filter: 'blur(0px)'
             }" :transition="{
               duration: 0.2,
               delay: 0.2
@@ -112,11 +111,9 @@ const open = ref(false)
             <Motion :initial="{
               scale: 0.5,
               opacity: 0,
-              // filter: 'blur(20px)'
             }" :animate="{
               scale: 1,
               opacity: 1,
-              // filter: 'blur(0px)'
             }" :transition="{
               duration: 0.2,
               delay: 0.3
@@ -128,11 +125,9 @@ const open = ref(false)
             <Motion :initial="{
               scale: 0.5,
               opacity: 0,
-              // filter: 'blur(20px)'
             }" :animate="{
               scale: 1,
               opacity: 1,
-              // filter: 'blur(0px)'
             }" :transition="{
               duration: 0.2,
               delay: 0.25
