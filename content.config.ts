@@ -571,7 +571,7 @@ export const collections = {
     schema: forestryTimelineSchema,
   }),
   overlayTexts: defineCollection({
-    type: "page",
+    type: "data",
     source: "skogsskotsel/overlays/texts/*.md",
     schema: z.object({
       key: z.string().nonempty(),
