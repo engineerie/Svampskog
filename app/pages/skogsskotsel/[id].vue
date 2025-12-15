@@ -284,9 +284,10 @@
                                                 <ContentRenderer v-if="card.doc?.body" :value="card.doc" />
                                                 <p v-else class="text-neutral-800">{{ card.description }}</p>
                                                 <div class="mt-4">
-                                                    <UButton color="neutral" variant="solid"
-                                                        icon="i-carbon-chart-line-smooth" label="Visa diagram"
-                                                        class="ring-muted/50 " @click="goToNaturvardsChart" />
+                                                    <UButton color="signal" variant="subtle"
+                                                        icon="i-carbon-chart-line-smooth"
+                                                        label="Diagram för naturvårdssvampar" class=" "
+                                                        @click="goToNaturvardsChart" />
                                                 </div>
                                             </template>
                                         </UModal>

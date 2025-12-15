@@ -588,4 +588,9 @@ export const collections = {
       entries: z.array(z.record(z.any())),
     }),
   }),
+  overlayPages: defineCollection({
+    type: "page",
+    source: "skogsskotsel/overlays/*.md",
+    schema: overlayTextSchema,
+  }),
 };
