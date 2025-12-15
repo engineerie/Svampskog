@@ -27,7 +27,7 @@ hero:
     icon: ""
     color: secondary
   mykorrhiza:
-    title: Mykorrhiza är en 500 miljoner år gammal symbios mellan växter och svampar. 
+    title: Mykorrhiza är en 500 miljoner år gammal symbios mellan växter och svampar.
     body: Symbiosen innebär att mykorrhizasvamparna får sin energi från träden och i utbyte sköter de om trädens näringsförsörjning.
 sections:
   - title: Utforska svampar i svenska skogar
@@ -61,15 +61,15 @@ press:
   title: Webbinarier
   description: Fördjupa dig i svampar och skogsbruk och ställ dina frågor direkt till forskare.
   items:
-    - title: "Webbinarium: Skogens svampar - Del 2"
-      publication: Plockhugget.se
-      publicationDate: 9 december 2025 kl 9-10.30
-      url: https://www.plockhugget.se/events/skogens-svampar-del-2-mykorrhizasvamparnas-mangfald-och-betydelse/
-      icon: i-heroicons-calendar-date-range
-      description: På senare år har forskning bringat allt större klarhet i vilka mykorrhizasvamparna är och deras biologi, hur skogsskötsel påverkar och kan utformas för att ta hänsyn till dem.
-      badge:
-        label: Anmälan öppen
-        color: primary
+    # - title: "Webbinarium: Skogens svampar - Del 2"
+    #   publication: Plockhugget.se
+    #   publicationDate: 9 december 2025 kl 9-10.30
+    #   url: https://www.plockhugget.se/events/skogens-svampar-del-2-mykorrhizasvamparnas-mangfald-och-betydelse/
+    #   icon: i-heroicons-calendar-date-range
+    #   description: På senare år har forskning bringat allt större klarhet i vilka mykorrhizasvamparna är och deras biologi, hur skogsskötsel påverkar och kan utformas för att ta hänsyn till dem.
+    #   badge:
+    #     label: Anmälan öppen
+    #     color: primary
     - title: Webbinarium om Svampskog
       publication: SLU
       publicationDate: Vår 2026

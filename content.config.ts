@@ -572,7 +572,7 @@ export const collections = {
   }),
   overlayTexts: defineCollection({
     type: "page",
-    source: "skogsskotsel/overlays/*.md",
+    source: "skogsskotsel/overlays/texts/*.md",
     schema: z.object({
       key: z.string().nonempty(),
       title: z.string().nonempty(),
@@ -584,15 +584,10 @@ export const collections = {
   }),
   overlays: defineCollection({
     type: "data",
-    source: "skogsskotsel/overlays/*.yml",
+    source: "skogsskotsel/overlays/points/*.yml",
     schema: z.object({
       title: z.string().optional(),
       entries: z.array(z.record(z.any())),
     }),
-  }),
-  overlayPages: defineCollection({
-    type: "data",
-    source: "skogsskotsel/overlays/*.md",
-    schema: overlayTextSchema,
   }),
 };
