@@ -1104,7 +1104,9 @@ function formatTimelineCurrentLabel(tid?: string) {
 }
 
 const overlayRegistry = useOverlayRegistry()
-const { data: overlayTextData } = await useAsyncData('overlay-texts-skogs', () => queryCollection('overlayTextPages').all())
+const { data: overlayTextData } = await useAsyncData('overlay-texts-skogs', () =>
+    queryCollection('overlayTexts').all()
+)
 
 const overlayTextMap = computed<Record<string, { title: string; description: string; image?: string; images?: string[]; imageDescriptions?: string[]; doc?: any }>>(() => {
     const docs = (overlayTextData.value as any[]) || []
