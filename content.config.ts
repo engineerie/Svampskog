@@ -227,10 +227,12 @@ export const collections = {
           color: colorEnum.optional(),
         }),
         links: z.array(linkSchema),
-        mykorrhiza: z.object({
-          title: z.string().nonempty(),
-          body: z.string().nonempty(),
-        }).optional(),
+        mykorrhiza: z
+          .object({
+            title: z.string().nonempty(),
+            body: z.string().nonempty(),
+          })
+          .optional(),
       }),
       sections: z.array(
         sectionSchema.extend({
@@ -570,7 +572,7 @@ export const collections = {
   }),
   overlayTexts: defineCollection({
     type: "page",
-    source: "skogsskotsel/overlays/**/*.md",
+    source: "skogsskotsel/overlays/*.md",
     schema: z.object({
       key: z.string().nonempty(),
       title: z.string().nonempty(),
@@ -589,7 +591,7 @@ export const collections = {
     }),
   }),
   overlayPages: defineCollection({
-    type: "page",
+    type: "data",
     source: "skogsskotsel/overlays/*.md",
     schema: overlayTextSchema,
   }),
