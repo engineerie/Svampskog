@@ -3,6 +3,7 @@ key: naturvardsarter
 title: Naturvårdssvampar
 description: Samlingsnamn för rödlistade svampar och signalarter.
 image: /images/svampbilder/RödlistadeSvampar/Ramaria boreimaxima-2051.jpg
+path: /skogsskotsel/naturskydd
 ---
 
 Naturvårdssvampar har ofta speciella miljökrav och förekommer främst i äldre skog.

@@ -2,6 +2,7 @@
 key: kanteffekt
 title: Kanteffekt
 description: Rötter och svampar sträcker sig 10–15 meter in.
+path: /skogsskotsel/luckhuggning
 images:
   - /images/overlayimages/web/kanteffekt_trakthygge.webp
   - /images/overlayimages/web/kanteffekt_luckhuggning.webp

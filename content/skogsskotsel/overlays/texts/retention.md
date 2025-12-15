@@ -2,6 +2,7 @@
 key: retention
 title: Hänsynsträd
 description: Mykorrhiza lever vidare på rötter från hänsynsträd.
+path: /skogsskotsel/trakthygge
 images:
   - /images/overlayimages/Hänsynsytor Skogskunskap.jpg
   - /images/overlayimages/web/retentiontree_grupp.webp

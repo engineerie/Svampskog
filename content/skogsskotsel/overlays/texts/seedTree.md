@@ -2,6 +2,7 @@
 key: seedTree
 title: Fröträd
 description: Mycel lever vidare på fröträdens rötter.
+path: /skogsskotsel/skarmtrad
 images:
   - /images/overlayimages/web/seedtrees.webp
 imageDescriptions:
