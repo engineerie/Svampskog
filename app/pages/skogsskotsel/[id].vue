@@ -563,7 +563,7 @@
                                                         diagrammen.</p>
                                                     <USelect :items="startskogTabs" v-model="selectedStartskogTab"
                                                         :icon="selectedStartskogIcon"
-                                                        class="transition-all ring-muted/50 mb-4" />
+                                                        class="transition-all ring-muted/50 " />
                                                     <p class="text-neutral-700 text-xs">
 
                                                     </p>
