@@ -1233,7 +1233,7 @@ const { data: forestryTimeline } = await useAsyncData(
 
 const { data: overlayTextData } = await useAsyncData(
   'overlay-texts-model',
-  () => queryCollection('overlayTexts').all()
+  () => queryCollection('overlayTextPages').all()
 );
 
 const timelineEntries = computed(() => {

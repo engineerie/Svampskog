@@ -573,14 +573,32 @@ export const collections = {
   overlayTexts: defineCollection({
     type: "data",
     source: "skogsskotsel/overlays/texts/*.md",
-    schema: z.object({
-      key: z.string().nonempty(),
-      title: z.string().nonempty(),
-      description: z.string().nonempty(),
-      images: z.array(z.string()).optional(),
-      imageDescriptions: z.array(z.string()).optional(),
-      image: z.string().optional(),
-    }),
+    schema: z
+      .object({
+        key: z.string().nonempty(),
+        title: z.string().nonempty(),
+        description: z.string().nonempty(),
+        images: z.array(z.string()).optional(),
+        imageDescriptions: z.array(z.string()).optional(),
+        image: z.string().optional(),
+      })
+      // Keep markdown body and other metadata even though the schema only covers frontmatter
+      .passthrough(),
+  }),
+  // Page-typed mirror for rendering full markdown bodies in the app while keeping Studio editing on the data collection above.
+  overlayTextPages: defineCollection({
+    type: "page",
+    source: "skogsskotsel/overlays/texts/*.md",
+    schema: z
+      .object({
+        key: z.string().nonempty(),
+        title: z.string().nonempty(),
+        description: z.string().nonempty(),
+        images: z.array(z.string()).optional(),
+        imageDescriptions: z.array(z.string()).optional(),
+        image: z.string().optional(),
+      })
+      .passthrough(),
   }),
   overlays: defineCollection({
     type: "data",
