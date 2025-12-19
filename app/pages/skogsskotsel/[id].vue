@@ -39,15 +39,14 @@
                         <div v-for="card in markerCards" :key="card.key" class="p-1">
                             <UModal v-if="card.key === 'naturvardsarter'" v-model:open="naturvardsModalOpen"
                                 :title="card.title" :description="card.description" :ui="{ header: 'shrink-0' }"
-                                :fullscreen="true">
+                                fullscreen>
                                 <div>
                                     <UButton :label="card.title" :icon="card.icon" color="neutral" variant="ghost"
                                         class="ring-muted/50 w-full justify-start" />
                                 </div>
                                 <template #body>
                                     <div v-if="card.images?.length" class="space-y-3 mb-10">
-                                        <UCarousel :auto-height="true" dots arrows
-                                            :items="card.images.map((src, idx) => ({ src, idx }))"
+                                        <UCarousel dots arrows :items="card.images.map((src, idx) => ({ src, idx }))"
                                             prev-icon="i-heroicons-chevron-left" next-icon="i-heroicons-chevron-right"
                                             :ui="{
 
@@ -61,7 +60,7 @@
                                             <template #default="{ item }">
                                                 <div
                                                     class="relative rounded-lg overflow-hidden ring ring-muted/50 m-1 shadow">
-                                                    <img :src="item.src" :alt="card.title" class=" w-full"
+                                                    <img :src="item.src" :alt="card.title" class="h-72 w-full"
                                                         loading="lazy" />
                                                     <div v-if="card.imageDescriptions?.[item.idx]"
                                                         class="text-sm text-neutral-100 absolute bottom-0 w-full bg-neutral-950/50 p-2">
@@ -92,8 +91,7 @@
                                 </div>
                                 <template #body>
                                     <div v-if="card.images?.length" class="space-y-3 mb-10">
-                                        <UCarousel :auto-height="true" dots arrows
-                                            :items="card.images.map((src, idx) => ({ src, idx }))"
+                                        <UCarousel dots arrows :items="card.images.map((src, idx) => ({ src, idx }))"
                                             prev-icon="i-heroicons-chevron-left" next-icon="i-heroicons-chevron-right"
                                             :ui="{
 
@@ -106,7 +104,7 @@
                                             <template #default="{ item }">
                                                 <div
                                                     class="relative rounded-lg overflow-hidden ring ring-muted/50 m-1 shadow">
-                                                    <img :src="item.src" :alt="card.title" class=" w-full"
+                                                    <img :src="item.src" :alt="card.title" class="h-72 w-full"
                                                         loading="lazy" />
                                                     <div v-if="card.imageDescriptions?.[item.idx]"
                                                         class="text-sm text-neutral-100 absolute bottom-0 w-full bg-neutral-950/50 p-2">
@@ -133,13 +131,12 @@
 
         <!-- <Transition name="fade"> -->
         <UContainer v-if="!selectedMethod.id" class="w-full px-0">
+
             <UPageHero :ui="{ container: 'py-20 pb-16 lg:py-24', title: 'sm:text-7xl', headline: 'text-neutral' }"
-                :title="page.hero.title" :description="page.hero.description" :orientation="page.hero.orientation"
-                class="">
-
-
+                :description="page.hero.description" :orientation="page.hero.orientation" class="">
 
             </UPageHero>
+
         </UContainer>
         <!-- </Transition> -->
 
@@ -202,7 +199,7 @@
                             </div>
                             <template #body>
                                 <div v-if="card.images?.length" class="space-y-3 mb-10">
-                                    <UCarousel :auto-height="true" dots arrows
+                                    <UCarousel  dots arrows
                                         :items="card.images.map((src, idx) => ({ src, idx }))"
                                         prev-icon="i-heroicons-chevron-left" next-icon="i-heroicons-chevron-right" :ui="{
                                             dots: '-bottom-4',
@@ -242,7 +239,7 @@
                             </div>
                             <template #body>
                                 <div v-if="card.images?.length" class="space-y-3 mb-10">
-                                    <UCarousel :auto-height="true" dots arrows
+                                    <UCarousel  dots arrows
                                         :items="card.images.map((src, idx) => ({ src, idx }))"
                                         prev-icon="i-heroicons-chevron-left" next-icon="i-heroicons-chevron-right" :ui="{
 
@@ -290,7 +287,7 @@
             duration: 0.5,
             delay: 0.2
         }">
-            <UCarousel :auto-height="true" v-slot="{ item }" :items="methods" loop :speed="4"
+            <UCarousel  v-slot="{ item }" :items="methods" loop :speed="4"
                 :ui="{ item: 'basis-3/5 md:basis-1/3 p-2' }" class="mobile-carousel">
 
                 <div @click="selectedId = item.id" :class="[
@@ -425,7 +422,7 @@
                                             </div>
                                             <template #body>
                                                 <div v-if="card.images?.length" class="space-y-3 mb-10">
-                                                    <UCarousel :auto-height="true" dots arrows
+                                                    <UCarousel dots arrows
                                                         :items="card.images.map((src, idx) => ({ src, idx }))"
                                                         prev-icon="i-heroicons-chevron-left"
                                                         next-icon="i-heroicons-chevron-right" :ui="{
@@ -440,8 +437,8 @@
                                                         <template #default="{ item }">
                                                             <div
                                                                 class="relative rounded-lg overflow-hidden ring ring-muted/50 m-1 shadow">
-                                                                <img :src="item.src" :alt="card.title" class=" w-full"
-                                                                    loading="lazy" />
+                                                                <img :src="item.src" :alt="card.title"
+                                                                    class="h-72 w-full" loading="lazy" />
                                                                 <div v-if="card.imageDescriptions?.[item.idx]"
                                                                     class="text-sm text-neutral-100 absolute bottom-0 w-full bg-neutral-950/50 p-2">
                                                                     {{ card.imageDescriptions[item.idx] }}
@@ -472,7 +469,7 @@
                                             </div>
                                             <template #body>
                                                 <div v-if="card.images?.length" class="space-y-3 mb-10">
-                                                    <UCarousel :auto-height="true" dots arrows
+                                                    <UCarousel dots arrows
                                                         :items="card.images.map((src, idx) => ({ src, idx }))"
                                                         prev-icon="i-heroicons-chevron-left"
                                                         next-icon="i-heroicons-chevron-right" :ui="{
@@ -487,8 +484,8 @@
                                                         <template #default="{ item }">
                                                             <div
                                                                 class="relative rounded-lg overflow-hidden ring ring-muted/50 m-1 shadow">
-                                                                <img :src="item.src" :alt="card.title" class=" w-full"
-                                                                    loading="lazy" />
+                                                                <img :src="item.src" :alt="card.title"
+                                                                    class="h-72 w-full" loading="lazy" />
                                                                 <div v-if="card.imageDescriptions?.[item.idx]"
                                                                     class="text-sm text-neutral-100 absolute bottom-0 w-full bg-neutral-950/50 p-2">
                                                                     {{ card.imageDescriptions[item.idx] }}
@@ -517,13 +514,21 @@
                                     </h1>
                                 </div> -->
                                 <UPageHero :title="selectedMethod.title"
-                                    :ui="{ container: 'pt-7 pb-3 sm:py-5 md:pt-16 md:pb-10 lg:pt-16 lg:pb-10', title: 'text-4xl sm:text-6xl' }" />
+                                    :ui="{ container: 'pt-7 pb-3 sm:py-5 md:pt-16 md:pb-10 lg:pt-16 lg:pb-10', title: 'text-4xl sm:text-6xl', headline: 'flex justify-center items-center' }">
+                                    <template #headline>
+
+                                        <UBreadcrumb :items="breadcrumbLinks" separator-icon="i-heroicons-slash"
+                                            class="lg:hidden" />
+
+                                    </template>
+
+                                </UPageHero>
                                 <Transition name="fade" mode="out-in">
                                     <img :src="methodImage(selectedMethod, 'detail')"
                                         :alt="`Bild för ${selectedMethod.title}`"
                                         class="rounded-lg ring ring-muted/50 w-full" />
                                 </Transition>
-                                <div v-if="isMobile" class="flex flex-wrap gap-2 sm:gap-3 items-center justify-center">
+                                <div class="flex flex-wrap gap-2 sm:gap-3 items-center justify-center">
                                     <UTooltip :text="visibleSections.intro ? 'Dölj introduktion' : 'Visa introduktion'">
                                         <UButton color="neutral" variant="outline"
                                             :leading-icon="visibleSections.intro ? 'i-heroicons-eye' : 'i-heroicons-eye-slash'"
@@ -535,7 +540,7 @@
                                         side: 'top',
                                         sideOffset: 8
                                     }"><template #content>
-                                            <Placeholder class="size-48 m-4 inline-flex" />
+                                            <Placeholder class="size-72 m-4 inline-flex" />
                                         </template>
                                         <USelect :items="startskogTabs" v-model="selectedStartskogTab"
                                             :icon="selectedStartskogIcon" class=" ring-muted/50 " />
@@ -563,7 +568,7 @@
                                             leading-icon="i-material-symbols:interactive-space" label="Helskärm"
                                             class="ring-muted/50" @click="openModelWithCurrentFramework" />
                                     </UTooltip>
-                                    <UPopover :ui="{ content: 'py-1' }" v-if="isMobile">
+                                    <UPopover :ui="{ content: 'py-1' }" class="lg:hidden">
                                         <UChip :text="markerCards.length" size="3xl">
                                             <UButton icon="i-hugeicons-center-focus" size="md" variant="outline"
                                                 class="shadow rounded-lg ring-muted" color="neutral" />
@@ -573,7 +578,7 @@
                                                 <UModal v-if="card.key === 'naturvardsarter'"
                                                     v-model:open="naturvardsModalOpen" :title="card.title"
                                                     :description="card.description" :ui="{ header: 'shrink-0' }"
-                                                    :fullscreen="true">
+                                                    fullscreen>
                                                     <div>
                                                         <UButton :label="card.title" :icon="card.icon" color="neutral"
                                                             variant="ghost"
@@ -581,7 +586,7 @@
                                                     </div>
                                                     <template #body>
                                                         <div v-if="card.images?.length" class="space-y-3 mb-10">
-                                                            <UCarousel :auto-height="true" dots arrows
+                                                            <UCarousel dots arrows
                                                                 :items="card.images.map((src, idx) => ({ src, idx }))"
                                                                 prev-icon="i-heroicons-chevron-left"
                                                                 next-icon="i-heroicons-chevron-right" :ui="{
@@ -594,7 +599,7 @@
                                                                     <div
                                                                         class="relative rounded-lg overflow-hidden ring ring-muted/50 m-1 shadow">
                                                                         <img :src="item.src" :alt="card.title"
-                                                                            class=" w-full" loading="lazy" />
+                                                                            class="h-72 w-full" loading="lazy" />
                                                                         <div v-if="card.imageDescriptions?.[item.idx]"
                                                                             class="text-sm text-neutral-100 absolute bottom-0 w-full bg-neutral-950/50 p-2">
                                                                             {{ card.imageDescriptions[item.idx] }}
@@ -627,7 +632,7 @@
                                                     </div>
                                                     <template #body>
                                                         <div v-if="card.images?.length" class="space-y-3 mb-10">
-                                                            <UCarousel :auto-height="true" dots arrows
+                                                            <UCarousel dots arrows
                                                                 :items="card.images.map((src, idx) => ({ src, idx }))"
                                                                 prev-icon="i-heroicons-chevron-left"
                                                                 next-icon="i-heroicons-chevron-right" :ui="{
@@ -642,7 +647,7 @@
                                                                     <div
                                                                         class="relative rounded-lg overflow-hidden ring ring-muted/50 m-1 shadow">
                                                                         <img :src="item.src" :alt="card.title"
-                                                                            class=" w-full" loading="lazy" />
+                                                                            class="h-72 w-full" loading="lazy" />
                                                                         <div v-if="card.imageDescriptions?.[item.idx]"
                                                                             class="text-sm text-neutral-100 absolute bottom-0 w-full bg-neutral-950/50 p-2">
                                                                             {{ card.imageDescriptions[item.idx] }}
@@ -794,8 +799,8 @@
                                             </UPopover>
                                         </div>
 
-                                        <UCarousel :auto-height="true" ref="timelineCarousel" v-slot="{ item }"
-                                            :items="timelineItems" :prev="{ onClick: handleTimelinePrev }"
+                                        <UCarousel ref="timelineCarousel" v-slot="{ item }" :items="timelineItems"
+                                            :prev="{ onClick: handleTimelinePrev }"
                                             :next="{ onClick: handleTimelineNext }"
                                             class="w-full bg-neutral-950 overflow-hidden rounded-lg ring-muted/50 " fade
                                             @select="handleTimelineSelect">
@@ -1205,6 +1210,15 @@ const selectedFrameworkIndex = computed<number | null>({
             selectedId.value = methods.value[value].id
         }
     }
+})
+
+const breadcrumbLinks = computed(() => {
+    const methodLabel = selectedMethod.value.title || selectedMethod.value.id || routeMethodId.value || 'Metod'
+    const methodTo = selectedId.value ? `/skogsskotsel/${selectedId.value}` : undefined
+    return [
+        { label: 'Skogsskötsel', to: '/skogsskotsel' },
+        // { label: methodLabel, to: methodTo },
+    ]
 })
 
 interface TimelineEntry {
