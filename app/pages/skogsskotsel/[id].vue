@@ -123,6 +123,7 @@
                                 </template>
                             </UModal>
                         </div>
+
                     </template>
                 </UPopover>
             </div>
@@ -319,659 +320,462 @@
         <!-- <div class="w-full bg-neutral-50 border-t border-muted"> -->
 
 
-        <UContainer class="w-full px-1 sm:px-6 " v-if="selectedMethod.id">
-            <Motion class="flex justify-center w-full" :initial="{
-                opacity: 1,
-                // transform: 'translateY(10px)',
-                scale: 1,
-                // filter: 'blur(20px)'
-            }" :animate="{
-                opacity: 1,
-                // transform: 'translateY(0px)',
-                scale: 1,
-                // filter: 'blur(0px)'
-            }" :transition="{
-                duration: 0,
+        <UContainer class="w-full px-0 " v-if="selectedMethod.id">
+            <UPage class="pt-0 min-h-screen" :left="immersiveAsideOpen" :right="false" :ui="immersivePageUi">
+                <template v-if="immersiveAsideOpen" #left>
+                    <UPageAside :ui="{ container: ' flex flex-col flex-1 h-full', root: '' }">
+                        <template #top>
+                            <div>
+                                <p class="text-sm font-medium text-neutral-800 mt-4 mb-2">Skötselmetoder</p>
 
-            }">
-                <div class="w-full  rounded-xl relative">
-                    <!-- <div class="absolute top-0 right-0 p-3 flex gap-4">
-                        <h1 class="text-lg font-medium">{{ selectedMethod.title }}</h1>
-                        <UBadge v-if="selectedMethod.type" :label="selectedMethod.type" color="neutral" variant="subtle"
-                            size="lg" />
-                    </div> -->
-                    <UPage class="px-3 pt-0">
-                        <template #left>
-                            <UPageAside :ui="{ container: ' flex flex-col flex-1 h-full', root: '' }"
-                                class="border-r border-muted h-full">
-
-
-
-                                <!-- <div class="flex items-center gap-2 mb-2">
-                                        <span class="text-sm font-medium text-neutral-800">Historik</span>
-                                      
-                                    </div> -->
-
-                                <!-- <USeparator class="my-4" /> -->
-                                <div>
-
-
-                                    <p class="text-sm font-medium text-neutral-800 mt-4 mb-2">Skötselmetoder</p>
-
-                                    <div v-for="method in methods" class="space-y-1">
-                                        <UTooltip :text="method.shortdescription || method.title" :content="{
-                                            side: 'right',
-                                        }">
-                                            <UButton :label="method.title" :leading-icon="method.icon"
-                                                @click="selectedId = method.id"
-                                                :color="selectedId === method.id ? 'primary' : 'neutral'"
-                                                variant="ghost" class="ring-muted/50 w-full" />
-                                        </UTooltip>
-                                    </div>
-                                    <!-- <USeparator class="my-4" /> -->
+                                <div v-for="method in methods" class="space-y-1">
+                                    <UTooltip :text="method.shortdescription || method.title" :content="{
+                                        side: 'right',
+                                    }">
+                                        <UButton :label="method.title" :leading-icon="method.icon"
+                                            @click="selectedId = method.id"
+                                            :color="selectedId === method.id ? 'primary' : 'neutral'" variant="ghost"
+                                            class="ring-muted/50 w-full" />
+                                    </UTooltip>
                                 </div>
-                                <div class="mt-1 flex flex-col gap-1.5 absolute bottom-0 w-full">
-                                    <UModal scrollable :fullscreen="isMobile ? true : false"
-                                        :title="page.ecologyintro?.title ?? ''"
-                                        :description="page.ecologyintro?.description ?? ''" :ui="{
-                                            header: 'shrink-0',
-                                        }" class="h-full">
-
-                                        <UButton icon="i-heroicons-book-open" color="neutral" variant="ghost"
-                                            label="Fakta i korthet" class="sm:w-full ring-muted/50" />
-
-                                        <!-- <UAlert icon="i-heroicons-book-open" color="neutral" variant="outline" title="Fakta i korthet"
-                            class="sm:w-fit shadow ring-muted/50 hover:opacity-85 hover:cursor-pointer" /> -->
-                                        <template #body>
-                                            <EcologyIntro :section="page.ecologyintro" />
-                                        </template>
-                                    </UModal>
-                                    <UModal :fullscreen="isMobile ? true : false" :title="page.underlag"
-                                        :description="page.underlagdescription" :ui="{
-                                            header: 'shrink-0',
-                                        }">
-
-                                        <UButton icon="i-heroicons-document-magnifying-glass" color="neutral"
-                                            variant="ghost" :label="page.underlag" class="sm:w-full ring-muted/50" />
-
-                                        <!-- <UAlert icon="i-heroicons-document-magnifying-glass" color="neutral" variant="outline"
-                            :title="page.underlag"
-                            class="sm:w-fit shadow ring-muted/50 hover:opacity-85 hover:cursor-pointer" /> -->
-                                        <template #body>
-                                            <UnderlagContent :underlag="page.underlag" :underlagbild="page.underlagbild"
-                                                :sections="page.underlagSections" />
-                                        </template>
-                                    </UModal>
-                                </div>
-
-
-                            </UPageAside>
+                            </div>
 
                         </template>
-                        <template #right>
-                            <UPageAside>
-                                <div class="space-y-1">
-                                    <!-- <p class="text-xs uppercase tracking-wide text-muted px-1">Fokusområden</p> -->
-                                    <template v-for="card in markerCards" :key="card.key">
-                                        <UModal v-if="card.key === 'naturvardsarter'" v-model:open="naturvardsModalOpen"
-                                            :title="card.title" :description="card.description"
-                                            :ui="{ header: 'shrink-0' }">
-                                            <div>
-                                                <UButton :label="card.title" :icon="card.icon" color="neutral"
-                                                    variant="ghost" class="ring-muted/50 w-full justify-start" />
-                                            </div>
-                                            <template #body>
-                                                <div v-if="card.images?.length" class="space-y-3 mb-10">
-                                                    <UCarousel dots arrows
-                                                        :items="card.images.map((src, idx) => ({ src, idx }))"
-                                                        prev-icon="i-heroicons-chevron-left"
-                                                        next-icon="i-heroicons-chevron-right" :ui="{
+                        <template #default>
+                            <USeparator class="mb-8" />
 
-                                                            // controls: 'absolute -bottom-8 inset-x-12 max-w-30 mx-auto',
-                                                            dots: '-bottom-4',
-                                                            dot: 'w-6 h-1',
-                                                            prev: 'start-4 sm:start-4 top-1/2 -translate-y-1/2',
-                                                            next: 'end-4 sm:end-4 top-1/2 -translate-y-1/2',
+                            <div class="space-y-1">
+                                <!-- <p class="text-xs uppercase tracking-wide text-muted px-1">Fokusområden</p> -->
+                                <template v-for="card in markerCards" :key="card.key">
+                                    <UModal v-if="card.key === 'naturvardsarter'" v-model:open="naturvardsModalOpen"
+                                        :title="card.title" :description="card.description"
+                                        :ui="{ header: 'shrink-0' }">
+                                        <div>
+                                            <UButton :label="card.title" :icon="card.icon" color="neutral"
+                                                variant="ghost" class="ring-muted/50 w-full justify-start" />
+                                        </div>
+                                        <template #body>
+                                            <div v-if="card.images?.length" class="space-y-3 mb-10">
+                                                <UCarousel dots arrows
+                                                    :items="card.images.map((src, idx) => ({ src, idx }))"
+                                                    prev-icon="i-heroicons-chevron-left"
+                                                    next-icon="i-heroicons-chevron-right" :ui="{
 
-                                                        }" class="w-full">
-                                                        <template #default="{ item }">
-                                                            <div
-                                                                class="relative rounded-lg overflow-hidden ring ring-muted/50 m-1 shadow">
-                                                                <img :src="item.src" :alt="card.title"
-                                                                    class="h-72 w-full" loading="lazy" />
-                                                                <div v-if="card.imageDescriptions?.[item.idx]"
-                                                                    class="text-sm text-neutral-100 absolute bottom-0 w-full bg-neutral-950/50 p-2">
-                                                                    {{ card.imageDescriptions[item.idx] }}
-                                                                </div>
+                                                        // controls: 'absolute -bottom-8 inset-x-12 max-w-30 mx-auto',
+                                                        dots: '-bottom-4',
+                                                        dot: 'w-6 h-1',
+                                                        prev: 'start-4 sm:start-4 top-1/2 -translate-y-1/2',
+                                                        next: 'end-4 sm:end-4 top-1/2 -translate-y-1/2',
+
+                                                    }" class="w-full">
+                                                    <template #default="{ item }">
+                                                        <div
+                                                            class="relative rounded-lg overflow-hidden ring ring-muted/50 m-1 shadow">
+                                                            <img :src="item.src" :alt="card.title" class="h-72 w-full"
+                                                                loading="lazy" />
+                                                            <div v-if="card.imageDescriptions?.[item.idx]"
+                                                                class="text-sm text-neutral-100 absolute bottom-0 w-full bg-neutral-950/50 p-2">
+                                                                {{ card.imageDescriptions[item.idx] }}
                                                             </div>
-                                                        </template>
-                                                    </UCarousel>
-                                                </div>
-                                                <img v-else-if="card.image" :src="card.image" class="rounded-md mb-4" />
-                                                <ImagePlaceholder v-else />
-
-
-                                                <ContentRenderer v-if="card.doc?.body" :value="card.doc" />
-                                                <p v-else class="text-neutral-800">{{ card.description }}</p>
-                                                <div class="mt-4">
-                                                    <UButton color="signal" variant="subtle"
-                                                        icon="i-carbon-chart-line-smooth"
-                                                        label="Diagram för naturvårdssvampar" class=" "
-                                                        @click="goToNaturvardsChart" />
-                                                </div>
-                                            </template>
-                                        </UModal>
-                                        <UModal v-else :title="card.title" :description="card.description"
-                                            :ui="{ header: 'shrink-0' }">
-                                            <div>
-                                                <UButton :label="card.title" :icon="card.icon" color="neutral"
-                                                    variant="ghost" class="ring-muted/50 w-full justify-start" />
+                                                        </div>
+                                                    </template>
+                                                </UCarousel>
                                             </div>
-                                            <template #body>
-                                                <div v-if="card.images?.length" class="space-y-3 mb-10">
-                                                    <UCarousel dots arrows
-                                                        :items="card.images.map((src, idx) => ({ src, idx }))"
-                                                        prev-icon="i-heroicons-chevron-left"
-                                                        next-icon="i-heroicons-chevron-right" :ui="{
-
-                                                            // controls: 'absolute -bottom-8 inset-x-12 max-w-30 mx-auto',
-                                                            dots: '-bottom-4',
-                                                            dot: 'w-6 h-1',
-                                                            prev: 'start-4 sm:start-4 top-1/2 -translate-y-1/2',
-                                                            next: 'end-4 sm:end-4 top-1/2 -translate-y-1/2',
-
-                                                        }" class="w-full">
-                                                        <template #default="{ item }">
-                                                            <div
-                                                                class="relative rounded-lg overflow-hidden ring ring-muted/50 m-1 shadow">
-                                                                <img :src="item.src" :alt="card.title"
-                                                                    class="h-72 w-full" loading="lazy" />
-                                                                <div v-if="card.imageDescriptions?.[item.idx]"
-                                                                    class="text-sm text-neutral-100 absolute bottom-0 w-full bg-neutral-950/50 p-2">
-                                                                    {{ card.imageDescriptions[item.idx] }}
-                                                                </div>
-                                                            </div>
-                                                        </template>
-                                                    </UCarousel>
-                                                </div>
-                                                <img v-else-if="card.image" :src="card.image" class="rounded-md mb-4" />
-                                                <ImagePlaceholder v-else />
+                                            <img v-else-if="card.image" :src="card.image" class="rounded-md mb-4" />
+                                            <ImagePlaceholder v-else />
 
 
-                                                <ContentRenderer v-if="card.doc?.body" :value="card.doc" />
-                                                <p v-else class="text-neutral-800">{{ card.description }}</p>
-                                            </template>
-                                        </UModal>
-                                    </template>
-                                </div>
-                                <!-- <USeparator class="my-4" /> -->
-                            </UPageAside>
-                        </template>
-                        <div class="grid gap-3 sm:gap-6 ">
-                            <div class="flex flex-col gap-6 min-w-0 max-w-full mb-2">
-                                <!-- <div class="flex justify-center w-full">
-                                    <h1 class="text-5xl font-medium text-neutral-900 my-12">{{ selectedMethod.title }}
-                                    </h1>
-                                </div> -->
-                                <UPageHero :title="selectedMethod.title"
-                                    :ui="{ container: 'pt-7 pb-3 sm:py-5 md:pt-16 md:pb-10 lg:pt-16 lg:pb-10', title: 'text-4xl sm:text-6xl', headline: 'flex justify-center items-center' }">
-                                    <template #headline>
-
-                                        <UBreadcrumb :items="breadcrumbLinks" separator-icon="i-heroicons-slash"
-                                            class="lg:hidden" />
-
-                                    </template>
-
-                                </UPageHero>
-                                <Transition name="fade" mode="out-in">
-                                    <img :src="methodImage(selectedMethod, 'detail')"
-                                        :alt="`Bild för ${selectedMethod.title}`"
-                                        class="rounded-lg ring ring-muted/50 w-full" />
-                                </Transition>
-                                <div class="flex flex-wrap gap-2 sm:gap-3 items-center justify-center">
-                                    <UTooltip :text="visibleSections.intro ? 'Dölj introduktion' : 'Visa introduktion'">
-                                        <UButton color="neutral" variant="outline"
-                                            :leading-icon="visibleSections.intro ? 'i-heroicons-eye' : 'i-heroicons-eye-slash'"
-                                            label="Introduktion" @click="toggleSectionVisibility('intro')"
-                                            class="ring-muted/50" :class="visibleSections.intro ? '' : 'opacity-50'" />
-                                    </UTooltip>
-                                    <!-- <UPopover mode="hover" :content="{
-                                        align: 'center',
-                                        side: 'top',
-                                        sideOffset: 8
-                                    }"><template #content>
-                                            <Placeholder class="size-72 m-4 inline-flex" />
+                                            <ContentRenderer v-if="card.doc?.body" :value="card.doc" />
+                                            <p v-else class="text-neutral-800">{{ card.description }}</p>
+                                            <div class="mt-4">
+                                                <UButton color="signal" variant="subtle"
+                                                    icon="i-carbon-chart-line-smooth"
+                                                    label="Diagram för naturvårdssvampar" class=" "
+                                                    @click="goToNaturvardsChart" />
+                                            </div>
                                         </template>
-                                        <USelect :items="startskogTabs" v-model="selectedStartskogTab"
-                                            :icon="selectedStartskogIcon" class=" ring-muted/50 " />
-                                    </UPopover> -->
+                                    </UModal>
+                                    <UModal v-else :title="card.title" :description="card.description"
+                                        :ui="{ header: 'shrink-0' }">
+                                        <div>
+                                            <UButton :label="card.title" :icon="card.icon" color="neutral"
+                                                variant="ghost" class="ring-muted/50 w-full justify-start" />
+                                        </div>
+                                        <template #body>
+                                            <div v-if="card.images?.length" class="space-y-3 mb-10">
+                                                <UCarousel dots arrows
+                                                    :items="card.images.map((src, idx) => ({ src, idx }))"
+                                                    prev-icon="i-heroicons-chevron-left"
+                                                    next-icon="i-heroicons-chevron-right" :ui="{
+
+                                                        // controls: 'absolute -bottom-8 inset-x-12 max-w-30 mx-auto',
+                                                        dots: '-bottom-4',
+                                                        dot: 'w-6 h-1',
+                                                        prev: 'start-4 sm:start-4 top-1/2 -translate-y-1/2',
+                                                        next: 'end-4 sm:end-4 top-1/2 -translate-y-1/2',
+
+                                                    }" class="w-full">
+                                                    <template #default="{ item }">
+                                                        <div
+                                                            class="relative rounded-lg overflow-hidden ring ring-muted/50 m-1 shadow">
+                                                            <img :src="item.src" :alt="card.title" class="h-72 w-full"
+                                                                loading="lazy" />
+                                                            <div v-if="card.imageDescriptions?.[item.idx]"
+                                                                class="text-sm text-neutral-100 absolute bottom-0 w-full bg-neutral-950/50 p-2">
+                                                                {{ card.imageDescriptions[item.idx] }}
+                                                            </div>
+                                                        </div>
+                                                    </template>
+                                                </UCarousel>
+                                            </div>
+                                            <img v-else-if="card.image" :src="card.image" class="rounded-md mb-4" />
+                                            <ImagePlaceholder v-else />
 
 
-                                    <!-- <UTooltip :text="visibleSections.timeline ? 'Dölj tidslinje' : 'Visa tidslinje'">
-                                        <UButton color="neutral" variant="outline"
-                                            :leading-icon="visibleSections.timeline ? 'i-heroicons-eye' : 'i-heroicons-eye-slash'"
-                                            label="Tidslinje" @click="toggleSectionVisibility('timeline')"
-                                            class="ring-muted/50"
-                                            :class="visibleSections.timeline ? '' : 'opacity-50'" />
-                                    </UTooltip>
+                                            <ContentRenderer v-if="card.doc?.body" :value="card.doc" />
+                                            <p v-else class="text-neutral-800">{{ card.description }}</p>
+                                        </template>
+                                    </UModal>
+                                </template>
+                            </div>
+                        </template>
+                        <template #bottom>
+                            <div class="mt-1 flex flex-col gap-1.5 absolute bottom-0 w-full">
+                                <UModal scrollable :fullscreen="isMobile ? true : false"
+                                    :title="page.ecologyintro?.title ?? ''"
+                                    :description="page.ecologyintro?.description ?? ''" :ui="{
+                                        header: 'shrink-0',
+                                    }" class="h-full">
+
+                                    <UButton icon="i-heroicons-book-open" color="neutral" variant="ghost"
+                                        label="Fakta i korthet" class="sm:w-full ring-muted/50" />
+                                    <template #body>
+                                        <EcologyIntro :section="page.ecologyintro" />
+                                    </template>
+                                </UModal>
+                                <UModal :fullscreen="isMobile ? true : false" :title="page.underlag"
+                                    :description="page.underlagdescription" :ui="{
+                                        header: 'shrink-0',
+                                    }">
+
+                                    <UButton icon="i-heroicons-document-magnifying-glass" color="neutral"
+                                        variant="ghost" :label="page.underlag" class="sm:w-full ring-muted/50" />
+                                    <template #body>
+                                        <UnderlagContent :underlag="page.underlag" :underlagbild="page.underlagbild"
+                                            :sections="page.underlagSections" />
+                                    </template>
+                                </UModal>
+                            </div>
+                        </template>
+
+                    </UPageAside>
+                </template>
+                <div
+                    class=" border-b border-muted/50 px-3 py-2.5 flex flex-wrap items-center justify-between gap-3 sticky top-0 z-30">
+                    <div class="flex gap-3">
+                        <UButton color="neutral" variant="ghost" icon="i-f7-sidebar-left" class="ring-muted"
+                            @click="immersiveAsideOpen = !immersiveAsideOpen" />
+
+                    </div>
 
 
-                                    <UTooltip :text="visibleSections.diagram ? 'Dölj diagram' : 'Visa diagram'">
-                                        <UButton color="neutral" variant="outline"
-                                            :leading-icon="visibleSections.diagram ? 'i-heroicons-eye' : 'i-heroicons-eye-slash'"
-                                            label="Diagram" @click="toggleSectionVisibility('diagram')"
-                                            class="ring-muted/50"
-                                            :class="visibleSections.diagram ? '' : 'opacity-50'" />
-                                    </UTooltip> -->
-                                    <UTooltip text="Öppna interaktiv bildvisning i helskärm">
-                                        <UButton color="neutral" variant="solid"
-                                            leading-icon="i-material-symbols:interactive-space" label="Helskärm"
-                                            class="ring-muted/50" @click="openModelWithCurrentFramework" />
-                                    </UTooltip>
-                                    <UPopover :ui="{ content: 'py-1' }" class="lg:hidden">
-                                        <UChip :text="markerCards.length" size="3xl">
-                                            <UButton icon="i-hugeicons-center-focus" size="md" variant="outline"
-                                                class="shadow rounded-lg ring-muted" color="neutral" />
-                                        </UChip>
+                    <div class="flex flex-wrap gap-2 items-center">
+                        <UTabs v-model="immersiveTab" :items="immersiveTabItems" size="sm" placeholder="Välj"
+                            :clearable="false" class="w-full ring-muted " :ui="{
+                                root: 'min-w-max flex-shrink-0',
+                                list: 'flex-nowrap rounded-xl bg-muted/50 -mb-2 gap-2',
+                                indicator: 'bg-white border border-muted/50 shadow ',
+                                trigger: ' data-[state=active]:text-neutral-800 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary '
+                            }" />
+                    </div>
+                </div>
+
+                <div class="" v-if="immersiveTab === 'timeline'">
+                    <div class="relative w-full overflow-hidden shadow aspect-video bg-neutral-900"
+                        :style="heroBackgroundStyle">
+                        <Transition name="image-fade">
+                            <div :key="heroImageKey" class="absolute inset-0">
+                                <div
+                                    class=" bg-neutral-950/80 p-1 py-2 rounded-sm flex flex-col items-center gap-2 text-xs text-neutral-500 absolute bottom-4 right-4 z-20">
+
+                                    <UIcon name="i-mingcute-tree-fill" class="size-5 text-primary" />
+                                    <USlider v-model="treeFade" :min="0" :max="1" :step="0.05" class="h-20 sm:h-32"
+                                        color="primary" orientation="vertical" inverse size="xs" />
+                                    <UPopover>
+                                        <div class="flex flex-col cursor-help ">
+                                            <UIcon name="i-fluent-shape-organic-16-filled" class="size-4 text-gray-300 z-20" />
+                                            <UIcon name="i-fluent-shape-organic-16-filled"
+                                                class="size-4 -mt-3 text-signal-400 z-10" />
+                                            <UIcon name="i-fluent-shape-organic-16-filled"
+                                                class="size-4 -mt-3 text-yellow-400" />
+                                        </div>
                                         <template #content>
-                                            <div v-for="card in markerCards" :key="card.key" class="p-1">
-                                                <UModal v-if="card.key === 'naturvardsarter'"
-                                                    v-model:open="naturvardsModalOpen" :title="card.title"
-                                                    :description="card.description" :ui="{ header: 'shrink-0' }"
-                                                    fullscreen>
-                                                    <div>
-                                                        <UButton :label="card.title" :icon="card.icon" color="neutral"
-                                                            variant="ghost"
-                                                            class="ring-muted/50 w-full justify-start" />
-                                                    </div>
-                                                    <template #body>
-                                                        <div v-if="card.images?.length" class="space-y-3 mb-10">
-                                                            <UCarousel dots arrows
-                                                                :items="card.images.map((src, idx) => ({ src, idx }))"
-                                                                prev-icon="i-heroicons-chevron-left"
-                                                                next-icon="i-heroicons-chevron-right" :ui="{
-                                                                    dots: '-bottom-4',
-                                                                    dot: 'w-6 h-1',
-                                                                    prev: 'start-4 sm:start-4 top-1/2 -translate-y-1/2',
-                                                                    next: 'end-4 sm:end-4 top-1/2 -translate-y-1/2',
-                                                                }" class="w-full">
-                                                                <template #default="{ item }">
-                                                                    <div
-                                                                        class="relative rounded-lg overflow-hidden ring ring-muted/50 m-1 shadow">
-                                                                        <img :src="item.src" :alt="card.title"
-                                                                            class="h-72 w-full" loading="lazy" />
-                                                                        <div v-if="card.imageDescriptions?.[item.idx]"
-                                                                            class="text-sm text-neutral-100 absolute bottom-0 w-full bg-neutral-950/50 p-2">
-                                                                            {{ card.imageDescriptions[item.idx] }}
-                                                                        </div>
-                                                                    </div>
-                                                                </template>
-                                                            </UCarousel>
-                                                        </div>
-                                                        <img v-else-if="card.image" :src="card.image"
-                                                            class="rounded-md mb-4" />
-                                                        <ImagePlaceholder v-else />
+                                            <div class="flex flex-col gap-2 p-4">
+                                                <div class="flex w-full">
+                                                    <UIcon name="i-fluent-shape-organic-16-filled"
+                                                        class="size-6 text-gray-300 z-20" />
+                                                    <UIcon name="i-fluent-shape-organic-16-filled"
+                                                        class="size-6 -ml-4 text-gray-400 z-10" />
+                                                    <UIcon name="i-fluent-shape-organic-16-filled"
+                                                        class="size-6 -ml-4 mr-4 text-gray-500" />
+                                                    <h1 class="font-medium">Mykorrhizasvampar</h1>
+                                                </div>
+                                                <div class="flex w-full justify-between">
+                                                    <UIcon name="i-fluent-shape-organic-16-filled"
+                                                        class="size-6 text-signal-400" />
 
+                                                    <h1 class="font-medium">Naturvårdssvampar</h1>
+                                                </div>
+                                                <div class="flex w-full justify-between">
+                                                    <UIcon name="i-fluent-shape-organic-16-filled"
+                                                        class="size-6 text-yellow-400" />
 
-                                                        <ContentRenderer v-if="card.doc?.body" :value="card.doc" />
-                                                        <p v-else class="text-neutral-800">{{ card.description }}</p>
-                                                        <div class="mt-4">
-                                                            <UButton color="signal" variant="subtle"
-                                                                icon="i-carbon-chart-line-smooth"
-                                                                label="Diagram för naturvårdssvampar" class=" "
-                                                                @click="goToNaturvardsChart" />
-                                                        </div>
-                                                    </template>
-                                                </UModal>
-                                                <UModal fullscreen v-else :title="card.title"
-                                                    :description="card.description" :ui="{ header: 'shrink-0' }">
-                                                    <div>
-                                                        <UButton :label="card.title" :icon="card.icon" color="neutral"
-                                                            variant="ghost"
-                                                            class="ring-muted/50 w-full justify-start" />
-                                                    </div>
-                                                    <template #body>
-                                                        <div v-if="card.images?.length" class="space-y-3 mb-10">
-                                                            <UCarousel dots arrows
-                                                                :items="card.images.map((src, idx) => ({ src, idx }))"
-                                                                prev-icon="i-heroicons-chevron-left"
-                                                                next-icon="i-heroicons-chevron-right" :ui="{
+                                                    <h1 class="font-medium">Matsvampar</h1>
+                                                </div>
 
-                                                                    dots: '-bottom-4',
-                                                                    dot: 'w-6 h-1',
-                                                                    prev: 'start-4 sm:start-4 top-1/2 -translate-y-1/2',
-                                                                    next: 'end-4 sm:end-4 top-1/2 -translate-y-1/2',
-
-                                                                }" class="w-full">
-                                                                <template #default="{ item }">
-                                                                    <div
-                                                                        class="relative rounded-lg overflow-hidden ring ring-muted/50 m-1 shadow">
-                                                                        <img :src="item.src" :alt="card.title"
-                                                                            class="h-72 w-full" loading="lazy" />
-                                                                        <div v-if="card.imageDescriptions?.[item.idx]"
-                                                                            class="text-sm text-neutral-100 absolute bottom-0 w-full bg-neutral-950/50 p-2">
-                                                                            {{ card.imageDescriptions[item.idx] }}
-                                                                        </div>
-                                                                    </div>
-                                                                </template>
-                                                            </UCarousel>
-                                                        </div>
-                                                        <img v-else-if="card.image" :src="card.image"
-                                                            class="rounded-md mb-4" />
-                                                        <ImagePlaceholder v-else />
-
-
-                                                        <ContentRenderer v-if="card.doc?.body" :value="card.doc" />
-                                                        <p v-else class="text-neutral-800">{{ card.description }}</p>
-                                                    </template>
-                                                </UModal>
                                             </div>
                                         </template>
                                     </UPopover>
-
                                 </div>
-                                <div class="w-full flex justify-center my-0 sm:my-6" v-if="visibleSections.intro">
-                                    <div class="space-y-8 max-w-xl">
-                                        <section v-for="section in accordionItems"
-                                            :key="`${section.value}-${selectedMethod.id}`" class="space-y-3">
-                                            <h2 :class="[
-                                                'font-semibold text-neutral-900',
-                                                section.value === 'svamp'
-                                                    ? 'text-lg md:text-xl'
-                                                    : 'text-xl md:text-2xl'
-                                            ]">
-                                                {{ section.label }}
-                                            </h2>
-                                            <div class="space-y-3 text-md md:text-lg text-neutral-800">
-                                                <template v-for="(para, idx) in section.paragraphs">
-                                                    <div v-if="section.value === 'svamp'"
-                                                        class="flex items-center gap-2 text-md md:text-xl font-semibold text-neutral-900"
-                                                        v-show="idx === section.paragraphs.length - 2">
-                                                        <UIcon name="icon-park-solid:knife-fork"
-                                                            class="size-5 text-warning-500" />
-                                                        <span>Matsvampar</span>
-                                                    </div>
-                                                    <div v-if="section.value === 'svamp'"
-                                                        class="flex items-center gap-2 text-md md:text-xl font-semibold text-neutral-900"
-                                                        v-show="idx === section.paragraphs.length - 1">
-                                                        <UIcon name="i-material-symbols-award-star"
-                                                            class="size-5 text-signal-500" />
-                                                        <span>Naturvårdssvampar</span>
-                                                    </div>
-                                                    <MDC :value="para" unwrap="p" />
-                                                </template>
+
+                                <template v-if="compareModeEnabled && comparisonImages">
+                                    <CustomImageComparisonSlider class="w-full h-full"
+                                        :framework-label="comparisonLabels?.leftFramework"
+                                        :time-label="comparisonLabels?.leftTime"
+                                        :framework-label2="comparisonLabels?.rightFramework"
+                                        :time-label2="comparisonLabels?.rightTime">
+                                        <template #first>
+                                            <div class="relative w-full h-full">
+                                                <img :src="comparisonImages.leftHidden || comparisonImages.left"
+                                                    class="w-full h-full object-cover absolute inset-0" loading="lazy" />
+                                                <img :src="comparisonImages.left" class="w-full h-full object-cover relative"
+                                                    loading="lazy" :style="{ opacity: treeFade }" />
                                             </div>
-                                        </section>
+                                        </template>
+                                        <template #second>
+                                            <div class="relative w-full h-full">
+                                                <img :src="comparisonImages.rightHidden || comparisonImages.right"
+                                                    class="w-full h-full object-cover absolute inset-0" loading="lazy" />
+                                                <img :src="comparisonImages.right"
+                                                    class="w-full h-full object-cover relative transition-opacity duration-500"
+                                                    loading="lazy" :style="{ opacity: treeFade }" />
+                                            </div>
+                                        </template>
+                                    </CustomImageComparisonSlider>
+                                </template>
+                                <template v-else-if="currentTimelineItem">
+                                    <img :src="currentTimelineItem.thumbHidden" :alt="`Foto ${currentTimelineItem.tid}`"
+                                        class="w-full h-full object-cover absolute inset-0" />
+                                    <img :src="currentTimelineItem.thumb" :alt="`Foto ${currentTimelineItem.tid}`"
+                                        class="w-full h-full object-cover relative transition-opacity duration-500"
+                                        :style="{ opacity: treeFade }" />
+                                    <div class="absolute top-2 left-2 z-20 flex flex-col items-start gap-1 pointer-events-none">
+                                        <UBadge v-if="!isMobile" size="md"
+                                            class="backdrop-blur-xl bg-neutral-100/0 text-neutral-100 h-fit whitespace-nowrap mb-0.5">
+                                            {{ selectedMethod.title || selectedMethod.id }}
+                                        </UBadge>
+                                        <UBadge size="md"
+                                            class="backdrop-blur-xl bg-neutral-950/50 text-neutral-100 h-fit whitespace-nowrap">
+                                            {{ formatTimelineCurrentLabel(timelineItems[activeTimelineIndex]?.tid) }}
+                                        </UBadge>
                                     </div>
-                                </div>
-
-
+                                </template>
+                                <ImagePlaceholder v-else />
                             </div>
-                            <!-- <div class="space-y-6"> -->
+                        </Transition>
+                    </div>
+                    <div
+                        class=" border-b border-muted/50 px-3 py-2.5 flex flex-wrap items-center justify-between gap-3 sticky top-0 z-30">
 
 
-                            <!-- <UPageCard title="Tailwind CSS"
-                                    description="Nuxt UI integrates with latest Tailwind CSS v4, bringing significant improvements."
-                                    icon="i-material-symbols:interactive-space" /> -->
-                            <!-- </div> -->
-                            <!-- <USeparator /> -->
-                            <div v-if="timelineItems.length" class="flex flex-col gap-4 min-w-0 max-w-full">
+                        <div class="flex flex-wrap gap-2 items-center">
+                            <UPopover :close="false" :transition="true" :overlay="true"
+                                :ui="{ content: 'max-w-xs sm:max-w-xs p-4 sm:p-6 pb-2' }"
+                                title="Har skogen varit kalavverkad tidigare?"
+                                description="Hur skogen har brukats tidigare påverkar vilka mykorrhizasvampar som finns. Valet återspeglas i tidslinjen och diagrammen.">
+                                <UTooltip text="Skogens historik">
+                                    <UButton color="neutral" variant="outline"
+                                        :leading-icon="selectedStartskogOption?.icon"
+                                        :label="selectedStartskogOption?.label || ''" class="ring-muted/50" />
+                                </UTooltip>
 
-                                <!-- <UCard variant="subtle" :ui="{ body: 'p-2 sm:p-2' }"> -->
-                                <!-- <div v-if="isMobile">
-                                    <div class="flex w-full justify-between items-center">
-                                        <span class="text-md">Har skogen varit kalavverkad tidigare?</span>
-                                        <UIcon name="i-heroicons-question-mark-circle" class="size-5 cursor-pointer"
-                                            @click="toggleHistorikOpen" />
-                                    </div>
-                                    <div v-if="HistorikInfoOpen" class="text-sm text-muted mt-1">
-                                        Tidigare kalavverkning påverkar vilka mykorrhizasvampar som finns. Framförallt
-                                        är
-                                        naturvårdssvampar
-                                        vanligare i skogar som inte har kalavverkats.
-                                    </div>
+                                <template #content>
+                                    <h1 class="font-semibold mb-2">Har skogen varit kalavverkad
+                                        tidigare?
+                                    </h1>
+                                    <p class="text-muted text-sm mb-4">Hur skogen har brukats
+                                        tidigare
+                                        påverkar
+                                        vilka
+                                        mykorrhizasvampar som finns. Valet återspeglas i tidslinjen
+                                        och
+                                        diagrammen.</p>
+                                    <USelect :items="startskogTabs" v-model="selectedStartskogTab"
+                                        :icon="selectedStartskogIcon"
+                                        class="transition-all ring-muted/50 mb-2 sm:mb-0" />
+                                    <p class="text-neutral-700 text-xs">
 
-
-                                    <UTabs :items="startskogTabs" v-model="selectedStartskogTab"
-                                        @change="handleStartskogTabChange" variant="link"
-                                        class=" -mb-3 -mt-2 transition-all " />
-                                </div> -->
-
-                                <USeparator v-if="visibleSections.intro" class="hidden sm:flex mt-8 mb-16" />
-                                <!-- </UCard> -->
-
-                                <div v-if="visibleSections.timeline" class="space-y-2 mt-6 sm:mt-0">
-
-                                    <!-- <h2 class="text-xl md:text-2xl font-semibold text-neutral-900 max-w-2xl sm:px-6">
-                                        Tidslinje i bilder
-                                    </h2> -->
-
-                                    <div class="relative">
-                                        <UTooltip text="Öppna interaktiv bildvisning i helskärm"
-                                            class="absolute left-4 bottom-4 z-10">
-                                            <UButton color="neutral" variant="solid"
-                                                leading-icon="i-material-symbols:interactive-space" label="Helskärm"
-                                                class="ring-muted/50" @click="openModelWithCurrentFramework" />
-                                        </UTooltip>
-
-                                        <div
-                                            class=" bg-neutral-950/80 p-1 py-2 rounded-sm flex flex-col items-center gap-2 text-xs text-neutral-500 absolute bottom-4 right-4 z-10">
-
-                                            <UIcon name="i-mingcute-tree-fill" class="size-5 text-primary" />
-                                            <USlider v-model="treeFade" :min="0" :max="1" :step="0.05"
-                                                class="h-20 sm:h-32" color="primary" orientation="vertical" inverse
-                                                size="xs" />
-                                            <UPopover>
-                                                <div class="flex flex-col cursor-help ">
-                                                    <UIcon name="i-fluent-shape-organic-16-filled"
-                                                        class="size-4 text-gray-300 z-20" />
-                                                    <UIcon name="i-fluent-shape-organic-16-filled"
-                                                        class="size-4 -mt-3 text-signal-400 z-10" />
-                                                    <UIcon name="i-fluent-shape-organic-16-filled"
-                                                        class="size-4 -mt-3 text-yellow-400" />
-                                                </div>
-                                                <template #content>
-                                                    <div class="flex flex-col gap-2 p-4">
-                                                        <div class="flex w-full">
-                                                            <UIcon name="i-fluent-shape-organic-16-filled"
-                                                                class="size-6 text-gray-300 z-20" />
-                                                            <UIcon name="i-fluent-shape-organic-16-filled"
-                                                                class="size-6 -ml-4 text-gray-400 z-10" />
-                                                            <UIcon name="i-fluent-shape-organic-16-filled"
-                                                                class="size-6 -ml-4 mr-4 text-gray-500" />
-                                                            <h1 class="font-medium">Mykorrhizasvampar</h1>
-                                                        </div>
-                                                        <div class="flex w-full justify-between">
-                                                            <UIcon name="i-fluent-shape-organic-16-filled"
-                                                                class="size-6 text-signal-400" />
-
-                                                            <h1 class="font-medium">Naturvårdssvampar</h1>
-                                                        </div>
-                                                        <div class="flex w-full justify-between">
-                                                            <UIcon name="i-fluent-shape-organic-16-filled"
-                                                                class="size-6 text-yellow-400" />
-
-                                                            <h1 class="font-medium">Matsvampar</h1>
-                                                        </div>
-
-                                                    </div>
-                                                </template>
-                                            </UPopover>
-                                        </div>
-
-                                        <UCarousel ref="timelineCarousel" v-slot="{ item }" :items="timelineItems"
-                                            :prev="{ onClick: handleTimelinePrev }"
-                                            :next="{ onClick: handleTimelineNext }"
-                                            class="w-full bg-neutral-950 overflow-hidden rounded-lg ring-muted/50 " fade
-                                            @select="handleTimelineSelect">
-
-                                            <div class="relative w-full aspect-video">
-                                                <img :src="item.thumbHidden" :alt="`Foto ${item.tid}`" width="960"
-                                                    height="540" class="w-full h-full object-cover absolute inset-0" />
-                                                <img :src="item.thumb" :alt="`Foto ${item.tid}`" width="960"
-                                                    height="540"
-                                                    class="w-full h-full object-cover absolute inset-0 transition-opacity duration-700 "
-                                                    :style="{ opacity: treeFade }" />
-                                            </div>
-
-
-                                        </UCarousel>
-
-                                    </div>
-
-
-                                    <div class="w-full max-w-full min-w-0 overflow-x-auto overflow-y-visible">
-
-                                        <div
-                                            class="flex sm:justify-center items-center flex-nowrap whitespace-nowrap gap-2 w-full my-4">
-                                            <UPopover :close="false" :transition="true" :overlay="true"
-                                                :ui="{ content: 'max-w-xs sm:max-w-sm p-4 sm:p-6 pb-2' }"
-                                                title="Har skogen varit kalavverkad tidigare?"
-                                                description="Hur skogen har brukats tidigare påverkar vilka mykorrhizasvampar som finns. Valet återspeglas i tidslinjen och diagrammen.">
-                                                <UTooltip text="Skogens historik">
-                                                    <UButton color="neutral" variant="outline"
-                                                        :leading-icon="selectedStartskogOption?.icon"
-                                                        :label="selectedStartskogOption?.label || ''"
-                                                        class="ring-muted/50" />
-                                                </UTooltip>
-                                                <template #content>
-                                                    <h1 class="font-semibold mb-2">Har skogen varit kalavverkad
-                                                        tidigare?
-                                                    </h1>
-                                                    <p class="text-muted text-sm mb-4">Hur skogen har brukats tidigare
-                                                        påverkar
-                                                        vilka
-                                                        mykorrhizasvampar som finns. Valet återspeglas i tidslinjen och
-                                                        diagrammen.</p>
-                                                    <USelect :items="startskogTabs" v-model="selectedStartskogTab"
-                                                        :icon="selectedStartskogIcon"
-                                                        class="transition-all ring-muted/50 mb-2 sm:mb-0" />
-                                                    <p class="text-neutral-700 text-xs">
-
-                                                    </p>
-                                                    <!-- <div class="flex gap-2">
+                                    </p>
+                                    <!-- <div class="flex gap-2">
                                                 <UButton color="neutral" variant="outline" class="ring-muted/50"
                                                     label="Fortsätt" @click="startskogModalOpen = false" />
                                             </div> -->
-                                                </template>
-                                            </UPopover>
-                                            <USeparator orientation="vertical" class="h-6" />
-                                            <UButton v-for="(item, index) in timelineItems"
-                                                :key="`timeline-thumb-${index}`" color="neutral"
-                                                class="ring-muted/50 flex-none shrink-0  sm:justify-center whitespace-nowrap"
-                                                variant="outline"
-                                                :class="index === activeTimelineIndex ? 'border-neutral-900 bg-neutral-900 hover:bg-neutral-900 text-white opacity-100 ring-0 shadow' : 'border-transparent opacity-60 hover:opacity-100'"
-                                                type="button" @click="selectTimelineSlide(index)"
-                                                :label="formatTimelineButtonLabel(item.tid)" />
-                                        </div>
-                                    </div>
-
-                                    <div
-                                        class="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-2 ring-muted/50">
-                                        <div class="space-y-2">
-                                            <!-- <p class="text-xs uppercase tracking-wide text-muted">Tidslinje</p> -->
-                                            <h3 class="text-xl font-semibold text-neutral-900">{{
-                                                formatTimelineCurrentLabel(timelineItems[activeTimelineIndex]?.tid) }}
-                                            </h3>
-                                            <p class="text-md text-muted">
-                                                {{ timelineItems[activeTimelineIndex]?.skog }}
-                                            </p>
-                                            <p class="text-md">{{ timelineItems[activeTimelineIndex]?.svamp }}</p>
-                                        </div>
-
-                                    </div>
-                                </div>
-                            </div>
-                            <div v-if="visibleSections.diagram" class="space-y-2" ref="chartSection">
-
-                                <ForestryChartMain ref="chartComponent" :selectedChart="chartSelected"
-                                    @update:selectedChart="val => chartSelected = val"
-                                    :parentSelectedFrameworks=[selectedMethod.id]
-                                    :currentStartskog="selectedStartskogTab" :currentTimeValue="currentTimelineTime" />
-
-                            </div>
-
-                            <div class="grid grid-cols-2 gap-6 items-center py-10">
-                                <UPageCard v-if="methodNav.prev" color="neutral" variant="outline"
-                                    icon="i-heroicons-arrow-left-20-solid" :title="`${methodNav.prev.title}`"
-                                    class="ring-muted/50" @click="handleMethodNav(methodNav.prev.id)" :ui="{
-                                        leading: 'text-sm',
-                                        title: 'truncate whitespace-nowrap max-w-[14ch] sm:max-w-none'
-                                    }">
-                                    <template #leading class="text-muted">
-                                        <UIcon name="i-heroicons-chevron-left" class="mr-1" /> Föregående
-                                    </template>
-                                </UPageCard>
-                                <div v-else />
-                                <UPageCard v-if="methodNav.next" color="neutral" variant="outline"
-                                    icon="i-heroicons-arrow-right-20-solid" :title="`${methodNav.next.title}`"
-                                    class="ring-muted/50 " @click="handleMethodNav(methodNav.next.id)" :ui="{
-                                        leading: 'w-full flex justify-end text-sm',
-                                        body: 'w-full flex justify-end',
-                                        title: 'truncate whitespace-nowrap max-w-[14ch] sm:max-w-none text-right'
-                                    }">
-                                    <template #leading class="text-muted">Nästa
-                                        <UIcon name="i-heroicons-chevron-right" class="ml-1" />
-                                    </template>
-                                </UPageCard>
-                            </div>
-
-                            <!-- <div class="flex flex-col gap-1 min-w-0 max-w-full">
-
-
-
-                                <UCard variant="soft" class="mt-3 flex flex-col gap-5 ring-muted/50"
-                                    :ui="{ body: 'sm:p-4 text-base' }">
-                                    <h1 class="font-semibold mb-3">Fokusområden i {{ selectedMethod.title }}</h1>
-                               
-                                    <UAccordion :ui="{
-                                        root: '', item: 'border-none px-4 ring ring-muted/50 rounded-lg bg-white my-2', trigger: 'text-base font-medium',
-                                        body: 'text-md/7 text-neutral-800 px-2'
-                                    }" :items="markerCards.map(card => ({ ...card, label: card.title, content: card.description }))"
-                                        multiple />
-                                    <UPageCard title="Öppna modell i helskärm" :ui="{ description: 'text-neutral-100' }"
-                                        description="I helskärm kan du jämföra metoder och se fokusområden markerade i bilden."
-                                        icon="i-material-symbols:interactive-space"
-                                        class="mt-6 cursor-pointer ring-muted/50 shadow" color="neutral" variant="solid"
-                                        orientation="vertical" @click="openModelWithCurrentFramework">
-                                
-                                    </UPageCard>
-                                </UCard>
-                                <UModal v-model:open="modelOpen" fullscreen>
-                                    <template #content>
-                                        <Model @close="modelOpen = false" />
-                                    </template>
-                                </UModal>
-
-                            </div> -->
-
-
-
-
-
-
-
-
-
-
-
-
-
+                                </template>
+                            </UPopover>
+                            <USeparator orientation="vertical" class="h-6" />
+                            <UButton v-for="(item, index) in timelineItems" :key="`immersive-timeline-${index}`"
+                                color="neutral" variant="outline"
+                                :class="index === activeTimelineIndex ? 'border-neutral-900 bg-neutral-900 hover:bg-neutral-900 text-white opacity-100 ring-0 shadow' : 'border-transparent opacity-70 hover:opacity-100'"
+                                class="ring-muted/50 flex-none whitespace-nowrap"
+                                :label="formatTimelineButtonLabel(item.tid)" @click="selectTimelineSlide(index)" />
                         </div>
+                        <UPopover :ui="{ content: 'p-0 w-80' }" :content="{
+                            align: 'end',
+                            side: 'bottom',
+                            sideOffset: 8
+                        }">
+                            <UButton color="neutral" variant="outline" icon="iconamoon:compare-duotone"
+                                :label="compareEnabled ? 'Jämför' : 'Jämför'" class="ring-muted" />
+                            <template #content>
+                                <div class="space-y-0.5 p-3">
+                                    <div class="grid grid-cols-2 gap-2 ">
+                                        <UButton size="xs" variant="outline" color="neutral"
+                                            @click="setCompareMode(false)"
+                                            :class="!compareEnabled ? 'bg-neutral-100 shadow ring-muted' : 'text-muted/60 hover:text-muted ring-muted/50'">
+                                            <div class="flex flex-col text-center items-center w-full space-y-1">
+                                                <UIcon name="i-bx-rectangle" class="size-4" />
+                                                <h1>Enkelvy</h1>
+                                            </div>
+                                        </UButton>
+                                        <UButton size="xs" variant="outline" color="neutral"
+                                            @click="setCompareMode(true)"
+                                            :class="compareEnabled ? 'bg-neutral-100 shadow ring-muted' : 'text-muted/60 hover:text-muted ring-muted/50'">
+                                            <div class="flex flex-col text-center items-center w-full space-y-1">
+                                                <UIcon name="iconamoon:compare-duotone" class="size-4" />
+                                                <h1>Jämför</h1>
+                                            </div>
+                                        </UButton>
+                                    </div>
 
+                                    <UTabs v-if="compareEnabled" v-model="compareMode" :items="compareOptions" size="sm"
+                                        placeholder="Välj" :clearable="false" class="w-full ring-muted -mb-2 mt-2" :ui="{
+                                            root: 'min-w-max flex-shrink-0',
+                                            list: 'flex-nowrap rounded-xl bg-muted/50 -mb-1.5 gap-2',
+                                            indicator: 'bg-white border border-muted/50 shadow ',
+                                            trigger: ' data-[state=active]:text-neutral-800 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary '
+                                        }" />
 
+                                    <div v-if="compareEnabled && compareMode === 'methods'" class="space-y-2 mt-3">
+                                        <p class="text-xs text-neutral-600 pt-2">Välj metod att jämföra med</p>
+                                        <USelect :items="compareMethodOptions" v-model="compareMethodId"
+                                            placeholder="Välj metod" class="w-full ring-muted"
+                                            :popper="{ placement: 'bottom-start' }" />
+                                    </div>
 
+                                </div>
+                            </template>
+                        </UPopover>
+                    </div>
+                    <div class="grid grid-cols-2">
 
-                    </UPage>
+                        <div class="space-y-2 p-5">
+                            <h3 class="text-xl font-semibold text-neutral-900">
+                                {{ formatTimelineCurrentLabel(timelineItems[activeTimelineIndex]?.tid) }}
+                            </h3>
+                            <p class="text-md text-muted">
+                                {{ timelineItems[activeTimelineIndex]?.skog }}
+                            </p>
+                            <p class="text-md">{{ timelineItems[activeTimelineIndex]?.svamp }}</p>
+                        </div>
+                        <ForestryChartMain :selectedChart="chartSelected" class="p-2"
+                            @update:selectedChart="val => chartSelected = val"
+                            :parentSelectedFrameworks="chartFrameworks" :currentStartskog="selectedStartskogTab"
+                            :currentTimeValue="currentTimelineTime" preserveFrameworkOrder />
+                    </div>
+
                 </div>
-            </Motion>
-
-            <UModal v-model:open="modelOpen" fullscreen>
-                <template #content>
-                    <Model @close="modelOpen = false" />
-                </template>
-            </UModal>
+                <div v-else-if="immersiveTab === 'about'" class="space-y-6">
+                    <UPageHero :title="selectedMethod.title"
+                        :ui="{ container: 'pt-7 pb-3 sm:py-5 md:pt-16 md:pb-10 lg:pt-16 lg:pb-10 flex flex-col justify-center', title: 'text-4xl sm:text-6xl', headline: 'flex justify-center items-center' }">
+                        <!-- <template #headline>
+                                <UBreadcrumb :items="breadcrumbLinks" separator-icon="i-heroicons-slash"
+                                    class="lg:hidden" />
+                            </template> -->
+                        <img :src="methodImage(selectedMethod, 'detail')" :alt="`Bild för ${selectedMethod.title}`"
+                            class="rounded-lg ring ring-muted/50 " />
+                    </UPageHero>
+                    <!-- <Transition name="fade" mode="out-in">
+                            
+                        </Transition> -->
+                    <div class="w-full flex justify-center my-0 sm:my-6">
+                        <div class="space-y-8 max-w-xl">
+                            <section v-for="section in accordionItems" :key="`${section.value}-${selectedMethod.id}`"
+                                class="space-y-3">
+                                <h2 :class="[
+                                    'font-semibold text-neutral-900',
+                                    section.value === 'svamp'
+                                        ? 'text-lg md:text-xl'
+                                        : 'text-xl md:text-2xl'
+                                ]">
+                                    {{ section.label }}
+                                </h2>
+                                <div class="space-y-3 text-md md:text-lg text-neutral-800">
+                                    <template v-for="(para, idx) in section.paragraphs">
+                                        <div v-if="section.value === 'svamp'"
+                                            class="flex items-center gap-2 text-md md:text-xl font-semibold text-neutral-900"
+                                            v-show="idx === section.paragraphs.length - 2">
+                                            <UIcon name="icon-park-solid:knife-fork" class="size-5 text-warning-500" />
+                                            <span>Matsvampar</span>
+                                        </div>
+                                        <div v-if="section.value === 'svamp'"
+                                            class="flex items-center gap-2 text-md md:text-xl font-semibold text-neutral-900"
+                                            v-show="idx === section.paragraphs.length - 1">
+                                            <UIcon name="i-material-symbols-award-star"
+                                                class="size-5 text-signal-500" />
+                                            <span>Naturvårdssvampar</span>
+                                        </div>
+                                        <MDC :value="para" unwrap="p" />
+                                    </template>
+                                </div>
+                            </section>
+                        </div>
+                    </div>
+                    <div class="grid grid-cols-2 gap-6 items-center py-10 max-w-4xl mx-auto">
+                        <UPageCard v-if="methodNav.prev" color="neutral" variant="outline"
+                            icon="i-heroicons-arrow-left-20-solid" :title="`${methodNav.prev.title}`"
+                            class="ring-muted/50" @click="handleMethodNav(methodNav.prev.id)" :ui="{
+                                leading: 'text-sm',
+                                title: 'truncate whitespace-nowrap max-w-[14ch] sm:max-w-none'
+                            }">
+                            <template #leading class="text-muted">
+                                <UIcon name="i-heroicons-chevron-left" class="mr-1" /> Föregående
+                            </template>
+                        </UPageCard>
+                        <div v-else />
+                        <UPageCard v-if="methodNav.next" color="neutral" variant="outline"
+                            icon="i-heroicons-arrow-right-20-solid" :title="`${methodNav.next.title}`"
+                            class="ring-muted/50 " @click="handleMethodNav(methodNav.next.id)" :ui="{
+                                leading: 'w-full flex justify-end text-sm',
+                                body: 'w-full flex justify-end',
+                                title: 'truncate whitespace-nowrap max-w-[14ch] sm:max-w-none text-right'
+                            }">
+                            <template #leading class="text-muted">Nästa
+                                <UIcon name="i-heroicons-chevron-right" class="ml-1" />
+                            </template>
+                        </UPageCard>
+                    </div>
+                </div>
+            </UPage>
         </UContainer>
+        <USlideover :modal="false" :dismissible="false" v-model:open="chartSlideoverOpen" side="right"
+            :ui="{ body: 'p-2 lg:p-2' }">
+            <template #title>Diagram</template>
+            <template #body>
+                <ForestryChartMain :selectedChart="chartSelected" @update:selectedChart="val => chartSelected = val"
+                    :parentSelectedFrameworks="chartFrameworks" :currentStartskog="selectedStartskogTab"
+                    :currentTimeValue="currentTimelineTime" preserveFrameworkOrder />
+            </template>
+        </USlideover>
         <!-- <Motion :initial="{
             opacity: 0,
             transform: 'translatex(-10px)'
@@ -1032,13 +836,6 @@ definePageMeta({
     key: 'skogsskotsel-method',
 })
 
-const HistorikInfoOpen = ref(false)
-
-function toggleHistorikOpen() {
-    HistorikInfoOpen.value = !HistorikInfoOpen.value
-}
-
-const open = ref(false)
 const treeFade = ref(0.8)
 const expandedMarker = ref<string | null>(null)
 const methodImage = (method: any, variant: 'thumb' | 'card' | 'detail') => {
@@ -1217,8 +1014,85 @@ const breadcrumbLinks = computed(() => {
     const methodTo = selectedId.value ? `/skogsskotsel/${selectedId.value}` : undefined
     return [
         { label: 'Skogsskötsel', to: '/skogsskotsel' },
-        // { label: methodLabel, to: methodTo },
+        { label: methodLabel, to: methodTo },
     ]
+})
+
+const chartSlideoverOpen = ref(false)
+const currentTimelineItem = computed(() => timelineItems.value[activeTimelineIndex.value])
+const heroImageKey = computed(() => {
+    if (compareModeEnabled.value && comparisonImages.value) {
+        return [
+            'compare',
+            comparisonImages.value.left,
+            comparisonImages.value.right,
+            selectedStartskogTab.value,
+            compareMode.value,
+            compareMethodId.value
+        ].join('|')
+    }
+    const item = currentTimelineItem.value
+    return ['single', item?.thumbHidden, item?.thumb, selectedStartskogTab.value, activeTimelineIndex.value].join('|')
+})
+
+const heroBackgroundStyle = computed(() => {
+    let url: string | undefined
+    if (compareModeEnabled.value && comparisonImages.value) {
+        url = comparisonImages.value.left || comparisonImages.value.leftHidden || comparisonImages.value.right
+    } else if (currentTimelineItem.value) {
+        url = currentTimelineItem.value.thumb || currentTimelineItem.value.thumbHidden
+    }
+    return url ? { backgroundImage: `url(${url})`, backgroundSize: 'cover', backgroundPosition: 'center' } : {}
+})
+const compareModeEnabled = ref(false)
+const compareMode = ref<'beforeAfter' | 'methods'>('beforeAfter')
+const compareMethodId = ref<string | null>(null)
+const compareModeItems = [
+    { label: 'Före/Efter', value: 'beforeAfter' },
+    { label: 'Metoder', value: 'methods' }
+]
+const compareEnabled = computed({
+    get: () => compareModeEnabled.value,
+    set: (val: boolean) => {
+        compareModeEnabled.value = val
+        if (!val) compareMode.value = 'beforeAfter'
+    }
+})
+const compareOptions = computed(() => compareModeItems)
+const setCompareMode = (enabled: boolean) => {
+    compareEnabled.value = enabled
+}
+const immersiveAsideOpen = ref(true)
+const immersiveTabItems = [
+    { label: 'Tidslinje', value: 'timeline' },
+    { label: 'Om metoden', value: 'about' },
+]
+const immersiveTab = ref<'timeline' | 'about'>('timeline')
+const immersivePageUi = computed(() => {
+    if (immersiveAsideOpen.value) {
+        return {
+            root: ' lg:gap-0',
+            center: ' border-x border-muted lg:col-span-8',
+        }
+    }
+    return {
+        root: 'lg:grid-cols-10 lg:gap-0',
+        center: 'lg:col-span-10  border-x border-muted',
+    }
+})
+const compareMethodResolved = computed(() => {
+    if (compareMode.value !== 'methods') return null
+    if (compareMethodId.value && compareMethodId.value !== selectedMethod.value.id) {
+        return compareMethodId.value
+    }
+    const alt = methods.value.find(m => m.id !== selectedMethod.value.id)
+    return alt?.id ?? null
+})
+const chartFrameworks = computed(() => {
+    if (compareModeEnabled.value && compareMode.value === 'methods' && compareMethodResolved.value) {
+        return [selectedMethod.value.id, compareMethodResolved.value]
+    }
+    return [selectedMethod.value.id]
 })
 
 interface TimelineEntry {
@@ -1337,6 +1211,31 @@ const timelineItems = computed<TimelineDisplayItem[]>(() => {
         }))
 })
 
+const compareMethodOptions = computed(() =>
+    methods.value
+        .filter(method => method.id !== selectedMethod.value.id)
+        .map(method => ({ label: method.title, value: method.id }))
+)
+
+const timelineItemsForMethod = (methodId: string) => {
+    const list = forestryTimeline.value?.entries ?? []
+    const canonicalMethod = normalizeTimelineAtgard(methodId)
+    return list
+        .map((entry) => ({
+            ...entry,
+            startskog: normalizeTimelineStartskog(entry.startskog),
+            atgard: normalizeTimelineAtgard(entry.atgard)
+        }))
+        .filter((entry) => entry.startskog === normalizeTimelineStartskog(selectedStartskogTab.value) && entry.atgard === canonicalMethod)
+        .map((entry) => ({
+            tid: entry.tid,
+            skog: entry.skog,
+            svamp: entry.svamp,
+            thumb: makeThumbSrc(entry.atgard, entry.tid, entry.startskog, 'visa_visa'),
+            thumbHidden: makeThumbSrc(entry.atgard, entry.tid, entry.startskog, 'visa_dölj')
+        }))
+}
+
 const timelineCarousel = ref<any>(null)
 const activeTimelineIndex = ref(0)
 
@@ -1366,6 +1265,20 @@ watch(timelineItems, (items) => {
     }
 })
 
+watch(compareModeEnabled, (enabled) => {
+    if (enabled && compareMode.value === 'methods' && !compareMethodId.value) {
+        const alt = methods.value.find(m => m.id !== selectedMethod.value.id)
+        compareMethodId.value = alt?.id ?? null
+    }
+})
+
+watch(selectedMethod, (val) => {
+    if (compareMethodId.value === val.id) {
+        const alt = methods.value.find(m => m.id !== val.id)
+        compareMethodId.value = alt?.id ?? null
+    }
+})
+
 const mapTimelineTidToChartValue = (tid?: string) => {
     if (!tid) return undefined
     const token = normalizeTimeToken(tid)
@@ -1378,6 +1291,64 @@ const mapTimelineTidToChartValue = (tid?: string) => {
 }
 
 const currentTimelineTime = computed(() => mapTimelineTidToChartValue(timelineItems.value[activeTimelineIndex.value]?.tid))
+
+const comparisonImages = computed(() => {
+    if (!compareModeEnabled.value) return null
+    const active = timelineItems.value[activeTimelineIndex.value]
+    if (!active) return null
+
+    if (compareMode.value === 'beforeAfter') {
+        const before = timelineItems.value.find(item => {
+            const token = normalizeTimeToken(item.tid)
+            return token === 'före'
+        }) ?? active
+        return {
+            left: before.thumb,
+            leftHidden: before.thumbHidden,
+            right: active.thumb,
+            rightHidden: active.thumbHidden
+        }
+    }
+
+    // Method compare
+    const otherMethodId = compareMethodResolved.value
+    if (!otherMethodId) return null
+
+    const otherTimeline = timelineItemsForMethod(otherMethodId)
+    const targetToken = normalizeTimeToken(active.tid)
+    const other = otherTimeline.find(item => normalizeTimeToken(item.tid) === targetToken) ?? otherTimeline[0]
+    if (!other) return null
+    return {
+        left: active.thumb,
+        leftHidden: active.thumbHidden,
+        right: other.thumb,
+        rightHidden: other.thumbHidden
+    }
+})
+
+const comparisonLabels = computed(() => {
+    if (!compareModeEnabled.value) return null
+    const currentLabel = selectedMethod.value.title || selectedMethod.value.id
+    const currentTimeLabel = formatTimelineCurrentLabel(timelineItems.value[activeTimelineIndex.value]?.tid)
+
+    if (compareMode.value === 'beforeAfter') {
+        return {
+            leftFramework: currentLabel,
+            leftTime: 'Före avverkning',
+            rightFramework: currentLabel,
+            rightTime: currentTimeLabel,
+        }
+    }
+    const otherMethodId = compareMethodResolved.value
+    const otherMethod = methods.value.find(m => m.id === otherMethodId)
+    const otherLabel = otherMethod?.title || otherMethodId || ''
+    return {
+        leftFramework: currentLabel,
+        leftTime: currentTimeLabel,
+        rightFramework: otherLabel,
+        rightTime: currentTimeLabel,
+    }
+})
 
 function formatTimelineButtonLabel(tid?: string) {
     if (!tid) return ''
@@ -1505,8 +1476,6 @@ const tabs = ref<TabsItem[]>([
 
 const startskogModalOpen = ref(route.query.entry === '1' || route.query.entry === 'true')
 
-const expandedCard = ref<'description' | 'svamp' | ''>('description')
-
 const splitParagraphs = (text: string | undefined | null) =>
     (text || '')
         .split(/\n\s*\n/g)
@@ -1532,23 +1501,6 @@ const accordionItems = computed(() => [
             : splitParagraphs(selectedMethod.value.descriptionsvamp),
     }
 ])
-
-const visibleSections = ref({
-    intro: true,
-    timeline: true,
-    diagram: true,
-})
-
-function toggleSectionVisibility(section: 'intro' | 'timeline' | 'diagram') {
-    visibleSections.value = {
-        ...visibleSections.value,
-        [section]: !visibleSections.value[section]
-    }
-}
-
-function toggleCard(key: 'description' | 'svamp') {
-    expandedCard.value = expandedCard.value === key ? '' : key
-}
 
 const frameworkIndexMap: Record<string, number> = {
     naturskydd: 0,
@@ -1629,6 +1581,18 @@ async function handleMethodNav(id: string) {
 .fold-down-enter-from,
 .fold-down-leave-to {
     transform: scaleY(0.8) translateY(-8px);
+    opacity: 0;
+}
+
+.image-fade-enter-active,
+.image-fade-leave-active {
+    transition: opacity 0.45s ease;
+    position: absolute;
+    inset: 0;
+}
+
+.image-fade-enter-from,
+.image-fade-leave-to {
     opacity: 0;
 }
 </style>

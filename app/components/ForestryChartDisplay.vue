@@ -450,6 +450,7 @@ interface Props {
   maxYValue?: number, // <-- Add this
   matsvampVariant?: 'standard' | 'goda' | 'kg',
   relativeChart?: boolean,
+  preserveFrameworkOrder?: boolean,
 }
 
 const props = withDefaults(defineProps<Props>(), {
@@ -850,9 +851,10 @@ const seriesDataMap = computed<Record<string, Array<{ age: number; value: number
 const legendItems = computed<LegendItem[]>(() => {
   if (props.singleFrameworkSelection) {
     if (props.frameworkComparisonMode) {
-      const frameworks = legendOrder.filter(key =>
-        props.selectedFrameworks.map(f => f.toLowerCase()).includes(key)
-      );
+      const selectedLower = (props.selectedFrameworks || []).map(f => f.toLowerCase())
+      const frameworks = props.preserveFrameworkOrder
+        ? selectedLower.filter(key => legendOrder.includes(key))
+        : legendOrder.filter(key => selectedLower.includes(key))
       const baseColor = primaryArtColor.value;
       const alpha = 0.5;
       return frameworks.map((key, index) => {
@@ -897,9 +899,10 @@ const legendItems = computed<LegendItem[]>(() => {
     });
   }
 
-  const frameworks = legendOrder.filter(key =>
-    props.selectedFrameworks.map(f => f.toLowerCase()).includes(key)
-  );
+  const selectedLower = (props.selectedFrameworks || []).map(f => f.toLowerCase())
+  const frameworks = props.preserveFrameworkOrder
+    ? selectedLower.filter(key => legendOrder.includes(key))
+    : legendOrder.filter(key => selectedLower.includes(key));
   const baseColor = primaryArtColor.value;
   const alpha = 0.5;
   return frameworks.map((key, index) => {

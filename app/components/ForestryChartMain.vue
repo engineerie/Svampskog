@@ -162,7 +162,8 @@ const chartDisplayProps = computed(() => {
       redColor: true,
       maxYValue: 0.65,
       currentTimeValue: props.currentTimeValue,
-      frameworkComparisonMode: isFrameworkCompareMode.value
+      frameworkComparisonMode: isFrameworkCompareMode.value,
+      preserveFrameworkOrder: props.preserveFrameworkOrder,
     }
   }
 
@@ -176,7 +177,8 @@ const chartDisplayProps = computed(() => {
       maxYValue: matsvampMaxY.value,
       currentTimeValue: props.currentTimeValue,
       matsvampVariant: selectedMatsvampVariant.value,
-      frameworkComparisonMode: isFrameworkCompareMode.value
+      frameworkComparisonMode: isFrameworkCompareMode.value,
+      preserveFrameworkOrder: props.preserveFrameworkOrder,
     }
   }
 
@@ -188,7 +190,8 @@ const chartDisplayProps = computed(() => {
       chartType: chartType.value,
       singleFrameworkSelection: true,
       selectedStartskog: props.currentStartskog,
-      currentTimeValue: props.currentTimeValue
+      currentTimeValue: props.currentTimeValue,
+      preserveFrameworkOrder: props.preserveFrameworkOrder,
     }
   }
 
@@ -199,7 +202,8 @@ const chartDisplayProps = computed(() => {
     chartType: chartType.value,
     maxYValue: 130,
     currentTimeValue: props.currentTimeValue,
-    frameworkComparisonMode: isFrameworkCompareMode.value
+    frameworkComparisonMode: isFrameworkCompareMode.value,
+    preserveFrameworkOrder: props.preserveFrameworkOrder,
   }
 })
 
@@ -235,6 +239,7 @@ interface Props {
   currentTimeValue?: string
   currentStartskog?: string
   selectedChart?: string
+  preserveFrameworkOrder?: boolean
 }
 const props = defineProps<Props>()
 const emit = defineEmits<{

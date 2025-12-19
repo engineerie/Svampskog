@@ -1,5 +1,24 @@
 <template>
   <div v-if="layoutMode === 'slider'" ref="container" class="relative w-full h-full overflow-hidden select-none">
+    <!-- Labels -->
+    <!-- <div class="absolute inset-x-0 top-2 px-3 flex justify-between z-30 pointer-events-none">
+      <div class="flex flex-col gap-1">
+        <UBadge v-if="frameworkLabel" size="md" color="neutral" variant="solid" class="pointer-events-auto">
+          {{ frameworkLabel }}
+        </UBadge>
+        <UBadge v-if="timeLabel" size="sm" color="neutral" variant="subtle" class="pointer-events-auto">
+          {{ timeLabel }}
+        </UBadge>
+      </div>
+      <div class="flex flex-col gap-1 items-end">
+        <UBadge v-if="frameworkLabel2" size="md" color="neutral" variant="solid" class="pointer-events-auto">
+          {{ frameworkLabel2 }}
+        </UBadge>
+        <UBadge v-if="timeLabel2" size="sm" color="neutral" variant="subtle" class="pointer-events-auto">
+          {{ timeLabel2 }}
+        </UBadge>
+      </div>
+    </div> -->
     <!-- "After" slot: full background -->
     <div class="absolute inset-0" style="z-index:0">
       <slot name="second" />
@@ -18,21 +37,21 @@
       zIndex: 20,
     }" @mousedown="startDrag" @touchstart="startDrag">
       <div class="flex h-full relative">
-        <div class="absolute text-end  right-3 top-14">
-          <!-- <UBadge v-if="!isMobile" size="lg"
+        <div class="absolute text-end  right-3 top-2">
+          <UBadge v-if="!isMobile" size="md"
             class="backdrop-blur-xl bg-neutral-100/0 text-neutral-100 h-fit whitespace-nowrap mb-0.5">{{
-              frameworkLabel }}</UBadge> -->
-          <!-- <UBadge size="lg" class="backdrop-blur-xl bg-neutral-950/50 text-neutral-100 h-fit whitespace-nowrap">{{
-            timeLabel }}</UBadge> -->
+              frameworkLabel }}</UBadge>
+          <UBadge size="md" class="backdrop-blur-xl bg-neutral-950/50 text-neutral-100 h-fit whitespace-nowrap">{{
+            timeLabel }}</UBadge>
         </div>
 
         <div class="h-full w-1.5 bg-neutral-50/90 backdrop-blur-md inset-shadow-sm inset-shadow-neutral-300"></div>
-        <div class="absolute top-14 left-3">
-          <!-- <UBadge v-if="!isMobile" size="lg"
+        <div class="absolute top-2 left-3">
+          <UBadge v-if="!isMobile" size="md"
             class="backdrop-blur-xl bg-neutral-100/0 text-neutral-100 h-fit whitespace-nowrap mb-0.5">{{
-              frameworkLabel2 }}</UBadge> -->
-          <!-- <UBadge size="lg" class="backdrop-blur-xl bg-neutral-950/50 text-neutral-100 h-fit whitespace-nowrap">{{
-            timeLabel2 }}</UBadge> -->
+              frameworkLabel2 }}</UBadge>
+          <UBadge size="md" class="backdrop-blur-xl bg-neutral-950/50 text-neutral-100 h-fit whitespace-nowrap">{{
+            timeLabel2 }}</UBadge>
         </div>
       </div>
     </div>
