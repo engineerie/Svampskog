@@ -27,7 +27,7 @@ const buildStack = () => {
       }
     }) ?? []
   stackImages.value = imgs.length ? [...imgs] : []
-  currentImageIndex.value = 0
+  currentImageIndex.value = 2
   if (stackImages.value.length && isImageInView.value) {
     restartProgress()
   }

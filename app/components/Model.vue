@@ -411,7 +411,7 @@
           <template v-for="badge in pinnedOverlayBadges" :key="badge.key">
             <div class="pointer-events-auto flex flex-col sm:flex sm:flex-wrap gap-1 items-end">
               <UPopover :open-delay="500" :close-delay="300" mode="click" v-model:open="badgePopoverOpen[badge.key]"
-                :popper="{ placement: 'bottom-end' }" :ui="{ content: 'p-0 w-80' }">
+                :popper="{ placement: 'bottom-end' }" :ui="{ content: 'p-0 w-80 overflow-hidden' }">
                 <div>
                   <UBadge color="neutral" variant="outline" size="lg" :class="[
                     'cursor-pointer shadow-sm sm:ml-1.5 w-fit transition-opacity ring-muted/50',
@@ -430,7 +430,7 @@
                 </div>
 
                 <template #content>
-                  <div class="p-3 space-y-2">
+                  <div class="p-3 space-y-2 max-h-120 overflow-auto">
                     <div class="flex w-full justify-between">
                       <div class="flex items-start gap-2">
                         <UIcon v-if="badge.icon" :name="badge.icon" class="size-5 text-primary-500 mt-0.5" />
@@ -442,7 +442,23 @@
                         @click="togglePinned(badge.key), badgePopoverOpen[badge.key] = true" />
                     </div>
 
-                    <p v-if="getOverlayInfo(badge.key).description" class="text-sm text-neutral-600 leading-relaxed">
+                    <div v-if="overlayTextMap[badge.key]?.images?.length"
+                      class="relative rounded-md overflow-hidden ring ring-muted/50 shadow">
+                      <img :src="overlayTextMap[badge.key].images[0]" :alt="getOverlayInfo(badge.key).title"
+                        class="w-full h-48 object-cover" loading="lazy" />
+                      <div v-if="overlayTextMap[badge.key]?.imageDescriptions?.[0]"
+                        class="text-xs text-neutral-100 absolute bottom-0 w-full bg-neutral-950/60 p-2">
+                        {{ overlayTextMap[badge.key].imageDescriptions[0] }}
+                      </div>
+                    </div>
+                    <img v-else-if="overlayTextMap[badge.key]?.image" :src="overlayTextMap[badge.key].image"
+                      :alt="getOverlayInfo(badge.key).title"
+                      class="rounded-md ring ring-muted/50 shadow w-full h-48 object-cover" />
+
+                    <ContentRenderer v-if="overlayTextMap[badge.key]?.doc?.body"
+                      :value="overlayTextMap[badge.key].doc" />
+                    <p v-else-if="getOverlayInfo(badge.key).description"
+                      class="text-sm text-neutral-600 leading-relaxed">
                       {{ getOverlayInfo(badge.key).description }}
                     </p>
                     <div v-else class="text-xs text-neutral-400">Ingen beskrivning tillgänglig.</div>
@@ -1956,9 +1972,20 @@ const overlayConfigs: Record<OverlayKey, OverlayContentConfig> = {
   },
 };
 
-const overlayTextMap = computed<Record<OverlayKey, { title: string; description: string; image?: string; doc?: any }>>(() => {
+function toWebOverlayImage(src?: string) {
+  if (!src) return src;
+  if (src.includes('/overlayimages/web/') || src.endsWith('.webp')) return src;
+  const lastSlash = src.lastIndexOf('/');
+  const dir = lastSlash === -1 ? '' : src.slice(0, lastSlash);
+  const file = lastSlash === -1 ? src : src.slice(lastSlash + 1);
+  const base = file.replace(/\.[^.]+$/, '');
+  const webDir = dir ? `${dir}/web` : '/web';
+  return `${webDir}/${base}.webp`;
+}
+
+const overlayTextMap = computed<Record<OverlayKey, { title: string; description: string; image?: string; images?: string[]; imageDescriptions?: string[]; doc?: any }>>(() => {
   const docs = (overlayTextData.value as any[]) || [];
-  const map = {} as Record<OverlayKey, { title: string; description: string; image?: string; doc?: any }>;
+  const map = {} as Record<OverlayKey, { title: string; description: string; image?: string; images?: string[]; imageDescriptions?: string[]; doc?: any }>;
 
   docs.forEach((doc: any) => {
     const key = doc?.key as OverlayKey;
@@ -1967,7 +1994,9 @@ const overlayTextMap = computed<Record<OverlayKey, { title: string; description:
     map[key] = {
       title: doc.title ?? base.title,
       description: doc.description ?? base.description,
-      image: doc.image,
+      image: toWebOverlayImage(doc.image),
+      images: doc.images?.map((img: string) => toWebOverlayImage(img)),
+      imageDescriptions: doc.imageDescriptions,
       doc,
     };
   });

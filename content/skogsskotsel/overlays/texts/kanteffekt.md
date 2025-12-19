@@ -4,11 +4,13 @@ title: Kanteffekt
 description: Rötter och svampar sträcker sig 10–15 meter in.
 path: /skogsskotsel/luckhuggning
 images:
+  - /images/overlayimages/Line Djupström Hyggeskant.JPG
   - /images/overlayimages/web/kanteffekt_trakthygge.webp
   - /images/overlayimages/web/kanteffekt_luckhuggning.webp
   - /images/overlayimages/web/kanteffekt_luckhuggning2.webp
   - /images/overlayimages/web/kanteffekt_skärm.webp
 imageDescriptions:
+  - Hyggeskant. © Line Djupström
   - Trakthygge strax efter avverkning.
   - Luckhuggning strax efter första avverkningen.
   - Spår av samlad kanteffekt över 80 år av luckhuggning.
