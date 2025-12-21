@@ -321,6 +321,11 @@
 
 
         <UContainer class="w-full px-0 " v-if="selectedMethod.id">
+
+            <Head>
+                <link v-for="(link, idx) in timelinePreloadLinks" :key="`${link.href}-${idx}`"
+                    :rel="link.rel || 'prefetch'" :as="link.as || 'image'" :href="link.href" />
+            </Head>
             <UPage class="pt-0 min-h-screen" :left="immersiveAsideOpen" :right="false" :ui="immersivePageUi">
                 <template v-if="immersiveAsideOpen" #left>
                     <UPageAside :ui="{ container: ' flex flex-col flex-1 h-full', root: '' }">
@@ -328,14 +333,15 @@
                             <div>
                                 <p class="text-sm font-medium text-neutral-800 mt-4 mb-2">Skötselmetoder</p>
 
-                                <div v-for="method in methods" class="space-y-1">
+                                <div v-for="method in methods" class="space-y-2">
                                     <UTooltip :text="method.shortdescription || method.title" :content="{
                                         side: 'right',
                                     }">
                                         <UButton :label="method.title" :leading-icon="method.icon"
                                             @click="selectedId = method.id"
-                                            :color="selectedId === method.id ? 'primary' : 'neutral'" variant="ghost"
-                                            class="ring-muted/50 w-full" />
+                                            :color="selectedId === method.id ? 'neutral' : 'neutral'"
+                                            :variant="selectedId === method.id ? 'solid' : 'ghost'"
+                                            class="ring-muted/50 w-full mb-0.5" />
                                     </UTooltip>
                                 </div>
                             </div>
@@ -491,101 +497,113 @@
                 </div>
 
                 <div class="" v-if="immersiveTab === 'timeline'">
-                    <div class="relative w-full overflow-hidden shadow aspect-video bg-neutral-900"
-                        :style="heroBackgroundStyle">
-                        <Transition name="image-fade">
-                            <div :key="heroImageKey" class="absolute inset-0">
-                                <div
-                                    class=" bg-neutral-950/80 p-1 py-2 rounded-sm flex flex-col items-center gap-2 text-xs text-neutral-500 absolute bottom-4 right-4 z-20">
+                    <div class="flex bg-neutral-50/70">
+                        <div class="relative w-full overflow-hidden shadow aspect-video bg-neutral-900 resize min-w-90 min-h-60 max-h-150"
+                            :style="heroBackgroundStyle">
+                            <Transition name="image-fade">
+                                <div :key="heroImageKey" class="absolute inset-0">
 
-                                    <UIcon name="i-mingcute-tree-fill" class="size-5 text-primary" />
-                                    <USlider v-model="treeFade" :min="0" :max="1" :step="0.05" class="h-20 sm:h-32"
-                                        color="primary" orientation="vertical" inverse size="xs" />
-                                    <UPopover>
-                                        <div class="flex flex-col cursor-help ">
-                                            <UIcon name="i-fluent-shape-organic-16-filled" class="size-4 text-gray-300 z-20" />
-                                            <UIcon name="i-fluent-shape-organic-16-filled"
-                                                class="size-4 -mt-3 text-signal-400 z-10" />
-                                            <UIcon name="i-fluent-shape-organic-16-filled"
-                                                class="size-4 -mt-3 text-yellow-400" />
+
+                                    <template v-if="compareModeEnabled && comparisonImages">
+                                        <CustomImageComparisonSlider class="w-full h-full"
+                                            :framework-label="comparisonLabels?.leftFramework"
+                                            :time-label="comparisonLabels?.leftTime"
+                                            :framework-label2="comparisonLabels?.rightFramework"
+                                            :time-label2="comparisonLabels?.rightTime">
+                                            <template #first>
+                                                <div class="relative w-full h-full">
+                                                    <img :src="comparisonImages.leftHidden || comparisonImages.left"
+                                                        class="w-full h-full object-cover absolute inset-0"
+                                                        loading="lazy" />
+                                                    <img :src="comparisonImages.left"
+                                                        class="w-full h-full object-cover relative" loading="lazy"
+                                                        :style="{ opacity: treeFade }" />
+                                                </div>
+                                            </template>
+                                            <template #second>
+                                                <div class="relative w-full h-full">
+                                                    <img :src="comparisonImages.rightHidden || comparisonImages.right"
+                                                        class="w-full h-full object-cover absolute inset-0"
+                                                        loading="lazy" />
+                                                    <img :src="comparisonImages.right"
+                                                        class="w-full h-full object-cover relative transition-opacity duration-500"
+                                                        loading="lazy" :style="{ opacity: treeFade }" />
+                                                </div>
+                                            </template>
+                                        </CustomImageComparisonSlider>
+                                    </template>
+                                    <template v-else-if="currentTimelineItem">
+                                        <img :src="currentTimelineItem.thumbHidden"
+                                            :alt="`Foto ${currentTimelineItem.tid}`"
+                                            class="w-full h-full object-cover absolute inset-0" />
+                                        <img :src="currentTimelineItem.thumb" :alt="`Foto ${currentTimelineItem.tid}`"
+                                            class="w-full h-full object-cover relative transition-opacity duration-500"
+                                            :style="{ opacity: treeFade }" />
+                                        <div
+                                            class="absolute top-2 left-2 z-20 flex flex-col items-start gap-1 pointer-events-none">
+                                            <UBadge v-if="!isMobile" size="md"
+                                                class="backdrop-blur-xl bg-neutral-100/0 text-neutral-100 h-fit whitespace-nowrap mb-0.5">
+                                                {{ selectedMethod.title || selectedMethod.id }}
+                                            </UBadge>
+                                            <UBadge size="md"
+                                                class="backdrop-blur-xl bg-neutral-950/50 text-neutral-100 h-fit whitespace-nowrap">
+                                                {{ formatTimelineCurrentLabel(timelineItems[activeTimelineIndex]?.tid)
+                                                }}
+                                            </UBadge>
                                         </div>
-                                        <template #content>
-                                            <div class="flex flex-col gap-2 p-4">
-                                                <div class="flex w-full">
-                                                    <UIcon name="i-fluent-shape-organic-16-filled"
-                                                        class="size-6 text-gray-300 z-20" />
-                                                    <UIcon name="i-fluent-shape-organic-16-filled"
-                                                        class="size-6 -ml-4 text-gray-400 z-10" />
-                                                    <UIcon name="i-fluent-shape-organic-16-filled"
-                                                        class="size-6 -ml-4 mr-4 text-gray-500" />
-                                                    <h1 class="font-medium">Mykorrhizasvampar</h1>
-                                                </div>
-                                                <div class="flex w-full justify-between">
-                                                    <UIcon name="i-fluent-shape-organic-16-filled"
-                                                        class="size-6 text-signal-400" />
-
-                                                    <h1 class="font-medium">Naturvårdssvampar</h1>
-                                                </div>
-                                                <div class="flex w-full justify-between">
-                                                    <UIcon name="i-fluent-shape-organic-16-filled"
-                                                        class="size-6 text-yellow-400" />
-
-                                                    <h1 class="font-medium">Matsvampar</h1>
-                                                </div>
-
-                                            </div>
-                                        </template>
-                                    </UPopover>
+                                    </template>
+                                    <ImagePlaceholder v-else />
                                 </div>
+                            </Transition>
+                            <div
+                                class="p-3 flex flex-col items-center gap-2 text-xs text-neutral-500 absolute right-3 bottom-3 z-20">
 
-                                <template v-if="compareModeEnabled && comparisonImages">
-                                    <CustomImageComparisonSlider class="w-full h-full"
-                                        :framework-label="comparisonLabels?.leftFramework"
-                                        :time-label="comparisonLabels?.leftTime"
-                                        :framework-label2="comparisonLabels?.rightFramework"
-                                        :time-label2="comparisonLabels?.rightTime">
-                                        <template #first>
-                                            <div class="relative w-full h-full">
-                                                <img :src="comparisonImages.leftHidden || comparisonImages.left"
-                                                    class="w-full h-full object-cover absolute inset-0" loading="lazy" />
-                                                <img :src="comparisonImages.left" class="w-full h-full object-cover relative"
-                                                    loading="lazy" :style="{ opacity: treeFade }" />
-                                            </div>
-                                        </template>
-                                        <template #second>
-                                            <div class="relative w-full h-full">
-                                                <img :src="comparisonImages.rightHidden || comparisonImages.right"
-                                                    class="w-full h-full object-cover absolute inset-0" loading="lazy" />
-                                                <img :src="comparisonImages.right"
-                                                    class="w-full h-full object-cover relative transition-opacity duration-500"
-                                                    loading="lazy" :style="{ opacity: treeFade }" />
-                                            </div>
-                                        </template>
-                                    </CustomImageComparisonSlider>
-                                </template>
-                                <template v-else-if="currentTimelineItem">
-                                    <img :src="currentTimelineItem.thumbHidden" :alt="`Foto ${currentTimelineItem.tid}`"
-                                        class="w-full h-full object-cover absolute inset-0" />
-                                    <img :src="currentTimelineItem.thumb" :alt="`Foto ${currentTimelineItem.tid}`"
-                                        class="w-full h-full object-cover relative transition-opacity duration-500"
-                                        :style="{ opacity: treeFade }" />
-                                    <div class="absolute top-2 left-2 z-20 flex flex-col items-start gap-1 pointer-events-none">
-                                        <UBadge v-if="!isMobile" size="md"
-                                            class="backdrop-blur-xl bg-neutral-100/0 text-neutral-100 h-fit whitespace-nowrap mb-0.5">
-                                            {{ selectedMethod.title || selectedMethod.id }}
-                                        </UBadge>
-                                        <UBadge size="md"
-                                            class="backdrop-blur-xl bg-neutral-950/50 text-neutral-100 h-fit whitespace-nowrap">
-                                            {{ formatTimelineCurrentLabel(timelineItems[activeTimelineIndex]?.tid) }}
-                                        </UBadge>
+                                <UIcon name="i-mingcute-tree-fill" class="size-5 text-primary" />
+                                <USlider v-model="treeFade" :min="0" :max="1" :step="0.05" class="h-20 sm:h-32"
+                                    color="primary" orientation="vertical" inverse size="xs" />
+                                <UPopover>
+                                    <div class="flex flex-col cursor-help ">
+                                        <UIcon name="i-fluent-shape-organic-16-filled"
+                                            class="size-4 text-gray-300 z-20" />
+                                        <UIcon name="i-fluent-shape-organic-16-filled"
+                                            class="size-4 -mt-3 text-signal-400 z-10" />
+                                        <UIcon name="i-fluent-shape-organic-16-filled"
+                                            class="size-4 -mt-3 text-yellow-400" />
                                     </div>
-                                </template>
-                                <ImagePlaceholder v-else />
+                                    <template #content>
+                                        <div class="flex flex-col gap-2 p-4">
+                                            <div class="flex w-full">
+                                                <UIcon name="i-fluent-shape-organic-16-filled"
+                                                    class="size-6 text-gray-300 z-20" />
+                                                <UIcon name="i-fluent-shape-organic-16-filled"
+                                                    class="size-6 -ml-4 text-gray-400 z-10" />
+                                                <UIcon name="i-fluent-shape-organic-16-filled"
+                                                    class="size-6 -ml-4 mr-4 text-gray-500" />
+                                                <h1 class="font-medium">Mykorrhizasvampar</h1>
+                                            </div>
+                                            <div class="flex w-full justify-between">
+                                                <UIcon name="i-fluent-shape-organic-16-filled"
+                                                    class="size-6 text-signal-400" />
+
+                                                <h1 class="font-medium">Naturvårdssvampar</h1>
+                                            </div>
+                                            <div class="flex w-full justify-between">
+                                                <UIcon name="i-fluent-shape-organic-16-filled"
+                                                    class="size-6 text-yellow-400" />
+
+                                                <h1 class="font-medium">Matsvampar</h1>
+                                            </div>
+
+                                        </div>
+                                    </template>
+                                </UPopover>
                             </div>
-                        </Transition>
+                        </div>
+
                     </div>
+
                     <div
-                        class=" border-b border-muted/50 px-3 py-2.5 flex flex-wrap items-center justify-between gap-3 sticky top-0 z-30">
+                        class=" border-y border-muted/50 px-3 py-2.5 flex flex-wrap items-center justify-between gap-3 sticky top-0 z-30">
 
 
                         <div class="flex flex-wrap gap-2 items-center">
@@ -676,7 +694,7 @@
                             </template>
                         </UPopover>
                     </div>
-                    <div class="grid grid-cols-2">
+                    <div class="grid md:grid-cols-2">
 
                         <div class="space-y-2 p-5">
                             <h3 class="text-xl font-semibold text-neutral-900">
@@ -1217,6 +1235,28 @@ const compareMethodOptions = computed(() =>
         .map(method => ({ label: method.title, value: method.id }))
 )
 
+const timelinePreloadLinks = computed(() => {
+    const links: { rel: string; as?: string; href: string }[] = []
+    const items = timelineItems.value
+    if (!items.length) return links
+
+    // current first, then remaining in order
+    const ordered = [
+        items[activeTimelineIndex.value],
+        ...items.filter((_, idx) => idx !== activeTimelineIndex.value)
+    ].filter(Boolean)
+
+    for (const item of ordered) {
+        if (item?.thumb) {
+            links.push({ rel: 'prefetch', as: 'image', href: item.thumb })
+        }
+        if (item?.thumbHidden) {
+            links.push({ rel: 'prefetch', as: 'image', href: item.thumbHidden })
+        }
+    }
+    return links
+})
+
 const timelineItemsForMethod = (methodId: string) => {
     const list = forestryTimeline.value?.entries ?? []
     const canonicalMethod = normalizeTimelineAtgard(methodId)
@@ -1594,5 +1634,11 @@ async function handleMethodNav(id: string) {
 .image-fade-enter-from,
 .image-fade-leave-to {
     opacity: 0;
+}
+
+.background {
+    /* background-color: #f9f6f3; */
+    background-image: linear-gradient(#f2ece2 1px, transparent 1px), linear-gradient(to right, #f2ece2 1px, #ffffff 1px);
+    background-size: 20px 20px;
 }
 </style>
