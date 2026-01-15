@@ -38,20 +38,20 @@
     }" @mousedown="startDrag" @touchstart="startDrag">
       <div class="flex h-full relative">
         <div class="absolute text-end  right-3 top-2">
-          <UBadge v-if="!isMobile" size="md"
+          <!-- <UBadge v-if="!isMobile" size="md"
             class="backdrop-blur-xl bg-neutral-100/0 text-neutral-100 h-fit whitespace-nowrap mb-0.5">{{
-              frameworkLabel }}</UBadge>
+              frameworkLabel }}</UBadge> -->
           <UBadge size="md" class="backdrop-blur-xl bg-neutral-950/50 text-neutral-100 h-fit whitespace-nowrap">{{
-            timeLabel }}</UBadge>
+            primaryTimeLabel }}</UBadge>
         </div>
 
         <div class="h-full w-1.5 bg-neutral-50/90 backdrop-blur-md inset-shadow-sm inset-shadow-neutral-300"></div>
         <div class="absolute top-2 left-3">
-          <UBadge v-if="!isMobile" size="md"
+          <!-- <UBadge v-if="!isMobile" size="md"
             class="backdrop-blur-xl bg-neutral-100/0 text-neutral-100 h-fit whitespace-nowrap mb-0.5">{{
-              frameworkLabel2 }}</UBadge>
+              frameworkLabel2 }}</UBadge> -->
           <UBadge size="md" class="backdrop-blur-xl bg-neutral-950/50 text-neutral-100 h-fit whitespace-nowrap">{{
-            timeLabel2 }}</UBadge>
+            secondaryTimeLabel }}</UBadge>
         </div>
       </div>
     </div>
@@ -67,7 +67,7 @@
   </div>
 </template>
 <script setup>
-import { ref, watch, onMounted, onUnmounted } from "vue";
+import { ref, watch, onMounted, onUnmounted, computed } from "vue";
 import { useMediaQuery } from '@vueuse/core'
 const isMobile = useMediaQuery('(max-width: 767px)')
 
@@ -90,6 +90,10 @@ const props = defineProps({
     type: String,
     default: "",
   },
+  useMethodLabels: {
+    type: Boolean,
+    default: false,
+  },
   layoutMode: {
     type: String,
     default: "slider"  // default if nothing is passed
@@ -98,6 +102,8 @@ const props = defineProps({
 
 // Initialize internal layout mode with the prop value.
 const layoutMode = ref(props.layoutMode);
+const primaryTimeLabel = computed(() => (props.useMethodLabels ? props.frameworkLabel : props.timeLabel));
+const secondaryTimeLabel = computed(() => (props.useMethodLabels ? props.frameworkLabel2 : props.timeLabel2));
 
 // Watch for prop changes to update internal state.
 watch(() => props.layoutMode, (newVal) => {
