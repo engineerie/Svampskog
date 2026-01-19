@@ -229,9 +229,11 @@ const open = ref(false)
           duration: 0.3,
           delay: 0.6
         }">
-          <EnvironmentSelector class="" />
+          <UCard variant="soft" class="shadow ring ring-muted/30">
+            <EnvironmentSelector class="" />
+          </UCard>
 
-          <div class="flex w-full justify-center mb-4">
+          <div class="flex w-full justify-center my-4">
             <UButton size="xl" trailing :disabled="!allSelected" @click="redirect" color="primary"
               icon="i-heroicons-arrow-right" label="Gå till miljö" />
           </div>

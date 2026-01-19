@@ -134,6 +134,10 @@
             class="ring-muted/50 w-full justify-start" />
     </DefineMarkerCardTrigger>
     <DefineMarkerCardBody v-slot="{ card }">
+        <div v-if="card.key === 'kanteffekt'" class="mb-3">
+            <USwitch v-model="kanteffektOldVisible" size="sm" color="primary" label="Tidigare kanteffekt"
+                :ui="{ label: 'text-sm text-neutral-700', track: 'ring-muted/60' }" />
+        </div>
         <div class="flex items-center gap-2 mb-3">
             <UButton color="neutral" :variant="markerPinned[card.key] ? 'solid' : 'outline'" class="ring-muted/50"
                 :label="markerPinned[card.key] ? 'Lossa overlay' : 'Fäst overlay'"
@@ -383,13 +387,28 @@
                                                             height="844" preserveAspectRatio="xMidYMid slice" />
                                                     </svg>
                                                     <div class="absolute inset-0 pointer-events-none">
-                                                        <template v-for="(card, idx) in markerCards"
+                                                        <template
+                                                            v-for="(card, idx) in (compareMode === 'beforeAfter' ? markerCardsBefore : markerCards)"
                                                             :key="`overlay-compare-left-${card.key}`">
-                                                            <div v-if="isMarkerOverlayVisible(card.key)"
-                                                                class="absolute rounded-md border border-neutral-100/60 bg-neutral-900/40 px-2 py-1 text-xs text-neutral-100 backdrop-blur"
-                                                                :style="markerOverlayStyle(idx)">
-                                                                {{ card.title }}
-                                                            </div>
+                                                            <template
+                                                                v-if="isMarkerOverlayVisible(card.key) && card.overlayAvailable !== false">
+                                                                <template v-if="card.overlaySvgs?.length">
+                                                                    <img v-for="(overlay, svgIdx) in card.overlaySvgs"
+                                                                        :key="`${card.key}-left-${svgIdx}`"
+                                                                        :src="overlay.src" :alt="card.title"
+                                                                        class="absolute inset-0 w-full h-full object-cover"
+                                                                        :style="{ opacity: overlay.opacity ?? 1 }" />
+                                                                </template>
+                                                                <img v-else-if="card.svgPath" :src="card.svgPath"
+                                                                    :alt="card.title"
+                                                                    class="absolute inset-0 w-full h-full object-cover"
+                                                                    :style="{ opacity: card.overlayOpacity ?? 1 }" />
+                                                                <div v-else
+                                                                    class="absolute rounded-md border border-neutral-100/60 bg-neutral-900/40 px-2 py-1 text-xs text-neutral-100 backdrop-blur"
+                                                                    :style="markerOverlayStyle(idx)">
+                                                                    {{ card.title }}
+                                                                </div>
+                                                            </template>
                                                         </template>
                                                     </div>
                                                 </div>
@@ -409,13 +428,28 @@
                                                             height="844" preserveAspectRatio="xMidYMid slice" />
                                                     </svg>
                                                     <div class="absolute inset-0 pointer-events-none">
-                                                        <template v-for="(card, idx) in markerCards"
+                                                        <template
+                                                            v-for="(card, idx) in (compareMode === 'methods' ? markerCardsCompare : markerCards)"
                                                             :key="`overlay-compare-right-${card.key}`">
-                                                            <div v-if="isMarkerOverlayVisible(card.key)"
-                                                                class="absolute rounded-md border border-neutral-100/60 bg-neutral-900/40 px-2 py-1 text-xs text-neutral-100 backdrop-blur"
-                                                                :style="markerOverlayStyle(idx)">
-                                                                {{ card.title }}
-                                                            </div>
+                                                            <template
+                                                                v-if="isMarkerOverlayVisible(card.key) && card.overlayAvailable !== false">
+                                                                <template v-if="card.overlaySvgs?.length">
+                                                                    <img v-for="(overlay, svgIdx) in card.overlaySvgs"
+                                                                        :key="`${card.key}-right-${svgIdx}`"
+                                                                        :src="overlay.src" :alt="card.title"
+                                                                        class="absolute inset-0 w-full h-full object-cover"
+                                                                        :style="{ opacity: overlay.opacity ?? 1 }" />
+                                                                </template>
+                                                                <img v-else-if="card.svgPath" :src="card.svgPath"
+                                                                    :alt="card.title"
+                                                                    class="absolute inset-0 w-full h-full object-cover"
+                                                                    :style="{ opacity: card.overlayOpacity ?? 1 }" />
+                                                                <div v-else
+                                                                    class="absolute rounded-md border border-neutral-100/60 bg-neutral-900/40 px-2 py-1 text-xs text-neutral-100 backdrop-blur"
+                                                                    :style="markerOverlayStyle(idx)">
+                                                                    {{ card.title }}
+                                                                </div>
+                                                            </template>
                                                         </template>
                                                     </div>
                                                 </div>
@@ -437,11 +471,24 @@
                                         </svg>
                                         <div class="absolute inset-0 pointer-events-none">
                                             <template v-for="(card, idx) in markerCards" :key="`overlay-${card.key}`">
-                                                <div v-if="isMarkerOverlayVisible(card.key)"
-                                                    class="absolute rounded-md border border-neutral-100/60 bg-neutral-900/40 px-2 py-1 text-xs text-neutral-100 backdrop-blur"
-                                                    :style="markerOverlayStyle(idx)">
-                                                    {{ card.title }}
-                                                </div>
+                                                <template
+                                                    v-if="isMarkerOverlayVisible(card.key) && card.overlayAvailable !== false">
+                                                    <template v-if="card.overlaySvgs?.length">
+                                                        <img v-for="(overlay, svgIdx) in card.overlaySvgs"
+                                                            :key="`${card.key}-single-${svgIdx}`" :src="overlay.src"
+                                                            :alt="card.title"
+                                                            class="absolute inset-0 w-full h-full object-cover"
+                                                            :style="{ opacity: overlay.opacity ?? 1 }" />
+                                                    </template>
+                                                    <img v-else-if="card.svgPath" :src="card.svgPath" :alt="card.title"
+                                                        class="absolute inset-0 w-full h-full object-cover"
+                                                        :style="{ opacity: card.overlayOpacity ?? 1 }" />
+                                                    <div v-else
+                                                        class="absolute rounded-md border border-neutral-100/60 bg-neutral-900/40 px-2 py-1 text-xs text-neutral-100 backdrop-blur"
+                                                        :style="markerOverlayStyle(idx)">
+                                                        {{ card.title }}
+                                                    </div>
+                                                </template>
                                             </template>
                                         </div>
                                         <div
@@ -642,6 +689,7 @@ const isDesktop = useMediaQuery('(min-width: 640px)')
 const methodPanelOpen = ref(true)
 const showMobileStickySelect = ref(false)
 const bestandsgransVisible = ref(true)
+const kanteffektOldVisible = ref(false)
 const bestandsgransSrc = '/svg/best%C3%A5ndsgr%C3%A4ns.svg'
 let __scrollHandler: (() => void) | null = null
 const evaluateStickySelect = () => {
@@ -1219,23 +1267,70 @@ const overlayTextMap = computed<Record<string, { title: string; description: str
 })
 
 const markerDefinitions = [
-    { key: 'retention', icon: 'i-pepicons-pop-tree-circle' },
     { key: 'kanteffekt', icon: 'i-healthicons-square-medium-negative' },
     { key: 'rottacke', icon: 'i-game-icons-tree-roots' },
-    { key: 'rottackeSkarmtrad', icon: 'i-game-icons-tree-roots' },
-    { key: 'rottackeBladning', icon: 'i-game-icons-tree-roots' },
-    { key: 'seedTree', icon: 'i-teenyicons-redwoodjs-outline' },
+    { key: 'rottackeSkarmtrad', icon: 'i-game-icons-tree-roots', label: 'Rötter skärmträd', svgPath: '/svg/sk%C3%A4rmtr%C3%A4d.svg' },
+    { key: 'rottackeBladning', icon: 'i-game-icons-tree-roots', label: 'Trädrötter blädning', svgPath: '/svg/Bl%C3%A4dning.svg' },
+    { key: 'seedTree', icon: 'i-teenyicons-redwoodjs-outline', label: 'Fröträd', svgPath: '/svg/Fr%C3%B6tr%C3%A4d.svg' },
     { key: 'smaplantor', icon: 'i-pepicons-pop-seedling-circle' },
-    { key: 'hogstubbar', icon: 'i-roentgen-wood' },
+    { key: 'hogstubbar', icon: 'i-roentgen-wood', label: 'Högstubbar', svgPath: '/svg/H%C3%B6gstubbe.svg' },
     { key: 'naturvardsarter', icon: 'i-material-symbols-award-star-outline' },
-    { key: 'tradplantor', icon: 'i-hugeicons-plant-02' },
+    { key: 'tradplantor', icon: 'i-hugeicons-plant-02', label: 'Planterade plantor', svgPath: '/svg/planterade_plantor.svg' },
+    { key: 'hansyn_enstaka', icon: 'i-material-symbols-park', label: 'Hänsynsträd', svgPath: '/svg/h%C3%A4nsyn_enstaka.svg' },
+    { key: 'hansyn_yta', icon: 'i-material-symbols-nature-people', label: 'Hänsynsyta', svgPath: '/svg/h%C3%A4nsyn_yta.svg' },
 ]
 
-const markerCards = computed(() => {
-    const currentMethod = selectedMethod.value.id
+const getKanteffektOverlays = (methodKey: string, timeToken: string, showOld: boolean) => {
+    if (methodKey === 'luckhuggning') {
+        if (timeToken === 'efter' || timeToken === '20') {
+            return [{ src: '/svg/Kanteffekt_luckhuggning_1.svg', opacity: 1 }]
+        }
+        if (timeToken === '50') {
+            return showOld
+                ? [
+                    { src: '/svg/Kanteffekt_luckhuggning_2.svg', opacity: 1 },
+                    { src: '/svg/Kanteffekt_luckhuggning_1.svg', opacity: 0.5 }
+                ]
+                : [{ src: '/svg/Kanteffekt_luckhuggning_2.svg', opacity: 1 }]
+        }
+        if (timeToken === '80') {
+            return showOld
+                ? [
+                    { src: '/svg/Kanteffekt_luckhuggning_3.svg', opacity: 1 },
+                    { src: '/svg/Kanteffekt_luckhuggning_2.svg', opacity: 0.5 },
+                    { src: '/svg/Kanteffekt_luckhuggning_1.svg', opacity: 0.35 }
+                ]
+                : [{ src: '/svg/Kanteffekt_luckhuggning_3.svg', opacity: 1 }]
+        }
+        return null
+    }
+    if (methodKey === 'trakthygge') {
+        if (timeToken === 'efter' || timeToken === '20') {
+            return [{ src: '/svg/Kanteffekt.svg', opacity: 1 }]
+        }
+        if (timeToken === '50' || timeToken === '80') {
+            return showOld ? [{ src: '/svg/Kanteffekt.svg', opacity: 0.5 }] : null
+        }
+        return null
+    }
+    if (methodKey === 'skarmtrad') {
+        if (timeToken === '10' || timeToken === '20') {
+            return [{ src: '/svg/Kanteffekt.svg', opacity: 1 }]
+        }
+        if (timeToken === '50' || timeToken === '80') {
+            return showOld ? [{ src: '/svg/Kanteffekt.svg', opacity: 0.5 }] : null
+        }
+        return null
+    }
+    return null
+}
+
+const buildMarkerCardsFor = (methodId: string, timeLabel?: string) => {
+    const currentMethod = methodId
+    const methodKey = normalizeFrameworkId(normalizeTimelineAtgard(currentMethod))
+    const timeToken = normalizeTimeToken(timeLabel ?? '')
     const allowedByMethod: Record<string, string[] | 'all'> = {
         naturvardsarter: 'all',
-        retention: ['trakthygge', 'luckhuggning', 'skärmträd', 'skarmtrad', 'blädning', 'bladning'],
         kanteffekt: ['trakthygge', 'luckhuggning', 'skärmträd', 'skarmtrad'],
         tradplantor: ['trakthygge'],
         smaplantor: ['trakthygge'],
@@ -1243,16 +1338,49 @@ const markerCards = computed(() => {
         rottackeBladning: ['blädning', 'bladning'],
         rottackeSkarmtrad: ['skärmträd', 'skarmtrad'],
         seedTree: ['skärmträd', 'skarmtrad'],
+        hansyn_enstaka: 'all',
+        hansyn_yta: 'all',
     }
 
+    const isNaturskydd = normalizeTimelineAtgard(currentMethod) === 'naturskydd'
     return markerDefinitions
         .filter(def => {
+            if (isNaturskydd && (def.key === 'hansyn_enstaka' || def.key === 'hansyn_yta')) {
+                return false
+            }
             const allow = allowedByMethod[def.key] ?? []
             if (allow === 'all') return true
-            return allow.includes(currentMethod)
+            return allow.map(entry => normalizeFrameworkId(entry)).includes(methodKey)
         })
         .map(def => {
-            const copy = overlayTextMap.value[def.key] ?? { title: def.key, description: '' }
+            const copy = overlayTextMap.value[def.key] ?? { title: def.label ?? def.key, description: '' }
+            let svgPath = def.svgPath
+            let overlayOpacity: number | undefined
+            let overlaySvgs: Array<{ src: string; opacity?: number }> | undefined
+            let overlayAvailable = true
+            if (def.key === 'kanteffekt') {
+                const kanteffekt = getKanteffektOverlays(methodKey, timeToken, kanteffektOldVisible.value)
+                if (kanteffekt) {
+                    overlaySvgs = kanteffekt
+                } else {
+                    overlayAvailable = false
+                }
+            }
+            if (def.key === 'rottackeSkarmtrad' && timeToken !== 'efter') {
+                overlayAvailable = false
+            }
+            if (def.key === 'rottackeBladning' && (timeToken === 'innan' || timeToken === 'före')) {
+                overlayAvailable = false
+            }
+            if (def.key === 'seedTree' && timeToken !== '10') {
+                overlayAvailable = false
+            }
+            if (def.key === 'tradplantor' && timeToken !== '20') {
+                overlayAvailable = false
+            }
+            if (def.key === 'hogstubbar' && (timeToken === 'före' || timeToken === 'innan')) {
+                overlayAvailable = false
+            }
             return {
                 ...def,
                 title: copy.title,
@@ -1261,8 +1389,31 @@ const markerCards = computed(() => {
                 images: copy.images,
                 imageDescriptions: copy.imageDescriptions,
                 doc: copy.doc,
+                svgPath,
+                overlayOpacity,
+                overlaySvgs,
+                overlayAvailable,
             }
         })
+}
+
+const markerCards = computed(() => {
+    const timeLabel = timelineItems.value[activeTimelineIndex.value]?.tid
+    return buildMarkerCardsFor(selectedMethod.value.id, timeLabel)
+})
+
+const markerCardsBefore = computed(() => {
+    if (!compareModeEnabled.value || compareMode.value !== 'beforeAfter') {
+        return markerCards.value
+    }
+    return buildMarkerCardsFor(selectedMethod.value.id, 'innan')
+})
+
+const markerCardsCompare = computed(() => {
+    if (!compareModeEnabled.value || compareMode.value !== 'methods') return []
+    const otherMethodId = compareMethodResolved.value
+    if (!otherMethodId) return []
+    return buildMarkerCardsFor(otherMethodId, comparisonTimelineItem.value?.tid)
 })
 
 function toggleMarkerCard(key: string) {

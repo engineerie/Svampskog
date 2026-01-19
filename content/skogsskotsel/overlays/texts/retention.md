@@ -1,5 +1,5 @@
 ---
-key: retention
+key: hansyn_enstaka
 title: Hänsynsträd
 description: Mykorrhiza lever vidare på rötter från hänsynsträd.
 path: /skogsskotsel/trakthygge
