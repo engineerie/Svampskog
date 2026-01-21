@@ -37,6 +37,9 @@ jobs:
         run: |
           rm -rf .nuxt
           rm -rf node_modules/.cache/nuxt
+      
+      - name: Clean pnpm store
+        run: rm -rf ~/.pnpm-store
 
       - name: Checkout
         uses: actions/checkout@v4
