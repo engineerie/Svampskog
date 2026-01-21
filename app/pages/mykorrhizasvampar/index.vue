@@ -237,6 +237,7 @@ const open = ref(false)
             <UButton size="xl" trailing :disabled="!allSelected" @click="redirect" color="primary"
               icon="i-heroicons-arrow-right" label="Gå till miljö" />
           </div>
+
         </Motion>
       </div>
       <!-- redirection button here
