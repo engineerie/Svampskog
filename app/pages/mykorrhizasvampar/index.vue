@@ -196,14 +196,7 @@ const open = ref(false)
                       </div>
                     </template>
                   </UModal>
-                  <!-- <UModal fullscreen title="Miljööversikt" class="col-span-2"
-                    :ui="{ content: 'overflow-y-scroll px-0', body: 'p-0', title: 'text-2xl' }">
-                    <UButton size="xl" label="Alla miljöer" trailing icon="i-hugeicons-tree-06" color="neutral"
-                      variant="subtle" />
-                    <template #body>
-                      <Miljoer />
-                    </template>
-                  </UModal> -->
+
                 </div>
 
                 <Transition name="fade" mode="out-in">
@@ -240,52 +233,6 @@ const open = ref(false)
 
         </Motion>
       </div>
-      <!-- redirection button here
-       
-      -->
-
     </UContainer>
-
-    <!-- <div class="bg-neutral-50 border-t border-muted">
-      <UContainer class="w-full px-0 pb-8 pt-2 sm:pt-8">
-        <div class="group">
-          <UCarousel :ui="{ prev: 'ml-8 hidden group-hover:flex', next: 'mr-8 hidden group-hover:flex' }"
-            v-slot="{ item }" :items="page.carousel ?? []" class="w-full mx-auto mb-8" arrows dots>
-            <UPageCTA :title="item.title"
-              :ui="{ root: 'mx-3 lg:mx-8 my-1', container: 'border-none py-8', title: 'lg:text-5xl/14 font-medium' }"
-              :description="item.description" orientation="horizontal">
-              <template v-if="item.specialGrid">
-                <div class="grid grid-cols-5 gap-4 lg:gap-6">
-                  <div v-for="(src, i) in buildGrid(item)" :key="i"
-                    class="rounded overflow-hidden ring ring-neutral-200 shadow">
-                    <NuxtImg :src="src" :alt="i === 0 ? 'Mycel: huvudbild' : 'Mycel: rutbild'" width="400"
-                      height="400" />
-                  </div>
-                </div>
-              </template>
-              <template v-else-if="item.specialBento">
-                <div class="grid grid-cols-3 gap-4 lg:gap-4">
-                  <div v-for="(src, i) in bentoImages(item)" :key="i"
-                    class="rounded overflow-hidden ring ring-neutral-200 shadow">
-                    <NuxtImg :src="src" :alt="`Svampbild ${i + 1}`" width="500" height="300" />
-                  </div>
-                </div>
-              </template>
-              <template v-else-if="item.img">
-                <div class="flex justify-center w-full">
-                  <NuxtImg :src="item.img" :class="['rounded ', { 'ring ring-neutral-200 shadow': !item.noBorder }]"
-                    height="400" />
-                </div>
-              </template>
-              <template v-else>
-                <div class="flex justify-center items-center w-full min-h-60 text-neutral-500">
-                  <span>Ingen bild tillgänglig</span>
-                </div>
-              </template>
-            </UPageCTA>
-          </UCarousel>
-        </div>
-      </UContainer>
-    </div> -->
   </UPage>
 </template>
