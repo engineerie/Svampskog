@@ -11,6 +11,7 @@ export default defineNuxtConfig({
     "nuxt-og-image",
     "@pinia/nuxt",
     "motion-v/nuxt",
+    "nuxt-studio",
   ],
   icon: {
     clientBundle: {
@@ -20,9 +21,17 @@ export default defineNuxtConfig({
     },
   },
 
-  content: {
-    preview: {
-      api: "https://api.nuxt.studio",
+  // content: {
+  //   preview: {
+  //     api: "https://api.nuxt.studio",
+  //   },
+  // },
+
+  studio: {
+    repository: {
+      provider: "github",
+      owner: "engineerie",
+      repo: "Svampskog",
     },
   },
 
@@ -38,7 +47,7 @@ export default defineNuxtConfig({
   },
 
   devtools: {
-    enabled: false,
+    enabled: true,
   },
 
   css: ["~/assets/css/main.css"],

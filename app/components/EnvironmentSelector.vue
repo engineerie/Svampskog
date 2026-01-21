@@ -319,7 +319,7 @@ onBeforeUnmount(() => {
 })
 
 
-const { data: page } = await useAsyncData('mykorrhizasvampar', () => queryCollection('mykorrhizasvampar').first())
+const { data: page } = await useAsyncData('mykorrhizasvampar-env', () => queryCollection('mykorrhizasvampar').first())
 if (!page.value) {
   throw createError({
     statusCode: 404,
