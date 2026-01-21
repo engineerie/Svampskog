@@ -33,6 +33,11 @@ jobs:
         node: [20]
 
     steps:
+      - name: Clean Nuxt build cache
+        run: |
+          rm -rf .nuxt
+          rm -rf node_modules/.cache/nuxt
+
       - name: Checkout
         uses: actions/checkout@v4
 
