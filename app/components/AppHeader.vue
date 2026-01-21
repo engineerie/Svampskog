@@ -25,11 +25,10 @@ const items = computed(() => [
   //   children: [
   //   ]
   // },
-  // {
-  //   label: 'Dokumentation',
-  //   description: 'Manual och underlag.',
-  //   to: '/svampardocs'
-  // },
+  {
+    label: 'Svampkunskap',
+    to: '/blog'
+  },
 ])
 
 const itemsright = computed(() => [

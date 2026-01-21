@@ -41,7 +41,7 @@
 
     <!-- Content Section -->
     <div class="px-5 pb-3 mt-4">
-      <h1 class="text-2xl font-medium">{{ capitalize(species.Commonname) }}</h1>
+      <h1 class="text-2xl font-medium text-neutral-800">{{ capitalize(species.Commonname) }}</h1>
       <h1 class="text-neutral-500">{{ species.Scientificname }}</h1>
       <!-- Rarity indicators -->
       <div class="my-1">

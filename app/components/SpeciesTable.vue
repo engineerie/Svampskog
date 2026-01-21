@@ -723,8 +723,10 @@ const pagination = ref({
 
 const speciesStore = useSpeciesStore();
 
-function selectRow(row, e) {
-  speciesStore.selectSpecies(row.original, "edna");
+function selectRow(e, row) {
+  const tableRow = row?.original ? row : (e?.original ? e : null);
+  if (!tableRow) return;
+  speciesStore.selectSpecies(tableRow.original ?? tableRow, "edna");
 }
 
 const capitalize = (str) => {

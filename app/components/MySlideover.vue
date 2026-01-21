@@ -6,7 +6,7 @@
       </div>
       <div ref="panelRef"
         class="ml-auto bg-white shadow-lg z-50 relative pointer-events-auto ring-1 ring-neutral-200 transition-all overflow-hidden"
-        :class="[localPinned ? '' : 'sm:ml-auto sm:m-2 sm:rounded', expanded ? 'w-[744px]' : 'w-screen sm:w-96']"
+        :class="[localPinned ? '' : 'sm:ml-auto sm:m-4 sm:rounded-lg', expanded ? 'w-186' : 'w-screen sm:w-96']"
         @click.stop>
         <div class="absolute top-3 left-3 items-end w-full gap-2 z-10 flex">
 
@@ -31,7 +31,7 @@ import { ref, watch } from "vue";
 
 const props = defineProps({
   modelValue: { type: Boolean, default: false },
-  pinned: { type: Boolean, default: true },
+  pinned: { type: Boolean, default: false },
   expanded: { type: Boolean, default: false },
 });
 const emit = defineEmits(["update:modelValue", "update:pinned"]);

@@ -34,7 +34,14 @@
                     </div>
                 </section>
             </div>
+
         </div>
+        <!-- <UModal fullscreen>
+            <UButton label="modell" />
+            <template #content>
+                <Model />
+            </template>
+        </UModal> -->
     </DefineMethodPanelBody>
     <DefineMethodPanelFooter>
         <div class="grid w-full grid-cols-2 gap-6 items-center py-2">
@@ -71,35 +78,37 @@
     <DefineMarkerCardsRow>
         <div class="flex gap-2 p-3 border-b border-muted/50 bg-white overflow-x-scroll scrollbar-hidden">
             <div class="flex items-center gap-2">
-                <UButton label="Beståndsgräns" color="neutral" :variant="bestandsgransVisible ? 'solid' : 'outline'"
-                    class="ring-muted/50 w-full justify-start" @click="bestandsgransVisible = !bestandsgransVisible" />
+                <UButton label="Beståndsgräns" color="neutral" variant="outline"
+                    :class="bestandsgransVisible ? 'ring-primary-500 ring-2' : 'ring-muted/50'"
+                    class=" w-full justify-start" @click="bestandsgransVisible = !bestandsgransVisible" />
             </div>
             <div v-for="card in markerCards" :key="card.key" class="">
-                <USlideover v-if="!isMobile" :overlay="false" :modal="false" :title="card.title"
-                    v-model:open="markerPanelOpen[card.key]" :ui="{ header: 'shrink-0' }">
-                    <ReuseMarkerCardTrigger :card="card" />
-                    <template #body>
-                        <ReuseMarkerCardHeader :card="card" />
-                        <ReuseMarkerCardBody :card="card" />
-                    </template>
-                </USlideover>
-                <UDrawer v-else :overlay="true" :title="card.title" :ui="{ header: 'shrink-0 sm:p-0' }"
-                    :snapPoints="[0.2, 0.9]" v-model:open="markerPanelOpen[card.key]">
-                    <template #header>
-                        <div class="flex items-center justify-between gap-2">
-                            <p class="text-md font-bold">{{ card.title }}</p>
-                            <UButton color="neutral" variant="ghost" icon="i-heroicons-x-mark" class="ring-muted/50"
-                                @click="markerPanelOpen[card.key] = false" />
-                        </div>
-                    </template>
-                    <ReuseMarkerCardTrigger :card="card" />
-                    <template #body>
-                        <ReuseMarkerCardHeader :card="card" />
-                        <ReuseMarkerCardBody :card="card" />
-                    </template>
-                </UDrawer>
+                <ReuseMarkerCardTrigger :card="card" />
             </div>
         </div>
+        <MySlideover v-if="!isMobile" v-model="markerPanelOpenSingle" :pinned="markerSlideoverPinned"
+            @update:pinned="(val) => (markerSlideoverPinned = val)">
+            <div v-if="selectedMarkerCard">
+                <ReuseMarkerCardHeader :card="selectedMarkerCard" />
+                <ReuseMarkerCardBody :card="selectedMarkerCard" />
+            </div>
+        </MySlideover>
+        <UDrawer v-else v-model:open="markerPanelOpenSingle" :title="selectedMarkerCard?.title"
+            :ui="{ header: 'shrink-0 sm:p-0' }" :snapPoints="[0.2, 0.9]">
+            <template #header>
+                <div class="flex items-center justify-between gap-2">
+                    <p class="text-md font-bold">{{ selectedMarkerCard?.title }}</p>
+                    <UButton color="neutral" variant="ghost" icon="i-heroicons-x-mark" class="ring-muted/50"
+                        @click="markerPanelOpenSingle = false" />
+                </div>
+            </template>
+            <template #body>
+                <template v-if="selectedMarkerCard">
+                    <ReuseMarkerCardHeader :card="selectedMarkerCard" />
+                    <ReuseMarkerCardBody :card="selectedMarkerCard" />
+                </template>
+            </template>
+        </UDrawer>
     </DefineMarkerCardsRow>
     <DefineMarkerCardHeader v-slot="{ card }">
         <div v-if="card.images?.length" class="space-y-3 mb-10">
@@ -114,9 +123,9 @@
                 }" class="w-full">
                 <template #default="{ item }">
                     <div class="relative overflow-hidden ring ring-muted/50 shadow">
-                        <img :src="item.src" :alt="card.title" class="h-72 w-full rounded-md" loading="lazy" />
+                        <img :src="item.src" :alt="card.title" class="h-72 w-full " loading="lazy" />
                         <div v-if="card.imageDescriptions?.[item.idx]"
-                            class="text-sm text-neutral-100 absolute bottom-0 w-full bg-neutral-950/50 rounded-b-md p-1">
+                            class="text-sm text-neutral-100 absolute bottom-0 w-full bg-neutral-950/50 p-1">
                             {{ card.imageDescriptions[item.idx] }}
                         </div>
                     </div>
@@ -124,27 +133,43 @@
             </UCarousel>
         </div>
         <div v-else-if="card.image">
-            <img :src="card.image" class="rounded-md" />
+            <img :src="card.image" />
         </div>
         <ImagePlaceholder v-else />
     </DefineMarkerCardHeader>
     <DefineMarkerCardTrigger v-slot="{ card }">
-        <UButton :label="card.title" :icon="card.icon" color="neutral"
-            :variant="markerPanelOpen[card.key] || markerPinned[card.key] ? 'solid' : 'outline'"
-            class="ring-muted/50 w-full justify-start" />
+        <UContextMenu :items="markerTriggerMenu(card)">
+            <UButton :label="card.title" :icon="card.icon" color="neutral"
+                :variant="markerPanelOpen[card.key] ? 'solid' : 'outline'" class="ring-muted/50 w-full justify-start"
+                :class="[
+                    card.overlayAvailable === false ? 'opacity-50' : '',
+                    markerPinned[card.key] ? 'ring-2 ring-primary/60' : ''
+                ]" @click="openMarkerPanel(card.key)" />
+        </UContextMenu>
     </DefineMarkerCardTrigger>
     <DefineMarkerCardBody v-slot="{ card }">
-        <div v-if="card.key === 'kanteffekt'" class="mb-3">
-            <USwitch v-model="kanteffektOldVisible" size="sm" color="primary" label="Tidigare kanteffekt"
-                :ui="{ label: 'text-sm text-neutral-700', track: 'ring-muted/60' }" />
+        <div class="p-4">
+
+
+            <div class="flex items-center gap-3 mb-3">
+                <UButton color="neutral" variant="outline"
+                    :class="markerPinned[card.key] ? 'ring-2 ring-primary' : 'ring-muted/50'"
+                    :icon="markerPinned[card.key] ? 'i-heroicons-lock-closed' : 'i-heroicons-lock-open'"
+                    :label="markerPinned[card.key] ? 'Markör fäst' : 'Markör lossad'"
+                    @click="markerPinned[card.key] = !markerPinned[card.key]" />
+                <div v-if="card.key === 'kanteffekt'">
+                    <UButton color="neutral" variant="outline"
+                        :class="kanteffektOldVisible ? 'ring-primary ring-2' : 'ring-muted/50'"
+                        :icon="kanteffektOldVisible ? 'i-heroicons-eye' : 'i-heroicons-eye-slash'"
+                        label="Tidigare kanteffekt" @click="kanteffektOldVisible = !kanteffektOldVisible" />
+                </div>
+            </div>
+
+            <h1 class="text-2xl font-medium text-neutral-800 -mb-2">{{ card.title }}</h1>
+            <ContentRenderer v-if="card.doc?.body" :value="card.doc" />
+            <p v-else class="text-neutral-800">{{ card.description }}</p>
         </div>
-        <div class="flex items-center gap-2 mb-3">
-            <UButton color="neutral" :variant="markerPinned[card.key] ? 'solid' : 'outline'" class="ring-muted/50"
-                :label="markerPinned[card.key] ? 'Lossa overlay' : 'Fäst overlay'"
-                @click="markerPinned[card.key] = !markerPinned[card.key]" />
-        </div>
-        <ContentRenderer v-if="card.doc?.body" :value="card.doc" />
-        <p v-else class="text-neutral-800">{{ card.description }}</p>
+
     </DefineMarkerCardBody>
     <!-- <UModal v-model:open="startskogModalOpen" :close="false" :transition="true" :overlay="true"
         :ui="{ body: 'space-y-2 pt-2 sm:pt-2', content: 'max-w-sm divide-none' }"
@@ -236,11 +261,13 @@
                     <div class="flex gap-3 items-center">
                         <!-- <UButton color="neutral" variant="ghost" icon="i-f7-sidebar-left" class="ring-muted"
                             @click="immersiveAsideOpen = !immersiveAsideOpen" /> -->
-                        <USlideover v-if="isDesktop" v-model:open="methodPanelOpen" side="left"
-                            :title="selectedMethod.title">
+                        <USlideover inset v-if="isDesktop" v-model:open="methodPanelOpen" side="left"
+                            :title="selectedMethod.title" :ui="{ content: '' }">
                             <UButton color="neutral" variant="ghost" icon="i-f7-sidebar-left" class="ring-muted" />
-                            <template #body>
-                                <ReuseMethodPanelBody />
+                            <template #content>
+                                <div class="overflow-auto scrollbar-hidden p-4">
+                                    <ReuseMethodPanelBody />
+                                </div>
                             </template>
                             <template #footer>
                                 <ReuseMethodPanelFooter />
@@ -250,7 +277,9 @@
                             :snapPoints="[0.5, 1]">
                             <UButton color="neutral" variant="ghost" icon="i-f7-sidebar-left" class="ring-muted" />
                             <template #body>
-                                <ReuseMethodPanelBody />
+                                <div class="overflow-auto scrollbar-hidden">
+                                    <ReuseMethodPanelBody />
+                                </div>
                             </template>
                             <template #footer>
                                 <ReuseMethodPanelFooter />
@@ -391,7 +420,7 @@
                                                             v-for="(card, idx) in (compareMode === 'beforeAfter' ? markerCardsBefore : markerCards)"
                                                             :key="`overlay-compare-left-${card.key}`">
                                                             <template
-                                                                v-if="isMarkerOverlayVisible(card.key) && card.overlayAvailable !== false">
+                                                                v-if="card.key !== 'naturvardsarter' && isMarkerOverlayVisible(card.key) && card.overlayAvailable !== false">
                                                                 <template v-if="card.overlaySvgs?.length">
                                                                     <img v-for="(overlay, svgIdx) in card.overlaySvgs"
                                                                         :key="`${card.key}-left-${svgIdx}`"
@@ -411,6 +440,10 @@
                                                             </template>
                                                         </template>
                                                     </div>
+                                                    <NaturvardsOverlayLayer
+                                                        :visible="isMarkerOverlayVisible('naturvardsarter')"
+                                                        :framework="selectedMethod.id" :startskog="selectedStartskogTab"
+                                                        :time-label="compareMode === 'beforeAfter' ? 'innan' : timelineItems[activeTimelineIndex]?.tid" />
                                                 </div>
                                             </template>
                                             <template #second>
@@ -432,7 +465,7 @@
                                                             v-for="(card, idx) in (compareMode === 'methods' ? markerCardsCompare : markerCards)"
                                                             :key="`overlay-compare-right-${card.key}`">
                                                             <template
-                                                                v-if="isMarkerOverlayVisible(card.key) && card.overlayAvailable !== false">
+                                                                v-if="card.key !== 'naturvardsarter' && isMarkerOverlayVisible(card.key) && card.overlayAvailable !== false">
                                                                 <template v-if="card.overlaySvgs?.length">
                                                                     <img v-for="(overlay, svgIdx) in card.overlaySvgs"
                                                                         :key="`${card.key}-right-${svgIdx}`"
@@ -452,6 +485,11 @@
                                                             </template>
                                                         </template>
                                                     </div>
+                                                    <NaturvardsOverlayLayer
+                                                        :visible="isMarkerOverlayVisible('naturvardsarter')"
+                                                        :framework="compareMode === 'methods' ? compareMethodResolved : selectedMethod.id"
+                                                        :startskog="selectedStartskogTab"
+                                                        :time-label="compareMode === 'methods' ? comparisonTimelineItem?.tid : timelineItems[activeTimelineIndex]?.tid" />
                                                 </div>
                                             </template>
                                         </CustomImageComparisonSlider>
@@ -472,7 +510,7 @@
                                         <div class="absolute inset-0 pointer-events-none">
                                             <template v-for="(card, idx) in markerCards" :key="`overlay-${card.key}`">
                                                 <template
-                                                    v-if="isMarkerOverlayVisible(card.key) && card.overlayAvailable !== false">
+                                                    v-if="card.key !== 'naturvardsarter' && isMarkerOverlayVisible(card.key) && card.overlayAvailable !== false">
                                                     <template v-if="card.overlaySvgs?.length">
                                                         <img v-for="(overlay, svgIdx) in card.overlaySvgs"
                                                             :key="`${card.key}-single-${svgIdx}`" :src="overlay.src"
@@ -491,6 +529,9 @@
                                                 </template>
                                             </template>
                                         </div>
+                                        <NaturvardsOverlayLayer :visible="isMarkerOverlayVisible('naturvardsarter')"
+                                            :framework="selectedMethod.id" :startskog="selectedStartskogTab"
+                                            :time-label="currentTimelineItem?.tid" />
                                         <div
                                             class="absolute top-2 left-2 z-20 flex flex-col items-start gap-1 pointer-events-none">
                                             <UBadge v-if="!isMobile" size="md"
@@ -668,6 +709,41 @@ const [DefineMarkerCardBody, ReuseMarkerCardBody] = createReusableTemplate()
 const markerPanelOpen = reactive<Record<string, boolean>>({})
 const markerPinned = reactive<Record<string, boolean>>({})
 const isMarkerOverlayVisible = (key: string) => markerPanelOpen[key] || markerPinned[key]
+const selectedMarkerKey = ref<string | null>(null)
+const markerSlideoverPinned = ref(false)
+const selectedMarkerCard = computed(() =>
+    markerCards.value.find(card => card.key === selectedMarkerKey.value) ?? null
+)
+const markerPanelOpenSingle = ref(false)
+watch(markerPanelOpenSingle, (open) => {
+    if (open) return
+    if (selectedMarkerKey.value) {
+        markerPanelOpen[selectedMarkerKey.value] = false
+        selectedMarkerKey.value = null
+    }
+})
+const openMarkerPanel = (key: string) => {
+    Object.keys(markerPanelOpen).forEach(existing => {
+        markerPanelOpen[existing] = false
+    })
+    markerPanelOpen[key] = true
+    selectedMarkerKey.value = key
+    markerPanelOpenSingle.value = true
+}
+const closeMarkerPanel = () => {
+    markerPanelOpenSingle.value = false
+}
+const markerTriggerMenu = (card: { key: string }) => ([
+    [
+        {
+            label: markerPinned[card.key] ? 'Lossa markör' : 'Fäst markör',
+            icon: markerPinned[card.key] ? 'i-heroicons-lock-open' : 'i-heroicons-lock-closed',
+            onSelect: () => {
+                markerPinned[card.key] = !markerPinned[card.key]
+            }
+        }
+    ]
+])
 const markerOverlayStyle = (idx: number) => ({
     top: `${12 + (idx % 4) * 28}px`,
     left: `${12 + Math.floor(idx / 4) * 140}px`
@@ -1269,15 +1345,15 @@ const overlayTextMap = computed<Record<string, { title: string; description: str
 const markerDefinitions = [
     { key: 'kanteffekt', icon: 'i-healthicons-square-medium-negative' },
     { key: 'rottacke', icon: 'i-game-icons-tree-roots' },
-    { key: 'rottackeSkarmtrad', icon: 'i-game-icons-tree-roots', label: 'Rötter skärmträd', svgPath: '/svg/sk%C3%A4rmtr%C3%A4d.svg' },
-    { key: 'rottackeBladning', icon: 'i-game-icons-tree-roots', label: 'Trädrötter blädning', svgPath: '/svg/Bl%C3%A4dning.svg' },
+    { key: 'rottackeSkarmtrad', icon: 'i-streamline-tree-3', label: 'Skärmträd', svgPath: '/svg/sk%C3%A4rmtr%C3%A4d.svg' },
+    { key: 'rottackeBladning', icon: 'i-tabler-christmas-tree', label: 'Träd blädning', svgPath: '/svg/Bl%C3%A4dning.svg' },
     { key: 'seedTree', icon: 'i-teenyicons-redwoodjs-outline', label: 'Fröträd', svgPath: '/svg/Fr%C3%B6tr%C3%A4d.svg' },
     { key: 'smaplantor', icon: 'i-pepicons-pop-seedling-circle' },
     { key: 'hogstubbar', icon: 'i-roentgen-wood', label: 'Högstubbar', svgPath: '/svg/H%C3%B6gstubbe.svg' },
     { key: 'naturvardsarter', icon: 'i-material-symbols-award-star-outline' },
     { key: 'tradplantor', icon: 'i-hugeicons-plant-02', label: 'Planterade plantor', svgPath: '/svg/planterade_plantor.svg' },
-    { key: 'hansyn_enstaka', icon: 'i-material-symbols-park', label: 'Hänsynsträd', svgPath: '/svg/h%C3%A4nsyn_enstaka.svg' },
-    { key: 'hansyn_yta', icon: 'i-material-symbols-nature-people', label: 'Hänsynsyta', svgPath: '/svg/h%C3%A4nsyn_yta.svg' },
+    { key: 'hansyn_enstaka', icon: 'i-tabler-tree', label: 'Hänsynsträd', svgPath: '/svg/h%C3%A4nsyn_enstaka.svg' },
+    { key: 'hansyn_yta', icon: 'i-tabler-trees', label: 'Hänsynsyta', svgPath: '/svg/h%C3%A4nsyn_yta.svg' },
 ]
 
 const getKanteffektOverlays = (methodKey: string, timeToken: string, showOld: boolean) => {
@@ -1402,6 +1478,14 @@ const markerCards = computed(() => {
     return buildMarkerCardsFor(selectedMethod.value.id, timeLabel)
 })
 
+watch(markerCards, (cards) => {
+    if (!selectedMarkerKey.value) return
+    const stillExists = cards.some(card => card.key === selectedMarkerKey.value)
+    if (!stillExists) {
+        closeMarkerPanel()
+    }
+})
+
 const markerCardsBefore = computed(() => {
     if (!compareModeEnabled.value || compareMode.value !== 'beforeAfter') {
         return markerCards.value
@@ -1464,7 +1548,7 @@ const splitParagraphs = (text: string | undefined | null) =>
 // Accordion items for the selected method
 const accordionItems = computed(() => [
     {
-        label: 'Introduktion',
+        label: 'Om metoden',
         icon: 'i-hugeicons-tree-06',
         value: 'description',
         paragraphs: selectedMethod.value.descriptionParagraphs?.length
@@ -1472,7 +1556,7 @@ const accordionItems = computed(() => [
             : splitParagraphs(selectedMethod.value.description),
     },
     {
-        label: 'Påverkan på mykorrhizasvampar',
+        label: 'Påverkan på mykorrhiza',
         icon: 'i-hugeicons-mushroom',
         value: 'svamp',
         paragraphs: selectedMethod.value.descriptionsvampParagraphs?.length

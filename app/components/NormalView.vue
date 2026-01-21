@@ -21,28 +21,6 @@
             :ui="{ close: ' cursor-pointer' }"
             :title="activeTab === 'dna' ? 'Arterna är sorterade i fallande ordning baserat på hur många skogar deras DNA påträffats i.' : 'Arterna är sorterade i fallande ordning baserat på hur många gånger de har rapporterats i Artportalen.'"
             class=" h-fit max-w-96 text-muted ring-muted/50" @update:open="showImagesAlert = $event" />
-          <!-- <UCard ><p>Arterna är sorterade i fallande ordning baserat på hur många gånger de har rapporterats i Artportalen.</p></UCard> -->
-          <!-- <UModal :fullscreen="isMobile ? true : false" :title="page.ecologyintro?.title ?? ''"
-            :description="page.ecologyintro?.description ?? ''" :ui="{
-              header: 'shrink-0',
-            }">
-            <UAlert icon="i-heroicons-book-open" color="neutral" variant="outline" title="Fakta i korthet"
-              class="sm:w-fit h-fit  ring-muted/50 hover:opacity-85 hover:cursor-pointer" />
-            <template #body>
-              <EcologyIntro :section="page.ecologyintro" />
-            </template>
-</UModal>
-<UModal :fullscreen="isMobile ? true : false" :title="page.underlag" :description="page.underlagdescription" :ui="{
-              header: 'shrink-0',
-            }">
-  <UAlert icon="i-heroicons-document-magnifying-glass" color="neutral" variant="outline" title="Underlag"
-    class="sm:w-fit h-fit  ring-muted/50 hover:opacity-85 hover:cursor-pointer" />
-  <template #body>
-              <UnderlagContent :underlag="page.underlag" :underlagbild="page.underlagbild"
-                :sections="page.underlagSections" />
-            </template>
-</UModal> -->
-
         </div>
 
 
@@ -57,64 +35,72 @@
           </div>
           <UContainer class="md:hidden space-y-3 pt-3 bg-muted/50">
             <UPageFeature title="Enligt DNA" description="Från markinventeringens jordprover" />
-            <UCard @click="emitEnlarge('FullScreenEdna')" class="ring-muted/50">
-              <div class="flex justify-between items-center text-secondary-500">
-                <div class="truncate">
-                  <div class="text-2xl font-semibold flex items-center ">
-                    <UIcon name="solar:dna-linear" class="mr-2" />
-                    <h1 class="truncate">Alla mykorrhizasvampar</h1>
+            <ClientOnly>
+              <UCard @click="emitEnlarge('FullScreenEdna')" class="ring-muted/50">
+                <div class="flex justify-between items-center text-secondary-500">
+                  <div class="truncate">
+                    <div class="text-2xl font-semibold flex items-center ">
+                      <UIcon name="solar:dna-linear" class="mr-2" />
+                      <h1 class="truncate">Alla mykorrhizasvampar</h1>
+                    </div>
+                    <USkeleton v-if="dnaCount === null" class="h-4 w-12 mt-2" />
+                    <h1 v-else class="text-neutral-500">{{ dnaCount }} arter</h1>
                   </div>
-                  <USkeleton v-if="dnaCount === null" class="h-4 w-12 mt-2" />
-                  <h1 v-else class="text-neutral-500">{{ dnaCount }} arter</h1>
+                  <UButton icon="i-heroicons-chevron-right" class="rounded-full " variant="ghost" color="neutral"
+                    size="xl" />
                 </div>
-                <UButton icon="i-heroicons-chevron-right" class="rounded-full " variant="ghost" color="neutral"
-                  size="xl" />
-              </div>
-            </UCard>
+              </UCard>
+            </ClientOnly>
             <!-- <USeparator /> -->
 
             <UPageFeature class="mt-6" title="Enligt fruktkroppar" description="Utifrån vart fruktkroppar förekommer" />
 
-            <UCard @click="emitEnlarge('FullScreenEdible')" class="ring-muted/50">
-              <div class="flex justify-between items-center text-warning-500">
-                <div>
-                  <h1 class="text-2xl font-semibold flex items-center">
-                    <UIcon name="icon-park-solid:knife-fork" class="mr-2" />Matsvampar
-                  </h1>
-                  <USkeleton v-if="edibleCount === null" class="h-4 w-12 mt-2" />
-                  <h1 v-else class="text-neutral-500">{{ edibleCount }} arter</h1>
+            <ClientOnly>
+              <UCard @click="emitEnlarge('FullScreenEdible')" class="ring-muted/50">
+                <div class="flex justify-between items-center text-warning-500">
+                  <div>
+                    <h1 class="text-2xl font-semibold flex items-center">
+                      <UIcon name="icon-park-solid:knife-fork" class="mr-2" />Matsvampar
+                    </h1>
+                    <USkeleton v-if="edibleCount === null" class="h-4 w-12 mt-2" />
+                    <h1 v-else class="text-neutral-500">{{ edibleCount }} arter</h1>
+                  </div>
+                  <UButton icon="i-heroicons-chevron-right" class="rounded-full ring-muted/50" variant="ghost"
+                    color="neutral" size="xl" />
                 </div>
-                <UButton icon="i-heroicons-chevron-right" class="rounded-full ring-muted/50" variant="ghost"
-                  color="neutral" size="xl" />
-              </div>
-            </UCard>
-            <UCard @click="emitEnlarge('FullScreenPoison')" class="ring-muted/50">
-              <div class="flex justify-between items-center text-poison-500">
-                <div>
-                  <h1 class="text-2xl font-semibold flex items-center ">
-                    <UIcon name="i-hugeicons-danger" class="mr-2" />Giftsvampar
-                  </h1>
-                  <USkeleton v-if="edibleCount === null" class="h-4 w-12 mt-2" />
-                  <h1 v-else class="text-neutral-500">{{ poisonCount }} arter</h1>
+              </UCard>
+            </ClientOnly>
+            <ClientOnly>
+              <UCard @click="emitEnlarge('FullScreenPoison')" class="ring-muted/50">
+                <div class="flex justify-between items-center text-poison-500">
+                  <div>
+                    <h1 class="text-2xl font-semibold flex items-center ">
+                      <UIcon name="i-hugeicons-danger" class="mr-2" />Giftsvampar
+                    </h1>
+                    <USkeleton v-if="edibleCount === null" class="h-4 w-12 mt-2" />
+                    <h1 v-else class="text-neutral-500">{{ poisonCount }} arter</h1>
+                  </div>
+                  <UButton icon="i-heroicons-chevron-right" class="rounded-full " variant="ghost" color="neutral"
+                    size="xl" />
                 </div>
-                <UButton icon="i-heroicons-chevron-right" class="rounded-full " variant="ghost" color="neutral"
-                  size="xl" />
-              </div>
-            </UCard>
-            <UCard @click="emitEnlarge('RedlistedComponent')" class="ring-muted/50">
-              <div class="flex justify-between items-center text-signal-500">
-                <div>
-                  <h1 class="text-2xl font-semibold flex items-center">
-                    <UIcon name="i-material-symbols-award-star-outline" class="mr-2" />
-                    Naturvårdsarter
-                  </h1>
-                  <USkeleton v-if="redlistCount === null" class="h-4 w-12 mt-2" />
-                  <h1 v-else class="text-neutral-500">{{ redlistCount }} arter</h1>
+              </UCard>
+            </ClientOnly>
+            <ClientOnly>
+              <UCard @click="emitEnlarge('RedlistedComponent')" class="ring-muted/50">
+                <div class="flex justify-between items-center text-signal-500">
+                  <div>
+                    <h1 class="text-2xl font-semibold flex items-center">
+                      <UIcon name="i-material-symbols-award-star-outline" class="mr-2" />
+                      Naturvårdsarter
+                    </h1>
+                    <USkeleton v-if="redlistCount === null" class="h-4 w-12 mt-2" />
+                    <h1 v-else class="text-neutral-500">{{ redlistCount }} arter</h1>
+                  </div>
+                  <UButton icon="i-heroicons-chevron-right" class="rounded-full " variant="ghost" color="neutral"
+                    size="xl" />
                 </div>
-                <UButton icon="i-heroicons-chevron-right" class="rounded-full " variant="ghost" color="neutral"
-                  size="xl" />
-              </div>
-            </UCard>
+              </UCard>
+            </ClientOnly>
             <USeparator class="my-6" />
             <div
               class=" flex flex-col sm:flex-row gap-1.5 p-1 rounded-lg ring ring-muted/50  sm:w-fit h-fit bg-muted/30">
@@ -166,7 +152,6 @@
                   <RedlistedComponent :isNormalView="true" @enlarge="emitEnlarge('RedlistedComponent')" />
                 </div>
               </div>
-
             </template>
           </transition>
         </div>
@@ -185,7 +170,7 @@ import { ref, computed, watch, onMounted, onUnmounted } from 'vue';
 import { useEnvParamsStore } from '~/stores/envParamsStore';
 import { hasEdnaDataset } from '~/utils/edna';
 
-const { data: page } = await useAsyncData('mykorrhizasvampar', () => queryCollection('mykorrhizasvampar').first())
+const { data: page } = await useAsyncData('mykorrhizasvampar-normal', () => queryCollection('mykorrhizasvampar').first())
 if (!page.value) {
   throw createError({
     statusCode: 404,
@@ -366,8 +351,6 @@ async function fetchEdnaCount() {
     dnaCount.value = 0
     return
   }
-
-  dnaCount.value = null
 
   const filename = `edna-${geog}-${forest}-${age}-${veg}.json`
   try {

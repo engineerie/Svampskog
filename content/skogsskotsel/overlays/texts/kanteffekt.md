@@ -3,24 +3,19 @@ key: kanteffekt
 title: Kanteffekt
 description: Rötter och svampar sträcker sig 10–15 meter in.
 path: /skogsskotsel/luckhuggning
-images:
-  - /images/overlayimages/Line Djupström Hyggeskant.JPG
-  - /images/overlayimages/web/kanteffekt_trakthygge.webp
-  - /images/overlayimages/web/kanteffekt_luckhuggning.webp
-  - /images/overlayimages/web/kanteffekt_luckhuggning2.webp
-  - /images/overlayimages/web/kanteffekt_skärm.webp
+image: /images/overlayimages/Line Djupström Hyggeskant.JPG
 imageDescriptions:
   - Hyggeskant. © Line Djupström
-  - Trakthygge strax efter avverkning.
-  - Luckhuggning strax efter första avverkningen.
-  - Spår av samlad kanteffekt över 80 år av luckhuggning.
-  - Överhållen skärm strax efter andra avverkningen
 ---
 
-Kanteffekt beskriver hur trädens rötter och deras mykorrhizasvampar sprider sig från skogskanten och in över en avverkad yta, vanligen 10–15 meter in beroende på trädens storlek. Mest rötter och den största mängden mykorrhiza finns precis intill skogskanten nära stammarna.
+Kanteffekt beskriver hur trädens rötter och deras mykorrhizasvampar sträcker sig från skogskanten in över en avverkad yta, vanligen 10–15 meter in beroende på trädens storlek. Mest rötter och den största mängden mykorrhiza finns precis intill skogskanten nära stammarna.
 
 **Många små luckor (luckhuggning)**
 
 Små avverkningsytor skapar mycket mer kant per yta. I små luckor kan kanteffekten nästan täcka hela ytan, eftersom all mark ligger inom 10–15 meter från en kant.
 
 Fördelen av kanteffekten blir därför mycket större i små luckor än i stora hyggen.
+
+| Markör                                                | Förklaring                                                           |
+| ----------------------------------------------------- | -------------------------------------------------------------------- |
+| <UIcon name="i-temaki-striped-zone" class="size-5" /> | Område längs hyggeskanten där trädens rötter når, cirka 10 meter in. |

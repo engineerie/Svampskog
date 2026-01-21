@@ -61,17 +61,16 @@ defineOgImageComponent('Saas')
       <UPageHeader :ui="{ root: 'border-b-0', container: 'lg:pt-12', title: 'sm:text-6xl', headline: 'text-neutral' }"
         v-bind="page" />
 
-      <div v-if="categories.length" class="mb-12 mt-4 flex flex-wrap gap-2">
+      <!-- <div v-if="categories.length" class="mb-12 mt-4 flex flex-wrap gap-2">
         <UButton v-for="category in categoryFilters" :key="category" :label="category === 'all' ? 'Alla' : category"
           color="neutral" :variant="selectedCategory === category ? 'soft' : 'ghost'"
           :aria-pressed="selectedCategory === category" class="rounded-lg" @click="selectedCategory = category" />
-      </div>
+      </div> -->
 
       <UPageBody>
         <UBlogPosts v-if="filteredPosts.length">
           <UBlogPost v-for="(post, index) in filteredPosts" :key="post._path || index" :to="post.path"
-            :title="post.title" :description="post.description" :image="post.image" :badge="post.badge" :class="[]"
-            variant="naked" :ui="{
+            :title="post.title" :description="post.description" :image="post.image" :class="[]" variant="naked" :ui="{
               description: 'line-clamp-2', header: 'rounded-md', root: 'rounded-md', body: 'px-0 sm:px-2'
             }" />
         </UBlogPosts>

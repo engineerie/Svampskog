@@ -3,6 +3,7 @@
     <UButton v-if="isMobile" icon="i-heroicons-x-mark" variant="solid" color="error"
       class="rounded-full h-fit absolute bottom-4 left-4 z-50" :ui="{ rounded: 'rounded-full' }" @click="emit('close')"
       aria-label="Stäng modellvy" size="xl" />
+
     <DefineSettingsTemplate>
       <div class="space-y-0.5 p-3">
         <div class="grid grid-cols-2 gap-2 ">
@@ -96,6 +97,15 @@
           <div v-if="!isMobile" class="absolute top-3 right-3">
             <UButton icon="i-heroicons-x-mark" variant="solid" color="error" class="rounded-full"
               :ui="{ rounded: 'rounded-full' }" @click="emit('close')" aria-label="Stäng modellvy" />
+            <div class="flex flex-col gap-1 pointer-events-auto">
+              <USwitch :ui="{ root: 'flex-row-reverse justify-between' }" color="warning" v-model="devSaveClicks"
+                label="Spara klick (dev)" />
+              <USwitch :ui="{ root: 'flex-row-reverse justify-between' }" color="warning"
+                v-model="devOverlayLabelsVisible" label="Visa myc-etiketter (dev)" />
+              <USwitch :ui="{ root: 'flex-row-reverse justify-between' }" color="warning"
+                v-model="devNaturvardCounterVisible" label="Visa naturvårdssiffra (dev)" />
+            </div>
+
           </div>
 
 
@@ -149,15 +159,15 @@
       </div>
 
 
-      <div class="flex justify-center">
-        <!-- <div class="absolute top-3 left-3 flex flex-col gap-1 pointer-events-auto">
+      <div class="flex justify-center z-50">
+        <div class="absolute top-3 left-3 flex flex-col gap-1 pointer-events-auto">
           <USwitch :ui="{ root: 'flex-row-reverse justify-between' }" color="warning" v-model="devSaveClicks"
             label="Spara klick (dev)" />
           <USwitch :ui="{ root: 'flex-row-reverse justify-between' }" color="warning" v-model="devOverlayLabelsVisible"
             label="Visa myc-etiketter (dev)" />
           <USwitch :ui="{ root: 'flex-row-reverse justify-between' }" color="warning"
             v-model="devNaturvardCounterVisible" label="Visa naturvårdssiffra (dev)" />
-        </div> -->
+        </div>
 
 
         <div

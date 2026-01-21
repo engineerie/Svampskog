@@ -57,7 +57,7 @@ const isMobile = useMediaQuery('(max-width: 767px)')
 const route = useRoute();
 
 const showSlideover = ref(false);
-const isPinned = ref(true);
+const isPinned = ref(false);
 
 const togglePinned = () => {
   isPinned.value = !isPinned.value

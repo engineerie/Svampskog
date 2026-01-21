@@ -27,20 +27,37 @@
                 duration: 0.3,
                 delay: 0.5 + 0.05 * (method.index ?? 0)
             }">
+                <UPopover :open="hoveredMethodId === method.id" :ui="{ content: 'p-4 w-80' }"
+                    :popper="{ placement: 'bottom-start' }">
+                    <div v-if="!selectedMethod.id" @click="goToMethod(method.id)"
+                        @mouseenter="hoveredMethodId = method.id" @mouseleave="hoveredMethodId = null"
+                        @focusin="hoveredMethodId = method.id" @focusout="hoveredMethodId = null" :class="[
+                            'shrink-0 lg:shrink sm:w-58 lg:w-full bg-white transition-all hover:opacity-100 border border-muted/50 overflow-hidden rounded-lg h-fit shadow-lg hover:shadow-md relative cursor-pointer',
+                            !selectedId ? 'opacity-100' : (selectedId === method.id ? 'opacity-100 ring-primary/40 shadow-lg' : 'opacity-50')
+                        ]">
 
-                <div v-if="!selectedMethod.id" @click="goToMethod(method.id)" :class="[
-                    'shrink-0 lg:shrink sm:w-58 lg:w-full bg-white transition-all hover:opacity-100 border border-muted/50 overflow-hidden rounded-lg h-fit shadow-lg hover:shadow-md relative cursor-pointer',
-                    !selectedId ? 'opacity-100' : (selectedId === method.id ? 'opacity-100 ring-primary/40 shadow-lg' : 'opacity-50')
-                ]">
-
-                    <template v-if="!selectedMethod.id">
-                        <UBadge v-if="method.type" class="absolute top-2 left-2" :label="method.type" color="neutral"
-                            variant="subtle" />
-                        <img :src="methodImage(method, 'card')" :alt="method.title" width="300" height="160"
-                            class=" w-full h-full" loading="lazy" decoding="async" />
-                        <h1 class="text-lg p-2 px-3 font-medium text-nowrap ">{{ method.title }}</h1>
+                        <template v-if="!selectedMethod.id">
+                            <UBadge v-if="method.type" class="absolute top-2 left-2" :label="method.type"
+                                color="neutral" variant="subtle" />
+                            <img :src="methodImage(method, 'card')" :alt="method.title" width="300" height="160"
+                                class=" w-full h-full" loading="lazy" decoding="async" />
+                            <h1 class="text-lg p-2 px-3 font-medium text-nowrap ">{{ method.title }}</h1>
+                        </template>
+                    </div>
+                    <template #content>
+                        <div class="space-y-2">
+                            <p class="text-xs font-semibold uppercase tracking-wide text-neutral-500">Om metoden</p>
+                            <p class="text-sm text-neutral-800 line-clamp-3">
+                                {{ method.descriptionParagraphs?.[0] || method.description }}
+                            </p>
+                            <p class="text-xs font-semibold uppercase tracking-wide text-neutral-500">Påverkan på
+                                mykorrhiza</p>
+                            <p class="text-sm text-neutral-800 line-clamp-3">
+                                {{ method.descriptionsvampParagraphs?.[0] || method.descriptionsvamp }}
+                            </p>
+                        </div>
                     </template>
-                </div>
+                </UPopover>
             </Motion>
         </UContainer>
 
@@ -180,6 +197,7 @@ const emptyMethod: Method = {
     descriptionsvamp: ''
 }
 const selectedId = ref<string | null>(null)
+const hoveredMethodId = ref<string | null>(null)
 const goToMethod = (id: string) => {
     selectedId.value = id
     navigateTo({ path: `/skogsskotsel/${id}` }, { replace: true, external: false, scroll: false })
