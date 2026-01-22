@@ -1096,7 +1096,7 @@ import { useRuntimeConfig } from '#imports';
 import { useAsyncData } from '#app';
 let removeShortcutsFn;
 import { useOnboardingStore } from "~/stores/onboardingStore";
-import annotationsData from "public/annotations.json";
+import annotationsData from "~/data/annotations.json";
 import { useSelectedAnnotationStore } from "~/stores/selectedAnnotationStore";
 import { useOverlayStore } from "~/stores/overlayStore";
 import { useMediaQuery, createReusableTemplate } from '@vueuse/core'

@@ -1,0 +1,403 @@
+{
+  "annotations": [
+    {
+      "id": "manga_arter_pa_trad",
+      "title": "Många arter på ett träd",
+      "text": "På rötterna av äldre träd kan det finnas mycel av 50-100 olika arter mykorrhizasvampar.",
+      "thumbnail": "/images/Skogsbruk.png",
+      "icon": "i-material-symbols-light-circle",
+      "color": "neutral-300",
+      "positions": [
+        {
+          "framework": ["naturskydd"],
+          "times": ["före"],
+
+          "placement": "LEFT"
+        },
+        {
+          "framework": ["trakthygge"],
+          "times": ["före"],
+
+          "placement": "LEFT"
+        },
+        {
+          "framework": ["blädning"],
+          "times": ["förr"],
+
+          "placement": "LEFT"
+        },
+        {
+          "framework": ["skärmträd"],
+          "times": ["före"],
+
+          "placement": "LEFT"
+        },
+        {
+          "framework": ["luckhuggning"],
+          "times": ["före"],
+
+          "placement": "LEFT"
+        }
+      ]
+    },
+    {
+      "id": "mykorrhiza_dar_det_finns_rotter",
+      "title": "Mykorrhiza där det finns rötter",
+      "text": "Mykorrhizasvamparnas mycel finns lika djupt ner i marken som rötter når, och så långt träds rötter breder ut sig, 10-15 meter från stammen. Men det är rikligast med mykorrhiza närmast trädet och i de översta 10 cm av skogsmarken.",
+      "thumbnail": "/images/Skogsbruk.png",
+      "icon": "i-material-symbols-light-circle",
+      "color": "neutral-300",
+      "positions": [
+        {
+          "framework": ["naturskydd"],
+          "times": ["före"],
+
+          "placement": "LEFT"
+        },
+        {
+          "framework": ["trakthygge"],
+          "times": ["före"],
+
+          "placement": "LEFT"
+        },
+        {
+          "framework": ["blädning"],
+          "times": ["förr"],
+
+          "placement": "LEFT"
+        },
+        {
+          "framework": ["skärmträd"],
+          "times": ["före"],
+
+          "placement": "LEFT"
+        },
+        {
+          "framework": ["luckhuggning"],
+          "times": ["före"],
+
+          "placement": "LEFT"
+        }
+      ]
+    },
+    {
+      "id": "matsvampsmycel_kort_tid",
+      "title": "Matsvamp efter avverkning",
+      "text": "Nästan alla matsvampar är mykorrhizasvampar och försvinner efter avverkning. De överlever om dess mycel växer med hänsynsträd som lämnats eller nära en skogskant. Annars behöver de återetableras i ungskog från sporer som sprids in från näraliggande skogar.",
+      "thumbnail": "/images/Skogsbruk.png",
+      "icon": "i-material-symbols-light-circle",
+      "color": "neutral-300",
+      "positions": [
+        {
+          "framework": ["trakthygge"],
+          "times": ["efter"],
+
+          "placement": "LEFT"
+        },
+        {
+          "framework": ["luckhuggning"],
+          "times": ["efter"],
+
+          "placement": "LEFT"
+        }
+      ]
+    },
+    {
+      "id": "matsvampsmycel_i_aldrre_skog",
+      "title": "Mer matsvamp i äldre skog",
+      "text": "Mängden matsvampar är större i äldre skog eftersom större träd har högre fotosyntes och kan skicka ner mer socker till sina rötter.",
+      "thumbnail": "/images/Skogsbruk.png",
+      "icon": "i-material-symbols-light-circle",
+      "color": "neutral-300",
+      "positions": [
+        {
+          "framework": ["naturskydd"],
+          "times": ["före", "efter", "10", "20", "50", "80"],
+
+          "placement": "LEFT"
+        },
+        {
+          "framework": ["trakthygge"],
+          "times": ["före", "50", "80"],
+
+          "placement": "LEFT"
+        },
+        {
+          "framework": ["blädning"],
+          "times": ["före", "efter", "10", "20", "50", "80"],
+
+          "placement": "LEFT"
+        },
+        {
+          "framework": ["skärmträd"],
+          "times": ["före", "50", "80"],
+
+          "placement": "LEFT"
+        },
+        {
+          "framework": ["luckhuggning"],
+          "times": ["före", "50", "80"],
+
+          "placement": "LEFT"
+        }
+      ]
+    },
+    {
+      "id": "mycel_av_rodlistade_svampar",
+      "title": "Rödlistade svampar",
+      "text": "Rödlistade mykorrhizasvampar har ofta speciella miljökrav, och förekommer främst i äldre skog. Generellt kan mycel av mykorrhizasvampar leva vidare på en plast så länge det finns levande träd. Svampindividers mycel kan bli många decennier till potentiellt sekler gamla.",
+      "thumbnail": "/images/Skogsbruk.png",
+      "icon": "i-material-symbols-award-star-outline",
+      "color": "signal-500",
+      "positions": [
+        {
+          "framework": ["naturskydd"],
+          "times": ["före", "efter", "10", "20", "50", "80"],
+
+          "placement": "LEFT"
+        },
+        {
+          "framework": ["trakthygge"],
+          "times": ["före"],
+
+          "placement": "LEFT"
+        },
+        {
+          "framework": ["blädning"],
+          "times": ["före"],
+
+          "placement": "LEFT"
+        },
+        {
+          "framework": ["skärmträd"],
+          "times": ["före"],
+
+          "placement": "LEFT"
+        },
+        {
+          "framework": ["luckhuggning"],
+          "times": ["före"],
+
+          "placement": "LEFT"
+        }
+      ]
+    },
+    {
+      "id": "hogstubbe",
+      "title": "Högstubbe",
+      "text": "Här finns inga levande mykorrhizamycel. Trädets rötter är döda.",
+      "thumbnail": "/images/Skogsbruk.png",
+      "icon": "i-fluent-emoji-high-contrast-wood",
+      "color": "neutral-500",
+      "positions": [
+        {
+          "framework": ["luckhuggning"],
+          "times": ["efter"],
+          "x": 0.51,
+          "y": 0.26,
+          "placement": "LEFT"
+        },
+        {
+          "framework": ["trakthygge"],
+          "times": ["efter"],
+          "x": 0.621,
+          "y": 0.3,
+          "placement": "LEFT"
+        }
+      ]
+    },
+    {
+      "id": "stubbe",
+      "title": "Stubbe",
+      "text": "Trädets fotosyntes och flöde av energi till sina rötter har upphört. Efter avverkning tynar mykorrhizasvamparna bort och dör efter ett par månader - ett år.",
+      "thumbnail": "/images/Skogsbruk.png",
+      "icon": "i-fluent-emoji-high-contrast-wood",
+      "color": "neutral-500",
+      "positions": [
+        {
+          "framework": ["luckhuggning"],
+          "times": ["efter"],
+          "x": 0.422,
+          "y": 0.185,
+          "placement": "LEFT"
+        },
+        {
+          "framework": ["trakthygge"],
+          "times": ["efter"],
+          "x": 0.573,
+          "y": 0.32,
+          "placement": "LEFT"
+        }
+      ]
+    },
+    {
+      "id": "hansynstrad",
+      "title": "Hänsynsträd",
+      "text": "De flesta mykorrhizasvamparna som växte med trädets rötter i skogen före avverkningen finns kvar och lever vidare. Dessa mycel kan växa in i och spridas till uppväxande trädplantor.",
+      "thumbnail": "/images/Skogsbruk.png",
+      "icon": "i-pepicons-pop-tree-circle",
+      "color": "neutral-500",
+      "positions": [
+        {
+          "framework": ["luckhuggning"],
+          "times": ["efter", "20", "50", "80"],
+          "x": 0.335,
+          "y": 0.38,
+          "placement": "LEFT"
+        },
+        {
+          "framework": ["trakthygge"],
+          "times": ["efter", "20", "50", "80"],
+          "x": 0.4502,
+          "y": 0.2228,
+          "placement": "LEFT"
+        },
+        {
+          "framework": ["skärmträd"],
+          "times": ["20", "50", "80"],
+          "x": 0.469,
+          "y": 0.2577,
+          "placement": "LEFT"
+        }
+      ]
+    },
+    {
+      "id": "grupp_av_hansynstrad",
+      "title": "Grupp av hänsynsträd",
+      "text": "De flesta mykorrhizasvampar som växte i denna trädgrupps rötter före avverkningen finns kvar och lever vidare. Fanns det mat- och naturvårdssvampar, kan de fortleva.",
+      "thumbnail": "/images/Skogsbruk.png",
+      "icon": "i-pepicons-pop-tree-circle",
+      "color": "neutral-500",
+      "positions": [
+        {
+          "framework": ["trakthygge"],
+          "times": ["efter", "20", "50", "80"],
+          "x": 0.3736,
+          "y": 0.2832,
+          "placement": "LEFT"
+        }
+      ]
+    },
+    {
+      "id": "sjalforyngrade_sma_tradplantor",
+      "title": "Självföryngrade trädplantor",
+      "text": "Små mycel av mykorrhizasvampar växer i plantornas rötter. Om de växer nära hänsynsträd kan mycel vuxint in från dessas rötter. Annars etableras mycel från svampsporer som sprid in från näraliggande skogar. Vissa svamparter har också en sporbank i marken.",
+      "thumbnail": "/images/Skogsbruk.png",
+      "icon": "i-hugeicons-plant-03",
+      "color": "neutral-500",
+      "positions": [
+        {
+          "framework": ["trakthygge"],
+          "times": ["efter"],
+          "x": 0.4344,
+          "y": 0.1971,
+          "placement": "LEFT"
+        },
+        {
+          "framework": ["luckhuggning"],
+          "times": ["efter"],
+          "x": 0.4344,
+          "y": 0.1971,
+          "placement": "LEFT"
+        }
+      ]
+    },
+    {
+      "id": "planterade_sma_tradplantor",
+      "title": "Planterade små trädplantor",
+      "text": "Har med sig spontant etablerad mykorrhiza från plantskolan där de odlades upp. Det är dock få arter. Dessa ersätts succesivt med bättre anpassade och svamparter som finns på platsen.",
+      "thumbnail": "/images/Skogsbruk.png",
+      "icon": "i-hugeicons-plant-02",
+      "color": "neutral-500",
+      "positions": [
+        {
+          "framework": ["trakthygge"],
+          "times": ["20"],
+          "x": 0.45,
+          "y": 0.32,
+          "placement": "LEFT"
+        }
+      ]
+    },
+    {
+      "id": "yngre_trad_vid_avverkningen",
+      "title": "Yngre träd som lämnats",
+      "text": "Undviks underröjning före avverkning, kommer mykorrhizasvampar att överleva på dessa plantor och träd på samma sätt som de gör på rötterna av hänsynsträd.",
+      "thumbnail": "/images/Skogsbruk.png",
+      "icon": "i-pepicons-pop-seedling-circle",
+      "color": "neutral-500",
+      "positions": [
+        {
+          "framework": ["trakthygge"],
+          "times": ["efter"],
+          "x": 0.33,
+          "y": 0.37,
+          "placement": "LEFT"
+        }
+      ]
+    },
+    {
+      "id": "tradkant_mot_avverkning",
+      "title": "Trädkant mot avverkning",
+      "text": "Mykorrhizasvampars mycel växer med i skogskantsträdens rötter så långt de sträcker sig in på avverkningen. Mest närmast skogskanten, men når 10–15 meter in på hygget.",
+      "thumbnail": "/images/Skogsbruk.png",
+      "icon": "i-healthicons-square-medium-negative",
+      "color": "neutral-500",
+      "positions": [
+        {
+          "framework": ["trakthygge"],
+          "times": ["efter", "20"],
+          "x": 0.46,
+          "y": 0.409,
+          "placement": "LEFT"
+        },
+        {
+          "framework": ["luckhuggning"],
+          "times": ["efter", "20"],
+          "x": 0.64,
+          "y": 0.352,
+          "placement": "LEFT"
+        },
+        {
+          "framework": ["luckhuggning"],
+          "times": ["50"],
+          "x": 0.511,
+          "y": 0.3245,
+          "placement": "LEFT"
+        },
+        {
+          "framework": ["luckhuggning"],
+          "times": ["80"],
+          "x": 0.3278,
+          "y": 0.2383,
+          "placement": "LEFT"
+        }
+      ]
+    },
+    {
+      "id": "tomma_omraden_avverkning",
+      "title": "Tomma områden ",
+      "text": "Vid områden utan nära träd och småplantor direkt efter avverkning finns inte mykorrhizasvampar. I mark där det saknas trädrötter finns inte mykorrhizasvampar. Några, men få mykorrhizasvampar har en sporbank.",
+      "thumbnail": "/images/Skogsbruk.png",
+      "icon": "i-heroicons-map-pin-solid",
+      "iconOutline": "i-heroicons-outline-map-pin",
+      "color": "neutral-500",
+      "positions": [
+        {
+          "framework": ["trakthygge"],
+          "times": ["efter"],
+          "x": 0.6095,
+          "y": 0.2081,
+          "placement": "LEFT"
+        },
+        {
+          "framework": ["luckhuggning"],
+          "times": ["efter"],
+          "x": 0.485,
+          "y": 0.292,
+          "placement": "LEFT"
+        }
+      ]
+    }
+  ]
+}
