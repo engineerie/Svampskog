@@ -36,16 +36,16 @@ export default defineNuxtConfig({
     },
   },
 
-  // vite: {
-  //   server: {
-  //     cors: true,
-  //   },
-  //   resolve: {
-  //     alias: {
-  //       public: fileURLToPath(new URL("./public", import.meta.url)),
-  //     },
-  //   },
-  // },
+  vite: {
+    server: {
+      cors: true,
+    },
+    resolve: {
+      alias: {
+        public: fileURLToPath(new URL("./public", import.meta.url)),
+      },
+    },
+  },
 
   devtools: {
     enabled: true,
