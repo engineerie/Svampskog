@@ -21,11 +21,11 @@ export default defineNuxtConfig({
     },
   },
 
-  content: {
-    preview: {
-      api: "https://api.nuxt.studio",
-    },
-  },
+  // content: {
+  //   preview: {
+  //     api: "https://api.nuxt.studio",
+  //   },
+  // },
 
   studio: {
     repository: {
