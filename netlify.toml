@@ -4,3 +4,18 @@
 
 [build.environment]
   NODE_OPTIONS = "--max-old-space-size=8192"
+
+[[redirects]]
+  from = "/_studio"
+  to = "/.netlify/functions/server"
+  status = 200
+
+[[redirects]]
+  from = "/_studio/*"
+  to = "/.netlify/functions/server"
+  status = 200
+
+[[redirects]]
+  from = "/__nuxt_studio/*"
+  to = "/.netlify/functions/server"
+  status = 200
