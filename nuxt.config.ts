@@ -21,30 +21,31 @@ export default defineNuxtConfig({
     },
   },
 
-  // content: {
-  //   preview: {
-  //     api: "https://api.nuxt.studio",
-  //   },
-  // },
+  content: {
+    preview: {
+      api: "https://api.nuxt.studio",
+    },
+  },
 
   studio: {
     repository: {
       provider: "github",
       owner: "engineerie",
       repo: "Svampskog",
+      branch: "gh-pages",
     },
   },
 
-  vite: {
-    server: {
-      cors: true,
-    },
-    resolve: {
-      alias: {
-        public: fileURLToPath(new URL("./public", import.meta.url)),
-      },
-    },
-  },
+  // vite: {
+  //   server: {
+  //     cors: true,
+  //   },
+  //   resolve: {
+  //     alias: {
+  //       public: fileURLToPath(new URL("./public", import.meta.url)),
+  //     },
+  //   },
+  // },
 
   devtools: {
     enabled: true,
@@ -88,17 +89,17 @@ export default defineNuxtConfig({
       },
     ],
     prerender: {
-      routes: ["/", "/info"],
+      routes: ["/"],
       crawlLinks: true,
     },
   },
 
-  eslint: {
-    config: {
-      stylistic: {
-        commaDangle: "never",
-        braceStyle: "1tbs",
-      },
-    },
-  },
+  // eslint: {
+  //   config: {
+  //     stylistic: {
+  //       commaDangle: "never",
+  //       braceStyle: "1tbs",
+  //     },
+  //   },
+  // },
 });

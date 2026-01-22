@@ -64,9 +64,8 @@
                 @click="handleMethodNav(methodNav.next.id)" :ui="{
                     root: 'w-full',
                     header: 'w-full',
-                    body: 'w-full',
-                    leading: 'w-full flex justify-end text-sm',
                     body: 'w-full flex justify-end',
+                    leading: 'w-full flex justify-end text-sm',
                     title: 'truncate whitespace-nowrap max-w-[14ch] sm:max-w-none text-right'
                 }">
                 <template #leading class="text-muted">Nästa

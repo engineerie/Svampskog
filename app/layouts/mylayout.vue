@@ -3,5 +3,5 @@
     <UMain>
         <slot />
     </UMain>
-    <AppFooter/>
+    <AppFooter />
 </template>

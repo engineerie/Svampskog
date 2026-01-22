@@ -1,6 +1,26 @@
 title: Svampskog
 description: Svampskog.se är en webbapplikation där du kan utforska vilka mykorrhizasvampar som kan finnas i olika skogar och se hur de reagerar vid skogsbruksåtgärder.
-navigation: false
+financing:
+  headline: Projektet har finansierats av SLU och Skogssällskapet och med stöd från Skogsstyrelsen och EU.
+  logos:
+    - src: /images/logo/slu_logo_webb.png
+      alt: SLU
+      height: 60
+    - src: /images/logo/skogssallskapet_logo.png
+      alt: Skogssällskapet
+      height: 50
+    - src: /images/logo/Skogsstyrelsen_logo.png
+      alt: Skogsstyrelsen
+      height: 80
+    - src: /images/logo/EU_Logo.png
+      alt: EU
+      height: 80
+  notes:
+    - Verktyget är utvecklat med data från Markinventeringen, SLU riksskogstaxeringen och SLU Artdatabanken.
+    - "Referensgrupp: Representanter från Bitzner, Skogforsk, Skogsstyrelsen, SLU-Artdatabanken, Sveaskog och Södra Skogsägarna."
+    - "Ansvarig för projektet och för informationsinnehåll: Anders Dahlberg, SLU"
+    - "Webb och konceptutveckling: Jacob Bertilsson"
+    - "Kontakt: Anders Dahlberg, anders.dahlberg@slu.se"
 hero:
   title: Svampar och skogsskötsel
   description: Utforska vilka mykorrhizasvampar som kan finnas i olika skogar och se hur de påverkas av skogsskötsel.
@@ -29,6 +49,20 @@ hero:
   mykorrhiza:
     title: Mykorrhiza är en 500 miljoner år gammal symbios mellan växter och svampar.
     body: Symbiosen innebär att mykorrhizasvamparna får sin energi från träden och i utbyte sköter de om trädens näringsförsörjning.
+navigation: false
+press:
+  title: Webbinarier
+  description: Fördjupa dig i svampar och skogsbruk och ställ dina frågor direkt till forskare.
+  items:
+    - title: Webbinarium om Svampskog
+      publication: SLU
+      publicationDate: Vår 2026
+      url: https://www.slu.se/om-slu/organisation/fakulteter/fakulteten-for-skogsvetenskap/samverkan/kompetensutveckling-for-ett-hallbart-skogsbruk/se-svampen-i-din-skog/
+      icon: i-heroicons-calendar-date-range
+      description: Lär dig mer om skogens mykorrhizasvampar och hur skogsskötsel påverkar dem - och få en genomgång av hur du använder funktionerna i webbappen Svampskog.
+      badge:
+        label: Anmäl intresse
+        color: info
 sections:
   - title: Utforska svampar i svenska skogar
     description: Se vilka mykorrhizasvampar som kan finnas i en skog baserat på DNA-analyser av svampmycel i jordprover och vår samlade kunskap om var olika arters fruktkroppar förekommer.
@@ -57,64 +91,6 @@ sections:
         size: xl
     orientation: horizontal
     reverse: false
-press:
-  title: Webbinarier
-  description: Fördjupa dig i svampar och skogsbruk och ställ dina frågor direkt till forskare.
-  items:
-    # - title: "Webbinarium: Skogens svampar - Del 2"
-    #   publication: Plockhugget.se
-    #   publicationDate: 9 december 2025 kl 9-10.30
-    #   url: https://www.plockhugget.se/events/skogens-svampar-del-2-mykorrhizasvamparnas-mangfald-och-betydelse/
-    #   icon: i-heroicons-calendar-date-range
-    #   description: På senare år har forskning bringat allt större klarhet i vilka mykorrhizasvamparna är och deras biologi, hur skogsskötsel påverkar och kan utformas för att ta hänsyn till dem.
-    #   badge:
-    #     label: Anmälan öppen
-    #     color: primary
-    - title: Webbinarium om Svampskog
-      publication: SLU
-      publicationDate: Vår 2026
-      url: https://www.slu.se/om-slu/organisation/fakulteter/fakulteten-for-skogsvetenskap/samverkan/kompetensutveckling-for-ett-hallbart-skogsbruk/se-svampen-i-din-skog/
-      icon: i-heroicons-calendar-date-range
-      description: Lär dig mer om skogens mykorrhizasvampar och hur skogsskötsel påverkar dem - och få en genomgång av hur du använder funktionerna i webbappen Svampskog.
-      badge:
-        label: Anmäl intresse
-        color: info
-    # - title: Då stannar kantarellen
-    #   publication: Föreningen & tidningen Skogen
-    #   publicationDate: 2 april 2025
-    #   url: https://www.skogen.se/nyheter/da-stannar-kantarellen/
-    #   icon: i-heroicons-newspaper
-    #   description: Måste svampställena försvinna efter avverkning? Inte om man sparar träden där svamparna växer. En ny app visar hur svampar påverkas av skötselåtgärder.
-    # - title: "Ny teknik: Se svampen i din skog"
-    #   publication: Skogsvärden
-    #   publicationDate: 2 oktober 2024
-    #   url: https://www.skogssallskapet.se/kunskapsbank/artiklar/2024-10-02-ny-teknik-se-svampen-i-din-skog.html
-    #   icon: i-heroicons-newspaper
-    #   description: ""
-    # - title: Svamparnas rike - osynligt men viktigt
-    #   publication: Korta föreläsningar om svamp
-    #   publicationDate: 14 mars 2024
-    #   url: https://www.ksla.se/aktiviteter/svamparnas-rike-osynligt-men-viktigt/
-    #   icon: i-heroicons-film
-    #   description: Fyra presentationer på Kungliga Skogs- och lantbruksakademien
-    # - title: Så påverkar skogsbruket dina svampställen
-    #   publication: Dagens Nyheter
-    #   publicationDate: 3 september 2023
-    #   url: https://www.dn.se/sverige/sa-paverkar-skogsbruket-dina-svampstallen/
-    #   icon: i-heroicons-film
-    #   description: ""
-    # - title: Sporen - en podd om svampar
-    #   publication: Anna Rosling - Spotify
-    #   publicationDate: 1 september 2023
-    #   url: https://open.spotify.com/show/77UlUrR6SbIrsyFBOLHC8c
-    #   icon: i-heroicons-radio
-    #   description: 6 avsnitt från hösten 2023 där Anna Rosling från Uppsala universitet och Hanna Johannesson på Kungliga vetenskapsakademien/Stockholms universitet pratar om svamp.
-    # - title: Viktigt samspel mellan träd och svamp
-    #   publication: Skogseko
-    #   publicationDate: Nr 3 2022
-    #   url: https://e-tidning.skogseko.se/p/skogseko/skogseko-nr-3-2022/a/viktigt-samspel-mellan-trad-och-svamp/1525/587953/31172107
-    #   icon: i-heroicons-newspaper
-    #   description: ""
 timeline:
   title: Kommande innehåll
   description: Svampskog.se vidareutvecklas stegvis med nya funktioner och material.
@@ -139,24 +115,3 @@ timeline:
       title: Webbinarium
       description: Webbinarium om svampar, skogssbruk och funktionerna på svampskog.se hålls.
       icon: i-hugeicons-presentation-line-chart-01
-financing:
-  headline: Projektet har finansierats av SLU och Skogssällskapet och med stöd från Skogsstyrelsen och EU.
-  logos:
-    - src: /images/logo/slu_logo_webb.png
-      alt: SLU
-      height: 60
-    - src: /images/logo/skogssallskapet_logo.png
-      alt: Skogssällskapet
-      height: 50
-    - src: /images/logo/Skogsstyrelsen_logo.png
-      alt: Skogsstyrelsen
-      height: 80
-    - src: /images/logo/EU_Logo.png
-      alt: EU
-      height: 80
-  notes:
-    - Verktyget är utvecklat med data från Markinventeringen, SLU riksskogstaxeringen och SLU Artdatabanken.
-    - "Referensgrupp: Representanter från Bitzner, Skogforsk, Skogsstyrelsen, SLU-Artdatabanken, Sveaskog och Södra Skogsägarna."
-    - "Ansvarig för projektet och för informationsinnehåll: Anders Dahlberg, SLU"
-    - "Webb och konceptutveckling: Jacob Bertilsson"
-    - "Kontakt: Anders Dahlberg, anders.dahlberg@slu.se"
