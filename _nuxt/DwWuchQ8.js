@@ -1,1 +1,0 @@
-import{_,d as a,e as s,g as e,cR as r,w as l,a9 as p,cS as f,cT as d}from"./Q6ygd3_e.js";const m={};function u(n,i){const o=r,t=f,c=d;return s(),a("div",null,[e(o),e(t,{class:"flex flex-col"},{default:l(()=>[p(n.$slots,"default")]),_:3}),e(c)])}const h=_(m,[["render",u]]);export{h as default};
