@@ -1,0 +1,592 @@
+[
+  { "geo": "Norr", "forest": "Granskog", "veg": "Örter_grupp", "age": "1-40" },
+  { "geo": "Norr", "forest": "Granskog", "veg": "Örter_grupp", "age": "41-90" },
+  { "geo": "Norr", "forest": "Granskog", "veg": "Örter_grupp", "age": "91" },
+  {
+    "geo": "Norr",
+    "forest": "Granskog",
+    "veg": "Örter_grupp",
+    "age": "allaåldrar"
+  },
+  { "geo": "Norr", "forest": "Granskog", "veg": "Blåbär_grupp", "age": "1-40" },
+  {
+    "geo": "Norr",
+    "forest": "Granskog",
+    "veg": "Blåbär_grupp",
+    "age": "41-90"
+  },
+  { "geo": "Norr", "forest": "Granskog", "veg": "Blåbär_grupp", "age": "91" },
+  {
+    "geo": "Norr",
+    "forest": "Granskog",
+    "veg": "Blåbär_grupp",
+    "age": "allaåldrar"
+  },
+  { "geo": "Norr", "forest": "Granskog", "veg": "Lingon_grupp", "age": "1-40" },
+  {
+    "geo": "Norr",
+    "forest": "Granskog",
+    "veg": "Lingon_grupp",
+    "age": "41-90"
+  },
+  { "geo": "Norr", "forest": "Granskog", "veg": "Lingon_grupp", "age": "91" },
+  {
+    "geo": "Norr",
+    "forest": "Granskog",
+    "veg": "Lingon_grupp",
+    "age": "allaåldrar"
+  },
+  { "geo": "Norr", "forest": "Tallskog", "veg": "Örter_grupp", "age": "1-40" },
+  { "geo": "Norr", "forest": "Tallskog", "veg": "Örter_grupp", "age": "41-90" },
+  { "geo": "Norr", "forest": "Tallskog", "veg": "Örter_grupp", "age": "91" },
+  {
+    "geo": "Norr",
+    "forest": "Tallskog",
+    "veg": "Örter_grupp",
+    "age": "allaåldrar"
+  },
+  { "geo": "Norr", "forest": "Tallskog", "veg": "Blåbär_grupp", "age": "1-40" },
+  {
+    "geo": "Norr",
+    "forest": "Tallskog",
+    "veg": "Blåbär_grupp",
+    "age": "41-90"
+  },
+  { "geo": "Norr", "forest": "Tallskog", "veg": "Blåbär_grupp", "age": "91" },
+  {
+    "geo": "Norr",
+    "forest": "Tallskog",
+    "veg": "Blåbär_grupp",
+    "age": "allaåldrar"
+  },
+  { "geo": "Norr", "forest": "Tallskog", "veg": "Lingon_grupp", "age": "1-40" },
+  {
+    "geo": "Norr",
+    "forest": "Tallskog",
+    "veg": "Lingon_grupp",
+    "age": "41-90"
+  },
+  { "geo": "Norr", "forest": "Tallskog", "veg": "Lingon_grupp", "age": "91" },
+  {
+    "geo": "Norr",
+    "forest": "Tallskog",
+    "veg": "Lingon_grupp",
+    "age": "allaåldrar"
+  },
+  {
+    "geo": "Norr",
+    "forest": "Barrblandskog",
+    "veg": "Örter_grupp",
+    "age": "1-40"
+  },
+  {
+    "geo": "Norr",
+    "forest": "Barrblandskog",
+    "veg": "Örter_grupp",
+    "age": "41-90"
+  },
+  {
+    "geo": "Norr",
+    "forest": "Barrblandskog",
+    "veg": "Örter_grupp",
+    "age": "91"
+  },
+  {
+    "geo": "Norr",
+    "forest": "Barrblandskog",
+    "veg": "Örter_grupp",
+    "age": "allaåldrar"
+  },
+  {
+    "geo": "Norr",
+    "forest": "Barrblandskog",
+    "veg": "Blåbär_grupp",
+    "age": "1-40"
+  },
+  {
+    "geo": "Norr",
+    "forest": "Barrblandskog",
+    "veg": "Blåbär_grupp",
+    "age": "41-90"
+  },
+  {
+    "geo": "Norr",
+    "forest": "Barrblandskog",
+    "veg": "Blåbär_grupp",
+    "age": "91"
+  },
+  {
+    "geo": "Norr",
+    "forest": "Barrblandskog",
+    "veg": "Blåbär_grupp",
+    "age": "allaåldrar"
+  },
+  {
+    "geo": "Norr",
+    "forest": "Barrblandskog",
+    "veg": "Lingon_grupp",
+    "age": "1-40"
+  },
+  {
+    "geo": "Norr",
+    "forest": "Barrblandskog",
+    "veg": "Lingon_grupp",
+    "age": "41-90"
+  },
+  {
+    "geo": "Norr",
+    "forest": "Barrblandskog",
+    "veg": "Lingon_grupp",
+    "age": "91"
+  },
+  {
+    "geo": "Norr",
+    "forest": "Barrblandskog",
+    "veg": "Lingon_grupp",
+    "age": "allaåldrar"
+  },
+  {
+    "geo": "Norr",
+    "forest": "Lövblandskog",
+    "veg": "Örter_grupp",
+    "age": "1-40"
+  },
+  {
+    "geo": "Norr",
+    "forest": "Lövblandskog",
+    "veg": "Örter_grupp",
+    "age": "41-90"
+  },
+  {
+    "geo": "Norr",
+    "forest": "Lövblandskog",
+    "veg": "Örter_grupp",
+    "age": "91"
+  },
+  {
+    "geo": "Norr",
+    "forest": "Lövblandskog",
+    "veg": "Örter_grupp",
+    "age": "allaåldrar"
+  },
+  {
+    "geo": "Norr",
+    "forest": "Lövblandskog",
+    "veg": "Blåbär_grupp",
+    "age": "1-40"
+  },
+  {
+    "geo": "Norr",
+    "forest": "Lövblandskog",
+    "veg": "Blåbär_grupp",
+    "age": "41-90"
+  },
+  {
+    "geo": "Norr",
+    "forest": "Lövblandskog",
+    "veg": "Blåbär_grupp",
+    "age": "91"
+  },
+  {
+    "geo": "Norr",
+    "forest": "Lövblandskog",
+    "veg": "Blåbär_grupp",
+    "age": "allaåldrar"
+  },
+  {
+    "geo": "Norr",
+    "forest": "Lövblandskog",
+    "veg": "Lingon_grupp",
+    "age": "1-40"
+  },
+  {
+    "geo": "Norr",
+    "forest": "Lövblandskog",
+    "veg": "Lingon_grupp",
+    "age": "41-90"
+  },
+  {
+    "geo": "Norr",
+    "forest": "Lövblandskog",
+    "veg": "Lingon_grupp",
+    "age": "91"
+  },
+  {
+    "geo": "Norr",
+    "forest": "Lövblandskog",
+    "veg": "Lingon_grupp",
+    "age": "allaåldrar"
+  },
+  { "geo": "Norr", "forest": "Lövskog", "veg": "Örter_grupp", "age": "1-40" },
+  { "geo": "Norr", "forest": "Lövskog", "veg": "Örter_grupp", "age": "41-90" },
+  { "geo": "Norr", "forest": "Lövskog", "veg": "Örter_grupp", "age": "91" },
+  {
+    "geo": "Norr",
+    "forest": "Lövskog",
+    "veg": "Örter_grupp",
+    "age": "allaåldrar"
+  },
+  { "geo": "Norr", "forest": "Lövskog", "veg": "Blåbär_grupp", "age": "1-40" },
+  { "geo": "Norr", "forest": "Lövskog", "veg": "Blåbär_grupp", "age": "41-90" },
+  {
+    "geo": "Norr",
+    "forest": "Lövskog",
+    "veg": "Blåbär_grupp",
+    "age": "allaåldrar"
+  },
+  { "geo": "Norr", "forest": "Lövskog", "veg": "Lingon_grupp", "age": "1-40" },
+  { "geo": "Norr", "forest": "Lövskog", "veg": "Lingon_grupp", "age": "41-90" },
+  {
+    "geo": "Norr",
+    "forest": "Lövskog",
+    "veg": "Lingon_grupp",
+    "age": "allaåldrar"
+  },
+  { "geo": "Norr", "forest": "Naturbete", "veg": "Örter_grupp", "age": "1-40" },
+  {
+    "geo": "Norr",
+    "forest": "Naturbete",
+    "veg": "Örter_grupp",
+    "age": "41-90"
+  },
+  {
+    "geo": "Norr",
+    "forest": "Naturbete",
+    "veg": "Örter_grupp",
+    "age": "allaåldrar"
+  },
+  { "geo": "Söder", "forest": "Granskog", "veg": "Örter_grupp", "age": "1-40" },
+  {
+    "geo": "Söder",
+    "forest": "Granskog",
+    "veg": "Örter_grupp",
+    "age": "41-90"
+  },
+  { "geo": "Söder", "forest": "Granskog", "veg": "Örter_grupp", "age": "91" },
+  {
+    "geo": "Söder",
+    "forest": "Granskog",
+    "veg": "Örter_grupp",
+    "age": "allaåldrar"
+  },
+  {
+    "geo": "Söder",
+    "forest": "Granskog",
+    "veg": "Blåbär_grupp",
+    "age": "1-40"
+  },
+  {
+    "geo": "Söder",
+    "forest": "Granskog",
+    "veg": "Blåbär_grupp",
+    "age": "41-90"
+  },
+  { "geo": "Söder", "forest": "Granskog", "veg": "Blåbär_grupp", "age": "91" },
+  {
+    "geo": "Söder",
+    "forest": "Granskog",
+    "veg": "Blåbär_grupp",
+    "age": "allaåldrar"
+  },
+  {
+    "geo": "Söder",
+    "forest": "Granskog",
+    "veg": "Lingon_grupp",
+    "age": "1-40"
+  },
+  {
+    "geo": "Söder",
+    "forest": "Granskog",
+    "veg": "Lingon_grupp",
+    "age": "allaåldrar"
+  },
+  { "geo": "Söder", "forest": "Tallskog", "veg": "Örter_grupp", "age": "1-40" },
+  {
+    "geo": "Söder",
+    "forest": "Tallskog",
+    "veg": "Örter_grupp",
+    "age": "41-90"
+  },
+  { "geo": "Söder", "forest": "Tallskog", "veg": "Örter_grupp", "age": "91" },
+  {
+    "geo": "Söder",
+    "forest": "Tallskog",
+    "veg": "Örter_grupp",
+    "age": "allaåldrar"
+  },
+  {
+    "geo": "Söder",
+    "forest": "Tallskog",
+    "veg": "Blåbär_grupp",
+    "age": "1-40"
+  },
+  {
+    "geo": "Söder",
+    "forest": "Tallskog",
+    "veg": "Blåbär_grupp",
+    "age": "41-90"
+  },
+  { "geo": "Söder", "forest": "Tallskog", "veg": "Blåbär_grupp", "age": "91" },
+  {
+    "geo": "Söder",
+    "forest": "Tallskog",
+    "veg": "Blåbär_grupp",
+    "age": "allaåldrar"
+  },
+  {
+    "geo": "Söder",
+    "forest": "Tallskog",
+    "veg": "Lingon_grupp",
+    "age": "1-40"
+  },
+  {
+    "geo": "Söder",
+    "forest": "Tallskog",
+    "veg": "Lingon_grupp",
+    "age": "41-90"
+  },
+  { "geo": "Söder", "forest": "Tallskog", "veg": "Lingon_grupp", "age": "91" },
+  {
+    "geo": "Söder",
+    "forest": "Tallskog",
+    "veg": "Lingon_grupp",
+    "age": "allaåldrar"
+  },
+  {
+    "geo": "Söder",
+    "forest": "Barrblandskog",
+    "veg": "Örter_grupp",
+    "age": "1-40"
+  },
+  {
+    "geo": "Söder",
+    "forest": "Barrblandskog",
+    "veg": "Örter_grupp",
+    "age": "41-90"
+  },
+  {
+    "geo": "Söder",
+    "forest": "Barrblandskog",
+    "veg": "Örter_grupp",
+    "age": "91"
+  },
+  {
+    "geo": "Söder",
+    "forest": "Barrblandskog",
+    "veg": "Örter_grupp",
+    "age": "allaåldrar"
+  },
+  {
+    "geo": "Söder",
+    "forest": "Barrblandskog",
+    "veg": "Blåbär_grupp",
+    "age": "1-40"
+  },
+  {
+    "geo": "Söder",
+    "forest": "Barrblandskog",
+    "veg": "Blåbär_grupp",
+    "age": "41-90"
+  },
+  {
+    "geo": "Söder",
+    "forest": "Barrblandskog",
+    "veg": "Blåbär_grupp",
+    "age": "91"
+  },
+  {
+    "geo": "Söder",
+    "forest": "Barrblandskog",
+    "veg": "Blåbär_grupp",
+    "age": "allaåldrar"
+  },
+  {
+    "geo": "Söder",
+    "forest": "Barrblandskog",
+    "veg": "Lingon_grupp",
+    "age": "1-40"
+  },
+  {
+    "geo": "Söder",
+    "forest": "Barrblandskog",
+    "veg": "Lingon_grupp",
+    "age": "41-90"
+  },
+  {
+    "geo": "Söder",
+    "forest": "Barrblandskog",
+    "veg": "Lingon_grupp",
+    "age": "91"
+  },
+  {
+    "geo": "Söder",
+    "forest": "Barrblandskog",
+    "veg": "Lingon_grupp",
+    "age": "allaåldrar"
+  },
+  {
+    "geo": "Söder",
+    "forest": "Lövblandskog",
+    "veg": "Örter_grupp",
+    "age": "1-40"
+  },
+  {
+    "geo": "Söder",
+    "forest": "Lövblandskog",
+    "veg": "Örter_grupp",
+    "age": "41-90"
+  },
+  {
+    "geo": "Söder",
+    "forest": "Lövblandskog",
+    "veg": "Örter_grupp",
+    "age": "91"
+  },
+  {
+    "geo": "Söder",
+    "forest": "Lövblandskog",
+    "veg": "Örter_grupp",
+    "age": "allaåldrar"
+  },
+  {
+    "geo": "Söder",
+    "forest": "Lövblandskog",
+    "veg": "Blåbär_grupp",
+    "age": "1-40"
+  },
+  {
+    "geo": "Söder",
+    "forest": "Lövblandskog",
+    "veg": "Blåbär_grupp",
+    "age": "41-90"
+  },
+  {
+    "geo": "Söder",
+    "forest": "Lövblandskog",
+    "veg": "Blåbär_grupp",
+    "age": "91"
+  },
+  {
+    "geo": "Söder",
+    "forest": "Lövblandskog",
+    "veg": "Blåbär_grupp",
+    "age": "allaåldrar"
+  },
+  {
+    "geo": "Söder",
+    "forest": "Lövblandskog",
+    "veg": "Lingon_grupp",
+    "age": "1-40"
+  },
+  {
+    "geo": "Söder",
+    "forest": "Lövblandskog",
+    "veg": "Lingon_grupp",
+    "age": "allaåldrar"
+  },
+  { "geo": "Söder", "forest": "Lövskog", "veg": "Örter_grupp", "age": "1-40" },
+  { "geo": "Söder", "forest": "Lövskog", "veg": "Örter_grupp", "age": "41-90" },
+  { "geo": "Söder", "forest": "Lövskog", "veg": "Örter_grupp", "age": "91" },
+  {
+    "geo": "Söder",
+    "forest": "Lövskog",
+    "veg": "Örter_grupp",
+    "age": "allaåldrar"
+  },
+  { "geo": "Söder", "forest": "Lövskog", "veg": "Blåbär_grupp", "age": "1-40" },
+  {
+    "geo": "Söder",
+    "forest": "Lövskog",
+    "veg": "Blåbär_grupp",
+    "age": "41-90"
+  },
+  {
+    "geo": "Söder",
+    "forest": "Lövskog",
+    "veg": "Blåbär_grupp",
+    "age": "allaåldrar"
+  },
+  { "geo": "Söder", "forest": "Lövskog", "veg": "Lingon_grupp", "age": "1-40" },
+  {
+    "geo": "Söder",
+    "forest": "Lövskog",
+    "veg": "Lingon_grupp",
+    "age": "allaåldrar"
+  },
+  {
+    "geo": "Söder",
+    "forest": "Naturbete",
+    "veg": "Örter_grupp",
+    "age": "1-40"
+  },
+  {
+    "geo": "Söder",
+    "forest": "Naturbete",
+    "veg": "Örter_grupp",
+    "age": "41-90"
+  },
+  { "geo": "Söder", "forest": "Naturbete", "veg": "Örter_grupp", "age": "91" },
+  {
+    "geo": "Söder",
+    "forest": "Naturbete",
+    "veg": "Örter_grupp",
+    "age": "allaåldrar"
+  },
+  {
+    "geo": "Söder",
+    "forest": "Naturbete",
+    "veg": "Blåbär_grupp",
+    "age": "1-40"
+  },
+  {
+    "geo": "Söder",
+    "forest": "Naturbete",
+    "veg": "Blåbär_grupp",
+    "age": "41-90"
+  },
+  { "geo": "Söder", "forest": "Naturbete", "veg": "Blåbär_grupp", "age": "91" },
+  {
+    "geo": "Söder",
+    "forest": "Naturbete",
+    "veg": "Blåbär_grupp",
+    "age": "allaåldrar"
+  },
+  {
+    "geo": "Söder",
+    "forest": "EkBokskog",
+    "veg": "Örter_grupp",
+    "age": "1-40"
+  },
+  {
+    "geo": "Söder",
+    "forest": "EkBokskog",
+    "veg": "Örter_grupp",
+    "age": "41-90"
+  },
+  { "geo": "Söder", "forest": "EkBokskog", "veg": "Örter_grupp", "age": "91" },
+  {
+    "geo": "Söder",
+    "forest": "EkBokskog",
+    "veg": "Örter_grupp",
+    "age": "allaåldrar"
+  },
+  {
+    "geo": "Söder",
+    "forest": "EkBokskog",
+    "veg": "Blåbär_grupp",
+    "age": "1-40"
+  },
+  {
+    "geo": "Söder",
+    "forest": "EkBokskog",
+    "veg": "Blåbär_grupp",
+    "age": "41-90"
+  },
+  { "geo": "Söder", "forest": "EkBokskog", "veg": "Blåbär_grupp", "age": "91" },
+  {
+    "geo": "Söder",
+    "forest": "EkBokskog",
+    "veg": "Blåbär_grupp",
+    "age": "allaåldrar"
+  }
+]

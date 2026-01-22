@@ -1,4 +1,4 @@
-import validCombinations from 'public/validCombinations.json'
+import validCombinations from '~/data/validCombinations.json'
 
 interface EdnaCombination {
   geo: string
