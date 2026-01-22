@@ -81,18 +81,18 @@ export default defineNuxtConfig({
 
   compatibilityDate: "2024-07-11",
 
-  // nitro: {
-  //   serverAssets: [
-  //     {
-  //       baseName: "storage",
-  //       dir: "storage",
-  //     },
-  //   ],
-  //   prerender: {
-  //     routes: ["/"],
-  //     crawlLinks: true,
-  //   },
-  // },
+  nitro: {
+    serverAssets: [
+      {
+        baseName: "storage",
+        dir: "storage",
+      },
+    ],
+    prerender: {
+      routes: ["/"],
+      crawlLinks: false,
+    },
+  },
 
   // eslint: {
   //   config: {
