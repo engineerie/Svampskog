@@ -1,0 +1,1 @@
+import{y as r,d as c,e as l,a9 as p,n as m,ai as u,aT as s}from"./D20xMtru.js";const i={base:""},_={__name:"ProseEm",props:{class:{type:String,required:!1}},setup(e){const a=e,t=r(),o=u(()=>s({extend:s(i),...t.ui?.prose?.em||{}}));return(n,d)=>(l(),c("em",{class:m(o.value({class:a.class}))},[p(n.$slots,"default")],2))}};export{_ as default};
