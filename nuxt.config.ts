@@ -32,7 +32,6 @@ export default defineNuxtConfig({
       provider: "github",
       owner: "engineerie",
       repo: "Svampskog",
-      branch: "gh-pages",
     },
   },
 
