@@ -1,0 +1,1 @@
+import{y as l,d as r,e as c,a9 as p,n as u,ai as d,aT as e}from"./C9IE90CY.js";const i={base:"bg-muted"},h={__name:"ProseThead",props:{class:{type:null,required:!1}},setup(s){const a=s,t=l(),o=d(()=>e({extend:e(i),...t.ui?.prose?.thead||{}}));return(n,m)=>(c(),r("thead",{class:u(o.value({class:a.class}))},[p(n.$slots,"default")],2))}};export{h as default};
