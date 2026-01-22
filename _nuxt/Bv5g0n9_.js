@@ -1,0 +1,1 @@
+import{_ as a,d as c,e as s,g as e,cR as r,w as l,a9 as p,cS as m,cT as u,F as d}from"./truv8Om2.js";const f={};function i(n,x){const t=r,o=m,_=u;return s(),c(d,null,[e(t),e(o,null,{default:l(()=>[p(n.$slots,"default")]),_:3}),e(_)],64)}const g=a(f,[["render",i]]);export{g as default};
