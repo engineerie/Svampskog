@@ -1,0 +1,1 @@
+import{_ as c,d as _,e as a,g as e,cR as r,w as l,a9 as p,cS as f,cT as m,F as d}from"./CnLc4XRp.js";const u={};function x(o,i){const n=r,t=f,s=m;return a(),_(d,null,[e(n),e(t,{class:"flex flex-col"},{default:l(()=>[p(o.$slots,"default")]),_:3}),e(s)],64)}const g=c(u,[["render",x]]);export{g as default};
