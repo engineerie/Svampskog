@@ -32,6 +32,7 @@ export default defineNuxtConfig({
       provider: "github",
       owner: "engineerie",
       repo: "Svampskog",
+      branch: "main",
     },
   },
 
@@ -93,12 +94,12 @@ export default defineNuxtConfig({
     },
   },
 
-  // eslint: {
-  //   config: {
-  //     stylistic: {
-  //       commaDangle: "never",
-  //       braceStyle: "1tbs",
-  //     },
-  //   },
-  // },
+  eslint: {
+    config: {
+      stylistic: {
+        commaDangle: "never",
+        braceStyle: "1tbs",
+      },
+    },
+  },
 });
