@@ -1,9 +1,10 @@
 [build]
-  command = "nuxt build"
+  command = "pnpm build"
   publish = ".output/public"
 
 [build.environment]
   NODE_OPTIONS = "--max-old-space-size=8192"
+  NITRO_PRESET = "netlify"
 
 [functions]
   directory = ".output/server"

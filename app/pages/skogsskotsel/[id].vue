@@ -153,8 +153,8 @@
             <div class="flex items-center gap-3 mb-3">
                 <UButton color="neutral" variant="outline"
                     :class="markerPinned[card.key] ? 'ring-2 ring-primary' : 'ring-muted/50'"
-                    :icon="markerPinned[card.key] ? 'i-heroicons-lock-closed' : 'i-heroicons-lock-open'"
-                    :label="markerPinned[card.key] ? 'Markör fäst' : 'Markör lossad'"
+                    :icon="markerPinned[card.key] ? 'i-heroicons-eye' : 'i-heroicons-eye-slash'"
+                    :label="markerPinned[card.key] ? 'Markör' : 'Markör'"
                     @click="markerPinned[card.key] = !markerPinned[card.key]" />
                 <div v-if="card.key === 'kanteffekt'">
                     <UButton color="neutral" variant="outline"
@@ -707,7 +707,7 @@ const [DefineMarkerCardTrigger, ReuseMarkerCardTrigger] = createReusableTemplate
 const [DefineMarkerCardBody, ReuseMarkerCardBody] = createReusableTemplate()
 const markerPanelOpen = reactive<Record<string, boolean>>({})
 const markerPinned = reactive<Record<string, boolean>>({})
-const isMarkerOverlayVisible = (key: string) => markerPanelOpen[key] || markerPinned[key]
+const isMarkerOverlayVisible = (key: string) => markerPinned[key]
 const selectedMarkerKey = ref<string | null>(null)
 const markerSlideoverPinned = ref(false)
 const selectedMarkerCard = computed(() =>
@@ -726,6 +726,7 @@ const openMarkerPanel = (key: string) => {
         markerPanelOpen[existing] = false
     })
     markerPanelOpen[key] = true
+    markerPinned[key] = true
     selectedMarkerKey.value = key
     markerPanelOpenSingle.value = true
 }
@@ -735,8 +736,8 @@ const closeMarkerPanel = () => {
 const markerTriggerMenu = (card: { key: string }) => ([
     [
         {
-            label: markerPinned[card.key] ? 'Lossa markör' : 'Fäst markör',
-            icon: markerPinned[card.key] ? 'i-heroicons-lock-open' : 'i-heroicons-lock-closed',
+            label: markerPinned[card.key] ? 'Dölj markör' : 'Visa markör',
+            icon: markerPinned[card.key] ? 'i-heroicons-eye-slash' : 'i-heroicons-eye',
             onSelect: () => {
                 markerPinned[card.key] = !markerPinned[card.key]
             }

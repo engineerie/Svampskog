@@ -89,9 +89,9 @@ const open = ref(false)
 
   <UPage v-if="page" class="flex-1">
     <UContainer class="w-full px-0">
-      <UPageHero :ui="{ container: ' py-12 lg:py-24 lg:pb-12', title: ' sm:text-7xl', headline: 'text-neutral' }"
+      <UPageHero :ui="{ container: ' py-12 lg:py-24 lg:pb-18', title: ' sm:text-7xl', headline: 'text-neutral' }"
         :title="page.hero.title" :description="page.hero.description" :orientation="page.hero.orientation" class="">
-        <template #headline v-if="page.hero.headline">
+        <!-- <template #headline v-if="page.hero.headline">
           <div class="flex justify-center items-center">
             <Motion :initial="{
               scale: 0.5,
@@ -138,7 +138,7 @@ const open = ref(false)
             </Motion>
           </div>
 
-        </template>
+        </template> -->
         <!-- <NuxtImg :src="page.hero.src" width="700" format="webp" alt="Illustration"
           class=" rounded ring ring-neutral-300 " /> -->
         <template v-if="isMobile && page?.hero?.links?.[0]" #links>
@@ -212,15 +212,17 @@ const open = ref(false)
 
         <Motion :initial="{
           opacity: 0,
-          transform: 'translateY(10px)'
+          scale: 0.9,
+          // transform: 'translateY(10px)'
           // filter: 'blur(20px)'
         }" :animate="{
           opacity: 1,
-          transform: 'translateY(0px)'
+          scale: 1,
+          // transform: 'translateY(0px)'
           // filter: 'blur(0px)'
         }" :transition="{
           duration: 0.3,
-          delay: 0.6
+          delay: 0.1
         }">
           <UCard variant="soft" class="shadow ring ring-muted/30">
             <EnvironmentSelector class="" />

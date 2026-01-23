@@ -14,7 +14,7 @@
         </UContainer>
         <UContainer v-if="!isMobile"
             class="w-full flex flex-col sm:flex-row  justify-between py-4 gap-3 sm:gap-6 overflow-x-auto transition-all overflow-visible"
-            :class="[selectedMethod.id ? 'mt-0 flex-row' : 'mt-8 flex-col']">
+            :class="[selectedMethod.id ? 'mt-0 flex-row' : ' flex-col']">
             <Motion v-for="method in methods" :key="method.id" class="relative" :initial="{
                 scale: 1,
                 transform: 'translateY(10px)',
@@ -25,26 +25,26 @@
                 opacity: 1,
             }" :transition="{
                 duration: 0.3,
-                delay: 0.5 + 0.05 * (method.index ?? 0)
+                delay: 0.2 + 0.05 * (method.index ?? 0)
             }">
-                <UPopover :open="hoveredMethodId === method.id" :ui="{ content: 'p-4 w-80' }"
-                    :popper="{ placement: 'bottom-start' }">
-                    <div v-if="!selectedMethod.id" @click="goToMethod(method.id)"
-                        @mouseenter="hoveredMethodId = method.id" @mouseleave="hoveredMethodId = null"
-                        @focusin="hoveredMethodId = method.id" @focusout="hoveredMethodId = null" :class="[
-                            'shrink-0 lg:shrink sm:w-58 lg:w-full bg-white transition-all hover:opacity-100 border border-muted/50 overflow-hidden rounded-lg h-fit shadow-lg hover:shadow-md relative cursor-pointer',
-                            !selectedId ? 'opacity-100' : (selectedId === method.id ? 'opacity-100 ring-primary/40 shadow-lg' : 'opacity-50')
-                        ]">
+                <!-- <UPopover :open="hoveredMethodId === method.id" :ui="{ content: 'p-4 w-80' }"
+                    :popper="{ placement: 'bottom-start' }"> -->
+                <div v-if="!selectedMethod.id" @click="goToMethod(method.id)" @mouseenter="hoveredMethodId = method.id"
+                    @mouseleave="hoveredMethodId = null" @focusin="hoveredMethodId = method.id"
+                    @focusout="hoveredMethodId = null" :class="[
+                        'shrink-0 lg:shrink sm:w-58 lg:w-full bg-white transition-all hover:opacity-100 border border-muted/50 overflow-hidden rounded-lg h-fit shadow-lg hover:shadow-md relative cursor-pointer',
+                        !selectedId ? 'opacity-100' : (selectedId === method.id ? 'opacity-100 ring-primary/40 shadow-lg' : 'opacity-50')
+                    ]">
 
-                        <template v-if="!selectedMethod.id">
-                            <UBadge v-if="method.type" class="absolute top-2 left-2" :label="method.type"
-                                color="neutral" variant="subtle" />
-                            <img :src="methodImage(method, 'card')" :alt="method.title" width="300" height="160"
-                                class=" w-full h-full" loading="lazy" decoding="async" />
-                            <h1 class="text-lg p-2 px-3 font-medium text-nowrap ">{{ method.title }}</h1>
-                        </template>
-                    </div>
-                    <template #content>
+                    <template v-if="!selectedMethod.id">
+                        <UBadge v-if="method.type" class="absolute top-2 left-2" :label="method.type" color="neutral"
+                            variant="subtle" />
+                        <img :src="methodImage(method, 'card')" :alt="method.title" width="300" height="160"
+                            class=" w-full h-full" loading="lazy" decoding="async" />
+                        <h1 class="text-lg p-2 px-3 font-medium text-nowrap ">{{ method.title }}</h1>
+                    </template>
+                </div>
+                <!-- <template #content>
                         <div class="space-y-2">
                             <p class="text-xs font-semibold uppercase tracking-wide text-neutral-500">Om metoden</p>
                             <p class="text-sm text-neutral-800 line-clamp-3">
@@ -57,7 +57,7 @@
                             </p>
                         </div>
                     </template>
-                </UPopover>
+                </UPopover> -->
             </Motion>
         </UContainer>
 

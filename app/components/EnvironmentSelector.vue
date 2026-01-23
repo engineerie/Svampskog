@@ -85,7 +85,7 @@
             :class="[' relative h-full col-span-9 items-center ring-0 bg-transparent transition-all', geography && forestType && standAge && vegetationType ? 'col-span-9' : 'col-span-12']">
             <div class="flex transition-all">
               <div v-for="category in categories" :key="category.key" class="flex md:justify-center w-full m-3">
-                <UPopover :ui="{ content: 'max-h-96 overflow-y-auto bar-chart-container' }" :content="{
+                <UPopover :ui="{ content: 'max-h-72 overflow-y-auto bar-chart-container' }" :content="{
                   align: 'start',
                   side: 'bottom',
                 }">
