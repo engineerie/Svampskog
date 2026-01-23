@@ -1,1 +1,0 @@
-import{_,d as a,e as s,g as e,cR as r,w as l,a9 as p,cS as f,cT as m,F as d}from"./BNsSSsGZ.js";const u={};function x(n,i){const t=r,o=f,c=m;return s(),a(d,null,[e(t),e(o,{class:"flex flex-col"},{default:l(()=>[p(n.$slots,"default")]),_:3}),e(c)],64)}const g=_(u,[["render",x]]);export{g as default};
