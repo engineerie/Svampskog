@@ -48,7 +48,7 @@ methods:
     title: Överhållen skärm
     image: images/metoder/skärm.png
     type: Hyggesfritt
-    shortdescription: Avverkning i tre steg under 20 år
+    shortdescription: Överhållen skärm
     icon: i-lucide-lab-trees-forest
     descriptionParagraphs:
       - Överhållen skärm innebär att antalet lämnade skyddande skärmträd är fler än vid en vanlig fröträdsställning och att de sparas längre än vid normalt skärmskogsbruk. Skärmträden avvecklas successivt i flera steg medan trädplantor etableras och växer till.
@@ -64,7 +64,7 @@ methods:
     title: Blädning
     image: images/metoder/blädning.png
     type: Hyggesfritt
-    shortdescription: Enstaka träd gallras
+    shortdescription: Stora träd gallras
     icon: i-tabler-christmas-tree-off
     descriptionParagraphs:
       - Blädning innebär ofta uttag om 20-30 procent av virkesvolymen med intervall på 15-30 år. Avverkning görs med målet att skapa och bibehålla en fullskiktad skog, det vill säga en skog med träd i alla storlekar.

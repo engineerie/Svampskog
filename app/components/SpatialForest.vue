@@ -14,7 +14,7 @@
       delay: 0.2
     }">
       <Transition name="fade" mode="out-in">
-        <img :key="imageUrl" :src="imageUrl" alt="Vald skogsmiljö" class="h-full rounded-md ring ring-muted/50"
+        <img :key="imageUrl" :src="imageUrl" alt="Vald skogsmiljö" class="h-full rounded-xl ring ring-muted/50 shadow"
           width="805" height="505" />
       </Transition>
     </Motion>

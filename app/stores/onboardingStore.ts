@@ -7,7 +7,7 @@ interface OnboardingState {
 
 export const useOnboardingStore = defineStore("onboardingStore", {
   state: (): OnboardingState => ({
-    selectedStartskog: 0,
+    selectedStartskog: 1,
     selectedFramework: 1,
   }),
 });

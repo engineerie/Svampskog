@@ -224,7 +224,7 @@ const open = ref(false)
           duration: 0.3,
           delay: 0.1
         }">
-          <UCard variant="soft" class="shadow ring ring-muted/30">
+          <UCard variant="soft" class="shadow ring ring-muted/30 sm:px-4 rounded-2xl">
             <EnvironmentSelector class="" />
           </UCard>
 

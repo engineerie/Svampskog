@@ -32,7 +32,7 @@
                 <div v-if="!selectedMethod.id" @click="goToMethod(method.id)" @mouseenter="hoveredMethodId = method.id"
                     @mouseleave="hoveredMethodId = null" @focusin="hoveredMethodId = method.id"
                     @focusout="hoveredMethodId = null" :class="[
-                        'shrink-0 lg:shrink sm:w-58 lg:w-full bg-white transition-all hover:opacity-100 border border-muted/50 overflow-hidden rounded-lg h-fit shadow-lg hover:shadow-md relative cursor-pointer',
+                        'shrink-0 lg:shrink sm:w-58 lg:w-full bg-white transition-all hover:opacity-100 border border-muted/50 overflow-hidden rounded-xl h-fit shadow-lg hover:shadow-md relative cursor-pointer',
                         !selectedId ? 'opacity-100' : (selectedId === method.id ? 'opacity-100 ring-primary/40 shadow-lg' : 'opacity-50')
                     ]">
 

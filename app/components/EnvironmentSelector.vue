@@ -82,7 +82,7 @@
 
         <div class="grid grid-cols-12 gap-2 mb-4 min-h-44">
           <UCard
-            :class="[' relative h-full col-span-9 items-center ring-0 bg-transparent transition-all', geography && forestType && standAge && vegetationType ? 'col-span-9' : 'col-span-12']">
+            :class="[' relative h-full col-span-9 items-center ring-0 bg-transparent transition-all', geography && forestType && standAge && vegetationType ? 'col-span-9' : 'col-span-9']">
             <div class="flex transition-all">
               <div v-for="category in categories" :key="category.key" class="flex md:justify-center w-full m-3">
                 <UPopover :ui="{ content: 'max-h-72 overflow-y-auto bar-chart-container' }" :content="{
@@ -92,7 +92,7 @@
                   <div class="w-full">
                     <transition name="slide-up" mode="out-in">
                       <div :key="getLabel(category.key)"
-                        class="flex items-center md:justify-center cursor-pointer ring ring-muted/50 shadow bg-white hover:bg-neutral-100/70 py-4 rounded-md w-full">
+                        class="flex items-center md:justify-center cursor-pointer ring ring-muted/50 shadow bg-white hover:bg-neutral-100/70 py-4 rounded-lg w-full">
                         <div class="md:text-center">
                           <h1 class="text-neutral-500">{{ category.title }}</h1>
                           <h1 class="md:text-2xl font-medium">
@@ -214,6 +214,12 @@
           <div class="col-span-3 flex w-full justify-end" v-if="geography && forestType && standAge && vegetationType">
             <Transition name="fade" mode="out-in">
               <SpatialForest />
+            </Transition>
+          </div>
+          <div class="col-span-3 flex w-full justify-end" v-else>
+            <Transition name="fade" mode="out-in">
+              <NuxtImg src="/images/Landing/Mushroom Forest Image.jpeg" width="805" height="505"
+                class="h-full rounded-xl ring ring-muted/50" />
             </Transition>
           </div>
         </div>

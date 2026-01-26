@@ -2,16 +2,15 @@
   <div>
     <!-- Dropdown to select which chart to display -->
 
-    <div class="mt-2 mb-1 flex justify-between">
-      <USelect v-model="selectedChart" :items="chartOptions" value-key="value" option-attribute="label" size="xl"
-        variant="none" class="hover:cursor-pointer" :icon="selectedChartIcon"
+    <div v-if="showHeaderRow" class="mt-2 mb-1 flex justify-between">
+      <USelect v-if="showControls" v-model="selectedChart" :items="chartOptions" value-key="value"
+        option-attribute="label" size="xl" variant="none" class="hover:cursor-pointer" :icon="selectedChartIcon"
         :ui="{ content: 'min-w-fit', value: 'sm:text-lg sm:font-medium text-neutral-700' }" />
       <div class="pr-2">
-
-
-        <USelect v-if="selectedChart === 'grupper' && isFrameworkCompareMode" v-model="selectedCompareArtkategori"
-          :items="compareArtkategoriOptions" option-attribute="label" value-key="value" size="lg" variant="soft"
-          placeholder="Välj svampgrupp" class="hover:cursor-pointer rounded-full"
+        <USelect v-if="selectedChart === 'grupper' && isFrameworkCompareMode"
+          v-model="selectedCompareArtkategori" :items="compareArtkategoriOptions" option-attribute="label"
+          value-key="value" size="lg" variant="outline" placeholder="Välj svampgrupp"
+          class="hover:cursor-pointer ring-muted/50"
           :ui="{ content: 'min-w-fit', value: 'hidden sm:flex', base: 'min-h-8' }" :avatar="selectedCompareAvatar">
           <template #item="{ item }">
             <div class="flex items-center gap-2">
@@ -20,15 +19,15 @@
             </div>
           </template>
         </USelect>
-        <USelect v-if="selectedChart === 'matsvampar'" v-model="selectedMatsvampVariant" :items="matsvampVariantOptions"
-          :content="{
+        <USelect v-if="selectedChart === 'matsvampar' && showMatsvampSelector" v-model="selectedMatsvampVariant"
+          :items="matsvampVariantOptions" :content="{
             align: 'end',
             side: 'bottom',
             sideOffset: 8
           }" option-attribute="label" value-key="value" placeholder="Välj dataset"
-          class="hover:cursor-pointer rounded-full" size="lg" variant="soft"
-          :ui="{ content: 'w-fit shrink-0', value: 'hidden', base: 'min-h-8', item: 'gap-0' }"
-          :icon="selectedMatsvampIcon" :aria-label="selectedMatsvampLabel">
+          class="hover:cursor-pointer ring-muted/50" size="lg"
+          :ui="{ content: 'w-fit shrink-0', base: 'min-h-8', item: 'gap-0' }" :icon="selectedMatsvampIcon"
+          :aria-label="selectedMatsvampLabel">
           <template #item="{ item }">
             <div class="flex items-center gap-2">
               <UIcon v-if="item.icon" :name="item.icon" class="size-4" />
@@ -48,10 +47,10 @@
 
       <ForestryChartDisplay v-bind="chartDisplayProps" />
 
-      <div class="px-4 pb-4 text-sm text-muted" v-if="chartDescription">
+      <div class="px-4 pb-2 text-sm text-muted" v-if="chartDescription">
         {{ chartDescription }}
       </div>
-      <div v-if="selectedChart === 'grupper'" class="mx-2">
+      <div v-if="selectedChart === 'grupper'" class="mx-2 my-2">
         <UModal :fullscreen="isMobile ? true : false" title="Relativ mängd" description="">
 
           <UButton size="lg" variant="outline" class="px-3 flex justify-center ring-muted/50" color="neutral"
@@ -240,11 +239,21 @@ interface Props {
   currentStartskog?: string
   selectedChart?: string
   preserveFrameworkOrder?: boolean
+  showControls?: boolean
+  showMatsvampSelector?: boolean
 }
 const props = defineProps<Props>()
 const emit = defineEmits<{
   (e: 'update:selectedChart', value: string): void
 }>()
+
+const showControls = computed(() => props.showControls !== false)
+const showMatsvampSelector = computed(() => props.showMatsvampSelector !== false)
+const showHeaderRow = computed(() =>
+  showControls.value
+  || (selectedChart.value === 'matsvampar' && showMatsvampSelector.value)
+  || (selectedChart.value === 'grupper' && isFrameworkCompareMode.value)
+)
 
 const selectedStartskog = ref('naturskog');
 const selectedStartskog2 = ref('naturskog');
@@ -371,7 +380,7 @@ const matsvampDescription = computed(() =>
   matsvampVariantDescriptions.value[selectedMatsvampVariant.value]
 )
 
-const matsvampMaxY = computed(() => selectedMatsvampVariant.value === 'kg' ? 55 : 28)
+const matsvampMaxY = computed(() => (selectedMatsvampVariant.value === 'kg' ? 55 : 28) + 5)
 
 const selectedArtkategori = ref<string[]>([...defaultGrupperArtkategori]);
 
