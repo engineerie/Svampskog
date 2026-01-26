@@ -1,7 +1,7 @@
 <template>
     <DefineMethodPanelBody>
         <div class="grid grid-cols-1 md:grid-cols-3 gap-6 p-1">
-            <div class="space-y-0">
+            <div class="space-y-6">
 
                 <UCard class="h-fit ring-muted/50 shadow rounded-2xl">
                     <!-- <template #header>
@@ -30,13 +30,16 @@
                     </div>
                 </template> -->
             <div class="flex flex-col gap-6">
+                <UCard variant=soft>
+                    <ImpactDonut :value="impact.value" :label="impact.label" :tone="impact.tone"
+                        :comparison-value="comparisonImpact?.value" :comparison-tone="comparisonImpact?.tone"
+                        class="" />
+                </UCard>
                 <UCard class="h-fit ring-muted/50 shadow rounded-2xl">
                     <div class="text-md md:text-md text-neutral-800 space-y-3">
 
 
-                        <ImpactDonut :value="impact.value" :label="impact.label" :tone="impact.tone"
-                            :comparison-value="comparisonImpact?.value" :comparison-tone="comparisonImpact?.tone"
-                            class="pt-8 pb-4" />
+
                         <UAlert v-if="selectedStartskogTab === 'naturskog' && selectedMethod.id !== 'naturskydd'"
                             color="info" variant="subtle" icon="i-heroicons-information-circle" title="Äldre skog"
                             description="Skötselingrepp i skog som inte tidigare har varit kalavverkad har i regel större påverkan.
@@ -469,7 +472,7 @@
                                     <transition name="slide-up" mode="out-in">
                                         <div :key="compareMethodLabel || 'Jämför'"
                                             :class="compareModeEnabled
-                                                ? 'flex items-center md:justify-center cursor-pointer outline-2 outline-dashed outline-neutral-200 bg-neutral-100 hover:bg-neutral-100/70 p-3 px-4 rounded-lg w-full '
+                                                ? 'flex items-center md:justify-center cursor-pointer outline-2 outline-dashed outline-neutral-200 bg-neutral-50 hover:bg-neutral-100/70 p-3 px-4 rounded-lg w-full '
                                                 : 'flex items-center md:justify-center cursor-pointer bg-neutral-50 hover:bg-neutral-100/70 p-3 px-4 rounded-lg w-full outline-2 outline-dashed outline-neutral-200 outline-offset-0 opacity-50 hover:opacity-100'">
                                             <div :class="compareModeEnabled ? '' : ''">
                                                 <h1 class="text-neutral-500">Jämför</h1>
@@ -904,7 +907,7 @@
                             <p class="text-md">{{ timelineItems[activeTimelineIndex]?.svamp }}</p>
                         </div>
                         <div v-if="comparisonTimelineItem"
-                            class="space-y-2 p-6 ring ring-muted/50 rounded-xl shadow bg-white">
+                            class="space-y-2 p-6 outline-dashed outline-2 outline-neutral-200 rounded-xl shadow bg-neutral-50">
                             <p class="text-xs font-semibold text-neutral-600 uppercase tracking-wide">
                                 {{ compareMethodLabel }}
                             </p>
