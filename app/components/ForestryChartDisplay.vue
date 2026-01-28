@@ -2,11 +2,11 @@
   <div class="custom-area" ref="rootEl">
     <ClientOnly>
       <VisBulletLegend
-        v-if="isMounted && chartReady && showLegend && legendItems.length && !(props.singleFrameworkSelection && !props.frameworkComparisonMode)"
+        v-if="isMounted && chartReady && legendItems.length && !(props.singleFrameworkSelection && !props.frameworkComparisonMode)"
         :items="legendItems" :onLegendItemClick="handleLegendItemClick" class="mx-2 flex flex-wrap gap-2" />
       <div
         v-if="isMounted && chartReady && legendItems.length && (props.singleFrameworkSelection && !props.frameworkComparisonMode)"
-        class="mx-1.5 flex flex-wrap gap-0 gap-y-1">
+        class="m-2 flex flex-wrap gap-0 gap-y-1">
         <UButton v-for="item in legendItems" :key="item.key" type="button" variant="ghost" color="neutral" size="sm"
           class="flex items-center px-2 py-1 gap-2 hover:opacity-95 transition ring-muted/50"
           @click="handleLegendItemClick(item)">

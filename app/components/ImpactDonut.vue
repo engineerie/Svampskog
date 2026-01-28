@@ -1,8 +1,8 @@
 <template>
     <div class="flex flex-col items-center gap-3">
-        <div class="w-full space-y-2">
-            <div class="rounded-lg space-y-1 p-4 ring-muted/50">
-                <p v-if="hasComparison && methodLabel" class="text-xs font-medium text-neutral-600">
+        <div class="w-full space-y-3">
+            <div class="rounded-lg space-y-1 p-4 ">
+                <p v-if="methodLabel" class="text-xs font-medium text-neutral-600">
                     {{ methodLabel }}
                 </p>
                 <UProgress :model-value="clampedValue" :max="100" :color="progressColor" size="xl"
@@ -12,7 +12,7 @@
                 </p>
             </div>
             <div v-if="hasComparison"
-                class=" bg-neutral-50 rounded-lg space-y-1 p-4 outline-dashed outline-2 outline-neutral-200">
+                class=" bg-neutral-50 rounded-lg space-y-1 p-4 outline-dashed outline-2 outline-neutral-200 ">
                 <p v-if="comparisonLabel" class="text-xs font-medium text-neutral-600">
                     {{ comparisonLabel }}
                 </p>

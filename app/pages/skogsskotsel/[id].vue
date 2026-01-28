@@ -42,7 +42,7 @@
                         <ImpactDonut :value="impact.value" :label="impact.label" :tone="impact.tone"
                             :comparison-value="comparisonImpact?.value" :comparison-tone="comparisonImpact?.tone"
                             :method-label="selectedMethodLabel" :comparison-label="comparisonMethodLabel"
-                            :comparison-impact-label="comparisonImpact?.label" class="" />
+                            :comparison-impact-label="comparisonImpact?.label" />
 
 
                         <UAlert v-if="selectedStartskogTab === 'naturskog' && selectedMethod.id !== 'naturskydd'"
@@ -74,9 +74,10 @@
                             <UIcon name="i-lineicons-mushroom-1" class="size-5 text-neutral-700" />
                             <h3 class="text-xl font-semibold text-neutral-900">Mängd mykorrhizasvamp</h3>
                         </div>
+
                         <ForestryChartMain :selectedChart="'skogsskole'" :parentSelectedFrameworks="chartFrameworks"
                             :currentStartskog="selectedStartskogTab" :currentTimeValue="currentTimelineTime"
-                            preserveFrameworkOrder :showControls="false" />
+                            preserveFrameworkOrder :showControls="false" class="pt-2" />
                     </div>
                 </UCard>
                 <UCard class="ring-muted/50 shadow rounded-2xl">
@@ -87,7 +88,7 @@
                         </div>
                         <ForestryChartMain :selectedChart="'grupper'" :parentSelectedFrameworks="chartFrameworks"
                             :currentStartskog="selectedStartskogTab" :currentTimeValue="currentTimelineTime"
-                            preserveFrameworkOrder :showControls="false" />
+                            preserveFrameworkOrder :showControls="false" class="pt-2" />
                     </div>
                 </UCard>
 
@@ -107,7 +108,7 @@
                             class="text-lg text-neutral-800" />
                         <ForestryChartMain :selectedChart="'matsvampar'" :parentSelectedFrameworks="chartFrameworks"
                             :currentStartskog="selectedStartskogTab" :currentTimeValue="currentTimelineTime"
-                            preserveFrameworkOrder :showControls="false" :showMatsvampSelector="true" />
+                            preserveFrameworkOrder :showControls="false" :showMatsvampSelector="true" class="pt-2" />
                     </div>
                 </UCard>
                 <UCard class=" ring-muted/50 shadow rounded-2xl">
@@ -121,7 +122,7 @@
                             class="text-lg text-neutral-800" />
                         <ForestryChartMain :selectedChart="'rodlistade'" :parentSelectedFrameworks="chartFrameworks"
                             :currentStartskog="selectedStartskogTab" :currentTimeValue="currentTimelineTime"
-                            preserveFrameworkOrder :showControls="false" />
+                            preserveFrameworkOrder :showControls="false" class="pt-2" />
                     </div>
 
                 </UCard>
@@ -852,23 +853,44 @@
                                     <ImagePlaceholder v-else />
                                 </div>
                             </Transition>
-                            <div
-                                class="p-3 flex flex-col items-center gap-2 text-xs text-neutral-500 absolute right-3 bottom-3 z-20">
-
-                                <UIcon name="i-mingcute-tree-fill" class="size-5 text-primary" />
-                                <USlider v-model="treeFade" :min="0" :max="1" :step="0.05" class="h-20 sm:h-32"
-                                    color="primary" orientation="vertical" inverse size="xs" />
-                                <UPopover>
-                                    <div class="flex flex-col cursor-help ">
-                                        <UIcon name="i-fluent-shape-organic-16-filled"
-                                            class="size-4 text-gray-300 z-20" />
-                                        <UIcon name="i-fluent-shape-organic-16-filled"
-                                            class="size-4 -mt-3 text-signal-400 z-10" />
-                                        <UIcon name="i-fluent-shape-organic-16-filled"
-                                            class="size-4 -mt-3 text-yellow-400" />
-                                    </div>
+                            <div class="flex absolute right-3 bottom-3 z-20 gap-2">
+                                <UPopover :content="{
+                                    align: 'end',
+                                    side: 'top',
+                                }">
+                                    <UButton icon="mingcute:tree-fill" label="Genomskinlighet" variant="outline"
+                                        class="ring-muted/50" color="neutral" size="sm" />
                                     <template #content>
-                                        <div class="flex flex-col gap-2 p-4">
+                                        <div class="p-3 flex  items-center gap-2 text-xs text-neutral-500 ">
+
+                                            <!-- <div class="flex ">
+                                                <UIcon name="i-fluent-shape-organic-16-filled"
+                                                    class="size-4 text-gray-300 z-20" />
+                                                <UIcon name="i-fluent-shape-organic-16-filled"
+                                                    class="size-4 -ml-3 text-signal-400 z-10" />
+                                                <UIcon name="i-fluent-shape-organic-16-filled"
+                                                    class="size-4 -ml-3 text-yellow-400" />
+                                            </div> -->
+                                            <!-- <UIcon name="mingcute:tree-line" class="size-5 text-primary" /> -->
+
+                                            <USlider v-model="treeFade" :min="0" :max="1" :step="0.05" class="w-32"
+                                                color="primary" orientation="horizontal" inverse size="xs" />
+                                            <!-- <UIcon name="mingcute:tree-fill" class="size-5 text-primary" /> -->
+
+
+
+                                        </div>
+                                    </template>
+                                </UPopover>
+
+                                <UPopover :content="{
+                                    align: 'end',
+                                    side: 'top',
+                                }">
+                                    <UButton icon="i-fluent-shape-organic-16-filled" label="Mycelfärger"
+                                        variant="outline" class="ring-muted/50" color="neutral" size="sm" />
+                                    <template #content>
+                                        <div class="flex flex-col gap-2 p-3">
                                             <div class="flex w-full">
                                                 <UIcon name="i-fluent-shape-organic-16-filled"
                                                     class="size-6 text-gray-300 z-20" />
@@ -895,6 +917,9 @@
                                     </template>
                                 </UPopover>
                             </div>
+
+
+
                         </div>
                         <ReuseMarkerCardsRow v-if="isMobile" />
                         <div class="flex-1 min-w-60 min-h-60">

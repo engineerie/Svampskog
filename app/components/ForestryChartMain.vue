@@ -7,11 +7,10 @@
         option-attribute="label" size="xl" variant="none" class="hover:cursor-pointer" :icon="selectedChartIcon"
         :ui="{ content: 'min-w-fit', value: 'sm:text-lg sm:font-medium text-neutral-700' }" />
       <div class="pr-2">
-        <USelect v-if="selectedChart === 'grupper' && isFrameworkCompareMode"
-          v-model="selectedCompareArtkategori" :items="compareArtkategoriOptions" option-attribute="label"
-          value-key="value" size="lg" variant="outline" placeholder="Välj svampgrupp"
-          class="hover:cursor-pointer ring-muted/50"
-          :ui="{ content: 'min-w-fit', value: 'hidden sm:flex', base: 'min-h-8' }" :avatar="selectedCompareAvatar">
+        <USelect v-if="selectedChart === 'grupper' && isFrameworkCompareMode" v-model="selectedCompareArtkategori"
+          :items="compareArtkategoriOptions" option-attribute="label" value-key="value" size="lg" variant="outline"
+          placeholder="Välj svampgrupp" class="hover:cursor-pointer ring-muted/50 mb-2"
+          :ui="{ content: 'min-w-fit', base: 'min-h-8' }" :avatar="selectedCompareAvatar">
           <template #item="{ item }">
             <div class="flex items-center gap-2">
               <img v-if="item.icon" :src="item.icon" alt="" class="size-5 rounded-sm object-contain" />
@@ -25,7 +24,7 @@
             side: 'bottom',
             sideOffset: 8
           }" option-attribute="label" value-key="value" placeholder="Välj dataset"
-          class="hover:cursor-pointer ring-muted/50" size="lg"
+          class="hover:cursor-pointer ring-muted/50 mb-2" size="lg"
           :ui="{ content: 'w-fit shrink-0', base: 'min-h-8', item: 'gap-0' }" :icon="selectedMatsvampIcon"
           :aria-label="selectedMatsvampLabel">
           <template #item="{ item }">
