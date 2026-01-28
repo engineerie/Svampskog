@@ -1,16 +1,33 @@
 <template>
     <div class="flex flex-col items-center gap-3">
         <div class="w-full space-y-2">
-            <UProgress :model-value="clampedValue" :max="100" :color="progressColor" size="xl" :indeterminate="false" />
-            <UProgress v-if="hasComparison" :model-value="clampedComparisonValue" :max="100"
-                :color="comparisonProgressColor" size="xl" :indeterminate="false" />
+            <div class="rounded-lg space-y-1 p-4 ring-muted/50">
+                <p v-if="hasComparison && methodLabel" class="text-xs font-medium text-neutral-600">
+                    {{ methodLabel }}
+                </p>
+                <UProgress :model-value="clampedValue" :max="100" :color="progressColor" size="xl"
+                    :indeterminate="false" />
+                <p class="text-lg font-medium" :class="toneClass">
+                    {{ label }}
+                </p>
+            </div>
+            <div v-if="hasComparison"
+                class=" bg-neutral-50 rounded-lg space-y-1 p-4 outline-dashed outline-2 outline-neutral-200">
+                <p v-if="comparisonLabel" class="text-xs font-medium text-neutral-600">
+                    {{ comparisonLabel }}
+                </p>
+                <UProgress :model-value="clampedComparisonValue" :max="100" :color="comparisonProgressColor" size="xl"
+                    :indeterminate="false" />
+                <p v-if="comparisonImpactLabel" class="text-lg font-medium" :class="comparisonToneClass">
+                    {{ comparisonImpactLabel }}
+                </p>
+            </div>
         </div>
 
     </div>
-    <div class="text-left mt-2">
-        <p class="text-xs uppercase tracking-wide text-neutral-500">Övergripande påverkan</p>
+    <!-- <div v-if="!hasComparison" class="text-left mt-2">
         <p class="text-lg font-semibold" :class="toneClass">{{ label }}</p>
-    </div>
+    </div> -->
 </template>
 
 <script setup lang="ts">
@@ -23,15 +40,21 @@ const props = withDefaults(
         value: number
         label: string
         tone: Tone
+        methodLabel?: string | null
         comparisonValue?: number | null
         comparisonTone?: Tone | null
+        comparisonLabel?: string | null
+        comparisonImpactLabel?: string | null
     }>(),
     {
         value: 0,
         label: '',
         tone: 'medium',
+        methodLabel: null,
         comparisonValue: null,
-        comparisonTone: null
+        comparisonTone: null,
+        comparisonLabel: null,
+        comparisonImpactLabel: null
     }
 )
 
@@ -56,6 +79,11 @@ const comparisonProgressColor = computed(() => {
 const toneClass = computed(() => {
     if (props.tone === 'low') return 'text-emerald-500'
     if (props.tone === 'high') return 'text-rose-500'
+    return 'text-amber-500'
+})
+const comparisonToneClass = computed(() => {
+    if (comparisonTone.value === 'low') return 'text-emerald-500'
+    if (comparisonTone.value === 'high') return 'text-rose-500'
     return 'text-amber-500'
 })
 </script>
