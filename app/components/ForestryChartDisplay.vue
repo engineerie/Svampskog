@@ -46,7 +46,7 @@
             :interpolateMissingData="true" :zIndex="1" />
           <VisLine v-for="fw in activeFrameworks" :x="xAccessor"
             :y="(d: any) => getComparisonValue(d, fw.key, comparisonCategory)"
-            :color="() => (hexToRgba(fw.colorLine || fw.color, 0.6))" />
+            :color="() => (hexToRgba(fw.colorLine || fw.color, 0.6))" :lineDashArray="fw.lineDashArray" />
 
           <VisPlotband v-if="hasActiveSeries && currentTimeX !== null" axis="x" :from="-7" :to="currentTimeX"
             :color="'rgba(255, 255, 255, 0.7)'" :zIndex="20" />
@@ -62,7 +62,7 @@
 
           <!-- <VisCrosshair v-if="hasActiveSeries" :template="crosshairTemplate" /> -->
           <VisLine v-for="fw in activeFrameworks" :x="xAccessor" :y="(d: any) => getFrameworkValue(d, fw.key)"
-            :color="() => (hexToRgba(fw.colorLine || fw.color, 0.6))" />
+            :color="() => (hexToRgba(fw.colorLine || fw.color, 0.6))" :lineDashArray="fw.lineDashArray" />
           <VisArea v-if="isKgMatsvamp" v-for="fw in activeFrameworks" :key="fw.key + '-kg-x2'" :x="xAccessor"
             :y="kgDoubleAccessorFor(fw.key)" :color="() => 'rgba(234,179,8,0.3)'" />
           <!-- <VisTooltip v-if="hasActiveSeries" :horizontalShift="30" /> -->
@@ -868,6 +868,7 @@ const legendItems = computed<LegendItem[]>(() => {
           color,
           colorArea: hexToRgba(color, alpha),
           colorLine: color,
+          lineDashArray: index === 1 ? [5] : undefined,
           inactive,
         };
       });
@@ -916,6 +917,7 @@ const legendItems = computed<LegendItem[]>(() => {
       color,
       colorArea: hexToRgba(color, alpha),
       colorLine: color,
+      lineDashArray: index === 1 ? [5] : undefined,
       inactive,
     };
   });

@@ -1523,16 +1523,16 @@ entries:
   - startskog: naturskog
     metod: skärm
     ålder: -7
-    Alla matsvampar: 23.625
-    Goda matsvampar: 9.225
-    Signal + rödlistade: 0.3475
-    Atheliales: 23.95
-    Boletales: 11.3
-    Cantharellales: 0.575
-    Cortinariaceae: 17.65
-    Russulales: 16.225
-    Thelephorales: 3.7
-    Ascomyceter: 19.2
+    Alla matsvampar: 30
+    Goda matsvampar: 10
+    Signal + rödlistade: 0.6
+    Atheliales: 19
+    Boletales: 12
+    Cantharellales: 0.7
+    Cortinariaceae: 25
+    Russulales: 23
+    Thelephorales: 3
+    Ascomyceter: 16
   - startskog: naturskog
     metod: skärm
     ålder: 0
