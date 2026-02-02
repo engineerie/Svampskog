@@ -1,6 +1,6 @@
 methods:
   - index: 0
-    id: naturskydd
+    id: ingenatgard
     title: Inga åtgärder
     image: images/metoder/ingen_åtgärd.png
     shortdescription: Orörd skog
@@ -50,7 +50,7 @@ methods:
     descriptionnaturvårdssvampParagraphs:
       - Möjligheten för ovanligare och rödlistade arter att fortleva efter avverkning är stor med små luckor, mindre med större.
   - index: 3
-    id: skärmträd
+    id: skarmtrad
     title: Överhållen skärm
     image: images/metoder/skärm.png
     type: Hyggesfritt
@@ -68,7 +68,7 @@ methods:
     descriptionnaturvårdssvampParagraphs:
       - Flera av ovanliga och naturvårdssvampar, kommer förmodligen att fortleva.
   - index: 4
-    id: blädning
+    id: bladning
     title: Blädning
     image: images/metoder/blädning.png
     type: Hyggesfritt

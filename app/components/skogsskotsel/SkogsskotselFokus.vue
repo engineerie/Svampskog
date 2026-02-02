@@ -16,6 +16,25 @@ const frameworkContext = inject<{
 const frameworkId = computed(() => props.frameworkId || frameworkContext?.id?.value || '')
 const frameworkTitle = computed(() => props.title || frameworkContext?.title?.value || '')
 
+const resolveFrameworkKey = (value: string | null | undefined) => {
+  const normalized = (value || '')
+    .trim()
+    .normalize('NFD')
+    .replace(/\p{Diacritic}+/gu, '')
+    .toLowerCase()
+  if (normalized === 'ingenatgard') return 'naturskydd'
+  if (normalized === 'skarmtrad') return 'skärmträd'
+  if (normalized === 'bladning') return 'blädning'
+  return value || ''
+}
+
+const normalizedFrameworkKey = (value: string | null | undefined) =>
+  (resolveFrameworkKey(value) || '')
+    .trim()
+    .normalize('NFD')
+    .replace(/\p{Diacritic}+/gu, '')
+    .toLowerCase()
+
 const { data: overlayTextData } = await useAsyncData('overlay-texts-skogs', () => queryCollection('overlayTexts').all())
 
 const overlayTextMap = computed<Record<string, { title: string; description: string; image?: string; doc?: any }>>(() => {
@@ -48,7 +67,7 @@ const markerDefinitions = [
 ]
 
 const markerCards = computed(() => {
-  const currentMethod = frameworkId.value
+  const currentMethod = resolveFrameworkKey(frameworkId.value)
   const allowedByMethod: Record<string, string[] | 'all'> = {
     naturvardsarter: 'all',
     retention: ['trakthygge', 'luckhuggning', 'skärmträd', 'skarmtrad', 'blädning', 'bladning'],
@@ -100,7 +119,7 @@ const normalizeFrameworkId = (value: string) =>
     .toLowerCase()
 
 function openModelWithCurrentFramework() {
-  const normalized = normalizeFrameworkId(frameworkId.value)
+  const normalized = normalizedFrameworkKey(frameworkId.value)
   const index = frameworkIndexMap[normalized]
   if (typeof index === 'number') {
     onboardingStore.selectedFramework = index

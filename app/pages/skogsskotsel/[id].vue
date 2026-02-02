@@ -44,7 +44,7 @@
                             :comparison-impact-label="comparisonImpact?.label" />
 
 
-                        <UAlert v-if="selectedStartskogTab === 'naturskog' && selectedMethod.id !== 'naturskydd'"
+                        <UAlert v-if="selectedStartskogTab === 'naturskog' && selectedFrameworkKey !== 'naturskydd'"
                             color="info" variant="subtle" icon="i-heroicons-information-circle" title="Äldre skog"
                             description="Skötselingrepp i skog som inte tidigare har varit kalavverkad har i regel större påverkan.
                             " />
@@ -746,7 +746,8 @@
                                                     </div>
                                                     <NaturvardsOverlayLayer
                                                         :visible="isMarkerOverlayVisible('naturvardsarter')"
-                                                        :framework="selectedMethod.id" :startskog="selectedStartskogTab"
+                                                        :framework="selectedFrameworkKey"
+                                                        :startskog="selectedStartskogTab"
                                                         :time-label="compareMode === 'beforeAfter' ? 'innan' : timelineItems[activeTimelineIndex]?.tid" />
                                                 </div>
                                             </template>
@@ -791,7 +792,7 @@
                                                     </div>
                                                     <NaturvardsOverlayLayer
                                                         :visible="isMarkerOverlayVisible('naturvardsarter')"
-                                                        :framework="compareMode === 'methods' ? compareMethodResolved : selectedMethod.id"
+                                                        :framework="compareMode === 'methods' ? compareFrameworkKey : selectedFrameworkKey"
                                                         :startskog="selectedStartskogTab"
                                                         :time-label="compareMode === 'methods' ? comparisonTimelineItem?.tid : timelineItems[activeTimelineIndex]?.tid" />
                                                 </div>
@@ -834,7 +835,7 @@
                                             </template>
                                         </div>
                                         <NaturvardsOverlayLayer :visible="isMarkerOverlayVisible('naturvardsarter')"
-                                            :framework="selectedMethod.id" :startskog="selectedStartskogTab"
+                                            :framework="selectedFrameworkKey" :startskog="selectedStartskogTab"
                                             :time-label="currentTimelineItem?.tid" />
                                         <div
                                             class="absolute top-2 left-2 z-20 flex flex-col items-start gap-1 pointer-events-none">
@@ -1405,10 +1406,11 @@ const comparisonMethodLabel = computed(() =>
     compareMethod.value?.title || compareMethodResolved.value || 'Jämförelse'
 )
 const chartFrameworks = computed(() => {
+    const primary = selectedFrameworkKey.value
     if (compareModeEnabled.value && compareMode.value === 'methods' && compareMethodResolved.value) {
-        return [selectedMethod.value.id, compareMethodResolved.value]
+        return [primary, compareFrameworkKey.value]
     }
-    return [selectedMethod.value.id]
+    return [primary]
 })
 
 interface TimelineEntry {
@@ -1434,6 +1436,8 @@ const normalizeTimelineStartskog = (value: string) => {
 const normalizeTimelineAtgard = (value: string) => {
     const lower = value?.toLowerCase?.() ?? ''
     if (lower === 'ingenatgard') return 'naturskydd'
+    if (lower === 'skarmtrad') return 'skärmträd'
+    if (lower === 'bladning') return 'blädning'
     return value
 }
 
@@ -2003,9 +2007,7 @@ const frameworkIndexMap: Record<string, number> = {
     trakthygge: 1,
     luckhuggning: 2,
     skarmtrad: 3,
-    'skärmträd': 3,
     bladning: 4,
-    'blädning': 4,
 }
 
 function normalizeFrameworkId(value: string) {
@@ -2016,6 +2018,20 @@ function normalizeFrameworkId(value: string) {
         .toLowerCase()
 }
 
+const resolveFrameworkKey = (value: string | null | undefined) => {
+    const normalized = normalizeFrameworkId(value || '')
+    if (normalized === 'ingenatgard') return 'naturskydd'
+    if (normalized === 'skarmtrad') return 'skärmträd'
+    if (normalized === 'bladning') return 'blädning'
+    return value || ''
+}
+
+const normalizeFrameworkKey = (value: string | null | undefined) =>
+    normalizeFrameworkId(resolveFrameworkKey(value))
+
+const selectedFrameworkKey = computed(() => resolveFrameworkKey(selectedMethod.value.id))
+const compareFrameworkKey = computed(() => resolveFrameworkKey(compareMethodResolved.value))
+
 const impactByMethod: Record<string, { value: number; tone: 'low' | 'medium' | 'high'; label: string }> = {
     naturskydd: { value: 5, tone: 'low', label: 'Låg ' },
     trakthygge: { value: 85, tone: 'high', label: 'Hög ' },
@@ -2025,7 +2041,7 @@ const impactByMethod: Record<string, { value: number; tone: 'low' | 'medium' | '
 }
 
 const resolveImpact = (methodId: string | null | undefined) => {
-    const normalized = normalizeFrameworkId(methodId || '')
+    const normalized = normalizeFrameworkKey(methodId)
     const base = impactByMethod[normalized] ?? { value: 50, tone: 'medium', label: 'Medel påverkan' }
     const isNaturskog = selectedStartskogTab.value === 'naturskog'
     const needsBoost = isNaturskog && normalized !== 'naturskydd'
@@ -2042,7 +2058,7 @@ const comparisonImpact = computed(() => {
 })
 
 function openModelWithCurrentFramework() {
-    const normalized = normalizeFrameworkId(selectedMethod.value.id)
+    const normalized = normalizeFrameworkKey(selectedMethod.value.id)
     const index = frameworkIndexMap[normalized]
     if (typeof index === 'number') {
         onboardingStore.selectedFramework = index

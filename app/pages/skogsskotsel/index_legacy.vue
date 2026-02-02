@@ -296,7 +296,7 @@
 
                                 <UCard variant="soft" :ui="{ body: 'p-1 sm:p-1 sm:pb-3' }"
                                     class="ring-muted/50 h-fit bg-white/80">
-                                    <ForestryChartMain :parentSelectedFrameworks=[selectedMethod.id]
+                                    <ForestryChartMain :parentSelectedFrameworks="[selectedFrameworkKey]"
                                         :currentStartskog="selectedStartskogTab"
                                         :currentTimeValue="currentTimelineTime" />
                                 </UCard>
@@ -578,6 +578,8 @@ const normalizeTimelineStartskog = (value: string) => {
 const normalizeTimelineAtgard = (value: string) => {
     const lower = value?.toLowerCase?.() ?? ''
     if (lower === 'ingenatgard') return 'naturskydd'
+    if (lower === 'skarmtrad') return 'skärmträd'
+    if (lower === 'bladning') return 'blädning'
     return value
 }
 
@@ -848,9 +850,7 @@ const frameworkIndexMap: Record<string, number> = {
     trakthygge: 1,
     luckhuggning: 2,
     skarmtrad: 3,
-    'skärmträd': 3,
     bladning: 4,
-    'blädning': 4,
 }
 
 const normalizeFrameworkId = (value: string) =>
@@ -860,8 +860,21 @@ const normalizeFrameworkId = (value: string) =>
         .replace(/\p{Diacritic}+/gu, '')
         .toLowerCase()
 
+const resolveFrameworkKey = (value: string | null | undefined) => {
+    const normalized = normalizeFrameworkId(value || '')
+    if (normalized === 'ingenatgard') return 'naturskydd'
+    if (normalized === 'skarmtrad') return 'skärmträd'
+    if (normalized === 'bladning') return 'blädning'
+    return value || ''
+}
+
+const normalizeFrameworkKey = (value: string | null | undefined) =>
+    normalizeFrameworkId(resolveFrameworkKey(value))
+
+const selectedFrameworkKey = computed(() => resolveFrameworkKey(selectedMethod.value.id))
+
 function openModelWithCurrentFramework() {
-    const normalized = normalizeFrameworkId(selectedMethod.value.id)
+    const normalized = normalizeFrameworkKey(selectedMethod.value.id)
     const index = frameworkIndexMap[normalized]
     if (typeof index === 'number') {
         onboardingStore.selectedFramework = index
