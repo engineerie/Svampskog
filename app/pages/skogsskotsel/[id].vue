@@ -3,27 +3,26 @@
         <div class="grid grid-cols-1 md:grid-cols-3 sm:gap-4 gap-3 p-3 sm:p-0.5">
             <div class="sm:space-y-4 space-y-3">
 
-                <UCard class="h-fit ring-muted/50 shadow rounded-2xl cursor-pointer select-none hover:bg-neutral-100"
+                <UCard class="h-fit ring-muted/50 shadow rounded-xl cursor-pointer select-none hover:bg-neutral-100"
                     role="button" tabindex="0" @click="isMethodDescriptionExpanded = !isMethodDescriptionExpanded"
                     @keydown.enter.prevent="isMethodDescriptionExpanded = !isMethodDescriptionExpanded"
                     @keydown.space.prevent="isMethodDescriptionExpanded = !isMethodDescriptionExpanded">
 
 
                     <div class="space-y-3 text-md md:text-md text-neutral-800">
-                        <NuxtImg :src="methodImage(selectedMethod, 'detail')" height="800" width="1400"
-                            :alt="`Bild för ${selectedMethod.title}`" class="rounded-xl ring ring-muted/50" />
+                        <NuxtImg :src="methodImage(selectedMethod, 'detail')" height="800" width="1500"
+                            :alt="`Bild för ${selectedMethod.title}`" class="rounded-xl ring ring-muted/50 w-full" />
                         <div class="flex items-center gap-2 pt-4">
-                            <!-- <UIcon name="i-hugeicons-tree-06" class="size-5 text-neutral-700" /> -->
                             <h2 class="text-3xl font-semibold text-neutral-900">{{ selectedMethod.title }}</h2>
                         </div>
                         <div :class="{ 'line-clamp-3': !isMethodDescriptionExpanded }">
                             <template v-for="(para, idx) in methodDescriptionSection?.paragraphs" :key="`desc-${idx}`">
-                                <MDC :value="para" unwrap="p" class="text-lg" />
+                                <MDC :value="para" unwrap="p" class="text-md" />
                             </template>
                         </div>
                     </div>
                 </UCard>
-                <UCard class="h-fit ring-muted/50 shadow rounded-2xl cursor-pointer select-none hover:bg-neutral-100"
+                <UCard class="h-fit ring-muted/50 shadow rounded-xl cursor-pointer select-none hover:bg-neutral-100"
                     role="button" tabindex="0" @click="isSvampDescriptionExpanded = !isSvampDescriptionExpanded"
                     @keydown.enter.prevent="isSvampDescriptionExpanded = !isSvampDescriptionExpanded"
                     @keydown.space.prevent="isSvampDescriptionExpanded = !isSvampDescriptionExpanded">
@@ -51,7 +50,7 @@
                             " />
                         <div :class="{ 'line-clamp-3': !isSvampDescriptionExpanded }">
                             <template v-for="(para, idx) in svampMainParagraphs" :key="`svamp-${idx}`">
-                                <MDC :value="para" unwrap="p" class="text-lg" />
+                                <MDC :value="para" unwrap="p" class="text-md" />
                             </template>
                         </div>
                     </div>
@@ -68,10 +67,10 @@
             <div class="flex flex-col sm:gap-4 gap-3">
 
 
-                <UCard class="ring-muted/50 shadow rounded-2xl">
+                <UCard class="ring-muted/50 shadow rounded-xl">
                     <div class="space-y-3">
                         <div class="flex items-center gap-2">
-                            <UIcon name="i-lineicons-mushroom-1" class="size-5 text-neutral-700" />
+                            <UIcon name="lineicons:mushroom" class="size-5 text-gray-500" />
                             <h3 class="text-xl font-semibold text-neutral-900">Mängd mykorrhizasvamp</h3>
                         </div>
 
@@ -80,10 +79,10 @@
                             preserveFrameworkOrder :showControls="false" class="pt-2" />
                     </div>
                 </UCard>
-                <UCard class="ring-muted/50 shadow rounded-2xl">
+                <UCard class="ring-muted/50 shadow rounded-xl">
                     <div class="space-y-3">
                         <div class="flex items-center gap-2">
-                            <UIcon name="i-material-symbols-category-rounded" class="size-5 text-neutral-700" />
+                            <UIcon name="i-material-symbols-category-rounded" class="size-5 text-rose-500" />
                             <h3 class="text-xl font-semibold text-neutral-900">Svampgrupper</h3>
                         </div>
                         <ForestryChartMain :selectedChart="'grupper'" :parentSelectedFrameworks="chartFrameworks"
@@ -97,7 +96,7 @@
 
 
             <div class="flex flex-col sm:gap-4 gap-3 ">
-                <UCard class="ring-muted/50 shadow rounded-2xl">
+                <UCard class="ring-muted/50 shadow rounded-xl">
                     <div class="space-y-3">
                         <div class="flex items-center gap-2">
                             <UIcon name="icon-park-solid:knife-fork" class="size-5 text-warning-500" />
@@ -105,13 +104,13 @@
                         </div>
 
                         <MDC v-if="svampMatsvampParagraph" :value="svampMatsvampParagraph" unwrap="p"
-                            class="text-lg text-neutral-800" />
+                            class="text-md text-neutral-800 ring-muted/50 rounded-md" />
                         <ForestryChartMain :selectedChart="'matsvampar'" :parentSelectedFrameworks="chartFrameworks"
                             :currentStartskog="selectedStartskogTab" :currentTimeValue="currentTimelineTime"
                             preserveFrameworkOrder :showControls="false" :showMatsvampSelector="true" class="pt-2" />
                     </div>
                 </UCard>
-                <UCard class=" ring-muted/50 shadow rounded-2xl">
+                <UCard class=" ring-muted/50 shadow rounded-xl">
                     <div class="space-y-3">
                         <div class="flex items-center gap-2 ">
                             <UIcon name="i-material-symbols-award-star" class="size-5 text-signal-500" />
@@ -119,7 +118,7 @@
                         </div>
 
                         <MDC v-if="svampNaturvardParagraph" :value="svampNaturvardParagraph" unwrap="p"
-                            class="text-lg text-neutral-800" />
+                            class="text-md text-neutral-800" />
                         <ForestryChartMain :selectedChart="'rodlistade'" :parentSelectedFrameworks="chartFrameworks"
                             :currentStartskog="selectedStartskogTab" :currentTimeValue="currentTimelineTime"
                             preserveFrameworkOrder :showControls="false" class="pt-2" />
@@ -548,8 +547,8 @@
                             </UPopover>
                         </div>
                         <UTabs v-model="contentTab" :items="contentTabItems" size="xl" :clearable="false" :ui="{
-                            root: 'min-w-max flex-shrink-0',
-                            list: 'flex-nowrap gap-2',
+                            root: 'min-w-max flex-shrink-0 ',
+                            list: 'flex-nowrap gap-2 ring ring-muted/50',
                             indicator: 'bg-white border border-muted/50 shadow ',
                             trigger: 'data-[state=active]:text-neutral-800 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary'
                         }" />

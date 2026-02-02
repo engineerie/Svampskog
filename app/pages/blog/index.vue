@@ -56,7 +56,7 @@ defineOgImageComponent('Saas')
 </script>
 
 <template>
-  <div class="">
+  <div class="bg-neutral-50 h-full">
     <UContainer>
       <UPageHeader :ui="{ root: 'border-b-0', container: 'lg:pt-12', title: 'sm:text-6xl', headline: 'text-neutral' }"
         v-bind="page" />
@@ -69,10 +69,23 @@ defineOgImageComponent('Saas')
 
       <UPageBody>
         <UBlogPosts v-if="filteredPosts.length">
-          <UBlogPost v-for="(post, index) in filteredPosts" :key="post._path || index" :to="post.path"
-            :title="post.title" :description="post.description" :image="post.image" :class="[]" variant="naked" :ui="{
-              description: 'line-clamp-2', header: 'rounded-md', root: 'rounded-md', body: 'px-0 sm:px-2'
-            }" />
+          <Motion v-for="(post, index) in filteredPosts" :key="post._path || index" class="relative" :initial="{
+            scale: 1,
+            transform: 'translateY(20px)',
+            opacity: 0,
+          }" :animate="{
+              scale: 1,
+              transform: 'translateY(0px)',
+              opacity: 1,
+            }" :transition="{
+              duration: 0.2,
+              delay: 0.2 + 0.1 * index
+            }">
+            <UBlogPost :title="post.title" :to="post.path" :description="post.description" :image="post.image"
+              :class="[]" variant="naked" :ui="{
+                description: 'line-clamp-2', header: 'rounded-xl border border-1 border-muted/50 shadow-none', root: 'rounded-md', body: 'px-0 sm:px-2'
+              }" />
+          </Motion>
         </UBlogPosts>
         <div v-else class="py-12 text-center text-muted-500">
           Inga artiklar matchar kategorin just nu.
