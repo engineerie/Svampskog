@@ -1,25 +1,5 @@
 title: Skogsskötsel
 description: Se hur skogsskötsel påverkar mykorrhizasvampar.
-navigation: false
-hero:
-  title: Svampar efter skogsskötsel
-  description: Se hur olika skötselåtgärder kan påverka förekomsten av mykorrhizasvampar.
-  orientation: vertical
-  src: /images/Landing/skogsbruk.jpeg
-  headline:
-    label: Interaktiv modell
-    to: ""
-    icon: i-material-symbols:interactive-space
-    color: secondary
-  links:
-    - label: Visa modell för påverkan över tid
-      icon: i-material-symbols:interactive-space
-      trailing: false
-      to: ""
-      target: ""
-      size: xl
-      color: rodeodust
-      variant: solid
 ecologyintro:
   title: Fakta i korthet
   description: Grunderna för hur skogsskötsel påverkar mykorrhizasvampar
@@ -57,16 +37,36 @@ ecologyintro:
         3. Välj hyggesfria metoder. 
         4. Om skogen kalavverkas, lämna väl tilltagna grupper med hänsynsträd.
       img: /images/Carousel/web/Mushroom Images.webp
+hero:
+  title: Svampar efter skogsskötsel
+  description: Se hur olika skötselåtgärder kan påverka förekomsten av mykorrhizasvampar.
+  orientation: vertical
+  src: /images/Landing/skogsbruk.jpeg
+  headline:
+    label: Interaktiv modell
+    to: ""
+    icon: i-material-symbols:interactive-space
+    color: secondary
+  links:
+    - label: Visa modell för påverkan över tid
+      icon: i-material-symbols:interactive-space
+      trailing: false
+      to: ""
+      target: ""
+      size: xl
+      color: rodeodust
+      variant: solid
+navigation: false
 underlag: Faktaunderlag
-underlagdescription: Baseras på forskning, bl a  av svamp-DNA i skogsmark.
 underlagSections:
-  - title: "Bilderna av vad som sker under 80 år  bygger på"
+  - title: Bilderna av vad som sker under 80 år  bygger på
     paragraphs:
-      - "Forskning om  mykorrhizasvampars förekomster  vid olika former av skogsskötsel, miljöhänsyn och skogsålder."
-      - "Förekomsten av olika svampar i skogsmark baserad på DNA-analyser från Markinventeringen."
-  - title: "Diagrammen baseras på"
+      - Forskning om  mykorrhizasvampars förekomster  vid olika former av skogsskötsel, miljöhänsyn och skogsålder.
+      - Förekomsten av olika svampar i skogsmark baserad på DNA-analyser från Markinventeringen.
+  - title: Diagrammen baseras på
     paragraphs:
-      - "Markinventeringens DNA-analyser av svamparters förekomst i mark vid olika skogsåldrar."
-      - "Dessa värden vägs mot den relativa skogstillväxten jämfört med orörd skog. Trädtillväxten är ett ungefärligt mått på trädens fotosyntes och ger en ungefärlig bild av hur mycket mykorrhizasvamp som kan finnas."
-      - "Diagrammen över matsvampar som redovisas i kg/ha bygger på fältundersökningar."
+      - Markinventeringens DNA-analyser av svamparters förekomst i mark vid olika skogsåldrar.
+      - Dessa värden vägs mot den relativa skogstillväxten jämfört med orörd skog. Trädtillväxten är ett ungefärligt mått på trädens fotosyntes och ger en ungefärlig bild av hur mycket mykorrhizasvamp som kan finnas.
+      - Diagrammen över matsvampar som redovisas i kg/ha bygger på fältundersökningar.
 underlagbild: /images/Sources/web/markinventering_500.webp
+underlagdescription: Baseras på forskning, bl a  av svamp-DNA i skogsmark.
