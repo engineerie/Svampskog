@@ -59,6 +59,7 @@
                     </template>
                 </UPopover> -->
             </Motion>
+
         </UContainer>
 
 
@@ -102,6 +103,30 @@
 
             </UCarousel>
         </Motion>
+        <UContainer class="flex gap-2">
+            <UModal :fullscreen="isMobile ? true : false" :title="page.ecologyintro?.title ?? ''"
+                :description="page.ecologyintro?.description ?? ''" :ui="{
+                    header: 'shrink-0',
+                }">
+                <UButton icon="i-heroicons-book-open" color="neutral" variant="outline" label="Fakta i korthet"
+                    class="sm:w-fit h-fit  ring-muted/50 hover:opacity-85 hover:cursor-pointer" />
+                <template #body>
+                    <EcologyIntro :section="page.ecologyintro" />
+                </template>
+            </UModal>
+            <UModal :fullscreen="isMobile ? true : false" :title="page.underlag" :description="page.underlagdescription"
+                :ui="{
+                    header: 'shrink-0',
+                }">
+                <UButton icon="i-heroicons-document-magnifying-glass" color="neutral" variant="outline" label="Underlag"
+                    class="sm:w-fit h-fit  ring-muted/50 hover:opacity-85 hover:cursor-pointer" />
+                <template #body>
+                    <UnderlagContent :underlag="page.underlag" :underlagbild="page.underlagbild"
+                        :sections="page.underlagSections" />
+                </template>
+            </UModal>
+        </UContainer>
+
     </div>
 </template>
 
@@ -174,8 +199,12 @@ interface Method {
     title: string
     image: string
     shortdescription: string
-    description: string
-    descriptionsvamp: string
+    description?: string
+    descriptionsvamp?: string
+    descriptionParagraphs?: string[]
+    descriptionsvampParagraphs?: string[]
+    descriptionmatsvampParagraphs?: string[]
+    descriptionnaturvårdssvampParagraphs?: string[]
     type?: string
     icon?: string
 }
@@ -194,7 +223,11 @@ const emptyMethod: Method = {
     image: '',
     shortdescription: '',
     description: '',
-    descriptionsvamp: ''
+    descriptionsvamp: '',
+    descriptionParagraphs: [],
+    descriptionsvampParagraphs: [],
+    descriptionmatsvampParagraphs: [],
+    descriptionnaturvårdssvampParagraphs: []
 }
 const selectedId = ref<string | null>(null)
 const hoveredMethodId = ref<string | null>(null)

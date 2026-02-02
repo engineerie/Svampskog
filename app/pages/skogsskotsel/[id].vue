@@ -15,9 +15,9 @@
                         <div class="flex items-center gap-2 pt-4">
                             <h2 class="text-3xl font-semibold text-neutral-900">{{ selectedMethod.title }}</h2>
                         </div>
-                        <div :class="{ 'line-clamp-3': !isMethodDescriptionExpanded }">
+                        <div :class="{ 'line-clamp-3': !isMethodDescriptionExpanded }" class="space-y-3">
                             <template v-for="(para, idx) in methodDescriptionSection?.paragraphs" :key="`desc-${idx}`">
-                                <MDC :value="para" unwrap="p" class="text-md" />
+                                <MDC :value="para" unwrap="p" class="text-md block" />
                             </template>
                         </div>
                     </div>
@@ -48,9 +48,9 @@
                             color="info" variant="subtle" icon="i-heroicons-information-circle" title="Äldre skog"
                             description="Skötselingrepp i skog som inte tidigare har varit kalavverkad har i regel större påverkan.
                             " />
-                        <div :class="{ 'line-clamp-3': !isSvampDescriptionExpanded }">
+                        <div :class="{ 'line-clamp-3': !isSvampDescriptionExpanded }" class="space-y-3">
                             <template v-for="(para, idx) in svampMainParagraphs" :key="`svamp-${idx}`">
-                                <MDC :value="para" unwrap="p" class="text-md" />
+                                <MDC :value="para" unwrap="p" class="text-md block" />
                             </template>
                         </div>
                     </div>
@@ -1210,8 +1210,12 @@ interface Method {
     title: string
     image: string
     shortdescription: string
-    description: string
-    descriptionsvamp: string
+    description?: string
+    descriptionsvamp?: string
+    descriptionParagraphs?: string[]
+    descriptionsvampParagraphs?: string[]
+    descriptionmatsvampParagraphs?: string[]
+    descriptionnaturvårdssvampParagraphs?: string[]
     type?: string
     icon?: string
 }
@@ -1235,7 +1239,11 @@ const emptyMethod: Method = {
     image: '',
     shortdescription: '',
     description: '',
-    descriptionsvamp: ''
+    descriptionsvamp: '',
+    descriptionParagraphs: [],
+    descriptionsvampParagraphs: [],
+    descriptionmatsvampParagraphs: [],
+    descriptionnaturvårdssvampParagraphs: []
 }
 const selectedId = ref<string | null>(null)
 const routeMethodId = computed(() => (route.params.id as string) || '')
@@ -1972,19 +1980,23 @@ const methodSvampSection = computed(() =>
     accordionItems.value.find(section => section.value === 'svamp')
 )
 const svampParagraphs = computed(() => methodSvampSection.value?.paragraphs ?? [])
-const svampMainParagraphs = computed(() =>
-    svampParagraphs.value.length > 2 ? svampParagraphs.value.slice(0, -2) : []
-)
-const svampMatsvampParagraph = computed(() =>
-    svampParagraphs.value.length >= 2
-        ? svampParagraphs.value[svampParagraphs.value.length - 2]
-        : ''
-)
-const svampNaturvardParagraph = computed(() =>
-    svampParagraphs.value.length >= 1
-        ? svampParagraphs.value[svampParagraphs.value.length - 1]
-        : ''
-)
+const svampMainParagraphs = computed(() => svampParagraphs.value)
+const svampMatsvampParagraph = computed(() => {
+    const paragraphs = selectedMethod.value.descriptionmatsvampParagraphs;
+    if (paragraphs?.length) return paragraphs.join('\n\n');
+    if (svampParagraphs.value.length >= 2) {
+        return svampParagraphs.value[svampParagraphs.value.length - 2];
+    }
+    return '';
+})
+const svampNaturvardParagraph = computed(() => {
+    const paragraphs = selectedMethod.value.descriptionnaturvårdssvampParagraphs;
+    if (paragraphs?.length) return paragraphs.join('\n\n');
+    if (svampParagraphs.value.length >= 1) {
+        return svampParagraphs.value[svampParagraphs.value.length - 1];
+    }
+    return '';
+})
 
 const frameworkIndexMap: Record<string, number> = {
     naturskydd: 0,

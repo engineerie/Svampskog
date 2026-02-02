@@ -490,8 +490,12 @@ interface Method {
     title: string
     image: string
     shortdescription: string
-    description: string
-    descriptionsvamp: string
+    description?: string
+    descriptionsvamp?: string
+    descriptionParagraphs?: string[]
+    descriptionsvampParagraphs?: string[]
+    descriptionmatsvampParagraphs?: string[]
+    descriptionnaturvårdssvampParagraphs?: string[]
     type?: string
 }
 
@@ -509,7 +513,11 @@ const emptyMethod: Method = {
     image: '',
     shortdescription: '',
     description: '',
-    descriptionsvamp: ''
+    descriptionsvamp: '',
+    descriptionParagraphs: [],
+    descriptionsvampParagraphs: [],
+    descriptionmatsvampParagraphs: [],
+    descriptionnaturvårdssvampParagraphs: []
 }
 const selectedId = ref<string | null>(null)
 

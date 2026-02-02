@@ -9,7 +9,9 @@ methods:
       - Beståndet lämnas för fri utveckling tills vidare, till exempel som en frivillig naturvårdsavsättning eller en skog med områdesskydd.
     descriptionsvampParagraphs:
       - Mykorrhizasvampsamhället lever vidare med de arter som redan finns i skogen. Mycelen i marken kan bli lika gamla som träden eller äldre och breda ut sig över många kvadratmeter så länge det kontinuerligt finns levande träd. Om man plockhugger enstaka träd spritt i beståndet blir påverkan på mykorrhizasvamparna mycket liten.
+    descriptionmatsvampParagraphs:
       - I bestånd som sköts på det här sättet är tillgången på matsvampar oftast god.
+    descriptionnaturvårdssvampParagraphs:
       - Även rödlistade arter kan fortleva på platsen.
   - index: 1
     id: trakthygge
@@ -24,7 +26,9 @@ methods:
     descriptionsvampParagraphs:
       - Mykorrhizasvampar försvinner nästan helt efter avverkning eftersom de är beroende av sin symbios med levande träd. En del svampmycel överlever på rötter från hänsynsträd, på småplantor som lämnas kvar vid naturlig föryngring och längs skogskanter.
       - De planterade plantskoleplantorna har med sig ett fåtal mykorrhizaarter som etablerats spontant i plantskolan. Dessa byts så småningom ut mot arter på platsen som överlevt eller sprids in med sporer från omgivande skog.
+    descriptionmatsvampParagraphs:
       - Matsvampar saknas direkt efter avverkning men brukar återkomma efter ungefär 10-20 år.
+    descriptionnaturvårdssvampParagraphs:
       - Rödlistade arter och signalarter är oftast för ovanliga i näraliggande skogar för att spridas in och etableras.
   - index: 2
     id: luckhuggning
@@ -41,7 +45,9 @@ methods:
     descriptionsvampParagraphs:
       - Som trakthygge i liten skala. Ett mellanting mellan kalhygge och blädning. Hur stor påverkan blir beror på luckornas storlek.
       - Kanteffekten gör att mykorrhizasvampar lever vidare i rötter från omgivande träd ca 10 meter in i luckorna. Med luckdiameter på högst 20 meter är påverkan mycket liten. Med större diameter tynar mykorrhizasvamparna bort och dör i mitten av luckorna. Svamparnas återetablering sker då som på hyggen, främst med sporer från angränsande skogar.
+    descriptionmatsvampParagraphs:
       - Med små luckor är påverkan på matsvampar minimal. I större luckor saknas matsvampar efter avverkning men återkommer efter 10-20 år.
+    descriptionnaturvårdssvampParagraphs:
       - Möjligheten för ovanligare och rödlistade arter att fortleva efter avverkning är stor med små luckor, mindre med större.
   - index: 3
     id: skärmträd
@@ -57,7 +63,9 @@ methods:
       - Överhållen skärm kan vara ett bra val i skogar med naturvärden som vill ha ljus och värme.
     descriptionsvampParagraphs:
       - Troligen begränsad påverkan på artsammansättningen av mykorrhizasvampar. De flesta svampmycelen kommer att fortleva i rötterna på skärmträden även om det blir färre fruktkroppar. Många av dessa mycel etableras antagligen på uppväxande trädplantor.
+    descriptionmatsvampParagraphs:
       - Matsvampstillgången är större under de första decennierna med skärmträd än med trakthygge, men blir ungefär samma när bestånden är 30 år.
+    descriptionnaturvårdssvampParagraphs:
       - Flera av ovanliga och naturvårdssvampar, kommer förmodligen att fortleva.
   - index: 4
     id: blädning
@@ -72,5 +80,7 @@ methods:
       - Blädning lämpar sig i skogar där man vill bevara en fuktigare och mer skyddad miljö.
     descriptionsvampParagraphs:
       - Påverkan på mykorrhizasvampar är förmodligen försumbar då förändringen av markmiljön är liten och det kontinuerligt finns levande trädrötter i princip överallt i skogen. De allra flesta svampmycel lever vidare efter en blädning. En blädning och en gallring har samma påverkan på marksvampar.
+    descriptionmatsvampParagraphs:
       - Mängden matsvampar är i stort sett opåverkad, men kan minska något till några år efter en blädning.
+    descriptionnaturvårdssvampParagraphs:
       - Ovanliga och rödlistade arter i beståndet kommer i stor utsträckning kunna fortleva.
