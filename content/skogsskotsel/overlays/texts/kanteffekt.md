@@ -1,6 +1,7 @@
 ---
 title: Kanteffekt
 description: Rötter och svampar sträcker sig 10–15 meter in.
+path: /skogsskotsel/trakthygge
 image: /images/overlayimages/Line Djupström Hyggeskant.JPG
 imageDescriptions:
   - Hyggeskant. © Line Djupström

@@ -1,6 +1,7 @@
 ---
 title: Träd blädning
 description: Rötter kvar även där träd har avverkats.
+path: /skogsskotsel/bladning
 image: /images/metoder/web/blädning_1000.webp
 key: rottackeBladning
 ---

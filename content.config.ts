@@ -163,6 +163,7 @@ const overlayTextSchema = z.object({
   key: z.string().nonempty(),
   title: z.string().nonempty(),
   description: z.string().nonempty(),
+  path: z.string().optional(),
 });
 
 const sectionSchema = z.object({
@@ -580,6 +581,7 @@ export const collections = {
         key: z.string().nonempty(),
         title: z.string().nonempty(),
         description: z.string().nonempty(),
+        path: z.string().optional(),
         images: z.array(z.string()).optional(),
         imageDescriptions: z.array(z.string()).optional(),
         image: z.string().optional(),

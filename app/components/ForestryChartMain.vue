@@ -269,7 +269,7 @@ const showDesc4 = ref(false)
 const showDesc5 = ref(false)
 
 const chartOptions = [
-  { label: 'Mängd mykorrhizasvamp', value: 'skogsskole', icon: 'i-lineicons-mushroom-1' },
+  { label: 'Mängd mykorrhizasvamp', value: 'skogsskole', icon: 'i-lineicons-mushroom' },
   { label: 'Svampgrupper', value: 'grupper', icon: 'i-material-symbols-category-rounded' },
   { label: 'Naturvårdssvampar', value: 'rodlistade', icon: 'i-material-symbols-award-star' },
   { label: 'Matsvampar', value: 'matsvampar', icon: 'icon-park-solid:knife-fork' },

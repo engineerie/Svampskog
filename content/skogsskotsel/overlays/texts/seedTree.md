@@ -1,6 +1,7 @@
 ---
 title: Fröträd
 description: Mycel lever vidare på fröträdens rötter.
+path: /skogsskotsel/skarmtrad
 image: /images/overlayimages/Fröträd_ Avvecklad tallskärm med lämnade överståndare, Skogsstyrelsen CVarl Appelvist.jpg
 imageDescriptions:
   - Överhållen skärm år 10. 75-150 fröträd/ha

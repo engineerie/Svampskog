@@ -1,6 +1,7 @@
 ---
 title: Naturvårdssvampar
 description: Samlingsnamn för rödlistade svampar och signalarter.
+path: /skogsskotsel/trakthygge
 image: /images/svampbilder/RödlistadeSvampar/Ramaria boreimaxima-2051.jpg
 imageDescriptions: []
 images: []

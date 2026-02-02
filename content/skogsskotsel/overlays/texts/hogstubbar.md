@@ -1,6 +1,7 @@
 ---
 title: Högstubbar
 description: Döda rötter saknar mykorrhiza men gynnar vedlevande arter.
+path: /skogsskotsel/trakthygge
 image: /images/overlayimages/Högstubbar Lena Gustafsson.jpg
 imageDescriptions: []
 images: []

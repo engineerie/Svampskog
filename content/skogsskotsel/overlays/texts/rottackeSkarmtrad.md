@@ -1,6 +1,7 @@
 ---
 title: Skärmträd
 description: Skärmträdens rötter täcker stor del av marken.
+path: /skogsskotsel/skarmtrad
 image: /images/metoder/web/skärm_1000.webp
 imageDescriptions: []
 images: []
