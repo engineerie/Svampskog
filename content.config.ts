@@ -576,18 +576,15 @@ export const collections = {
   overlayTexts: defineCollection({
     type: "page",
     source: "skogsskotsel/overlays/texts/*.md",
-    schema: z
-      .object({
-        key: z.string().nonempty(),
-        title: z.string().nonempty(),
-        description: z.string().nonempty(),
-        path: z.string().optional(),
-        images: z.array(z.string()).optional(),
-        imageDescriptions: z.array(z.string()).optional(),
-        image: z.string().optional(),
-      })
-      // Keep markdown body and other metadata even though the schema only covers frontmatter
-      .passthrough(),
+    schema: z.object({
+      key: z.string().nonempty(),
+      title: z.string().nonempty(),
+      description: z.string().nonempty(),
+      path: z.string().optional(),
+      images: z.array(z.string()).optional(),
+      imageDescriptions: z.array(z.string()).optional(),
+      image: z.string().optional(),
+    }),
   }),
   overlays: defineCollection({
     type: "data",
