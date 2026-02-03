@@ -28,12 +28,8 @@ const { data: navigation } = await useAsyncData('navigation', () => queryCollect
   transform: data => data.find(item => item.path === '/docs')?.children || []
 })
 
-const { data: svamparnavigation } = await useAsyncData('svamparnavigation', () => queryCollectionNavigation('mushroomInfo'), {
-  transform: data => data.find(item => item.path === '/svampardocs')?.children || []
-})
-
 const { data: blognavigation } = await useAsyncData('blognavigation', () => queryCollectionNavigation('posts'), {
-  transform: data => data.find(item => item.path === '/blog')?.children || []
+  transform: data => data.find(item => item.path === '/svampkunskap')?.children || []
 })
 
 const { data: skogsskotselNavigation } = await useAsyncData('skogsskotselnavigation', () => queryCollectionNavigation('forestryFrameworks'), {
@@ -48,14 +44,13 @@ const { data: overlayTextsNavigation } = await useAsyncData(
   () => queryCollectionNavigation('overlayTexts'),
   {
     transform: data => {
-      const root = data.find(item => item.path?.startsWith('/skogsskotsel/overlays/texts'))
+      const root = data.find(item => item.path?.startsWith('/skogsskotsel/markorer'))
       return root?.children?.length ? root.children : data
     }
   }
 )
 
 provide('navigation', navigation)
-provide('svamparnavigation', svamparnavigation)
 provide('blognavigation', blognavigation)
 provide('skogsskotselnavigation', skogsskotselNavigation)
 provide('overlayTextsNavigation', overlayTextsNavigation)

@@ -5,6 +5,10 @@ image: /images/svampbilder/RödlistadeSvampar/Ramaria boreimaxima-2051.jpg
 imageDescriptions: []
 images: []
 key: naturvardsarter
+paragraphs: []
+table:
+  rows: []
+  headers: []
 ---
 
 Naturvårdssvampar har ofta speciella miljökrav och förekommer främst i äldre skog.

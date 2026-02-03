@@ -3,7 +3,7 @@ import { computed, ref, watch } from 'vue'
 
 const route = useRoute()
 
-const { data: page } = await useAsyncData('blog', () => queryCollection('blog').first())
+const { data: page } = await useAsyncData('svampkunskap', () => queryCollection('blog').first())
 const { data: posts } = await useAsyncData(route.path, () => queryCollection('posts').all())
 
 const selectedCategory = ref('all')

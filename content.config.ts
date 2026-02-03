@@ -215,24 +215,15 @@ export const collections = {
   }),
   information: defineCollection({
     type: "page",
-    source: "4.info/**/*",
+    source: "4.om-projektet/**/*",
     schema: z.object({
       title: z.string().nonempty(),
       description: z.string().nonempty(),
-    }),
-  }),
-  mushroomInfo: defineCollection({
-    type: "page",
-    source: "6.svamparDocs/**/*",
-    schema: z.object({
-      title: z.string().nonempty(),
-      description: z.string().nonempty(),
-      headline: z.string().optional(),
     }),
   }),
   posts: defineCollection({
     type: "page",
-    source: "3.blog/**/*",
+    source: "3.svampkunskap/**/*",
     schema: z.object({
       title: z.string().nonempty(),
       description: z.string().nonempty(),
@@ -348,13 +339,6 @@ export const collections = {
       ecologyintro: ecologyIntroSectionSchema.optional(),
     }),
   }),
-  skotselmetoder: defineCollection({
-    type: "data",
-    source: "skogsskotsel/skotselmetoder.yml",
-    schema: z.object({
-      methods: z.array(methodSchema),
-    }),
-  }),
   skotselmetodSections: defineCollection({
     type: "page",
     source: "skogsskotsel/metoder/**/*.md",
@@ -376,7 +360,7 @@ export const collections = {
   }),
   forestryChartTexts: defineCollection({
     type: "data",
-    source: "diagram/forestry-chart-texts.yml",
+    source: "diagram/texter.yml",
     schema: z.object({
       entries: z.array(forestryChartTextSchema),
     }),
@@ -602,7 +586,7 @@ export const collections = {
     }),
   }),
   blog: defineCollection({
-    source: "3.blog.yml",
+    source: "3.svampkunskap.yml",
     type: "data",
     schema: sectionSchema,
   }),
@@ -613,15 +597,7 @@ export const collections = {
   }),
   overlayTexts: defineCollection({
     type: "page",
-    source: "skogsskotsel/overlays/texts/*.md",
+    source: "skogsskotsel/markorer/*.md",
     schema: overlayTextSchema,
-  }),
-  overlays: defineCollection({
-    type: "data",
-    source: "skogsskotsel/overlays/points/*.yml",
-    schema: z.object({
-      title: z.string().optional(),
-      entries: z.array(z.record(z.any())),
-    }),
   }),
 };

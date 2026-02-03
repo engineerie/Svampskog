@@ -43,7 +43,7 @@ hero:
       variant: outline
   headline:
     label: ""
-    to: /blog
+    to: /svampkunskap
     icon: ""
     color: secondary
   mykorrhiza:

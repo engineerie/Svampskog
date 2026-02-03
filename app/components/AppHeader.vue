@@ -27,7 +27,7 @@ const items = computed(() => [
   // },
   {
     label: 'Svampkunskap',
-    to: '/blog'
+    to: '/svampkunskap'
   },
 ])
 
@@ -35,8 +35,8 @@ const itemsright = computed(() => [
   {
     label: 'Om projektet',
     description: 'Information om bakgrund och syfte.',
-    to: '/info',
-    active: route.path.startsWith('/info'),
+    to: '/om-projektet',
+    active: route.path.startsWith('/om-projektet'),
     children: [
     ]
   }
@@ -60,8 +60,8 @@ const itemsmobile = computed(() => [
   {
     label: 'Om projektet',
     description: 'Information om bakgrund och syfte.',
-    to: '/info',
-    active: route.path.startsWith('/info'),
+    to: '/om-projektet',
+    active: route.path.startsWith('/om-projektet'),
     children: [
     ]
   }

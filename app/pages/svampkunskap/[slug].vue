@@ -50,7 +50,7 @@ if (post.value.image?.src) {
   })
 } else {
   defineOgImageComponent('Saas', {
-    headline: 'Blog'
+    headline: 'Svampkunskap'
   })
 }
 </script>

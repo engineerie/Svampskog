@@ -2,7 +2,7 @@
 import type { ContentNavigationItem } from '@nuxt/content'
 
 definePageMeta({
-  alias: ['/overlays/:key', '/skogsskotsel/overlays/texts/:key'],
+  alias: ['/markorer/:key', '/skogsskotsel/markorer/:key'],
 })
 
 const route = useRoute()

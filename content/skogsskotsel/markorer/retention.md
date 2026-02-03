@@ -4,7 +4,12 @@ description: Mykorrhiza lever vidare på rötter från hänsynsträd.
 image: /images/overlayimages/web/Line Djupström Naturvärdesträd tall.webp
 imageDescriptions:
   - Hänsynsträd. © Line Djupström
+images: []
 key: hansyn_enstaka
+paragraphs: []
+table:
+  rows: []
+  headers: []
 ---
 
 Mykorrhizasvampar som växte med träden före avverkningen finns oftast kvar. De lever vidare med rötterna som når 10-15 meter och kan sprida sig till uppväxande plantor.
