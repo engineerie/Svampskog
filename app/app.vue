@@ -43,10 +43,22 @@ const { data: skogsskotselNavigation } = await useAsyncData('skogsskotselnavigat
   }
 })
 
+const { data: overlayTextsNavigation } = await useAsyncData(
+  'overlayTextsNavigation',
+  () => queryCollectionNavigation('overlayTexts'),
+  {
+    transform: data => {
+      const root = data.find(item => item.path?.startsWith('/skogsskotsel/overlays/texts'))
+      return root?.children?.length ? root.children : data
+    }
+  }
+)
+
 provide('navigation', navigation)
 provide('svamparnavigation', svamparnavigation)
 provide('blognavigation', blognavigation)
 provide('skogsskotselnavigation', skogsskotselNavigation)
+provide('overlayTextsNavigation', overlayTextsNavigation)
 
 </script>
 

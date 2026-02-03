@@ -1,7 +1,6 @@
 ---
 title: Hänsynsträd
 description: Mykorrhiza lever vidare på rötter från hänsynsträd.
-path: /skogsskotsel/trakthygge
 image: /images/overlayimages/web/Line Djupström Naturvärdesträd tall.webp
 imageDescriptions:
   - Hänsynsträd. © Line Djupström

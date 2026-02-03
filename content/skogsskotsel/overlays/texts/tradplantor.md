@@ -2,7 +2,6 @@
 key: tradplantor
 title: Planterade plantor
 description: Har med sig få spontana mykorrhizaarter.
-path: /skogsskotsel/trakthygge
 image: /images/overlayimages/Emil Bengtsson planterad planta.JPEG
 ---
 

@@ -4,21 +4,23 @@
             <div class="sm:space-y-4 space-y-3">
 
                 <UCard class="h-fit ring-muted/50 shadow rounded-xl cursor-pointer select-none hover:bg-neutral-100"
-                    role="button" tabindex="0" @click="isMethodDescriptionExpanded = !isMethodDescriptionExpanded"
+                    :ui="{ header: 'p-0 sm:p-0 sm:m-0' }" role="button" tabindex="0"
+                    @click="isMethodDescriptionExpanded = !isMethodDescriptionExpanded"
                     @keydown.enter.prevent="isMethodDescriptionExpanded = !isMethodDescriptionExpanded"
                     @keydown.space.prevent="isMethodDescriptionExpanded = !isMethodDescriptionExpanded">
+                    <template #header>
+                        <NuxtImg :src="methodImage(selectedMethod, 'detail')" height="800" width="1500"
+                            :alt="`Bild för ${selectedMethod.title}`" class="rounded-none ring ring-muted/50 w-full" />
+                    </template>
 
 
                     <div class="space-y-3 text-md md:text-md text-neutral-800">
-                        <NuxtImg :src="methodImage(selectedMethod, 'detail')" height="800" width="1500"
-                            :alt="`Bild för ${selectedMethod.title}`" class="rounded-xl ring ring-muted/50 w-full" />
-                        <div class="flex items-center gap-2 pt-4">
+
+                        <div class="flex items-center gap-2">
                             <h2 class="text-3xl font-semibold text-neutral-900">{{ selectedMethod.title }}</h2>
                         </div>
                         <div :class="{ 'line-clamp-3': !isMethodDescriptionExpanded }" class="space-y-3">
-                            <template v-for="(para, idx) in methodDescriptionSection?.paragraphs" :key="`desc-${idx}`">
-                                <MDC :value="para" unwrap="p" class="text-md block" />
-                            </template>
+                            <ContentRenderer v-if="methodOmSection" :value="methodOmSection" />
                         </div>
                     </div>
                 </UCard>
@@ -49,9 +51,7 @@
                             description="Skötselingrepp i skog som inte tidigare har varit kalavverkad har i regel större påverkan.
                             " />
                         <div :class="{ 'line-clamp-3': !isSvampDescriptionExpanded }" class="space-y-3">
-                            <template v-for="(para, idx) in svampMainParagraphs" :key="`svamp-${idx}`">
-                                <MDC :value="para" unwrap="p" class="text-md block" />
-                            </template>
+                            <ContentRenderer v-if="methodSvampSection" :value="methodSvampSection" />
                         </div>
                     </div>
                 </UCard>
@@ -74,6 +74,8 @@
                             <h3 class="text-xl font-semibold text-neutral-900">Mängd mykorrhizasvamp</h3>
                         </div>
 
+                        <ContentRenderer v-if="methodMangdMykorrhizaDoc" :value="methodMangdMykorrhizaDoc"
+                            class="text-md text-neutral-800 ring-muted/50 rounded-md" />
                         <ForestryChartMain :selectedChart="'skogsskole'" :parentSelectedFrameworks="chartFrameworks"
                             :currentStartskog="selectedStartskogTab" :currentTimeValue="currentTimelineTime"
                             preserveFrameworkOrder :showControls="false" class="pt-2" />
@@ -85,6 +87,8 @@
                             <UIcon name="i-material-symbols-category-rounded" class="size-5 text-rose-500" />
                             <h3 class="text-xl font-semibold text-neutral-900">Svampgrupper</h3>
                         </div>
+                        <ContentRenderer v-if="methodSvampgrupperDoc" :value="methodSvampgrupperDoc"
+                            class="text-md text-neutral-800 ring-muted/50 rounded-md" />
                         <ForestryChartMain :selectedChart="'grupper'" :parentSelectedFrameworks="chartFrameworks"
                             :currentStartskog="selectedStartskogTab" :currentTimeValue="currentTimelineTime"
                             preserveFrameworkOrder :showControls="false" class="pt-2" />
@@ -103,7 +107,7 @@
                             <h3 class="text-xl font-semibold text-neutral-900">Matsvampar</h3>
                         </div>
 
-                        <MDC v-if="svampMatsvampParagraph" :value="svampMatsvampParagraph" unwrap="p"
+                        <ContentRenderer v-if="methodMatsvampSection" :value="methodMatsvampSection"
                             class="text-md text-neutral-800 ring-muted/50 rounded-md" />
                         <ForestryChartMain :selectedChart="'matsvampar'" :parentSelectedFrameworks="chartFrameworks"
                             :currentStartskog="selectedStartskogTab" :currentTimeValue="currentTimelineTime"
@@ -117,7 +121,7 @@
                             <h3 class="text-xl font-semibold text-neutral-900">Naturvårdssvampar</h3>
                         </div>
 
-                        <MDC v-if="svampNaturvardParagraph" :value="svampNaturvardParagraph" unwrap="p"
+                        <ContentRenderer v-if="methodNaturvardSection" :value="methodNaturvardSection"
                             class="text-md text-neutral-800" />
                         <ForestryChartMain :selectedChart="'rodlistade'" :parentSelectedFrameworks="chartFrameworks"
                             :currentStartskog="selectedStartskogTab" :currentTimeValue="currentTimelineTime"
@@ -282,9 +286,8 @@
 
             <h1 class="text-2xl font-medium text-neutral-800 -mb-2">{{ card.title }}</h1>
             <ContentRenderer v-if="card.doc?.body" :value="card.doc" />
-            <p v-else class="text-neutral-800">{{ card.description }}</p>
+            <!-- <p v-else class="text-neutral-800">{{ card.description }}</p> -->
         </div>
-
     </DefineMarkerCardBody>
     <!-- <UModal v-model:open="startskogModalOpen" :close="false" :transition="true" :overlay="true"
         :ui="{ body: 'space-y-2 pt-2 sm:pt-2', content: 'max-w-sm divide-none' }"
@@ -1033,6 +1036,7 @@ import { createReusableTemplate, useMediaQuery } from '@vueuse/core'
 import { useOnboardingStore } from '~/stores/onboardingStore'
 import { useOverlayRegistry } from '~/composables/useOverlayRegistry'
 import { useAsyncData, useRoute, useRouter, navigateTo } from '#app'
+import { header } from '#build/ui'
 
 definePageMeta({
     scrollToTop: false,
@@ -1197,7 +1201,10 @@ const { data: surround } = await useAsyncData(
     }),
     { watch: [contentPath] }
 )
-const { data: methodsData } = await useAsyncData('skotselmetoder', () => queryCollection('skotselmetoder').first())
+const { data: methodIndexDocs } = await useAsyncData(
+    'skotselmetod-index',
+    () => queryCollection('skotselmetodSections').where('section', '=', 'om_metoden').all()
+)
 if (!page.value) {
     throw createError({
         statusCode: 404,
@@ -1211,17 +1218,24 @@ interface Method {
     title: string
     image: string
     shortdescription: string
-    description?: string
-    descriptionsvamp?: string
-    descriptionParagraphs?: string[]
-    descriptionsvampParagraphs?: string[]
-    descriptionmatsvampParagraphs?: string[]
-    descriptionnaturvårdssvampParagraphs?: string[]
     type?: string
     icon?: string
 }
 
-const methods = computed<Method[]>(() => methodsData.value?.methods ?? [])
+const methods = computed<Method[]>(() => {
+    const list = (methodIndexDocs.value as any[]) || []
+    return list
+        .map(doc => ({
+            index: doc.index,
+            id: doc.methodId,
+            title: doc.methodTitle ?? doc.title ?? doc.methodId,
+            image: doc.image ?? '',
+            shortdescription: doc.shortdescription ?? '',
+            type: doc.type,
+            icon: doc.icon,
+        }))
+        .sort((a, b) => (a.index ?? 0) - (b.index ?? 0))
+})
 const frameworkOptions = computed(() =>
     methods.value.map((method, index) => ({
         label: method.title,
@@ -1239,12 +1253,6 @@ const emptyMethod: Method = {
     title: '',
     image: '',
     shortdescription: '',
-    description: '',
-    descriptionsvamp: '',
-    descriptionParagraphs: [],
-    descriptionsvampParagraphs: [],
-    descriptionmatsvampParagraphs: [],
-    descriptionnaturvårdssvampParagraphs: []
 }
 const selectedId = ref<string | null>(null)
 const routeMethodId = computed(() => (route.params.id as string) || '')
@@ -1282,6 +1290,40 @@ const selectedMethod = computed<Method>(() => {
     if (!selectedId.value) return emptyMethod
     return list.find(method => method.id === selectedId.value) ?? emptyMethod
 })
+
+const { data: methodSectionDocs } = await useAsyncData(
+    'skotselmetod-sections',
+    () => {
+        const id = selectedId.value || routeMethodId.value
+        if (!id) return []
+        return queryCollection('skotselmetodSections').where('methodId', '=', id).all()
+    },
+    { watch: [selectedId, routeMethodId] }
+)
+
+const { data: methodImpactDocs } = await useAsyncData(
+    'skotselmetod-impacts',
+    () => queryCollection('skotselmetodSections').where('section', '=', 'paverkan_pa_svamp').all()
+)
+
+const methodOmDoc = computed(() =>
+    (methodSectionDocs.value as any[])?.find(doc => doc.section === 'om_metoden') ?? null
+)
+const methodSvampDoc = computed(() =>
+    (methodSectionDocs.value as any[])?.find(doc => doc.section === 'paverkan_pa_svamp') ?? null
+)
+const methodMatsvampDoc = computed(() =>
+    (methodSectionDocs.value as any[])?.find(doc => doc.section === 'matsvamp') ?? null
+)
+const methodNaturvardDoc = computed(() =>
+    (methodSectionDocs.value as any[])?.find(doc => doc.section === 'naturvardssvamp') ?? null
+)
+const methodMangdMykorrhizaDoc = computed(() =>
+    (methodSectionDocs.value as any[])?.find(doc => doc.section === 'mangd_mykorrhiza') ?? null
+)
+const methodSvampgrupperDoc = computed(() =>
+    (methodSectionDocs.value as any[])?.find(doc => doc.section === 'svampgrupper') ?? null
+)
 const selectedFrameworkIndex = computed<number | null>({
     get() {
         if (!selectedId.value) return null
@@ -1952,55 +1994,10 @@ const tabs = ref<TabsItem[]>([
 
 const startskogModalOpen = ref(route.query.entry === '1' || route.query.entry === 'true')
 
-const splitParagraphs = (text: string | undefined | null) =>
-    (text || '')
-        .split(/\n\s*\n/g)
-        .map(p => p.trim())
-        .filter(Boolean)
-
-// Accordion items for the selected method
-const accordionItems = computed(() => [
-    {
-        label: 'Om metoden',
-        icon: 'i-hugeicons-tree-06',
-        value: 'description',
-        paragraphs: selectedMethod.value.descriptionParagraphs?.length
-            ? selectedMethod.value.descriptionParagraphs
-            : splitParagraphs(selectedMethod.value.description),
-    },
-    {
-        label: 'Påverkan på mykorrhiza',
-        icon: 'i-hugeicons-mushroom',
-        value: 'svamp',
-        paragraphs: selectedMethod.value.descriptionsvampParagraphs?.length
-            ? selectedMethod.value.descriptionsvampParagraphs
-            : splitParagraphs(selectedMethod.value.descriptionsvamp),
-    }
-])
-const methodDescriptionSection = computed(() =>
-    accordionItems.value.find(section => section.value === 'description')
-)
-const methodSvampSection = computed(() =>
-    accordionItems.value.find(section => section.value === 'svamp')
-)
-const svampParagraphs = computed(() => methodSvampSection.value?.paragraphs ?? [])
-const svampMainParagraphs = computed(() => svampParagraphs.value)
-const svampMatsvampParagraph = computed(() => {
-    const paragraphs = selectedMethod.value.descriptionmatsvampParagraphs;
-    if (paragraphs?.length) return paragraphs.join('\n\n');
-    if (svampParagraphs.value.length >= 2) {
-        return svampParagraphs.value[svampParagraphs.value.length - 2];
-    }
-    return '';
-})
-const svampNaturvardParagraph = computed(() => {
-    const paragraphs = selectedMethod.value.descriptionnaturvårdssvampParagraphs;
-    if (paragraphs?.length) return paragraphs.join('\n\n');
-    if (svampParagraphs.value.length >= 1) {
-        return svampParagraphs.value[svampParagraphs.value.length - 1];
-    }
-    return '';
-})
+const methodOmSection = computed(() => methodOmDoc.value)
+const methodSvampSection = computed(() => methodSvampDoc.value)
+const methodMatsvampSection = computed(() => methodMatsvampDoc.value)
+const methodNaturvardSection = computed(() => methodNaturvardDoc.value)
 
 const frameworkIndexMap: Record<string, number> = {
     naturskydd: 0,
@@ -2032,17 +2029,27 @@ const normalizeFrameworkKey = (value: string | null | undefined) =>
 const selectedFrameworkKey = computed(() => resolveFrameworkKey(selectedMethod.value.id))
 const compareFrameworkKey = computed(() => resolveFrameworkKey(compareMethodResolved.value))
 
-const impactByMethod: Record<string, { value: number; tone: 'low' | 'medium' | 'high'; label: string }> = {
-    naturskydd: { value: 5, tone: 'low', label: 'Låg ' },
-    trakthygge: { value: 85, tone: 'high', label: 'Hög ' },
-    bladning: { value: 20, tone: 'low', label: 'Låg ' },
-    luckhuggning: { value: 55, tone: 'medium', label: 'Medel ' },
-    skarmtrad: { value: 40, tone: 'medium', label: 'Medel ' },
-}
+const impactByMethod = computed<Record<string, { value: number; tone: 'low' | 'medium' | 'high'; label: string }>>(() => {
+    const docs = (methodImpactDocs.value as any[]) || []
+    const map: Record<string, { value: number; tone: 'low' | 'medium' | 'high'; label: string }> = {}
+    docs.forEach(doc => {
+        if (!doc?.methodId) return
+        const value = Number(doc.impactValue)
+        const tone = doc.impactTone as 'low' | 'medium' | 'high' | undefined
+        const label = doc.impactLabel as string | undefined
+        if (!Number.isNaN(value) && tone && label) {
+            map[doc.methodId] = { value, tone, label }
+        }
+    })
+    return map
+})
 
 const resolveImpact = (methodId: string | null | undefined) => {
     const normalized = normalizeFrameworkKey(methodId)
-    const base = impactByMethod[normalized] ?? { value: 50, tone: 'medium', label: 'Medel påverkan' }
+    const base =
+        impactByMethod.value[methodId || ''] ??
+        impactByMethod.value[normalized] ??
+        { value: 50, tone: 'medium', label: 'Medel påverkan' }
     const isNaturskog = selectedStartskogTab.value === 'naturskog'
     const needsBoost = isNaturskog && normalized !== 'naturskydd'
     return {

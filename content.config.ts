@@ -146,6 +146,29 @@ const methodSchema = z.object({
   icon: z.string().optional(),
 });
 
+const methodSectionSchema = z.object({
+  methodId: z.string().nonempty(),
+  methodTitle: z.string().nonempty(),
+  section: z.enum([
+    "om_metoden",
+    "paverkan_pa_svamp",
+    "matsvamp",
+    "naturvardssvamp",
+    "mangd_mykorrhiza",
+    "svampgrupper",
+  ]),
+  sectionTitle: z.string().optional(),
+  sectionIndex: z.number().optional(),
+  impactValue: z.number().optional(),
+  impactTone: z.enum(["low", "medium", "high"]).optional(),
+  impactLabel: z.string().optional(),
+  index: z.number().optional(),
+  image: z.string().optional(),
+  shortdescription: z.string().optional(),
+  type: z.string().optional(),
+  icon: z.string().optional(),
+});
+
 const logoSchema = z.object({
   src: z.string().nonempty(),
   alt: z.string().optional(),
@@ -164,6 +187,16 @@ const overlayTextSchema = z.object({
   title: z.string().nonempty(),
   description: z.string().nonempty(),
   path: z.string().optional(),
+  image: z.string().optional(),
+  images: z.array(z.string()).optional(),
+  imageDescriptions: z.array(z.string()).optional(),
+  paragraphs: z.array(z.string()).optional(),
+  table: z
+    .object({
+      headers: z.array(z.string()).optional(),
+      rows: z.array(z.array(z.string())).optional(),
+    })
+    .optional(),
 });
 
 const sectionSchema = z.object({
@@ -321,6 +354,11 @@ export const collections = {
     schema: z.object({
       methods: z.array(methodSchema),
     }),
+  }),
+  skotselmetodSections: defineCollection({
+    type: "page",
+    source: "skogsskotsel/metoder/**/*.md",
+    schema: methodSectionSchema.passthrough(),
   }),
   forestryFrameworks: defineCollection({
     type: "page",
@@ -576,15 +614,7 @@ export const collections = {
   overlayTexts: defineCollection({
     type: "page",
     source: "skogsskotsel/overlays/texts/*.md",
-    schema: z.object({
-      key: z.string().nonempty(),
-      title: z.string().nonempty(),
-      description: z.string().nonempty(),
-      path: z.string().optional(),
-      images: z.array(z.string()).optional(),
-      imageDescriptions: z.array(z.string()).optional(),
-      image: z.string().optional(),
-    }),
+    schema: overlayTextSchema,
   }),
   overlays: defineCollection({
     type: "data",

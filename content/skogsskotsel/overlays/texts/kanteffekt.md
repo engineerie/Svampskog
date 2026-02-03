@@ -1,11 +1,15 @@
 ---
 title: Kanteffekt
 description: Rötter och svampar sträcker sig 10–15 meter in.
-path: /skogsskotsel/trakthygge
 image: /images/overlayimages/Line Djupström Hyggeskant.JPG
 imageDescriptions:
   - Hyggeskant. © Line Djupström
+images: []
 key: kanteffekt
+paragraphs: []
+table:
+  rows: []
+  headers: []
 ---
 
 Kanteffekt beskriver hur trädens rötter och deras mykorrhizasvampar sträcker sig från skogskanten in över en avverkad yta, vanligen 10–15 meter in beroende på trädens storlek. Mest rötter och den största mängden mykorrhiza finns precis intill skogskanten nära stammarna.

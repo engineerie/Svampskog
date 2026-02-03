@@ -476,7 +476,10 @@ onBeforeUnmount(() => updateScrollState(false))
 const onboardingStore = useOnboardingStore()
 
 const { data: page } = await useAsyncData('skogsskotsel', () => queryCollection('skogsskotsel').first())
-const { data: methodsData } = await useAsyncData('skotselmetoder', () => queryCollection('skotselmetoder').first())
+const { data: methodIndexDocs } = await useAsyncData(
+    'skotselmetod-index',
+    () => queryCollection('skotselmetodSections').where('section', '=', 'om_metoden').all()
+)
 if (!page.value) {
     throw createError({
         statusCode: 404,
@@ -490,16 +493,24 @@ interface Method {
     title: string
     image: string
     shortdescription: string
-    description?: string
-    descriptionsvamp?: string
-    descriptionParagraphs?: string[]
-    descriptionsvampParagraphs?: string[]
-    descriptionmatsvampParagraphs?: string[]
-    descriptionnaturvårdssvampParagraphs?: string[]
     type?: string
+    icon?: string
 }
 
-const methods = computed<Method[]>(() => methodsData.value?.methods ?? [])
+const methods = computed<Method[]>(() => {
+    const list = (methodIndexDocs.value as any[]) || []
+    return list
+        .map(doc => ({
+            index: doc.index,
+            id: doc.methodId,
+            title: doc.methodTitle ?? doc.title ?? doc.methodId,
+            image: doc.image ?? '',
+            shortdescription: doc.shortdescription ?? '',
+            type: doc.type,
+            icon: doc.icon,
+        }))
+        .sort((a, b) => (a.index ?? 0) - (b.index ?? 0))
+})
 const frameworkOptions = computed(() =>
     methods.value.map((method, index) => ({
         label: method.title,
@@ -511,13 +522,7 @@ const emptyMethod: Method = {
     id: '',
     title: '',
     image: '',
-    shortdescription: '',
-    description: '',
-    descriptionsvamp: '',
-    descriptionParagraphs: [],
-    descriptionsvampParagraphs: [],
-    descriptionmatsvampParagraphs: [],
-    descriptionnaturvårdssvampParagraphs: []
+    shortdescription: ''
 }
 const selectedId = ref<string | null>(null)
 

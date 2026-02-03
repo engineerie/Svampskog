@@ -3,7 +3,10 @@ import { computed, onMounted, onUnmounted, ref, watch } from 'vue'
 import { useIntersectionObserver } from '@vueuse/core'
 
 const { data: page } = await useAsyncData('index', () => queryCollection('index').first())
-const { data: skotselMethods } = await useAsyncData('landing-skogsskotsel-metoder', () => queryCollection('skotselmetoder').first())
+const { data: skotselMethodIndex } = await useAsyncData(
+  'landing-skogsskotsel-metoder',
+  () => queryCollection('skotselmetodSections').where('section', '=', 'om_metoden').all()
+)
 
 type StackCard = { image: string; title?: string }
 
@@ -16,16 +19,16 @@ const imageSectionRef = ref<HTMLElement | null>(null)
 const isImageInView = ref(false)
 
 const buildStack = () => {
-  const imgs =
-    skotselMethods.value?.methods?.map(method => {
-      const base = (method.image || '').split('/').pop() || ''
-      const name = base.replace(/\.[^.]+$/, '')
-      const webPath = name ? `/images/metoder/web/${name}_1000.webp` : method.image
-      return {
-        image: webPath,
-        title: method.title
-      }
-    }) ?? []
+  const docs = (skotselMethodIndex.value as any[]) || []
+  const imgs = docs.map(doc => {
+    const base = (doc.image || '').split('/').pop() || ''
+    const name = base.replace(/\.[^.]+$/, '')
+    const webPath = name ? `/images/metoder/web/${name}_1000.webp` : doc.image
+    return {
+      image: webPath,
+      title: doc.methodTitle ?? doc.title
+    }
+  })
   stackImages.value = imgs.length ? [...imgs] : []
   currentImageIndex.value = 2
   if (stackImages.value.length && isImageInView.value) {
@@ -33,7 +36,7 @@ const buildStack = () => {
   }
 }
 
-watch(skotselMethods, buildStack, { immediate: true })
+watch(skotselMethodIndex, buildStack, { immediate: true })
 
 const restartProgress = () => {
   progressKey.value += 1

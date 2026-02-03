@@ -3,7 +3,6 @@ title: Hänsynsyta
 description: Mykorrhiza lever vidare i hänsynsytor som lämnas orörda.
 image: /images/overlayimages/Hänsynsyta 2 Lena Gustafsson.JPG
 key: hansyn_yta
-path: /skogsskotsel/trakthygge
 navigation: true
 seo:
   title: Hänsynsyta
