@@ -1,25 +1,5 @@
 title: Svampar
 description: Sök på vilka mykorrhizasvampar som kan finnas i olika skogar baserat på miljö-DNA och sammanställd kunskap om vart fruktkroppar förekommer.
-ecologyintro:
-  title: Lite om mykorrhizasvampar
-  description: ""
-  items:
-    - title: Många skogssvampar bildar mykorrhiza
-      image: /images/svampindex/Cortinarius sanguineus-179-.jpg
-      description: |
-        De flesta större svampar i skogen bildar mykorrhiza - nästan alla ätliga och giftiga. Hit hör bland annat spindelskivlingar, kremlor, riskor, soppar och kantareller. Det finns också några  som bildar små och oansenliga fruktkroppar och därför dåligt kända, bland annat många skinnsvampar.
-    - title: Över 2000 arter i Sverige
-      image: /images/Carousel/web/ArterDiagram2.webp
-      description: |
-        I Sverige finns över 2 000 olika mykorrhizasvampar. Några är vanliga, de flesta mindre vanliga eller till och med  ovanliga. I en äldre skog kan det finnas ett par hundra arter. Ofta växer varje träds rotsystem i symbios med mycel av 50-100 arter.
-    - title: Det mesta är mycel i marken
-      image: /images/Carousel/web/mainlymycelium.webp
-      description: |
-        Fruktkropparna är bara en liten och tillfällig del av svampen. Den största delen är mycel i marken. Mycel växer under hela växtsäsongen och kan leva i många år.
-    - title: Varje mycel är en individ
-      image: /images/Carousel/web/Söder_Tallskog_91_Blåbär_grupp.webp
-      description: |
-        Varje mycel i marken är en svampindivid, ofta någon till några kvadratmeter stor. I en skog finns många olika individer av både samma och olika arter. Olika individe bildar ett komplext lapptäcke av  konkurrerande mycel.  
 hero:
   title: Sök svampar i svenska skogar
   description: Enligt DNA-analyser av jordprover och sammanställda uppgifter om var fruktkroppar finns.
@@ -40,19 +20,3 @@ hero:
       color: neutral
       variant: solid
 navigation: false
-underlag: Faktaunderlag
-underlagSections:
-  - title: Artlistor på två sätt
-    paragraphs:
-      - Vi presenterar artlistor som baseras på (1) DNA-analyser av jordprover och (2) förekomsten av fruktkroppar.
-      - DNA-analyser görs med små markprover och fungerar utmärkt för frekventa och vanliga arter, men dåligt för ovanliga arter.
-      - " Med fruktkroppar kan däremo alla arter som bildar fruktkroppar detekteras, vanliga som ovanliga. Fruktkroppar ger dock också en ofullständig bild av artrikedomen och hur vanliga svamparna är, eftersom många arter sällan bildar eller saknar fruktkroppar."
-      - De två metoderna kompletterar varandra och ger tillsammans en god bild av svamplivet i skogen.
-  - title: Enligt DNA
-    paragraphs:
-      - Bygger på DNA-analyser av svampars förekomst som mycel från ca 2000 markprover tagna i Markinventeringen och Riksskogstaxeringen permanenta provytor i skog under 2015-2021.
-  - title: Enligt fruktkroppar
-    paragraphs:
-      - Bygger främst på Artdatabankens sammanställningar över arters förekomst, ekologi och naturvårdsstatus.
-underlagbild: /images/Sources/web/samladkunskap_500.webp
-underlagdescription: Kombination av svamp-DNA i mark och kunskap om fruktkroppar

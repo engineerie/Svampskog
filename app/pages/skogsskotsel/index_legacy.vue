@@ -369,26 +369,25 @@
 
                 <div
                     class="mb-4 flex flex-col sm:flex-row gap-1.5 p-1 rounded-lg ring ring-muted/50 sm:w-fit bg-muted/30">
-                    <UModal :fullscreen="isMobile ? true : false" :title="page.ecologyintro?.title ?? ''"
-                        :description="page.ecologyintro?.description ?? ''" :ui="{
+                    <UModal :fullscreen="isMobile ? true : false" :title="faktaDoc?.title ?? ''"
+                        :description="faktaDoc?.description ?? ''" :ui="{
                             header: 'shrink-0',
                         }">
                         <UAlert icon="i-heroicons-book-open" color="neutral" variant="outline" title="Fakta i korthet"
                             class="sm:w-fit shadow ring-muted/50 hover:opacity-85 hover:cursor-pointer" />
                         <template #body>
-                            <EcologyIntro :section="page.ecologyintro" />
+                            <ContentRenderer v-if="faktaDoc" :value="faktaDoc" />
                         </template>
                     </UModal>
-                    <UModal :fullscreen="isMobile ? true : false" :title="page.underlag"
-                        :description="page.underlagdescription" :ui="{
+                    <UModal :fullscreen="isMobile ? true : false" :title="underlagDoc?.title"
+                        :description="underlagDoc?.description" :ui="{
                             header: 'shrink-0',
                         }">
                         <UAlert icon="i-heroicons-document-magnifying-glass" color="neutral" variant="outline"
-                            :title="page.underlag"
+                            :title="underlagDoc?.title"
                             class="sm:w-fit shadow ring-muted/50 hover:opacity-85 hover:cursor-pointer" />
                         <template #body>
-                            <UnderlagContent :underlag="page.underlag" :underlagbild="page.underlagbild"
-                                :sections="page.underlagSections" />
+                            <ContentRenderer v-if="underlagDoc" :value="underlagDoc" />
                         </template>
                     </UModal>
                 </div>
@@ -476,6 +475,9 @@ onBeforeUnmount(() => updateScrollState(false))
 const onboardingStore = useOnboardingStore()
 
 const { data: page } = await useAsyncData('skogsskotsel', () => queryCollection('skogsskotsel').first())
+const { data: skogsskotselInfo } = await useAsyncData('skogsskotsel-info', () =>
+    queryCollection('skogsskotselInfo').all()
+)
 const { data: methodIndexDocs } = await useAsyncData(
     'skotselmetod-index',
     () => queryCollection('skotselmetodSections').where('section', '=', 'om_metoden').all()
@@ -487,6 +489,8 @@ if (!page.value) {
         fatal: true
     })
 }
+const faktaDoc = computed(() => (skogsskotselInfo.value ?? []).find(doc => doc.key === 'fakta') ?? null)
+const underlagDoc = computed(() => (skogsskotselInfo.value ?? []).find(doc => doc.key === 'underlag') ?? null)
 interface Method {
     index?: number
     id: string

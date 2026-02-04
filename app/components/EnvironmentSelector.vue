@@ -169,25 +169,24 @@
             </div>
 
             <div class="absolute bottom-0 right-3 flex justify-end gap-2 items-center">
-              <UModal :fullscreen="isMobile ? true : false" :title="page.ecologyintro?.title ?? ''"
-                :description="page.ecologyintro?.description ?? ''" :ui="{
+              <UModal :fullscreen="isMobile ? true : false" :title="faktaDoc?.title ?? ''"
+                :description="faktaDoc?.description ?? ''" :ui="{
                   header: 'shrink-0',
                 }">
                 <UButton icon="i-heroicons-book-open" color="neutral" variant="outline" label="Fakta i korthet"
                   class="sm:w-fit h-fit  ring-muted/50 hover:opacity-85 hover:cursor-pointer" />
                 <template #body>
-                  <EcologyIntro :section="page.ecologyintro" />
+                  <ContentRenderer v-if="faktaDoc" :value="faktaDoc" />
                 </template>
               </UModal>
-              <UModal :fullscreen="isMobile ? true : false" :title="page.underlag"
-                :description="page.underlagdescription" :ui="{
+              <UModal :fullscreen="isMobile ? true : false" :title="underlagDoc?.title"
+                :description="underlagDoc?.description" :ui="{
                   header: 'shrink-0',
                 }">
                 <UButton icon="i-heroicons-document-magnifying-glass" color="neutral" variant="outline" label="Underlag"
                   class="sm:w-fit h-fit  ring-muted/50 hover:opacity-85 hover:cursor-pointer" />
                 <template #body>
-                  <UnderlagContent :underlag="page.underlag" :underlagbild="page.underlagbild"
-                    :sections="page.underlagSections" />
+                  <ContentRenderer v-if="underlagDoc" :value="underlagDoc" />
                 </template>
               </UModal>
               <USeparator orientation="vertical" class="h-6" />
@@ -326,6 +325,9 @@ onBeforeUnmount(() => {
 
 
 const { data: page } = await useAsyncData('mykorrhizasvampar-env', () => queryCollection('mykorrhizasvampar').first())
+const { data: svamparInfo } = await useAsyncData('svampar-info-env', () =>
+  queryCollection('svamparInfo').all()
+)
 if (!page.value) {
   throw createError({
     statusCode: 404,
@@ -333,6 +335,9 @@ if (!page.value) {
     fatal: true
   })
 }
+
+const faktaDoc = computed(() => (svamparInfo.value ?? []).find(doc => doc.key === 'fakta') ?? null)
+const underlagDoc = computed(() => (svamparInfo.value ?? []).find(doc => doc.key === 'underlag') ?? null)
 // --- Environment Selector Data & Methods ---
 
 interface Category {

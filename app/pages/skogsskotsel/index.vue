@@ -32,7 +32,7 @@
                 <div v-if="!selectedMethod.id" @click="goToMethod(method.id)" @mouseenter="hoveredMethodId = method.id"
                     @mouseleave="hoveredMethodId = null" @focusin="hoveredMethodId = method.id"
                     @focusout="hoveredMethodId = null" :class="[
-                        'shrink-0 lg:shrink sm:w-58 lg:w-full bg-white transition-all hover:opacity-100 border border-muted/50 overflow-hidden rounded-xl h-fit shadow-lg hover:shadow-md relative cursor-pointer',
+                        'shrink-0 lg:shrink sm:w-58 lg:w-full bg-white transition-all hover:opacity-100 border border-muted/50 overflow-hidden rounded-xl h-fit shadow-md hover:shadow-lg relative cursor-pointer',
                         !selectedId ? 'opacity-100' : (selectedId === method.id ? 'opacity-100 ring-primary/40 shadow-lg' : 'opacity-50')
                     ]">
 
@@ -104,25 +104,24 @@
             </UCarousel>
         </Motion>
         <UContainer class="flex gap-2">
-            <UModal :fullscreen="isMobile ? true : false" :title="page.ecologyintro?.title ?? ''"
-                :description="page.ecologyintro?.description ?? ''" :ui="{
+            <UModal :fullscreen="isMobile ? true : false" :title="faktaDoc?.title ?? ''"
+                :description="faktaDoc?.description ?? ''" :ui="{
                     header: 'shrink-0',
                 }">
                 <UButton icon="i-heroicons-book-open" color="neutral" variant="outline" label="Fakta i korthet"
                     class="sm:w-fit h-fit  ring-muted/50 hover:opacity-85 hover:cursor-pointer" />
                 <template #body>
-                    <EcologyIntro :section="page.ecologyintro" />
+                    <ContentRenderer v-if="faktaDoc" :value="faktaDoc" />
                 </template>
             </UModal>
-            <UModal :fullscreen="isMobile ? true : false" :title="page.underlag" :description="page.underlagdescription"
-                :ui="{
+            <UModal :fullscreen="isMobile ? true : false" :title="underlagDoc?.title"
+                :description="underlagDoc?.description" :ui="{
                     header: 'shrink-0',
                 }">
                 <UButton icon="i-heroicons-document-magnifying-glass" color="neutral" variant="outline" label="Underlag"
                     class="sm:w-fit h-fit  ring-muted/50 hover:opacity-85 hover:cursor-pointer" />
                 <template #body>
-                    <UnderlagContent :underlag="page.underlag" :underlagbild="page.underlagbild"
-                        :sections="page.underlagSections" />
+                    <ContentRenderer v-if="underlagDoc" :value="underlagDoc" />
                 </template>
             </UModal>
         </UContainer>
@@ -185,6 +184,9 @@ watch(isMobile, () => {
 })
 
 const { data: page } = await useAsyncData('skogsskotsel', () => queryCollection('skogsskotsel').first())
+const { data: skogsskotselInfo } = await useAsyncData('skogsskotsel-info', () =>
+    queryCollection('skogsskotselInfo').all()
+)
 const { data: methodIndexDocs } = await useAsyncData(
     'skotselmetod-index',
     () => queryCollection('skotselmetodSections').where('section', '=', 'om_metoden').all()
@@ -196,6 +198,8 @@ if (!page.value) {
         fatal: true
     })
 }
+const faktaDoc = computed(() => (skogsskotselInfo.value ?? []).find(doc => doc.key === 'fakta') ?? null)
+const underlagDoc = computed(() => (skogsskotselInfo.value ?? []).find(doc => doc.key === 'underlag') ?? null)
 interface Method {
     index?: number
     id: string

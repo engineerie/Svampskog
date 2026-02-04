@@ -128,6 +128,30 @@ const chartFrameworks = computed(() => {
 })
 
 const methodRootPath = computed(() => `/skogsskotsel/metoder/${route.params.method}`)
+const flattenNavigation = (items: ContentNavigationItem[]): ContentNavigationItem[] => {
+  const result: ContentNavigationItem[] = []
+  const stack = [...items]
+  while (stack.length) {
+    const item = stack.shift()
+    if (!item) continue
+    result.push(item)
+    if (item.children?.length) {
+      stack.unshift(...item.children)
+    }
+  }
+  return result
+}
+const findNodeByPath = (items: ContentNavigationItem[], path: string): ContentNavigationItem | null => {
+  for (const item of items) {
+    if (item.path === path) return item
+    if (item.children?.length) {
+      const found = findNodeByPath(item.children, path)
+      if (found) return found
+    }
+  }
+  return null
+}
+const countPathSegments = (path: string) => path.split('/').filter(Boolean).length
 
 const { data: navigation } = await useAsyncData(
   'skotselmetod-navigation',
@@ -135,8 +159,17 @@ const { data: navigation } = await useAsyncData(
   {
     watch: [methodRootPath],
     transform: (data) => {
-      const root = data.find(item => item.path?.startsWith(methodRootPath.value))
-      return root?.children?.length ? root.children : data
+      const prefix = '/skogsskotsel/metoder'
+      const allItems = flattenNavigation(data)
+      const candidates = allItems.filter(item => (item.path || '').startsWith(prefix))
+      if (!candidates.length) return []
+      const rootPath = candidates
+        .map(item => item.path || '')
+        .filter(Boolean)
+        .sort((a, b) => countPathSegments(a) - countPathSegments(b) || a.length - b.length)[0]
+      if (!rootPath) return []
+      const rootNode = findNodeByPath(data, rootPath)
+      return rootNode ? [rootNode] : candidates
     }
   }
 )

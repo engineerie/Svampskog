@@ -64,6 +64,23 @@ const ecologyIntroSectionSchema = z.object({
   items: z.array(ecologyIntroItemSchema),
 });
 
+const underlagSectionSchema = z.object({
+  title: z.string().optional(),
+  paragraphs: z.array(z.string()).optional(),
+  content: z.string().optional(),
+});
+
+const infoPageSchema = z
+  .object({
+    key: z.string().optional(),
+    title: z.string().nonempty(),
+    description: z.string().optional(),
+    underlagbild: z.string().optional(),
+    sections: z.array(underlagSectionSchema).optional(),
+    items: z.array(ecologyIntroItemSchema).optional(),
+  })
+  .passthrough();
+
 const galleryItemSchema = z.object({
   title: z.string().nonempty(),
   image: z.string().nonempty(),
@@ -281,18 +298,6 @@ export const collections = {
     schema: z.object({
       title: z.string().nonempty(),
       description: z.string().nonempty(),
-      underlag: z.string().nonempty(),
-      underlagdescription: z.string().nonempty(),
-      underlagbild: z.string().nonempty(),
-      underlagSections: z
-        .array(
-          z.object({
-            title: z.string().optional(),
-            paragraphs: z.array(z.string()).optional(),
-            content: z.string().optional(),
-          }),
-        )
-        .optional(),
       hero: sectionSchema.extend({
         headline: z.object({
           label: z.string().optional(),
@@ -304,8 +309,15 @@ export const collections = {
         src: z.string().nonempty(),
         orientation: orientationEnum.optional(),
       }),
-      ecologyintro: ecologyIntroSectionSchema,
     }),
+  }),
+  svamparInfo: defineCollection({
+    type: "page",
+    source: {
+      include: "1.svampar/info/*.md",
+      prefix: "/svampar/info",
+    },
+    schema: infoPageSchema,
   }),
   skogsskotsel: defineCollection({
     type: "page",
@@ -313,18 +325,6 @@ export const collections = {
     schema: z.object({
       title: z.string().nonempty(),
       description: z.string().nonempty(),
-      underlag: z.string().nonempty(),
-      underlagdescription: z.string().nonempty(),
-      underlagbild: z.string().nonempty(),
-      underlagSections: z
-        .array(
-          z.object({
-            title: z.string().optional(),
-            paragraphs: z.array(z.string()).optional(),
-            content: z.string().optional(),
-          }),
-        )
-        .optional(),
       hero: sectionSchema.extend({
         headline: z.object({
           label: z.string().optional(),
@@ -336,17 +336,24 @@ export const collections = {
         src: z.string().nonempty(),
         orientation: orientationEnum.optional(),
       }),
-      ecologyintro: ecologyIntroSectionSchema.optional(),
     }),
+  }),
+  skogsskotselInfo: defineCollection({
+    type: "page",
+    source: {
+      include: "2.skogsskotsel/info/*.md",
+      prefix: "/skogsskotsel/info",
+    },
+    schema: infoPageSchema,
   }),
   skotselmetodSections: defineCollection({
     type: "page",
-    source: "skogsskotsel/metoder/**/*.md",
+    source: "2.skogsskotsel/metoder/**/*.md",
     schema: methodSectionSchema.passthrough(),
   }),
   forestryFrameworks: defineCollection({
     type: "page",
-    source: "skogsskotsel/frameworks/**/*",
+    source: "2.skogsskotsel/frameworks/**/*",
     schema: z.object({
       title: z.string().nonempty(),
       description: z.string().nonempty(),
@@ -360,14 +367,14 @@ export const collections = {
   }),
   forestryChartTexts: defineCollection({
     type: "data",
-    source: "diagram/texter.yml",
+    source: "2.skogsskotsel/diagram/texter.yml",
     schema: z.object({
       entries: z.array(forestryChartTextSchema),
     }),
   }),
   matsvampSkogsbruk: defineCollection({
     type: "data",
-    source: "diagram/matsvamp-skogsbruk.yml",
+    source: "2.skogsskotsel/diagram/matsvamp-skogsbruk.yml",
     schema: z.object({
       entries: z.array(
         z.object({
@@ -382,7 +389,7 @@ export const collections = {
   }),
   kgMatsvampSkogsbruk: defineCollection({
     type: "data",
-    source: "diagram/kg-matsvamp-skogsbruk.yml",
+    source: "2.skogsskotsel/diagram/kg-matsvamp-skogsbruk.yml",
     schema: z.object({
       entries: z.array(
         z.object({
@@ -397,7 +404,7 @@ export const collections = {
   }),
   godaMatsvamparSkogsbruk: defineCollection({
     type: "data",
-    source: "diagram/goda-matsvampar-skogsbruk.yml",
+    source: "2.skogsskotsel/diagram/goda-matsvampar-skogsbruk.yml",
     schema: z.object({
       entries: z.array(
         z.object({
@@ -412,7 +419,7 @@ export const collections = {
   }),
   signalRodlistadeSkogsbruk: defineCollection({
     type: "data",
-    source: "diagram/signal-rodlistade-skogsbruk.yml",
+    source: "2.skogsskotsel/diagram/signal-rodlistade-skogsbruk.yml",
     schema: z.object({
       entries: z.array(
         z.object({
@@ -427,7 +434,7 @@ export const collections = {
   }),
   athelialesSkogsbruk: defineCollection({
     type: "data",
-    source: "diagram/atheliales-skogsbruk.yml",
+    source: "2.skogsskotsel/diagram/atheliales-skogsbruk.yml",
     schema: z.object({
       entries: z.array(
         z.object({
@@ -442,7 +449,7 @@ export const collections = {
   }),
   boletalesSkogsbruk: defineCollection({
     type: "data",
-    source: "diagram/boletales-skogsbruk.yml",
+    source: "2.skogsskotsel/diagram/boletales-skogsbruk.yml",
     schema: z.object({
       entries: z.array(
         z.object({
@@ -457,7 +464,7 @@ export const collections = {
   }),
   cantharellalesSkogsbruk: defineCollection({
     type: "data",
-    source: "diagram/cantharellales-skogsbruk.yml",
+    source: "2.skogsskotsel/diagram/cantharellales-skogsbruk.yml",
     schema: z.object({
       entries: z.array(
         z.object({
@@ -472,7 +479,7 @@ export const collections = {
   }),
   spindlingarSkogsbruk: defineCollection({
     type: "data",
-    source: "diagram/spindlingar-skogsbruk.yml",
+    source: "2.skogsskotsel/diagram/spindlingar-skogsbruk.yml",
     schema: z.object({
       entries: z.array(
         z.object({
@@ -487,7 +494,7 @@ export const collections = {
   }),
   russulalesSkogsbruk: defineCollection({
     type: "data",
-    source: "diagram/russulales-skogsbruk.yml",
+    source: "2.skogsskotsel/diagram/russulales-skogsbruk.yml",
     schema: z.object({
       entries: z.array(
         z.object({
@@ -502,7 +509,7 @@ export const collections = {
   }),
   thelephoralesSkogsbruk: defineCollection({
     type: "data",
-    source: "diagram/thelephorales-skogsbruk.yml",
+    source: "2.skogsskotsel/diagram/thelephorales-skogsbruk.yml",
     schema: z.object({
       entries: z.array(
         z.object({
@@ -517,7 +524,7 @@ export const collections = {
   }),
   ascomycotaSkogsbruk: defineCollection({
     type: "data",
-    source: "diagram/ascomycota-skogsbruk.yml",
+    source: "2.skogsskotsel/diagram/ascomycota-skogsbruk.yml",
     schema: z.object({
       entries: z.array(
         z.object({
@@ -532,7 +539,7 @@ export const collections = {
   }),
   skogsbrukSvampar: defineCollection({
     type: "data",
-    source: "diagram/skogssbruk_svampar.yml",
+    source: "2.skogsskotsel/diagram/skogssbruk_svampar.yml",
     schema: z.object({
       entries: z.array(
         z.object({
@@ -555,7 +562,7 @@ export const collections = {
   }),
   svampgrupperRelativeSkogsbruk: defineCollection({
     type: "data",
-    source: "diagram/svampgrupper-relative-skogsbruk.yml",
+    source: "2.skogsskotsel/diagram/svampgrupper-relative-skogsbruk.yml",
     schema: z.object({
       entries: z.array(
         z.object({
@@ -573,7 +580,7 @@ export const collections = {
   }),
   totalSvamparSkogsbruk: defineCollection({
     type: "data",
-    source: "diagram/total-svampar-skogsbruk.yml",
+    source: "2.skogsskotsel/diagram/total-svampar-skogsbruk.yml",
     schema: z.object({
       entries: z.array(
         z.object({
@@ -592,12 +599,12 @@ export const collections = {
   }),
   forestryTimelines: defineCollection({
     type: "data",
-    source: "skogsskotsel/tidslinjer.yml",
+    source: "2.skogsskotsel/tidslinjer.yml",
     schema: forestryTimelineSchema,
   }),
   overlayTexts: defineCollection({
     type: "page",
-    source: "skogsskotsel/markorer/*.md",
+    source: "2.skogsskotsel/markorer/*.md",
     schema: overlayTextSchema,
   }),
 };
