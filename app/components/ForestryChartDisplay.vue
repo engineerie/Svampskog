@@ -6,20 +6,40 @@
         :items="legendItems" :onLegendItemClick="handleLegendItemClick" class="mx-2 flex flex-wrap gap-2" />
       <div
         v-if="isMounted && chartReady && legendItems.length && (props.singleFrameworkSelection && !props.frameworkComparisonMode)"
-        class="m-2 flex flex-wrap gap-0 gap-y-1">
-        <UButton v-for="item in legendItems" :key="item.key" type="button" variant="ghost" color="neutral" size="sm"
-          class="flex items-center px-2 py-1 gap-2 hover:opacity-95 transition ring-muted/50"
-          @click="handleLegendItemClick(item)">
-          <div v-if="item.icon" class="h-5 w-5" :style="{
-            backgroundColor: item.color || item.colorLine || item.colorArea || '#000',
-            WebkitMask: `url(${item.icon}) center / contain no-repeat`,
-            mask: `url(${item.icon}) center / contain no-repeat`,
-            opacity: item.inactive ? 0.2 : 1,
-          }" />
-          <span :style="{ opacity: item.inactive ? 0.2 : 1 }">
-            {{ item.label }}
-          </span>
-        </UButton>
+        class=" flex flex-wrap gap-0 gap-y-1 mb-0.5">
+        <USelect v-model="selectedLegendValues" multiple :items="legendSelectItems" class="w-55 ring-muted/50" size="xs"
+          variant="outline">
+          <template #default="{ ui }">
+            <span v-if="selectedLegendItems.length"
+              :class="ui.value({ class: 'flex items-center gap-2 min-w-0 overflow-hidden' })">
+              <span class="inline-flex items-center gap-2 min-w-0 overflow-visible">
+                <span v-for="item in selectedLegendItems" :key="item.value"
+                  class="inline-flex items-center gap-1 shrink-0">
+                  <span v-if="item.icon" class="h-3.5 w-3.5" :style="{
+                    backgroundColor: item.color || item.colorLine || item.colorArea || '#000',
+                    WebkitMask: `url(${item.icon}) center / contain no-repeat`,
+                    mask: `url(${item.icon}) center / contain no-repeat`,
+                  }" />
+                </span>
+              </span>
+            </span>
+            <span v-else :class="ui.placeholder({ class: '' })">Välj svampgrupp</span>
+          </template>
+          <template #item="{ item }">
+            <div class="flex items-center justify-between w-full">
+              <div class="flex items-center gap-2">
+                <div v-if="item.icon" class="h-4 w-4" :style="{
+                  backgroundColor: item.color || item.colorLine || item.colorArea || '#000',
+                  WebkitMask: `url(${item.icon}) center / contain no-repeat`,
+                  mask: `url(${item.icon}) center / contain no-repeat`,
+                }" />
+                <span>{{ item.label }}</span>
+              </div>
+              <UIcon name="i-lucide-check" class="size-3 text-neutral-700"
+                :class="isLegendSelected(item.value) ? 'opacity-100' : 'opacity-0'" />
+            </div>
+          </template>
+        </USelect>
       </div>
       <VisXYContainer v-if="isMounted && chartReady" :data="chartData.length ? chartData : [emptyDataPoint]"
         :height="200" :margin="margin" :xDomain="xDomain" :yDomain="yDomain">
@@ -922,6 +942,45 @@ const legendItems = computed<LegendItem[]>(() => {
     };
   });
 });
+
+const legendSelectItems = computed(() =>
+  legendItems.value.map(item => ({
+    label: item.label,
+    value: item.key,
+    icon: item.icon,
+    color: item.color,
+    colorLine: item.colorLine,
+    colorArea: item.colorArea,
+  }))
+);
+
+const selectedLegendItems = computed(() =>
+  legendSelectItems.value.filter(item => selectedLegendValues.value.includes(item.value))
+);
+
+
+const selectedLegendValues = computed<string[]>({
+  get() {
+    if (!legendItems.value.length) return [];
+    return legendItems.value
+      .filter(item => !item.inactive)
+      .map(item => item.key);
+  },
+  set(values) {
+    const selected = new Set((values || []).map(v => (v || '').toLowerCase()));
+    const next = new Set<string>();
+    for (const item of legendItems.value) {
+      const key = (item.key || '').toLowerCase();
+      if (key && !selected.has(key)) next.add(key);
+    }
+    inactiveArtkategoriKeys.value = next;
+  },
+});
+
+function isLegendSelected(value?: string) {
+  if (!value) return false;
+  return selectedLegendValues.value.includes(value);
+}
 
 const activeFrameworks = computed(() => {
   if (props.singleFrameworkSelection && !props.frameworkComparisonMode) {

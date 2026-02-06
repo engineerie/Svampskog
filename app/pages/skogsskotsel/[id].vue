@@ -1,60 +1,112 @@
 <template>
     <DefineMethodPanelBody v-if="contentTab === 'method'">
-        <div class="grid grid-cols-1 md:grid-cols-3 sm:gap-4 gap-3 p-3 sm:p-0 overflow-visible">
-            <div class="sm:space-y-4 space-y-3">
 
-                <UCard class="h-fit ring-muted/50 shadow rounded-lg cursor-pointer select-none hover:bg-neutral-100"
-                    :ui="{ header: 'p-0 sm:p-0 sm:m-0' }" role="button" tabindex="0"
-                    @click="isMethodDescriptionExpanded = !isMethodDescriptionExpanded"
-                    @keydown.enter.prevent="isMethodDescriptionExpanded = !isMethodDescriptionExpanded"
-                    @keydown.space.prevent="isMethodDescriptionExpanded = !isMethodDescriptionExpanded">
-                    <template #header>
-                        <NuxtImg :src="methodImage(selectedMethod, 'detail')" height="800" width="1500"
-                            :alt="`Bild för ${selectedMethod.title}`" class="rounded-none ring ring-muted/50 w-full" />
-                    </template>
-
-
-                    <div class="space-y-3 text-md md:text-md text-neutral-800">
-
-                        <div class="flex items-center gap-2">
-                            <h2 class="text-3xl font-semibold text-neutral-900">{{ selectedMethod.title }}</h2>
-                        </div>
-                        <div :class="{ 'line-clamp-3': !isMethodDescriptionExpanded }" class="space-y-3">
-                            <ContentRenderer v-if="methodOmSection" :value="methodOmSection" />
-                        </div>
+        <div class="">
+            <div class="flex items-center gap-4">
+                <!-- <div class="min-w-40 p-2 border-r border-muted/50 h-full">
+                        <p class="text-xs font-semibold text-neutral-600 uppercase tracking-wide">
+                            {{ selectedMethod.title }}
+                        </p>
+                    </div> -->
+                <div class="flex-1 flex items-center gap-2 px-5 p-3">
+                    <div class="h-1.5 rounded-full transition-[width] duration-300 ease-out" :class="impactBarClass"
+                        :style="{ width: `${impact.value}%` }" />
+                    <div class="text-xs font-semibold uppercase tracking-wide p-1 px-1.5 rounded-md border border-muted/50"
+                        :class="impactTextClass">
+                        {{ impact.label }} påverkan
                     </div>
-                </UCard>
-                <UCard class="h-fit ring-muted/50 shadow rounded-lg cursor-pointer select-none hover:bg-neutral-100"
-                    role="button" tabindex="0" @click="isSvampDescriptionExpanded = !isSvampDescriptionExpanded"
-                    @keydown.enter.prevent="isSvampDescriptionExpanded = !isSvampDescriptionExpanded"
-                    @keydown.space.prevent="isSvampDescriptionExpanded = !isSvampDescriptionExpanded">
+                </div>
+            </div>
+            <div v-if="compareModeEnabled && comparisonImpact" class="flex items-center gap-4 ">
+                <!-- <div class="min-w-40 p-2 border-r border-muted/50 h-full">
+                        <p class="text-xs font-semibold text-neutral-600 uppercase tracking-wide">
+                            {{ comparisonMethodLabel }}
+                        </p>
+                    </div> -->
+                <div class="flex-1 flex items-center gap-2 p-3 px-5 pt-0 -mt-1">
+                    <div class="h-1.5 rounded-full transition-[width] duration-300 ease-out impact-dashed"
+                        :style="{ width: `${comparisonImpact.value}%` }" />
+                    <div
+                        class="text-xs font-semibold uppercase tracking-wide text-muted p-1 px-1.5 rounded-sm border border-dashed border-muted">
+                        {{ comparisonImpact.label }} påverkan
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="grid grid-cols-1 md:grid-cols-3 border-muted/50 border-t p-3 sm:p-0 overflow-visible ">
+            <div class=" border-b border-muted/50 col-span-3 grid md:grid-cols-3">
 
-                    <div class="text-md md:text-md text-neutral-800 space-y-3">
-                        <div class="flex items-center gap-2 ">
-                            <!-- <UIcon name="i-hugeicons-mushroom" class="size-5 text-neutral-700" /> -->
-                            <h2 class="text-2xl font-semibold text-neutral-900">Påverkan på mykorrhiza</h2>
+                <div class="w-full bg-muted flex-1 flex ring-muted/50 overflow-hidden relative" role="button"
+                    tabindex="0">
+
+                    <NuxtImg :src="methodImage(selectedMethod, 'detail')" height="800" width="1500"
+                        :alt="`Bild för ${selectedMethod.title}`" class=" w-full h-fit z-10" />
+
+                    <svg class="absolute inset-0 h-full w-full stroke-(--ui-border-inverted)/10" fill="none">
+                        <defs>
+                            <pattern id="pattern-5c1e4f0e-62d5-498b-8ff0-cf77bb448c8e" x="0" y="0" width="10"
+                                height="10" patternUnits="userSpaceOnUse">
+                                <path d="M-3 13 15-5M-5 5l18-18M-1 21 17 3" />
+                            </pattern>
+                        </defs>
+                        <rect stroke="none" fill="url(#pattern-5c1e4f0e-62d5-498b-8ff0-cf77bb448c8e)" width="100%"
+                            height="100%" />
+                    </svg>
+
+
+                </div>
+                <div class="flex flex-col justify-between col-span-2 border-l bg-neutral-50/50 border-muted/50 p-6"
+                    role="button" tabindex="0" @click="isMethodDetailsExpanded = !isMethodDetailsExpanded"
+                    @keydown.enter.prevent="isMethodDetailsExpanded = !isMethodDetailsExpanded"
+                    @keydown.space.prevent="isMethodDetailsExpanded = !isMethodDetailsExpanded">
+
+                    <div>
+                        <div class="space-y-2 text-md md:text-md text-neutral-800 ">
+
+
+                            <p class="text-xs font-semibold text-neutral-600 uppercase tracking-wide">{{
+                                selectedMethod.title }}</p>
+
+                            <h3 class="text-xl font-semibold text-neutral-900">Om metoden</h3>
+                            <div class="text-md text-muted text-pretty"
+                                :class="{ 'line-clamp-2': !isMethodDetailsExpanded }">
+                                <ContentRenderer v-if="methodOmSection" :value="methodOmSection"
+                                    class="[&>*:first-child]:mt-0" />
+                            </div>
                         </div>
+                        <div v-show="isMethodDetailsExpanded" class="h-fit">
+
+                            <div class="text-md md:text-md text-neutral-800">
+                                <div class="flex items-center gap-2 ">
+                                    <!-- <UIcon name="i-hugeicons-mushroom" class="size-5 text-neutral-700" /> -->
+                                    <h3 class="text-xl font-semibold text-neutral-900">Påverkan på mykorrhiza</h3>
+                                </div>
 
 
 
 
 
 
-                        <ImpactDonut :value="impact.value" :label="impact.label" :tone="impact.tone"
+                                <!-- <ImpactDonut :value="impact.value" :label="impact.label" :tone="impact.tone"
                             :comparison-value="comparisonImpact?.value" :comparison-tone="comparisonImpact?.tone"
                             :method-label="selectedMethodLabel" :comparison-label="comparisonMethodLabel"
-                            :comparison-impact-label="comparisonImpact?.label" />
+                            :comparison-impact-label="comparisonImpact?.label" /> -->
 
 
-                        <UAlert v-if="selectedStartskogTab === 'naturskog' && selectedFrameworkKey !== 'naturskydd'"
-                            color="info" variant="subtle" icon="i-heroicons-information-circle" title="Äldre skog"
-                            description="Skötselingrepp i skog som inte tidigare har varit kalavverkad har i regel större påverkan.
+                                <UAlert
+                                    v-if="selectedStartskogTab === 'naturskog' && selectedFrameworkKey !== 'naturskydd'"
+                                    color="info" variant="subtle" icon="i-heroicons-information-circle"
+                                    title="Äldre skog" description="Skötselingrepp i skog som inte tidigare har varit kalavverkad har i regel större påverkan.
                             " />
-                        <div :class="{ 'line-clamp-3': !isSvampDescriptionExpanded }" class="space-y-3">
-                            <ContentRenderer v-if="methodSvampSection" :value="methodSvampSection" />
+                                <div class="space-y-3">
+                                    <ContentRenderer v-if="methodSvampSection" :value="methodSvampSection" />
+                                </div>
+                            </div>
                         </div>
                     </div>
-                </UCard>
+
+                </div>
+
             </div>
 
 
@@ -64,43 +116,37 @@
                         <h2 class="text-xl font-semibold text-neutral-900">Påverkan på mykorrhiza</h2>
                     </div>
                 </template> -->
-            <div class="flex flex-col sm:gap-4 gap-3">
+            <div class="flex flex-col border-r border-muted/50">
 
 
-                <UCard class="ring-muted/50 shadow rounded-lg">
+                <div class="p-6 ring-muted/50 border-b border-muted/50">
                     <div class="space-y-3">
                         <div class="flex items-center gap-2">
-                            <UIcon name="lineicons:mushroom" class="size-5 text-gray-500" />
-                            <h3 class="text-xl font-semibold text-neutral-900">Mängd mykorrhizasvamp</h3>
+                            <UIcon v-if="methodChartTab === 'skogsskole'" name="lineicons:mushroom"
+                                class="size-5 text-gray-500" />
+                            <UIcon v-else name="i-material-symbols-category-rounded" class="size-5 text-rose-500" />
+                            <h3 class="text-xl font-semibold text-neutral-900">
+                                {{ methodChartTab === 'skogsskole' ? 'Mängd mykorrhizasvamp' : 'Svampgrupper' }}
+                            </h3>
                         </div>
 
-                        <ContentRenderer v-if="methodMangdMykorrhizaDoc" :value="methodMangdMykorrhizaDoc"
+                        <ContentRenderer v-if="methodChartTab === 'skogsskole' && methodMangdMykorrhizaDoc"
+                            :value="methodMangdMykorrhizaDoc" class="text-md text-neutral-800 ring-muted/50 rounded-md" />
+                        <ContentRenderer v-else-if="methodSvampgrupperDoc" :value="methodSvampgrupperDoc"
                             class="text-md text-neutral-800 ring-muted/50 rounded-md" />
-                        <ForestryChartMain :selectedChart="'skogsskole'" :parentSelectedFrameworks="chartFrameworks"
-                            :currentStartskog="selectedStartskogTab" :currentTimeValue="currentTimelineTime"
-                            preserveFrameworkOrder :showControls="false" class="pt-2" />
+                        <ForestryChartMain v-model:selectedChart="methodChartTab" :selectedChart="methodChartTab"
+                            :parentSelectedFrameworks="chartFrameworks" :currentStartskog="selectedStartskogTab"
+                            :currentTimeValue="currentTimelineTime" preserveFrameworkOrder :showControls="false"
+                            :showInlineTabs="true" class="pt-2" />
                     </div>
-                </UCard>
-                <UCard class="ring-muted/50 shadow rounded-lg">
-                    <div class="space-y-3">
-                        <div class="flex items-center gap-2">
-                            <UIcon name="i-material-symbols-category-rounded" class="size-5 text-rose-500" />
-                            <h3 class="text-xl font-semibold text-neutral-900">Svampgrupper</h3>
-                        </div>
-                        <ContentRenderer v-if="methodSvampgrupperDoc" :value="methodSvampgrupperDoc"
-                            class="text-md text-neutral-800 ring-muted/50 rounded-md" />
-                        <ForestryChartMain :selectedChart="'grupper'" :parentSelectedFrameworks="chartFrameworks"
-                            :currentStartskog="selectedStartskogTab" :currentTimeValue="currentTimelineTime"
-                            preserveFrameworkOrder :showControls="false" class="pt-2" />
-                    </div>
-                </UCard>
+                </div>
 
 
             </div>
 
 
-            <div class="flex flex-col sm:gap-4 gap-3 ">
-                <UCard class="ring-muted/50 shadow rounded-lg">
+            <div class="grid md:grid-cols-2 col-span-2  ">
+                <div class="p-6 ring-muted/50 border-r border-muted/50">
                     <div class="space-y-3">
                         <div class="flex items-center gap-2">
                             <UIcon name="icon-park-solid:knife-fork" class="size-5 text-warning-500" />
@@ -113,8 +159,8 @@
                             :currentStartskog="selectedStartskogTab" :currentTimeValue="currentTimelineTime"
                             preserveFrameworkOrder :showControls="false" :showMatsvampSelector="true" class="pt-2" />
                     </div>
-                </UCard>
-                <UCard class=" ring-muted/50 shadow rounded-lg">
+                </div>
+                <div class=" p-6 ring-muted/50 border-b border-muted/50">
                     <div class="space-y-3">
                         <div class="flex items-center gap-2 ">
                             <UIcon name="i-material-symbols-award-star" class="size-5 text-signal-500" />
@@ -128,7 +174,7 @@
                             preserveFrameworkOrder :showControls="false" class="pt-2" />
                     </div>
 
-                </UCard>
+                </div>
             </div>
         </div>
         <!-- <UModal fullscreen>
@@ -170,8 +216,7 @@
         </div>
     </DefineMethodPanelFooter>
     <DefineMarkerCardsRow>
-        <div
-            class="flex gap-2  my-3 bg-neutral-100 w-full sm:w-fit transition-all duration-300 rounded-lg border-muted/50 ">
+        <div class="flex gap-2 border-y  w-full sm:w-full transition-all duration-300 border-muted/50 ">
             <!-- <UButton label="Markörer" color="neutral" variant="outline" class="ring-muted/50 m-2"
                 @click="markersRowOpen = !markersRowOpen" /> -->
 
@@ -549,330 +594,216 @@
                                 </template>
                             </UPopover>
                         </div>
-                        <UTabs v-model="contentTab" :items="contentTabItems" size="xl" :clearable="false" :ui="{
-                            root: 'min-w-max flex-shrink-0 ',
-                            list: 'flex-nowrap gap-2 ring ring-muted/50',
-                            indicator: 'bg-white border border-muted/50 shadow ',
-                            trigger: 'data-[state=active]:text-neutral-800 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary'
-                        }" />
+                        <UTabs :unmount-on-hide="false" v-model="contentTab" :items="contentTabItems" size="xl"
+                            :clearable="false" :ui="{
+                                root: 'min-w-max flex-shrink-0 ',
+                                list: 'flex-nowrap gap-2 ring ring-muted/50',
+                                indicator: 'bg-white border border-muted/50 shadow ',
+                                trigger: 'data-[state=active]:text-neutral-800 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary'
+                            }" />
                     </div>
 
                 </div>
+                <div class="bg-white ring ring-muted/50 md:rounded-xl shadow overflow-hidden">
+                    <Transition :name="contentTransitionName" mode="out-in">
 
-                <Transition :name="contentTransitionName" mode="out-in">
-                    <div v-if="contentTab === 'timeline'" key="timeline" class=" flex-1 flex flex-col  sm:p-0">
-                        <div
-                            class=" sticky w-full top-18  pb-2.5 flex flex-wrap items-center justify-center sm:justify-start gap-3 z-30">
+                        <div v-if="contentTab === 'timeline'" key="timeline" class=" flex-1 flex flex-col ">
+                            <div class=" w-full flex flex-wrap items-center justify-center sm:justify-start gap-3 z-30">
 
 
-                            <div class="flex flex-nowrap gap-2 items-center overflow-visible">
-                                <!-- <UPopover :close="false" :transition="true" :overlay="true" :content="{ align: 'start' }"
-                                :ui="{ content: 'max-w-xs sm:max-w-sm p-4 sm:p-4 pb-2' }"
-                                title="Har skogen varit kalavverkad tidigare?"
-                                description="Hur skogen har brukats tidigare påverkar vilka mykorrhizasvampar som finns.">
-                                <UTooltip text="Skogens historik">
-                                    <UButton color="neutral" variant="outline" size="xl"
-                                        :leading-icon="selectedStartskogOption?.icon"
-                                        :label="selectedStartskogOption?.label || ''"
-                                        :aria-label="selectedStartskogOption?.label || 'Skogens historik'"
-                                        :ui="{ label: isMobile ? 'hidden sm:inline' : '' }" class="ring-muted/50" />
-                                </UTooltip>
+                                <div class="flex flex-nowrap gap-2 items-center overflow-visible p-2">
 
-                                <template #content>
-                                    <h1 class="font-semibold mb-2">Har skogen varit kalavverkad
-                                        tidigare?
-                                    </h1>
-                                    <p class="text-muted text-sm mb-4">Hur skogen har brukats
-                                        tidigare
-                                        påverkar
-                                        vilka
-                                        mykorrhizasvampar som finns. </p>
-                                    <USelect :items="startskogTabs" v-model="selectedStartskogTab"
-                                        :icon="selectedStartskogIcon"
-                                        class="transition-all ring-muted/50 mb-2 sm:mb-0" />
-                                    <p class="text-neutral-700 text-xs">
-
-                                    </p>
-                                
-                                </template>
-                            </UPopover>
-                            <USeparator orientation="vertical" class="h-6" /> -->
-                                <UFieldGroup class="w-full ">
-                                    <UButton v-for="(item, index) in timelineItems" :key="`immersive-timeline-${index}`"
-                                        size="xl" color="neutral" variant="outline"
-                                        :class="index === activeTimelineIndex ? 'border-neutral-900 bg-neutral-900 hover:bg-neutral-900 text-white opacity-100 ring-0 shadow' : 'border-transparent  hover:opacity-100'"
-                                        class="ring-muted rounded-md shadow"
-                                        :label="formatTimelineButtonLabel(item.tid)"
-                                        @click="selectTimelineSlide(index)" />
-                                </UFieldGroup>
-
+                                    <UFieldGroup class="w-full ">
+                                        <UButton v-for="(item, index) in timelineItems"
+                                            :key="`immersive-timeline-${index}`" size="xl" color="neutral"
+                                            variant="outline"
+                                            :class="index === activeTimelineIndex ? 'border-neutral-900 bg-neutral-900 hover:bg-neutral-900 text-white opacity-100 ring-0 shadow' : 'border-transparent  hover:opacity-100'"
+                                            class="ring-muted rounded-lg " :label="formatTimelineButtonLabel(item.tid)"
+                                            @click="selectTimelineSlide(index)" />
+                                    </UFieldGroup>
+                                </div>
                             </div>
-                            <!-- <div class="flex items-center gap-2">
-                            <UPopover :ui="{ content: 'p-0 w-80' }" :content="{
-                                align: 'end',
-                                side: 'bottom',
-                                sideOffset: 8
-                            }">
-                                <UButton color="neutral" variant="outline" icon="iconamoon:compare-duotone"
-                                    :label="compareEnabled ? 'Jämför' : 'Jämför'" class="ring-muted" size="lg" />
-                                <template #content>
-                                    <div class="space-y-0.5 p-3">
-                                        <div class="grid grid-cols-2 gap-2 ">
-                                            <UButton size="xs" variant="outline" color="neutral"
-                                                @click="setCompareMode(false)"
-                                                :class="!compareEnabled ? 'bg-neutral-100 shadow ring-muted' : 'text-muted/60 hover:text-muted ring-muted/50'">
-                                                <div class="flex flex-col text-center items-center w-full space-y-1">
-                                                    <UIcon name="i-bx-rectangle" class="size-4" />
-                                                    <h1>Enkelvy</h1>
-                                                </div>
-                                            </UButton>
-                                            <UButton size="xs" variant="outline" color="neutral"
-                                                @click="setCompareMode(true)"
-                                                :class="compareEnabled ? 'bg-neutral-100 shadow ring-muted' : 'text-muted/60 hover:text-muted ring-muted/50'">
-                                                <div class="flex flex-col text-center items-center w-full space-y-1">
-                                                    <UIcon name="iconamoon:compare-duotone" class="size-4" />
-                                                    <h1>Jämför</h1>
-                                                </div>
-                                            </UButton>
-                                        </div>
-
-                                        <UTabs v-if="compareEnabled" v-model="compareMode" :items="compareOptions"
-                                            size="sm" placeholder="Välj" :clearable="false"
-                                            class="w-full ring-muted -mb-2 mt-2" :ui="{
-                                                root: 'min-w-max flex-shrink-0',
-                                                list: 'flex-nowrap rounded-xl bg-muted/50 -mb-1.5 gap-2',
-                                                indicator: 'bg-white border border-muted/50 shadow ',
-                                                trigger: ' data-[state=active]:text-neutral-800 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary '
-                                            }" />
-
-                                        <div v-if="compareEnabled && compareMode === 'methods'" class="space-y-2 mt-3">
-                                            <p class="text-xs text-neutral-600 pt-2">Välj metod att jämföra med</p>
-                                            <USelect :items="compareMethodOptions" v-model="compareMethodId"
-                                                placeholder="Välj metod" class="w-full ring-muted"
-                                                :popper="{ placement: 'bottom-start' }" />
-                                        </div>
-
-                                    </div>
-                                </template>
-                            </UPopover>
-                            <UPopover :ui="{ content: 'p-3 w-72' }" :content="{
-                                align: 'end',
-                                side: 'bottom',
-                                sideOffset: 8
-                            }">
-                                <UButton color="neutral" variant="outline" icon="i-bi-layout-split" label="Layout"
-                                    class="ring-muted" size="lg" />
-                                <template #content>
-                                    <div class="grid grid-cols-3 gap-2">
-                                        <UButton size="xs" variant="outline" color="neutral"
-                                            @click="displayMode = 'images'"
-                                            :class="displayMode === 'images' ? 'bg-neutral-100 shadow ring-muted' : 'text-muted/60 hover:text-muted ring-muted/50'">
-                                            <div class="flex flex-col text-center items-center w-full space-y-1">
-                                                <UIcon name="i-heroicons-photo" class="size-4" />
-                                                <h1>Bilder</h1>
-                                            </div>
-                                        </UButton>
-                                        <UButton size="xs" variant="outline" color="neutral"
-                                            @click="displayMode = 'both'"
-                                            :class="displayMode === 'both' ? 'bg-neutral-100 shadow ring-muted' : 'text-muted/60 hover:text-muted ring-muted/50'">
-                                            <div class="flex flex-col text-center items-center w-full space-y-1">
-                                                <UIcon name="i-bi-layout-split" class="size-4" />
-                                                <h1>Båda</h1>
-                                            </div>
-                                        </UButton>
-                                        <UButton size="xs" variant="outline" color="neutral"
-                                            @click="displayMode = 'chart'"
-                                            :class="displayMode === 'chart' ? 'bg-neutral-100 shadow ring-muted' : 'text-muted/60 hover:text-muted ring-muted/50'">
-                                            <div class="flex flex-col text-center items-center w-full space-y-1">
-                                                <UIcon name="i-heroicons-presentation-chart-line" class="size-4" />
-                                                <h1>Diagram</h1>
-                                            </div>
-                                        </UButton>
-                                    </div>
-                                </template>
-                            </UPopover>
-                        </div> -->
+                            <div class="md:flex justify-center space-x-0 sm:p-0 p-0 border-t border-muted/50">
+                                <div v-if="showImages"
+                                    class="flex-1  relative w-full overflow-hidden shadow aspect-video bg-neutral-900 resize min-w-60 min-h-60 h-full max-h-150"
+                                    :style="heroBackgroundStyle">
+                                    <Transition name="image-fade">
+                                        <div :key="heroImageKey" class="absolute inset-0">
 
 
-                        </div>
-                        <div class="md:flex justify-center space-x-4 sm:p-0 p-3">
-                            <div v-if="showImages"
-                                class="flex-1 rounded-lg ring ring-muted/50 relative w-full overflow-hidden shadow aspect-video bg-neutral-900 resize min-w-60 min-h-60 h-full max-h-150"
-                                :style="heroBackgroundStyle">
-                                <Transition name="image-fade">
-                                    <div :key="heroImageKey" class="absolute inset-0">
-
-
-                                        <template v-if="compareModeEnabled && comparisonImages">
-                                            <CustomImageComparisonSlider class="w-full h-full"
-                                                :framework-label="comparisonLabels?.leftFramework"
-                                                :time-label="comparisonLabels?.leftTime"
-                                                :framework-label2="comparisonLabels?.rightFramework"
-                                                :time-label2="comparisonLabels?.rightTime"
-                                                :use-method-labels="compareMode === 'methods'">
-                                                <template #first>
-                                                    <div class="relative w-full h-full">
-                                                        <img :src="comparisonImages.leftHidden || comparisonImages.left"
-                                                            class="w-full h-full object-cover absolute inset-0"
-                                                            loading="lazy" />
-                                                        <img :src="comparisonImages.left"
-                                                            class="w-full h-full object-cover relative" loading="lazy"
-                                                            :style="{ opacity: treeFade }" />
-                                                        <svg v-if="isBestandsgransVisible"
-                                                            class="absolute inset-0 w-full h-full pointer-events-none"
-                                                            viewBox="0 0 1500 844" preserveAspectRatio="xMidYMid slice">
-                                                            <image :href="bestandsgransSrc" x="0" y="0" width="1500"
-                                                                height="844" preserveAspectRatio="xMidYMid slice" />
-                                                        </svg>
-                                                        <div class="absolute inset-0 pointer-events-none">
-                                                            <template
-                                                                v-for="(card, idx) in (compareMode === 'beforeAfter' ? markerCardsBefore : markerCards)"
-                                                                :key="`overlay-compare-left-${card.key}`">
+                                            <template v-if="compareModeEnabled && comparisonImages">
+                                                <CustomImageComparisonSlider class="w-full h-full"
+                                                    :framework-label="comparisonLabels?.leftFramework"
+                                                    :time-label="comparisonLabels?.leftTime"
+                                                    :framework-label2="comparisonLabels?.rightFramework"
+                                                    :time-label2="comparisonLabels?.rightTime"
+                                                    :use-method-labels="compareMode === 'methods'">
+                                                    <template #first>
+                                                        <div class="relative w-full h-full">
+                                                            <img :src="comparisonImages.leftHidden || comparisonImages.left"
+                                                                class="w-full h-full object-cover absolute inset-0"
+                                                                loading="lazy" />
+                                                            <img :src="comparisonImages.left"
+                                                                class="w-full h-full object-cover relative"
+                                                                loading="lazy" :style="{ opacity: treeFade }" />
+                                                            <svg v-if="isBestandsgransVisible"
+                                                                class="absolute inset-0 w-full h-full pointer-events-none"
+                                                                viewBox="0 0 1500 844"
+                                                                preserveAspectRatio="xMidYMid slice">
+                                                                <image :href="bestandsgransSrc" x="0" y="0" width="1500"
+                                                                    height="844" preserveAspectRatio="xMidYMid slice" />
+                                                            </svg>
+                                                            <div class="absolute inset-0 pointer-events-none">
                                                                 <template
-                                                                    v-if="card.key !== 'naturvardsarter' && isMarkerOverlayVisible(card.key) && card.overlayAvailable !== false">
-                                                                    <template v-if="card.overlaySvgs?.length">
-                                                                        <img v-for="(overlay, svgIdx) in card.overlaySvgs"
-                                                                            :key="`${card.key}-left-${svgIdx}`"
-                                                                            :src="overlay.src" :alt="card.title"
+                                                                    v-for="(card, idx) in (compareMode === 'beforeAfter' ? markerCardsBefore : markerCards)"
+                                                                    :key="`overlay-compare-left-${card.key}`">
+                                                                    <template
+                                                                        v-if="card.key !== 'naturvardsarter' && isMarkerOverlayVisible(card.key) && card.overlayAvailable !== false">
+                                                                        <template v-if="card.overlaySvgs?.length">
+                                                                            <img v-for="(overlay, svgIdx) in card.overlaySvgs"
+                                                                                :key="`${card.key}-left-${svgIdx}`"
+                                                                                :src="overlay.src" :alt="card.title"
+                                                                                class="absolute inset-0 w-full h-full object-cover"
+                                                                                :style="{ opacity: overlay.opacity ?? 1 }" />
+                                                                        </template>
+                                                                        <img v-else-if="card.svgPath"
+                                                                            :src="card.svgPath" :alt="card.title"
                                                                             class="absolute inset-0 w-full h-full object-cover"
-                                                                            :style="{ opacity: overlay.opacity ?? 1 }" />
+                                                                            :style="{ opacity: card.overlayOpacity ?? 1 }" />
+                                                                        <div v-else
+                                                                            class="absolute rounded-md border border-neutral-100/60 bg-neutral-900/40 px-2 py-1 text-xs text-neutral-100 backdrop-blur"
+                                                                            :style="markerOverlayStyle(idx)">
+                                                                            {{ card.title }}
+                                                                        </div>
                                                                     </template>
-                                                                    <img v-else-if="card.svgPath" :src="card.svgPath"
-                                                                        :alt="card.title"
-                                                                        class="absolute inset-0 w-full h-full object-cover"
-                                                                        :style="{ opacity: card.overlayOpacity ?? 1 }" />
-                                                                    <div v-else
-                                                                        class="absolute rounded-md border border-neutral-100/60 bg-neutral-900/40 px-2 py-1 text-xs text-neutral-100 backdrop-blur"
-                                                                        :style="markerOverlayStyle(idx)">
-                                                                        {{ card.title }}
-                                                                    </div>
                                                                 </template>
-                                                            </template>
-                                                        </div>
-                                                        <NaturvardsOverlayLayer
-                                                            :visible="isMarkerOverlayVisible('naturvardsarter')"
-                                                            :framework="selectedFrameworkKey"
-                                                            :startskog="selectedStartskogTab"
-                                                            :time-label="compareMode === 'beforeAfter' ? 'innan' : timelineItems[activeTimelineIndex]?.tid" />
-                                                    </div>
-                                                </template>
-                                                <template #second>
-                                                    <div class="relative w-full h-full">
-                                                        <img :src="comparisonImages.rightHidden || comparisonImages.right"
-                                                            class="w-full h-full object-cover absolute inset-0"
-                                                            loading="lazy" />
-                                                        <img :src="comparisonImages.right"
-                                                            class="w-full h-full object-cover relative transition-opacity duration-500"
-                                                            loading="lazy" :style="{ opacity: treeFade }" />
-                                                        <svg v-if="isBestandsgransVisible"
-                                                            class="absolute inset-0 w-full h-full pointer-events-none"
-                                                            viewBox="0 0 1500 844" preserveAspectRatio="xMidYMid slice">
-                                                            <image :href="bestandsgransSrc" x="0" y="0" width="1500"
-                                                                height="844" preserveAspectRatio="xMidYMid slice" />
-                                                        </svg>
-                                                        <div class="absolute inset-0 pointer-events-none">
-                                                            <template
-                                                                v-for="(card, idx) in (compareMode === 'methods' ? markerCardsCompare : markerCards)"
-                                                                :key="`overlay-compare-right-${card.key}`">
-                                                                <template
-                                                                    v-if="card.key !== 'naturvardsarter' && isMarkerOverlayVisible(card.key) && card.overlayAvailable !== false">
-                                                                    <template v-if="card.overlaySvgs?.length">
-                                                                        <img v-for="(overlay, svgIdx) in card.overlaySvgs"
-                                                                            :key="`${card.key}-right-${svgIdx}`"
-                                                                            :src="overlay.src" :alt="card.title"
-                                                                            class="absolute inset-0 w-full h-full object-cover"
-                                                                            :style="{ opacity: overlay.opacity ?? 1 }" />
-                                                                    </template>
-                                                                    <img v-else-if="card.svgPath" :src="card.svgPath"
-                                                                        :alt="card.title"
-                                                                        class="absolute inset-0 w-full h-full object-cover"
-                                                                        :style="{ opacity: card.overlayOpacity ?? 1 }" />
-                                                                    <div v-else
-                                                                        class="absolute rounded-md border border-neutral-100/60 bg-neutral-900/40 px-2 py-1 text-xs text-neutral-100 backdrop-blur"
-                                                                        :style="markerOverlayStyle(idx)">
-                                                                        {{ card.title }}
-                                                                    </div>
-                                                                </template>
-                                                            </template>
-                                                        </div>
-                                                        <NaturvardsOverlayLayer
-                                                            :visible="isMarkerOverlayVisible('naturvardsarter')"
-                                                            :framework="compareMode === 'methods' ? compareFrameworkKey : selectedFrameworkKey"
-                                                            :startskog="selectedStartskogTab"
-                                                            :time-label="compareMode === 'methods' ? comparisonTimelineItem?.tid : timelineItems[activeTimelineIndex]?.tid" />
-                                                    </div>
-                                                </template>
-                                            </CustomImageComparisonSlider>
-                                        </template>
-                                        <template v-else-if="currentTimelineItem">
-                                            <img :src="currentTimelineItem.thumbHidden"
-                                                :alt="`Foto ${currentTimelineItem.tid}`"
-                                                class="w-full h-full object-cover absolute inset-0" />
-                                            <img :src="currentTimelineItem.thumb"
-                                                :alt="`Foto ${currentTimelineItem.tid}`"
-                                                class="w-full h-full object-cover relative transition-opacity duration-500"
-                                                :style="{ opacity: treeFade }" />
-                                            <svg v-if="isBestandsgransVisible"
-                                                class="absolute inset-0 w-full h-full pointer-events-none"
-                                                viewBox="0 0 1500 844" preserveAspectRatio="xMidYMid slice">
-                                                <image :href="bestandsgransSrc" x="0" y="0" width="1500" height="844"
-                                                    preserveAspectRatio="xMidYMid slice" />
-                                            </svg>
-                                            <div class="absolute inset-0 pointer-events-none">
-                                                <template v-for="(card, idx) in markerCards"
-                                                    :key="`overlay-${card.key}`">
-                                                    <template
-                                                        v-if="card.key !== 'naturvardsarter' && isMarkerOverlayVisible(card.key) && card.overlayAvailable !== false">
-                                                        <template v-if="card.overlaySvgs?.length">
-                                                            <img v-for="(overlay, svgIdx) in card.overlaySvgs"
-                                                                :key="`${card.key}-single-${svgIdx}`" :src="overlay.src"
-                                                                :alt="card.title"
-                                                                class="absolute inset-0 w-full h-full object-cover"
-                                                                :style="{ opacity: overlay.opacity ?? 1 }" />
-                                                        </template>
-                                                        <img v-else-if="card.svgPath" :src="card.svgPath"
-                                                            :alt="card.title"
-                                                            class="absolute inset-0 w-full h-full object-cover"
-                                                            :style="{ opacity: card.overlayOpacity ?? 1 }" />
-                                                        <div v-else
-                                                            class="absolute rounded-md border border-neutral-100/60 bg-neutral-900/40 px-2 py-1 text-xs text-neutral-100 backdrop-blur"
-                                                            :style="markerOverlayStyle(idx)">
-                                                            {{ card.title }}
+                                                            </div>
+                                                            <NaturvardsOverlayLayer
+                                                                :visible="isMarkerOverlayVisible('naturvardsarter')"
+                                                                :framework="selectedFrameworkKey"
+                                                                :startskog="selectedStartskogTab"
+                                                                :time-label="compareMode === 'beforeAfter' ? 'innan' : timelineItems[activeTimelineIndex]?.tid" />
                                                         </div>
                                                     </template>
-                                                </template>
-                                            </div>
-                                            <NaturvardsOverlayLayer :visible="isMarkerOverlayVisible('naturvardsarter')"
-                                                :framework="selectedFrameworkKey" :startskog="selectedStartskogTab"
-                                                :time-label="currentTimelineItem?.tid" />
-                                            <div
-                                                class="absolute top-2 left-2 z-20 flex flex-col items-start gap-1 pointer-events-none">
-                                                <UBadge v-if="!isMobile" size="md"
-                                                    class="backdrop-blur-xl bg-neutral-100/0 text-neutral-100 h-fit whitespace-nowrap mb-0.5">
-                                                    {{ selectedMethod.title || selectedMethod.id }}
-                                                </UBadge>
-                                                <UBadge size="md"
-                                                    class="backdrop-blur-xl bg-neutral-950/50 text-neutral-100 h-fit whitespace-nowrap">
-                                                    {{
-                                                        formatTimelineCurrentLabel(timelineItems[activeTimelineIndex]?.tid)
-                                                    }}
-                                                </UBadge>
-                                            </div>
-                                        </template>
-                                        <ImagePlaceholder v-else />
-                                    </div>
-                                </Transition>
-                                <div class="flex absolute right-3 bottom-3 z-20 gap-2">
-                                    <UPopover :content="{
-                                        align: 'end',
-                                        side: 'top',
-                                    }">
-                                        <UButton icon="mingcute:tree-fill" label="Genomskinlighet" variant="outline"
-                                            class="ring-muted/50" color="neutral" size="sm" />
-                                        <template #content>
-                                            <div class="p-3 flex  items-center gap-2 text-xs text-neutral-500 ">
+                                                    <template #second>
+                                                        <div class="relative w-full h-full">
+                                                            <img :src="comparisonImages.rightHidden || comparisonImages.right"
+                                                                class="w-full h-full object-cover absolute inset-0"
+                                                                loading="lazy" />
+                                                            <img :src="comparisonImages.right"
+                                                                class="w-full h-full object-cover relative transition-opacity duration-500"
+                                                                loading="lazy" :style="{ opacity: treeFade }" />
+                                                            <svg v-if="isBestandsgransVisible"
+                                                                class="absolute inset-0 w-full h-full pointer-events-none"
+                                                                viewBox="0 0 1500 844"
+                                                                preserveAspectRatio="xMidYMid slice">
+                                                                <image :href="bestandsgransSrc" x="0" y="0" width="1500"
+                                                                    height="844" preserveAspectRatio="xMidYMid slice" />
+                                                            </svg>
+                                                            <div class="absolute inset-0 pointer-events-none">
+                                                                <template
+                                                                    v-for="(card, idx) in (compareMode === 'methods' ? markerCardsCompare : markerCards)"
+                                                                    :key="`overlay-compare-right-${card.key}`">
+                                                                    <template
+                                                                        v-if="card.key !== 'naturvardsarter' && isMarkerOverlayVisible(card.key) && card.overlayAvailable !== false">
+                                                                        <template v-if="card.overlaySvgs?.length">
+                                                                            <img v-for="(overlay, svgIdx) in card.overlaySvgs"
+                                                                                :key="`${card.key}-right-${svgIdx}`"
+                                                                                :src="overlay.src" :alt="card.title"
+                                                                                class="absolute inset-0 w-full h-full object-cover"
+                                                                                :style="{ opacity: overlay.opacity ?? 1 }" />
+                                                                        </template>
+                                                                        <img v-else-if="card.svgPath"
+                                                                            :src="card.svgPath" :alt="card.title"
+                                                                            class="absolute inset-0 w-full h-full object-cover"
+                                                                            :style="{ opacity: card.overlayOpacity ?? 1 }" />
+                                                                        <div v-else
+                                                                            class="absolute rounded-md border border-neutral-100/60 bg-neutral-900/40 px-2 py-1 text-xs text-neutral-100 backdrop-blur"
+                                                                            :style="markerOverlayStyle(idx)">
+                                                                            {{ card.title }}
+                                                                        </div>
+                                                                    </template>
+                                                                </template>
+                                                            </div>
+                                                            <NaturvardsOverlayLayer
+                                                                :visible="isMarkerOverlayVisible('naturvardsarter')"
+                                                                :framework="compareMode === 'methods' ? compareFrameworkKey : selectedFrameworkKey"
+                                                                :startskog="selectedStartskogTab"
+                                                                :time-label="compareMode === 'methods' ? comparisonTimelineItem?.tid : timelineItems[activeTimelineIndex]?.tid" />
+                                                        </div>
+                                                    </template>
+                                                </CustomImageComparisonSlider>
+                                            </template>
+                                            <template v-else-if="currentTimelineItem">
+                                                <img :src="currentTimelineItem.thumbHidden"
+                                                    :alt="`Foto ${currentTimelineItem.tid}`"
+                                                    class="w-full h-full object-cover absolute inset-0" />
+                                                <img :src="currentTimelineItem.thumb"
+                                                    :alt="`Foto ${currentTimelineItem.tid}`"
+                                                    class="w-full h-full object-cover relative transition-opacity duration-500"
+                                                    :style="{ opacity: treeFade }" />
+                                                <svg v-if="isBestandsgransVisible"
+                                                    class="absolute inset-0 w-full h-full pointer-events-none"
+                                                    viewBox="0 0 1500 844" preserveAspectRatio="xMidYMid slice">
+                                                    <image :href="bestandsgransSrc" x="0" y="0" width="1500"
+                                                        height="844" preserveAspectRatio="xMidYMid slice" />
+                                                </svg>
+                                                <div class="absolute inset-0 pointer-events-none">
+                                                    <template v-for="(card, idx) in markerCards"
+                                                        :key="`overlay-${card.key}`">
+                                                        <template
+                                                            v-if="card.key !== 'naturvardsarter' && isMarkerOverlayVisible(card.key) && card.overlayAvailable !== false">
+                                                            <template v-if="card.overlaySvgs?.length">
+                                                                <img v-for="(overlay, svgIdx) in card.overlaySvgs"
+                                                                    :key="`${card.key}-single-${svgIdx}`"
+                                                                    :src="overlay.src" :alt="card.title"
+                                                                    class="absolute inset-0 w-full h-full object-cover"
+                                                                    :style="{ opacity: overlay.opacity ?? 1 }" />
+                                                            </template>
+                                                            <img v-else-if="card.svgPath" :src="card.svgPath"
+                                                                :alt="card.title"
+                                                                class="absolute inset-0 w-full h-full object-cover"
+                                                                :style="{ opacity: card.overlayOpacity ?? 1 }" />
+                                                            <div v-else
+                                                                class="absolute rounded-md border border-neutral-100/60 bg-neutral-900/40 px-2 py-1 text-xs text-neutral-100 backdrop-blur"
+                                                                :style="markerOverlayStyle(idx)">
+                                                                {{ card.title }}
+                                                            </div>
+                                                        </template>
+                                                    </template>
+                                                </div>
+                                                <NaturvardsOverlayLayer
+                                                    :visible="isMarkerOverlayVisible('naturvardsarter')"
+                                                    :framework="selectedFrameworkKey" :startskog="selectedStartskogTab"
+                                                    :time-label="currentTimelineItem?.tid" />
+                                                <div
+                                                    class="absolute top-2 left-2 z-20 flex flex-col items-start gap-1 pointer-events-none">
+                                                    <UBadge v-if="!isMobile" size="md"
+                                                        class="backdrop-blur-xl bg-neutral-100/0 text-neutral-100 h-fit whitespace-nowrap mb-0.5">
+                                                        {{ selectedMethod.title || selectedMethod.id }}
+                                                    </UBadge>
+                                                    <UBadge size="md"
+                                                        class="backdrop-blur-xl bg-neutral-950/50 text-neutral-100 h-fit whitespace-nowrap">
+                                                        {{
+                                                            formatTimelineCurrentLabel(timelineItems[activeTimelineIndex]?.tid)
+                                                        }}
+                                                    </UBadge>
+                                                </div>
+                                            </template>
+                                            <ImagePlaceholder v-else />
+                                        </div>
+                                    </Transition>
+                                    <div class="flex absolute right-3 bottom-3 z-20 gap-2">
+                                        <UPopover :content="{
+                                            align: 'end',
+                                            side: 'top',
+                                        }">
+                                            <UButton icon="mingcute:tree-fill" label="Genomskinlighet" variant="outline"
+                                                class="ring-muted/50" color="neutral" size="sm" />
+                                            <template #content>
+                                                <div class="p-3 flex  items-center gap-2 text-xs text-neutral-500 ">
 
-                                                <!-- <div class="flex ">
+                                                    <!-- <div class="flex ">
                                                 <UIcon name="i-fluent-shape-organic-16-filled"
                                                     class="size-4 text-gray-300 z-20" />
                                                 <UIcon name="i-fluent-shape-organic-16-filled"
@@ -880,104 +811,105 @@
                                                 <UIcon name="i-fluent-shape-organic-16-filled"
                                                     class="size-4 -ml-3 text-yellow-400" />
                                             </div> -->
-                                                <!-- <UIcon name="mingcute:tree-line" class="size-5 text-primary" /> -->
+                                                    <!-- <UIcon name="mingcute:tree-line" class="size-5 text-primary" /> -->
 
-                                                <USlider v-model="treeFade" :min="0" :max="1" :step="0.05" class="w-32"
-                                                    color="primary" orientation="horizontal" inverse size="xs" />
-                                                <!-- <UIcon name="mingcute:tree-fill" class="size-5 text-primary" /> -->
+                                                    <USlider v-model="treeFade" :min="0" :max="1" :step="0.05"
+                                                        class="w-32" color="primary" orientation="horizontal" inverse
+                                                        size="xs" />
+                                                    <!-- <UIcon name="mingcute:tree-fill" class="size-5 text-primary" /> -->
 
 
 
-                                            </div>
-                                        </template>
-                                    </UPopover>
-
-                                    <UPopover :content="{
-                                        align: 'end',
-                                        side: 'top',
-                                    }">
-                                        <UButton icon="i-fluent-shape-organic-16-filled" label="Mycelfärger"
-                                            variant="outline" class="ring-muted/50" color="neutral" size="sm" />
-                                        <template #content>
-                                            <div class="flex flex-col gap-2 p-3">
-                                                <div class="flex w-full">
-                                                    <UIcon name="i-fluent-shape-organic-16-filled"
-                                                        class="size-6 text-gray-300 z-20" />
-                                                    <UIcon name="i-fluent-shape-organic-16-filled"
-                                                        class="size-6 -ml-4 text-gray-400 z-10" />
-                                                    <UIcon name="i-fluent-shape-organic-16-filled"
-                                                        class="size-6 -ml-4 mr-4 text-gray-500" />
-                                                    <h1 class="font-medium">Mykorrhizasvampar</h1>
                                                 </div>
-                                                <div class="flex w-full justify-between">
-                                                    <UIcon name="i-fluent-shape-organic-16-filled"
-                                                        class="size-6 text-signal-400" />
+                                            </template>
+                                        </UPopover>
 
-                                                    <h1 class="font-medium">Naturvårdssvampar</h1>
+                                        <UPopover :content="{
+                                            align: 'end',
+                                            side: 'top',
+                                        }">
+                                            <UButton icon="i-fluent-shape-organic-16-filled" label="Mycelfärger"
+                                                variant="outline" class="ring-muted/50" color="neutral" size="sm" />
+                                            <template #content>
+                                                <div class="flex flex-col gap-2 p-3">
+                                                    <div class="flex w-full">
+                                                        <UIcon name="i-fluent-shape-organic-16-filled"
+                                                            class="size-6 text-gray-300 z-20" />
+                                                        <UIcon name="i-fluent-shape-organic-16-filled"
+                                                            class="size-6 -ml-4 text-gray-400 z-10" />
+                                                        <UIcon name="i-fluent-shape-organic-16-filled"
+                                                            class="size-6 -ml-4 mr-4 text-gray-500" />
+                                                        <h1 class="font-medium">Mykorrhizasvampar</h1>
+                                                    </div>
+                                                    <div class="flex w-full justify-between">
+                                                        <UIcon name="i-fluent-shape-organic-16-filled"
+                                                            class="size-6 text-signal-400" />
+
+                                                        <h1 class="font-medium">Naturvårdssvampar</h1>
+                                                    </div>
+                                                    <div class="flex w-full justify-between">
+                                                        <UIcon name="i-fluent-shape-organic-16-filled"
+                                                            class="size-6 text-yellow-400" />
+
+                                                        <h1 class="font-medium">Matsvampar</h1>
+                                                    </div>
+
                                                 </div>
-                                                <div class="flex w-full justify-between">
-                                                    <UIcon name="i-fluent-shape-organic-16-filled"
-                                                        class="size-6 text-yellow-400" />
+                                            </template>
+                                        </UPopover>
+                                    </div>
 
-                                                    <h1 class="font-medium">Matsvampar</h1>
-                                                </div>
 
-                                            </div>
-                                        </template>
-                                    </UPopover>
+
                                 </div>
-
-
-
+                                <ReuseMarkerCardsRow v-if="isMobile" />
+                                <div class="flex-1 min-w-60 min-h-60 border-l border-muted/50">
+                                    <ForestryChartMain v-show="showChart" :selectedChart="chartSelected"
+                                        class="p-2 h-full bg-white" @update:selectedChart="val => chartSelected = val"
+                                        :parentSelectedFrameworks="chartFrameworks"
+                                        :currentStartskog="selectedStartskogTab" :currentTimeValue="currentTimelineTime"
+                                        preserveFrameworkOrder :showControls="true" :showMatsvampSelector="true" />
+                                </div>
                             </div>
-                            <ReuseMarkerCardsRow v-if="isMobile" />
-                            <div class="flex-1 min-w-60 min-h-60">
-                                <ForestryChartMain v-show="showChart" :selectedChart="chartSelected"
-                                    class="p-2 h-full border-muted/50 ring-muted/50 ring rounded-lg shadow bg-white"
-                                    @update:selectedChart="val => chartSelected = val"
-                                    :parentSelectedFrameworks="chartFrameworks" :currentStartskog="selectedStartskogTab"
-                                    :currentTimeValue="currentTimelineTime" preserveFrameworkOrder :showControls="true"
-                                    :showMatsvampSelector="true" />
+                            <ReuseMarkerCardsRow v-if="!isMobile" />
+
+                            <div class="grid md:grid-cols-2 px-3 sm:px-0 bg-neutral-50/50">
+                                <div class="space-y-2 p-6 ">
+                                    <p class="text-xs font-semibold text-neutral-600 uppercase tracking-wide">
+                                        {{ selectedMethod.title || selectedMethod.id }}
+                                    </p>
+                                    <h3 class="text-xl font-semibold text-neutral-900">
+                                        {{ formatTimelineCurrentLabel(timelineItems[activeTimelineIndex]?.tid) }}
+                                    </h3>
+                                    <p class="text-md text-muted">
+                                        {{ timelineItems[activeTimelineIndex]?.skog }}
+                                    </p>
+                                    <p class="text-md">{{ timelineItems[activeTimelineIndex]?.svamp }}</p>
+                                </div>
+                                <div v-if="comparisonTimelineItem"
+                                    class="space-y-2 p-6 border-dashed border-l-2 border-neutral-200  bg-neutral-50">
+                                    <p class="text-xs font-semibold text-neutral-600 uppercase tracking-wide">
+                                        {{ compareMethodLabel }}
+                                    </p>
+                                    <h3 class="text-xl font-semibold text-neutral-900">
+                                        {{ formatTimelineCurrentLabel(comparisonTimelineItem?.tid) }}
+                                    </h3>
+                                    <p class="text-md text-muted">
+                                        {{ comparisonTimelineItem?.skog }}
+                                    </p>
+                                    <p class="text-md">{{ comparisonTimelineItem?.svamp }}</p>
+                                </div>
                             </div>
+
                         </div>
-                        <ReuseMarkerCardsRow v-if="!isMobile" />
-
-                        <div class="grid md:grid-cols-2 gap-4 px-3 sm:px-0">
-                            <div class="space-y-2 p-6 ring ring-muted/50 rounded-lg shadow bg-white">
-                                <p class="text-xs font-semibold text-neutral-600 uppercase tracking-wide">
-                                    {{ selectedMethod.title || selectedMethod.id }}
-                                </p>
-                                <h3 class="text-xl font-semibold text-neutral-900">
-                                    {{ formatTimelineCurrentLabel(timelineItems[activeTimelineIndex]?.tid) }}
-                                </h3>
-                                <p class="text-md text-muted">
-                                    {{ timelineItems[activeTimelineIndex]?.skog }}
-                                </p>
-                                <p class="text-md">{{ timelineItems[activeTimelineIndex]?.svamp }}</p>
+                        <div v-else key="method" class="flex-1 flex flex-col sm:gap-6 gap-3">
+                            <div class="overwflow-visible scrollbar-hidden">
+                                <ReuseMethodPanelBody />
                             </div>
-                            <div v-if="comparisonTimelineItem"
-                                class="space-y-2 p-6 outline-dashed outline-2 outline-neutral-200 rounded-lg  bg-neutral-50">
-                                <p class="text-xs font-semibold text-neutral-600 uppercase tracking-wide">
-                                    {{ compareMethodLabel }}
-                                </p>
-                                <h3 class="text-xl font-semibold text-neutral-900">
-                                    {{ formatTimelineCurrentLabel(comparisonTimelineItem?.tid) }}
-                                </h3>
-                                <p class="text-md text-muted">
-                                    {{ comparisonTimelineItem?.skog }}
-                                </p>
-                                <p class="text-md">{{ comparisonTimelineItem?.svamp }}</p>
-                            </div>
+                            <!-- <ReuseMethodPanelFooter /> -->
                         </div>
-
-                    </div>
-                    <div v-else key="method" class="flex-1 flex flex-col sm:gap-6 gap-3">
-                        <div class="overwflow-visible scrollbar-hidden">
-                            <ReuseMethodPanelBody />
-                        </div>
-                        <!-- <ReuseMethodPanelFooter /> -->
-                    </div>
-                </Transition>
+                    </Transition>
+                </div>
             </UPage>
         </UContainer>
         <USlideover :modal="false" :dismissible="false" v-model:open="chartSlideoverOpen" side="right"
@@ -1051,8 +983,7 @@ definePageMeta({
 })
 
 const treeFade = ref(0.8)
-const isMethodDescriptionExpanded = ref(false)
-const isSvampDescriptionExpanded = ref(false)
+const isMethodDetailsExpanded = ref(false)
 const [DefineMethodPanelBody, ReuseMethodPanelBody] = createReusableTemplate()
 const [DefineMethodPanelFooter, ReuseMethodPanelFooter] = createReusableTemplate()
 const [DefineMarkerCardsRow, ReuseMarkerCardsRow] = createReusableTemplate()
@@ -2006,6 +1937,8 @@ const tabs = ref<TabsItem[]>([
 
 ])
 
+const methodChartTab = ref<'skogsskole' | 'grupper'>('skogsskole')
+
 const startskogModalOpen = ref(route.query.entry === '1' || route.query.entry === 'true')
 
 const methodOmSection = computed(() => methodOmDoc.value)
@@ -2042,6 +1975,30 @@ const normalizeFrameworkKey = (value: string | null | undefined) =>
 
 const selectedFrameworkKey = computed(() => resolveFrameworkKey(selectedMethod.value.id))
 const compareFrameworkKey = computed(() => resolveFrameworkKey(compareMethodResolved.value))
+
+const impactBarClass = computed(() => {
+    if (impact.value.tone === 'low') return 'bg-emerald-500'
+    if (impact.value.tone === 'high') return 'bg-rose-500'
+    return 'bg-amber-500'
+})
+
+const impactTextClass = computed(() => {
+    if (impact.value.tone === 'low') return 'text-emerald-500'
+    if (impact.value.tone === 'high') return 'text-rose-500'
+    return 'text-amber-500'
+})
+
+const comparisonImpactBarClass = computed(() => {
+    if (comparisonImpact.value?.tone === 'low') return 'bg-emerald-500'
+    if (comparisonImpact.value?.tone === 'high') return 'bg-rose-500'
+    return 'bg-amber-500'
+})
+
+const comparisonImpactTextClass = computed(() => {
+    if (comparisonImpact.value?.tone === 'low') return 'text-emerald-500'
+    if (comparisonImpact.value?.tone === 'high') return 'text-rose-500'
+    return 'text-amber-500'
+})
 
 const impactByMethod = computed<Record<string, { value: number; tone: 'low' | 'medium' | 'high'; label: string }>>(() => {
     const docs = (methodImpactDocs.value as any[]) || []
@@ -2117,30 +2074,47 @@ async function handleMethodNav(id: string) {
 }
 
 .slide-left-fade-enter-active,
-.slide-left-fade-leave-active,
-.slide-right-fade-enter-active,
-.slide-right-fade-leave-active {
+.slide-right-fade-enter-active {
     transition: opacity 0.15s ease, transform 0.1s ease;
+}
+
+.slide-left-fade-leave-active,
+.slide-right-fade-leave-active {
+    transition: opacity 0.1s ease, transform 0.1s ease;
 }
 
 .slide-left-fade-enter-from {
     opacity: 0;
-    transform: translateX(-12px);
+    transform: translateX(-8px);
 }
 
 .slide-left-fade-leave-to {
     opacity: 0;
-    transform: translateX(12px);
+    transform: translateX(8px);
 }
 
 .slide-right-fade-enter-from {
     opacity: 0;
-    transform: translateX(12px);
+    transform: translateX(8px);
 }
 
 .slide-right-fade-leave-to {
     opacity: 0;
-    transform: translateX(-12px);
+    transform: translateX(-8px);
+}
+
+.striped-bg {
+    background-image: repeating-linear-gradient(135deg,
+            rgba(0, 0, 0, 0.08) 0,
+            rgba(0, 0, 0, 0.08) 8px,
+            rgba(0, 0, 0, 0.02) 8px,
+            rgba(0, 0, 0, 0.02) 16px);
+}
+
+.impact-dashed {
+    background-image: repeating-linear-gradient(90deg,
+            var(--ui-color-neutral-400) 0 8px,
+            color-mix(in srgb, var(--ui-color-neutral-400) 5%, transparent) 6px 10px);
 }
 
 .mobile-carousel {

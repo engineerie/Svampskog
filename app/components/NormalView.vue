@@ -130,20 +130,20 @@
             </div>
           </UContainer>
         </div>
-        <div v-else key="knowledge" class="col-span-12 sm:pt-2">
+        <div v-else key="knowledge" class="col-span-12 ">
           <transition name="fade" mode="out-in">
             <div v-if="activeDetailComponent" class="space-y-4">
               <component :is="activeDetailComponent" v-bind="detailComponentProps" :key="detailComponentKey"
                 @enlarge="handleCloseDetail" class="w-full" />
             </div>
             <template v-else>
-              <div class="col-span-12 grid-cols-12 rounded-2xl gap-y-3 hidden md:grid gap-4">
-                <div class="col-span-4 flex flex-col h-full">
+              <div class="col-span-12 grid-cols-12 rounded-2xl gap-y-3 hidden md:grid ">
+                <div class="col-span-4 flex flex-col h-full border-r border-muted/50">
                   <FullScreenEdible :geography="geography" :forestType="forestType" :standAge="standAge"
                     :vegetationType="vegetationType" :isNormalView="true" @enlarge="emitEnlarge('FullScreenEdible')"
                     :key="route.fullPath" />
                 </div>
-                <div class="col-span-4 flex flex-col">
+                <div class="col-span-4 flex flex-col h-full border-r border-muted/50">
                   <FullScreenPoison :geography="geography" :forestType="forestType" :standAge="standAge"
                     :vegetationType="vegetationType" :isNormalView="true" @enlarge="emitEnlarge('FullScreenPoison')"
                     :key="route.fullPath" />

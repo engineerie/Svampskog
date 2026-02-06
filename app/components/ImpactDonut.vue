@@ -5,7 +5,7 @@
                 <p v-if="methodLabel" class="text-xs font-medium text-neutral-600">
                     {{ methodLabel }}
                 </p>
-                <UProgress :model-value="clampedValue" :max="100" :color="progressColor" size="xl"
+                <UProgress :model-value="clampedValue" :max="100" :color="progressColor" size="md"
                     :indeterminate="false" />
                 <p class="text-lg font-medium" :class="toneClass">
                     {{ label }}
@@ -16,7 +16,7 @@
                 <p v-if="comparisonLabel" class="text-xs font-medium text-neutral-600">
                     {{ comparisonLabel }}
                 </p>
-                <UProgress :model-value="clampedComparisonValue" :max="100" :color="comparisonProgressColor" size="xl"
+                <UProgress :model-value="clampedComparisonValue" :max="100" :color="comparisonProgressColor" size="md"
                     :indeterminate="false" />
                 <p v-if="comparisonImpactLabel" class="text-lg font-medium" :class="comparisonToneClass">
                     {{ comparisonImpactLabel }}

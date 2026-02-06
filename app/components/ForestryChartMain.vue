@@ -2,13 +2,13 @@
   <div>
     <!-- Dropdown to select which chart to display -->
 
-    <div v-if="showHeaderRow" class="mt-2 mb-1 flex justify-between">
+    <div v-if="showHeaderRow" class=" flex justify-between">
       <USelect v-if="showControls" v-model="selectedChart" :items="chartOptions" value-key="value"
         option-attribute="label" size="xl" variant="none" class="hover:cursor-pointer" :icon="selectedChartIcon"
         :ui="{ content: 'min-w-fit', value: 'sm:text-lg sm:font-medium text-neutral-700' }" />
-      <div class="pr-2">
+      <div class="">
         <USelect v-if="selectedChart === 'grupper' && isFrameworkCompareMode" v-model="selectedCompareArtkategori"
-          :items="compareArtkategoriOptions" option-attribute="label" value-key="value" size="lg" variant="outline"
+          :items="compareArtkategoriOptions" option-attribute="label" value-key="value" size="xs" variant="outline"
           placeholder="Välj svampgrupp" class="hover:cursor-pointer ring-muted/50 mb-2"
           :ui="{ content: 'min-w-fit', base: 'min-h-8' }" :avatar="selectedCompareAvatar">
           <template #item="{ item }">
@@ -24,7 +24,7 @@
             side: 'bottom',
             sideOffset: 8
           }" option-attribute="label" value-key="value" placeholder="Välj dataset"
-          class="hover:cursor-pointer ring-muted/50 mb-2" size="lg"
+          class="hover:cursor-pointer ring-muted/50 mb-2" size="xs"
           :ui="{ content: 'w-fit shrink-0', base: 'min-h-8', item: 'gap-0' }" :icon="selectedMatsvampIcon"
           :aria-label="selectedMatsvampLabel">
           <template #item="{ item }">
@@ -46,10 +46,17 @@
 
       <ForestryChartDisplay v-bind="chartDisplayProps" />
 
+      <UTabs v-if="showInlineTabs" v-model="selectedChart" :items="inlineChartTabs" size="sm" :ui="{
+        root: '',
+        list: 'flex-nowrap gap-2 bg-transparent',
+        indicator: 'bg-white border border-muted/50 shadow',
+        trigger: 'data-[state=active]:text-neutral-800 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary'
+      }" class="px-2 pt-2 pb-1" />
+
       <div class="px-4 pb-2 text-sm text-muted" v-if="chartDescription">
         {{ chartDescription }}
       </div>
-      <div v-if="selectedChart === 'grupper'" class="mx-2 my-2">
+      <div class="mx-2 my-2">
         <UModal :fullscreen="isMobile ? true : false" title="Relativ mängd" description="">
 
           <UButton size="lg" variant="outline" class="px-3 flex justify-center ring-muted/50" color="neutral"
@@ -240,6 +247,7 @@ interface Props {
   preserveFrameworkOrder?: boolean
   showControls?: boolean
   showMatsvampSelector?: boolean
+  showInlineTabs?: boolean
 }
 const props = defineProps<Props>()
 const emit = defineEmits<{
@@ -248,6 +256,7 @@ const emit = defineEmits<{
 
 const showControls = computed(() => props.showControls !== false)
 const showMatsvampSelector = computed(() => props.showMatsvampSelector !== false)
+const showInlineTabs = computed(() => props.showInlineTabs === true)
 const showHeaderRow = computed(() =>
   showControls.value
   || (selectedChart.value === 'matsvampar' && showMatsvampSelector.value)
@@ -274,6 +283,10 @@ const chartOptions = [
   { label: 'Naturvårdssvampar', value: 'rodlistade', icon: 'i-material-symbols-award-star' },
   { label: 'Matsvampar', value: 'matsvampar', icon: 'icon-park-solid:knife-fork' },
 
+]
+const inlineChartTabs = [
+  { label: 'Mängd mykorrhizasvamp', value: 'skogsskole', icon: 'i-lineicons-mushroom' },
+  { label: 'Svampgrupper', value: 'grupper', icon: 'i-material-symbols-category-rounded' },
 ]
 const selectedChart = ref<string>(
   chartOptions.some(opt => opt.value === (props.selectedChart as any))
