@@ -69,8 +69,9 @@
               <UButton label="Kolumner" color="neutral" variant="ghost" trailing-icon="i-lucide-chevron-down" />
             </UDropdownMenu>
 
-            <div v-if="!isNormalView" class="hidden md:flex">
+            <div v-if="paginationEnabled" class="hidden md:flex">
               <USelect v-model="rowsPerPage" :items="[
+                { value: 5, label: '5 rader' },
                 { value: 10, label: '10 rader' },
                 { value: 20, label: '20 rader' },
                 { value: 30, label: '30 rader' },
@@ -151,15 +152,15 @@
           onSearchInput(value);
         }" variant="soft" />
     </div>
-    <USeparator :ui="{ border: 'border-muted/50' }" class="mb-2" />
+    <USeparator :ui="{ border: 'border-muted/50' }" class="" />
     <div v-if="filteredData" :class="[isNormalView ? '' : '']">
       <div class="">
 
         <UTable ref="table" v-model:column-visibility="columnVisibility" v-model:pagination="pagination"
           :data="displayedData" :columns="columns" sticky :loading="isLoading" v-model:sorting="sorting"
-          @select="selectRow" :autoResetAll="true" :pagination-options="(isMobile && !isNormalView)
+          @select="selectRow" :autoResetAll="true" :pagination-options="(isMobile && !paginationEnabled)
             ? false
-            : (!isNormalView
+            : (paginationEnabled
               ? { getPaginationRowModel: getPaginationRowModel() }
               : undefined)" :class="{ '': isNormalView }" :ui="tableUi" class="rounded-sm " />
 
@@ -178,7 +179,7 @@
 
           <div>
             <!-- Pagination component -->
-            <div v-if="!isNormalView && rowsPerPage !== 'Alla' && !isMobile">
+            <div v-if="paginationEnabled && rowsPerPage !== 'Alla' && !isMobile">
               <div class="flex justify-center">
                 <UPagination active-variant="ghost" variant="ghost"
                   :default-page="(table?.tableApi?.getState().pagination.pageIndex || 0) + 1"
@@ -226,7 +227,9 @@ const emit = defineEmits([
   'update:giftsvampFilter',
   'update:gruppFilter',
   'update:statusFilter',
-  'update:searchTerm'
+  'update:searchTerm',
+  'update:sorting',
+  'update:visibleRange'
 ]);
 
 // Temporary storage for raw input and debounce timer
@@ -262,7 +265,11 @@ const props = defineProps({
   columnVisibilityOverrides: { type: Object, default: () => ({}) },
   filterEdible: { type: Boolean, default: false },
   filterPoison: { type: Boolean, default: false },
-  searchTerm: { type: String, default: '' }
+  searchTerm: { type: String, default: '' },
+  externalMatsvampFilter: { type: Boolean, default: undefined },
+  externalStatusFilter: { type: Array, default: undefined },
+  externalGruppFilter: { type: Array, default: undefined },
+  enablePagination: { type: Boolean, default: false }
 });
 
 
@@ -424,7 +431,8 @@ const svampOptions = computed(() => {
     .filter(Boolean);
 });
 
-const rowsPerPage = ref(props.isNormalView ? 500 : 10);
+const rowsPerPage = ref((props.isNormalView && !props.enablePagination) ? 500 : 10);
+const paginationEnabled = computed(() => !props.isNormalView || props.enablePagination);
 const selectedFilter = ref([]);
 const selectedStatus = ref([]);
 const naturvardsStatuses = ['VU', 'NT', 'EN', 'CR', 'DD', 'Signalart'];
@@ -440,6 +448,25 @@ const toggleNaturvardsGroup = (checked) => {
   }
 };
 const selectedGrupp = ref([]);
+
+watch(() => props.externalMatsvampFilter, (val) => {
+  if (typeof val !== 'boolean') return;
+  if (val) {
+    selectedFilter.value = ['Matsvamp'];
+  } else {
+    selectedFilter.value = selectedFilter.value.filter(entry => entry !== 'Matsvamp');
+  }
+}, { immediate: true });
+
+watch(() => props.externalStatusFilter, (val) => {
+  if (!Array.isArray(val)) return;
+  selectedStatus.value = [...val];
+}, { immediate: true });
+
+watch(() => props.externalGruppFilter, (val) => {
+  if (!Array.isArray(val)) return;
+  selectedGrupp.value = [...val];
+}, { immediate: true });
 const gruppMenuItems = computed(() => {
   return gruppOptions.value.map(option => ({
     label: option.label,
@@ -812,7 +839,7 @@ const desktopColumns = [
       if (images.length) {
         return h('img', {
           src: images[0],
-          class: "h-14 w-20 object-cover -my-3 rounded-md border border-neutral-100 dark:border-neutral-800",
+          class: "h-11 w-14 object-cover -my-3 rounded-md border border-neutral-100 dark:border-neutral-800",
           alt: row.original?.Commonname ? `${row.original.Commonname} bild` : "Species image",
           loading: 'lazy',
           decoding: 'async',
@@ -1417,6 +1444,17 @@ const totalItems = computed(() => {
   return table.value?.tableApi?.getFilteredRowModel()?.rows.length || 0;
 });
 
+const visibleRange = computed(() => {
+  if (!paginationEnabled.value) {
+    return { startIndex: 0, endIndex: Math.max(0, totalItems.value - 1), total: totalItems.value };
+  }
+  const pageIndex = paginationState.value.pageIndex || 0;
+  const pageSize = paginationState.value.pageSize || 10;
+  const startIndex = pageIndex * pageSize;
+  const endIndex = startIndex + Math.max(0, currentPaginationRows.value.length - 1);
+  return { startIndex, endIndex, total: totalItems.value };
+});
+
 const columnFilters = computed(() => {
   // If searchTerm is present, filter Commonname (and Scientificname via filterFn)
   const filters = props.searchTerm
@@ -1504,6 +1542,14 @@ watch(columnFilters, (newFilters) => {
   const statusFilterEntry = newFilters.find(f => f.id === 'RL2020kat');
   const statusValues = statusFilterEntry?.value ?? [];
   emit('update:statusFilter', statusValues);
+}, { deep: true, immediate: true });
+
+watch(sorting, (val) => {
+  emit('update:sorting', val);
+}, { deep: true, immediate: true });
+
+watch(visibleRange, (val) => {
+  emit('update:visibleRange', val);
 }, { deep: true, immediate: true });
 </script>
 

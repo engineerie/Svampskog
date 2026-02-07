@@ -73,8 +73,21 @@
         >
           {{ sampleEnvCount < 10 ? 'Lågt provantal: ' + sampleEnvCount + ' skogar' : 'Baserat på ' + sampleEnvCount + ' skogar' }}
         </UBadge> -->
-          <UButton class="hidden md:flex h-fit ring-muted/60" color="neutral" variant="outline" size="sm"
-            @click="showBarChart = !showBarChart" :label="showBarChart ? 'Dölj diagram' : 'Visa diagram'" />
+          <div class="hidden md:flex flex-col items-start gap-2">
+            <!-- <UButton class="h-fit ring-muted/60" color="neutral" variant="outline" size="sm"
+              @click="showBarChart = !showBarChart" :label="showBarChart ? 'Dölj diagram' : 'Visa diagram'" /> -->
+            <div class="flex flex-col gap-2">
+              <p class="text-xs font-semibold uppercase tracking-wide text-neutral-500">Snabbfilter</p>
+              <div class="flex flex-wrap gap-2">
+                <UButton size="md" :variant="quickFilter === 'matsvamp' ? 'solid' : 'outline'" color="warning"
+                  @click="toggleQuickFilter('matsvamp')" label="Matsvampar" />
+                <UButton size="md" :variant="quickFilter === 'naturvard' ? 'solid' : 'outline'" color="signal"
+                  @click="toggleQuickFilter('naturvard')" label="Naturvårdssvampar" />
+                <UButton size="md" :variant="quickFilter === 'syns' ? 'solid' : 'outline'" color="neutral"
+                  @click="toggleQuickFilter('syns')" label="Svampar som syns" />
+              </div>
+            </div>
+          </div>
 
           <!-- <UButton
         class="hidden md:flex h-fit"
@@ -100,30 +113,51 @@
         
           @click="$emit('enlarge')"
         /> -->
-          <SpeciesTable @enlarge="emit('enlarge')" :isNormalView="isNormalView"
-            :column-visibility-overrides="columnVisibilityOverrides" />
+          <SpeciesTable @enlarge="emit('enlarge')" @update:sorting="tableSorting = $event"
+            @update:visibleRange="tableVisibleRange = $event" :isNormalView="isNormalView"
+            :column-visibility-overrides="columnVisibilityOverrides" :externalMatsvampFilter="externalMatsvampFilter"
+            :externalStatusFilter="externalStatusFilter" :externalGruppFilter="externalGruppFilter"
+            :enablePagination="true" />
         </div>
 
         <div v-else-if="activeTab === 'columnChart'" class="">
 
-          <BarChart class="mb-6" v-if="showBarChart" :chartData="data" :chartWidth="chartWidth"
-            :geography="geographyValue" :forestType="forestTypeValue" :standAge="standAgeValue"
-            :vegetationType="vegetationTypeValue" :matsvampFilter="matsvampFilter" :giftsvampFilter="giftsvampFilter"
-            :gruppFilter="gruppFilter" :statusFilter="statusFilter" :search-term="modalSearchTerm" />
+          <div ref="barChartRef">
+            <BarChart class="mb-6" v-if="showBarChart" :chartData="data" :chartWidth="chartWidth"
+              :geography="geographyValue" :forestType="forestTypeValue" :standAge="standAgeValue"
+              :vegetationType="vegetationTypeValue" :matsvampFilter="matsvampFilter" :giftsvampFilter="giftsvampFilter"
+              :gruppFilter="gruppFilter" :statusFilter="statusFilter" :search-term="modalSearchTerm"
+              :sort-order="tableSorting" :visible-range="tableVisibleRange" />
+          </div>
           <SpeciesTable @enlarge="emit('enlarge')" @update:matsvampFilter="matsvampFilter = $event"
             @update:giftsvampFilter="giftsvampFilter = $event" @update:gruppFilter="gruppFilter = $event"
             @update:statusFilter="statusFilter = $event" @update:searchTerm="modalSearchTerm = $event"
+            @update:sorting="tableSorting = $event" @update:visibleRange="tableVisibleRange = $event"
             :isNormalView="isNormalView" :column-visibility-overrides="columnVisibilityOverrides"
-            :search-term="modalSearchTerm" />
+            :search-term="modalSearchTerm" :externalMatsvampFilter="externalMatsvampFilter"
+            :externalStatusFilter="externalStatusFilter" :externalGruppFilter="externalGruppFilter"
+            :enablePagination="true" />
         </div>
       </transition>
 
     </UCard>
+    <transition name="fold-down">
+      <UContainer v-if="isBarChartSticky && showBarChart && activeTab === 'columnChart' && !isSmallScreen"
+        class="shadow hidden md:block fixed top-0 pt-16 z-20 bg-neutral-50 dark:bg-black border-b border-x rounded-xl border-neutral-200 dark:border-neutral-800 left-0 right-0">
+        <div class="w-full mx-auto max-w-7xl py-2 px-4">
+          <BarChart :chartData="data" :chartWidth="chartWidth" :chartHeight="40" :showControls="false"
+            :showYAxis="false" :geography="geographyValue" :forestType="forestTypeValue" :standAge="standAgeValue"
+            :vegetationType="vegetationTypeValue" :matsvampFilter="matsvampFilter" :giftsvampFilter="giftsvampFilter"
+            :gruppFilter="gruppFilter" :statusFilter="statusFilter" :search-term="modalSearchTerm"
+            :sort-order="tableSorting" :visible-range="tableVisibleRange" />
+        </div>
+      </UContainer>
+    </transition>
   </div>
 </template>
 
 <script setup lang="ts">
-import { ref, computed, watch } from "vue";
+import { ref, computed, watch, onMounted, onBeforeUnmount } from "vue";
 import { useMediaQuery } from '@vueuse/core';
 import { useEnvParamsStore } from "~/stores/envParamsStore";
 import { storeToRefs } from "pinia";
@@ -134,11 +168,18 @@ const matsvampFilter = ref(false);
 const giftsvampFilter = ref(false);
 const gruppFilter = ref<string[]>([]);
 const statusFilter = ref<string[]>([]);
+const quickFilter = ref<'matsvamp' | 'naturvard' | 'syns' | null>(null);
 
 
 
 const modalSearchTerm = ref('');
+const tableSorting = ref<Array<{ id: string; desc: boolean }>>([]);
+const tableVisibleRange = ref<{ startIndex: number; endIndex: number; total: number } | null>(null);
 const showBarChart = ref(true);
+const isBarChartSticky = ref(false);
+const barChartRef = ref<HTMLElement | null>(null);
+let barChartObserver: IntersectionObserver | null = null;
+let barChartObservedEl: HTMLElement | null = null;
 
 const { isNormalView } = defineProps<{ isNormalView: boolean }>();
 const emit = defineEmits<{ (e: "enlarge"): void }>();
@@ -182,6 +223,111 @@ const columnVisibilityOverrides = computed(() => ({
   mark: false,
   ...(isSmallScreen.value ? { images: false } : {})
 }));
+
+const naturvardsStatuses = ['VU', 'NT', 'EN', 'CR', 'DD', 'Signalart'];
+const synligaGruppFilter = computed(() => {
+  const excluded = new Set(['skinnsvamp', 'skinnsvampar', 'tryffel', 'tryfflar']);
+  const map = new Map<string, string>();
+  data.value.forEach(row => {
+    const group = row?.['Svamp-grupp-släkte'];
+    if (!group) return;
+    const normalized = String(group)
+      .toLowerCase()
+      .normalize('NFD')
+      .replace(/\p{Diacritic}+/gu, '');
+    if (Array.from(excluded).some(entry => normalized.includes(entry))) return;
+    if (!map.has(normalized)) map.set(normalized, String(group));
+  });
+  return Array.from(map.values());
+});
+
+const externalMatsvampFilter = computed(() => quickFilter.value === 'matsvamp');
+const externalStatusFilter = computed(() =>
+  quickFilter.value === 'naturvard' ? naturvardsStatuses : []
+);
+const externalGruppFilter = computed(() =>
+  quickFilter.value === 'syns' ? synligaGruppFilter.value : []
+);
+
+function toggleQuickFilter(type: 'matsvamp' | 'naturvard' | 'syns') {
+  quickFilter.value = quickFilter.value === type ? null : type;
+}
+
+watch(quickFilter, (val) => {
+  if (val === 'matsvamp') {
+    matsvampFilter.value = true;
+    giftsvampFilter.value = false;
+    statusFilter.value = [];
+    gruppFilter.value = [];
+    return;
+  }
+  if (val === 'naturvard') {
+    matsvampFilter.value = false;
+    giftsvampFilter.value = false;
+    statusFilter.value = [...naturvardsStatuses];
+    gruppFilter.value = [];
+    return;
+  }
+  if (val === 'syns') {
+    matsvampFilter.value = false;
+    giftsvampFilter.value = false;
+    statusFilter.value = [];
+    gruppFilter.value = [...synligaGruppFilter.value];
+    return;
+  }
+  matsvampFilter.value = false;
+  giftsvampFilter.value = false;
+  statusFilter.value = [];
+  gruppFilter.value = [];
+}, { immediate: true });
+
+watch(synligaGruppFilter, (val) => {
+  if (quickFilter.value === 'syns') {
+    gruppFilter.value = [...val];
+  }
+});
+
+function cleanupBarChartObserver() {
+  if (barChartObserver && barChartObservedEl) {
+    barChartObserver.unobserve(barChartObservedEl);
+  }
+  barChartObservedEl = null;
+  barChartObserver = null;
+}
+
+function setupBarChartObserver() {
+  cleanupBarChartObserver();
+  if (!barChartRef.value) return;
+  barChartObserver = new IntersectionObserver(
+    ([entry]) => {
+      isBarChartSticky.value = !(entry?.isIntersecting ?? true);
+    },
+    { threshold: 0, rootMargin: '-180px 0px 0px 0px' }
+  );
+  barChartObserver.observe(barChartRef.value);
+  barChartObservedEl = barChartRef.value;
+}
+
+onMounted(() => {
+  setupBarChartObserver();
+});
+
+onBeforeUnmount(() => {
+  cleanupBarChartObserver();
+});
+
+watch(
+  [() => barChartRef.value, () => activeTab.value, () => showBarChart.value, () => isSmallScreen.value],
+  ([element, tab, isVisible, isSmall]) => {
+    if (!element || tab !== 'columnChart' || !isVisible || isSmall) {
+      isBarChartSticky.value = false;
+      cleanupBarChartObserver();
+      return;
+    }
+    setupBarChartObserver();
+  },
+  { immediate: true }
+);
 
 // Fetch data when environment store values change.
 async function fetchData(geog: string, forest: string, age: string, veg: string) {
@@ -234,5 +380,20 @@ watch(
 .fade-enter-from,
 .fade-leave-to {
   opacity: 0;
+}
+
+.fold-down-enter-active,
+.fold-down-leave-active {
+  transition: transform 0.3s ease;
+}
+
+.fold-down-enter-from,
+.fold-down-leave-to {
+  transform: translateY(-100%);
+}
+
+.fold-down-enter-to,
+.fold-down-leave-from {
+  transform: translateY(0);
 }
 </style>

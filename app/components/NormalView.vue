@@ -2,34 +2,28 @@
   <div class="grid grid-cols-12 ">
     <div class="col-span-12">
 
-      <div class="flex justify-between p-3 border-b border-muted/50" v-if="!isMobile">
-        <div class="flex gap-3">
-          <UButton @click="activeTab = 'dna'"
-            class="hover:bg-neutral-100 text-start ring-muted/50 cursor-pointer p-3 px-4 rounded-lg"
-            :variant="activeTab === 'dna' ? 'subtle' : 'outline'" color="neutral">
-            <UPageFeature title="Enligt DNA" description="Från markinventeringens jordprover" />
-          </UButton>
-          <UButton @click="activeTab = 'knowledge'"
-            class="hover:bg-neutral-100 text-start ring-muted/50 cursor-pointer p-3 px-4 rounded-lg"
-            :variant="activeTab === 'knowledge' ? 'subtle' : 'outline'" color="neutral">
-            <UPageFeature title="Enligt fruktkroppar" description="Utifrån var fruktkroppar förekommer" />
-          </UButton>
-        </div>
+      <div class="flex justify-between border-b border-muted/50" v-if="!isMobile">
+        <UTabs v-model="activeTab" :items="normalViewTabs" size="lg" :ui="{
+          root: '',
+          list: 'flex-nowrap gap-2 bg-transparent',
+          indicator: 'bg-white border border-muted/50 shadow',
+          trigger: 'data-[state=active]:text-neutral-800 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary'
+        }" class="px-2 pt-2 pb-1" />
 
-        <div class=" flex flex-col sm:flex-row gap-1.5  w-fit h-fit">
+        <!-- <div class=" flex flex-col sm:flex-row gap-1.5  w-fit h-fit">
           <UAlert v-if="activeTab !== 'dna'" :color="activeTab === 'dna' ? 'secondary' : 'neutral'" variant="outline"
             :ui="{ close: ' cursor-pointer' }"
             :title="activeTab === 'dna' ? 'Arterna är sorterade i fallande ordning baserat på hur många skogar deras DNA påträffats i.' : 'Arterna är sorterade i fallande ordning baserat på hur många gånger de har rapporterats i Artportalen.'"
             class=" h-fit max-w-96 text-muted ring-muted/50" @update:open="showImagesAlert = $event" />
-        </div>
+        </div> -->
 
 
 
       </div>
 
 
-      <transition name="view-transition" mode="out-in">
-        <div v-if="activeTab === 'dna'" key="dna" class="col-span-12 sm:pt-2">
+      <Transition :name="contentTransitionName" mode="out-in">
+        <div v-if="activeTab === 'dna'" key="dna" class="col-span-12">
           <div class="hidden md:block">
             <EdnaComponent :isNormalView="!isEdnaExpanded" @enlarge="handleEdnaToggle" />
           </div>
@@ -155,7 +149,7 @@
             </template>
           </transition>
         </div>
-      </transition>
+      </Transition>
     </div>
   </div>
 </template>
@@ -223,9 +217,9 @@ const emitEnlarge = (componentName) => {
 };
 
 const activeTab = ref('dna')
-const tabs = [
-  { label: 'Samlad kunskap', value: 'knowledge', icon: 'lineicons:mushroom-1' },
-  { label: 'DNA från markinventeringens provytor', value: 'dna', icon: 'solar:dna-linear' },
+const normalViewTabs = [
+  { label: 'Enligt DNA', value: 'dna', icon: 'solar:dna-linear' },
+  { label: 'Enligt fruktkroppar', value: 'knowledge', icon: 'lineicons:mushroom-1' },
 ]
 // Responsive tab size based on Tailwind md breakpoint (768px)
 const windowWidth = ref(0);
@@ -240,6 +234,9 @@ onUnmounted(() => {
 
 const tabSize = computed(() => windowWidth.value >= 768 ? 'md' : 'md');
 const isMobile = computed(() => windowWidth.value < 768)
+const contentTransitionName = computed(() =>
+  activeTab.value === 'dna' ? 'slide-right-fade' : 'slide-left-fade'
+)
 
 const geography = computed(() => envStore.geography)
 const forestType = computed(() => envStore.forestType)
@@ -392,14 +389,34 @@ watch(
   opacity: 0;
 }
 
-.view-transition-enter-active,
-.view-transition-leave-active {
-  transition: opacity 0.3s ease-in-out;
+.slide-left-fade-enter-active,
+.slide-right-fade-enter-active {
+  transition: opacity 0.15s ease, transform 0.1s ease;
 }
 
-.view-transition-enter-from,
-.view-transition-leave-to {
+.slide-left-fade-leave-active,
+.slide-right-fade-leave-active {
+  transition: opacity 0.1s ease, transform 0.1s ease;
+}
+
+.slide-left-fade-enter-from {
   opacity: 0;
+  transform: translateX(-8px);
+}
+
+.slide-left-fade-leave-to {
+  opacity: 0;
+  transform: translateX(8px);
+}
+
+.slide-right-fade-enter-from {
+  opacity: 0;
+  transform: translateX(8px);
+}
+
+.slide-right-fade-leave-to {
+  opacity: 0;
+  transform: translateX(-8px);
 }
 
 .rounded-tab {

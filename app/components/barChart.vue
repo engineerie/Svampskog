@@ -1,7 +1,7 @@
 <template>
   <div>
     <!-- Zoom controls only on desktop -->
-    <div v-if="!isMobile" class="flex justify-end gap-2 mb-2 mx-2">
+    <div v-if="showControls && !isMobile" class="flex justify-end gap-2 mb-2 mx-2">
       <UButton @click="zoomOut" icon="i-heroicons-magnifying-glass-minus" color="neutral" variant="ghost" />
       <UButton @click="zoomIn" icon="i-heroicons-magnifying-glass-plus" color="neutral" variant="ghost" />
     </div>
@@ -10,15 +10,22 @@
       'w-full overflow-y-auto overflow-x-scroll',
       { 'bar-chart-container': currentZoomIndex === 0 }
     ]" @click="handleChartClick">
-      <VisXYContainer :data="updatedChartData" :width="chartWidth" height="200">
+      <VisXYContainer :data="updatedChartData" :width="chartWidth" :height="chartHeight">
+        <!-- <VisXYLabels v-if="showGroupLabels" :data="labelData" :x="labelX" :y="labelY" :label="labelText"
+          :labelFontSize="10" :clustering="false" backgroundColor="#ffffff" color="#111827" /> -->
+        <VisPlotband v-if="plotBandRange" axis="x" :from="plotBandRange.from" :to="plotBandRange.to"
+          color="rgba(234, 179, 8, 0.15)" :zIndex="5" />
         <VisStackedBar :data="updatedChartData" :x="xAccessor" :y="yAccessor" :color="barColorAccessor"
           :barPadding="0.1" />
-        <VisAxis :gridLine="false" type="x" tickTextAnchor="start" tickTextAngle="30"
+
+
+        <!-- <VisAxis :tickLine="false" :gridLine="false" type="x" tickTextAnchor="start" tickTextAngle="30"
           :numTicks="updatedChartData.length" tickTextFitMode="trim" :tickTextWidth="150" tickTextAlign="left"
-          :tick-format="tickFormat" />
-        <VisAxis type="y" label="Antal skogar" :gridLine="false" />
+          :tick-format="tickFormat" /> -->
+        <VisAxis v-if="showYAxis" type="y" label="Antal skogar" :gridLine="false" />
         <VisTooltip v-if="hasData" :triggers="triggers" :followCursor="true" />
         <VisCrosshair v-if="hasData" :color="barColorAccessor" :template="tooltipTemplate" />
+
       </VisXYContainer>
     </div>
   </div>
@@ -27,7 +34,7 @@
 <script setup lang="ts">
 import { ref, computed, onMounted, watch } from 'vue'
 import { useMediaQuery } from '@vueuse/core'
-import { VisXYContainer, VisStackedBar, VisAxis, VisTooltip, VisCrosshair, VisSingleContainer, VisDonut } from '@unovis/vue'
+import { VisXYContainer, VisStackedBar, VisAxis, VisTooltip, VisCrosshair, VisSingleContainer, VisDonut, VisXYLabels, VisPlotband } from '@unovis/vue'
 import { StackedBar } from '@unovis/ts'
 import { useEnvParamsStore } from '~/stores/envParamsStore'
 import { useSpeciesStore } from '~/stores/speciesStore'
@@ -39,7 +46,12 @@ const props = defineProps({
   giftsvampFilter: { type: Boolean, default: false },
   gruppFilter: { type: Array as PropType<string[]>, default: () => [] },
   groupKey: { type: String, default: 'Svamp-grupp-släkte' },
-  statusFilter: { type: Array as PropType<string[]>, default: () => [] }
+  statusFilter: { type: Array as PropType<string[]>, default: () => [] },
+  sortOrder: { type: Array as PropType<Array<{ id: string; desc: boolean }>>, default: () => [] },
+  visibleRange: { type: Object as PropType<{ startIndex: number; endIndex: number; total: number } | null>, default: null },
+  chartHeight: { type: Number, default: 150 },
+  showControls: { type: Boolean, default: true },
+  showYAxis: { type: Boolean, default: true }
 })
 
 // ----- Filtering & Zoom Setup -----
@@ -80,6 +92,36 @@ function generateRainbowColors(steps: number): string[] {
   }
   return colors
 }
+
+function getSortValue(row: any, key: string) {
+  if (!row || !key) return undefined
+  return row[key]
+}
+
+const sortedChartData = computed(() => {
+  const data = [...chartData.value]
+  if (!props.sortOrder.length) return data
+  const sorters = props.sortOrder
+  data.sort((a, b) => {
+    for (const sorter of sorters) {
+      const key = sorter.id
+      const aVal = getSortValue(a, key)
+      const bVal = getSortValue(b, key)
+      const aNum = typeof aVal === 'number' ? aVal : Number(aVal)
+      const bNum = typeof bVal === 'number' ? bVal : Number(bVal)
+      let cmp = 0
+      if (Number.isFinite(aNum) && Number.isFinite(bNum)) {
+        cmp = aNum - bNum
+      } else {
+        cmp = String(aVal ?? '').localeCompare(String(bVal ?? ''), 'sv')
+      }
+      if (cmp !== 0) return sorter.desc ? -cmp : cmp
+    }
+    return 0
+  })
+  return data
+})
+
 async function fetchChartData() {
   const params = [envStore.geography, envStore.forestType, envStore.standAge, envStore.vegetationType]
   if (params.some(param => !param)) {
@@ -126,34 +168,31 @@ watch(
   { immediate: true }
 )
 
+
 // ----- Accessors & Formatters -----
 const xAccessor = (_: any, i: number) => i
 const yAccessor = (d: any) => d.sample_plot_count
-const tickFormat = (_: any, i: number) => {
-  const d = updatedChartData.value[i]
-  if (!d) return ''
-  // Compute matchSearch
+function shouldShowLabel(d: any) {
+  if (!d) return false
   const term = props.searchTerm.trim().toLowerCase()
   const common = String(d.Commonname || '').toLowerCase()
   const scientific = String(d.Scientificname || '').toLowerCase()
   const matchSearch = term ? (common.includes(term) || scientific.includes(term)) : true
 
-  // 1) Early return: only search active (no other filters)
   const statusActive = props.statusFilter.length > 0
   const svampActive = props.matsvampFilter || props.giftsvampFilter
   const groupActive = props.gruppFilter.length > 0
+
   if (!statusActive && !svampActive && !groupActive && props.searchTerm.trim() !== '') {
-    return matchSearch ? capitalizeFirstLetter(d.Commonname) : ''
+    return matchSearch
   }
 
-  // 2a) Compute matches
   const matchSignal =
     statusActive &&
     props.statusFilter.includes('Signalart') &&
     (d.SIGNAL_art === 'S')
 
   const otherStatuses = props.statusFilter.filter(s => s !== 'Signalart')
-  // Add Ej bedömd and Ej tillämplig logic
   const matchEjBedom = statusActive && props.statusFilter.includes('Ej bedömd') &&
     (d.RL2020kat === null || d.RL2020kat === 0 || d.RL2020kat === '0' || String(d.RL2020kat).toUpperCase() === 'NE')
   const matchEjTillamplig = statusActive && props.statusFilter.includes('Ej tillämplig') &&
@@ -167,55 +206,128 @@ const tickFormat = (_: any, i: number) => {
     ? (d.Giftsvamp || '').toLowerCase() === 'x'
     : false
 
-  const matchGroup = groupActive
-    ? props.gruppFilter.includes(d[props.groupKey])
-    : false
+  const matchGroup = matchesGroupFilter(d)
 
-  // 3) If Status filter is active, only label those matching all active filters:
   if (statusActive) {
-    // 3a) Only Status (no Svamp, no Grupp)
     if (!svampActive && !groupActive) {
-      return (matchSearch && (matchSignal || matchStatus || matchEjBedom || matchEjTillamplig))
-        ? capitalizeFirstLetter(d.Commonname)
-        : ''
+      return matchSearch && (matchSignal || matchStatus || matchEjBedom || matchEjTillamplig)
     }
-    // 3b) Status + other filters
     const passesStatus = matchSearch && (matchSignal || matchStatus || matchEjBedom || matchEjTillamplig)
     const passesSvamp = svampActive ? (matchMats || matchGifts) : true
     const passesGroupVal = groupActive ? matchGroup : true
-
-    if (passesStatus && passesSvamp && passesGroupVal) {
-      return capitalizeFirstLetter(d.Commonname)
-    }
-    return ''
+    return passesStatus && passesSvamp && passesGroupVal
   }
 
-  // 4) No Status → If Svamp/Group is active, only label those matching all:
   if (svampActive || groupActive) {
-    // 4a) Only Svamp (no Grupp)
-    if (svampActive && !groupActive) {
-      return (matchSearch && (matchMats || matchGifts))
-        ? capitalizeFirstLetter(d.Commonname)
-        : ''
-    }
-    // 4b) Only Grupp (no Svamp)
-    if (!svampActive && groupActive) {
-      return (matchSearch && matchGroup) ? capitalizeFirstLetter(d.Commonname) : ''
-    }
-    // 4c) Svamp + Grupp
+    if (svampActive && !groupActive) return matchSearch && (matchMats || matchGifts)
+    if (!svampActive && groupActive) return matchSearch && matchGroup
     const passesSvampOnly = matchSearch && (matchMats || matchGifts)
-    if (passesSvampOnly && matchGroup) {
-      return capitalizeFirstLetter(d.Commonname)
-    }
-    return ''
+    return passesSvampOnly && matchGroup
   }
 
-  // 5) No filters/search → hide all names
-  return ''
+  return false
+}
+
+function shouldMatchTable(d: any) {
+  if (!d) return false
+  const term = props.searchTerm.trim().toLowerCase()
+  const common = String(d.Commonname || '').toLowerCase()
+  const scientific = String(d.Scientificname || '').toLowerCase()
+  const matchSearch = term ? (common.includes(term) || scientific.includes(term)) : true
+
+  const statusActive = props.statusFilter.length > 0
+  const svampActive = props.matsvampFilter || props.giftsvampFilter
+  const groupActive = props.gruppFilter.length > 0
+
+  if (!statusActive && !svampActive && !groupActive && props.searchTerm.trim() === '') {
+    return true
+  }
+
+  const matchSignal =
+    statusActive &&
+    props.statusFilter.includes('Signalart') &&
+    (d.SIGNAL_art === 'S')
+
+  const otherStatuses = props.statusFilter.filter(s => s !== 'Signalart')
+  const matchEjBedom = statusActive && props.statusFilter.includes('Ej bedömd') &&
+    (d.RL2020kat === null || d.RL2020kat === 0 || d.RL2020kat === '0' || String(d.RL2020kat).toUpperCase() === 'NE')
+  const matchEjTillamplig = statusActive && props.statusFilter.includes('Ej tillämplig') &&
+    String(d.RL2020kat).toUpperCase() === 'NA'
+  const matchStatus = statusActive
+    ? matchSignal || otherStatuses.includes(d.RL2020kat)
+    : false
+
+  const matchMats = props.matsvampFilter ? d.matsvamp == 1 : false
+  const matchGifts = props.giftsvampFilter
+    ? (d.Giftsvamp || '').toLowerCase() === 'x'
+    : false
+
+  const matchGroup = matchesGroupFilter(d)
+
+  if (statusActive) {
+    if (!svampActive && !groupActive) {
+      return matchSearch && (matchSignal || matchStatus || matchEjBedom || matchEjTillamplig)
+    }
+    const passesStatus = matchSearch && (matchSignal || matchStatus || matchEjBedom || matchEjTillamplig)
+    const passesSvamp = svampActive ? (matchMats || matchGifts) : true
+    const passesGroupVal = groupActive ? matchGroup : true
+    return passesStatus && passesSvamp && passesGroupVal
+  }
+
+  if (svampActive || groupActive) {
+    if (svampActive && !groupActive) return matchSearch && (matchMats || matchGifts)
+    if (!svampActive && groupActive) return matchSearch && matchGroup
+    const passesSvampOnly = matchSearch && (matchMats || matchGifts)
+    return passesSvampOnly && matchGroup
+  }
+
+  return matchSearch
+}
+
+function matchesGroupFilter(d: any) {
+  if (!props.gruppFilter.length) return false
+  return props.gruppFilter.includes(d[props.groupKey])
+}
+
+const tickFormat = (_: any, i: number) => {
+  const d = updatedChartData.value[i]
+  if (!shouldShowLabel(d)) return ''
+  return capitalizeFirstLetter(d.Commonname)
 }
 function capitalizeFirstLetter(str: string): string {
   return str ? str.charAt(0).toUpperCase() + str.slice(1) : ""
 }
+
+const showGroupLabels = computed(() => props.gruppFilter.length > 0)
+const maxYValue = computed(() =>
+  Math.max(...updatedChartData.value.map(row => Number(row.sample_plot_count || 0)), 1)
+)
+const labelYOffset = computed(() => maxYValue.value * 0.04)
+const labelData = computed(() =>
+  updatedChartData.value
+    .map((d, i) => ({ ...d, __xIndex: i }))
+    .filter(d => matchesGroupFilter(d))
+)
+const labelX = (d: any) => d.__xIndex
+const labelY = (d: any) => Number(d.sample_plot_count || 0) + labelYOffset.value
+const labelText = () => 'x'
+
+const filteredSortedData = computed(() => sortedChartData.value.filter(d => shouldMatchTable(d)))
+const keyForRow = (d: any) => d?.Scientificname || d?.Commonname || d?.id || d?.ID || ''
+
+const plotBandRange = computed(() => {
+  const range = props.visibleRange
+  if (!range || range.endIndex < range.startIndex) return null
+  const slice = filteredSortedData.value.slice(range.startIndex, range.endIndex + 1)
+  if (!slice.length) return null
+  const indices = slice
+    .map(item => sortedChartData.value.findIndex(row => keyForRow(row) === keyForRow(item)))
+    .filter(idx => idx >= 0)
+  if (!indices.length) return null
+  const min = Math.min(...indices)
+  const max = Math.max(...indices)
+  return { from: min - 0.5, to: max + 0.5 }
+})
 
 // ----- Tooltip Trigger & Template -----
 // We use a reactive variable to store the current hovered datum.
@@ -269,7 +381,7 @@ const triggers = { [StackedBar.selectors.bar]: tooltipTemplate }
 // ----- Custom Bar Color Based on Selected Filters -----
 const updatedChartData = computed(() => {
   const defaultGray = '#d4d4d4'
-  return chartData.value.map(d => {
+  return sortedChartData.value.map(d => {
     // Highlight selected species only while the slide-over is open
     if (
       isSlideOverOpen.value &&
@@ -385,6 +497,7 @@ watch(updatedChartData, (newVal) => {
     currentHoveredDatum.value = null
   }
 })
+
 
 // ----- Zoom Functions -----
 function zoomIn() {

@@ -14,8 +14,8 @@
       delay: 0.2
     }">
       <Transition name="fade" mode="out-in">
-        <img :key="imageUrl" :src="imageUrl" alt="Vald skogsmiljö" class="h-full rounded-xl ring ring-muted/50 shadow"
-          width="805" height="505" />
+        <NuxtImg :key="imageUrl" :src="imageUrl" alt="Vald skogsmiljö"
+          class="h-full rounded-lg ring ring-muted/50 shadow" width="805" height="400" />
       </Transition>
     </Motion>
     <USkeleton v-else class="h-20 flex items-center justify-center">Välj miljö för att visa bild</USkeleton>

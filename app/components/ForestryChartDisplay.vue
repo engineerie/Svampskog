@@ -78,11 +78,12 @@
         </template>
         <template v-else-if="props.chartType === 'area'">
           <VisArea v-for="fw in activeFrameworks" :x="xAccessor" :y="(d: any) => getFrameworkValue(d, fw.key)"
-            :color="() => (fw.colorArea || fw.color)" :interpolateMissingData="true" :zIndex="1" />
+            :color="() => (fw.colorArea || fw.color)" :interpolateMissingData="true" :zIndex="1" lineColor="#a611a5"
+            :line="true" />
 
           <!-- <VisCrosshair v-if="hasActiveSeries" :template="crosshairTemplate" /> -->
-          <VisLine v-for="fw in activeFrameworks" :x="xAccessor" :y="(d: any) => getFrameworkValue(d, fw.key)"
-            :color="() => (hexToRgba(fw.colorLine || fw.color, 0.6))" :lineDashArray="fw.lineDashArray" />
+          <!-- <VisLine v-for="fw in activeFrameworks" :x="xAccessor" :y="(d: any) => getFrameworkValue(d, fw.key)"
+            :color="() => (hexToRgba(fw.colorLine || fw.color, 0.6))" :lineDashArray="fw.lineDashArray" /> -->
           <VisArea v-if="isKgMatsvamp" v-for="fw in activeFrameworks" :key="fw.key + '-kg-x2'" :x="xAccessor"
             :y="kgDoubleAccessorFor(fw.key)" :color="() => 'rgba(234,179,8,0.3)'" />
           <!-- <VisTooltip v-if="hasActiveSeries" :horizontalShift="30" /> -->
