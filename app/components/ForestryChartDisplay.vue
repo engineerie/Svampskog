@@ -97,14 +97,12 @@
         </template>
         <VisPlotline v-for="band in plotBands" axis="x" :value="band.value" :color="`rgba(69,10,10, 0.5)`"
           :lineStyle="[2, 3]" :label="band.labelText" :labelColor="band.labelColor" :zIndex="100" :lineWidth="1" />
-        <VisAxis tickTextFontSize="12px" :gridLine="true" type="x" :tickValues="xTickValues"
+        <VisAxis tickTextFontSize="12px" :gridLine="false" type="x" :tickValues="xTickValues"
           :tickFormat="formatXTicks" />
-        <VisAxis tickTextFontSize="12px" type="y" />
+        <VisAxis tickTextFontSize="12px" type="y" :gridLine="false" />
       </VisXYContainer>
     </ClientOnly>
   </div>
-
-
 </template>
 
 <script setup lang="ts">

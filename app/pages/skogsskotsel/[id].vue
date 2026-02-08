@@ -131,7 +131,8 @@
                         </div>
 
                         <ContentRenderer v-if="methodChartTab === 'skogsskole' && methodMangdMykorrhizaDoc"
-                            :value="methodMangdMykorrhizaDoc" class="text-md text-neutral-800 ring-muted/50 rounded-md" />
+                            :value="methodMangdMykorrhizaDoc"
+                            class="text-md text-neutral-800 ring-muted/50 rounded-md" />
                         <ContentRenderer v-else-if="methodSvampgrupperDoc" :value="methodSvampgrupperDoc"
                             class="text-md text-neutral-800 ring-muted/50 rounded-md" />
                         <ForestryChartMain v-model:selectedChart="methodChartTab" :selectedChart="methodChartTab"
@@ -2075,12 +2076,12 @@ async function handleMethodNav(id: string) {
 
 .slide-left-fade-enter-active,
 .slide-right-fade-enter-active {
-    transition: opacity 0.15s ease, transform 0.1s ease;
+    transition: opacity 0.3s ease, transform 0.25s ease;
 }
 
 .slide-left-fade-leave-active,
 .slide-right-fade-leave-active {
-    transition: opacity 0.1s ease, transform 0.1s ease;
+    transition: opacity 0.2s ease, transform 0.2s ease;
 }
 
 .slide-left-fade-enter-from {

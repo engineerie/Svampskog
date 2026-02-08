@@ -158,7 +158,7 @@
 
         <UTable ref="table" v-model:column-visibility="columnVisibility" v-model:pagination="pagination"
           :data="displayedData" :columns="columns" sticky :loading="isLoading" v-model:sorting="sorting"
-          @select="selectRow" :autoResetAll="true" :pagination-options="(isMobile && !paginationEnabled)
+          @select="selectRow" :autoResetAll="false" :pagination-options="(isMobile && !paginationEnabled)
             ? false
             : (paginationEnabled
               ? { getPaginationRowModel: getPaginationRowModel() }
@@ -204,10 +204,11 @@
 </template>
 
 <script setup>
-import { ref, computed, watch, h, resolveComponent, onBeforeUnmount } from "vue";
+import { ref, computed, watch, h, resolveComponent, onBeforeUnmount, onMounted } from "vue";
 import { useMediaQuery } from '@vueuse/core';
 import { useSpeciesStore } from "~/stores/speciesStore";
 import { useEnvParamsStore } from '~/stores/envParamsStore'
+import { useTableStateStore } from '~/stores/tableStateStore'
 import { getPaginationRowModel } from '@tanstack/vue-table'
 import { upperFirst } from 'scule'
 import { hasEdnaDataset } from '~/utils/edna'
@@ -230,12 +231,18 @@ const props = defineProps({
   externalMatsvampFilter: { type: Boolean, default: undefined },
   externalStatusFilter: { type: Array, default: undefined },
   externalGruppFilter: { type: Array, default: undefined },
-  enablePagination: { type: Boolean, default: false }
+  enablePagination: { type: Boolean, default: false },
+  tableKey: { type: String, default: '' }
 });
 
 const isMobile = useMediaQuery('(max-width: 767px)');
 const useMobileLayout = computed(() =>
   isMobile.value || (props.isNormalView && props.dataTypeFolder !== 'edna')
+);
+
+const tableStateStore = useTableStateStore();
+const resolvedTableKey = computed(() =>
+  props.tableKey || `${props.dataTypeFolder}:${props.dataType}:${props.mat}:${props.obs}`
 );
 
 // allow child to emit an "enlarge" event
@@ -829,6 +836,39 @@ const sorting = ref(
   isRankColumn
     ? [{ id: props.obs, desc: false }, { id: 'Commonname', desc: false }]
     : [{ id: props.obs, desc: true }]
+);
+
+onMounted(() => {
+  const saved = tableStateStore.getState(resolvedTableKey.value);
+  if (!saved) return;
+  if (Array.isArray(saved.selectedFilter)) selectedFilter.value = [...saved.selectedFilter];
+  if (Array.isArray(saved.selectedStatus)) selectedStatus.value = [...saved.selectedStatus];
+  if (Array.isArray(saved.selectedGrupp)) selectedGrupp.value = [...saved.selectedGrupp];
+  if (Array.isArray(saved.selectedMark)) selectedMark.value = [...saved.selectedMark];
+  if (Array.isArray(saved.sorting)) sorting.value = [...saved.sorting];
+  if (saved.rowsPerPage !== undefined) rowsPerPage.value = saved.rowsPerPage;
+  if (saved.pagination) {
+    pagination.value = {
+      pageIndex: saved.pagination.pageIndex ?? 0,
+      pageSize: saved.pagination.pageSize ?? pagination.value.pageSize,
+    };
+  }
+});
+
+watch(
+  [selectedFilter, selectedStatus, selectedGrupp, selectedMark, sorting, rowsPerPage, pagination],
+  () => {
+    tableStateStore.setState(resolvedTableKey.value, {
+      selectedFilter: [...selectedFilter.value],
+      selectedStatus: [...selectedStatus.value],
+      selectedGrupp: [...selectedGrupp.value],
+      selectedMark: [...selectedMark.value],
+      sorting: [...sorting.value],
+      rowsPerPage: rowsPerPage.value,
+      pagination: { ...pagination.value },
+    });
+  },
+  { deep: true }
 );
 
 const UBadge = resolveComponent('UBadge')

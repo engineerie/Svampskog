@@ -117,7 +117,8 @@
             @update:visibleRange="tableVisibleRange = $event" :isNormalView="isNormalView"
             :column-visibility-overrides="columnVisibilityOverrides" :externalMatsvampFilter="externalMatsvampFilter"
             :externalStatusFilter="externalStatusFilter" :externalGruppFilter="externalGruppFilter"
-            :search-term="effectiveSearchTerm" @update:searchTerm="handleSearchUpdate" :enablePagination="true" />
+            :search-term="effectiveSearchTerm" @update:searchTerm="handleSearchUpdate" :enablePagination="true"
+            tableKey="edna" />
         </div>
 
         <div v-else-if="activeTab === 'columnChart'" class="">
@@ -136,7 +137,7 @@
             :isNormalView="isNormalView" :column-visibility-overrides="columnVisibilityOverrides"
             :search-term="effectiveSearchTerm" :externalMatsvampFilter="externalMatsvampFilter"
             :externalStatusFilter="externalStatusFilter" :externalGruppFilter="externalGruppFilter"
-            :enablePagination="true" />
+            :enablePagination="true" tableKey="edna" />
         </div>
       </transition>
 
@@ -182,7 +183,7 @@ const barChartRef = ref<HTMLElement | null>(null);
 let barChartObserver: IntersectionObserver | null = null;
 let barChartObservedEl: HTMLElement | null = null;
 
-const props = defineProps<{ isNormalView: boolean; searchTerm?: string }>();
+const props = defineProps<{ isNormalView: boolean; searchTerm?: string; isActive?: boolean }>();
 const { isNormalView } = toRefs(props);
 const emit = defineEmits<{ (e: "enlarge"): void; (e: "update:searchTerm", value: string): void }>();
 
@@ -329,9 +330,9 @@ onBeforeUnmount(() => {
 });
 
 watch(
-  [() => barChartRef.value, () => activeTab.value, () => showBarChart.value, () => isSmallScreen.value],
-  ([element, tab, isVisible, isSmall]) => {
-    if (!element || tab !== 'columnChart' || !isVisible || isSmall) {
+  [() => barChartRef.value, () => activeTab.value, () => showBarChart.value, () => isSmallScreen.value, () => props.isActive],
+  ([element, tab, isVisible, isSmall, isActive]) => {
+    if (!element || tab !== 'columnChart' || !isVisible || isSmall || isActive === false) {
       isBarChartSticky.value = false;
       cleanupBarChartObserver();
       return;

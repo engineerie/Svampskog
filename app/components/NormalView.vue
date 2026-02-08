@@ -3,7 +3,7 @@
     <div class="col-span-12">
 
       <div class="flex justify-between items-start border-b border-muted/50 p-2 pb-0" v-if="!isMobile">
-        <UTabs v-model="activeTab" :items="normalViewTabs" size="lg" :ui="{
+        <UTabs :unmount-on-hide="false" v-model="activeTab" :items="normalViewTabs" size="lg" :ui="{
           root: '',
           list: 'flex-nowrap gap-2 bg-transparent',
           indicator: 'bg-white border border-muted/50 shadow',
@@ -24,11 +24,11 @@
 
       </div>
 
-
       <Transition :name="contentTransitionName" mode="out-in">
         <div v-if="activeTab === 'dna'" key="dna" class="col-span-12">
           <div class="hidden md:block">
             <EdnaComponent :isNormalView="!isEdnaExpanded" :searchTerm="globalSearchTerm"
+              :isActive="activeTab === 'dna'"
               @update:searchTerm="globalSearchTerm = $event" @enlarge="handleEdnaToggle" />
           </div>
           <UContainer class="md:hidden space-y-3 pt-3 bg-muted/50">
@@ -132,25 +132,42 @@
           <transition name="fade" mode="out-in">
             <div v-if="activeDetailComponent" class="space-y-4">
               <component :is="activeDetailComponent" v-bind="detailComponentProps" :key="detailComponentKey"
+                :searchTerm="globalSearchTerm" @update:searchTerm="globalSearchTerm = $event"
                 @enlarge="handleCloseDetail" class="w-full" />
             </div>
             <template v-else>
               <div class="col-span-12 grid-cols-12 rounded-2xl gap-y-3 hidden md:grid ">
                 <div class="col-span-4 flex flex-col h-full border-r border-muted/50">
-                  <FullScreenEdible :geography="geography" :forestType="forestType" :standAge="standAge"
-                    :vegetationType="vegetationType" :isNormalView="true" @enlarge="emitEnlarge('FullScreenEdible')"
-                    :searchTerm="globalSearchTerm" @update:searchTerm="globalSearchTerm = $event"
+                  <FullscreenTable :isNormalView="true" @enlarge="emitEnlarge('FullScreenEdible')"
+                    :searchTerm="globalSearchTerm" @update:searchTerm="globalSearchTerm = $event" title="Matsvampar"
+                    icon="icon-park-solid:knife-fork" titleColorClass="text-warning-500 dark:text-neutral-300"
+                    :titleClickable="true" cardClass="rounded-none sm:rounded-lg" countFolder="edible"
+                    countType="edibledata" countFilterKey="Nyasvamp-boken" dataType="edibledata" dataTypeFolder="edible"
+                    grupp="Svamp-grupp" mat="Nyasvamp-boken" obs="Rank matsvamp" obsLabel="Sannolikhet"
+                    :filterEdible="true" tableKey="edna-edible"
+                    :column-visibility-overrides="{ mark: false, 'Nyasvamp-boken': false }"
                     :key="route.fullPath" />
                 </div>
                 <div class="col-span-4 flex flex-col h-full border-r border-muted/50">
-                  <FullScreenPoison :geography="geography" :forestType="forestType" :standAge="standAge"
-                    :vegetationType="vegetationType" :isNormalView="true" @enlarge="emitEnlarge('FullScreenPoison')"
-                    :searchTerm="globalSearchTerm" @update:searchTerm="globalSearchTerm = $event"
+                  <FullscreenTable :isNormalView="true" @enlarge="emitEnlarge('FullScreenPoison')"
+                    :searchTerm="globalSearchTerm" @update:searchTerm="globalSearchTerm = $event" title="Giftsvampar"
+                    icon="i-hugeicons-danger" titleColorClass="text-poison-500 dark:text-neutral-300"
+                    :titleClickable="true" cardClass="rounded-none sm:rounded-none border-muted/50" countFolder="edible"
+                    countType="edibledata" countFilterKey="Giftsvamp" dataType="edibledata" dataTypeFolder="edible"
+                    grupp="Svamp-grupp" mat="Nyasvamp-boken" obs="Rank giftsvamp" obsLabel="Sannolikhet"
+                    :filterPoison="true" tableKey="edna-poison"
+                    :column-visibility-overrides="{ mark: false, 'Nyasvamp-boken': false }"
                     :key="route.fullPath" />
                 </div>
                 <div class="col-span-4 flex flex-col">
-                  <RedlistedComponent :isNormalView="true" @enlarge="emitEnlarge('RedlistedComponent')"
-                    :searchTerm="globalSearchTerm" @update:searchTerm="globalSearchTerm = $event" />
+                  <FullscreenTable :isNormalView="true" @enlarge="emitEnlarge('RedlistedComponent')"
+                    :searchTerm="globalSearchTerm" @update:searchTerm="globalSearchTerm = $event"
+                    title="Naturvårdsarter" icon="i-material-symbols-award-star-outline"
+                    titleColorClass="text-signal-500 dark:text-neutral-300" :titleClickable="true"
+                    cardClass="rounded-none sm:rounded-lg" countFolder="redlisted" countType="redlisted"
+                    dataType="redlisted" dataTypeFolder="redlisted" grupp="Svamp-grupp" mat="Nyasvamp-boken"
+                    obs="RankRed" obsLabel="Sannolikhet" tableKey="edna-redlisted"
+                    :column-visibility-overrides="{ 'Nyasvamp-boken': false }" />
                 </div>
               </div>
             </template>
@@ -163,9 +180,7 @@
 
 <script setup>
 import EdnaComponent from "./EdnaComponent.vue";
-import FullScreenEdible from "./FullScreenEdible.vue";
-import FullScreenPoison from "./FullScreenPoison.vue";
-import RedlistedComponent from "./RedlistedComponent.vue";
+import FullscreenTable from "./FullscreenTable.vue";
 import { useRoute } from "vue-router";
 import { ref, computed, watch, onMounted, onUnmounted } from 'vue';
 import { useEnvParamsStore } from '~/stores/envParamsStore';
@@ -211,9 +226,9 @@ const viewTabMap = {
 }
 
 const detailComponentMap = {
-  FullScreenEdible,
-  FullScreenPoison,
-  RedlistedComponent,
+  FullScreenEdible: FullscreenTable,
+  FullScreenPoison: FullscreenTable,
+  RedlistedComponent: FullscreenTable,
   FullScreenEdna: EdnaComponent
 }
 
@@ -224,7 +239,8 @@ const emitEnlarge = (componentName) => {
   emit("enlarge", componentName);
 };
 
-const activeTab = ref('dna')
+const activeTab = ref('dna');
+const previousTab = ref(activeTab.value);
 const normalViewTabs = [
   { label: 'Enligt DNA', value: 'dna', icon: 'solar:dna-linear' },
   { label: 'Enligt fruktkroppar', value: 'knowledge', icon: 'lineicons:mushroom-1' },
@@ -242,14 +258,14 @@ onUnmounted(() => {
 
 const tabSize = computed(() => windowWidth.value >= 768 ? 'md' : 'md');
 const isMobile = computed(() => windowWidth.value < 768)
-const contentTransitionName = computed(() =>
-  activeTab.value === 'dna' ? 'slide-right-fade' : 'slide-left-fade'
-)
-
-const geography = computed(() => envStore.geography)
-const forestType = computed(() => envStore.forestType)
-const standAge = computed(() => envStore.standAge)
-const vegetationType = computed(() => envStore.vegetationType)
+const tabOrder = ['dna', 'knowledge'];
+const contentTransitionName = computed(() => {
+  if (activeTab.value === previousTab.value) return 'slide-right-fade';
+  const fromIndex = tabOrder.indexOf(previousTab.value);
+  const toIndex = tabOrder.indexOf(activeTab.value);
+  if (fromIndex === -1 || toIndex === -1) return 'slide-right-fade';
+  return toIndex > fromIndex ? 'slide-left-fade' : 'slide-right-fade';
+})
 
 const activeDetailComponent = computed(() => detailComponentMap[props.activeView ?? ''] ?? null)
 
@@ -258,13 +274,70 @@ const detailComponentProps = computed(() => {
     return { isNormalView: false }
   }
 
-  if (props.activeView === 'FullScreenEdible' || props.activeView === 'FullScreenPoison') {
+  if (props.activeView === 'FullScreenEdible') {
     return {
       isNormalView: false,
-      geography: geography.value,
-      forestType: forestType.value,
-      standAge: standAge.value,
-      vegetationType: vegetationType.value,
+      title: 'Matsvampar',
+      icon: 'icon-park-solid:knife-fork',
+      titleColorClass: 'text-warning-500 dark:text-neutral-300',
+      titleClickable: false,
+      cardClass: 'rounded-none sm:rounded-lg',
+      countFolder: 'edible',
+      countType: 'edibledata',
+      countFilterKey: 'Nyasvamp-boken',
+      dataType: 'edibledata',
+      dataTypeFolder: 'edible',
+      grupp: 'Svamp-grupp',
+      mat: 'Nyasvamp-boken',
+      obs: 'Rank matsvamp',
+      obsLabel: 'Sannolikhet',
+      tableKey: 'edna-edible',
+      filterEdible: true,
+      columnVisibilityOverrides: { mark: false, 'Nyasvamp-boken': false }
+    }
+  }
+
+  if (props.activeView === 'FullScreenPoison') {
+    return {
+      isNormalView: false,
+      title: 'Giftsvampar',
+      icon: 'i-hugeicons-danger',
+      titleColorClass: 'text-poison-500 dark:text-neutral-300',
+      titleClickable: false,
+      cardClass: 'rounded-none sm:rounded-none border-muted/50',
+      countFolder: 'edible',
+      countType: 'edibledata',
+      countFilterKey: 'Giftsvamp',
+      dataType: 'edibledata',
+      dataTypeFolder: 'edible',
+      grupp: 'Svamp-grupp',
+      mat: 'Nyasvamp-boken',
+      obs: 'Rank giftsvamp',
+      obsLabel: 'Sannolikhet',
+      tableKey: 'edna-poison',
+      filterPoison: true,
+      columnVisibilityOverrides: { mark: false, 'Nyasvamp-boken': false }
+    }
+  }
+
+  if (props.activeView === 'RedlistedComponent') {
+    return {
+      isNormalView: false,
+      title: 'Naturvårdsarter',
+      icon: 'i-material-symbols-award-star-outline',
+      titleColorClass: 'text-signal-500 dark:text-neutral-300',
+      titleClickable: false,
+      cardClass: 'rounded-none sm:rounded-lg',
+      countFolder: 'redlisted',
+      countType: 'redlisted',
+      dataType: 'redlisted',
+      dataTypeFolder: 'redlisted',
+      grupp: 'Svamp-grupp',
+      mat: 'Nyasvamp-boken',
+      obs: 'RankRed',
+      obsLabel: 'Sannolikhet',
+      tableKey: 'edna-redlisted',
+      columnVisibilityOverrides: { 'Nyasvamp-boken': false }
     }
   }
 
@@ -284,7 +357,7 @@ const isEdnaExpanded = computed(() => props.activeView === 'FullScreenEdna')
 const currentViewLabel = computed(() => viewLabels[props.activeView ?? ''] ?? '')
 
 function handleCloseDetail() {
-  activeTab.value = 'dna'
+  activeTab.value = 'knowledge'
   emit('closeView')
 }
 
@@ -313,11 +386,11 @@ watch(() => props.activeView, (val) => {
   }
 })
 
-watch(activeTab, (val) => {
-  if (props.activeView && viewTabMap[props.activeView] !== val) {
-    emit('closeView')
-  }
+watch(activeTab, (val, prev) => {
+  previousTab.value = prev
 })
+
+
 
 async function fetchCount(folder, type, countRef, filterKey = null) {
   const params = [envStore.geography, envStore.forestType, envStore.standAge, envStore.vegetationType]
@@ -399,33 +472,34 @@ watch(
 
 .slide-left-fade-enter-active,
 .slide-right-fade-enter-active {
-  transition: opacity 0.15s ease, transform 0.1s ease;
+  transition: opacity 0.3s ease, transform 0.25s ease;
 }
 
 .slide-left-fade-leave-active,
 .slide-right-fade-leave-active {
-  transition: opacity 0.1s ease, transform 0.1s ease;
+  transition: opacity 0.2s ease, transform 0.2s ease;
 }
 
 .slide-left-fade-enter-from {
   opacity: 0;
-  transform: translateX(-8px);
+  transform: translateX(-24px);
 }
 
 .slide-left-fade-leave-to {
   opacity: 0;
-  transform: translateX(8px);
+  transform: translateX(24px);
 }
 
 .slide-right-fade-enter-from {
   opacity: 0;
-  transform: translateX(8px);
+  transform: translateX(24px);
 }
 
 .slide-right-fade-leave-to {
   opacity: 0;
-  transform: translateX(-8px);
+  transform: translateX(-24px);
 }
+
 
 .rounded-tab {
   --r: 0.8em;
