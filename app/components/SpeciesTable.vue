@@ -215,6 +215,24 @@ import { hasEdnaDataset } from '~/utils/edna'
 
 
 
+const props = defineProps({
+  isNormalView: { type: Boolean, default: false },
+  dataTypeFolder: { type: String, default: 'edna' },
+  dataType: { type: String, default: 'edna' },
+  grupp: { type: String, default: 'Svamp-grupp-släkte' },
+  mat: { type: String, default: 'matsvamp' },
+  obs: { type: String, default: 'sample_plot_count' },
+  obsLabel: { type: String, default: 'Förekomst' },
+  columnVisibilityOverrides: { type: Object, default: () => ({}) },
+  filterEdible: { type: Boolean, default: false },
+  filterPoison: { type: Boolean, default: false },
+  searchTerm: { type: String, default: '' },
+  externalMatsvampFilter: { type: Boolean, default: undefined },
+  externalStatusFilter: { type: Array, default: undefined },
+  externalGruppFilter: { type: Array, default: undefined },
+  enablePagination: { type: Boolean, default: false }
+});
+
 const isMobile = useMediaQuery('(max-width: 767px)');
 const useMobileLayout = computed(() =>
   isMobile.value || (props.isNormalView && props.dataTypeFolder !== 'edna')
@@ -254,27 +272,18 @@ onBeforeUnmount(() => {
   }
 });
 
-const props = defineProps({
-  isNormalView: { type: Boolean, default: false },
-  dataTypeFolder: { type: String, default: 'edna' },
-  dataType: { type: String, default: 'edna' },
-  grupp: { type: String, default: 'Svamp-grupp-släkte' },
-  mat: { type: String, default: 'matsvamp' },
-  obs: { type: String, default: 'sample_plot_count' },
-  obsLabel: { type: String, default: 'Förekomst' },
-  columnVisibilityOverrides: { type: Object, default: () => ({}) },
-  filterEdible: { type: Boolean, default: false },
-  filterPoison: { type: Boolean, default: false },
-  searchTerm: { type: String, default: '' },
-  externalMatsvampFilter: { type: Boolean, default: undefined },
-  externalStatusFilter: { type: Array, default: undefined },
-  externalGruppFilter: { type: Array, default: undefined },
-  enablePagination: { type: Boolean, default: false }
-});
-
-
-
 const table = useTemplateRef('table')
+
+watch(
+  [() => props.searchTerm, () => table.value?.tableApi],
+  ([value, api]) => {
+    const nextValue = value ?? '';
+    rawSearch.value = nextValue;
+    if (!api) return;
+    api.getColumn('Commonname')?.setFilterValue(nextValue);
+  },
+  { immediate: true, flush: 'post' }
+);
 
 const defaultVisibility = useMobileLayout.value
   ? {

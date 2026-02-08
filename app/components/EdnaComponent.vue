@@ -117,7 +117,7 @@
             @update:visibleRange="tableVisibleRange = $event" :isNormalView="isNormalView"
             :column-visibility-overrides="columnVisibilityOverrides" :externalMatsvampFilter="externalMatsvampFilter"
             :externalStatusFilter="externalStatusFilter" :externalGruppFilter="externalGruppFilter"
-            :enablePagination="true" />
+            :search-term="effectiveSearchTerm" @update:searchTerm="handleSearchUpdate" :enablePagination="true" />
         </div>
 
         <div v-else-if="activeTab === 'columnChart'" class="">
@@ -126,15 +126,15 @@
             <BarChart class="mb-6" v-if="showBarChart" :chartData="data" :chartWidth="chartWidth"
               :geography="geographyValue" :forestType="forestTypeValue" :standAge="standAgeValue"
               :vegetationType="vegetationTypeValue" :matsvampFilter="matsvampFilter" :giftsvampFilter="giftsvampFilter"
-              :gruppFilter="gruppFilter" :statusFilter="statusFilter" :search-term="modalSearchTerm"
+              :gruppFilter="gruppFilter" :statusFilter="statusFilter" :search-term="effectiveSearchTerm"
               :sort-order="tableSorting" :visible-range="tableVisibleRange" />
           </div>
           <SpeciesTable @enlarge="emit('enlarge')" @update:matsvampFilter="matsvampFilter = $event"
             @update:giftsvampFilter="giftsvampFilter = $event" @update:gruppFilter="gruppFilter = $event"
-            @update:statusFilter="statusFilter = $event" @update:searchTerm="modalSearchTerm = $event"
+            @update:statusFilter="statusFilter = $event" @update:searchTerm="handleSearchUpdate"
             @update:sorting="tableSorting = $event" @update:visibleRange="tableVisibleRange = $event"
             :isNormalView="isNormalView" :column-visibility-overrides="columnVisibilityOverrides"
-            :search-term="modalSearchTerm" :externalMatsvampFilter="externalMatsvampFilter"
+            :search-term="effectiveSearchTerm" :externalMatsvampFilter="externalMatsvampFilter"
             :externalStatusFilter="externalStatusFilter" :externalGruppFilter="externalGruppFilter"
             :enablePagination="true" />
         </div>
@@ -146,9 +146,10 @@
         class="shadow hidden md:block fixed top-0 pt-16 z-20 bg-neutral-50 dark:bg-black border-b border-x rounded-xl border-neutral-200 dark:border-neutral-800 left-0 right-0">
         <div class="w-full mx-auto max-w-7xl py-2 px-4">
           <BarChart :chartData="data" :chartWidth="chartWidth" :chartHeight="40" :showControls="false"
-            :showYAxis="false" :geography="geographyValue" :forestType="forestTypeValue" :standAge="standAgeValue"
+            :showYAxis="false" :showTooltip="false" :geography="geographyValue" :forestType="forestTypeValue"
+            :standAge="standAgeValue"
             :vegetationType="vegetationTypeValue" :matsvampFilter="matsvampFilter" :giftsvampFilter="giftsvampFilter"
-            :gruppFilter="gruppFilter" :statusFilter="statusFilter" :search-term="modalSearchTerm"
+            :gruppFilter="gruppFilter" :statusFilter="statusFilter" :search-term="effectiveSearchTerm"
             :sort-order="tableSorting" :visible-range="tableVisibleRange" />
         </div>
       </UContainer>
@@ -157,7 +158,7 @@
 </template>
 
 <script setup lang="ts">
-import { ref, computed, watch, onMounted, onBeforeUnmount } from "vue";
+import { ref, computed, watch, onMounted, onBeforeUnmount, toRefs } from "vue";
 import { useMediaQuery } from '@vueuse/core';
 import { useEnvParamsStore } from "~/stores/envParamsStore";
 import { storeToRefs } from "pinia";
@@ -172,7 +173,7 @@ const quickFilter = ref<'matsvamp' | 'naturvard' | 'syns' | null>(null);
 
 
 
-const modalSearchTerm = ref('');
+const localSearchTerm = ref('');
 const tableSorting = ref<Array<{ id: string; desc: boolean }>>([]);
 const tableVisibleRange = ref<{ startIndex: number; endIndex: number; total: number } | null>(null);
 const showBarChart = ref(true);
@@ -181,8 +182,19 @@ const barChartRef = ref<HTMLElement | null>(null);
 let barChartObserver: IntersectionObserver | null = null;
 let barChartObservedEl: HTMLElement | null = null;
 
-const { isNormalView } = defineProps<{ isNormalView: boolean }>();
-const emit = defineEmits<{ (e: "enlarge"): void }>();
+const props = defineProps<{ isNormalView: boolean; searchTerm?: string }>();
+const { isNormalView } = toRefs(props);
+const emit = defineEmits<{ (e: "enlarge"): void; (e: "update:searchTerm", value: string): void }>();
+
+const effectiveSearchTerm = computed(() => props.searchTerm ?? localSearchTerm.value);
+
+function handleSearchUpdate(value: string) {
+  if (props.searchTerm !== undefined) {
+    emit('update:searchTerm', value);
+    return;
+  }
+  localSearchTerm.value = value;
+}
 
 const tabsStore = useTabsStore();
 const activeTab = computed({

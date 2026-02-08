@@ -29,26 +29,27 @@
 
       </div>
       <div class="md:flex gap-4 items-center  hidden">
-        <UTabs v-if="!useMobileLayout" class="flex mt-2" v-model="activeTab" :items="items" variant="pill"
+        <!-- <UTabs v-if="!useMobileLayout" class="flex mt-2" v-model="activeTab" :items="items" variant="pill"
           color="neutral" size="md" :ui="{
             indicator: 'bg-white dark:bg-black border border-neutral-300/80 dark:border-neutral-300/30',
             trigger: 'data-[state=active]:text-neutral-700 dark:data-[state=active]:text-neutral-100/90 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-neutral'
-          }" />
+          }" /> -->
 
         <!-- <UButton :label="isNormalView ? 'Visa mer' : 'Tillbaka till översikt'" color="neutral" variant="outline"
           size="sm" @click="$emit('enlarge')" class="hidden md:flex ring-muted/60" /> -->
       </div>
     </div>
     <!-- Table vs. grid view -->
-    <transition name="fade" mode="out-in" class="md:min-h-[260px]">
-      <div v-if="isTableView">
-        <SpeciesTable @enlarge="emit('enlarge')" :is-normal-view="isNormalView" dataType="redlisted"
-          dataTypeFolder="redlisted" grupp="Svamp-grupp" mat="Nyasvamp-boken" obs="RankRed" obsLabel="Sannolikhet"
-          :column-visibility-overrides="{ 'Nyasvamp-boken': false }" />
-      </div>
-      <div v-else>
+    <transition name="fade" mode="out-in" class="md:min-h-65">
+
+      <SpeciesTable @enlarge="emit('enlarge')" :is-normal-view="isNormalView" dataType="redlisted"
+        dataTypeFolder="redlisted" grupp="Svamp-grupp" mat="Nyasvamp-boken" obs="RankRed" obsLabel="Sannolikhet"
+        :search-term="searchTerm" @update:searchTerm="value => emit('update:searchTerm', value)"
+        :column-visibility-overrides="{ 'Nyasvamp-boken': false }" />
+
+      <!-- <div v-else>
         <SpeciesGrid :is-normal-view="isNormalView" dataType="redlisted" dataTypeFolder="redlisted" />
-      </div>
+      </div> -->
     </transition>
   </UCard>
 </template>
@@ -87,7 +88,7 @@ watch(
   { immediate: true }
 );
 
-const emit = defineEmits(['enlarge']);
+const emit = defineEmits(['enlarge', 'update:searchTerm']);
 
 // Define the items for the tabs.
 const items = [
@@ -104,7 +105,7 @@ const items = [
 ];
 
 // Import props if needed.
-const props = defineProps({ isNormalView: Boolean });
+const props = defineProps({ isNormalView: Boolean, searchTerm: { type: String, default: '' } });
 
 // detect mobile screens (< md)
 const isSmallScreen = useMediaQuery('(max-width: 767px)');

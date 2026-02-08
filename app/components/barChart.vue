@@ -23,8 +23,8 @@
           :numTicks="updatedChartData.length" tickTextFitMode="trim" :tickTextWidth="150" tickTextAlign="left"
           :tick-format="tickFormat" /> -->
         <VisAxis v-if="showYAxis" type="y" label="Antal skogar" :gridLine="false" />
-        <VisTooltip v-if="hasData" :triggers="triggers" :followCursor="true" />
-        <VisCrosshair v-if="hasData" :color="barColorAccessor" :template="tooltipTemplate" />
+        <VisTooltip v-if="showTooltip && hasData" :triggers="triggers" :followCursor="true" />
+        <VisCrosshair v-if="showTooltip && hasData" :color="barColorAccessor" :template="tooltipTemplate" />
 
       </VisXYContainer>
     </div>
@@ -51,7 +51,8 @@ const props = defineProps({
   visibleRange: { type: Object as PropType<{ startIndex: number; endIndex: number; total: number } | null>, default: null },
   chartHeight: { type: Number, default: 150 },
   showControls: { type: Boolean, default: true },
-  showYAxis: { type: Boolean, default: true }
+  showYAxis: { type: Boolean, default: true },
+  showTooltip: { type: Boolean, default: true }
 })
 
 // ----- Filtering & Zoom Setup -----

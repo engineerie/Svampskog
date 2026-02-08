@@ -2,13 +2,16 @@
   <div class="grid grid-cols-12 ">
     <div class="col-span-12">
 
-      <div class="flex justify-between border-b border-muted/50" v-if="!isMobile">
+      <div class="flex justify-between items-start border-b border-muted/50 p-2 pb-0" v-if="!isMobile">
         <UTabs v-model="activeTab" :items="normalViewTabs" size="lg" :ui="{
           root: '',
           list: 'flex-nowrap gap-2 bg-transparent',
           indicator: 'bg-white border border-muted/50 shadow',
           trigger: 'data-[state=active]:text-neutral-800 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary'
-        }" class="px-2 pt-2 pb-1" />
+        }" />
+
+        <UInput v-model="globalSearchTerm" class="max-w-sm min-w-[12ch] m-1" size="lg" :ui="{ base: 'ring-muted/50' }"
+          placeholder="Sök på namn" icon="i-heroicons-magnifying-glass" variant="outline" />
 
         <!-- <div class=" flex flex-col sm:flex-row gap-1.5  w-fit h-fit">
           <UAlert v-if="activeTab !== 'dna'" :color="activeTab === 'dna' ? 'secondary' : 'neutral'" variant="outline"
@@ -25,7 +28,8 @@
       <Transition :name="contentTransitionName" mode="out-in">
         <div v-if="activeTab === 'dna'" key="dna" class="col-span-12">
           <div class="hidden md:block">
-            <EdnaComponent :isNormalView="!isEdnaExpanded" @enlarge="handleEdnaToggle" />
+            <EdnaComponent :isNormalView="!isEdnaExpanded" :searchTerm="globalSearchTerm"
+              @update:searchTerm="globalSearchTerm = $event" @enlarge="handleEdnaToggle" />
           </div>
           <UContainer class="md:hidden space-y-3 pt-3 bg-muted/50">
             <UPageFeature title="Enligt DNA" description="Från markinventeringens jordprover" />
@@ -135,15 +139,18 @@
                 <div class="col-span-4 flex flex-col h-full border-r border-muted/50">
                   <FullScreenEdible :geography="geography" :forestType="forestType" :standAge="standAge"
                     :vegetationType="vegetationType" :isNormalView="true" @enlarge="emitEnlarge('FullScreenEdible')"
+                    :searchTerm="globalSearchTerm" @update:searchTerm="globalSearchTerm = $event"
                     :key="route.fullPath" />
                 </div>
                 <div class="col-span-4 flex flex-col h-full border-r border-muted/50">
                   <FullScreenPoison :geography="geography" :forestType="forestType" :standAge="standAge"
                     :vegetationType="vegetationType" :isNormalView="true" @enlarge="emitEnlarge('FullScreenPoison')"
+                    :searchTerm="globalSearchTerm" @update:searchTerm="globalSearchTerm = $event"
                     :key="route.fullPath" />
                 </div>
                 <div class="col-span-4 flex flex-col">
-                  <RedlistedComponent :isNormalView="true" @enlarge="emitEnlarge('RedlistedComponent')" />
+                  <RedlistedComponent :isNormalView="true" @enlarge="emitEnlarge('RedlistedComponent')"
+                    :searchTerm="globalSearchTerm" @update:searchTerm="globalSearchTerm = $event" />
                 </div>
               </div>
             </template>
@@ -174,6 +181,7 @@ if (!page.value) {
 }
 
 const showImagesAlert = ref(true)
+const globalSearchTerm = ref('')
 
 const open = ref(false)
 const envStore = useEnvParamsStore();

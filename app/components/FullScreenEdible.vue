@@ -21,12 +21,12 @@
             class="rounded-full" />
         </div>
         <div class="md:flex gap-1 items-center  hidden">
-          <UTabs v-if="!useMobileLayout" class="flex mt-2" v-model="activeTab" :items="items" variant="pill"
+          <!-- <UTabs v-if="!useMobileLayout" class="flex mt-2" v-model="activeTab" :items="items" variant="pill"
             color="neutral" size="md" :ui="{
               list: 'bg-transparent',
               indicator: 'bg-white dark:bg-black border border-neutral-300/80 dark:border-neutral-300/30',
               trigger: 'data-[state=active]:text-neutral-700 dark:data-[state=active]:text-neutral-100/90 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-neutral'
-            }" />
+            }" /> -->
           <!-- <UButton :label="isNormalView ? 'Visa mer' : 'Tillbaka till översikt'" color="neutral" variant="outline"
             size="sm" @click="$emit('enlarge')" class="hidden md:flex ring-muted/60" /> -->
         </div>
@@ -35,16 +35,17 @@
       </div> -->
       </div>
       <!-- TABLE VIEW -->
-      <transition name="fade" mode="out-in" class="md:min-h-[260px]">
-        <div v-if="isTableView">
+      <transition name="fade" mode="out-in" class="md:min-h-65">
+        <div>
           <SpeciesTable @enlarge="emit('enlarge')" :is-normal-view="isNormalView" dataType="edibledata"
             dataTypeFolder="edible" grupp="Svamp-grupp" mat="Nyasvamp-boken" obs="Rank matsvamp" obsLabel="Sannolikhet"
+            :search-term="searchTerm" @update:searchTerm="value => emit('update:searchTerm', value)"
             :filterEdible="true" :column-visibility-overrides="{ 'mark': false, 'Nyasvamp-boken': false }" />
         </div>
-        <div v-else>
+        <!-- <div v-else>
           <SpeciesGrid :is-normal-view="isNormalView" dataType="edibledata" dataTypeFolder="edible"
             :filterEdible="true" />
-        </div>
+        </div> -->
       </transition>
     </UCard>
   </div>
@@ -86,7 +87,7 @@ watch(
   { immediate: true }
 );
 
-const emit = defineEmits(['enlarge']);
+const emit = defineEmits(['enlarge', 'update:searchTerm']);
 
 
 const items = [
@@ -103,7 +104,7 @@ const items = [
 ];
 
 const tabsStore = useTabsStore();
-const props = defineProps({ isNormalView: Boolean });
+const props = defineProps({ isNormalView: Boolean, searchTerm: { type: String, default: '' } });
 
 // detect mobile screens (< md)
 const isSmallScreen = useMediaQuery('(max-width: 767px)');
