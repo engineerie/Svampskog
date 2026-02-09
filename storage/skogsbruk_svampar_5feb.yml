@@ -12,7 +12,7 @@ entries:
     Russulales: 17
     Thelephorales: 5
     Ascomyceter: 20
-    Övriga: 3.3
+    övrigt: 3.3
     Mängd mykorrhiza: 100
   - startskog: produktionsskog_
     metod: trakthygge
@@ -27,7 +27,7 @@ entries:
     Russulales: 17
     Thelephorales: 5
     Ascomyceter: 20
-    Övriga: 3.3
+    övrigt: 3.3
     Mängd mykorrhiza: 100
   - startskog: produktionsskog_
     metod: trakthygge
@@ -42,7 +42,7 @@ entries:
     Russulales: 0.5
     Thelephorales: 0.7
     Ascomyceter: 1.3
-    Övriga: 0.3
+    övrigt: 0.3
     Mängd mykorrhiza: 5
   - startskog: produktionsskog_
     metod: trakthygge
@@ -57,7 +57,7 @@ entries:
     Russulales: 1.35
     Thelephorales: 2.1
     Ascomyceter: 3.15
-    Övriga: 0.3
+    övrigt: 0.3
     Mängd mykorrhiza: 15
   - startskog: produktionsskog_
     metod: trakthygge
@@ -72,7 +72,7 @@ entries:
     Russulales: 6
     Thelephorales: 3.6
     Ascomyceter: 13.2
-    Övriga: 2.25
+    övrigt: 2.25
     Mängd mykorrhiza: 60
   - startskog: produktionsskog_
     metod: trakthygge
@@ -87,7 +87,7 @@ entries:
     Russulales: 13.2
     Thelephorales: 7.2
     Ascomyceter: 30
-    Övriga: 1.44
+    övrigt: 1.44
     Mängd mykorrhiza: 120
   - startskog: produktionsskog_
     metod: trakthygge
@@ -102,7 +102,7 @@ entries:
     Russulales: 13.53
     Thelephorales: 7.38
     Ascomyceter: 29.52
-    Övriga: 2.706
+    övrigt: 2.706
     Mängd mykorrhiza: 123
   - startskog: produktionsskog_
     metod: trakthygge
@@ -117,7 +117,7 @@ entries:
     Russulales: 15.73
     Thelephorales: 7.26
     Ascomyceter: 27.83
-    Övriga: 3.025
+    övrigt: 3.025
     Mängd mykorrhiza: 121
   - startskog: produktionsskog_
     metod: trakthygge
@@ -132,7 +132,7 @@ entries:
     Russulales: 16.8
     Thelephorales: 6.6
     Ascomyceter: 28.2
-    Övriga: 2.94
+    övrigt: 2.94
     Mängd mykorrhiza: 120
   - startskog: produktionsskog_
     metod: trakthygge
@@ -147,7 +147,7 @@ entries:
     Russulales: 17.25
     Thelephorales: 5.98
     Ascomyceter: 25.3
-    Övriga: 3.703
+    övrigt: 3.703
     Mängd mykorrhiza: 115
   - startskog: produktionsskog_
     metod: trakthygge
@@ -162,7 +162,7 @@ entries:
     Russulales: 17.28
     Thelephorales: 5.4
     Ascomyceter: 22.68
-    Övriga: 3.672
+    övrigt: 3.672
     Mängd mykorrhiza: 108
   - startskog: produktionsskog_
     metod: trakthygge
@@ -177,7 +177,7 @@ entries:
     Russulales: 16.995
     Thelephorales: 5.15
     Ascomyceter: 21.115
-    Övriga: 3.4505
+    övrigt: 3.4505
     Mängd mykorrhiza: 103
   - startskog: produktionsskog_
     metod: trakthygge
@@ -192,7 +192,7 @@ entries:
     Russulales: 17
     Thelephorales: 5
     Ascomyceter: 20
-    Övriga: 3.3
+    övrigt: 3.3
     Mängd mykorrhiza: 100
   - startskog: produktionsskog_
     metod: blädning
@@ -207,7 +207,7 @@ entries:
     Russulales: 17
     Thelephorales: 5
     Ascomyceter: 20
-    Övriga: 3.3
+    övrigt: 3.3
     Mängd mykorrhiza: 100
   - startskog: produktionsskog_
     metod: blädning
@@ -222,7 +222,7 @@ entries:
     Russulales: 17
     Thelephorales: 5
     Ascomyceter: 20
-    Övriga: 3.3
+    övrigt: 3.3
     Mängd mykorrhiza: 100
   - startskog: produktionsskog_
     metod: blädning
@@ -237,7 +237,7 @@ entries:
     Russulales: 12.6980198
     Thelephorales: 3.816831683
     Ascomyceter: 15.04455446
-    Övriga: 2.495049505
+    övrigt: 2.495049505
     Mängd mykorrhiza: 75
   - startskog: produktionsskog_
     metod: blädning
@@ -252,7 +252,7 @@ entries:
     Russulales: 14.25194175
     Thelephorales: 4.472815534
     Ascomyceter: 17.02475728
-    Övriga: 2.772815534
+    övrigt: 2.772815534
     Mängd mykorrhiza: 85
   - startskog: produktionsskog_
     metod: blädning
@@ -267,7 +267,7 @@ entries:
     Russulales: 15.4375
     Thelephorales: 4.851785714
     Ascomyceter: 19.20357143
-    Övriga: 3.180803571
+    övrigt: 3.180803571
     Mängd mykorrhiza: 95
   - startskog: produktionsskog_
     metod: blädning
@@ -282,7 +282,7 @@ entries:
     Russulales: 15.83870968
     Thelephorales: 5.193548387
     Ascomyceter: 20.96774194
-    Övriga: 2.893548387
+    övrigt: 2.893548387
     Mängd mykorrhiza: 100
   - startskog: produktionsskog_
     metod: blädning
@@ -297,7 +297,7 @@ entries:
     Russulales: 11.67142857
     Thelephorales: 3.985714286
     Ascomyceter: 15.9
-    Övriga: 2.134285714
+    övrigt: 2.134285714
     Mängd mykorrhiza: 75
   - startskog: produktionsskog_
     metod: blädning
@@ -312,7 +312,7 @@ entries:
     Russulales: 13.09442379
     Thelephorales: 4.657620818
     Ascomyceter: 17.8010223
-    Övriga: 2.560427509
+    övrigt: 2.560427509
     Mängd mykorrhiza: 85
   - startskog: produktionsskog_
     metod: blädning
@@ -327,7 +327,7 @@ entries:
     Russulales: 14.67185886
     Thelephorales: 5.04595525
     Ascomyceter: 19.78975904
-    Övriga: 3.020869191
+    övrigt: 3.020869191
     Mängd mykorrhiza: 95
   - startskog: produktionsskog_
     metod: blädning
@@ -342,7 +342,7 @@ entries:
     Russulales: 15.3125
     Thelephorales: 5.28125
     Ascomyceter: 21.59375
-    Övriga: 2.746875
+    övrigt: 2.746875
     Mängd mykorrhiza: 100
   - startskog: produktionsskog_
     metod: blädning
@@ -357,7 +357,7 @@ entries:
     Russulales: 11.21559633
     Thelephorales: 4.059633028
     Ascomyceter: 16.44495413
-    Övriga: 2.006422018
+    övrigt: 2.006422018
     Mängd mykorrhiza: 75
   - startskog: produktionsskog_
     metod: blädning
@@ -372,7 +372,7 @@ entries:
     Russulales: 12.77766727
     Thelephorales: 4.681916817
     Ascomyceter: 18.13282098
-    Övriga: 2.552920434
+    övrigt: 2.552920434
     Mängd mykorrhiza: 85
   - startskog: produktionsskog_
     metod: blädning
@@ -387,7 +387,7 @@ entries:
     Russulales: 14.52234401
     Thelephorales: 5.039966273
     Ascomyceter: 19.95320405
-    Övriga: 3.041121417
+    övrigt: 3.041121417
     Mängd mykorrhiza: 95
   - startskog: produktionsskog_
     metod: blädning
@@ -402,7 +402,7 @@ entries:
     Russulales: 15.25
     Thelephorales: 5.277777778
     Ascomyceter: 21.65740741
-    Övriga: 2.762037037
+    övrigt: 2.762037037
     Mängd mykorrhiza: 100
   - startskog: produktionsskog_
     metod: blädning
@@ -417,7 +417,7 @@ entries:
     Russulales: 11.21559633
     Thelephorales: 4.059633028
     Ascomyceter: 16.44495413
-    Övriga: 2.006422018
+    övrigt: 2.006422018
     Mängd mykorrhiza: 75
   - startskog: produktionsskog_
     metod: blädning
@@ -432,7 +432,7 @@ entries:
     Russulales: 12.77766727
     Thelephorales: 4.681916817
     Ascomyceter: 18.13282098
-    Övriga: 2.552920434
+    övrigt: 2.552920434
     Mängd mykorrhiza: 85
   - startskog: produktionsskog_
     metod: luckhuggning
@@ -447,7 +447,7 @@ entries:
     Russulales: 17
     Thelephorales: 5
     Ascomyceter: 20
-    Övriga: 3.3
+    övrigt: 3.3
     Mängd mykorrhiza: 100
   - startskog: produktionsskog_
     metod: luckhuggning
@@ -462,7 +462,7 @@ entries:
     Russulales: 17
     Thelephorales: 5
     Ascomyceter: 20
-    Övriga: 3.3
+    övrigt: 3.3
     Mängd mykorrhiza: 100
   - startskog: produktionsskog_
     metod: luckhuggning
@@ -477,7 +477,7 @@ entries:
     Russulales: 12.6980198
     Thelephorales: 3.816831683
     Ascomyceter: 15.04455446
-    Övriga: 2.495049505
+    övrigt: 2.495049505
     Mängd mykorrhiza: 75
   - startskog: produktionsskog_
     metod: luckhuggning
@@ -492,7 +492,7 @@ entries:
     Russulales: 14.25194175
     Thelephorales: 4.472815534
     Ascomyceter: 17.02475728
-    Övriga: 2.772815534
+    övrigt: 2.772815534
     Mängd mykorrhiza: 85
   - startskog: produktionsskog_
     metod: luckhuggning
@@ -507,7 +507,7 @@ entries:
     Russulales: 15.4375
     Thelephorales: 4.851785714
     Ascomyceter: 19.20357143
-    Övriga: 3.180803571
+    övrigt: 3.180803571
     Mängd mykorrhiza: 95
   - startskog: produktionsskog_
     metod: luckhuggning
@@ -522,7 +522,7 @@ entries:
     Russulales: 15.83870968
     Thelephorales: 5.193548387
     Ascomyceter: 20.96774194
-    Övriga: 2.893548387
+    övrigt: 2.893548387
     Mängd mykorrhiza: 100
   - startskog: produktionsskog_
     metod: luckhuggning
@@ -537,7 +537,7 @@ entries:
     Russulales: 11.67142857
     Thelephorales: 3.985714286
     Ascomyceter: 15.9
-    Övriga: 2.134285714
+    övrigt: 2.134285714
     Mängd mykorrhiza: 75
   - startskog: produktionsskog_
     metod: luckhuggning
@@ -552,7 +552,7 @@ entries:
     Russulales: 13.09442379
     Thelephorales: 4.657620818
     Ascomyceter: 17.8010223
-    Övriga: 2.560427509
+    övrigt: 2.560427509
     Mängd mykorrhiza: 85
   - startskog: produktionsskog_
     metod: luckhuggning
@@ -567,7 +567,7 @@ entries:
     Russulales: 14.67185886
     Thelephorales: 5.04595525
     Ascomyceter: 19.78975904
-    Övriga: 3.020869191
+    övrigt: 3.020869191
     Mängd mykorrhiza: 95
   - startskog: produktionsskog_
     metod: luckhuggning
@@ -582,7 +582,7 @@ entries:
     Russulales: 15.3125
     Thelephorales: 5.28125
     Ascomyceter: 21.59375
-    Övriga: 2.746875
+    övrigt: 2.746875
     Mängd mykorrhiza: 100
   - startskog: produktionsskog_
     metod: luckhuggning
@@ -597,7 +597,7 @@ entries:
     Russulales: 11.21559633
     Thelephorales: 4.059633028
     Ascomyceter: 16.44495413
-    Övriga: 2.006422018
+    övrigt: 2.006422018
     Mängd mykorrhiza: 75
   - startskog: produktionsskog_
     metod: luckhuggning
@@ -612,7 +612,7 @@ entries:
     Russulales: 12.77766727
     Thelephorales: 4.681916817
     Ascomyceter: 18.13282098
-    Övriga: 2.552920434
+    övrigt: 2.552920434
     Mängd mykorrhiza: 85
   - startskog: produktionsskog_
     metod: luckhuggning
@@ -627,7 +627,7 @@ entries:
     Russulales: 14.52234401
     Thelephorales: 5.039966273
     Ascomyceter: 19.95320405
-    Övriga: 3.041121417
+    övrigt: 3.041121417
     Mängd mykorrhiza: 95
   - startskog: produktionsskog_
     metod: luckhuggning
@@ -642,7 +642,7 @@ entries:
     Russulales: 15.25
     Thelephorales: 5.277777778
     Ascomyceter: 21.65740741
-    Övriga: 2.762037037
+    övrigt: 2.762037037
     Mängd mykorrhiza: 100
   - startskog: produktionsskog_
     metod: luckhuggning
@@ -657,7 +657,7 @@ entries:
     Russulales: 11.21559633
     Thelephorales: 4.059633028
     Ascomyceter: 16.44495413
-    Övriga: 2.006422018
+    övrigt: 2.006422018
     Mängd mykorrhiza: 75
   - startskog: produktionsskog_
     metod: luckhuggning
@@ -672,7 +672,7 @@ entries:
     Russulales: 12.77766727
     Thelephorales: 4.681916817
     Ascomyceter: 18.13282098
-    Övriga: 2.552920434
+    övrigt: 2.552920434
     Mängd mykorrhiza: 85
   - startskog: produktionsskog_
     metod: skärm
@@ -687,7 +687,7 @@ entries:
     Russulales: 17
     Thelephorales: 5
     Ascomyceter: 20
-    Övriga: 3.3
+    övrigt: 3.3
     Mängd mykorrhiza: 100
   - startskog: produktionsskog_
     metod: skärm
@@ -702,7 +702,7 @@ entries:
     Russulales: 17
     Thelephorales: 5
     Ascomyceter: 20
-    Övriga: 3.3
+    övrigt: 3.3
     Mängd mykorrhiza: 100
   - startskog: produktionsskog_
     metod: skärm
@@ -717,7 +717,7 @@ entries:
     Russulales: 8.359550562
     Thelephorales: 5.366292135
     Ascomyceter: 13.57752809
-    Övriga: 2.68988764
+    övrigt: 2.68988764
     Mängd mykorrhiza: 60
   - startskog: produktionsskog_
     metod: skärm
@@ -732,7 +732,7 @@ entries:
     Russulales: 9.001515152
     Thelephorales: 5.554545455
     Ascomyceter: 13.25606061
-    Övriga: 1.812121212
+    övrigt: 1.812121212
     Mängd mykorrhiza: 65
   - startskog: produktionsskog_
     metod: skärm
@@ -747,7 +747,7 @@ entries:
     Russulales: 4.830769231
     Thelephorales: 4.215384615
     Ascomyceter: 8.246153846
-    Övriga: 1
+    övrigt: 1
     Mängd mykorrhiza: 40
   - startskog: produktionsskog_
     metod: skärm
@@ -762,7 +762,7 @@ entries:
     Russulales: 7.235294118
     Thelephorales: 3.423529412
     Ascomyceter: 12.84705882
-    Övriga: 2.170588235
+    övrigt: 2.170588235
     Mängd mykorrhiza: 60
   - startskog: produktionsskog_
     metod: skärm
@@ -777,7 +777,7 @@ entries:
     Russulales: 5
     Thelephorales: 3
     Ascomyceter: 11
-    Övriga: 1.875
+    övrigt: 1.875
     Mängd mykorrhiza: 50
   - startskog: produktionsskog_
     metod: skärm
@@ -792,7 +792,7 @@ entries:
     Russulales: 9.9
     Thelephorales: 5.4
     Ascomyceter: 22.5
-    Övriga: 1.08
+    övrigt: 1.08
     Mängd mykorrhiza: 90
   - startskog: produktionsskog_
     metod: skärm
@@ -807,7 +807,7 @@ entries:
     Russulales: 12.65
     Thelephorales: 6.9
     Ascomyceter: 27.6
-    Övriga: 2.53
+    övrigt: 2.53
     Mängd mykorrhiza: 115
   - startskog: produktionsskog_
     metod: skärm
@@ -822,7 +822,7 @@ entries:
     Russulales: 15.6
     Thelephorales: 7.2
     Ascomyceter: 27.6
-    Övriga: 3
+    övrigt: 3
     Mängd mykorrhiza: 120
   - startskog: produktionsskog_
     metod: skärm
@@ -837,7 +837,7 @@ entries:
     Russulales: 16.8
     Thelephorales: 6.6
     Ascomyceter: 28.2
-    Övriga: 2.94
+    övrigt: 2.94
     Mängd mykorrhiza: 120
   - startskog: produktionsskog_
     metod: skärm
@@ -852,7 +852,7 @@ entries:
     Russulales: 17.25
     Thelephorales: 5.98
     Ascomyceter: 25.3
-    Övriga: 3.703
+    övrigt: 3.703
     Mängd mykorrhiza: 115
   - startskog: produktionsskog_
     metod: skärm
@@ -867,7 +867,7 @@ entries:
     Russulales: 17.28
     Thelephorales: 5.4
     Ascomyceter: 22.68
-    Övriga: 3.672
+    övrigt: 3.672
     Mängd mykorrhiza: 108
   - startskog: produktionsskog_
     metod: skärm
@@ -882,7 +882,7 @@ entries:
     Russulales: 16.995
     Thelephorales: 5.15
     Ascomyceter: 21.115
-    Övriga: 3.4505
+    övrigt: 3.4505
     Mängd mykorrhiza: 103
   - startskog: produktionsskog_
     metod: skärm
@@ -897,7 +897,7 @@ entries:
     Russulales: 17
     Thelephorales: 5
     Ascomyceter: 20
-    Övriga: 3.3
+    övrigt: 3.3
     Mängd mykorrhiza: 100
   - startskog: produktionsskog_
     metod: ingen åtgärd
@@ -912,7 +912,7 @@ entries:
     Russulales: 17
     Thelephorales: 5
     Ascomyceter: 20
-    Övriga: 3.3
+    övrigt: 3.3
     Mängd mykorrhiza: 100
   - startskog: produktionsskog_
     metod: ingen åtgärd
@@ -927,7 +927,7 @@ entries:
     Russulales: 17
     Thelephorales: 5
     Ascomyceter: 20
-    Övriga: 3.3
+    övrigt: 3.3
     Mängd mykorrhiza: 100
   - startskog: produktionsskog_
     metod: ingen åtgärd
@@ -942,7 +942,7 @@ entries:
     Russulales: 17
     Thelephorales: 5
     Ascomyceter: 20
-    Övriga: 3.3
+    övrigt: 3.3
     Mängd mykorrhiza: 100
   - startskog: produktionsskog_
     metod: ingen åtgärd
@@ -957,7 +957,7 @@ entries:
     Russulales: 17
     Thelephorales: 5
     Ascomyceter: 20
-    Övriga: 3.3
+    övrigt: 3.3
     Mängd mykorrhiza: 100
   - startskog: produktionsskog_
     metod: ingen åtgärd
@@ -972,7 +972,7 @@ entries:
     Russulales: 17
     Thelephorales: 5
     Ascomyceter: 20
-    Övriga: 3.3
+    övrigt: 3.3
     Mängd mykorrhiza: 100
   - startskog: produktionsskog_
     metod: ingen åtgärd
@@ -987,7 +987,7 @@ entries:
     Russulales: 17
     Thelephorales: 5
     Ascomyceter: 20
-    Övriga: 3.3
+    övrigt: 3.3
     Mängd mykorrhiza: 100
   - startskog: produktionsskog_
     metod: ingen åtgärd
@@ -1002,7 +1002,7 @@ entries:
     Russulales: 17
     Thelephorales: 5
     Ascomyceter: 20
-    Övriga: 3.3
+    övrigt: 3.3
     Mängd mykorrhiza: 100
   - startskog: produktionsskog_
     metod: ingen åtgärd
@@ -1017,7 +1017,7 @@ entries:
     Russulales: 17
     Thelephorales: 5
     Ascomyceter: 20
-    Övriga: 3.3
+    övrigt: 3.3
     Mängd mykorrhiza: 100
   - startskog: produktionsskog_
     metod: ingen åtgärd
@@ -1032,7 +1032,7 @@ entries:
     Russulales: 17
     Thelephorales: 5
     Ascomyceter: 20
-    Övriga: 3.3
+    övrigt: 3.3
     Mängd mykorrhiza: 100
   - startskog: produktionsskog_
     metod: ingen åtgärd
@@ -1047,7 +1047,7 @@ entries:
     Russulales: 17
     Thelephorales: 5
     Ascomyceter: 20
-    Övriga: 3.3
+    övrigt: 3.3
     Mängd mykorrhiza: 100
   - startskog: produktionsskog_
     metod: ingen åtgärd
@@ -1062,7 +1062,7 @@ entries:
     Russulales: 17
     Thelephorales: 5
     Ascomyceter: 20
-    Övriga: 3.3
+    övrigt: 3.3
     Mängd mykorrhiza: 100
   - startskog: produktionsskog_
     metod: ingen åtgärd
@@ -1077,7 +1077,7 @@ entries:
     Russulales: 17
     Thelephorales: 5
     Ascomyceter: 20
-    Övriga: 3.3
+    övrigt: 3.3
     Mängd mykorrhiza: 100
   - startskog: naturskog
     metod: trakthygge
@@ -1092,7 +1092,7 @@ entries:
     Russulales: 23
     Thelephorales: 3
     Ascomyceter: 17
-    Övriga: 1.3
+    övrigt: 1.3
     Mängd mykorrhiza: 100
   - startskog: naturskog
     metod: trakthygge
@@ -1107,7 +1107,7 @@ entries:
     Russulales: 23
     Thelephorales: 3
     Ascomyceter: 17
-    Övriga: 1.3
+    övrigt: 1.3
     Mängd mykorrhiza: 100
   - startskog: naturskog
     metod: trakthygge
@@ -1122,7 +1122,7 @@ entries:
     Russulales: 0.5
     Thelephorales: 0.7
     Ascomyceter: 1.3
-    Övriga: 0.3
+    övrigt: 0.3
     Mängd mykorrhiza: 5
   - startskog: naturskog
     metod: trakthygge
@@ -1137,7 +1137,7 @@ entries:
     Russulales: 1.35
     Thelephorales: 2.1
     Ascomyceter: 3.15
-    Övriga: 0.3
+    övrigt: 0.3
     Mängd mykorrhiza: 15
   - startskog: naturskog
     metod: trakthygge
@@ -1152,7 +1152,7 @@ entries:
     Russulales: 6
     Thelephorales: 3.6
     Ascomyceter: 13.2
-    Övriga: 2.25
+    övrigt: 2.25
     Mängd mykorrhiza: 60
   - startskog: naturskog
     metod: trakthygge
@@ -1167,7 +1167,7 @@ entries:
     Russulales: 13.2
     Thelephorales: 7.2
     Ascomyceter: 30
-    Övriga: 1.44
+    övrigt: 1.44
     Mängd mykorrhiza: 120
   - startskog: naturskog
     metod: trakthygge
@@ -1182,7 +1182,7 @@ entries:
     Russulales: 13.53
     Thelephorales: 7.38
     Ascomyceter: 29.52
-    Övriga: 2.706
+    övrigt: 2.706
     Mängd mykorrhiza: 123
   - startskog: naturskog
     metod: trakthygge
@@ -1197,7 +1197,7 @@ entries:
     Russulales: 15.73
     Thelephorales: 7.26
     Ascomyceter: 27.83
-    Övriga: 3.025
+    övrigt: 3.025
     Mängd mykorrhiza: 121
   - startskog: naturskog
     metod: trakthygge
@@ -1212,7 +1212,7 @@ entries:
     Russulales: 16.8
     Thelephorales: 6.6
     Ascomyceter: 28.2
-    Övriga: 2.94
+    övrigt: 2.94
     Mängd mykorrhiza: 120
   - startskog: naturskog
     metod: trakthygge
@@ -1227,7 +1227,7 @@ entries:
     Russulales: 17.25
     Thelephorales: 5.98
     Ascomyceter: 25.3
-    Övriga: 3.703
+    övrigt: 3.703
     Mängd mykorrhiza: 115
   - startskog: naturskog
     metod: trakthygge
@@ -1242,7 +1242,7 @@ entries:
     Russulales: 17.28
     Thelephorales: 5.4
     Ascomyceter: 22.68
-    Övriga: 3.672
+    övrigt: 3.672
     Mängd mykorrhiza: 108
   - startskog: naturskog
     metod: trakthygge
@@ -1257,7 +1257,7 @@ entries:
     Russulales: 16.995
     Thelephorales: 5.15
     Ascomyceter: 21.115
-    Övriga: 3.4505
+    övrigt: 3.4505
     Mängd mykorrhiza: 103
   - startskog: naturskog
     metod: trakthygge
@@ -1272,7 +1272,7 @@ entries:
     Russulales: 17
     Thelephorales: 5
     Ascomyceter: 20
-    Övriga: 3.3
+    övrigt: 3.3
     Mängd mykorrhiza: 100
   - startskog: naturskog
     metod: blädning
@@ -1287,7 +1287,7 @@ entries:
     Russulales: 23
     Thelephorales: 3
     Ascomyceter: 17
-    Övriga: 1.3
+    övrigt: 1.3
     Mängd mykorrhiza: 100
   - startskog: naturskog
     metod: blädning
@@ -1302,7 +1302,7 @@ entries:
     Russulales: 23
     Thelephorales: 3
     Ascomyceter: 17
-    Övriga: 1.3
+    övrigt: 1.3
     Mängd mykorrhiza: 100
   - startskog: naturskog
     metod: blädning
@@ -1317,7 +1317,7 @@ entries:
     Russulales: 17.15346535
     Thelephorales: 2.331683168
     Ascomyceter: 12.81683168
-    Övriga: 1.00990099
+    övrigt: 1.00990099
     Mängd mykorrhiza: 75
   - startskog: naturskog
     metod: blädning
@@ -1332,7 +1332,7 @@ entries:
     Russulales: 19.20339806
     Thelephorales: 2.822330097
     Ascomyceter: 14.54902913
-    Övriga: 1.122330097
+    övrigt: 1.122330097
     Mängd mykorrhiza: 85
   - startskog: naturskog
     metod: blädning
@@ -1347,7 +1347,7 @@ entries:
     Russulales: 21.60714286
     Thelephorales: 3.321428571
     Ascomyceter: 17.53571429
-    Övriga: 1.5625
+    övrigt: 1.5625
     Mängd mykorrhiza: 100
   - startskog: naturskog
     metod: blädning
@@ -1362,7 +1362,7 @@ entries:
     Russulales: 20.67741935
     Thelephorales: 3.580645161
     Ascomyceter: 18.5483871
-    Övriga: 1.280645161
+    övrigt: 1.280645161
     Mängd mykorrhiza: 100
   - startskog: naturskog
     metod: blädning
@@ -1377,7 +1377,7 @@ entries:
     Russulales: 15.1
     Thelephorales: 2.842857143
     Ascomyceter: 14.18571429
-    Övriga: 0.991428571
+    övrigt: 0.991428571
     Mängd mykorrhiza: 75
   - startskog: naturskog
     metod: blädning
@@ -1392,7 +1392,7 @@ entries:
     Russulales: 16.88624535
     Thelephorales: 3.393680297
     Ascomyceter: 15.90511152
-    Övriga: 1.296486989
+    övrigt: 1.296486989
     Mängd mykorrhiza: 85
   - startskog: naturskog
     metod: blädning
@@ -1407,7 +1407,7 @@ entries:
     Russulales: 19.57487091
     Thelephorales: 3.934595525
     Ascomyceter: 18.76592083
-    Övriga: 1.80292599
+    övrigt: 1.80292599
     Mängd mykorrhiza: 100
   - startskog: naturskog
     metod: blädning
@@ -1422,7 +1422,7 @@ entries:
     Russulales: 19.0625
     Thelephorales: 4.03125
     Ascomyceter: 19.71875
-    Övriga: 1.496875
+    övrigt: 1.496875
     Mängd mykorrhiza: 100
   - startskog: naturskog
     metod: blädning
@@ -1437,7 +1437,7 @@ entries:
     Russulales: 13.69266055
     Thelephorales: 3.233944954
     Ascomyceter: 15.20642202
-    Övriga: 1.180733945
+    övrigt: 1.180733945
     Mängd mykorrhiza: 75
   - startskog: naturskog
     metod: blädning
@@ -1452,7 +1452,7 @@ entries:
     Russulales: 15.54439421
     Thelephorales: 3.759674503
     Ascomyceter: 16.7494575
-    Övriga: 1.630678119
+    övrigt: 1.630678119
     Mängd mykorrhiza: 85
   - startskog: naturskog
     metod: blädning
@@ -1467,7 +1467,7 @@ entries:
     Russulales: 18.32209106
     Thelephorales: 4.293423272
     Ascomyceter: 19.4856661
-    Övriga: 2.189376054
+    övrigt: 2.189376054
     Mängd mykorrhiza: 100
   - startskog: naturskog
     metod: blädning
@@ -1482,7 +1482,7 @@ entries:
     Russulales: 18.02777778
     Thelephorales: 4.351851852
     Ascomyceter: 20.26851852
-    Övriga: 1.836111111
+    övrigt: 1.836111111
     Mängd mykorrhiza: 100
   - startskog: naturskog
     metod: blädning
@@ -1497,7 +1497,7 @@ entries:
     Russulales: 13.69266055
     Thelephorales: 3.233944954
     Ascomyceter: 15.20642202
-    Övriga: 1.180733945
+    övrigt: 1.180733945
     Mängd mykorrhiza: 75
   - startskog: naturskog
     metod: blädning
@@ -1512,7 +1512,7 @@ entries:
     Russulales: 15.54439421
     Thelephorales: 3.759674503
     Ascomyceter: 16.7494575
-    Övriga: 1.630678119
+    övrigt: 1.630678119
     Mängd mykorrhiza: 85
   - startskog: naturskog
     metod: luckhuggning
@@ -1527,7 +1527,7 @@ entries:
     Russulales: 23
     Thelephorales: 3
     Ascomyceter: 17
-    Övriga: 1.3
+    övrigt: 1.3
     Mängd mykorrhiza: 100
   - startskog: naturskog
     metod: luckhuggning
@@ -1542,7 +1542,7 @@ entries:
     Russulales: 23
     Thelephorales: 3
     Ascomyceter: 17
-    Övriga: 1.3
+    övrigt: 1.3
     Mängd mykorrhiza: 100
   - startskog: naturskog
     metod: luckhuggning
@@ -1557,7 +1557,7 @@ entries:
     Russulales: 17.15346535
     Thelephorales: 2.331683168
     Ascomyceter: 12.81683168
-    Övriga: 1.00990099
+    övrigt: 1.00990099
     Mängd mykorrhiza: 75
   - startskog: naturskog
     metod: luckhuggning
@@ -1572,7 +1572,7 @@ entries:
     Russulales: 19.20339806
     Thelephorales: 2.822330097
     Ascomyceter: 14.54902913
-    Övriga: 1.122330097
+    övrigt: 1.122330097
     Mängd mykorrhiza: 85
   - startskog: naturskog
     metod: luckhuggning
@@ -1587,7 +1587,7 @@ entries:
     Russulales: 21.60714286
     Thelephorales: 3.321428571
     Ascomyceter: 17.53571429
-    Övriga: 1.5625
+    övrigt: 1.5625
     Mängd mykorrhiza: 100
   - startskog: naturskog
     metod: luckhuggning
@@ -1602,7 +1602,7 @@ entries:
     Russulales: 20.67741935
     Thelephorales: 3.580645161
     Ascomyceter: 18.5483871
-    Övriga: 1.280645161
+    övrigt: 1.280645161
     Mängd mykorrhiza: 100
   - startskog: naturskog
     metod: luckhuggning
@@ -1617,7 +1617,7 @@ entries:
     Russulales: 15.1
     Thelephorales: 2.842857143
     Ascomyceter: 14.18571429
-    Övriga: 0.991428571
+    övrigt: 0.991428571
     Mängd mykorrhiza: 75
   - startskog: naturskog
     metod: luckhuggning
@@ -1632,7 +1632,7 @@ entries:
     Russulales: 16.88624535
     Thelephorales: 3.393680297
     Ascomyceter: 15.90511152
-    Övriga: 1.296486989
+    övrigt: 1.296486989
     Mängd mykorrhiza: 85
   - startskog: naturskog
     metod: luckhuggning
@@ -1647,7 +1647,7 @@ entries:
     Russulales: 19.57487091
     Thelephorales: 3.934595525
     Ascomyceter: 18.76592083
-    Övriga: 1.80292599
+    övrigt: 1.80292599
     Mängd mykorrhiza: 100
   - startskog: naturskog
     metod: luckhuggning
@@ -1662,7 +1662,7 @@ entries:
     Russulales: 19.0625
     Thelephorales: 4.03125
     Ascomyceter: 19.71875
-    Övriga: 1.496875
+    övrigt: 1.496875
     Mängd mykorrhiza: 100
   - startskog: naturskog
     metod: luckhuggning
@@ -1677,7 +1677,7 @@ entries:
     Russulales: 13.69266055
     Thelephorales: 3.233944954
     Ascomyceter: 15.20642202
-    Övriga: 1.180733945
+    övrigt: 1.180733945
     Mängd mykorrhiza: 75
   - startskog: naturskog
     metod: luckhuggning
@@ -1692,7 +1692,7 @@ entries:
     Russulales: 15.54439421
     Thelephorales: 3.759674503
     Ascomyceter: 16.7494575
-    Övriga: 1.630678119
+    övrigt: 1.630678119
     Mängd mykorrhiza: 85
   - startskog: naturskog
     metod: luckhuggning
@@ -1707,7 +1707,7 @@ entries:
     Russulales: 18.32209106
     Thelephorales: 4.293423272
     Ascomyceter: 19.4856661
-    Övriga: 2.189376054
+    övrigt: 2.189376054
     Mängd mykorrhiza: 100
   - startskog: naturskog
     metod: luckhuggning
@@ -1722,7 +1722,7 @@ entries:
     Russulales: 18.02777778
     Thelephorales: 4.351851852
     Ascomyceter: 20.26851852
-    Övriga: 1.836111111
+    övrigt: 1.836111111
     Mängd mykorrhiza: 100
   - startskog: naturskog
     metod: luckhuggning
@@ -1737,7 +1737,7 @@ entries:
     Russulales: 13.69266055
     Thelephorales: 3.233944954
     Ascomyceter: 15.20642202
-    Övriga: 1.180733945
+    övrigt: 1.180733945
     Mängd mykorrhiza: 75
   - startskog: naturskog
     metod: luckhuggning
@@ -1752,7 +1752,7 @@ entries:
     Russulales: 15.54439421
     Thelephorales: 3.759674503
     Ascomyceter: 16.7494575
-    Övriga: 1.630678119
+    övrigt: 1.630678119
     Mängd mykorrhiza: 85
   - startskog: naturskog
     metod: skärm
@@ -1767,7 +1767,7 @@ entries:
     Russulales: 23
     Thelephorales: 3
     Ascomyceter: 17
-    Övriga: 1.3
+    övrigt: 1.3
     Mängd mykorrhiza: 100
   - startskog: naturskog
     metod: skärm
@@ -1782,7 +1782,7 @@ entries:
     Russulales: 23
     Thelephorales: 3
     Ascomyceter: 17
-    Övriga: 1.3
+    övrigt: 1.3
     Mängd mykorrhiza: 100
   - startskog: naturskog
     metod: skärm
@@ -1797,7 +1797,7 @@ entries:
     Russulales: 10.38202247
     Thelephorales: 4.692134831
     Ascomyceter: 12.56629213
-    Övriga: 2.015730337
+    övrigt: 2.015730337
     Mängd mykorrhiza: 60
   - startskog: naturskog
     metod: skärm
@@ -1812,7 +1812,7 @@ entries:
     Russulales: 11.36515152
     Thelephorales: 4.766666667
     Ascomyceter: 12.07424242
-    Övriga: 1.024242424
+    övrigt: 1.024242424
     Mängd mykorrhiza: 65
   - startskog: naturskog
     metod: skärm
@@ -1827,7 +1827,7 @@ entries:
     Russulales: 5.2
     Thelephorales: 3.8
     Ascomyceter: 8.2
-    Övriga: 1.06
+    övrigt: 1.06
     Mängd mykorrhiza: 40
   - startskog: naturskog
     metod: skärm
@@ -1842,7 +1842,7 @@ entries:
     Russulales: 7.68
     Thelephorales: 3.36
     Ascomyceter: 12.72
-    Övriga: 2.142
+    övrigt: 2.142
     Mängd mykorrhiza: 60
   - startskog: naturskog
     metod: skärm
@@ -1857,7 +1857,7 @@ entries:
     Russulales: 5
     Thelephorales: 3
     Ascomyceter: 11
-    Övriga: 1.875
+    övrigt: 1.875
     Mängd mykorrhiza: 50
   - startskog: naturskog
     metod: skärm
@@ -1872,7 +1872,7 @@ entries:
     Russulales: 9.9
     Thelephorales: 5.4
     Ascomyceter: 22.5
-    Övriga: 1.08
+    övrigt: 1.08
     Mängd mykorrhiza: 90
   - startskog: naturskog
     metod: skärm
@@ -1887,7 +1887,7 @@ entries:
     Russulales: 12.65
     Thelephorales: 6.9
     Ascomyceter: 27.6
-    Övriga: 2.53
+    övrigt: 2.53
     Mängd mykorrhiza: 115
   - startskog: naturskog
     metod: skärm
@@ -1902,7 +1902,7 @@ entries:
     Russulales: 15.6
     Thelephorales: 7.2
     Ascomyceter: 27.6
-    Övriga: 3
+    övrigt: 3
     Mängd mykorrhiza: 120
   - startskog: naturskog
     metod: skärm
@@ -1917,7 +1917,7 @@ entries:
     Russulales: 16.8
     Thelephorales: 6.6
     Ascomyceter: 28.2
-    Övriga: 2.94
+    övrigt: 2.94
     Mängd mykorrhiza: 120
   - startskog: naturskog
     metod: skärm
@@ -1932,7 +1932,7 @@ entries:
     Russulales: 17.25
     Thelephorales: 5.98
     Ascomyceter: 25.3
-    Övriga: 3.703
+    övrigt: 3.703
     Mängd mykorrhiza: 115
   - startskog: naturskog
     metod: skärm
@@ -1947,7 +1947,7 @@ entries:
     Russulales: 17.28
     Thelephorales: 5.4
     Ascomyceter: 22.68
-    Övriga: 3.672
+    övrigt: 3.672
     Mängd mykorrhiza: 108
   - startskog: naturskog
     metod: skärm
@@ -1962,7 +1962,7 @@ entries:
     Russulales: 16.995
     Thelephorales: 5.15
     Ascomyceter: 21.115
-    Övriga: 3.4505
+    övrigt: 3.4505
     Mängd mykorrhiza: 103
   - startskog: naturskog
     metod: skärm
@@ -1977,7 +1977,7 @@ entries:
     Russulales: 17
     Thelephorales: 5
     Ascomyceter: 20
-    Övriga: 3.3
+    övrigt: 3.3
     Mängd mykorrhiza: 100
   - startskog: naturskog
     metod: ingen åtgärd
@@ -1992,7 +1992,7 @@ entries:
     Russulales: 17
     Thelephorales: 5
     Ascomyceter: 20
-    Övriga: 3.3
+    övrigt: 3.3
     Mängd mykorrhiza: 100
   - startskog: naturskog
     metod: ingen åtgärd
@@ -2007,7 +2007,7 @@ entries:
     Russulales: 17
     Thelephorales: 5
     Ascomyceter: 20
-    Övriga: 3.3
+    övrigt: 3.3
     Mängd mykorrhiza: 100
   - startskog: naturskog
     metod: ingen åtgärd
@@ -2022,7 +2022,7 @@ entries:
     Russulales: 17
     Thelephorales: 5
     Ascomyceter: 20
-    Övriga: 3.3
+    övrigt: 3.3
     Mängd mykorrhiza: 100
   - startskog: naturskog
     metod: ingen åtgärd
@@ -2037,7 +2037,7 @@ entries:
     Russulales: 17
     Thelephorales: 5
     Ascomyceter: 20
-    Övriga: 3.3
+    övrigt: 3.3
     Mängd mykorrhiza: 100
   - startskog: naturskog
     metod: ingen åtgärd
@@ -2052,7 +2052,7 @@ entries:
     Russulales: 17
     Thelephorales: 5
     Ascomyceter: 20
-    Övriga: 3.3
+    övrigt: 3.3
     Mängd mykorrhiza: 100
   - startskog: naturskog
     metod: ingen åtgärd
@@ -2067,7 +2067,7 @@ entries:
     Russulales: 17
     Thelephorales: 5
     Ascomyceter: 20
-    Övriga: 3.3
+    övrigt: 3.3
     Mängd mykorrhiza: 100
   - startskog: naturskog
     metod: ingen åtgärd
@@ -2082,7 +2082,7 @@ entries:
     Russulales: 17
     Thelephorales: 5
     Ascomyceter: 20
-    Övriga: 3.3
+    övrigt: 3.3
     Mängd mykorrhiza: 100
   - startskog: naturskog
     metod: ingen åtgärd
@@ -2097,7 +2097,7 @@ entries:
     Russulales: 17
     Thelephorales: 5
     Ascomyceter: 20
-    Övriga: 3.3
+    övrigt: 3.3
     Mängd mykorrhiza: 100
   - startskog: naturskog
     metod: ingen åtgärd
@@ -2112,7 +2112,7 @@ entries:
     Russulales: 17
     Thelephorales: 5
     Ascomyceter: 20
-    Övriga: 3.3
+    övrigt: 3.3
     Mängd mykorrhiza: 100
   - startskog: naturskog
     metod: ingen åtgärd
@@ -2127,7 +2127,7 @@ entries:
     Russulales: 17
     Thelephorales: 5
     Ascomyceter: 20
-    Övriga: 3.3
+    övrigt: 3.3
     Mängd mykorrhiza: 100
   - startskog: naturskog
     metod: ingen åtgärd
@@ -2142,7 +2142,7 @@ entries:
     Russulales: 17
     Thelephorales: 5
     Ascomyceter: 20
-    Övriga: 3.3
+    övrigt: 3.3
     Mängd mykorrhiza: 100
   - startskog: naturskog
     metod: ingen åtgärd
@@ -2157,5 +2157,5 @@ entries:
     Russulales: 17
     Thelephorales: 5
     Ascomyceter: 20
-    Övriga: 3.3
+    övrigt: 3.3
     Mängd mykorrhiza: 100

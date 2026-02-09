@@ -157,13 +157,17 @@ const grupperModalDescription = computed(() =>
 
 const chartDisplayProps = computed(() => {
   const baseFrameworks = props.parentSelectedFrameworks ?? ['naturskydd', 'trakthygge', 'luckhuggning', 'blädning', 'skärmträd']
+  const startskogValue =
+    typeof props.currentStartskog === 'string'
+      ? props.currentStartskog
+      : (props.currentStartskog as any)?.value ?? ''
 
   if (selectedChart.value === 'rodlistade') {
     return {
       selectedFrameworks: baseFrameworks,
       selectedArtkategori: ['rödlistade + signalarter'],
       chartType: chartType.value,
-      selectedStartskog: props.currentStartskog,
+      selectedStartskog: startskogValue,
       redColor: true,
       maxYValue: 0.65,
       currentTimeValue: props.currentTimeValue,
@@ -177,7 +181,7 @@ const chartDisplayProps = computed(() => {
       selectedFrameworks: baseFrameworks,
       selectedArtkategori: [matsvampChartArtkategori.value],
       chartType: chartType.value,
-      selectedStartskog: props.currentStartskog,
+      selectedStartskog: startskogValue,
       yellowColor: true,
       maxYValue: matsvampMaxY.value,
       currentTimeValue: props.currentTimeValue,
@@ -194,7 +198,7 @@ const chartDisplayProps = computed(() => {
       frameworkComparisonMode: isFrameworkCompareMode.value,
       chartType: chartType.value,
       singleFrameworkSelection: true,
-      selectedStartskog: props.currentStartskog,
+      selectedStartskog: startskogValue,
       currentTimeValue: props.currentTimeValue,
       preserveFrameworkOrder: props.preserveFrameworkOrder,
     }
@@ -205,10 +209,11 @@ const chartDisplayProps = computed(() => {
     selectedFrameworks: baseFrameworks,
     selectedArtkategori: ['total'],
     chartType: chartType.value,
-    maxYValue: 130,
+    // maxYValue: 130,
     currentTimeValue: props.currentTimeValue,
     frameworkComparisonMode: isFrameworkCompareMode.value,
     preserveFrameworkOrder: props.preserveFrameworkOrder,
+    selectedStartskog: startskogValue,
   }
 })
 

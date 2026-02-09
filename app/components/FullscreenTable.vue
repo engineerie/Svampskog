@@ -13,7 +13,7 @@
               <UIcon v-if="titleClickable" name="i-lucide-arrow-right"
                 class="size-6 font-medium text-neutral transition-all opacity-0 group-hover:translate-x-1 group-hover:opacity-100" />
             </div>
-            <h2 class="text-md text-neutral-500 md:mb-2">{{ count }} {{ countLabel }}</h2>
+            <h2 class="text-md text-neutral-500 md:mb-2">{{ countSummary }} {{ countLabel }}</h2>
           </div>
           <UButton v-if="!isNormalView" color="neutral" variant="outline" size="lg" @click="$emit('enlarge')"
             icon="i-heroicons-arrow-left" label="Tillbaka" class="hidden md:flex ring-muted/50" />
@@ -26,7 +26,7 @@
     <transition name="fade" mode="out-in" class="md:min-h-65">
       <SpeciesTable @enlarge="emit('enlarge')" :is-normal-view="isNormalView" :dataType="dataType"
         :dataTypeFolder="dataTypeFolder" :grupp="grupp" :mat="mat" :obs="obs" :obsLabel="obsLabel"
-        :tableKey="tableKey"
+        :tableKey="tableKey" @update:visibleRange="tableVisibleRange = $event"
         :search-term="searchTerm" @update:searchTerm="value => emit('update:searchTerm', value)"
         :filterEdible="filterEdible" :filterPoison="filterPoison"
         :column-visibility-overrides="columnVisibilityOverrides" />
@@ -65,6 +65,15 @@ const props = defineProps({
 const emit = defineEmits(['enlarge', 'update:searchTerm']);
 const envStore = useEnvParamsStore();
 const count = ref(0);
+const tableVisibleRange = ref<{ startIndex: number; endIndex: number; total: number } | null>(null);
+
+const filteredCount = computed(() => tableVisibleRange.value?.total ?? count.value);
+const isFiltered = computed(() =>
+  count.value > 0 && tableVisibleRange.value !== null && filteredCount.value !== count.value
+);
+const countSummary = computed(() =>
+  isFiltered.value ? `${filteredCount.value} av ${count.value}` : `${count.value}`
+);
 
 const titleClass = computed(() =>
   `flex items-center text-4xl font-medium md:text-3xl ${props.titleColorClass}`

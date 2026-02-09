@@ -37,8 +37,12 @@
                     ]">
 
                     <template v-if="!selectedMethod.id">
-                        <UBadge v-if="method.type" class="absolute top-2 left-2" :label="method.type" color="neutral"
-                            variant="subtle" />
+                        <div class="flex gap-2 absolute top-2 left-2">
+                            <!-- <UBadge v-if="method.impactLabel" :label="method.impactLabel" :color="method.impactColor"
+                                variant="subtle" /> -->
+                            <UBadge v-if="method.type" :label="method.type" color="neutral" variant="subtle" />
+                        </div>
+
                         <img :src="methodImage(method, 'card')" :alt="method.title" width="300" height="160"
                             class=" w-full h-full" loading="lazy" decoding="async" />
                         <h1 class="text-lg p-2 px-3 font-medium text-nowrap ">{{ method.title }}</h1>
@@ -85,7 +89,9 @@
                     !selectedId ? 'opacity-100' : (selectedId === item.id ? 'opacity-100 ring-primary/40 shadow-lg' : 'opacity-50')
                 ]">
                     <template v-if="!selectedMethod.id">
-                        <UBadge v-if="item.type" class="absolute top-2 left-2" :label="item.type" color="neutral"
+                        <UBadge v-if="item.impactLabel" class="absolute top-2 left-2" :label="item.impactLabel"
+                            :color="item.impactColor" variant="subtle" />
+                        <UBadge v-if="item.type" class="absolute top-10 left-2" :label="item.type" color="neutral"
                             variant="subtle" />
                         <img :src="methodImage(item, 'card')" :alt="item.title" width="300" height="160"
                             class="w-full h-full" loading="lazy" decoding="async" />
@@ -191,6 +197,10 @@ const { data: methodIndexDocs } = await useAsyncData(
     'skotselmetod-index',
     () => queryCollection('skotselmetodSections').where('section', '=', 'om_metoden').all()
 )
+const { data: methodImpactDocs } = await useAsyncData(
+    'skotselmetod-impact-index',
+    () => queryCollection('skotselmetodSections').where('section', '=', 'paverkan_pa_svamp').all()
+)
 if (!page.value) {
     throw createError({
         statusCode: 404,
@@ -208,10 +218,18 @@ interface Method {
     shortdescription: string
     type?: string
     icon?: string
+    impactLabel?: string
+    impactTone?: 'low' | 'medium' | 'high'
+    impactColor?: string
 }
 
 const methods = computed<Method[]>(() => {
     const list = (methodIndexDocs.value as any[]) || []
+    const impacts = (methodImpactDocs.value as any[]) || []
+    const impactByMethod = new Map<string, any>()
+    for (const doc of impacts) {
+        if (doc?.methodId) impactByMethod.set(doc.methodId, doc)
+    }
     return list
         .map(doc => ({
             index: doc.index,
@@ -221,6 +239,13 @@ const methods = computed<Method[]>(() => {
             shortdescription: doc.shortdescription ?? '',
             type: doc.type,
             icon: doc.icon,
+            impactLabel: impactByMethod.get(doc.methodId)?.impactLabel ?? '',
+            impactTone: impactByMethod.get(doc.methodId)?.impactTone ?? 'medium',
+            impactColor: impactByMethod.get(doc.methodId)?.impactTone === 'low'
+                ? 'success'
+                : impactByMethod.get(doc.methodId)?.impactTone === 'high'
+                    ? 'error'
+                    : 'warning',
         }))
         .sort((a, b) => (a.index ?? 0) - (b.index ?? 0))
 })

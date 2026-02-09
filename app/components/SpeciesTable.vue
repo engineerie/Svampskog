@@ -2,13 +2,13 @@
   <div class="">
     <div class="">
       <div v-if="!useMobileLayout" class="flex md:gap-2 mt-2 justify-between z-30">
-        <div class="flex gap-2 items-end justify-between w-full mb-2">
-          <UInput :model-value="table?.tableApi?.getColumn('Commonname')?.getFilterValue() || ''"
+        <div class="flex gap-2 items-end justify-end w-full mb-2">
+          <!-- <UInput :model-value="table?.tableApi?.getColumn('Commonname')?.getFilterValue() || ''"
             class="max-w-sm min-w-[12ch] hidden md:block" placeholder="Sök på namn" icon="i-heroicons-magnifying-glass"
             @update:model-value="value => {
               table?.tableApi?.getColumn('Commonname')?.setFilterValue(value);
               onSearchInput(value);
-            }" variant="ghost" />
+            }" variant="ghost" /> -->
 
           <div class="flex gap-2">
             <div class="flex my-1 gap-2 overflow-scroll" id="scrollbar">
@@ -131,7 +131,7 @@
 
     </div>
 
-    <div v-if="useMobileLayout" class="flex gap-2 w-full mb-2">
+    <div v-if="useMobileLayout && isMobile" class="flex gap-2 w-full mb-2">
 
 
       <UDropdownMenu :size="isMobile ? 'xl' : 'md'" :items="sortMenuItems" :content="{ align: 'start' }"
@@ -152,7 +152,7 @@
           onSearchInput(value);
         }" variant="soft" />
     </div>
-    <USeparator :ui="{ border: 'border-muted/50' }" class="" />
+    <USeparator v-if="isMobile" :ui="{ border: 'border-muted/50' }" class="" />
     <div v-if="filteredData" :class="[isNormalView ? '' : '']">
       <div class="">
 

@@ -43,49 +43,38 @@
       </div>
       <VisXYContainer v-if="isMounted && chartReady" :data="chartData.length ? chartData : [emptyDataPoint]"
         :height="200" :margin="margin" :xDomain="xDomain" :yDomain="yDomain">
-        <template v-if="props.chartType === 'area' && props.singleFrameworkSelection && !props.frameworkComparisonMode">
+        <template v-if="props.chartType === 'area'">
+          <template v-if="props.singleFrameworkSelection && !props.frameworkComparisonMode">
+            <VisArea :x="xAccessor" :y="stackedYAccessors" :color="stackedColors" :interpolateMissingData="true" />
 
-          <VisArea :x="xAccessor" :y="stackedYAccessors" :color="stackedColors" :interpolateMissingData="true" />
+            <!-- <VisLine v-for="cfg in stackedLineConfigs" :key="cfg.key + '-stack-line'" :x="xAccessor" :y="cfg.accessor"
+              :color="() => cfg.color" :duration=1 /> -->
+            <!-- <VisCrosshair v-if="hasActiveSeries" :template="crosshairTemplate" />
+            <VisTooltip v-if="hasActiveSeries" :horizontalShift="30" /> -->
+          </template>
+          <template v-else-if="props.singleFrameworkSelection && props.frameworkComparisonMode">
+            <VisArea v-for="fw in activeFrameworks" :x="xAccessor"
+              :y="(d: any) => getComparisonValue(d, fw.key, comparisonCategory)" :color="() => fw.colorArea || fw.color"
+              :interpolateMissingData="true" :zIndex="1" />
+            <VisLine v-for="fw in activeFrameworks" :x="xAccessor"
+              :y="(d: any) => getComparisonValue(d, fw.key, comparisonCategory)"
+              :color="() => (hexToRgba(fw.colorLine || fw.color, 0.6))" :lineDashArray="fw.lineDashArray" />
 
+            <!-- <VisCrosshair v-if="hasActiveSeries" :template="crosshairTemplate" />
+            <VisTooltip v-if="hasActiveSeries" :horizontalShift="30" /> -->
+          </template>
+          <template v-else>
+            <VisArea v-for="fw in activeFrameworks" :x="xAccessor" :y="(d: any) => getFrameworkValue(d, fw.key)"
+              :color="() => (fw.colorArea || fw.color)" :interpolateMissingData="true" :zIndex="1" />
 
+            <!-- <VisCrosshair v-if="hasActiveSeries" :template="crosshairTemplate" /> -->
+            <VisLine v-for="fw in activeFrameworks" :x="xAccessor" :y="(d: any) => getFrameworkValue(d, fw.key)"
+              :color="() => (hexToRgba(fw.colorLine || fw.color, 0.5))" :lineDashArray="fw.lineDashArray" />
+            <VisArea v-if="isKgMatsvamp" v-for="fw in activeFrameworks" :key="fw.key + '-kg-x2'" :x="xAccessor"
+              :y="kgDoubleAccessorFor(fw.key)" :color="() => 'rgba(234,179,8,0.3)'" />
+            <!-- <VisTooltip v-if="hasActiveSeries" :horizontalShift="30" /> -->
+          </template>
 
-          <!-- <VisLine v-for="cfg in stackedLineConfigs" :key="cfg.key + '-stack-line'" :x="xAccessor" :y="cfg.accessor"
-            :color="() => cfg.color" :duration=1 /> -->
-          <!-- <VisCrosshair v-if="hasActiveSeries" :template="crosshairTemplate" />
-          <VisTooltip v-if="hasActiveSeries" :horizontalShift="30" /> -->
-          <VisPlotband v-if="hasActiveSeries && currentTimeX !== null" axis="x" :from="-7" :to="currentTimeX"
-            :color="'rgba(255, 255, 255, 0.7)'" :zIndex="20" />
-          <VisPlotline v-if="hasActiveSeries" :value="currentTimeX" color="rgba(234,88,12,1)" axis="x"
-            labelOrientation="vertical" :zIndex="20" :lineWidth="1" />
-
-        </template>
-        <template
-          v-else-if="props.chartType === 'area' && props.singleFrameworkSelection && props.frameworkComparisonMode">
-          <VisArea v-for="fw in activeFrameworks" :x="xAccessor"
-            :y="(d: any) => getComparisonValue(d, fw.key, comparisonCategory)" :color="() => fw.colorArea || fw.color"
-            :interpolateMissingData="true" :zIndex="1" />
-          <VisLine v-for="fw in activeFrameworks" :x="xAccessor"
-            :y="(d: any) => getComparisonValue(d, fw.key, comparisonCategory)"
-            :color="() => (hexToRgba(fw.colorLine || fw.color, 0.6))" :lineDashArray="fw.lineDashArray" />
-
-          <VisPlotband v-if="hasActiveSeries && currentTimeX !== null" axis="x" :from="-7" :to="currentTimeX"
-            :color="'rgba(255, 255, 255, 0.7)'" :zIndex="20" />
-          <VisPlotline v-if="hasActiveSeries" :value="currentTimeX" color="rgba(234,88,12,1)" axis="x"
-            labelOrientation="vertical" :zIndex="20" :lineWidth="1" />
-
-          <!-- <VisCrosshair v-if="hasActiveSeries" :template="crosshairTemplate" />
-          <VisTooltip v-if="hasActiveSeries" :horizontalShift="30" /> -->
-        </template>
-        <template v-else-if="props.chartType === 'area'">
-          <VisArea v-for="fw in activeFrameworks" :x="xAccessor" :y="(d: any) => getFrameworkValue(d, fw.key)"
-            :color="() => (fw.colorArea || fw.color)" :interpolateMissingData="true" :zIndex="1" />
-
-          <!-- <VisCrosshair v-if="hasActiveSeries" :template="crosshairTemplate" /> -->
-          <VisLine v-for="fw in activeFrameworks" :x="xAccessor" :y="(d: any) => getFrameworkValue(d, fw.key)"
-            :color="() => (hexToRgba(fw.colorLine || fw.color, 0.5))" :lineDashArray="fw.lineDashArray" />
-          <VisArea v-if="isKgMatsvamp" v-for="fw in activeFrameworks" :key="fw.key + '-kg-x2'" :x="xAccessor"
-            :y="kgDoubleAccessorFor(fw.key)" :color="() => 'rgba(234,179,8,0.3)'" />
-          <!-- <VisTooltip v-if="hasActiveSeries" :horizontalShift="30" /> -->
           <VisPlotband v-if="hasActiveSeries && currentTimeX !== null" axis="x" :from="-7" :to="currentTimeX"
             :color="'rgba(255, 255, 255, 0.7)'" :zIndex="20" />
           <VisPlotline v-if="hasActiveSeries" :value="currentTimeX" color="rgba(234,88,12,1)" axis="x"
@@ -126,6 +115,7 @@ type SkogsbrukSvampEntry = {
 const svampCategoryFieldMap: Record<string, string> = {
   matsvamp: 'Alla matsvampar',
   'goda matsvampar': 'Goda matsvampar',
+  total: 'Mängd mykorrhiza',
   'rödlistade + signalarter': 'Signal + rödlistade',
   atheliales: 'Atheliales',
   boletales: 'Boletales',
@@ -213,10 +203,6 @@ const { data: kgMatsvampDataDoc } = await useAsyncData('kg-matsvamp-skogsbruk', 
   queryCollection('kgMatsvampSkogsbruk').first()
 )
 
-const { data: totalSvamparDataDoc } = await useAsyncData('total-svampar-skogsbruk', () =>
-  queryCollection('totalSvamparSkogsbruk').first()
-)
-
 const matsvampDataset = computed(() => svampCategoryDatasets.value['matsvamp'] ?? [])
 const godaMatsvampDataset = computed(() => svampCategoryDatasets.value['goda matsvampar'] ?? [])
 const kgMatsvampDataset = computed(() => Array.isArray(kgMatsvampDataDoc.value?.entries) ? kgMatsvampDataDoc.value.entries : [])
@@ -230,7 +216,7 @@ const russulalesDataset = computed(() => svampCategoryDatasets.value['russulales
 const ascomycotaDataset = computed(() => svampCategoryDatasets.value['ascomycota'] ?? [])
 const thelephoralesDataset = computed(() => svampCategoryDatasets.value['thelephorales'] ?? [])
 const ovrigaDataset = computed(() => svampCategoryDatasets.value['övriga'] ?? [])
-const totalDataset = computed(() => Array.isArray(totalSvamparDataDoc.value?.entries) ? totalSvamparDataDoc.value.entries : [])
+const totalDataset = computed(() => svampCategoryDatasets.value['total'] ?? [])
 
 const { data: relativeSvampgrupperDoc } = await useAsyncData('svampgrupper-relative-skogsbruk', () =>
   queryCollection('svampgrupperRelativeSkogsbruk').first()
@@ -399,6 +385,15 @@ const stackedCategories = computed<string[]>(() => {
   const raw = (props.selectedArtkategori || [])
     .map(a => (a || '').toLowerCase())
     .filter(a => !inactiveArtkategoriKeys.value.has(a))
+  const ordered = artkategoriLegendOrder.filter(key => raw.includes(key))
+  const extras = raw.filter(key => !artkategoriLegendOrder.includes(key))
+  return ordered.concat(extras)
+})
+
+const stackedSeriesOrder = computed<string[]>(() => {
+  if (!props.singleFrameworkSelection || props.frameworkComparisonMode) return []
+  const raw = (props.selectedArtkategori || [])
+    .map(a => (a || '').toLowerCase())
   const ordered = artkategoriLegendOrder.filter(key => raw.includes(key))
   const extras = raw.filter(key => !artkategoriLegendOrder.includes(key))
   return ordered.concat(extras)
@@ -584,7 +579,6 @@ const artkategoriColorMapping: Record<string, string> = {
 const artkategoriLegendOrder = [
   'atheliales',
   'ascomycota',
-  'övriga',
   'spindlingar',
   'russulales',
 
@@ -594,7 +588,8 @@ const artkategoriLegendOrder = [
   'matsvamp',
   'goda matsvampar',
   'rödlistade + signalarter',
-  'total'
+  'total',
+  'övriga'
 ];
 const artkategoriLabelMap: Record<string, string> = {
   'atheliales': 'Skinnsvampar',
@@ -608,7 +603,7 @@ const artkategoriLabelMap: Record<string, string> = {
   'matsvamp': 'Alla matsvampar',
   'goda matsvampar': 'Goda matsvampar',
   'rödlistade + signalarter': 'Naturvårdssvampar',
-  'total': 'Total'
+  'total': 'Mängd mykorrhiza'
 };
 
 const artkategoriIconMap: Record<string, string> = {
@@ -941,16 +936,20 @@ const legendItems = computed<LegendItem[]>(() => {
   });
 });
 
-const legendSelectItems = computed(() =>
-  legendItems.value.map(item => ({
+const legendSelectItems = computed(() => {
+  const items = legendItems.value.map(item => ({
     label: item.label,
     value: item.key,
     icon: item.icon,
     color: item.color,
     colorLine: item.colorLine,
     colorArea: item.colorArea,
-  }))
-);
+  }));
+  if (props.singleFrameworkSelection && !props.frameworkComparisonMode) {
+    return [...items].reverse();
+  }
+  return items;
+});
 
 const selectedLegendItems = computed(() =>
   legendSelectItems.value.filter(item => selectedLegendValues.value.includes(item.value))
@@ -1257,13 +1256,16 @@ function handleLegendItemClick(item: LegendItem) {
 // Unovis stacked areas require an array of y accessors (one per series)
 const stackedYAccessors = computed<((d: any) => number)[]>(() => {
   if (!props.singleFrameworkSelection || props.frameworkComparisonMode) return []
-  return stackedCategories.value.map(cat => (d: any) => getCategoryValue(d, cat))
+  return stackedSeriesOrder.value.map(cat => (d: any) => {
+    if (inactiveArtkategoriKeys.value.has(cat)) return NaN
+    return getCategoryValue(d, cat)
+  })
 })
 
 // Colors aligned with the stacked series order
 const stackedColors = computed<string[] | ((...args: any[]) => string)>(() => {
   if (!props.singleFrameworkSelection || props.frameworkComparisonMode) return []
-  return stackedCategories.value.map(cat => getArtColor(cat))
+  return stackedSeriesOrder.value.map(cat => getArtColor(cat))
 
 })
 

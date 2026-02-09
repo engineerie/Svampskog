@@ -242,10 +242,10 @@
             </Transition>
           </div>
           <div v-else-if="compactDesktop"></div>
-          <div class="col-span-3 flex w-full justify-end" v-else>
+          <div class="col-span-3 flex w-full justify-end mt-3" v-else>
             <Transition name="fade" mode="out-in">
-              <NuxtImg src="/images/Landing/Mushroom Forest Image.jpeg" width="805" height="505"
-                class="h-full rounded-xl ring ring-muted/50" />
+              <NuxtImg src="/images/Landing/Mushroom Forest Image.jpeg" width="805" height="400"
+                class="h-full rounded-lg ring ring-muted/50" />
             </Transition>
           </div>
         </div>

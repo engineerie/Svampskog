@@ -556,6 +556,7 @@ export const collections = {
           Russulales: numericStringSchema.optional(),
           Thelephorales: numericStringSchema.optional(),
           Ascomyceter: numericStringSchema.optional(),
+          ["Mängd mykorrhiza"]: numericStringSchema.optional(),
         }),
       ),
     }),
@@ -574,20 +575,6 @@ export const collections = {
           Russulales: numericStringSchema.optional(),
           Thelephorales: numericStringSchema.optional(),
           Ascomyceter: numericStringSchema.optional(),
-        }),
-      ),
-    }),
-  }),
-  totalSvamparSkogsbruk: defineCollection({
-    type: "data",
-    source: "2.skogsskotsel/diagram/total-svampar-skogsbruk.yml",
-    schema: z.object({
-      entries: z.array(
-        z.object({
-          artkategori: z.string().nonempty(),
-          frameworks: z.string().nonempty(),
-          ["ålder"]: z.number(),
-          klassning: z.number(),
         }),
       ),
     }),

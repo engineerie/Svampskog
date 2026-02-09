@@ -18,7 +18,7 @@
               <h1 class="truncate">Alla mykorrhizasvampar</h1>
             </div>
             <div class="flex gap-2">
-              <h1 class="text-md text-neutral-500">{{ totalSpecies }} arter baserat på {{ sampleEnvCount }} skogar</h1>
+              <h1 class="text-md text-neutral-500">{{ speciesCountLabel }} arter baserat på {{ sampleEnvCount }} skogar</h1>
               <UBadge v-if="sampleEnvCount < 10" :icon="sampleEnvCount < 10 ? 'i-cuida-warning-outline' : undefined"
                 size="md" :color="sampleEnvCount < 10 ? 'warning' : 'secondary'" variant="subtle" class="h-fit flex ">
                 {{ sampleEnvCount < 10 ? 'Få prov' : null }} </UBadge>
@@ -227,6 +227,13 @@ const data = ref<any[]>([]);
 const totalSpecies = computed(() => data.value.length);
 const sampleEnvCount = computed(() =>
   data.value.length > 0 ? data.value[0].sample_env_count || 0 : 0
+);
+const filteredSpeciesCount = computed(() => tableVisibleRange.value?.total ?? totalSpecies.value);
+const isFiltered = computed(() => filteredSpeciesCount.value !== totalSpecies.value);
+const speciesCountLabel = computed(() =>
+  isFiltered.value
+    ? `${filteredSpeciesCount.value} av ${totalSpecies.value}`
+    : `${totalSpecies.value}`
 );
 const chartWidth = ref("100%");
 
