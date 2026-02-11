@@ -2,7 +2,7 @@ title: Svampar
 description: Sök på vilka mykorrhizasvampar som kan finnas i olika skogar baserat på miljö-DNA och sammanställd kunskap om vart fruktkroppar förekommer.
 hero:
   title: Sök svampar i svenska skogar
-  description: Enligt DNA-analyser av jordprover och sammanställda uppgifter om var fruktkroppar finns.
+  description: Baserat på dels DNA-analyser av svamp i markprover och dels uppgifter om var fruktkroppar finns.
   orientation: vertical
   src: /images/svampgrid/Cantharellus cibarius-3.jpg
   headline:

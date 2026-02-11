@@ -7,7 +7,7 @@ images: []
 key: rottackeSkarmtrad
 ---
 
-Med cirka 300–400 skärmträd kvar efter avverkning täcker rötterna fortsatt en stor del av marken. Rotsystemen sträcker sig även in i ytor där träd har tagits bort, vilket gör att påverkan på mykorrhizasvampar förblir låg.
+Med cirka 300–400 skärmträd kvar efter avverkning täcker rötterna fortsatt en stor del av marken. Rotsystemen sträcker sig även in i ytor där träd har tagits bort, vilket gör att påverkan på mykorrhizasvampar är begränsad och förmodligen liten.
 
 | Markör | Förklaring                                                      |
 | ------ | --------------------------------------------------------------- |

@@ -11,7 +11,7 @@ table:
   headers: []
 ---
 
-Här finns inga levande mykorrhizamycel eftersom stubbens rötter är döda. Högstubbar är däremot viktiga för insekter och svampar som är vedlevande.
+Här finns inga levande mykorrhizamycel eftersom stubbens rötter är döda. Högstubbar är däremot viktiga för vedlevande insekter och svampar.
 
 | Markör | Förklaring |
 | ------ | ---------- |

@@ -11,7 +11,7 @@ table:
   headers: []
 ---
 
-Mykorrhizasvampar som växte med träden före avverkningen finns oftast kvar. De lever vidare med rötterna som når 10-15 meter och kan sprida sig till uppväxande plantor.
+Mykorrhizasvampar som växte med träden före avverkningen finns oftast kvar. De lever vidare med rötterna som når 10 meter och kan sprida sig till uppväxande plantor.
 
 | Markör                                            | Förklaring                                                      |
 | ------------------------------------------------- | --------------------------------------------------------------- |

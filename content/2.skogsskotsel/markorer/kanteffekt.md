@@ -12,7 +12,7 @@ table:
   headers: []
 ---
 
-Kanteffekt beskriver hur trädens rötter och deras mykorrhizasvampar sträcker sig från skogskanten in över en avverkad yta, vanligen 10–15 meter in beroende på trädens storlek. Mest rötter och den största mängden mykorrhiza finns precis intill skogskanten nära stammarna.
+Kanteffekt beskriver att träds rötter och deras mykorrhizasvampar sträcker sig från skogskanten in på en avverkad yta, vanligen 10 meter beroende på trädens storlek. Mest rötter och den största mängden mykorrhiza finns intill skogskanten.
 
 #### Många små luckor (luckhuggning)
 
