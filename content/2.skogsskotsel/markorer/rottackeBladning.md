@@ -1,5 +1,5 @@
 ---
-title: Träd blädning
+title: Plockhuggna träd
 description: Rötter kvar även där träd har avverkats.
 image: /images/metoder/web/blädning_1000.webp
 key: rottackeBladning
