@@ -42,7 +42,7 @@
         </USelect>
       </div>
       <VisXYContainer v-if="isMounted && chartReady" :data="chartData.length ? chartData : [emptyDataPoint]"
-        :height="200" :margin="margin" :xDomain="xDomain" :yDomain="yDomain">
+        :height="200" :margin="margin" :xDomain="xDomain" :yDomain="yDomain" :svgDefs="svgDefs">
         <template v-if="props.chartType === 'area'">
           <template v-if="props.singleFrameworkSelection && !props.frameworkComparisonMode">
             <VisArea :x="xAccessor" :y="stackedYAccessors" :color="stackedColors" :interpolateMissingData="true" />
@@ -65,11 +65,11 @@
           </template>
           <template v-else>
             <VisArea v-for="fw in activeFrameworks" :x="xAccessor" :y="(d: any) => getFrameworkValue(d, fw.key)"
-              :color="() => (fw.colorArea || fw.color)" :interpolateMissingData="true" :zIndex="1" />
+              :color="() => getFrameworkGradientUrl(fw)" :interpolateMissingData="true" :zIndex="1" />
 
             <!-- <VisCrosshair v-if="hasActiveSeries" :template="crosshairTemplate" /> -->
             <VisLine v-for="fw in activeFrameworks" :x="xAccessor" :y="(d: any) => getFrameworkValue(d, fw.key)"
-              :color="() => (hexToRgba(fw.colorLine || fw.color, 0.5))" :lineDashArray="fw.lineDashArray" />
+              :color="() => (hexToRgba(fw.colorLine || fw.color, 0.4))" :lineDashArray="fw.lineDashArray" />
             <VisArea v-if="isKgMatsvamp" v-for="fw in activeFrameworks" :key="fw.key + '-kg-x2'" :x="xAccessor"
               :y="kgDoubleAccessorFor(fw.key)" :color="() => 'rgba(234,179,8,0.3)'" />
             <!-- <VisTooltip v-if="hasActiveSeries" :horizontalShift="30" /> -->
@@ -96,7 +96,7 @@
 
 <script setup lang="ts">
 
-import { computed, ref, onMounted, onBeforeUnmount, nextTick, reactive } from 'vue'
+import { computed, ref, onMounted, onBeforeUnmount, nextTick, reactive, getCurrentInstance } from 'vue'
 import { VisXYContainer, VisAxis, VisLine, VisArea, VisGroupedBar, VisBulletLegend, VisBrush, VisCrosshair, VisTooltip, VisPlotline, VisPlotband } from '@unovis/vue'
 import type { BulletLegendItemInterface } from '@unovis/ts'
 import { PlotbandLabelPosition } from '@unovis/ts'
@@ -524,6 +524,49 @@ function hexToRgba(hex: string, alpha = 1): string {
   const b = bigint & 255
   return `rgba(${r}, ${g}, ${b}, ${alpha})`
 }
+
+function colorWithAlpha(color: string, alpha: number): string {
+  if (!color) return color
+  if (color.startsWith('#')) return hexToRgba(color, alpha)
+  if (color.startsWith('rgba(')) {
+    return color.replace(/rgba\(([^,]+,[^,]+,[^,]+),[^)]+\)/, `rgba($1,${alpha})`)
+  }
+  if (color.startsWith('rgb(')) {
+    return color.replace('rgb(', 'rgba(').replace(')', `,${alpha})`)
+  }
+  return color
+}
+
+function toRgbParts(color: string): { r: number; g: number; b: number; a: number } {
+  if (!color) return { r: 153, g: 153, b: 153, a: 1 }
+  if (color.startsWith('#')) {
+    const m = color.replace('#', '')
+    const s = m.length === 3 ? m.split('').map(c => c + c).join('') : m
+    const bigint = parseInt(s, 16)
+    return {
+      r: (bigint >> 16) & 255,
+      g: (bigint >> 8) & 255,
+      b: bigint & 255,
+      a: 1
+    }
+  }
+  const rgba = color.match(/rgba?\(([^)]+)\)/i)
+  if (rgba) {
+    const parts = rgba[1].split(',').map(s => s.trim())
+    const r = Number(parts[0])
+    const g = Number(parts[1])
+    const b = Number(parts[2])
+    const a = parts[3] !== undefined ? Number(parts[3]) : 1
+    return { r, g, b, a: Number.isFinite(a) ? a : 1 }
+  }
+  return { r: 153, g: 153, b: 153, a: 1 }
+}
+
+function sanitizeId(value: string): string {
+  return value.toLowerCase().replace(/[^a-z0-9-_]+/g, '-')
+}
+
+const instanceId = getCurrentInstance()?.uid ?? Math.floor(Math.random() * 1e9)
 
 const brushSelection = computed<[number, number]>(() => {
   const startMap: Record<string, number> = {
@@ -985,6 +1028,29 @@ const activeFrameworks = computed(() => {
   }
   return legendItems.value.filter(item => !item.inactive);
 });
+
+const svgDefs = computed(() => {
+  if (!activeFrameworks.value.length) return ''
+  const defs = activeFrameworks.value.map(fw => {
+    const id = `area-grad-${instanceId}-${sanitizeId(fw.key)}`
+    const base = fw.colorArea || fw.color || '#999999'
+    const { r, g, b, a } = toRgbParts(base)
+    const topOpacity = Math.min(1, 0.9 * a)
+    const bottomOpacity = 0
+    return `
+      <linearGradient id="${id}" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0%" stop-color="rgb(${r}, ${g}, ${b})" stop-opacity="${topOpacity}" />
+        <stop offset="100%" stop-color="rgb(${r}, ${g}, ${b})" stop-opacity="${bottomOpacity}" />
+      </linearGradient>
+    `
+  }).join('\n')
+  return defs
+})
+
+const getFrameworkGradientUrl = (fw: { key: string }) => {
+  const id = `area-grad-${instanceId}-${sanitizeId(fw.key)}`
+  return `url(#${id})`
+}
 
 const plotBandLabelPosition = PlotbandLabelPosition.TopOutside;
 
