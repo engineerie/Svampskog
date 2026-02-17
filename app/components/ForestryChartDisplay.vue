@@ -7,8 +7,8 @@
       <div
         v-if="isMounted && chartReady && legendItems.length && (props.singleFrameworkSelection && !props.frameworkComparisonMode)"
         class=" flex flex-wrap gap-0 gap-y-1 mb-0.5">
-        <USelect v-model="selectedLegendValues" multiple :items="legendSelectItems" class="w-55 ring-muted/50" size="xs"
-          variant="outline">
+        <USelect v-model="selectedLegendValues" multiple :items="legendSelectItems" class="w-fit ring-muted/50"
+          size="lg" variant="outline" :ui="{ content: 'min-w-fit' }">
           <template #default="{ ui }">
             <span v-if="selectedLegendItems.length"
               :class="ui.value({ class: 'flex items-center gap-2 min-w-0 overflow-hidden' })">
@@ -64,14 +64,15 @@
             <VisTooltip v-if="hasActiveSeries" :horizontalShift="30" /> -->
           </template>
           <template v-else>
-            <VisArea v-for="fw in activeFrameworks" :x="xAccessor" :y="(d: any) => getFrameworkValue(d, fw.key)"
-              :color="() => getFrameworkGradientUrl(fw)" :interpolateMissingData="true" :zIndex="1" />
+            <VisArea v-if="!isKgMatsvamp" v-for="fw in activeFrameworks" :x="xAccessor"
+              :y="(d: any) => getFrameworkValue(d, fw.key)" :color="() => getFrameworkGradientUrl(fw)"
+              :interpolateMissingData="true" :zIndex="1" />
 
             <!-- <VisCrosshair v-if="hasActiveSeries" :template="crosshairTemplate" /> -->
             <VisLine v-for="fw in activeFrameworks" :x="xAccessor" :y="(d: any) => getFrameworkValue(d, fw.key)"
               :color="() => (hexToRgba(fw.colorLine || fw.color, 0.4))" :lineDashArray="fw.lineDashArray" />
             <VisArea v-if="isKgMatsvamp" v-for="fw in activeFrameworks" :key="fw.key + '-kg-x2'" :x="xAccessor"
-              :y="kgDoubleAccessorFor(fw.key)" :color="() => 'rgba(234,179,8,0.3)'" />
+              :y="kgDoubleAccessorFor(fw.key)" :color="() => getFrameworkGradientUrl(fw)" />
             <!-- <VisTooltip v-if="hasActiveSeries" :horizontalShift="30" /> -->
           </template>
 

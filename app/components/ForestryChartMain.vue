@@ -8,12 +8,30 @@
         :ui="{ content: 'min-w-fit', value: 'sm:text-lg sm:font-medium text-neutral-700' }" />
       <div class="">
         <USelect v-if="selectedChart === 'grupper' && isFrameworkCompareMode" v-model="selectedCompareArtkategori"
-          :items="compareArtkategoriOptions" option-attribute="label" value-key="value" size="xs" variant="outline"
-          placeholder="Välj svampgrupp" class="hover:cursor-pointer ring-muted/50 mb-2"
-          :ui="{ content: 'min-w-fit', base: 'min-h-8' }" :avatar="selectedCompareAvatar">
+          :items="compareArtkategoriOptionsReversed" option-attribute="label" value-key="value" size="lg" variant="outline"
+          placeholder="Välj svampgrupp" class="hover:cursor-pointer ring-muted/50 mb-2 w-fit"
+          :ui="{ content: 'min-w-fit' }">
+          <template #default="{ ui }">
+            <span v-if="selectedCompareItem"
+              :class="ui.value({ class: 'flex items-center gap-2 min-w-0 overflow-hidden' })">
+              <span class="inline-flex items-center gap-2 min-w-0 overflow-visible">
+                <span v-if="selectedCompareItem.icon" class="h-3.5 w-3.5" :style="{
+                  backgroundColor: selectedCompareItem.color || '#000',
+                  WebkitMask: `url(${selectedCompareItem.icon}) center / contain no-repeat`,
+                  mask: `url(${selectedCompareItem.icon}) center / contain no-repeat`,
+                }" />
+                <span>{{ selectedCompareItem.label }}</span>
+              </span>
+            </span>
+            <span v-else :class="ui.placeholder({ class: '' })">Välj svampgrupp</span>
+          </template>
           <template #item="{ item }">
             <div class="flex items-center gap-2">
-              <img v-if="item.icon" :src="item.icon" alt="" class="size-5 rounded-sm object-contain" />
+              <span v-if="item.icon" class="h-4 w-4" :style="{
+                backgroundColor: item.color || '#000',
+                WebkitMask: `url(${item.icon}) center / contain no-repeat`,
+                mask: `url(${item.icon}) center / contain no-repeat`,
+              }" />
               <span>{{ item.label }}</span>
             </div>
           </template>
@@ -56,7 +74,7 @@
       <div class="px-4 pb-2 text-sm text-muted" v-if="chartDescription">
         {{ chartDescription }}
       </div>
-      <div class="mx-2 my-2">
+      <div v-if="selectedChart === 'grupper'" class="mx-2 my-2">
         <UModal :fullscreen="isMobile ? true : false" title="Relativ mängd" description="">
 
           <UButton size="lg" variant="outline" class="px-3 flex justify-center ring-muted/50" color="neutral"
@@ -68,6 +86,26 @@
                 :relativeChart="true" />
               <p class="text-sm text-muted">
                 {{ grupperModalDescription }}
+              </p>
+            </div>
+          </template>
+        </UModal>
+      </div>
+      <div v-if="selectedChart === 'matsvampar' && selectedMatsvampVariant === 'goda'" class="mx-2 my-2">
+        <UModal :fullscreen="isMobile ? true : false" title="Om goda matsvampar" description="">
+          <UButton size="lg" variant="outline" class="px-3 flex justify-center ring-muted/50" color="neutral"
+            icon="heroicons:question-mark-circle" label="Om goda matsvampar" />
+          <template #body>
+            <div class="flex flex-col gap-4">
+              <p class="text-sm text-muted">
+                Matsvampar omfattar de 75 arter som klassas som matsvampar i Nya svampboken (Holmberg & Marklund 2014)
+                och av
+                Svampguiden.com.
+              </p>
+              <p class="text-sm text-muted">
+                Vad som är en god matsvamp är subjektivt. Här har vi klassat 43 arter som goda (bl a kantarell,
+                stensopp och trattkantarell) och resterade 32 arter som ordinära matsvampar (bl a björksopp,
+                grönkremla och pepparriska).
               </p>
             </div>
           </template>
@@ -406,6 +444,7 @@ const compareArtkategoriOptions = [
     label: 'Skinnsvampar',
     value: 'atheliales',
     icon: '/images/svampgrupp/skinnsvamp.png',
+    color: '#8B5CF6',
     avatar: {
       src: '/images/svampgrupp/skinnsvamp.png',
       alt: 'Skinnsvampar'
@@ -415,6 +454,7 @@ const compareArtkategoriOptions = [
     label: 'Soppar',
     value: 'boletales',
     icon: '/images/svampgrupp/sopp.png',
+    color: '#EC4899',
     avatar: {
       src: '/images/svampgrupp/sopp.png',
       alt: 'Soppar'
@@ -424,6 +464,7 @@ const compareArtkategoriOptions = [
     label: 'Kantarellsläktingar',
     value: 'cantharellales',
     icon: '/images/svampgrupp/kantarell.png',
+    color: '#eab308',
     avatar: {
       src: '/images/svampgrupp/kantarell.png',
       alt: 'Kantarellsläktingar'
@@ -433,6 +474,7 @@ const compareArtkategoriOptions = [
     label: 'Spindelskivlingar',
     value: 'spindlingar',
     icon: '/images/svampgrupp/hattsvamp.png',
+    color: '#F97316',
     avatar: {
       src: '/images/svampgrupp/hattsvamp.png',
       alt: 'Spindelskivlingar'
@@ -442,6 +484,7 @@ const compareArtkategoriOptions = [
     label: 'Kremlor & riskor',
     value: 'russulales',
     icon: '/images/svampgrupp/hattsvamp.png',
+    color: '#22C55E',
     avatar: {
       src: '/images/svampgrupp/hattsvamp.png',
       alt: 'Kremlor & riskor'
@@ -451,6 +494,7 @@ const compareArtkategoriOptions = [
     label: 'Tagg- och tomentelloida svampar',
     value: 'thelephorales',
     icon: '/images/svampgrupp/taggsvamp.png',
+    color: '#0EA5E9',
     avatar: {
       src: '/images/svampgrupp/taggsvamp.png',
       alt: 'Tagg- och tomentelloida svampar'
@@ -460,6 +504,7 @@ const compareArtkategoriOptions = [
     label: 'Sporsäckssvampar',
     value: 'ascomycota',
     icon: '/images/svampgrupp/skalsvamp.png',
+    color: '#DC2626',
     avatar: {
       src: '/images/svampgrupp/skalsvamp.png',
       alt: 'Sporsäckssvampar'
@@ -469,17 +514,18 @@ const compareArtkategoriOptions = [
     label: 'Övriga svampar',
     value: 'övriga',
     icon: '/images/svampgrupp/ovrigt.png',
+    color: '#94A3B8',
     avatar: {
       src: '/images/svampgrupp/ovrigt.png',
       alt: 'Övriga svampar'
     }
   }
 ]
+const compareArtkategoriOptionsReversed = computed(() => [...compareArtkategoriOptions].reverse())
 
 const selectedCompareArtkategori = ref(compareArtkategoriOptions[0].value)
-
-const selectedCompareAvatar = computed(() =>
-  compareArtkategoriOptions.find(opt => opt.value === selectedCompareArtkategori.value)?.avatar
+const selectedCompareItem = computed(() =>
+  compareArtkategoriOptions.find(opt => opt.value === selectedCompareArtkategori.value)
 )
 
 watch([selectedChart, isFrameworkCompareMode], ([chart, compare]) => {
