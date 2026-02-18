@@ -712,7 +712,7 @@ entries:
     Signal + rödlistade: 0.159789
     Atheliales: 13.23370787
     Boletales: 6.674157303
-    Cantharellales: 0.2568
+    Cantharellales: 0.4
     Cortinariaceae: 9.337078652
     Russulales: 8.359550562
     Thelephorales: 5.366292135
@@ -727,7 +727,7 @@ entries:
     Signal + rödlistade: 0.16223625
     Atheliales: 17.92424242
     Boletales: 7.8
-    Cantharellales: 0.26975
+    Cantharellales: 0.42
     Cortinariaceae: 8.863636364
     Russulales: 9.001515152
     Thelephorales: 5.554545455
@@ -742,12 +742,12 @@ entries:
     Signal + rödlistade: 0.1
     Atheliales: 11.38461538
     Boletales: 4.8
-    Cantharellales: 0.0816
+    Cantharellales: 0.3
     Cortinariaceae: 4.923076923
     Russulales: 4.830769231
     Thelephorales: 4.215384615
     Ascomyceter: 8.246153846
-    Övriga: 1
+    Övriga: 1.2
     Mängd mykorrhiza: 40
   - startskog: produktionsskog_
     metod: skärm
@@ -757,7 +757,7 @@ entries:
     Signal + rödlistade: 0.11
     Atheliales: 18.56470588
     Boletales: 8.047058824
-    Cantharellales: 0.156
+    Cantharellales: 0.33
     Cortinariaceae: 7.482352941
     Russulales: 7.235294118
     Thelephorales: 3.423529412
@@ -772,7 +772,7 @@ entries:
     Signal + rödlistade: 0.07
     Atheliales: 16.5
     Boletales: 7
-    Cantharellales: 0.0625
+    Cantharellales: 0.25
     Cortinariaceae: 5.5
     Russulales: 5
     Thelephorales: 3.423529412
@@ -787,12 +787,12 @@ entries:
     Signal + rödlistade: 0.11
     Atheliales: 28.8
     Boletales: 11.7
-    Cantharellales: 0.243
+    Cantharellales: 0.34
     Cortinariaceae: 10.35
     Russulales: 9.9
     Thelephorales: 5.4
     Ascomyceter: 22.5
-    Övriga: 1.08
+    Övriga: 2.25
     Mängd mykorrhiza: 90
   - startskog: produktionsskog_
     metod: skärm
@@ -802,7 +802,7 @@ entries:
     Signal + rödlistade: 0.123
     Atheliales: 36.8
     Boletales: 14.95
-    Cantharellales: 0.39675
+    Cantharellales: 0.47
     Cortinariaceae: 13.225
     Russulales: 12.65
     Thelephorales: 6.9
@@ -837,7 +837,7 @@ entries:
     Russulales: 16.8
     Thelephorales: 6.6
     Ascomyceter: 28.2
-    Övriga: 2.94
+    Övriga: 3.4
     Mängd mykorrhiza: 120
   - startskog: produktionsskog_
     metod: skärm
@@ -1307,212 +1307,212 @@ entries:
   - startskog: naturskog
     metod: blädning
     ålder: 0.1
-    Alla matsvampar: 19.37291667
-    Goda matsvampar: 6.063333333
+    Alla matsvampar: 22.77291667
+    Goda matsvampar: 7.125833333
     Signal + rödlistade: 0.397530833
-    Atheliales: 16.13023256
-    Boletales: 9.340116279
-    Cantharellales: 0.607848837
-    Cortinariaceae: 21.15116279
-    Russulales: 19.42151163
-    Thelephorales: 2.65872093
-    Ascomyceter: 14.53895349
-    Övriga: 1.151453488
+    Atheliales: 16.75526992
+    Boletales: 9.701799486
+    Cantharellales: 0.629305913
+    Cortinariaceae: 18.70437018
+    Russulales: 20.19023136
+    Thelephorales: 2.744473008
+    Ascomyceter: 15.08586118
+    Övriga: 1.188688946
     Mängd mykorrhiza: 85
   - startskog: naturskog
     metod: blädning
     ålder: 10
-    Alla matsvampar: 20.7825
-    Goda matsvampar: 6.5145
+    Alla matsvampar: 24.3825
+    Goda matsvampar: 7.6395
     Signal + rödlistade: 0.4214925
-    Atheliales: 17.4375
-    Boletales: 9.930681818
-    Cantharellales: 0.669886364
-    Cortinariaceae: 22.03977273
-    Russulales: 20.27045455
-    Thelephorales: 3.0375
-    Ascomyceter: 15.42272727
-    Övriga: 1.191477273
+    Atheliales: 18.04534005
+    Boletales: 10.30125945
+    Cantharellales: 0.689168766
+    Cortinariaceae: 19.54156171
+    Russulales: 21.10125945
+    Thelephorales: 3.101259446
+    Ascomyceter: 15.98690176
+    Övriga: 1.23324937
     Mängd mykorrhiza: 90
   - startskog: naturskog
     metod: blädning
     ålder: 20
-    Alla matsvampar: 23.43333333
-    Goda matsvampar: 7.346666667
+    Alla matsvampar: 27.23333333
+    Goda matsvampar: 8.534166667
     Signal + rödlistade: 0.450395
-    Atheliales: 19.69536082
-    Boletales: 10.80257732
-    Cantharellales: 0.612113402
-    Cortinariaceae: 22.10463918
-    Russulales: 20.32216495
-    Thelephorales: 3.20257732
-    Ascomyceter: 16.73762887
-    Övriga: 1.522938144
+    Atheliales: 20.14965358
+    Boletales: 11.12794457
+    Cantharellales: 0.640646651
+    Cortinariaceae: 19.8073903
+    Russulales: 21.23787529
+    Thelephorales: 3.264665127
+    Ascomyceter: 17.23602771
+    Övriga: 1.535796767
     Mängd mykorrhiza: 95
   - startskog: naturskog
     metod: blädning
     ålder: 30
-    Alla matsvampar: 26.66666667
-    Goda matsvampar: 8.483333333
+    Alla matsvampar: 30.66666667
+    Goda matsvampar: 9.733333333
     Signal + rödlistade: 0.4829
-    Atheliales: 21.86238532
-    Boletales: 11.44036697
-    Cantharellales: 0.611926606
-    Cortinariaceae: 22.02752294
-    Russulales: 20.35779817
-    Thelephorales: 3.660550459
-    Ascomyceter: 18.76146789
-    Övriga: 1.277981651
+    Atheliales: 22.18711019
+    Boletales: 11.74220374
+    Cantharellales: 0.641995842
+    Cortinariaceae: 19.96673597
+    Russulales: 21.32224532
+    Thelephorales: 3.692307692
+    Ascomyceter: 19.12681913
+    Övriga: 1.320582121
     Mängd mykorrhiza: 100
   - startskog: naturskog
     metod: blädning
     ålder: 30.1
-    Alla matsvampar: 18.91958333
-    Goda matsvampar: 6.049166667
+    Alla matsvampar: 21.63958333
+    Goda matsvampar: 6.899166667
     Signal + rödlistade: 0.331145833
-    Atheliales: 18.98333333
-    Boletales: 9.779569892
-    Cantharellales: 0.519139785
-    Cortinariaceae: 18.19731183
-    Russulales: 16.79892473
-    Thelephorales: 3.308602151
-    Ascomyceter: 16.28709677
-    Övriga: 1.126021505
+    Atheliales: 19.20833333
+    Boletales: 10.01666667
+    Cantharellales: 0.543333333
+    Cortinariaceae: 16.59166667
+    Russulales: 17.61666667
+    Thelephorales: 3.316666667
+    Ascomyceter: 16.55
+    Övriga: 1.156666667
     Mängd mykorrhiza: 85
   - startskog: naturskog
     metod: blädning
     ålder: 40
-    Alla matsvampar: 20.3925
-    Goda matsvampar: 6.62325
+    Alla matsvampar: 23.2725
+    Goda matsvampar: 7.52325
     Signal + rödlistade: 0.3535785
-    Atheliales: 20.42133891
-    Boletales: 10.39142259
-    Cantharellales: 0.574079498
-    Cortinariaceae: 18.9498954
-    Russulales: 17.52552301
-    Thelephorales: 3.705439331
-    Ascomyceter: 17.03410042
-    Övriga: 1.398200837
+    Atheliales: 20.62600382
+    Boletales: 10.63307839
+    Cantharellales: 0.596959847
+    Cortinariaceae: 17.31940727
+    Russulales: 18.39235182
+    Thelephorales: 3.696367113
+    Ascomyceter: 17.32370937
+    Övriga: 1.412122371
     Mängd mykorrhiza: 90
   - startskog: naturskog
     metod: blädning
     ålder: 50
-    Alla matsvampar: 22.95833333
-    Goda matsvampar: 7.5335
+    Alla matsvampar: 25.99833333
+    Goda matsvampar: 8.4835
     Signal + rödlistade: 0.382644167
-    Atheliales: 22.00863724
-    Boletales: 11.21948177
-    Cantharellales: 0.571641075
-    Cortinariaceae: 19.35009597
-    Russulales: 18.22140115
-    Thelephorales: 3.840115163
-    Ascomyceter: 18.02082534
-    Övriga: 1.767802303
+    Atheliales: 22.17226148
+    Boletales: 11.43524735
+    Cantharellales: 0.596687279
+    Cortinariaceae: 17.81166078
+    Russulales: 19.0889576
+    Thelephorales: 3.836925795
+    Ascomyceter: 18.30008834
+    Övriga: 1.758171378
     Mängd mykorrhiza: 95
   - startskog: naturskog
     metod: blädning
     ålder: 60
-    Alla matsvampar: 26.13333333
-    Goda matsvampar: 8.666666667
+    Alla matsvampar: 29.33333333
+    Goda matsvampar: 9.666666667
     Signal + rödlistade: 0.418
-    Atheliales: 23.75862069
-    Boletales: 11.62068966
-    Cantharellales: 0.586206897
-    Cortinariaceae: 19.72413793
-    Russulales: 18.65517241
-    Thelephorales: 4.137931034
-    Ascomyceter: 20
-    Övriga: 1.517241379
+    Atheliales: 23.872
+    Boletales: 11.84
+    Cantharellales: 0.6112
+    Cortinariaceae: 18.304
+    Russulales: 19.52
+    Thelephorales: 4.128
+    Ascomyceter: 20.192
+    Övriga: 1.5328
     Mängd mykorrhiza: 100
   - startskog: naturskog
     metod: blädning
     ålder: 60.1
-    Alla matsvampar: 18.46625
-    Goda matsvampar: 6.205
+    Alla matsvampar: 20.50625
+    Goda matsvampar: 6.8425
     Signal + rödlistade: 0.275980833
-    Atheliales: 20.825
-    Boletales: 9.9535
-    Cantharellales: 0.49385
-    Cortinariaceae: 15.963
-    Russulales: 15.1555
-    Thelephorales: 3.7655
-    Ascomyceter: 17.4845
-    Övriga: 1.35915
+    Atheliales: 20.86978923
+    Boletales: 10.11241218
+    Cantharellales: 0.512786885
+    Cortinariaceae: 14.95362998
+    Russulales: 15.84543326
+    Thelephorales: 3.742388759
+    Ascomyceter: 17.5971897
+    Övriga: 1.366370023
     Mängd mykorrhiza: 85
   - startskog: naturskog
     metod: blädning
     ålder: 70
-    Alla matsvampar: 19.7625
-    Goda matsvampar: 6.72825
+    Alla matsvampar: 21.9225
+    Goda matsvampar: 7.40325
     Signal + rödlistade: 0.301686
-    Atheliales: 22.16072835
-    Boletales: 10.56614173
-    Cantharellales: 0.552933071
-    Cortinariaceae: 16.81653543
-    Russulales: 16.08307087
-    Thelephorales: 4.094291339
-    Ascomyceter: 17.9503937
-    Övriga: 1.775905512
+    Atheliales: 22.20055376
+    Boletales: 10.73022612
+    Cantharellales: 0.570816797
+    Cortinariaceae: 15.76889709
+    Russulales: 16.80055376
+    Thelephorales: 4.063497923
+    Ascomyceter: 18.10299954
+    Övriga: 1.762455007
     Mängd mykorrhiza: 90
   - startskog: naturskog
     metod: blädning
     ålder: 80
-    Alla matsvampar: 22.19833333
-    Goda matsvampar: 7.695
+    Alla matsvampar: 24.47833333
+    Goda matsvampar: 8.4075
     Signal + rödlistade: 0.3328325
-    Atheliales: 23.56104015
-    Boletales: 11.37572993
-    Cantharellales: 0.556824818
-    Cortinariaceae: 17.43111314
-    Russulales: 17.04105839
-    Thelephorales: 4.179653285
-    Ascomyceter: 18.70529197
-    Övriga: 2.149288321
+    Atheliales: 23.59037387
+    Boletales: 11.52410829
+    Cantharellales: 0.575960464
+    Cortinariaceae: 16.41985389
+    Russulales: 17.74258702
+    Thelephorales: 4.157627847
+    Ascomyceter: 18.86935969
+    Övriga: 2.120128921
     Mängd mykorrhiza: 95
   - startskog: naturskog
     metod: blädning
     ålder: 90
-    Alla matsvampar: 26.1
-    Goda matsvampar: 8.78
+    Alla matsvampar: 28.5
+    Goda matsvampar: 9.53
     Signal + rödlistade: 0.374
-    Atheliales: 25.00995025
-    Boletales: 11.7761194
-    Cantharellales: 0.58159204
-    Cortinariaceae: 18.13432836
-    Russulales: 17.65671642
-    Thelephorales: 4.452736318
-    Ascomyceter: 20.51243781
-    Övriga: 1.876119403
+    Atheliales: 25.02709069
+    Boletales: 11.92932862
+    Cantharellales: 0.600235571
+    Cortinariaceae: 17.17314488
+    Russulales: 18.34628975
+    Thelephorales: 4.428739694
+    Ascomyceter: 20.62661955
+    Övriga: 1.868551237
     Mängd mykorrhiza: 100
   - startskog: naturskog
     metod: blädning
     ålder: 90.1
-    Alla matsvampar: 18.46625
-    Goda matsvampar: 6.205
+    Alla matsvampar: 20.50625
+    Goda matsvampar: 6.8425
     Signal + rödlistade: 0.275980833
-    Atheliales: 20.825
-    Boletales: 9.9535
-    Cantharellales: 0.49385
-    Cortinariaceae: 15.963
-    Russulales: 15.1555
-    Thelephorales: 3.7655
-    Ascomyceter: 17.4845
-    Övriga: 1.35915
+    Atheliales: 20.86978923
+    Boletales: 10.11241218
+    Cantharellales: 0.512786885
+    Cortinariaceae: 14.95362998
+    Russulales: 15.84543326
+    Thelephorales: 3.742388759
+    Ascomyceter: 17.5971897
+    Övriga: 1.366370023
     Mängd mykorrhiza: 85
   - startskog: naturskog
     metod: blädning
     ålder: 100
-    Alla matsvampar: 19.7625
-    Goda matsvampar: 6.72825
+    Alla matsvampar: 21.9225
+    Goda matsvampar: 7.40325
     Signal + rödlistade: 0.301686
-    Atheliales: 22.16072835
-    Boletales: 10.56614173
-    Cantharellales: 0.552933071
-    Cortinariaceae: 16.81653543
-    Russulales: 16.08307087
-    Thelephorales: 4.094291339
-    Ascomyceter: 17.9503937
-    Övriga: 1.775905512
+    Atheliales: 22.20055376
+    Boletales: 10.73022612
+    Cantharellales: 0.570816797
+    Cortinariaceae: 15.76889709
+    Russulales: 16.80055376
+    Thelephorales: 4.063497923
+    Ascomyceter: 18.10299954
+    Övriga: 1.762455007
     Mängd mykorrhiza: 90
   - startskog: naturskog
     metod: luckhuggning
