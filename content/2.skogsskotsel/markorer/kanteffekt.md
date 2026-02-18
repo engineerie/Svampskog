@@ -14,11 +14,9 @@ table:
 
 Kanteffekt beskriver att träds rötter och deras mykorrhizasvampar sträcker sig från skogskanten in på en avverkad yta, vanligen 10 meter beroende på trädens storlek. Mest rötter och den största mängden mykorrhiza finns intill skogskanten.
 
-#### Många små luckor (luckhuggning)
+#### Luckhuggning
 
-Små avverkningsytor skapar mycket mer kant per yta. I små luckor kan kanteffekten nästan täcka hela ytan, eftersom all mark ligger inom 10–15 meter från en kant.
-
-Fördelen av kanteffekten blir därför mycket större i små luckor än i stora hyggen.
+Små avverkningsytor skapar mer kant per yta och ger en större kanteffekt. Är luckorna 20-30 m täcker kanteffekten i princip hela ytan, eftersom all mark ligger inom 10–15 meter från en kant.
 
 | Markör | Förklaring                                                           |
 | ------ | -------------------------------------------------------------------- |

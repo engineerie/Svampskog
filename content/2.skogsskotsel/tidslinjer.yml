@@ -133,32 +133,32 @@ entries:
     atgard: naturskydd
     tid: innan
     skog: Äldre skog som inte varit kalavverkad, åtminstone inte under de senaste 100 åren. Som regel historiskt brukad, plock- eller  dimensionsavverkad och ofta skogsbetad.
-    svamp: Rikligt med mykorrhizasvamp med många olika arter. Goda förutsättningar för matsvampar. Svampar som är signalarter eller rödlistade förekommer generellt oftare här än i skog som tidigare varit kalavverkad. Svampindivider kan vara gamla och vara ha stora mycel.
+    svamp: Rikligt med mykorrhizasvamp med många olika arter. Goda förutsättningar för matsvampar. Svampar som är signalarter eller rödlistade förekommer generellt oftare här än i skog som tidigare varit kalavverkad. Svampindivider kan vara gamla och ha stora mycel.
   - startskog: naturskog
     atgard: naturskydd
     tid: efter
     skog: Intern dynamik med träd som dör och självföryngring av trädplantor.
-    svamp: Rikligt med mykorrhizasvamp med många olika arter. Goda förutsättningar för matsvampar. Svampar som är signalarter eller rödlistade förekommer generellt oftare här än i skog som tidigare varit kalavverkad. Svampindivider kan vara gamla och vara ha stora mycel.
+    svamp: Rikligt med mykorrhizasvamp med många olika arter. Goda förutsättningar för matsvampar. Svampar som är signalarter eller rödlistade förekommer generellt oftare här än i skog som tidigare varit kalavverkad. Svampindivider kan vara gamla och ha stora mycel.
   - startskog: naturskog
     atgard: naturskydd
     tid: 20 år
     skog: Intern dynamik med träd som dör och självföryngring av trädplantor.
-    svamp: Rikligt med mykorrhizasvamp med många olika arter. Goda förutsättningar för matsvampar. Svampar som är signalarter eller rödlistade förekommer generellt oftare här än i skog som tidigare varit kalavverkad. Svampindivider kan vara gamla och vara ha stora mycel.
+    svamp: Rikligt med mykorrhizasvamp med många olika arter. Goda förutsättningar för matsvampar. Svampar som är signalarter eller rödlistade förekommer generellt oftare här än i skog som tidigare varit kalavverkad. Svampindivider kan vara gamla och ha stora mycel.
   - startskog: naturskog
     atgard: naturskydd
     tid: 50 år
     skog: Intern dynamik med träd som dör och självföryngring av trädplantor.
-    svamp: Rikligt med mykorrhizasvamp med många olika arter. Goda förutsättningar för matsvampar. Svampar som är signalarter eller rödlistade förekommer generellt oftare här än i skog som tidigare varit kalavverkad. Svampindivider kan vara gamla och vara ha stora mycel.
+    svamp: Rikligt med mykorrhizasvamp med många olika arter. Goda förutsättningar för matsvampar. Svampar som är signalarter eller rödlistade förekommer generellt oftare här än i skog som tidigare varit kalavverkad. Svampindivider kan vara gamla och ha stora mycel.
   - startskog: naturskog
     atgard: naturskydd
     tid: 80 år
     skog: Intern dynamik med träd som dör och självföryngring av trädplantor.
-    svamp: Rikligt med mykorrhizasvamp med många olika arter. Goda förutsättningar för matsvampar. Svampar som är signalarter eller rödlistade förekommer generellt oftare här än i skog som tidigare varit kalavverkad. Svampindivider kan vara gamla och vara ha stora mycel.
+    svamp: Rikligt med mykorrhizasvamp med många olika arter. Goda förutsättningar för matsvampar. Svampar som är signalarter eller rödlistade förekommer generellt oftare här än i skog som tidigare varit kalavverkad. Svampindivider kan vara gamla och ha stora mycel.
   - startskog: naturskog
     atgard: trakthygge
     tid: innan
     skog: Äldre skog som inte varit kalavverkad, åtminstone inte under de senaste 100 åren. Som regel historiskt brukad, plock- eller  dimensionsavverkad och ofta skogsbetad.
-    svamp: Rikligt med mykorrhizasvamp med många olika arter. Goda förutsättningar för matsvampar. Svampar som är signalarter eller rödlistade förekommer oftare här än i skog som tidigare varit kalavverkad. Svampindivider kan vara gamla och vara ha stora mycel.
+    svamp: Rikligt med mykorrhizasvamp med många olika arter. Goda förutsättningar för matsvampar. Svampar som är signalarter eller rödlistade förekommer oftare här än i skog som tidigare varit kalavverkad. Svampindivider kan vara gamla och ha stora mycel.
   - startskog: naturskog
     atgard: trakthygge
     tid: efter

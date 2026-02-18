@@ -7,7 +7,7 @@ imageDescriptions:
 key: seedTree
 ---
 
-Mycel fortsätter leva på fröträdens rötter och kan sprida sig vidare till nya plantor.
+Mykorrhizasvamparnas mycel fortsätter leva på fröträdens rötter och kan sprida sig vidare till nya uppväxande plantor.
 
 | Markör | Förklaring                                                      |
 | ------ | --------------------------------------------------------------- |
