@@ -135,16 +135,10 @@ const forestryTimelineSchema = z.object({
   entries: z.array(forestryTimelineEntrySchema),
 });
 
-const forestryChartTextVariantSchema = z.object({
-  id: z.string().nonempty(),
-  description: z.string().nonempty(),
-});
-
 const forestryChartTextSchema = z.object({
   id: z.string().nonempty(),
   description: z.string().nonempty(),
   modalDescription: z.string().optional(),
-  variants: z.array(forestryChartTextVariantSchema).optional(),
 });
 
 const methodSchema = z.object({

@@ -124,16 +124,10 @@ const isMobile = useMediaQuery('(max-width: 767px)')
 
 type MatsvampVariant = 'standard' | 'goda' | 'kg'
 
-interface ForestryChartTextVariant {
-  id: string
-  description: string
-}
-
 interface ForestryChartTextEntry {
   id: string
   description: string
   modalDescription?: string
-  variants?: ForestryChartTextVariant[]
 }
 
 const fallbackChartDescriptions = {
@@ -149,8 +143,6 @@ const fallbackMatsvampVariantDescriptions: Record<MatsvampVariant, string> = {
   goda: 'Mängden av alla goda matsvampar i förhållande till förekomsten i äldre skog/före avverkning (%).',
   kg: 'Färskvikten av alla matsvampar (kg/ha) under en säsong i förhållande till förekomsten i äldre skog/före avverkning. Medel- samt min-maxvärde.'
 }
-
-const matsvampVariantKeys: MatsvampVariant[] = ['standard', 'goda', 'kg']
 
 const { data: forestryChartTextsDoc } = await useAsyncData('forestry-chart-texts', () =>
   queryCollection('forestryChartTexts').first()
@@ -264,23 +256,17 @@ const chartDescription = computed(() => {
 
 const matsvampVariantDescriptions = computed<Record<MatsvampVariant, string>>(() => {
   const map: Record<MatsvampVariant, string> = { ...fallbackMatsvampVariantDescriptions }
-  const entry = chartTextMap.value['matsvampar']
-  if (entry?.variants?.length) {
-    for (const variant of entry.variants) {
-      if (isMatsvampVariant(variant?.id) && variant.description) {
-        map[variant.id] = variant.description
-      }
-    }
-  } else if (entry?.description) {
-    map.standard = entry.description
+  if (chartTextMap.value['alla matsvampar']?.description) {
+    map.standard = chartTextMap.value['alla matsvampar'].description
+  }
+  if (chartTextMap.value['goda matsvampar']?.description) {
+    map.goda = chartTextMap.value['goda matsvampar'].description
+  }
+  if (chartTextMap.value['kg matsvampar']?.description) {
+    map.kg = chartTextMap.value['kg matsvampar'].description
   }
   return map
 })
-
-function isMatsvampVariant(value: string | undefined): value is MatsvampVariant {
-  if (!value) return false
-  return matsvampVariantKeys.includes(value as MatsvampVariant)
-}
 
 interface Props {
   parentSelectedFrameworks?: string[]

@@ -3,15 +3,12 @@ entries:
     description: Den totala mängen mykorrhizasvamp som mycel i marken i förhållande till förekomsten i äldre skog/före avverkning (%).
   - id: rodlistade
     description: Mängden av mykorrhizasvampar som är rödlistade/signalarter som mycel i marken i förhållande till förekomsten i äldre skog/före avverkning (%).
-  - id: matsvampar
+  - id: alla matsvampar
     description: Mängden av alla matsvampar som mycel i marken förhållande till förekomsten i äldre skog/före avverkning (%).
-    variants:
-      - id: standard
-        description: Mängden av alla matsvampar som mycel i marken i förhållande till förekomsten i äldre skog/före avverkning (%).
-      - id: goda
-        description: Mängden av goda matsvampar som mycel i marken i förhållande till förekomsten i äldre skog/före avverkning (%).
-      - id: kg
-        description: Färskvikten av alla matsvampar (kg/ha) under en säsong i förhållande till förekomsten i äldre skog/före avverkning. Väderberoende, stor variation mellan år. Medel-, min- och maxvärde. Generaliserade värden från de undersökningar som finns.
+  - id: goda matsvampar
+    description: Mängden av goda matsvampar som mycel i marken i förhållande till förekomsten i äldre skog/före avverkning (%).
+  - id: kg matsvampar
+    description: Färskvikten av alla matsvampar (kg/ha) under en säsong i förhållande till förekomsten i äldre skog/före avverkning. Väderberoende, stor variation mellan år. Medel-, min- och maxvärde. Generaliserade värden från de undersökningar som finns.
   - id: grupper
     description: Mängden av olika grupper svampar som mycel i mark i förhållande till förekomsten i äldre skog/före avverkning (%).
     modalDescription: Den relativa fördelningen av olika grupper mykorrhizasvampar vid olika skogsåldrar. Uppgifterna baseras enbart på förekomst i skogar av olika åldrar och är inte kopplade till vilken skogsskötselmetod som använts.
