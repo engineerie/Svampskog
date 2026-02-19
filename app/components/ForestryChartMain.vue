@@ -97,15 +97,8 @@
             icon="heroicons:question-mark-circle" label="Om goda matsvampar" />
           <template #body>
             <div class="flex flex-col gap-4">
-              <p class="text-sm text-muted">
-                Matsvampar omfattar de 75 arter som klassas som matsvampar i Nya svampboken (Holmberg & Marklund 2014)
-                och av
-                Svampguiden.com.
-              </p>
-              <p class="text-sm text-muted">
-                Vad som är en god matsvamp är subjektivt. Här har vi klassat 43 arter som goda (bl a kantarell,
-                stensopp och trattkantarell) och resterade 32 arter som ordinära matsvampar (bl a björksopp,
-                grönkremla och pepparriska).
+              <p v-for="(paragraph, index) in godaMatsvamparModalParagraphs" :key="index" class="text-sm text-muted">
+                {{ paragraph }}
               </p>
             </div>
           </template>
@@ -137,6 +130,7 @@ const fallbackChartDescriptions = {
 } as const
 
 const fallbackGrupperModalDescription = 'Den relativa fördelningen av olika grupper mykorrhizasvampar vid olika skogsåldrar. Uppgifterna baseras enbart på förekomst i skogar av olika åldrar och är inte kopplade till vilken skogsskötselmetod som använts.'
+const fallbackGodaMatsvamparModalDescription = 'Matsvampar omfattar de 75 arter som klassas som matsvampar i Nya svampboken (Holmberg & Marklund 2014) och av Svampguiden.com.\n\nVad som är en god matsvamp är subjektivt. Här har vi klassat 43 arter som goda (bl a kantarell, stensopp och trattkantarell) och resterade 32 arter som ordinära matsvampar (bl a björksopp, grönkremla och pepparriska).'
 
 const fallbackMatsvampVariantDescriptions: Record<MatsvampVariant, string> = {
   standard: 'Mängden av alla matsvampar i marken förhållande till förekomsten i äldre skog/före avverkning (%).',
@@ -183,6 +177,17 @@ const grupperDescription = computed(() =>
 
 const grupperModalDescription = computed(() =>
   chartTextMap.value['grupper']?.modalDescription ?? fallbackGrupperModalDescription
+)
+
+const godaMatsvamparModalDescription = computed(() =>
+  chartTextMap.value['goda matsvampar']?.modalDescription ?? fallbackGodaMatsvamparModalDescription
+)
+
+const godaMatsvamparModalParagraphs = computed(() =>
+  godaMatsvamparModalDescription.value
+    .split(/\n{2,}/)
+    .map(paragraph => paragraph.trim())
+    .filter(Boolean)
 )
 
 const chartDisplayProps = computed(() => {

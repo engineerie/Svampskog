@@ -7,6 +7,10 @@ entries:
     description: Mängden av alla matsvampar som mycel i marken förhållande till förekomsten i äldre skog/före avverkning (%).
   - id: goda matsvampar
     description: Mängden av goda matsvampar som mycel i marken i förhållande till förekomsten i äldre skog/före avverkning (%).
+    modalDescription: |
+      Matsvampar omfattar de 75 arter som klassas som matsvampar i Nya svampboken (Holmberg & Marklund 2014) och av Svampguiden.com.
+
+      Vad som är en god matsvamp är subjektivt. Här har vi klassat 43 arter som goda (bl a kantarell, stensopp och trattkantarell) och resterade 32 arter som ordinära matsvampar (bl a björksopp, grönkremla och pepparriska).
   - id: kg matsvampar
     description: Färskvikten av alla matsvampar (kg/ha) under en säsong i förhållande till förekomsten i äldre skog/före avverkning. Väderberoende, stor variation mellan år. Medel-, min- och maxvärde. Generaliserade värden från de undersökningar som finns.
   - id: grupper
