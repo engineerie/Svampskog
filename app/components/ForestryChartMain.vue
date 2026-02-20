@@ -8,8 +8,8 @@
         :ui="{ content: 'min-w-fit', value: 'sm:text-lg sm:font-medium text-neutral-700' }" />
       <div class="">
         <USelect v-if="selectedChart === 'grupper' && isFrameworkCompareMode" v-model="selectedCompareArtkategori"
-          :items="compareArtkategoriOptionsReversed" option-attribute="label" value-key="value" size="lg" variant="outline"
-          placeholder="Välj svampgrupp" class="hover:cursor-pointer ring-muted/50 mb-2 w-fit"
+          :items="compareArtkategoriOptionsReversed" option-attribute="label" value-key="value" size="lg"
+          variant="outline" placeholder="Välj svampgrupp" class="hover:cursor-pointer ring-muted/50 mb-2 w-fit"
           :ui="{ content: 'min-w-fit' }">
           <template #default="{ ui }">
             <span v-if="selectedCompareItem"
@@ -69,7 +69,7 @@
         list: 'flex-nowrap gap-2 bg-transparent',
         indicator: 'bg-white border border-muted/50 shadow',
         trigger: 'data-[state=active]:text-neutral-800 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary'
-      }" class="px-2 pt-2 pb-1" />
+      }" class="sm:px-2 pt-2 pb-1" />
 
       <div class="px-4 pb-2 text-sm text-muted" v-if="chartDescription">
         {{ chartDescription }}
@@ -319,7 +319,7 @@ const chartOptions = [
 
 ]
 const inlineChartTabs = [
-  { label: 'Mängd mykorrhizasvamp', value: 'skogsskole', icon: 'i-lineicons-mushroom' },
+  { label: 'Total mängd', value: 'skogsskole', icon: 'i-lineicons-mushroom' },
   { label: 'Svampgrupper', value: 'grupper', icon: 'i-material-symbols-category-rounded' },
 ]
 const selectedChart = ref<string>(

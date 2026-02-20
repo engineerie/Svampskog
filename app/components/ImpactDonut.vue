@@ -3,12 +3,12 @@
         <div class="w-full grid gap-4">
             <div class="flex justify-center rounded-xl space-y-4">
                 <!-- <h1 class="text-lg font-semibold">Påverkan</h1> -->
-                <div class="size-40 relative ">
+                <div class="size-30 relative ">
                     <div class="absolute" :style="{
                         '--vis-donut-central-label-text-color': impactColor,
                         '--vis-donut-central-sub-label-text-color': '#b1835e'
                     }">
-                        <VisSingleContainer :height="160" :width="160" class="donut-background">
+                        <VisSingleContainer :height="120" :width="120" class="donut-background">
                             <VisDonut :data="comparisonDonutData" :value="donutValue" :color="comparisonDonutColor"
                                 :radius="50" :arcWidth="5" :centralLabel="label"
                                 :centralSubLabel="comparisonImpactLabel || 'Påverkan'" />
@@ -16,7 +16,7 @@
                         </VisSingleContainer>
                     </div>
                     <div class="absolute ">
-                        <VisSingleContainer :height="160" :width="160" class="donut-background">
+                        <VisSingleContainer :height="120" :width="120" class="donut-background">
                             <VisDonut :data="primaryDonutData" :value="donutValue" :color="primaryDonutColor"
                                 :radius="60" :arcWidth="10" />
                         </VisSingleContainer>

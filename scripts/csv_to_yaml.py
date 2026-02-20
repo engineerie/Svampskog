@@ -2,7 +2,7 @@ import csv
 import yaml
 from pathlib import Path
 
-csv_path = Path("/Users/jacobbertilsson/Documents/NUXT Apps/saas-3/storage/Skogsbruk_svampar_18ny.csv")
+csv_path = Path("/Users/jacobbertilsson/Documents/NUXT Apps/saas-3/storage/Skogsbruk_svampar_20.csv")
 yaml_path = csv_path.with_suffix(".yml")
 
 def to_number(value: str):
