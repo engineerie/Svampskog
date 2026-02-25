@@ -29,6 +29,7 @@
     "nuxt-studio": "1.1.1",
     "openseadragon": "^5.0.1",
     "openseadragon-opacity-slider": "^1.0.0",
+    "playwright": "^1.58.2",
     "sharp": "^0.34.4",
     "vue3-apexcharts": "^1.8.0"
   },

@@ -1,8 +1,10 @@
 <template>
-    <div class="flex flex-col items-center gap-4">
-        <div class="w-full grid gap-4">
-            <div class="flex justify-center rounded-xl space-y-4">
-                <!-- <h1 class="text-lg font-semibold">Påverkan</h1> -->
+    <div class="flex justify-center">
+        <div class="flex flex-wrap items-center gap-4 rounded-xl">
+            <!-- <h1 class="text-lg font-semibold">Påverkan</h1> -->
+            <UPopover mode="hover" :content="{ side: 'left', }">
+
+
                 <div class="size-30 relative ">
                     <div class="absolute" :style="{
                         '--vis-donut-central-label-text-color': impactColor,
@@ -23,14 +25,22 @@
                     </div>
 
                 </div>
-
-
-
-            </div>
+                <template #content>
+                    <div class="flex flex-col gap-2 min-w-0 py-3 px-5">
+                        <div v-for="item in legendItems" :key="item.key" class="flex items-center gap-2">
+                            <span class="inline-block size-2.5 rounded-full shrink-0"
+                                :style="{ backgroundColor: item.color }" />
+                            <span class="text-xs text-neutral-600 truncate">{{ item.label }}</span>
+                        </div>
+                    </div>
+                </template>
+            </UPopover>
 
 
         </div>
+
     </div>
+
 </template>
 
 <script setup lang="ts">
@@ -124,6 +134,24 @@ const comparisonDonutColor = (d: { id: string }) => {
     if (d.id === 'rest') return '#f2ece2'
     return '#c3a283'
 }
+const comparisonDonutImpactColor = '#c3a283'
+const legendItems = computed(() => {
+    const items = [
+        {
+            key: 'primary',
+            color: impactColor.value,
+            label: props.methodLabel || 'Vald metod'
+        }
+    ]
+    if (hasComparison.value) {
+        items.push({
+            key: 'comparison',
+            color: comparisonDonutImpactColor,
+            label: props.comparisonLabel || 'Jämförelse'
+        })
+    }
+    return items
+})
 
 </script>
 

@@ -2,55 +2,24 @@
   <div class="custom-area" ref="rootEl">
     <ClientOnly>
       <VisBulletLegend
-        v-if="isMounted && chartReady && legendItems.length && !(props.singleFrameworkSelection && !props.frameworkComparisonMode)"
-        :items="legendItems" :onLegendItemClick="handleLegendItemClick" class="mx-2 flex flex-wrap gap-2" />
-      <div
-        v-if="isMounted && chartReady && legendItems.length && (props.singleFrameworkSelection && !props.frameworkComparisonMode)"
-        class=" flex flex-wrap gap-0 gap-y-1 mb-0.5">
-        <USelect v-model="selectedLegendValues" multiple :items="legendSelectItems" class="w-fit ring-muted/50"
-          size="lg" variant="outline" :ui="{ content: 'min-w-fit' }">
-          <template #default="{ ui }">
-            <span v-if="selectedLegendItems.length"
-              :class="ui.value({ class: 'flex items-center gap-2 min-w-0 overflow-hidden' })">
-              <span class="inline-flex items-center gap-2 min-w-0 overflow-visible">
-                <span v-for="item in selectedLegendItems" :key="item.value"
-                  class="inline-flex items-center gap-1 shrink-0">
-                  <span v-if="item.icon" class="h-3.5 w-3.5" :style="{
-                    backgroundColor: item.color || item.colorLine || item.colorArea || '#000',
-                    WebkitMask: `url(${item.icon}) center / contain no-repeat`,
-                    mask: `url(${item.icon}) center / contain no-repeat`,
-                  }" />
-                </span>
-              </span>
-            </span>
-            <span v-else :class="ui.placeholder({ class: '' })">Välj svampgrupp</span>
-          </template>
-          <template #item="{ item }">
-            <div class="flex items-center justify-between w-full">
-              <div class="flex items-center gap-2">
-                <div v-if="item.icon" class="h-4 w-4" :style="{
-                  backgroundColor: item.color || item.colorLine || item.colorArea || '#000',
-                  WebkitMask: `url(${item.icon}) center / contain no-repeat`,
-                  mask: `url(${item.icon}) center / contain no-repeat`,
-                }" />
-                <span>{{ item.label }}</span>
-              </div>
-              <UIcon name="i-lucide-check" class="size-3 text-neutral-700"
-                :class="isLegendSelected(item.value) ? 'opacity-100' : 'opacity-0'" />
-            </div>
-          </template>
-        </USelect>
-      </div>
+        v-if="isMounted && chartReady && legendDisplayItems.length"
+        :items="legendDisplayItems" :onLegendItemClick="handleLegendClick" class="mx-2 flex flex-wrap gap-2" />
+
       <VisXYContainer v-if="isMounted && chartReady" :data="chartData.length ? chartData : [emptyDataPoint]"
         :height="200" :margin="margin" :xDomain="xDomain" :yDomain="yDomain" :svgDefs="svgDefs">
         <template v-if="props.chartType === 'area'">
-          <template v-if="props.singleFrameworkSelection && !props.frameworkComparisonMode">
+          <template v-if="isSingleFrameworkStackedMode">
             <VisArea :x="xAccessor" :y="stackedYAccessors" :color="stackedColors" :interpolateMissingData="true" />
 
             <!-- <VisLine v-for="cfg in stackedLineConfigs" :key="cfg.key + '-stack-line'" :x="xAccessor" :y="cfg.accessor"
               :color="() => cfg.color" :duration=1 /> -->
             <!-- <VisCrosshair v-if="hasActiveSeries" :template="crosshairTemplate" />
             <VisTooltip v-if="hasActiveSeries" :horizontalShift="30" /> -->
+          </template>
+          <template v-else-if="isSingleFrameworkSingleMode">
+            <VisArea :x="xAccessor" :y="singleCategoryAccessor" :color="() => hexToRgba(primaryArtColor, 0.5)"
+              :interpolateMissingData="true" :zIndex="1" />
+            <VisLine :x="xAccessor" :y="singleCategoryAccessor" :color="() => hexToRgba(primaryArtColor, 0.7)" />
           </template>
           <template v-else-if="props.singleFrameworkSelection && props.frameworkComparisonMode">
             <VisArea v-for="fw in activeFrameworks" :x="xAccessor"
@@ -458,6 +427,7 @@ interface Props {
   currentTimeValue?: string
   singleFrameworkSelection?: boolean,
   frameworkComparisonMode?: boolean,
+  grupperDisplayMode?: 'stacked' | 'single',
   selectedStartskog?: string, // <-- Add this
   redColor?: boolean,
   yellowColor?: boolean,
@@ -471,6 +441,7 @@ const props = withDefaults(defineProps<Props>(), {
   selectedFrameworks: () => [],
   singleFrameworkSelection: false,
   frameworkComparisonMode: false,
+  grupperDisplayMode: 'stacked',
   redColor: false,
   yellowColor: false,
   matsvampVariant: 'standard',
@@ -488,6 +459,19 @@ const isKgMatsvamp = computed(() => {
   const selected = (props.selectedArtkategori || []).map(a => (a || '').toLowerCase());
   return selected.includes('matsvamp') && matsvampVariant.value === 'kg';
 });
+const isSingleFrameworkStackedMode = computed(() =>
+  props.singleFrameworkSelection && !props.frameworkComparisonMode && props.grupperDisplayMode !== 'single'
+)
+const isSingleFrameworkSingleMode = computed(() =>
+  props.singleFrameworkSelection && !props.frameworkComparisonMode && props.grupperDisplayMode === 'single'
+)
+const singleCategory = computed(() =>
+  stackedCategories.value[0] || (props.selectedArtkategori?.[0]?.toLowerCase() ?? '')
+)
+const singleCategoryAccessor = (d: any) => {
+  const category = singleCategory.value
+  return category ? getCategoryValue(d, category) : NaN
+}
 
 const transformValue = (value: number) => value;
 
@@ -980,47 +964,35 @@ const legendItems = computed<LegendItem[]>(() => {
   });
 });
 
-const legendSelectItems = computed(() => {
-  const items = legendItems.value.map(item => ({
-    label: item.label,
-    value: item.key,
-    icon: item.icon,
-    color: item.color,
-    colorLine: item.colorLine,
-    colorArea: item.colorArea,
-  }));
+const legendDisplayItems = computed<LegendItem[]>(() => {
   if (props.singleFrameworkSelection && !props.frameworkComparisonMode) {
-    return [...items].reverse();
+    const selectedLower = (props.selectedFrameworks || []).map(f => f.toLowerCase())
+    const frameworks = props.preserveFrameworkOrder
+      ? selectedLower.filter(key => legendOrder.includes(key))
+      : legendOrder.filter(key => selectedLower.includes(key))
+    const baseColor = primaryArtColor.value
+    const alpha = 0.5
+    return frameworks.map((key, index) => {
+      const label = mapFrameworkLabel(key)
+      const color = index === 1 ? '#c3a283' : baseColor
+      return {
+        key,
+        name: label,
+        label,
+        color,
+        colorArea: hexToRgba(color, alpha),
+        colorLine: color,
+        lineDashArray: index === 1 ? [5] : undefined,
+        inactive: false,
+      }
+    })
   }
-  return items;
-});
+  return legendItems.value
+})
 
-const selectedLegendItems = computed(() =>
-  legendSelectItems.value.filter(item => selectedLegendValues.value.includes(item.value))
-);
-
-
-const selectedLegendValues = computed<string[]>({
-  get() {
-    if (!legendItems.value.length) return [];
-    return legendItems.value
-      .filter(item => !item.inactive)
-      .map(item => item.key);
-  },
-  set(values) {
-    const selected = new Set((values || []).map(v => (v || '').toLowerCase()));
-    const next = new Set<string>();
-    for (const item of legendItems.value) {
-      const key = (item.key || '').toLowerCase();
-      if (key && !selected.has(key)) next.add(key);
-    }
-    inactiveArtkategoriKeys.value = next;
-  },
-});
-
-function isLegendSelected(value?: string) {
-  if (!value) return false;
-  return selectedLegendValues.value.includes(value);
+function handleLegendClick(item: LegendItem) {
+  if (props.singleFrameworkSelection && !props.frameworkComparisonMode) return
+  handleLegendItemClick(item)
 }
 
 const activeFrameworks = computed(() => {
@@ -1355,6 +1327,9 @@ const activeSeriesCount = computed(() => {
     if (props.frameworkComparisonMode) {
       return activeFrameworks.value.length;
     }
+    if (isSingleFrameworkSingleMode.value) {
+      return singleCategory.value ? 1 : 0;
+    }
     return stackedCategories.value.length;
   }
   return activeFrameworks.value.length;
@@ -1440,8 +1415,10 @@ const crosshairTemplate = (d: any): string => {
         };
       });
     } else {
-      series = props.selectedArtkategori.map(art => {
-        const key = art.toLowerCase();
+      const single = isSingleFrameworkSingleMode.value
+        ? [singleCategory.value].filter(Boolean)
+        : props.selectedArtkategori.map(art => art.toLowerCase());
+      series = single.map(key => {
         return {
           key,
           label: formatArtLabel(key),

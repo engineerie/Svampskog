@@ -10,8 +10,51 @@
           trigger: 'data-[state=active]:text-neutral-800 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary'
         }" />
 
-        <UInput v-model="globalSearchTerm" class="max-w-sm min-w-[12ch] m-1" size="lg" :ui="{ base: 'ring-muted/50' }"
-          placeholder="Sök på namn" icon="i-heroicons-magnifying-glass" variant="outline" />
+        <div class="flex items-center gap-2 m-1">
+
+          <USelect v-model="globalQuickFilters" multiple :items="globalQuickFilterOptions" item-value="value"
+            item-label="label" placeholder="Filtrera" icon="i-lucide-list-filter" class=" ring-muted/50" size="lg"
+            :ui="{ content: 'min-w-fit' }">
+            <template #default="{ ui }">
+              <span v-if="selectedGlobalQuickFilterItems.length"
+                :class="ui.value({ class: 'flex items-center gap-1.5 min-w-0 overflow-hidden' })">
+                <span v-for="item in selectedGlobalQuickFilterItems" :key="item.value"
+                  class="inline-flex items-center gap-1.5 min-w-0 shrink-0">
+                  <img v-if="item.image" :src="item.image" alt="" class="size-4 object-contain" />
+                  <UIcon v-else-if="item.icon" :name="item.icon"
+                    :class="['size-4', item.iconClass || 'text-neutral-500']" />
+                  <span class="truncate text-sm text-neutral-700 dark:text-neutral-200">{{ item.label }}</span>
+                </span>
+              </span>
+              <span v-else :class="ui.placeholder({ class: '' })">Filtrera</span>
+            </template>
+            <template #leading>
+              <UIcon name="i-lucide-list-filter" class="size-4 text-neutral-500" />
+            </template>
+            <template #item="{ item }">
+              <div v-if="item.type === 'separator'" class="my-1 h-px bg-muted/60 w-full" />
+              <div v-else-if="item.type === 'label'"
+                class="text-xs font-medium uppercase tracking-wide text-neutral-500 px-1 py-1">
+                {{ item.label }}
+              </div>
+              <div v-else class="flex items-center justify-between gap-2 w-full">
+                <div class="flex items-center gap-2 min-w-0">
+                  <img v-if="item.image" :src="item.image" alt="" class="size-4 object-contain" />
+                  <UIcon v-else-if="item.icon" :name="item.icon"
+                    :class="['size-4', item.iconClass || 'text-neutral-500']" />
+                  <span class="text-neutral-700 dark:text-neutral-200 truncate">{{ item.label }}</span>
+                </div>
+                <UIcon v-if="item.value && globalQuickFilters.includes(item.value)" name="heroicons:check"
+                  class="size-5 text-neutral-800 dark:text-primary-400 shrink-0" />
+              </div>
+            </template>
+          </USelect>
+          <UInput v-model="globalSearchTerm" class="max-w-sm" size="lg" :ui="{ base: 'ring-muted/50' }"
+            placeholder="Sök på namn" icon="i-heroicons-magnifying-glass" variant="outline" />
+          <!-- <UButton color="neutral" variant="outline" size="lg" icon="i-heroicons-document-arrow-down"
+            :loading="isGeneratingPdf" :disabled="isGeneratingPdf" label="Ladda ner PDF" class="ring-muted/50"
+            @click="downloadSpeciesListPdf" /> -->
+        </div>
 
         <!-- <div class=" flex flex-col sm:flex-row gap-1.5  w-fit h-fit">
           <UAlert v-if="activeTab !== 'dna'" :color="activeTab === 'dna' ? 'secondary' : 'neutral'" variant="outline"
@@ -28,7 +71,8 @@
         <div v-if="activeTab === 'dna'" key="dna" class="col-span-12">
           <div class="hidden md:block">
             <EdnaComponent :isNormalView="!isEdnaExpanded" :searchTerm="globalSearchTerm"
-              :isActive="activeTab === 'dna'"
+              :isActive="activeTab === 'dna'" :externalSvampFilter="globalExternalSvampFilter"
+              :externalStatusFilter="globalExternalStatusFilter" :externalGruppFilter="globalExternalGruppFilter"
               @update:searchTerm="globalSearchTerm = $event" @enlarge="handleEdnaToggle" />
           </div>
           <UContainer class="md:hidden space-y-3 pt-3 bg-muted/50">
@@ -144,8 +188,8 @@
                     :titleClickable="true" cardClass="rounded-none sm:rounded-lg" countFolder="edible"
                     countType="edibledata" countFilterKey="Nyasvamp-boken" dataType="edibledata" dataTypeFolder="edible"
                     grupp="Svamp-grupp" mat="Nyasvamp-boken" obs="Rank matsvamp" obsLabel="Sannolikhet"
-                    :filterEdible="true" tableKey="edna-edible"
-                    :column-visibility-overrides="{ mark: false, 'Nyasvamp-boken': false }"
+                    :filterEdible="true" tableKey="edna-edible" :externalSvampFilter="globalExternalSvampFilter"
+                    :externalStatusFilter="globalExternalStatusFilter" :externalGruppFilter="globalExternalGruppFilter"
                     :key="route.fullPath" />
                 </div>
                 <div class="col-span-4 flex flex-col h-full border-r border-muted/50">
@@ -155,8 +199,8 @@
                     :titleClickable="true" cardClass="rounded-none sm:rounded-none border-muted/50" countFolder="edible"
                     countType="edibledata" countFilterKey="Giftsvamp" dataType="edibledata" dataTypeFolder="edible"
                     grupp="Svamp-grupp" mat="Nyasvamp-boken" obs="Rank giftsvamp" obsLabel="Sannolikhet"
-                    :filterPoison="true" tableKey="edna-poison"
-                    :column-visibility-overrides="{ mark: false, 'Nyasvamp-boken': false }"
+                    :filterPoison="true" tableKey="edna-poison" :externalSvampFilter="globalExternalSvampFilter"
+                    :externalStatusFilter="globalExternalStatusFilter" :externalGruppFilter="globalExternalGruppFilter"
                     :key="route.fullPath" />
                 </div>
                 <div class="col-span-4 flex flex-col">
@@ -167,7 +211,8 @@
                     cardClass="rounded-none sm:rounded-lg" countFolder="redlisted" countType="redlisted"
                     dataType="redlisted" dataTypeFolder="redlisted" grupp="Svamp-grupp" mat="Nyasvamp-boken"
                     obs="RankRed" obsLabel="Sannolikhet" tableKey="edna-redlisted"
-                    :column-visibility-overrides="{ 'Nyasvamp-boken': false }" />
+                    :externalSvampFilter="globalExternalSvampFilter" :externalStatusFilter="globalExternalStatusFilter"
+                    :externalGruppFilter="globalExternalGruppFilter" />
                 </div>
               </div>
             </template>
@@ -184,6 +229,7 @@ import FullscreenTable from "./FullscreenTable.vue";
 import { useRoute } from "vue-router";
 import { ref, computed, watch, onMounted, onUnmounted } from 'vue';
 import { useEnvParamsStore } from '~/stores/envParamsStore';
+import { useTableStateStore } from '~/stores/tableStateStore';
 import { hasEdnaDataset } from '~/utils/edna';
 
 const { data: page } = await useAsyncData('mykorrhizasvampar-normal', () => queryCollection('mykorrhizasvampar').first())
@@ -200,12 +246,331 @@ const globalSearchTerm = ref('')
 
 const open = ref(false)
 const envStore = useEnvParamsStore();
+const tableStateStore = useTableStateStore();
 const route = useRoute();
 
 const redlistCount = ref(null);
 const edibleCount = ref(null);
 const poisonCount = ref(null);
 const dnaCount = ref(null);
+const isGeneratingPdf = ref(false);
+const globalQuickFilters = ref([]);
+
+const naturvardsStatuses = ['VU', 'NT', 'EN', 'CR', 'DD', 'Signalart'];
+const groupedQuickFilterChoices = [
+  { label: 'Övrigt', value: 'group:ovrigt', groups: ['Övrigt'], image: '/images/svampgrupp/ovrigt.webp' },
+  { label: 'Hattsvamp', value: 'group:hattsvamp', groups: ['Hattsvamp'], image: '/images/svampgrupp/hattsvamp.png' },
+  { label: 'Kantarell', value: 'group:kantarell', groups: ['Kantarell'], image: '/images/svampgrupp/kantarell.webp' },
+  { label: 'Sopp', value: 'group:sopp', groups: ['Sopp'], image: '/images/svampgrupp/sopp.png' },
+  { label: 'Taggsvamp', value: 'group:taggsvamp', groups: ['Taggsvamp'], image: '/images/svampgrupp/taggsvamp.png' },
+  { label: 'Fingersvamp', value: 'group:fingersvamp', groups: ['Fingersvamp'], image: '/images/svampgrupp/fingersvamp.webp' },
+  { label: 'Skinnsvamp', value: 'group:skinnsvamp', groups: ['Skinnsvamp'], image: '/images/svampgrupp/skinnsvamp.webp' },
+  { label: 'Skålsvamp', value: 'group:skalsvamp', groups: ['Skålsvamp'], image: '/images/svampgrupp/skalsvamp.webp' },
+  { label: 'Tryffel', value: 'group:tryffel', groups: ['Tryffel'], image: '/images/svampgrupp/tryffel.webp' }
+];
+
+const globalQuickFilterOptions = computed(() => [
+  { label: 'Matsvampar', value: 'matsvamp', icon: 'icon-park-solid:knife-fork', iconClass: 'text-warning-600 dark:text-warning-400' },
+  { label: 'Giftsvampar', value: 'giftsvamp', icon: 'i-hugeicons-danger', iconClass: 'text-poison-600 dark:text-poison-400' },
+  { label: 'Naturvårdssvampar', value: 'naturvard', icon: 'i-material-symbols-award-star-outline', iconClass: 'text-signal-600 dark:text-signal-400' },
+  { type: 'separator' },
+  { type: 'label', label: 'Svampgrupper' },
+  ...groupedQuickFilterChoices.map(({ label, value, image }) => ({ label, value, image }))
+]);
+
+const selectedGlobalQuickFilterItems = computed(() => {
+  const optionMap = new Map(
+    globalQuickFilterOptions.value
+      .filter((option) => option.value)
+      .map((option) => [option.value, option])
+  );
+
+  return globalQuickFilters.value
+    .map((value) => optionMap.get(value))
+    .filter(Boolean);
+});
+
+const globalExternalSvampFilter = computed(() => {
+  const selected = new Set(globalQuickFilters.value);
+  const values = [];
+  if (selected.has('matsvamp')) values.push('Matsvamp');
+  if (selected.has('giftsvamp')) values.push('Giftsvamp');
+  return values;
+});
+
+const globalExternalStatusFilter = computed(() =>
+  globalQuickFilters.value.includes('naturvard') ? naturvardsStatuses : []
+);
+
+const globalExternalGruppFilter = computed(() => {
+  const selected = new Set(globalQuickFilters.value);
+  return groupedQuickFilterChoices
+    .filter((choice) => selected.has(choice.value))
+    .flatMap((choice) => choice.groups);
+});
+
+const REPORT_TABLES = [
+  {
+    id: 'edible',
+    title: 'Matsvampar',
+    dataTypeFolder: 'edible',
+    dataType: 'edibledata',
+    tableKey: 'edna-edible',
+    grupp: 'Svamp-grupp',
+    mat: 'Nyasvamp-boken',
+    obs: 'Rank matsvamp',
+    filterEdible: true
+  },
+  {
+    id: 'poison',
+    title: 'Giftsvampar',
+    dataTypeFolder: 'edible',
+    dataType: 'edibledata',
+    tableKey: 'edna-poison',
+    grupp: 'Svamp-grupp',
+    mat: 'Nyasvamp-boken',
+    obs: 'Rank giftsvamp',
+    filterPoison: true
+  },
+  {
+    id: 'redlisted',
+    title: 'Naturvårdsarter',
+    dataTypeFolder: 'redlisted',
+    dataType: 'redlisted',
+    tableKey: 'edna-redlisted',
+    grupp: 'Svamp-grupp',
+    mat: 'Nyasvamp-boken',
+    obs: 'RankRed'
+  }
+]
+
+const normalize = (value) => String(value ?? '').trim().toLowerCase()
+const normalizeGroup = (value) => String(value ?? '')
+  .toLowerCase()
+  .normalize('NFD')
+  .replace(/\p{Diacritic}+/gu, '')
+
+const hasValueX = (value) => normalize(value) === 'x'
+
+const isUnassessedStatus = (value) => {
+  const normalized = normalize(value)
+  return normalized === '' || normalized === '0' || normalized === 'ne'
+}
+
+const isNotApplicableStatus = (value) => normalize(value) === 'na'
+
+const compareValues = (left, right) => {
+  if (left == null && right == null) return 0
+  if (left == null) return 1
+  if (right == null) return -1
+  const leftNumber = Number(left)
+  const rightNumber = Number(right)
+  if (Number.isFinite(leftNumber) && Number.isFinite(rightNumber)) {
+    return leftNumber - rightNumber
+  }
+  return String(left).localeCompare(String(right), 'sv', { sensitivity: 'base', numeric: true })
+}
+
+const applyTableFilters = (rows, config, tableState) => {
+  const searchTerm = normalize(globalSearchTerm.value)
+  const selectedFilter = Array.isArray(tableState?.selectedFilter) ? tableState.selectedFilter : []
+  const selectedStatus = Array.isArray(tableState?.selectedStatus) ? tableState.selectedStatus : []
+  const selectedGrupp = Array.isArray(tableState?.selectedGrupp) ? tableState.selectedGrupp : []
+  const selectedMark = Array.isArray(tableState?.selectedMark) ? tableState.selectedMark : []
+
+  return rows.filter((row) => {
+    if (searchTerm) {
+      const searchable = `${row.Commonname ?? ''} ${row.Scientificname ?? ''}`.toLowerCase()
+      if (!searchable.includes(searchTerm)) return false
+    }
+
+    if (config.filterEdible && !hasValueX(row[config.mat])) return false
+    if (config.filterPoison && hasValueX(row[config.mat])) return false
+
+    if (selectedFilter.length > 0) {
+      const matchesSelectedFilter = selectedFilter.some((filterValue) => {
+        if (filterValue === 'Matsvamp') return hasValueX(row[config.mat])
+        if (filterValue === 'Giftsvamp') return hasValueX(row.Giftsvamp)
+        return normalize(row[config.mat]) === normalize(filterValue)
+      })
+      if (!matchesSelectedFilter) return false
+    }
+
+    if (selectedStatus.length > 0) {
+      const matchesStatus = selectedStatus.some((status) => {
+        if (status === 'Signalart') return row.SIGNAL_art === 'S'
+        if (status === 'Ej bedömd') return isUnassessedStatus(row.RL2020kat)
+        if (status === 'Ej tillämplig') return isNotApplicableStatus(row.RL2020kat)
+        return String(row.RL2020kat ?? '') === status
+      })
+      if (!matchesStatus) return false
+    }
+
+    if (selectedGrupp.length > 0) {
+      const groupValue = normalizeGroup(row[config.grupp])
+      const selectedNormalized = selectedGrupp.map(normalizeGroup)
+      if (!selectedNormalized.includes(groupValue)) return false
+    }
+
+    if (selectedMark.length > 0) {
+      const matchesMark = selectedMark.some((mark) => {
+        if (mark === 'KALKmark') return Boolean(row.KALKmark)
+        if (mark === 'ANNANmark') return Boolean(row.ANNANmark)
+        return false
+      })
+      if (!matchesMark) return false
+    }
+
+    return true
+  })
+}
+
+const sortRows = (rows, config, tableState) => {
+  const rankSortDefault = config.obs.startsWith('Rank')
+    ? [{ id: config.obs, desc: false }, { id: 'Commonname', desc: false }]
+    : [{ id: config.obs, desc: true }]
+
+  const sorting = Array.isArray(tableState?.sorting) && tableState.sorting.length > 0
+    ? tableState.sorting
+    : rankSortDefault
+
+  return [...rows].sort((left, right) => {
+    for (const sortDef of sorting) {
+      const direction = sortDef?.desc ? -1 : 1
+      const result = compareValues(left?.[sortDef.id], right?.[sortDef.id])
+      if (result !== 0) return result * direction
+    }
+    return 0
+  })
+}
+
+const resolveReportImageUrl = (row) => {
+  const source = Array.isArray(row?.images) && row.images.length > 0
+    ? row.images[0]
+    : row?.image
+
+  if (!source) return ''
+
+  const raw = String(source).trim()
+  if (!raw) return ''
+  if (raw.startsWith('http://') || raw.startsWith('https://')) return raw
+  if (raw.startsWith('//')) return `${window.location.protocol}${raw}`
+  if (raw.startsWith('/')) return `${window.location.origin}${raw}`
+  return `${window.location.origin}/${raw}`
+}
+
+const resolveGroupImageUrl = (group) => {
+  const normalizedGroup = normalize(group)
+  const iconMapping = {
+    övrigt: 'ovrigt.webp',
+    hattsvamp: 'hattsvamp.png',
+    kantarell: 'kantarell.webp',
+    sopp: 'sopp.png',
+    taggsvamp: 'taggsvamp.png',
+    fingersvamp: 'fingersvamp.webp',
+    tryffel: 'tryffel.webp',
+    skinnsvamp: 'skinnsvamp.webp',
+    skålsvamp: 'skalsvamp.webp'
+  }
+
+  const iconFile = iconMapping[normalizedGroup] ?? 'default-icon.png'
+  return `${window.location.origin}/images/svampgrupp/${iconFile}`
+}
+
+const fetchReportRows = async (config) => {
+  const filename = `${config.dataType}-${envStore.geography}-${envStore.forestType}-${envStore.standAge}-${envStore.vegetationType}.json`
+  const response = await fetch(`/${config.dataTypeFolder}/${filename}`)
+  if (!response.ok) {
+    return { rows: [], missingData: true }
+  }
+  const sourceRows = await response.json()
+  const tableState = tableStateStore.getState(config.tableKey)
+  const filteredRows = applyTableFilters(sourceRows, config, tableState)
+  const sortedRows = sortRows(filteredRows, config, tableState)
+
+  return {
+    rows: sortedRows.map((row) => {
+      const group = row[config.grupp] ?? ''
+      return {
+        commonName: row.Commonname ?? '',
+        scientificName: row.Scientificname ?? '',
+        group,
+        groupImageUrl: resolveGroupImageUrl(group),
+        status: row.RL2020kat ?? '',
+        indicator: row.SIGNAL_art === 'S' ? 'Signalart' : '',
+        mark: row.KALKmark ? 'Kalkmark' : row.ANNANmark ? 'Annan mark' : '',
+        probability: row[config.obs] ?? '',
+        imageUrl: resolveReportImageUrl(row)
+      }
+    }),
+    missingData: false
+  }
+}
+
+const downloadBlob = (blob, filename) => {
+  const url = URL.createObjectURL(blob)
+  const anchor = document.createElement('a')
+  anchor.href = url
+  anchor.download = filename
+  anchor.click()
+  URL.revokeObjectURL(url)
+}
+
+async function downloadSpeciesListPdf() {
+  const params = [envStore.geography, envStore.forestType, envStore.standAge, envStore.vegetationType]
+  if (params.some((param) => !param)) {
+    window.alert('Välj geografi, skogstyp, ålder och vegetationstyp innan export.')
+    return
+  }
+
+  isGeneratingPdf.value = true
+  try {
+    const sections = await Promise.all(REPORT_TABLES.map(async (config) => {
+      const { rows, missingData } = await fetchReportRows(config)
+      return {
+        id: config.id,
+        title: config.title,
+        missingData,
+        rowCount: rows.length,
+        rows
+      }
+    }))
+
+    const payload = {
+      documentTitle: 'Artrapport',
+      searchTerm: globalSearchTerm.value,
+      generatedAt: new Date().toISOString(),
+      environment: {
+        geography: envStore.geographyLabel ?? envStore.geography,
+        forestType: envStore.forestTypeLabel ?? envStore.forestType,
+        standAge: envStore.standAgeLabel ?? envStore.standAge,
+        vegetationType: envStore.vegetationTypeLabel ?? envStore.vegetationType
+      },
+      sections
+    }
+
+    const response = await fetch('/api/specieslist-pdf', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(payload)
+    })
+
+    if (!response.ok) {
+      const message = await response.text()
+      throw new Error(message || 'PDF export failed')
+    }
+
+    const pdfBlob = await response.blob()
+    const safeDate = new Date().toISOString().slice(0, 10)
+    const filename = `arter-${envStore.geography}-${envStore.forestType}-${safeDate}.pdf`
+    downloadBlob(pdfBlob, filename)
+  } catch (error) {
+    console.error('Failed to generate PDF', error)
+    window.alert('PDF-kunde inte skapas just nu. Kontrollera serverkonfigurationen och försök igen.')
+  } finally {
+    isGeneratingPdf.value = false
+  }
+}
 
 // Define props
 const props = defineProps({
@@ -271,7 +636,12 @@ const activeDetailComponent = computed(() => detailComponentMap[props.activeView
 
 const detailComponentProps = computed(() => {
   if (!props.activeView) {
-    return { isNormalView: false }
+    return {
+      isNormalView: false,
+      externalSvampFilter: globalExternalSvampFilter.value,
+      externalStatusFilter: globalExternalStatusFilter.value,
+      externalGruppFilter: globalExternalGruppFilter.value
+    }
   }
 
   if (props.activeView === 'FullScreenEdible') {
@@ -293,7 +663,9 @@ const detailComponentProps = computed(() => {
       obsLabel: 'Sannolikhet',
       tableKey: 'edna-edible',
       filterEdible: true,
-      columnVisibilityOverrides: { mark: false, 'Nyasvamp-boken': false }
+      externalSvampFilter: globalExternalSvampFilter.value,
+      externalStatusFilter: globalExternalStatusFilter.value,
+      externalGruppFilter: globalExternalGruppFilter.value
     }
   }
 
@@ -316,7 +688,9 @@ const detailComponentProps = computed(() => {
       obsLabel: 'Sannolikhet',
       tableKey: 'edna-poison',
       filterPoison: true,
-      columnVisibilityOverrides: { mark: false, 'Nyasvamp-boken': false }
+      externalSvampFilter: globalExternalSvampFilter.value,
+      externalStatusFilter: globalExternalStatusFilter.value,
+      externalGruppFilter: globalExternalGruppFilter.value
     }
   }
 
@@ -337,11 +711,27 @@ const detailComponentProps = computed(() => {
       obs: 'RankRed',
       obsLabel: 'Sannolikhet',
       tableKey: 'edna-redlisted',
-      columnVisibilityOverrides: { 'Nyasvamp-boken': false }
+      externalSvampFilter: globalExternalSvampFilter.value,
+      externalStatusFilter: globalExternalStatusFilter.value,
+      externalGruppFilter: globalExternalGruppFilter.value
     }
   }
 
-  return { isNormalView: false }
+  if (props.activeView === 'FullScreenEdna') {
+    return {
+      isNormalView: false,
+      externalSvampFilter: globalExternalSvampFilter.value,
+      externalStatusFilter: globalExternalStatusFilter.value,
+      externalGruppFilter: globalExternalGruppFilter.value
+    }
+  }
+
+  return {
+    isNormalView: false,
+    externalSvampFilter: globalExternalSvampFilter.value,
+    externalStatusFilter: globalExternalStatusFilter.value,
+    externalGruppFilter: globalExternalGruppFilter.value
+  }
 })
 
 const detailComponentKey = computed(() => props.activeView ? `${props.activeView}-${route.fullPath}` : undefined)

@@ -55,7 +55,7 @@
 
 
             </div>
-            <UDropdownMenu v-if="!useMobileLayout" class="flex" :items="table?.tableApi?.getAllColumns()?.filter(column => column.getCanHide())?.map(column => ({
+            <UDropdownMenu v-if="!useMobileLayout" class="flex" :items="table?.tableApi?.getAllColumns()?.filter(column => column.getCanHide() && column.id !== '__groupingOrder')?.map(column => ({
               label: column.columnDef.meta?.headerText || upperFirst(column.id),
               type: 'checkbox',
               checked: column.getIsVisible(),
@@ -156,11 +156,12 @@
     <div v-if="filteredData" :class="[isNormalView ? '' : '']">
       <div class="">
 
-        <UTable ref="table" v-model:column-visibility="columnVisibility" v-model:pagination="pagination"
+        <UTable :key="tableRenderKey" ref="table" v-model:column-visibility="columnVisibility" v-model:pagination="pagination"
           :data="displayedData" :columns="columns" sticky :loading="isLoading" v-model:sorting="sorting"
+          :grouping="tableGrouping" :grouping-options="groupingOptions"
           @select="selectRow" :autoResetAll="false" :pagination-options="(isMobile && !paginationEnabled)
             ? false
-            : (paginationEnabled
+            : (paginationEnabled && !isTableGroupingActive
               ? { getPaginationRowModel: getPaginationRowModel() }
               : undefined)" :class="{ '': isNormalView }" :ui="tableUi" class="rounded-sm " />
 
@@ -179,7 +180,7 @@
 
           <div>
             <!-- Pagination component -->
-            <div v-if="paginationEnabled && rowsPerPage !== 'Alla' && !isMobile">
+            <div v-if="paginationEnabled && !isTableGroupingActive && rowsPerPage !== 'Alla' && !isMobile">
               <div class="flex justify-center">
                 <UPagination active-variant="ghost" variant="ghost"
                   :default-page="(table?.tableApi?.getState().pagination.pageIndex || 0) + 1"
@@ -209,7 +210,7 @@ import { useMediaQuery } from '@vueuse/core';
 import { useSpeciesStore } from "~/stores/speciesStore";
 import { useEnvParamsStore } from '~/stores/envParamsStore'
 import { useTableStateStore } from '~/stores/tableStateStore'
-import { getPaginationRowModel } from '@tanstack/vue-table'
+import { getPaginationRowModel, getGroupedRowModel } from '@tanstack/vue-table'
 import { upperFirst } from 'scule'
 import { hasEdnaDataset } from '~/utils/edna'
 
@@ -228,9 +229,11 @@ const props = defineProps({
   filterEdible: { type: Boolean, default: false },
   filterPoison: { type: Boolean, default: false },
   searchTerm: { type: String, default: '' },
+  externalSvampFilter: { type: Array, default: undefined },
   externalMatsvampFilter: { type: Boolean, default: undefined },
   externalStatusFilter: { type: Array, default: undefined },
   externalGruppFilter: { type: Array, default: undefined },
+  chartGroupingMode: { type: String, default: 'treemap-standard' },
   enablePagination: { type: Boolean, default: false },
   tableKey: { type: String, default: '' }
 });
@@ -304,12 +307,11 @@ const defaultVisibility = useMobileLayout.value
     Commonname: false,
     Scientificname: false,
     images: false,
+    __groupingOrder: false,
     [props.obs]: false,
   }
   : {
-    RankRed: false,
-    "Rank matsvamp": false,
-    "Rank giftsvamp": false,
+    __groupingOrder: false,
   };
 
 if (props.dataType === 'edna') {
@@ -447,8 +449,9 @@ const svampOptions = computed(() => {
     .filter(Boolean);
 });
 
-const rowsPerPage = ref((props.isNormalView && !props.enablePagination) ? 500 : 10);
 const paginationEnabled = computed(() => !props.isNormalView || props.enablePagination);
+const DEFAULT_ROWS_PER_PAGE = 10;
+const rowsPerPage = ref((props.isNormalView && !props.enablePagination) ? 500 : DEFAULT_ROWS_PER_PAGE);
 const selectedFilter = ref([]);
 const selectedStatus = ref([]);
 const naturvardsStatuses = ['VU', 'NT', 'EN', 'CR', 'DD', 'Signalart'];
@@ -464,6 +467,9 @@ const toggleNaturvardsGroup = (checked) => {
   }
 };
 const selectedGrupp = ref([]);
+const hasExternalSvampFilter = computed(() => Array.isArray(props.externalSvampFilter));
+const hasExternalStatusFilter = computed(() => Array.isArray(props.externalStatusFilter));
+const hasExternalGruppFilter = computed(() => Array.isArray(props.externalGruppFilter));
 
 watch(() => props.externalMatsvampFilter, (val) => {
   if (typeof val !== 'boolean') return;
@@ -474,15 +480,26 @@ watch(() => props.externalMatsvampFilter, (val) => {
   }
 }, { immediate: true });
 
+watch(() => props.externalSvampFilter, (val) => {
+  if (!Array.isArray(val)) return;
+  selectedFilter.value = [...val];
+}, { immediate: true, flush: 'post' });
+
 watch(() => props.externalStatusFilter, (val) => {
   if (!Array.isArray(val)) return;
   selectedStatus.value = [...val];
-}, { immediate: true });
+}, { immediate: true, flush: 'post' });
 
 watch(() => props.externalGruppFilter, (val) => {
   if (!Array.isArray(val)) return;
-  selectedGrupp.value = [...val];
-}, { immediate: true });
+  const seen = new Set();
+  selectedGrupp.value = val.filter((entry) => {
+    const normalized = normalizeGroupKey(entry);
+    if (seen.has(normalized)) return false;
+    seen.add(normalized);
+    return true;
+  });
+}, { immediate: true, flush: 'post' });
 const gruppMenuItems = computed(() => {
   return gruppOptions.value.map(option => ({
     label: option.label,
@@ -769,6 +786,8 @@ const speciesStore = useSpeciesStore();
 function selectRow(e, row) {
   const tableRow = row?.original ? row : (e?.original ? e : null);
   if (!tableRow) return;
+  if (typeof tableRow.getIsGrouped === 'function' && tableRow.getIsGrouped()) return;
+  if (tableRow.original?.__groupingKey && !tableRow.original?.Scientificname) return;
   speciesStore.selectSpecies(tableRow.original ?? tableRow, "edna");
 }
 
@@ -841,16 +860,35 @@ const sorting = ref(
 onMounted(() => {
   const saved = tableStateStore.getState(resolvedTableKey.value);
   if (!saved) return;
-  if (Array.isArray(saved.selectedFilter)) selectedFilter.value = [...saved.selectedFilter];
-  if (Array.isArray(saved.selectedStatus)) selectedStatus.value = [...saved.selectedStatus];
-  if (Array.isArray(saved.selectedGrupp)) selectedGrupp.value = [...saved.selectedGrupp];
+  if (!hasExternalSvampFilter.value && Array.isArray(saved.selectedFilter)) selectedFilter.value = [...saved.selectedFilter];
+  if (!hasExternalStatusFilter.value && Array.isArray(saved.selectedStatus)) selectedStatus.value = [...saved.selectedStatus];
+  if (!hasExternalGruppFilter.value && Array.isArray(saved.selectedGrupp)) selectedGrupp.value = [...saved.selectedGrupp];
   if (Array.isArray(saved.selectedMark)) selectedMark.value = [...saved.selectedMark];
   if (Array.isArray(saved.sorting)) sorting.value = [...saved.sorting];
-  if (saved.rowsPerPage !== undefined) rowsPerPage.value = saved.rowsPerPage;
+  if (saved.rowsPerPage !== undefined) {
+    const savedRowsPerPage = saved.rowsPerPage === 'Alla' ? 'Alla' : Number(saved.rowsPerPage);
+    if (paginationEnabled.value) {
+      rowsPerPage.value = savedRowsPerPage === 'Alla'
+        ? 'Alla'
+        : (Number.isFinite(savedRowsPerPage) && savedRowsPerPage > 0 && savedRowsPerPage <= 100
+          ? savedRowsPerPage
+          : DEFAULT_ROWS_PER_PAGE);
+    } else {
+      rowsPerPage.value = saved.rowsPerPage;
+    }
+  }
   if (saved.pagination) {
+    const savedPageSize = Number(saved.pagination.pageSize ?? pagination.value.pageSize);
+    const sanitizedPageSize = paginationEnabled.value
+      ? (Number.isFinite(savedPageSize) && savedPageSize > 0 && savedPageSize <= 100
+        ? savedPageSize
+        : DEFAULT_ROWS_PER_PAGE)
+      : (Number.isFinite(savedPageSize) && savedPageSize > 0
+        ? savedPageSize
+        : pagination.value.pageSize);
     pagination.value = {
       pageIndex: saved.pagination.pageIndex ?? 0,
-      pageSize: saved.pagination.pageSize ?? pagination.value.pageSize,
+      pageSize: sanitizedPageSize,
     };
   }
 });
@@ -877,18 +915,153 @@ const UButton = resolveComponent('UButton')
 const UDropdownMenu = resolveComponent('UDropdownMenu')
 const Icon = resolveComponent('Icon')
 
+function normalizeGroupKey(value) {
+  return String(value || '')
+    .toLowerCase()
+    .normalize('NFD')
+    .replace(/\p{Diacritic}+/gu, '')
+}
+
+const isVisibleMushroomGroup = (value) => {
+  const normalized = normalizeGroupKey(value)
+  return !normalized.includes('skinnsvamp') && !normalized.includes('tryffel')
+}
+
+const getRowGroupingLabel = (row) => {
+  const mode = props.chartGroupingMode
+  if (mode === 'treemap-groups') return String(row?.[props.grupp] || 'Övrigt')
+  if (mode === 'treemap-edibility') {
+    const isEdible = row?.[props.mat] == 1
+    const isPoison = String(row?.Giftsvamp || '').toLowerCase() === 'x'
+    if (isEdible) return 'Matsvamp'
+    if (isPoison) return 'Giftsvamp'
+    return 'Övrigt'
+  }
+  if (mode === 'treemap-redlist') {
+    const status = String(row?.RL2020kat || '').trim().toUpperCase()
+    const redlistLabelByCode = {
+      LC: 'Livskraftig',
+      DD: 'Kunskapsbrist',
+      NT: 'Nära hotad',
+      VU: 'Sårbar',
+      EN: 'Starkt hotad',
+      CR: 'Akut hotad',
+      RE: 'Nationellt utdöd'
+    }
+    return redlistLabelByCode[status] || 'Övrigt'
+  }
+  if (mode === 'treemap-visible') {
+    return isVisibleMushroomGroup(row?.[props.grupp]) ? 'Svampar som syns' : 'Svampar som är svåra att se'
+  }
+  return ''
+}
+
+const getRowGroupingOrder = (row) => {
+  const mode = props.chartGroupingMode
+  if (mode === 'treemap-groups') {
+    const normalized = normalizeGroupKey(getRowGroupingLabel(row))
+    const order = ['ovrigt', 'hattsvamp', 'kantarell', 'sopp', 'taggsvamp', 'fingersvamp', 'skinnsvamp', 'skalsvamp', 'tryffel']
+    const idx = order.indexOf(normalized)
+    return idx === -1 ? Number.POSITIVE_INFINITY : idx
+  }
+  if (mode === 'treemap-edibility') {
+    const label = getRowGroupingLabel(row)
+    const order = { Matsvamp: 0, Giftsvamp: 1, Övrigt: 2 }
+    return order[label] ?? Number.POSITIVE_INFINITY
+  }
+  if (mode === 'treemap-redlist') {
+    const label = getRowGroupingLabel(row)
+    const order = {
+      Livskraftig: 0,
+      Kunskapsbrist: 1,
+      'Nära hotad': 2,
+      Sårbar: 3,
+      'Starkt hotad': 4,
+      'Akut hotad': 5,
+      'Nationellt utdöd': 6,
+      Övrigt: 7
+    }
+    return order[label] ?? Number.POSITIVE_INFINITY
+  }
+  if (mode === 'treemap-visible') {
+    const label = getRowGroupingLabel(row)
+    const order = { 'Svampar som syns': 0, 'Svampar som är svåra att se': 1 }
+    return order[label] ?? Number.POSITIVE_INFINITY
+  }
+  return Number.POSITIVE_INFINITY
+}
+
+const isTableGroupingActive = computed(() =>
+  String(props.chartGroupingMode || '').startsWith('treemap-') && props.chartGroupingMode !== 'treemap-standard'
+)
+
+const tableGrouping = computed(() => isTableGroupingActive.value ? ['__groupingKey'] : [])
+const tableRenderKey = computed(() =>
+  `${resolvedTableKey.value}:${isTableGroupingActive.value ? 'grouped' : 'paged'}:${props.chartGroupingMode}`
+)
+
+const groupingOptions = computed(() => ({
+  groupedColumnMode: 'reorder',
+  getGroupedRowModel: getGroupedRowModel()
+}))
+
 
 const desktopColumns = [
+  {
+    accessorKey: '__groupingOrder',
+    enableHiding: true,
+    enableSorting: true,
+    header: '',
+    cell: () => null,
+    aggregationFn: 'min',
+    sortingFn: 'basic',
+    meta: { headerText: 'Grupperingsordning' }
+  },
+  {
+    accessorKey: '__groupingKey',
+    enableHiding: false,
+    header: '',
+    cell: ({ row }) => {
+      if (!row.getIsGrouped()) return null
+      const label = String(row.getValue('__groupingKey') || row.original?.__groupingKey || 'Grupp')
+      const count = row.subRows?.length ?? 0
+      const showGroupIcon = props.chartGroupingMode === 'treemap-groups'
+      const iconNode = showGroupIcon
+        ? h('img', {
+          src: getIconPath(label),
+          alt: `${label || 'Svamp'} ikon`,
+          class: 'w-5 h-5',
+          loading: 'lazy',
+          decoding: 'async'
+        })
+        : null
+      return h('div', { class: 'flex items-center gap-2 py-1' }, [
+        h('span', { class: 'inline-block', style: { width: `${row.depth * 0.9}rem` } }),
+        h(UButton, {
+          variant: 'outline',
+          color: 'neutral',
+          size: 'xs',
+          icon: row.getIsExpanded() ? 'i-lucide-minus' : 'i-lucide-plus',
+          onClick: () => row.toggleExpanded()
+        }),
+        iconNode,
+        h('strong', { class: 'text-sm' }, `${label} (${count} arter)`)
+      ])
+    },
+    aggregationFn: 'count',
+    meta: { headerText: 'Gruppering' }
+  },
   {
     accessorKey: "images",
     header: "",
     sortable: false,
     cell: ({ row }) => {
+      if (row.getIsGrouped()) return null
       const images = row.getValue("images") || [];
       if (images.length) {
         return h('img', {
           src: images[0],
-          class: "h-11 w-14 object-cover -my-3 rounded-md border border-neutral-100 dark:border-neutral-800",
+          class: "h-11 w-14 min-w-14 shrink-0 object-cover -my-3 rounded-md border border-neutral-100 dark:border-neutral-800",
           alt: row.original?.Commonname ? `${row.original.Commonname} bild` : "Species image",
           loading: 'lazy',
           decoding: 'async',
@@ -898,12 +1071,21 @@ const desktopColumns = [
       }
       return null;
     },
-    meta: { headerText: 'Bild' },
+    meta: {
+      headerText: 'Bild',
+      class: {
+        th: 'w-16 min-w-16',
+        td: 'w-16 min-w-16'
+      }
+    },
   },
 
   {
     accessorKey: "Commonname",
     header: ({ column }) => {
+      if (isTableGroupingActive.value) {
+        return h('span', { class: 'text-sm font-medium text-neutral-700 dark:text-neutral-200' }, 'Namn')
+      }
       const isSorted = column.getIsSorted();
       return h(
         UButton,
@@ -922,6 +1104,9 @@ const desktopColumns = [
       );
     },
     cell: ({ row }) =>
+      row.getIsGrouped()
+        ? null
+        :
       h('div', { class: 'text-neutral-700 dark:text-neutral-200 font-semibold truncate text-[16px]' }, capitalize(row.getValue("Commonname")))
     ,
     filterFn: (row, _columnId, filterValue) => {
@@ -937,6 +1122,9 @@ const desktopColumns = [
   {
     accessorKey: "Scientificname",
     header: ({ column }) => {
+      if (isTableGroupingActive.value) {
+        return h('span', { class: 'text-sm font-medium text-neutral-700 dark:text-neutral-200' }, 'Latinskt namn')
+      }
       const isSorted = column.getIsSorted();
       return h(
         UButton,
@@ -955,8 +1143,17 @@ const desktopColumns = [
       );
     },
     cell: ({ row }) =>
-      h('div', { class: 'truncate  text-[16px]' }, row.getValue('Scientificname')),
-    meta: { headerText: 'Latinskt namn' },
+      row.getIsGrouped()
+        ? null
+        :
+      h('div', { class: 'max-w-[18rem] truncate text-[16px]' }, row.getValue('Scientificname')),
+    meta: {
+      headerText: 'Latinskt namn',
+      class: {
+        th: 'max-w-[18rem]',
+        td: 'max-w-[18rem]'
+      }
+    },
   },
 
   {
@@ -970,9 +1167,12 @@ const desktopColumns = [
     }),
     filterFn: (row, columnId, filterValue) => {
       if (!filterValue || filterValue.length === 0) return true;
-      return filterValue.includes(row.getValue(columnId));
+      const rowGroup = normalizeGroupKey(row.getValue(columnId));
+      const normalizedFilters = filterValue.map(normalizeGroupKey);
+      return normalizedFilters.includes(rowGroup);
     },
     cell: ({ row }) => {
+      if (row.getIsGrouped()) return null
       const grupp = row.getValue(props.grupp);
       if (grupp !== "Saknas") {
         return h('img', {
@@ -1017,6 +1217,7 @@ const desktopColumns = [
       return match;
     },
     cell: ({ row }) => {
+      if (row.getIsGrouped()) return null
       return h(
         "div",
         { class: "flex items-center space-x-1" },
@@ -1053,6 +1254,9 @@ const desktopColumns = [
       return match;
     },
     cell: ({ row }) =>
+      row.getIsGrouped()
+        ? null
+        :
       h('div', { class: 'flex gap-1' }, [
         (props.mat === "Nyasvamp-boken"
           ? row.getValue(props.mat)?.toLowerCase() === 'x'
@@ -1093,6 +1297,7 @@ const desktopColumns = [
       });
     },
     cell: ({ row }) => {
+      if (row.getIsGrouped()) return null
       const status = row.getValue('RL2020kat');
       const mainBadge = h(
         UBadge,
@@ -1110,6 +1315,9 @@ const desktopColumns = [
   {
     accessorKey: props.obs,
     header: ({ column }) => {
+      if (isTableGroupingActive.value) {
+        return h('span', { class: 'text-sm font-medium text-neutral-700 dark:text-neutral-200' }, props.obsLabel)
+      }
       const isSorted = column.getIsSorted();
       return h(
         UButton,
@@ -1128,6 +1336,7 @@ const desktopColumns = [
       );
     },
     cell: ({ row }) => {
+      if (row.getIsGrouped()) return null
       const val = row.getValue(props.obs);
       if (props.obs.startsWith('Rank')) {
         if (val === 3) {
@@ -1249,8 +1458,8 @@ const tableUi = computed(() => ({
     ? 'divide-none'
     : 'divide-none md:divide-dotted',
   td: useMobileLayout.value
-    ? 'px-0 pt-2 pb-3 cursor-pointer'
-    : 'px-0 md:px-4 md:pt-4 md:pb-4 pt-2 pb-3',
+    ? 'empty:p-0 px-0 pt-2 pb-3 cursor-pointer'
+    : 'empty:p-0 px-0 md:px-4 md:pt-4 md:pb-4 pt-2 pb-3',
 }));
 const topCount = ref(0);
 const remainingCount = ref(0);
@@ -1419,11 +1628,54 @@ const filteredData = computed(() => {
 
 // Limit rows on mobile when in normal view to the top 4 species
 const displayedData = computed(() => {
-  // if (isMobile.value && props.isNormalView) {
-  //   return filteredData.value.slice(0, 4);
-  // }
-  return filteredData.value;
+  const rows = filteredData.value;
+  if (!isTableGroupingActive.value) return rows;
+  return rows.map((row) => ({
+    ...row,
+    __groupingKey: getRowGroupingLabel(row),
+    __groupingOrder: getRowGroupingOrder(row)
+  }));
 });
+
+watch(
+  () => [isTableGroupingActive.value, props.chartGroupingMode],
+  ([active]) => {
+    if (!active) return
+    sorting.value = [
+      { id: '__groupingOrder', desc: false },
+      { id: props.obs, desc: true }
+    ]
+  },
+  { immediate: true }
+)
+
+const syncPaginationForGroupingMode = (active) => {
+  if (!table.value?.tableApi) return
+  if (active) {
+    table.value.tableApi.setPagination({
+      pageIndex: 0,
+      pageSize: Math.max(1, filteredData.value.length)
+    })
+    return
+  }
+
+  const restoredSize = rowsPerPage.value === 'Alla'
+    ? Math.max(1, totalItems.value)
+    : Number(rowsPerPage.value || 10)
+
+  table.value.tableApi.setPagination({
+    pageIndex: 0,
+    pageSize: restoredSize
+  })
+}
+
+watch(
+  [isTableGroupingActive, () => table.value?.tableApi],
+  ([active]) => {
+    syncPaginationForGroupingMode(active)
+  },
+  { immediate: true, flush: 'post' }
+)
 
 
 // const sorting = ref([{ id: props.obs, desc: false }])
@@ -1545,6 +1797,10 @@ const isFilterActive = (columnId, value) => {
       return rows.some(row => (row.original.Giftsvamp || '').toLowerCase() === 'x');
     }
   }
+  if (columnId === props.grupp) {
+    const normalizedValue = normalizeGroupKey(value);
+    return rows.some(row => normalizeGroupKey(row.original?.[props.grupp]) === normalizedValue);
+  }
   return rows.some(row => {
     if (columnId === 'RL2020kat') {
       if (value === 'Ej bedömd') {
@@ -1568,11 +1824,23 @@ const isFilterActive = (columnId, value) => {
   });
 };
 
-watch(columnFilters, (newFilters) => {
-  if (table.value?.tableApi) {
+watch(
+  columnFilters,
+  (newFilters) => {
+    if (!table.value?.tableApi) return;
     table.value.tableApi.setColumnFilters(newFilters);
-  }
-});
+  },
+  { deep: true, immediate: true, flush: 'post' }
+);
+
+watch(
+  () => table.value?.tableApi,
+  (api) => {
+    if (!api) return;
+    api.setColumnFilters(columnFilters.value);
+  },
+  { immediate: true, flush: 'post' }
+);
 
 // Watch columnFilters to emit matsvampFilter when the matsvamp column filter is active
 watch(columnFilters, (newFilters) => {
@@ -1594,6 +1862,7 @@ watch(columnFilters, (newFilters) => {
 }, { deep: true, immediate: true });
 
 watch(sorting, (val) => {
+  if (isTableGroupingActive.value) return
   emit('update:sorting', val);
 }, { deep: true, immediate: true });
 

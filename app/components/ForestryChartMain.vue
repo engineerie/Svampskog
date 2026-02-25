@@ -3,13 +3,109 @@
     <!-- Dropdown to select which chart to display -->
 
     <div v-if="showHeaderRow" class=" flex justify-between">
-      <USelect v-if="showControls" v-model="selectedChart" :items="chartOptions" value-key="value"
-        option-attribute="label" size="xl" variant="none" class="hover:cursor-pointer" :icon="selectedChartIcon"
-        :ui="{ content: 'min-w-fit', value: 'sm:text-lg sm:font-medium text-neutral-700' }" />
-      <div class="">
-        <USelect v-if="selectedChart === 'grupper' && isFrameworkCompareMode" v-model="selectedCompareArtkategori"
-          :items="compareArtkategoriOptionsReversed" option-attribute="label" value-key="value" size="lg"
-          variant="outline" placeholder="Välj svampgrupp" class="hover:cursor-pointer ring-muted/50 mb-2 w-fit"
+      <USelect v-if="showControls" v-model="selectedChartControl" :items="selectChartOptions" value-key="value"
+        option-attribute="label" size="md" class="hover:bg-neutral-50 ring-0 mb-2 w-full sm:w-fit max-w-full"
+        :icon="selectedChartIcon" :ui="{ content: 'min-w-fit', value: ' text-neutral-700 ' }" />
+
+
+
+      <!-- <UButton color="neutral" variant="subtle"
+        :icon="chartType === 'area' ? 'i-carbon-chart-column' : 'i-carbon-chart-line-smooth'"
+        @click="ToggleChartType" /> -->
+    </div>
+
+    <div class="space-y-3 relative">
+      <UTabs v-if="selectedChart === 'grupper'" v-model="grupperChartMode" :items="grupperModeTabs" size="sm" :ui="{
+        root: 'shrink-0',
+        list: 'flex-nowrap gap-1 bg-transparent',
+        indicator: 'bg-white border border-muted/50 shadow',
+        trigger: 'px-2 data-[state=active]:text-neutral-800'
+      }" class="sm:mr-2 mt-0.5 absolute -top-2 right-0 z-40 " />
+      <ForestryChartDisplay v-bind="chartDisplayProps" />
+
+      <UTabs v-if="showPrimaryInlineTabs" v-model="selectedChart" :items="inlineChartTabs" size="sm" :ui="{
+        root: '',
+        list: 'flex-nowrap gap-2 bg-transparent',
+        indicator: 'bg-white border border-muted/50 shadow',
+        trigger: 'data-[state=active]:text-neutral-800 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary'
+      }" class="sm:px-2 pt-2 " />
+      <UTabs v-if="selectedChart === 'matsvampar' && showMatsvampSelector" v-model="selectedMatsvampVariant"
+        :items="matsvampVariantOptions" size="sm" :ui="{
+          root: '',
+          list: 'flex-nowrap gap-2 bg-transparent',
+          indicator: 'bg-white border border-muted/50 shadow',
+          trigger: 'data-[state=active]:text-neutral-800 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary'
+        }" class="sm:px-2 pt-2 " />
+      <div v-if="selectedChart === 'grupper'" class="w-full min-w-0 flex flex-wrap justify-between items-start gap-2">
+        <USelect v-if="!isFrameworkCompareMode && grupperChartMode === 'stacked'" v-model="selectedArtkategori" multiple
+          :items="grupperLegendSelectItems" option-attribute="label" value-key="value"
+          class="w-full sm:w-fit max-w-full ring-muted/50 sm:mx-2 mb-2" size="lg" variant="outline"
+          :ui="{ content: 'min-w-fit' }">
+          <template #default="{ ui }">
+            <span v-if="selectedGrupperLegendItems.length"
+              :class="ui.value({ class: 'flex items-center gap-2 min-w-0 overflow-hidden' })">
+              <span class="inline-flex items-center gap-2 min-w-0 overflow-visible">
+                <span v-for="item in selectedGrupperLegendItems" :key="item.value"
+                  class="inline-flex items-center gap-1 shrink-0">
+                  <span v-if="item.icon" class="h-3.5 w-3.5" :style="{
+                    backgroundColor: item.color || '#000',
+                    WebkitMask: `url(${item.icon}) center / contain no-repeat`,
+                    mask: `url(${item.icon}) center / contain no-repeat`,
+                  }" />
+                </span>
+              </span>
+            </span>
+            <span v-else :class="ui.placeholder({ class: '' })">Välj svampgrupp</span>
+          </template>
+          <template #item="{ item }">
+            <div class="flex items-center justify-between w-full">
+              <div class="flex items-center gap-2">
+                <div v-if="item.icon" class="h-4 w-4" :style="{
+                  backgroundColor: item.color || '#000',
+                  WebkitMask: `url(${item.icon}) center / contain no-repeat`,
+                  mask: `url(${item.icon}) center / contain no-repeat`,
+                }" />
+                <span>{{ item.label }}</span>
+              </div>
+              <UIcon name="i-lucide-check" class="size-3 text-neutral-700"
+                :class="isGrupperLegendSelected(item.value) ? 'opacity-100' : 'opacity-0'" />
+            </div>
+          </template>
+        </USelect>
+        <USelect v-if="!isFrameworkCompareMode && grupperChartMode === 'single'" v-model="selectedSingleArtkategori"
+          :items="compareArtkategoriOptionsReversed" option-attribute="label" value-key="value" size="md"
+          variant="outline" placeholder="Välj svampgrupp"
+          class="hover:cursor-pointer ring-muted/50 sm:mx-2 mb-2 w-full sm:w-fit max-w-full"
+          :ui="{ content: 'min-w-fit' }">
+          <template #default="{ ui }">
+            <span v-if="selectedSingleItem"
+              :class="ui.value({ class: 'flex items-center gap-2 min-w-0 overflow-hidden' })">
+              <span class="inline-flex items-center gap-2 min-w-0 overflow-visible">
+                <span v-if="selectedSingleItem.icon" class="h-3.5 w-3.5" :style="{
+                  backgroundColor: selectedSingleItem.color || '#000',
+                  WebkitMask: `url(${selectedSingleItem.icon}) center / contain no-repeat`,
+                  mask: `url(${selectedSingleItem.icon}) center / contain no-repeat`,
+                }" />
+                <span>{{ selectedSingleItem.label }}</span>
+              </span>
+            </span>
+            <span v-else :class="ui.placeholder({ class: '' })">Välj svampgrupp</span>
+          </template>
+          <template #item="{ item }">
+            <div class="flex items-center gap-2">
+              <span v-if="item.icon" class="h-4 w-4" :style="{
+                backgroundColor: item.color || '#000',
+                WebkitMask: `url(${item.icon}) center / contain no-repeat`,
+                mask: `url(${item.icon}) center / contain no-repeat`,
+              }" />
+              <span>{{ item.label }}</span>
+            </div>
+          </template>
+        </USelect>
+        <USelect v-if="isFrameworkCompareMode" v-model="selectedCompareArtkategori"
+          :items="compareArtkategoriOptionsReversed" option-attribute="label" value-key="value" size="md"
+          variant="outline" placeholder="Välj svampgrupp"
+          class="hover:cursor-pointer ring-muted/50 sm:mx-2 mb-2 w-full sm:w-fit max-w-full"
           :ui="{ content: 'min-w-fit' }">
           <template #default="{ ui }">
             <span v-if="selectedCompareItem"
@@ -36,41 +132,8 @@
             </div>
           </template>
         </USelect>
-        <USelect v-if="selectedChart === 'matsvampar' && showMatsvampSelector" v-model="selectedMatsvampVariant"
-          :items="matsvampVariantOptions" :content="{
-            align: 'end',
-            side: 'bottom',
-            sideOffset: 8
-          }" option-attribute="label" value-key="value" placeholder="Välj dataset"
-          class="hover:cursor-pointer ring-muted/50 mb-2" size="xs"
-          :ui="{ content: 'w-fit shrink-0', base: 'min-h-8', item: 'gap-0' }" :icon="selectedMatsvampIcon"
-          :aria-label="selectedMatsvampLabel">
-          <template #item="{ item }">
-            <div class="flex items-center gap-2">
-              <UIcon v-if="item.icon" :name="item.icon" class="size-4" />
-              <span>{{ item.label }}</span>
-            </div>
-          </template>
-        </USelect>
+
       </div>
-
-
-      <!-- <UButton color="neutral" variant="subtle"
-        :icon="chartType === 'area' ? 'i-carbon-chart-column' : 'i-carbon-chart-line-smooth'"
-        @click="ToggleChartType" /> -->
-    </div>
-
-    <div class="space-y-3">
-
-      <ForestryChartDisplay v-bind="chartDisplayProps" />
-
-      <UTabs v-if="showInlineTabs" v-model="selectedChart" :items="inlineChartTabs" size="sm" :ui="{
-        root: '',
-        list: 'flex-nowrap gap-2 bg-transparent',
-        indicator: 'bg-white border border-muted/50 shadow',
-        trigger: 'data-[state=active]:text-neutral-800 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary'
-      }" class="sm:px-2 pt-2 pb-1" />
-
       <div class="px-4 pb-2 text-sm text-muted" v-if="chartDescription">
         {{ chartDescription }}
       </div>
@@ -229,8 +292,11 @@ const chartDisplayProps = computed(() => {
   if (selectedChart.value === 'grupper') {
     return {
       selectedFrameworks: props.parentSelectedFrameworks ?? [selectedSingleFramework.value],
-      selectedArtkategori: isFrameworkCompareMode.value ? [selectedCompareArtkategori.value] : selectedArtkategori.value,
+      selectedArtkategori: isFrameworkCompareMode.value
+        ? [selectedCompareArtkategori.value]
+        : (grupperChartMode.value === 'single' ? [selectedSingleArtkategori.value] : selectedArtkategori.value),
       frameworkComparisonMode: isFrameworkCompareMode.value,
+      grupperDisplayMode: isFrameworkCompareMode.value ? 'single' : grupperChartMode.value,
       chartType: chartType.value,
       singleFrameworkSelection: true,
       selectedStartskog: startskogValue,
@@ -282,6 +348,7 @@ interface Props {
   showControls?: boolean
   showMatsvampSelector?: boolean
   showInlineTabs?: boolean
+  hideGrupperInSelect?: boolean
 }
 const props = defineProps<Props>()
 const emit = defineEmits<{
@@ -291,9 +358,11 @@ const emit = defineEmits<{
 const showControls = computed(() => props.showControls !== false)
 const showMatsvampSelector = computed(() => props.showMatsvampSelector !== false)
 const showInlineTabs = computed(() => props.showInlineTabs === true)
+const showPrimaryInlineTabs = computed(() =>
+  showInlineTabs.value && (selectedChart.value === 'skogsskole' || selectedChart.value === 'grupper')
+)
 const showHeaderRow = computed(() =>
   showControls.value
-  || (selectedChart.value === 'matsvampar' && showMatsvampSelector.value)
   || (selectedChart.value === 'grupper' && isFrameworkCompareMode.value)
 )
 
@@ -318,6 +387,11 @@ const chartOptions = [
   { label: 'Matsvampar', value: 'matsvampar', icon: 'icon-park-solid:knife-fork' },
 
 ]
+const selectChartOptions = computed(() =>
+  props.hideGrupperInSelect
+    ? chartOptions.filter(option => option.value !== 'grupper')
+    : chartOptions
+)
 const inlineChartTabs = [
   { label: 'Total mängd', value: 'skogsskole', icon: 'i-lineicons-mushroom' },
   { label: 'Svampgrupper', value: 'grupper', icon: 'i-material-symbols-category-rounded' },
@@ -327,8 +401,16 @@ const selectedChart = ref<string>(
     ? (props.selectedChart as string)
     : chartOptions[0].value
 )
+const selectedChartControl = computed<string>({
+  get: () => (props.hideGrupperInSelect && selectedChart.value === 'grupper' ? 'skogsskole' : selectedChart.value),
+  set: (value) => {
+    if (chartOptions.some(opt => opt.value === value)) {
+      selectedChart.value = value
+    }
+  }
+})
 const selectedChartIcon = computed(() =>
-  chartOptions.find(opt => opt.value === selectedChart.value)?.icon
+  chartOptions.find(opt => opt.value === selectedChartControl.value)?.icon
 )
 const isFrameworkCompareMode = computed(() => (props.parentSelectedFrameworks?.length ?? 0) === 2)
 
@@ -414,21 +496,31 @@ const matsvampVariantOptions = [
 const selectedMatsvampVariant = ref<MatsvampVariant>('standard')
 const matsvampChartArtkategori = computed(() => selectedMatsvampVariant.value === 'goda' ? 'goda matsvampar' : 'matsvamp')
 
-const selectedMatsvampIcon = computed(() =>
-  matsvampVariantOptions.find(opt => opt.value === selectedMatsvampVariant.value)?.icon
-)
-
-const selectedMatsvampLabel = computed(() =>
-  matsvampVariantOptions.find(opt => opt.value === selectedMatsvampVariant.value)?.label ?? 'Välj dataset'
-)
-
 const matsvampDescription = computed(() =>
   matsvampVariantDescriptions.value[selectedMatsvampVariant.value]
 )
 
 const matsvampMaxY = computed(() => (selectedMatsvampVariant.value === 'kg' ? 55 : 28) + 5)
+const grupperChartMode = ref<'stacked' | 'single'>('stacked')
+const grupperModeTabs = computed(() => [
+  { value: 'stacked', icon: 'i-carbon-chart-area', label: '', disabled: isFrameworkCompareMode.value },
+  { value: 'single', icon: 'i-carbon-chart-line', label: '' },
+])
 
 const selectedArtkategori = ref<string[]>([...defaultGrupperArtkategori]);
+const grupperLegendSelectItems = computed(() => compareArtkategoriOptionsReversed.value.map(item => ({
+  label: item.label,
+  value: item.value,
+  icon: item.icon,
+  color: item.color,
+})))
+const selectedGrupperLegendItems = computed(() =>
+  grupperLegendSelectItems.value.filter(item => selectedArtkategori.value.includes(item.value))
+)
+function isGrupperLegendSelected(value?: string) {
+  if (!value) return false
+  return selectedArtkategori.value.includes(value)
+}
 
 const compareArtkategoriOptions = [
   {
@@ -518,6 +610,10 @@ const selectedCompareArtkategori = ref(compareArtkategoriOptions[0].value)
 const selectedCompareItem = computed(() =>
   compareArtkategoriOptions.find(opt => opt.value === selectedCompareArtkategori.value)
 )
+const selectedSingleArtkategori = ref(compareArtkategoriOptions[0].value)
+const selectedSingleItem = computed(() =>
+  compareArtkategoriOptions.find(opt => opt.value === selectedSingleArtkategori.value)
+)
 
 watch([selectedChart, isFrameworkCompareMode], ([chart, compare]) => {
   if (!(chart === 'grupper' && compare)) {
@@ -526,11 +622,20 @@ watch([selectedChart, isFrameworkCompareMode], ([chart, compare]) => {
   if (chart === 'grupper' && !compare) {
     selectedArtkategori.value = [...defaultGrupperArtkategori]
   }
+  if (chart === 'grupper' && compare) {
+    grupperChartMode.value = 'single'
+  }
 })
 
 watch(() => props.parentSelectedFrameworks?.length, () => {
   if (selectedChart.value === 'grupper' && isFrameworkCompareMode.value) {
     selectedCompareArtkategori.value = compareArtkategoriOptions[0].value
+  }
+})
+
+watch(grupperChartMode, (mode) => {
+  if (mode === 'single' && selectedArtkategori.value.length > 0) {
+    selectedSingleArtkategori.value = selectedArtkategori.value[0]
   }
 })
 

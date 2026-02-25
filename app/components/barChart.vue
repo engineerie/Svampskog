@@ -1,41 +1,53 @@
 <template>
   <div>
+    <div v-if="showControls && !isMobile" class="flex items-center justify-between gap-3 mb-3">
+      <UTabs v-if="showModeTabs" v-model="chartTypeTab" :items="chartTypeTabs" size="md" :ui="{
+        root: '',
+        list: 'flex-nowrap gap-2 bg-transparent',
+        indicator: 'bg-white border border-muted/50 shadow',
+        trigger: 'data-[state=active]:text-neutral-800 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary'
+      }" />
+      <USelect v-if="showModeTabs && chartTypeTab === 'treemap'" v-model="treemapGroupingMode"
+        :items="treemapGroupingOptions" item-value="value" item-label="label" class="ring-muted/50"
+        :ui="{ content: 'min-w-fit' }" />
+    </div>
     <!-- Zoom controls only on desktop -->
-    <div v-if="showControls && !isMobile" class="flex justify-end gap-2 mb-2 mx-2">
+    <!-- <div v-if="showControls && !isMobile" class="flex justify-end gap-2 mb-2 mx-2">
       <UButton @click="zoomOut" icon="i-heroicons-magnifying-glass-minus" color="neutral" variant="ghost" />
       <UButton @click="zoomIn" icon="i-heroicons-magnifying-glass-plus" color="neutral" variant="ghost" />
-    </div>
-    <!-- Bar chart on desktop -->
-    <div v-if="!isMobile" :class="[
+    </div> -->
+    <!-- Chart on desktop -->
+    <div :key="chartShellRenderKey" ref="chartHostRef" v-if="!isMobile" :class="[
       'w-full overflow-y-auto overflow-x-scroll',
       { 'bar-chart-container': currentZoomIndex === 0 }
     ]" @click="handleChartClick">
-      <VisXYContainer :data="updatedChartData" :width="chartWidth" :height="chartHeight">
-        <!-- <VisXYLabels v-if="showGroupLabels" :data="labelData" :x="labelX" :y="labelY" :label="labelText"
-          :labelFontSize="10" :clustering="false" backgroundColor="#ffffff" color="#111827" /> -->
-        <VisPlotband v-if="plotBandRange" axis="x" :from="plotBandRange.from" :to="plotBandRange.to"
-          color="rgba(234, 179, 8, 0.15)" :zIndex="5" />
-        <VisStackedBar :data="updatedChartData" :x="xAccessor" :y="yAccessor" :color="barColorAccessor"
-          :barPadding="0.1" />
+      <EdnaBarModeChart v-if="viewMode === 'bar'" :data="updatedChartData" :width="chartWidth" :height="chartHeight"
+        :plot-band-range="plotBandRange" :x-accessor="xAccessor" :y-accessor="yAccessor"
+        :bar-color-accessor="barColorAccessor" :show-y-axis="showYAxis" :show-tooltip="showTooltip" :has-data="hasData"
+        :triggers="triggers" :tooltip-template="tooltipTemplate" :bar-events="barEvents" />
 
-
-        <!-- <VisAxis :tickLine="false" :gridLine="false" type="x" tickTextAnchor="start" tickTextAngle="30"
-          :numTicks="updatedChartData.length" tickTextFitMode="trim" :tickTextWidth="150" tickTextAlign="left"
-          :tick-format="tickFormat" /> -->
-        <VisAxis v-if="showYAxis" type="y" label="Antal skogar" :gridLine="false" />
-        <VisTooltip v-if="showTooltip && hasData" :triggers="triggers" :followCursor="true" />
-        <VisCrosshair v-if="showTooltip && hasData" :color="barColorAccessor" :template="tooltipTemplate" />
-
-      </VisXYContainer>
+      <div v-else ref="treemapWrapperRef" class="space-y-2">
+        <div ref="treemapContainerRef">
+          <VisSingleContainer :data="treemapSourceData" :height="chartHeight">
+            <VisTooltip :horizontalPlacement="treemapTooltipPlacement" :horizontalShift="12"
+              :triggers="treemapTooltipTriggersConfig" />
+            <VisTreemap :id="treemapDatumId" :tileBorderRadius="4" :layers="treemapLayersConfig"
+              :value="treemapValueAccessor" :tile-color="treemapTileColorConfig" :tile-label="treemapTileLabelConfig"
+              :label-offset-x="6" :label-offset-y="8" :tile-padding-top="20" :enableLightnessVariance="false"
+              :enable-tile-label-font-size-variation="true" :tile-show-html-tooltip="false"
+              :show-tile-click-affordance="true" :label-internal-nodes="true" :events="treemapEventsWithTooltipFlip" />
+          </VisSingleContainer>
+        </div>
+      </div>
     </div>
   </div>
 </template>
 
 <script setup lang="ts">
-import { ref, computed, onMounted, watch } from 'vue'
-import { useMediaQuery } from '@vueuse/core'
-import { VisXYContainer, VisStackedBar, VisAxis, VisTooltip, VisCrosshair, VisSingleContainer, VisDonut, VisXYLabels, VisPlotband } from '@unovis/vue'
-import { StackedBar } from '@unovis/ts'
+import { ref, computed, onMounted, onBeforeUnmount, watch, nextTick } from 'vue'
+import { useMediaQuery, useElementSize } from '@vueuse/core'
+import { VisSingleContainer, VisTooltip, VisTreemap, VisTreemapSelectors } from '@unovis/vue'
+import { Position, StackedBar, Treemap } from '@unovis/ts'
 import { useEnvParamsStore } from '~/stores/envParamsStore'
 import { useSpeciesStore } from '~/stores/speciesStore'
 import { hasEdnaDataset } from '~/utils/edna'
@@ -51,18 +63,82 @@ const props = defineProps({
   visibleRange: { type: Object as PropType<{ startIndex: number; endIndex: number; total: number } | null>, default: null },
   chartHeight: { type: Number, default: 150 },
   showControls: { type: Boolean, default: true },
+  showModeTabs: { type: Boolean, default: true },
   showYAxis: { type: Boolean, default: true },
-  showTooltip: { type: Boolean, default: true }
+  showTooltip: { type: Boolean, default: true },
+  viewMode: { type: String as PropType<'bar' | 'treemap-standard' | 'treemap-groups' | 'treemap-edibility' | 'treemap-redlist' | 'treemap-visible'>, default: 'bar' }
 })
+const emit = defineEmits<{
+  (e: 'update:viewMode', value: 'bar' | 'treemap-standard' | 'treemap-groups' | 'treemap-edibility' | 'treemap-redlist' | 'treemap-visible'): void
+}>()
 
 // ----- Filtering & Zoom Setup -----
-const zoomLevels = ["100%", "200%", "400%", "800%"]
+const zoomLevels = [1, 2, 4, 8]
 const currentZoomIndex = ref(0)
-const chartWidth = computed(() => zoomLevels[currentZoomIndex.value])
+const chartShellRenderKey = ref(0)
+const chartHostRef = ref<HTMLElement | null>(null)
+const { width: chartHostWidth } = useElementSize(chartHostRef)
+const chartWidth = computed(() => {
+  const baseWidth = Math.max(320, Math.floor(chartHostWidth.value || 0))
+  return Math.floor(baseWidth * zoomLevels[currentZoomIndex.value])
+})
+const viewMode = computed(() => props.viewMode)
+const lastTreemapMode = useState<'treemap-standard' | 'treemap-groups' | 'treemap-edibility' | 'treemap-redlist' | 'treemap-visible'>(
+  'edna-last-treemap-mode',
+  () => 'treemap-groups'
+)
+const chartTypeTabs = [
+  { label: 'Stapeldiagram', value: 'bar', icon: 'fluent:data-bar-vertical-20-regular' },
+  { label: 'Träddiagram', value: 'treemap', icon: 'fluent:data-treemap-20-regular' }
+]
+const chartTypeTab = computed<'bar' | 'treemap'>({
+  get: () => (viewMode.value === 'bar' ? 'bar' : 'treemap'),
+  set: (value) => {
+    if (value === 'bar') {
+      emit('update:viewMode', 'bar')
+      return
+    }
+    if (viewMode.value === 'bar') {
+      emit('update:viewMode', lastTreemapMode.value === 'treemap-standard' ? 'treemap-groups' : lastTreemapMode.value)
+    }
+  }
+})
+const treemapGroupingOptions = [
+  { label: 'Svampgrupper', value: 'treemap-groups', icon: 'i-material-symbols-category-rounded' },
+  { label: 'Matsvamp', value: 'treemap-edibility', icon: 'icon-park-solid:knife-fork' },
+  { label: 'Status', value: 'treemap-redlist', icon: 'i-material-symbols-flag-rounded' },
+  { label: 'Svampar som syns', value: 'treemap-visible', icon: 'i-heroicons-eye' }
+]
+const treemapGroupingMode = computed<'treemap-standard' | 'treemap-groups' | 'treemap-edibility' | 'treemap-redlist' | 'treemap-visible'>({
+  get: () => {
+    if (viewMode.value === 'treemap-standard') return 'treemap-groups'
+    if (viewMode.value === 'treemap-edibility') return 'treemap-edibility'
+    if (viewMode.value === 'treemap-redlist') return 'treemap-redlist'
+    if (viewMode.value === 'treemap-visible') return 'treemap-visible'
+    return 'treemap-groups'
+  },
+  set: (value) => {
+    emit('update:viewMode', value)
+  }
+})
+const treemapWrapperRef = ref<HTMLElement | null>(null)
+const treemapContainerRef = ref<HTMLElement | null>(null)
+let treemapSyncRaf = 0
+let treemapSyncTimer: ReturnType<typeof setTimeout> | null = null
+const treemapTooltipPlacement = ref<Position.Left | Position.Right>(Position.Right)
+const enableTreemapLeafGroupIcons = true
+const activeTreemapMode = computed<'treemap-standard' | 'treemap-groups' | 'treemap-edibility' | 'treemap-redlist' | 'treemap-visible'>(() => {
+  if (viewMode.value === 'treemap-standard') return 'treemap-standard'
+  if (viewMode.value === 'treemap-edibility') return 'treemap-edibility'
+  if (viewMode.value === 'treemap-redlist') return 'treemap-redlist'
+  if (viewMode.value === 'treemap-visible') return 'treemap-visible'
+  return 'treemap-groups'
+})
 
 // ----- Chart Data & Color Setup -----
 const chartData = ref<any[]>([])
 const envStore = useEnvParamsStore()
+const speciesStore = useSpeciesStore()
 function sortData(data: any[]) {
   return data.sort((a, b) => b.sample_plot_count - a.sample_plot_count)
 }
@@ -148,7 +224,7 @@ async function fetchChartData() {
     let jsonData = await response.json()
     jsonData = sortData(jsonData)
     const totalSpecies = jsonData.length
-    const numberOfGrayBars = Math.floor(totalSpecies * 0.1)
+    const numberOfGrayBars = Math.floor(totalSpecies * 0.2)
     const numberOfColorBars = totalSpecies - numberOfGrayBars
     const grayColors = generateColors([82, 82, 82], [212, 212, 212], numberOfGrayBars)
     const rainbowColors = generateRainbowColors(numberOfColorBars)
@@ -287,7 +363,8 @@ function shouldMatchTable(d: any) {
 
 function matchesGroupFilter(d: any) {
   if (!props.gruppFilter.length) return false
-  return props.gruppFilter.includes(d[props.groupKey])
+  const rowGroup = normalizeGroupKey(d?.[props.groupKey])
+  return props.gruppFilter.some((group) => normalizeGroupKey(group) === rowGroup)
 }
 
 const tickFormat = (_: any, i: number) => {
@@ -314,7 +391,468 @@ const labelY = (d: any) => Number(d.sample_plot_count || 0) + labelYOffset.value
 const labelText = () => 'x'
 
 const filteredSortedData = computed(() => sortedChartData.value.filter(d => shouldMatchTable(d)))
-const keyForRow = (d: any) => d?.Scientificname || d?.Commonname || d?.id || d?.ID || ''
+const isVisibleMushroomGroup = (value: string) => {
+  const normalized = normalizeGroupKey(value)
+  return !normalized.includes('skinnsvamp') && !normalized.includes('tryffel')
+}
+const treemapBaseData = computed(() => filteredSortedData.value)
+const getSpeciesStableId = (d: any) => {
+  const scientific = String(d?.Scientificname || '').trim()
+  if (scientific) return scientific
+  const common = String(d?.Commonname || '').trim()
+  if (common) return common
+  return 'Okänd art'
+}
+const keyForRow = (d: any) => getSpeciesStableId(d)
+
+const getTreemapSpeciesLayerKey = (
+  datum: any,
+  mode: 'treemap-standard' | 'treemap-groups' | 'treemap-edibility' | 'treemap-redlist' | 'treemap-visible' = activeTreemapMode.value
+) => {
+  return getSpeciesStableId(datum)
+}
+
+const treemapDatumId = (d: any) => getTreemapSpeciesLayerKey(d, 'treemap-standard')
+
+const treemapLayers = [
+  (d: any) => getTreemapGroupForDatum(d),
+  (d: any) => getTreemapSpeciesLayerKey(d)
+]
+
+const treemapValueAccessor = (d: any) => Number(d?.sample_plot_count || 0)
+
+const treemapPalette = ['#3b82f6', '#10b981', '#f59e0b', '#ef4444', '#8b5cf6', '#06b6d4', '#84cc16', '#e11d48']
+const treemapGroupColorOverrides: Record<string, string> = {
+  ovrigt: '#9ca3af',
+  hattsvamp: '#fb7185',
+  kantarell: '#fbbf24',
+  sopp: '#34d399',
+  taggsvamp: '#38bdf8',
+  fingersvamp: '#a78bfa',
+  skinnsvamp: '#e879f9',
+  skinnsvampar: '#e879f9',
+  skalsvamp: '#fb923c',
+  tryffel: '#a3e635'
+}
+const treemapGroupIconMap: Record<string, string> = {
+  ovrigt: 'ovrigt.webp',
+  hattsvamp: 'hattsvamp.png',
+  kantarell: 'kantarell.webp',
+  sopp: 'sopp.png',
+  taggsvamp: 'taggsvamp.png',
+  fingersvamp: 'fingersvamp.webp',
+  tryffel: 'tryffel.webp',
+  skinnsvamp: 'skinnsvamp.webp',
+  skalsvamp: 'skalsvamp.webp'
+}
+const treemapEdibilityColors: Record<string, string> = {
+  matsvamp: '#facc15',
+  giftsvamp: '#a3e635',
+  ovrigt: '#9ca3af'
+}
+const treemapRedlistColors: Record<string, string> = {
+  lc: '#4ade80',
+  dd: '#DDD',
+  nt: '#F8C6C7',
+  vu: '#EF858F',
+  en: '#EA516D',
+  cr: '#E5014E',
+  re: '#490F2C',
+  ovrigt: '#9ca3af'
+}
+const treemapVisibleColors: Record<string, string> = {
+  'svampar som syns': '#c3a283',
+  'svampar som ar svara att se': '#f2ece2'
+}
+
+const normalizeGroupKey = (value: string) => String(value || '')
+  .toLowerCase()
+  .normalize('NFD')
+  .replace(/\p{Diacritic}+/gu, '')
+
+const getGroupIconUrl = (group: string) => {
+  const normalized = normalizeGroupKey(group)
+  const iconFile = treemapGroupIconMap[normalized] ?? 'default-icon.png'
+  return `/images/svampgrupp/${iconFile}`
+}
+
+const getEdibilityGroup = (datum: any) => {
+  const isEdible = datum?.matsvamp == 1
+  const isPoison = String(datum?.Giftsvamp || '').toLowerCase() === 'x'
+  if (isEdible) return 'Matsvamp'
+  if (isPoison) return 'Giftsvamp'
+  return 'Övrigt'
+}
+
+const getRedlistGroup = (datum: any) => {
+  const status = String(datum?.RL2020kat || '').trim().toUpperCase()
+  const redlistLabelByCode: Record<string, string> = {
+    LC: 'Livskraftig',
+    DD: 'Kunskapsbrist',
+    NT: 'Nära hotad',
+    VU: 'Sårbar',
+    EN: 'Starkt hotad',
+    CR: 'Akut hotad',
+    RE: 'Nationellt utdöd'
+  }
+  if (redlistLabelByCode[status]) return redlistLabelByCode[status]
+  return 'Övrigt'
+}
+
+const getTreemapGroupForDatum = (datum: any, mode = activeTreemapMode.value) => {
+  if (mode === 'treemap-edibility') return getEdibilityGroup(datum)
+  if (mode === 'treemap-redlist') return getRedlistGroup(datum)
+  if (mode === 'treemap-visible') {
+    const groupValue = String(datum?.[props.groupKey] || '')
+    return isVisibleMushroomGroup(groupValue) ? 'Svampar som syns' : 'Svampar som är svåra att se'
+  }
+  return String(datum?.[props.groupKey] || 'övrigt')
+}
+
+const getTreemapGroupNodeKey = (
+  datum: any,
+  mode: 'treemap-standard' | 'treemap-groups' | 'treemap-edibility' | 'treemap-redlist' | 'treemap-visible' = activeTreemapMode.value
+) => {
+  const group = getTreemapGroupForDatum(datum, mode)
+  return `${mode}::${group}`
+}
+
+const getTreemapGroupLabelFromNodeKey = (key: string) => {
+  const raw = String(key || '')
+  const sepIndex = raw.indexOf('::')
+  return sepIndex >= 0 ? raw.slice(sepIndex + 2) : raw
+}
+
+const stableColorIndex = (key: string, modulo: number) => {
+  let hash = 0
+  for (let i = 0; i < key.length; i++) {
+    hash = (hash * 31 + key.charCodeAt(i)) >>> 0
+  }
+  return modulo > 0 ? hash % modulo : 0
+}
+
+const getStableGroupColor = (group: string) => {
+  const normalized = normalizeGroupKey(group)
+  const override = treemapGroupColorOverrides[normalized]
+  if (override) return override
+  return treemapPalette[stableColorIndex(normalized, treemapPalette.length)] ?? '#64748b'
+}
+
+const getTreemapGroupColor = (group: string, mode = activeTreemapMode.value) => {
+  const normalized = normalizeGroupKey(group)
+
+  if (mode === 'treemap-edibility') {
+    return treemapEdibilityColors[normalized] ?? treemapEdibilityColors.ovrigt
+  }
+
+  if (mode === 'treemap-redlist') {
+    const redlistCodeByLabel: Record<string, string> = {
+      livskraftig: 'lc',
+      kunskapsbrist: 'dd',
+      'nara hotad': 'nt',
+      sarbar: 'vu',
+      'starkt hotad': 'en',
+      'akut hotad': 'cr',
+      'nationellt utdod': 're'
+    }
+    const code = redlistCodeByLabel[normalized] ?? normalized
+    return treemapRedlistColors[code] ?? treemapRedlistColors.ovrigt
+  }
+
+  if (mode === 'treemap-visible') {
+    return treemapVisibleColors[normalized] ?? treemapVisibleColors['svampar som syns']
+  }
+
+  return getStableGroupColor(group)
+}
+
+const sortTreemapGroups = (groups: string[], mode = activeTreemapMode.value) => {
+  if (mode === 'treemap-edibility') {
+    const order = ['Matsvamp', 'Giftsvamp', 'Övrigt']
+    return [...groups].sort((a, b) => order.indexOf(a) - order.indexOf(b))
+  }
+  if (mode === 'treemap-redlist') {
+    const order = ['Livskraftig', 'Kunskapsbrist', 'Nära hotad', 'Sårbar', 'Starkt hotad', 'Akut hotad', 'Nationellt utdöd', 'Övrigt']
+    return [...groups].sort((a, b) => order.indexOf(a) - order.indexOf(b))
+  }
+  if (mode === 'treemap-visible') {
+    const order = ['Svampar som syns', 'Svampar som är svåra att se']
+    return [...groups].sort((a, b) => order.indexOf(a) - order.indexOf(b))
+  }
+  return [...groups].sort((a, b) => a.localeCompare(b, 'sv'))
+}
+
+const getTreemapGroupOrder = (group: string, mode = activeTreemapMode.value) => {
+  if (mode === 'treemap-edibility') {
+    const order = ['Matsvamp', 'Giftsvamp', 'Övrigt']
+    const idx = order.indexOf(group)
+    return idx === -1 ? Number.POSITIVE_INFINITY : idx
+  }
+  if (mode === 'treemap-redlist') {
+    const order = ['Livskraftig', 'Kunskapsbrist', 'Nära hotad', 'Sårbar', 'Starkt hotad', 'Akut hotad', 'Nationellt utdöd', 'Övrigt']
+    const idx = order.indexOf(group)
+    return idx === -1 ? Number.POSITIVE_INFINITY : idx
+  }
+  if (mode === 'treemap-visible') {
+    const order = ['Svampar som syns', 'Svampar som är svåra att se']
+    const idx = order.indexOf(group)
+    return idx === -1 ? Number.POSITIVE_INFINITY : idx
+  }
+  if (mode === 'treemap-groups') {
+    const normalized = normalizeGroupKey(group)
+    const order = ['ovrigt', 'hattsvamp', 'kantarell', 'sopp', 'taggsvamp', 'fingersvamp', 'skinnsvamp', 'skalsvamp', 'tryffel']
+    const idx = order.indexOf(normalized)
+    return idx === -1 ? Number.POSITIVE_INFINITY : idx
+  }
+  return Number.POSITIVE_INFINITY
+}
+
+const treemapSourceData = computed(() => {
+  const rows = [...treemapBaseData.value]
+  rows.sort((a, b) => {
+    const valueCmp = Number(b.sample_plot_count || 0) - Number(a.sample_plot_count || 0)
+    if (valueCmp !== 0) return valueCmp
+    return getSpeciesStableId(a).localeCompare(getSpeciesStableId(b), 'sv')
+  })
+  return rows
+})
+
+const visibleTreemapGroups = computed(() => {
+  const mode = activeTreemapMode.value
+  if (mode === 'treemap-standard') return []
+  const names = new Map<string, string>()
+  treemapSourceData.value.forEach((row) => {
+    const groupName = getTreemapGroupForDatum(row, mode)
+    const normalized = normalizeGroupKey(groupName)
+    if (!names.has(normalized)) names.set(normalized, groupName)
+  })
+  return sortTreemapGroups(Array.from(names.values()), mode)
+})
+
+const treemapLegendItems = computed(() =>
+  visibleTreemapGroups.value.map((group) => ({
+    name: capitalizeFirstLetter(group),
+    color: getTreemapGroupColor(group, activeTreemapMode.value)
+  }))
+)
+
+const treemapLayersConfig = computed(() => {
+  const mode = activeTreemapMode.value
+  if (mode === 'treemap-standard') {
+    return [(d: any) => getTreemapSpeciesLayerKey(d, mode)]
+  }
+  return [
+    (d: any) => getTreemapGroupNodeKey(d, mode),
+    (d: any) => getTreemapSpeciesLayerKey(d, mode)
+  ]
+})
+
+const treemapSpeciesColorByKey = computed(() => {
+  const map = new Map<string, string>()
+  updatedChartData.value.forEach((d) => {
+    map.set(keyForRow(d), d.barColor || d.fillColor || '#94a3b8')
+  })
+  return map
+})
+
+const treemapTileColorConfig = computed(() => {
+  const mode = activeTreemapMode.value
+  const selectedScientificName = String((speciesStore.selectedSpecies as any)?.Scientificname || '').toLowerCase()
+  const hasSelectedSpecies = speciesStore.selectedSpecies !== null
+  return (node: any) => {
+    const datum = node?.data?.datum
+    const nodeScientificName = String(datum?.Scientificname || '').toLowerCase()
+    if (hasSelectedSpecies && selectedScientificName && nodeScientificName === selectedScientificName) {
+      return '#b1835e'
+    }
+
+    if (mode === 'treemap-standard') {
+      if (!datum) return undefined
+      return treemapSpeciesColorByKey.value.get(keyForRow(datum)) ?? '#94a3b8'
+    }
+    if (mode === 'treemap-redlist' && node?.depth === 2) {
+      if (datum?.SIGNAL_art === 'S') return '#99f6e4'
+      return undefined
+    }
+    if (node?.depth !== 1) return undefined
+    const groupKey = getTreemapGroupLabelFromNodeKey(String(node?.data?.key || 'övrigt'))
+    return getTreemapGroupColor(groupKey, mode)
+  }
+})
+
+const treemapTileLabelConfig = computed(() => (node: any) => {
+  if (!node) return ''
+  const tileWidth = Math.max(0, Number(node?.x1 ?? 0) - Number(node?.x0 ?? 0))
+  const tileHeight = Math.max(0, Number(node?.y1 ?? 0) - Number(node?.y0 ?? 0))
+  const canShowLeafIcon = enableTreemapLeafGroupIcons && tileWidth >= 18 && tileHeight >= 18
+  if (activeTreemapMode.value === 'treemap-standard') {
+    // Keep leaf label nodes in DOM so we can replace text with group icons.
+    return node.depth === 1 && canShowLeafIcon ? ' ' : ''
+  }
+  if (node.depth === 1) {
+    const speciesCount = Array.isArray(node?.children)
+      ? node.children.filter((child: any) => child?.depth === 2).length
+      : 0
+    const groupLabel = getTreemapGroupLabelFromNodeKey(String(node?.data?.key || 'Övrigt'))
+    return `${capitalizeFirstLetter(groupLabel)} (${speciesCount} arter)`
+  }
+  // Keep leaf label nodes in DOM so we can replace text with group icons.
+  return canShowLeafIcon ? ' ' : ''
+})
+
+const formatTreemapValue = (value: number) =>
+  `${Number(value || 0).toLocaleString('sv-SE')} skogar`
+
+const getSpeciesBadgesHtml = (datum: any) => {
+  const matsvampBadge = datum.matsvamp == 1
+    ? '<div class="font-md bg-yellow-50 border border-yellow-200 text-yellow-500 text-xs rounded-md py-0.5 px-1">Matsvamp</div>'
+    : ''
+  const giftsvampBadge = String(datum.Giftsvamp || '').toLowerCase() === 'x'
+    ? '<div class="font-md bg-lime-50 border border-lime-200 text-lime-500 text-xs rounded-md py-0.5 px-1">Giftsvamp</div>'
+    : ''
+  const rlMapping: Record<string, string> = {
+    NT: 'Nära hotad',
+    EN: 'Starkt hotad',
+    VU: 'Sårbar',
+    CR: 'Akut hotad',
+    DD: 'Kunskapsbrist',
+    RE: 'Nationellt utdöd'
+  }
+  const rl = String(datum.RL2020kat || '').toUpperCase()
+  const rodlisteBadge = rlMapping[rl]
+    ? `<div class="font-md bg-rose-50 border border-rose-200 text-rose-500 text-xs rounded-md py-0.5 px-1">${rlMapping[rl]}</div>`
+    : ''
+  const signalartBadge = datum.SIGNAL_art === 'S'
+    ? '<div class="font-md bg-teal-50 border border-teal-200 text-teal-500 text-xs rounded-md py-0.5 px-1">Signalart</div>'
+    : ''
+
+  return `${matsvampBadge}${giftsvampBadge}${rodlisteBadge}${signalartBadge}`
+}
+
+const buildSpeciesTooltipHtml = (datum: any, extraMetaLine = '') => {
+  const commonName = capitalizeFirstLetter(String(datum?.Commonname || 'Okänd art'))
+  const scientificName = String(datum?.Scientificname || '')
+  const count = Number(datum?.sample_plot_count || 0)
+  const envCount = datum?.sample_env_count ?? '?'
+  const groupIcon = getGroupIconUrl(String(datum?.[props.groupKey] || 'övrigt'))
+  const badges = getSpeciesBadgesHtml(datum)
+
+  return `
+    <div class="p-2">
+      <img src="${groupIcon}" class="h-5 mb-1" />
+      <div class="text-sm flex gap-1">
+        <strong>${commonName}</strong> <em>${scientificName}</em>
+      </div>
+      <div class="text-sm text-neutral-500">
+        Påträffad i ${count} av ${envCount} skogar
+      </div>
+      ${extraMetaLine}
+      <div class="flex gap-1 mt-1">
+        ${badges}
+      </div>
+    </div>
+  `
+}
+
+const treemapTooltipTriggersConfig = computed(() => {
+  const mode = activeTreemapMode.value
+  const content = (node: any) => {
+    const datum = node?.data?.datum
+    if (!datum) {
+      const groupName = getTreemapGroupLabelFromNodeKey(String(node?.data?.key || 'Övrigt'))
+      return `<div class="p-2 text-sm"><strong>${capitalizeFirstLetter(groupName)}</strong></div>`
+    }
+
+    const groupName = getTreemapGroupForDatum(datum, mode)
+    const extraMetaLine = mode === 'treemap-redlist'
+      ? `<div class="text-xs text-neutral-500 mt-1">Rödlistestatus: ${capitalizeFirstLetter(groupName)}</div>`
+      : ''
+    return buildSpeciesTooltipHtml(
+      datum,
+      extraMetaLine
+    )
+  }
+
+  return {
+    [Treemap.selectors.tile]: content
+  }
+})
+
+const applyTreemapLeafGroupIcons = () => {
+  if (!enableTreemapLeafGroupIcons) return
+  const root = treemapWrapperRef.value
+  if (!root) return
+
+  root.querySelectorAll('.treemap-leaf-group-icon').forEach((node) => node.remove())
+
+  const labels = Array.from(
+    root.querySelectorAll(`.${VisTreemapSelectors.label}`)
+  ) as SVGTextElement[]
+
+  const leafDepth = activeTreemapMode.value === 'treemap-standard' ? 1 : 2
+
+  labels.forEach((labelEl) => {
+    labelEl.style.opacity = ''
+  })
+
+  labels.forEach((labelEl) => {
+    const node = (labelEl as any).__data__
+    if (!node || node.depth !== leafDepth) return
+    const tileWidth = Math.max(0, Number(node?.x1 ?? 0) - Number(node?.x0 ?? 0))
+    const tileHeight = Math.max(0, Number(node?.y1 ?? 0) - Number(node?.y0 ?? 0))
+    if (tileWidth < 18 || tileHeight < 18) return
+
+    const datum = node?.data?.datum
+    const groupName = String(datum?.[props.groupKey] || '')
+    const iconHref = getGroupIconUrl(groupName)
+    const x = Number(labelEl.getAttribute('x') ?? (node.x0 + 6))
+    const y = Number(labelEl.getAttribute('y') ?? (node.y0 + 10))
+
+    labelEl.style.opacity = '0'
+
+    const imageNode = document.createElementNS('http://www.w3.org/2000/svg', 'image')
+    imageNode.setAttribute('href', iconHref)
+    imageNode.setAttributeNS('http://www.w3.org/1999/xlink', 'xlink:href', iconHref)
+    imageNode.setAttribute('x', String(x))
+    imageNode.setAttribute('y', String(Math.max(0, y - 12)))
+    imageNode.setAttribute('width', '14')
+    imageNode.setAttribute('height', '14')
+    imageNode.setAttribute('class', 'treemap-leaf-group-icon')
+    imageNode.setAttribute('preserveAspectRatio', 'xMidYMid meet')
+    imageNode.setAttribute('pointer-events', 'none')
+
+    labelEl.parentElement?.appendChild(imageNode)
+  })
+}
+
+const scheduleTreemapIconSync = async () => {
+  if (!enableTreemapLeafGroupIcons) return
+  await nextTick()
+  if (treemapSyncRaf) cancelAnimationFrame(treemapSyncRaf)
+  treemapSyncRaf = requestAnimationFrame(() => {
+    applyTreemapLeafGroupIcons()
+    setTimeout(() => applyTreemapLeafGroupIcons(), 180)
+  })
+}
+
+function updateTreemapTooltipPlacementFromEvent(event: MouseEvent) {
+  const rect = treemapContainerRef.value?.getBoundingClientRect()
+  if (!rect || !Number.isFinite(event.clientX)) return
+  const relativeX = event.clientX - rect.left
+  treemapTooltipPlacement.value = relativeX > rect.width * 0.55 ? Position.Left : Position.Right
+}
+
+const treemapEventsWithTooltipFlip = {
+  [Treemap.selectors.tile]: {
+    click: (node: any) => {
+      const datum = node?.data?.datum
+      if (datum) speciesStore.selectSpecies(datum, 'edna')
+    },
+    mousemove: (_d: any, event: MouseEvent) => {
+      updateTreemapTooltipPlacementFromEvent(event)
+    }
+  }
+}
 
 const plotBandRange = computed(() => {
   const range = props.visibleRange
@@ -331,62 +869,34 @@ const plotBandRange = computed(() => {
 })
 
 // ----- Tooltip Trigger & Template -----
-// We use a reactive variable to store the current hovered datum.
-const currentHoveredDatum = ref<any>(null)
 function tooltipTemplate(d: any): string {
   if (!d) {
-    currentHoveredDatum.value = null
     return '<div class="p-2 text-sm text-neutral-500">Ingen data</div>'
   }
-  // Update the reactive variable with the current datum
   currentHoveredDatum.value = d
-  // Return the tooltip HTML (badges, image, etc.)
-  const matsvampBadge = d.matsvamp == 1
-    ? `<div class="font-md bg-yellow-50 border border-yellow-200 text-yellow-500 text-xs rounded-md py-0.5 px-1">Matsvamp</div>`
-    : ""
-  const giftsvampBadge = d.Giftsvamp === "x"
-    ? `<div class="font-md bg-lime-50 border border-lime-200 text-lime-500 text-xs rounded-md py-0.5 px-1">Giftsvamp</div>`
-    : ""
-  const rlMapping: Record<string, string> = {
-    NT: "Nära hotad",
-    EN: "Starkt hotad",
-    VU: "Sårbar",
-    CR: "Akut hotad",
-    DD: "Kunskapsbrist",
-    RE: "Nationellt utdöd",
-  }
-  const rodlisteBadge = rlMapping[d["RL2020kat"]]
-    ? `<div class="font-md bg-rose-50 border border-rose-200 text-rose-500 text-xs rounded-md py-0.5 px-1">${rlMapping[d["RL2020kat"]]}</div>`
-    : ""
-  const signalartBadge = d["SIGNAL_art"] === "S"
-    ? `<div class="font-md bg-teal-50 border border-teal-200 text-teal-500 text-xs rounded-md py-0.5 px-1">Signalarter</div>`
-    : ""
-  return `
-    <div class="p-2">
-      <img src="/images/svampgrupp/${d["Svamp-grupp-släkte"]}.png" class="h-5 mb-1" />
-      <div class="text-sm flex gap-1">
-        <strong>${capitalizeFirstLetter(d.Commonname)}</strong> <em>${capitalizeFirstLetter(d.Scientificname)}</em>
-      </div>
-      <div class="text-sm text-neutral-500">
-        Påträffad i ${d.sample_plot_count} av ${d.sample_env_count} skogar
-      </div>
-      <div class="flex gap-1 mt-1">
-        ${matsvampBadge} ${giftsvampBadge} ${rodlisteBadge} ${signalartBadge}
-      </div>
-    </div>
-  `
+  return buildSpeciesTooltipHtml(d)
 }
-// For convenience we define triggers using our tooltipTemplate.
 const triggers = { [StackedBar.selectors.bar]: tooltipTemplate }
-
+const currentHoveredDatum = ref<any | null>(null)
+const barEvents = {
+  [StackedBar.selectors.bar]: {
+    click: (datum: any) => {
+      if (datum) {
+        speciesStore.selectSpecies(datum, 'edna')
+      }
+    }
+  }
+}
 // ----- Custom Bar Color Based on Selected Filters -----
 const updatedChartData = computed(() => {
   const defaultGray = '#d4d4d4'
+  const selectedScientificName = (speciesStore.selectedSpecies as any)?.Scientificname
   return sortedChartData.value.map(d => {
     // Highlight selected species only while the slide-over is open
     if (
       isSlideOverOpen.value &&
-      d.Scientificname === speciesStore.selectedSpecies?.Scientificname
+      selectedScientificName &&
+      d.Scientificname === selectedScientificName
     ) {
       return { ...d, barColor: '#b1835e' }
     }
@@ -426,7 +936,7 @@ const updatedChartData = computed(() => {
       : false
 
     const matchGroup = groupActive
-      ? props.gruppFilter.includes(d[props.groupKey])
+      ? props.gruppFilter.some((group) => normalizeGroupKey(group) === normalizeGroupKey(d?.[props.groupKey]))
       : false
 
     // 3) If any Status filter is on, handle Status‐first logic:
@@ -499,6 +1009,41 @@ watch(updatedChartData, (newVal) => {
   }
 })
 
+watch(viewMode, (mode, prevMode) => {
+  if (mode !== 'bar' && mode !== 'treemap-standard') {
+    lastTreemapMode.value = mode
+  }
+  const isCrossingBarBoundary = (mode === 'bar') !== (prevMode === 'bar')
+  if (isCrossingBarBoundary) {
+    if (treemapSyncRaf) cancelAnimationFrame(treemapSyncRaf)
+    if (treemapSyncTimer) clearTimeout(treemapSyncTimer)
+    chartShellRenderKey.value += 1
+  }
+  if (mode !== 'bar') {
+    scheduleTreemapIconSync()
+    // Re-run after animation settles to avoid mutating DOM during treemap transition.
+    if (treemapSyncTimer) clearTimeout(treemapSyncTimer)
+    treemapSyncTimer = setTimeout(() => {
+      scheduleTreemapIconSync()
+      treemapSyncTimer = null
+    }, 760)
+  }
+})
+
+watch(
+  [activeTreemapMode, treemapSourceData],
+  () => {
+    if (viewMode.value === 'bar') return
+    scheduleTreemapIconSync()
+    if (treemapSyncTimer) clearTimeout(treemapSyncTimer)
+    treemapSyncTimer = setTimeout(() => {
+      scheduleTreemapIconSync()
+      treemapSyncTimer = null
+    }, 760)
+  },
+  { immediate: true, deep: true, flush: 'post' }
+)
+
 
 // ----- Zoom Functions -----
 function zoomIn() {
@@ -513,19 +1058,34 @@ function zoomOut() {
 }
 
 // ----- Sidebar Trigger on Chart Click -----
-const speciesStore = useSpeciesStore()
 const isSlideOverOpen = computed(() => speciesStore.selectedSpecies !== null)
 
 // Detect mobile screens (< md)
 const isMobile = useMediaQuery('(max-width: 767px)')
 
-function handleChartClick(event: MouseEvent) {
+function handleChartClick() {
+  if (viewMode.value !== 'bar') return
   if (currentHoveredDatum.value) {
-    speciesStore.selectSpecies(currentHoveredDatum.value, "edna")
-  } else {
-    console.log("No datum available from tooltip.")
+    speciesStore.selectSpecies(currentHoveredDatum.value, 'edna')
   }
 }
+
+onMounted(() => {
+  scheduleTreemapIconSync()
+})
+
+watch(
+  () => treemapWrapperRef.value,
+  () => {
+    scheduleTreemapIconSync()
+  },
+  { flush: 'post' }
+)
+
+onBeforeUnmount(() => {
+  if (treemapSyncRaf) cancelAnimationFrame(treemapSyncRaf)
+  if (treemapSyncTimer) clearTimeout(treemapSyncTimer)
+})
 </script>
 
 <style scoped>

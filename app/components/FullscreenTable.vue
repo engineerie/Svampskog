@@ -29,7 +29,10 @@
         :tableKey="tableKey" @update:visibleRange="tableVisibleRange = $event"
         :search-term="searchTerm" @update:searchTerm="value => emit('update:searchTerm', value)"
         :filterEdible="filterEdible" :filterPoison="filterPoison"
-        :column-visibility-overrides="columnVisibilityOverrides" />
+        :column-visibility-overrides="columnVisibilityOverrides"
+        :externalSvampFilter="externalSvampFilter"
+        :externalStatusFilter="externalStatusFilter"
+        :externalGruppFilter="externalGruppFilter" />
     </transition>
   </UCard>
 </template>
@@ -59,7 +62,10 @@ const props = defineProps({
   tableKey: { type: String, default: '' },
   filterEdible: { type: Boolean, default: false },
   filterPoison: { type: Boolean, default: false },
-  columnVisibilityOverrides: { type: Object, default: () => ({}) }
+  columnVisibilityOverrides: { type: Object, default: () => ({}) },
+  externalSvampFilter: { type: Array, default: undefined },
+  externalStatusFilter: { type: Array, default: undefined },
+  externalGruppFilter: { type: Array, default: undefined }
 });
 
 const emit = defineEmits(['enlarge', 'update:searchTerm']);
