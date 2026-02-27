@@ -156,11 +156,11 @@
     <div v-if="filteredData" :class="[isNormalView ? '' : '']">
       <div class="">
 
-        <UTable :key="tableRenderKey" ref="table" v-model:column-visibility="columnVisibility" v-model:pagination="pagination"
+          <UTable :key="tableRenderKey" ref="table" v-model:column-visibility="columnVisibility" v-model:pagination="pagination"
           :data="displayedData" :columns="columns" sticky :loading="isLoading" v-model:sorting="sorting"
           :grouping="tableGrouping" :grouping-options="groupingOptions"
           @select="selectRow" :autoResetAll="false" :pagination-options="(isMobile && !paginationEnabled)
-            ? false
+            ? undefined
             : (paginationEnabled && !isTableGroupingActive
               ? { getPaginationRowModel: getPaginationRowModel() }
               : undefined)" :class="{ '': isNormalView }" :ui="tableUi" class="rounded-sm " />

@@ -625,6 +625,7 @@ const tabSize = computed(() => windowWidth.value >= 768 ? 'md' : 'md');
 const isMobile = computed(() => windowWidth.value < 768)
 const tabOrder = ['dna', 'knowledge'];
 const contentTransitionName = computed(() => {
+  if (isMobile.value) return 'fade';
   if (activeTab.value === previousTab.value) return 'slide-right-fade';
   const fromIndex = tabOrder.indexOf(previousTab.value);
   const toIndex = tabOrder.indexOf(activeTab.value);
@@ -747,7 +748,7 @@ const isEdnaExpanded = computed(() => props.activeView === 'FullScreenEdna')
 const currentViewLabel = computed(() => viewLabels[props.activeView ?? ''] ?? '')
 
 function handleCloseDetail() {
-  activeTab.value = 'knowledge'
+  activeTab.value = isMobile.value ? 'dna' : 'knowledge'
   emit('closeView')
 }
 

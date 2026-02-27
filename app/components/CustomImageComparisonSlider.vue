@@ -37,7 +37,7 @@
       zIndex: 20,
     }" @mousedown="startDrag" @touchstart="startDrag">
       <div class="flex h-full relative">
-        <div class="absolute text-end  right-3 top-2">
+        <div class="absolute text-end  right-3 bottom-2" v-if="!isMobile">
           <!-- <UBadge v-if="!isMobile" size="md"
             class="backdrop-blur-xl bg-neutral-100/0 text-neutral-100 h-fit whitespace-nowrap mb-0.5">{{
               frameworkLabel }}</UBadge> -->
@@ -46,7 +46,7 @@
         </div>
 
         <div class="h-full w-1.5 bg-neutral-50/90 backdrop-blur-md inset-shadow-sm inset-shadow-neutral-300"></div>
-        <div class="absolute top-2 left-3">
+        <div class="absolute bottom-2 left-3" v-if="!isMobile">
           <!-- <UBadge v-if="!isMobile" size="md"
             class="backdrop-blur-xl bg-neutral-100/0 text-neutral-100 h-fit whitespace-nowrap mb-0.5">{{
               frameworkLabel2 }}</UBadge> -->
