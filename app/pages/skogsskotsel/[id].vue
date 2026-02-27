@@ -401,8 +401,10 @@
                                 size="xl" class="cursor-pointer ring-muted/50"
                                 trailing-icon="i-heroicons-chevron-down-20-solid" />
                             <template #content>
-                                <div class=" py-1 min-w-60 max-w-110">
-                                    <div v-for="option in frameworkOptions" :key="option.value" class="px-2">
+                                <div class="relative py-1 min-w-60 max-w-110">
+                                    <span
+                                        class="pointer-events-none absolute left-2 top-2 bottom-2 w-0.5 rounded-full bg-linear-to-b from-emerald-500 via-amber-400 to-rose-500" />
+                                    <div v-for="option in frameworkOptions" :key="option.value" class="pl-4 pr-2">
                                         <div class="hover:bg-neutral-50 p-3 w-full justify-between flex items-center gap-4 rounded-md my-1 cursor-pointer"
                                             :class="{ 'bg-neutral-100': option.value === selectedFrameworkIndex }"
                                             @click="selectedFrameworkIndex = option.value; frameworkPopoverOpen = false">
@@ -583,19 +585,25 @@
                                     </div>
                                     <USeparator class="my-2 w-full" />
 
-                                    <div v-for="option in compareFrameworkOptions" :key="option.value" class="px-2">
-                                        <div class="hover:bg-neutral-50 p-3 w-full justify-between flex items-center gap-4 rounded-md my-1 cursor-pointer"
-                                            :class="{ 'bg-neutral-100': option.value === selectedCompareFrameworkIndex }"
-                                            @click="setCompareFrameworkIndex(option.value); compareFrameworkPopoverOpen = false">
-                                            <div>
-                                                <h1 class="text-md font-semibold text-neutral-900">{{
-                                                    option.label }}</h1>
-                                                <p class="text-sm text-neutral-500 font-light">{{
-                                                    option.description || '' }}</p>
-                                            </div>
-                                            <div class="size-10 flex justify-center items-center bg-muted rounded-md">
-                                                <UIcon v-if="option.icon" :name="option.icon" />
-                                                <UIcon v-else name="i-heroicons-photo" />
+                                    <div class="relative py-1">
+                                        <span
+                                            class="pointer-events-none absolute left-2 top-2 bottom-2 w-0.5 rounded-full bg-linear-to-b from-emerald-500 via-amber-400 to-rose-500" />
+                                        <div v-for="option in compareFrameworkOptions" :key="option.value"
+                                            class="pl-4 pr-2">
+                                            <div class="hover:bg-neutral-50 p-3 w-full justify-between flex items-center gap-4 rounded-md my-1 cursor-pointer"
+                                                :class="{ 'bg-neutral-100': option.value === selectedCompareFrameworkIndex }"
+                                                @click="setCompareFrameworkIndex(option.value); compareFrameworkPopoverOpen = false">
+                                                <div>
+                                                    <h1 class="text-md font-semibold text-neutral-900">{{
+                                                        option.label }}</h1>
+                                                    <p class="text-sm text-neutral-500 font-light">{{
+                                                        option.description || '' }}</p>
+                                                </div>
+                                                <div
+                                                    class="size-10 flex justify-center items-center bg-muted rounded-md">
+                                                    <UIcon v-if="option.icon" :name="option.icon" />
+                                                    <UIcon v-else name="i-heroicons-photo" />
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
@@ -677,6 +685,33 @@
                                                                         </template>
                                                                     </template>
                                                                 </div>
+                                                                <div v-if="compareLeftMarkerBadges.length"
+                                                                    class="absolute top-2 left-2 z-20 flex flex-col gap-1">
+                                                                    <template v-for="badge in compareLeftMarkerBadges"
+                                                                        :key="`left-marker-badge-${badge.key}`">
+                                                                        <UPopover v-if="badge.description" mode="hover"
+                                                                            :content="{ side: 'right', align: 'start' }">
+                                                                            <div
+                                                                                class="inline-flex w-fit cursor-default items-center gap-1.5 rounded-md bg-neutral-950/55 px-2.5 py-1.5 text-sm text-neutral-50 backdrop-blur-xs pointer-events-auto">
+                                                                                <UIcon :name="badge.icon"
+                                                                                    class="size-4" />
+                                                                                <span class="leading-none">{{ badge.label
+                                                                                }}</span>
+                                                                            </div>
+                                                                            <template #content>
+                                                                                <p
+                                                                                    class="max-w-64 p-2 text-sm text-neutral-700">
+                                                                                    {{ badge.description }}
+                                                                                </p>
+                                                                            </template>
+                                                                        </UPopover>
+                                                                        <div v-else
+                                                                            class="inline-flex w-fit cursor-default items-center gap-1.5 rounded-md bg-neutral-950/55 px-2.5 py-1.5 text-sm text-neutral-50 backdrop-blur-xs pointer-events-auto">
+                                                                            <UIcon :name="badge.icon" class="size-4" />
+                                                                            <span class="leading-none">{{ badge.label }}</span>
+                                                                        </div>
+                                                                    </template>
+                                                                </div>
                                                                 <NaturvardsOverlayLayer
                                                                     :visible="isMarkerOverlayVisible('naturvardsarter')"
                                                                     :framework="selectedFrameworkKey"
@@ -725,6 +760,33 @@
                                                                         </template>
                                                                     </template>
                                                                 </div>
+                                                                <div v-if="compareRightMarkerBadges.length"
+                                                                    class="absolute top-2 left-2 z-20 flex flex-col gap-1">
+                                                                    <template v-for="badge in compareRightMarkerBadges"
+                                                                        :key="`right-marker-badge-${badge.key}`">
+                                                                        <UPopover v-if="badge.description" mode="hover"
+                                                                            :content="{ side: 'right', align: 'start' }">
+                                                                            <div
+                                                                                class="inline-flex w-fit cursor-default items-center gap-1.5 rounded-md bg-neutral-950/55 px-2.5 py-1.5 text-sm text-neutral-50 backdrop-blur-xs pointer-events-auto">
+                                                                                <UIcon :name="badge.icon"
+                                                                                    class="size-4" />
+                                                                                <span class="leading-none">{{ badge.label
+                                                                                }}</span>
+                                                                            </div>
+                                                                            <template #content>
+                                                                                <p
+                                                                                    class="max-w-64 p-2 text-sm text-neutral-700">
+                                                                                    {{ badge.description }}
+                                                                                </p>
+                                                                            </template>
+                                                                        </UPopover>
+                                                                        <div v-else
+                                                                            class="inline-flex w-fit cursor-default items-center gap-1.5 rounded-md bg-neutral-950/55 px-2.5 py-1.5 text-sm text-neutral-50 backdrop-blur-xs pointer-events-auto">
+                                                                            <UIcon :name="badge.icon" class="size-4" />
+                                                                            <span class="leading-none">{{ badge.label }}</span>
+                                                                        </div>
+                                                                    </template>
+                                                                </div>
                                                                 <NaturvardsOverlayLayer
                                                                     :visible="isMarkerOverlayVisible('naturvardsarter')"
                                                                     :framework="compareMode === 'methods' ? compareFrameworkKey : selectedFrameworkKey"
@@ -770,6 +832,30 @@
                                                                     {{ card.title }}
                                                                 </div>
                                                             </template>
+                                                        </template>
+                                                    </div>
+                                                    <div v-if="singleImageMarkerBadges.length"
+                                                        class="absolute top-2 left-2 z-20 flex flex-col gap-1">
+                                                        <template v-for="badge in singleImageMarkerBadges"
+                                                            :key="`single-marker-badge-${badge.key}`">
+                                                            <UPopover v-if="badge.description" mode="hover"
+                                                                :content="{ side: 'right', align: 'start' }">
+                                                                <div
+                                                                    class="inline-flex w-fit cursor-default items-center gap-1.5 rounded-md bg-neutral-950/55 px-2.5 py-1.5 text-sm text-neutral-50 backdrop-blur-xs pointer-events-auto">
+                                                                    <UIcon :name="badge.icon" class="size-4" />
+                                                                    <span class="leading-none">{{ badge.label }}</span>
+                                                                </div>
+                                                                <template #content>
+                                                                    <p class="max-w-64 p-2 text-sm text-neutral-700">
+                                                                        {{ badge.description }}
+                                                                    </p>
+                                                                </template>
+                                                            </UPopover>
+                                                            <div v-else
+                                                                class="inline-flex w-fit cursor-default items-center gap-1.5 rounded-md bg-neutral-950/55 px-2.5 py-1.5 text-sm text-neutral-50 backdrop-blur-xs pointer-events-auto">
+                                                                <UIcon :name="badge.icon" class="size-4" />
+                                                                <span class="leading-none">{{ badge.label }}</span>
+                                                            </div>
                                                         </template>
                                                     </div>
                                                     <NaturvardsOverlayLayer
@@ -2124,6 +2210,148 @@ const markerCardsCompare = computed(() => {
     if (!otherMethodId) return []
     return buildMarkerCardsFor(otherMethodId, comparisonTimelineItem.value?.tid)
 })
+
+type ActiveMarkerBadge = {
+    key: string
+    icon: string
+    label: string
+    description?: string
+}
+
+const panelCardsLeft = computed(() => compareMode.value === 'beforeAfter' ? markerCardsBefore.value : markerCards.value)
+const panelCardsRight = computed(() => compareMode.value === 'methods' ? markerCardsCompare.value : markerCards.value)
+
+const hasActiveMarkerInCards = (cards: Array<{ key: string; overlayAvailable?: boolean }>, key: string) =>
+    cards.some(card => card.key === key && card.overlayAvailable !== false) && isMarkerOverlayVisible(key)
+
+const buildActiveMarkerBadges = (
+    cards: Array<{ key: string; overlayAvailable?: boolean }>,
+    timeLabel?: string,
+    startskog?: string
+): ActiveMarkerBadge[] => {
+    const badges: ActiveMarkerBadge[] = []
+    const timeToken = normalizeTimeToken(timeLabel ?? '')
+    const numericTime = Number(timeToken)
+    const hasNumericTime = !Number.isNaN(numericTime)
+    const isNaturskog = startskog === 'naturskog'
+
+    const showRootCircle = (
+        hasActiveMarkerInCards(cards, 'hansyn_enstaka') ||
+        hasActiveMarkerInCards(cards, 'hansyn_yta') ||
+        hasActiveMarkerInCards(cards, 'rottackeSkarmtrad') ||
+        hasActiveMarkerInCards(cards, 'seedTree')
+    )
+    if (showRootCircle) {
+        badges.push({
+            key: 'root-circle',
+            icon: 'i-fluent-emoji-high-contrast-red-circle',
+            label: 'Yta med rötter',
+        })
+    }
+
+    if (hasActiveMarkerInCards(cards, 'hogstubbar')) {
+        badges.push({
+            key: 'hogstubbar',
+            icon: 'i-roentgen-wood',
+            label: 'Högstubbar',
+        })
+    }
+
+    if (hasActiveMarkerInCards(cards, 'kanteffekt') || hasActiveMarkerInCards(cards, 'rottackeBladning')) {
+        badges.push({
+            key: 'root-square',
+            icon: 'i-fluent-emoji-high-contrast-red-square',
+            label: 'Yta med rötter',
+        })
+    }
+
+    if (isBestandsgransVisible.value) {
+        badges.push({
+            key: 'bestandsgrans',
+            icon: 'i-fluent-emoji-high-contrast-white-flag',
+            label: 'Beståndsgräns',
+        })
+    }
+
+    if (hasActiveMarkerInCards(cards, 'naturvardsarter')) {
+        badges.push({
+            key: 'naturvardsarter',
+            icon: 'i-material-symbols-award-star-outline-rounded',
+            label: 'Naturvårdssvamp',
+            description: 'Naturvårdsart individ',
+        })
+
+        const isAfterFelling = timeToken === 'efter' || (hasNumericTime && numericTime >= 10)
+        if (isAfterFelling) {
+            badges.push({
+                key: 'naturvardsarter-avverkning',
+                icon: 'i-fluent-emoji-high-contrast-carpentry-saw',
+                label: 'Avverkning',
+                description: 'Svampen har tynat bort och dött efter att träd avverkats.',
+            })
+        }
+
+        if (hasNumericTime && numericTime >= 20) {
+            badges.push({
+                key: 'naturvardsarter-sjalvdod',
+                icon: 'i-tabler-mushroom-off',
+                label: 'Självdöd/utkonkurrerad',
+                description: 'Svampen har dött av ålder, konkurrens eller annan orsak.',
+            })
+        }
+
+        if (hasNumericTime && numericTime >= 50) {
+            badges.push({
+                key: 'naturvardsarter-sporer-hansyn',
+                icon: 'i-mingcute-floating-dust-line',
+                label: 'Sporer',
+                description: 'Har etablerats med sporer från svamp som överlevt vid hänsynsträd.',
+            })
+        }
+
+        if (hasNumericTime && numericTime >= 50 && isNaturskog) {
+            badges.push({
+                key: 'naturvardsarter-flyttat-sig',
+                icon: 'i-heroicons-arrow-down-right-solid',
+                label: 'Flyttat sig',
+                description: 'Svampen har flyttat sig genom att mycel har växt och expanderat.',
+            })
+        }
+
+        if (hasNumericTime && numericTime >= 80 && isNaturskog) {
+            badges.push({
+                key: 'naturvardsarter-sporer-omgivning',
+                icon: 'i-fluent-weather-duststorm-20-regular',
+                label: 'Sporer',
+                description: 'Har etablerats med sporer spridda från närliggande skogar.',
+            })
+        }
+    }
+
+    return badges
+}
+
+const singleImageMarkerBadges = computed(() =>
+    buildActiveMarkerBadges(
+        markerCards.value,
+        currentTimelineItem.value?.tid,
+        selectedStartskogTab.value
+    )
+)
+const compareLeftMarkerBadges = computed(() =>
+    buildActiveMarkerBadges(
+        panelCardsLeft.value,
+        compareMode.value === 'beforeAfter' ? 'innan' : timelineItems.value[activeTimelineIndex.value]?.tid,
+        selectedStartskogTab.value
+    )
+)
+const compareRightMarkerBadges = computed(() =>
+    buildActiveMarkerBadges(
+        panelCardsRight.value,
+        compareMode.value === 'methods' ? comparisonTimelineItem.value?.tid : timelineItems.value[activeTimelineIndex.value]?.tid,
+        selectedStartskogTab.value
+    )
+)
 
 const markerLibraryColumns = [
     { accessorKey: 'icon', id: 'icon' },
