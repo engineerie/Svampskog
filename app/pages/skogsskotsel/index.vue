@@ -109,12 +109,6 @@ import { ref, computed, watch, nextTick, onMounted, onBeforeUnmount } from 'vue'
 import { useMediaQuery } from '@vueuse/core'
 import { useAsyncData, navigateTo } from '#app'
 
-definePageMeta({
-    scrollToTop: true,
-    pageTransition: false,
-    key: () => 'skogsskotsel-index',
-})
-
 const methodImage = (method: any, variant: 'thumb' | 'card' | 'detail') => {
     const src = method?.image ?? '';
     const base = src.split('/').pop()?.split('.')[0] ?? '';

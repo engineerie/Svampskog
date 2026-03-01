@@ -27,9 +27,6 @@ export default defineNuxtConfig({
   //   },
   // },
 
-  app: {
-    pageTransition: { name: "page", mode: "out-in" },
-  },
   studio: {
     repository: {
       provider: "github",
