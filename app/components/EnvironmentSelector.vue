@@ -27,13 +27,14 @@
                   </div>
                 </template>
               </USelect>
-              <div class="grid grid-cols-2 gap-2 mt-1 mb-2">
-                <UButton label="DNA-data" size="xl" trailing :icon="restrictionEnabled ? 'mdi:lock' : 'mdi:lock-open'"
-                  @click="toggleRestriction" variant="subtle" :color="restrictionEnabled ? 'secondary' : 'neutral'" />
+              <div class="flex flex-col gap-2 mt-1 mb-2">
+                <UButton class="justify-center" label="DNA-data" size="xl" trailing
+                  :icon="restrictionEnabled ? 'mdi:lock' : 'mdi:lock-open'" @click="toggleRestriction" variant="subtle"
+                  :color="restrictionEnabled ? 'secondary' : 'neutral'" />
 
                 <UDrawer nested fullscreen class="w-full" :ui="{ title: 'text-2xl', content: 'bg-neutral-50' }">
                   <UButton label="Kombinationer" size="xl" shape="full" trailing icon="mdi:apps" color="neutral"
-                    variant="outline" class="ring-muted" />
+                    variant="outline" class="ring-muted justify-center" />
                   <template #body>
                     <UButton size="xl" trailing :icon="restrictionEnabled ? 'mdi:lock' : 'mdi:lock-open'"
                       @click="toggleRestriction" shape="full" class="transition-all shrink-0 mb-2 w-full" variant="soft"
@@ -67,9 +68,9 @@
                   </template>
                 </UModal> -->
               </div>
-              <Transition name="fade" mode="out-in">
+              <!-- <Transition name="fade" mode="out-in">
                 <SpatialForest class="overflow-hidden h-fit" />
-              </Transition>
+              </Transition> -->
             </div>
           </template>
         </UDrawer>

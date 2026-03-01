@@ -449,9 +449,12 @@ const svampOptions = computed(() => {
     .filter(Boolean);
 });
 
-const paginationEnabled = computed(() => !props.isNormalView || props.enablePagination);
+const paginationEnabled = computed(() => {
+  if (isMobile.value) return false;
+  return !props.isNormalView || props.enablePagination;
+});
 const DEFAULT_ROWS_PER_PAGE = 10;
-const rowsPerPage = ref((props.isNormalView && !props.enablePagination) ? 500 : DEFAULT_ROWS_PER_PAGE);
+const rowsPerPage = ref((props.isNormalView && !props.enablePagination) ? 'Alla' : DEFAULT_ROWS_PER_PAGE);
 const selectedFilter = ref([]);
 const selectedStatus = ref([]);
 const naturvardsStatuses = ['VU', 'NT', 'EN', 'CR', 'DD', 'Signalart'];
@@ -778,7 +781,7 @@ const statusOptions = computed(() => {
 
 const pagination = ref({
   pageIndex: 0,
-  pageSize: 10
+  pageSize: paginationEnabled.value ? DEFAULT_ROWS_PER_PAGE : 100000
 });
 
 const speciesStore = useSpeciesStore();
@@ -874,7 +877,7 @@ onMounted(() => {
           ? savedRowsPerPage
           : DEFAULT_ROWS_PER_PAGE);
     } else {
-      rowsPerPage.value = saved.rowsPerPage;
+      rowsPerPage.value = 'Alla';
     }
   }
   if (saved.pagination) {
@@ -883,9 +886,7 @@ onMounted(() => {
       ? (Number.isFinite(savedPageSize) && savedPageSize > 0 && savedPageSize <= 100
         ? savedPageSize
         : DEFAULT_ROWS_PER_PAGE)
-      : (Number.isFinite(savedPageSize) && savedPageSize > 0
-        ? savedPageSize
-        : pagination.value.pageSize);
+      : 100000;
     pagination.value = {
       pageIndex: saved.pagination.pageIndex ?? 0,
       pageSize: sanitizedPageSize,
@@ -1711,8 +1712,9 @@ watch(
 // const totalItems = computed(() => filteredData.value.length);
 
 watch(rowsPerPage, (newVal) => {
-  let newPageSize =
-    newVal === "Alla" ? totalItems.value || data.value.length : Number(newVal);
+  let newPageSize = !paginationEnabled.value
+    ? 100000
+    : (newVal === "Alla" ? totalItems.value || data.value.length : Number(newVal));
   // Update our reactive pagination object:
   pagination.value.pageSize = newPageSize;
   pagination.value.pageIndex = 0;

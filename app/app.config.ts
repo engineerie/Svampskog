@@ -13,13 +13,13 @@ export default defineAppConfig({
     pageHero: {
       slots: {
         title: "font-semibold",
-        links: " flex",
+        links: " justify-start mx-auto flex-row lg:flex-row ",
       },
     },
     pageSection: {
       slots: {
         // container:
-        //   "flex flex-col-reverse sm:flex-col lg:grid py-16 sm:py-24 lg:py-32 gap-8 sm:gap-16",
+        //   "flex flex-col-reverse lg:flex-col lg:grid py-16 sm:py-24 lg:py-32 gap-8 sm:gap-16",
         title: "font-semibold",
       },
     },

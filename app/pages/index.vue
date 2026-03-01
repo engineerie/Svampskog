@@ -1,6 +1,8 @@
 <script setup lang="ts">
 import { computed, onMounted, onUnmounted, ref, watch } from 'vue'
-import { useIntersectionObserver } from '@vueuse/core'
+import { useIntersectionObserver, useMediaQuery } from '@vueuse/core'
+
+const isMobile = useMediaQuery('(max-width: 1024px)')
 
 const { data: page } = await useAsyncData('index', () => queryCollection('index').first())
 const { data: skotselMethodIndex } = await useAsyncData(
@@ -102,10 +104,12 @@ const heroDescriptionParts = computed(() => {
 <template>
   <div v-if="page">
     <div class="bg-neutral-50 border-b border-neutral-100">
+      <!-- <NuxtImg src="/images/Landing/boleto_small.png" width="750" height="1050" quality="80" format="webp"
+        class=" sm:-mt-90 -mb-40 -mt-70 sm:-mb-80" /> -->
       <UPageHero :ui="{
-        container: 'py-12',
+        container: 'py-12 pb-0',
       }" :title="page.hero.title" :description="page.hero.description" :links="page.hero.links"
-        orientation="horizontal">
+        :orientation="isMobile ? 'horizontal' : 'horizontal'">
         <template #headline v-if="page.hero.headline.label">
           <NuxtLink :to="page.hero.headline.to">
             <UBadge :icon="page.hero.headline.icon" :label="page.hero.headline.label" :color="page.hero.headline.color"
@@ -134,23 +138,19 @@ const heroDescriptionParts = computed(() => {
         </template>
         <template #links>
           <UButton v-for="link in page.hero.links" :label="link.label" :icon="link.icon" :color="link.color"
-            :variant="link.variant" :size="link.size" :to="link.to" :target="link.target" />
+            :variant="link.variant" :size="link.size" :to="link.to" :target="link.target" class="justify-center" />
         </template>
-        <Motion :initial="{
-          opacity: 0,
-          transform: 'translateY(10px)'
-          // filter: 'blur(20px)'
-        }" :animate="{
-          opacity: 1,
-          transform: 'translateY(0px)'
-          // filter: 'blur(0px)'
-        }" :transition="{
-          duration: 0.5,
-          delay: 0.2
-        }">
-          <NuxtImg src="/images/Landing/boleto_small.png" width="750" height="1050" quality="80" format="webp"
-            class=" sm:-mt-90 -mb-32 -mt-10 sm:-mb-80" />
-        </Motion>
+        <div>
+          <div class="relative">
+
+
+            <NuxtImg v-if="!isMobile" src="/images/Landing/boleto_small.png" width="750" height="1050" quality="80"
+              format="webp" class=" sm:-mt-90 -mb-32 -mt-10 sm:-mb-80  object-cover object-bottom" />
+            <!-- <div v-if="isMobile"
+              class="pointer-events-none absolute top-0 inset-x-0 h-25 bg-linear-to-b from-neutral-50 to-transparent" /> -->
+
+          </div>
+        </div>
 
       </UPageHero>
     </div>
@@ -163,7 +163,9 @@ const heroDescriptionParts = computed(() => {
       <UPageSection v-if="page?.sections?.[0]" :title="page.sections[0].title"
         :description="page.sections[0].description" :headline="page.sections[0].headline"
         :orientation="page.sections[0].orientation" :reverse="page.sections[0].reverse" :links="page.sections[0].links">
-        <LandingSpeciesGrid :filterEdible="true" />
+        <NuxtImg src="/images/svampbilder/RödlistadeSvampar/Amanita ceciliae-2-37.jpg"
+          class="rounded-lg lg:rounded-xl shadow ring ring-muted/50 w-full aspect-video object-cover object-top" />
+        <!-- <LandingSpeciesGrid :filterEdible="true" /> -->
       </UPageSection>
     </Motion>
     <Motion :initial="{ opacity: 0, transform: 'translateY(20px)' }"
@@ -171,8 +173,8 @@ const heroDescriptionParts = computed(() => {
       :transition="{ duration: 0.6, delay: 0.3 }">
       <UPageSection v-if="page?.sections?.[1]" :title="page.sections[1].title"
         :description="page.sections[1].description" :headline="page.sections[1].headline"
-        :orientation="page.sections[1].orientation" :links="page.sections[1].links">
-        <div v-if="stackImages.length" ref="imageSectionRef"
+        :orientation="page.sections[1].orientation" :links="page.sections[1].links" :reverse="isMobile ? true : false">
+        <!-- <div v-if="stackImages.length" ref="imageSectionRef"
           class="relative w-full max-w-3xl ml-auto flex flex-col items-center group">
           <div class="relative w-full" style="padding-top: 60%">
             <Transition name="fade-slow" mode="out-in" appear>
@@ -192,8 +194,10 @@ const heroDescriptionParts = computed(() => {
 
             <UBadge variant="outline" color="neutral" :label="currentImage.title" class="ring-muted/50" />
           </div>
-        </div>
+        </div> -->
 
+        <NuxtImg src="/images/Landing/Stock Photo 563535222.jpeg"
+          class="rounded-lg lg:rounded-xl shadow ring ring-muted/50 w-full aspect-video object-cover" />
 
       </UPageSection>
     </Motion>

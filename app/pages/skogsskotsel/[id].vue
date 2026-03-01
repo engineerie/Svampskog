@@ -1,54 +1,6 @@
 <template>
     <DefineMethodPanelBody v-if="contentTab === 'method'">
         <div class="grid grid-cols-1 md:grid-cols-3 border-muted/50 p-3 sm:p-0 overflow-visible ">
-            <!-- <div class=" bg-blue-50 border-muted/50 col-span-3 grid md:grid-cols-3">
-                <div class=" md:grid grid-cols-3 gap-12 justify-between col-span-3 border-muted/50 sm:p-3">
-
-                    <div class="col-span-2 p-4">
-                        <div class="space-y-2 text-md md:text-md text-neutral-800 ">
-
-
-                            <p class="text-xs font-semibold text-neutral-600 uppercase tracking-wide">{{
-                                selectedMethod.title }}</p>
-
-                            <h3 class="text-xl font-semibold text-neutral-900 pb-2">Om metoden</h3>
-                            <div class="text-md text-muted text-pretty cursor-pointer rounded-md" role="button"
-                                tabindex="0" @click="isMethodOmExpanded = !isMethodOmExpanded"
-                                @keydown.enter.prevent="isMethodOmExpanded = !isMethodOmExpanded"
-                                @keydown.space.prevent="isMethodOmExpanded = !isMethodOmExpanded"
-                                :class="{ 'line-clamp-2': !isMethodOmExpanded }">
-                                <ContentRenderer v-if="methodOmSection" :value="methodOmSection"
-                                    class="[&>*:first-child]:mt-0" />
-                            </div>
-                        </div>
-                        <div v-show="isMethodOmExpanded" class="h-fit">
-
-
-                        </div>
-
-                    </div>
-                    <div class="col-span-3 sm:grid grid-cols-3 ring ring-muted/30 bg-muted/50  pl-4 pt-4 rounded-lg">
-                        <div class="text-md md:text-md text-neutral-800 col-span-2 space-y-2">
-                            <p class="text-xs font-semibold text-neutral-600 uppercase tracking-wide">{{
-                                selectedMethod.title }}</p>
-                            <h3 class="text-xl font-semibold text-neutral-900 pb-2">Påverkan på mykorrhiza</h3>
-
-                            <div class="text-pretty cursor-pointer rounded-md" role="button" tabindex="0"
-                                @click="isMethodImpactExpanded = !isMethodImpactExpanded"
-                                @keydown.enter.prevent="isMethodImpactExpanded = !isMethodImpactExpanded"
-                                @keydown.space.prevent="isMethodImpactExpanded = !isMethodImpactExpanded"
-                                :class="{ 'line-clamp-2': !isMethodImpactExpanded }">
-                                <ContentRenderer v-if="methodSvampSection" :value="methodSvampSection"
-                                    class="[&>*:first-child]:mt-0" />
-                            </div>
-                        </div>
-                        <ImpactDonut :value="impact.value" :label="impact.label" :tone="impact.tone"
-                            :comparison-value="comparisonImpact?.value" :comparison-tone="comparisonImpact?.tone"
-                            :method-label="selectedMethodLabel" :comparison-label="comparisonMethodLabel"
-                            :comparison-impact-label="comparisonImpact?.label" class="p-4 sm:p-0" />
-                    </div>
-                </div>
-            </div> -->
 
             <div class="grid md:grid-cols-2 lg:grid-cols-3 col-span-3 gap-4 sm:m-3  min-w-0">
                 <div class="ring ring-gray-300/30 bg-gray-50/50 p-4 sm:p-6 rounded-lg w-full min-w-0 overflow-hidden">
@@ -316,10 +268,9 @@
         </div>
     </DefineMarkerCardBody>
     <DefineMethodHeroImage>
-        <div
-            class="relative w-full z-10 max-h-40 lg:max-h-60 rounded-lg shadow ring ring-muted/50 overflow-hidden bg-neutral-400">
+        <div class="relative w-full z-10 max-h-40 lg:max-h-60 shadow ring-muted/50 overflow-hidden bg-neutral-400">
             <NuxtImg :src="methodImage(selectedMethod, 'detail')" height="500" width="900"
-                :alt="`Bild för ${selectedMethod.title}`" class="w-full h-full opacity-80" />
+                :alt="`Bild för ${selectedMethod.title}`" class="w-full h-full opacity-90" />
             <!-- <div v-if="compareModeEnabled && compareMode === 'methods' && compareMethod"
                 class="absolute inset-y-0 right-0 w-1/2 overflow-hidden bg-neutral-400 border-l-2 border-neutral-50">
                 <NuxtImg :src="methodImage(compareMethod, 'detail')" height="450" width="900"
@@ -388,11 +339,13 @@
                         </div>
                     </template>
                 </UPopover> -->
-                <div class="p-2 pb-0">
 
 
-                    <UPopover v-if="isMobile" mode="hover" :content="{ align: 'start', side: 'bottom' }">
-                        <div class="relative w-full rounded-sm h-4 bg-linear-to-r from-emerald-500 via-amber-400 to-rose-500 ring ring-neutral-300/40 "
+                <div class=" pb-0" v-if="isMobile">
+                    <ReuseMethodHeroImage class="" v-if="isMobile" />
+
+                    <UPopover mode="hover" :content="{ align: 'start', side: 'bottom' }">
+                        <div class="relative w-full  h-4 bg-linear-to-r from-emerald-500 via-amber-400 to-rose-500 ring ring-neutral-300/40 "
                             aria-label="Påverkansskala">
                             <span
                                 class="absolute inset-y-0 left-0 rounded-l-sm bg-neutral-100/30 transition-all duration-300 ease-out"
@@ -450,14 +403,14 @@
                         </template>
                     </UPopover>
                 </div>
-                <div class="flex  justify-between items-end py-2 gap-2 px-2 lg:px-0">
+                <div class="flex  justify-between items-end py-2 gap-2 px-3 lg:px-0">
 
                     <div class="flex items-center gap-2 min-w-0 w-full">
 
                         <USelect v-model="selectedFrameworkIndex" :items="frameworkOptions" option-attribute="label"
                             value-key="value" placeholder="Välj metod" size="xl" variant="outline"
                             class="w-full sm:w-fit ring-muted/50 text-neutral-700" :ui="{
-                                content: 'pl-3 min-w-fit min-h-fit relative overflow-y-auto bar-chart-container max-w-96 before:pointer-events-none before:absolute before:left-2 before:top-2 before:bottom-2 before:w-0.5 before:rounded-full before:bg-linear-to-b before:from-emerald-500 before:via-amber-400 before:to-rose-500'
+                                content: 'pl-3 min-w-fit min-h-70 relative overflow-y-auto bar-chart-container max-w-96 before:pointer-events-none before:absolute before:left-2 before:top-2 before:bottom-2 before:w-0.5 before:rounded-full before:bg-linear-to-b before:from-emerald-500 before:via-amber-400 before:to-rose-500'
                             }">
                             <template #item="{ item }">
                                 <div class="px-1 w-full">
@@ -531,58 +484,60 @@
                     </div>
 
                     <div class="flex items-end gap-2">
-                        <UPopover v-if="!isMobile" mode="hover" :content="{ align: 'start', side: 'bottom' }">
-                            <div class="relative w-40 h-4 rounded-sm bg-linear-to-r from-emerald-500 via-amber-400 to-rose-500 ring ring-neutral-300/40 "
-                                aria-label="Påverkansskala">
-                                <span
-                                    class="absolute inset-y-0 left-0 rounded-l-sm bg-neutral-100/30 transition-all duration-300 ease-out"
-                                    :style="{ width: `${Math.max(0, Math.min(100, impact.value))}%` }" />
-                                <span v-if="comparisonImpact"
-                                    class="absolute inset-y-0 left-0 rounded-l-sm transition-all duration-300 ease-out"
-                                    :style="{
-                                        width: `${Math.max(0, Math.min(100, comparisonImpact.value))}%`,
-                                        opacity: '0.2',
-                                        backgroundImage: 'repeating-linear-gradient(135deg, rgb(64 64 64) 0 2px, transparent 2px 6px)'
-                                    }" />
-                                <span
-                                    class="absolute top-0 h-4 w-0.5 bg-neutral-100/80 -translate-x-1/2 transition-all duration-300 ease-out"
-                                    :style="{ left: `${Math.max(0, Math.min(100, impact.value))}%` }">
-                                    <UIcon :name="selectedMethod.icon || 'i-heroicons-information-circle'"
-                                        class="absolute -top-4 left-1/2 -translate-x-1/2 size-3.5 text-neutral-500" />
+
+                        <UPopover v-if="!isMobile" :ui="{ content: ' overflow-y-auto bar-chart-container max-w-96' }"
+                            :content="{
+                                align: 'end',
+                                side: 'bottom',
+                            }" v-model:open="compareFrameworkPopoverOpen">
+                            <UButton variant="outline" color="neutral"
+                                class="ring-muted/50 max-w-[85vw] sm:max-w-none h-fit" size="xl"
+                                icon="i-iconamoon-compare">
+                                <span class="block truncate max-w-12 sm:max-w-none">
+                                    {{ compareMethodLabel || 'Jämför' }}
                                 </span>
-                                <span v-if="comparisonImpact"
-                                    class="absolute top-0 h-4 w-0.5 bg-neutral-700/20 -translate-x-1/2 transition-all duration-300 ease-out"
-                                    :style="{ left: `${Math.max(0, Math.min(100, comparisonImpact.value))}%` }">
-                                    <UIcon :name="compareMethod?.icon || 'i-iconamoon-compare'"
-                                        class="absolute -top-4 left-1/2 -translate-x-1/2 size-3.5 text-neutral-500/60" />
-                                </span>
-                            </div>
+                            </UButton>
+
                             <template #content>
-                                <div class="p-3 min-w-56 space-y-2">
-                                    <p class="text-sm font-semibold text-neutral-900">Påverkan på mykorrhiza</p>
-                                    <div class="flex items-center gap-1">
-                                        <UIcon :name="selectedMethod.icon || 'i-heroicons-information-circle'"
-                                            class="size-4 text-neutral-600" />
-                                        <p class="text-sm text-neutral-600">
-                                            {{ selectedMethod.title || selectedMethod.id }}
-                                        </p>
-                                        <UBadge size="sm" class="ml-2"
-                                            :color="impact.tone === 'low' ? 'primary' : impact.tone === 'high' ? 'error' : 'tertiary'"
-                                            variant="subtle">
-                                            {{ impact.label }}
-                                        </UBadge>
+                                <div class="py-1 min-w-60 max-w-110">
+                                    <div class="px-2">
+                                        <div class="hover:bg-neutral-50 p-3 w-full justify-between flex items-center gap-4 rounded-md my-1 cursor-pointer"
+                                            :class="{ 'bg-neutral-100': !compareModeEnabled }"
+                                            @click="setCompareFrameworkIndex(null); compareFrameworkPopoverOpen = false">
+                                            <div>
+                                                <h1 class="text-md font-semibold text-neutral-900">Ingen
+                                                    jämförelse</h1>
+                                                <p class="text-sm text-neutral-500 font-light">Stäng av
+                                                    jämförelse.</p>
+                                            </div>
+                                            <div class="size-10 flex justify-center items-center bg-muted rounded-md">
+                                                <UIcon name="i-heroicons-x-mark" />
+                                            </div>
+                                        </div>
                                     </div>
-                                    <div v-if="comparisonImpact" class="flex items-center gap-1">
-                                        <UIcon :name="compareMethod?.icon || 'i-iconamoon-compare'"
-                                            class="size-4 text-neutral-600" />
-                                        <p class="text-sm text-neutral-600">
-                                            {{ compareMethodLabel }}
-                                        </p>
-                                        <UBadge size="sm" class="ml-2"
-                                            :color="comparisonImpact.tone === 'low' ? 'primary' : comparisonImpact.tone === 'high' ? 'error' : 'tertiary'"
-                                            variant="subtle">
-                                            {{ comparisonImpact.label }}
-                                        </UBadge>
+                                    <USeparator class="my-2 w-full" />
+
+                                    <div class="relative py-1">
+                                        <span
+                                            class="pointer-events-none absolute left-2 top-2 bottom-2 w-0.5 rounded-full bg-linear-to-b from-emerald-500 via-amber-400 to-rose-500" />
+                                        <div v-for="option in compareFrameworkOptions" :key="option.value"
+                                            class="pl-4 pr-2">
+                                            <div class="hover:bg-neutral-50 p-3 w-full justify-between flex items-center gap-4 rounded-md my-1 cursor-pointer"
+                                                :class="{ 'bg-neutral-100': option.value === selectedCompareFrameworkIndex }"
+                                                @click="setCompareFrameworkIndex(option.value); compareFrameworkPopoverOpen = false">
+                                                <div>
+                                                    <h1 class="text-md font-semibold text-neutral-900">{{
+                                                        option.label }}</h1>
+                                                    <p class="text-sm text-neutral-500 font-light">{{
+                                                        option.description || '' }}</p>
+                                                </div>
+                                                <div
+                                                    class="size-10 flex justify-center items-center bg-muted rounded-md">
+                                                    <UIcon v-if="option.icon" :name="option.icon" />
+                                                    <UIcon v-else name="i-heroicons-photo" />
+                                                </div>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
                             </template>
@@ -727,6 +682,7 @@
                                             </UPopover>
                                         </div>
                                     </div>
+
                                     <UButton label="Om metoden" icon="i-heroicons-information-circle" color="neutral"
                                         variant="solid" class="ring-muted/50 w-full justify-center" size="xl"
                                         @click="methodInfoPanelOpen = true" />
@@ -746,7 +702,7 @@
 
                 <!-- <UPageHeader :title="selectedMethod.title" /> -->
                 <div class="relative  bg-white ring ring-muted/50 lg:rounded-xl shadow overflow-x-clip ">
-                    <div class="border-b border-muted/50 w-full flex justify-between pl-2 pr-3 items-center">
+                    <div class="border-b border-muted/50 w-full flex justify-between pl-2 pr-3 items-end">
                         <UTabs :unmount-on-hide="false" v-model="contentTab" :items="contentTabItems" size="lg"
                             :clearable="false" :ui="{
                                 root: '',
@@ -754,59 +710,58 @@
                                 indicator: 'bg-white border border-muted/50 shadow',
                                 trigger: 'data-[state=active]:text-neutral-800 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary'
                             }" class="w-full lg:w-fit pt-2" />
-                        <UPopover v-if="!isMobile" :ui="{ content: ' overflow-y-auto bar-chart-container max-w-96' }"
-                            :content="{
-                                align: 'end',
-                                side: 'bottom',
-                            }" v-model:open="compareFrameworkPopoverOpen">
-                            <UButton variant="outline" color="neutral"
-                                class="ring-muted/50 max-w-[85vw] sm:max-w-none h-fit" size="lg"
-                                icon="i-iconamoon-compare">
-                                <span class="block truncate max-w-12 sm:max-w-none">
-                                    {{ compareMethodLabel || 'Jämför' }}
+                        <UPopover v-if="!isMobile" mode="hover" :content="{ align: 'end', side: 'bottom' }">
+                            <div class="relative w-40 h-4 mb-3 rounded-sm bg-linear-to-r from-emerald-500 via-amber-400 to-rose-500 ring ring-neutral-300/40 "
+                                aria-label="Påverkansskala">
+                                <span
+                                    class="absolute inset-y-0 left-0 rounded-l-sm bg-neutral-100/30 transition-all duration-300 ease-out"
+                                    :style="{ width: `${Math.max(0, Math.min(100, impact.value))}%` }" />
+                                <span v-if="comparisonImpact"
+                                    class="absolute inset-y-0 left-0 rounded-l-sm transition-all duration-300 ease-out"
+                                    :style="{
+                                        width: `${Math.max(0, Math.min(100, comparisonImpact.value))}%`,
+                                        opacity: '0.2',
+                                        backgroundImage: 'repeating-linear-gradient(135deg, rgb(64 64 64) 0 2px, transparent 2px 6px)'
+                                    }" />
+                                <span
+                                    class="absolute top-0 h-4 w-0.5 bg-neutral-100/80 -translate-x-1/2 transition-all duration-300 ease-out"
+                                    :style="{ left: `${Math.max(0, Math.min(100, impact.value))}%` }">
+                                    <UIcon :name="selectedMethod.icon || 'i-heroicons-information-circle'"
+                                        class="absolute -top-4 left-1/2 -translate-x-1/2 size-3.5 text-neutral-500" />
                                 </span>
-                            </UButton>
-
+                                <span v-if="comparisonImpact"
+                                    class="absolute top-0 h-4 w-0.5 bg-neutral-700/20 -translate-x-1/2 transition-all duration-300 ease-out"
+                                    :style="{ left: `${Math.max(0, Math.min(100, comparisonImpact.value))}%` }">
+                                    <UIcon :name="compareMethod?.icon || 'i-iconamoon-compare'"
+                                        class="absolute -top-4 left-1/2 -translate-x-1/2 size-3.5 text-neutral-500/60" />
+                                </span>
+                            </div>
                             <template #content>
-                                <div class="py-1 min-w-60 max-w-110">
-                                    <div class="px-2">
-                                        <div class="hover:bg-neutral-50 p-3 w-full justify-between flex items-center gap-4 rounded-md my-1 cursor-pointer"
-                                            :class="{ 'bg-neutral-100': !compareModeEnabled }"
-                                            @click="setCompareFrameworkIndex(null); compareFrameworkPopoverOpen = false">
-                                            <div>
-                                                <h1 class="text-md font-semibold text-neutral-900">Ingen
-                                                    jämförelse</h1>
-                                                <p class="text-sm text-neutral-500 font-light">Stäng av
-                                                    jämförelse.</p>
-                                            </div>
-                                            <div class="size-10 flex justify-center items-center bg-muted rounded-md">
-                                                <UIcon name="i-heroicons-x-mark" />
-                                            </div>
-                                        </div>
+                                <div class="p-3 min-w-56 space-y-2">
+                                    <p class="text-sm font-semibold text-neutral-900">Påverkan på mykorrhiza</p>
+                                    <div class="flex items-center gap-1">
+                                        <UIcon :name="selectedMethod.icon || 'i-heroicons-information-circle'"
+                                            class="size-4 text-neutral-600" />
+                                        <p class="text-sm text-neutral-600">
+                                            {{ selectedMethod.title || selectedMethod.id }}
+                                        </p>
+                                        <UBadge size="sm" class="ml-2"
+                                            :color="impact.tone === 'low' ? 'primary' : impact.tone === 'high' ? 'error' : 'tertiary'"
+                                            variant="subtle">
+                                            {{ impact.label }}
+                                        </UBadge>
                                     </div>
-                                    <USeparator class="my-2 w-full" />
-
-                                    <div class="relative py-1">
-                                        <span
-                                            class="pointer-events-none absolute left-2 top-2 bottom-2 w-0.5 rounded-full bg-linear-to-b from-emerald-500 via-amber-400 to-rose-500" />
-                                        <div v-for="option in compareFrameworkOptions" :key="option.value"
-                                            class="pl-4 pr-2">
-                                            <div class="hover:bg-neutral-50 p-3 w-full justify-between flex items-center gap-4 rounded-md my-1 cursor-pointer"
-                                                :class="{ 'bg-neutral-100': option.value === selectedCompareFrameworkIndex }"
-                                                @click="setCompareFrameworkIndex(option.value); compareFrameworkPopoverOpen = false">
-                                                <div>
-                                                    <h1 class="text-md font-semibold text-neutral-900">{{
-                                                        option.label }}</h1>
-                                                    <p class="text-sm text-neutral-500 font-light">{{
-                                                        option.description || '' }}</p>
-                                                </div>
-                                                <div
-                                                    class="size-10 flex justify-center items-center bg-muted rounded-md">
-                                                    <UIcon v-if="option.icon" :name="option.icon" />
-                                                    <UIcon v-else name="i-heroicons-photo" />
-                                                </div>
-                                            </div>
-                                        </div>
+                                    <div v-if="comparisonImpact" class="flex items-center gap-1">
+                                        <UIcon :name="compareMethod?.icon || 'i-iconamoon-compare'"
+                                            class="size-4 text-neutral-600" />
+                                        <p class="text-sm text-neutral-600">
+                                            {{ compareMethodLabel }}
+                                        </p>
+                                        <UBadge size="sm" class="ml-2"
+                                            :color="comparisonImpact.tone === 'low' ? 'primary' : comparisonImpact.tone === 'high' ? 'error' : 'tertiary'"
+                                            variant="subtle">
+                                            {{ comparisonImpact.label }}
+                                        </UBadge>
                                     </div>
                                 </div>
                             </template>
@@ -1270,8 +1225,9 @@
                         <!-- <template #title>
                             
                         </template> -->
+                        <!-- <ReuseMethodHeroImage class="mb-6 " /> -->
                         <template #body>
-                            <ReuseMethodHeroImage class="mb-6" />
+
                             <h1 class="text-3xl font-medium text-neutral-800">{{ selectedMethod.title }}</h1>
 
                             <div class="space-y-4 ">

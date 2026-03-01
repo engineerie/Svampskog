@@ -27,7 +27,10 @@
     <MySlideover v-model="showSlideover" :pinned="isPinned" @update:pinned="(val) => (isPinned = val)">
       <SpeciesInfo :species="speciesStore.selectedSpecies" :source="speciesStore.sourceComponent" />
     </MySlideover>
+    <!-- <SpatialForest v-if="isMobile" /> -->
+
     <UContainer>
+
       <transition name="fade">
         <EnvironmentSelector v-if="hasAllParams" />
       </transition>

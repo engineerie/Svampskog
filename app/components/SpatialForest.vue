@@ -2,8 +2,8 @@
   <!-- Image Section -->
   <div class="justify-center">
     <Motion v-if="imageUrl" :initial="{
-      opacity: 0,
-      transform: 'translateY(10px)'
+      opacity: 1,
+      transform: 'translateY(0px)'
       // filter: 'blur(20px)'
     }" :animate="{
       opacity: 1,
@@ -14,8 +14,14 @@
       delay: 0.2
     }">
       <Transition name="fade" mode="out-in">
+
+
+
         <NuxtImg :key="imageUrl" :src="imageUrl" alt="Vald skogsmiljö"
-          class="h-full rounded-lg ring ring-muted/50 shadow" width="805" height="400" />
+          class="h-full lg:rounded-lg lg:ring ring-muted/50 lg:shadow" width="805" height="400" />
+
+
+
       </Transition>
     </Motion>
     <USkeleton v-else class="h-20 flex items-center justify-center">Välj miljö för att visa bild</USkeleton>
