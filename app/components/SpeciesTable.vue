@@ -156,10 +156,10 @@
     <div v-if="filteredData" :class="[isNormalView ? '' : '']">
       <div class="">
 
-          <UTable :key="tableRenderKey" ref="table" v-model:column-visibility="columnVisibility" v-model:pagination="pagination"
-          :data="displayedData" :columns="columns" sticky :loading="isLoading" v-model:sorting="sorting"
-          :grouping="tableGrouping" :grouping-options="groupingOptions"
-          @select="selectRow" :autoResetAll="false" :pagination-options="(isMobile && !paginationEnabled)
+        <UTable :key="tableRenderKey" ref="table" v-model:column-visibility="columnVisibility"
+          v-model:pagination="pagination" :data="displayedData" :columns="columns" sticky :loading="isLoading"
+          v-model:sorting="sorting" :grouping="tableGrouping" :grouping-options="groupingOptions" @select="selectRow"
+          :autoResetAll="false" :pagination-options="(isMobile && !paginationEnabled)
             ? undefined
             : (paginationEnabled && !isTableGroupingActive
               ? { getPaginationRowModel: getPaginationRowModel() }
@@ -1108,7 +1108,7 @@ const desktopColumns = [
       row.getIsGrouped()
         ? null
         :
-      h('div', { class: 'text-neutral-700 dark:text-neutral-200 font-semibold truncate text-[16px]' }, capitalize(row.getValue("Commonname")))
+        h('div', { class: 'text-neutral-700 dark:text-neutral-200 font-semibold truncate text-[16px]' }, capitalize(row.getValue("Commonname")))
     ,
     filterFn: (row, _columnId, filterValue) => {
       if (!filterValue) return true
@@ -1147,7 +1147,7 @@ const desktopColumns = [
       row.getIsGrouped()
         ? null
         :
-      h('div', { class: 'max-w-[18rem] truncate text-[16px]' }, row.getValue('Scientificname')),
+        h('div', { class: 'max-w-[18rem] truncate text-[16px]' }, row.getValue('Scientificname')),
     meta: {
       headerText: 'Latinskt namn',
       class: {
@@ -1258,12 +1258,12 @@ const desktopColumns = [
       row.getIsGrouped()
         ? null
         :
-      h('div', { class: 'flex gap-1' }, [
-        (props.mat === "Nyasvamp-boken"
-          ? row.getValue(props.mat)?.toLowerCase() === 'x'
-          : row.getValue(props.mat) === 1) && h(UBadge, { color: 'warning', variant: 'subtle' }, () => 'Matsvamp'),
-        row.original.Giftsvamp?.toLowerCase() === 'x' && h(UBadge, { color: 'poison', variant: 'subtle' }, () => 'Giftsvamp')
-      ].filter(Boolean))
+        h('div', { class: 'flex gap-1' }, [
+          (props.mat === "Nyasvamp-boken"
+            ? row.getValue(props.mat)?.toLowerCase() === 'x'
+            : row.getValue(props.mat) === 1) && h(UBadge, { color: 'warning', variant: 'subtle' }, () => 'Matsvamp'),
+          row.original.Giftsvamp?.toLowerCase() === 'x' && h(UBadge, { color: 'poison', variant: 'subtle' }, () => 'Giftsvamp')
+        ].filter(Boolean))
     ,
     meta: { headerText: 'Matsvamp' },
   },
@@ -1405,14 +1405,14 @@ const mobileColumns = [
         ? matVal && String(matVal).toLowerCase() === 'x'
         : matVal === 1;
       const matsvampBadge = isMat
-        ? h(UBadge, { color: "warning", variant: "subtle", size: "sm" }, () => "Matsvamp")
+        ? h(UBadge, { color: "warning", variant: "soft", size: "sm" }, () => "Matsvamp")
         : null;
       const badgesComp = h("div", { class: "flex flex-wrap gap-2 mt-2 " }, [
         (row.original.RL2020kat !== 'LC' && row.original.RL2020kat !== 'NA' && row.original.RL2020kat !== 'NE' && row.original.RL2020kat !== "0")
-          ? h(UBadge, { color: getStatusColor(row.original.RL2020kat), variant: "subtle", size: "md" }, () => getStatusTooltip(row.original.RL2020kat))
+          ? h(UBadge, { color: getStatusColor(row.original.RL2020kat), variant: "soft", size: "sm" }, () => getStatusTooltip(row.original.RL2020kat))
           : null,
         row.original.SIGNAL_art === 'S'
-          ? h(UBadge, { color: "signal", variant: "subtle", size: "md" }, () => "Signalart")
+          ? h(UBadge, { color: "signal", variant: "soft", size: "sm" }, () => "Signalart")
           : null,
         props.dataType === 'edna'
           ? h(UProgress, {

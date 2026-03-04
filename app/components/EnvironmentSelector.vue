@@ -83,7 +83,7 @@
 
         <div class="grid grid-cols-12 gap-3  mb-3">
           <div
-            :class="['  h-full col-span-9 flex flex-col justify-between w-full ring-0 transition-all', compactDesktop ? 'col-span-9' : 'col-span-9']">
+            :class="['  h-full col-span-9 flex flex-col justify-between w-full ring-0 transition-all', props.showSpatialForest ? 'col-span-9' : 'col-span-12']">
             <div class="flex transition-all my-3">
               <template v-if="compactDesktop">
                 <div class="flex gap-3 w-full  ">
@@ -236,19 +236,18 @@
               </UModal> -->
             </div>
           </div>
-          <div class="col-span-3 flex w-full justify-end mt-3"
-            v-if="geography && forestType && standAge && vegetationType && !compactDesktop">
+          <div class="col-span-3 flex w-full justify-end mt-3" v-if="props.showSpatialForest && !compactDesktop">
             <Transition name="fade" mode="out-in">
               <SpatialForest class=" h-fit" />
             </Transition>
           </div>
-          <div v-else-if="compactDesktop"></div>
+          <!-- <div v-else-if="compactDesktop"></div>
           <div class="col-span-3 flex w-full justify-end mt-3" v-else>
             <Transition name="fade" mode="out-in">
               <NuxtImg src="/images/Landing/Mushroom Forest Image.jpeg" width="805" height="400"
                 class="h-full rounded-lg ring ring-muted/50" />
             </Transition>
-          </div>
+          </div> -->
         </div>
 
         <!-- Combination view (checkboxes) -->
@@ -316,7 +315,10 @@ const isMobile = useMediaQuery('(max-width: 767px)')
 // Control whether the desktop image info is shown
 const showImgInfo = ref(false)
 
-const props = defineProps<{ initialMobileCollapsed?: boolean }>();
+const props = withDefaults(defineProps<{ initialMobileCollapsed?: boolean; showSpatialForest?: boolean }>(), {
+  initialMobileCollapsed: false,
+  showSpatialForest: true
+});
 
 
 const envStore = useEnvParamsStore()
@@ -410,7 +412,7 @@ const categories: Category[] = [
 const listBoxRowVisible = ref(false)
 const restrictionEnabled = ref(true)
 
-const mobileCollapsed = ref(props.initialMobileCollapsed ?? false)
+const mobileCollapsed = ref(props.initialMobileCollapsed)
 const compactDesktop = ref(false)
 
 function toggleHeight(): void {

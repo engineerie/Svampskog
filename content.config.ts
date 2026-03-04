@@ -578,6 +578,21 @@ export const collections = {
     type: "data",
     schema: sectionSchema,
   }),
+  glossary: defineCollection({
+    source: "5.glossary.yml",
+    type: "data",
+    schema: z.object({
+      title: z.string().nonempty(),
+      description: z.string().optional(),
+      entries: z.array(
+        z.object({
+          term: z.string().nonempty(),
+          definition: z.string().nonempty(),
+          aliases: z.array(z.string()).optional(),
+        }),
+      ),
+    }),
+  }),
   forestryTimelines: defineCollection({
     type: "data",
     source: "2.skogsskotsel/tidslinjer.yml",

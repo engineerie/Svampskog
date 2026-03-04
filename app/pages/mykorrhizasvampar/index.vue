@@ -95,9 +95,9 @@ function redirect() {
     <UContainer class="w-full px-0">
       <NuxtImg v-if="isMobile" src="/images/svampbilder/RödlistadeSvampar/Amanita ceciliae-2-37.jpg"
         class=" shadow ring ring-muted/50 w-full aspect-video object-cover " />
-      <UPageHero :ui="{ container: 'py-12 pb-6 lg:py-24 lg:pb-6', title: ' sm:text-7xl' }" :title="page.hero.title"
-        :description="page.hero.description" :headline="isMobile ? 'Svampar' : ''"
-        :orientation="isMobile ? 'horizontal' : 'vertical'" class="">
+      <UPageHero :ui="{ container: '', title: ' sm:text-7xl' }" :title="page.hero.title"
+        :description="page.hero.description" reverse :headline="isMobile ? 'Svampar' : ''"
+        :orientation="isMobile ? 'horizontal' : 'horizontal'" class="">
         <!-- <template #headline v-if="page.hero.headline">
           <div class="flex justify-center items-center">
             <Motion :initial="{
@@ -148,113 +148,158 @@ function redirect() {
         </template> -->
         <!-- <NuxtImg :src="page.hero.src" width="700" format="webp" alt="Illustration"
           class=" rounded ring ring-neutral-300 " /> -->
+        <NuxtImg src="/images/svampbilder/RödlistadeSvampar/Amanita ceciliae-2-37.jpg"
+          class="rounded-lg lg:rounded-xl shadow ring ring-muted/50 w-full aspect-video object-cover object-top" />
       </UPageHero>
-      <UContainer class="w-full py-2">
-        <div class="lg:flex w-full justify-center">
-          <UTabs v-model="indexTab" :items="indexTabItems" size="lg" :ui="{
-            root: '',
-            list: 'flex-nowrap gap-2 bg-transparent',
-            indicator: 'bg-white border border-muted/50 shadow',
-            trigger: 'data-[state=active]:text-neutral-800 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary'
-          }" class="lg:w-fit" />
-        </div>
-      </UContainer>
-
-      <div class="sm:mb-24" v-if="indexTab === 'environment' && !isMobile">
-
-
-        <Motion :initial="{
-          opacity: 0,
-          scale: 0.9,
-          // transform: 'translateY(10px)'
-          // filter: 'blur(20px)'
-        }" :animate="{
-          opacity: 1,
-          scale: 1,
-          // transform: 'translateY(0px)'
-          // filter: 'blur(0px)'
-        }" :transition="{
-          duration: 0.3,
-          delay: 0.1
-        }">
-          <UCard variant="soft" class="shadow ring ring-muted/30 sm:px-4 rounded-2xl">
-            <EnvironmentSelector class="" />
-          </UCard>
-
-          <div class="flex w-full justify-center my-4">
-            <UButton size="xl" trailing :disabled="!allSelected" @click="redirect" color="primary"
-              icon="i-heroicons-arrow-right" label="Gå till miljö" />
-          </div>
-
-        </Motion>
+    </UContainer>
+    <!-- <UContainer class="w-full py-2">
+      <div class="lg:flex w-full justify-start">
+        <UTabs v-model="indexTab" :items="indexTabItems" size="lg" :ui="{
+          root: '',
+          list: 'flex-nowrap gap-2 bg-transparent',
+          indicator: 'bg-white border border-muted/50 shadow',
+          trigger: 'data-[state=active]:text-neutral-800 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary'
+        }" class="lg:w-fit" />
       </div>
-      <UContainer v-if="indexTab === 'environment' && isMobile" class="w-full px-0">
-        <div class="w-full max-w-full p-4 py-2">
-          <div class="p-2 bg-muted rounded-lg">
+    </UContainer> -->
+    <div class="bg-muted border-y border-muted/50">
 
 
-            <USelect size="xl" v-for="category in categories" :key="category.key" :items="enabledOptions[category.key]"
-              v-model="envStore[category.key]" :placeholder="category.defaultLabel"
-              class="flex-1 w-full my-1 text-lg ring-muted/50" append-to-body variant="outline">
-              <template #item="{ item }">
-                <div class="flex flex-col">
-                  <div class="text-lg font-medium">{{ item.label }}</div>
-                  <div v-if="item.description" class="text-sm text-neutral-500">
-                    {{ item.description }}
-                  </div>
-                </div>
-              </template>
-            </USelect>
+      <UContainer class="px-0">
+        <UPageSection :ui="{ title: 'text-start', description: 'text-start' }" title="Välj skogsmiljö"
+          description="Sök fram skogsmiljöer utifrån Markinventeringens miljövariabler. Kombinationerna är i utgångsläget begränsade till miljöer där DNA-baserade artlistor finns tillgängliga.">
+          <div class="" v-if="indexTab === 'environment' && !isMobile">
+
+
+            <Motion :initial="{
+              opacity: 0,
+              scale: 0.9,
+              // transform: 'translateY(10px)'
+              // filter: 'blur(20px)'
+            }" :animate="{
+              opacity: 1,
+              scale: 1,
+              // transform: 'translateY(0px)'
+              // filter: 'blur(0px)'
+            }" :transition="{
+              duration: 0.3,
+              delay: 0.1
+            }">
+
+              <EnvironmentSelector :show-spatial-forest="false" />
+
+
+              <div class="flex w-full justify-center my-4">
+                <UButton size="xl" trailing :disabled="!allSelected" @click="redirect" color="primary"
+                  icon="i-heroicons-arrow-right" label="Gå till miljö" />
+              </div>
+
+            </Motion>
           </div>
-          <div class="flex flex-col lg:flex-row gap-2 my-4">
+          <div class="" v-if="indexTab === 'environment' && isMobile">
+            <div class=" bg-muted rounded-lg">
 
 
-
-
-            <!-- <UButton label="DNA-data" size="xl" trailing :icon="restrictionEnabled ? 'mdi:lock' : 'mdi:lock-open'"
-                @click="toggleRestriction" variant="subtle" :color="restrictionEnabled ? 'secondary' : 'neutral'" /> -->
-            <UDrawer fullscreen title="Kombinationer" class="w-full ring-muted/50 justify-center lg:justify-start"
-              :ui="{ title: 'text-2xl' }">
-              <UButton label="Kombinationer" size="xl" shape="full" trailing icon="mdi:apps" color="neutral"
-                variant="outline" />
-              <template #body>
-                <UButton size="xl" trailing :icon="restrictionEnabled ? 'mdi:lock' : 'mdi:lock-open'"
-                  @click="toggleRestriction" shape="full" class="transition-all shrink-0 mb-2 w-full" variant="soft"
-                  :color="restrictionEnabled ? 'secondary' : 'neutral'">
-                  {{ restrictionEnabled ? "Begränsar till där det finns DNA-data" : "Inkluderar alla miljöer" }}
-                </UButton>
-                <div class="grid gap-2 ">
-                  <UCard v-for="category in categories" :key="category.key" variant="soft">
-                    <div v-for="option in enabledOptions[category.key]" :key="option.value"
-                      class="flex justify-between mb-2 text-neutral-500 items-center">
-                      <label :for="`${category.key}-${option.value}`"
-                        :class="{ 'opacity-40 cursor-not-allowed': option.disabled, 'cursor-pointer': !option.disabled }"
-                        class="text-lg">
-                        {{ option.label }}
-                      </label>
-                      <UCheckbox :id="`${category.key}-${option.value}`" color="primary"
-                        :model-value="envStore[category.key] === option.value"
-                        @update:model-value="() => { if (!option.disabled) selectOption(category.key, option.value) }"
-                        :disabled="option.disabled" />
+              <USelect size="xl" v-for="category in categories" :key="category.key"
+                :items="enabledOptions[category.key]" v-model="envStore[category.key]"
+                :placeholder="category.defaultLabel" class="flex-1 w-full my-1 text-lg ring-muted/50" append-to-body
+                variant="outline">
+                <template #item="{ item }">
+                  <div class="flex flex-col">
+                    <div class="text-lg font-medium">{{ item.label }}</div>
+                    <div v-if="item.description" class="text-sm text-neutral-500">
+                      {{ item.description }}
                     </div>
-                  </UCard>
-                </div>
-              </template>
-            </UDrawer>
-            <UButton trailing :disabled="!allSelected" @click="redirect" color="primary" icon="i-heroicons-arrow-right"
-              label="Gå till miljö" size="xl" class="w-full justify-center lg:justify-start" />
-          </div>
-          <!-- <Transition name="fade" mode="out-in">
+                  </div>
+                </template>
+              </USelect>
+            </div>
+            <div class="flex flex-col lg:flex-row gap-2 my-4">
+
+
+
+
+              <!-- <UButton label="DNA-data" size="xl" trailing :icon="restrictionEnabled ? 'mdi:lock' : 'mdi:lock-open'"
+                @click="toggleRestriction" variant="subtle" :color="restrictionEnabled ? 'secondary' : 'neutral'" /> -->
+              <UDrawer fullscreen title="Kombinationer" class="w-full ring-muted/50 justify-center lg:justify-start"
+                :ui="{ title: 'text-2xl' }">
+                <UButton label="Kombinationer" size="xl" shape="full" trailing icon="mdi:apps" color="neutral"
+                  variant="outline" />
+                <template #body>
+                  <UButton size="xl" trailing :icon="restrictionEnabled ? 'mdi:lock' : 'mdi:lock-open'"
+                    @click="toggleRestriction" shape="full" class="transition-all shrink-0 mb-2 w-full" variant="soft"
+                    :color="restrictionEnabled ? 'secondary' : 'neutral'">
+                    {{ restrictionEnabled ? "Begränsar till där det finns DNA-data" : "Inkluderar alla miljöer" }}
+                  </UButton>
+                  <div class="grid gap-2 ">
+                    <UCard v-for="category in categories" :key="category.key" variant="soft">
+                      <div v-for="option in enabledOptions[category.key]" :key="option.value"
+                        class="flex justify-between mb-2 text-neutral-500 items-center">
+                        <label :for="`${category.key}-${option.value}`"
+                          :class="{ 'opacity-40 cursor-not-allowed': option.disabled, 'cursor-pointer': !option.disabled }"
+                          class="text-lg">
+                          {{ option.label }}
+                        </label>
+                        <UCheckbox :id="`${category.key}-${option.value}`" color="primary"
+                          :model-value="envStore[category.key] === option.value"
+                          @update:model-value="() => { if (!option.disabled) selectOption(category.key, option.value) }"
+                          :disabled="option.disabled" />
+                      </div>
+                    </UCard>
+                  </div>
+                </template>
+              </UDrawer>
+              <UButton trailing :disabled="!allSelected" @click="redirect" color="primary"
+                icon="i-heroicons-arrow-right" label="Gå till miljö" size="xl"
+                class="w-full justify-center lg:justify-start" />
+            </div>
+            <!-- <Transition name="fade" mode="out-in">
             <SpatialForest class="h-fit" />
           </Transition> -->
-        </div>
+          </div>
+        </UPageSection>
       </UContainer>
-      <UContainer v-if="indexTab === 'video'" class="w-full py-4 px-0">
-        <div
-          class="border border-dashed border-muted/60 rounded-xl bg-muted/20 min-h-64 flex items-center justify-center">
-          <p class="text-muted">Instruktionsvideo kommer här</p>
+
+
+
+
+    </div>
+    <UContainer class="w-full py-4">
+      <UPageSection title="Kom igång med att utforska skogsmiljöer"
+        description="En kort genomgång av hur du söker fram olika skogstyper och tolkar artlistorna baserade på DNA och fruktkroppsfynd.">
+        <div class=" border-muted/60 rounded-xl bg-muted/20 min-h-64 flex items-center justify-center overflow-hidden">
+          <NuxtImg src="/images/Landing/Screenshot 2026-03-03 at 10.15.50.png" class="w-full" />
         </div>
-      </UContainer>
+      </UPageSection>
     </UContainer>
+    <UContainer>
+      <UPageSection title="Artlistor på två sätt"
+        :ui="{ title: 'text-start lg:text-center', description: 'text-start lg:text-center', container: 'pb-0 sm:pb-0 lg:pb-0' }"
+        description="Vi presenterar artlistor som baseras på DNA-analyser av jordprover och förekomsten av fruktkroppar. De två metoderna kompletterar varandra och ger tillsammans en god bild av svamplivet i skogen." />
+      <UPageSection orientation="horizontal" :reverse="isMobile ? true : false" headline="Enligt DNA"
+        :ui="{ title: 'text-2xl sm:text-3xl lg:text-4xl' }" title="Artförekomst baserad på mycel-DNA i markprover"
+        description="DNA-analyser görs med små markprover och fungerar utmärkt för frekventa och vanliga
+                arter, men sämre för ovanliga arter. Vissa arter, såsom kantarell, detekteras heller inte eftersom deras
+                DNA-sekvenser är för långa för den använda analysmetoden."
+        :features="[{ title: 'Underlag', description: 'Bygger på analyser av svampars förekomst som mycel i ca 2000 markprover tagna i Markinventeringen och Riksskogstaxeringens permanenta provytor i skog under 2015–2021.' }]">
+        <NuxtImg src="/images/Sources/markinventering.png" class="w-full rounded-xl mb-2 ring ring-muted/50 shadow"
+          width="1000" height="600" />
+      </UPageSection>
+      <UPageSection orientation="horizontal" :reverse="true" headline="Enligt fruktkroppar"
+        :ui="{ title: 'text-2xl sm:text-3xl lg:text-4xl' }" title="Artförekomst enligt fruktkroppsfynd"
+        description="Med fruktkroppar kan alla arter som bildar fruktkroppar detekteras, vanliga som ovanliga. Fruktkroppar ger dock en ofullständig bild av artrikedomen och hur vanliga svamparna är, eftersom många arter sällan bildar eller saknar fruktkroppar."
+        :features="[{ title: 'Underlag', description: 'Bygger främst på Artdatabankens sammanställningar av arters förekomst, ekologi och naturvårdsstatus.' }]">
+        <NuxtImg src="/images/Sources/samladkunskap.png" class="w-full rounded-xl mb-2 ring ring-muted/50 shadow"
+          width="1000" height="600" />
+      </UPageSection>
+    </UContainer>
+    <div class="bg-muted border-y border-muted/50">
+      <UContainer>
+        <KnowledgeSelectionSection :ui="{ title: 'text-start', description: 'text-start' }"
+          title="Mer om svampar och deras ekologi"
+          description="Utvalda kunskapsidor som hjälper dig att förstå svamparna bakom resultaten." :indices="[0]"
+          :limit="3" />
+      </UContainer>
+    </div>
   </UPage>
 </template>

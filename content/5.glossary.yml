@@ -1,0 +1,20 @@
+title: Ordlista
+description: Grundbegrepp inom svamp och skogsekologi.
+entries:
+  - term: Mykorrhiza
+    definition: Symbios mellan svamp och växtrötter där svampen hjälper växten att ta upp vatten och näring, och får kolhydrater tillbaka.
+    aliases:
+      - ektomykorrhiza
+      - svamprot
+  - term: Hyfer
+    definition: Mikroskopiskt tunna svamptrådar som bygger upp svampens mycel.
+    aliases:
+      - svamptrådar
+  - term: Mycel
+    definition: Nätverk av hyfer som utgör den största delen av svampen i mark eller ved.
+  - term: Fruktkropp
+    definition: Den synliga delen av svampen som bildar och sprider sporer.
+    aliases:
+      - svampkropp
+  - term: Kalhygge
+    definition: En yta där nästan alla träd har avverkats, vilket kraftigt förändrar mikroklimat och markförhållanden.

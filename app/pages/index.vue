@@ -252,7 +252,7 @@ const heroDescriptionParts = computed(() => {
       :transition="{ duration: 0.6, delay: 0.3 }">
       <Finansiering>
         <template v-if="page.financing" #headline>
-          <h1 class="text-lg text-center font-semibold text-neutral-900 my-12 sm:my-18">
+          <h1 class="text-lg lg:text-center font-semibold text-neutral-900 my-12 sm:my-18">
             {{ page.financing.headline }}
           </h1>
         </template>

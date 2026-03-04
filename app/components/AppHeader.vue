@@ -28,7 +28,7 @@ const items = computed(() => [
   {
     label: 'Svampkunskap',
     to: '/svampkunskap'
-  },
+  }
 ])
 
 const itemsright = computed(() => [
@@ -80,12 +80,17 @@ const itemsmobile = computed(() => [
       </NuxtLink>
     </template>
 
-    <UNavigationMenu :items="items" variant="link" color="primary"
-      :ui="{ link: 'text-md hover:bg-muted rounded', item: 'mx-0.5' }" class="hidden lg:flex " />
+
 
     <template #right>
-      <UNavigationMenu :items="itemsright" variant="link" color="primary"
-        :ui="{ link: 'text-md hover:bg-neutral-50 rounded', item: 'mx-0.5' }" class="hidden lg:flex " />
+      <div class="hidden lg:flex items-center">
+        <UNavigationMenu :items="items" variant="link" color="primary"
+          :ui="{ link: 'text-md hover:bg-muted rounded', item: 'mx-0.5' }" />
+        <USeparator orientation="vertical" class="h-4 mx-2" />
+        <UNavigationMenu :items="itemsright" variant="link" color="primary"
+          :ui="{ link: 'text-md hover:bg-muted rounded', item: 'mx-0.5' }" />
+        <UContentSearchButton :collapsed="false" class="ring-muted/50" />
+      </div>
     </template>
 
     <template #body>

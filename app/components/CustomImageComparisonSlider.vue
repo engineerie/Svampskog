@@ -41,8 +41,9 @@
           <!-- <UBadge v-if="!isMobile" size="md"
             class="backdrop-blur-xl bg-neutral-100/0 text-neutral-100 h-fit whitespace-nowrap mb-0.5">{{
               frameworkLabel }}</UBadge> -->
-          <UBadge size="md" class="backdrop-blur-xl bg-neutral-950/50 text-neutral-100 h-fit whitespace-nowrap">{{
-            primaryTimeLabel }}</UBadge>
+          <UBadge v-if="primaryTimeLabel" size="md"
+            class="backdrop-blur-xl bg-neutral-950/50 text-neutral-100 h-fit whitespace-nowrap">{{
+              primaryTimeLabel }}</UBadge>
         </div>
 
         <div class="h-full w-1.5 bg-neutral-50/90 backdrop-blur-md inset-shadow-sm inset-shadow-neutral-300"></div>
@@ -50,8 +51,9 @@
           <!-- <UBadge v-if="!isMobile" size="md"
             class="backdrop-blur-xl bg-neutral-100/0 text-neutral-100 h-fit whitespace-nowrap mb-0.5">{{
               frameworkLabel2 }}</UBadge> -->
-          <UBadge size="md" class="backdrop-blur-xl bg-neutral-950/50 text-neutral-100 h-fit whitespace-nowrap">{{
-            secondaryTimeLabel }}</UBadge>
+          <UBadge v-if="secondaryTimeLabel" size="md"
+            class="backdrop-blur-xl bg-neutral-950/50 text-neutral-100 h-fit whitespace-nowrap">{{
+              secondaryTimeLabel }}</UBadge>
         </div>
       </div>
     </div>
