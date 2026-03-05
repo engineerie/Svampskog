@@ -7,22 +7,22 @@ entries:
   - startskog: produktionsskog_
     atgard: naturskydd
     tid: efter
-    skog: Intern dynamik med träd som dör och självföryngring av trädplantor.
+    skog: Intern dynamik med träd som dör med självföryngring och uppväxt av nya träd.
     svamp: Ofta många olika arter mykorrhizasvamp. Goda förutsättningar för matsvampar. Svampar som är signalarter eller rödlistade kan förekomma. Svampindivider kan vara gamla och ha stora mycel.
   - startskog: produktionsskog_
     atgard: naturskydd
     tid: 20 år
-    skog: Intern dynamik med träd som dör och självföryngring av trädplantor.
+    skog: Intern dynamik med träd som dör med självföryngring och uppväxt nya träd.
     svamp: Ofta många olika arter mykorrhizasvamp. Goda förutsättningar för matsvampar. Svampar som är signalarter eller rödlistade kan förekomma. Svampindivider kan vara gamla och ha stora mycel.
   - startskog: produktionsskog_
     atgard: naturskydd
     tid: 50 år
-    skog: Intern dynamik med träd som dör och självföryngring av trädplantor.
+    skog: Intern dynamik med träd som dör med självföryngring och uppväxt av nya träd.
     svamp: Ofta många olika arter mykorrhizasvamp. Goda förutsättningar för matsvampar. Svampar som är signalarter eller rödlistade kan förekomma. Svampindivider kan vara gamla och ha stora mycel.
   - startskog: produktionsskog_
     atgard: naturskydd
     tid: 80 år
-    skog: Intern dynamik med träd som dör och självföryngring av trädplantor.
+    skog: Intern dynamik med träd som dör med självföryngring och uppväxt av nya träd.
     svamp: Ofta många olika arter mykorrhizasvamp. Goda förutsättningar för matsvampar. Svampar som är signalarter eller rödlistade kan förekomma. Svampindivider kan vara gamla och ha stora mycel.
   - startskog: produktionsskog_
     atgard: trakthygge
@@ -118,7 +118,7 @@ entries:
     atgard: blädning
     tid: 20 år
     skog: Mindre och yngre träd växer upp till och börjar fylla i luckigheten som bildades vid blädningen.
-    svamp: Artsammansättning och mängd mykorrhiza bedöms vara ungefär samma som före blädningen för såväl vanliga arter, mat-, rödlistade och signalarter. Bedöms bra för matsvampar.
+    svamp: Artsammansättning och mängd mykorrhiza bedöms vara ungefär samma som före blädningen för såväl vanliga arter, matsvampar, rödlistade och signalarter. Bedöms bra för matsvampar.
   - startskog: produktionsskog_
     atgard: blädning
     tid: 50 år
@@ -128,7 +128,7 @@ entries:
     atgard: blädning
     tid: 80 år
     skog: Ungefär 60 år efter den första blädningen avverkas den sista tredjedelen av träden från det ursprungliga beståndet.
-    svamp: Artsammansättning och mängd mykorrhiza bedöms vara fortsatt ungefär samma som före blädningen för såväl vanliga arter, mat-, rödlistade och signalarter. Bedöms bra för matsvampar.
+    svamp: Artsammansättning och mängd mykorrhiza bedöms vara fortsatt ungefär samma som före blädningen för vanliga arter och matsvampar. Rödlistade och signalarter kan ha minskat något. Bedöms bra för matsvampar.
   - startskog: naturskog
     atgard: naturskydd
     tid: innan
@@ -142,17 +142,17 @@ entries:
   - startskog: naturskog
     atgard: naturskydd
     tid: 20 år
-    skog: Intern dynamik med träd som dör och självföryngring av trädplantor.
+    skog: Intern dynamik med träd som dör med självföryngring och uppväxt av nya träd.
     svamp: Rikligt med mykorrhizasvamp med många olika arter. Goda förutsättningar för matsvampar. Svampar som är signalarter eller rödlistade förekommer generellt oftare här än i skog som tidigare varit kalavverkad. Svampindivider kan vara gamla och ha stora mycel.
   - startskog: naturskog
     atgard: naturskydd
     tid: 50 år
-    skog: Intern dynamik med träd som dör och självföryngring av trädplantor.
+    skog: Intern dynamik med träd som dör med  självföryngring och uppväxt av nya träd.
     svamp: Rikligt med mykorrhizasvamp med många olika arter. Goda förutsättningar för matsvampar. Svampar som är signalarter eller rödlistade förekommer generellt oftare här än i skog som tidigare varit kalavverkad. Svampindivider kan vara gamla och ha stora mycel.
   - startskog: naturskog
     atgard: naturskydd
     tid: 80 år
-    skog: Intern dynamik med träd som dör och självföryngring av trädplantor.
+    skog: Intern dynamik med träd som dör med  självföryngring och uppväxt av nya träd.
     svamp: Rikligt med mykorrhizasvamp med många olika arter. Goda förutsättningar för matsvampar. Svampar som är signalarter eller rödlistade förekommer generellt oftare här än i skog som tidigare varit kalavverkad. Svampindivider kan vara gamla och ha stora mycel.
   - startskog: naturskog
     atgard: trakthygge
@@ -258,4 +258,4 @@ entries:
     atgard: blädning
     tid: 80 år
     skog: Ungefär 60 år efter den första blädningen avverkas den sista tredjedelen av träden från det ursprungliga beståndet.
-    svamp: Artsammansättning och mängd mykorrhiza bedöms vara fortsatt ungefär samma som före blädningen för såväl vanliga arter, mat-, rödlistade och signalarter. Bedöms bra för matsvampar.
+    svamp: Artsammansättning och mängd mykorrhiza bedöms vara fortsatt ungefär samma som före blädningen för såväl vanliga arter som matsvampar. Rödlistade och signalarter kan ha minskat något. Bedöms bra för matsvampar.
