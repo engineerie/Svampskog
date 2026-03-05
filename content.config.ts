@@ -215,6 +215,30 @@ const sectionSchema = z.object({
   ...baseSchema,
 });
 
+const featureItemSchema = z.object({
+  title: z.string().optional(),
+  description: z.string().nonempty(),
+});
+
+const knowledgeSectionSchema = z.object({
+  title: z.string().nonempty(),
+  description: z.string().nonempty(),
+  indices: z.array(z.number()).optional(),
+  limit: z.number().optional(),
+});
+
+const factsSectionSchema = z.object({
+  title: z.string().nonempty(),
+  description: z.string().optional(),
+  items: z.array(
+    z.object({
+      title: z.string().nonempty(),
+      description: z.string().nonempty(),
+      image: z.string().optional(),
+    }),
+  ),
+});
+
 export const collections = {
   docs: defineCollection({
     type: "page",
@@ -303,6 +327,21 @@ export const collections = {
         src: z.string().nonempty(),
         orientation: orientationEnum.optional(),
       }),
+      environmentSection: sectionSchema.optional(),
+      videoSection: sectionSchema.extend({
+        image: z.string().nonempty(),
+      }).optional(),
+      speciesListsIntro: sectionSchema.optional(),
+      dnaSection: sectionSchema.extend({
+        features: z.array(featureItemSchema).optional(),
+        image: z.string().nonempty(),
+      }).optional(),
+      fruitbodySection: sectionSchema.extend({
+        features: z.array(featureItemSchema).optional(),
+        image: z.string().nonempty(),
+      }).optional(),
+      factsSection: factsSectionSchema.optional(),
+      knowledgeSection: knowledgeSectionSchema.optional(),
     }),
   }),
   svamparInfo: defineCollection({
@@ -330,6 +369,31 @@ export const collections = {
         src: z.string().nonempty(),
         orientation: orientationEnum.optional(),
       }),
+      methodSelectorSection: sectionSchema.optional(),
+      videoSection: sectionSchema.extend({
+        image: z.string().nonempty(),
+      }).optional(),
+      timelineAndChartsIntro: sectionSchema.optional(),
+      timelineSection: sectionSchema.extend({
+        features: z.array(featureItemSchema).optional(),
+        comparison: z.object({
+          frameworkLabel: z.string().nonempty(),
+          frameworkLabel2: z.string().nonempty(),
+          firstImage: z.string().nonempty(),
+          secondImage: z.string().nonempty(),
+        }).optional(),
+      }).optional(),
+      chartSection: sectionSchema.extend({
+        features: z.array(featureItemSchema).optional(),
+        chart: z.object({
+          selectedChart: z.string().nonempty(),
+          parentSelectedFrameworks: z.array(z.string()).optional(),
+          currentStartskog: z.string().optional(),
+          showControls: z.boolean().optional(),
+        }).optional(),
+      }).optional(),
+      factsSection: factsSectionSchema.optional(),
+      knowledgeSection: knowledgeSectionSchema.optional(),
     }),
   }),
   skogsskotselInfo: defineCollection({

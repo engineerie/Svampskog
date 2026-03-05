@@ -93,7 +93,7 @@ function redirect() {
 
   <UPage v-if="page" class="flex-1">
     <UContainer class="w-full px-0">
-      <NuxtImg v-if="isMobile" src="/images/svampbilder/RödlistadeSvampar/Amanita ceciliae-2-37.jpg"
+      <NuxtImg v-if="isMobile" :src="page.hero.src"
         class=" shadow ring ring-muted/50 w-full aspect-video object-cover " />
       <UPageHero :ui="{ container: '', title: ' sm:text-7xl' }" :title="page.hero.title"
         :description="page.hero.description" reverse :headline="isMobile ? 'Svampar' : ''"
@@ -148,7 +148,7 @@ function redirect() {
         </template> -->
         <!-- <NuxtImg :src="page.hero.src" width="700" format="webp" alt="Illustration"
           class=" rounded ring ring-neutral-300 " /> -->
-        <NuxtImg src="/images/svampbilder/RödlistadeSvampar/Amanita ceciliae-2-37.jpg"
+        <NuxtImg :src="page.hero.src"
           class="rounded-lg lg:rounded-xl shadow ring ring-muted/50 w-full aspect-video object-cover object-top" />
       </UPageHero>
     </UContainer>
@@ -166,8 +166,8 @@ function redirect() {
 
 
       <UContainer class="px-0">
-        <UPageSection :ui="{ title: 'text-start', description: 'text-start' }" title="Välj skogsmiljö"
-          description="Sök fram skogsmiljöer utifrån Markinventeringens miljövariabler. Kombinationerna är i utgångsläget begränsade till miljöer där DNA-baserade artlistor finns tillgängliga.">
+        <UPageSection :ui="{ title: 'text-start', description: 'text-start' }" :title="page.environmentSection?.title"
+          :description="page.environmentSection?.description">
           <div class="" v-if="indexTab === 'environment' && !isMobile">
 
 
@@ -265,40 +265,52 @@ function redirect() {
 
     </div>
     <UContainer class="w-full py-4">
-      <UPageSection title="Kom igång med att utforska skogsmiljöer"
-        description="En kort genomgång av hur du söker fram olika skogstyper och tolkar artlistorna baserade på DNA och fruktkroppsfynd.">
+      <UPageSection :title="page.factsSection?.title" :description="page.factsSection?.description">
+        <UCarousel v-slot="{ item }" :items="page.factsSection?.items" arrows
+          :ui="{ item: 'basis-full sm:basis-1/3 px-6' }">
+          <UPageCard variant="naked" reverse :title="item.title" :description="item.description"
+            :ui="{ title: 'text-lg text-neutral-700 ', description: 'text-base text-neutral-500' }">
+            <div class="bg-neutral-400 rounded-md overflow-hidden">
+              <NuxtImg v-if="item.image" :src="item.image" class="w-full aspect-video object-cover opacity-85"
+                width="800" height="450" />
+            </div>
+
+          </UPageCard>
+        </UCarousel>
+      </UPageSection>
+      <UPageSection :title="page.videoSection?.title" :description="page.videoSection?.description">
         <div class=" border-muted/60 rounded-xl bg-muted/20 min-h-64 flex items-center justify-center overflow-hidden">
-          <NuxtImg src="/images/Landing/Screenshot 2026-03-03 at 10.15.50.png" class="w-full" />
+          <NuxtImg :src="page.videoSection?.image" class="w-full" />
+
         </div>
       </UPageSection>
+
+
     </UContainer>
     <UContainer>
-      <UPageSection title="Artlistor på två sätt"
+      <UPageSection :title="page.speciesListsIntro?.title"
         :ui="{ title: 'text-start lg:text-center', description: 'text-start lg:text-center', container: 'pb-0 sm:pb-0 lg:pb-0' }"
-        description="Vi presenterar artlistor som baseras på DNA-analyser av jordprover och förekomsten av fruktkroppar. De två metoderna kompletterar varandra och ger tillsammans en god bild av svamplivet i skogen." />
-      <UPageSection orientation="horizontal" :reverse="isMobile ? true : false" headline="Enligt DNA"
-        :ui="{ title: 'text-2xl sm:text-3xl lg:text-4xl' }" title="Artförekomst baserad på mycel-DNA i markprover"
-        description="DNA-analyser görs med små markprover och fungerar utmärkt för frekventa och vanliga
-                arter, men sämre för ovanliga arter. Vissa arter, såsom kantarell, detekteras heller inte eftersom deras
-                DNA-sekvenser är för långa för den använda analysmetoden."
-        :features="[{ title: 'Underlag', description: 'Bygger på analyser av svampars förekomst som mycel i ca 2000 markprover tagna i Markinventeringen och Riksskogstaxeringens permanenta provytor i skog under 2015–2021.' }]">
-        <NuxtImg src="/images/Sources/markinventering.png" class="w-full rounded-xl mb-2 ring ring-muted/50 shadow"
-          width="1000" height="600" />
+        :description="page.speciesListsIntro?.description" />
+      <UPageSection orientation="horizontal" :reverse="isMobile ? true : false"
+        :ui="{ title: 'text-2xl sm:text-3xl lg:text-4xl' }" :headline="page.dnaSection?.headline"
+        :title="page.dnaSection?.title" :description="page.dnaSection?.description"
+        :features="page.dnaSection?.features || []">
+        <NuxtImg :src="page.dnaSection?.image" class="w-full rounded-xl mb-2 ring ring-muted/50 shadow" width="1000"
+          height="600" />
       </UPageSection>
-      <UPageSection orientation="horizontal" :reverse="true" headline="Enligt fruktkroppar"
-        :ui="{ title: 'text-2xl sm:text-3xl lg:text-4xl' }" title="Artförekomst enligt fruktkroppsfynd"
-        description="Med fruktkroppar kan alla arter som bildar fruktkroppar detekteras, vanliga som ovanliga. Fruktkroppar ger dock en ofullständig bild av artrikedomen och hur vanliga svamparna är, eftersom många arter sällan bildar eller saknar fruktkroppar."
-        :features="[{ title: 'Underlag', description: 'Bygger främst på Artdatabankens sammanställningar av arters förekomst, ekologi och naturvårdsstatus.' }]">
-        <NuxtImg src="/images/Sources/samladkunskap.png" class="w-full rounded-xl mb-2 ring ring-muted/50 shadow"
+      <UPageSection orientation="horizontal" :reverse="true" :headline="page.fruitbodySection?.headline"
+        :ui="{ title: 'text-2xl sm:text-3xl lg:text-4xl' }" :title="page.fruitbodySection?.title"
+        :description="page.fruitbodySection?.description" :features="page.fruitbodySection?.features || []">
+        <NuxtImg :src="page.fruitbodySection?.image" class="w-full rounded-xl mb-2 ring ring-muted/50 shadow"
           width="1000" height="600" />
       </UPageSection>
     </UContainer>
     <div class="bg-muted border-y border-muted/50">
       <UContainer>
-        <KnowledgeSelectionSection :ui="{ title: 'text-start', description: 'text-start' }"
-          title="Mer om svampar och deras ekologi"
-          description="Utvalda kunskapsidor som hjälper dig att förstå svamparna bakom resultaten." :indices="[0]"
-          :limit="3" />
+        <KnowledgeSelectionSection
+          :ui="{ title: 'text-start text-2xl sm:text-3xl lg:text-4xl', description: 'text-start' }"
+          :title="page.knowledgeSection?.title" :description="page.knowledgeSection?.description"
+          :indices="page.knowledgeSection?.indices || [0]" :limit="page.knowledgeSection?.limit || 3" />
       </UContainer>
     </div>
   </UPage>
