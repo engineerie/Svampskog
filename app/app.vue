@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import { onBeforeUnmount, onMounted } from 'vue'
 import { sv } from '@nuxt/ui/locale'
 // const colorMode = useColorMode()
 
@@ -92,6 +93,22 @@ type GlossaryEntry = {
   aliases?: string[]
 }
 
+type SpeciesEntry = {
+  Commonname?: string
+  Scientificname?: string
+  ekologi?: string
+  images?: string[]
+  Artfakta?: string
+  Svampguiden?: string
+  Giftsvamp?: string | null
+  SIGNAL_art?: string | null
+  'Nyasvamp-boken'?: string | null
+  KALKmark?: string | null
+  ANNANmark?: string | null
+  'Svamp-grupp'?: string | null
+  'Svamp-Undersvamp-grupp'?: string | null
+}
+
 function normalizePathKey(value: string) {
   return decodeURIComponent(value || '')
     .trim()
@@ -180,6 +197,42 @@ const svampkunskapSearchChildren = computed(() => {
 
 const { data: glossaryDoc } = await useAsyncData('glossary', () => queryCollection('glossary').first())
 
+const { data: speciesData } = useLazyAsyncData('species-search-poc', async () => {
+  try {
+    return await $fetch<SpeciesEntry[]>('/edible/edibledata-Norr-Barrblandskog-1-40-Blåbär_grupp.json')
+  } catch {
+    return []
+  }
+}, {
+  server: false
+})
+
+function stripDetailsFromURL(url?: string) {
+  if (!url) return ''
+  return url.replace('/detaljer', '').replace('/artinformation', '')
+}
+
+function speciesGroupIconPath(species?: SpeciesEntry) {
+  const rawGroup = species?.['Svamp-grupp'] || species?.['Svamp-Undersvamp-grupp'] || 'övrigt'
+  const group = String(rawGroup).trim().toLowerCase()
+
+  const iconMapping: Record<string, string> = {
+    övrigt: 'ovrigt.png',
+    ovrigt: 'ovrigt.png',
+    hattsvamp: 'hattsvamp.png',
+    kantarell: 'kantarell.png',
+    sopp: 'sopp.png',
+    taggsvamp: 'taggsvamp.png',
+    fingersvamp: 'fingersvamp.png',
+    tryffel: 'tryffel.png',
+    skinnsvamp: 'skinnsvamp.png',
+    skålsvamp: 'skalsvamp.png',
+    skalsvamp: 'skalsvamp.png'
+  }
+
+  return `/images/svampgrupp/${iconMapping[group] || 'default-icon.png'}`
+}
+
 const glossaryItems = computed(() => {
   const entries = ((glossaryDoc.value as any)?.entries || []) as GlossaryEntry[]
   const items = entries
@@ -220,6 +273,47 @@ const glossaryItems = computed(() => {
   return items
 })
 
+const speciesItems = computed(() => {
+  const rows = (speciesData.value || []).filter(row => row?.Commonname || row?.Scientificname)
+
+  const items = rows
+    .map((row) => ({
+      label: row.Commonname || row.Scientificname || 'Okänd art',
+      avatar: {
+        src: speciesGroupIconPath(row),
+        alt: row['Svamp-grupp'] || row['Svamp-Undersvamp-grupp'] || 'Svampgrupp'
+      },
+      suffix: row.Scientificname,
+      species: row,
+      children: [
+        {
+          label: row.Commonname || row.Scientificname || 'Okänd art',
+          slot: 'species-definition',
+          species: row,
+          disabled: true,
+          class: 'cursor-default',
+          ui: {
+            item: 'items-start select-text cursor-text'
+          }
+        }
+      ]
+    }))
+    .sort((a, b) => a.label.localeCompare(b.label, 'sv'))
+
+  if (!items.length) {
+    return [
+      {
+        label: 'Artlista laddas...',
+        icon: 'i-lucide-loader-circle',
+        suffix: 'Inga arter tillgängliga ännu.',
+        disabled: true
+      }
+    ]
+  }
+
+  return items
+})
+
 const commandGroups = computed(() => [
   {
     id: 'svampkunskap-search',
@@ -236,6 +330,12 @@ const commandGroups = computed(() => [
         icon: 'i-lucide-book-open-text',
         placeholder: 'Sök i ordlista',
         children: glossaryItems.value
+      },
+      {
+        label: 'Sök arter',
+        icon: 'i-lineicons-mushroom-1',
+        placeholder: 'Sök arter',
+        children: speciesItems.value
       }
     ]
   }
@@ -278,6 +378,45 @@ provide('blognavigation', blognavigation)
 provide('skogsskotselnavigation', skogsskotselNavigation)
 provide('overlayTextsNavigation', overlayTextsNavigation)
 
+let paletteMutationObserver: MutationObserver | null = null
+let speciesDetailWasVisible = false
+
+function resetPaletteScrollToTop() {
+  const root = document.querySelector('.command-palette-root')
+  if (!(root instanceof HTMLElement)) return
+
+  const viewport = root.querySelector('[data-slot="viewport"]')
+  const content = root.querySelector('[data-slot="content"]')
+
+  if (viewport instanceof HTMLElement) viewport.scrollTop = 0
+  if (content instanceof HTMLElement) content.scrollTop = 0
+}
+
+onMounted(() => {
+  paletteMutationObserver = new MutationObserver(() => {
+    const speciesDetailVisible = !!document.querySelector('.species-definition-panel')
+
+    if (speciesDetailVisible && !speciesDetailWasVisible) {
+      requestAnimationFrame(() => {
+        resetPaletteScrollToTop()
+        requestAnimationFrame(() => resetPaletteScrollToTop())
+      })
+    }
+
+    speciesDetailWasVisible = speciesDetailVisible
+  })
+
+  paletteMutationObserver.observe(document.body, {
+    childList: true,
+    subtree: true
+  })
+})
+
+onBeforeUnmount(() => {
+  paletteMutationObserver?.disconnect()
+  paletteMutationObserver = null
+})
+
 </script>
 
 <template>
@@ -291,8 +430,8 @@ provide('overlayTextsNavigation', overlayTextsNavigation)
       </NuxtLayout>
     </div>
     <ClientOnly>
-      <LazyUContentSearch icon="i-lucide-box" :close="false" :files="commandFiles" shortcut="meta_k"
-        :groups="commandGroups" :links="[]" :fuse="{ resultLimit: 42 }" size="xl" :ui="{
+      <LazyUContentSearch :close="false" :files="commandFiles" shortcut="meta_k" :groups="commandGroups" :links="[]"
+        :fuse="{ resultLimit: 42 }" size="xl" :ui="{
           root: 'command-palette-root',
           modal: 'sm:max-w-xl',
           input: 'p-1.5 text-lg',
@@ -313,6 +452,55 @@ provide('overlayTextsNavigation', overlayTextsNavigation)
             <p v-if="item.aliases?.length" class="text-xs text-neutral-500 mt-2">
               Alias: {{ item.aliases.join(', ') }}
             </p>
+          </div>
+        </template>
+        <template #species-definition="{ item }">
+          <div class="species-definition-panel w-full py-1 text-left select-text">
+            <div class="  items-start">
+              <div>
+                <div>
+                  <h3 class="text-3xl font-semibold text-neutral-900">{{ item.species?.Commonname || item.label }}</h3>
+                  <p class="text-base italic text-neutral-600">{{ item.species?.Scientificname }}</p>
+
+                </div>
+                <div class="mt-3 flex flex-wrap gap-2">
+                  <UButton v-if="item.species?.Artfakta && item.species.Artfakta !== 'Information saknas'"
+                    :to="stripDetailsFromURL(item.species.Artfakta)" target="_blank" size="sm" variant="outline"
+                    color="neutral" icon="i-heroicons-arrow-top-right-on-square-20-solid" label="Artfakta" />
+                  <UButton v-if="item.species?.Svampguiden && item.species.Svampguiden !== '0'"
+                    :to="stripDetailsFromURL(item.species.Svampguiden)" target="_blank" size="sm" variant="outline"
+                    color="neutral" icon="i-heroicons-arrow-top-right-on-square-20-solid" label="Svampguiden" />
+                </div>
+                <div class="mt-3 flex flex-wrap gap-1.5">
+                  <UBadge v-if="item.species?.['Nyasvamp-boken'] === 'x'" color="warning" size="md" variant="subtle">
+                    Matsvamp
+                  </UBadge>
+                  <UBadge v-if="item.species?.Giftsvamp === 'x'" color="poison" size="md" variant="subtle">
+                    Giftsvamp
+                  </UBadge>
+                  <UBadge v-if="item.species?.SIGNAL_art === 'S'" color="signal" size="md" variant="subtle">
+                    Signalart
+                  </UBadge>
+                  <UBadge v-if="item.species?.KALKmark" color="kalkmark" size="md" variant="subtle">
+                    Kalkmark
+                  </UBadge>
+                  <UBadge v-if="item.species?.ANNANmark" color="vanligmark" size="md" variant="subtle">
+                    Vanlig skogsmark
+                  </UBadge>
+                </div>
+              </div>
+            </div>
+
+
+            <p v-if="item.species?.ekologi" class="mt-3 text-base text-neutral-700 leading-relaxed whitespace-normal">
+              {{ item.species.ekologi }}
+            </p>
+
+            <NuxtImg v-if="item.species?.images?.[0]" :src="item.species.images[0]" width="400" height="250"
+              class="h-full w-full object-cover rounded-md my-6 shadow" :alt="item.species?.Commonname || item.label" />
+
+
+
           </div>
         </template>
       </LazyUContentSearch>
