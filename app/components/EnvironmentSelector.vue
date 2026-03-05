@@ -227,13 +227,13 @@
                 :color="restrictionEnabled ? 'secondary' : 'neutral'">
                 {{ restrictionEnabled ? "Markinventeringsdata" : "Markinventeringsdata" }}
               </UButton>
-              <!-- <UModal title="Miljööversikt" :ui="{ content: 'max-w-[83rem]', body: 'sm:p-0', title: 'text-2xl' }">
+              <UModal title="Miljööversikt" :ui="{ content: 'max-w-[83rem]', body: 'sm:p-0', title: 'text-2xl' }">
                 <UButton class="ring-muted/60" label="Alla miljöer" trailing icon="i-hugeicons-tree-06" color="neutral"
                   variant="outline" />
                 <template #body>
                   <Miljoer />
                 </template>
-              </UModal> -->
+              </UModal>
             </div>
           </div>
           <div class="col-span-3 flex w-full justify-end mt-3" v-if="props.showSpatialForest && !compactDesktop">
