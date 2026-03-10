@@ -8,7 +8,3 @@ key: seedTree
 ---
 
 Mykorrhizasvamparnas mycel fortsätter leva på fröträdens rötter och kan sprida sig vidare till nya uppväxande plantor.
-
-| Markör | Förklaring                                                      |
-| ------ | --------------------------------------------------------------- |
-|        | Område runt träden med cirka 10 meters radie, dit rötterna når. |

@@ -12,7 +12,3 @@ table:
 ---
 
 Här överlever mykorrhizasvampar. De arter och mycel som växte med träden före avverkningen finns oftast kvar. De lever vidare med rötterna som når 10 meter och kan sprida sig till uppväxande plantor.
-
-| Markör                                            | Förklaring                                                      |
-| ------------------------------------------------- | --------------------------------------------------------------- |
-| ![Hänsynsyta ikon](/svg/h%C3%A4nsyn-yta-icon.svg) | Område runt träden med cirka 10 meters radie, dit rötterna når. |

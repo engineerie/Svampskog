@@ -269,7 +269,7 @@
     </DefineMarkerCardBody>
     <DefineMethodHeroImage>
         <div class="relative w-full z-10 max-h-40 lg:max-h-60 shadow ring-muted/50 overflow-hidden bg-neutral-400">
-            <NuxtImg :src="methodImage(selectedMethod, 'detail')" height="500" width="900"
+            <NuxtImg :src="methodImage(selectedMethod, 'detail')" height="450" width="900"
                 :alt="`Bild för ${selectedMethod.title}`" class="w-full h-full opacity-90" />
             <!-- <div v-if="compareModeEnabled && compareMode === 'methods' && compareMethod"
                 class="absolute inset-y-0 right-0 w-1/2 overflow-hidden bg-neutral-400 border-l-2 border-neutral-50">
@@ -286,7 +286,8 @@
                 <link v-for="(link, idx) in timelinePreloadLinks" :key="`${link.href}-${idx}`"
                     :rel="link.rel || 'prefetch'" :as="link.as || 'image'" :href="link.href" />
             </Head>
-            <div class="grid grid-cols-4 my-3 ring-muted/50 ring bg-white rounded-xl overflow-hidden">
+            <div v-if="!isMobile"
+                class="hidden lg:grid grid-cols-4 my-3 ring-muted/50 ring bg-white rounded-xl overflow-hidden">
                 <ReuseMethodHeroImage class="  overflow-hidden ring ring-muted/50 " />
                 <div :class="[
                     'mx-4 lg:mx-0 lg:px-6 lg:py-4 lg:pt-6  w-full h-full flex flex-col justify-between col-span-2',
@@ -326,7 +327,7 @@
                             </template>
                         </UPopover>
                         <p class="text-muted text-md ">{{ selectedMethod.shortdescription }}</p>
-                        <div class="flex flex-wrap items-center gap-1">
+                        <div class="flex flex-wrap items-center gap-1 mt-1">
 
                             <UBadge v-if="selectedMethod.impactLabel" :color="selectedMethod.impactColor || 'warning'"
                                 variant="soft" size="md">{{ selectedMethod.impactLabel }} påverkan</UBadge>
@@ -361,94 +362,14 @@
                                 variant="soft" size="md" />
                         </div>
                     </div>
-                    <UPopover v-if="!isMobile" mode="hover" :content="{ align: 'start', side: 'bottom' }">
-                        <div class="relative w-80 h-2 rounded-sm bg-linear-to-r from-emerald-500 via-amber-400 to-rose-500 ring ring-neutral-300/40 "
-                            aria-label="Påverkansskala">
-                            <span
-                                class="absolute inset-y-0 left-0 rounded-l-sm bg-neutral-100/30 transition-all duration-300 ease-out"
-                                :style="{ width: `${Math.max(0, Math.min(100, impact.value))}%` }" />
-                            <span v-if="comparisonImpact"
-                                class="absolute inset-y-0 left-0 rounded-l-sm transition-all duration-300 ease-out"
-                                :style="{
-                                    width: `${Math.max(0, Math.min(100, comparisonImpact.value))}%`,
-                                    opacity: '0.2',
-                                    backgroundImage: 'repeating-linear-gradient(135deg, rgb(64 64 64) 0 2px, transparent 2px 6px)'
-                                }" />
-                            <span
-                                class="absolute top-0 h-2 w-0.5 bg-neutral-100/80 -translate-x-1/2 transition-all duration-300 ease-out"
-                                :style="{ left: `${Math.max(0, Math.min(100, impact.value))}%` }">
-                                <UIcon :name="selectedMethod.icon || 'i-heroicons-information-circle'"
-                                    class="absolute -top-4 left-1/2 -translate-x-1/2 size-3.5 text-neutral-500" />
-                            </span>
-                            <span v-if="comparisonImpact"
-                                class="absolute top-0 h-2 w-0.5 bg-neutral-700/20 -translate-x-1/2 transition-all duration-300 ease-out"
-                                :style="{ left: `${Math.max(0, Math.min(100, comparisonImpact.value))}%` }">
-                                <UIcon :name="compareMethod?.icon || 'i-iconamoon-compare'"
-                                    class="absolute -top-4 left-1/2 -translate-x-1/2 size-3.5 text-neutral-500/60" />
-                            </span>
-                        </div>
-                        <template #content>
-                            <div class="p-3 min-w-56 space-y-2">
-                                <p class="text-sm font-semibold text-neutral-900">Påverkan på mykorrhiza</p>
-                                <div class="flex items-center gap-1">
-                                    <UIcon :name="selectedMethod.icon || 'i-heroicons-information-circle'"
-                                        class="size-4 text-neutral-600" />
-                                    <p class="text-sm text-neutral-600">
-                                        {{ selectedMethod.title || selectedMethod.id }}
-                                    </p>
-                                    <UBadge size="sm" class="ml-2"
-                                        :color="impact.tone === 'low' ? 'primary' : impact.tone === 'high' ? 'error' : 'tertiary'"
-                                        variant="subtle">
-                                        {{ impact.label }}
-                                    </UBadge>
-                                </div>
-                                <div v-if="comparisonImpact" class="flex items-center gap-1">
-                                    <UIcon :name="compareMethod?.icon || 'i-iconamoon-compare'"
-                                        class="size-4 text-neutral-600" />
-                                    <p class="text-sm text-neutral-600">
-                                        {{ compareMethodLabel }}
-                                    </p>
-                                    <UBadge size="sm" class="ml-2"
-                                        :color="comparisonImpact.tone === 'low' ? 'primary' : comparisonImpact.tone === 'high' ? 'error' : 'tertiary'"
-                                        variant="subtle">
-                                        {{ comparisonImpact.label }}
-                                    </UBadge>
-                                </div>
-                            </div>
-                        </template>
-                    </UPopover>
+
                 </div>
                 <div class="col-span-1 w-full h-full flex flex-col items-end">
-                    <div
-                        class="flex flex-col h-full justify-between items-end gap-2 p-4  ring-muted/50 rounded-lg w-fit ">
+                    <div class="flex flex-col h-full justify-between items-end gap-2 p-4  ring-muted/50  w-fit ">
 
                         <div class="flex flex-col items-end gap-2">
 
-                            <USelect v-model="selectedFrameworkIndex" :items="frameworkOptions" v-if="isMobile"
-                                option-attribute="label" value-key="value" placeholder="Välj metod" size="lg"
-                                variant="outline" class="w-full sm:w-fit ring-muted/50 text-neutral-700" :ui="{
-                                    content: 'pl-3 min-w-fit min-h-70 relative overflow-y-auto bar-chart-container max-w-96 before:pointer-events-none before:absolute before:left-2 before:top-2 before:bottom-2 before:w-0.5 before:rounded-full before:bg-linear-to-b before:from-emerald-500 before:via-amber-400 before:to-rose-500'
-                                }">
-                                <template #item="{ item }">
-                                    <div class="px-1 w-full">
-                                        <div
-                                            class="hover:bg-neutral-50 p-1 w-full justify-between flex items-center gap-4 rounded-md my-1">
-                                            <div>
-                                                <h1 class="text-md font-semibold text-neutral-900">{{ item.label }}
-                                                </h1>
-                                                <p class="text-sm text-neutral-500 font-light">{{ item.description
-                                                    || ''
-                                                    }}
-                                                </p>
-                                            </div>
-                                            <div class="size-10 flex justify-center items-center bg-muted rounded-md">
-                                                <UIcon v-if="item.icon" :name="item.icon" />
-                                                <UIcon v-else name="i-heroicons-photo" />
-                                            </div>
-                                        </div>
-                                    </div>
-                                </template>
-                            </USelect>
+
 
 
 
@@ -456,165 +377,65 @@
                             <UButton v-if="!isMobile" label="Om metoden" icon="i-heroicons-information-circle"
                                 color="neutral" variant="solid" class="ring-muted/50 rounded-lg" size="lg"
                                 @click="methodInfoPanelOpen = true" />
-                            <UDrawer v-else>
-                                <UButton color="neutral" variant="outline" class="ring-muted/50"
-                                    icon="i-heroicons-ellipsis-horizontal-16-solid" size="xl" />
-                                <template #content>
-                                    <div class="p-4 flex flex-col gap-2">
-                                        <div class="flex flex-col rounded-lg bg-neutral-50">
-                                            <div class=" pl-4 p-2  w-full items-center flex justify-between">
-                                                <div class="text-neutral-700 text-semibold">Historik</div>
-                                                <UPopover
-                                                    :ui="{ content: ' overflow-y-auto bar-chart-container max-w-80' }"
-                                                    :content="{
-                                                        align: 'start',
-                                                        side: 'bottom',
-                                                    }">
-                                                    <UButton :label="selectedStartskogLabel"
-                                                        icon="i-heroicons-chevron-up-down" color="neutral"
-                                                        variant="soft" trailing size="xl"
-                                                        class="cursor-pointer ring-muted/50" />
-                                                    <template #content>
-                                                        <div class="py-1 min-w-50 max-w-110">
-                                                            <div class="px-3 my-2 pb-1">
-                                                                <h3 class="text-sm font-semibold text-neutral-900">
-                                                                    Skogens
-                                                                    historik
-                                                                </h3>
-                                                                <p class="text-xs text-neutral-500">Har skogen varit
-                                                                    kalavverkad
-                                                                    tidigare?</p>
-                                                            </div>
-                                                            <USeparator class="mb-2" />
-                                                            <div class="px-2">
-                                                                <div class="hover:bg-neutral-50 p-3 w-full justify-between flex items-center gap-4 rounded-md my-1 cursor-pointer"
-                                                                    :class="{ 'bg-neutral-100': selectedStartskogTab === 'naturskog' }"
-                                                                    @click="selectedStartskogTab = 'naturskog'">
-                                                                    <div>
-                                                                        <h1
-                                                                            class="text-md font-semibold text-neutral-900">
-                                                                            Inte
-                                                                            kalavverkad</h1>
-                                                                        <p class="text-sm text-neutral-500 font-light">
-                                                                            Skogen har
-                                                                            oftast skogsbrukats, men inte varit
-                                                                            kalavverkad.
-                                                                        </p>
-                                                                    </div>
-                                                                    <div
-                                                                        class="size-10 flex justify-center items-center bg-muted rounded-md shrink-0">
-                                                                        <UIcon
-                                                                            name="i-material-symbols-light-forest-rounded" />
-                                                                    </div>
-                                                                </div>
-                                                                <div class="hover:bg-neutral-50 p-3 w-full justify-between flex items-center gap-4 rounded-md my-1 cursor-pointer"
-                                                                    :class="{ 'bg-neutral-100': selectedStartskogTab === 'produktionsskog_' }"
-                                                                    @click="selectedStartskogTab = 'produktionsskog_'">
-                                                                    <div>
-                                                                        <h1
-                                                                            class="text-md font-semibold text-neutral-900">
-                                                                            Kalavverkad</h1>
-                                                                        <p class="text-sm text-neutral-500 font-light">
-                                                                            Skogen har
-                                                                            varit kalavverkad eller är etablerad på
-                                                                            tidigare
-                                                                            trädlös
-                                                                            mark.</p>
-                                                                    </div>
-                                                                    <div
-                                                                        class="size-10 flex justify-center items-center bg-muted rounded-md shrink-0">
-                                                                        <UIcon name="i-ph-farm" />
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </template>
-                                                </UPopover>
 
-                                            </div>
-                                            <USeparator class="border-white" />
-                                            <div class="pl-4 p-2 w-full items-center flex justify-between">
-                                                <div class="text-neutral-700 text-semibold">Jämför</div>
-                                                <UPopover
-                                                    :ui="{ content: ' overflow-y-auto bar-chart-container max-w-96' }"
-                                                    :content="{
-                                                        align: 'end',
-                                                        side: 'bottom',
-                                                    }" v-model:open="compareFrameworkPopoverOpen">
-                                                    <UButton trailing variant="soft" color="neutral"
-                                                        class="ring-muted/50 lg:max-w-[85vw] sm:max-w-none h-fit"
-                                                        size="xl" icon="i-heroicons-chevron-up-down">
-                                                        <span class="block truncate sm:max-w-none">
-                                                            {{ compareMethodLabel || 'Ingen jämförelse' }}
-                                                        </span>
-                                                    </UButton>
-
-                                                    <template #content>
-                                                        <div class="py-1 min-w-60 max-w-110">
-                                                            <div class="px-2">
-                                                                <div class="hover:bg-neutral-50 p-3 w-full justify-between flex items-center gap-4 rounded-md my-1 cursor-pointer"
-                                                                    :class="{ 'bg-neutral-100': !compareModeEnabled }"
-                                                                    @click="setCompareFrameworkIndex(null); compareFrameworkPopoverOpen = false">
-                                                                    <div>
-                                                                        <h1
-                                                                            class="text-md font-semibold text-neutral-900">
-                                                                            Ingen
-                                                                            jämförelse</h1>
-                                                                        <p class="text-sm text-neutral-500 font-light">
-                                                                            Stäng
-                                                                            av
-                                                                            jämförelse.</p>
-                                                                    </div>
-                                                                    <div
-                                                                        class="size-10 flex justify-center items-center bg-muted rounded-md">
-                                                                        <UIcon name="i-heroicons-x-mark" />
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                            <USeparator class="my-2 w-full" />
-
-                                                            <div class="relative py-1">
-                                                                <span
-                                                                    class="pointer-events-none absolute left-2 top-2 bottom-2 w-0.5 rounded-full bg-linear-to-b from-emerald-500 via-amber-400 to-rose-500" />
-                                                                <div v-for="option in compareFrameworkOptions"
-                                                                    :key="option.value" class="pl-4 pr-2">
-                                                                    <div class="hover:bg-neutral-50 p-3 w-full justify-between flex items-center gap-4 rounded-md my-1 cursor-pointer"
-                                                                        :class="{ 'bg-neutral-100': option.value === selectedCompareFrameworkIndex }"
-                                                                        @click="setCompareFrameworkIndex(option.value); compareFrameworkPopoverOpen = false">
-                                                                        <div>
-                                                                            <h1
-                                                                                class="text-md font-semibold text-neutral-900">
-                                                                                {{
-                                                                                    option.label }}</h1>
-                                                                            <p
-                                                                                class="text-sm text-neutral-500 font-light">
-                                                                                {{
-                                                                                    option.description || '' }}</p>
-                                                                        </div>
-                                                                        <div
-                                                                            class="size-10 flex justify-center items-center bg-muted rounded-md">
-                                                                            <UIcon v-if="option.icon"
-                                                                                :name="option.icon" />
-                                                                            <UIcon v-else name="i-heroicons-photo" />
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </template>
-                                                </UPopover>
-                                            </div>
-                                        </div>
-
-                                        <UButton label="Om metoden" icon="i-heroicons-information-circle"
-                                            color="neutral" variant="solid" class="ring-muted/50 w-full justify-center"
-                                            size="xl" @click="methodInfoPanelOpen = true" />
-                                    </div>
-                                </template>
-                            </UDrawer>
                         </div>
 
-
+                        <UPopover v-if="!isMobile" mode="hover" :content="{ align: 'start', side: 'bottom' }">
+                            <div class="relative w-80 h-2 rounded-sm bg-linear-to-r from-emerald-500 via-amber-400 to-rose-500 ring ring-neutral-300/40 "
+                                aria-label="Påverkansskala">
+                                <span
+                                    class="absolute inset-y-0 left-0 rounded-l-sm bg-neutral-100/30 transition-all duration-300 ease-out"
+                                    :style="{ width: `${Math.max(0, Math.min(100, impact.value))}%` }" />
+                                <span v-if="comparisonImpact"
+                                    class="absolute inset-y-0 left-0 rounded-l-sm transition-all duration-300 ease-out"
+                                    :style="{
+                                        width: `${Math.max(0, Math.min(100, comparisonImpact.value))}%`,
+                                        opacity: '0.2',
+                                        backgroundImage: 'repeating-linear-gradient(135deg, rgb(64 64 64) 0 2px, transparent 2px 6px)'
+                                    }" />
+                                <span
+                                    class="absolute top-0 h-2 w-0.5 bg-neutral-100/80 -translate-x-1/2 transition-all duration-300 ease-out"
+                                    :style="{ left: `${Math.max(0, Math.min(100, impact.value))}%` }">
+                                    <UIcon :name="selectedMethod.icon || 'i-heroicons-information-circle'"
+                                        class="absolute -top-4 left-1/2 -translate-x-1/2 size-3.5 text-neutral-500" />
+                                </span>
+                                <span v-if="comparisonImpact"
+                                    class="absolute top-0 h-2 w-0.5 bg-neutral-700/20 -translate-x-1/2 transition-all duration-300 ease-out"
+                                    :style="{ left: `${Math.max(0, Math.min(100, comparisonImpact.value))}%` }">
+                                    <UIcon :name="compareMethod?.icon || 'i-iconamoon-compare'"
+                                        class="absolute -top-4 left-1/2 -translate-x-1/2 size-3.5 text-neutral-500/60" />
+                                </span>
+                            </div>
+                            <template #content>
+                                <div class="p-3 min-w-56 space-y-2">
+                                    <p class="text-sm font-semibold text-neutral-900">Påverkan på mykorrhiza</p>
+                                    <div class="flex items-center gap-1">
+                                        <UIcon :name="selectedMethod.icon || 'i-heroicons-information-circle'"
+                                            class="size-4 text-neutral-600" />
+                                        <p class="text-sm text-neutral-600">
+                                            {{ selectedMethod.title || selectedMethod.id }}
+                                        </p>
+                                        <UBadge size="sm" class="ml-2"
+                                            :color="impact.tone === 'low' ? 'primary' : impact.tone === 'high' ? 'error' : 'tertiary'"
+                                            variant="subtle">
+                                            {{ impact.label }}
+                                        </UBadge>
+                                    </div>
+                                    <div v-if="comparisonImpact" class="flex items-center gap-1">
+                                        <UIcon :name="compareMethod?.icon || 'i-iconamoon-compare'"
+                                            class="size-4 text-neutral-600" />
+                                        <p class="text-sm text-neutral-600">
+                                            {{ compareMethodLabel }}
+                                        </p>
+                                        <UBadge size="sm" class="ml-2"
+                                            :color="comparisonImpact.tone === 'low' ? 'primary' : comparisonImpact.tone === 'high' ? 'error' : 'tertiary'"
+                                            variant="subtle">
+                                            {{ comparisonImpact.label }}
+                                        </UBadge>
+                                    </div>
+                                </div>
+                            </template>
+                        </UPopover>
 
 
 
@@ -738,6 +559,182 @@
                             </div>
                         </template>
                     </UPopover>
+                    <div class="flex gap-2 p-2">
+                        <USelect v-model="selectedFrameworkIndex" :items="frameworkOptions" v-if="isMobile"
+                            option-attribute="label" value-key="value" placeholder="Välj metod" size="lg"
+                            variant="outline" class="w-full sm:w-fit ring-muted/50 text-neutral-700" :ui="{
+                                content: 'pl-3 min-w-fit min-h-70 relative overflow-y-auto bar-chart-container max-w-96 before:pointer-events-none before:absolute before:left-2 before:top-2 before:bottom-2 before:w-0.5 before:rounded-full before:bg-linear-to-b before:from-emerald-500 before:via-amber-400 before:to-rose-500'
+                            }">
+                            <template #item="{ item }">
+                                <div class="px-1 w-full">
+                                    <div
+                                        class="hover:bg-neutral-50 p-1 w-full justify-between flex items-center gap-4 rounded-md my-1">
+                                        <div>
+                                            <h1 class="text-md font-semibold text-neutral-900">{{ item.label }}
+                                            </h1>
+                                            <p class="text-sm text-neutral-500 font-light">{{ item.description
+                                                || ''
+                                            }}
+                                            </p>
+                                        </div>
+                                        <div class="size-10 flex justify-center items-center bg-muted rounded-md">
+                                            <UIcon v-if="item.icon" :name="item.icon" />
+                                            <UIcon v-else name="i-heroicons-photo" />
+                                        </div>
+                                    </div>
+                                </div>
+                            </template>
+                        </USelect>
+
+                        <UDrawer>
+                            <UButton color="neutral" variant="outline" class="ring-muted/50"
+                                icon="i-heroicons-ellipsis-horizontal-16-solid" size="xl" />
+                            <template #content>
+                                <div class="p-4 flex flex-col gap-2">
+                                    <div class="flex flex-col rounded-lg bg-neutral-50">
+                                        <div class=" pl-4 p-2  w-full items-center flex justify-between">
+                                            <div class="text-neutral-700 text-semibold">Historik</div>
+                                            <UPopover :ui="{ content: ' overflow-y-auto bar-chart-container max-w-80' }"
+                                                :content="{
+                                                    align: 'start',
+                                                    side: 'bottom',
+                                                }">
+                                                <UButton :label="selectedStartskogLabel"
+                                                    icon="i-heroicons-chevron-up-down" color="neutral" variant="soft"
+                                                    trailing size="xl" class="cursor-pointer ring-muted/50" />
+                                                <template #content>
+                                                    <div class="py-1 min-w-50 max-w-110">
+                                                        <div class="px-3 my-2 pb-1">
+                                                            <h3 class="text-sm font-semibold text-neutral-900">
+                                                                Skogens
+                                                                historik
+                                                            </h3>
+                                                            <p class="text-xs text-neutral-500">Har skogen varit
+                                                                kalavverkad
+                                                                tidigare?</p>
+                                                        </div>
+                                                        <USeparator class="mb-2" />
+                                                        <div class="px-2">
+                                                            <div class="hover:bg-neutral-50 p-3 w-full justify-between flex items-center gap-4 rounded-md my-1 cursor-pointer"
+                                                                :class="{ 'bg-neutral-100': selectedStartskogTab === 'naturskog' }"
+                                                                @click="selectedStartskogTab = 'naturskog'">
+                                                                <div>
+                                                                    <h1 class="text-md font-semibold text-neutral-900">
+                                                                        Inte
+                                                                        kalavverkad</h1>
+                                                                    <p class="text-sm text-neutral-500 font-light">
+                                                                        Skogen har
+                                                                        oftast skogsbrukats, men inte varit
+                                                                        kalavverkad.
+                                                                    </p>
+                                                                </div>
+                                                                <div
+                                                                    class="size-10 flex justify-center items-center bg-muted rounded-md shrink-0">
+                                                                    <UIcon
+                                                                        name="i-material-symbols-light-forest-rounded" />
+                                                                </div>
+                                                            </div>
+                                                            <div class="hover:bg-neutral-50 p-3 w-full justify-between flex items-center gap-4 rounded-md my-1 cursor-pointer"
+                                                                :class="{ 'bg-neutral-100': selectedStartskogTab === 'produktionsskog_' }"
+                                                                @click="selectedStartskogTab = 'produktionsskog_'">
+                                                                <div>
+                                                                    <h1 class="text-md font-semibold text-neutral-900">
+                                                                        Kalavverkad</h1>
+                                                                    <p class="text-sm text-neutral-500 font-light">
+                                                                        Skogen har
+                                                                        varit kalavverkad eller är etablerad på
+                                                                        tidigare
+                                                                        trädlös
+                                                                        mark.</p>
+                                                                </div>
+                                                                <div
+                                                                    class="size-10 flex justify-center items-center bg-muted rounded-md shrink-0">
+                                                                    <UIcon name="i-ph-farm" />
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </template>
+                                            </UPopover>
+
+                                        </div>
+                                        <USeparator class="border-white" />
+                                        <div class="pl-4 p-2 w-full items-center flex justify-between">
+                                            <div class="text-neutral-700 text-semibold">Jämför</div>
+                                            <UPopover :ui="{ content: ' overflow-y-auto bar-chart-container max-w-96' }"
+                                                :content="{
+                                                    align: 'end',
+                                                    side: 'bottom',
+                                                }" v-model:open="compareFrameworkPopoverOpen">
+                                                <UButton trailing variant="soft" color="neutral"
+                                                    class="ring-muted/50 lg:max-w-[85vw] sm:max-w-none h-fit" size="xl"
+                                                    icon="i-heroicons-chevron-up-down">
+                                                    <span class="block truncate sm:max-w-none">
+                                                        {{ compareMethodLabel || 'Ingen jämförelse' }}
+                                                    </span>
+                                                </UButton>
+
+                                                <template #content>
+                                                    <div class="py-1 min-w-60 max-w-110">
+                                                        <div class="px-2">
+                                                            <div class="hover:bg-neutral-50 p-3 w-full justify-between flex items-center gap-4 rounded-md my-1 cursor-pointer"
+                                                                :class="{ 'bg-neutral-100': !compareModeEnabled }"
+                                                                @click="setCompareFrameworkIndex(null); compareFrameworkPopoverOpen = false">
+                                                                <div>
+                                                                    <h1 class="text-md font-semibold text-neutral-900">
+                                                                        Ingen
+                                                                        jämförelse</h1>
+                                                                    <p class="text-sm text-neutral-500 font-light">
+                                                                        Stäng
+                                                                        av
+                                                                        jämförelse.</p>
+                                                                </div>
+                                                                <div
+                                                                    class="size-10 flex justify-center items-center bg-muted rounded-md">
+                                                                    <UIcon name="i-heroicons-x-mark" />
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <USeparator class="my-2 w-full" />
+
+                                                        <div class="relative py-1">
+                                                            <span
+                                                                class="pointer-events-none absolute left-2 top-2 bottom-2 w-0.5 rounded-full bg-linear-to-b from-emerald-500 via-amber-400 to-rose-500" />
+                                                            <div v-for="option in compareFrameworkOptions"
+                                                                :key="option.value" class="pl-4 pr-2">
+                                                                <div class="hover:bg-neutral-50 p-3 w-full justify-between flex items-center gap-4 rounded-md my-1 cursor-pointer"
+                                                                    :class="{ 'bg-neutral-100': option.value === selectedCompareFrameworkIndex }"
+                                                                    @click="setCompareFrameworkIndex(option.value); compareFrameworkPopoverOpen = false">
+                                                                    <div>
+                                                                        <h1
+                                                                            class="text-md font-semibold text-neutral-900">
+                                                                            {{
+                                                                                option.label }}</h1>
+                                                                        <p class="text-sm text-neutral-500 font-light">
+                                                                            {{
+                                                                                option.description || '' }}</p>
+                                                                    </div>
+                                                                    <div
+                                                                        class="size-10 flex justify-center items-center bg-muted rounded-md">
+                                                                        <UIcon v-if="option.icon" :name="option.icon" />
+                                                                        <UIcon v-else name="i-heroicons-photo" />
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </template>
+                                            </UPopover>
+                                        </div>
+                                    </div>
+
+                                    <UButton label="Om metoden" icon="i-heroicons-information-circle" color="neutral"
+                                        variant="solid" class="ring-muted/50 w-full justify-center" size="xl"
+                                        @click="methodInfoPanelOpen = true" />
+                                </div>
+                            </template>
+                        </UDrawer>
+                    </div>
                 </div>
 
 
@@ -949,7 +946,7 @@
                                                                                     class="size-4" />
                                                                                 <span class="leading-none">{{
                                                                                     badge.label
-                                                                                }}</span>
+                                                                                    }}</span>
                                                                             </div>
                                                                             <template #content>
                                                                                 <p
@@ -962,7 +959,7 @@
                                                                             class="inline-flex w-fit cursor-default items-center gap-1.5 rounded-md bg-neutral-950/55 px-2.5 py-1.5 text-sm text-neutral-50 backdrop-blur-xs pointer-events-auto">
                                                                             <UIcon :name="badge.icon" class="size-4" />
                                                                             <span class="leading-none">{{ badge.label
-                                                                            }}</span>
+                                                                                }}</span>
                                                                         </div>
                                                                     </template>
                                                                 </div>
@@ -1026,7 +1023,7 @@
                                                                                     class="size-4" />
                                                                                 <span class="leading-none">{{
                                                                                     badge.label
-                                                                                }}</span>
+                                                                                    }}</span>
                                                                             </div>
                                                                             <template #content>
                                                                                 <p
@@ -1039,7 +1036,7 @@
                                                                             class="inline-flex w-fit cursor-default items-center gap-1.5 rounded-md bg-neutral-950/55 px-2.5 py-1.5 text-sm text-neutral-50 backdrop-blur-xs pointer-events-auto">
                                                                             <UIcon :name="badge.icon" class="size-4" />
                                                                             <span class="leading-none">{{ badge.label
-                                                                            }}</span>
+                                                                                }}</span>
                                                                         </div>
                                                                     </template>
                                                                 </div>
@@ -1419,7 +1416,6 @@ import { useOverlayRegistry } from '~/composables/useOverlayRegistry'
 import { useAsyncData, useRoute, useRouter, navigateTo } from '#app'
 
 definePageMeta({
-    scrollToTop: false,
     pageTransition: false,
     key: 'skogsskotsel-method',
 })
@@ -2550,7 +2546,7 @@ const buildActiveMarkerBadges = (
             key: 'naturvardsarter',
             icon: 'i-material-symbols-award-star-outline-rounded',
             label: 'Naturvårdssvamp',
-            description: 'Naturvårdsart individ',
+            description: 'Mycel av rödlistad svamp eller signalart',
         })
 
         const isAfterFelling = timeToken === 'efter' || (hasNumericTime && numericTime >= 10)

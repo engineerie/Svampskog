@@ -145,7 +145,7 @@ const heroDescriptionParts = computed(() => {
 
 
             <NuxtImg v-if="!isMobile" src="/images/Landing/boleto_small.png" width="750" height="1050" quality="80"
-              format="webp" class=" sm:-mt-90 -mb-32 -mt-10 sm:-mb-80  object-cover object-bottom" />
+              format="webp" class="hidden lg:flex sm:-mt-90 -mb-32 -mt-10 sm:-mb-80  object-cover object-bottom" />
             <!-- <div v-if="isMobile"
               class="pointer-events-none absolute top-0 inset-x-0 h-25 bg-linear-to-b from-neutral-50 to-transparent" /> -->
 
@@ -173,7 +173,8 @@ const heroDescriptionParts = computed(() => {
       :transition="{ duration: 0.6, delay: 0.3 }">
       <UPageSection v-if="page?.sections?.[1]" :title="page.sections[1].title"
         :description="page.sections[1].description" :headline="page.sections[1].headline"
-        :orientation="page.sections[1].orientation" :links="page.sections[1].links" :reverse="isMobile ? true : false">
+        :orientation="page.sections[1].orientation" :links="page.sections[1].links"
+        :ui="{ wrapper: 'order-last lg:order-first' }">
         <!-- <div v-if="stackImages.length" ref="imageSectionRef"
           class="relative w-full max-w-3xl ml-auto flex flex-col items-center group">
           <div class="relative w-full" style="padding-top: 60%">

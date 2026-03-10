@@ -18,8 +18,6 @@ export default defineAppConfig({
     },
     pageSection: {
       slots: {
-        // container:
-        //   "flex flex-col-reverse lg:flex-col lg:grid py-16 sm:py-24 lg:py-32 gap-8 sm:gap-16",
         title: "font-semibold",
       },
     },

@@ -17,7 +17,3 @@ Kanteffekt beskriver att träds rötter och deras mykorrhizasvampar sträcker si
 #### Luckhuggning
 
 Små avverkningsytor skapar mer kant per yta och ger en större kanteffekt. Är luckorna 20-30 m täcker kanteffekten i princip hela ytan, eftersom all mark ligger inom 10–15 meter från en kant.
-
-| Markör | Förklaring                                                           |
-| ------ | -------------------------------------------------------------------- |
-|        | Område längs hyggeskanten där trädens rötter når, cirka 10 meter in. |

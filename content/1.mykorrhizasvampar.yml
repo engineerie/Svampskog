@@ -10,7 +10,7 @@ dnaSection:
   image: /images/Sources/markinventering.png
 environmentSection:
   title: Välj skogsmiljö
-  description: Sök fram skogsmiljöer utifrån Markinventeringens miljövariabler. Kombinationerna är i utgångsläget begränsade till miljöer där DNA-baserade artlistor finns tillgängliga.
+  description: Sök fram skogsmiljöer utifrån Markinventeringens miljövariabler.
 fruitbodySection:
   headline: Enligt fruktkroppar
   title: Artförekomst enligt fruktkroppsfynd
@@ -50,16 +50,16 @@ factsSection:
   items:
     - title: Många svampar bildar mykorrhiza
       description: De flesta större svampar i skogen bildar mykorrhiza - nästan alla ätliga och giftiga. Hit hör bland annat spindelskivlingar, kremlor, riskor, soppar och kantareller. Det finns också några som bildar små och oansenliga fruktkroppar och därför dåligt kända, bland annat många skinnsvampar.
-      image: /images/svampindex/Cortinarius sanguineus-179-.jpg
+      image: /images/Carousel/ManyMychorrhizatone.svg
     - title: Över 2000 arter i Sverige
       description: I Sverige finns över 2 000 olika mykorrhizasvampar. Några är vanliga, de flesta mindre vanliga eller till och med ovanliga. I en äldre skog kan det finnas ett par hundra arter. Ofta växer varje träds rotsystem i symbios med mycel av 50-100 arter.
-      image: /images/Carousel/web/ArterDiagram2.webp
+      image: /images/Carousel/2000.svg
     - title: Det mesta är mycel i marken
       description: Fruktkropparna är bara en liten och tillfällig del av svampen. Den största delen är mycel i marken. Mycel växer under hela växtsäsongen och kan leva i många år.
-      image: /images/Carousel/web/mainlymycelium.webp
+      image: /images/Carousel/MainlyMycelTone.svg
     - title: Varje mycel är en individ
       description: Varje mycel i marken är en svampindivid, ofta någon till några kvadratmeter stor. I en skog finns många olika individer av både samma och olika arter. Olika individer bildar ett komplext lapptäcke av konkurrerande mycel.
-      image: /images/Carousel/web/S%C3%B6der_Tallskog_91_Bl%C3%A5b%C3%A4r_grupp.webp
+      image: /images/Carousel/patchwork2.svg
 navigation: false
 speciesListsIntro:
   title: Artlistor på två sätt

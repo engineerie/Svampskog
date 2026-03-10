@@ -1,21 +1,21 @@
 <template>
-    <div class="flex-1 transition-all" :class="selectedMethod.id ? '' : ''" v-if="page">
+    <div class="flex-1 transition-all" v-if="page">
 
 
 
 
 
 
-        <UContainer v-if="!selectedMethod.id" class="w-full px-0">
-            <div class=" pb-0">
-                <NuxtImg v-if="isMobile" :src="page.hero.src"
-                    class=" shadow ring ring-muted/50 w-full aspect-video object-cover " />
-            </div>
-            <UPageHero :ui="{ container: ' ', title: 'sm:text-7xl' }" :title="page.hero.title"
+        <UContainer class="w-full px-0">
+
+            <NuxtImg v-if="isMobile" :src="page.hero.src"
+                class=" lg:hidden shadow ring ring-muted/50 w-full aspect-video object-cover " />
+
+            <UPageHero :ui="{ container: ' py-12', title: 'sm:text-7xl' }" :title="page.hero.title"
                 :description="page.hero.description" :orientation="isMobile ? 'horizontal' : 'horizontal'" class=""
                 :headline="isMobile ? 'Skogsskötsel' : ''">
-                <NuxtImg :src="page.hero.src"
-                    class="rounded-lg lg:rounded-xl shadow ring ring-muted/50 w-full aspect-video object-cover"
+                <NuxtImg v-if="!isMobile" :src="page.hero.src"
+                    class="hidden lg:flex rounded-lg lg:rounded-xl shadow ring ring-muted/50 w-full aspect-video object-cover"
                     width="1000" format="webp" quality="80" />
             </UPageHero>
             <!-- <UPageHeader :title="page.hero.title" :description="page.hero.description" headline="Skogsskötsel"
@@ -40,7 +40,7 @@
 
 
 
-            <UContainer v-if="indexTab === 'methods'" class="relative w-full overflow-visible px-0">
+            <UContainer class="relative w-full overflow-visible px-0">
                 <!-- <Motion :initial="{ opacity: 0 }" :animate="{ opacity: 1 }" :transition="{ duration: 0.35, delay: 0.1 }">
                 <div
                     class="pointer-events-none absolute left-1.5 top-4 bottom-4 w-0.5 rounded-full bg-linear-to-b from-emerald-500 via-amber-400 to-rose-500 lg:hidden" />
@@ -49,8 +49,7 @@
                 <UPageSection :ui="{ title: 'text-start', description: 'text-start' }"
                     :title="page.methodSelectorSection?.title" :description="page.methodSelectorSection?.description">
 
-                    <div class="w-full flex flex-col lg:flex-row justify-between sm:gap-4 transition-all"
-                        :class="[selectedMethod.id ? 'mt-0 flex-row' : ' flex-col gap-4']">
+                    <div class="w-full flex flex-col lg:flex-row justify-between transition-all gap-4">
                         <Motion v-for="(method, idx) in methods" :key="method.id" class="relative" :initial="{
                             scale: 1,
                             transform: 'translateY(10px)',
@@ -63,38 +62,42 @@
                             duration: 0.3,
                             delay: 0.2 + 0.05 * (method.index ?? 0)
                         }">
-                            <div v-if="!selectedMethod.id" @click="goToMethod(method.id)" :class="[
-                                'shrink-0 lg:shrink w-full shadow hover:shadow-lg p-2 lg:p-0 bg-white ring ring-muted/30 rounded-xl transition-all group border-muted/50 h-fit  relative cursor-pointer overflow-visible',
-
+                            <div @click="selectMethod(method.id)" :class="[
+                                'shrink-0 lg:shrink w-full shadow hover:shadow-lg p-2 lg:p-0 bg-white ring rounded-md lg:rounded-lg transition-all group border-muted/50 h-fit relative cursor-pointer overflow-visible',
+                                selectedId === method.id ? 'sm:ring-2 ring-primary/70' : 'ring-muted/30'
                             ]">
 
-                                <template v-if="!selectedMethod.id">
-                                    <div class="flex lg:block  ">
-                                        <img :src="methodImage(method, 'card')" :alt="method.title" width="300"
-                                            height="160"
-                                            class="h-18 w-26 object-cover rounded-sm lg:rounded-lg lg:rounded-b-none ring ring-muted/50 transition-all lg:w-full lg:h-full"
-                                            loading="lazy" decoding="async" />
-                                        <div :class="[
-                                            'mx-4 lg:mx-0 lg:px-4 lg:py-3   w-full ',
-                                            idx < methods.length - 1 ? ' border-muted/30  lg:border-b-0 ' : ''
-                                        ]">
-                                            <h1 class="text-lg lg:text-lg font-medium text-neutral-800 text-nowrap ">{{
-                                                method.title
-                                            }}</h1>
-                                            <p class="text-muted text-sm mb-1">{{ method.shortdescription }}</p>
-                                            <div class="flex flex-wrap items-center gap-1 lg:pt-2 lg:pb-1">
+                                <!-- <UIcon v-if="selectedId === method.id" name="i-lucide-check"
+                                    class="size-6 text-primary bg-white p-2 absolute top-2 right-2" /> -->
 
-                                                <UBadge v-if="method.impactLabel"
-                                                    :color="method.impactColor || 'warning'" variant="soft" size="sm">{{
-                                                        method.impactLabel }} påverkan</UBadge>
-                                                <UBadge v-if="method.type" :label="method.type" color="neutral"
-                                                    variant="soft" size="sm" />
-                                            </div>
+
+                                <div class="flex lg:block  ">
+                                    <img :src="methodImage(method, 'card')" :alt="method.title" width="300" height="160"
+                                        class="h-18 w-26 object-cover rounded-sm lg:rounded-lg lg:rounded-b-none ring ring-muted/50 transition-all lg:w-full lg:h-full"
+                                        loading="lazy" decoding="async" />
+                                    <div :class="[
+                                        'mx-4 lg:mx-0 lg:px-4 lg:py-3 w-full',
+                                        idx < methods.length - 1 ? 'border-muted/30 lg:border-b-0' : ''
+                                    ]">
+                                        <h1 class="text-lg lg:text-lg font-medium text-neutral-800 text-nowrap ">{{
+                                            method.title
+                                            }}</h1>
+                                        <p class="text-muted text-sm mb-1">{{ method.shortdescription }}</p>
+                                        <div class="flex flex-wrap items-center gap-1 lg:pt-2 lg:pb-1">
+                                            <UBadge v-if="method.impactLabel" :color="method.impactColor || 'warning'"
+                                                variant="soft" size="sm">{{ method.impactLabel }} påverkan</UBadge>
+                                            <UBadge v-if="method.type" :label="method.type" color="neutral"
+                                                variant="soft" size="sm" />
                                         </div>
                                     </div>
-                                </template>
+                                </div>
                             </div>
                         </Motion>
+                    </div>
+                    <div class="flex w-full justify-center my-4">
+                        <UButton size="xl" trailing :disabled="!selectedId" @click="goToSelectedMethod" color="primary"
+                            icon="i-heroicons-arrow-right">{{ selectedId ? selectedMethod.title : 'Välj metod' }}
+                        </UButton>
                     </div>
                 </UPageSection>
                 <!-- <Motion :initial="{ opacity: 0 }" :animate="{ opacity: 1 }" :transition="{ duration: 0.35, delay: 0.1 }">
@@ -105,21 +108,30 @@
             </Motion> -->
             </UContainer>
         </div>
-        <UContainer>
-            <UPageSection :title="page.factsSection?.title" :description="page.factsSection?.description">
-                <UCarousel v-slot="{ item }" :items="page.factsSection?.items" arrows
-                    :ui="{ item: 'basis-full sm:basis-1/3 px-6' }">
+        <UContainer class="px-0">
+            <UPageSection :auto-height="isMobile ? true : false" :title="page.factsSection?.title"
+                :description="page.factsSection?.description" :ui="{ title: 'text-start', description: 'text-start' }">
+                <UCarousel v-slot="{ item }" dots :items="page.factsSection?.items" arrows :ui="{
+
+                    // container: 'transition-[height]',
+                    // controls: 'absolute -top-8 lg:-bottom-8 inset-x-0',
+                    dots: '-bottom-12',
+                    dot: 'w-6 h-1',
+                    arrows: 'hidden lg:block',
+                    item: 'basis-full sm:basis-1/3 px-6'
+                }">
                     <UPageCard variant="naked" reverse :title="item.title" :description="item.description"
                         :ui="{ title: 'text-lg text-neutral-700 ', description: 'text-base text-neutral-500' }">
-                        <div class="bg-neutral-400 rounded-md overflow-hidden">
+                        <div class=" rounded-md overflow-hidden">
                             <NuxtImg v-if="item.image" :src="item.image"
-                                class="w-full aspect-video object-cover opacity-85" width="800" height="450" />
+                                class="w-full aspect-square object-cover opacity-85" width="800" height="800" />
                         </div>
-
                     </UPageCard>
                 </UCarousel>
             </UPageSection>
-            <UPageSection :title="page.videoSection?.title" :description="page.videoSection?.description">
+            <UPageSection :title="page.timelineAndChartsIntro?.title"
+                :ui="{ title: 'text-start lg:text-center', description: 'text-start lg:text-center', container: 'pb-0 sm:pb-0 lg:pb-0' }"
+                :description="page.timelineAndChartsIntro?.description">
                 <div
                     class=" border-muted/60 rounded-xl bg-muted/20 min-h-64 flex items-center justify-center overflow-hidden">
                     <NuxtImg :src="page.videoSection?.image" class="w-full" />
@@ -128,10 +140,10 @@
 
 
         </UContainer>
-        <UContainer>
-            <UPageSection :title="page.timelineAndChartsIntro?.title"
+        <UContainer class="px-0">
+            <!-- <UPageSection :title="page.timelineAndChartsIntro?.title"
                 :ui="{ title: 'text-start lg:text-center', description: 'text-start lg:text-center', container: 'pb-0 sm:pb-0 lg:pb-0' }"
-                :description="page.timelineAndChartsIntro?.description" />
+                :description="page.timelineAndChartsIntro?.description" /> -->
 
             <UPageSection orientation="horizontal" :reverse="isMobile ? true : false"
                 :headline="page.timelineSection?.headline" :ui="{ title: 'text-2xl sm:text-3xl lg:text-4xl' }"
@@ -169,7 +181,7 @@
             </UPageSection>
         </UContainer>
         <div class="bg-muted border-y border-muted/50">
-            <UContainer>
+            <UContainer class="px-0">
                 <KnowledgeSelectionSection :title="page.knowledgeSection?.title"
                     :ui="{ title: 'text-start text-start text-2xl sm:text-3xl lg:text-4xl', description: 'text-start' }"
                     :description="page.knowledgeSection?.description" :indices="page.knowledgeSection?.indices || [1]"
@@ -205,7 +217,7 @@
 </template>
 
 <script setup lang="ts">
-import { ref, computed, watch, nextTick, onMounted, onBeforeUnmount } from 'vue'
+import { ref, computed, onMounted, onBeforeUnmount } from 'vue'
 import { useMediaQuery } from '@vueuse/core'
 import { useAsyncData, navigateTo } from '#app'
 
@@ -331,23 +343,15 @@ const emptyMethod: Method = {
     shortdescription: ''
 }
 const selectedId = ref<string | null>(null)
-const goToMethod = (id: string) => {
+
+const selectMethod = (id: string) => {
     selectedId.value = id
-    navigateTo({ path: `/skogsskotsel/${id}` }, { replace: true, external: false, scroll: false })
 }
 
-const hasScrolledOnFirstSelect = ref(false)
-
-watch(selectedId, async (newVal, oldVal) => {
-    // Only on the first transition from no selection -> some selection
-    if (newVal && !oldVal && !hasScrolledOnFirstSelect.value) {
-        hasScrolledOnFirstSelect.value = true
-        await nextTick()
-        if (process.client) {
-            window.scrollTo({ top: 0 })
-        }
-    }
-})
+const goToSelectedMethod = () => {
+    if (!selectedId.value) return
+    navigateTo({ path: `/skogsskotsel/${selectedId.value}` }, { replace: true, external: false, scroll: false })
+}
 
 const selectedMethod = computed<Method>(() => {
     const list = methods.value
@@ -365,7 +369,7 @@ const selectedFrameworkIndex = computed<number | null>({
     },
     set(value) {
         if (typeof value === 'number' && methods.value[value]) {
-            goToMethod(methods.value[value].id)
+            selectMethod(methods.value[value].id)
         }
     }
 })

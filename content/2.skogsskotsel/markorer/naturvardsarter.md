@@ -16,12 +16,3 @@ Naturvårdssvampar har ofta speciella miljökrav och förekommer främst i äldr
 Mykorrhizasvampar kan leva vidare på en plats så länge det finns levande träd. Svamparnas mycelindivider i marken kan bli många decennier och potentiellt sekler gamla.
 
 På bilden rotfingersvamp (VU, sårbar). Växer i sandtallskog.
-
-| Markör | Förklaring                                                         |
-| ------ | ------------------------------------------------------------------ |
-|        | Naturvårdsart individ                                              |
-|        | Har etablerats med sporer spridda från närliggande skogar.         |
-|        | Har etablerats med sporer från svamp som överlevt vid hänsynsträd. |
-|        | Svampen har dött av ålder, konkurrens eller annan orsak.           |
-|        | Svampen har flyttat sig genom att mycel har växt och expanderat.   |
-|        | Svampen har tynat bort och dött efter att träd avverkats.          |

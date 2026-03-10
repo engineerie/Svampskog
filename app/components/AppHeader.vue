@@ -86,10 +86,13 @@ const itemsmobile = computed(() => [
       <div class="hidden lg:flex items-center">
         <UNavigationMenu :items="items" variant="link" color="primary"
           :ui="{ link: 'text-md hover:bg-muted rounded', item: 'mx-0.5' }" />
-        <USeparator orientation="vertical" class="h-4 mx-2" />
+        <!-- <USeparator orientation="vertical" class="h-4 mx-3" /> -->
         <UNavigationMenu :items="itemsright" variant="link" color="primary"
           :ui="{ link: 'text-md hover:bg-muted rounded', item: 'mx-0.5' }" />
-        <UContentSearchButton :collapsed="false" class="ring-muted/50" />
+        <UTooltip text="Sök" :kbds="['meta', 'K']">
+          <USeparator orientation="vertical" class="h-4 mx-3" />
+          <UContentSearchButton :collapsed="true" class="ring-muted/50 mx-0.5" />
+        </UTooltip>
       </div>
     </template>
 
