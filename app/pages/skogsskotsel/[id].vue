@@ -642,10 +642,7 @@
                                                                         Kalavverkad</h1>
                                                                     <p class="text-sm text-neutral-500 font-light">
                                                                         Skogen har
-                                                                        varit kalavverkad eller är etablerad på
-                                                                        tidigare
-                                                                        trädlös
-                                                                        mark.</p>
+                                                                        varit kalavverkad.</p>
                                                                 </div>
                                                                 <div
                                                                     class="size-10 flex justify-center items-center bg-muted rounded-md shrink-0">
@@ -788,8 +785,7 @@
                                                     <h1 class="text-md font-semibold text-neutral-900">
                                                         Kalavverkad</h1>
                                                     <p class="text-sm text-neutral-500 font-light">Skogen har
-                                                        varit kalavverkad eller är etablerad på tidigare trädlös
-                                                        mark.</p>
+                                                        varit kalavverkad.</p>
                                                 </div>
                                                 <div
                                                     class="size-10 flex justify-center items-center bg-muted rounded-md shrink-0">

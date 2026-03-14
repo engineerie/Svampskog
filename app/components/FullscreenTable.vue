@@ -1,40 +1,39 @@
 <template>
-  <UCard variant="ghost" :class="cardClass">
-    <div class="md:flex justify-between items-start w-full">
-      <div class="md:flex gap-4 w-full">
-        <div class="w-full flex justify-between items-start">
-          <div>
-            <div @click="handleTitleClick"
-              :class="[titleClass, titleClickable ? 'group cursor-pointer' : 'cursor-default']">
-              <UIcon :name="icon" class="mr-2" />
-              <h1 class="truncate">
-                {{ title }}
-              </h1>
-              <UIcon v-if="titleClickable" name="i-lucide-arrow-right"
-                class="size-6 font-medium text-neutral transition-all opacity-0 group-hover:translate-x-1 group-hover:opacity-100" />
+  <div class="flex flex-col flex-1">
+
+
+    <UCard variant="ghost" :class="cardClass" :ui="{ body: 'md:pb-0' }">
+      <div class="md:flex justify-between items-start w-full">
+        <div class="md:flex gap-4 w-full">
+          <div class="w-full flex justify-between items-start">
+            <div>
+              <div @click="handleTitleClick"
+                :class="[titleClass, titleClickable ? 'group cursor-pointer' : 'cursor-default']">
+                <UIcon :name="icon" class="mr-2" />
+                <h1 class="truncate">
+                  {{ title }}
+                </h1>
+                <UIcon v-if="titleClickable" name="i-lucide-arrow-right"
+                  class="size-6 font-medium text-neutral transition-all opacity-0 group-hover:translate-x-1 group-hover:opacity-100" />
+              </div>
+              <h2 class="text-md text-neutral-500 ">{{ countSummary }} {{ countLabel }}</h2>
             </div>
-            <h2 class="text-md text-neutral-500 md:mb-2">{{ countSummary }} {{ countLabel }}</h2>
+            <UButton v-if="!isNormalView && !hideActions" color="neutral" variant="soft" size="xl"
+              @click="$emit('enlarge')" icon="i-heroicons-x-mark-solid" class="rounded-full md:hidden" />
           </div>
-          <UButton v-if="!isNormalView" color="neutral" variant="outline" size="lg" @click="$emit('enlarge')"
-            icon="i-heroicons-arrow-left" label="Tillbaka" class="hidden md:flex ring-muted/50" />
-          <UButton v-if="!isNormalView" color="neutral" variant="soft" size="xl" @click="$emit('enlarge')"
-            icon="i-heroicons-x-mark-solid" class="rounded-full md:hidden" />
         </div>
       </div>
-    </div>
-
-    <transition name="fade" mode="out-in" class="md:min-h-65">
+    </UCard>
+    <transition name="fade" mode="out-in" class="md:min-h-120 flex-1">
       <SpeciesTable @enlarge="emit('enlarge')" :is-normal-view="isNormalView" :dataType="dataType"
-        :dataTypeFolder="dataTypeFolder" :grupp="grupp" :mat="mat" :obs="obs" :obsLabel="obsLabel"
-        :tableKey="tableKey" @update:visibleRange="tableVisibleRange = $event"
-        :search-term="searchTerm" @update:searchTerm="value => emit('update:searchTerm', value)"
-        :filterEdible="filterEdible" :filterPoison="filterPoison"
-        :column-visibility-overrides="columnVisibilityOverrides"
-        :externalSvampFilter="externalSvampFilter"
-        :externalStatusFilter="externalStatusFilter"
+        :dataTypeFolder="dataTypeFolder" :grupp="grupp" :mat="mat" :obs="obs" :obsLabel="obsLabel" :tableKey="tableKey"
+        @update:visibleRange="tableVisibleRange = $event" :search-term="searchTerm"
+        @update:searchTerm="value => emit('update:searchTerm', value)" :filterEdible="filterEdible"
+        :filterPoison="filterPoison" :column-visibility-overrides="columnVisibilityOverrides"
+        :externalSvampFilter="externalSvampFilter" :externalStatusFilter="externalStatusFilter"
         :externalGruppFilter="externalGruppFilter" />
     </transition>
-  </UCard>
+  </div>
 </template>
 
 <script setup lang="ts">
@@ -48,6 +47,7 @@ const props = defineProps({
   icon: { type: String, required: true },
   titleColorClass: { type: String, required: true },
   titleClickable: { type: Boolean, default: true },
+  hideActions: { type: Boolean, default: false },
   cardClass: { type: String, default: 'rounded-none sm:rounded-lg' },
   countLabel: { type: String, default: 'arter' },
   countFolder: { type: String, required: true },

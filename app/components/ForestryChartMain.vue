@@ -73,7 +73,7 @@
           </template>
         </USelect>
         <USelect v-if="!isFrameworkCompareMode && grupperChartMode === 'single'" v-model="selectedSingleArtkategori"
-          :items="compareArtkategoriOptionsReversed" option-attribute="label" value-key="value" size="md"
+          :items="compareArtkategoriOptionsOrdered" option-attribute="label" value-key="value" size="md"
           variant="outline" placeholder="Välj svampgrupp"
           class="hover:cursor-pointer ring-muted/50 sm:mx-2 mb-2 w-full sm:w-fit max-w-full"
           :ui="{ content: 'min-w-fit' }">
@@ -103,7 +103,7 @@
           </template>
         </USelect>
         <USelect v-if="isFrameworkCompareMode" v-model="selectedCompareArtkategori"
-          :items="compareArtkategoriOptionsReversed" option-attribute="label" value-key="value" size="md"
+          :items="compareArtkategoriOptionsOrdered" option-attribute="label" value-key="value" size="md"
           variant="outline" placeholder="Välj svampgrupp"
           class="hover:cursor-pointer ring-muted/50 sm:mx-2 mb-2 w-full sm:w-fit max-w-full"
           :ui="{ content: 'min-w-fit' }">
@@ -144,9 +144,43 @@
             icon="i-carbon-diagram-reference" label="Relativ mängd vid olika åldrar" />
           <template #body>
             <div class="flex flex-col gap-4">
+              <USelect v-model="selectedArtkategori" multiple :items="grupperLegendSelectItems" option-attribute="label"
+                value-key="value" class="w-full sm:w-fit max-w-full ring-muted/50" size="lg" variant="outline"
+                :ui="{ content: 'min-w-fit' }">
+                <template #default="{ ui }">
+                  <span v-if="selectedGrupperLegendItems.length"
+                    :class="ui.value({ class: 'flex items-center gap-2 min-w-0 overflow-hidden' })">
+                    <span class="inline-flex items-center gap-2 min-w-0 overflow-visible">
+                      <span v-for="item in selectedGrupperLegendItems" :key="item.value"
+                        class="inline-flex items-center gap-1 shrink-0">
+                        <span v-if="item.icon" class="h-3.5 w-3.5" :style="{
+                          backgroundColor: item.color || '#000',
+                          WebkitMask: `url(${item.icon}) center / contain no-repeat`,
+                          mask: `url(${item.icon}) center / contain no-repeat`,
+                        }" />
+                      </span>
+                    </span>
+                  </span>
+                  <span v-else :class="ui.placeholder({ class: '' })">Välj svampgrupp</span>
+                </template>
+                <template #item="{ item }">
+                  <div class="flex items-center justify-between w-full">
+                    <div class="flex items-center gap-2">
+                      <div v-if="item.icon" class="h-4 w-4" :style="{
+                        backgroundColor: item.color || '#000',
+                        WebkitMask: `url(${item.icon}) center / contain no-repeat`,
+                        mask: `url(${item.icon}) center / contain no-repeat`,
+                      }" />
+                      <span>{{ item.label }}</span>
+                    </div>
+                    <UIcon name="i-lucide-check" class="size-3 text-neutral-700"
+                      :class="isGrupperLegendSelected(item.value) ? 'opacity-100' : 'opacity-0'" />
+                  </div>
+                </template>
+              </USelect>
               <ForestryChartDisplay :selectedFrameworks="['trakthygge']"
-                :selectedArtkategori="defaultGrupperArtkategori" chartType="area" :singleFrameworkSelection="true"
-                :relativeChart="true" />
+                :selectedArtkategori="selectedArtkategori" chartType="area" :singleFrameworkSelection="true"
+                :relativeChart="true" :hideLegend="true" />
               <p class="text-sm text-muted">
                 {{ grupperModalDescription }}
               </p>
@@ -508,7 +542,7 @@ const grupperModeTabs = computed(() => [
 ])
 
 const selectedArtkategori = ref<string[]>([...defaultGrupperArtkategori]);
-const grupperLegendSelectItems = computed(() => compareArtkategoriOptionsReversed.value.map(item => ({
+const grupperLegendSelectItems = computed(() => compareArtkategoriOptionsOrdered.value.map(item => ({
   label: item.label,
   value: item.value,
   icon: item.icon,
@@ -604,20 +638,38 @@ const compareArtkategoriOptions = [
     }
   }
 ]
-const compareArtkategoriOptionsReversed = computed(() => [...compareArtkategoriOptions].reverse())
+const artkategoriLegendOrder = [
+  'atheliales',
+  'ascomycota',
+  'spindlingar',
+  'russulales',
+  'boletales',
+  'cantharellales',
+  'thelephorales',
+  'övriga',
+]
 
-const selectedCompareArtkategori = ref(compareArtkategoriOptions[0].value)
+const compareArtkategoriOptionsOrdered = computed(() => {
+  const indexByValue = new Map(compareArtkategoriOptions.map(item => [item.value, item]))
+  const ordered = artkategoriLegendOrder
+    .map(value => indexByValue.get(value))
+    .filter((item): item is typeof compareArtkategoriOptions[number] => Boolean(item))
+  const extras = compareArtkategoriOptions.filter(item => !artkategoriLegendOrder.includes(item.value))
+  return [...ordered, ...extras].reverse()
+})
+
+const selectedCompareArtkategori = ref(compareArtkategoriOptionsOrdered.value[0]?.value || compareArtkategoriOptions[0].value)
 const selectedCompareItem = computed(() =>
-  compareArtkategoriOptions.find(opt => opt.value === selectedCompareArtkategori.value)
+  compareArtkategoriOptionsOrdered.value.find(opt => opt.value === selectedCompareArtkategori.value)
 )
-const selectedSingleArtkategori = ref(compareArtkategoriOptions[0].value)
+const selectedSingleArtkategori = ref(compareArtkategoriOptionsOrdered.value[0]?.value || compareArtkategoriOptions[0].value)
 const selectedSingleItem = computed(() =>
-  compareArtkategoriOptions.find(opt => opt.value === selectedSingleArtkategori.value)
+  compareArtkategoriOptionsOrdered.value.find(opt => opt.value === selectedSingleArtkategori.value)
 )
 
 watch([selectedChart, isFrameworkCompareMode], ([chart, compare]) => {
   if (!(chart === 'grupper' && compare)) {
-    selectedCompareArtkategori.value = compareArtkategoriOptions[0].value
+    selectedCompareArtkategori.value = compareArtkategoriOptionsOrdered.value[0]?.value || compareArtkategoriOptions[0].value
   }
   if (chart === 'grupper' && !compare) {
     selectedArtkategori.value = [...defaultGrupperArtkategori]
@@ -629,7 +681,7 @@ watch([selectedChart, isFrameworkCompareMode], ([chart, compare]) => {
 
 watch(() => props.parentSelectedFrameworks?.length, () => {
   if (selectedChart.value === 'grupper' && isFrameworkCompareMode.value) {
-    selectedCompareArtkategori.value = compareArtkategoriOptions[0].value
+    selectedCompareArtkategori.value = compareArtkategoriOptionsOrdered.value[0]?.value || compareArtkategoriOptions[0].value
   }
 })
 

@@ -104,6 +104,7 @@
               <template v-else>
                 <div class="flex md:justify-center w-full gap-3">
                   <UPopover v-for="category in categories" :key="category.key"
+                    v-model:open="categoryPopoverOpen[category.key]"
                     :ui="{ content: 'max-h-80 overflow-y-auto bar-chart-container' }" :content="{
                       align: 'start',
                       side: 'bottom',
@@ -131,7 +132,7 @@
                             :class="{
                               'bg-neutral-100': option.value === envStore[category.key],
                               'opacity-40 cursor-not-allowed': option.disabled
-                            }" @click="() => { if (!option.disabled) selectOption(category.key, option.value) }">
+                            }" @click="handlePopoverOptionClick(category.key, option.value, option.disabled)">
 
                             <div>
                               <h1 class="text-md font-semibold text-neutral-900">
@@ -165,7 +166,7 @@
                             :class="{
                               'bg-neutral-100': option.value === envStore[category.key],
                               'opacity-40 cursor-not-allowed': option.disabled
-                            }" @click="() => { if (!option.disabled) selectOption(category.key, option.value) }">
+                            }" @click="handlePopoverOptionClick(category.key, option.value, option.disabled)">
 
                             <div>
                               <h1 class="text-md font-semibold text-neutral-900">
@@ -227,13 +228,13 @@
                 :color="restrictionEnabled ? 'secondary' : 'neutral'">
                 {{ restrictionEnabled ? "Markinventeringsdata" : "Markinventeringsdata" }}
               </UButton>
-              <UModal title="Miljööversikt" :ui="{ content: 'max-w-[83rem]', body: 'sm:p-0', title: 'text-2xl' }">
+              <!-- <UModal title="Miljööversikt" :ui="{ content: 'max-w-[83rem]', body: 'sm:p-0', title: 'text-2xl' }">
                 <UButton class="ring-muted/60" label="Alla miljöer" trailing icon="i-hugeicons-tree-06" color="neutral"
                   variant="outline" />
                 <template #body>
                   <Miljoer />
                 </template>
-              </UModal>
+              </UModal> -->
             </div>
           </div>
           <div class="col-span-3 flex w-full justify-end mt-3" v-if="props.showSpatialForest && !compactDesktop">
@@ -433,6 +434,23 @@ function selectOption(
   optionValue: string
 ): void {
   envStore.$patch({ [categoryKey]: optionValue })
+}
+
+const categoryPopoverOpen = ref<Record<Category['key'], boolean>>({
+  geography: false,
+  forestType: false,
+  standAge: false,
+  vegetationType: false
+})
+
+function handlePopoverOptionClick(
+  categoryKey: Category['key'],
+  optionValue: string,
+  disabled?: boolean
+): void {
+  if (disabled) return
+  selectOption(categoryKey, optionValue)
+  categoryPopoverOpen.value[categoryKey] = false
 }
 
 // Helper functions for display

@@ -329,7 +329,9 @@ export const collections = {
       }),
       environmentSection: sectionSchema.optional(),
       videoSection: sectionSchema.extend({
+        src: z.string().nonempty(),
         image: z.string().nonempty(),
+        subtitles: z.string().optional(),
       }).optional(),
       speciesListsIntro: sectionSchema.optional(),
       dnaSection: sectionSchema.extend({
@@ -371,7 +373,9 @@ export const collections = {
       }),
       methodSelectorSection: sectionSchema.optional(),
       videoSection: sectionSchema.extend({
+        src: z.string().nonempty(),
         image: z.string().nonempty(),
+        subtitles: z.string().optional(),
       }).optional(),
       timelineAndChartsIntro: sectionSchema.optional(),
       timelineSection: sectionSchema.extend({

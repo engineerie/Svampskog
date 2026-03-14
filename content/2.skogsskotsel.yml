@@ -89,6 +89,8 @@ timelineSection:
     firstImage: /images/thumbnails/trakthygge_efter_visa_visa_naturskog.webp
     secondImage: /images/thumbnails/blädning_efter_visa_visa_naturskog.webp
 videoSection:
+  src: /videos/skogsskotsel.mp4
+  subtitles: /videos/skogsskotsel.sv.vtt
   title: Kom igång med skogsskötsel
   description: En kort video som visar hur du väljer skötselmetod, jämför påverkan och tolkar tidslinje och diagram på metodsidan.
-  image: /images/Landing/Screenshot 2026-03-03 at 10.23.02.png
+  image: /videos/skogsskotsel_poster.png

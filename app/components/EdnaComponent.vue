@@ -2,9 +2,8 @@
   <div>
 
 
-    <UCard class="rounded-none sm:rounded-lg" variant="ghost">
+    <UCard class="rounded-none sm:rounded-lg " variant="ghost">
 
-      <!-- Header / List View -->
 
       <div class="md:flex justify-between relative">
         <UButton color="neutral" variant="soft" size="xl" @click="$emit('enlarge')"
@@ -70,27 +69,7 @@
 
           </div>
 
-          <!-- <div class="flex gap-2">
-            <UModal fullscreen title="Diagram" :ui="{
-              body: 'pt-0',
-            }">
-              <template #body>
-                <EnvironmentSelector :initialMobileCollapsed="true" />
-                <UButton variant="ghost" size="md" @click="showBarChart = !showBarChart"
-                  :label="showBarChart ? 'Dölj diagram' : 'Visa diagram'" class="mb-2 hidden md:block" />
-                <BarChart v-if="showBarChart" class="mb-2" :chartData="data" :chartWidth="chartWidth"
-                  :geography="geographyValue" :forestType="forestTypeValue" :standAge="standAgeValue"
-                  :vegetationType="vegetationTypeValue" :matsvampFilter="matsvampFilter"
-                  :giftsvampFilter="giftsvampFilter" :gruppFilter="gruppFilter" :statusFilter="statusFilter"
-                  :search-term="modalSearchTerm" />
-                <SpeciesTable class="mt-2" @enlarge="emit('enlarge')" @update:matsvampFilter="matsvampFilter = $event"
-                  @update:giftsvampFilter="giftsvampFilter = $event" @update:gruppFilter="gruppFilter = $event"
-                  @update:statusFilter="statusFilter = $event" @update:searchTerm="modalSearchTerm = $event"
-                  :isNormalView="isNormalView" :column-visibility-overrides="columnVisibilityOverrides"
-                  :search-term="modalSearchTerm" />
-              </template>
-</UModal>
-</div> -->
+
           <div class=" justify-between hidden">
             <UTabs v-model="activeTab" :items="items" class="w-full" color="neutral" variant="link"
               :unmount-on-hide="false" />
@@ -98,79 +77,34 @@
 
         </div>
         <div class="flex gap-3 items-start">
-          <!-- <UBadge
-          v-if="!isNormalView" 
-          icon="solar:dna-linear"
-          size="lg"
-          color="secondary"
-          variant="subtle"
-          label="Enligt DNA från markinventeringens provytor"
-          class="h-fit hidden md:flex"
-        />    -->
-
-          <!-- <UBadge
-          :icon="sampleEnvCount < 10 ? 'i-cuida-warning-outline' : undefined"
-          size="lg"
-          :color="sampleEnvCount < 10 ? 'warning' : 'secondary'"
-          variant="subtle"
-          class="h-fit hidden md:flex"
-        >
-          {{ sampleEnvCount < 10 ? 'Lågt provantal: ' + sampleEnvCount + ' skogar' : 'Baserat på ' + sampleEnvCount + ' skogar' }}
-        </UBadge> -->
-          <!-- <UButton
-        class="hidden md:flex h-fit"
-        color="neutral"
-        variant="ghost"
-          size="lg"
-          :icon="isNormalView ? 'material-symbols:open-in-full' : 'material-symbols:close-fullscreen'"
-          @click="$emit('enlarge')"
-        /> -->
         </div>
       </div>
-
-      <!-- FullScreenEdna (if spatialForest tab is active) -->
-      <!-- <FullScreenEdna v-if="activeTab === 'spatialForest'" :isNormalView="isNormalView" /> -->
-      <transition name="fade" mode="out-in" class="md:min-h-[550px] min-h-full">
-        <div v-if="activeTab === 'spatialForest'" class="">
-          <!-- <UButton
-        class="md:hidden block absolute bottom-0 right-0"
-        color="primary"
-        variant="ghost"
-        label="Visa alla"
-        size="xl"
-        
-          @click="$emit('enlarge')"
-        /> -->
-          <SpeciesTable @enlarge="emit('enlarge')" @update:sorting="tableSorting = $event"
-            @update:visibleRange="tableVisibleRange = $event" :isNormalView="isNormalView"
-            :column-visibility-overrides="columnVisibilityOverrides" :externalSvampFilter="externalSvampFilter"
-            :externalStatusFilter="externalStatusFilter" :externalGruppFilter="externalGruppFilter"
-            :chart-grouping-mode="chartView" :search-term="effectiveSearchTerm" @update:searchTerm="handleSearchUpdate"
-            :enablePagination="true" tableKey="edna" />
-        </div>
-
-        <div v-else-if="activeTab === 'columnChart'" class="mt-2">
-
-          <div ref="barChartRef">
-            <BarChart :key="`main-${barChartInstanceKey}`" class="mb-6" v-if="showBarChart" :chartData="data"
-              :chartWidth="chartWidth" :geography="geographyValue" :forestType="forestTypeValue"
-              :standAge="standAgeValue" :vegetationType="vegetationTypeValue" :matsvampFilter="matsvampFilter"
-              :giftsvampFilter="giftsvampFilter" :gruppFilter="gruppFilter" :statusFilter="statusFilter"
-              :search-term="effectiveSearchTerm" :sort-order="tableSorting" :visible-range="tableVisibleRange"
-              :view-mode="chartView" :show-mode-tabs="false" @update:viewMode="chartView = $event" />
-          </div>
-          <SpeciesTable @enlarge="emit('enlarge')" @update:matsvampFilter="matsvampFilter = $event"
-            @update:giftsvampFilter="giftsvampFilter = $event" @update:gruppFilter="gruppFilter = $event"
-            @update:statusFilter="statusFilter = $event" @update:searchTerm="handleSearchUpdate"
-            @update:sorting="tableSorting = $event" @update:visibleRange="tableVisibleRange = $event"
-            :isNormalView="isNormalView" :column-visibility-overrides="columnVisibilityOverrides"
-            :search-term="effectiveSearchTerm" :externalSvampFilter="externalSvampFilter"
-            :externalStatusFilter="externalStatusFilter" :externalGruppFilter="externalGruppFilter"
-            :chart-grouping-mode="chartView" :enablePagination="true" tableKey="edna" />
-        </div>
-      </transition>
-
     </UCard>
+    <transition name="fade" mode="out-in" class="md:min-h-[550px] min-h-full">
+
+
+      <div v-if="activeTab === 'columnChart'" class="mt-2">
+
+        <div ref="barChartRef" class="px-6">
+          <BarChart :key="`main-${barChartInstanceKey}`" class="mb-6" v-if="showBarChart" :chartData="data"
+            :chartWidth="chartWidth" :geography="geographyValue" :forestType="forestTypeValue" :standAge="standAgeValue"
+            :vegetationType="vegetationTypeValue" :matsvampFilter="matsvampFilter" :giftsvampFilter="giftsvampFilter"
+            :gruppFilter="gruppFilter" :statusFilter="statusFilter" :search-term="effectiveSearchTerm"
+            :sort-order="tableSorting" :visible-range="tableVisibleRange" :view-mode="chartView" :show-mode-tabs="false"
+            @update:viewMode="chartView = $event" />
+        </div>
+        <SpeciesTable @enlarge="emit('enlarge')" @update:matsvampFilter="matsvampFilter = $event"
+          @update:giftsvampFilter="giftsvampFilter = $event" @update:gruppFilter="gruppFilter = $event"
+          @update:statusFilter="statusFilter = $event" @update:searchTerm="handleSearchUpdate"
+          @update:sorting="tableSorting = $event" @update:visibleRange="tableVisibleRange = $event"
+          :isNormalView="isNormalView" :column-visibility-overrides="columnVisibilityOverrides"
+          :search-term="effectiveSearchTerm" :externalSvampFilter="externalSvampFilter"
+          :externalStatusFilter="externalStatusFilter" :externalGruppFilter="externalGruppFilter"
+          :chart-grouping-mode="chartView" :enablePagination="true" tableKey="edna" />
+      </div>
+    </transition>
+
+
     <transition name="fold-down">
       <UContainer
         v-if="isBarChartSticky && showBarChart && chartView === 'bar' && activeTab === 'columnChart' && !isSmallScreen"

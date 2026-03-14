@@ -178,13 +178,41 @@ function redirect() {
                 class="w-full justify-center lg:justify-start" />
             </div>
           </div>
+          <UPageSection
+            :ui="{ title: 'text-start lg:text-center', description: 'text-start lg:text-center', container: 'pb-0 sm:pb-0 lg:pb-0' }">
+            <div
+              class=" ring ring-muted/60 rounded-xl bg-muted/20 min-h-64 flex items-center justify-center overflow-hidden">
+              <CustomVideoPlayer :src="page.videoSection?.src || ''" :poster="page.videoSection?.image"
+                :subtitles-src="page.videoSection?.subtitles || ''" />
+            </div>
+          </UPageSection>
         </UPageSection>
+
       </UContainer>
 
 
 
 
     </div>
+
+    <UContainer class="px-0">
+      <UPageSection :title="page.speciesListsIntro?.title"
+        :ui="{ title: 'text-start lg:text-center', description: 'text-start lg:text-center', container: 'pb-0 sm:pb-0 lg:pb-0' }"
+        :description="page.speciesListsIntro?.description" />
+      <UPageSection orientation="horizontal" :reverse="isMobile ? true : false"
+        :ui="{ title: 'text-2xl sm:text-3xl lg:text-4xl' }" :headline="page.dnaSection?.headline"
+        :title="page.dnaSection?.title" :description="page.dnaSection?.description"
+        :features="page.dnaSection?.features || []">
+        <NuxtImg :src="page.dnaSection?.image" class="w-full rounded-xl mb-2 ring ring-muted/50 shadow" width="1000"
+          height="600" />
+      </UPageSection>
+      <UPageSection orientation="horizontal" :reverse="true" :headline="page.fruitbodySection?.headline"
+        :ui="{ title: 'text-2xl sm:text-3xl lg:text-4xl' }" :title="page.fruitbodySection?.title"
+        :description="page.fruitbodySection?.description" :features="page.fruitbodySection?.features || []">
+        <NuxtImg :src="page.fruitbodySection?.image" class="w-full rounded-xl mb-2 ring ring-muted/50 shadow"
+          width="1000" height="600" />
+      </UPageSection>
+    </UContainer>
     <UContainer class="px-0">
       <UPageSection :ui="{ title: 'text-start', description: 'text-start' }" :title="page.factsSection?.title"
         :description="page.factsSection?.description">
@@ -202,31 +230,7 @@ function redirect() {
           </UPageCard>
         </UCarousel>
       </UPageSection>
-      <UPageSection :title="page.speciesListsIntro?.title"
-        :ui="{ title: 'text-start lg:text-center', description: 'text-start lg:text-center', container: 'pb-0 sm:pb-0 lg:pb-0' }"
-        :description="page.speciesListsIntro?.description">
-        <div class=" border-muted/60 rounded-xl bg-muted/20 min-h-64 flex items-center justify-center overflow-hidden">
-          <NuxtImg :src="page.videoSection?.image" class="w-full" />
-        </div>
-      </UPageSection>
-    </UContainer>
-    <UContainer class="px-0">
-      <!-- <UPageSection :title="page.speciesListsIntro?.title"
-        :ui="{ title: 'text-start lg:text-center', description: 'text-start lg:text-center', container: 'pb-0 sm:pb-0 lg:pb-0' }"
-        :description="page.speciesListsIntro?.description" /> -->
-      <UPageSection orientation="horizontal" :reverse="isMobile ? true : false"
-        :ui="{ title: 'text-2xl sm:text-3xl lg:text-4xl' }" :headline="page.dnaSection?.headline"
-        :title="page.dnaSection?.title" :description="page.dnaSection?.description"
-        :features="page.dnaSection?.features || []">
-        <NuxtImg :src="page.dnaSection?.image" class="w-full rounded-xl mb-2 ring ring-muted/50 shadow" width="1000"
-          height="600" />
-      </UPageSection>
-      <UPageSection orientation="horizontal" :reverse="true" :headline="page.fruitbodySection?.headline"
-        :ui="{ title: 'text-2xl sm:text-3xl lg:text-4xl' }" :title="page.fruitbodySection?.title"
-        :description="page.fruitbodySection?.description" :features="page.fruitbodySection?.features || []">
-        <NuxtImg :src="page.fruitbodySection?.image" class="w-full rounded-xl mb-2 ring ring-muted/50 shadow"
-          width="1000" height="600" />
-      </UPageSection>
+
     </UContainer>
     <div class="bg-muted border-y border-muted/50">
       <UContainer class="px-0">

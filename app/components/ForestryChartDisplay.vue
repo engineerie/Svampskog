@@ -1,8 +1,7 @@
 <template>
   <div class="custom-area" ref="rootEl">
     <ClientOnly>
-      <VisBulletLegend
-        v-if="isMounted && chartReady && legendDisplayItems.length"
+      <VisBulletLegend v-if="isMounted && chartReady && !props.hideLegend && legendDisplayItems.length"
         :items="legendDisplayItems" :onLegendItemClick="handleLegendClick" class="mx-2 flex flex-wrap gap-2" />
 
       <VisXYContainer v-if="isMounted && chartReady" :data="chartData.length ? chartData : [emptyDataPoint]"
@@ -369,6 +368,13 @@ const stackedSeriesOrder = computed<string[]>(() => {
   return ordered.concat(extras)
 })
 
+// Keep a stable render index for stacked areas so removing one category does not reindex
+// every remaining layer during animation.
+const stackedRenderOrder = computed<string[]>(() => {
+  if (!props.singleFrameworkSelection || props.frameworkComparisonMode) return []
+  return [...artkategoriLegendOrder]
+})
+
 const margin = { left: 10, right: 10, top: 10, bottom: 10 }
 
 const rootEl = ref<HTMLElement | null>(null)
@@ -435,6 +441,7 @@ interface Props {
   matsvampVariant?: 'standard' | 'goda' | 'kg',
   relativeChart?: boolean,
   preserveFrameworkOrder?: boolean,
+  hideLegend?: boolean,
 }
 
 const props = withDefaults(defineProps<Props>(), {
@@ -446,6 +453,7 @@ const props = withDefaults(defineProps<Props>(), {
   yellowColor: false,
   matsvampVariant: 'standard',
   relativeChart: false,
+  hideLegend: false,
 });
 
 const matsvampVariant = computed(() => props.matsvampVariant === 'goda' ? 'goda' : (props.matsvampVariant === 'kg' ? 'kg' : 'standard'))
@@ -609,7 +617,6 @@ const artkategoriLegendOrder = [
   'ascomycota',
   'spindlingar',
   'russulales',
-
   'boletales',
   'cantharellales',
   'thelephorales',
@@ -621,13 +628,16 @@ const artkategoriLegendOrder = [
 ];
 const artkategoriLabelMap: Record<string, string> = {
   'atheliales': 'Skinnsvampar',
-  'boletales': 'Soppar',
-  'cantharellales': 'Kantarellsläktingar',
+  'ascomycota': 'Sporsäckssvampar',
   'spindlingar': 'Spindelskivlingar',
   'russulales': 'Kremlor & riskor',
-  'ascomycota': 'Sporsäckssvampar',
-  'övriga': 'Övriga',
+  'boletales': 'Soppar',
+  'cantharellales': 'Kantarellsläktingar',
+
+
   'thelephorales': 'Tagg- och tomentelloida svampar',
+  'övriga': 'Övriga',
+
   'matsvamp': 'Alla matsvampar',
   'goda matsvampar': 'Goda matsvampar',
   'rödlistade + signalarter': 'Naturvårdssvampar',
@@ -1295,7 +1305,9 @@ function handleLegendItemClick(item: LegendItem) {
 // Unovis stacked areas require an array of y accessors (one per series)
 const stackedYAccessors = computed<((d: any) => number)[]>(() => {
   if (!props.singleFrameworkSelection || props.frameworkComparisonMode) return []
-  return stackedSeriesOrder.value.map(cat => (d: any) => {
+  const activeSet = new Set(stackedSeriesOrder.value)
+  return stackedRenderOrder.value.map(cat => (d: any) => {
+    if (!activeSet.has(cat)) return NaN
     if (inactiveArtkategoriKeys.value.has(cat)) return NaN
     return getCategoryValue(d, cat)
   })
@@ -1304,7 +1316,7 @@ const stackedYAccessors = computed<((d: any) => number)[]>(() => {
 // Colors aligned with the stacked series order
 const stackedColors = computed<string[] | ((...args: any[]) => string)>(() => {
   if (!props.singleFrameworkSelection || props.frameworkComparisonMode) return []
-  return stackedSeriesOrder.value.map(cat => getArtColor(cat))
+  return stackedRenderOrder.value.map(cat => getArtColor(cat))
 
 })
 

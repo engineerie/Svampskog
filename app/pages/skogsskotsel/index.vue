@@ -99,6 +99,14 @@
                             icon="i-heroicons-arrow-right">{{ selectedId ? selectedMethod.title : 'Välj metod' }}
                         </UButton>
                     </div>
+                    <UPageSection
+                        :ui="{ title: 'text-start lg:text-center', description: 'text-start lg:text-center', container: 'pb-0 sm:pb-0 lg:pb-0' }">
+                        <div
+                            class=" ring ring-muted/60 rounded-xl bg-muted/20 min-h-64 flex items-center justify-center overflow-hidden">
+                            <CustomVideoPlayer :src="page.videoSection?.src || ''" :poster="page.videoSection?.image"
+                                :subtitles-src="page.videoSection?.subtitles || ''" />
+                        </div>
+                    </UPageSection>
                 </UPageSection>
                 <!-- <Motion :initial="{ opacity: 0 }" :animate="{ opacity: 1 }" :transition="{ duration: 0.35, delay: 0.1 }">
 
@@ -106,44 +114,14 @@
                     <div class="h-0.5 w-full rounded-full bg-linear-to-r from-emerald-500 via-amber-400 to-rose-500" />
                 </div>
             </Motion> -->
+
             </UContainer>
         </div>
-        <UContainer class="px-0">
-            <UPageSection :auto-height="isMobile ? true : false" :title="page.factsSection?.title"
-                :description="page.factsSection?.description" :ui="{ title: 'text-start', description: 'text-start' }">
-                <UCarousel v-slot="{ item }" dots :items="page.factsSection?.items" arrows :ui="{
 
-                    // container: 'transition-[height]',
-                    // controls: 'absolute -top-8 lg:-bottom-8 inset-x-0',
-                    dots: '-bottom-12',
-                    dot: 'w-6 h-1',
-                    arrows: 'hidden lg:block',
-                    item: 'basis-full sm:basis-1/3 px-6'
-                }">
-                    <UPageCard variant="naked" reverse :title="item.title" :description="item.description"
-                        :ui="{ title: 'text-lg text-neutral-700 ', description: 'text-base text-neutral-500' }">
-                        <div class=" rounded-md overflow-hidden">
-                            <NuxtImg v-if="item.image" :src="item.image"
-                                class="w-full aspect-square object-cover opacity-85" width="800" height="800" />
-                        </div>
-                    </UPageCard>
-                </UCarousel>
-            </UPageSection>
+        <UContainer class="px-0">
             <UPageSection :title="page.timelineAndChartsIntro?.title"
-                :ui="{ title: 'text-start lg:text-center', description: 'text-start lg:text-center', container: 'pb-0 sm:pb-0 lg:pb-0' }"
-                :description="page.timelineAndChartsIntro?.description">
-                <div
-                    class=" border-muted/60 rounded-xl bg-muted/20 min-h-64 flex items-center justify-center overflow-hidden">
-                    <NuxtImg :src="page.videoSection?.image" class="w-full" />
-                </div>
-            </UPageSection>
-
-
-        </UContainer>
-        <UContainer class="px-0">
-            <!-- <UPageSection :title="page.timelineAndChartsIntro?.title"
-                :ui="{ title: 'text-start lg:text-center', description: 'text-start lg:text-center', container: 'pb-0 sm:pb-0 lg:pb-0' }"
-                :description="page.timelineAndChartsIntro?.description" /> -->
+                :description="page.timelineAndChartsIntro?.description"
+                :ui="{ title: 'text-start lg:text-center', description: 'text-start lg:text-center', container: 'pb-0 sm:pb-0 lg:pb-0' }" />
 
             <UPageSection orientation="horizontal" :reverse="isMobile ? true : false"
                 :headline="page.timelineSection?.headline" :ui="{ title: 'text-2xl sm:text-3xl lg:text-4xl' }"
@@ -179,6 +157,31 @@
                         :showControls="page.chartSection?.chart?.showControls ?? true" class="py-2" />
                 </UCard>
             </UPageSection>
+        </UContainer>
+        <UContainer class="px-0">
+            <UPageSection :auto-height="isMobile ? true : false" :title="page.factsSection?.title"
+                :description="page.factsSection?.description" :ui="{ title: 'text-start', description: 'text-start' }">
+                <UCarousel v-slot="{ item }" dots :items="page.factsSection?.items" arrows :ui="{
+
+                    // container: 'transition-[height]',
+                    // controls: 'absolute -top-8 lg:-bottom-8 inset-x-0',
+                    dots: '-bottom-12',
+                    dot: 'w-6 h-1',
+                    arrows: 'hidden lg:block',
+                    item: 'basis-full sm:basis-1/3 px-6'
+                }">
+                    <UPageCard variant="naked" reverse :title="item.title" :description="item.description"
+                        :ui="{ title: 'text-lg text-neutral-700 ', description: 'text-base text-neutral-500' }">
+                        <div class=" rounded-md overflow-hidden">
+                            <NuxtImg v-if="item.image" :src="item.image"
+                                class="w-full aspect-square object-cover opacity-85" width="800" height="800" />
+                        </div>
+                    </UPageCard>
+                </UCarousel>
+            </UPageSection>
+
+
+
         </UContainer>
         <div class="bg-muted border-y border-muted/50">
             <UContainer class="px-0">

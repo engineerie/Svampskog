@@ -1,0 +1,155 @@
+﻿1
+00:00:13,050 --> 00:00:14,116
+Välj om skogen ligger i
+
+2
+00:00:14,116 --> 00:00:16,216
+norra eller södra Sverige,
+
+3
+00:00:16,216 --> 00:00:18,300
+vilka träd som växer i skogen,
+
+4
+00:00:18,300 --> 00:00:20,100
+medelåldern på träden
+
+5
+00:00:20,100 --> 00:00:22,500
+och vad som växer på marken.
+
+6
+00:00:22,500 --> 00:00:23,666
+Kombinationerna är från början
+
+7
+00:00:23,666 --> 00:00:24,683
+begränsade till där det
+
+8
+00:00:24,683 --> 00:00:25,650
+finns DNA-underlag
+
+9
+00:00:25,650 --> 00:00:28,650
+från markinventeringen.
+
+10
+00:00:30,033 --> 00:00:31,416
+Först visas en artlista för
+
+11
+00:00:31,416 --> 00:00:33,300
+alla mykorrhizasvampar som dektekterats
+
+12
+00:00:33,300 --> 00:00:35,200
+med DNA.
+
+13
+00:00:35,200 --> 00:00:36,933
+Denna miljö har ett gott underlag
+
+14
+00:00:36,933 --> 00:00:39,933
+med jordprover från totalt 121 skogar.
+
+15
+00:00:41,300 --> 00:00:43,233
+Det går att filtrera globalt på sidan,
+
+16
+00:00:43,233 --> 00:00:46,316
+det vill säga samtidigt i enligt DNA och enligt fruktkroppar
+
+17
+00:00:47,116 --> 00:00:48,750
+I sökfältet kan du söka
+
+18
+00:00:48,750 --> 00:00:51,450
+på svenskt eller vetenskapligt namn.
+
+19
+00:00:51,666 --> 00:00:53,550
+Klicka i diagrammet eller listan
+
+20
+00:00:53,550 --> 00:00:56,700
+för att visa mer information om arten.
+
+21
+00:00:56,800 --> 00:00:59,800
+För att läsa mer, gå till artfakta.se
+
+22
+00:01:04,966 --> 00:01:07,600
+Globala filter finns även för matsvampar,
+
+23
+00:01:07,600 --> 00:01:09,133
+giftsvampar, naturvårdssvampar
+
+24
+00:01:09,283 --> 00:01:11,516
+och de olika svampgrupperna.
+
+25
+00:01:12,250 --> 00:01:13,383
+För att bättre jämföra de
+
+26
+00:01:13,383 --> 00:01:14,833
+olika kategorierna
+
+27
+00:01:14,833 --> 00:01:15,616
+går det att gruppera
+
+28
+00:01:15,616 --> 00:01:17,883
+dem i träddiagrammet.
+
+29
+00:01:19,916 --> 00:01:22,350
+Gruppera på svampgrupper, matsvampar,
+
+30
+00:01:22,350 --> 00:01:25,350
+status och hur synliga svamparna är.
+
+31
+00:01:26,000 --> 00:01:27,950
+artlistor presenteras också
+
+32
+00:01:27,950 --> 00:01:31,350
+enligt var fruktkroppar har dokumenterats.
+
+33
+00:01:33,100 --> 00:01:34,633
+Dessa är sorterade efter hur
+
+34
+00:01:34,633 --> 00:01:37,633
+sannolika arterna är att hitta
+
+35
+00:01:42,800 --> 00:01:44,116
+om inga arter visas,
+
+36
+00:01:44,116 --> 00:01:45,066
+kontrollera först
+
+37
+00:01:45,066 --> 00:01:48,066
+att inga filter är aktiva.
+
+38
+00:01:48,216 --> 00:01:50,383
+för att sortera eller filtrera lokalt
+
+39
+00:01:50,383 --> 00:01:52,133
+i en tabell klicka på kolumntiteln

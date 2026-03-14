@@ -10,7 +10,7 @@
               onSearchInput(value);
             }" variant="ghost" /> -->
 
-          <div class="flex gap-2">
+          <div class="flex gap-2 px-2">
             <div class="flex my-1 gap-2 overflow-scroll" id="scrollbar">
               <template v-if="selectedMark.length">
                 <span v-for="filter in selectedMark" :key="'mark-' + filter">
@@ -163,7 +163,7 @@
             ? undefined
             : (paginationEnabled && !isTableGroupingActive
               ? { getPaginationRowModel: getPaginationRowModel() }
-              : undefined)" :class="{ '': isNormalView }" :ui="tableUi" class="rounded-sm " />
+              : undefined)" :class="{ '': isNormalView }" :ui="tableUi" class="bg-muted/50" />
 
         <div v-if="!useMobileLayout"
           class="md:flex justify-between items-center pb-2 md:pt-5 md:p-5 md:border-t-[1px] border-neutral-200 dark:border-neutral-700">
@@ -213,6 +213,7 @@ import { useTableStateStore } from '~/stores/tableStateStore'
 import { getPaginationRowModel, getGroupedRowModel } from '@tanstack/vue-table'
 import { upperFirst } from 'scule'
 import { hasEdnaDataset } from '~/utils/edna'
+import { separator } from "#build/ui";
 
 
 
@@ -853,6 +854,19 @@ const getStatusTooltip = (status) => {
   return tooltips[status] || "Ej bedömd";
 };
 
+const getProbabilityLabel = (rankValue, obsKey) => {
+  const rank = Number(rankValue)
+  const isEdibleOrPoisonRank = obsKey === 'Rank matsvamp' || obsKey === 'Rank giftsvamp'
+
+  if (rank === 3) {
+    return isEdibleOrPoisonRank ? 'Minst vanlig' : 'Sällsynt'
+  }
+  if (rank === 2) {
+    return isEdibleOrPoisonRank ? 'Mindre vanlig' : 'Ovanlig'
+  }
+  return ''
+}
+
 const isRankColumn = props.obs.startsWith('Rank');
 const sorting = ref(
   isRankColumn
@@ -880,16 +894,27 @@ onMounted(() => {
       rowsPerPage.value = 'Alla';
     }
   }
+  const shouldRestoreAllRows = rowsPerPage.value === 'Alla' || !paginationEnabled.value;
   if (saved.pagination) {
     const savedPageSize = Number(saved.pagination.pageSize ?? pagination.value.pageSize);
+    const allRowsSize = Math.max(1, filteredData.value.length || data.value.length || 1);
     const sanitizedPageSize = paginationEnabled.value
-      ? (Number.isFinite(savedPageSize) && savedPageSize > 0 && savedPageSize <= 100
-        ? savedPageSize
-        : DEFAULT_ROWS_PER_PAGE)
+      ? (shouldRestoreAllRows
+        ? allRowsSize
+        : (Number.isFinite(savedPageSize) && savedPageSize > 0 && savedPageSize <= 100
+          ? savedPageSize
+          : DEFAULT_ROWS_PER_PAGE))
       : 100000;
     pagination.value = {
-      pageIndex: saved.pagination.pageIndex ?? 0,
+      pageIndex: shouldRestoreAllRows ? 0 : (saved.pagination.pageIndex ?? 0),
       pageSize: sanitizedPageSize,
+    };
+  } else if (shouldRestoreAllRows) {
+    pagination.value = {
+      pageIndex: 0,
+      pageSize: paginationEnabled.value
+        ? Math.max(1, filteredData.value.length || data.value.length || 1)
+        : 100000
     };
   }
 });
@@ -1340,10 +1365,10 @@ const desktopColumns = [
       if (row.getIsGrouped()) return null
       const val = row.getValue(props.obs);
       if (props.obs.startsWith('Rank')) {
-        if (val === 3) {
-          return h('span', { class: 'text-red-700' }, 'Sällsynt');
-        } else if (val === 2) {
-          return h('span', { class: 'text-yellow-600' }, 'Ovanlig');
+        const label = getProbabilityLabel(val, props.obs)
+        if (label) {
+          const badgeColor = Number(val) === 3 ? 'error' : 'warning'
+          return h(UBadge, { color: badgeColor, variant: 'subtle' }, () => label)
         }
         return null;
       }
@@ -1452,15 +1477,17 @@ const columns = computed(() =>
 );
 // Apply the mobile table styling (headers, dividers, padding) when useMobileLayout is true
 const tableUi = computed(() => ({
+  root: 'border-t border-neutral-100',
   thead: useMobileLayout.value
     ? 'hidden'
-    : 'hidden md:table-header-group',
+    : 'hidden md:table-header-group ',
   tbody: useMobileLayout.value
     ? 'divide-none'
     : 'divide-none md:divide-dotted',
   td: useMobileLayout.value
     ? 'empty:p-0 px-0 pt-2 pb-3 cursor-pointer'
     : 'empty:p-0 px-0 md:px-4 md:pt-4 md:pb-4 pt-2 pb-3',
+  separator: 'bg-neutral-100'
 }));
 const topCount = ref(0);
 const remainingCount = ref(0);
@@ -1724,6 +1751,30 @@ watch(rowsPerPage, (newVal) => {
     table.value.tableApi.setPageIndex(0);
   }
 });
+
+watch(
+  [rowsPerPage, () => filteredData.value.length, () => table.value?.tableApi, paginationEnabled],
+  ([currentRowsPerPage]) => {
+    if (!paginationEnabled.value || currentRowsPerPage !== 'Alla') return;
+
+    const allRowsSize = Math.max(1, filteredData.value.length || data.value.length || 1);
+    const needsLocalUpdate =
+      pagination.value.pageIndex !== 0 || pagination.value.pageSize !== allRowsSize;
+
+    if (needsLocalUpdate) {
+      pagination.value.pageIndex = 0;
+      pagination.value.pageSize = allRowsSize;
+    }
+
+    if (table.value?.tableApi) {
+      table.value.tableApi.setPagination({
+        pageIndex: 0,
+        pageSize: allRowsSize
+      });
+    }
+  },
+  { immediate: true, flush: 'post' }
+);
 
 const currentPaginationRows = computed(() => {
   return table.value?.tableApi?.getPaginationRowModel().rows || [];

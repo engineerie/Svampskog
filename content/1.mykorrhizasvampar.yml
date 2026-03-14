@@ -65,6 +65,8 @@ speciesListsIntro:
   title: Artlistor på två sätt
   description: Vi presenterar artlistor som baseras på DNA-analyser av jordprover och förekomsten av fruktkroppar. De två metoderna kompletterar varandra och ger tillsammans en god bild av svamplivet i skogen.
 videoSection:
+  src: /videos/svampar.mp4
+  subtitles: /videos/svampar.sv.vtt
   title: Kom igång med att utforska skogsmiljöer
   description: En kort genomgång av hur du söker fram olika skogstyper och tolkar artlistorna baserade på DNA och fruktkroppsfynd.
-  image: /images/Landing/Screenshot 2026-03-03 at 10.15.50.png
+  image: /videos/svampar_poster.png

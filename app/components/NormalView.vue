@@ -51,9 +51,9 @@
           </USelect>
           <UInput v-model="globalSearchTerm" class="max-w-sm" size="lg" :ui="{ base: 'ring-muted/50' }"
             placeholder="Sök på namn" icon="i-heroicons-magnifying-glass" variant="outline" />
-          <!-- <UButton color="neutral" variant="outline" size="lg" icon="i-heroicons-document-arrow-down"
+          <UButton color="neutral" variant="outline" size="lg" icon="i-heroicons-document-arrow-down"
             :loading="isGeneratingPdf" :disabled="isGeneratingPdf" label="Ladda ner PDF" class="ring-muted/50"
-            @click="downloadSpeciesListPdf" /> -->
+            @click="downloadSpeciesListPdf" />
         </div>
 
         <!-- <div class=" flex flex-col sm:flex-row gap-1.5  w-fit h-fit">
@@ -75,11 +75,11 @@
               :externalStatusFilter="globalExternalStatusFilter" :externalGruppFilter="globalExternalGruppFilter"
               @update:searchTerm="globalSearchTerm = $event" @enlarge="handleEdnaToggle" />
           </div>
-          <div class="relative">
+          <!-- <div class="relative">
             <SpatialForest v-if="isMobile" />
             <div v-if="isMobile"
               class="pointer-events-none absolute bottom-0 inset-x-0 h-8 bg-linear-to-t from-muted via-muted  to-transparent" />
-          </div>
+          </div> -->
 
           <UContainer class="md:hidden flex flex-col gap-3 pt-4 bg-muted/50">
             <UPageFeature class="mt-4" title="Enligt DNA" description="Från markinventeringens jordprover" />
@@ -196,40 +196,32 @@
                 @enlarge="handleCloseDetail" class="w-full" />
             </div>
             <template v-else>
-              <div class="col-span-12 grid-cols-12 rounded-2xl gap-y-3 hidden md:grid ">
-                <div class="col-span-4 flex flex-col h-full border-r border-muted/50">
-                  <FullscreenTable :isNormalView="true" @enlarge="emitEnlarge('FullScreenEdible')"
-                    :searchTerm="globalSearchTerm" @update:searchTerm="globalSearchTerm = $event" title="Matsvampar"
-                    icon="icon-park-solid:knife-fork" titleColorClass="text-warning-500 dark:text-neutral-300"
-                    :titleClickable="true" cardClass="rounded-none sm:rounded-lg" countFolder="edible"
-                    countType="edibledata" countFilterKey="Nyasvamp-boken" dataType="edibledata" dataTypeFolder="edible"
-                    grupp="Svamp-grupp" mat="Nyasvamp-boken" obs="Rank matsvamp" obsLabel="Sannolikhet"
-                    :filterEdible="true" tableKey="edna-edible" :externalSvampFilter="globalExternalSvampFilter"
-                    :externalStatusFilter="globalExternalStatusFilter" :externalGruppFilter="globalExternalGruppFilter"
-                    :key="route.fullPath" />
+              <div class="col-span-12 hidden md:block">
+                <div class="border-b border-muted/50 p-2 pb-0 flex justify-start">
+                  <UTabs v-model="desktopKnowledgeTab" :items="desktopKnowledgeTabItems" size="lg" :ui="{
+                    root: '',
+                    list: 'flex-nowrap gap-2 bg-transparent w-fit ',
+                    indicator: 'bg-white border border-muted/50 shadow',
+                    trigger: 'data-[state=active]:text-neutral-800 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary'
+                  }" />
                 </div>
-                <div class="col-span-4 flex flex-col h-full border-r border-muted/50">
-                  <FullscreenTable :isNormalView="true" @enlarge="emitEnlarge('FullScreenPoison')"
-                    :searchTerm="globalSearchTerm" @update:searchTerm="globalSearchTerm = $event" title="Giftsvampar"
-                    icon="i-hugeicons-danger" titleColorClass="text-poison-500 dark:text-neutral-300"
-                    :titleClickable="true" cardClass="rounded-none sm:rounded-none border-muted/50" countFolder="edible"
-                    countType="edibledata" countFilterKey="Giftsvamp" dataType="edibledata" dataTypeFolder="edible"
-                    grupp="Svamp-grupp" mat="Nyasvamp-boken" obs="Rank giftsvamp" obsLabel="Sannolikhet"
-                    :filterPoison="true" tableKey="edna-poison" :externalSvampFilter="globalExternalSvampFilter"
-                    :externalStatusFilter="globalExternalStatusFilter" :externalGruppFilter="globalExternalGruppFilter"
-                    :key="route.fullPath" />
-                </div>
-                <div class="col-span-4 flex flex-col">
-                  <FullscreenTable :isNormalView="true" @enlarge="emitEnlarge('RedlistedComponent')"
-                    :searchTerm="globalSearchTerm" @update:searchTerm="globalSearchTerm = $event"
-                    title="Naturvårdsarter" icon="i-material-symbols-award-star-outline"
-                    titleColorClass="text-signal-500 dark:text-neutral-300" :titleClickable="true"
-                    cardClass="rounded-none sm:rounded-lg" countFolder="redlisted" countType="redlisted"
-                    dataType="redlisted" dataTypeFolder="redlisted" grupp="Svamp-grupp" mat="Nyasvamp-boken"
-                    obs="RankRed" obsLabel="Sannolikhet" tableKey="edna-redlisted"
+                <Transition :name="knowledgeTableTransitionName" mode="out-in">
+                  <FullscreenTable :key="`${desktopKnowledgeTab}-${route.fullPath}`" :isNormalView="false"
+                    :hideActions="true" :searchTerm="globalSearchTerm" @update:searchTerm="globalSearchTerm = $event"
+                    :title="desktopKnowledgeTableProps.title" :icon="desktopKnowledgeTableProps.icon"
+                    :titleColorClass="desktopKnowledgeTableProps.titleColorClass" :titleClickable="false"
+                    cardClass="rounded-none" :countFolder="desktopKnowledgeTableProps.countFolder"
+                    :countType="desktopKnowledgeTableProps.countType"
+                    :countFilterKey="desktopKnowledgeTableProps.countFilterKey"
+                    :dataType="desktopKnowledgeTableProps.dataType"
+                    :dataTypeFolder="desktopKnowledgeTableProps.dataTypeFolder" grupp="Svamp-grupp" mat="Nyasvamp-boken"
+                    :obs="desktopKnowledgeTableProps.obs" obsLabel="Sannolikhet"
+                    :tableKey="desktopKnowledgeTableProps.tableKey"
+                    :filterEdible="desktopKnowledgeTableProps.filterEdible"
+                    :filterPoison="desktopKnowledgeTableProps.filterPoison"
                     :externalSvampFilter="globalExternalSvampFilter" :externalStatusFilter="globalExternalStatusFilter"
                     :externalGruppFilter="globalExternalGruppFilter" />
-                </div>
+                </Transition>
               </div>
             </template>
           </transition>
@@ -639,6 +631,73 @@ onUnmounted(() => {
 
 const tabSize = computed(() => windowWidth.value >= 768 ? 'md' : 'md');
 const isMobile = computed(() => windowWidth.value < 768)
+const desktopKnowledgeTab = ref('edible')
+const previousDesktopKnowledgeTab = ref(desktopKnowledgeTab.value)
+const desktopKnowledgeTabItems = [
+  { label: 'Matsvampar', value: 'edible', icon: 'icon-park-solid:knife-fork' },
+  { label: 'Giftsvampar', value: 'poison', icon: 'i-hugeicons-danger' },
+  { label: 'Naturvårdsarter', value: 'redlisted', icon: 'i-material-symbols-award-star-outline' }
+]
+watch(desktopKnowledgeTab, (newValue, oldValue) => {
+  previousDesktopKnowledgeTab.value = oldValue ?? newValue
+})
+const knowledgeTabOrder = ['edible', 'poison', 'redlisted']
+const knowledgeTableTransitionName = computed(() => {
+  const fromIndex = knowledgeTabOrder.indexOf(previousDesktopKnowledgeTab.value)
+  const toIndex = knowledgeTabOrder.indexOf(desktopKnowledgeTab.value)
+  if (fromIndex === -1 || toIndex === -1 || fromIndex === toIndex) return 'fade'
+  return toIndex > fromIndex ? 'slide-left-fade' : 'slide-right-fade'
+})
+const desktopKnowledgeTableProps = computed(() => {
+  if (desktopKnowledgeTab.value === 'poison') {
+    return {
+      title: 'Giftsvampar',
+      icon: 'i-hugeicons-danger',
+      titleColorClass: 'text-poison-500 dark:text-neutral-300',
+      countFolder: 'edible',
+      countType: 'edibledata',
+      countFilterKey: 'Giftsvamp',
+      dataType: 'edibledata',
+      dataTypeFolder: 'edible',
+      obs: 'Rank giftsvamp',
+      tableKey: 'edna-poison',
+      filterEdible: false,
+      filterPoison: true
+    }
+  }
+
+  if (desktopKnowledgeTab.value === 'redlisted') {
+    return {
+      title: 'Naturvårdsarter',
+      icon: 'i-material-symbols-award-star-outline',
+      titleColorClass: 'text-signal-500 dark:text-neutral-300',
+      countFolder: 'redlisted',
+      countType: 'redlisted',
+      countFilterKey: '',
+      dataType: 'redlisted',
+      dataTypeFolder: 'redlisted',
+      obs: 'RankRed',
+      tableKey: 'edna-redlisted',
+      filterEdible: false,
+      filterPoison: false
+    }
+  }
+
+  return {
+    title: 'Matsvampar',
+    icon: 'icon-park-solid:knife-fork',
+    titleColorClass: 'text-warning-500 dark:text-neutral-300',
+    countFolder: 'edible',
+    countType: 'edibledata',
+    countFilterKey: 'Nyasvamp-boken',
+    dataType: 'edibledata',
+    dataTypeFolder: 'edible',
+    obs: 'Rank matsvamp',
+    tableKey: 'edna-edible',
+    filterEdible: true,
+    filterPoison: false
+  }
+})
 const tabOrder = ['dna', 'knowledge'];
 const contentTransitionName = computed(() => {
   if (isMobile.value) return 'fade';
