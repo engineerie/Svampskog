@@ -8,6 +8,14 @@
       color="rgba(234, 179, 8, 0.15)"
       :z-index="5"
     />
+    <VisPlotband
+      v-if="selectedPlotBandRange"
+      axis="x"
+      :from="selectedPlotBandRange.from"
+      :to="selectedPlotBandRange.to"
+      color="rgba(177, 131, 94, 0.28)"
+      :z-index="6"
+    />
     <VisStackedBar
       :data="data"
       :x="xAccessor"
@@ -31,6 +39,10 @@ defineProps({
   width: { type: [String, Number], default: 320 },
   height: { type: Number, default: 150 },
   plotBandRange: {
+    type: Object as PropType<{ from: number, to: number } | null>,
+    default: null
+  },
+  selectedPlotBandRange: {
     type: Object as PropType<{ from: number, to: number } | null>,
     default: null
   },

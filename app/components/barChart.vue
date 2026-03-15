@@ -1,15 +1,30 @@
 <template>
   <div>
-    <div v-if="showControls && !isMobile" class="flex items-center justify-between gap-3 mb-3">
-      <UTabs v-if="showModeTabs" v-model="chartTypeTab" :items="chartTypeTabs" size="md" :ui="{
-        root: '',
-        list: 'flex-nowrap gap-2 bg-transparent',
-        indicator: 'bg-white border border-muted/50 shadow',
-        trigger: 'data-[state=active]:text-neutral-800 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary'
-      }" />
-      <USelect v-if="showModeTabs && chartTypeTab === 'treemap'" v-model="treemapGroupingMode"
-        :items="treemapGroupingOptions" item-value="value" item-label="label" class="ring-muted/50"
-        :ui="{ content: 'min-w-fit' }" />
+    <div
+      v-if="showControls && !isMobile"
+      class="flex items-center justify-between gap-3 mb-3"
+    >
+      <UTabs
+        v-if="showModeTabs"
+        v-model="chartTypeTab"
+        :items="chartTypeTabs"
+        size="md"
+        :ui="{
+          root: '',
+          list: 'flex-nowrap gap-2 bg-transparent',
+          indicator: 'bg-white border border-muted/50 shadow',
+          trigger: 'data-[state=active]:text-neutral-800 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary'
+        }"
+      />
+      <USelect
+        v-if="showModeTabs && chartTypeTab === 'treemap'"
+        v-model="treemapGroupingMode"
+        :items="treemapGroupingOptions"
+        item-value="value"
+        item-label="label"
+        class="ring-muted/50"
+        :ui="{ content: 'min-w-fit' }"
+      />
     </div>
     <!-- Zoom controls only on desktop -->
     <!-- <div v-if="showControls && !isMobile" class="flex justify-end gap-2 mb-2 mx-2">
@@ -17,25 +32,66 @@
       <UButton @click="zoomIn" icon="i-heroicons-magnifying-glass-plus" color="neutral" variant="ghost" />
     </div> -->
     <!-- Chart on desktop -->
-    <div :key="chartShellRenderKey" ref="chartHostRef" v-if="!isMobile" :class="[
-      'w-full overflow-y-auto overflow-x-scroll',
-      { 'bar-chart-container': currentZoomIndex === 0 }
-    ]" @click="handleChartClick">
-      <EdnaBarModeChart v-if="viewMode === 'bar'" :data="updatedChartData" :width="chartWidth" :height="chartHeight"
-        :plot-band-range="plotBandRange" :x-accessor="xAccessor" :y-accessor="yAccessor"
-        :bar-color-accessor="barColorAccessor" :show-y-axis="showYAxis" :show-tooltip="showTooltip" :has-data="hasData"
-        :triggers="triggers" :tooltip-template="tooltipTemplate" :bar-events="barEvents" />
+    <div
+      v-if="!isMobile"
+      :key="chartShellRenderKey"
+      ref="chartHostRef"
+      :class="[
+        'w-full overflow-y-auto overflow-x-scroll',
+        { 'bar-chart-container': currentZoomIndex === 0 }
+      ]"
+      @click="handleChartClick"
+    >
+      <EdnaBarModeChart
+        v-if="viewMode === 'bar'"
+        :data="displayedBarData"
+        :width="chartWidth"
+        :height="chartHeight"
+        :plot-band-range="plotBandRange"
+        :selected-plot-band-range="selectedPlotBandRange"
+        :x-accessor="xAccessor"
+        :y-accessor="yAccessor"
+        :bar-color-accessor="barColorAccessor"
+        :show-y-axis="showYAxis"
+        :show-tooltip="showTooltip"
+        :has-data="hasData"
+        :triggers="triggers"
+        :tooltip-template="tooltipTemplate"
+        :bar-events="barEvents"
+      />
 
-      <div v-else ref="treemapWrapperRef" class="space-y-2">
+      <div
+        v-else
+        ref="treemapWrapperRef"
+        class="space-y-2"
+      >
         <div ref="treemapContainerRef">
-          <VisSingleContainer :data="treemapSourceData" :height="chartHeight">
-            <VisTooltip :horizontalPlacement="treemapTooltipPlacement" :horizontalShift="12"
-              :triggers="treemapTooltipTriggersConfig" />
-            <VisTreemap :id="treemapDatumId" :tileBorderRadius="4" :layers="treemapLayersConfig"
-              :value="treemapValueAccessor" :tile-color="treemapTileColorConfig" :tile-label="treemapTileLabelConfig"
-              :label-offset-x="6" :label-offset-y="8" :tile-padding-top="20" :enableLightnessVariance="false"
-              :enable-tile-label-font-size-variation="true" :tile-show-html-tooltip="false"
-              :show-tile-click-affordance="true" :label-internal-nodes="true" :events="treemapEventsWithTooltipFlip" />
+          <VisSingleContainer
+            :data="treemapSourceData"
+            :height="chartHeight"
+          >
+            <VisTooltip
+              :horizontal-placement="treemapTooltipPlacement"
+              :horizontal-shift="12"
+              :triggers="treemapTooltipTriggersConfig"
+            />
+            <VisTreemap
+              :id="treemapDatumId"
+              :tile-border-radius="4"
+              :layers="treemapLayersConfig"
+              :value="treemapValueAccessor"
+              :tile-color="treemapTileColorConfig"
+              :tile-label="treemapTileLabelConfig"
+              :label-offset-x="6"
+              :label-offset-y="8"
+              :tile-padding-top="20"
+              :enable-lightness-variance="false"
+              :enable-tile-label-font-size-variation="true"
+              :tile-show-html-tooltip="false"
+              :show-tile-click-affordance="true"
+              :label-internal-nodes="true"
+              :events="treemapEventsWithTooltipFlip"
+            />
           </VisSingleContainer>
         </div>
       </div>
@@ -59,13 +115,14 @@ const props = defineProps({
   gruppFilter: { type: Array as PropType<string[]>, default: () => [] },
   groupKey: { type: String, default: 'Svamp-grupp-släkte' },
   statusFilter: { type: Array as PropType<string[]>, default: () => [] },
-  sortOrder: { type: Array as PropType<Array<{ id: string; desc: boolean }>>, default: () => [] },
-  visibleRange: { type: Object as PropType<{ startIndex: number; endIndex: number; total: number } | null>, default: null },
+  sortOrder: { type: Array as PropType<Array<{ id: string, desc: boolean }>>, default: () => [] },
+  visibleRange: { type: Object as PropType<{ startIndex: number, endIndex: number, total: number } | null>, default: null },
   chartHeight: { type: Number, default: 150 },
   showControls: { type: Boolean, default: true },
   showModeTabs: { type: Boolean, default: true },
   showYAxis: { type: Boolean, default: true },
   showTooltip: { type: Boolean, default: true },
+  barGroupingMode: { type: String as PropType<'none' | 'groups' | 'edibility' | 'redlist' | 'visible'>, default: 'none' },
   viewMode: { type: String as PropType<'bar' | 'treemap-standard' | 'treemap-groups' | 'treemap-edibility' | 'treemap-redlist' | 'treemap-visible'>, default: 'bar' }
 })
 const emit = defineEmits<{
@@ -139,6 +196,10 @@ const activeTreemapMode = computed<'treemap-standard' | 'treemap-groups' | 'tree
 const chartData = ref<any[]>([])
 const envStore = useEnvParamsStore()
 const speciesStore = useSpeciesStore()
+const normalizeScientificName = (value: any) => String(value || '').trim().toLowerCase()
+const activeSelectedScientificName = computed(() =>
+  normalizeScientificName(speciesStore.pendingScientificname || (speciesStore.selectedSpecies as any)?.Scientificname)
+)
 function sortData(data: any[]) {
   return data.sort((a, b) => b.sample_plot_count - a.sample_plot_count)
 }
@@ -173,6 +234,25 @@ function generateRainbowColors(steps: number): string[] {
 function getSortValue(row: any, key: string) {
   if (!row || !key) return undefined
   return row[key]
+}
+
+function compareRowsBySortOrder(a: any, b: any, sorters: Array<{ id: string, desc: boolean }>) {
+  for (const sorter of sorters) {
+    const key = sorter.id
+    if (!key || key === '__groupingOrder') continue
+    const aVal = getSortValue(a, key)
+    const bVal = getSortValue(b, key)
+    const aNum = typeof aVal === 'number' ? aVal : Number(aVal)
+    const bNum = typeof bVal === 'number' ? bVal : Number(bVal)
+    let cmp = 0
+    if (Number.isFinite(aNum) && Number.isFinite(bNum)) {
+      cmp = aNum - bNum
+    } else {
+      cmp = String(aVal ?? '').localeCompare(String(bVal ?? ''), 'sv')
+    }
+    if (cmp !== 0) return sorter.desc ? -cmp : cmp
+  }
+  return 0
 }
 
 const sortedChartData = computed(() => {
@@ -245,65 +325,9 @@ watch(
   { immediate: true }
 )
 
-
 // ----- Accessors & Formatters -----
 const xAccessor = (_: any, i: number) => i
 const yAccessor = (d: any) => d.sample_plot_count
-function shouldShowLabel(d: any) {
-  if (!d) return false
-  const term = props.searchTerm.trim().toLowerCase()
-  const common = String(d.Commonname || '').toLowerCase()
-  const scientific = String(d.Scientificname || '').toLowerCase()
-  const matchSearch = term ? (common.includes(term) || scientific.includes(term)) : true
-
-  const statusActive = props.statusFilter.length > 0
-  const svampActive = props.matsvampFilter || props.giftsvampFilter
-  const groupActive = props.gruppFilter.length > 0
-
-  if (!statusActive && !svampActive && !groupActive && props.searchTerm.trim() !== '') {
-    return matchSearch
-  }
-
-  const matchSignal =
-    statusActive &&
-    props.statusFilter.includes('Signalart') &&
-    (d.SIGNAL_art === 'S')
-
-  const otherStatuses = props.statusFilter.filter(s => s !== 'Signalart')
-  const matchEjBedom = statusActive && props.statusFilter.includes('Ej bedömd') &&
-    (d.RL2020kat === null || d.RL2020kat === 0 || d.RL2020kat === '0' || String(d.RL2020kat).toUpperCase() === 'NE')
-  const matchEjTillamplig = statusActive && props.statusFilter.includes('Ej tillämplig') &&
-    String(d.RL2020kat).toUpperCase() === 'NA'
-  const matchStatus = statusActive
-    ? matchSignal || otherStatuses.includes(d.RL2020kat)
-    : false
-
-  const matchMats = props.matsvampFilter ? d.matsvamp == 1 : false
-  const matchGifts = props.giftsvampFilter
-    ? (d.Giftsvamp || '').toLowerCase() === 'x'
-    : false
-
-  const matchGroup = matchesGroupFilter(d)
-
-  if (statusActive) {
-    if (!svampActive && !groupActive) {
-      return matchSearch && (matchSignal || matchStatus || matchEjBedom || matchEjTillamplig)
-    }
-    const passesStatus = matchSearch && (matchSignal || matchStatus || matchEjBedom || matchEjTillamplig)
-    const passesSvamp = svampActive ? (matchMats || matchGifts) : true
-    const passesGroupVal = groupActive ? matchGroup : true
-    return passesStatus && passesSvamp && passesGroupVal
-  }
-
-  if (svampActive || groupActive) {
-    if (svampActive && !groupActive) return matchSearch && (matchMats || matchGifts)
-    if (!svampActive && groupActive) return matchSearch && matchGroup
-    const passesSvampOnly = matchSearch && (matchMats || matchGifts)
-    return passesSvampOnly && matchGroup
-  }
-
-  return false
-}
 
 function shouldMatchTable(d: any) {
   if (!d) return false
@@ -320,16 +344,16 @@ function shouldMatchTable(d: any) {
     return true
   }
 
-  const matchSignal =
-    statusActive &&
-    props.statusFilter.includes('Signalart') &&
-    (d.SIGNAL_art === 'S')
+  const matchSignal
+    = statusActive
+      && props.statusFilter.includes('Signalart')
+      && (d.SIGNAL_art === 'S')
 
   const otherStatuses = props.statusFilter.filter(s => s !== 'Signalart')
-  const matchEjBedom = statusActive && props.statusFilter.includes('Ej bedömd') &&
-    (d.RL2020kat === null || d.RL2020kat === 0 || d.RL2020kat === '0' || String(d.RL2020kat).toUpperCase() === 'NE')
-  const matchEjTillamplig = statusActive && props.statusFilter.includes('Ej tillämplig') &&
-    String(d.RL2020kat).toUpperCase() === 'NA'
+  const matchEjBedom = statusActive && props.statusFilter.includes('Ej bedömd')
+    && (d.RL2020kat === null || d.RL2020kat === 0 || d.RL2020kat === '0' || String(d.RL2020kat).toUpperCase() === 'NE')
+  const matchEjTillamplig = statusActive && props.statusFilter.includes('Ej tillämplig')
+    && String(d.RL2020kat).toUpperCase() === 'NA'
   const matchStatus = statusActive
     ? matchSignal || otherStatuses.includes(d.RL2020kat)
     : false
@@ -364,31 +388,12 @@ function shouldMatchTable(d: any) {
 function matchesGroupFilter(d: any) {
   if (!props.gruppFilter.length) return false
   const rowGroup = normalizeGroupKey(d?.[props.groupKey])
-  return props.gruppFilter.some((group) => normalizeGroupKey(group) === rowGroup)
+  return props.gruppFilter.some(group => normalizeGroupKey(group) === rowGroup)
 }
 
-const tickFormat = (_: any, i: number) => {
-  const d = updatedChartData.value[i]
-  if (!shouldShowLabel(d)) return ''
-  return capitalizeFirstLetter(d.Commonname)
-}
 function capitalizeFirstLetter(str: string): string {
-  return str ? str.charAt(0).toUpperCase() + str.slice(1) : ""
+  return str ? str.charAt(0).toUpperCase() + str.slice(1) : ''
 }
-
-const showGroupLabels = computed(() => props.gruppFilter.length > 0)
-const maxYValue = computed(() =>
-  Math.max(...updatedChartData.value.map(row => Number(row.sample_plot_count || 0)), 1)
-)
-const labelYOffset = computed(() => maxYValue.value * 0.04)
-const labelData = computed(() =>
-  updatedChartData.value
-    .map((d, i) => ({ ...d, __xIndex: i }))
-    .filter(d => matchesGroupFilter(d))
-)
-const labelX = (d: any) => d.__xIndex
-const labelY = (d: any) => Number(d.sample_plot_count || 0) + labelYOffset.value
-const labelText = () => 'x'
 
 const filteredSortedData = computed(() => sortedChartData.value.filter(d => shouldMatchTable(d)))
 const isVisibleMushroomGroup = (value: string) => {
@@ -406,18 +411,12 @@ const getSpeciesStableId = (d: any) => {
 const keyForRow = (d: any) => getSpeciesStableId(d)
 
 const getTreemapSpeciesLayerKey = (
-  datum: any,
-  mode: 'treemap-standard' | 'treemap-groups' | 'treemap-edibility' | 'treemap-redlist' | 'treemap-visible' = activeTreemapMode.value
+  datum: any
 ) => {
   return getSpeciesStableId(datum)
 }
 
-const treemapDatumId = (d: any) => getTreemapSpeciesLayerKey(d, 'treemap-standard')
-
-const treemapLayers = [
-  (d: any) => getTreemapGroupForDatum(d),
-  (d: any) => getTreemapSpeciesLayerKey(d)
-]
+const treemapDatumId = (d: any) => getTreemapSpeciesLayerKey(d)
 
 const treemapValueAccessor = (d: any) => Number(d?.sample_plot_count || 0)
 
@@ -450,14 +449,23 @@ const treemapEdibilityColors: Record<string, string> = {
   giftsvamp: '#a3e635',
   ovrigt: '#9ca3af'
 }
+const redlistColorByCode: Record<string, string> = {
+  LC: 'var(--color-redlist-lc)',
+  DD: 'var(--color-redlist-dd)',
+  NT: 'var(--color-redlist-nt)',
+  VU: 'var(--color-redlist-vu)',
+  EN: 'var(--color-redlist-en)',
+  CR: 'var(--color-redlist-cr)',
+  RE: 'var(--color-redlist-re)'
+}
 const treemapRedlistColors: Record<string, string> = {
-  lc: '#4ade80',
-  dd: '#DDD',
-  nt: '#F8C6C7',
-  vu: '#EF858F',
-  en: '#EA516D',
-  cr: '#E5014E',
-  re: '#490F2C',
+  lc: redlistColorByCode.LC,
+  dd: redlistColorByCode.DD,
+  nt: redlistColorByCode.NT,
+  vu: redlistColorByCode.VU,
+  en: redlistColorByCode.EN,
+  cr: redlistColorByCode.CR,
+  re: redlistColorByCode.RE,
   ovrigt: '#9ca3af'
 }
 const treemapVisibleColors: Record<string, string> = {
@@ -497,6 +505,11 @@ const getRedlistGroup = (datum: any) => {
   }
   if (redlistLabelByCode[status]) return redlistLabelByCode[status]
   return 'Övrigt'
+}
+
+const getRedlistColorForDatum = (datum: any) => {
+  const status = String(datum?.RL2020kat || '').trim().toUpperCase()
+  return redlistColorByCode[status] || null
 }
 
 const getTreemapGroupForDatum = (datum: any, mode = activeTreemapMode.value) => {
@@ -547,10 +560,10 @@ const getTreemapGroupColor = (group: string, mode = activeTreemapMode.value) => 
 
   if (mode === 'treemap-redlist') {
     const redlistCodeByLabel: Record<string, string> = {
-      livskraftig: 'lc',
-      kunskapsbrist: 'dd',
+      'livskraftig': 'lc',
+      'kunskapsbrist': 'dd',
       'nara hotad': 'nt',
-      sarbar: 'vu',
+      'sarbar': 'vu',
       'starkt hotad': 'en',
       'akut hotad': 'cr',
       'nationellt utdod': 're'
@@ -566,47 +579,6 @@ const getTreemapGroupColor = (group: string, mode = activeTreemapMode.value) => 
   return getStableGroupColor(group)
 }
 
-const sortTreemapGroups = (groups: string[], mode = activeTreemapMode.value) => {
-  if (mode === 'treemap-edibility') {
-    const order = ['Matsvamp', 'Giftsvamp', 'Övrigt']
-    return [...groups].sort((a, b) => order.indexOf(a) - order.indexOf(b))
-  }
-  if (mode === 'treemap-redlist') {
-    const order = ['Livskraftig', 'Kunskapsbrist', 'Nära hotad', 'Sårbar', 'Starkt hotad', 'Akut hotad', 'Nationellt utdöd', 'Övrigt']
-    return [...groups].sort((a, b) => order.indexOf(a) - order.indexOf(b))
-  }
-  if (mode === 'treemap-visible') {
-    const order = ['Svampar som syns', 'Svampar som är svåra att se']
-    return [...groups].sort((a, b) => order.indexOf(a) - order.indexOf(b))
-  }
-  return [...groups].sort((a, b) => a.localeCompare(b, 'sv'))
-}
-
-const getTreemapGroupOrder = (group: string, mode = activeTreemapMode.value) => {
-  if (mode === 'treemap-edibility') {
-    const order = ['Matsvamp', 'Giftsvamp', 'Övrigt']
-    const idx = order.indexOf(group)
-    return idx === -1 ? Number.POSITIVE_INFINITY : idx
-  }
-  if (mode === 'treemap-redlist') {
-    const order = ['Livskraftig', 'Kunskapsbrist', 'Nära hotad', 'Sårbar', 'Starkt hotad', 'Akut hotad', 'Nationellt utdöd', 'Övrigt']
-    const idx = order.indexOf(group)
-    return idx === -1 ? Number.POSITIVE_INFINITY : idx
-  }
-  if (mode === 'treemap-visible') {
-    const order = ['Svampar som syns', 'Svampar som är svåra att se']
-    const idx = order.indexOf(group)
-    return idx === -1 ? Number.POSITIVE_INFINITY : idx
-  }
-  if (mode === 'treemap-groups') {
-    const normalized = normalizeGroupKey(group)
-    const order = ['ovrigt', 'hattsvamp', 'kantarell', 'sopp', 'taggsvamp', 'fingersvamp', 'skinnsvamp', 'skalsvamp', 'tryffel']
-    const idx = order.indexOf(normalized)
-    return idx === -1 ? Number.POSITIVE_INFINITY : idx
-  }
-  return Number.POSITIVE_INFINITY
-}
-
 const treemapSourceData = computed(() => {
   const rows = [...treemapBaseData.value]
   rows.sort((a, b) => {
@@ -617,29 +589,10 @@ const treemapSourceData = computed(() => {
   return rows
 })
 
-const visibleTreemapGroups = computed(() => {
-  const mode = activeTreemapMode.value
-  if (mode === 'treemap-standard') return []
-  const names = new Map<string, string>()
-  treemapSourceData.value.forEach((row) => {
-    const groupName = getTreemapGroupForDatum(row, mode)
-    const normalized = normalizeGroupKey(groupName)
-    if (!names.has(normalized)) names.set(normalized, groupName)
-  })
-  return sortTreemapGroups(Array.from(names.values()), mode)
-})
-
-const treemapLegendItems = computed(() =>
-  visibleTreemapGroups.value.map((group) => ({
-    name: capitalizeFirstLetter(group),
-    color: getTreemapGroupColor(group, activeTreemapMode.value)
-  }))
-)
-
 const treemapLayersConfig = computed(() => {
   const mode = activeTreemapMode.value
   if (mode === 'treemap-standard') {
-    return [(d: any) => getTreemapSpeciesLayerKey(d, mode)]
+    return [(d: any) => getTreemapSpeciesLayerKey(d)]
   }
   return [
     (d: any) => getTreemapGroupNodeKey(d, mode),
@@ -700,9 +653,6 @@ const treemapTileLabelConfig = computed(() => (node: any) => {
   return canShowLeafIcon ? ' ' : ''
 })
 
-const formatTreemapValue = (value: number) =>
-  `${Number(value || 0).toLocaleString('sv-SE')} skogar`
-
 const getSpeciesBadgesHtml = (datum: any) => {
   const matsvampBadge = datum.matsvamp == 1
     ? '<div class="font-md bg-yellow-50 border border-yellow-200 text-yellow-500 text-xs rounded-md py-0.5 px-1">Matsvamp</div>'
@@ -716,11 +666,22 @@ const getSpeciesBadgesHtml = (datum: any) => {
     VU: 'Sårbar',
     CR: 'Akut hotad',
     DD: 'Kunskapsbrist',
-    RE: 'Nationellt utdöd'
+    RE: 'Nationellt utdöd',
+    LC: 'Livskraftig'
+  }
+  const rlBadgeStyleByCode: Record<string, string> = {
+    LC: 'background-color: var(--color-redlist-lc-bg-subtle); border-color: var(--color-redlist-lc-ring-subtle); color: var(--color-redlist-lc-text-subtle);',
+    DD: 'background-color: var(--color-redlist-dd-bg-subtle); border-color: var(--color-redlist-dd-ring-subtle); color: var(--color-redlist-dd-text-subtle);',
+    NT: 'background-color: var(--color-redlist-nt-bg-subtle); border-color: var(--color-redlist-nt-ring-subtle); color: var(--color-redlist-nt-text-subtle);',
+    VU: 'background-color: var(--color-redlist-vu-bg-subtle); border-color: var(--color-redlist-vu-ring-subtle); color: var(--color-redlist-vu-text-subtle);',
+    EN: 'background-color: var(--color-redlist-en-bg-subtle); border-color: var(--color-redlist-en-ring-subtle); color: var(--color-redlist-en-text-subtle);',
+    CR: 'background-color: var(--color-redlist-cr-bg-subtle); border-color: var(--color-redlist-cr-ring-subtle); color: var(--color-redlist-cr-text-subtle);',
+    RE: 'background-color: var(--color-redlist-re-bg-subtle); border-color: var(--color-redlist-re-ring-subtle); color: var(--color-redlist-re-text-subtle);'
   }
   const rl = String(datum.RL2020kat || '').toUpperCase()
+  const rlBadgeStyle = rlBadgeStyleByCode[rl] || 'background-color: #f5f5f5; border-color: #e5e5e5; color: #737373;'
   const rodlisteBadge = rlMapping[rl]
-    ? `<div class="font-md bg-rose-50 border border-rose-200 text-rose-500 text-xs rounded-md py-0.5 px-1">${rlMapping[rl]}</div>`
+    ? `<div class="font-md border text-xs rounded-md py-0.5 px-1" style="${rlBadgeStyle}">${rlMapping[rl]}</div>`
     : ''
   const signalartBadge = datum.SIGNAL_art === 'S'
     ? '<div class="font-md bg-teal-50 border border-teal-200 text-teal-500 text-xs rounded-md py-0.5 px-1">Signalart</div>'
@@ -783,7 +744,7 @@ const applyTreemapLeafGroupIcons = () => {
   const root = treemapWrapperRef.value
   if (!root) return
 
-  root.querySelectorAll('.treemap-leaf-group-icon').forEach((node) => node.remove())
+  root.querySelectorAll('.treemap-leaf-group-icon').forEach(node => node.remove())
 
   const labels = Array.from(
     root.querySelectorAll(`.${VisTreemapSelectors.label}`)
@@ -855,8 +816,12 @@ const treemapEventsWithTooltipFlip = {
 }
 
 const plotBandRange = computed(() => {
+  if (isBarGroupedActive.value) return null
   const range = props.visibleRange
   if (!range || range.endIndex < range.startIndex) return null
+  const total = Number(range.total ?? 0)
+  const showsAllRows = total > 0 && range.startIndex <= 0 && range.endIndex >= total - 1
+  if (showsAllRows) return null
   const slice = filteredSortedData.value.slice(range.startIndex, range.endIndex + 1)
   if (!slice.length) return null
   const indices = slice
@@ -868,19 +833,70 @@ const plotBandRange = computed(() => {
   return { from: min - 0.5, to: max + 0.5 }
 })
 
+const selectedPlotBandRange = computed(() => {
+  if (viewMode.value !== 'bar') return null
+  const selectedScientificName = activeSelectedScientificName.value
+  if (!selectedScientificName) return null
+
+  const selectedIndex = displayedBarData.value.findIndex(d =>
+    normalizeScientificName(d?.Scientificname) === selectedScientificName
+  )
+
+  if (selectedIndex < 0) return null
+  return { from: selectedIndex - 0.5, to: selectedIndex + 0.5 }
+})
+
+const isSpeciesDatum = (value: any) =>
+  value && (typeof value.Commonname === 'string' || typeof value.Scientificname === 'string')
+
+const resolveBarDatum = (payload: any) => {
+  if (!payload) return null
+  if (isSpeciesDatum(payload)) return payload
+
+  const nestedCandidates = [payload.datum, payload.data, payload.original]
+  for (const candidate of nestedCandidates) {
+    if (isSpeciesDatum(candidate)) return candidate
+  }
+
+  if (Array.isArray(payload)) {
+    for (const item of payload) {
+      if (isSpeciesDatum(item)) return item
+      if (item?.datum && isSpeciesDatum(item.datum)) return item.datum
+    }
+  }
+
+  const idxCandidates = [
+    payload.index,
+    payload.i,
+    payload.dataIndex,
+    payload._index,
+    payload.x,
+    payload.xIndex
+  ]
+  for (const idx of idxCandidates) {
+    if (!Number.isInteger(idx)) continue
+    const row = displayedBarData.value[idx]
+    if (isSpeciesDatum(row)) return row
+  }
+
+  return null
+}
+
 // ----- Tooltip Trigger & Template -----
 function tooltipTemplate(d: any): string {
-  if (!d) {
+  const datum = resolveBarDatum(d)
+  if (!datum) {
     return '<div class="p-2 text-sm text-neutral-500">Ingen data</div>'
   }
-  currentHoveredDatum.value = d
-  return buildSpeciesTooltipHtml(d)
+  currentHoveredDatum.value = datum
+  return buildSpeciesTooltipHtml(datum)
 }
 const triggers = { [StackedBar.selectors.bar]: tooltipTemplate }
 const currentHoveredDatum = ref<any | null>(null)
 const barEvents = {
   [StackedBar.selectors.bar]: {
-    click: (datum: any) => {
+    click: (payload: any) => {
+      const datum = resolveBarDatum(payload)
       if (datum) {
         speciesStore.selectSpecies(datum, 'edna')
       }
@@ -890,21 +906,16 @@ const barEvents = {
 // ----- Custom Bar Color Based on Selected Filters -----
 const updatedChartData = computed(() => {
   const defaultGray = '#d4d4d4'
-  const selectedScientificName = (speciesStore.selectedSpecies as any)?.Scientificname
-  return sortedChartData.value.map(d => {
-    // Highlight selected species only while the slide-over is open
-    if (
-      isSlideOverOpen.value &&
-      selectedScientificName &&
-      d.Scientificname === selectedScientificName
-    ) {
+  const selectedScientificName = activeSelectedScientificName.value
+  return sortedChartData.value.map((d) => {
+    if (selectedScientificName && normalizeScientificName(d?.Scientificname) === selectedScientificName) {
       return { ...d, barColor: '#b1835e' }
     }
     // Compute matchSearch at the top
-    const term = props.searchTerm.trim().toLowerCase();
-    const common = String(d.Commonname || '').toLowerCase();
-    const scientific = String(d.Scientificname || '').toLowerCase();
-    const matchSearch = term ? (common.includes(term) || scientific.includes(term)) : true;
+    const term = props.searchTerm.trim().toLowerCase()
+    const common = String(d.Commonname || '').toLowerCase()
+    const scientific = String(d.Scientificname || '').toLowerCase()
+    const matchSearch = term ? (common.includes(term) || scientific.includes(term)) : true
 
     // 1) Only search active (no other filters)
     const statusActive = props.statusFilter.length > 0
@@ -915,17 +926,17 @@ const updatedChartData = computed(() => {
     }
 
     // 2a) Compute boolean matches for each category
-    const matchSignal =
-      statusActive &&
-      props.statusFilter.includes('Signalart') &&
-      d.SIGNAL_art === 'S'
+    const matchSignal
+      = statusActive
+        && props.statusFilter.includes('Signalart')
+        && d.SIGNAL_art === 'S'
 
     const otherStatuses = props.statusFilter.filter(s => s !== 'Signalart')
     // Add Ej bedömd and Ej tillämplig logic
-    const matchEjBedom = statusActive && props.statusFilter.includes('Ej bedömd') &&
-      (d.RL2020kat === null || d.RL2020kat === 0 || d.RL2020kat === '0' || String(d.RL2020kat).toUpperCase() === 'NE')
-    const matchEjTillamplig = statusActive && props.statusFilter.includes('Ej tillämplig') &&
-      String(d.RL2020kat).toUpperCase() === 'NA'
+    const matchEjBedom = statusActive && props.statusFilter.includes('Ej bedömd')
+      && (d.RL2020kat === null || d.RL2020kat === 0 || d.RL2020kat === '0' || String(d.RL2020kat).toUpperCase() === 'NE')
+    const matchEjTillamplig = statusActive && props.statusFilter.includes('Ej tillämplig')
+      && String(d.RL2020kat).toUpperCase() === 'NA'
     const matchStatus = statusActive
       ? matchSignal || otherStatuses.includes(d.RL2020kat)
       : false
@@ -936,18 +947,18 @@ const updatedChartData = computed(() => {
       : false
 
     const matchGroup = groupActive
-      ? props.gruppFilter.some((group) => normalizeGroupKey(group) === normalizeGroupKey(d?.[props.groupKey]))
+      ? props.gruppFilter.some(group => normalizeGroupKey(group) === normalizeGroupKey(d?.[props.groupKey]))
       : false
 
     // 3) If any Status filter is on, handle Status‐first logic:
     if (statusActive) {
       // 3a) Only Status (no Svamp, no Grupp)
       if (!svampActive && !groupActive) {
-        if (matchSearch && matchSignal) return { ...d, barColor: '#14b8a6' }    // teal-500
+        if (matchSearch && matchSignal) return { ...d, barColor: '#14b8a6' } // teal-500
         if (matchSearch && (matchSignal || matchStatus || matchEjBedom || matchEjTillamplig)) {
           if (matchSignal) return { ...d, barColor: '#14b8a6' }
-          if (d.RL2020kat === 'LC') return { ...d, barColor: '#22c55e' }
-          if (['NT', 'EN', 'VU', 'CR'].includes(d.RL2020kat)) return { ...d, barColor: '#ef4444' }
+          const redlistColor = getRedlistColorForDatum(d)
+          if (redlistColor) return { ...d, barColor: redlistColor }
           if (matchEjBedom || matchEjTillamplig) return { ...d, barColor: '#737373' }
           return { ...d, barColor: '#1f2937' }
         }
@@ -962,8 +973,8 @@ const updatedChartData = computed(() => {
         // Color precedence: Signalart > RL status > Matsvamp > Giftsvamp > Grupp
         if (matchSignal) return { ...d, barColor: '#14b8a6' }
         if (otherStatuses.length > 0) {
-          if (d.RL2020kat === 'LC') return { ...d, barColor: '#22c55e' }
-          if (['NT', 'EN', 'VU', 'CR'].includes(d.RL2020kat)) return { ...d, barColor: '#ef4444' }
+          const redlistColor = getRedlistColorForDatum(d)
+          if (redlistColor) return { ...d, barColor: redlistColor }
           if (matchEjBedom || matchEjTillamplig) return { ...d, barColor: '#737373' }
           return { ...d, barColor: '#1f2937' }
         }
@@ -978,7 +989,7 @@ const updatedChartData = computed(() => {
     if (svampActive || groupActive) {
       // 4a) Only Svamp (no Grupp)
       if (svampActive && !groupActive) {
-        if (matchSearch && matchMats) return { ...d, barColor: '#eab308' }  // yellow
+        if (matchSearch && matchMats) return { ...d, barColor: '#eab308' } // yellow
         if (matchSearch && matchGifts) return { ...d, barColor: '#84cc16' } // green
         return { ...d, barColor: defaultGray }
       }
@@ -1000,10 +1011,101 @@ const updatedChartData = computed(() => {
     return { ...d, barColor: d.fillColor || 'var(--ui-primary)' }
   })
 })
-const barColorAccessor = (d: any) => d.barColor
-const hasData = computed(() => updatedChartData.value.length > 0)
 
-watch(updatedChartData, (newVal) => {
+const isBarGroupedActive = computed(() =>
+  viewMode.value === 'bar' && props.barGroupingMode !== 'none'
+)
+
+const getBarGroupingLabel = (datum: any) => {
+  if (props.barGroupingMode === 'groups') return String(datum?.[props.groupKey] || 'Övrigt')
+  if (props.barGroupingMode === 'edibility') return getEdibilityGroup(datum)
+  if (props.barGroupingMode === 'redlist') {
+    const status = String(datum?.RL2020kat || '').trim().toUpperCase()
+    const redlistLabelByCode: Record<string, string> = {
+      LC: 'Livskraftig',
+      DD: 'Kunskapsbrist',
+      NT: 'Nära hotad',
+      VU: 'Sårbar',
+      EN: 'Starkt hotad',
+      CR: 'Akut hotad',
+      RE: 'Nationellt utdöd'
+    }
+    return redlistLabelByCode[status] || 'Övrigt'
+  }
+  if (props.barGroupingMode === 'visible') {
+    const groupValue = String(datum?.[props.groupKey] || '')
+    return isVisibleMushroomGroup(groupValue) ? 'Svampar som syns' : 'Svampar som är svåra att se'
+  }
+  return String(datum?.Commonname || 'Övrigt')
+}
+
+const getBarGroupingOrder = (label: string) => {
+  if (props.barGroupingMode === 'groups') {
+    const normalized = normalizeGroupKey(label)
+    const order = ['ovrigt', 'hattsvamp', 'kantarell', 'sopp', 'taggsvamp', 'fingersvamp', 'skinnsvamp', 'skalsvamp', 'tryffel']
+    const idx = order.indexOf(normalized)
+    return idx === -1 ? Number.POSITIVE_INFINITY : idx
+  }
+  if (props.barGroupingMode === 'edibility') {
+    const order = ['Matsvamp', 'Giftsvamp', 'Övrigt']
+    const idx = order.indexOf(label)
+    return idx === -1 ? Number.POSITIVE_INFINITY : idx
+  }
+  if (props.barGroupingMode === 'redlist') {
+    const order = ['Livskraftig', 'Kunskapsbrist', 'Nära hotad', 'Sårbar', 'Starkt hotad', 'Akut hotad', 'Nationellt utdöd', 'Övrigt']
+    const idx = order.indexOf(label)
+    return idx === -1 ? Number.POSITIVE_INFINITY : idx
+  }
+  if (props.barGroupingMode === 'visible') {
+    const order = ['Svampar som syns', 'Svampar som är svåra att se']
+    const idx = order.indexOf(label)
+    return idx === -1 ? Number.POSITIVE_INFINITY : idx
+  }
+  return Number.POSITIVE_INFINITY
+}
+
+const getBarGroupingColor = (label: string) => {
+  if (props.barGroupingMode === 'groups') return getStableGroupColor(label)
+  if (props.barGroupingMode === 'edibility') return getTreemapGroupColor(label, 'treemap-edibility')
+  if (props.barGroupingMode === 'redlist') return getTreemapGroupColor(label, 'treemap-redlist')
+  if (props.barGroupingMode === 'visible') return getTreemapGroupColor(label, 'treemap-visible')
+  return '#d4d4d4'
+}
+
+const groupedSpeciesBarData = computed(() => {
+  const selectedScientificName = activeSelectedScientificName.value
+  const sorters = props.sortOrder.length
+    ? props.sortOrder
+    : [{ id: 'sample_plot_count', desc: true }]
+  const rows = updatedChartData.value
+    .filter(d => shouldMatchTable(d))
+    .map((d) => {
+      const groupingLabel = getBarGroupingLabel(d)
+      const datumScientificName = normalizeScientificName(d?.Scientificname)
+      const isSelected = selectedScientificName && datumScientificName === selectedScientificName
+      return {
+        ...d,
+        __groupingLabel: groupingLabel,
+        barColor: isSelected ? '#b1835e' : getBarGroupingColor(groupingLabel)
+      }
+    })
+  return rows.sort((a, b) => {
+    const orderCmp = getBarGroupingOrder(String(a.__groupingLabel)) - getBarGroupingOrder(String(b.__groupingLabel))
+    if (orderCmp !== 0) return orderCmp
+    const sorterCmp = compareRowsBySortOrder(a, b, sorters)
+    if (sorterCmp !== 0) return sorterCmp
+    return Number(b.sample_plot_count || 0) - Number(a.sample_plot_count || 0)
+  })
+})
+
+const displayedBarData = computed(() =>
+  isBarGroupedActive.value ? groupedSpeciesBarData.value : updatedChartData.value
+)
+
+const barColorAccessor = (d: any) => d.barColor
+const hasData = computed(() => displayedBarData.value.length > 0)
+
+watch(displayedBarData, (newVal) => {
   if (!newVal.length) {
     currentHoveredDatum.value = null
   }
@@ -1043,22 +1145,6 @@ watch(
   },
   { immediate: true, deep: true, flush: 'post' }
 )
-
-
-// ----- Zoom Functions -----
-function zoomIn() {
-  if (currentZoomIndex.value < zoomLevels.length - 1) {
-    currentZoomIndex.value++
-  }
-}
-function zoomOut() {
-  if (currentZoomIndex.value > 0) {
-    currentZoomIndex.value--
-  }
-}
-
-// ----- Sidebar Trigger on Chart Click -----
-const isSlideOverOpen = computed(() => speciesStore.selectedSpecies !== null)
 
 // Detect mobile screens (< md)
 const isMobile = useMediaQuery('(max-width: 767px)')

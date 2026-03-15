@@ -42,6 +42,44 @@
   --vis-line-gapfill-stroke-dasharray: 1 3;
   --vis-line-gapfill-stroke-opacity: 1;
   --vis-line-gapfill-stroke-dashoffset: 1;
+
+  /* Official rödlista colors */
+  --color-redlist-lc: #CDD400;
+  --color-redlist-dd: #DDD;
+  --color-redlist-nt: #F9C6C7;
+  --color-redlist-vu: #EF858F;
+  --color-redlist-en: #EA516D;
+  --color-redlist-cr: #E5014F;
+  --color-redlist-re: #490F2C;
+
+  /* Subtle badge tokens */
+  --color-redlist-lc-bg-subtle: #CDD40033;
+  --color-redlist-lc-ring-subtle: #CDD40066;
+  --color-redlist-lc-text-subtle: #7A8000;
+
+  --color-redlist-dd-bg-subtle: #DDDDDD73;
+  --color-redlist-dd-ring-subtle: #DDDDDDB3;
+  --color-redlist-dd-text-subtle: #666666;
+
+  --color-redlist-nt-bg-subtle: #F9C6C74D;
+  --color-redlist-nt-ring-subtle: #F9C6C773;
+  --color-redlist-nt-text-subtle: #C36A73;
+
+  --color-redlist-vu-bg-subtle: #EF858F47;
+  --color-redlist-vu-ring-subtle: #EF858F73;
+  --color-redlist-vu-text-subtle: #B93F53;
+
+  --color-redlist-en-bg-subtle: #EA516D42;
+  --color-redlist-en-ring-subtle: #EA516D73;
+  --color-redlist-en-text-subtle: #B12B46;
+
+  --color-redlist-cr-bg-subtle: #E5014F3D;
+  --color-redlist-cr-ring-subtle: #E5014F73;
+  --color-redlist-cr-text-subtle: #A30038;
+
+  --color-redlist-re-bg-subtle: #490F2C33;
+  --color-redlist-re-ring-subtle: #490F2C66;
+  --color-redlist-re-text-subtle: #490F2C;
 }
 
 /* app/assets/css/main.css */
@@ -58,4 +96,94 @@ html {
 /* Nuxt UI’s scroll lock adds inline padding-right – just drop it */
 body[style*="padding-right"] {
   padding-right: 0 !important;
+}
+
+.quick-filter-select-content,
+.quick-filter-select-content [data-radix-select-viewport],
+.quick-filter-select-content [data-slot="viewport"] {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+.quick-filter-select-content::-webkit-scrollbar,
+.quick-filter-select-content [data-radix-select-viewport]::-webkit-scrollbar,
+.quick-filter-select-content [data-slot="viewport"]::-webkit-scrollbar {
+  display: none;
+}
+
+.badge-rl-lc-subtle {
+  background-color: var(--color-redlist-lc-bg-subtle);
+  color: var(--color-redlist-lc-text-subtle);
+  box-shadow: inset 0 0 0 1px var(--color-redlist-lc-ring-subtle);
+}
+
+.badge-rl-dd-subtle {
+  background-color: var(--color-redlist-dd-bg-subtle);
+  color: var(--color-redlist-dd-text-subtle);
+  box-shadow: inset 0 0 0 1px var(--color-redlist-dd-ring-subtle);
+}
+
+.badge-rl-nt-subtle {
+  background-color: var(--color-redlist-nt-bg-subtle);
+  color: var(--color-redlist-nt-text-subtle);
+  box-shadow: inset 0 0 0 1px var(--color-redlist-nt-ring-subtle);
+}
+
+.badge-rl-vu-subtle {
+  background-color: var(--color-redlist-vu-bg-subtle);
+  color: var(--color-redlist-vu-text-subtle);
+  box-shadow: inset 0 0 0 1px var(--color-redlist-vu-ring-subtle);
+}
+
+.badge-rl-en-subtle {
+  background-color: var(--color-redlist-en-bg-subtle);
+  color: var(--color-redlist-en-text-subtle);
+  box-shadow: inset 0 0 0 1px var(--color-redlist-en-ring-subtle);
+}
+
+.badge-rl-cr-subtle {
+  background-color: var(--color-redlist-cr-bg-subtle);
+  color: var(--color-redlist-cr-text-subtle);
+  box-shadow: inset 0 0 0 1px var(--color-redlist-cr-ring-subtle);
+}
+
+.badge-rl-re-subtle {
+  background-color: var(--color-redlist-re-bg-subtle);
+  color: var(--color-redlist-re-text-subtle);
+  box-shadow: inset 0 0 0 1px var(--color-redlist-re-ring-subtle);
+}
+
+.dark .badge-rl-lc-subtle {
+  background-color: #CDD40040;
+  color: #E7EC8A;
+}
+
+.dark .badge-rl-dd-subtle {
+  background-color: #DDDDDD33;
+  color: #DDD;
+}
+
+.dark .badge-rl-nt-subtle {
+  background-color: #F9C6C733;
+  color: #F9C6C7;
+}
+
+.dark .badge-rl-vu-subtle {
+  background-color: #EF858F33;
+  color: #EF858F;
+}
+
+.dark .badge-rl-en-subtle {
+  background-color: #EA516D33;
+  color: #EA516D;
+}
+
+.dark .badge-rl-cr-subtle {
+  background-color: #E5014F33;
+  color: #E5014F;
+}
+
+.dark .badge-rl-re-subtle {
+  background-color: #490F2C59;
+  color: #E7CAD8;
 }

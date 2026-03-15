@@ -76,6 +76,41 @@ export default defineAppConfig({
           class:
             "bg-vanligmark-50 text-(--ui-vanligmark) dark:bg-vanligmark-950/80 ring ring-inset ring-(--ui-vanligmark)/25",
         },
+        {
+          color: "rl-lc",
+          variant: "subtle",
+          class: "badge-rl-lc-subtle",
+        },
+        {
+          color: "rl-dd",
+          variant: "subtle",
+          class: "badge-rl-dd-subtle",
+        },
+        {
+          color: "rl-nt",
+          variant: "subtle",
+          class: "badge-rl-nt-subtle",
+        },
+        {
+          color: "rl-vu",
+          variant: "subtle",
+          class: "badge-rl-vu-subtle",
+        },
+        {
+          color: "rl-en",
+          variant: "subtle",
+          class: "badge-rl-en-subtle",
+        },
+        {
+          color: "rl-cr",
+          variant: "subtle",
+          class: "badge-rl-cr-subtle",
+        },
+        {
+          color: "rl-re",
+          variant: "subtle",
+          class: "badge-rl-re-subtle",
+        },
       ],
     },
     colors: {
