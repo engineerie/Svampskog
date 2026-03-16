@@ -814,11 +814,16 @@ const treemapEventsWithTooltipFlip = {
     }
   }
 }
+const suppressPlotBandAfterUngroup = ref(false)
+let suppressPlotBandTimer: ReturnType<typeof setTimeout> | null = null
 
 const plotBandRange = computed(() => {
   if (isBarGroupedActive.value) return null
+  if (suppressPlotBandAfterUngroup.value) return null
   const range = props.visibleRange
   if (!range || range.endIndex < range.startIndex) return null
+  const rangeSize = (range.endIndex - range.startIndex) + 1
+  if (rangeSize <= 1) return null
   const total = Number(range.total ?? 0)
   const showsAllRows = total > 0 && range.startIndex <= 0 && range.endIndex >= total - 1
   if (showsAllRows) return null
@@ -1016,6 +1021,17 @@ const isBarGroupedActive = computed(() =>
   viewMode.value === 'bar' && props.barGroupingMode !== 'none'
 )
 
+watch(isBarGroupedActive, (active, prevActive) => {
+  if (prevActive && !active) {
+    suppressPlotBandAfterUngroup.value = true
+    if (suppressPlotBandTimer) clearTimeout(suppressPlotBandTimer)
+    suppressPlotBandTimer = setTimeout(() => {
+      suppressPlotBandAfterUngroup.value = false
+      suppressPlotBandTimer = null
+    }, 260)
+  }
+})
+
 const getBarGroupingLabel = (datum: any) => {
   if (props.barGroupingMode === 'groups') return String(datum?.[props.groupKey] || 'Övrigt')
   if (props.barGroupingMode === 'edibility') return getEdibilityGroup(datum)
@@ -1169,6 +1185,7 @@ watch(
 )
 
 onBeforeUnmount(() => {
+  if (suppressPlotBandTimer) clearTimeout(suppressPlotBandTimer)
   if (treemapSyncRaf) cancelAnimationFrame(treemapSyncRaf)
   if (treemapSyncTimer) clearTimeout(treemapSyncTimer)
 })

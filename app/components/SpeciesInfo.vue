@@ -203,12 +203,9 @@
         variant="ghost" target="_blank" class="text-primary-500 w-full" size="xl"
         icon="i-heroicons-arrow-up-right-20-solid" label="Artfakta.se" trailing />
       <br />
-      <UButton v-if="species.Svampguiden && species.Svampguiden !== '0'" :to="stripDetailsFromURL(species.Svampguiden)"
+      <!-- <UButton v-if="species.Svampguiden && species.Svampguiden !== '0'" :to="stripDetailsFromURL(species.Svampguiden)"
         trailing label="Svampguiden.com" icon="i-heroicons-arrow-up-right-20-solid" target="_blank" variant="ghost"
-        class=" text-primary-500 w-full" size="xl" />
-      <NuxtLink>
-
-      </NuxtLink>
+        class=" text-primary-500 w-full" size="xl" /> -->
     </div>
   </div>
 </template>

@@ -208,7 +208,7 @@
             </div>
             <template v-else>
               <div class="col-span-12 hidden md:block">
-                <div class="border-b border-muted/50 p-2 pb-0 flex justify-start">
+                <div class=" border-muted/50 p-2 pb-0 flex justify-start">
                   <UTabs v-model="desktopKnowledgeTab" :items="desktopKnowledgeTabItems" size="lg" :ui="{
                     root: '',
                     list: 'flex-nowrap gap-2 bg-transparent w-fit ',

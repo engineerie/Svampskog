@@ -25,10 +25,10 @@ const items = computed(() => [
   //   children: [
   //   ]
   // },
-  {
-    label: 'Svampkunskap',
-    to: '/svampkunskap'
-  }
+  // {
+  //   label: 'Svampkunskap',
+  //   to: '/svampkunskap'
+  // }
 ])
 
 const itemsright = computed(() => [
@@ -89,10 +89,10 @@ const itemsmobile = computed(() => [
         <!-- <USeparator orientation="vertical" class="h-4 mx-3" /> -->
         <UNavigationMenu :items="itemsright" variant="link" color="primary"
           :ui="{ link: 'text-md hover:bg-muted rounded', item: 'mx-0.5' }" />
-        <UTooltip text="Sök" :kbds="['meta', 'K']">
+        <!-- <UTooltip text="Sök" :kbds="['meta', 'K']">
           <USeparator orientation="vertical" class="h-4 mx-3" />
           <UContentSearchButton :collapsed="true" class="ring-muted/50 mx-0.5" />
-        </UTooltip>
+        </UTooltip> -->
       </div>
     </template>
 

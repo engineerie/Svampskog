@@ -158,13 +158,10 @@
                 </UCard>
             </UPageSection>
         </UContainer>
-        <UContainer class="px-0">
+        <!-- <UContainer class="px-0">
             <UPageSection :auto-height="isMobile ? true : false" :title="page.factsSection?.title"
                 :description="page.factsSection?.description" :ui="{ title: 'text-start', description: 'text-start' }">
                 <UCarousel v-slot="{ item }" dots :items="page.factsSection?.items" arrows :ui="{
-
-                    // container: 'transition-[height]',
-                    // controls: 'absolute -top-8 lg:-bottom-8 inset-x-0',
                     dots: '-bottom-12',
                     dot: 'w-6 h-1',
                     arrows: 'hidden lg:block',
@@ -179,18 +176,15 @@
                     </UPageCard>
                 </UCarousel>
             </UPageSection>
-
-
-
-        </UContainer>
-        <div class="bg-muted border-y border-muted/50">
+        </UContainer> -->
+        <!-- <div class="bg-muted border-y border-muted/50">
             <UContainer class="px-0">
                 <KnowledgeSelectionSection :title="page.knowledgeSection?.title"
                     :ui="{ title: 'text-start text-start text-2xl sm:text-3xl lg:text-4xl', description: 'text-start' }"
                     :description="page.knowledgeSection?.description" :indices="page.knowledgeSection?.indices || [1]"
                     :limit="page.knowledgeSection?.limit || 3" />
             </UContainer>
-        </div>
+        </div> -->
 
 
         <!-- <UContainer class="flex gap-2">

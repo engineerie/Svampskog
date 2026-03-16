@@ -186,6 +186,7 @@ function redirect() {
                 :subtitles-src="page.videoSection?.subtitles || ''" />
             </div>
           </UPageSection>
+
         </UPageSection>
 
       </UContainer>
@@ -196,6 +197,22 @@ function redirect() {
     </div>
 
     <UContainer class="px-0">
+      <UPageSection :ui="{ title: 'text-start', description: 'text-start' }" :title="page.factsSection?.title"
+        :description="page.factsSection?.description">
+        <UCarousel v-slot="{ item }" dots :items="page.factsSection?.items" arrows :ui="{
+          dots: '-bottom-12',
+          dot: 'w-6 h-1',
+          arrows: 'hidden lg:block',
+          item: 'basis-full sm:basis-1/3 px-6'
+        }">
+          <UPageCard variant="naked" reverse :title="item.title" :description="item.description"
+            :ui="{ title: 'text-lg text-neutral-700 ', description: 'text-base text-neutral-500' }">
+            <div class=" rounded-md overflow-hidden">
+              <NuxtImg v-if="item.image" :src="item.image" class="w-full aspect-square object-cover opacity-85" />
+            </div>
+          </UPageCard>
+        </UCarousel>
+      </UPageSection>
       <UPageSection :title="page.speciesListsIntro?.title"
         :ui="{ title: 'text-start lg:text-center', description: 'text-start lg:text-center', container: 'pb-0 sm:pb-0 lg:pb-0' }"
         :description="page.speciesListsIntro?.description" />
@@ -214,31 +231,16 @@ function redirect() {
       </UPageSection>
     </UContainer>
     <UContainer class="px-0">
-      <UPageSection :ui="{ title: 'text-start', description: 'text-start' }" :title="page.factsSection?.title"
-        :description="page.factsSection?.description">
-        <UCarousel v-slot="{ item }" dots :items="page.factsSection?.items" arrows :ui="{
-          dots: '-bottom-12',
-          dot: 'w-6 h-1',
-          arrows: 'hidden lg:block',
-          item: 'basis-full sm:basis-1/3 px-6'
-        }">
-          <UPageCard variant="naked" reverse :title="item.title" :description="item.description"
-            :ui="{ title: 'text-lg text-neutral-700 ', description: 'text-base text-neutral-500' }">
-            <div class=" rounded-md overflow-hidden">
-              <NuxtImg v-if="item.image" :src="item.image" class="w-full aspect-square object-cover opacity-85" />
-            </div>
-          </UPageCard>
-        </UCarousel>
-      </UPageSection>
+
 
     </UContainer>
-    <div class="bg-muted border-y border-muted/50">
+    <!-- <div class="bg-muted border-y border-muted/50">
       <UContainer class="px-0">
         <KnowledgeSelectionSection
           :ui="{ title: 'text-start text-2xl sm:text-3xl lg:text-4xl', description: 'text-start' }"
           :title="page.knowledgeSection?.title" :description="page.knowledgeSection?.description"
           :indices="page.knowledgeSection?.indices || [0]" :limit="page.knowledgeSection?.limit || 3" />
       </UContainer>
-    </div>
+    </div> -->
   </UPage>
 </template>

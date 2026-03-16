@@ -62,15 +62,14 @@
                     class="flex items-center justify-between gap-3">
                     <p class="text-sm text-neutral-700">Gruppering</p>
                     <USelect v-model="selectedTableGrouping" :items="tableGroupingMenuOptions" item-value="value"
-                      item-label="label" class="max-w-36 ring-muted/50" :ui="{ content: 'min-w-fit' }" />
+                      item-label="label" class="max-w-42 ring-muted/50" :ui="{ content: 'min-w-fit' }" />
                   </div>
 
                   <div v-if="paginationEnabled" class="flex items-center justify-between gap-3"
                     :class="isTableGroupingActive ? 'opacity-60' : ''">
                     <p class="text-sm text-neutral-700">Rader</p>
                     <USelect v-model="rowsPerPage" :items="rowsPerPageOptions" item-value="value" item-label="label"
-                      class="max-w-36 ring-muted/50" :disabled="isTableGroupingActive"
-                      :ui="{ content: 'min-w-fit' }" />
+                      class="max-w-42 ring-muted/50" :disabled="isTableGroupingActive" :ui="{ content: 'min-w-fit' }" />
                   </div>
 
                   <div class="space-y-2">
@@ -393,19 +392,10 @@ const svampOptions = computed(() => {
   // Compute total counts from filteredData (before column filters)
   const totalCounts = {}
   filteredData.value.forEach((row) => {
-    const matVal = row[props.mat]
-    // Matsvamp logic:
-    if (props.mat === 'Nyasvamp-boken') {
-      if (matVal && String(matVal).toLowerCase() === 'x') {
-        totalCounts['Matsvamp'] = (totalCounts['Matsvamp'] || 0) + 1
-      }
-    } else {
-      if (matVal == 1) {
-        totalCounts['Matsvamp'] = (totalCounts['Matsvamp'] || 0) + 1
-      }
+    if (isEdibleSpecies(row)) {
+      totalCounts['Matsvamp'] = (totalCounts['Matsvamp'] || 0) + 1
     }
-    // Giftsvamp logic:
-    if ((row.Giftsvamp || '').toLowerCase() === 'x') {
+    if (isPoisonSpecies(row)) {
       totalCounts['Giftsvamp'] = (totalCounts['Giftsvamp'] || 0) + 1
     }
   })
@@ -414,17 +404,10 @@ const svampOptions = computed(() => {
   const visibleCounts = {}
   visibleRows.forEach((rowModel) => {
     const row = rowModel.original
-    // Matsvamp logic:
-    const matVal = row[props.mat]
-    if (
-      (props.mat === 'Nyasvamp-boken'
-        ? matVal && String(matVal).toLowerCase() === 'x'
-        : matVal == 1)
-    ) {
+    if (isEdibleSpecies(row)) {
       visibleCounts['Matsvamp'] = (visibleCounts['Matsvamp'] || 0) + 1
     }
-    // Giftsvamp logic:
-    if ((row.Giftsvamp || '').toLowerCase() === 'x') {
+    if (isPoisonSpecies(row)) {
       visibleCounts['Giftsvamp'] = (visibleCounts['Giftsvamp'] || 0) + 1
     }
   })
@@ -989,6 +972,18 @@ const isVisibleMushroomGroup = (value) => {
   return !normalized.includes('skinnsvamp') && !normalized.includes('tryffel')
 }
 
+const isEdibleSpecies = (row) => {
+  const primaryValue = row?.[props.mat]
+  const normalizedPrimary = String(primaryValue ?? '').trim().toLowerCase()
+  if (normalizedPrimary === 'x' || normalizedPrimary === '1' || normalizedPrimary === 'true') return true
+
+  const fallbackValue = row?.matsvamp
+  const normalizedFallback = String(fallbackValue ?? '').trim().toLowerCase()
+  return fallbackValue == 1 || normalizedFallback === 'x' || normalizedFallback === '1' || normalizedFallback === 'true'
+}
+
+const isPoisonSpecies = (row) => String(row?.Giftsvamp ?? '').trim().toLowerCase() === 'x'
+
 const resolveGroupingModeFromChart = (mode) => {
   if (mode === 'treemap-groups') return 'groups'
   if (mode === 'treemap-edibility') return 'edibility'
@@ -1009,8 +1004,8 @@ const getRowGroupingLabel = (row) => {
   const mode = effectiveGroupingMode.value
   if (mode === 'groups') return String(row?.[props.grupp] || 'Övrigt')
   if (mode === 'edibility') {
-    const isEdible = row?.[props.mat] == 1
-    const isPoison = String(row?.Giftsvamp || '').toLowerCase() === 'x'
+    const isEdible = isEdibleSpecies(row)
+    const isPoison = isPoisonSpecies(row)
     if (isEdible) return 'Matsvamp'
     if (isPoison) return 'Giftsvamp'
     return 'Övrigt'
@@ -1314,14 +1309,10 @@ const desktopColumns = [
       if (!filterValue || filterValue.length === 0) return true
       let match = false
       if (filterValue.includes('Matsvamp')) {
-        if (props.mat === 'Nyasvamp-boken') {
-          match = match || (row.getValue(columnId)?.toLowerCase() === 'x')
-        } else {
-          match = match || (row.getValue(columnId) === 1)
-        }
+        match = match || isEdibleSpecies(row.original)
       }
       if (filterValue.includes('Giftsvamp')) {
-        match = match || ((row.original.Giftsvamp || '').toLowerCase() === 'x')
+        match = match || isPoisonSpecies(row.original)
       }
       return match
     },
@@ -1329,10 +1320,8 @@ const desktopColumns = [
       row.getIsGrouped()
         ? null
         : h('div', { class: 'flex gap-1' }, [
-          (props.mat === 'Nyasvamp-boken'
-            ? row.getValue(props.mat)?.toLowerCase() === 'x'
-            : row.getValue(props.mat) === 1) && h(UBadge, { color: 'warning', variant: 'subtle' }, () => 'Matsvamp'),
-          row.original.Giftsvamp?.toLowerCase() === 'x' && h(UBadge, { color: 'poison', variant: 'subtle' }, () => 'Giftsvamp')
+          isEdibleSpecies(row.original) && h(UBadge, { color: 'warning', variant: 'subtle' }, () => 'Matsvamp'),
+          isPoisonSpecies(row.original) && h(UBadge, { color: 'poison', variant: 'subtle' }, () => 'Giftsvamp')
         ].filter(Boolean)),
     meta: { headerText: 'Matsvamp' }
   },
@@ -1510,7 +1499,7 @@ const columns = computed(() =>
 )
 // Apply the mobile table styling (headers, dividers, padding) when useMobileLayout is true
 const tableUi = computed(() => ({
-  root: 'md:px-6',
+  root: 'md:px-4',
   thead: useMobileLayout.value
     ? 'hidden'
     : 'hidden md:table-header-group  ',
@@ -1674,15 +1663,9 @@ const filteredData = computed(() => {
 
   // Apply edible/poison filtering if specified via props
   if (props.filterEdible) {
-    result = result.filter((row) => {
-      const edibleVal = row[props.mat]
-      return edibleVal && String(edibleVal).toLowerCase() === 'x'
-    })
+    result = result.filter((row) => isEdibleSpecies(row))
   } else if (props.filterPoison) {
-    result = result.filter((row) => {
-      const edibleVal = row[props.mat]
-      return !(edibleVal && String(edibleVal).toLowerCase() === 'x')
-    })
+    result = result.filter((row) => !isEdibleSpecies(row))
   }
 
   return result
@@ -1899,15 +1882,10 @@ const isFilterActive = (columnId, value) => {
   }
   if (columnId === props.mat) {
     if (value === 'Matsvamp') {
-      return rows.some((row) => {
-        const matVal = row.original[props.mat]
-        return props.mat === 'Nyasvamp-boken'
-          ? matVal && String(matVal).toLowerCase() === 'x'
-          : matVal == 1
-      })
+      return rows.some((row) => isEdibleSpecies(row.original))
     }
     if (value === 'Giftsvamp') {
-      return rows.some(row => (row.original.Giftsvamp || '').toLowerCase() === 'x')
+      return rows.some(row => isPoisonSpecies(row.original))
     }
   }
   if (columnId === props.grupp) {

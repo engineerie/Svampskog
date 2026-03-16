@@ -17,7 +17,7 @@
 
 
 
-        <NuxtImg :key="imageUrl" :src="imageUrl" alt="Vald skogsmiljö"
+        <NuxtImg :key="imageUrl" :src="imageUrl" alt="Vald skogsmiljö" fit="cover"
           class="h-full lg:rounded-lg lg:ring ring-muted/50 lg:shadow" width="805" height="400" />
 
 
