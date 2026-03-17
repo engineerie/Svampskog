@@ -847,27 +847,29 @@ const getStatusColor = (status) => {
 }
 
 const groupingBaseColors = {
-  ovrigt: '#9ca3af',
-  hattsvamp: '#fb7185',
-  kantarell: '#fbbf24',
-  sopp: '#34d399',
-  taggsvamp: '#38bdf8',
-  fingersvamp: '#a78bfa',
-  skinnsvamp: '#e879f9',
-  skinnsvampar: '#e879f9',
-  skalsvamp: '#fb923c',
-  tryffel: '#a3e635'
+  ovrigt: '#4b5563',
+  hattsvamp: '#db2777',
+  kantarell: '#d97706',
+  sopp: '#059669',
+  taggsvamp: '#0284c7',
+  fingersvamp: '#7c3aed',
+  skinnsvamp: '#c026d3',
+  skinnsvampar: '#c026d3',
+  skalsvamp: '#ea580c',
+  tryffel: '#65a30d'
 }
 
 const groupingEdibilityColors = {
-  matsvamp: '#facc15',
-  giftsvamp: '#a3e635',
-  ovrigt: '#9ca3af'
+  matsvamp: '#eab308',
+  giftsvamp: '#84cc16',
+  ovrigt: '#4b5563'
 }
 
 const groupingRedlistColors = {
   livskraftig: '#CDD400',
-  kunskapsbrist: '#9CA3AF',
+  kunskapsbrist: '#DDD',
+  'ej bedomd': '#DDD',
+  'ej tillamplig': '#9ca3af',
   'nara hotad': '#F9C6C7',
   sarbar: '#EF858F',
   'starkt hotad': '#EA516D',
@@ -882,6 +884,18 @@ const groupingVisibleColors = {
   'synlighet saknas': '#d4d4d4'
 }
 
+const redlistAbbreviationByLabel = {
+  livskraftig: 'LC',
+  kunskapsbrist: 'DD',
+  'ej bedomd': 'NE',
+  'ej tillamplig': 'NA',
+  'nara hotad': 'NT',
+  sarbar: 'VU',
+  'starkt hotad': 'EN',
+  'akut hotad': 'CR',
+  'nationellt utdod': 'RE'
+}
+
 const getGroupingAccentColor = (label) => {
   const normalized = normalizeGroupKey(label)
   const mode = effectiveGroupingMode.value
@@ -891,6 +905,157 @@ const getGroupingAccentColor = (label) => {
   if (mode === 'redlist') return groupingRedlistColors[normalized] || groupingRedlistColors.ovrigt
   if (mode === 'visible') return groupingVisibleColors[normalized] || groupingVisibleColors['synlighet saknas']
   return '#9ca3af'
+}
+
+const getGroupingForegroundColor = (label) => {
+  const normalized = normalizeGroupKey(label)
+  const useLightForeground = [
+    'ovrigt',
+    'synlighet saknas',
+    'svampar som syns',
+    'starkt hotad',
+    'akut hotad'
+  ].includes(normalized)
+  return useLightForeground ? '#ffffff' : '#5a3f34'
+}
+
+const getMaskedIconNode = (iconPath, foregroundColor, size = 'h-3 w-3') => h('span', {
+  class: `inline-block ${size}`,
+  style: {
+    backgroundColor: foregroundColor,
+    WebkitMaskImage: `url(${iconPath})`,
+    maskImage: `url(${iconPath})`,
+    WebkitMaskRepeat: 'no-repeat',
+    maskRepeat: 'no-repeat',
+    WebkitMaskPosition: 'center',
+    maskPosition: 'center',
+    WebkitMaskSize: 'contain',
+    maskSize: 'contain'
+  }
+})
+
+const getGroupingIconBadgeClass = (label) => {
+  const normalized = normalizeGroupKey(label)
+  const mode = effectiveGroupingMode.value
+
+  if (mode === 'groups') {
+    const classes = {
+      ovrigt: 'bg-gray-100',
+      hattsvamp: 'bg-pink-100',
+      kantarell: 'bg-amber-100',
+      sopp: 'bg-emerald-100',
+      taggsvamp: 'bg-sky-100',
+      fingersvamp: 'bg-violet-100',
+      skinnsvamp: 'bg-fuchsia-100',
+      skinnsvampar: 'bg-fuchsia-100',
+      skalsvamp: 'bg-orange-100',
+      tryffel: 'bg-lime-100'
+    }
+    return classes[normalized] || 'bg-gray-100'
+  }
+
+  if (mode === 'edibility') {
+    const classes = {
+      matsvamp: 'bg-yellow-100',
+      giftsvamp: 'bg-lime-100',
+      ovrigt: 'bg-gray-100'
+    }
+    return classes[normalized] || 'bg-gray-100'
+  }
+
+  return ''
+}
+
+const getGroupingIconBadgeRingClass = (label) => {
+  const normalized = normalizeGroupKey(label)
+  const mode = effectiveGroupingMode.value
+
+  if (mode === 'groups') {
+    const classes = {
+      ovrigt: 'ring-gray-200',
+      hattsvamp: 'ring-pink-200',
+      kantarell: 'ring-amber-200',
+      sopp: 'ring-emerald-200',
+      taggsvamp: 'ring-sky-200',
+      fingersvamp: 'ring-violet-200',
+      skinnsvamp: 'ring-fuchsia-200',
+      skinnsvampar: 'ring-fuchsia-200',
+      skalsvamp: 'ring-orange-200',
+      tryffel: 'ring-lime-200'
+    }
+    return classes[normalized] || 'ring-gray-200'
+  }
+
+  if (mode === 'edibility') {
+    const classes = {
+      matsvamp: 'ring-yellow-200',
+      giftsvamp: 'ring-lime-200',
+      ovrigt: 'ring-gray-200'
+    }
+    return classes[normalized] || 'ring-gray-200'
+  }
+
+  return 'ring-black/10'
+}
+
+const wrapIconInLightBadge = (contentNode, label) => h('span', {
+  class: `inline-flex size-7 shrink-0 items-center justify-center rounded-full ring-1 ${getGroupingIconBadgeClass(label)} ${getGroupingIconBadgeRingClass(label)}`,
+  'aria-hidden': 'true'
+}, [contentNode])
+
+const getGroupingBadgeNode = (label) => {
+  const mode = effectiveGroupingMode.value
+  const normalized = normalizeGroupKey(label)
+  const accentColor = getGroupingAccentColor(label)
+  const foregroundColor = getGroupingForegroundColor(label)
+
+  if (mode === 'groups') {
+    return wrapIconInLightBadge(
+      getMaskedIconNode(getIconPath(label), accentColor, 'h-5 w-5'),
+      label
+    )
+  }
+
+  if (mode === 'edibility') {
+    if (normalized === 'matsvamp') {
+      return wrapIconInLightBadge(
+        h(Icon, { name: 'icon-park-solid:knife-fork', class: 'h-5 w-5 shrink-0', style: { color: accentColor } }),
+        label
+      )
+    }
+    if (normalized === 'giftsvamp') {
+      return wrapIconInLightBadge(
+        h(Icon, { name: 'hugeicons:danger', class: 'h-5 w-5 shrink-0', style: { color: accentColor } }),
+        label
+      )
+    }
+    return wrapIconInLightBadge(
+      getMaskedIconNode(getIconPath('övrigt'), accentColor, 'h-5 w-5'),
+      label
+    )
+  }
+
+  if (mode === 'redlist') {
+    const abbreviation = redlistAbbreviationByLabel[normalized] || 'NE'
+    const contentNode = h('span', { class: 'text-[12px] font-semibold leading-none', style: { color: foregroundColor } }, abbreviation)
+    return h('span', {
+      class: 'relative inline-flex size-7 shrink-0 items-center justify-center rounded-full',
+      style: { backgroundColor: accentColor },
+      'aria-hidden': 'true'
+    }, [contentNode])
+  }
+
+  if (mode === 'visible') {
+    if (normalized === 'svampar som syns') return h(Icon, { name: 'heroicons:eye-20-solid', class: 'h-5 w-5 shrink-0', style: { color: accentColor } })
+    if (normalized === 'svampar som ar svara att se') return h(Icon, { name: 'heroicons:eye-slash-20-solid', class: 'h-5 w-5 shrink-0', style: { color: accentColor } })
+    return h(Icon, { name: 'heroicons:minus-circle-20-solid', class: 'h-5 w-5 shrink-0', style: { color: accentColor } })
+  }
+
+  return h('span', {
+    class: 'inline-block h-3 w-3 rounded-full ring-1 ring-black/10 shrink-0',
+    style: { backgroundColor: accentColor },
+    'aria-hidden': 'true'
+  })
 }
 
 const getStatusTooltip = (status) => {
@@ -1087,10 +1252,15 @@ const getRowGroupingLabel = (row) => {
     return 'Övrigt'
   }
   if (mode === 'redlist') {
-    const status = String(row?.RL2020kat || '').trim().toUpperCase()
+    const rawStatus = row?.RL2020kat
+    const status = String(rawStatus || '').trim().toUpperCase()
+    if (rawStatus === null || rawStatus === undefined || rawStatus === 0 || rawStatus === '0' || status === '' || status === 'NE') {
+      return 'Ej bedömd'
+    }
     const redlistLabelByCode = {
       LC: 'Livskraftig',
       DD: 'Kunskapsbrist',
+      NA: 'Ej tillämplig',
       NT: 'Nära hotad',
       VU: 'Sårbar',
       EN: 'Starkt hotad',
@@ -1126,7 +1296,9 @@ const getRowGroupingOrder = (row) => {
       'Starkt hotad': 4,
       'Akut hotad': 5,
       'Nationellt utdöd': 6,
-      'Övrigt': 7
+      'Ej bedömd': 7,
+      'Ej tillämplig': 8,
+      'Övrigt': 9
     }
     return order[label] ?? Number.POSITIVE_INFINITY
   }
@@ -1169,33 +1341,19 @@ const desktopColumns = [
       if (!row.getIsGrouped()) return null
       const label = String(row.getValue('__groupingKey') || row.original?.__groupingKey || 'Grupp')
       const count = row.subRows?.length ?? 0
-      const showGroupIcon = effectiveGroupingMode.value === 'groups'
-      const iconNode = showGroupIcon
-        ? h('img', {
-          src: getIconPath(label),
-          alt: `${label || 'Svamp'} ikon`,
-          class: 'w-5 h-5',
-          loading: 'lazy',
-          decoding: 'async'
-        })
-        : null
-      const colorNode = h('span', {
-        class: 'inline-block h-3 w-3 rounded-full ring-1 ring-black/10 shrink-0',
-        style: { backgroundColor: getGroupingAccentColor(label) },
-        'aria-hidden': 'true'
-      })
+      const badgeNode = getGroupingBadgeNode(label)
       return h('div', { class: 'flex items-center gap-2 py-1' }, [
         h('span', { class: 'inline-block', style: { width: `${row.depth * 0.9}rem` } }),
         h(UButton, {
           variant: 'outline',
           color: 'neutral',
           size: 'xs',
+          class: 'ring-muted/50',
           icon: row.getIsExpanded() ? 'i-lucide-minus' : 'i-lucide-plus',
           onClick: () => row.toggleExpanded()
         }),
-        colorNode,
-        iconNode,
-        h('strong', { class: 'text-sm' }, `${label} (${count} arter)`)
+        badgeNode,
+        h('strong', { class: 'text-sm' }, `${capitalize(label)} (${count} arter)`)
       ])
     },
     aggregationFn: 'count',
