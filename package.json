@@ -31,6 +31,8 @@
     "openseadragon-opacity-slider": "^1.0.0",
     "playwright": "^1.58.2",
     "sharp": "^0.34.4",
+    "sqlite": "^5.1.1",
+    "sqlite3": "^6.0.1",
     "vue3-apexcharts": "^1.8.0"
   },
   "devDependencies": {
@@ -52,21 +54,20 @@
   },
   "pnpm": {
     "onlyBuiltDependencies": [
-      "@parcel/watcher",
-      "@tailwindcss/oxide",
       "better-sqlite3",
-      "esbuild",
-      "netlify-cli",
       "sharp",
-      "vue-demi"
+      "sqlite3"
     ],
     "overrides": {
       "sharp": "0.34.4"
     },
     "ignoredBuiltDependencies": [
-      "maplibre-gl",
-      "unix-dgram",
-      "unrs-resolver"
+      "@parcel/watcher",
+      "@tailwindcss/oxide",
+      "esbuild",
+      "sqlite3",
+      "unrs-resolver",
+      "vue-demi"
     ]
   },
   "packageManager": "pnpm@10.6.2"

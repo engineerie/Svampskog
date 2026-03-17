@@ -270,7 +270,7 @@
     <DefineMethodHeroImage>
         <div class="relative w-full z-10 max-h-40 lg:max-h-60 shadow ring-muted/50 overflow-hidden bg-neutral-400">
             <NuxtImg :src="methodImage(selectedMethod, 'detail')" height="450" width="900"
-                :alt="`Bild för ${selectedMethod.title}`" class="w-full h-full opacity-90" />
+                :alt="`Bild för ${selectedMethod.title}`" class="w-full h-full opacity-90" fit="cover" />
             <!-- <div v-if="compareModeEnabled && compareMode === 'methods' && compareMethod"
                 class="absolute inset-y-0 right-0 w-1/2 overflow-hidden bg-neutral-400 border-l-2 border-neutral-50">
                 <NuxtImg :src="methodImage(compareMethod, 'detail')" height="450" width="900"
@@ -574,7 +574,7 @@
                                             </h1>
                                             <p class="text-sm text-neutral-500 font-light">{{ item.description
                                                 || ''
-                                            }}
+                                                }}
                                             </p>
                                         </div>
                                         <div class="size-10 flex justify-center items-center bg-muted rounded-md">
@@ -942,7 +942,7 @@
                                                                                     class="size-4" />
                                                                                 <span class="leading-none">{{
                                                                                     badge.label
-                                                                                    }}</span>
+                                                                                }}</span>
                                                                             </div>
                                                                             <template #content>
                                                                                 <p
@@ -955,7 +955,7 @@
                                                                             class="inline-flex w-fit cursor-default items-center gap-1.5 rounded-md bg-neutral-950/55 px-2.5 py-1.5 text-sm text-neutral-50 backdrop-blur-xs pointer-events-auto">
                                                                             <UIcon :name="badge.icon" class="size-4" />
                                                                             <span class="leading-none">{{ badge.label
-                                                                                }}</span>
+                                                                            }}</span>
                                                                         </div>
                                                                     </template>
                                                                 </div>
@@ -1019,7 +1019,7 @@
                                                                                     class="size-4" />
                                                                                 <span class="leading-none">{{
                                                                                     badge.label
-                                                                                    }}</span>
+                                                                                }}</span>
                                                                             </div>
                                                                             <template #content>
                                                                                 <p
@@ -1032,7 +1032,7 @@
                                                                             class="inline-flex w-fit cursor-default items-center gap-1.5 rounded-md bg-neutral-950/55 px-2.5 py-1.5 text-sm text-neutral-50 backdrop-blur-xs pointer-events-auto">
                                                                             <UIcon :name="badge.icon" class="size-4" />
                                                                             <span class="leading-none">{{ badge.label
-                                                                                }}</span>
+                                                                            }}</span>
                                                                         </div>
                                                                     </template>
                                                                 </div>

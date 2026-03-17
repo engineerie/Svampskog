@@ -24,6 +24,7 @@
     "sample_plot_count": 1,
     "sample_env_count": 1,
     "Svamp-grupp-släkte": "hattsvamp",
+    "synlighet": 1,
     "images": []
   },
   {
@@ -51,6 +52,7 @@
     "sample_plot_count": 1,
     "sample_env_count": 1,
     "Svamp-grupp-släkte": "hattsvamp",
+    "synlighet": 1,
     "images": []
   },
   {
@@ -78,6 +80,7 @@
     "sample_plot_count": 1,
     "sample_env_count": 1,
     "Svamp-grupp-släkte": "hattsvamp",
+    "synlighet": 1,
     "images": []
   },
   {
@@ -105,6 +108,7 @@
     "sample_plot_count": 1,
     "sample_env_count": 1,
     "Svamp-grupp-släkte": "övrigt",
+    "synlighet": 0,
     "images": []
   },
   {
@@ -132,6 +136,7 @@
     "sample_plot_count": 1,
     "sample_env_count": 1,
     "Svamp-grupp-släkte": "skålsvamp",
+    "synlighet": 0,
     "images": []
   },
   {
@@ -159,6 +164,7 @@
     "sample_plot_count": 1,
     "sample_env_count": 1,
     "Svamp-grupp-släkte": "skinnsvamp",
+    "synlighet": 1,
     "images": []
   },
   {
@@ -186,6 +192,7 @@
     "sample_plot_count": 1,
     "sample_env_count": 1,
     "Svamp-grupp-släkte": "tryffel",
+    "synlighet": 0,
     "images": []
   },
   {
@@ -213,6 +220,7 @@
     "sample_plot_count": 1,
     "sample_env_count": 1,
     "Svamp-grupp-släkte": "hattsvamp",
+    "synlighet": 1,
     "images": []
   },
   {
@@ -240,6 +248,7 @@
     "sample_plot_count": 1,
     "sample_env_count": 1,
     "Svamp-grupp-släkte": "övrigt",
+    "synlighet": 0,
     "images": []
   },
   {
@@ -267,6 +276,7 @@
     "sample_plot_count": 1,
     "sample_env_count": 1,
     "Svamp-grupp-släkte": "skinnsvamp",
+    "synlighet": 0,
     "images": []
   },
   {
@@ -294,6 +304,7 @@
     "sample_plot_count": 1,
     "sample_env_count": 1,
     "Svamp-grupp-släkte": "hattsvamp",
+    "synlighet": 1,
     "images": []
   },
   {
@@ -321,6 +332,7 @@
     "sample_plot_count": 1,
     "sample_env_count": 1,
     "Svamp-grupp-släkte": "skinnsvamp",
+    "synlighet": 0,
     "images": []
   },
   {
@@ -348,6 +360,7 @@
     "sample_plot_count": 1,
     "sample_env_count": 1,
     "Svamp-grupp-släkte": "skinnsvamp",
+    "synlighet": 0,
     "images": []
   },
   {
@@ -375,6 +388,7 @@
     "sample_plot_count": 1,
     "sample_env_count": 1,
     "Svamp-grupp-släkte": "skinnsvamp",
+    "synlighet": 0,
     "images": []
   }
 ]

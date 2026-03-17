@@ -1,30 +1,15 @@
 <template>
   <div>
-    <div
-      v-if="showControls && !isMobile"
-      class="flex items-center justify-between gap-3 mb-3"
-    >
-      <UTabs
-        v-if="showModeTabs"
-        v-model="chartTypeTab"
-        :items="chartTypeTabs"
-        size="md"
-        :ui="{
-          root: '',
-          list: 'flex-nowrap gap-2 bg-transparent',
-          indicator: 'bg-white border border-muted/50 shadow',
-          trigger: 'data-[state=active]:text-neutral-800 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary'
-        }"
-      />
-      <USelect
-        v-if="showModeTabs && chartTypeTab === 'treemap'"
-        v-model="treemapGroupingMode"
-        :items="treemapGroupingOptions"
-        item-value="value"
-        item-label="label"
-        class="ring-muted/50"
-        :ui="{ content: 'min-w-fit' }"
-      />
+    <div v-if="showControls && !isMobile" class="flex items-center justify-between gap-3 mb-3">
+      <UTabs v-if="showModeTabs" v-model="chartTypeTab" :items="chartTypeTabs" size="md" :ui="{
+        root: '',
+        list: 'flex-nowrap gap-2 bg-transparent',
+        indicator: 'bg-white border border-muted/50 shadow',
+        trigger: 'data-[state=active]:text-neutral-800 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary'
+      }" />
+      <USelect v-if="showModeTabs && chartTypeTab === 'treemap'" v-model="treemapGroupingMode"
+        :items="treemapGroupingOptions" item-value="value" item-label="label" class="ring-muted/50"
+        :ui="{ content: 'min-w-fit' }" />
     </div>
     <!-- Zoom controls only on desktop -->
     <!-- <div v-if="showControls && !isMobile" class="flex justify-end gap-2 mb-2 mx-2">
@@ -32,66 +17,26 @@
       <UButton @click="zoomIn" icon="i-heroicons-magnifying-glass-plus" color="neutral" variant="ghost" />
     </div> -->
     <!-- Chart on desktop -->
-    <div
-      v-if="!isMobile"
-      :key="chartShellRenderKey"
-      ref="chartHostRef"
-      :class="[
-        'w-full overflow-y-auto overflow-x-scroll',
-        { 'bar-chart-container': currentZoomIndex === 0 }
-      ]"
-      @click="handleChartClick"
-    >
-      <EdnaBarModeChart
-        v-if="viewMode === 'bar'"
-        :data="displayedBarData"
-        :width="chartWidth"
-        :height="chartHeight"
-        :plot-band-range="plotBandRange"
-        :selected-plot-band-range="selectedPlotBandRange"
-        :x-accessor="xAccessor"
-        :y-accessor="yAccessor"
-        :bar-color-accessor="barColorAccessor"
-        :show-y-axis="showYAxis"
-        :show-tooltip="showTooltip"
-        :has-data="hasData"
-        :triggers="triggers"
-        :tooltip-template="tooltipTemplate"
-        :bar-events="barEvents"
-      />
+    <div v-if="!isMobile" :key="chartShellRenderKey" ref="chartHostRef" :class="[
+      'w-full overflow-y-auto overflow-x-scroll',
+      { 'bar-chart-container': currentZoomIndex === 0 }
+    ]" @click="handleChartClick">
+      <EdnaBarModeChart v-if="viewMode === 'bar'" :data="displayedBarData" :width="chartWidth" :height="chartHeight"
+        :plot-band-range="plotBandRange" :selected-plot-band-range="selectedPlotBandRange" :x-accessor="xAccessor"
+        :y-accessor="yAccessor" :bar-color-accessor="barColorAccessor" :show-y-axis="showYAxis"
+        :show-tooltip="showTooltip" :has-data="hasData" :triggers="triggers" :tooltip-template="tooltipTemplate"
+        :bar-events="barEvents" />
 
-      <div
-        v-else
-        ref="treemapWrapperRef"
-        class="space-y-2"
-      >
+      <div v-else ref="treemapWrapperRef" class="space-y-2">
         <div ref="treemapContainerRef">
-          <VisSingleContainer
-            :data="treemapSourceData"
-            :height="chartHeight"
-          >
-            <VisTooltip
-              :horizontal-placement="treemapTooltipPlacement"
-              :horizontal-shift="12"
-              :triggers="treemapTooltipTriggersConfig"
-            />
-            <VisTreemap
-              :id="treemapDatumId"
-              :tile-border-radius="4"
-              :layers="treemapLayersConfig"
-              :value="treemapValueAccessor"
-              :tile-color="treemapTileColorConfig"
-              :tile-label="treemapTileLabelConfig"
-              :label-offset-x="6"
-              :label-offset-y="8"
-              :tile-padding-top="20"
-              :enable-lightness-variance="false"
-              :enable-tile-label-font-size-variation="true"
-              :tile-show-html-tooltip="false"
-              :show-tile-click-affordance="true"
-              :label-internal-nodes="true"
-              :events="treemapEventsWithTooltipFlip"
-            />
+          <VisSingleContainer :data="treemapSourceData" :height="chartHeight">
+            <VisTooltip :horizontal-placement="treemapTooltipPlacement" :horizontal-shift="12"
+              :triggers="treemapTooltipTriggersConfig" />
+            <VisTreemap :id="treemapDatumId" :tile-border-radius="4" :layers="treemapLayersConfig"
+              :value="treemapValueAccessor" :tile-color="treemapTileColorConfig" :tile-label="treemapTileLabelConfig"
+              :label-offset-x="6" :label-offset-y="8" :tile-padding-top="20" :enable-lightness-variance="false"
+              :enable-tile-label-font-size-variation="true" :tile-show-html-tooltip="false"
+              :show-tile-click-affordance="true" :label-internal-nodes="true" :events="treemapEventsWithTooltipFlip" />
           </VisSingleContainer>
         </div>
       </div>
@@ -346,8 +291,8 @@ function shouldMatchTable(d: any) {
 
   const matchSignal
     = statusActive
-      && props.statusFilter.includes('Signalart')
-      && (d.SIGNAL_art === 'S')
+    && props.statusFilter.includes('Signalart')
+    && (d.SIGNAL_art === 'S')
 
   const otherStatuses = props.statusFilter.filter(s => s !== 'Signalart')
   const matchEjBedom = statusActive && props.statusFilter.includes('Ej bedömd')
@@ -396,10 +341,6 @@ function capitalizeFirstLetter(str: string): string {
 }
 
 const filteredSortedData = computed(() => sortedChartData.value.filter(d => shouldMatchTable(d)))
-const isVisibleMushroomGroup = (value: string) => {
-  const normalized = normalizeGroupKey(value)
-  return !normalized.includes('skinnsvamp') && !normalized.includes('tryffel')
-}
 const treemapBaseData = computed(() => filteredSortedData.value)
 const getSpeciesStableId = (d: any) => {
   const scientific = String(d?.Scientificname || '').trim()
@@ -469,8 +410,9 @@ const treemapRedlistColors: Record<string, string> = {
   ovrigt: '#9ca3af'
 }
 const treemapVisibleColors: Record<string, string> = {
-  'svampar som syns': '#c3a283',
-  'svampar som ar svara att se': '#f2ece2'
+  'svampar som syns': '#a37153',
+  'svampar som ar svara att se': '#d1bba0',
+  'synlighet saknas': '#d4d4d4'
 }
 
 const normalizeGroupKey = (value: string) => String(value || '')
@@ -512,13 +454,17 @@ const getRedlistColorForDatum = (datum: any) => {
   return redlistColorByCode[status] || null
 }
 
+const getVisibilityGroup = (datum: any) => {
+  const synlighet = datum?.synlighet
+  if (synlighet === 1 || synlighet === '1') return 'Svampar som syns'
+  if (synlighet === 0 || synlighet === '0') return 'Svampar som är svåra att se'
+  return 'Synlighet saknas'
+}
+
 const getTreemapGroupForDatum = (datum: any, mode = activeTreemapMode.value) => {
   if (mode === 'treemap-edibility') return getEdibilityGroup(datum)
   if (mode === 'treemap-redlist') return getRedlistGroup(datum)
-  if (mode === 'treemap-visible') {
-    const groupValue = String(datum?.[props.groupKey] || '')
-    return isVisibleMushroomGroup(groupValue) ? 'Svampar som syns' : 'Svampar som är svåra att se'
-  }
+  if (mode === 'treemap-visible') return getVisibilityGroup(datum)
   return String(datum?.[props.groupKey] || 'övrigt')
 }
 
@@ -933,8 +879,8 @@ const updatedChartData = computed(() => {
     // 2a) Compute boolean matches for each category
     const matchSignal
       = statusActive
-        && props.statusFilter.includes('Signalart')
-        && d.SIGNAL_art === 'S'
+      && props.statusFilter.includes('Signalart')
+      && d.SIGNAL_art === 'S'
 
     const otherStatuses = props.statusFilter.filter(s => s !== 'Signalart')
     // Add Ej bedömd and Ej tillämplig logic
@@ -1048,10 +994,7 @@ const getBarGroupingLabel = (datum: any) => {
     }
     return redlistLabelByCode[status] || 'Övrigt'
   }
-  if (props.barGroupingMode === 'visible') {
-    const groupValue = String(datum?.[props.groupKey] || '')
-    return isVisibleMushroomGroup(groupValue) ? 'Svampar som syns' : 'Svampar som är svåra att se'
-  }
+  if (props.barGroupingMode === 'visible') return getVisibilityGroup(datum)
   return String(datum?.Commonname || 'Övrigt')
 }
 
@@ -1073,7 +1016,7 @@ const getBarGroupingOrder = (label: string) => {
     return idx === -1 ? Number.POSITIVE_INFINITY : idx
   }
   if (props.barGroupingMode === 'visible') {
-    const order = ['Svampar som syns', 'Svampar som är svåra att se']
+    const order = ['Svampar som syns', 'Svampar som är svåra att se', 'Synlighet saknas']
     const idx = order.indexOf(label)
     return idx === -1 ? Number.POSITIVE_INFINITY : idx
   }

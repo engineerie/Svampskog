@@ -619,13 +619,18 @@ const filterMenuItems = computed(() => [
   { label: 'Mark', children: markMenuItems.value }
 ])
 
-const tableGroupingMenuOptions = [
-  { label: 'Ingen gruppering', value: 'none' },
-  { label: 'Svampgrupp', value: 'groups' },
-  { label: 'Matsvamp/Giftsvamp', value: 'edibility' },
-  { label: 'Status', value: 'redlist' },
-  { label: 'Synlighet', value: 'visible' }
-]
+const tableGroupingMenuOptions = computed(() => {
+  const options = [
+    { label: 'Ingen gruppering', value: 'none' },
+    { label: 'Svampgrupp', value: 'groups' },
+    { label: 'Matsvamp/Giftsvamp', value: 'edibility' },
+    { label: 'Status', value: 'redlist' }
+  ]
+  if (props.dataTypeFolder === 'edna') {
+    options.push({ label: 'Synlighet', value: 'visible' })
+  }
+  return options
+})
 
 const rowsPerPageOptions = [
   { value: 5, label: '5 rader' },
@@ -841,6 +846,53 @@ const getStatusColor = (status) => {
   return colors[status] || 'neutral'
 }
 
+const groupingBaseColors = {
+  ovrigt: '#9ca3af',
+  hattsvamp: '#fb7185',
+  kantarell: '#fbbf24',
+  sopp: '#34d399',
+  taggsvamp: '#38bdf8',
+  fingersvamp: '#a78bfa',
+  skinnsvamp: '#e879f9',
+  skinnsvampar: '#e879f9',
+  skalsvamp: '#fb923c',
+  tryffel: '#a3e635'
+}
+
+const groupingEdibilityColors = {
+  matsvamp: '#facc15',
+  giftsvamp: '#a3e635',
+  ovrigt: '#9ca3af'
+}
+
+const groupingRedlistColors = {
+  livskraftig: '#CDD400',
+  kunskapsbrist: '#9CA3AF',
+  'nara hotad': '#F9C6C7',
+  sarbar: '#EF858F',
+  'starkt hotad': '#EA516D',
+  'akut hotad': '#E5014F',
+  'nationellt utdod': '#490F2C',
+  ovrigt: '#9ca3af'
+}
+
+const groupingVisibleColors = {
+  'svampar som syns': '#a37153',
+  'svampar som ar svara att se': '#e3d6c5',
+  'synlighet saknas': '#d4d4d4'
+}
+
+const getGroupingAccentColor = (label) => {
+  const normalized = normalizeGroupKey(label)
+  const mode = effectiveGroupingMode.value
+
+  if (mode === 'groups') return groupingBaseColors[normalized] || '#9ca3af'
+  if (mode === 'edibility') return groupingEdibilityColors[normalized] || groupingEdibilityColors.ovrigt
+  if (mode === 'redlist') return groupingRedlistColors[normalized] || groupingRedlistColors.ovrigt
+  if (mode === 'visible') return groupingVisibleColors[normalized] || groupingVisibleColors['synlighet saknas']
+  return '#9ca3af'
+}
+
 const getStatusTooltip = (status) => {
   if (status === 'Ej bedömd') return 'Ej bedömd'
   if (status === 'Ej tillämplig') return 'Ej tillämplig'
@@ -932,9 +984,20 @@ onMounted(() => {
     }
   }
   if (typeof saved.selectedGrouping === 'string') {
-    selectedTableGrouping.value = saved.selectedGrouping
+    const groupingIsAvailable = tableGroupingMenuOptions.value.some(option => option.value === saved.selectedGrouping)
+    selectedTableGrouping.value = groupingIsAvailable ? saved.selectedGrouping : 'none'
   }
 })
+
+watch(
+  () => [props.dataTypeFolder, selectedTableGrouping.value],
+  ([dataTypeFolder, grouping]) => {
+    if (dataTypeFolder === 'edna') return
+    if (grouping !== 'visible') return
+    selectedTableGrouping.value = 'none'
+  },
+  { immediate: true }
+)
 
 watch(
   [selectedFilter, selectedStatus, selectedGrupp, selectedMark, selectedTableGrouping, sorting, rowsPerPage, pagination, columnVisibility],
@@ -970,6 +1033,19 @@ function normalizeGroupKey(value) {
 const isVisibleMushroomGroup = (value) => {
   const normalized = normalizeGroupKey(value)
   return !normalized.includes('skinnsvamp') && !normalized.includes('tryffel')
+}
+
+const getVisibilityGroupingLabel = (row) => {
+  if (props.dataType === 'edna') {
+    const synlighet = row?.synlighet
+    if (synlighet === 1 || synlighet === '1') return 'Svampar som syns'
+    if (synlighet === 0 || synlighet === '0') return 'Svampar som är svåra att se'
+    return 'Synlighet saknas'
+  }
+
+  return isVisibleMushroomGroup(row?.[props.grupp])
+    ? 'Svampar som syns'
+    : 'Svampar som är svåra att se'
 }
 
 const isEdibleSpecies = (row) => {
@@ -1023,9 +1099,7 @@ const getRowGroupingLabel = (row) => {
     }
     return redlistLabelByCode[status] || 'Övrigt'
   }
-  if (mode === 'visible') {
-    return isVisibleMushroomGroup(row?.[props.grupp]) ? 'Svampar som syns' : 'Svampar som är svåra att se'
-  }
+  if (mode === 'visible') return getVisibilityGroupingLabel(row)
   return ''
 }
 
@@ -1058,7 +1132,7 @@ const getRowGroupingOrder = (row) => {
   }
   if (mode === 'visible') {
     const label = getRowGroupingLabel(row)
-    const order = { 'Svampar som syns': 0, 'Svampar som är svåra att se': 1 }
+    const order = { 'Svampar som syns': 0, 'Svampar som är svåra att se': 1, 'Synlighet saknas': 2 }
     return order[label] ?? Number.POSITIVE_INFINITY
   }
   return Number.POSITIVE_INFINITY
@@ -1105,6 +1179,11 @@ const desktopColumns = [
           decoding: 'async'
         })
         : null
+      const colorNode = h('span', {
+        class: 'inline-block h-3 w-3 rounded-full ring-1 ring-black/10 shrink-0',
+        style: { backgroundColor: getGroupingAccentColor(label) },
+        'aria-hidden': 'true'
+      })
       return h('div', { class: 'flex items-center gap-2 py-1' }, [
         h('span', { class: 'inline-block', style: { width: `${row.depth * 0.9}rem` } }),
         h(UButton, {
@@ -1114,6 +1193,7 @@ const desktopColumns = [
           icon: row.getIsExpanded() ? 'i-lucide-minus' : 'i-lucide-plus',
           onClick: () => row.toggleExpanded()
         }),
+        colorNode,
         iconNode,
         h('strong', { class: 'text-sm' }, `${label} (${count} arter)`)
       ])
