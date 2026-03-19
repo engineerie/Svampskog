@@ -1,1 +1,0 @@
-import{_ as c,d as _,e as s,h as e,cQ as r,w as l,aa as p,cR as f,cS as m,F as d}from"./B5E7Hvrj.js";const u={};function x(n,i){const t=r,o=f,a=m;return _(),s(d,null,[e(t),e(o,{class:"flex flex-col"},{default:l(()=>[p(n.$slots,"default")]),_:3}),e(a)],64)}const F=c(u,[["render",x]]);export{F as default};
