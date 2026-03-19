@@ -172,7 +172,7 @@
                 </div>
               </UCard>
             </ClientOnly>
-            <USeparator class="my-6" />
+            <!-- <USeparator class="my-6" />
             <div
               class=" flex flex-col sm:flex-row gap-1.5 p-1 rounded-lg ring ring-muted/50  sm:w-fit h-fit bg-muted/30">
               <UModal :fullscreen="isMobile ? true : false" :title="page.ecologyintro?.title ?? ''"
@@ -196,7 +196,7 @@
                     :sections="page.underlagSections" />
                 </template>
               </UModal>
-            </div>
+            </div> -->
           </UContainer>
         </div>
         <div v-else key="knowledge" class="col-span-12 ">

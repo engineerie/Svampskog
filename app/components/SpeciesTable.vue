@@ -90,7 +90,7 @@
         </div>
       </div>
 
-      <div v-if="useMobileLayout" id="scrollbar" class="flex my-1 gap-2 overflow-scroll">
+      <div v-if="useMobileLayout" id="scrollbar" class="flex my-1 gap-2 overflow-scroll ">
         <template v-if="selectedMark.length">
           <span v-for="filter in selectedMark" :key="'mark-' + filter">
             <UBadge trailing-icon="i-heroicons-x-mark-solid" variant="subtle"
@@ -130,7 +130,7 @@
       </div>
     </div>
 
-    <div v-if="useMobileLayout && isMobile" class="flex gap-2 w-full mb-2">
+    <div v-if="useMobileLayout && isMobile" class="flex gap-2 w-full mb-2 px-4 sm:px-0">
       <UDropdownMenu :size="isMobile ? 'xl' : 'md'" :items="sortMenuItems" :content="{ align: 'start' }"
         :ui="{ content: 'min-w-fit' }">
         <UButton :variant="isMobile ? 'soft' : 'ghost'" icon="i-lucide-arrow-up-down" :size="isMobile ? 'xl' : 'md'"
@@ -149,9 +149,9 @@
           onSearchInput(value);
         }" />
     </div>
-    <USeparator v-if="isMobile" :ui="{ border: 'border-muted/50' }" class="" />
+    <USeparator v-if="isMobile" :ui="{ border: 'border-transparent sm:border-muted/50' }" class="" />
     <div v-if="filteredData" :class="[isNormalView ? '' : '']">
-      <div class="">
+      <div class="px-4 sm:px-0">
         <UTable :key="tableRenderKey" ref="table" v-model:column-visibility="columnVisibility"
           v-model:pagination="pagination" v-model:sorting="sorting" :data="displayedData" :columns="columns" sticky
           :loading="isLoading" :grouping="tableGrouping" :grouping-options="groupingOptions" :auto-reset-all="false"
@@ -1348,12 +1348,11 @@ const desktopColumns = [
           variant: 'outline',
           color: 'neutral',
           size: 'xs',
-          class: 'ring-muted/50',
           icon: row.getIsExpanded() ? 'i-lucide-minus' : 'i-lucide-plus',
           onClick: () => row.toggleExpanded()
         }),
         badgeNode,
-        h('strong', { class: 'text-sm' }, `${capitalize(label)} (${count} arter)`)
+        h('strong', { class: 'text-sm' }, `${label} (${count} arter)`)
       ])
     },
     aggregationFn: 'count',

@@ -254,6 +254,22 @@ export const collections = {
     schema: z.object({
       title: z.string().nonempty(),
       description: z.string().nonempty(),
+      date: z.string().optional(),
+      image: z.union([
+        z.string(),
+        z.object({
+          src: z.string().nonempty(),
+          alt: z.string().optional()
+        })
+      ]).optional(),
+      badge: z.union([
+        z.string(),
+        z.object({
+          label: z.string().nonempty(),
+          color: z.string().optional(),
+          variant: z.enum(["solid", "outline", "subtle", "soft", "ghost", "link"]).optional(),
+        }),
+      ]).optional(),
     }),
   }),
   posts: defineCollection({

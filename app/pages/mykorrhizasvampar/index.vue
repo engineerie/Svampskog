@@ -92,14 +92,14 @@ function redirect() {
 <template>
 
   <UPage v-if="page" class="flex-1">
-    <UContainer class="w-full px-0">
+    <UContainer class="w-full px-0 sm:px-0">
       <NuxtImg v-if="isMobile" :src="page.hero.src"
         class=" shadow ring ring-muted/50 w-full aspect-video object-cover " />
-      <UPageHero :ui="{ container: 'py-12', title: ' sm:text-7xl' }" :title="page.hero.title"
+      <UPageHero :ui="{ container: 'py-12 sm:py-12', title: ' sm:text-7xl' }" :title="page.hero.title"
         :description="page.hero.description" reverse :headline="isMobile ? 'Svampar' : ''"
         :orientation="isMobile ? 'horizontal' : 'horizontal'" class="">
         <NuxtImg v-if="!isMobile" :src="page.hero.src"
-          class="hidden lg:flex rounded-lg lg:rounded-xl shadow ring ring-muted/50 w-full aspect-video object-cover object-top" />
+          class="hidden md:flex rounded-lg lg:rounded-xl shadow ring ring-muted/50 w-full aspect-video object-cover object-top" />
       </UPageHero>
     </UContainer>
     <div class="bg-muted border-y border-muted/50">
@@ -178,7 +178,7 @@ function redirect() {
                 class="w-full justify-center lg:justify-start" />
             </div>
           </div>
-          <UPageSection
+          <UPageSection v-if="!isMobile" class="hidden md:block"
             :ui="{ title: 'text-start lg:text-center', description: 'text-start lg:text-center', container: 'pb-0 sm:pb-0 lg:pb-0' }">
             <div
               class=" ring ring-muted/60 rounded-xl bg-muted/20 min-h-64 flex items-center justify-center overflow-hidden">

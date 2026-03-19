@@ -6,16 +6,16 @@
 
 
 
-        <UContainer class="w-full px-0">
+        <UContainer class="w-full px-0 sm:px-0">
 
             <NuxtImg v-if="isMobile" :src="page.hero.src"
                 class=" lg:hidden shadow ring ring-muted/50 w-full aspect-video object-cover " />
 
-            <UPageHero :ui="{ container: ' py-12', title: 'sm:text-7xl' }" :title="page.hero.title"
+            <UPageHero :ui="{ container: ' py-12 sm:py-12', title: 'sm:text-7xl' }" :title="page.hero.title"
                 :description="page.hero.description" :orientation="isMobile ? 'horizontal' : 'horizontal'" class=""
                 :headline="isMobile ? 'Skogsskötsel' : ''">
                 <NuxtImg v-if="!isMobile" :src="page.hero.src"
-                    class="hidden lg:flex rounded-lg lg:rounded-xl shadow ring ring-muted/50 w-full aspect-video object-cover"
+                    class="hidden md:flex rounded-lg lg:rounded-xl shadow ring ring-muted/50 w-full aspect-video object-cover"
                     width="1000" format="webp" quality="80" />
             </UPageHero>
             <!-- <UPageHeader :title="page.hero.title" :description="page.hero.description" headline="Skogsskötsel"
@@ -99,7 +99,7 @@
                             icon="i-heroicons-arrow-right">{{ selectedId ? selectedMethod.title : 'Välj metod' }}
                         </UButton>
                     </div>
-                    <UPageSection
+                    <UPageSection v-if="!isMobile" class="hidden md:block"
                         :ui="{ title: 'text-start lg:text-center', description: 'text-start lg:text-center', container: 'pb-0 sm:pb-0 lg:pb-0' }">
                         <div
                             class=" ring ring-muted/60 rounded-xl bg-muted/20 min-h-64 flex items-center justify-center overflow-hidden">

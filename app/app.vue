@@ -41,6 +41,13 @@ const { data: skogsskotselNavigation } = await useAsyncData('skogsskotselnavigat
   }
 })
 
+const { data: omProjektNavigation } = await useAsyncData('omprojektnavigation', () => queryCollectionNavigation('information'), {
+  transform: data => {
+    const root = data.find(item => item.path?.startsWith('/om-projektet'))
+    return root?.children || []
+  }
+})
+
 const { data: overlayTextsNavigation } = await useAsyncData(
   'overlayTextsNavigation',
   () => queryCollectionNavigation('overlayTexts'),
@@ -376,6 +383,7 @@ const { data: commandFiles } = useLazyAsyncData('global-command-search', async (
 provide('navigation', navigation)
 provide('blognavigation', blognavigation)
 provide('skogsskotselnavigation', skogsskotselNavigation)
+provide('omprojektnavigation', omProjektNavigation)
 provide('overlayTextsNavigation', overlayTextsNavigation)
 
 let paletteMutationObserver: MutationObserver | null = null

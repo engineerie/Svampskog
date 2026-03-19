@@ -66,7 +66,7 @@ if (post.value.image?.src) {
 
       </template>
       <UPageHero :title="post.title"
-        :ui="{ title: 'text-4xl sm:text-6xl text-pretty tracking-tight', wrapper: 'text-left', container: 'lg:pb-20 pb-12 lg:pt-28 px-0 sm:px-0 md:px-0 lg:px-0' }">
+        :ui="{ title: 'text-4xl sm:text-6xl text-pretty tracking-tight font-medium', wrapper: 'text-center', container: 'lg:pb-20 pb-12 lg:pt-28 px-0 sm:px-0 md:px-0 lg:px-0' }">
         <NuxtImg :src="post.image.src" class="w-full rounded-lg" />
         <template #headline>
           <UBadge v-if="postBadge" v-bind="postBadge" color="neutral" variant="subtle" size="lg" />
@@ -94,7 +94,7 @@ if (post.value.image?.src) {
         </UButton>
       </div> -->
       </UPageHero>
-      <USeparator class="lg:pb-8 " />
+      <!-- <USeparator class="lg:pb-8 " /> -->
     </UPage>
 
 
@@ -109,7 +109,7 @@ if (post.value.image?.src) {
       </UPageBody>
 
       <template v-if="post?.body?.toc?.links?.length" #right>
-        <UContentToc :links="post.body.toc.links" title="På den här sidan" />
+        <UContentToc :links="post.body.toc.links" title="På den här sidan" highlight />
       </template>
       <template #left>
         <UPageAside>

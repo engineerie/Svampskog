@@ -56,7 +56,7 @@ defineOgImageComponent('Saas')
 </script>
 
 <template>
-  <div class="bg-neutral-50 h-full">
+  <div class=" h-full">
     <UContainer>
       <UPageHeader :ui="{ root: 'border-b-0', container: 'lg:pt-12', title: 'sm:text-6xl', headline: 'text-neutral' }"
         v-bind="page" />
@@ -74,10 +74,10 @@ defineOgImageComponent('Saas')
             transform: 'translateY(20px)',
             opacity: 0,
           }" :animate="{
-              scale: 1,
-              transform: 'translateY(0px)',
-              opacity: 1,
-            }" :transition="{
+            scale: 1,
+            transform: 'translateY(0px)',
+            opacity: 1,
+          }" :transition="{
               duration: 0.2,
               delay: 0.2 + 0.1 * index
             }">

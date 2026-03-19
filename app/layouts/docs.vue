@@ -1,7 +1,26 @@
 <script setup lang="ts">
 import type { ContentNavigationItem } from '@nuxt/content'
 
+const route = useRoute()
 const navigation = inject<Ref<ContentNavigationItem[]>>('navigation')
+const omProjektNavigation = computed<ContentNavigationItem[]>(() => [
+  {
+    title: 'Om projektet',
+    path: '/om-projektet'
+  },
+  {
+    title: 'Ändringslogg',
+    path: '/om-projektet/andringslogg'
+  }
+])
+
+const currentNavigation = computed(() => {
+  if (route.path.startsWith('/om-projektet')) {
+    return omProjektNavigation.value
+  }
+
+  return navigation.value || []
+})
 </script>
 
 <template>
@@ -10,28 +29,10 @@ const navigation = inject<Ref<ContentNavigationItem[]>>('navigation')
 
     <UMain>
       <UContainer>
-        <UPage>
+        <UPage :ui="{ root: 'pt-8 sm:pt-12 lg:pt-12', }">
           <template #left>
             <UPageAside>
-              <template #top>
-                <!-- <UContentSearchButton
-                  label="Search..."
-                  variant="outline"
-                  class="w-full"
-                >
-                  <template #trailing>
-                    <div class="flex items-center gap-0.5 ms-auto">
-                      <UKbd value="meta" />
-                      <UKbd value="k" />
-                    </div>
-                  </template>
-</UContentSearchButton> -->
-              </template>
-              <!-- <UContentNavigation
-                :navigation="navigation"
-                
-                variant="pill"
-              /> -->
+              <!-- <UContentNavigation :navigation="currentNavigation" variant="link" /> -->
             </UPageAside>
           </template>
 

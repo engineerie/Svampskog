@@ -2033,6 +2033,18 @@ const timelineItems = computed<TimelineDisplayItem[]>(() => {
             atgard: normalizeTimelineAtgard(entry.atgard)
         }))
         .filter((entry) => entry.startskog === normalizeTimelineStartskog(selectedStartskogTab.value) && entry.atgard === canonicalMethod)
+        .filter((entry) => {
+            if (
+                compareModeEnabled.value
+                && compareMode.value === 'methods'
+                && canonicalMethod === 'skärmträd'
+                && normalizeTimeToken(entry.tid) === '10'
+            ) {
+                return false
+            }
+
+            return true
+        })
         .map((entry) => ({
             tid: entry.tid,
             skog: entry.skog,

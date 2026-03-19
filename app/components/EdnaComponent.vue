@@ -6,7 +6,7 @@
           :icon="isNormalView ? '' : 'i-heroicons-x-mark-solid'" class="rounded-full absolute top-0 right-0"
           @click="$emit('enlarge')" />
         <div class="md:flex gap-4 w-full">
-          <div class=" md:mt-0 mt-1 mb-1 md:mb-2 w-full">
+          <div class=" md:mt-0 mt-1  md:mb-2 w-full">
             <div class="flex w-full justify-between gap-3">
               <div>
                 <div class="text-3xl font-medium flex items-center text-secondary-500 min-w-0">
@@ -91,7 +91,7 @@
       </div>
     </UCard>
     <transition name="fade" mode="out-in" class="md:min-h-[550px] min-h-full">
-      <div v-if="activeTab === 'columnChart'" class="mt-2">
+      <div v-if="activeTab === 'columnChart'" class="sm:mt-2">
         <div ref="barChartRef" class="px-6">
           <BarChart v-if="showBarChart" :key="`main-${barChartInstanceKey}`" class="mb-6" :chart-data="data"
             :chart-width="chartWidth" :geography="geographyValue" :forest-type="forestTypeValue"

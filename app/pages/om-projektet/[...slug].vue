@@ -34,27 +34,18 @@ defineOgImageComponent('Saas')
 <template>
 
   <UPage v-if="page">
-    <UPageHeader
-      :title="page.title"
-      :description="page.description"
-    />
+    <UPageHeader :title="page.title" :description="page.description" :ui="{ root: 'border-none' }" />
 
     <UPageBody>
-      <ContentRenderer
-        v-if="page.body"
-        :value="page"
-      />
+      <ContentRenderer v-if="page.body" :value="page" />
 
-      <USeparator v-if="surround?.length" />
+      <!-- <USeparator v-if="surround?.length" /> -->
 
-      <UContentSurround :surround="surround" />
+      <!-- <UContentSurround :surround="surround" /> -->
     </UPageBody>
 
-    <template
-      v-if="page?.body?.toc?.links?.length"
-      #right
-    >
-      <UContentToc :links="page.body.toc.links" title="På den här sidan"/>
+    <template v-if="page?.body?.toc?.links?.length" #right>
+      <!-- <UContentToc :links="page.body.toc.links" title="På den här sidan" /> -->
     </template>
   </UPage>
 </template>
