@@ -24,6 +24,7 @@
     "sample_plot_count": 28,
     "sample_env_count": 34,
     "Svamp-grupp-släkte": "övrigt",
+    "synlighet": 0,
     "images": []
   },
   {
@@ -51,6 +52,7 @@
     "sample_plot_count": 22,
     "sample_env_count": 34,
     "Svamp-grupp-släkte": "skålsvamp",
+    "synlighet": 0,
     "images": []
   },
   {
@@ -78,6 +80,7 @@
     "sample_plot_count": 16,
     "sample_env_count": 34,
     "Svamp-grupp-släkte": "skinnsvamp",
+    "synlighet": 0,
     "images": []
   },
   {
@@ -105,9 +108,10 @@
     "sample_plot_count": 16,
     "sample_env_count": 34,
     "Svamp-grupp-släkte": "hattsvamp",
+    "synlighet": 1,
     "images": [
-      "/images/svampbilder/Giftsvampar/Cortinarius armillatus-20-3541.jpg",
-      "/images/svampbilder/Giftsvampar/Cortinarius armillatus-21-3541.jpg"
+      "/images/SvampBilder/Giftsvampar/Cortinarius armillatus-20-3541.jpg",
+      "/images/SvampBilder/Giftsvampar/Cortinarius armillatus-21-3541.jpg"
     ]
   },
   {
@@ -135,6 +139,7 @@
     "sample_plot_count": 16,
     "sample_env_count": 34,
     "Svamp-grupp-släkte": "skinnsvamp",
+    "synlighet": 0,
     "images": []
   },
   {
@@ -162,6 +167,7 @@
     "sample_plot_count": 14,
     "sample_env_count": 34,
     "Svamp-grupp-släkte": "skinnsvamp",
+    "synlighet": 0,
     "images": []
   },
   {
@@ -189,6 +195,7 @@
     "sample_plot_count": 13,
     "sample_env_count": 34,
     "Svamp-grupp-släkte": "skinnsvamp",
+    "synlighet": 0,
     "images": []
   },
   {
@@ -216,6 +223,7 @@
     "sample_plot_count": 11,
     "sample_env_count": 34,
     "Svamp-grupp-släkte": "skinnsvamp",
+    "synlighet": 0,
     "images": []
   },
   {
@@ -243,6 +251,7 @@
     "sample_plot_count": 11,
     "sample_env_count": 34,
     "Svamp-grupp-släkte": "hattsvamp",
+    "synlighet": 1,
     "images": []
   },
   {
@@ -270,6 +279,7 @@
     "sample_plot_count": 11,
     "sample_env_count": 34,
     "Svamp-grupp-släkte": "skinnsvamp",
+    "synlighet": 0,
     "images": []
   },
   {
@@ -297,18 +307,19 @@
     "sample_plot_count": 11,
     "sample_env_count": 34,
     "Svamp-grupp-släkte": "sopp",
+    "synlighet": 1,
     "images": [
-      "/images/svampbilder/Matsvampar/Suillus variegatus-4.jpg",
-      "/images/svampbilder/Matsvampar/Suillus variegatus-5.jpg",
-      "/images/svampbilder/Matsvampar/Suillus variegatus-6.jpg",
-      "/images/svampbilder/Matsvampar/Suillus variegatus-2.jpg",
-      "/images/svampbilder/Matsvampar/Suillus variegatus-3.jpg",
-      "/images/svampbilder/Matsvampar/Suillus variegatus-1.jpg",
-      "/images/svampbilder/Giftsvampar/Suillus variegatus-1-6090.jpg",
-      "/images/svampbilder/Giftsvampar/Suillus variegatus-1-6090-2.jpg",
-      "/images/svampbilder/Giftsvampar/Suillus variegatus-1-6090-3.jpg",
-      "/images/svampbilder/Giftsvampar/Suillus variegatus-1-6090-4.jpg",
-      "/images/svampbilder/Giftsvampar/Suillus variegatus-1-6090-5.jpg"
+      "/images/SvampBilder/Matsvampar/Suillus variegatus-4.jpg",
+      "/images/SvampBilder/Matsvampar/Suillus variegatus-5.jpg",
+      "/images/SvampBilder/Matsvampar/Suillus variegatus-6.jpg",
+      "/images/SvampBilder/Matsvampar/Suillus variegatus-2.jpg",
+      "/images/SvampBilder/Matsvampar/Suillus variegatus-3.jpg",
+      "/images/SvampBilder/Matsvampar/Suillus variegatus-1.jpg",
+      "/images/SvampBilder/Giftsvampar/Suillus variegatus-1-6090.jpg",
+      "/images/SvampBilder/Giftsvampar/Suillus variegatus-1-6090-2.jpg",
+      "/images/SvampBilder/Giftsvampar/Suillus variegatus-1-6090-3.jpg",
+      "/images/SvampBilder/Giftsvampar/Suillus variegatus-1-6090-4.jpg",
+      "/images/SvampBilder/Giftsvampar/Suillus variegatus-1-6090-5.jpg"
     ]
   },
   {
@@ -336,6 +347,7 @@
     "sample_plot_count": 10,
     "sample_env_count": 34,
     "Svamp-grupp-släkte": "hattsvamp",
+    "synlighet": 1,
     "images": []
   },
   {
@@ -363,6 +375,7 @@
     "sample_plot_count": 10,
     "sample_env_count": 34,
     "Svamp-grupp-släkte": "hattsvamp",
+    "synlighet": 1,
     "images": []
   },
   {
@@ -390,6 +403,7 @@
     "sample_plot_count": 9,
     "sample_env_count": 34,
     "Svamp-grupp-släkte": "hattsvamp",
+    "synlighet": 1,
     "images": []
   },
   {
@@ -417,6 +431,7 @@
     "sample_plot_count": 8,
     "sample_env_count": 34,
     "Svamp-grupp-släkte": "skålsvamp",
+    "synlighet": 0,
     "images": []
   },
   {
@@ -444,6 +459,7 @@
     "sample_plot_count": 8,
     "sample_env_count": 34,
     "Svamp-grupp-släkte": "hattsvamp",
+    "synlighet": 1,
     "images": []
   },
   {
@@ -471,6 +487,7 @@
     "sample_plot_count": 7,
     "sample_env_count": 34,
     "Svamp-grupp-släkte": "skinnsvamp",
+    "synlighet": 0,
     "images": []
   },
   {
@@ -498,6 +515,7 @@
     "sample_plot_count": 7,
     "sample_env_count": 34,
     "Svamp-grupp-släkte": "skinnsvamp",
+    "synlighet": 0,
     "images": []
   },
   {
@@ -525,6 +543,7 @@
     "sample_plot_count": 7,
     "sample_env_count": 34,
     "Svamp-grupp-släkte": "hattsvamp",
+    "synlighet": 1,
     "images": []
   },
   {
@@ -552,6 +571,7 @@
     "sample_plot_count": 7,
     "sample_env_count": 34,
     "Svamp-grupp-släkte": "skinnsvamp",
+    "synlighet": 0,
     "images": []
   },
   {
@@ -579,6 +599,7 @@
     "sample_plot_count": 7,
     "sample_env_count": 34,
     "Svamp-grupp-släkte": "skinnsvamp",
+    "synlighet": 0,
     "images": []
   },
   {
@@ -606,6 +627,7 @@
     "sample_plot_count": 7,
     "sample_env_count": 34,
     "Svamp-grupp-släkte": "hattsvamp",
+    "synlighet": 1,
     "images": []
   },
   {
@@ -633,6 +655,7 @@
     "sample_plot_count": 6,
     "sample_env_count": 34,
     "Svamp-grupp-släkte": "tryffel",
+    "synlighet": 0,
     "images": []
   },
   {
@@ -660,6 +683,7 @@
     "sample_plot_count": 6,
     "sample_env_count": 34,
     "Svamp-grupp-släkte": "skinnsvamp",
+    "synlighet": 0,
     "images": []
   },
   {
@@ -687,6 +711,7 @@
     "sample_plot_count": 6,
     "sample_env_count": 34,
     "Svamp-grupp-släkte": "skinnsvamp",
+    "synlighet": 0,
     "images": []
   },
   {
@@ -714,6 +739,7 @@
     "sample_plot_count": 6,
     "sample_env_count": 34,
     "Svamp-grupp-släkte": "skinnsvamp",
+    "synlighet": 0,
     "images": []
   },
   {
@@ -741,6 +767,7 @@
     "sample_plot_count": 6,
     "sample_env_count": 34,
     "Svamp-grupp-släkte": "skinnsvamp",
+    "synlighet": 0,
     "images": []
   },
   {
@@ -768,6 +795,7 @@
     "sample_plot_count": 6,
     "sample_env_count": 34,
     "Svamp-grupp-släkte": "tryffel",
+    "synlighet": 0,
     "images": []
   },
   {
@@ -795,6 +823,7 @@
     "sample_plot_count": 6,
     "sample_env_count": 34,
     "Svamp-grupp-släkte": "hattsvamp",
+    "synlighet": 1,
     "images": []
   },
   {
@@ -822,6 +851,7 @@
     "sample_plot_count": 6,
     "sample_env_count": 34,
     "Svamp-grupp-släkte": "skinnsvamp",
+    "synlighet": null,
     "images": []
   },
   {
@@ -849,6 +879,7 @@
     "sample_plot_count": 5,
     "sample_env_count": 34,
     "Svamp-grupp-släkte": "skinnsvamp",
+    "synlighet": null,
     "images": []
   },
   {
@@ -876,6 +907,7 @@
     "sample_plot_count": 5,
     "sample_env_count": 34,
     "Svamp-grupp-släkte": "skinnsvamp",
+    "synlighet": 0,
     "images": []
   },
   {
@@ -903,6 +935,7 @@
     "sample_plot_count": 5,
     "sample_env_count": 34,
     "Svamp-grupp-släkte": "hattsvamp",
+    "synlighet": 1,
     "images": []
   },
   {
@@ -930,9 +963,10 @@
     "sample_plot_count": 5,
     "sample_env_count": 34,
     "Svamp-grupp-släkte": "hattsvamp",
+    "synlighet": 1,
     "images": [
-      "/images/svampbilder/Matsvampar/Lactarius trivialis-2.jpg",
-      "/images/svampbilder/Matsvampar/Lactarius trivialis-1.jpg"
+      "/images/SvampBilder/Matsvampar/Lactarius trivialis-2.jpg",
+      "/images/SvampBilder/Matsvampar/Lactarius trivialis-1.jpg"
     ]
   },
   {
@@ -960,6 +994,7 @@
     "sample_plot_count": 5,
     "sample_env_count": 34,
     "Svamp-grupp-släkte": "tryffel",
+    "synlighet": 0,
     "images": []
   },
   {
@@ -987,6 +1022,7 @@
     "sample_plot_count": 5,
     "sample_env_count": 34,
     "Svamp-grupp-släkte": "hattsvamp",
+    "synlighet": 1,
     "images": []
   },
   {
@@ -1014,6 +1050,7 @@
     "sample_plot_count": 5,
     "sample_env_count": 34,
     "Svamp-grupp-släkte": "hattsvamp",
+    "synlighet": 1,
     "images": []
   },
   {
@@ -1041,6 +1078,7 @@
     "sample_plot_count": 5,
     "sample_env_count": 34,
     "Svamp-grupp-släkte": "sopp",
+    "synlighet": 1,
     "images": []
   },
   {
@@ -1068,6 +1106,7 @@
     "sample_plot_count": 4,
     "sample_env_count": 34,
     "Svamp-grupp-släkte": "övrigt",
+    "synlighet": 0,
     "images": []
   },
   {
@@ -1095,6 +1134,7 @@
     "sample_plot_count": 4,
     "sample_env_count": 34,
     "Svamp-grupp-släkte": "hattsvamp",
+    "synlighet": 1,
     "images": []
   },
   {
@@ -1122,6 +1162,7 @@
     "sample_plot_count": 4,
     "sample_env_count": 34,
     "Svamp-grupp-släkte": "hattsvamp",
+    "synlighet": 1,
     "images": []
   },
   {
@@ -1149,11 +1190,12 @@
     "sample_plot_count": 4,
     "sample_env_count": 34,
     "Svamp-grupp-släkte": "hattsvamp",
+    "synlighet": 1,
     "images": [
-      "/images/svampbilder/Matsvampar/Lactarius rufus-4.jpg",
-      "/images/svampbilder/Matsvampar/Lactarius rufus-1.jpg",
-      "/images/svampbilder/Matsvampar/Lactarius rufus-3.jpg",
-      "/images/svampbilder/Matsvampar/Lactarius rufus-2.jpg"
+      "/images/SvampBilder/Matsvampar/Lactarius rufus-4.jpg",
+      "/images/SvampBilder/Matsvampar/Lactarius rufus-1.jpg",
+      "/images/SvampBilder/Matsvampar/Lactarius rufus-3.jpg",
+      "/images/SvampBilder/Matsvampar/Lactarius rufus-2.jpg"
     ]
   },
   {
@@ -1181,6 +1223,7 @@
     "sample_plot_count": 4,
     "sample_env_count": 34,
     "Svamp-grupp-släkte": "hattsvamp",
+    "synlighet": 1,
     "images": []
   },
   {
@@ -1208,6 +1251,7 @@
     "sample_plot_count": 4,
     "sample_env_count": 34,
     "Svamp-grupp-släkte": "hattsvamp",
+    "synlighet": 1,
     "images": []
   },
   {
@@ -1235,12 +1279,13 @@
     "sample_plot_count": 4,
     "sample_env_count": 34,
     "Svamp-grupp-släkte": "hattsvamp",
+    "synlighet": 1,
     "images": [
-      "/images/svampbilder/Matsvampar/Cortinarius caperatus-1.jpg",
-      "/images/svampbilder/Matsvampar/Cortinarius caperatus-2.jpg",
-      "/images/svampbilder/Matsvampar/Cortinarius caperatus-3.jpg",
-      "/images/svampbilder/Matsvampar/Cortinarius caperatus-4.jpg",
-      "/images/svampbilder/Matsvampar/Cortinarius caperatus-5.jpg"
+      "/images/SvampBilder/Matsvampar/Cortinarius caperatus-1.jpg",
+      "/images/SvampBilder/Matsvampar/Cortinarius caperatus-2.jpg",
+      "/images/SvampBilder/Matsvampar/Cortinarius caperatus-3.jpg",
+      "/images/SvampBilder/Matsvampar/Cortinarius caperatus-4.jpg",
+      "/images/SvampBilder/Matsvampar/Cortinarius caperatus-5.jpg"
     ]
   },
   {
@@ -1268,6 +1313,7 @@
     "sample_plot_count": 4,
     "sample_env_count": 34,
     "Svamp-grupp-släkte": "sopp",
+    "synlighet": 1,
     "images": []
   },
   {
@@ -1295,6 +1341,7 @@
     "sample_plot_count": 4,
     "sample_env_count": 34,
     "Svamp-grupp-släkte": "skinnsvamp",
+    "synlighet": null,
     "images": []
   },
   {
@@ -1322,6 +1369,7 @@
     "sample_plot_count": 3,
     "sample_env_count": 34,
     "Svamp-grupp-släkte": "hattsvamp",
+    "synlighet": 1,
     "images": []
   },
   {
@@ -1349,6 +1397,7 @@
     "sample_plot_count": 3,
     "sample_env_count": 34,
     "Svamp-grupp-släkte": "hattsvamp",
+    "synlighet": 1,
     "images": []
   },
   {
@@ -1376,6 +1425,7 @@
     "sample_plot_count": 3,
     "sample_env_count": 34,
     "Svamp-grupp-släkte": "hattsvamp",
+    "synlighet": 1,
     "images": []
   },
   {
@@ -1403,6 +1453,7 @@
     "sample_plot_count": 3,
     "sample_env_count": 34,
     "Svamp-grupp-släkte": "skinnsvamp",
+    "synlighet": 0,
     "images": []
   },
   {
@@ -1430,6 +1481,7 @@
     "sample_plot_count": 3,
     "sample_env_count": 34,
     "Svamp-grupp-släkte": "tryffel",
+    "synlighet": 0,
     "images": []
   },
   {
@@ -1457,6 +1509,7 @@
     "sample_plot_count": 3,
     "sample_env_count": 34,
     "Svamp-grupp-släkte": "sopp",
+    "synlighet": 1,
     "images": []
   },
   {
@@ -1484,6 +1537,7 @@
     "sample_plot_count": 3,
     "sample_env_count": 34,
     "Svamp-grupp-släkte": "hattsvamp",
+    "synlighet": 1,
     "images": []
   },
   {
@@ -1511,6 +1565,7 @@
     "sample_plot_count": 3,
     "sample_env_count": 34,
     "Svamp-grupp-släkte": "hattsvamp",
+    "synlighet": 1,
     "images": []
   },
   {
@@ -1538,6 +1593,7 @@
     "sample_plot_count": 3,
     "sample_env_count": 34,
     "Svamp-grupp-släkte": "hattsvamp",
+    "synlighet": 1,
     "images": []
   },
   {
@@ -1565,6 +1621,7 @@
     "sample_plot_count": 3,
     "sample_env_count": 34,
     "Svamp-grupp-släkte": "hattsvamp",
+    "synlighet": 1,
     "images": []
   },
   {
@@ -1592,6 +1649,7 @@
     "sample_plot_count": 3,
     "sample_env_count": 34,
     "Svamp-grupp-släkte": "hattsvamp",
+    "synlighet": 1,
     "images": []
   },
   {
@@ -1619,6 +1677,7 @@
     "sample_plot_count": 3,
     "sample_env_count": 34,
     "Svamp-grupp-släkte": "tryffel",
+    "synlighet": 0,
     "images": []
   },
   {
@@ -1646,6 +1705,7 @@
     "sample_plot_count": 3,
     "sample_env_count": 34,
     "Svamp-grupp-släkte": "skålsvamp",
+    "synlighet": 0,
     "images": []
   },
   {
@@ -1673,6 +1733,7 @@
     "sample_plot_count": 3,
     "sample_env_count": 34,
     "Svamp-grupp-släkte": "hattsvamp",
+    "synlighet": 1,
     "images": []
   },
   {
@@ -1700,6 +1761,7 @@
     "sample_plot_count": 3,
     "sample_env_count": 34,
     "Svamp-grupp-släkte": "hattsvamp",
+    "synlighet": 1,
     "images": []
   },
   {
@@ -1727,6 +1789,7 @@
     "sample_plot_count": 3,
     "sample_env_count": 34,
     "Svamp-grupp-släkte": "tryffel",
+    "synlighet": 0,
     "images": []
   },
   {
@@ -1754,13 +1817,14 @@
     "sample_plot_count": 3,
     "sample_env_count": 34,
     "Svamp-grupp-släkte": "sopp",
+    "synlighet": 1,
     "images": [
-      "/images/svampbilder/Matsvampar/Suillus luteus-1.jpg",
-      "/images/svampbilder/Matsvampar/Suillus luteus-2.jpg",
-      "/images/svampbilder/Matsvampar/Suillus luteus-3.jpg",
-      "/images/svampbilder/Matsvampar/Suillus luteus-4.jpg",
-      "/images/svampbilder/Matsvampar/Suillus luteus-5.jpg",
-      "/images/svampbilder/Giftsvampar/Suillus luteus-66-6088.jpg"
+      "/images/SvampBilder/Matsvampar/Suillus luteus-1.jpg",
+      "/images/SvampBilder/Matsvampar/Suillus luteus-2.jpg",
+      "/images/SvampBilder/Matsvampar/Suillus luteus-3.jpg",
+      "/images/SvampBilder/Matsvampar/Suillus luteus-4.jpg",
+      "/images/SvampBilder/Matsvampar/Suillus luteus-5.jpg",
+      "/images/SvampBilder/Giftsvampar/Suillus luteus-66-6088.jpg"
     ]
   },
   {
@@ -1788,13 +1852,14 @@
     "sample_plot_count": 3,
     "sample_env_count": 34,
     "Svamp-grupp-släkte": "sopp",
+    "synlighet": 1,
     "images": [
-      "/images/svampbilder/Matsvampar/Boletus edulis-1.jpg",
-      "/images/svampbilder/Matsvampar/Boletus edulis-2.jpg",
-      "/images/svampbilder/Matsvampar/Boletus edulis-3.jpg",
-      "/images/svampbilder/Matsvampar/Boletus edulis-6.jpg",
-      "/images/svampbilder/Matsvampar/Boletus edulis-4.jpg",
-      "/images/svampbilder/Matsvampar/Boletus edulis-5.jpg"
+      "/images/SvampBilder/Matsvampar/Boletus edulis-1.jpg",
+      "/images/SvampBilder/Matsvampar/Boletus edulis-2.jpg",
+      "/images/SvampBilder/Matsvampar/Boletus edulis-3.jpg",
+      "/images/SvampBilder/Matsvampar/Boletus edulis-6.jpg",
+      "/images/SvampBilder/Matsvampar/Boletus edulis-4.jpg",
+      "/images/SvampBilder/Matsvampar/Boletus edulis-5.jpg"
     ]
   },
   {
@@ -1822,6 +1887,7 @@
     "sample_plot_count": 3,
     "sample_env_count": 34,
     "Svamp-grupp-släkte": "hattsvamp",
+    "synlighet": 1,
     "images": []
   },
   {
@@ -1849,11 +1915,12 @@
     "sample_plot_count": 3,
     "sample_env_count": 34,
     "Svamp-grupp-släkte": "hattsvamp",
+    "synlighet": 1,
     "images": [
-      "/images/svampbilder/Matsvampar/Russula claroflava-4.jpg",
-      "/images/svampbilder/Matsvampar/Russula claroflava-1.jpg",
-      "/images/svampbilder/Matsvampar/Russula claroflava-3.jpg",
-      "/images/svampbilder/Matsvampar/Russula claroflava-2.jpg"
+      "/images/SvampBilder/Matsvampar/Russula claroflava-4.jpg",
+      "/images/SvampBilder/Matsvampar/Russula claroflava-1.jpg",
+      "/images/SvampBilder/Matsvampar/Russula claroflava-3.jpg",
+      "/images/SvampBilder/Matsvampar/Russula claroflava-2.jpg"
     ]
   },
   {
@@ -1881,6 +1948,7 @@
     "sample_plot_count": 3,
     "sample_env_count": 34,
     "Svamp-grupp-släkte": "hattsvamp",
+    "synlighet": 1,
     "images": []
   },
   {
@@ -1908,6 +1976,7 @@
     "sample_plot_count": 3,
     "sample_env_count": 34,
     "Svamp-grupp-släkte": "tryffel",
+    "synlighet": 0,
     "images": []
   },
   {
@@ -1935,6 +2004,7 @@
     "sample_plot_count": 3,
     "sample_env_count": 34,
     "Svamp-grupp-släkte": "hattsvamp",
+    "synlighet": 1,
     "images": []
   },
   {
@@ -1962,6 +2032,7 @@
     "sample_plot_count": 3,
     "sample_env_count": 34,
     "Svamp-grupp-släkte": "skinnsvamp",
+    "synlighet": 0,
     "images": []
   },
   {
@@ -1989,6 +2060,7 @@
     "sample_plot_count": 3,
     "sample_env_count": 34,
     "Svamp-grupp-släkte": "hattsvamp",
+    "synlighet": 1,
     "images": []
   },
   {
@@ -2016,6 +2088,7 @@
     "sample_plot_count": 2,
     "sample_env_count": 34,
     "Svamp-grupp-släkte": "hattsvamp",
+    "synlighet": 1,
     "images": []
   },
   {
@@ -2043,6 +2116,7 @@
     "sample_plot_count": 2,
     "sample_env_count": 34,
     "Svamp-grupp-släkte": "hattsvamp",
+    "synlighet": 1,
     "images": []
   },
   {
@@ -2070,9 +2144,10 @@
     "sample_plot_count": 2,
     "sample_env_count": 34,
     "Svamp-grupp-släkte": "hattsvamp",
+    "synlighet": 1,
     "images": [
-      "/images/svampbilder/Matsvampar/Hygrophorus olivaceoalbus-2.jpg",
-      "/images/svampbilder/Matsvampar/Hygrophorus olivaceoalbus-1.jpg"
+      "/images/SvampBilder/Matsvampar/Hygrophorus olivaceoalbus-2.jpg",
+      "/images/SvampBilder/Matsvampar/Hygrophorus olivaceoalbus-1.jpg"
     ]
   },
   {
@@ -2100,9 +2175,10 @@
     "sample_plot_count": 2,
     "sample_env_count": 34,
     "Svamp-grupp-släkte": "hattsvamp",
+    "synlighet": 1,
     "images": [
-      "/images/svampbilder/Giftsvampar/Tricholoma inamoenum-138-.jpg",
-      "/images/svampbilder/Giftsvampar/Tricholoma inamoenum-180-.jpg"
+      "/images/SvampBilder/Giftsvampar/Tricholoma inamoenum-138-.jpg",
+      "/images/SvampBilder/Giftsvampar/Tricholoma inamoenum-180-.jpg"
     ]
   },
   {
@@ -2130,6 +2206,7 @@
     "sample_plot_count": 2,
     "sample_env_count": 34,
     "Svamp-grupp-släkte": "hattsvamp",
+    "synlighet": 1,
     "images": []
   },
   {
@@ -2157,6 +2234,7 @@
     "sample_plot_count": 2,
     "sample_env_count": 34,
     "Svamp-grupp-släkte": "skinnsvamp",
+    "synlighet": 1,
     "images": []
   },
   {
@@ -2184,14 +2262,15 @@
     "sample_plot_count": 2,
     "sample_env_count": 34,
     "Svamp-grupp-släkte": "sopp",
+    "synlighet": 1,
     "images": [
-      "/images/svampbilder/Matsvampar/Suillus bovinus-5.jpg",
-      "/images/svampbilder/Matsvampar/Suillus bovinus-4.jpg",
-      "/images/svampbilder/Matsvampar/Suillus bovinus-6.jpg",
-      "/images/svampbilder/Matsvampar/Suillus bovinus-7.jpg",
-      "/images/svampbilder/Matsvampar/Suillus bovinus-3.jpg",
-      "/images/svampbilder/Matsvampar/Suillus bovinus-2.jpg",
-      "/images/svampbilder/Matsvampar/Suillus bovinus-1.jpg"
+      "/images/SvampBilder/Matsvampar/Suillus bovinus-5.jpg",
+      "/images/SvampBilder/Matsvampar/Suillus bovinus-4.jpg",
+      "/images/SvampBilder/Matsvampar/Suillus bovinus-6.jpg",
+      "/images/SvampBilder/Matsvampar/Suillus bovinus-7.jpg",
+      "/images/SvampBilder/Matsvampar/Suillus bovinus-3.jpg",
+      "/images/SvampBilder/Matsvampar/Suillus bovinus-2.jpg",
+      "/images/SvampBilder/Matsvampar/Suillus bovinus-1.jpg"
     ]
   },
   {
@@ -2219,6 +2298,7 @@
     "sample_plot_count": 2,
     "sample_env_count": 34,
     "Svamp-grupp-släkte": "skinnsvamp",
+    "synlighet": 0,
     "images": []
   },
   {
@@ -2246,6 +2326,7 @@
     "sample_plot_count": 2,
     "sample_env_count": 34,
     "Svamp-grupp-släkte": "skinnsvamp",
+    "synlighet": 0,
     "images": []
   },
   {
@@ -2273,6 +2354,7 @@
     "sample_plot_count": 2,
     "sample_env_count": 34,
     "Svamp-grupp-släkte": "skinnsvamp",
+    "synlighet": null,
     "images": []
   },
   {
@@ -2300,6 +2382,7 @@
     "sample_plot_count": 2,
     "sample_env_count": 34,
     "Svamp-grupp-släkte": "skinnsvamp",
+    "synlighet": null,
     "images": []
   },
   {
@@ -2327,6 +2410,7 @@
     "sample_plot_count": 2,
     "sample_env_count": 34,
     "Svamp-grupp-släkte": "skinnsvamp",
+    "synlighet": 0,
     "images": []
   },
   {
@@ -2354,6 +2438,7 @@
     "sample_plot_count": 2,
     "sample_env_count": 34,
     "Svamp-grupp-släkte": "tryffel",
+    "synlighet": 0,
     "images": []
   },
   {
@@ -2381,6 +2466,7 @@
     "sample_plot_count": 2,
     "sample_env_count": 34,
     "Svamp-grupp-släkte": "skinnsvamp",
+    "synlighet": 0,
     "images": []
   },
   {
@@ -2408,6 +2494,7 @@
     "sample_plot_count": 2,
     "sample_env_count": 34,
     "Svamp-grupp-släkte": "sopp",
+    "synlighet": 1,
     "images": []
   },
   {
@@ -2435,12 +2522,13 @@
     "sample_plot_count": 2,
     "sample_env_count": 34,
     "Svamp-grupp-släkte": "hattsvamp",
+    "synlighet": 1,
     "images": [
-      "/images/svampbilder/Giftsvampar/Amanita muscaria-28-2976.jpg",
-      "/images/svampbilder/Giftsvampar/Amanita muscaria-29-2976.jpg",
-      "/images/svampbilder/Giftsvampar/Amanita muscaria-48-2976.jpg",
-      "/images/svampbilder/Giftsvampar/Amanita muscaria-49-2976.jpg",
-      "/images/svampbilder/Giftsvampar/Amanita muscaria-26-2976.jpg"
+      "/images/SvampBilder/Giftsvampar/Amanita muscaria-28-2976.jpg",
+      "/images/SvampBilder/Giftsvampar/Amanita muscaria-29-2976.jpg",
+      "/images/SvampBilder/Giftsvampar/Amanita muscaria-48-2976.jpg",
+      "/images/SvampBilder/Giftsvampar/Amanita muscaria-49-2976.jpg",
+      "/images/SvampBilder/Giftsvampar/Amanita muscaria-26-2976.jpg"
     ]
   },
   {
@@ -2468,6 +2556,7 @@
     "sample_plot_count": 2,
     "sample_env_count": 34,
     "Svamp-grupp-släkte": "skinnsvamp",
+    "synlighet": 1,
     "images": []
   },
   {
@@ -2495,6 +2584,7 @@
     "sample_plot_count": 2,
     "sample_env_count": 34,
     "Svamp-grupp-släkte": "hattsvamp",
+    "synlighet": 1,
     "images": []
   },
   {
@@ -2522,6 +2612,7 @@
     "sample_plot_count": 2,
     "sample_env_count": 34,
     "Svamp-grupp-släkte": "skålsvamp",
+    "synlighet": 0,
     "images": []
   },
   {
@@ -2549,6 +2640,7 @@
     "sample_plot_count": 2,
     "sample_env_count": 34,
     "Svamp-grupp-släkte": "skinnsvamp",
+    "synlighet": 0,
     "images": []
   },
   {
@@ -2576,6 +2668,7 @@
     "sample_plot_count": 2,
     "sample_env_count": 34,
     "Svamp-grupp-släkte": "hattsvamp",
+    "synlighet": 1,
     "images": []
   },
   {
@@ -2603,6 +2696,7 @@
     "sample_plot_count": 2,
     "sample_env_count": 34,
     "Svamp-grupp-släkte": "hattsvamp",
+    "synlighet": 1,
     "images": []
   },
   {
@@ -2630,6 +2724,7 @@
     "sample_plot_count": 2,
     "sample_env_count": 34,
     "Svamp-grupp-släkte": "hattsvamp",
+    "synlighet": 1,
     "images": []
   },
   {
@@ -2657,6 +2752,7 @@
     "sample_plot_count": 2,
     "sample_env_count": 34,
     "Svamp-grupp-släkte": "hattsvamp",
+    "synlighet": 1,
     "images": []
   },
   {
@@ -2684,8 +2780,9 @@
     "sample_plot_count": 2,
     "sample_env_count": 34,
     "Svamp-grupp-släkte": "sopp",
+    "synlighet": 1,
     "images": [
-      "/images/svampbilder/Matsvampar/Leccinum variicolor.jpg"
+      "/images/SvampBilder/Matsvampar/Leccinum variicolor.jpg"
     ]
   },
   {
@@ -2713,6 +2810,7 @@
     "sample_plot_count": 2,
     "sample_env_count": 34,
     "Svamp-grupp-släkte": "hattsvamp",
+    "synlighet": 1,
     "images": []
   },
   {
@@ -2740,6 +2838,7 @@
     "sample_plot_count": 2,
     "sample_env_count": 34,
     "Svamp-grupp-släkte": "skålsvamp",
+    "synlighet": 1,
     "images": []
   },
   {
@@ -2767,6 +2866,7 @@
     "sample_plot_count": 2,
     "sample_env_count": 34,
     "Svamp-grupp-släkte": "hattsvamp",
+    "synlighet": 1,
     "images": []
   },
   {
@@ -2794,6 +2894,7 @@
     "sample_plot_count": 2,
     "sample_env_count": 34,
     "Svamp-grupp-släkte": "hattsvamp",
+    "synlighet": 1,
     "images": []
   },
   {
@@ -2821,6 +2922,7 @@
     "sample_plot_count": 2,
     "sample_env_count": 34,
     "Svamp-grupp-släkte": "hattsvamp",
+    "synlighet": 1,
     "images": []
   },
   {
@@ -2848,6 +2950,7 @@
     "sample_plot_count": 2,
     "sample_env_count": 34,
     "Svamp-grupp-släkte": "skinnsvamp",
+    "synlighet": 0,
     "images": []
   },
   {
@@ -2875,6 +2978,7 @@
     "sample_plot_count": 2,
     "sample_env_count": 34,
     "Svamp-grupp-släkte": "hattsvamp",
+    "synlighet": 1,
     "images": []
   },
   {
@@ -2902,6 +3006,7 @@
     "sample_plot_count": 2,
     "sample_env_count": 34,
     "Svamp-grupp-släkte": "hattsvamp",
+    "synlighet": 1,
     "images": []
   },
   {
@@ -2929,6 +3034,7 @@
     "sample_plot_count": 2,
     "sample_env_count": 34,
     "Svamp-grupp-släkte": "skinnsvamp",
+    "synlighet": 0,
     "images": []
   },
   {
@@ -2956,6 +3062,7 @@
     "sample_plot_count": 2,
     "sample_env_count": 34,
     "Svamp-grupp-släkte": "hattsvamp",
+    "synlighet": 1,
     "images": []
   },
   {
@@ -2983,6 +3090,7 @@
     "sample_plot_count": 2,
     "sample_env_count": 34,
     "Svamp-grupp-släkte": "hattsvamp",
+    "synlighet": 1,
     "images": []
   },
   {
@@ -3010,6 +3118,7 @@
     "sample_plot_count": 2,
     "sample_env_count": 34,
     "Svamp-grupp-släkte": "skinnsvamp",
+    "synlighet": 0,
     "images": []
   },
   {
@@ -3037,6 +3146,7 @@
     "sample_plot_count": 2,
     "sample_env_count": 34,
     "Svamp-grupp-släkte": "skinnsvamp",
+    "synlighet": 0,
     "images": []
   },
   {
@@ -3064,6 +3174,7 @@
     "sample_plot_count": 2,
     "sample_env_count": 34,
     "Svamp-grupp-släkte": "skinnsvamp",
+    "synlighet": 0,
     "images": []
   },
   {
@@ -3091,6 +3202,7 @@
     "sample_plot_count": 2,
     "sample_env_count": 34,
     "Svamp-grupp-släkte": "hattsvamp",
+    "synlighet": 1,
     "images": []
   },
   {
@@ -3118,6 +3230,7 @@
     "sample_plot_count": 2,
     "sample_env_count": 34,
     "Svamp-grupp-släkte": "övrigt",
+    "synlighet": 0,
     "images": []
   },
   {
@@ -3145,6 +3258,7 @@
     "sample_plot_count": 2,
     "sample_env_count": 34,
     "Svamp-grupp-släkte": "övrigt",
+    "synlighet": 0,
     "images": []
   },
   {
@@ -3172,6 +3286,7 @@
     "sample_plot_count": 2,
     "sample_env_count": 34,
     "Svamp-grupp-släkte": "hattsvamp",
+    "synlighet": 1,
     "images": []
   },
   {
@@ -3199,6 +3314,7 @@
     "sample_plot_count": 2,
     "sample_env_count": 34,
     "Svamp-grupp-släkte": "hattsvamp",
+    "synlighet": 1,
     "images": []
   },
   {
@@ -3226,6 +3342,7 @@
     "sample_plot_count": 2,
     "sample_env_count": 34,
     "Svamp-grupp-släkte": "tryffel",
+    "synlighet": 0,
     "images": []
   },
   {
@@ -3253,6 +3370,7 @@
     "sample_plot_count": 2,
     "sample_env_count": 34,
     "Svamp-grupp-släkte": "hattsvamp",
+    "synlighet": 1,
     "images": []
   },
   {
@@ -3280,6 +3398,7 @@
     "sample_plot_count": 2,
     "sample_env_count": 34,
     "Svamp-grupp-släkte": "hattsvamp",
+    "synlighet": 1,
     "images": []
   },
   {
@@ -3307,6 +3426,7 @@
     "sample_plot_count": 2,
     "sample_env_count": 34,
     "Svamp-grupp-släkte": "tryffel",
+    "synlighet": 0,
     "images": []
   },
   {
@@ -3334,6 +3454,7 @@
     "sample_plot_count": 2,
     "sample_env_count": 34,
     "Svamp-grupp-släkte": "skinnsvamp",
+    "synlighet": 0,
     "images": []
   },
   {
@@ -3361,6 +3482,7 @@
     "sample_plot_count": 2,
     "sample_env_count": 34,
     "Svamp-grupp-släkte": "skålsvamp",
+    "synlighet": 0,
     "images": []
   },
   {
@@ -3388,6 +3510,7 @@
     "sample_plot_count": 1,
     "sample_env_count": 34,
     "Svamp-grupp-släkte": "hattsvamp",
+    "synlighet": 1,
     "images": []
   },
   {
@@ -3415,6 +3538,7 @@
     "sample_plot_count": 1,
     "sample_env_count": 34,
     "Svamp-grupp-släkte": "hattsvamp",
+    "synlighet": 1,
     "images": []
   },
   {
@@ -3442,6 +3566,7 @@
     "sample_plot_count": 1,
     "sample_env_count": 34,
     "Svamp-grupp-släkte": "tryffel",
+    "synlighet": 0,
     "images": []
   },
   {
@@ -3469,6 +3594,7 @@
     "sample_plot_count": 1,
     "sample_env_count": 34,
     "Svamp-grupp-släkte": "övrigt",
+    "synlighet": 0,
     "images": []
   },
   {
@@ -3496,6 +3622,7 @@
     "sample_plot_count": 1,
     "sample_env_count": 34,
     "Svamp-grupp-släkte": "hattsvamp",
+    "synlighet": 1,
     "images": []
   },
   {
@@ -3523,6 +3650,7 @@
     "sample_plot_count": 1,
     "sample_env_count": 34,
     "Svamp-grupp-släkte": "skinnsvamp",
+    "synlighet": 0,
     "images": []
   },
   {
@@ -3550,6 +3678,7 @@
     "sample_plot_count": 1,
     "sample_env_count": 34,
     "Svamp-grupp-släkte": "skålsvamp",
+    "synlighet": 1,
     "images": []
   },
   {
@@ -3577,9 +3706,10 @@
     "sample_plot_count": 1,
     "sample_env_count": 34,
     "Svamp-grupp-släkte": "hattsvamp",
+    "synlighet": 1,
     "images": [
-      "/images/svampbilder/Giftsvampar/Cortinarius limonius-182-3653.jpg",
-      "/images/svampbilder/Giftsvampar/Cortinarius limonius-244-3653.jpg"
+      "/images/SvampBilder/Giftsvampar/Cortinarius limonius-182-3653.jpg",
+      "/images/SvampBilder/Giftsvampar/Cortinarius limonius-244-3653.jpg"
     ]
   },
   {
@@ -3607,6 +3737,7 @@
     "sample_plot_count": 1,
     "sample_env_count": 34,
     "Svamp-grupp-släkte": "hattsvamp",
+    "synlighet": 1,
     "images": []
   },
   {
@@ -3634,6 +3765,7 @@
     "sample_plot_count": 1,
     "sample_env_count": 34,
     "Svamp-grupp-släkte": "övrigt",
+    "synlighet": 0,
     "images": []
   },
   {
@@ -3661,6 +3793,7 @@
     "sample_plot_count": 1,
     "sample_env_count": 34,
     "Svamp-grupp-släkte": "hattsvamp",
+    "synlighet": 1,
     "images": []
   },
   {
@@ -3688,6 +3821,7 @@
     "sample_plot_count": 1,
     "sample_env_count": 34,
     "Svamp-grupp-släkte": "skinnsvamp",
+    "synlighet": 0,
     "images": []
   },
   {
@@ -3715,6 +3849,7 @@
     "sample_plot_count": 1,
     "sample_env_count": 34,
     "Svamp-grupp-släkte": "skinnsvamp",
+    "synlighet": 0,
     "images": []
   },
   {
@@ -3742,6 +3877,7 @@
     "sample_plot_count": 1,
     "sample_env_count": 34,
     "Svamp-grupp-släkte": "tryffel",
+    "synlighet": 0,
     "images": []
   },
   {
@@ -3769,14 +3905,15 @@
     "sample_plot_count": 1,
     "sample_env_count": 34,
     "Svamp-grupp-släkte": "sopp",
+    "synlighet": 1,
     "images": [
-      "/images/svampbilder/Matsvampar/Suillus granulatus-2.jpg",
-      "/images/svampbilder/Matsvampar/Suillus granulatus-3.jpg",
-      "/images/svampbilder/Matsvampar/Suillus granulatus-1.jpg",
-      "/images/svampbilder/Matsvampar/Suillus granulatus-4.jpg",
-      "/images/svampbilder/Matsvampar/Suillus granulatus-5.jpg",
-      "/images/svampbilder/Matsvampar/Suillus granulatus-6.jpg",
-      "/images/svampbilder/Giftsvampar/Suillus granulatus-42-6086.jpg"
+      "/images/SvampBilder/Matsvampar/Suillus granulatus-2.jpg",
+      "/images/SvampBilder/Matsvampar/Suillus granulatus-3.jpg",
+      "/images/SvampBilder/Matsvampar/Suillus granulatus-1.jpg",
+      "/images/SvampBilder/Matsvampar/Suillus granulatus-4.jpg",
+      "/images/SvampBilder/Matsvampar/Suillus granulatus-5.jpg",
+      "/images/SvampBilder/Matsvampar/Suillus granulatus-6.jpg",
+      "/images/SvampBilder/Giftsvampar/Suillus granulatus-42-6086.jpg"
     ]
   },
   {
@@ -3804,10 +3941,11 @@
     "sample_plot_count": 1,
     "sample_env_count": 34,
     "Svamp-grupp-släkte": "kantarell",
+    "synlighet": 1,
     "images": [
-      "/images/svampbilder/Matsvampar/Craterellus tubaeformis-3.jpg",
-      "/images/svampbilder/Matsvampar/Craterellus tubaeformis-2.jpg",
-      "/images/svampbilder/Matsvampar/Craterellus tubaeformis-1.jpg"
+      "/images/SvampBilder/Matsvampar/Craterellus tubaeformis-3.jpg",
+      "/images/SvampBilder/Matsvampar/Craterellus tubaeformis-2.jpg",
+      "/images/SvampBilder/Matsvampar/Craterellus tubaeformis-1.jpg"
     ]
   },
   {
@@ -3835,6 +3973,7 @@
     "sample_plot_count": 1,
     "sample_env_count": 34,
     "Svamp-grupp-släkte": "hattsvamp",
+    "synlighet": 1,
     "images": []
   },
   {
@@ -3862,6 +4001,7 @@
     "sample_plot_count": 1,
     "sample_env_count": 34,
     "Svamp-grupp-släkte": "hattsvamp",
+    "synlighet": 1,
     "images": []
   },
   {
@@ -3889,6 +4029,7 @@
     "sample_plot_count": 1,
     "sample_env_count": 34,
     "Svamp-grupp-släkte": "skinnsvamp",
+    "synlighet": 0,
     "images": []
   },
   {
@@ -3916,6 +4057,7 @@
     "sample_plot_count": 1,
     "sample_env_count": 34,
     "Svamp-grupp-släkte": "hattsvamp",
+    "synlighet": 1,
     "images": []
   },
   {
@@ -3943,6 +4085,7 @@
     "sample_plot_count": 1,
     "sample_env_count": 34,
     "Svamp-grupp-släkte": "övrigt",
+    "synlighet": 0,
     "images": []
   },
   {
@@ -3970,6 +4113,7 @@
     "sample_plot_count": 1,
     "sample_env_count": 34,
     "Svamp-grupp-släkte": "hattsvamp",
+    "synlighet": 1,
     "images": []
   },
   {
@@ -3997,6 +4141,7 @@
     "sample_plot_count": 1,
     "sample_env_count": 34,
     "Svamp-grupp-släkte": "tryffel",
+    "synlighet": 0,
     "images": []
   },
   {
@@ -4024,6 +4169,7 @@
     "sample_plot_count": 1,
     "sample_env_count": 34,
     "Svamp-grupp-släkte": "skinnsvamp",
+    "synlighet": 0,
     "images": []
   },
   {
@@ -4051,6 +4197,7 @@
     "sample_plot_count": 1,
     "sample_env_count": 34,
     "Svamp-grupp-släkte": "skinnsvamp",
+    "synlighet": 0,
     "images": []
   },
   {
@@ -4078,6 +4225,7 @@
     "sample_plot_count": 1,
     "sample_env_count": 34,
     "Svamp-grupp-släkte": "skinnsvamp",
+    "synlighet": 0,
     "images": []
   },
   {
@@ -4105,6 +4253,7 @@
     "sample_plot_count": 1,
     "sample_env_count": 34,
     "Svamp-grupp-släkte": "övrigt",
+    "synlighet": 0,
     "images": []
   },
   {
@@ -4132,6 +4281,7 @@
     "sample_plot_count": 1,
     "sample_env_count": 34,
     "Svamp-grupp-släkte": "skinnsvamp",
+    "synlighet": 0,
     "images": []
   },
   {
@@ -4159,6 +4309,7 @@
     "sample_plot_count": 1,
     "sample_env_count": 34,
     "Svamp-grupp-släkte": "hattsvamp",
+    "synlighet": 1,
     "images": []
   },
   {
@@ -4186,6 +4337,7 @@
     "sample_plot_count": 1,
     "sample_env_count": 34,
     "Svamp-grupp-släkte": "övrigt",
+    "synlighet": 0,
     "images": []
   },
   {
@@ -4213,6 +4365,7 @@
     "sample_plot_count": 1,
     "sample_env_count": 34,
     "Svamp-grupp-släkte": "hattsvamp",
+    "synlighet": 1,
     "images": []
   },
   {
@@ -4240,6 +4393,7 @@
     "sample_plot_count": 1,
     "sample_env_count": 34,
     "Svamp-grupp-släkte": "hattsvamp",
+    "synlighet": 1,
     "images": []
   },
   {
@@ -4267,6 +4421,7 @@
     "sample_plot_count": 1,
     "sample_env_count": 34,
     "Svamp-grupp-släkte": "hattsvamp",
+    "synlighet": 1,
     "images": []
   },
   {
@@ -4294,6 +4449,7 @@
     "sample_plot_count": 1,
     "sample_env_count": 34,
     "Svamp-grupp-släkte": "skinnsvamp",
+    "synlighet": 0,
     "images": []
   },
   {
@@ -4321,11 +4477,12 @@
     "sample_plot_count": 1,
     "sample_env_count": 34,
     "Svamp-grupp-släkte": "hattsvamp",
+    "synlighet": 1,
     "images": [
-      "/images/svampbilder/Matsvampar/Russula decolorans-4.jpg",
-      "/images/svampbilder/Matsvampar/Russula decolorans-1.jpg",
-      "/images/svampbilder/Matsvampar/Russula decolorans-2.jpg",
-      "/images/svampbilder/Matsvampar/Russula decolorans-3.jpg"
+      "/images/SvampBilder/Matsvampar/Russula decolorans-4.jpg",
+      "/images/SvampBilder/Matsvampar/Russula decolorans-1.jpg",
+      "/images/SvampBilder/Matsvampar/Russula decolorans-2.jpg",
+      "/images/SvampBilder/Matsvampar/Russula decolorans-3.jpg"
     ]
   },
   {
@@ -4353,6 +4510,7 @@
     "sample_plot_count": 1,
     "sample_env_count": 34,
     "Svamp-grupp-släkte": "hattsvamp",
+    "synlighet": 1,
     "images": []
   },
   {
@@ -4380,6 +4538,7 @@
     "sample_plot_count": 1,
     "sample_env_count": 34,
     "Svamp-grupp-släkte": "hattsvamp",
+    "synlighet": 1,
     "images": []
   },
   {
@@ -4407,6 +4566,7 @@
     "sample_plot_count": 1,
     "sample_env_count": 34,
     "Svamp-grupp-släkte": "hattsvamp",
+    "synlighet": 1,
     "images": []
   },
   {
@@ -4434,6 +4594,7 @@
     "sample_plot_count": 1,
     "sample_env_count": 34,
     "Svamp-grupp-släkte": "hattsvamp",
+    "synlighet": 1,
     "images": []
   },
   {
@@ -4461,6 +4622,7 @@
     "sample_plot_count": 1,
     "sample_env_count": 34,
     "Svamp-grupp-släkte": "hattsvamp",
+    "synlighet": 1,
     "images": []
   },
   {
@@ -4488,6 +4650,7 @@
     "sample_plot_count": 1,
     "sample_env_count": 34,
     "Svamp-grupp-släkte": "hattsvamp",
+    "synlighet": 1,
     "images": []
   },
   {
@@ -4515,6 +4678,7 @@
     "sample_plot_count": 1,
     "sample_env_count": 34,
     "Svamp-grupp-släkte": "skinnsvamp",
+    "synlighet": 1,
     "images": []
   },
   {
@@ -4542,6 +4706,7 @@
     "sample_plot_count": 1,
     "sample_env_count": 34,
     "Svamp-grupp-släkte": "hattsvamp",
+    "synlighet": 1,
     "images": []
   },
   {
@@ -4569,6 +4734,7 @@
     "sample_plot_count": 1,
     "sample_env_count": 34,
     "Svamp-grupp-släkte": "sopp",
+    "synlighet": 1,
     "images": []
   },
   {
@@ -4596,6 +4762,7 @@
     "sample_plot_count": 1,
     "sample_env_count": 34,
     "Svamp-grupp-släkte": "hattsvamp",
+    "synlighet": 1,
     "images": []
   },
   {
@@ -4623,6 +4790,7 @@
     "sample_plot_count": 1,
     "sample_env_count": 34,
     "Svamp-grupp-släkte": "hattsvamp",
+    "synlighet": 1,
     "images": []
   },
   {
@@ -4650,6 +4818,7 @@
     "sample_plot_count": 1,
     "sample_env_count": 34,
     "Svamp-grupp-släkte": "hattsvamp",
+    "synlighet": 1,
     "images": []
   },
   {
@@ -4677,6 +4846,7 @@
     "sample_plot_count": 1,
     "sample_env_count": 34,
     "Svamp-grupp-släkte": "hattsvamp",
+    "synlighet": 1,
     "images": []
   },
   {
@@ -4704,6 +4874,7 @@
     "sample_plot_count": 1,
     "sample_env_count": 34,
     "Svamp-grupp-släkte": "hattsvamp",
+    "synlighet": 1,
     "images": []
   },
   {
@@ -4731,6 +4902,7 @@
     "sample_plot_count": 1,
     "sample_env_count": 34,
     "Svamp-grupp-släkte": "hattsvamp",
+    "synlighet": 1,
     "images": []
   },
   {
@@ -4758,6 +4930,7 @@
     "sample_plot_count": 1,
     "sample_env_count": 34,
     "Svamp-grupp-släkte": "hattsvamp",
+    "synlighet": 1,
     "images": []
   },
   {
@@ -4785,6 +4958,7 @@
     "sample_plot_count": 1,
     "sample_env_count": 34,
     "Svamp-grupp-släkte": "hattsvamp",
+    "synlighet": 1,
     "images": []
   },
   {
@@ -4812,6 +4986,7 @@
     "sample_plot_count": 1,
     "sample_env_count": 34,
     "Svamp-grupp-släkte": "skinnsvamp",
+    "synlighet": 0,
     "images": []
   },
   {
@@ -4839,6 +5014,7 @@
     "sample_plot_count": 1,
     "sample_env_count": 34,
     "Svamp-grupp-släkte": "hattsvamp",
+    "synlighet": 1,
     "images": []
   },
   {
@@ -4866,6 +5042,7 @@
     "sample_plot_count": 1,
     "sample_env_count": 34,
     "Svamp-grupp-släkte": "skålsvamp",
+    "synlighet": 1,
     "images": []
   },
   {
@@ -4893,6 +5070,7 @@
     "sample_plot_count": 1,
     "sample_env_count": 34,
     "Svamp-grupp-släkte": "tryffel",
+    "synlighet": 0,
     "images": []
   },
   {
@@ -4920,6 +5098,7 @@
     "sample_plot_count": 1,
     "sample_env_count": 34,
     "Svamp-grupp-släkte": "skinnsvamp",
+    "synlighet": 0,
     "images": []
   },
   {
@@ -4947,6 +5126,7 @@
     "sample_plot_count": 1,
     "sample_env_count": 34,
     "Svamp-grupp-släkte": "skinnsvamp",
+    "synlighet": 0,
     "images": []
   },
   {
@@ -4974,6 +5154,7 @@
     "sample_plot_count": 1,
     "sample_env_count": 34,
     "Svamp-grupp-släkte": "skålsvamp",
+    "synlighet": 1,
     "images": []
   },
   {
@@ -5001,6 +5182,7 @@
     "sample_plot_count": 1,
     "sample_env_count": 34,
     "Svamp-grupp-släkte": "hattsvamp",
+    "synlighet": 1,
     "images": []
   },
   {
@@ -5028,6 +5210,7 @@
     "sample_plot_count": 1,
     "sample_env_count": 34,
     "Svamp-grupp-släkte": "skinnsvamp",
+    "synlighet": 0,
     "images": []
   },
   {
@@ -5055,6 +5238,7 @@
     "sample_plot_count": 1,
     "sample_env_count": 34,
     "Svamp-grupp-släkte": "hattsvamp",
+    "synlighet": 1,
     "images": []
   },
   {
@@ -5082,6 +5266,7 @@
     "sample_plot_count": 1,
     "sample_env_count": 34,
     "Svamp-grupp-släkte": "skinnsvamp",
+    "synlighet": 0,
     "images": []
   },
   {
@@ -5109,6 +5294,7 @@
     "sample_plot_count": 1,
     "sample_env_count": 34,
     "Svamp-grupp-släkte": "hattsvamp",
+    "synlighet": 1,
     "images": []
   },
   {
@@ -5136,6 +5322,7 @@
     "sample_plot_count": 1,
     "sample_env_count": 34,
     "Svamp-grupp-släkte": "hattsvamp",
+    "synlighet": 1,
     "images": []
   },
   {
@@ -5163,6 +5350,7 @@
     "sample_plot_count": 1,
     "sample_env_count": 34,
     "Svamp-grupp-släkte": "hattsvamp",
+    "synlighet": 1,
     "images": []
   },
   {
@@ -5190,6 +5378,7 @@
     "sample_plot_count": 1,
     "sample_env_count": 34,
     "Svamp-grupp-släkte": "hattsvamp",
+    "synlighet": 1,
     "images": []
   },
   {
@@ -5217,6 +5406,7 @@
     "sample_plot_count": 1,
     "sample_env_count": 34,
     "Svamp-grupp-släkte": "hattsvamp",
+    "synlighet": 1,
     "images": []
   },
   {
@@ -5244,6 +5434,7 @@
     "sample_plot_count": 1,
     "sample_env_count": 34,
     "Svamp-grupp-släkte": "hattsvamp",
+    "synlighet": 1,
     "images": []
   },
   {
@@ -5271,6 +5462,7 @@
     "sample_plot_count": 1,
     "sample_env_count": 34,
     "Svamp-grupp-släkte": "hattsvamp",
+    "synlighet": 1,
     "images": []
   },
   {
@@ -5298,6 +5490,7 @@
     "sample_plot_count": 1,
     "sample_env_count": 34,
     "Svamp-grupp-släkte": "hattsvamp",
+    "synlighet": 1,
     "images": []
   },
   {
@@ -5325,12 +5518,13 @@
     "sample_plot_count": 1,
     "sample_env_count": 34,
     "Svamp-grupp-släkte": "hattsvamp",
+    "synlighet": 1,
     "images": [
-      "/images/svampbilder/Matsvampar/Russula aeruginea-1.jpg",
-      "/images/svampbilder/Matsvampar/Russula aeruginea-2.jpg",
-      "/images/svampbilder/Matsvampar/Russula aeruginea-3.jpg",
-      "/images/svampbilder/Matsvampar/Russula aeruginea-4.jpg",
-      "/images/svampbilder/Matsvampar/Russula aeruginea-5.jpg"
+      "/images/SvampBilder/Matsvampar/Russula aeruginea-1.jpg",
+      "/images/SvampBilder/Matsvampar/Russula aeruginea-2.jpg",
+      "/images/SvampBilder/Matsvampar/Russula aeruginea-3.jpg",
+      "/images/SvampBilder/Matsvampar/Russula aeruginea-4.jpg",
+      "/images/SvampBilder/Matsvampar/Russula aeruginea-5.jpg"
     ]
   },
   {
@@ -5358,6 +5552,7 @@
     "sample_plot_count": 1,
     "sample_env_count": 34,
     "Svamp-grupp-släkte": "hattsvamp",
+    "synlighet": 1,
     "images": []
   },
   {
@@ -5385,6 +5580,7 @@
     "sample_plot_count": 1,
     "sample_env_count": 34,
     "Svamp-grupp-släkte": "hattsvamp",
+    "synlighet": 1,
     "images": []
   },
   {
@@ -5412,6 +5608,7 @@
     "sample_plot_count": 1,
     "sample_env_count": 34,
     "Svamp-grupp-släkte": "hattsvamp",
+    "synlighet": 1,
     "images": []
   },
   {
@@ -5439,6 +5636,7 @@
     "sample_plot_count": 1,
     "sample_env_count": 34,
     "Svamp-grupp-släkte": "skinnsvamp",
+    "synlighet": 0,
     "images": []
   },
   {
@@ -5466,6 +5664,7 @@
     "sample_plot_count": 1,
     "sample_env_count": 34,
     "Svamp-grupp-släkte": "hattsvamp",
+    "synlighet": 1,
     "images": []
   },
   {
@@ -5493,6 +5692,7 @@
     "sample_plot_count": 1,
     "sample_env_count": 34,
     "Svamp-grupp-släkte": "hattsvamp",
+    "synlighet": 1,
     "images": []
   },
   {
@@ -5520,9 +5720,10 @@
     "sample_plot_count": 1,
     "sample_env_count": 34,
     "Svamp-grupp-släkte": "hattsvamp",
+    "synlighet": 1,
     "images": [
-      "/images/svampbilder/Giftsvampar/Tricholoma fulvum-129-6269.jpg",
-      "/images/svampbilder/Giftsvampar/Tricholoma fulvum-27-6269.jpg"
+      "/images/SvampBilder/Giftsvampar/Tricholoma fulvum-129-6269.jpg",
+      "/images/SvampBilder/Giftsvampar/Tricholoma fulvum-27-6269.jpg"
     ]
   },
   {
@@ -5550,13 +5751,14 @@
     "sample_plot_count": 1,
     "sample_env_count": 34,
     "Svamp-grupp-släkte": "hattsvamp",
+    "synlighet": 1,
     "images": [
-      "/images/svampbilder/Matsvampar/Russula vinosa-6.jpg",
-      "/images/svampbilder/Matsvampar/Russula vinosa-5.jpg",
-      "/images/svampbilder/Matsvampar/Russula vinosa-4.jpg",
-      "/images/svampbilder/Matsvampar/Russula vinosa-1.jpg",
-      "/images/svampbilder/Matsvampar/Russula vinosa-3.jpg",
-      "/images/svampbilder/Matsvampar/Russula vinosa-2.jpg"
+      "/images/SvampBilder/Matsvampar/Russula vinosa-6.jpg",
+      "/images/SvampBilder/Matsvampar/Russula vinosa-5.jpg",
+      "/images/SvampBilder/Matsvampar/Russula vinosa-4.jpg",
+      "/images/SvampBilder/Matsvampar/Russula vinosa-1.jpg",
+      "/images/SvampBilder/Matsvampar/Russula vinosa-3.jpg",
+      "/images/SvampBilder/Matsvampar/Russula vinosa-2.jpg"
     ]
   },
   {
@@ -5584,6 +5786,7 @@
     "sample_plot_count": 1,
     "sample_env_count": 34,
     "Svamp-grupp-släkte": "övrigt",
+    "synlighet": null,
     "images": []
   },
   {
@@ -5611,6 +5814,7 @@
     "sample_plot_count": 1,
     "sample_env_count": 34,
     "Svamp-grupp-släkte": "hattsvamp",
+    "synlighet": 1,
     "images": []
   },
   {
@@ -5638,6 +5842,7 @@
     "sample_plot_count": 1,
     "sample_env_count": 34,
     "Svamp-grupp-släkte": "hattsvamp",
+    "synlighet": 1,
     "images": []
   },
   {
@@ -5665,6 +5870,7 @@
     "sample_plot_count": 1,
     "sample_env_count": 34,
     "Svamp-grupp-släkte": "skinnsvamp",
+    "synlighet": 0,
     "images": []
   },
   {
@@ -5692,6 +5898,7 @@
     "sample_plot_count": 1,
     "sample_env_count": 34,
     "Svamp-grupp-släkte": "hattsvamp",
+    "synlighet": 1,
     "images": []
   },
   {
@@ -5719,6 +5926,7 @@
     "sample_plot_count": 1,
     "sample_env_count": 34,
     "Svamp-grupp-släkte": "skinnsvamp",
+    "synlighet": 0,
     "images": []
   },
   {
@@ -5746,6 +5954,7 @@
     "sample_plot_count": 1,
     "sample_env_count": 34,
     "Svamp-grupp-släkte": "hattsvamp",
+    "synlighet": 1,
     "images": []
   },
   {
@@ -5773,6 +5982,7 @@
     "sample_plot_count": 1,
     "sample_env_count": 34,
     "Svamp-grupp-släkte": "hattsvamp",
+    "synlighet": 1,
     "images": []
   },
   {
@@ -5800,6 +6010,7 @@
     "sample_plot_count": 1,
     "sample_env_count": 34,
     "Svamp-grupp-släkte": "skinnsvamp",
+    "synlighet": 0,
     "images": []
   },
   {
@@ -5827,6 +6038,7 @@
     "sample_plot_count": 1,
     "sample_env_count": 34,
     "Svamp-grupp-släkte": "hattsvamp",
+    "synlighet": 1,
     "images": []
   },
   {
@@ -5854,6 +6066,7 @@
     "sample_plot_count": 1,
     "sample_env_count": 34,
     "Svamp-grupp-släkte": "skålsvamp",
+    "synlighet": 0,
     "images": []
   },
   {
@@ -5881,6 +6094,7 @@
     "sample_plot_count": 1,
     "sample_env_count": 34,
     "Svamp-grupp-släkte": "hattsvamp",
+    "synlighet": 1,
     "images": []
   },
   {
@@ -5908,6 +6122,7 @@
     "sample_plot_count": 1,
     "sample_env_count": 34,
     "Svamp-grupp-släkte": "taggsvamp",
+    "synlighet": 1,
     "images": []
   },
   {
@@ -5935,6 +6150,7 @@
     "sample_plot_count": 1,
     "sample_env_count": 34,
     "Svamp-grupp-släkte": "hattsvamp",
+    "synlighet": 1,
     "images": []
   },
   {
@@ -5962,6 +6178,7 @@
     "sample_plot_count": 1,
     "sample_env_count": 34,
     "Svamp-grupp-släkte": "övrigt",
+    "synlighet": 0,
     "images": []
   },
   {
@@ -5989,6 +6206,7 @@
     "sample_plot_count": 1,
     "sample_env_count": 34,
     "Svamp-grupp-släkte": "hattsvamp",
+    "synlighet": 1,
     "images": []
   },
   {
@@ -6016,6 +6234,7 @@
     "sample_plot_count": 1,
     "sample_env_count": 34,
     "Svamp-grupp-släkte": "hattsvamp",
+    "synlighet": 1,
     "images": []
   },
   {
@@ -6043,6 +6262,7 @@
     "sample_plot_count": 1,
     "sample_env_count": 34,
     "Svamp-grupp-släkte": "övrigt",
+    "synlighet": 0,
     "images": []
   },
   {
@@ -6070,6 +6290,7 @@
     "sample_plot_count": 1,
     "sample_env_count": 34,
     "Svamp-grupp-släkte": "hattsvamp",
+    "synlighet": 1,
     "images": []
   },
   {
@@ -6097,6 +6318,7 @@
     "sample_plot_count": 1,
     "sample_env_count": 34,
     "Svamp-grupp-släkte": "hattsvamp",
+    "synlighet": 1,
     "images": []
   },
   {
@@ -6124,6 +6346,7 @@
     "sample_plot_count": 1,
     "sample_env_count": 34,
     "Svamp-grupp-släkte": "skinnsvamp",
+    "synlighet": 0,
     "images": []
   },
   {
@@ -6151,6 +6374,7 @@
     "sample_plot_count": 1,
     "sample_env_count": 34,
     "Svamp-grupp-släkte": "skinnsvamp",
+    "synlighet": 0,
     "images": []
   },
   {
@@ -6178,6 +6402,7 @@
     "sample_plot_count": 1,
     "sample_env_count": 34,
     "Svamp-grupp-släkte": "hattsvamp",
+    "synlighet": 1,
     "images": []
   },
   {
@@ -6205,6 +6430,7 @@
     "sample_plot_count": 1,
     "sample_env_count": 34,
     "Svamp-grupp-släkte": "skålsvamp",
+    "synlighet": 0,
     "images": []
   },
   {
@@ -6232,6 +6458,7 @@
     "sample_plot_count": 1,
     "sample_env_count": 34,
     "Svamp-grupp-släkte": "skinnsvamp",
+    "synlighet": 0,
     "images": []
   },
   {
@@ -6259,6 +6486,7 @@
     "sample_plot_count": 1,
     "sample_env_count": 34,
     "Svamp-grupp-släkte": "skinnsvamp",
+    "synlighet": 0,
     "images": []
   },
   {
@@ -6286,6 +6514,7 @@
     "sample_plot_count": 1,
     "sample_env_count": 34,
     "Svamp-grupp-släkte": "skinnsvamp",
+    "synlighet": 0,
     "images": []
   },
   {
@@ -6313,6 +6542,7 @@
     "sample_plot_count": 1,
     "sample_env_count": 34,
     "Svamp-grupp-släkte": "övrigt",
+    "synlighet": 0,
     "images": []
   },
   {
@@ -6340,6 +6570,7 @@
     "sample_plot_count": 1,
     "sample_env_count": 34,
     "Svamp-grupp-släkte": "hattsvamp",
+    "synlighet": 1,
     "images": []
   },
   {
@@ -6367,6 +6598,7 @@
     "sample_plot_count": 1,
     "sample_env_count": 34,
     "Svamp-grupp-släkte": "skinnsvamp",
+    "synlighet": 0,
     "images": []
   },
   {
@@ -6394,6 +6626,7 @@
     "sample_plot_count": 1,
     "sample_env_count": 34,
     "Svamp-grupp-släkte": "hattsvamp",
+    "synlighet": 1,
     "images": []
   },
   {
@@ -6421,6 +6654,7 @@
     "sample_plot_count": 1,
     "sample_env_count": 34,
     "Svamp-grupp-släkte": "hattsvamp",
+    "synlighet": 1,
     "images": []
   },
   {
@@ -6448,6 +6682,7 @@
     "sample_plot_count": 1,
     "sample_env_count": 34,
     "Svamp-grupp-släkte": "skinnsvamp",
+    "synlighet": 0,
     "images": []
   },
   {
@@ -6475,6 +6710,7 @@
     "sample_plot_count": 1,
     "sample_env_count": 34,
     "Svamp-grupp-släkte": "hattsvamp",
+    "synlighet": 1,
     "images": []
   },
   {
@@ -6502,6 +6738,7 @@
     "sample_plot_count": 1,
     "sample_env_count": 34,
     "Svamp-grupp-släkte": "skinnsvamp",
+    "synlighet": 0,
     "images": []
   },
   {
@@ -6529,6 +6766,7 @@
     "sample_plot_count": 1,
     "sample_env_count": 34,
     "Svamp-grupp-släkte": "skinnsvamp",
+    "synlighet": 0,
     "images": []
   },
   {
@@ -6556,6 +6794,7 @@
     "sample_plot_count": 1,
     "sample_env_count": 34,
     "Svamp-grupp-släkte": "hattsvamp",
+    "synlighet": 1,
     "images": []
   },
   {
@@ -6583,6 +6822,7 @@
     "sample_plot_count": 1,
     "sample_env_count": 34,
     "Svamp-grupp-släkte": "skinnsvamp",
+    "synlighet": 0,
     "images": []
   },
   {
@@ -6610,6 +6850,7 @@
     "sample_plot_count": 1,
     "sample_env_count": 34,
     "Svamp-grupp-släkte": "skinnsvamp",
+    "synlighet": 0,
     "images": []
   },
   {
@@ -6637,6 +6878,7 @@
     "sample_plot_count": 1,
     "sample_env_count": 34,
     "Svamp-grupp-släkte": "hattsvamp",
+    "synlighet": 1,
     "images": []
   },
   {
@@ -6664,6 +6906,7 @@
     "sample_plot_count": 1,
     "sample_env_count": 34,
     "Svamp-grupp-släkte": "hattsvamp",
+    "synlighet": 1,
     "images": []
   },
   {
@@ -6691,6 +6934,7 @@
     "sample_plot_count": 1,
     "sample_env_count": 34,
     "Svamp-grupp-släkte": "skinnsvamp",
+    "synlighet": 0,
     "images": []
   },
   {
@@ -6718,6 +6962,7 @@
     "sample_plot_count": 1,
     "sample_env_count": 34,
     "Svamp-grupp-släkte": "hattsvamp",
+    "synlighet": 1,
     "images": []
   },
   {
@@ -6745,6 +6990,7 @@
     "sample_plot_count": 1,
     "sample_env_count": 34,
     "Svamp-grupp-släkte": "hattsvamp",
+    "synlighet": 1,
     "images": []
   },
   {
@@ -6772,6 +7018,7 @@
     "sample_plot_count": 1,
     "sample_env_count": 34,
     "Svamp-grupp-släkte": "hattsvamp",
+    "synlighet": 1,
     "images": []
   },
   {
@@ -6799,6 +7046,7 @@
     "sample_plot_count": 1,
     "sample_env_count": 34,
     "Svamp-grupp-släkte": "hattsvamp",
+    "synlighet": 1,
     "images": []
   },
   {
@@ -6826,6 +7074,7 @@
     "sample_plot_count": 1,
     "sample_env_count": 34,
     "Svamp-grupp-släkte": "hattsvamp",
+    "synlighet": 1,
     "images": []
   },
   {
@@ -6853,6 +7102,7 @@
     "sample_plot_count": 1,
     "sample_env_count": 34,
     "Svamp-grupp-släkte": "skinnsvamp",
+    "synlighet": 0,
     "images": []
   },
   {
@@ -6880,6 +7130,7 @@
     "sample_plot_count": 1,
     "sample_env_count": 34,
     "Svamp-grupp-släkte": "skinnsvamp",
+    "synlighet": 0,
     "images": []
   },
   {
@@ -6907,11 +7158,12 @@
     "sample_plot_count": 1,
     "sample_env_count": 34,
     "Svamp-grupp-släkte": "hattsvamp",
+    "synlighet": 1,
     "images": [
-      "/images/svampbilder/Matsvampar/Gomphidius glutinosus-4.jpg",
-      "/images/svampbilder/Matsvampar/Gomphidius glutinosus-1.jpg",
-      "/images/svampbilder/Matsvampar/Gomphidius glutinosus-3.jpg",
-      "/images/svampbilder/Matsvampar/Gomphidius glutinosus-2.jpg"
+      "/images/SvampBilder/Matsvampar/Gomphidius glutinosus-4.jpg",
+      "/images/SvampBilder/Matsvampar/Gomphidius glutinosus-1.jpg",
+      "/images/SvampBilder/Matsvampar/Gomphidius glutinosus-3.jpg",
+      "/images/SvampBilder/Matsvampar/Gomphidius glutinosus-2.jpg"
     ]
   },
   {
@@ -6939,6 +7191,7 @@
     "sample_plot_count": 1,
     "sample_env_count": 34,
     "Svamp-grupp-släkte": "skinnsvamp",
+    "synlighet": 0,
     "images": []
   },
   {
@@ -6966,6 +7219,7 @@
     "sample_plot_count": 1,
     "sample_env_count": 34,
     "Svamp-grupp-släkte": "hattsvamp",
+    "synlighet": 1,
     "images": []
   },
   {
@@ -6993,6 +7247,7 @@
     "sample_plot_count": 1,
     "sample_env_count": 34,
     "Svamp-grupp-släkte": "skinnsvamp",
+    "synlighet": 0,
     "images": []
   },
   {
@@ -7020,6 +7275,7 @@
     "sample_plot_count": 1,
     "sample_env_count": 34,
     "Svamp-grupp-släkte": "skinnsvamp",
+    "synlighet": 0,
     "images": []
   },
   {
@@ -7047,6 +7303,7 @@
     "sample_plot_count": 1,
     "sample_env_count": 34,
     "Svamp-grupp-släkte": "övrigt",
+    "synlighet": null,
     "images": []
   },
   {
@@ -7074,6 +7331,7 @@
     "sample_plot_count": 1,
     "sample_env_count": 34,
     "Svamp-grupp-släkte": "hattsvamp",
+    "synlighet": 1,
     "images": []
   },
   {
@@ -7101,6 +7359,7 @@
     "sample_plot_count": 1,
     "sample_env_count": 34,
     "Svamp-grupp-släkte": "tryffel",
+    "synlighet": 0,
     "images": []
   },
   {
@@ -7128,6 +7387,7 @@
     "sample_plot_count": 1,
     "sample_env_count": 34,
     "Svamp-grupp-släkte": "hattsvamp",
+    "synlighet": 1,
     "images": []
   },
   {
@@ -7155,6 +7415,7 @@
     "sample_plot_count": 1,
     "sample_env_count": 34,
     "Svamp-grupp-släkte": "tryffel",
+    "synlighet": 0,
     "images": []
   },
   {
@@ -7182,6 +7443,7 @@
     "sample_plot_count": 1,
     "sample_env_count": 34,
     "Svamp-grupp-släkte": "skinnsvamp",
+    "synlighet": 0,
     "images": []
   },
   {
@@ -7209,6 +7471,7 @@
     "sample_plot_count": 1,
     "sample_env_count": 34,
     "Svamp-grupp-släkte": "hattsvamp",
+    "synlighet": 1,
     "images": []
   },
   {
@@ -7236,6 +7499,7 @@
     "sample_plot_count": 1,
     "sample_env_count": 34,
     "Svamp-grupp-släkte": "hattsvamp",
+    "synlighet": 1,
     "images": []
   },
   {
@@ -7263,6 +7527,7 @@
     "sample_plot_count": 1,
     "sample_env_count": 34,
     "Svamp-grupp-släkte": "tryffel",
+    "synlighet": 0,
     "images": []
   }
 ]

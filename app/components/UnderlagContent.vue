@@ -17,7 +17,7 @@
       <p class="leading-relaxed text-neutral-800">{{ underlag }}</p>
     </div>
 
-    <NuxtLink to="/info" class="text-primary underline">Läs mer i om projektet</NuxtLink>
+    <NuxtLink to="/om-projektet" class="text-primary underline">Läs mer i om projektet</NuxtLink>
   </div>
 </template>
 

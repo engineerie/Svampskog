@@ -2,6 +2,14 @@
 import { computed } from 'vue'
 import { VisXYContainer, VisLine, VisAxis, VisCrosshair, VisGroupedBar, VisTooltip } from '@unovis/vue'
 import { useAsyncData } from '#app'
+type SkogsbrukSvamparRow = Record<string, string | number | undefined>
+type SkogsbrukSvampEntry = {
+    artkategori: string
+    startskog: string
+    frameworks: string
+    ["ålder"]: number
+    klassning: number
+}
 const { data: matsvampDataDoc } = await useAsyncData('matsvamp-skogsbruk', () =>
     queryCollection('matsvampSkogsbruk').first()
 )
@@ -29,8 +37,8 @@ const { data: russulalesDataDoc } = await useAsyncData('russulales-skogsbruk', (
 const { data: thelephoralesDataDoc } = await useAsyncData('thelephorales-skogsbruk', () =>
     queryCollection('thelephoralesSkogsbruk').first()
 )
-const { data: totalSvamparDataDoc } = await useAsyncData('total-svampar-skogsbruk', () =>
-    queryCollection('totalSvamparSkogsbruk').first()
+const { data: skogsbrukSvamparDoc } = await useAsyncData('skogsbruk-svampar', () =>
+    queryCollection('skogsbrukSvampar').first()
 )
 const matsvampDataset = computed(() => Array.isArray(matsvampDataDoc.value?.entries) ? matsvampDataDoc.value.entries : [])
 const godaMatsvampDataset = computed(() => Array.isArray(godaMatsvampDataDoc.value?.entries) ? godaMatsvampDataDoc.value.entries : [])
@@ -41,7 +49,27 @@ const cantharellalesDataset = computed(() => Array.isArray(cantharellalesDataDoc
 const spindlingarDataset = computed(() => Array.isArray(spindlingarDataDoc.value?.entries) ? spindlingarDataDoc.value.entries : [])
 const russulalesDataset = computed(() => Array.isArray(russulalesDataDoc.value?.entries) ? russulalesDataDoc.value.entries : [])
 const thelephoralesDataset = computed(() => Array.isArray(thelephoralesDataDoc.value?.entries) ? thelephoralesDataDoc.value.entries : [])
-const totalSvamparDataset = computed(() => Array.isArray(totalSvamparDataDoc.value?.entries) ? totalSvamparDataDoc.value.entries : [])
+const totalSvamparDataset = computed(() => {
+    const rows = Array.isArray(skogsbrukSvamparDoc.value?.entries)
+        ? (skogsbrukSvamparDoc.value.entries as SkogsbrukSvamparRow[])
+        : []
+    return rows
+        .map((row): SkogsbrukSvampEntry | null => {
+            const frameworks = normalizeFrameworkKey(String(row?.metod ?? ''))
+            const startskog = normalizeStartskog(row?.startskog)
+            const age = toNumber(row?.['ålder'])
+            const klassning = toNumber(row?.['Mängd mykorrhiza'])
+            if (!frameworks || !Number.isFinite(age) || !Number.isFinite(klassning)) return null
+            return {
+                artkategori: 'total',
+                startskog,
+                frameworks,
+                ['ålder']: age,
+                klassning,
+            }
+        })
+        .filter(Boolean) as SkogsbrukSvampEntry[]
+})
 import { capitalize } from 'lodash-es'
 
 const speciesColorMap: Record<string, string> = {
@@ -54,6 +82,37 @@ const speciesColorMap: Record<string, string> = {
     'matsvamp': '#eab308',
     'rödlistade + signalarter': '#5eead4',
     'goda matsvampar': '#eab308'
+}
+
+const methodToFrameworkMap: Record<string, string> = {
+    'trakthygge': 'trakthygge',
+    'blädning': 'blädning',
+    'luckhuggning': 'luckhuggning',
+    'skärm': 'skärmträd',
+    'skarm': 'skärmträd',
+    'ingen åtgärd': 'naturskydd',
+}
+
+function normalizeFrameworkKey(value: string) {
+    const key = (value || '').trim().toLowerCase()
+    if (!key) return ''
+    return methodToFrameworkMap[key] || key
+}
+
+function normalizeStartskog(value: unknown) {
+    if (typeof value === 'string') return value
+    if (typeof value === 'number') return String(value)
+    return ''
+}
+
+function toNumber(value: unknown): number {
+    if (typeof value === 'number') return value
+    if (typeof value === 'string') {
+        const normalized = value.replace(',', '.')
+        const parsed = Number(normalized)
+        return Number.isFinite(parsed) ? parsed : NaN
+    }
+    return NaN
 }
 
 // Define the props for the component.
@@ -109,10 +168,10 @@ function filterData(framework: string, startskog: string) {
     const frameworkLower = framework?.toLowerCase() || ''
     const selectedStartskogLower = props.selectedStartskog ? props.selectedStartskog.toLowerCase() : null
     if (props.dataSource === 'total' || speciesLower === 'total') {
-        // For total data, ignore startskog filtering.
         return (totalSvamparDataset.value as any[]).filter(d =>
             d.artkategori?.toLowerCase() === speciesLower &&
-            d.frameworks?.toLowerCase() === frameworkLower
+            d.frameworks?.toLowerCase() === frameworkLower &&
+            (!selectedStartskogLower || (d.startskog?.toLowerCase() ?? selectedStartskogLower) === selectedStartskogLower)
         ).map(d => ({
             age: d["ålder"],
             klassning: +d["klassning"]

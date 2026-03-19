@@ -1,5 +1,5 @@
 <template>
-  <div class="bg-muted">
+  <div class="bg-muted flex min-h-[calc(100vh-var(--ui-header-height))] flex-col">
 
 
     <!-- <USlideover :class="['transition-all', !isPinned ? 'm-1 rounded overflow-hidden' : 'm-0 rounded-none']"
@@ -27,15 +27,19 @@
     <MySlideover v-model="showSlideover" :pinned="isPinned" @update:pinned="(val) => (isPinned = val)">
       <SpeciesInfo :species="speciesStore.selectedSpecies" :source="speciesStore.sourceComponent" />
     </MySlideover>
+    <!-- <SpatialForest v-if="isMobile" /> -->
+
     <UContainer>
+
       <transition name="fade">
         <EnvironmentSelector v-if="hasAllParams" />
       </transition>
     </UContainer>
-    <div class="flex flex-col min-h-screen ">
-      <UContainer class="w-full px-0 ">
+    <div class="flex flex-1 flex-col">
+      <UContainer class="w-full px-0 flex-1 flex flex-col">
         <transition name="fade" mode="out-in">
-          <NormalView class="block sm:border border-muted/50 bg-white sm:rounded-xl sm:shadow mb-4"
+          <NormalView
+            class="block flex-1 sm:border border-muted/50 bg-white sm:rounded-xl sm:shadow mb-4 overflow-hidden"
             :active-view="activeKnowledgeView" @enlarge="handleFullScreen" @close-view="handleCloseFullScreen" />
         </transition>
       </UContainer>

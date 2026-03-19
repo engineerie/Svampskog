@@ -1,4 +1,4 @@
-type ComponentName = 'EdnaComponent' | 'RedlistedComponent' | 'FullscreenEdible' | 'FullscreenPoison';
+type ComponentName = 'EdnaComponent';
 
 import { defineStore } from 'pinia';
 
@@ -7,9 +7,6 @@ export const useTabsStore = defineStore('tabs', {
     // Store individual active tab state for each component
     componentTabs: {
       EdnaComponent: 'columnChart',
-      RedlistedComponent: 'grid',
-      FullscreenEdible: 'grid',
-      FullscreenPoison: 'grid',
     } as Record<ComponentName, string>,
   }),
   getters: {

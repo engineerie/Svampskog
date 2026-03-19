@@ -13,13 +13,11 @@ export default defineAppConfig({
     pageHero: {
       slots: {
         title: "font-semibold",
-        links: " flex",
+        links: " justify-start mx-auto flex-row lg:flex-row ",
       },
     },
     pageSection: {
       slots: {
-        // container:
-        //   "flex flex-col-reverse sm:flex-col lg:grid py-16 sm:py-24 lg:py-32 gap-8 sm:gap-16",
         title: "font-semibold",
       },
     },
@@ -77,6 +75,41 @@ export default defineAppConfig({
           variant: "subtle",
           class:
             "bg-vanligmark-50 text-(--ui-vanligmark) dark:bg-vanligmark-950/80 ring ring-inset ring-(--ui-vanligmark)/25",
+        },
+        {
+          color: "rl-lc",
+          variant: "subtle",
+          class: "badge-rl-lc-subtle",
+        },
+        {
+          color: "rl-dd",
+          variant: "subtle",
+          class: "badge-rl-dd-subtle",
+        },
+        {
+          color: "rl-nt",
+          variant: "subtle",
+          class: "badge-rl-nt-subtle",
+        },
+        {
+          color: "rl-vu",
+          variant: "subtle",
+          class: "badge-rl-vu-subtle",
+        },
+        {
+          color: "rl-en",
+          variant: "subtle",
+          class: "badge-rl-en-subtle",
+        },
+        {
+          color: "rl-cr",
+          variant: "subtle",
+          class: "badge-rl-cr-subtle",
+        },
+        {
+          color: "rl-re",
+          variant: "subtle",
+          class: "badge-rl-re-subtle",
         },
       ],
     },

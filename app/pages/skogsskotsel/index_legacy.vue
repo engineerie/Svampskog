@@ -296,7 +296,7 @@
 
                                 <UCard variant="soft" :ui="{ body: 'p-1 sm:p-1 sm:pb-3' }"
                                     class="ring-muted/50 h-fit bg-white/80">
-                                    <ForestryChartMain :parentSelectedFrameworks=[selectedMethod.id]
+                                    <ForestryChartMain :parentSelectedFrameworks="[selectedFrameworkKey]"
                                         :currentStartskog="selectedStartskogTab"
                                         :currentTimeValue="currentTimelineTime" />
                                 </UCard>
@@ -369,26 +369,25 @@
 
                 <div
                     class="mb-4 flex flex-col sm:flex-row gap-1.5 p-1 rounded-lg ring ring-muted/50 sm:w-fit bg-muted/30">
-                    <UModal :fullscreen="isMobile ? true : false" :title="page.ecologyintro?.title ?? ''"
-                        :description="page.ecologyintro?.description ?? ''" :ui="{
+                    <UModal :fullscreen="isMobile ? true : false" :title="faktaDoc?.title ?? ''"
+                        :description="faktaDoc?.description ?? ''" :ui="{
                             header: 'shrink-0',
                         }">
                         <UAlert icon="i-heroicons-book-open" color="neutral" variant="outline" title="Fakta i korthet"
                             class="sm:w-fit shadow ring-muted/50 hover:opacity-85 hover:cursor-pointer" />
                         <template #body>
-                            <EcologyIntro :section="page.ecologyintro" />
+                            <ContentRenderer v-if="faktaDoc" :value="faktaDoc" />
                         </template>
                     </UModal>
-                    <UModal :fullscreen="isMobile ? true : false" :title="page.underlag"
-                        :description="page.underlagdescription" :ui="{
+                    <UModal :fullscreen="isMobile ? true : false" :title="underlagDoc?.title"
+                        :description="underlagDoc?.description" :ui="{
                             header: 'shrink-0',
                         }">
                         <UAlert icon="i-heroicons-document-magnifying-glass" color="neutral" variant="outline"
-                            :title="page.underlag"
+                            :title="underlagDoc?.title"
                             class="sm:w-fit shadow ring-muted/50 hover:opacity-85 hover:cursor-pointer" />
                         <template #body>
-                            <UnderlagContent :underlag="page.underlag" :underlagbild="page.underlagbild"
-                                :sections="page.underlagSections" />
+                            <ContentRenderer v-if="underlagDoc" :value="underlagDoc" />
                         </template>
                     </UModal>
                 </div>
@@ -476,7 +475,13 @@ onBeforeUnmount(() => updateScrollState(false))
 const onboardingStore = useOnboardingStore()
 
 const { data: page } = await useAsyncData('skogsskotsel', () => queryCollection('skogsskotsel').first())
-const { data: methodsData } = await useAsyncData('skotselmetoder', () => queryCollection('skotselmetoder').first())
+const { data: skogsskotselInfo } = await useAsyncData('skogsskotsel-info', () =>
+    queryCollection('skogsskotselInfo').all()
+)
+const { data: methodIndexDocs } = await useAsyncData(
+    'skotselmetod-index',
+    () => queryCollection('skotselmetodSections').where('section', '=', 'om_metoden').all()
+)
 if (!page.value) {
     throw createError({
         statusCode: 404,
@@ -484,18 +489,32 @@ if (!page.value) {
         fatal: true
     })
 }
+const faktaDoc = computed(() => (skogsskotselInfo.value ?? []).find(doc => doc.key === 'fakta') ?? null)
+const underlagDoc = computed(() => (skogsskotselInfo.value ?? []).find(doc => doc.key === 'underlag') ?? null)
 interface Method {
     index?: number
     id: string
     title: string
     image: string
     shortdescription: string
-    description: string
-    descriptionsvamp: string
     type?: string
+    icon?: string
 }
 
-const methods = computed<Method[]>(() => methodsData.value?.methods ?? [])
+const methods = computed<Method[]>(() => {
+    const list = (methodIndexDocs.value as any[]) || []
+    return list
+        .map(doc => ({
+            index: doc.index,
+            id: doc.methodId,
+            title: doc.methodTitle ?? doc.title ?? doc.methodId,
+            image: doc.image ?? '',
+            shortdescription: doc.shortdescription ?? '',
+            type: doc.type,
+            icon: doc.icon,
+        }))
+        .sort((a, b) => (a.index ?? 0) - (b.index ?? 0))
+})
 const frameworkOptions = computed(() =>
     methods.value.map((method, index) => ({
         label: method.title,
@@ -507,9 +526,7 @@ const emptyMethod: Method = {
     id: '',
     title: '',
     image: '',
-    shortdescription: '',
-    description: '',
-    descriptionsvamp: ''
+    shortdescription: ''
 }
 const selectedId = ref<string | null>(null)
 
@@ -570,6 +587,8 @@ const normalizeTimelineStartskog = (value: string) => {
 const normalizeTimelineAtgard = (value: string) => {
     const lower = value?.toLowerCase?.() ?? ''
     if (lower === 'ingenatgard') return 'naturskydd'
+    if (lower === 'skarmtrad') return 'skärmträd'
+    if (lower === 'bladning') return 'blädning'
     return value
 }
 
@@ -840,9 +859,7 @@ const frameworkIndexMap: Record<string, number> = {
     trakthygge: 1,
     luckhuggning: 2,
     skarmtrad: 3,
-    'skärmträd': 3,
     bladning: 4,
-    'blädning': 4,
 }
 
 const normalizeFrameworkId = (value: string) =>
@@ -852,8 +869,21 @@ const normalizeFrameworkId = (value: string) =>
         .replace(/\p{Diacritic}+/gu, '')
         .toLowerCase()
 
+const resolveFrameworkKey = (value: string | null | undefined) => {
+    const normalized = normalizeFrameworkId(value || '')
+    if (normalized === 'ingenatgard') return 'naturskydd'
+    if (normalized === 'skarmtrad') return 'skärmträd'
+    if (normalized === 'bladning') return 'blädning'
+    return value || ''
+}
+
+const normalizeFrameworkKey = (value: string | null | undefined) =>
+    normalizeFrameworkId(resolveFrameworkKey(value))
+
+const selectedFrameworkKey = computed(() => resolveFrameworkKey(selectedMethod.value.id))
+
 function openModelWithCurrentFramework() {
-    const normalized = normalizeFrameworkId(selectedMethod.value.id)
+    const normalized = normalizeFrameworkKey(selectedMethod.value.id)
     const index = frameworkIndexMap[normalized]
     if (typeof index === 'number') {
         onboardingStore.selectedFramework = index

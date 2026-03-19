@@ -32,7 +32,7 @@ export default defineNuxtConfig({
       provider: "github",
       owner: "engineerie",
       repo: "Svampskog",
-      branch: "main",
+      branch: "Studio",
     },
   },
 
@@ -48,7 +48,7 @@ export default defineNuxtConfig({
   },
 
   devtools: {
-    enabled: true,
+    enabled: false,
   },
 
   css: ["~/assets/css/main.css"],

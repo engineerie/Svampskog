@@ -1,6 +1,7 @@
 <script setup lang="ts">
 
 const route = useRoute()
+const isSmUp = useMediaQuery('(min-width: 640px)')
 
 const items = computed(() => [
   {
@@ -18,27 +19,33 @@ const items = computed(() => [
     // icon: 'i-hugeicons-tree-06'
   },
   // {
-  //   label: 'Om projektet',
-  //   description: 'Information om bakgrund och syfte.',
-  //   to: '/info',
-  //   active: route.path.startsWith('/info'),
-  //   children: [
-  //   ]
+  //   label: 'Svampkunskap',
+  //   description: 'Hur skogsskötsel påverkar svampar.',
+  //   to: '/svampkunskap',
+  //   active: route.path.startsWith('/svampkunskap'),
   // },
   {
-    label: 'Svampkunskap',
-    to: '/blog'
-  },
-])
-
-const itemsright = computed(() => [
-  {
     label: 'Om projektet',
-    description: 'Information om bakgrund och syfte.',
-    to: '/info',
-    active: route.path.startsWith('/info'),
-    children: [
-    ]
+    description: 'Bakgrund och syfte',
+    to: '/om-projektet',
+    active: route.path.startsWith('/om-projektet'),
+    // children: [
+    //   {
+    //     label: 'Om projektet',
+    //     description: 'Bakgrund och syfte',
+    //     to: '/om-projektet',
+    //   },
+    //   {
+    //     label: 'Ändringslogg',
+    //     description: 'Följ hur svampskog uppdaterats',
+    //     to: '/om-projektet/andringslogg'
+    //   },
+    //   {
+    //     label: 'Kontakt',
+    //     description: '',
+
+    //   }
+    // ]
   }
 ])
 
@@ -60,17 +67,27 @@ const itemsmobile = computed(() => [
   {
     label: 'Om projektet',
     description: 'Information om bakgrund och syfte.',
-    to: '/info',
-    active: route.path.startsWith('/info'),
-    children: [
-    ]
+    to: '/om-projektet',
+    active: route.path.startsWith('/om-projektet'),
+    // children: [
+    //   {
+    //     label: 'Om projektet',
+    //     description: 'Information om bakgrund och syfte.',
+    //     to: '/om-projektet',
+    //   },
+    //   {
+    //     label: 'Ändringslogg',
+    //     description: 'Följ vad som har uppdaterats i appen.',
+    //     to: '/om-projektet/andringslogg'
+    //   },
+    // ]
   }
 ])
 
 </script>
 
 <template>
-  <UHeader mode="slideover" class="bg-white border-muted" :toggle="{
+  <UHeader :mode="isSmUp ? 'slideover' : 'modal'" class="bg-white border-muted" :toggle="{
     size: 'xl',
   }">
     <template #left>
@@ -80,12 +97,17 @@ const itemsmobile = computed(() => [
       </NuxtLink>
     </template>
 
-    <UNavigationMenu :items="items" variant="link" color="primary"
-      :ui="{ link: 'text-md hover:bg-muted rounded', item: 'mx-0.5' }" class="hidden lg:flex " />
+
 
     <template #right>
-      <UNavigationMenu :items="itemsright" variant="link" color="primary"
-        :ui="{ link: 'text-md hover:bg-neutral-50 rounded', item: 'mx-0.5' }" class="hidden lg:flex " />
+      <div class="hidden lg:flex items-center">
+        <UNavigationMenu :items="items" variant="link" color="primary"
+          :ui="{ link: 'text-md hover:bg-muted rounded', item: 'mx-0.5' }" />
+        <!-- <UTooltip text="Sök" :kbds="['meta', 'K']">
+          <USeparator orientation="vertical" class="h-4 mx-3" />
+          <UContentSearchButton :collapsed="true" class="ring-muted/50 mx-0.5" />
+        </UTooltip> -->
+      </div>
     </template>
 
     <template #body>

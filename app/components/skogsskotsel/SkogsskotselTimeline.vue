@@ -59,6 +59,8 @@ const normalizeTimelineStartskog = (value: string) => {
 const normalizeTimelineAtgard = (value: string) => {
   const lower = value?.toLowerCase?.() ?? ''
   if (lower === 'ingenatgard') return 'naturskydd'
+  if (lower === 'skarmtrad') return 'skärmträd'
+  if (lower === 'bladning') return 'blädning'
   return value
 }
 

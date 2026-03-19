@@ -23,7 +23,7 @@ financing:
     - "Kontakt: Anders Dahlberg, anders.dahlberg@slu.se"
 hero:
   title: Svampar och skogsskötsel
-  description: Utforska vilka mykorrhizasvampar som kan finnas i olika skogar och se hur de påverkas av skogsskötsel.
+  description: Utforska mykorrhizasvampar i svenska skogar och se hur de påverkas av skogsskötsel.
   links:
     - label: Svampar
       icon: i-lineicons-mushroom-1
@@ -40,10 +40,10 @@ hero:
       target: ""
       size: xl
       color: neutral
-      variant: outline
+      variant: soft
   headline:
     label: ""
-    to: /blog
+    to: /svampkunskap
     icon: ""
     color: secondary
   mykorrhiza:
@@ -65,8 +65,8 @@ press:
         color: info
 sections:
   - title: Utforska svampar i svenska skogar
-    description: Se vilka mykorrhizasvampar som kan finnas i en skog baserat på DNA-analyser av svampmycel i jordprover och vår samlade kunskap om var olika arters fruktkroppar förekommer.
-    headline: ""
+    description: Baserat på DNA-analyser av svampmycel i jordprover och vår samlade kunskap om var olika arters fruktkroppar förekommer.
+    headline: "Svampar"
     id: svampar
     links:
       - label: Gå till svampar
@@ -79,7 +79,7 @@ sections:
     reverse: true
   - title: Hur påverkar olika skogsskötsel svampar?
     description: Utifrån sammanställd forskning visar vi hur trakthyggesbruk och hyggesfria metoder kan påverka mykorrhizasvampar under en skogsgeneration.
-    headline: ""
+    headline: "Skogsskötsel"
     id: skogsbruk
     src: /images/Landing/Stock Photo 563535222.jpeg
     links:

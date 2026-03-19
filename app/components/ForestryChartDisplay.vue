@@ -1,71 +1,49 @@
 <template>
   <div class="custom-area" ref="rootEl">
     <ClientOnly>
-      <VisBulletLegend
-        v-if="isMounted && chartReady && showLegend && legendItems.length && !(props.singleFrameworkSelection && !props.frameworkComparisonMode)"
-        :items="legendItems" :onLegendItemClick="handleLegendItemClick" class="mx-2 flex flex-wrap gap-2" />
-      <div
-        v-if="isMounted && chartReady && legendItems.length && (props.singleFrameworkSelection && !props.frameworkComparisonMode)"
-        class="mx-1.5 flex flex-wrap gap-0 gap-y-1">
-        <UButton v-for="item in legendItems" :key="item.key" type="button" variant="ghost" color="neutral" size="sm"
-          class="flex items-center px-2 py-1 gap-2 hover:opacity-95 transition ring-muted/50"
-          @click="handleLegendItemClick(item)">
-          <div v-if="item.icon" class="h-5 w-5" :style="{
-            backgroundColor: item.color || item.colorLine || item.colorArea || '#000',
-            WebkitMask: `url(${item.icon}) center / contain no-repeat`,
-            mask: `url(${item.icon}) center / contain no-repeat`,
-            opacity: item.inactive ? 0.2 : 1,
-          }" />
-          <span :style="{ opacity: item.inactive ? 0.2 : 1 }">
-            {{ item.label }}
-          </span>
-        </UButton>
-      </div>
+      <VisBulletLegend v-if="isMounted && chartReady && !props.hideLegend && legendDisplayItems.length"
+        :items="legendDisplayItems" :onLegendItemClick="handleLegendClick" class="mx-2 flex flex-wrap gap-2" />
+
       <VisXYContainer v-if="isMounted && chartReady" :data="chartData.length ? chartData : [emptyDataPoint]"
-        :height="200" :margin="margin" :xDomain="xDomain" :yDomain="yDomain">
-        <template v-if="props.chartType === 'area' && props.singleFrameworkSelection && !props.frameworkComparisonMode">
+        :height="200" :margin="margin" :xDomain="xDomain" :yDomain="yDomain" :svgDefs="svgDefs">
+        <template v-if="props.chartType === 'area'">
+          <template v-if="isSingleFrameworkStackedMode">
+            <VisArea :x="xAccessor" :y="stackedYAccessors" :color="stackedColors" :interpolateMissingData="true" />
 
-          <VisArea :x="xAccessor" :y="stackedYAccessors" :color="stackedColors" :interpolateMissingData="true" />
+            <!-- <VisLine v-for="cfg in stackedLineConfigs" :key="cfg.key + '-stack-line'" :x="xAccessor" :y="cfg.accessor"
+              :color="() => cfg.color" :duration=1 /> -->
+            <!-- <VisCrosshair v-if="hasActiveSeries" :template="crosshairTemplate" />
+            <VisTooltip v-if="hasActiveSeries" :horizontalShift="30" /> -->
+          </template>
+          <template v-else-if="isSingleFrameworkSingleMode">
+            <VisArea :x="xAccessor" :y="singleCategoryAccessor" :color="() => hexToRgba(primaryArtColor, 0.5)"
+              :interpolateMissingData="true" :zIndex="1" />
+            <VisLine :x="xAccessor" :y="singleCategoryAccessor" :color="() => hexToRgba(primaryArtColor, 0.7)" />
+          </template>
+          <template v-else-if="props.singleFrameworkSelection && props.frameworkComparisonMode">
+            <VisArea v-for="fw in activeFrameworks" :x="xAccessor"
+              :y="(d: any) => getComparisonValue(d, fw.key, comparisonCategory)" :color="() => fw.colorArea || fw.color"
+              :interpolateMissingData="true" :zIndex="1" />
+            <VisLine v-for="fw in activeFrameworks" :x="xAccessor"
+              :y="(d: any) => getComparisonValue(d, fw.key, comparisonCategory)"
+              :color="() => (hexToRgba(fw.colorLine || fw.color, 0.6))" :lineDashArray="fw.lineDashArray" />
 
+            <!-- <VisCrosshair v-if="hasActiveSeries" :template="crosshairTemplate" />
+            <VisTooltip v-if="hasActiveSeries" :horizontalShift="30" /> -->
+          </template>
+          <template v-else>
+            <VisArea v-if="!isKgMatsvamp" v-for="fw in activeFrameworks" :x="xAccessor"
+              :y="(d: any) => getFrameworkValue(d, fw.key)" :color="() => getFrameworkGradientUrl(fw)"
+              :interpolateMissingData="true" :zIndex="1" />
 
+            <!-- <VisCrosshair v-if="hasActiveSeries" :template="crosshairTemplate" /> -->
+            <VisLine v-for="fw in activeFrameworks" :x="xAccessor" :y="(d: any) => getFrameworkValue(d, fw.key)"
+              :color="() => (hexToRgba(fw.colorLine || fw.color, 0.4))" :lineDashArray="fw.lineDashArray" />
+            <VisArea v-if="isKgMatsvamp" v-for="fw in activeFrameworks" :key="fw.key + '-kg-x2'" :x="xAccessor"
+              :y="kgDoubleAccessorFor(fw.key)" :color="() => getFrameworkGradientUrl(fw)" />
+            <!-- <VisTooltip v-if="hasActiveSeries" :horizontalShift="30" /> -->
+          </template>
 
-          <!-- <VisLine v-for="cfg in stackedLineConfigs" :key="cfg.key + '-stack-line'" :x="xAccessor" :y="cfg.accessor"
-            :color="() => cfg.color" :duration=1 /> -->
-          <!-- <VisCrosshair v-if="hasActiveSeries" :template="crosshairTemplate" />
-          <VisTooltip v-if="hasActiveSeries" :horizontalShift="30" /> -->
-          <VisPlotband v-if="hasActiveSeries && currentTimeX !== null" axis="x" :from="-7" :to="currentTimeX"
-            :color="'rgba(255, 255, 255, 0.7)'" :zIndex="20" />
-          <VisPlotline v-if="hasActiveSeries" :value="currentTimeX" color="rgba(234,88,12,1)" axis="x"
-            labelOrientation="vertical" :zIndex="20" :lineWidth="1" />
-
-        </template>
-        <template
-          v-else-if="props.chartType === 'area' && props.singleFrameworkSelection && props.frameworkComparisonMode">
-          <VisArea v-for="fw in activeFrameworks" :x="xAccessor"
-            :y="(d: any) => getComparisonValue(d, fw.key, comparisonCategory)" :color="() => fw.colorArea || fw.color"
-            :interpolateMissingData="true" :zIndex="1" />
-          <VisLine v-for="fw in activeFrameworks" :x="xAccessor"
-            :y="(d: any) => getComparisonValue(d, fw.key, comparisonCategory)"
-            :color="() => (hexToRgba(fw.colorLine || fw.color, 0.6))" />
-
-          <VisPlotband v-if="hasActiveSeries && currentTimeX !== null" axis="x" :from="-7" :to="currentTimeX"
-            :color="'rgba(255, 255, 255, 0.7)'" :zIndex="20" />
-          <VisPlotline v-if="hasActiveSeries" :value="currentTimeX" color="rgba(234,88,12,1)" axis="x"
-            labelOrientation="vertical" :zIndex="20" :lineWidth="1" />
-
-          <!-- <VisCrosshair v-if="hasActiveSeries" :template="crosshairTemplate" />
-          <VisTooltip v-if="hasActiveSeries" :horizontalShift="30" /> -->
-        </template>
-        <template v-else-if="props.chartType === 'area'">
-          <VisArea v-for="fw in activeFrameworks" :x="xAccessor" :y="(d: any) => getFrameworkValue(d, fw.key)"
-            :color="() => (fw.colorArea || fw.color)" :interpolateMissingData="true" :zIndex="1" />
-
-          <!-- <VisCrosshair v-if="hasActiveSeries" :template="crosshairTemplate" /> -->
-          <VisLine v-for="fw in activeFrameworks" :x="xAccessor" :y="(d: any) => getFrameworkValue(d, fw.key)"
-            :color="() => (hexToRgba(fw.colorLine || fw.color, 0.6))" />
-          <VisArea v-if="isKgMatsvamp" v-for="fw in activeFrameworks" :key="fw.key + '-kg-x2'" :x="xAccessor"
-            :y="kgDoubleAccessorFor(fw.key)" :color="() => 'rgba(234,179,8,0.3)'" />
-          <!-- <VisTooltip v-if="hasActiveSeries" :horizontalShift="30" /> -->
           <VisPlotband v-if="hasActiveSeries && currentTimeX !== null" axis="x" :from="-7" :to="currentTimeX"
             :color="'rgba(255, 255, 255, 0.7)'" :zIndex="20" />
           <VisPlotline v-if="hasActiveSeries" :value="currentTimeX" color="rgba(234,88,12,1)" axis="x"
@@ -77,19 +55,17 @@
         </template>
         <VisPlotline v-for="band in plotBands" axis="x" :value="band.value" :color="`rgba(69,10,10, 0.5)`"
           :lineStyle="[2, 3]" :label="band.labelText" :labelColor="band.labelColor" :zIndex="100" :lineWidth="1" />
-        <VisAxis tickTextFontSize="12px" :gridLine="true" type="x" :tickValues="xTickValues"
+        <VisAxis tickTextFontSize="12px" :gridLine="false" type="x" :tickValues="xTickValues"
           :tickFormat="formatXTicks" />
-        <VisAxis tickTextFontSize="12px" type="y" />
+        <VisAxis tickTextFontSize="12px" type="y" :gridLine="false" />
       </VisXYContainer>
     </ClientOnly>
   </div>
-
-
 </template>
 
 <script setup lang="ts">
 
-import { computed, ref, onMounted, onBeforeUnmount, nextTick, reactive } from 'vue'
+import { computed, ref, onMounted, onBeforeUnmount, nextTick, reactive, getCurrentInstance } from 'vue'
 import { VisXYContainer, VisAxis, VisLine, VisArea, VisGroupedBar, VisBulletLegend, VisBrush, VisCrosshair, VisTooltip, VisPlotline, VisPlotband } from '@unovis/vue'
 import type { BulletLegendItemInterface } from '@unovis/ts'
 import { PlotbandLabelPosition } from '@unovis/ts'
@@ -108,6 +84,7 @@ type SkogsbrukSvampEntry = {
 const svampCategoryFieldMap: Record<string, string> = {
   matsvamp: 'Alla matsvampar',
   'goda matsvampar': 'Goda matsvampar',
+  total: 'Mängd mykorrhiza',
   'rödlistade + signalarter': 'Signal + rödlistade',
   atheliales: 'Atheliales',
   boletales: 'Boletales',
@@ -195,10 +172,6 @@ const { data: kgMatsvampDataDoc } = await useAsyncData('kg-matsvamp-skogsbruk', 
   queryCollection('kgMatsvampSkogsbruk').first()
 )
 
-const { data: totalSvamparDataDoc } = await useAsyncData('total-svampar-skogsbruk', () =>
-  queryCollection('totalSvamparSkogsbruk').first()
-)
-
 const matsvampDataset = computed(() => svampCategoryDatasets.value['matsvamp'] ?? [])
 const godaMatsvampDataset = computed(() => svampCategoryDatasets.value['goda matsvampar'] ?? [])
 const kgMatsvampDataset = computed(() => Array.isArray(kgMatsvampDataDoc.value?.entries) ? kgMatsvampDataDoc.value.entries : [])
@@ -212,7 +185,7 @@ const russulalesDataset = computed(() => svampCategoryDatasets.value['russulales
 const ascomycotaDataset = computed(() => svampCategoryDatasets.value['ascomycota'] ?? [])
 const thelephoralesDataset = computed(() => svampCategoryDatasets.value['thelephorales'] ?? [])
 const ovrigaDataset = computed(() => svampCategoryDatasets.value['övriga'] ?? [])
-const totalDataset = computed(() => Array.isArray(totalSvamparDataDoc.value?.entries) ? totalSvamparDataDoc.value.entries : [])
+const totalDataset = computed(() => svampCategoryDatasets.value['total'] ?? [])
 
 const { data: relativeSvampgrupperDoc } = await useAsyncData('svampgrupper-relative-skogsbruk', () =>
   queryCollection('svampgrupperRelativeSkogsbruk').first()
@@ -386,6 +359,22 @@ const stackedCategories = computed<string[]>(() => {
   return ordered.concat(extras)
 })
 
+const stackedSeriesOrder = computed<string[]>(() => {
+  if (!props.singleFrameworkSelection || props.frameworkComparisonMode) return []
+  const raw = (props.selectedArtkategori || [])
+    .map(a => (a || '').toLowerCase())
+  const ordered = artkategoriLegendOrder.filter(key => raw.includes(key))
+  const extras = raw.filter(key => !artkategoriLegendOrder.includes(key))
+  return ordered.concat(extras)
+})
+
+// Keep a stable render index for stacked areas so removing one category does not reindex
+// every remaining layer during animation.
+const stackedRenderOrder = computed<string[]>(() => {
+  if (!props.singleFrameworkSelection || props.frameworkComparisonMode) return []
+  return [...artkategoriLegendOrder]
+})
+
 const margin = { left: 10, right: 10, top: 10, bottom: 10 }
 
 const rootEl = ref<HTMLElement | null>(null)
@@ -444,6 +433,7 @@ interface Props {
   currentTimeValue?: string
   singleFrameworkSelection?: boolean,
   frameworkComparisonMode?: boolean,
+  grupperDisplayMode?: 'stacked' | 'single',
   selectedStartskog?: string, // <-- Add this
   redColor?: boolean,
   yellowColor?: boolean,
@@ -451,16 +441,19 @@ interface Props {
   matsvampVariant?: 'standard' | 'goda' | 'kg',
   relativeChart?: boolean,
   preserveFrameworkOrder?: boolean,
+  hideLegend?: boolean,
 }
 
 const props = withDefaults(defineProps<Props>(), {
   selectedFrameworks: () => [],
   singleFrameworkSelection: false,
   frameworkComparisonMode: false,
+  grupperDisplayMode: 'stacked',
   redColor: false,
   yellowColor: false,
   matsvampVariant: 'standard',
   relativeChart: false,
+  hideLegend: false,
 });
 
 const matsvampVariant = computed(() => props.matsvampVariant === 'goda' ? 'goda' : (props.matsvampVariant === 'kg' ? 'kg' : 'standard'))
@@ -474,6 +467,19 @@ const isKgMatsvamp = computed(() => {
   const selected = (props.selectedArtkategori || []).map(a => (a || '').toLowerCase());
   return selected.includes('matsvamp') && matsvampVariant.value === 'kg';
 });
+const isSingleFrameworkStackedMode = computed(() =>
+  props.singleFrameworkSelection && !props.frameworkComparisonMode && props.grupperDisplayMode !== 'single'
+)
+const isSingleFrameworkSingleMode = computed(() =>
+  props.singleFrameworkSelection && !props.frameworkComparisonMode && props.grupperDisplayMode === 'single'
+)
+const singleCategory = computed(() =>
+  stackedCategories.value[0] || (props.selectedArtkategori?.[0]?.toLowerCase() ?? '')
+)
+const singleCategoryAccessor = (d: any) => {
+  const category = singleCategory.value
+  return category ? getCategoryValue(d, category) : NaN
+}
 
 const transformValue = (value: number) => value;
 
@@ -511,6 +517,49 @@ function hexToRgba(hex: string, alpha = 1): string {
   const b = bigint & 255
   return `rgba(${r}, ${g}, ${b}, ${alpha})`
 }
+
+function colorWithAlpha(color: string, alpha: number): string {
+  if (!color) return color
+  if (color.startsWith('#')) return hexToRgba(color, alpha)
+  if (color.startsWith('rgba(')) {
+    return color.replace(/rgba\(([^,]+,[^,]+,[^,]+),[^)]+\)/, `rgba($1,${alpha})`)
+  }
+  if (color.startsWith('rgb(')) {
+    return color.replace('rgb(', 'rgba(').replace(')', `,${alpha})`)
+  }
+  return color
+}
+
+function toRgbParts(color: string): { r: number; g: number; b: number; a: number } {
+  if (!color) return { r: 153, g: 153, b: 153, a: 1 }
+  if (color.startsWith('#')) {
+    const m = color.replace('#', '')
+    const s = m.length === 3 ? m.split('').map(c => c + c).join('') : m
+    const bigint = parseInt(s, 16)
+    return {
+      r: (bigint >> 16) & 255,
+      g: (bigint >> 8) & 255,
+      b: bigint & 255,
+      a: 1
+    }
+  }
+  const rgba = color.match(/rgba?\(([^)]+)\)/i)
+  if (rgba) {
+    const parts = rgba[1].split(',').map(s => s.trim())
+    const r = Number(parts[0])
+    const g = Number(parts[1])
+    const b = Number(parts[2])
+    const a = parts[3] !== undefined ? Number(parts[3]) : 1
+    return { r, g, b, a: Number.isFinite(a) ? a : 1 }
+  }
+  return { r: 153, g: 153, b: 153, a: 1 }
+}
+
+function sanitizeId(value: string): string {
+  return value.toLowerCase().replace(/[^a-z0-9-_]+/g, '-')
+}
+
+const instanceId = getCurrentInstance()?.uid ?? Math.floor(Math.random() * 1e9)
 
 const brushSelection = computed<[number, number]>(() => {
   const startMap: Record<string, number> = {
@@ -566,31 +615,33 @@ const artkategoriColorMapping: Record<string, string> = {
 const artkategoriLegendOrder = [
   'atheliales',
   'ascomycota',
-  'övriga',
   'spindlingar',
   'russulales',
-
   'boletales',
   'cantharellales',
   'thelephorales',
   'matsvamp',
   'goda matsvampar',
   'rödlistade + signalarter',
-  'total'
+  'total',
+  'övriga'
 ];
 const artkategoriLabelMap: Record<string, string> = {
   'atheliales': 'Skinnsvampar',
-  'boletales': 'Soppar',
-  'cantharellales': 'Kantarellsläktingar',
+  'ascomycota': 'Sporsäckssvampar',
   'spindlingar': 'Spindelskivlingar',
   'russulales': 'Kremlor & riskor',
-  'ascomycota': 'Sporsäckssvampar',
-  'övriga': 'Övriga',
+  'boletales': 'Soppar',
+  'cantharellales': 'Kantarellsläktingar',
+
+
   'thelephorales': 'Tagg- och tomentelloida svampar',
+  'övriga': 'Övriga',
+
   'matsvamp': 'Alla matsvampar',
   'goda matsvampar': 'Goda matsvampar',
   'rödlistade + signalarter': 'Naturvårdssvampar',
-  'total': 'Total'
+  'total': 'Mängd mykorrhiza'
 };
 
 const artkategoriIconMap: Record<string, string> = {
@@ -868,6 +919,7 @@ const legendItems = computed<LegendItem[]>(() => {
           color,
           colorArea: hexToRgba(color, alpha),
           colorLine: color,
+          lineDashArray: index === 1 ? [5] : undefined,
           inactive,
         };
       });
@@ -916,10 +968,42 @@ const legendItems = computed<LegendItem[]>(() => {
       color,
       colorArea: hexToRgba(color, alpha),
       colorLine: color,
+      lineDashArray: index === 1 ? [5] : undefined,
       inactive,
     };
   });
 });
+
+const legendDisplayItems = computed<LegendItem[]>(() => {
+  if (props.singleFrameworkSelection && !props.frameworkComparisonMode) {
+    const selectedLower = (props.selectedFrameworks || []).map(f => f.toLowerCase())
+    const frameworks = props.preserveFrameworkOrder
+      ? selectedLower.filter(key => legendOrder.includes(key))
+      : legendOrder.filter(key => selectedLower.includes(key))
+    const baseColor = primaryArtColor.value
+    const alpha = 0.5
+    return frameworks.map((key, index) => {
+      const label = mapFrameworkLabel(key)
+      const color = index === 1 ? '#c3a283' : baseColor
+      return {
+        key,
+        name: label,
+        label,
+        color,
+        colorArea: hexToRgba(color, alpha),
+        colorLine: color,
+        lineDashArray: index === 1 ? [5] : undefined,
+        inactive: false,
+      }
+    })
+  }
+  return legendItems.value
+})
+
+function handleLegendClick(item: LegendItem) {
+  if (props.singleFrameworkSelection && !props.frameworkComparisonMode) return
+  handleLegendItemClick(item)
+}
 
 const activeFrameworks = computed(() => {
   if (props.singleFrameworkSelection && !props.frameworkComparisonMode) {
@@ -927,6 +1011,29 @@ const activeFrameworks = computed(() => {
   }
   return legendItems.value.filter(item => !item.inactive);
 });
+
+const svgDefs = computed(() => {
+  if (!activeFrameworks.value.length) return ''
+  const defs = activeFrameworks.value.map(fw => {
+    const id = `area-grad-${instanceId}-${sanitizeId(fw.key)}`
+    const base = fw.colorArea || fw.color || '#999999'
+    const { r, g, b, a } = toRgbParts(base)
+    const topOpacity = Math.min(1, 0.9 * a)
+    const bottomOpacity = 0
+    return `
+      <linearGradient id="${id}" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0%" stop-color="rgb(${r}, ${g}, ${b})" stop-opacity="${topOpacity}" />
+        <stop offset="100%" stop-color="rgb(${r}, ${g}, ${b})" stop-opacity="${bottomOpacity}" />
+      </linearGradient>
+    `
+  }).join('\n')
+  return defs
+})
+
+const getFrameworkGradientUrl = (fw: { key: string }) => {
+  const id = `area-grad-${instanceId}-${sanitizeId(fw.key)}`
+  return `url(#${id})`
+}
 
 const plotBandLabelPosition = PlotbandLabelPosition.TopOutside;
 
@@ -1198,13 +1305,18 @@ function handleLegendItemClick(item: LegendItem) {
 // Unovis stacked areas require an array of y accessors (one per series)
 const stackedYAccessors = computed<((d: any) => number)[]>(() => {
   if (!props.singleFrameworkSelection || props.frameworkComparisonMode) return []
-  return stackedCategories.value.map(cat => (d: any) => getCategoryValue(d, cat))
+  const activeSet = new Set(stackedSeriesOrder.value)
+  return stackedRenderOrder.value.map(cat => (d: any) => {
+    if (!activeSet.has(cat)) return NaN
+    if (inactiveArtkategoriKeys.value.has(cat)) return NaN
+    return getCategoryValue(d, cat)
+  })
 })
 
 // Colors aligned with the stacked series order
 const stackedColors = computed<string[] | ((...args: any[]) => string)>(() => {
   if (!props.singleFrameworkSelection || props.frameworkComparisonMode) return []
-  return stackedCategories.value.map(cat => getArtColor(cat))
+  return stackedRenderOrder.value.map(cat => getArtColor(cat))
 
 })
 
@@ -1226,6 +1338,9 @@ const activeSeriesCount = computed(() => {
   if (props.singleFrameworkSelection) {
     if (props.frameworkComparisonMode) {
       return activeFrameworks.value.length;
+    }
+    if (isSingleFrameworkSingleMode.value) {
+      return singleCategory.value ? 1 : 0;
     }
     return stackedCategories.value.length;
   }
@@ -1312,8 +1427,10 @@ const crosshairTemplate = (d: any): string => {
         };
       });
     } else {
-      series = props.selectedArtkategori.map(art => {
-        const key = art.toLowerCase();
+      const single = isSingleFrameworkSingleMode.value
+        ? [singleCategory.value].filter(Boolean)
+        : props.selectedArtkategori.map(art => art.toLowerCase());
+      series = single.map(key => {
         return {
           key,
           label: formatArtLabel(key),

@@ -24,6 +24,7 @@
     "sample_plot_count": 1,
     "sample_env_count": 2,
     "Svamp-grupp-släkte": "hattsvamp",
+    "synlighet": 1,
     "images": []
   },
   {
@@ -51,6 +52,7 @@
     "sample_plot_count": 1,
     "sample_env_count": 2,
     "Svamp-grupp-släkte": "hattsvamp",
+    "synlighet": 1,
     "images": []
   },
   {
@@ -78,6 +80,7 @@
     "sample_plot_count": 1,
     "sample_env_count": 2,
     "Svamp-grupp-släkte": "hattsvamp",
+    "synlighet": 1,
     "images": []
   }
 ]

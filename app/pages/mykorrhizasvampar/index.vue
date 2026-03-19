@@ -56,6 +56,11 @@ const enabledOptions = computed<Record<CategoryKey, Option[]>>(() => ({
 
 // --- Mobile/desktop detection ---
 const isMobile = useMediaQuery('(max-width: 767px)')
+const indexTab = ref<'environment' | 'video'>('environment')
+const indexTabItems = [
+  { label: 'Välj miljö', value: 'environment', icon: 'i-heroicons-magnifying-glass' },
+  { label: 'Instruktionsvideo', value: 'video', icon: 'i-lucide-clapperboard' }
+]
 
 // --- Navigation helpers ---
 const router = useRouter()
@@ -83,158 +88,159 @@ function redirect() {
   }
 }
 
-const open = ref(false)
 </script>
 <template>
 
   <UPage v-if="page" class="flex-1">
-    <UContainer class="w-full px-0">
-      <UPageHero :ui="{ container: ' py-12 lg:py-24 lg:pb-18', title: ' sm:text-7xl', headline: 'text-neutral' }"
-        :title="page.hero.title" :description="page.hero.description" :orientation="page.hero.orientation" class="">
-        <!-- <template #headline v-if="page.hero.headline">
-          <div class="flex justify-center items-center">
-            <Motion :initial="{
-              scale: 0.5,
-              opacity: 0,
-
-            }" :animate="{
-              scale: 1,
-              opacity: 1,
-            }" :transition="{
-              duration: 0.2,
-              delay: 0.2
-            }">
-              <NuxtImg src="/images/svampindex/Cortinarius sanguineus-179-.jpg" width="300" height="300" format="webp"
-                alt="Illustration"
-                class="size-18 rounded-lg ring ring-muted/50 inline-flex mb-12 lg:mb-18 h-fit shadow-xl" />
-            </Motion>
-            <Motion :initial="{
-              scale: 0.5,
-              opacity: 0,
-            }" :animate="{
-              scale: 1,
-              opacity: 1,
-            }" :transition="{
-              duration: 0.2,
-              delay: 0.3
-            }" class="-mx-4 z-50">
-              <NuxtImg src="/images/svampgrid/Tricholoma matsutake-166-6276.jpg" width="300" height="300" format="webp"
-                alt="Illustration"
-                class="size-28 rounded-lg ring ring-muted/50 inline-flex mb-12 lg:mb-18 h-fit  z-50 shadow-xl" />
-            </Motion>
-            <Motion :initial="{
-              scale: 0.5,
-              opacity: 0,
-            }" :animate="{
-              scale: 1,
-              opacity: 1,
-            }" :transition="{
-              duration: 0.2,
-              delay: 0.25
-            }">
-              <NuxtImg src="/images/svampgrid/Gomphus clavatus-1.jpg" width="300" height="300" format="webp"
-                alt="Illustration"
-                class="size-20 rounded-lg ring ring-muted/50 inline-flex mb-12 lg:mb-18 h-fit shadow-xl" />
-            </Motion>
-          </div>
-
-        </template> -->
-        <!-- <NuxtImg :src="page.hero.src" width="700" format="webp" alt="Illustration"
-          class=" rounded ring ring-neutral-300 " /> -->
-        <template v-if="isMobile && page?.hero?.links?.[0]" #links>
-          <UModal title="Välj miljö" :ui="{ body: 'p-0 bg-neutral-50', title: 'text-2xl', content: '' }" fullscreen>
-            <UButton :label="page.hero.links[0].label" size="xl" color="neutral" icon="i-heroicons-magnifying-glass" />
-            <template #body>
-              <div class=" w-full max-w-full p-4">
-                <USelect size="xl" v-for="category in categories" :key="category.key"
-                  :items="enabledOptions[category.key]" v-model="envStore[category.key]"
-                  :placeholder="category.defaultLabel" class="flex-1 w-full my-1 text-lg ring-muted" append-to-body
-                  variant="outline">
-                  <template #item="{ item }">
-                    <div class="flex flex-col">
-                      <div class="text-lg font-medium">{{ item.label }}</div>
-                      <div v-if="item.description" class="text-sm text-neutral-500">
-                        {{ item.description }}
-                      </div>
-                    </div>
-                  </template>
-                </USelect>
-                <UButton trailing :disabled="!allSelected" @click="redirect" color="primary"
-                  icon="i-heroicons-arrow-right" label="Gå till miljö" size="xl" class="w-full my-1" />
-                <div class="grid grid-cols-2 gap-2 mt-1 mb-2">
-
-
-
-                  <UButton label="DNA-data" size="xl" trailing :icon="restrictionEnabled ? 'mdi:lock' : 'mdi:lock-open'"
-                    @click="toggleRestriction" variant="subtle" :color="restrictionEnabled ? 'secondary' : 'neutral'" />
-                  <UModal fullscreen title="Kombinationer" class="w-full" :ui="{ title: 'text-2xl' }">
-                    <UButton label="Kombinationer" size="xl" shape="full" trailing icon="mdi:apps" color="neutral"
-                      variant="outline" />
-
-
-                    <template #body>
-                      <UButton size="xl" trailing :icon="restrictionEnabled ? 'mdi:lock' : 'mdi:lock-open'"
-                        @click="toggleRestriction" shape="full" class="transition-all shrink-0 mb-2 w-full"
-                        variant="soft" :color="restrictionEnabled ? 'secondary' : 'neutral'">
-                        {{ restrictionEnabled ? "Begränsar till där det finns DNA-data" : "Inkluderar alla miljöer" }}
-                      </UButton>
-                      <div class="grid gap-2 ">
-                        <UCard v-for="category in categories" :key="category.key" variant="soft">
-                          <div v-for="option in enabledOptions[category.key]" :key="option.value"
-                            class="flex justify-between mb-2 text-neutral-500 items-center">
-                            <label :for="`${category.key}-${option.value}`"
-                              :class="{ 'opacity-40 cursor-not-allowed': option.disabled, 'cursor-pointer': !option.disabled }"
-                              class="text-lg">
-                              {{ option.label }}
-                            </label>
-                            <UCheckbox :id="`${category.key}-${option.value}`" color="primary"
-                              :model-value="envStore[category.key] === option.value"
-                              @update:model-value="() => { if (!option.disabled) selectOption(category.key, option.value) }"
-                              :disabled="option.disabled" />
-                          </div>
-                        </UCard>
-                      </div>
-                    </template>
-                  </UModal>
-
-                </div>
-
-                <Transition name="fade" mode="out-in">
-                  <SpatialForest class=" h-fit" />
-                </Transition>
-              </div>
-            </template>
-          </UModal>
-        </template>
+    <UContainer class="w-full px-0 sm:px-0">
+      <NuxtImg v-if="isMobile" :src="page.hero.src"
+        class=" shadow ring ring-muted/50 w-full aspect-video object-cover " />
+      <UPageHero :ui="{ container: 'py-12 sm:py-12', title: ' sm:text-7xl' }" :title="page.hero.title"
+        :description="page.hero.description" reverse :headline="isMobile ? 'Svampar' : ''"
+        :orientation="isMobile ? 'horizontal' : 'horizontal'" class="">
+        <NuxtImg v-if="!isMobile" :src="page.hero.src"
+          class="hidden md:flex rounded-lg lg:rounded-xl shadow ring ring-muted/50 w-full aspect-video object-cover object-top" />
       </UPageHero>
-      <div class="sm:mb-24" v-if="!isMobile">
-
-
-        <Motion :initial="{
-          opacity: 0,
-          scale: 0.9,
-          // transform: 'translateY(10px)'
-          // filter: 'blur(20px)'
-        }" :animate="{
-          opacity: 1,
-          scale: 1,
-          // transform: 'translateY(0px)'
-          // filter: 'blur(0px)'
-        }" :transition="{
-          duration: 0.3,
-          delay: 0.1
-        }">
-          <UCard variant="soft" class="shadow ring ring-muted/30">
-            <EnvironmentSelector class="" />
-          </UCard>
-
-          <div class="flex w-full justify-center my-4">
-            <UButton size="xl" trailing :disabled="!allSelected" @click="redirect" color="primary"
-              icon="i-heroicons-arrow-right" label="Gå till miljö" />
-          </div>
-
-        </Motion>
-      </div>
     </UContainer>
+    <div class="bg-muted border-y border-muted/50">
+
+
+      <UContainer class="px-0">
+        <UPageSection :ui="{ title: 'text-start', description: 'text-start' }" :title="page.environmentSection?.title"
+          :description="page.environmentSection?.description">
+          <div class="" v-if="indexTab === 'environment' && !isMobile">
+            <Motion :initial="{
+              opacity: 0,
+              scale: 0.9,
+            }" :animate="{
+              opacity: 1,
+              scale: 1,
+            }" :transition="{
+              duration: 0.3,
+              delay: 0.1
+            }">
+              <EnvironmentSelector :show-spatial-forest="false" />
+              <div class="flex w-full justify-center my-4">
+                <UButton size="xl" trailing :disabled="!allSelected" @click="redirect" color="primary"
+                  icon="i-heroicons-arrow-right" label="Gå till miljö" />
+              </div>
+            </Motion>
+          </div>
+          <div class="" v-if="indexTab === 'environment' && isMobile">
+            <div class=" bg-muted rounded-lg">
+              <USelect size="xl" v-for="category in categories" :key="category.key"
+                :items="enabledOptions[category.key]" v-model="envStore[category.key]"
+                :placeholder="category.defaultLabel" class="flex-1 w-full my-1 text-lg ring-muted/50" append-to-body
+                variant="outline">
+                <template #item="{ item }">
+                  <div class="flex flex-col">
+                    <div class="text-lg font-medium">{{ item.label }}</div>
+                    <div v-if="item.description" class="text-sm text-neutral-500">
+                      {{ item.description }}
+                    </div>
+                  </div>
+                </template>
+              </USelect>
+            </div>
+            <div class="flex flex-col lg:flex-row gap-2 my-4">
+              <!-- <UButton label="DNA-data" size="xl" trailing :icon="restrictionEnabled ? 'mdi:lock' : 'mdi:lock-open'"
+                @click="toggleRestriction" variant="subtle" :color="restrictionEnabled ? 'secondary' : 'neutral'" /> -->
+              <UDrawer fullscreen title="Kombinationer" class="w-full ring-muted/50 justify-center lg:justify-start"
+                :ui="{ title: 'text-2xl' }">
+                <UButton label="Kombinationer" size="xl" shape="full" trailing icon="mdi:apps" color="neutral"
+                  variant="outline" />
+                <template #body>
+                  <UButton size="xl" trailing :icon="restrictionEnabled ? 'mdi:lock' : 'mdi:lock-open'"
+                    @click="toggleRestriction" shape="full" class="transition-all shrink-0 mb-2 w-full" variant="soft"
+                    :color="restrictionEnabled ? 'secondary' : 'neutral'">
+                    {{ restrictionEnabled ? "Begränsar till där det finns DNA-data" : "Inkluderar alla miljöer" }}
+                  </UButton>
+                  <div class="grid gap-2 ">
+                    <UCard v-for="category in categories" :key="category.key" variant="soft">
+                      <div v-for="option in enabledOptions[category.key]" :key="option.value"
+                        class="flex justify-between mb-2 text-neutral-500 items-center">
+                        <label :for="`${category.key}-${option.value}`"
+                          :class="{ 'opacity-40 cursor-not-allowed': option.disabled, 'cursor-pointer': !option.disabled }"
+                          class="text-lg">
+                          {{ option.label }}
+                        </label>
+                        <UCheckbox :id="`${category.key}-${option.value}`" color="primary"
+                          :model-value="envStore[category.key] === option.value"
+                          @update:model-value="() => { if (!option.disabled) selectOption(category.key, option.value) }"
+                          :disabled="option.disabled" />
+                      </div>
+                    </UCard>
+                  </div>
+                </template>
+              </UDrawer>
+              <UButton trailing :disabled="!allSelected" @click="redirect" color="primary"
+                icon="i-heroicons-arrow-right" label="Gå till miljö" size="xl"
+                class="w-full justify-center lg:justify-start" />
+            </div>
+          </div>
+          <UPageSection v-if="!isMobile" class="hidden md:block"
+            :ui="{ title: 'text-start lg:text-center', description: 'text-start lg:text-center', container: 'pb-0 sm:pb-0 lg:pb-0' }">
+            <div
+              class=" ring ring-muted/60 rounded-xl bg-muted/20 min-h-64 flex items-center justify-center overflow-hidden">
+              <CustomVideoPlayer :src="page.videoSection?.src || ''" :poster="page.videoSection?.image"
+                :subtitles-src="page.videoSection?.subtitles || ''" />
+            </div>
+          </UPageSection>
+
+        </UPageSection>
+
+      </UContainer>
+
+
+
+
+    </div>
+
+    <UContainer class="px-0">
+      <UPageSection :ui="{ title: 'text-start', description: 'text-start' }" :title="page.factsSection?.title"
+        :description="page.factsSection?.description">
+        <UCarousel v-slot="{ item }" dots :items="page.factsSection?.items" arrows :ui="{
+          dots: '-bottom-12',
+          dot: 'w-6 h-1',
+          arrows: 'hidden lg:block',
+          item: 'basis-full sm:basis-1/3 px-6'
+        }">
+          <UPageCard variant="naked" reverse :title="item.title" :description="item.description"
+            :ui="{ title: 'text-lg text-neutral-700 ', description: 'text-base text-neutral-500' }">
+            <div class=" rounded-md overflow-hidden">
+              <NuxtImg v-if="item.image" :src="item.image" class="w-full aspect-square object-cover opacity-85" />
+            </div>
+          </UPageCard>
+        </UCarousel>
+      </UPageSection>
+      <UPageSection :title="page.speciesListsIntro?.title"
+        :ui="{ title: 'text-start lg:text-center', description: 'text-start lg:text-center', container: 'pb-0 sm:pb-0 lg:pb-0' }"
+        :description="page.speciesListsIntro?.description" />
+      <UPageSection orientation="horizontal" :reverse="isMobile ? true : false"
+        :ui="{ title: 'text-2xl sm:text-3xl lg:text-4xl' }" :headline="page.dnaSection?.headline"
+        :title="page.dnaSection?.title" :description="page.dnaSection?.description"
+        :features="page.dnaSection?.features || []">
+        <NuxtImg :src="page.dnaSection?.image" class="w-full rounded-xl mb-2 ring ring-muted/50 shadow" width="1000"
+          height="600" />
+      </UPageSection>
+      <UPageSection orientation="horizontal" :reverse="true" :headline="page.fruitbodySection?.headline"
+        :ui="{ title: 'text-2xl sm:text-3xl lg:text-4xl' }" :title="page.fruitbodySection?.title"
+        :description="page.fruitbodySection?.description" :features="page.fruitbodySection?.features || []">
+        <NuxtImg :src="page.fruitbodySection?.image" class="w-full rounded-xl mb-2 ring ring-muted/50 shadow"
+          width="1000" height="600" />
+      </UPageSection>
+    </UContainer>
+    <UContainer class="px-0">
+
+
+    </UContainer>
+    <!-- <div class="bg-muted border-y border-muted/50">
+      <UContainer class="px-0">
+        <KnowledgeSelectionSection
+          :ui="{ title: 'text-start text-2xl sm:text-3xl lg:text-4xl', description: 'text-start' }"
+          :title="page.knowledgeSection?.title" :description="page.knowledgeSection?.description"
+          :indices="page.knowledgeSection?.indices || [0]" :limit="page.knowledgeSection?.limit || 3" />
+      </UContainer>
+    </div> -->
   </UPage>
 </template>

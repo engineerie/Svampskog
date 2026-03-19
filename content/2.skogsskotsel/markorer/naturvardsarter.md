@@ -1,0 +1,18 @@
+---
+title: Naturvårdssvampar
+description: Samlingsnamn för rödlistade svampar och signalarter.
+image: /images/svampbilder/RödlistadeSvampar/Ramaria boreimaxima-2051.jpg
+imageDescriptions: []
+images: []
+key: naturvardsarter
+paragraphs: []
+table:
+  rows: []
+  headers: []
+---
+
+Naturvårdssvampar har ofta speciella miljökrav och förekommer främst i äldre skog.
+
+Mykorrhizasvampar kan leva vidare på en plats så länge det finns levande träd. Svamparnas mycelindivider i marken kan bli många decennier och potentiellt sekler gamla.
+
+På bilden rotfingersvamp (VU, sårbar). Växer i sandtallskog.

@@ -292,13 +292,13 @@ const getIconPath = (svampGrupp) => {
 
 const getStatusColor = (status) => {
   const colors = {
-    LC: "success",
-    NT: "error",
-    EN: "error",
-    VU: "error",
-    CR: "error",
-    RE: "error",
-    DD: "neutral",
+    LC: "rl-lc",
+    DD: "rl-dd",
+    NT: "rl-nt",
+    VU: "rl-vu",
+    EN: "rl-en",
+    CR: "rl-cr",
+    RE: "rl-re",
   };
   return colors[status] || "neutral";
 };

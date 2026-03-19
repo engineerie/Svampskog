@@ -27,13 +27,12 @@
     <!-- Grid of species with group transition -->
     <transition mode="out-in" name="fade">
       <transition-group name="fade" tag="div" :key="currentFileIndex"
-        class="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 gap-2 sm:gap-4 sm:p-2">
+        class="grid grid-cols-1 sm:grid-cols-1 md:grid-cols-1 gap-2 sm:gap-4 sm:p-2">
         <div v-for="(row, index) in gridPaginatedData" :key="row.Commonname + row.Scientificname + index"
-          class="group relative bg-white overflow-hidden rounded-lg border border-muted/50 h-[142px]"
+          class="group relative bg-white overflow-hidden rounded-lg border border-muted/50 h-full"
           @click="selectRow(row)">
           <div class="w-full h-full relative overflow-hidden">
-            <img v-if="row.images && row.images.length" :src="row.images[0]"
-              class="w-full h-full object-cover"
+            <img v-if="row.images && row.images.length" :src="row.images[0]" class="w-full h-full object-cover"
               alt="Species image" height="300" width="450" loading="lazy" decoding="async" />
             <div v-else class="w-full h-full flex items-center justify-center bg-gray-200 dark:bg-gray-700">
               <Icon name="material-symbols:photo" class="w-8 h-8 text-neutral-500" />
@@ -299,7 +298,7 @@ const filteredData = computed(() => {
 
 // Grid pagination – adjust page size based on isNormalView prop
 const isSmallScreen = useMediaQuery('(max-width: 640px)')
-const gridPageSize = computed(() => isSmallScreen.value ? 4 : 6)
+const gridPageSize = computed(() => isSmallScreen.value ? 1 : 1)
 const gridPage = ref(1)
 const gridPaginatedData = computed(() => {
   const start = (gridPage.value - 1) * gridPageSize.value

@@ -174,8 +174,8 @@
         <div class="flex justify-between cursor-pointer" @click="toggleExpand">
           <h1 class="text-lg font-semibold mb-2 flex">
             <div class="flex items-center space-x-2" v-if="species.RL2020kat">
-              <div :class="getStatusColor(species.RL2020kat)"
-                class="h-8 w-8 rounded-full flex items-center justify-center text-white">
+              <div :style="getStatusCircleStyle(species.RL2020kat)"
+                class="h-8 w-8 p-4 rounded-full flex items-center justify-center text-white">
                 {{ getStatusAbbreviation(species.RL2020kat) }}
               </div>
               <h1 size="md" weight="light">
@@ -203,12 +203,9 @@
         variant="ghost" target="_blank" class="text-primary-500 w-full" size="xl"
         icon="i-heroicons-arrow-up-right-20-solid" label="Artfakta.se" trailing />
       <br />
-      <UButton v-if="species.Svampguiden && species.Svampguiden !== '0'" :to="stripDetailsFromURL(species.Svampguiden)"
+      <!-- <UButton v-if="species.Svampguiden && species.Svampguiden !== '0'" :to="stripDetailsFromURL(species.Svampguiden)"
         trailing label="Svampguiden.com" icon="i-heroicons-arrow-up-right-20-solid" target="_blank" variant="ghost"
-        class=" text-primary-500 w-full" size="xl" />
-      <NuxtLink>
-
-      </NuxtLink>
+        class=" text-primary-500 w-full" size="xl" /> -->
     </div>
   </div>
 </template>
@@ -278,17 +275,17 @@ const getStatusAbbreviation = (status) => {
   return abbreviations[status] || "NE";
 };
 
-const getStatusColor = (status) => {
+const getStatusCircleStyle = (status) => {
   const colors = {
-    LC: "bg-green-500",
-    NT: "bg-[#D7838E]",
-    EN: "bg-[#C4004F]",
-    VU: "bg-[#D7838E]",
-    CR: "bg-[#C4004F]",
-    RE: "bg-[#421A31]",
-    DD: "bg-[#E8E9E7]",
+    LC: "var(--color-redlist-lc)",
+    DD: "var(--color-redlist-dd)",
+    NT: "var(--color-redlist-nt)",
+    VU: "var(--color-redlist-vu)",
+    EN: "var(--color-redlist-en)",
+    CR: "var(--color-redlist-cr)",
+    RE: "var(--color-redlist-re)",
   };
-  return colors[status] || "bg-neutral-300";
+  return { backgroundColor: colors[status] || "#d4d4d4" };
 };
 
 const getStatusTooltip = (status) => {
