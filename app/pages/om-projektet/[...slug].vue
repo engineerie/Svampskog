@@ -32,9 +32,13 @@ defineOgImageComponent('Saas')
 </script>
 
 <template>
-
   <UPage v-if="page">
-    <UPageHeader :title="page.title" :description="page.description" :ui="{ root: 'border-none' }" />
+    <UPageHeader :title="page.title" :description="page.description"
+      :ui="{ root: 'border-none', title: 'sm:text-5xl' }" />
+    <!-- <NuxtImg :src="page.image" class="w-full" /> -->
+  </UPage>
+  <UPage v-if="page">
+
 
     <UPageBody>
       <ContentRenderer v-if="page.body" :value="page" />
@@ -45,7 +49,7 @@ defineOgImageComponent('Saas')
     </UPageBody>
 
     <template v-if="page?.body?.toc?.links?.length" #right>
-      <!-- <UContentToc :links="page.body.toc.links" title="På den här sidan" /> -->
+      <UContentToc :links="page.body.toc.links" title="På den här sidan" :ui="{ linkText: 'text-ellipsis' }" />
     </template>
   </UPage>
 </template>
