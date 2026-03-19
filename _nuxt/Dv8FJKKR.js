@@ -1,0 +1,1 @@
+import{_ as c,d as _,e as s,g as e,cO as r,w as l,aa as p,cP as f,cQ as m,F as d}from"./Dr2g2Zr3.js";const u={};function x(n,i){const t=r,o=f,a=m;return s(),_(d,null,[e(t),e(o,{class:"flex flex-col"},{default:l(()=>[p(n.$slots,"default")]),_:3}),e(a)],64)}const g=c(u,[["render",x]]);export{g as default};

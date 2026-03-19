@@ -1,0 +1,1 @@
+import{y as r,d as c,e as l,aa as p,n as m,aj as u,aU as s}from"./Dr2g2Zr3.js";const i={base:""},_={__name:"ProseEm",props:{class:{type:String,required:!1}},setup(e){const a=e,t=r(),o=u(()=>s({extend:s(i),...t.ui?.prose?.em||{}}));return(n,d)=>(l(),c("em",{class:m(o.value({class:a.class}))},[p(n.$slots,"default")],2))}};export{_ as default};
