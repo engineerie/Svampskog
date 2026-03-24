@@ -56,7 +56,7 @@ press:
   items:
     - title: Webbinarium om Svampskog
       publication: SLU
-      publicationDate: Vår 2026
+      publicationDate: Höst 2026
       url: https://www.slu.se/om-slu/organisation/fakulteter/fakulteten-for-skogsvetenskap/samverkan/kompetensutveckling-for-ett-hallbart-skogsbruk/se-svampen-i-din-skog/
       icon: i-heroicons-calendar-date-range
       description: Lär dig mer om skogens mykorrhizasvampar och hur skogsskötsel påverkar dem - och få en genomgång av hur du använder funktionerna i webbappen Svampskog.
@@ -101,17 +101,17 @@ timeline:
       icon: i-hugeicons-plant-01
     - date: Sommar 2025
       title: Mobilanpassning
-      description: Hemsidan utvecklas löpande och mobilanpassas under sommaren 2025.
+      description: Hemsidan mobilanpassades under sommaren 2025.
       icon: i-heroicons-sun
-    - date: Höst 2025
+    - date: Vår 2026
       title: Skogsskötsel
-      description: Information om skogsskötsel färdigställs och lanseras.
+      description: Information om skogsskötsel uppdaterades.
       icon: i-hugeicons-tree-06
-    - date: Vinter 2025/26
+    - date: Vår 2026
       title: Svampkunskap
       description: Modul för svampkunskap med tillhörande lärarhandledning läggs upp på svampskog.se
       icon: i-hugeicons-book-03
-    - date: Vår 2026
+    - date: Höst 2026
       title: Webbinarium
       description: Webbinarium om svampar, skogssbruk och funktionerna på svampskog.se hålls.
       icon: i-hugeicons-presentation-line-chart-01

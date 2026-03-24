@@ -50,7 +50,7 @@ defineOgImageComponent('Saas')
 </script>
 
 <template>
-  <UPageHeader title="Ändringslogg" :ui="{ root: 'border-none' }" />
+  <UPageHeader title="Ändringslogg" :ui="{ root: 'border-none', title: 'text-4xl sm:text-5xl' }" />
   <UChangelogVersions as="main" :indicator-motion="false" :ui="{
     root: 'mt-8 sm:mt-12 lg:mt-18 mb-3 pb-8',
   }">
@@ -59,7 +59,7 @@ defineOgImageComponent('Saas')
         imageWrapper: 'ring ring-muted',
         image: 'opacity-50',
         root: 'flex items-start',
-        container: ' max-w-lg',
+        container: 'w-full max-w-lg lg:ml-40 mr-auto',
         header: 'border-none pb-4 ',
         title: 'text-3xl',
         dotInner: index === 0 ? 'bg-primary' : 'bg-neutral-400',

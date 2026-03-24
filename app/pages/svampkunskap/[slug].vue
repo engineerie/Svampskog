@@ -58,16 +58,10 @@ if (post.value.image?.src) {
 <template>
   <UContainer v-if="post">
     <UPage>
-      <template #left>
-        <UPageAside />
-      </template>
-      <template #right>
-        <UPageAside />
 
-      </template>
       <UPageHero :title="post.title"
         :ui="{ title: 'text-4xl sm:text-6xl text-pretty tracking-tight font-medium', wrapper: 'text-center', container: 'lg:pb-20 pb-12 lg:pt-28 px-0 sm:px-0 md:px-0 lg:px-0' }">
-        <NuxtImg :src="post.image.src" class="w-full rounded-lg" />
+        <NuxtImg :src="post.image.src" class="w-full rounded-lg bg-muted/50 ring-muted/50 ring" />
         <template #headline>
           <UBadge v-if="postBadge" v-bind="postBadge" color="neutral" variant="subtle" size="lg" />
           <!-- <span class="text-(--ui-text-muted)">&middot;</span> -->

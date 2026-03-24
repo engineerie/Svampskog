@@ -29,23 +29,24 @@ const items = computed(() => [
     description: 'Bakgrund och syfte',
     to: '/om-projektet',
     active: route.path.startsWith('/om-projektet'),
-    // children: [
-    //   {
-    //     label: 'Om projektet',
-    //     description: 'Bakgrund och syfte',
-    //     to: '/om-projektet',
-    //   },
-    //   {
-    //     label: 'Ändringslogg',
-    //     description: 'Följ hur svampskog uppdaterats',
-    //     to: '/om-projektet/andringslogg'
-    //   },
-    //   {
-    //     label: 'Kontakt',
-    //     description: '',
+    children: [
+      {
+        label: 'Om projektet',
+        description: 'Bakgrund och syfte',
+        to: '/om-projektet',
+      },
+      {
+        label: 'Kontakt',
+        description: 'Hör av dig',
+        to: '/om-projektet/kontakt'
+      },
+      {
+        label: 'Ändringslogg',
+        description: 'Hur svampskog uppdaterats',
+        to: '/om-projektet/andringslogg'
+      },
 
-    //   }
-    // ]
+    ]
   }
 ])
 

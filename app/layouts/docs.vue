@@ -9,9 +9,14 @@ const omProjektNavigation = computed<ContentNavigationItem[]>(() => [
     path: '/om-projektet'
   },
   {
+    title: 'Kontakt',
+    path: '/om-projektet/kontakt'
+  },
+  {
     title: 'Ändringslogg',
     path: '/om-projektet/andringslogg'
-  }
+  },
+
 ])
 
 const currentNavigation = computed(() => {
@@ -32,7 +37,7 @@ const currentNavigation = computed(() => {
         <UPage :ui="{ root: 'pt-8 sm:pt-12 lg:pt-12', }">
           <template #left>
             <UPageAside>
-              <!-- <UContentNavigation :navigation="currentNavigation" variant="link" /> -->
+              <UContentNavigation :navigation="currentNavigation" variant="link" />
             </UPageAside>
           </template>
 

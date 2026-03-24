@@ -78,12 +78,12 @@ defineOgImageComponent('Saas')
             transform: 'translateY(0px)',
             opacity: 1,
           }" :transition="{
-              duration: 0.2,
-              delay: 0.2 + 0.1 * index
-            }">
+            duration: 0.2,
+            delay: 0.2 + 0.1 * index
+          }">
             <UBlogPost :title="post.title" :to="post.path" :description="post.description" :image="post.image"
               :class="[]" variant="naked" :ui="{
-                description: 'line-clamp-2', header: 'rounded-xl border border-1 border-muted/50 shadow-none', root: 'rounded-md', body: 'px-0 sm:px-2'
+                description: 'line-clamp-2', header: 'rounded-xl border border-1 border-muted/50 shadow-none bg-muted/50 group-hover:shadow transition-all', root: 'rounded-md group', body: 'px-0 sm:px-2'
               }" />
           </Motion>
         </UBlogPosts>
