@@ -78,11 +78,11 @@
             </div>
 
             <div class="grid gap-10 md:grid-cols-2 mb-12">
-                <div class="overflow-hidden rounded-lg border border-muted/50 bg-white shadow-sm">
+                <div class="overflow-hidden p-6 space-y-6">
                     <NuxtImg src="/images/kontakt/anders_kontakt.jpg" alt="Anders Dahlberg"
-                        class="aspect-[4/3] w-full object-cover" />
+                        class="aspect-square w-full object-cover rounded-md ring ring-muted/50" />
 
-                    <div class="space-y-4 p-6 text-lg/8">
+                    <div class="space-y-4  text-lg/8">
                         <div class="space-y-2">
                             <h2 class="text-2xl font-semibold text-highlighted">
                                 Anders Dahlberg
@@ -108,11 +108,11 @@
                     </div>
                 </div>
 
-                <div class="overflow-hidden rounded-lg border border-muted/50 bg-white shadow-sm">
+                <div class="overflow-hidden p-6 space-y-6">
                     <NuxtImg src="/images/kontakt/jacob_kontakt.jpg" alt="Jacob Bertilsson"
-                        class="aspect-[4/3] w-full object-cover" />
+                        class="aspect-square w-full object-cover rounded-md ring ring-muted/50" />
 
-                    <div class="space-y-4 p-6 text-lg/8">
+                    <div class="space-y-4  text-lg/8">
                         <div class="space-y-2">
                             <h2 class="text-2xl font-semibold text-highlighted">
                                 Jacob Bertilsson
