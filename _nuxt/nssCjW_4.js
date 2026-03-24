@@ -1,0 +1,1 @@
+import{a,o as _,q as c,L as e,x as r,j as l,T as p,U as f,V as m,W as d}from"./DCFrM5Hr.js";const u={};function x(o,i){const n=m,t=f,s=d;return _(),c(p,null,[e(n),e(t,{class:"flex flex-col"},{default:r(()=>[l(o.$slots,"default")]),_:3}),e(s)],64)}const g=a(u,[["render",x]]);export{g as default};
