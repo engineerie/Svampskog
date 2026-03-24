@@ -1,1 +1,0 @@
-import{aj as s,Y as p,r}from"./DCFrM5Hr.js";function u(o={}){const t=s(),a=p().path||"/";if(t.payload.path===a){const n=r(!1);n.value=!0}}function c(o,t={},e={}){return u({...e})}export{c as a,u as d};
