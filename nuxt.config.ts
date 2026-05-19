@@ -37,6 +37,9 @@ export default defineNuxtConfig({
   },
 
   vite: {
+    ssr: {
+      noExternal: ["motion-v", "motion-dom"],
+    },
     server: {
       cors: true,
     },
