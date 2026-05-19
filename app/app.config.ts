@@ -41,6 +41,24 @@ export default defineAppConfig({
             "bg-time-50 text-(--ui-time) dark:bg-time-950/80 ring ring-inset ring-(--ui-time)/25",
         },
         {
+          color: "sky",
+          variant: "subtle",
+          class:
+            "bg-sky-100 text-sky-800 dark:bg-sky-950/80 dark:text-sky-200 ring ring-inset ring-sky-300/60 dark:ring-sky-800/60",
+        },
+        {
+          color: "amber",
+          variant: "subtle",
+          class:
+            "bg-amber-100 text-amber-800 dark:bg-amber-950/80 dark:text-amber-200 ring ring-inset ring-amber-300/60 dark:ring-amber-800/60",
+        },
+        {
+          color: "purple",
+          variant: "subtle",
+          class:
+            "bg-purple-100 text-purple-800 dark:bg-purple-950/80 dark:text-purple-200 ring ring-inset ring-purple-300/60 dark:ring-purple-800/60",
+        },
+        {
           color: "signal",
           variant: "subtle",
           class:
@@ -124,6 +142,9 @@ export default defineAppConfig({
       kalkmark: "slate",
       vanligmark: "emerald",
       time: "orange",
+      sky: "sky",
+      amber: "amber",
+      purple: "purple",
     },
   },
 });

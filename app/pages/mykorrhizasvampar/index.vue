@@ -215,7 +215,18 @@ function redirect() {
       </UPageSection>
       <UPageSection :title="page.speciesListsIntro?.title"
         :ui="{ title: 'text-start lg:text-center', description: 'text-start lg:text-center', container: 'pb-0 sm:pb-0 lg:pb-0' }"
-        :description="page.speciesListsIntro?.description" />
+        :description="page.speciesListsIntro?.description">
+        <!-- <div class="flex justify-start lg:justify-center">
+          <UButton
+            to="/mykorrhizasvampar/arter"
+            size="xl"
+            color="neutral"
+            variant="outline"
+            icon="i-heroicons-magnifying-glass"
+            label="Sök bland alla arter"
+          />
+        </div> -->
+      </UPageSection>
       <UPageSection orientation="horizontal" :reverse="isMobile ? true : false"
         :ui="{ title: 'text-2xl sm:text-3xl lg:text-4xl' }" :headline="page.dnaSection?.headline"
         :title="page.dnaSection?.title" :description="page.dnaSection?.description"

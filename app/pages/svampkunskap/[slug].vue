@@ -57,11 +57,19 @@ if (post.value.image?.src) {
 
 <template>
   <UContainer v-if="post">
-    <UPage>
-
+    <UPage :ui="{ left: 'lg:col-span-1', right: 'lg:col-span-1', center: 'lg:col-span-8' }">
+      <template #left>
+        <div></div>
+      </template>
+      <template #right>
+        <div></div>
+      </template>
       <UPageHero :title="post.title"
-        :ui="{ title: 'text-4xl sm:text-6xl text-pretty tracking-tight font-medium', wrapper: 'text-center', container: 'lg:pb-20 pb-12 lg:pt-28 px-0 sm:px-0 md:px-0 lg:px-0' }">
-        <NuxtImg :src="post.image.src" class="w-full rounded-lg bg-muted/50 ring-muted/50 ring" />
+        :ui="{ title: 'text-4xl sm:text-6xl text-pretty tracking-tight font-medium', wrapper: 'text-center', container: 'lg:pb-14 pb-12 lg:pt-28 px-0 sm:px-0 md:px-0 lg:px-0 sm:gap-y-14' }">
+
+        <div class="w-full rounded-lg bg-muted/50 ring-muted/50 ring flex item-center justify-center h-fit">
+          <NuxtImg :src="post.image.src" class="h-3/4" />
+        </div>
         <template #headline>
           <UBadge v-if="postBadge" v-bind="postBadge" color="neutral" variant="subtle" size="lg" />
           <!-- <span class="text-(--ui-text-muted)">&middot;</span> -->
@@ -103,7 +111,7 @@ if (post.value.image?.src) {
       </UPageBody>
 
       <template v-if="post?.body?.toc?.links?.length" #right>
-        <UContentToc :links="post.body.toc.links" title="På den här sidan" highlight />
+        <UContentToc :links="post.body.toc.links" title="På den här sidan" highlight highlight-variant="circuit" />
       </template>
       <template #left>
         <UPageAside>
