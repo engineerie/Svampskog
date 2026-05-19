@@ -1,0 +1,22 @@
+{
+  "total_plot_count": 2497,
+  "forest_type_plot_counts": {
+    "Granskog": 526,
+    "Tallskog": 778,
+    "Barrblandskog": 307,
+    "Lövblandskog": 358,
+    "Lövskog": 279,
+    "EkBokskog": 24,
+    "Naturbete": 137
+  },
+  "stand_age_plot_counts": {
+    "1-40": 897,
+    "41-90": 900,
+    ">91": 562
+  },
+  "vegetation_plot_counts": {
+    "Örttyper": 797,
+    "Blåbärstyper": 1121,
+    "Lingon-fattigristyper": 506
+  }
+}
