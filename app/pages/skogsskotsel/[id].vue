@@ -3,7 +3,7 @@
         <div class="grid grid-cols-1 md:grid-cols-3 border-muted/50 p-3 sm:p-0 overflow-visible ">
 
             <div class="grid md:grid-cols-2 lg:grid-cols-3 col-span-3 gap-4 sm:m-3  min-w-0">
-                <div class="ring ring-gray-300/30 bg-gray-50/50 p-4 sm:p-6 rounded-lg w-full min-w-0 overflow-hidden">
+                <div class="ring ring-gray-300/30 bg-white p-4 sm:p-6 rounded-lg w-full min-w-0 overflow-hidden">
                     <div class="space-y-3 w-full min-w-0">
                         <!-- <p class="text-xs font-semibold text-gray-600 uppercase tracking-wide">{{
                             selectedMethod.title }}</p> -->
@@ -62,8 +62,7 @@
                             class="pt-2 w-full min-w-0 max-w-full" />
                     </div>
                 </div>
-                <div
-                    class="ring ring-signal-700/10 bg-signal-50/50 p-4 sm:p-6 rounded-lg w-full min-w-0 overflow-hidden">
+                <div class="ring ring-signal-700/10 bg-white p-4 sm:p-6 rounded-lg w-full min-w-0 overflow-hidden">
                     <div class="space-y-3 w-full min-w-0">
                         <!-- <p class="text-xs font-semibold text-signal-600 uppercase tracking-wide">{{
                             selectedMethod.title }}</p> -->
