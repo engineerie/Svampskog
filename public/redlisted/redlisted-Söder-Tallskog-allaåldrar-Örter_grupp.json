@@ -2,7 +2,7 @@
   {
     "Scientificname": "Cortinarius odorifer",
     "Commonname": "anisspindling",
-    "Artfakta": "https://artfakta.se/artinformation/taxa/3674/detaljer",
+    "Artfakta": "https://artfakta.se/taxa/3674/",
     "RL2020kat": "LC",
     "RL2020krit": null,
     "Kriteriedokumentation": null,
@@ -45,10 +45,10 @@
   {
     "Scientificname": "Cortinarius caesiostramineus s. lat.",
     "Commonname": "blekspindling agg.",
-    "Artfakta": "https://artfakta.se/artinformation/taxa/436/detaljer",
+    "Artfakta": "https://artfakta.se/taxa/436/information",
     "RL2020kat": "NT",
     "RL2020krit": "A2c+3c+4c, C2a(i)",
-    "Kriteriedokumentation": " Det som vi tidigare har kallat C. caesiostramineus omfattar åtminstone två olika arter, C. gentianeus och C. cremeiamarescens, som bägge finns i landet. De rödlistebedöms här gemensamt under namnet C. caesiostramineus s. lat. Arternas totala populationer i landet bedöms ha minskat och minskar fortsatt p.g.a. avverkning av äldre kontinuitetsskog.  Fortgående minskning förekommer i kombination med att antalet reproduktiva individer är lågt vilket gör att arten rödlistas som Nära hotad (NT). (A2c+3c+4c, C2a(i)).",
+    "Kriteriedokumentation": "Det som vi tidigare har kallat C. caesiostramineus omfattar åtminstone två olika arter, C. gentianeus och C. cremeiamarescens, som bägge finns i landet. De rödlistebedöms här gemensamt under namnet C. caesiostramineus s. lat. Arternas totala populationer i landet bedöms ha minskat och minskar fortsatt p.g.a. avverkning av äldre kontinuitetsskog. Fortgående minskning förekommer i kombination med att antalet reproduktiva individer är lågt vilket gör att arten rödlistas som Nära hotad (NT). (A2c+3c+4c, C2a(i)).",
     "Svamp-grupp": "hattsvamp",
     "Svamp-Undersvamp-grupp": null,
     "SIGNAL_art": null,
@@ -88,10 +88,10 @@
   {
     "Scientificname": "Cortinarius salor",
     "Commonname": "blå slemspindling",
-    "Artfakta": "https://artfakta.se/artinformation/taxa/3712/detaljer",
-    "RL2020kat": "LC",
+    "Artfakta": "https://artfakta.se/taxa/3712/information",
+    "RL2020kat": "NT",
     "RL2020krit": null,
-    "Kriteriedokumentation": null,
+    "Kriteriedokumentation": "Arten är tämligen vanlig i kalkbarrskogar på Gotland och i delar av östra Mellansverige, men i övrigt endast känd från få och lokalt kalkrika områden i södra och mellersta Sverige. Den förväxlas ibland med den närstående och mer nordliga arten Cortinarius transiens. Den totala populationen i landet bedöms ha minskat och väntas fortsätta minska, främst till följd av avverkning av kalkbarrskogar. Det finns inga indikationer på att arten långsiktigt kan etablera eller reproducera sig i skogsbestånd som brukas med trakthyggesmetoder, markberedning, gödsling eller föryngring med förädlat plantmaterial. Ett ökat omfång av granbarkborreangrepp kan ytterligare försämra artens livsmiljöer och påverka populationen negativt. Uppfyller kriterierna för att bli rödlistad på grund av ny kunskap som visar att en större andel av populationen än tidigare bedömt är knuten till kontinuitetsbarrskog. En minskning av populationen pågår eller förväntas ske. Minskningen avser kvalitén på artens habitat. Minskningstakten för den svenska populationen bedöms vara nära gränsvärdet för Sårbar (VU). (A2c+3c+4c).",
     "Svamp-grupp": "hattsvamp",
     "Svamp-Undersvamp-grupp": null,
     "SIGNAL_art": "S",
@@ -111,14 +111,14 @@
     "41-90 år": 1,
     "91 år och äldre": 1,
     "ÖRTER_grupp": "x",
-    "BLÅBÄR_grupp": null,
+    "BLÅBÄR_grupp": "x",
     "LINGON_grupp": null,
     "OVANLIGHET": 1,
-    "KALKmark": null,
+    "KALKmark": "x",
     "ANNANmark": "y",
     "RLochS": "S",
     "rating": null,
-    "ekologi": "Växer i löv- och barrskog, bl.a. bok-, gran- och fjällbjörkskog på kalkrik mark. ",
+    "ekologi": "Växer i löv- och barrskog, bl.a. bok-, gran- och fjällbjörkskog pä kalkrik mark. ",
     "RankRed": 1,
     "Giftsvamp": null,
     "förekomst_skog_ålder": 2,
@@ -131,10 +131,10 @@
   {
     "Scientificname": "Hydnellum caeruleum",
     "Commonname": "blå taggsvamp",
-    "Artfakta": "https://artfakta.se/artinformation/taxa/4362/detaljer",
+    "Artfakta": "https://artfakta.se/taxa/4362/information",
     "RL2020kat": "NT",
     "RL2020krit": "A2c+3c+4c",
-    "Kriteriedokumentation": "Kan överleva hyggesfasen på hänsynsytor med lämnade hänsynsträd. Inga eller få observationer i ungskogar uppkomna efter slutavverkning. Total population i landet bedöms ha minskat och fortgående minska p.g.a slutavverkning av äldre barrskog. Minskningstakten för den svenska populationen bedöms vara nära gränsvärdet för Sårbar (VU). (A2c+3c+4c).",
+    "Kriteriedokumentation": "Särskilt frekvent i magra, torra, ljusöppna och ofta brandpräglade lavtallskogar. Marktypen utgörs av sandsediment, sandig–grusig morän eller hällmark. Inom den boreala zonen påträffas arten ibland i yngre tallbestånd som föryngrats under fröträd, vilket utgjort förutsättningar för bibehållen kontinuitet. Dessa områden angränsar ofta äldre bestånd. När arten förekommer i granskog, vilket är sällsynt, tycks den vara knuten till örtrik kalkgranskog. Den totala populationen i landet har minskat och bedöms fortsätta minska till följd av avverkning av äldre barrskog och fortsatt fragmentering av artens livsmiljöer. Arten har begränsad förmåga att återetablera sig efter slutavverkning eller andra storskaliga skogsbruksåtgärder. Det finns inga indikationer på att arten långsiktigt kan etablera eller reproducera sig i skogsbestånd som brukas med trakthyggesmetoder, markberedning, gödsling eller föryngring med förädlat plantmaterial.  Minskningstakten för den svenska populationen bedöms vara nära gränsvärdet för Sårbar (VU). (A2c+3c+4c).",
     "Svamp-grupp": "taggsvamp",
     "Svamp-Undersvamp-grupp": null,
     "SIGNAL_art": null,
@@ -170,16 +170,16 @@
     "förekomst_ung": 0,
     "förekomst_sum": 3,
     "images": [
-      "/images/svampbilder/RödlistadeSvampar/Hydnellum caeruleum-4362.jpg"
+      "/images/SvampBilder/RödlistadeSvampar/Hydnellum caeruleum-4362.jpg"
     ]
   },
   {
     "Scientificname": "Cortinarius barbaricus",
     "Commonname": "blåfotad fagerspindling",
-    "Artfakta": "https://artfakta.se/artinformation/taxa/248952/detaljer",
+    "Artfakta": "https://artfakta.se/taxa/248952/information",
     "RL2020kat": "VU",
     "RL2020krit": "A2c+3c+4c",
-    "Kriteriedokumentation": "Gick tidigare under namnet Cortinarius calochrous var. hasii och senare var. barbaricus innan den fick status som egen art. Förefaller ha svårt att etablera sig efter avverkning. Total population i landet bedöms ha minskat och minskar fortsatt p.g.a. att den huvudsakligen förekommer i äldre, tidigare inte kalavverkade kalkbarrskogar, som avverkas och minskar i areal.  Minskningstakten överstiger gränsvärdet för Sårbar (VU) enligt A-kriteriet. (A2c+3c+4c).",
+    "Kriteriedokumentation": "Gick tidigare under namnet Cortinarius calochrous var. hasii och senare var. barbaricus innan den fick status som egen art. Förefaller ha svårt att etablera sig efter avverkning. Total population i landet bedöms ha minskat och minskar fortsatt p.g.a. att den huvudsakligen förekommer i äldre, tidigare inte kalavverkade kalkbarrskogar, som avverkas och minskar i areal. Minskningstakten överstiger gränsvärdet för Sårbar (VU) enligt A-kriteriet. (A2c+3c+4c).",
     "Svamp-grupp": "hattsvamp",
     "Svamp-Undersvamp-grupp": null,
     "SIGNAL_art": null,
@@ -219,10 +219,10 @@
   {
     "Scientificname": "Tricholoma aurantium",
     "Commonname": "brandmusseron",
-    "Artfakta": "https://artfakta.se/artinformation/taxa/1595/detaljer",
+    "Artfakta": "https://artfakta.se/taxa/1595/",
     "RL2020kat": "LC",
     "RL2020krit": null,
-    "Kriteriedokumentation": "Större delen av landets population finns i äldre kalkbarrskog och blandskog på kalkrik mark, men arten kan även etableras i yngre skog. Förekommer mest på Gotland och i östra Svealand, med spridda fynd upp till Medelpad och Jämtland. Signalart i kalkbarrskog. Den totala populationen i landet har troligen minskat, men inte den omfattning som når tröskelvärden för att bli rödlistad. ",
+    "Kriteriedokumentation": null,
     "Svamp-grupp": "hattsvamp",
     "Svamp-Undersvamp-grupp": null,
     "SIGNAL_art": "S",
@@ -258,17 +258,17 @@
     "förekomst_ung": 0,
     "förekomst_sum": 2,
     "images": [
-      "/images/svampbilder/Giftsvampar/Tricholoma aurantium-92-1595.jpg",
-      "/images/svampbilder/Giftsvampar/Tricholoma aurantium-174-1595.jpg"
+      "/images/SvampBilder/Giftsvampar/Tricholoma aurantium-92-1595.jpg",
+      "/images/SvampBilder/Giftsvampar/Tricholoma aurantium-174-1595.jpg"
     ]
   },
   {
     "Scientificname": "Cortinarius corrosus",
     "Commonname": "bullspindling",
-    "Artfakta": "https://artfakta.se/artinformation/taxa/442/detaljer",
+    "Artfakta": "https://artfakta.se/taxa/442/information",
     "RL2020kat": "VU",
     "RL2020krit": "A2c+3c+4c, C2a(i)",
-    "Kriteriedokumentation": "Total population i landet bedöms ha minskat och fortsätter att minska, huvudsakligen p.g.a. slutavverkningar av äldre kontinuitetsskog och försämrad habitatkvalitet, bl.a. genom förtätningar i skogsbestånd vid upphört skogsbete. Fortgående minskning förekommer i kombination med att antalet reproduktiva individer är lågt vilket gör att arten hamnar i kategorin Sårbar (VU). (A2c+3c+4c, C2a(i)).",
+    "Kriteriedokumentation": "Den totala populationen i landet bedöms ha minskat och förväntas fortsätta minska på grund av slutavverkning av äldre kalkbarrskog samt försämrad habitatkvalitet, bl.a. genom förtätningar i skogsbestånd vid upphört skogsbete. Arten har begränsad förmåga att återetablera sig efter slutavverkning eller andra storskaliga skogsbruksåtgärder, och det finns inga indikationer på att den långsiktigt kan etablera eller reproducera sig i bestånd som brukas med trakthyggesmetoder, markberedning, gödsling eller förädlat plantmaterial.Fortgående minskning förekommer i kombination med att antalet reproduktiva individer är lågt vilket gör att arten hamnar i kategorin Sårbar (VU). (A2c+3c+4c, C2a(i)).",
     "Svamp-grupp": "hattsvamp",
     "Svamp-Undersvamp-grupp": null,
     "SIGNAL_art": null,
@@ -308,10 +308,10 @@
   {
     "Scientificname": "Tricholoma ilkkae",
     "Commonname": "davidmusseron",
-    "Artfakta": "https://artfakta.se/artinformation/taxa/6003116/detaljer",
-    "RL2020kat": "VU",
+    "Artfakta": "https://artfakta.se/taxa/6003116/information",
+    "RL2020kat": "EN",
     "RL2020krit": "A2c, C2a(i)",
-    "Kriteriedokumentation": "Uppmärksammad och eftersökt med få fynd i landet, från Gotland och Uppland. Ävenkänd från enstaka lokaler i Norge. Fyndnoteringar från Jämtland och Härjedalen utgör en egen art, T. dulciolens, som behandlas separat i rödlistan. En fortlöpande minskning på nationell nivå bedöms pågå, huvudsakligen på grund av avverkning av äldre kalkrika barrskogar samt upphört skogsbete vilket medför en förtätning av artens biotoper. På de kända växtplatserna finns inslag av både gammal tall och gran, och det är oklart vilket trädslag som utgör artens huvudsakliga värdträd. Fortgående minskning förekommer i kombination med att antalet reproduktiva individer är lågt vilket gör att arten hamnar i kategorin Sårbar (VU). (A2c, C2a(i)).",
+    "Kriteriedokumentation": "Uppmärksammad och eftersökt med få fynd i landet, från Gotland och Uppland. Även känd från enstaka lokaler i Norge. Den närstående arten T. dulciolens behandlas separat i rödlistan. En fortlöpande minskning på nationell nivå bedöms pågå, huvudsakligen på grund av minskande arealer av äldre kalkrika barrskogar samt upphört skogsbete vilket medför en förtätning av artens biotoper. Arten har begränsad förmåga att återetablera sig efter slutavverkning eller andra storskaliga skogsbruksåtgärder. Det finns inga indikationer på att arten långsiktigt kan etablera eller reproducera sig i skogsbestånd som brukas med trakthyggesmetoder, markberedning, gödsling eller föryngring med förädlat plantmaterial. På de kända växtplatserna finns inslag av både gammal tall och gran, och det är oklart vilket trädslag som utgör artens huvudsakliga värdträd. Uppfyller kriterierna för en högre hotkategori på grund av ny kunskap som visar att en större andel av populationen än tidigare bedömt är knuten till kontinuitetsbarrskog. Fortgående minskning förekommer i kombination med att antalet reproduktiva individer är lågt vilket gör att arten hamnar i kategorin Starkt hotad (EN). (A3c, C2a(i)).",
     "Svamp-grupp": "hattsvamp",
     "Svamp-Undersvamp-grupp": null,
     "SIGNAL_art": null,
@@ -351,10 +351,10 @@
   {
     "Scientificname": "Cortinarius haasii",
     "Commonname": "gulsträngad fagerspindling",
-    "Artfakta": "https://artfakta.se/artinformation/taxa/248956/detaljer",
+    "Artfakta": "https://artfakta.se/taxa/248956/information",
     "RL2020kat": "VU",
     "RL2020krit": "C2a(i)",
-    "Kriteriedokumentation": "Huvudsakliga andelen av landets population finns på Gotland och utgör möjligen artens nordgräns i Europa. Enstaka förekomster på norraÖland är kända. Tillhör komplexet kring fagerspindling (C. calochrous s.lat.). Total population i landet bedöms ha minskat och fortsätta minska, huvudsakligen p.g.a. slutavverkningar av äldre kontinuitetsbarrskog och försämrad habitatkvalitet, bl.a. genom förtätningar i skogsbestånd vid upphört skogsbete. Har uppenbart svårt att återetableras efter avverkning. Fortgående minskning förekommer i kombination med att antalet reproduktiva individer är lågt vilket gör att arten hamnar i kategorin Sårbar (VU). (C2a(i)).",
+    "Kriteriedokumentation": "Huvudsakliga andelen av landets population finns på Gotland och utgör möjligen artens nordgräns i Europa. Enstaka förekomster på norra Öland är kända. Tillhör komplexet kring fagerspindling (C. calochrous s.lat.). Den totala populationen i landet bedöms ha minskat och förväntas fortsätta minska på grund av avverkning av kalkbarrskog och försämrad habitatkvalitet, bl.a. genom förtätningar i skogsbestånd vid upphört skogsbete. Arten har begränsad förmåga att återetablera sig efter slutavverkning eller andra storskaliga skogsbruksåtgärder, och det finns inga indikationer på att den långsiktigt kan etablera eller reproducera sig i bestånd som brukas med trakthyggesmetoder, markberedning, gödsling eller förädlat plantmaterial. Fortgående minskning förekommer i kombination med att antalet reproduktiva individer är lågt vilket gör att arten hamnar i kategorin Sårbar (VU). (C2a(i)).",
     "Svamp-grupp": "hattsvamp",
     "Svamp-Undersvamp-grupp": null,
     "SIGNAL_art": null,
@@ -390,16 +390,16 @@
     "förekomst_ung": 0,
     "förekomst_sum": 3,
     "images": [
-      "/images/svampbilder/RödlistadeSvampar/Cortinarius haasii-248956.jpg"
+      "/images/SvampBilder/RödlistadeSvampar/Cortinarius haasii-248956.jpg"
     ]
   },
   {
     "Scientificname": "Tretomyces lutescens",
     "Commonname": "gult markskinn",
-    "Artfakta": "https://artfakta.se/artinformation/taxa/211/detaljer",
+    "Artfakta": "https://artfakta.se/taxa/211/information",
     "RL2020kat": "VU",
     "RL2020krit": "D1",
-    "Kriteriedokumentation": "Uppenbarligen sällsynt men även förbisedd art. I systematiska eftersökningar av barrskog i olika åldrar är den huvudsakligen påträffad i äldre skog med höga naturvärden och mycket död ved. Antalet individer bedöms vara lägre än gränsvärdet för Sårbar (VU) enligt D-kriteriet. (D1).",
+    "Kriteriedokumentation": "I systematiska eftersökningar av barrskog i olika åldrar är den huvudsakligen påträffad i äldre skog med höga naturvärden och mycket död ved. Antalet individer bedöms vara lägre än gränsvärdet för Sårbar (VU) enligt D-kriteriet. (D1).",
     "Svamp-grupp": "skinnsvamp",
     "Svamp-Undersvamp-grupp": null,
     "SIGNAL_art": null,
@@ -426,7 +426,7 @@
     "ANNANmark": "y",
     "RLochS": "x",
     "rating": null,
-    "ekologi": "Växer med, troligen med både barr- och lövträd. ",
+    "ekologi": "Växer med, troligen med bäde barr- och lövträd. ",
     "RankRed": 3,
     "Giftsvamp": null,
     "förekomst_skog_ålder": 3,
@@ -439,10 +439,10 @@
   {
     "Scientificname": "Hygrophorus hyacinthinus",
     "Commonname": "hyacintvaxskivling",
-    "Artfakta": "https://artfakta.se/artinformation/taxa/823/detaljer",
+    "Artfakta": "https://artfakta.se/taxa/823/information",
     "RL2020kat": "EN",
     "RL2020krit": "C2a(i)",
-    "Kriteriedokumentation": "Ganska anonym art om man inte uppmärksammar den kraftiga och behagliga doften. Förmodligen fragmenterad och förekommer endast i äldre skogsbestånd med totalt sett liten population och förekomstarea. Bedöms ha minskat och fortående att minska p.g.a. att arealen äldre barrskog som inte utsatts för slutavverkning på kalkrik mark minskar. Har uppenbart svårt att återetableras efter avverkning.  Fortgående minskning förekommer i kombination med att antalet reproduktiva individer är lågt vilket gör att arten hamnar i kategorin Starkt hotad (EN). (C2a(i)).",
+    "Kriteriedokumentation": "Ganska anonym art om man inte uppmärksammar den kraftiga och behagliga doften. Den totala populationen i landet är liten och bedöms ha minskat kraftigt och förväntas fortsätta minska på grund av slutavverkning av äldre kalkbarrskog och kontinuitetsskog. Arten har begränsad förmåga att återetablera sig efter slutavverkning eller andra storskaliga skogsbruksåtgärder, och det finns inga indikationer på att den långsiktigt kan etablera eller reproducera sig i bestånd som brukas med trakthyggesmetoder, markberedning, gödsling eller förädlat plantmaterial. Fortgående minskning förekommer i kombination med att antalet reproduktiva individer är lågt vilket gör att arten hamnar i kategorin Starkt hotad (EN). (C2a(i)).",
     "Svamp-grupp": "hattsvamp",
     "Svamp-Undersvamp-grupp": null,
     "SIGNAL_art": null,
@@ -478,16 +478,16 @@
     "förekomst_ung": 0,
     "förekomst_sum": 3,
     "images": [
-      "/images/svampbilder/RödlistadeSvampar/Hygrophorus hyacinthinus-823.jpg"
+      "/images/SvampBilder/RödlistadeSvampar/Hygrophorus hyacinthinus-823.jpg"
     ]
   },
   {
     "Scientificname": "Catathelasma imperiale",
     "Commonname": "kejsarskivling",
-    "Artfakta": "https://artfakta.se/artinformation/taxa/275/detaljer",
+    "Artfakta": "https://artfakta.se/taxa/275/information",
     "RL2020kat": "VU",
     "RL2020krit": "A2c+3c+4c, C2a(i)",
-    "Kriteriedokumentation": "Arten förefaller vara knuten till skogar med lång trädkontinuitet och gynnas troligen av skogsbete. Total population i landet bedöms ha minskat och minskar fortsatt p.g.a. att arten huvudsakligen förekommer i äldre kalkbarrskog som avverkas och minskar i areal. . Fortgående minskning förekommer i kombination med att antalet reproduktiva individer är lågt vilket gör att arten hamnar i kategorin Sårbar (VU). (A2c+3c+4c, C2a(i)).",
+    "Kriteriedokumentation": "Arten förefaller vara knuten till skogar med lång trädkontinuitet och gynnas troligen av skogsbete. Den totala populationen i landet har minskat kraftigt och bedöms fortsätta minska på grund av avverkning av kalkbarrskogar och tilltagande fragmentering av artens livsmiljö. Arten har begränsad förmåga att återetablera sig efter slutavverkning eller andra storskaliga skogsbruksåtgärder, och det finns inga indikationer på att den långsiktigt kan etablera eller reproducera sig i bestånd som brukas med trakthyggesmetoder, markberedning, gödsling eller förädlat plantmaterial. Fortgående minskning förekommer i kombination med att antalet reproduktiva individer är lågt vilket gör att arten hamnar i kategorin Sårbar (VU). (A2c+3c+4c, C2a(i)).",
     "Svamp-grupp": "hattsvamp",
     "Svamp-Undersvamp-grupp": null,
     "SIGNAL_art": null,
@@ -523,16 +523,16 @@
     "förekomst_ung": 0,
     "förekomst_sum": 3,
     "images": [
-      "/images/svampbilder/RödlistadeSvampar/Catathelasma imperiale-275.jpg"
+      "/images/SvampBilder/RödlistadeSvampar/Catathelasma imperiale-275.jpg"
     ]
   },
   {
     "Scientificname": "Cortinarius spectabilis",
     "Commonname": "klenodspindling",
-    "Artfakta": "https://artfakta.se/artinformation/taxa/3727/detaljer",
-    "RL2020kat": "VU",
+    "Artfakta": "https://artfakta.se/taxa/3727/information",
+    "RL2020kat": "EN",
     "RL2020krit": "C2a(i), D1",
-    "Kriteriedokumentation": "Iögonfallande och stor spindling med få fynd i landet, alla från Gotland (DNA-sekvenserad). I tidigare fyndnoteringar från Härjedalen och Jämtland har namnet C. spectabilis felaktigt använts för det vi idag kallar C. caesiocintus/C. lithopilus. Artens totala population i landet är liten och missgynnas av avverkningar och upphört skogsbete på dess få växtplatser Fortgående minskning förekommer i kombination med att antalet reproduktiva individer är lågt vilket gör att arten hamnar i kategorin Sårbar (VU). Antalet individer bedöms vara lägre än gränsvärdet för Sårbar (VU) enligt D-kriteriet. (C2a(i), D1).",
+    "Kriteriedokumentation": "Iögonfallande och stor spindling med få fynd i landet, alla från Gotland. Den totala populationen i landet bedöms ha minskat och förväntas fortsätta minska på grund av slutavverkning av äldre kalkbarrskog och försämrad habitatkvalitet, bl.a. genom förtätningar i skogsbestånd vid upphört skogsbete. Arten har begränsad förmåga att återetablera sig efter slutavverkning eller andra storskaliga skogsbruksåtgärder, och det finns inga indikationer på att den långsiktigt kan etablera eller reproducera sig i bestånd som brukas med trakthyggesmetoder, markberedning, gödsling eller förädlat plantmaterial. Uppfyller kriterierna för en högre hotkategori på grund av ny kunskap som visar att en större andel av populationen än tidigare bedömt är knuten till kontinuitetsbarrskog.  Fortgående minskning förekommer i kombination med att antalet reproduktiva individer är lågt vilket gör att arten hamnar i kategorin Starkt hotad (EN). (C2a(i)).",
     "Svamp-grupp": "hattsvamp",
     "Svamp-Undersvamp-grupp": null,
     "SIGNAL_art": null,
@@ -572,10 +572,10 @@
   {
     "Scientificname": "Hydnellum cumulatum",
     "Commonname": "knölig taggsvamp",
-    "Artfakta": "https://artfakta.se/artinformation/taxa/239737/detaljer",
+    "Artfakta": "https://artfakta.se/taxa/239737/information",
     "RL2020kat": "EN",
     "RL2020krit": "C2a(i)",
-    "Kriteriedokumentation": "Där arten påträffas finns ofta ett flertal andra rödlistade marksvampar. Ett 20-tal aktuella lokaler är kända. Uppenbarligen en sällsynt art med liten population i landet. Total population i landet bedöms ha minskat och fortsätta att minska, främst p.g.a. avverkningar av äldre kalkbarrskog. Har uppenbart svårt att återetableras efter kalavverkning.  Fortgående minskning förekommer i kombination med att antalet reproduktiva individer är lågt vilket gör att arten hamnar i kategorin Starkt hotad (EN). (C2a(i)).",
+    "Kriteriedokumentation": "Den totala populationen i landet är liten, har minskat kraftigt och bedöms fortsätta minska till följd av avverkning av kalkbarrskogar och fortsatt fragmentering av artens livsmiljöer. Arten har begränsad förmåga att återetablera sig efter slutavverkning eller andra storskaliga skogsbruksåtgärder. Det finns inga indikationer på att arten långsiktigt kan etablera eller reproducera sig i skogsbestånd som brukas med trakthyggesmetoder, markberedning, gödsling eller föryngring med förädlat plantmaterial. En ökning av granbarkborreangrepp kan medföra ytterligare försämring av artens status. Fortgående minskning förekommer i kombination med att antalet reproduktiva individer är lågt vilket gör att arten hamnar i kategorin Starkt hotad (EN). (A2c+3c+4c, C2a(i)).",
     "Svamp-grupp": "taggsvamp",
     "Svamp-Undersvamp-grupp": null,
     "SIGNAL_art": null,
@@ -611,16 +611,16 @@
     "förekomst_ung": 0,
     "förekomst_sum": 2,
     "images": [
-      "/images/svampbilder/RödlistadeSvampar/Hydnellum cumulatum-239737.jpg"
+      "/images/SvampBilder/RödlistadeSvampar/Hydnellum cumulatum-239737.jpg"
     ]
   },
   {
     "Scientificname": "Cortinarius cupreorufus",
     "Commonname": "kopparspindling",
-    "Artfakta": "https://artfakta.se/artinformation/taxa/445/detaljer",
+    "Artfakta": "https://artfakta.se/taxa/445/information",
     "RL2020kat": "VU",
     "RL2020krit": "A2c+3c+4c",
-    "Kriteriedokumentation": "Total population i landet bedöms ha minskat och fortsätter att minska, huvudsakligen p.g.a. slutavverkningar av äldre kontinuitetsbarrskog och försämrad habitatkvalitet, bl.a. genom förtätningar i skogsbestånd vid upphört skogsbete. Har uppenbart svårt att återetableras efter avverkning. Minskningstakten överstiger gränsvärdet för Sårbar (VU) enligt A-kriteriet. (A2c+3c+4c).",
+    "Kriteriedokumentation": "Den totala populationen i landet bedöms ha minskat och förväntas fortsätta minska på grund av slutavverkning av äldre kalkbarrskog samt försämrad habitatkvalitet, bl.a. genom förtätningar i skogsbestånd vid upphört skogsbete. Arten har begränsad förmåga att återetablera sig efter slutavverkning eller andra storskaliga skogsbruksåtgärder, och det finns inga indikationer på att den långsiktigt kan etablera eller reproducera sig i bestånd som brukas med trakthyggesmetoder, markberedning, gödsling eller förädlat plantmaterial.  Minskningstakten överstiger gränsvärdet för Sårbar (VU) enligt A-kriteriet. (A2c+3c+4c).",
     "Svamp-grupp": "hattsvamp",
     "Svamp-Undersvamp-grupp": null,
     "SIGNAL_art": null,
@@ -656,16 +656,59 @@
     "förekomst_ung": 0,
     "förekomst_sum": 2,
     "images": [
-      "/images/svampbilder/RödlistadeSvampar/Cortinarius cupreorufus-445.jpg"
+      "/images/SvampBilder/RödlistadeSvampar/Cortinarius cupreorufus-445.jpg"
     ]
+  },
+  {
+    "Scientificname": "Ramaria neoformosa",
+    "Commonname": "korallfingersvamp",
+    "Artfakta": "https://artfakta.se/taxa/233195/information",
+    "RL2020kat": "VU",
+    "RL2020krit": null,
+    "Kriteriedokumentation": "Arten har sin huvudsakliga utbredning i boreala sandtallskogar och är i Sverige känd från Dalarna och norrut till Lule lappmark. Utbredningen är i Fennoskandien östlig, med sporadiska förekomster i Finland och ett fåtal i Norge. Det finns inga kända fynd utanför Norden. Den totala populationen i landet har minskat och bedöms fortsätta minska till följd av avverkning av äldre barrskog. Arten har begränsad förmåga att återetablera sig efter slutavverkning eller andra storskaliga skogsbruksåtgärder, och det finns inga indikationer på att arten långsiktigt kan etablera eller reproducera sig i skogsbestånd som brukas med trakthyggesmetoder, markberedning, gödsling eller föryngring med förädlat plantmaterial. Fortgående minskning förekommer i kombination med att antalet reproduktiva individer är lågt vilket gör att arten hamnar i kategorin Sårbar (VU). (C2a(i)).",
+    "Svamp-grupp": "fingersvamp",
+    "Svamp-Undersvamp-grupp": null,
+    "SIGNAL_art": "S",
+    "Svampguiden": null,
+    "Nyasvamp-boken": null,
+    "Norra Sverige": "x",
+    "Södra Sverige": "x",
+    "Gran": 2,
+    "Tall": 2,
+    "Blandad barrskog": 1,
+    "Blandad lövskog": null,
+    "Lövskog": null,
+    "EkochBokskog": null,
+    "Naturbete": null,
+    "11-20 år": null,
+    "1-40 år": null,
+    "41-90 år": 1,
+    "91 år och äldre": 2,
+    "ÖRTER_grupp": "x",
+    "BLÅBÄR_grupp": "x",
+    "LINGON_grupp": null,
+    "OVANLIGHET": 2,
+    "KALKmark": "x",
+    "ANNANmark": "y",
+    "RLochS": "S",
+    "rating": null,
+    "ekologi": "Växer med gran och tall I kalkbarrskog. Möjligen finns ett närstäende taxa rik sandtallskog.",
+    "RankRed": 3,
+    "Giftsvamp": null,
+    "förekomst_skog_ålder": 3,
+    "förekomst_skog": 2,
+    "förekomst_ålder": 1,
+    "förekomst_ung": 0,
+    "förekomst_sum": 3,
+    "images": []
   },
   {
     "Scientificname": "Cortinarius elegantior",
     "Commonname": "kungsspindling",
-    "Artfakta": "https://artfakta.se/artinformation/taxa/3611/detaljer",
+    "Artfakta": "https://artfakta.se/taxa/3611/information",
     "RL2020kat": "NT",
     "RL2020krit": "A2c+3c+4c",
-    "Kriteriedokumentation": "Total population i landet bedöms ha minskat främst och fortsatt minska p.g.a. slutavverkningar men även förtätning av artens biotoper.  Minskningstakten för den svenska populationen bedöms uppfylla kriteriet för Nära hotad (NT) . (A2c+3c+4c).",
+    "Kriteriedokumentation": "Total population i landet bedöms ha minskat främst och fortsatt minska p.g.a. slutavverkningar men även förtätning av artens biotoper. Minskningstakten för den svenska populationen bedöms vara nära gränsvärdet för Sårbar (VU). (A2c+3c+4c).",
     "Svamp-grupp": "hattsvamp",
     "Svamp-Undersvamp-grupp": null,
     "SIGNAL_art": null,
@@ -692,7 +735,7 @@
     "ANNANmark": null,
     "RLochS": "x",
     "rating": null,
-    "ekologi": "Växer med gran och tall samt med hassel i hässlen, sällsynt troligen även med björk. Påträffas i ängsgranskog och kalktallskog, men också i betade lågskogar av hassel (hässlen). ",
+    "ekologi": "Växer med gran och tall samt med hassel i hässlen, sällsynt troligen även med björk. Påträffas i ängsgranskog och kalktallskog, men ocksä i betade lägskogar av hassel (hässlen). ",
     "RankRed": 2,
     "Giftsvamp": null,
     "förekomst_skog_ålder": 3,
@@ -701,16 +744,16 @@
     "förekomst_ung": 0,
     "förekomst_sum": 3,
     "images": [
-      "/images/svampbilder/RödlistadeSvampar/Cortinarius elegantior-3611.jpg"
+      "/images/SvampBilder/RödlistadeSvampar/Cortinarius elegantior-3611.jpg"
     ]
   },
   {
     "Scientificname": "Hydnellum fuligineoviolaceum",
     "Commonname": "lilaköttig taggsvamp",
-    "Artfakta": "https://artfakta.se/artinformation/taxa/1436/detaljer",
+    "Artfakta": "https://artfakta.se/taxa/1436/information",
     "RL2020kat": "EN",
     "RL2020krit": "B2ab(iii), C2a(i)",
-    "Kriteriedokumentation": " En noga eftersökt, uppenbart ytterst sällsynt art i hela Europa med sina största förekomster i Sverige. Total population i landet bedöms liten och fragmenterad samtidigt som få mycel finns på varje lokal. Bedöms ha minskat och fortgående att minska p.g.a. slutavverkning av äldre kalkbarrskog. Fortlevnadsmöjligheter för arten kommer förhoppningsvis att förbättras genom Artens fortlevnadsmöjligheter blir förhoppningsvis förbättrad genom Naturvårdsverkets åtgärdsprogram för rödlistade fjälltaggsvampar som sedan 2006 resulterat i en ökad kännedom om och uppmärksamhet kring arten, dess ekologi och förekomster. Förutom att samtliga svenska lokaler inventerats har arten eftersökts på potentiella lokaler varför antalet kända lokaler har ökat. Ã…tta av lokalerna ligger inom skyddade områden och 3 inom nyckelbiotop eller biotopskydd. Fortgående minskning förekommer i kombination med att antalet reproduktiva individer är lågt vilket gör att arten hamnar i kategorin Starkt hotad (EN). (B2ab(iii), C2a(i)).",
+    "Kriteriedokumentation": "En noga eftersökt och uppenbart ytterst sällsynt art i hela Europa med sina största förekomster i Sverige. Populationen bedöms vara liten och fragmenterad, samtidigt som få mycel finns på varje lokal. Den totala populationen i landet har minskat kraftigt och bedöms fortsätta minska till följd av avverkning av kalkbarrskogar och fortsatt fragmentering av artens livsmiljöer. Arten har begränsad förmåga att återetablera sig efter slutavverkning eller andra storskaliga skogsbruksåtgärder, och det finns inga indikationer på att den långsiktigt kan etablera eller reproducera sig i bestånd som brukas med trakthyggesmetoder, markberedning, gödsling eller förädlat plantmaterial. Kombination med att utbredningsområdet är kraftigt fragmenterat och fortgående minskning förekommer gör att arten uppfyller B-kriteriet. Fortgående minskning förekommer i kombination med att antalet reproduktiva individer är lågt vilket gör att arten hamnar i kategorin Starkt hotad (EN). (B2ab(iii), C2a(i)).",
     "Svamp-grupp": "taggsvamp",
     "Svamp-Undersvamp-grupp": null,
     "SIGNAL_art": null,
@@ -737,7 +780,7 @@
     "ANNANmark": null,
     "RLochS": "x",
     "rating": null,
-    "ekologi": "Växer med tall gles, äldre kalktallskog med inslag av enstaka senvuxna granar, men kan också finnas i kalkbarrskog med blandad förekomst av tall och gran. Oftast på torr och näringsfattig mark med tunt jordlager eller blottad mark. ",
+    "ekologi": "Växer med tall gles, äldre kalktallskog med inslag av enstaka senvuxna granar, men kan ocksä finnas i kalkbarrskog med blandad förekomst av tall och gran. Oftast på torr och näringsfattig mark med tunt jordlager eller blottad mark. ",
     "RankRed": 2,
     "Giftsvamp": null,
     "förekomst_skog_ålder": 3,
@@ -750,10 +793,10 @@
   {
     "Scientificname": "Hygrophorus subviscifer",
     "Commonname": "narrvaxskivling",
-    "Artfakta": "https://artfakta.se/artinformation/taxa/831/detaljer",
+    "Artfakta": "https://artfakta.se/taxa/831/information",
     "RL2020kat": "VU",
     "RL2020krit": "A2c+3c+4c, C2a(i)",
-    "Kriteriedokumentation": "Relativt liten och oansenlig fruktkropp, men uppenbarligen knuten till exklusiva miljöer och inte funnen i unga skogsbestånd. Total population i landet bedöms ha minskat kraftigt och fortgående att minska, huvudsakligen p.g.a. att arealen äldre barrskog som aldrig slutavverkats har minskat de senaste 50 åren. Fortgående minskning förekommer i kombination med att antalet reproduktiva individer är lågt vilket gör att arten hamnar i kategorin Sårbar (VU). (A2c+3c+4c, C2a(i)).",
+    "Kriteriedokumentation": "Den totala populationen i landet bedöms ha minskat och förväntas fortsätta minska på grund av slutavverkning av äldre barrskog och kontinuitetsskog. Arten har begränsad förmåga att återetablera sig efter slutavverkning eller andra storskaliga skogsbruksåtgärder, och det finns inga indikationer på att den långsiktigt kan etablera eller reproducera sig i bestånd som brukas med trakthyggesmetoder, markberedning, gödsling eller förädlat plantmaterial. Fortgående minskning förekommer i kombination med att antalet reproduktiva individer är lågt vilket gör att arten hamnar i kategorin Sårbar (VU). (A2c+3c+4c, C2a(i)).",
     "Svamp-grupp": "hattsvamp",
     "Svamp-Undersvamp-grupp": null,
     "SIGNAL_art": null,
@@ -789,16 +832,16 @@
     "förekomst_ung": 0,
     "förekomst_sum": 2,
     "images": [
-      "/images/svampbilder/RödlistadeSvampar/Hygrophorus subviscifer-831.jpg"
+      "/images/SvampBilder/RödlistadeSvampar/Hygrophorus subviscifer-831.jpg"
     ]
   },
   {
     "Scientificname": "Cortinarius venetus",
     "Commonname": "olivspindling",
-    "Artfakta": "https://artfakta.se/artinformation/taxa/3762/detaljer",
+    "Artfakta": "https://artfakta.se/taxa/3762/",
     "RL2020kat": "LC",
     "RL2020krit": null,
-    "Kriteriedokumentation": "Kalkrik mark verkar vara viktigare för artens förekomster än barrskogens historik och ålder. Total population i landet bedöms ha minskat, huvudsakligen p.g.a. slutavverkning av äldre skog men inte i tillräcklig omfattning för att uppfylla kriterierna för att bli rödlistad. ",
+    "Kriteriedokumentation": null,
     "Svamp-grupp": "hattsvamp",
     "Svamp-Undersvamp-grupp": null,
     "SIGNAL_art": "S",
@@ -838,10 +881,10 @@
   {
     "Scientificname": "Hydnellum aurantiacum",
     "Commonname": "orange taggsvamp",
-    "Artfakta": "https://artfakta.se/artinformation/taxa/4361/detaljer",
+    "Artfakta": "https://artfakta.se/taxa/4361/information",
     "RL2020kat": "NT",
     "RL2020krit": "A2c+3c+4c",
-    "Kriteriedokumentation": "Total population i landet bedöms ha minskat och fortgående att minska p.g.a slutavverkningar av kontinuitetsbarrskog.  Minskningstakten för den svenska populationen bedöms vara nära gränsvärdet för Sårbar (VU). (A2c+3c+4c).",
+    "Kriteriedokumentation": "Den totala populationen i landet har minskat och bedöms fortsätta minska till följd av avverkning av äldre barrskogar och fortsatt fragmentering av artens livsmiljöer. Arten har begränsad förmåga att återetablera sig efter slutavverkning eller andra storskaliga skogsbruksåtgärder. Det finns inga indikationer på att arten långsiktigt kan etablera eller reproducera sig i skogsbestånd som brukas med trakthyggesmetoder, markberedning, gödsling eller föryngring med förädlat plantmaterial. Minskningstakten för den svenska populationen bedöms vara nära gränsvärdet för Sårbar (VU). (A2c+3c+4c).",
     "Svamp-grupp": "taggsvamp",
     "Svamp-Undersvamp-grupp": null,
     "SIGNAL_art": null,
@@ -877,13 +920,13 @@
     "förekomst_ung": 0,
     "förekomst_sum": 3,
     "images": [
-      "/images/svampbilder/RödlistadeSvampar/Hydnellum aurantiacum-4361.jpg"
+      "/images/SvampBilder/RödlistadeSvampar/Hydnellum aurantiacum-4361.jpg"
     ]
   },
   {
     "Scientificname": "Cortinarius inexspectatus",
     "Commonname": "oväntad spindling",
-    "Artfakta": "https://artfakta.se/artinformation/taxa/3637/detaljer",
+    "Artfakta": "https://artfakta.se/taxa/3637/information",
     "RL2020kat": "VU",
     "RL2020krit": "D1",
     "Kriteriedokumentation": "Ytterst få fynduppgifter i landet, trots att arten bildar stora fruktkroppar och är känd sedan den beskrevs från Norge 1989. Troligen är arten förbisedd eftersom fruktkropparna uppträder vår till försommar. Eventuella populationsförändringar är svåra att uppskatta, men uppenbarligen en mycket sällsynt art med en liten population i landet. Antalet individer bedöms vara lägre än gränsvärdet för Sårbar (VU) enligt D-kriteriet. (D1).",
@@ -926,10 +969,10 @@
   {
     "Scientificname": "Cortinarius sulfurinus",
     "Commonname": "persiljespindling",
-    "Artfakta": "https://artfakta.se/artinformation/taxa/3739/detaljer",
+    "Artfakta": "https://artfakta.se/taxa/3739/information",
     "RL2020kat": "NT",
     "RL2020krit": "A2c+3c+4c",
-    "Kriteriedokumentation": "Minst 90 % av den svenska populationen förekommer i barrskog. Resterande 10 % avser var. fageticola som växer i bokskog. Barrskogspopulationen i landet bedöms ha minskat och fortsatt minska p.g.a. slutavverkningar.  Minskningstakten för den svenska populationen bedöms vara nära gränsvärdet för Sårbar (VU). (A2c+3c+4c).",
+    "Kriteriedokumentation": "Minst 90 % av den svenska populationen förekommer i barrskog. Resterande 10 % avser var. fageticola som växer i bokskog. Barrskogspopulationen i landet bedöms ha minskat och fortsatt minska p.g.a. slutavverkningar. Minskningstakten för den svenska populationen bedöms vara nära gränsvärdet för Sårbar (VU). (A2c+3c+4c).",
     "Svamp-grupp": "hattsvamp",
     "Svamp-Undersvamp-grupp": null,
     "SIGNAL_art": null,
@@ -969,10 +1012,10 @@
   {
     "Scientificname": "Hydnellum peckii",
     "Commonname": "skarp dropptaggsvamp",
-    "Artfakta": "https://artfakta.se/artinformation/taxa/4366/detaljer",
-    "RL2020kat": "LC",
+    "Artfakta": "https://artfakta.se/taxa/4366/information",
+    "RL2020kat": "NT",
     "RL2020krit": null,
-    "Kriteriedokumentation": null,
+    "Kriteriedokumentation": "Arten har tudelad ekologi och uppträder dels i näringsrik kalkbarrskog och dels i sur lavtallskog. Kalkbarrskogarna är ofta grandominerade, olikåldriga och skiktade på frisk mark med ett örtrikt vegetationsskikt. Lavtallskogarna är i regel magra, torra, ljusöppna och ofta brandpräglade. Den totala populationen i landet har minskat och bedöms fortsätta minska till följd av avverkning av äldre barrskogar. Arten har begränsad förmåga att återetablera sig efter slutavverkning eller andra storskaliga skogsbruksåtgärder. Det saknas indikationer på att arten långsiktigt kan etablera eller reproducera sig i skogsbestånd som brukas med metoder som trakthyggesbruk, markberedning, gödsling eller föryngring med förädlat plantmaterial. Uppfyller kriterierna för att bli rödlistad på grund av ny kunskap som visar att en större andel av populationen än tidigare bedömt är knuten till kontinuitetsbarrskog. Minskningstakten för den svenska populationen bedöms vara nära gränsvärdet för Sårbar (VU). (A2c+3c+4c).",
     "Svamp-grupp": "taggsvamp",
     "Svamp-Undersvamp-grupp": null,
     "SIGNAL_art": "S",
@@ -995,11 +1038,11 @@
     "BLÅBÄR_grupp": "x",
     "LINGON_grupp": null,
     "OVANLIGHET": 1,
-    "KALKmark": null,
+    "KALKmark": "x",
     "ANNANmark": "y",
     "RLochS": "S",
     "rating": null,
-    "ekologi": "Lavtallskog, lingontallskog och blåbärsgranskog. Med tall och gran.",
+    "ekologi": "Växer med tall och gran i lav- och  lingontallskog samt blåbärsgranskog. ",
     "RankRed": 1,
     "Giftsvamp": null,
     "förekomst_skog_ålder": 3,
@@ -1012,10 +1055,10 @@
   {
     "Scientificname": "Cortinarius mussivus",
     "Commonname": "stor odörspindling",
-    "Artfakta": "https://artfakta.se/artinformation/taxa/6003296/detaljer",
+    "Artfakta": "https://artfakta.se/taxa/6003296/information",
     "RL2020kat": "VU",
     "RL2020krit": "A2c+3c+4c, C2a(i)",
-    "Kriteriedokumentation": "Tidigare sammanblandad med den närstående arten C. russeoides och utbredningsbilden är ännu ofullständig. En fortlöpande minskning bedöms pågå p.g.a. slutavverkningar av äldre kontinuitetsbarrskog. Har uppenbart svårt att återetableras efter avverkning. AFortgående minskning förekommer i kombination med att antalet reproduktiva individer är lågt vilket gör att arten hamnar i kategorin Sårbar (VU). (A2c+3c+4c, C2a(i)).",
+    "Kriteriedokumentation": "Ofta förväxlad med den närstående arten C. russeoides och utbredningsbilden är ännu ofullständig. Den totala populationen i landet har minskat och bedöms fortsätta minska på grund av avverkning av kalkbarrskogar. Arten har begränsad förmåga att återetablera sig efter slutavverkning eller andra storskaliga skogsbruksåtgärder, och det finns inga indikationer på att den långsiktigt kan etablera eller reproducera sig i bestånd som brukas med trakthyggesmetoder, markberedning, gödsling eller förädlat plantmaterial. Fortgående minskning förekommer i kombination med att antalet reproduktiva individer är lågt vilket gör att arten hamnar i kategorin Sårbar (VU). (A2c+3c+4c, C2a(i)).",
     "Svamp-grupp": "hattsvamp",
     "Svamp-Undersvamp-grupp": null,
     "SIGNAL_art": null,
@@ -1055,7 +1098,7 @@
   {
     "Scientificname": "Cortinarius glaucopus",
     "Commonname": "strimspindling",
-    "Artfakta": "https://artfakta.se/artinformation/taxa/3624/detaljer",
+    "Artfakta": "https://artfakta.se/taxa/3624/",
     "RL2020kat": "LC",
     "RL2020krit": null,
     "Kriteriedokumentation": null,
@@ -1098,10 +1141,10 @@
   {
     "Scientificname": "Tricholoma atrosquamosum",
     "Commonname": "svartfjällig musseron",
-    "Artfakta": "https://artfakta.se/artinformation/taxa/1594/detaljer",
+    "Artfakta": "https://artfakta.se/taxa/1594/information",
     "RL2020kat": "VU",
     "RL2020krit": "A2c+3c+4c, C2a(i)",
-    "Kriteriedokumentation": "Arten förekommer huvudsakligen i kontinuitetsskog, bestånd som inte slutavverkats. Total population i landet bedöms ha minskat starkt och fortsatt minska p.g.a. avverkningar av örtrik äldre granskog. Tidigare har namnet T. atrosquamosum använts i en vidare bemärkelse som inkluderat även andra arter i komplexet med svartfjälliga musseroner, vilka nu är bedömda som egna arter under andra namn fr.o.m. rödlista 2015 och framåt.  Fortgående minskning förekommer i kombination med att antalet reproduktiva individer är lågt vilket gör att arten hamnar i kategorin Sårbar (VU). (A2c+3c+4c, C2a(i)).",
+    "Kriteriedokumentation": "Den totala populationen i landet har minskat kraftigt och bedöms fortsätta minska på grund av avverkning av kalkbarrskogar och tilltagande fragmentering av artens livsmiljö. Arten har begränsad förmåga att återetablera sig efter slutavverkning eller andra storskaliga skogsbruksåtgärder, och det finns inga indikationer på att den långsiktigt kan etablera eller reproducera sig i bestånd som brukas med trakthyggesmetoder, markberedning, gödsling eller förädlat plantmaterial. Fortgående minskning förekommer i kombination med att antalet reproduktiva individer är lågt vilket gör att arten hamnar i kategorin Sårbar (VU). (A2c+3c+4c, C2a(i)).",
     "Svamp-grupp": "hattsvamp",
     "Svamp-Undersvamp-grupp": null,
     "SIGNAL_art": null,
@@ -1137,16 +1180,16 @@
     "förekomst_ung": 0,
     "förekomst_sum": 2,
     "images": [
-      "/images/svampbilder/RödlistadeSvampar/Tricholoma atrosquamosum-1594.jpg"
+      "/images/SvampBilder/RödlistadeSvampar/Tricholoma atrosquamosum-1594.jpg"
     ]
   },
   {
     "Scientificname": "Cortinarius atrovirens",
     "Commonname": "svartgrön spindling",
-    "Artfakta": "https://artfakta.se/artinformation/taxa/424/detaljer",
+    "Artfakta": "https://artfakta.se/taxa/424/information",
     "RL2020kat": "VU",
     "RL2020krit": "A2c+3c+4c, C2a(i)",
-    "Kriteriedokumentation": "Iögonfallande och lätt identifierbar art som är välkänd och eftersökt. Total population i landet bedöms ha minskat och fortsätta minska p.g.a. slutavverkning av äldre kalkbarrskog. Förefaller ha svårt att återetableras efter kalavverkning.  Fortgående minskning förekommer i kombination med att antalet reproduktiva individer är lågt vilket gör att arten hamnar i kategorin Sårbar (VU). (A2c+3c+4c, C2a(i)).",
+    "Kriteriedokumentation": "Iögonfallande och lätt identifierbar art som är välkänd och eftersökt. Den totala populationen i landet har minskat kraftigt och bedöms fortsätta minska på grund av avverkning av kalkbarrskogar och tilltagande fragmentering av artens livsmiljö. Arten har begränsad förmåga att återetablera sig efter slutavverkning eller andra storskaliga skogsbruksåtgärder, och det finns inga indikationer på att den långsiktigt kan etablera eller reproducera sig i bestånd som brukas med trakthyggesmetoder, markberedning, gödsling eller förädlat plantmaterial. Fortgående minskning förekommer i kombination med att antalet reproduktiva individer är lågt vilket gör att arten hamnar i kategorin Sårbar (VU). (A2c+3c+4c, C2a(i)).",
     "Svamp-grupp": "hattsvamp",
     "Svamp-Undersvamp-grupp": null,
     "SIGNAL_art": null,
@@ -1182,18 +1225,18 @@
     "förekomst_ung": 0,
     "förekomst_sum": 3,
     "images": [
-      "/images/svampbilder/Giftsvampar/Cortinarius atrovirens-258-.jpg",
-      "/images/svampbilder/Giftsvampar/Cortinarius atrovirens-176-424.jpg",
-      "/images/svampbilder/RödlistadeSvampar/Cortinarius atrovirens-424.jpg"
+      "/images/SvampBilder/Giftsvampar/Cortinarius atrovirens-258-.jpg",
+      "/images/SvampBilder/Giftsvampar/Cortinarius atrovirens-176-424.jpg",
+      "/images/SvampBilder/RödlistadeSvampar/Cortinarius atrovirens-424.jpg"
     ]
   },
   {
     "Scientificname": "Cortinarius terpsichores",
     "Commonname": "tallpraktspindling",
-    "Artfakta": "https://artfakta.se/artinformation/taxa/248939/detaljer",
+    "Artfakta": "https://artfakta.se/taxa/248939/information",
     "RL2020kat": "VU",
     "RL2020krit": "A2c, C2a(i)",
-    "Kriteriedokumentation": "Huvudsaklig utbredning Gotland, enstaka fynd på norraÖland. Total population i landet bedöms ha minskat och fortgående minska, huvudsakligen p.g.a. slutavverkningar av äldre kontinuitetsbarrskog och försämrad habitatkvalitet, bl.a. genom förtätningar i skogsbestånd vid upphört skogsbete. Har uppenbart svårt att återetableras efter avverkning. Tidigare sammanblandad med den närstående arten C. eucaeruleus som växer med ädellövträd. Fortgående minskning förekommer i kombination med att antalet reproduktiva individer är lågt vilket gör att arten hamnar i kategorin Sårbar (VU). (A2c, C2a(i)).",
+    "Kriteriedokumentation": "Huvudsaklig utbredning Gotland, enstaka fynd på norra Öland. Total population i landet bedöms ha minskat och fortgående minska, huvudsakligen p.g.a. slutavverkningar av äldre kontinuitetsbarrskog och försämrad habitatkvalitet, bl.a. genom förtätningar i skogsbestånd vid upphört skogsbete. Arten har begränsad förmåga att återetablera sig efter slutavverkning eller andra storskaliga skogsbruksåtgärder, och det finns inga indikationer på att den långsiktigt kan etablera eller reproducera sig i bestånd som brukas med trakthyggesmetoder, markberedning, gödsling eller förädlat plantmaterial. Tidigare sammanblandad med den närstående arten C. eucaeruleus som växer med ädellövträd. Fortgående minskning förekommer i kombination med att antalet reproduktiva individer är lågt vilket gör att arten hamnar i kategorin Sårbar (VU). (A2c+3c+4c, C2a(i)).",
     "Svamp-grupp": "hattsvamp",
     "Svamp-Undersvamp-grupp": null,
     "SIGNAL_art": null,
@@ -1229,16 +1272,16 @@
     "förekomst_ung": 0,
     "förekomst_sum": null,
     "images": [
-      "/images/svampbilder/RödlistadeSvampar/Cortinarius terpsichores-248939.jpg"
+      "/images/SvampBilder/RödlistadeSvampar/Cortinarius terpsichores-248939.jpg"
     ]
   },
   {
     "Scientificname": "Hygrophorus latitabundus",
     "Commonname": "tallvaxskivling",
-    "Artfakta": "https://artfakta.se/artinformation/taxa/4414/detaljer",
+    "Artfakta": "https://artfakta.se/taxa/4414/information",
     "RL2020kat": "VU",
     "RL2020krit": "D1",
-    "Kriteriedokumentation": "Först konstaterad i landet 1998 och är i Sverige enbart funnen på ett fåtal lokaler på Gotland. En klimatiskt begränsad, sydlig art. Svårt att bedöma eventuella populationsförändringar. Antalet individer bedöms vara lägre än gränsvärdet för Sårbar (VU) enligt D-kriteriet. (D1).",
+    "Kriteriedokumentation": "Först konstaterad i landet 1998 och är i Sverige enbart funnen på ett fåtal lokaler på Gotland. En klimatiskt begränsad, sydlig art. Svårt att bedöma eventuella populationsförändringar.  Antalet individer bedöms vara lägre än gränsvärdet för Sårbar (VU) enligt D-kriteriet. (D1).",
     "Svamp-grupp": "hattsvamp",
     "Svamp-Undersvamp-grupp": null,
     "SIGNAL_art": null,
@@ -1274,16 +1317,16 @@
     "förekomst_ung": 0,
     "förekomst_sum": "x1",
     "images": [
-      "/images/svampbilder/RödlistadeSvampar/Hygrophorus latitabundus-4414.jpg"
+      "/images/SvampBilder/RödlistadeSvampar/Hygrophorus latitabundus-4414.jpg"
     ]
   },
   {
     "Scientificname": "Ramaria flavescens",
     "Commonname": "tjockfotad fingersvamp",
-    "Artfakta": "https://artfakta.se/artinformation/taxa/5741/detaljer",
-    "RL2020kat": "LC",
+    "Artfakta": "https://artfakta.se/taxa/5741/information",
+    "RL2020kat": "NT",
     "RL2020krit": null,
-    "Kriteriedokumentation": "Har ofta sammanblandats med andra arter i Ramaria flava-komplexet. R. flavescens är sannolikt en av våra vanligare gula arter av â€",
+    "Kriteriedokumentation": "Den totala populationen i landet bedöms ha minskat under de senaste 50 åren och förväntas fortsätta minska, främst på grund av slutavverkning av äldre barrskog. Populationen i ädellövskog bedöms vara mer stabil och minskar inte i samma omfattning. Arten har begränsad förmåga att återetablera sig efter kalavverkning, och det finns inga indikationer på att den långsiktigt kan etablera eller reproducera sig i skogar där kontinuerlig markberedning, gödsling eller trakthyggesbruk tillämpas. Uppfyller kriterierna för att bli rödlistad på grund av ny kunskap som visar att en större andel av populationen än tidigare bedömt är knuten till kontinuitetsbarrskog. A Minskningstakten för den svenska populationen bedöms vara nära gränsvärdet för Sårbar (VU). (A2c+3c+4c).",
     "Svamp-grupp": "fingersvamp",
     "Svamp-Undersvamp-grupp": null,
     "SIGNAL_art": "S",
@@ -1310,7 +1353,7 @@
     "ANNANmark": null,
     "RLochS": "S",
     "rating": null,
-    "ekologi": "Bildar mykorrhiza med bok och ek på kalkrik mark i huvudsakligen äldre skog men även med gran i örtrik äldre barrskog.",
+    "ekologi": "Växer med bok och ek pä kalkrik mark i huvudsakligen äldre skog men även med gran i örtrik äldre barrskog.",
     "RankRed": 2,
     "Giftsvamp": null,
     "förekomst_skog_ålder": 3,
@@ -1323,10 +1366,10 @@
   {
     "Scientificname": "Cortinarius violaceomaculatus",
     "Commonname": "violettfläckig spindling",
-    "Artfakta": "https://artfakta.se/artinformation/taxa/3767/detaljer",
+    "Artfakta": "https://artfakta.se/taxa/3767/information",
     "RL2020kat": "VU",
     "RL2020krit": "A2c+3c+4c, C2a(i)",
-    "Kriteriedokumentation": " De flesta fynden i landet är gjorda på Gotland där den förekommer i betespräglade äldre kalkbarrskogar. Total population i landet bedöms ha minskat och fortgående minska, huvudsakligen p.g.a. slutavverkningar av äldre kontinuitetsbarrskog och försämrad habitatkvalitet, bl.a. genom förtätningar i skogsbestånd vid upphört skogsbete. Har uppenbart svårt att återetableras efter avverkning. Fortgående minskning förekommer i kombination med att antalet reproduktiva individer är lågt vilket gör att arten hamnar i kategorin Sårbar (VU). (A2c+3c+4c, C2a(i)).",
+    "Kriteriedokumentation": "De flesta fynden i landet är gjorda på Gotland där den förekommer i betespräglade äldre kalkbarrskogar. Total population i landet bedöms ha minskat och fortgående minska, huvudsakligen p.g.a. slutavverkningar av äldre kontinuitetsbarrskog och försämrad habitatkvalitet, bl.a. genom förtätningar i skogsbestånd vid upphört skogsbete. Har uppenbart svårt att återetableras efter avverkning.  Fortgående minskning förekommer i kombination med att antalet reproduktiva individer är lågt vilket gör att arten hamnar i kategorin Sårbar (VU). (A2c+3c+4c, C2a(i)).",
     "Svamp-grupp": "hattsvamp",
     "Svamp-Undersvamp-grupp": null,
     "SIGNAL_art": null,
@@ -1362,16 +1405,16 @@
     "förekomst_ung": 0,
     "förekomst_sum": 3,
     "images": [
-      "/images/svampbilder/RödlistadeSvampar/Cortinarius violaceomaculatus-3767.jpg"
+      "/images/SvampBilder/RödlistadeSvampar/Cortinarius violaceomaculatus-3767.jpg"
     ]
   },
   {
     "Scientificname": "Cortinarius pseudoglaucopus",
     "Commonname": "violettrandad spindling",
-    "Artfakta": "https://artfakta.se/artinformation/taxa/462/detaljer",
+    "Artfakta": "https://artfakta.se/taxa/462/information",
     "RL2020kat": "VU",
     "RL2020krit": "A2c+3c+4c, C2a(i)",
-    "Kriteriedokumentation": "Växer främst i luckiga skogar påverkade av plockhuggning och/eller skogsbete. Total population i landet bedöms ha minskat och minskar fortsatt, huvudsakligen p.g.a. slutavverkningar av äldre barrskog och försämrad habitatkvalitet som förtätningar i skogsbestånd vid upphört skogsbete. Har uppenbart svårt att återetableras efter avverkning. Fortgående minskning förekommer i kombination med att antalet reproduktiva individer är lågt vilket gör att arten hamnar i kategorin Sårbar (VU). (A2c+3c+4c, C2a(i)).",
+    "Kriteriedokumentation": "Växer främst i kontinuitetsskog och luckiga skogar påverkade av plockhuggning och/eller skogsbete. Den totala populationen i landet bedöms ha minskat och förväntas fortsätta minska på grund av slutavverkning av äldre kalkbarrskog och försämrad habitatkvalitet, bl.a. genom förtätningar i skogsbestånd vid upphört skogsbete. Arten har begränsad förmåga att återetablera sig efter slutavverkning eller andra storskaliga skogsbruksåtgärder, och det finns inga indikationer på att den långsiktigt kan etablera eller reproducera sig i bestånd som brukas med trakthyggesmetoder, markberedning, gödsling eller förädlat plantmaterial. Fortgående minskning förekommer i kombination med att antalet reproduktiva individer är lågt vilket gör att arten hamnar i kategorin Sårbar (VU). (A2c+3c+4c, C2a(i)).",
     "Svamp-grupp": "hattsvamp",
     "Svamp-Undersvamp-grupp": null,
     "SIGNAL_art": null,
@@ -1411,7 +1454,7 @@
   {
     "Scientificname": "Hydnellum concrescens",
     "Commonname": "zontaggsvamp",
-    "Artfakta": "https://artfakta.se/artinformation/taxa/4363/detaljer",
+    "Artfakta": "https://artfakta.se/taxa/4363/",
     "RL2020kat": "LC",
     "RL2020krit": null,
     "Kriteriedokumentation": null,

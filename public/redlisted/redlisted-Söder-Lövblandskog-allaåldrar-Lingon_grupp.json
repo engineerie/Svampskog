@@ -2,10 +2,10 @@
   {
     "Scientificname": "Hydnellum caeruleum",
     "Commonname": "blå taggsvamp",
-    "Artfakta": "https://artfakta.se/artinformation/taxa/4362/detaljer",
+    "Artfakta": "https://artfakta.se/taxa/4362/information",
     "RL2020kat": "NT",
     "RL2020krit": "A2c+3c+4c",
-    "Kriteriedokumentation": "Kan överleva hyggesfasen på hänsynsytor med lämnade hänsynsträd. Inga eller få observationer i ungskogar uppkomna efter slutavverkning. Total population i landet bedöms ha minskat och fortgående minska p.g.a slutavverkning av äldre barrskog. Minskningstakten för den svenska populationen bedöms vara nära gränsvärdet för Sårbar (VU). (A2c+3c+4c).",
+    "Kriteriedokumentation": "Särskilt frekvent i magra, torra, ljusöppna och ofta brandpräglade lavtallskogar. Marktypen utgörs av sandsediment, sandig–grusig morän eller hällmark. Inom den boreala zonen påträffas arten ibland i yngre tallbestånd som föryngrats under fröträd, vilket utgjort förutsättningar för bibehållen kontinuitet. Dessa områden angränsar ofta äldre bestånd. När arten förekommer i granskog, vilket är sällsynt, tycks den vara knuten till örtrik kalkgranskog. Den totala populationen i landet har minskat och bedöms fortsätta minska till följd av avverkning av äldre barrskog och fortsatt fragmentering av artens livsmiljöer. Arten har begränsad förmåga att återetablera sig efter slutavverkning eller andra storskaliga skogsbruksåtgärder. Det finns inga indikationer på att arten långsiktigt kan etablera eller reproducera sig i skogsbestånd som brukas med trakthyggesmetoder, markberedning, gödsling eller föryngring med förädlat plantmaterial.  Minskningstakten för den svenska populationen bedöms vara nära gränsvärdet för Sårbar (VU). (A2c+3c+4c).",
     "Svamp-grupp": "taggsvamp",
     "Svamp-Undersvamp-grupp": null,
     "SIGNAL_art": null,
@@ -41,16 +41,16 @@
     "förekomst_ung": 0,
     "förekomst_sum": 2,
     "images": [
-      "/images/svampbilder/RödlistadeSvampar/Hydnellum caeruleum-4362.jpg"
+      "/images/SvampBilder/RödlistadeSvampar/Hydnellum caeruleum-4362.jpg"
     ]
   },
   {
     "Scientificname": "Hydnellum ferrugineum",
     "Commonname": "dropptaggsvamp",
-    "Artfakta": "https://artfakta.se/artinformation/taxa/4364/detaljer",
-    "RL2020kat": "LC",
+    "Artfakta": "https://artfakta.se/taxa/4364/information",
+    "RL2020kat": "NT",
     "RL2020krit": null,
-    "Kriteriedokumentation": "Total population i landet bedöms ha minskat och fortsatt minska p.g.a slutavverkningar och förhöja kvävenivåer i marken som en följd av skogsgödsling, omfattningen är dock svår att bedöma. ",
+    "Kriteriedokumentation": "Arten påträffas också i tallskog med yngre trädåldrar men då främst i bestånd som föryngrats naturligt. En välkänd art som går att identifiera även utanför svampsäsong tack vare den tjocka vita mycelmattan. Den totala populationen i landet har minskat och bedöms fortsätta minska till följd av slutavverkningar av tallskog. Det är högst oklart om arten långsiktigt kan etablera och reproducera sig i skogsbestånd som brukas med trakthyggesmetoder, markberedning, gödsling eller föryngring med förädlat plantmaterial. Uppfyller kriterierna för att bli rödlistad på grund av ny kunskap som visar att en större andel av populationen än tidigare bedömt är knuten till kontinuitetsbarrskog. Minskningstakten för den svenska populationen bedöms vara nära gränsvärdet för Sårbar (VU). (A2c+3c+4c).",
     "Svamp-grupp": "taggsvamp",
     "Svamp-Undersvamp-grupp": null,
     "SIGNAL_art": "S",
@@ -77,7 +77,7 @@
     "ANNANmark": "y",
     "RLochS": "S",
     "rating": null,
-    "ekologi": "Lavtallskog, lingontallskog och blåbärsgranskog. Mager mark. Med tall och gran.",
+    "ekologi": "Växer med tall och gran i lav- och  lingontallskog samt blåbärsgranskog. ",
     "RankRed": 1,
     "Giftsvamp": null,
     "förekomst_skog_ålder": 3,
@@ -90,10 +90,10 @@
   {
     "Scientificname": "Scleroderma septentrionale",
     "Commonname": "sandrottryffel",
-    "Artfakta": "https://artfakta.se/artinformation/taxa/5977/detaljer",
+    "Artfakta": "https://artfakta.se/taxa/5977/information",
     "RL2020kat": "NT",
     "RL2020krit": "A2c+3c+4c",
-    "Kriteriedokumentation": "Finns förmodligen på flertalet sandstränder upp till Haparanda men mörkertal ännu stort. Verkar ha sitt europeiska utbredningscentrum i Skandinavien. Väl känd ekologi, framförallt gamla betesmarker och störda landhöjningsstränder som inte får växa igen. Artens potentiella lämpliga miljöer bedöms ha minskat och fortsatt komma att minska p.g.a. igenväxning av betesmarker samt exploatering av stränder. Minskningstakten för den svenska populationen bedöms vara nära gränsvärdet för Sårbar (VU). (A2c+3c+4c).",
+    "Kriteriedokumentation": "Finns förmodligen på flertalet sandstränder upp till Haparanda men mörkertal ännu stort, men även längs älvstränder i inlandet. Har sitt europeiska utbredningscentrum i Skandinavien. Väl känd ekologi, framförallt gamla betesmarker och störda landhöjningsstränder som inte får växa igen. Artens potentiella lämpliga miljöer bedöms ha minskat och fortsatt komma att minska p.g.a. igenväxning av betesmarker samt exploatering av stränder. . Fortgående minskning förekommer i kombination med att antalet reproduktiva individer är lågt vilket gör att arten rödlistas som Nära hotad (NT). (A3c+4c, C1).",
     "Svamp-grupp": "tryffel",
     "Svamp-Undersvamp-grupp": null,
     "SIGNAL_art": null,
@@ -120,7 +120,7 @@
     "ANNANmark": "y",
     "RLochS": "x",
     "rating": null,
-    "ekologi": "Växer med tall, ev också krypvide. Främst på kustnära sanddyner med lågt pH, ofta utlakade och med kråkbär, ärttryffel etc. ",
+    "ekologi": "Växer med tall, ev ocksä krypvide. Främst på kustnära sanddyner med lägt pH, ofta utlakade och med kräkbär, ärttryffel etc. ",
     "RankRed": 3,
     "Giftsvamp": null,
     "förekomst_skog_ålder": 3,
@@ -133,10 +133,10 @@
   {
     "Scientificname": "Phellodon connatus",
     "Commonname": "svartvit taggsvamp",
-    "Artfakta": "https://artfakta.se/artinformation/taxa/5448/detaljer",
+    "Artfakta": "https://artfakta.se/taxa/5448/information",
     "RL2020kat": "NT",
     "RL2020krit": "A2c+3c+4c",
-    "Kriteriedokumentation": "Växer huvudsakligen i äldre tidigare icke kalavverkad skog på torr till frisk mark. Total population i landet bedöms ha minskat, och fortsatt minska huvudsakligen p.g.a. slutavverkningar av äldre skog. P.g.a. något bredare ekologi än andra rödlistade barrskogsarter bedöms minskningstakten något lägre.  Minskningstakten för den svenska populationen bedöms uppfylla kriteriet för Nära hotad (NT). (A2c+3c+4c).",
+    "Kriteriedokumentation": "Växer huvudsakligen i äldre tidigare icke kalavverkad skog på torr till frisk mark. Den totala populationen i landet bedöms ha minskat de senaste 50 åren och förväntas fortsätta minska på grund av slutavverkning av äldre barrskog. Arten har begränsad förmåga att återetablera sig efter slutavverkning eller andra storskaliga skogsbruksåtgärder. Det finns inga indikationer på att arten långsiktigt kan etablera eller reproducera sig i skogsbestånd som brukas med trakthyggesmetoder, markberedning, gödsling eller föryngring med förädlat plantmaterial. Minskningstakten för den svenska populationen bedöms vara nära gränsvärdet för Sårbar (VU). (A2c+3c+4c).",
     "Svamp-grupp": "taggsvamp",
     "Svamp-Undersvamp-grupp": null,
     "SIGNAL_art": null,
@@ -172,7 +172,7 @@
     "förekomst_ung": 0,
     "förekomst_sum": 2,
     "images": [
-      "/images/svampbilder/RödlistadeSvampar/Phellodon connatus-5448.jpg"
+      "/images/SvampBilder/RödlistadeSvampar/Phellodon connatus-5448.jpg"
     ]
   }
 ]

@@ -3,6 +3,11 @@ import { open } from 'sqlite'
 import fs from 'fs'
 import path from 'path'
 import { fileURLToPath } from 'url'
+import {
+  pickColumnRef,
+  quoteIdentifier,
+  resolveSpeciesSourceSchema,
+} from '../server/utils/speciesSourceSchema.js'
 
 const __filename = fileURLToPath(import.meta.url)
 const __dirname = path.dirname(__filename)
@@ -320,6 +325,84 @@ async function buildAllSpeciesJson() {
     filename: path.join(__dirname, '../server/EDNAData.db'),
     driver: sqlite3.Database
   })
+  const schema = await resolveSpeciesSourceSchema(db)
+  const speciesTable = quoteIdentifier(schema.speciesTable)
+  const artfaktaRef =
+    pickColumnRef('m', schema.speciesColumns, ['Artfakta_2025', 'Artfakta 2025', 'Artfakta']) ||
+    'NULL'
+  const rlRef =
+    pickColumnRef('m', schema.speciesColumns, ['RL2025kat', 'RL2020kat']) ||
+    'NULL'
+  const rl2025Ref =
+    pickColumnRef('m', schema.speciesColumns, ['RL2025kat']) ||
+    'NULL'
+  const kriteriedokumentationRef =
+    pickColumnRef('m', schema.speciesColumns, ['Kriteriedokumentation2025']) ||
+    pickColumnRef('m', schema.speciesColumns, ['Kriteriedokumentation']) ||
+    'NULL'
+  const ekologiRef =
+    pickColumnRef('m', schema.speciesColumns, ['Ekologi2025', 'ekologi 2025']) ||
+    pickColumnRef('m', schema.speciesColumns, ['ekologi']) ||
+    'NULL'
+  const antalObsarRef =
+    pickColumnRef('m', schema.speciesColumns, ['Antal_obsar', 'Antal obsar']) ||
+    'NULL'
+  const artfakta2025Ref =
+    pickColumnRef('m', schema.speciesColumns, ['Artfakta_2025', 'Artfakta 2025']) ||
+    'NULL'
+  const nya2025Ref =
+    pickColumnRef('m', schema.speciesColumns, ['nya_2025', 'nya 2025']) ||
+    'NULL'
+  const rankRedRef =
+    pickColumnRef('m', schema.speciesColumns, ['Rank_rödlist_o_signal', 'Rank rödlist o signal']) ||
+    'NULL'
+  const rankMatsvampRef =
+    pickColumnRef('m', schema.speciesColumns, ['Rank_matsvamp', 'Rank matsvamp']) ||
+    'NULL'
+  const rankGiftsvampRef =
+    pickColumnRef('m', schema.speciesColumns, ['Rank_giftsvamp', 'Rank giftsvamp']) ||
+    'NULL'
+  const vedOchBarkRef =
+    pickColumnRef('m', schema.speciesColumns, ['Värdtaxa:Vedochbark', 'Värdtaxa:VedochBark']) ||
+    'NULL'
+  const finaRotterRef =
+    pickColumnRef('m', schema.speciesColumns, [
+      'Värdtaxa:Finarerötterochrottrådar',
+      'VärdTaxa:Finarerötterochrottrådar',
+    ]) || 'NULL'
+  const norrRef =
+    pickColumnRef('m', schema.speciesColumns, ['Norra_Sverige', 'Norra Sverige']) ||
+    'NULL'
+  const soderRef =
+    pickColumnRef('m', schema.speciesColumns, ['Södra_Sverige', 'Södra Sverige']) ||
+    'NULL'
+  const barrRef =
+    pickColumnRef('m', schema.speciesColumns, ['Blandad_barrskog', 'Blandad barrskog']) ||
+    'NULL'
+  const lovRef =
+    pickColumnRef('m', schema.speciesColumns, ['Blandad_lövskog', 'Blandad lövskog']) ||
+    'NULL'
+  const youngRef =
+    pickColumnRef('m', schema.speciesColumns, ['11-20_år', '11-20 år']) ||
+    'NULL'
+  const earlyRef =
+    pickColumnRef('m', schema.speciesColumns, ['1-40_år', '1-40 år']) ||
+    'NULL'
+  const middleRef =
+    pickColumnRef('m', schema.speciesColumns, ['41-90_år', '41-90 år']) ||
+    'NULL'
+  const oldRef =
+    pickColumnRef('m', schema.speciesColumns, ['91_år_och_äldre', '91 år och äldre']) ||
+    'NULL'
+  const bredbladigtRef =
+    pickColumnRef('m', schema.speciesColumns, ['bredbladigt_gräs', 'bredbladigt gräs']) ||
+    'NULL'
+  const smalbladigtRef =
+    pickColumnRef('m', schema.speciesColumns, ['smalbladigt_gräs', 'smalbladigt gräs']) ||
+    'NULL'
+  const krakbarRef =
+    pickColumnRef('m', schema.speciesColumns, ['kråkbär_ljung', 'kråkbär ljung']) ||
+    'NULL'
 
   const manifestPath = path.join(__dirname, '../public/imagemanifest/manifest.json')
   const outputDir = path.join(__dirname, '../public/species')
@@ -330,12 +413,66 @@ async function buildAllSpeciesJson() {
 
   const speciesRows = await db.all(`
     SELECT
-      m.*,
+      m.taxon,
+      ${antalObsarRef} AS "Antal obsar",
+      m.Giftsvamp,
+      ${rankRedRef} AS "Rank rödlist o signal",
+      ${rankMatsvampRef} AS "Rank matsvamp",
+      ${rankGiftsvampRef} AS "Rank giftsvamp",
+      m.Scientificname,
+      m.Commonname,
+      m.Nyttartnamn,
+      m.Släkte,
+      m.högrenivå,
+      COALESCE(${artfaktaRef}, 'Information saknas') AS Artfakta,
+      ${artfakta2025Ref} AS Artfakta_2025,
+      COALESCE(${rlRef}, '0') AS RL2020kat,
+      ${rl2025Ref} AS RL2025kat,
+      ${nya2025Ref} AS nya_2025,
+      m.RL2020krit,
+      m.RLochS,
+      ${kriteriedokumentationRef} AS Kriteriedokumentation,
+      ${ekologiRef} AS ekologi,
+      m."Svamp-grupp",
+      m."Svamp-Undersvamp-grupp",
+      m.SIGNAL_art,
+      m.Svampguiden,
+      m."Nyasvamp-boken",
+      m.NOTE,
+      ${vedOchBarkRef} AS "Värdtaxa:Vedochbark",
+      ${finaRotterRef} AS "Värdtaxa:Finarerötterochrottrådar",
+      ${norrRef} AS "Norra Sverige",
+      ${soderRef} AS "Södra Sverige",
+      m.OVANLIGHET,
+      m.KALKmark,
+      m.ANNANmark,
+      m.Gran,
+      m.Tall,
+      ${barrRef} AS "Blandad barrskog",
+      ${lovRef} AS "Blandad lövskog",
+      m.Lövskog,
+      m.EkochBokskog,
+      m.Naturbete,
+      ${youngRef} AS "11-20 år",
+      ${earlyRef} AS "1-40 år",
+      ${middleRef} AS "41-90 år",
+      ${oldRef} AS "91 år och äldre",
+      m."ÖRTER_grupp",
+      m."BLÅBÄR_grupp",
+      m."LINGON_grupp",
+      m.OKLART,
+      m.högört,
+      m.lågört,
+      ${bredbladigtRef} AS "bredbladigt gräs",
+      ${smalbladigtRef} AS "smalbladigt gräs",
+      m.blåbär,
+      m.lingon,
+      ${krakbarRef} AS "kråkbär ljung",
       s.Fylum,
       s.Klass,
       s.Ordning,
       s.Familj
-    FROM "Mat_Naturvård_Gift_Jan_3" m
+    FROM ${speciesTable} m
     LEFT JOIN "se_svampen_oktober_18" s
       ON TRIM(m.Scientificname) = TRIM(s.Scientificname)
     ORDER BY COALESCE(m.Commonname, m.Nyttartnamn, m.Släkte, m.högrenivå, m.Scientificname) COLLATE NOCASE
@@ -368,7 +505,7 @@ async function buildAllSpeciesJson() {
       m.Bestandsalder AS Bestandsalder,
       m.Fältskikt AS "Fältskikt",
       COUNT(DISTINCT mcv.GropInventeringID) AS plot_count
-    FROM "Mat_Naturvård_Gift_Jan_3" ms
+    FROM ${speciesTable} ms
     LEFT JOIN Species_database sd
       ON TRIM(REPLACE(sd.Taxon, '(coll.)', '')) = ms.Scientificname
     LEFT JOIN Melted_counts_vs_samples_ECM mcv
@@ -404,7 +541,7 @@ async function buildAllSpeciesJson() {
       m.Bestandsalder AS Bestandsalder,
       m.Fältskikt AS "Fältskikt",
       COUNT(DISTINCT mcv.GropInventeringID) AS plot_count
-    FROM "Mat_Naturvård_Gift_Jan_3" ms
+    FROM ${speciesTable} ms
     LEFT JOIN Species_database sd
       ON TRIM(REPLACE(sd.Taxon, '(coll.)', '')) = ms.Scientificname
     LEFT JOIN Melted_counts_vs_samples_ECM mcv

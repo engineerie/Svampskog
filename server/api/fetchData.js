@@ -3,6 +3,11 @@ import { open } from "sqlite";
 import fs from "fs";
 import path from "path";
 import { fileURLToPath } from "url";
+import {
+  pickColumnRef,
+  quoteIdentifier,
+  resolveSpeciesSourceSchema,
+} from "../utils/speciesSourceSchema.js";
 
 // Fix for __dirname not being defined in ES modules
 const __filename = fileURLToPath(import.meta.url);
@@ -18,6 +23,31 @@ const fetchDataFromDB = async ({
     filename: "./server/EDNAData.db",
     driver: sqlite3.Database,
   });
+  const schema = await resolveSpeciesSourceSchema(db);
+  const speciesTable = quoteIdentifier(schema.speciesTable);
+
+  const kriteriedokumentationRef =
+    pickColumnRef("ms", schema.speciesColumns, ["Kriteriedokumentation2025"]) ||
+    pickColumnRef("ms", schema.speciesColumns, ["Kriteriedokumentation"]) ||
+    "NULL";
+  const ekologiRef =
+    pickColumnRef("ms", schema.speciesColumns, ["Ekologi2025", "ekologi 2025"]) ||
+    pickColumnRef("ms", schema.speciesColumns, ["ekologi"]) ||
+    "NULL";
+  const artfaktaRef =
+    pickColumnRef("ms", schema.speciesColumns, ["Artfakta_2025", "Artfakta 2025", "Artfakta"]) ||
+    "NULL";
+  const rlRef =
+    pickColumnRef("ms", schema.speciesColumns, ["RL2025kat", "RL2020kat"]) ||
+    "NULL";
+  const vedOchBarkRef =
+    pickColumnRef("ms", schema.speciesColumns, ["Värdtaxa:Vedochbark", "Värdtaxa:VedochBark"]) ||
+    "NULL";
+  const finaRötterRef =
+    pickColumnRef("ms", schema.speciesColumns, [
+      "Värdtaxa:Finarerötterochrottrådar",
+      "VärdTaxa:Finarerötterochrottrådar",
+    ]) || "NULL";
 
   // Modify the SQL condition for stand age
   let ageCondition = "";
@@ -78,13 +108,13 @@ const fetchDataFromDB = async ({
     mcv.SpeciesCode,
     sd.Taxon_sp AS Scientificname,
       ms.Svampguiden,
-  ms.Kriteriedokumentation,
+  ${kriteriedokumentationRef} AS Kriteriedokumentation,
   ms.OVANLIGHET,
   ms.KALKmark,
   ms.ANNANmark,
-  ms."Värdtaxa:VedochBark",
-  ms."VärdTaxa:Finarerötterochrottrådar",
-  ms.ekologi AS ekologi,
+  ${vedOchBarkRef} AS "Värdtaxa:VedochBark",
+  ${finaRötterRef} AS "VärdTaxa:Finarerötterochrottrådar",
+  ${ekologiRef} AS ekologi,
  COALESCE(
   ms.Commonname, 
   ms.Nyttartnamn, 
@@ -97,8 +127,8 @@ const fetchDataFromDB = async ({
 ) AS Commonname,
     CASE WHEN ms."Nyasvamp-boken" = 'x' THEN 1 ELSE 0 END AS matsvamp,
     SUM(mcv.Presence) AS total_presence,
-    COALESCE(ms.Artfakta, 'Information saknas') AS Artfakta,
-    COALESCE(ms.RL2020kat, '0') AS RL2020kat,
+    COALESCE(${artfaktaRef}, 'Information saknas') AS Artfakta,
+    COALESCE(${rlRef}, '0') AS RL2020kat,
     COALESCE(ms."Svamp-grupp", '0') AS "Svamp-grupp",
     COALESCE(ms."Svamp-Undersvamp-grupp", '0') AS "Svamp-Undersvamp-grupp",
     COALESCE(ms.SIGNAL_art, '0') AS "SIGNAL_art",
@@ -123,7 +153,7 @@ const fetchDataFromDB = async ({
   LEFT JOIN 
     Species_database sd ON mcv.SpeciesCode = sd."ID#"
 LEFT JOIN 
-  "Mat_Naturvård_Gift_Jan_3" ms ON TRIM(REPLACE(sd.Taxon, '(coll.)', '')) = ms.Scientificname
+  ${speciesTable} ms ON TRIM(REPLACE(sd.Taxon, '(coll.)', '')) = ms.Scientificname
   LEFT JOIN svampguiden s ON ms.taxon = s.taxonid
 
   LEFT JOIN 

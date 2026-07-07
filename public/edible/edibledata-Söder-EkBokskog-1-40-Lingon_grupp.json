@@ -2,7 +2,7 @@
   {
     "Scientificname": "Imleria badia",
     "Commonname": "brunsopp",
-    "Artfakta": "https://artfakta.se/artinformation/taxa/3122/detaljer",
+    "Artfakta": "https://artfakta.se/taxa/3122/",
     "RL2020kat": "LC",
     "RL2020krit": null,
     "Kriteriedokumentation": null,
@@ -40,18 +40,18 @@
     "förekomst_ung": 1,
     "förekomst_sum": 2,
     "images": [
-      "/images/svampbilder/Matsvampar/Imleria badia-4.jpg",
-      "/images/svampbilder/Matsvampar/Imleria badia-5.jpg",
-      "/images/svampbilder/Matsvampar/Imleria badia-6.jpg",
-      "/images/svampbilder/Matsvampar/Imleria badia-2.jpg",
-      "/images/svampbilder/Matsvampar/Imleria badia-3.jpg",
-      "/images/svampbilder/Matsvampar/Imleria badia-1.jpg"
+      "/images/SvampBilder/Matsvampar/Imleria badia-4.jpg",
+      "/images/SvampBilder/Matsvampar/Imleria badia-5.jpg",
+      "/images/SvampBilder/Matsvampar/Imleria badia-6.jpg",
+      "/images/SvampBilder/Matsvampar/Imleria badia-2.jpg",
+      "/images/SvampBilder/Matsvampar/Imleria badia-3.jpg",
+      "/images/SvampBilder/Matsvampar/Imleria badia-1.jpg"
     ]
   },
   {
     "Scientificname": "Cantharellus cibarius",
     "Commonname": "kantarell",
-    "Artfakta": "https://artfakta.se/artinformation/taxa/3213/detaljer",
+    "Artfakta": "https://artfakta.se/taxa/3213/",
     "RL2020kat": "LC",
     "RL2020krit": null,
     "Kriteriedokumentation": null,
@@ -89,17 +89,17 @@
     "förekomst_ung": 0,
     "förekomst_sum": 2.5,
     "images": [
-      "/images/svampbilder/Matsvampar/Cantharellus cibarius-4.jpg",
-      "/images/svampbilder/Matsvampar/Cantharellus cibarius-5.jpg",
-      "/images/svampbilder/Matsvampar/Cantharellus cibarius-2.jpg",
-      "/images/svampbilder/Matsvampar/Cantharellus cibarius-3.jpg",
-      "/images/svampbilder/Matsvampar/Cantharellus cibarius-1.jpg"
+      "/images/SvampBilder/Matsvampar/Cantharellus cibarius-4.jpg",
+      "/images/SvampBilder/Matsvampar/Cantharellus cibarius-5.jpg",
+      "/images/SvampBilder/Matsvampar/Cantharellus cibarius-2.jpg",
+      "/images/SvampBilder/Matsvampar/Cantharellus cibarius-3.jpg",
+      "/images/SvampBilder/Matsvampar/Cantharellus cibarius-1.jpg"
     ]
   },
   {
     "Scientificname": "Scleroderma bovista",
     "Commonname": "potatisrottryffel",
-    "Artfakta": "https://artfakta.se/artinformation/taxa/5975/detaljer",
+    "Artfakta": "https://artfakta.se/taxa/5975/",
     "RL2020kat": "LC",
     "RL2020krit": null,
     "Kriteriedokumentation": null,
@@ -137,13 +137,13 @@
     "förekomst_ung": 0,
     "förekomst_sum": 2.5,
     "images": [
-      "/images/svampbilder/Giftsvampar/Scleroderma bovista-161-5975.jpg"
+      "/images/SvampBilder/Giftsvampar/Scleroderma bovista-161-5975.jpg"
     ]
   },
   {
     "Scientificname": "Cortinarius caperatus",
     "Commonname": "rimskivling",
-    "Artfakta": "https://artfakta.se/artinformation/taxa/5821/detaljer",
+    "Artfakta": "https://artfakta.se/taxa/5821/",
     "RL2020kat": "LC",
     "RL2020krit": null,
     "Kriteriedokumentation": null,
@@ -181,17 +181,17 @@
     "förekomst_ung": 0,
     "förekomst_sum": 2.5,
     "images": [
-      "/images/svampbilder/Matsvampar/Cortinarius caperatus-1.jpg",
-      "/images/svampbilder/Matsvampar/Cortinarius caperatus-2.jpg",
-      "/images/svampbilder/Matsvampar/Cortinarius caperatus-3.jpg",
-      "/images/svampbilder/Matsvampar/Cortinarius caperatus-4.jpg",
-      "/images/svampbilder/Matsvampar/Cortinarius caperatus-5.jpg"
+      "/images/SvampBilder/Matsvampar/Cortinarius caperatus-1.jpg",
+      "/images/SvampBilder/Matsvampar/Cortinarius caperatus-2.jpg",
+      "/images/SvampBilder/Matsvampar/Cortinarius caperatus-3.jpg",
+      "/images/SvampBilder/Matsvampar/Cortinarius caperatus-4.jpg",
+      "/images/SvampBilder/Matsvampar/Cortinarius caperatus-5.jpg"
     ]
   },
   {
     "Scientificname": "Boletus edulis",
     "Commonname": "stensopp",
-    "Artfakta": "https://artfakta.se/artinformation/taxa/245630/detaljer",
+    "Artfakta": "https://artfakta.se/taxa/245630/",
     "RL2020kat": "LC",
     "RL2020krit": null,
     "Kriteriedokumentation": null,
@@ -229,12 +229,12 @@
     "förekomst_ung": 0,
     "förekomst_sum": 2.5,
     "images": [
-      "/images/svampbilder/Matsvampar/Boletus edulis-1.jpg",
-      "/images/svampbilder/Matsvampar/Boletus edulis-2.jpg",
-      "/images/svampbilder/Matsvampar/Boletus edulis-3.jpg",
-      "/images/svampbilder/Matsvampar/Boletus edulis-6.jpg",
-      "/images/svampbilder/Matsvampar/Boletus edulis-4.jpg",
-      "/images/svampbilder/Matsvampar/Boletus edulis-5.jpg"
+      "/images/SvampBilder/Matsvampar/Boletus edulis-1.jpg",
+      "/images/SvampBilder/Matsvampar/Boletus edulis-2.jpg",
+      "/images/SvampBilder/Matsvampar/Boletus edulis-3.jpg",
+      "/images/SvampBilder/Matsvampar/Boletus edulis-6.jpg",
+      "/images/SvampBilder/Matsvampar/Boletus edulis-4.jpg",
+      "/images/SvampBilder/Matsvampar/Boletus edulis-5.jpg"
     ]
   }
 ]

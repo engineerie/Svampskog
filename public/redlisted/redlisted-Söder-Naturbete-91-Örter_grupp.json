@@ -2,10 +2,10 @@
   {
     "Scientificname": "Amanita lividopallescens",
     "Commonname": "bleknande kamskivling",
-    "Artfakta": "https://artfakta.se/artinformation/taxa/2975/detaljer",
+    "Artfakta": "https://artfakta.se/taxa/2975/information",
     "RL2020kat": "NT",
     "RL2020krit": "C2a(i)",
-    "Kriteriedokumentation": "En uppenbart sällsynt och iögonfallande art som växer i en väl undersökt och exklusiv miljö. Cirka hälften av de kända svenska växtplatserna finns på Gotland. Arten förefaller trivas i ljusa, halvöppna trädbestånd och har sannolikt gynnats av äldre tiders markanvändning inom jordbruket. Total population i landet bedöms ha minskat  p.g.a. igenväxning och omvandling av halvöppna skogar till sluten skogsmark. Fortgående minskning förekommer i kombination med att antalet reproduktiva individer är lågt vilket gör att arten rödlistas som Nära hotad (NT). (C2a(i)).",
+    "Kriteriedokumentation": "En uppenbart sällsynt och iögonfallande art som växer i en väl undersökt och exklusiv miljö. Cirka hälften av de kända svenska växtplatserna finns på Gotland. Arten förefaller trivas i ljusa, halvöppna trädbestånd och har sannolikt gynnats av äldre tiders markanvändning inom jordbruket. Total population i landet bedöms ha historiskt minskat  p.g.a. igenväxning och omvandling av halvöppna skogar till sluten skogsmark. Framtida trend helt beroende på hävd och skötsel av ädellövsrika fodermarker.  Minskningstakten för den svenska populationen bedöms vara nära gränsvärdet för Sårbar (VU). (A2c).",
     "Svamp-grupp": "hattsvamp",
     "Svamp-Undersvamp-grupp": null,
     "SIGNAL_art": null,
@@ -41,16 +41,16 @@
     "förekomst_ung": 0,
     "förekomst_sum": 3,
     "images": [
-      "/images/svampbilder/RödlistadeSvampar/Amanita lividopallescens-2975.jpg"
+      "/images/SvampBilder/RödlistadeSvampar/Amanita lividopallescens-2975.jpg"
     ]
   },
   {
     "Scientificname": "Hemileccinum impolitum",
     "Commonname": "bleksopp",
-    "Artfakta": "https://artfakta.se/artinformation/taxa/154/detaljer",
-    "RL2020kat": "VU",
+    "Artfakta": "https://artfakta.se/taxa/154/information",
+    "RL2020kat": "NT",
     "RL2020krit": "A2c+3c+4c",
-    "Kriteriedokumentation": "Värmegynnad och med östlig utbredning i landet. Tätaste populationerna finns i Mälarlandskapen och på Öland och Gotland. Värmegynnad och med östlig utbredning i landet. Växer i väl undersökt miljö och med litet mörkertal. Totalpopulation i landet bedöms ha minskat och fortgående minska, främst p.g.a. att tidigare mosaikartade ädellövrika fodermarker växer igen som följd av upphörd hävd.  Minskningstakten överstiger gränsvärdet för Sårbar (VU) enligt A-kriteriet. (A2c+3c+4c).",
+    "Kriteriedokumentation": "Tätaste populationerna finns i Mälarlandskapen och på Öland och Gotland. Värmegynnad och med östlig utbredning i landet. Arten förefaller trivas i ljusa, halvöppna trädbestånd och har sannolikt gynnats av äldre tiders markanvändning inom jordbruket. Total population i landet bedöms historiskt ha minskat och eventuellt fortgående minska p.g.a. igenväxning och omvandling av halvöppna skogar till sluten skogsmark. Rätt utförd hävd och skötsel av kalkrika ädellövsmarker skulle gynna arten. Minskningstakten för den svenska populationen bedöms vara nära gränsvärdet för Sårbar (VU). (A2c+3c+4c).",
     "Svamp-grupp": "sopp",
     "Svamp-Undersvamp-grupp": null,
     "SIGNAL_art": null,
@@ -90,10 +90,10 @@
   {
     "Scientificname": "Lactarius mairei",
     "Commonname": "borstriska",
-    "Artfakta": "https://artfakta.se/artinformation/taxa/908/detaljer",
+    "Artfakta": "https://artfakta.se/taxa/908/information",
     "RL2020kat": "VU",
     "RL2020krit": "C2a(i)",
-    "Kriteriedokumentation": "En värmekrävande, exklusiv art som är lätt att känna igen. Arten är i Sverige känd från Öland, Gotland och en lokal i Skåne. Liten population och förekomstarea samt mycket få mycel på varje känd lokal. En fortlöpande minskning bedöms pågå p.g.a. igenväxning, beskuggning och försämrat lokalklimat i ädellövsrika fodermarker. Omfattningen är dock svår att bedöma. Fortgående minskning förekommer i kombination med att antalet reproduktiva individer är lågt vilket gör att arten hamnar i kategorin Sårbar (VU). (C2a(i)).",
+    "Kriteriedokumentation": "En värmekrävande, exklusiv art som är lätt att känna igen. Arten är i Sverige känd från Öland, Gotland och en lokal i Skåne. Liten population och förekomstarea samt mycket få mycel på varje känd lokal. En fortlöpande minskning bedöms pågå p.g.a. igenväxning, beskuggning och försämrat lokalklimat i ädellövsrika fodermarker. Omfattningen är dock svår att bedöma. Baserat på de troligaste värdena hamnar arten i kategorin Sårbar (VU). Antalet individer bedöms vara lägre än gränsvärdet för Sårbar (VU) enligt D-kriteriet. (D1).",
     "Svamp-grupp": "hattsvamp",
     "Svamp-Undersvamp-grupp": null,
     "SIGNAL_art": null,
@@ -133,10 +133,10 @@
   {
     "Scientificname": "Rubroboletus satanas",
     "Commonname": "djävulssopp",
-    "Artfakta": "https://artfakta.se/artinformation/taxa/161/detaljer",
-    "RL2020kat": "EN",
+    "Artfakta": "https://artfakta.se/taxa/161/information",
+    "RL2020kat": "VU",
     "RL2020krit": "C2a(i)",
-    "Kriteriedokumentation": " En tydligt värmekrävande art. En välkänd, iögonfallande och noga eftersökt art. Förekommer på Öland och Gotland samt ett fynd i Uppland (Uppsala, där den förmodligen kommit in med planterad parklind) och ett obekräftat fynd i Drottningholmsparken (som behöver bekräftas med DNA). Populationen i Sverige är mycket liten och bedöms minskande som följd av igenväxning från öppna och halvöppna till slutna skogsmiljöer. Artens fortlevnadsmöjligheter blir förhoppningsvis bättre genom Naturvårdsverkets åtgärdsprogram för svampar i kalkrika ädellövbärande fodermarker som sedan 2009 har resulterat i ökad kännedom och uppmärksamhet kring arten, dess ekologi och förekomster.  Fortgående minskning förekommer i kombination med att antalet reproduktiva individer är lågt vilket gör att arten hamnar i kategorin Starkt hotad (EN). (C2a(i)).",
+    "Kriteriedokumentation": "En tydligt värmekrävande art. En välkänd, iögonfallande och noga eftersökt art. Förekommer främst på Öland och Gotland samt några fynd i Uppland och Närke. Populationen i Sverige är liten och bedöms missgynnas av igenväxning från öppna och halvöppna till slutna skogsmiljöer. Artens fortlevnadsmöjligheter blir förhoppningsvis bättre genom Naturvårdsverkets åtgärdsprogram för svampar i kalkrika ädellövbärande fodermarker som sedan 2009 har resulterat i ökad kännedom och uppmärksamhet kring arten, dess ekologi och förekomster. Antalet individer bedöms vara lägre än gränsvärdet för Sårbar (VU) enligt D-kriteriet. (D1).",
     "Svamp-grupp": "sopp",
     "Svamp-Undersvamp-grupp": null,
     "SIGNAL_art": null,
@@ -172,23 +172,23 @@
     "förekomst_ung": 0,
     "förekomst_sum": 3,
     "images": [
-      "/images/svampbilder/Giftsvampar/Rubroboletus satanas-214-161.jpg",
-      "/images/svampbilder/Giftsvampar/Rubroboletus satanas-228-161.jpg",
-      "/images/svampbilder/Giftsvampar/Rubroboletus satanas-229-161.jpg",
-      "/images/svampbilder/Giftsvampar/Rubroboletus satanas-230-161.jpg",
-      "/images/svampbilder/Giftsvampar/Rubroboletus satanas-225-161.jpg",
-      "/images/svampbilder/Giftsvampar/Rubroboletus satanas-224-161.jpg",
-      "/images/svampbilder/Giftsvampar/Rubroboletus satanas-226-161.jpg",
-      "/images/svampbilder/Giftsvampar/Rubroboletus satanas-227-161.jpg"
+      "/images/SvampBilder/Giftsvampar/Rubroboletus satanas-214-161.jpg",
+      "/images/SvampBilder/Giftsvampar/Rubroboletus satanas-228-161.jpg",
+      "/images/SvampBilder/Giftsvampar/Rubroboletus satanas-229-161.jpg",
+      "/images/SvampBilder/Giftsvampar/Rubroboletus satanas-230-161.jpg",
+      "/images/SvampBilder/Giftsvampar/Rubroboletus satanas-225-161.jpg",
+      "/images/SvampBilder/Giftsvampar/Rubroboletus satanas-224-161.jpg",
+      "/images/SvampBilder/Giftsvampar/Rubroboletus satanas-226-161.jpg",
+      "/images/SvampBilder/Giftsvampar/Rubroboletus satanas-227-161.jpg"
     ]
   },
   {
     "Scientificname": "Hygrophorus penarioides",
     "Commonname": "ekgräddvaxskivling",
-    "Artfakta": "https://artfakta.se/artinformation/taxa/4419/detaljer",
+    "Artfakta": "https://artfakta.se/taxa/4419/information",
     "RL2020kat": "VU",
     "RL2020krit": "C1+2a(i)",
-    "Kriteriedokumentation": " Sannolikt värmegynnad. Arten beskrevs som ny för vetenskapen 2007 och var tidigare sammanblandad med H. penarius som växer med bok. Växer i en exklusiv och väl undersökt miljö och har lågt mörkertal. Funnen i Västergötland, Östergötland samt påÖland och Gotland. Total population i landet liten och bedöms ha minskat och fortgående att minska p.g.a. minskande arealer av kalkrika, luckiga ekskogar av lämplig kvalitet. Bedöms missgynnas av EUs regler för miljöstöd där alltför mycket av trädskiktet behöver tas bort i lövklädda gräsmarker för att erhålla ersättning.  Fortgående minskning förekommer i kombination med att antalet reproduktiva individer är lågt vilket gör att arten hamnar i kategorin Sårbar (VU). (C1+2a(i)).",
+    "Kriteriedokumentation": "Sannolikt värmegynnad. Växer i en exklusiv och väl undersökt miljö och har lågt mörkertal. Funnen i Västergötland, Östergötland samt på Öland och Gotland. Total population i landet fragmenterad, liten och bedöms historiskt ha minskat och fortgående att minska p.g.a. minskande arealer av kalkrika, luckiga ekskogar av lämplig kvalitet. Bedöms missgynnas av EUs regler för miljöstöd där alltför mycket av trädskiktet behöver tas bort i lövklädda gräsmarker för att erhålla ersättning. Rätt utförd hävd och skötsel av kalkrika ädellövsmarker skulle gynna arten. Fortgående minskning förekommer i kombination med att antalet reproduktiva individer är lågt vilket gör att arten hamnar i kategorin Sårbar (VU). (C2a(i)).",
     "Svamp-grupp": "hattsvamp",
     "Svamp-Undersvamp-grupp": null,
     "SIGNAL_art": null,
@@ -224,16 +224,16 @@
     "förekomst_ung": 0,
     "förekomst_sum": "x2",
     "images": [
-      "/images/svampbilder/RödlistadeSvampar/Hygrophorus penarioides-4419.jpg"
+      "/images/SvampBilder/RödlistadeSvampar/Hygrophorus penarioides-4419.jpg"
     ]
   },
   {
     "Scientificname": "Hygrophorus cossus",
     "Commonname": "ekvaxskivling",
-    "Artfakta": "https://artfakta.se/artinformation/taxa/239233/detaljer",
-    "RL2020kat": "NT",
+    "Artfakta": "https://artfakta.se/taxa/239233/information",
+    "RL2020kat": "LC",
     "RL2020krit": "C2a(i)",
-    "Kriteriedokumentation": "Finns i södra Sverige upp till Mälarlandskapen. Total population liten och bedöms minska och fortgående att minska p.g.a. minskande arealer av luckiga ekskogar av lämplig kvalitet. Kan missgynnas av EUs nya regler för miljöstöd. Tidigare ibland förväxlad med andra vita skogsvaxingar bl.a. H. discoxhanthus som dock enbart växer i bokskog. Under en period felaktigt kallad H. quercetorum.  Fortgående minskning förekommer i kombination med att antalet reproduktiva individer är lågt vilket gör att arten rödlistas som Nära hotad (NT). (C2a(i)).",
+    "Kriteriedokumentation": null,
     "Svamp-grupp": "hattsvamp",
     "Svamp-Undersvamp-grupp": null,
     "SIGNAL_art": null,
@@ -269,16 +269,16 @@
     "förekomst_ung": 0,
     "förekomst_sum": 3,
     "images": [
-      "/images/svampbilder/RödlistadeSvampar/Hygrophorus cossus-239233.jpg"
+      "/images/SvampBilder/RödlistadeSvampar/Hygrophorus cossus-239233.jpg"
     ]
   },
   {
     "Scientificname": "Rubroboletus legaliae",
     "Commonname": "falsk djävulssopp",
-    "Artfakta": "https://artfakta.se/artinformation/taxa/156/detaljer",
+    "Artfakta": "https://artfakta.se/taxa/156/information",
     "RL2020kat": "VU",
     "RL2020krit": "D1",
-    "Kriteriedokumentation": "Uppträder ibland under solitära kvarstående ekar längs vägkanter ochparkliknande ytor i tätortsbebyggelse. Endast fem aktuella lokalområden i landet (Öland, Östergötland, Sörmland och Uppland). Växer i en väl undersökt miljö. Uppenbarligen en mycket sällsynt art med liten population i landet. Har tidigare har sammanblandats med B. rhodoxanthus och B. rhodopurpureus. Antalet individer bedöms vara lägre än gränsvärdet för Sårbar (VU) enligt D-kriteriet. (D1).",
+    "Kriteriedokumentation": "Uppträder ibland under solitära kvarstående ekar längs vägkanter och parkliknande ytor i tätortsbebyggelse. Endast fem aktuella lokalområden i landet (Öland, Östergötland, Sörmland och Uppland). Växer i en väl undersökt miljö. Uppenbarligen en sällsynt art med liten population i landet. Har tidigare har sammanblandats med B. rhodoxanthus och B. rhodopurpureus.  Antalet individer bedöms vara lägre än gränsvärdet för Sårbar (VU) enligt D-kriteriet. (D1).",
     "Svamp-grupp": "sopp",
     "Svamp-Undersvamp-grupp": null,
     "SIGNAL_art": null,
@@ -305,7 +305,7 @@
     "ANNANmark": null,
     "RLochS": "x",
     "rating": null,
-    "ekologi": "Bildar mykorrhiza med ek på kalkrik mark i solvarma lägen i glesa ädellövskogar, parker och andra brynmiljöer. ",
+    "ekologi": "Växer med ek på kalkrik mark i solvarma lägen i glesa ädellövskogar, parker och andra brynmiljöer. ",
     "RankRed": 3,
     "Giftsvamp": "x",
     "förekomst_skog_ålder": 3,
@@ -314,18 +314,18 @@
     "förekomst_ung": 0,
     "förekomst_sum": 3,
     "images": [
-      "/images/svampbilder/Giftsvampar/Rubroboletus legaliae-232-156.jpg",
-      "/images/svampbilder/Giftsvampar/Rubroboletus legaliae-255-.jpg",
-      "/images/svampbilder/Giftsvampar/Rubroboletus legaliae-231-156.jpg"
+      "/images/SvampBilder/Giftsvampar/Rubroboletus legaliae-232-156.jpg",
+      "/images/SvampBilder/Giftsvampar/Rubroboletus legaliae-255-.jpg",
+      "/images/SvampBilder/Giftsvampar/Rubroboletus legaliae-231-156.jpg"
     ]
   },
   {
     "Scientificname": "Cortinarius multiformium",
     "Commonname": "frostspindling",
-    "Artfakta": "https://artfakta.se/artinformation/taxa/1989/detaljer",
-    "RL2020kat": "EN",
+    "Artfakta": "https://artfakta.se/taxa/1989/information",
+    "RL2020kat": "VU",
     "RL2020krit": "C2a(i)",
-    "Kriteriedokumentation": "Bedöms ha mycket liten total population och fortgående minska p.g.a. avverkning av värdträd samt igenväxning och omvandling av halvöppna skogar till sluten skogsmark. Arten tillhör en svår grupp som tidigare gick under namnet C. polymorphus men som nu är uppdelad i två taxa - C. cruentipellis och C. multiformium. De är svåra att skilja på utan mikroskopisk undersökning men är båda mycket sällsynta och krävande.Fortgående minskning förekommer i kombination med att antalet reproduktiva individer är lågt vilket gör att arten hamnar i kategorin Starkt hotad (EN). (C2a(i)).",
+    "Kriteriedokumentation": "Bedöms ha mycket liten total population och fortgående minska p.g.a. avverkning av värdträd samt igenväxning och omvandling av halvöppna skogar till sluten skogsmark. Arten tillhör en svår grupp som tidigare gick under namnet C. polymorphus men som nu är uppdelad i två taxa - C. cruentipellis och C. multiformium bedömda var för sig.  Fortgående minskning förekommer i kombination med att antalet reproduktiva individer är lågt vilket gör att arten hamnar i kategorin Sårbar (VU). (C2a(i)).",
     "Svamp-grupp": "hattsvamp",
     "Svamp-Undersvamp-grupp": null,
     "SIGNAL_art": null,
@@ -365,7 +365,7 @@
   {
     "Scientificname": "Russula decipiens",
     "Commonname": "fruktkremla",
-    "Artfakta": "https://artfakta.se/artinformation/taxa/5851/detaljer",
+    "Artfakta": "https://artfakta.se/taxa/5851/information",
     "RL2020kat": "DD",
     "RL2020krit": null,
     "Kriteriedokumentation": "Värmekrävande. Arten förefaller trivas i ljusa, halvöppna trädbestånd och har sannolikt gynnats av äldre tiders markanvändning. Total population i landet bedöms ha minskat p.g.a. igenväxning och omvandling av halvöppna skogar till sluten skogsmark. Arten är svår att identifiera och kunskapsunderlaget är något för svagt för att fastställa status och eventuell hotbild. Faktaunderlaget bedöms vara otillräckligt för att avgöra vilken av de olika rödlistningskategorierna som är mest trolig.",
@@ -408,10 +408,10 @@
   {
     "Scientificname": "Cortinarius arcuatorum",
     "Commonname": "grisspindling",
-    "Artfakta": "https://artfakta.se/artinformation/taxa/423/detaljer",
-    "RL2020kat": "VU",
+    "Artfakta": "https://artfakta.se/taxa/423/information",
+    "RL2020kat": "NT",
     "RL2020krit": "C2a(i)",
-    "Kriteriedokumentation": "Värmegynnad. De rikaste förekomsterna finns på Öland och Gotland. Bedöms ha liten population och fortgående minska pga. att dess växtmiljöer är känsliga för såväl igenväxning och förtätning som för hård utglesning av träd- och buskskikt i samband med avverkning och restaurering av betesmark.Fortgående minskning förekommer i kombination med att antalet reproduktiva individer är lågt vilket gör att arten hamnar i kategorin Sårbar (VU). (C2a(i)).",
+    "Kriteriedokumentation": "Värmegynnad. De rikaste förekomsterna finns på Öland och Gotland. Bedöms ha liten population med okänd trend. Missgynnas troligen av att dess växtmiljöer är känsliga för såväl igenväxning och förtätning som för hård utglesning av träd- och buskskikt i samband med avverkning och restaurering av betesmark. Minskningstakten för den svenska populationen bedöms vara nära gränsvärdet för Sårbar (VU). (A2c).",
     "Svamp-grupp": "hattsvamp",
     "Svamp-Undersvamp-grupp": null,
     "SIGNAL_art": null,
@@ -451,10 +451,10 @@
   {
     "Scientificname": "Leccinellum crocipodium",
     "Commonname": "gul strävsopp",
-    "Artfakta": "https://artfakta.se/artinformation/taxa/928/detaljer",
-    "RL2020kat": "EN",
+    "Artfakta": "https://artfakta.se/taxa/928/information",
+    "RL2020kat": "VU",
     "RL2020krit": "C2a(i)",
-    "Kriteriedokumentation": "Största förekomsten finns i Mälarlandskapen och Västergötland, därutöver mycket sällsynt. Total population i landet är liten och bedöms fortgående minska p.g.a. upphörd hävd av lövrika fodermarker vilket leder till igenväxning och omvandling av halvöppna skogar till sluten skogsmark. Fortgående minskning förekommer i kombination med att antalet reproduktiva individer är lågt vilket gör att arten hamnar i kategorin Starkt hotad (EN). (C2a(i)).",
+    "Kriteriedokumentation": "Största förekomsten finns i Mälarlandskapen och Östergötland, därutöver mycket sällsynt. Total population i landet är liten och bedöms såväl historiskt som fortgående minska p.g.a. upphörd hävd av lövrika fodermarker vilket leder till igenväxning och omvandling av halvöppna skogar till sluten skogsmark. Många fynduppgifter utanför kärnområdet är gamla och inte återfunna vilket indikerar minskning av okända orsaker. Fortgående minskning förekommer i kombination med att antalet reproduktiva individer är lågt vilket gör att arten hamnar i kategorin Sårbar (VU). (C2a(i)).",
     "Svamp-grupp": "sopp",
     "Svamp-Undersvamp-grupp": null,
     "SIGNAL_art": null,
@@ -494,10 +494,10 @@
   {
     "Scientificname": "Aureoboletus gentilis",
     "Commonname": "gyllensopp",
-    "Artfakta": "https://artfakta.se/artinformation/taxa/1334/detaljer",
+    "Artfakta": "https://artfakta.se/taxa/1334/information",
     "RL2020kat": "VU",
     "RL2020krit": "C2a(i)",
-    "Kriteriedokumentation": "Värmekrävande.  Arten förefaller trivas i ljusa, halvöppna trädbestånd och har sannolikt gynnats av äldre tiders markanvändning inom jordbruket. Total population i landet bedöms ha minskat  p.g.a. igenväxning och omvandling av halvöppna skogar till sluten skogsmark.  Fortgående minskning förekommer i kombination med att antalet reproduktiva individer är lågt vilket gör att arten hamnar i kategorin Sårbar (VU). (C2a(i)).",
+    "Kriteriedokumentation": "Arten förefaller trivas i ljusa, halvöppna trädbestånd och har sannolikt gynnats av äldre tiders markanvändning inom jordbruket. Total population i landet bedöms historiskt ha minskat  p.g.a. avverkning samt igenväxning och omvandling av halvöppna skogar till sluten skogsmark.  Minskningstakten överstiger gränsvärdet för Sårbar (VU) enligt A-kriteriet. (A2c).",
     "Svamp-grupp": "sopp",
     "Svamp-Undersvamp-grupp": null,
     "SIGNAL_art": null,
@@ -533,13 +533,13 @@
     "förekomst_ung": 0,
     "förekomst_sum": 3,
     "images": [
-      "/images/svampbilder/RödlistadeSvampar/Aureoboletus gentilis-1334.jpg"
+      "/images/SvampBilder/RödlistadeSvampar/Aureoboletus gentilis-1334.jpg"
     ]
   },
   {
     "Scientificname": "Cortinarius hinnuleoarmillatus",
     "Commonname": "orangeflockig spindling",
-    "Artfakta": "https://artfakta.se/artinformation/taxa/249310/detaljer",
+    "Artfakta": "https://artfakta.se/taxa/249310/information",
     "RL2020kat": "VU",
     "RL2020krit": "D1",
     "Kriteriedokumentation": "Iögonfallande, uppmärksammad och därför bedömd som föga förbisedd. I Sverige funnen på ett fåtal lokaler under ek på fuktig näringsrik jord i betespräglad lövskog. Status och hotbild oklar men uppenbart en mycket sällsynt art med liten population och förekomstarea. Antalet individer bedöms vara lägre än gränsvärdet för Sårbar (VU) enligt D-kriteriet. (D1).",
@@ -582,10 +582,10 @@
   {
     "Scientificname": "Ramaria subbotrytis",
     "Commonname": "praktfingersvamp",
-    "Artfakta": "https://artfakta.se/artinformation/taxa/2049/detaljer",
-    "RL2020kat": "VU",
+    "Artfakta": "https://artfakta.se/taxa/2049/information",
+    "RL2020kat": "EN",
     "RL2020krit": "C2a(i)",
-    "Kriteriedokumentation": "En sällsynt sydlig art, knuten till exklusiva miljöer. Total population i landet bedöms liten och fortgående minska, p.g.a. såväl avverkning av värdträd som upphört extensiv hävd med åtföljande igenväxning och förtätning av de fåtaliga växtplatserna. Fortgående minskning förekommer i kombination med att antalet reproduktiva individer är lågt vilket gör att arten hamnar i kategorin Sårbar (VU). (C2a(i)).",
+    "Kriteriedokumentation": "En sällsynt sydlig art, knuten till exklusiva miljöer. Total population i landet bedöms liten och fortgående minska p.g.a. avverkning av värdträd som upphörd extensiv hävd med åtföljande igenväxning och förtätning av de fåtaliga växtplatserna. . Fortgående minskning förekommer i kombination med att antalet reproduktiva individer är lågt vilket gör att arten hamnar i kategorin Starkt hotad (EN). (C2a(i)).",
     "Svamp-grupp": "fingersvamp",
     "Svamp-Undersvamp-grupp": null,
     "SIGNAL_art": null,
@@ -625,10 +625,10 @@
   {
     "Scientificname": "Scleroderma cepa",
     "Commonname": "rödbrun rottryffel",
-    "Artfakta": "https://artfakta.se/artinformation/taxa/2060/detaljer",
+    "Artfakta": "https://artfakta.se/taxa/2060/information",
     "RL2020kat": "VU",
     "RL2020krit": "C2a(i)",
-    "Kriteriedokumentation": "Arten är lätt att känna igen och växer i välbesökta miljöer men är sällan funnen. Total population i landet bedöms liten och missgynnas huvudsakligen av igenväxning, beskuggning och andra förändringar i luckiga ädellövskogar. Fortgående minskning förekommer i kombination med att antalet reproduktiva individer är lågt vilket gör att arten hamnar i kategorin Sårbar (VU). (C2a(i)).",
+    "Kriteriedokumentation": "Arten  växer i välbesökta miljöer men är sällan funnen. Total population i landet bedöms liten och missgynnas huvudsakligen av igenväxning, beskuggning och andra förändringar i luckiga ädellövskogar. Fortgående minskning förekommer i kombination med att antalet reproduktiva individer är lågt vilket gör att arten hamnar i kategorin Sårbar (VU). (C2a(i)).",
     "Svamp-grupp": "tryffel",
     "Svamp-Undersvamp-grupp": null,
     "SIGNAL_art": null,
@@ -655,7 +655,7 @@
     "ANNANmark": "y",
     "RLochS": "x",
     "rating": null,
-    "ekologi": "Bildar mykorrhiza med ek i varma lägen i gles ädellövskog, löväng, hagmark och parkmiljö. ",
+    "ekologi": "Växer med ek i varma lägen i gles ädellövskog, löväng, hagmark och parkmiljö. ",
     "RankRed": 3,
     "Giftsvamp": "x",
     "förekomst_skog_ålder": 3,
@@ -668,10 +668,10 @@
   {
     "Scientificname": "Cortinarius olearioides",
     "Commonname": "saffransspindling",
-    "Artfakta": "https://artfakta.se/artinformation/taxa/450/detaljer",
+    "Artfakta": "https://artfakta.se/taxa/450/information",
     "RL2020kat": "NT",
     "RL2020krit": "A2c+3c+4c",
-    "Kriteriedokumentation": "En del äldre fynduppgifter är felbestämda då namnet tidigare användes i en kollektiv mening som inkluderade bl.a.  fläckad saffransspindling, C. alcalinophilus. Total population i landet bedöms ha minskat och fortgående minska pga. att dess växtmiljöer är känsliga för såväl igenväxning och förtätning som för alltför hård utglesning av träd- och buskskikt, t.ex. i samband med avverkningar eller restaureringar av betesmark.  Minskningstakten för den svenska populationen bedöms uppfylla kriteriet för Nära hotad (NT). (A2c+3c+4c).",
+    "Kriteriedokumentation": "En del äldre fynduppgifter är felbestämda då namnet tidigare användes i en kollektiv mening som inkluderade bl.a.  fläckad saffransspindling, C. alcalinophilus. Total population i landet bedöms historiskt ha minskat och förmodligen fortgående minska pga. att dess växtmiljöer är känsliga för såväl igenväxning och förtätning som för alltför hård utglesning av träd- och buskskikt, t.ex. i samband med avverkningar eller restaureringar av betesmark. . Minskningstakten för den svenska populationen bedöms vara nära gränsvärdet för Sårbar (VU). (A2c+4c).",
     "Svamp-grupp": "hattsvamp",
     "Svamp-Undersvamp-grupp": null,
     "SIGNAL_art": null,
@@ -709,12 +709,12 @@
     "images": []
   },
   {
-    "Scientificname": "Cortinarius moÃ«nne-loccozii",
+    "Scientificname": "Cortinarius moö┬½nne-loccozii",
     "Commonname": "safirspindling",
-    "Artfakta": "https://artfakta.se/artinformation/taxa/248940/detaljer",
+    "Artfakta": "https://artfakta.se/taxa/248940/information",
     "RL2020kat": "EN",
     "RL2020krit": "C2a(i)",
-    "Kriteriedokumentation": "Värmekrävande och exklusiv art med få nordiska förekomster. Bedöms ha mycket liten total population och fortgående minska p.g.a. avverkning av värdträd samt igenväxning och omvandling av halvöppna skogar till sluten skogsmark. Ny taxonomi har visat att två arter doldes i det som tidigare bedömdes under namnet \"C. caerulescens\" : C. caerulescens s.str. enbart med bok, och C. moÃ«nne-loccozii med ek och hassel.  Fortgående minskning förekommer i kombination med att antalet reproduktiva individer är lågt vilket gör att arten hamnar i kategorin Starkt hotad (EN). (C2a(i)).",
+    "Kriteriedokumentation": "Värmekrävande och exklusiv art med få och små nordiska förekomster. Bedöms ha mycket liten total population och fortgående missgynnas av avverkning av värdträd samt igenväxning och omvandling av halvöppna skogar till sluten skogsmark.  Antalet individer bedöms vara lägre än gränsvärdet för Starkt hotad (EN) enligt D-kriteriet. (C2a(i), D).",
     "Svamp-grupp": "hattsvamp",
     "Svamp-Undersvamp-grupp": null,
     "SIGNAL_art": null,
@@ -754,10 +754,10 @@
   {
     "Scientificname": "Russula laeta",
     "Commonname": "skönkremla",
-    "Artfakta": "https://artfakta.se/artinformation/taxa/1422/detaljer",
-    "RL2020kat": "VU",
+    "Artfakta": "https://artfakta.se/taxa/1422/information",
+    "RL2020kat": "NT",
     "RL2020krit": "C2a(i)",
-    "Kriteriedokumentation": "Total population i landet liten och med få mycel på varje lokal. Bedöms ha minskat och fortgående att minska, huvudsakligen p.g.a. igenväxning och förtätning av tidigare halvöppna betade hagar, lövängar och parker.  Fortgående minskning förekommer i kombination med att antalet reproduktiva individer är lågt vilket gör att arten hamnar i kategorin Sårbar (VU). (C2a(i)).",
+    "Kriteriedokumentation": "Total population i landet liten och med få mycel på varje lokal. Bedöms ha minskat och fortgående att minska (ekpopulationen), huvudsakligen p.g.a. igenväxning och förtätning av tidigare halvöppna betade hagar, lövängar och andra ädellövskogar. Antalet individer bedöms överstiga gränsvärdet för Sårbar (VU) enligt D-kriteriet. (D1).",
     "Svamp-grupp": "hattsvamp",
     "Svamp-Undersvamp-grupp": null,
     "SIGNAL_art": null,
@@ -797,10 +797,10 @@
   {
     "Scientificname": "Ramaria flavobrunnescens",
     "Commonname": "solfingersvamp",
-    "Artfakta": "https://artfakta.se/artinformation/taxa/233192/detaljer",
-    "RL2020kat": "NT",
+    "Artfakta": "https://artfakta.se/taxa/233192/information",
+    "RL2020kat": "VU",
     "RL2020krit": "D1",
-    "Kriteriedokumentation": "Känd från Götaland och Svealand men överallt sällsynt och med totalt sett liten population i landet. Svårt att bedöma populationsförändringar men missgynnas potentiellt av såväl avverkningar som igenväxning och förtätning av ädellövskogar. Baserat på de troligaste värdena hamnar arten i kategorin Nära hotad (NT). Antalet individer bedöms överstiga gränsvärdet för Sårbar (VU) enligt D-kriteriet. (D1).",
+    "Kriteriedokumentation": "Känd från Götaland och Svealand men överallt sällsynt och med totalt sett liten population i landet. Svårt att bedöma framtida populationsförändringar men har historiskt missgynnas av såväl avverkningar som igenväxning och förtätning av ädellövskogar. Fortgående minskning förekommer i kombination med att antalet reproduktiva individer är lågt vilket gör att arten hamnar i kategorin Sårbar (VU). (B2ab(iii), C2a(i)).",
     "Svamp-grupp": "fingersvamp",
     "Svamp-Undersvamp-grupp": null,
     "SIGNAL_art": null,
@@ -827,7 +827,7 @@
     "ANNANmark": "x",
     "RLochS": "x",
     "rating": null,
-    "ekologi": "Växer med framförallt ek, lind och bok, kanske även hassel i luckiga, äldre ädellövskogar på kalkrik eller grönstenspåverkad mark.",
+    "ekologi": "Växer med framförallt ek, lind och bok, kanske även hassel i luckiga, äldre ädellövskogar på kalkrik eller grönstenspäverkad mark.",
     "RankRed": 3,
     "Giftsvamp": null,
     "förekomst_skog_ålder": 3,
@@ -840,10 +840,10 @@
   {
     "Scientificname": "Lactarius violascens",
     "Commonname": "stor lilariska",
-    "Artfakta": "https://artfakta.se/artinformation/taxa/4785/detaljer",
+    "Artfakta": "https://artfakta.se/taxa/4785/information",
     "RL2020kat": "NT",
     "RL2020krit": "A2c+3c",
-    "Kriteriedokumentation": "Arten förefaller trivas i ljusa, halvöppna trädbestånd och har sannolikt gynnats av äldre tiders markanvändning inom jordbruket. Total population i landet bedöms ha minskat  p.g.a. igenväxning och omvandling av halvöppna skogar till sluten skogsmark.Minskningstakten för den svenska populationen bedöms uppfylla kriteriet för Nära hotad (NT). (A2c+3c).",
+    "Kriteriedokumentation": "Arten förefaller trivas i ljusa, halvöppna trädbestånd och har sannolikt gynnats av äldre tiders markanvändning inom jordbruket. Total population i landet bedöms ha missgynnats  p.g.a. avverkning av värdträd men också av igenväxning och förtätning av halvöppna skogar till sluten skogsmark. Minskningstakten för den svenska populationen bedöms vara nära gränsvärdet för Sårbar (VU). (A2c+4c).",
     "Svamp-grupp": "hattsvamp",
     "Svamp-Undersvamp-grupp": null,
     "SIGNAL_art": null,
@@ -883,10 +883,10 @@
   {
     "Scientificname": "Lactarius zonarius",
     "Commonname": "zonriska",
-    "Artfakta": "https://artfakta.se/artinformation/taxa/4788/detaljer",
-    "RL2020kat": "DD",
+    "Artfakta": "https://artfakta.se/taxa/4788/information",
+    "RL2020kat": "NT",
     "RL2020krit": null,
-    "Kriteriedokumentation": "Arten är sydlig och värmeberoende men bristfälligt känd beroende på sammanblandning med andra arter. Fynd i databaser under namnet avser i de flesta fall ett annat taxon (L. evosmus). Ãkta L. zonarius s.str. är mycket sällsynt och knuten till ett exklusivt habitat. Kunskapsunderlaget dock dåligt. Faktaunderlaget bedöms vara otillräckligt för att avgöra vilken av de olika rödlistningskategorierna som är mest trolig.",
+    "Kriteriedokumentation": "Arten är sydlig och värmeberoende men bristfälligt känd beroende på sammanblandning med andra arter. Fynd i databaser under namnet avser i de flesta fall ett annat taxon (L. evosmus). Äkta L. zonarius s.str. är mycket sällsynt och knuten till ett exklusivt habitat och det är denna som bedömts. Antalet individer bedöms överstiga gränsvärdet för Sårbar (VU) enligt D-kriteriet. (D1).",
     "Svamp-grupp": "hattsvamp",
     "Svamp-Undersvamp-grupp": null,
     "SIGNAL_art": null,
@@ -922,7 +922,7 @@
     "förekomst_ung": 0,
     "förekomst_sum": 3,
     "images": [
-      "/images/svampbilder/RödlistadeSvampar/Lactarius zonarius-4788.jpg"
+      "/images/SvampBilder/RödlistadeSvampar/Lactarius zonarius-4788.jpg"
     ]
   }
 ]

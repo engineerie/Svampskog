@@ -2,10 +2,10 @@
   {
     "Scientificname": "Hydnellum caeruleum",
     "Commonname": "blå taggsvamp",
-    "Artfakta": "https://artfakta.se/artinformation/taxa/4362/detaljer",
+    "Artfakta": "https://artfakta.se/taxa/4362/information",
     "RL2020kat": "NT",
     "RL2020krit": "A2c+3c+4c",
-    "Kriteriedokumentation": "Kan överleva hyggesfasen på hänsynsytor med lämnade hänsynsträd. Inga eller få observationer i ungskogar uppkomna efter slutavverkning. Total population i landet bedöms ha minskat och fortgående minska p.g.a slutavverkning av äldre barrskog. Minskningstakten för den svenska populationen bedöms vara nära gränsvärdet för Sårbar (VU). (A2c+3c+4c).",
+    "Kriteriedokumentation": "Särskilt frekvent i magra, torra, ljusöppna och ofta brandpräglade lavtallskogar. Marktypen utgörs av sandsediment, sandig–grusig morän eller hällmark. Inom den boreala zonen påträffas arten ibland i yngre tallbestånd som föryngrats under fröträd, vilket utgjort förutsättningar för bibehållen kontinuitet. Dessa områden angränsar ofta äldre bestånd. När arten förekommer i granskog, vilket är sällsynt, tycks den vara knuten till örtrik kalkgranskog. Den totala populationen i landet har minskat och bedöms fortsätta minska till följd av avverkning av äldre barrskog och fortsatt fragmentering av artens livsmiljöer. Arten har begränsad förmåga att återetablera sig efter slutavverkning eller andra storskaliga skogsbruksåtgärder. Det finns inga indikationer på att arten långsiktigt kan etablera eller reproducera sig i skogsbestånd som brukas med trakthyggesmetoder, markberedning, gödsling eller föryngring med förädlat plantmaterial.  Minskningstakten för den svenska populationen bedöms vara nära gränsvärdet för Sårbar (VU). (A2c+3c+4c).",
     "Svamp-grupp": "taggsvamp",
     "Svamp-Undersvamp-grupp": null,
     "SIGNAL_art": null,
@@ -41,16 +41,16 @@
     "förekomst_ung": 0,
     "förekomst_sum": 3,
     "images": [
-      "/images/svampbilder/RödlistadeSvampar/Hydnellum caeruleum-4362.jpg"
+      "/images/SvampBilder/RödlistadeSvampar/Hydnellum caeruleum-4362.jpg"
     ]
   },
   {
     "Scientificname": "Hydnellum ferrugineum",
     "Commonname": "dropptaggsvamp",
-    "Artfakta": "https://artfakta.se/artinformation/taxa/4364/detaljer",
-    "RL2020kat": "LC",
+    "Artfakta": "https://artfakta.se/taxa/4364/information",
+    "RL2020kat": "NT",
     "RL2020krit": null,
-    "Kriteriedokumentation": "Total population i landet bedöms ha minskat och fortsatt minska p.g.a slutavverkningar och förhöja kvävenivåer i marken som en följd av skogsgödsling, omfattningen är dock svår att bedöma. ",
+    "Kriteriedokumentation": "Arten påträffas också i tallskog med yngre trädåldrar men då främst i bestånd som föryngrats naturligt. En välkänd art som går att identifiera även utanför svampsäsong tack vare den tjocka vita mycelmattan. Den totala populationen i landet har minskat och bedöms fortsätta minska till följd av slutavverkningar av tallskog. Det är högst oklart om arten långsiktigt kan etablera och reproducera sig i skogsbestånd som brukas med trakthyggesmetoder, markberedning, gödsling eller föryngring med förädlat plantmaterial. Uppfyller kriterierna för att bli rödlistad på grund av ny kunskap som visar att en större andel av populationen än tidigare bedömt är knuten till kontinuitetsbarrskog. Minskningstakten för den svenska populationen bedöms vara nära gränsvärdet för Sårbar (VU). (A2c+3c+4c).",
     "Svamp-grupp": "taggsvamp",
     "Svamp-Undersvamp-grupp": null,
     "SIGNAL_art": "S",
@@ -77,7 +77,7 @@
     "ANNANmark": "y",
     "RLochS": "S",
     "rating": null,
-    "ekologi": "Lavtallskog, lingontallskog och blåbärsgranskog. Mager mark. Med tall och gran.",
+    "ekologi": "Växer med tall och gran i lav- och  lingontallskog samt blåbärsgranskog. ",
     "RankRed": 1,
     "Giftsvamp": null,
     "förekomst_skog_ålder": 4,
@@ -90,10 +90,10 @@
   {
     "Scientificname": "Tricholoma matsutake",
     "Commonname": "goliatmusseron",
-    "Artfakta": "https://artfakta.se/artinformation/taxa/6276/detaljer",
+    "Artfakta": "https://artfakta.se/taxa/6276/information",
     "RL2020kat": "VU",
     "RL2020krit": "A2c+3c+4c",
-    "Kriteriedokumentation": "Huvudsaklig förekomst i Västerbotten och Norrbottten. Största delen av populationen finns i skogar som aldrig har kalavverkats. Förefaller ha svårt att återetableras efter kalavverkning. Svampen och dess markmycel är långlivat. Svampplockning har ingen negativ inverkan på arten. Total population i landet bedöms ha minskat starkt och fortsatt att minska huvudsakligen p.g.a. slutavverkning av tallhedar i norra Sverige. Hällmarkstallskog i södra Sverige avverkas inte i samma omfattning. Minskningstakten överstiger gränsvärdet för Sårbar (VU) enligt A-kriteriet. (A2c+3c+4c).",
+    "Kriteriedokumentation": "Huvudsaklig förekomst i Västerbotten och Norrbottten. Största delen av populationen finns i skogar som aldrig har kalavverkats. Förefaller ha svårt att återetableras efter kalavverkning. Svampen och dess markmycel är långlivat. Svampplockning har ingen negativ inverkan på arten. Total population i landet bedöms ha minskat starkt och fortsatt att minska huvudsakligen p.g.a. slutavverkning av tallhedar i norra Sverige. Minskningstakten överstiger gränsvärdet för Sårbar (VU) enligt A-kriteriet. (A2c+3c+4c).",
     "Svamp-grupp": "hattsvamp",
     "Svamp-Undersvamp-grupp": null,
     "SIGNAL_art": null,
@@ -120,7 +120,7 @@
     "ANNANmark": "x",
     "RLochS": "x",
     "rating": 3,
-    "ekologi": "Bildar mykorrhiza med tall, i lav- och lingontallskog främst på mager sandjord. I södra Sverige även i blockig hällmarkstallskog. ",
+    "ekologi": "Växer med tall, i lav- och lingontallskog främst på mager sandjord. I södra Sverige även i blockig hällmarkstallskog. ",
     "RankRed": 1,
     "Giftsvamp": null,
     "förekomst_skog_ålder": 3,
@@ -129,24 +129,24 @@
     "förekomst_ung": 0,
     "förekomst_sum": 3,
     "images": [
-      "/images/svampbilder/Matsvampar/Tricholoma matsutake-4.jpg",
-      "/images/svampbilder/Matsvampar/Tricholoma matsutake-5.jpg",
-      "/images/svampbilder/Matsvampar/Tricholoma matsutake-1.jpg",
-      "/images/svampbilder/Matsvampar/Tricholoma matsutake-2.jpg",
-      "/images/svampbilder/Matsvampar/Tricholoma matsutake-3.jpg",
-      "/images/svampbilder/Giftsvampar/Tricholoma matsutake-166-6276.jpg",
-      "/images/svampbilder/Giftsvampar/Tricholoma matsutake-165-6276.jpg",
-      "/images/svampbilder/Giftsvampar/Tricholoma matsutake-210-6276.jpg",
-      "/images/svampbilder/RödlistadeSvampar/Tricholoma matsutake-6276.jpg"
+      "/images/SvampBilder/Matsvampar/Tricholoma matsutake-4.jpg",
+      "/images/SvampBilder/Matsvampar/Tricholoma matsutake-5.jpg",
+      "/images/SvampBilder/Matsvampar/Tricholoma matsutake-1.jpg",
+      "/images/SvampBilder/Matsvampar/Tricholoma matsutake-2.jpg",
+      "/images/SvampBilder/Matsvampar/Tricholoma matsutake-3.jpg",
+      "/images/SvampBilder/Giftsvampar/Tricholoma matsutake-166-6276.jpg",
+      "/images/SvampBilder/Giftsvampar/Tricholoma matsutake-165-6276.jpg",
+      "/images/SvampBilder/Giftsvampar/Tricholoma matsutake-210-6276.jpg",
+      "/images/SvampBilder/RödlistadeSvampar/Tricholoma matsutake-6276.jpg"
     ]
   },
   {
     "Scientificname": "Albatrellus subrubescens",
     "Commonname": "lammticka",
-    "Artfakta": "https://artfakta.se/artinformation/taxa/1958/detaljer",
+    "Artfakta": "https://artfakta.se/taxa/1958/information",
     "RL2020kat": "VU",
     "RL2020krit": "A2c+3c+4c, C2a(i)",
-    "Kriteriedokumentation": "Boreal art som påträffas i äldre barrskog, ofta magra tallhedar och är indifferent till förekomst av kalk. Arten har tidigare sammanblandats med gul lammticka (A. citrinus) som beskrevs 2003, bildar mykorrhiza med gran och som förefaller vara kalkgynnad. Sannolikt är ett antal äldre fynd registrerade som A. subrubescens egentligen A. citrinus. Förefaller ha svårt att etablera sig efter avverkning men påträffas sparsamt även i yngre 25â€“40-åriga tallplanteringar. Markstörning, tunna vegetationsskikt och brand bedöms gynna arten. På självföryngrade marker efter avverkning lämnas troligen frötallar för kort tid för att lammticka skall kunna fortleva in i det uppväxande beståndet. Grupper av hänsynsträd och evighetsträd bedöms ha större betydelse. Sammantaget bedöms den totala populationen i landet ha minskat och fortfarande minska p.g.a. att den huvudsakligen förekommer i äldre tallskog som avverkas och minskar i areal.  Fortgående minskning förekommer i kombination med att antalet reproduktiva individer är lågt vilket gör att arten hamnar i kategorin Sårbar (VU). (A2c+3c+4c, C2a(i)).",
+    "Kriteriedokumentation": "Arten har tidigare sammanblandats med gul lammticka (A. citrinus) som beskrevs 2003, bildar mykorrhiza med gran och som förefaller vara kalkgynnad. Sannolikt är ett antal äldre fynd registrerade som A. subrubescens egentligen A. citrinus. Förefaller ha svårt att etablera sig efter avverkning men påträffas sparsamt även i yngre tallskog. Markstörning, tunna vegetationsskikt och brand bedöms gynna arten. På självföryngrade marker efter avverkning lämnas troligen frötallar för kort tid för att lammticka skall kunna fortleva in i det uppväxande beståndet. Grupper av hänsynsträd och evighetsträd bedöms ha större betydelse. Sammantaget bedöms den totala populationen i landet ha minskat och fortfarande minska p.g.a. att den huvudsakligen förekommer i äldre tallskog som avverkas och minskar i areal.Fortgående minskning förekommer i kombination med att antalet reproduktiva individer är lågt vilket gör att arten hamnar i kategorin Sårbar (VU). (A2c+3c+4c, C2a(i)).",
     "Svamp-grupp": "hattsvamp",
     "Svamp-Undersvamp-grupp": "ticka",
     "SIGNAL_art": null,
@@ -182,17 +182,17 @@
     "förekomst_ung": 0,
     "förekomst_sum": 4,
     "images": [
-      "/images/svampbilder/Matsvampar/Albatrellus subrubescens.jpg",
-      "/images/svampbilder/RödlistadeSvampar/Albatrellus subrubescens-1958.jpg"
+      "/images/SvampBilder/Matsvampar/Albatrellus subrubescens.jpg",
+      "/images/SvampBilder/RödlistadeSvampar/Albatrellus subrubescens-1958.jpg"
     ]
   },
   {
     "Scientificname": "Hydnellum fuligineoviolaceum",
     "Commonname": "lilaköttig taggsvamp",
-    "Artfakta": "https://artfakta.se/artinformation/taxa/1436/detaljer",
+    "Artfakta": "https://artfakta.se/taxa/1436/information",
     "RL2020kat": "EN",
     "RL2020krit": "B2ab(iii), C2a(i)",
-    "Kriteriedokumentation": " En noga eftersökt, uppenbart ytterst sällsynt art i hela Europa med sina största förekomster i Sverige. Total population i landet bedöms liten och fragmenterad samtidigt som få mycel finns på varje lokal. Bedöms ha minskat och fortgående att minska p.g.a. slutavverkning av äldre kalkbarrskog. Fortlevnadsmöjligheter för arten kommer förhoppningsvis att förbättras genom Artens fortlevnadsmöjligheter blir förhoppningsvis förbättrad genom Naturvårdsverkets åtgärdsprogram för rödlistade fjälltaggsvampar som sedan 2006 resulterat i en ökad kännedom om och uppmärksamhet kring arten, dess ekologi och förekomster. Förutom att samtliga svenska lokaler inventerats har arten eftersökts på potentiella lokaler varför antalet kända lokaler har ökat. Ã…tta av lokalerna ligger inom skyddade områden och 3 inom nyckelbiotop eller biotopskydd. Fortgående minskning förekommer i kombination med att antalet reproduktiva individer är lågt vilket gör att arten hamnar i kategorin Starkt hotad (EN). (B2ab(iii), C2a(i)).",
+    "Kriteriedokumentation": "En noga eftersökt och uppenbart ytterst sällsynt art i hela Europa med sina största förekomster i Sverige. Populationen bedöms vara liten och fragmenterad, samtidigt som få mycel finns på varje lokal. Den totala populationen i landet har minskat kraftigt och bedöms fortsätta minska till följd av avverkning av kalkbarrskogar och fortsatt fragmentering av artens livsmiljöer. Arten har begränsad förmåga att återetablera sig efter slutavverkning eller andra storskaliga skogsbruksåtgärder, och det finns inga indikationer på att den långsiktigt kan etablera eller reproducera sig i bestånd som brukas med trakthyggesmetoder, markberedning, gödsling eller förädlat plantmaterial. Kombination med att utbredningsområdet är kraftigt fragmenterat och fortgående minskning förekommer gör att arten uppfyller B-kriteriet. Fortgående minskning förekommer i kombination med att antalet reproduktiva individer är lågt vilket gör att arten hamnar i kategorin Starkt hotad (EN). (B2ab(iii), C2a(i)).",
     "Svamp-grupp": "taggsvamp",
     "Svamp-Undersvamp-grupp": null,
     "SIGNAL_art": null,
@@ -219,7 +219,7 @@
     "ANNANmark": null,
     "RLochS": "x",
     "rating": null,
-    "ekologi": "Växer med tall gles, äldre kalktallskog med inslag av enstaka senvuxna granar, men kan också finnas i kalkbarrskog med blandad förekomst av tall och gran. Oftast på torr och näringsfattig mark med tunt jordlager eller blottad mark. ",
+    "ekologi": "Växer med tall gles, äldre kalktallskog med inslag av enstaka senvuxna granar, men kan ocksä finnas i kalkbarrskog med blandad förekomst av tall och gran. Oftast på torr och näringsfattig mark med tunt jordlager eller blottad mark. ",
     "RankRed": 2,
     "Giftsvamp": null,
     "förekomst_skog_ålder": 3,
@@ -232,10 +232,10 @@
   {
     "Scientificname": "Sarcodon squamosus",
     "Commonname": "motaggsvamp",
-    "Artfakta": "https://artfakta.se/artinformation/taxa/5966/detaljer",
+    "Artfakta": "https://artfakta.se/taxa/5966/information",
     "RL2020kat": "NT",
     "RL2020krit": "A2c+3c+4c",
-    "Kriteriedokumentation": "Förekommer även i ungskog, men har sin huvudsakliga förekomst i äldre skog och dagens ungskogar av tall bedöms inte komma att hysa samma populationstorlekar när dessa blir äldre. Fram till 1999 sammanblandad med fjällig taggsvamp (Sarcodon imbricatus) som bildar mykorrhiza med gran. Status något oklar genom att uppföljning för vanligare skogssvampar inte sker. Total population i landet bedöms ha minskat sedan 1970 och fortsatt komma att minska p.g.a. slutavverkning av äldre tallskog.  Minskningstakten för den svenska populationen bedömsuppfylla kriteriet för Nära hotad (NT). (A2c+3c+4c).",
+    "Kriteriedokumentation": "Förekommer även i ungskog, men har sin huvudsakliga förekomst i äldre skog och dagens ungskogar av tall bedöms inte komma att hysa samma populationstorlekar när dessa blir äldre. Den totala populationen i landet har minskat och förväntas fortsätta minska på grund av avverkning av tallskog med trädkontinuitet och fortsatt fragmentering av artens livsmiljöer. Arten har begränsad förmåga att återetablera sig efter slutavverkning eller andra storskaliga skogsbruksåtgärder. Det finns inga indikationer på att arten långsiktigt kan etablera eller reproducera sig i skogsbestånd som brukas med trakthyggesmetoder, markberedning, gödsling eller föryngring med förädlat plantmaterial. Minskningstakten för den svenska populationen bedöms vara nära gränsvärdet för Sårbar (VU). (A2c+3c+4c).",
     "Svamp-grupp": "taggsvamp",
     "Svamp-Undersvamp-grupp": null,
     "SIGNAL_art": null,
@@ -262,7 +262,7 @@
     "ANNANmark": "x",
     "RLochS": "x",
     "rating": 2,
-    "ekologi": "Växer med tall i med tall i tallskog. Huvudsakligen i äldre, glesare skogsbestånd och hällmarksimpediment. ",
+    "ekologi": "Växer med tall i med tall i tallskog. Huvudsakligen i äldre, glesare skogsbeständ och hällmarksimpediment. ",
     "RankRed": 1,
     "Giftsvamp": null,
     "förekomst_skog_ålder": 4,
@@ -271,17 +271,17 @@
     "förekomst_ung": 0,
     "förekomst_sum": 4,
     "images": [
-      "/images/svampbilder/Matsvampar/Sarcodon squamosus.jpg",
-      "/images/svampbilder/RödlistadeSvampar/Sarcodon squamosus-5966.jpg"
+      "/images/SvampBilder/Matsvampar/Sarcodon squamosus.jpg",
+      "/images/SvampBilder/RödlistadeSvampar/Sarcodon squamosus-5966.jpg"
     ]
   },
   {
     "Scientificname": "Scleroderma septentrionale",
     "Commonname": "sandrottryffel",
-    "Artfakta": "https://artfakta.se/artinformation/taxa/5977/detaljer",
+    "Artfakta": "https://artfakta.se/taxa/5977/information",
     "RL2020kat": "NT",
     "RL2020krit": "A2c+3c+4c",
-    "Kriteriedokumentation": "Finns förmodligen på flertalet sandstränder upp till Haparanda men mörkertal ännu stort. Verkar ha sitt europeiska utbredningscentrum i Skandinavien. Väl känd ekologi, framförallt gamla betesmarker och störda landhöjningsstränder som inte får växa igen. Artens potentiella lämpliga miljöer bedöms ha minskat och fortsatt komma att minska p.g.a. igenväxning av betesmarker samt exploatering av stränder. Minskningstakten för den svenska populationen bedöms vara nära gränsvärdet för Sårbar (VU). (A2c+3c+4c).",
+    "Kriteriedokumentation": "Finns förmodligen på flertalet sandstränder upp till Haparanda men mörkertal ännu stort, men även längs älvstränder i inlandet. Har sitt europeiska utbredningscentrum i Skandinavien. Väl känd ekologi, framförallt gamla betesmarker och störda landhöjningsstränder som inte får växa igen. Artens potentiella lämpliga miljöer bedöms ha minskat och fortsatt komma att minska p.g.a. igenväxning av betesmarker samt exploatering av stränder. . Fortgående minskning förekommer i kombination med att antalet reproduktiva individer är lågt vilket gör att arten rödlistas som Nära hotad (NT). (A3c+4c, C1).",
     "Svamp-grupp": "tryffel",
     "Svamp-Undersvamp-grupp": null,
     "SIGNAL_art": null,
@@ -308,7 +308,7 @@
     "ANNANmark": "y",
     "RLochS": "x",
     "rating": null,
-    "ekologi": "Växer med tall, ev också krypvide. Främst på kustnära sanddyner med lågt pH, ofta utlakade och med kråkbär, ärttryffel etc. ",
+    "ekologi": "Växer med tall, ev ocksä krypvide. Främst på kustnära sanddyner med lägt pH, ofta utlakade och med kräkbär, ärttryffel etc. ",
     "RankRed": 3,
     "Giftsvamp": null,
     "förekomst_skog_ålder": 4,
@@ -321,10 +321,10 @@
   {
     "Scientificname": "Phellodon connatus",
     "Commonname": "svartvit taggsvamp",
-    "Artfakta": "https://artfakta.se/artinformation/taxa/5448/detaljer",
+    "Artfakta": "https://artfakta.se/taxa/5448/information",
     "RL2020kat": "NT",
     "RL2020krit": "A2c+3c+4c",
-    "Kriteriedokumentation": "Växer huvudsakligen i äldre tidigare icke kalavverkad skog på torr till frisk mark. Total population i landet bedöms ha minskat, och fortsatt minska huvudsakligen p.g.a. slutavverkningar av äldre skog. P.g.a. något bredare ekologi än andra rödlistade barrskogsarter bedöms minskningstakten något lägre.  Minskningstakten för den svenska populationen bedöms uppfylla kriteriet för Nära hotad (NT). (A2c+3c+4c).",
+    "Kriteriedokumentation": "Växer huvudsakligen i äldre tidigare icke kalavverkad skog på torr till frisk mark. Den totala populationen i landet bedöms ha minskat de senaste 50 åren och förväntas fortsätta minska på grund av slutavverkning av äldre barrskog. Arten har begränsad förmåga att återetablera sig efter slutavverkning eller andra storskaliga skogsbruksåtgärder. Det finns inga indikationer på att arten långsiktigt kan etablera eller reproducera sig i skogsbestånd som brukas med trakthyggesmetoder, markberedning, gödsling eller föryngring med förädlat plantmaterial. Minskningstakten för den svenska populationen bedöms vara nära gränsvärdet för Sårbar (VU). (A2c+3c+4c).",
     "Svamp-grupp": "taggsvamp",
     "Svamp-Undersvamp-grupp": null,
     "SIGNAL_art": null,
@@ -360,16 +360,16 @@
     "förekomst_ung": 0,
     "förekomst_sum": 3,
     "images": [
-      "/images/svampbilder/RödlistadeSvampar/Phellodon connatus-5448.jpg"
+      "/images/SvampBilder/RödlistadeSvampar/Phellodon connatus-5448.jpg"
     ]
   },
   {
     "Scientificname": "Lactarius musteus",
     "Commonname": "tallriska",
-    "Artfakta": "https://artfakta.se/artinformation/taxa/4745/detaljer",
+    "Artfakta": "https://artfakta.se/taxa/4745/information",
     "RL2020kat": "NT",
     "RL2020krit": "A2c+3c+4c",
-    "Kriteriedokumentation": "Arten är fortfarande täml. vanlig men har missgynnats kraftigt genom avverkning av tallhedar. Den kan dock klara öppnare tillstånd eftersom den är relativt torktålig och mycel kan fortleva på frötallar och evighetsträd. Förekommer även i ungskog, men har sin huvudsakliga förekomst i äldre skog och dagens ungskogar av tall bedöms inte komma att hysa samma populationstorlekar när dessa blir äldre. Sammantaget bedöms totalpopulationen ha minskat och fortgående att minska p.g.a. minskad areal äldre, tidigare inte kalavverkad skog och äldre bestånd på landskapsnivå.  Minskningstakten för den svenska populationen bedöms uppfylla kriteriet för Nära hotad (NT). (A2c+3c+4c).",
+    "Kriteriedokumentation": "Arten har en vid utbredning i landet och är förhållandevis vanlig men har missgynnats av omfattande avverkning av tallhedar och äldre tallskog. Den kan överleva i öppnare miljöer tack vare sin torktålighet och förmåga att bilda mycel vid frötallar och evighetsträd. Arten förekommer i ungskog men har sin huvudsakliga förekomst i äldre skog, och dagens tallungskogar bedöms inte komma att hysa lika stora populationer när dessa blir äldre. Sammantaget bedöms populationen ha minskat och fortsätta minska i takt med att arealen äldre, tidigare inte kalavverkad tallskog minskar. Minskningstakten för den svenska populationen bedöms vara nära gränsvärdet för Sårbar (VU). (A2c+3c+4c).",
     "Svamp-grupp": "hattsvamp",
     "Svamp-Undersvamp-grupp": null,
     "SIGNAL_art": null,
@@ -405,7 +405,7 @@
     "förekomst_ung": 0,
     "förekomst_sum": 3,
     "images": [
-      "/images/svampbilder/RödlistadeSvampar/Lactarius musteus-4745.jpg"
+      "/images/SvampBilder/RödlistadeSvampar/Lactarius musteus-4745.jpg"
     ]
   }
 ]

@@ -2,7 +2,7 @@
   {
     "Scientificname": "Lactarius pubescens",
     "Commonname": "blek skäggriska",
-    "Artfakta": "https://artfakta.se/artinformation/taxa/4758/detaljer",
+    "Artfakta": "https://artfakta.se/taxa/4758/",
     "RL2020kat": "LC",
     "RL2020krit": null,
     "Kriteriedokumentation": null,
@@ -44,7 +44,7 @@
   {
     "Scientificname": "Cantharellus cibarius",
     "Commonname": "kantarell",
-    "Artfakta": "https://artfakta.se/artinformation/taxa/3213/detaljer",
+    "Artfakta": "https://artfakta.se/taxa/3213/",
     "RL2020kat": "LC",
     "RL2020krit": null,
     "Kriteriedokumentation": null,
@@ -82,17 +82,17 @@
     "förekomst_ung": 0,
     "förekomst_sum": 1.5,
     "images": [
-      "/images/svampbilder/Matsvampar/Cantharellus cibarius-4.jpg",
-      "/images/svampbilder/Matsvampar/Cantharellus cibarius-5.jpg",
-      "/images/svampbilder/Matsvampar/Cantharellus cibarius-2.jpg",
-      "/images/svampbilder/Matsvampar/Cantharellus cibarius-3.jpg",
-      "/images/svampbilder/Matsvampar/Cantharellus cibarius-1.jpg"
+      "/images/SvampBilder/Matsvampar/Cantharellus cibarius-4.jpg",
+      "/images/SvampBilder/Matsvampar/Cantharellus cibarius-5.jpg",
+      "/images/SvampBilder/Matsvampar/Cantharellus cibarius-2.jpg",
+      "/images/SvampBilder/Matsvampar/Cantharellus cibarius-3.jpg",
+      "/images/SvampBilder/Matsvampar/Cantharellus cibarius-1.jpg"
     ]
   },
   {
     "Scientificname": "Paxillus involutus s.lat.",
     "Commonname": "pluggskivling",
-    "Artfakta": "https://artfakta.se/artinformation/taxa/5351/detaljer",
+    "Artfakta": "https://artfakta.se/taxa/5351/",
     "RL2020kat": "LC",
     "RL2020krit": null,
     "Kriteriedokumentation": null,
@@ -130,15 +130,15 @@
     "förekomst_ung": 0,
     "förekomst_sum": 1.5,
     "images": [
-      "/images/svampbilder/Giftsvampar/Paxillus involutus-104-5351.jpg",
-      "/images/svampbilder/Giftsvampar/Paxillus involutus-98-5351.jpg"
+      "/images/SvampBilder/Giftsvampar/Paxillus involutus-104-5351.jpg",
+      "/images/SvampBilder/Giftsvampar/Paxillus involutus-98-5351.jpg"
     ]
   },
   {
     "Scientificname": "Paxillus involutus",
     "Commonname": "pluggskivling",
-    "Artfakta": "https://artfakta.se/artinformation/taxa/6051059/detaljer",
-    "RL2020kat": null,
+    "Artfakta": "https://artfakta.se/taxa/6051059/",
+    "RL2020kat": "LC",
     "RL2020krit": null,
     "Kriteriedokumentation": null,
     "Svamp-grupp": "hattsvamp",
@@ -175,14 +175,14 @@
     "förekomst_ung": 0,
     "förekomst_sum": 1.5,
     "images": [
-      "/images/svampbilder/Giftsvampar/Paxillus involutus-104-5351.jpg",
-      "/images/svampbilder/Giftsvampar/Paxillus involutus-98-5351.jpg"
+      "/images/SvampBilder/Giftsvampar/Paxillus involutus-104-5351.jpg",
+      "/images/SvampBilder/Giftsvampar/Paxillus involutus-98-5351.jpg"
     ]
   },
   {
     "Scientificname": "Scleroderma bovista",
     "Commonname": "potatisrottryffel",
-    "Artfakta": "https://artfakta.se/artinformation/taxa/5975/detaljer",
+    "Artfakta": "https://artfakta.se/taxa/5975/",
     "RL2020kat": "LC",
     "RL2020krit": null,
     "Kriteriedokumentation": null,
@@ -220,13 +220,13 @@
     "förekomst_ung": 0,
     "förekomst_sum": 1.5,
     "images": [
-      "/images/svampbilder/Giftsvampar/Scleroderma bovista-161-5975.jpg"
+      "/images/SvampBilder/Giftsvampar/Scleroderma bovista-161-5975.jpg"
     ]
   },
   {
     "Scientificname": "Amanita muscaria",
     "Commonname": "röd flugsvamp",
-    "Artfakta": "https://artfakta.se/artinformation/taxa/236537/detaljer",
+    "Artfakta": "https://artfakta.se/taxa/236537/",
     "RL2020kat": "NE",
     "RL2020krit": null,
     "Kriteriedokumentation": null,
@@ -264,17 +264,17 @@
     "förekomst_ung": 0,
     "förekomst_sum": null,
     "images": [
-      "/images/svampbilder/Giftsvampar/Amanita muscaria-28-2976.jpg",
-      "/images/svampbilder/Giftsvampar/Amanita muscaria-29-2976.jpg",
-      "/images/svampbilder/Giftsvampar/Amanita muscaria-48-2976.jpg",
-      "/images/svampbilder/Giftsvampar/Amanita muscaria-49-2976.jpg",
-      "/images/svampbilder/Giftsvampar/Amanita muscaria-26-2976.jpg"
+      "/images/SvampBilder/Giftsvampar/Amanita muscaria-28-2976.jpg",
+      "/images/SvampBilder/Giftsvampar/Amanita muscaria-29-2976.jpg",
+      "/images/SvampBilder/Giftsvampar/Amanita muscaria-48-2976.jpg",
+      "/images/SvampBilder/Giftsvampar/Amanita muscaria-49-2976.jpg",
+      "/images/SvampBilder/Giftsvampar/Amanita muscaria-26-2976.jpg"
     ]
   },
   {
     "Scientificname": "Lactarius torminosus",
     "Commonname": "skäggriska",
-    "Artfakta": "https://artfakta.se/artinformation/taxa/4779/detaljer",
+    "Artfakta": "https://artfakta.se/taxa/4779/",
     "RL2020kat": "LC",
     "RL2020krit": null,
     "Kriteriedokumentation": null,
@@ -312,14 +312,14 @@
     "förekomst_ung": 0,
     "förekomst_sum": 1.5,
     "images": [
-      "/images/svampbilder/Matsvampar/Lactarius torminosus-2.jpg",
-      "/images/svampbilder/Matsvampar/Lactarius torminosus-1.jpg"
+      "/images/SvampBilder/Matsvampar/Lactarius torminosus-2.jpg",
+      "/images/SvampBilder/Matsvampar/Lactarius torminosus-1.jpg"
     ]
   },
   {
     "Scientificname": "Boletus edulis",
     "Commonname": "stensopp",
-    "Artfakta": "https://artfakta.se/artinformation/taxa/245630/detaljer",
+    "Artfakta": "https://artfakta.se/taxa/245630/",
     "RL2020kat": "LC",
     "RL2020krit": null,
     "Kriteriedokumentation": null,
@@ -357,12 +357,12 @@
     "förekomst_ung": 0,
     "förekomst_sum": 1.5,
     "images": [
-      "/images/svampbilder/Matsvampar/Boletus edulis-1.jpg",
-      "/images/svampbilder/Matsvampar/Boletus edulis-2.jpg",
-      "/images/svampbilder/Matsvampar/Boletus edulis-3.jpg",
-      "/images/svampbilder/Matsvampar/Boletus edulis-6.jpg",
-      "/images/svampbilder/Matsvampar/Boletus edulis-4.jpg",
-      "/images/svampbilder/Matsvampar/Boletus edulis-5.jpg"
+      "/images/SvampBilder/Matsvampar/Boletus edulis-1.jpg",
+      "/images/SvampBilder/Matsvampar/Boletus edulis-2.jpg",
+      "/images/SvampBilder/Matsvampar/Boletus edulis-3.jpg",
+      "/images/SvampBilder/Matsvampar/Boletus edulis-6.jpg",
+      "/images/SvampBilder/Matsvampar/Boletus edulis-4.jpg",
+      "/images/SvampBilder/Matsvampar/Boletus edulis-5.jpg"
     ]
   }
 ]

@@ -2,10 +2,10 @@
   {
     "Scientificname": "Rubroboletus legaliae",
     "Commonname": "falsk djävulssopp",
-    "Artfakta": "https://artfakta.se/artinformation/taxa/156/detaljer",
+    "Artfakta": "https://artfakta.se/taxa/156/information",
     "RL2020kat": "VU",
     "RL2020krit": "D1",
-    "Kriteriedokumentation": "Uppträder ibland under solitära kvarstående ekar längs vägkanter ochparkliknande ytor i tätortsbebyggelse. Endast fem aktuella lokalområden i landet (Öland, Östergötland, Sörmland och Uppland). Växer i en väl undersökt miljö. Uppenbarligen en mycket sällsynt art med liten population i landet. Har tidigare har sammanblandats med B. rhodoxanthus och B. rhodopurpureus. Antalet individer bedöms vara lägre än gränsvärdet för Sårbar (VU) enligt D-kriteriet. (D1).",
+    "Kriteriedokumentation": "Uppträder ibland under solitära kvarstående ekar längs vägkanter och parkliknande ytor i tätortsbebyggelse. Endast fem aktuella lokalområden i landet (Öland, Östergötland, Sörmland och Uppland). Växer i en väl undersökt miljö. Uppenbarligen en sällsynt art med liten population i landet. Har tidigare har sammanblandats med B. rhodoxanthus och B. rhodopurpureus.  Antalet individer bedöms vara lägre än gränsvärdet för Sårbar (VU) enligt D-kriteriet. (D1).",
     "Svamp-grupp": "sopp",
     "Svamp-Undersvamp-grupp": null,
     "SIGNAL_art": null,
@@ -32,7 +32,7 @@
     "ANNANmark": null,
     "RLochS": "x",
     "rating": null,
-    "ekologi": "Bildar mykorrhiza med ek på kalkrik mark i solvarma lägen i glesa ädellövskogar, parker och andra brynmiljöer. ",
+    "ekologi": "Växer med ek på kalkrik mark i solvarma lägen i glesa ädellövskogar, parker och andra brynmiljöer. ",
     "RankRed": 3,
     "Giftsvamp": "x",
     "förekomst_skog_ålder": 2,
@@ -41,9 +41,9 @@
     "förekomst_ung": 0,
     "förekomst_sum": 2,
     "images": [
-      "/images/svampbilder/Giftsvampar/Rubroboletus legaliae-232-156.jpg",
-      "/images/svampbilder/Giftsvampar/Rubroboletus legaliae-255-.jpg",
-      "/images/svampbilder/Giftsvampar/Rubroboletus legaliae-231-156.jpg"
+      "/images/SvampBilder/Giftsvampar/Rubroboletus legaliae-232-156.jpg",
+      "/images/SvampBilder/Giftsvampar/Rubroboletus legaliae-255-.jpg",
+      "/images/SvampBilder/Giftsvampar/Rubroboletus legaliae-231-156.jpg"
     ]
   }
 ]

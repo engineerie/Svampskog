@@ -2,7 +2,7 @@
   {
     "Scientificname": "Leccinum scabrum",
     "Commonname": "björksopp",
-    "Artfakta": "https://artfakta.se/artinformation/taxa/245506/detaljer",
+    "Artfakta": "https://artfakta.se/taxa/245506/",
     "RL2020kat": "LC",
     "RL2020krit": null,
     "Kriteriedokumentation": null,
@@ -40,16 +40,16 @@
     "förekomst_ung": 1,
     "förekomst_sum": 3,
     "images": [
-      "/images/svampbilder/Matsvampar/Leccinum scabrum-4.jpg",
-      "/images/svampbilder/Matsvampar/Leccinum scabrum-3.jpg",
-      "/images/svampbilder/Matsvampar/Leccinum scabrum-2.jpg",
-      "/images/svampbilder/Matsvampar/Leccinum scabrum-1.jpg"
+      "/images/SvampBilder/Matsvampar/Leccinum scabrum-4.jpg",
+      "/images/SvampBilder/Matsvampar/Leccinum scabrum-3.jpg",
+      "/images/SvampBilder/Matsvampar/Leccinum scabrum-2.jpg",
+      "/images/SvampBilder/Matsvampar/Leccinum scabrum-1.jpg"
     ]
   },
   {
     "Scientificname": "Lactarius pubescens",
     "Commonname": "blek skäggriska",
-    "Artfakta": "https://artfakta.se/artinformation/taxa/4758/detaljer",
+    "Artfakta": "https://artfakta.se/taxa/4758/",
     "RL2020kat": "LC",
     "RL2020krit": null,
     "Kriteriedokumentation": null,
@@ -91,7 +91,7 @@
   {
     "Scientificname": "Imleria badia",
     "Commonname": "brunsopp",
-    "Artfakta": "https://artfakta.se/artinformation/taxa/3122/detaljer",
+    "Artfakta": "https://artfakta.se/taxa/3122/",
     "RL2020kat": "LC",
     "RL2020krit": null,
     "Kriteriedokumentation": null,
@@ -129,18 +129,18 @@
     "förekomst_ung": 1,
     "förekomst_sum": 3,
     "images": [
-      "/images/svampbilder/Matsvampar/Imleria badia-4.jpg",
-      "/images/svampbilder/Matsvampar/Imleria badia-5.jpg",
-      "/images/svampbilder/Matsvampar/Imleria badia-6.jpg",
-      "/images/svampbilder/Matsvampar/Imleria badia-2.jpg",
-      "/images/svampbilder/Matsvampar/Imleria badia-3.jpg",
-      "/images/svampbilder/Matsvampar/Imleria badia-1.jpg"
+      "/images/SvampBilder/Matsvampar/Imleria badia-4.jpg",
+      "/images/SvampBilder/Matsvampar/Imleria badia-5.jpg",
+      "/images/SvampBilder/Matsvampar/Imleria badia-6.jpg",
+      "/images/SvampBilder/Matsvampar/Imleria badia-2.jpg",
+      "/images/SvampBilder/Matsvampar/Imleria badia-3.jpg",
+      "/images/SvampBilder/Matsvampar/Imleria badia-1.jpg"
     ]
   },
   {
     "Scientificname": "Russula claroflava",
     "Commonname": "gulkremla",
-    "Artfakta": "https://artfakta.se/artinformation/taxa/5847/detaljer",
+    "Artfakta": "https://artfakta.se/taxa/5847/",
     "RL2020kat": "LC",
     "RL2020krit": null,
     "Kriteriedokumentation": null,
@@ -178,16 +178,16 @@
     "förekomst_ung": 0,
     "förekomst_sum": 3,
     "images": [
-      "/images/svampbilder/Matsvampar/Russula claroflava-4.jpg",
-      "/images/svampbilder/Matsvampar/Russula claroflava-1.jpg",
-      "/images/svampbilder/Matsvampar/Russula claroflava-3.jpg",
-      "/images/svampbilder/Matsvampar/Russula claroflava-2.jpg"
+      "/images/SvampBilder/Matsvampar/Russula claroflava-4.jpg",
+      "/images/SvampBilder/Matsvampar/Russula claroflava-1.jpg",
+      "/images/SvampBilder/Matsvampar/Russula claroflava-3.jpg",
+      "/images/SvampBilder/Matsvampar/Russula claroflava-2.jpg"
     ]
   },
   {
     "Scientificname": "Cantharellus cibarius",
     "Commonname": "kantarell",
-    "Artfakta": "https://artfakta.se/artinformation/taxa/3213/detaljer",
+    "Artfakta": "https://artfakta.se/taxa/3213/",
     "RL2020kat": "LC",
     "RL2020krit": null,
     "Kriteriedokumentation": null,
@@ -225,17 +225,17 @@
     "förekomst_ung": 0,
     "förekomst_sum": 4,
     "images": [
-      "/images/svampbilder/Matsvampar/Cantharellus cibarius-4.jpg",
-      "/images/svampbilder/Matsvampar/Cantharellus cibarius-5.jpg",
-      "/images/svampbilder/Matsvampar/Cantharellus cibarius-2.jpg",
-      "/images/svampbilder/Matsvampar/Cantharellus cibarius-3.jpg",
-      "/images/svampbilder/Matsvampar/Cantharellus cibarius-1.jpg"
+      "/images/SvampBilder/Matsvampar/Cantharellus cibarius-4.jpg",
+      "/images/SvampBilder/Matsvampar/Cantharellus cibarius-5.jpg",
+      "/images/SvampBilder/Matsvampar/Cantharellus cibarius-2.jpg",
+      "/images/SvampBilder/Matsvampar/Cantharellus cibarius-3.jpg",
+      "/images/SvampBilder/Matsvampar/Cantharellus cibarius-1.jpg"
     ]
   },
   {
     "Scientificname": "Leccinum holopus",
     "Commonname": "kärrsopp",
-    "Artfakta": "https://artfakta.se/artinformation/taxa/4818/detaljer",
+    "Artfakta": "https://artfakta.se/taxa/4818/",
     "RL2020kat": "LC",
     "RL2020krit": null,
     "Kriteriedokumentation": null,
@@ -277,7 +277,7 @@
   {
     "Scientificname": "Lactarius helvus",
     "Commonname": "lakritsriska",
-    "Artfakta": "https://artfakta.se/artinformation/taxa/4732/detaljer",
+    "Artfakta": "https://artfakta.se/taxa/4732/",
     "RL2020kat": "LC",
     "RL2020krit": null,
     "Kriteriedokumentation": null,
@@ -315,15 +315,15 @@
     "förekomst_ung": 0,
     "förekomst_sum": 3,
     "images": [
-      "/images/svampbilder/Giftsvampar/Lactarius helvus-191-4732.jpg",
-      "/images/svampbilder/Giftsvampar/Lactarius helvus-103-4732.jpg",
-      "/images/svampbilder/Giftsvampar/Lactarius helvus-192-4732.jpg"
+      "/images/SvampBilder/Giftsvampar/Lactarius helvus-191-4732.jpg",
+      "/images/SvampBilder/Giftsvampar/Lactarius helvus-103-4732.jpg",
+      "/images/SvampBilder/Giftsvampar/Lactarius helvus-192-4732.jpg"
     ]
   },
   {
     "Scientificname": "Russula integra",
     "Commonname": "mandelkremla",
-    "Artfakta": "https://artfakta.se/artinformation/taxa/5881/detaljer",
+    "Artfakta": "https://artfakta.se/taxa/5881/",
     "RL2020kat": "LC",
     "RL2020krit": null,
     "Kriteriedokumentation": null,
@@ -361,17 +361,17 @@
     "förekomst_ung": 0,
     "förekomst_sum": 2,
     "images": [
-      "/images/svampbilder/Matsvampar/Russula integra-2.jpg",
-      "/images/svampbilder/Matsvampar/Russula integra-3.jpg",
-      "/images/svampbilder/Matsvampar/Russula integra-1.jpg",
-      "/images/svampbilder/Matsvampar/Russula integra-4.jpg",
-      "/images/svampbilder/Matsvampar/Russula integra-5.jpg"
+      "/images/SvampBilder/Matsvampar/Russula integra-2.jpg",
+      "/images/SvampBilder/Matsvampar/Russula integra-3.jpg",
+      "/images/SvampBilder/Matsvampar/Russula integra-1.jpg",
+      "/images/SvampBilder/Matsvampar/Russula integra-4.jpg",
+      "/images/SvampBilder/Matsvampar/Russula integra-5.jpg"
     ]
   },
   {
     "Scientificname": "Lactarius rufus",
     "Commonname": "pepparriska",
-    "Artfakta": "https://artfakta.se/artinformation/taxa/4763/detaljer",
+    "Artfakta": "https://artfakta.se/taxa/4763/",
     "RL2020kat": "LC",
     "RL2020krit": null,
     "Kriteriedokumentation": null,
@@ -409,16 +409,16 @@
     "förekomst_ung": 1,
     "förekomst_sum": 3,
     "images": [
-      "/images/svampbilder/Matsvampar/Lactarius rufus-4.jpg",
-      "/images/svampbilder/Matsvampar/Lactarius rufus-1.jpg",
-      "/images/svampbilder/Matsvampar/Lactarius rufus-3.jpg",
-      "/images/svampbilder/Matsvampar/Lactarius rufus-2.jpg"
+      "/images/SvampBilder/Matsvampar/Lactarius rufus-4.jpg",
+      "/images/SvampBilder/Matsvampar/Lactarius rufus-1.jpg",
+      "/images/SvampBilder/Matsvampar/Lactarius rufus-3.jpg",
+      "/images/SvampBilder/Matsvampar/Lactarius rufus-2.jpg"
     ]
   },
   {
     "Scientificname": "Paxillus involutus s.lat.",
     "Commonname": "pluggskivling",
-    "Artfakta": "https://artfakta.se/artinformation/taxa/5351/detaljer",
+    "Artfakta": "https://artfakta.se/taxa/5351/",
     "RL2020kat": "LC",
     "RL2020krit": null,
     "Kriteriedokumentation": null,
@@ -456,15 +456,15 @@
     "förekomst_ung": 0,
     "förekomst_sum": 2,
     "images": [
-      "/images/svampbilder/Giftsvampar/Paxillus involutus-104-5351.jpg",
-      "/images/svampbilder/Giftsvampar/Paxillus involutus-98-5351.jpg"
+      "/images/SvampBilder/Giftsvampar/Paxillus involutus-104-5351.jpg",
+      "/images/SvampBilder/Giftsvampar/Paxillus involutus-98-5351.jpg"
     ]
   },
   {
     "Scientificname": "Paxillus involutus",
     "Commonname": "pluggskivling",
-    "Artfakta": "https://artfakta.se/artinformation/taxa/6051059/detaljer",
-    "RL2020kat": null,
+    "Artfakta": "https://artfakta.se/taxa/6051059/",
+    "RL2020kat": "LC",
     "RL2020krit": null,
     "Kriteriedokumentation": null,
     "Svamp-grupp": "hattsvamp",
@@ -501,14 +501,14 @@
     "förekomst_ung": 0,
     "förekomst_sum": 2,
     "images": [
-      "/images/svampbilder/Giftsvampar/Paxillus involutus-104-5351.jpg",
-      "/images/svampbilder/Giftsvampar/Paxillus involutus-98-5351.jpg"
+      "/images/SvampBilder/Giftsvampar/Paxillus involutus-104-5351.jpg",
+      "/images/SvampBilder/Giftsvampar/Paxillus involutus-98-5351.jpg"
     ]
   },
   {
     "Scientificname": "Cortinarius caperatus",
     "Commonname": "rimskivling",
-    "Artfakta": "https://artfakta.se/artinformation/taxa/5821/detaljer",
+    "Artfakta": "https://artfakta.se/taxa/5821/",
     "RL2020kat": "LC",
     "RL2020krit": null,
     "Kriteriedokumentation": null,
@@ -546,17 +546,17 @@
     "förekomst_ung": 0,
     "förekomst_sum": 3,
     "images": [
-      "/images/svampbilder/Matsvampar/Cortinarius caperatus-1.jpg",
-      "/images/svampbilder/Matsvampar/Cortinarius caperatus-2.jpg",
-      "/images/svampbilder/Matsvampar/Cortinarius caperatus-3.jpg",
-      "/images/svampbilder/Matsvampar/Cortinarius caperatus-4.jpg",
-      "/images/svampbilder/Matsvampar/Cortinarius caperatus-5.jpg"
+      "/images/SvampBilder/Matsvampar/Cortinarius caperatus-1.jpg",
+      "/images/SvampBilder/Matsvampar/Cortinarius caperatus-2.jpg",
+      "/images/SvampBilder/Matsvampar/Cortinarius caperatus-3.jpg",
+      "/images/SvampBilder/Matsvampar/Cortinarius caperatus-4.jpg",
+      "/images/SvampBilder/Matsvampar/Cortinarius caperatus-5.jpg"
     ]
   },
   {
     "Scientificname": "Amanita muscaria",
     "Commonname": "röd flugsvamp",
-    "Artfakta": "https://artfakta.se/artinformation/taxa/236537/detaljer",
+    "Artfakta": "https://artfakta.se/taxa/236537/",
     "RL2020kat": "NE",
     "RL2020krit": null,
     "Kriteriedokumentation": null,
@@ -594,17 +594,17 @@
     "förekomst_ung": 0,
     "förekomst_sum": "x2",
     "images": [
-      "/images/svampbilder/Giftsvampar/Amanita muscaria-28-2976.jpg",
-      "/images/svampbilder/Giftsvampar/Amanita muscaria-29-2976.jpg",
-      "/images/svampbilder/Giftsvampar/Amanita muscaria-48-2976.jpg",
-      "/images/svampbilder/Giftsvampar/Amanita muscaria-49-2976.jpg",
-      "/images/svampbilder/Giftsvampar/Amanita muscaria-26-2976.jpg"
+      "/images/SvampBilder/Giftsvampar/Amanita muscaria-28-2976.jpg",
+      "/images/SvampBilder/Giftsvampar/Amanita muscaria-29-2976.jpg",
+      "/images/SvampBilder/Giftsvampar/Amanita muscaria-48-2976.jpg",
+      "/images/SvampBilder/Giftsvampar/Amanita muscaria-49-2976.jpg",
+      "/images/SvampBilder/Giftsvampar/Amanita muscaria-26-2976.jpg"
     ]
   },
   {
     "Scientificname": "Cortinarius armillatus",
     "Commonname": "rödbandad spindling",
-    "Artfakta": "https://artfakta.se/artinformation/taxa/3541/detaljer",
+    "Artfakta": "https://artfakta.se/taxa/3541/",
     "RL2020kat": "LC",
     "RL2020krit": null,
     "Kriteriedokumentation": null,
@@ -642,14 +642,14 @@
     "förekomst_ung": 0,
     "förekomst_sum": 4,
     "images": [
-      "/images/svampbilder/Giftsvampar/Cortinarius armillatus-20-3541.jpg",
-      "/images/svampbilder/Giftsvampar/Cortinarius armillatus-21-3541.jpg"
+      "/images/SvampBilder/Giftsvampar/Cortinarius armillatus-20-3541.jpg",
+      "/images/SvampBilder/Giftsvampar/Cortinarius armillatus-21-3541.jpg"
     ]
   },
   {
     "Scientificname": "Tricholoma columbetta",
     "Commonname": "silkesmusseron",
-    "Artfakta": "https://artfakta.se/artinformation/taxa/6263/detaljer",
+    "Artfakta": "https://artfakta.se/taxa/6263/",
     "RL2020kat": "LC",
     "RL2020krit": null,
     "Kriteriedokumentation": null,
@@ -687,17 +687,17 @@
     "förekomst_ung": 0,
     "förekomst_sum": 2,
     "images": [
-      "/images/svampbilder/Matsvampar/Tricholoma columbetta-1.jpg",
-      "/images/svampbilder/Matsvampar/Tricholoma columbetta-3.jpg",
-      "/images/svampbilder/Matsvampar/Tricholoma columbetta-2.jpg",
-      "/images/svampbilder/Matsvampar/Tricholoma columbetta-5.jpg",
-      "/images/svampbilder/Matsvampar/Tricholoma columbetta-4.jpg"
+      "/images/SvampBilder/Matsvampar/Tricholoma columbetta-1.jpg",
+      "/images/SvampBilder/Matsvampar/Tricholoma columbetta-3.jpg",
+      "/images/SvampBilder/Matsvampar/Tricholoma columbetta-2.jpg",
+      "/images/SvampBilder/Matsvampar/Tricholoma columbetta-5.jpg",
+      "/images/SvampBilder/Matsvampar/Tricholoma columbetta-4.jpg"
     ]
   },
   {
     "Scientificname": "Russula xerampelina s. lat.",
     "Commonname": "sillkremlor",
-    "Artfakta": "https://artfakta.se/artinformation/taxa/267011/detaljer",
+    "Artfakta": "https://artfakta.se/taxa/267011/",
     "RL2020kat": "NA",
     "RL2020krit": null,
     "Kriteriedokumentation": null,
@@ -735,13 +735,13 @@
     "förekomst_ung": 0,
     "förekomst_sum": 3,
     "images": [
-      "/images/svampbilder/Matsvampar/Russula xerampelina.jpg"
+      "/images/SvampBilder/Matsvampar/Russula xerampelina.jpg"
     ]
   },
   {
     "Scientificname": "Lactarius torminosus",
     "Commonname": "skäggriska",
-    "Artfakta": "https://artfakta.se/artinformation/taxa/4779/detaljer",
+    "Artfakta": "https://artfakta.se/taxa/4779/",
     "RL2020kat": "LC",
     "RL2020krit": null,
     "Kriteriedokumentation": null,
@@ -779,14 +779,14 @@
     "förekomst_ung": 0,
     "förekomst_sum": 3,
     "images": [
-      "/images/svampbilder/Matsvampar/Lactarius torminosus-2.jpg",
-      "/images/svampbilder/Matsvampar/Lactarius torminosus-1.jpg"
+      "/images/SvampBilder/Matsvampar/Lactarius torminosus-2.jpg",
+      "/images/SvampBilder/Matsvampar/Lactarius torminosus-1.jpg"
     ]
   },
   {
     "Scientificname": "Boletus edulis",
     "Commonname": "stensopp",
-    "Artfakta": "https://artfakta.se/artinformation/taxa/245630/detaljer",
+    "Artfakta": "https://artfakta.se/taxa/245630/",
     "RL2020kat": "LC",
     "RL2020krit": null,
     "Kriteriedokumentation": null,
@@ -824,18 +824,18 @@
     "förekomst_ung": 0,
     "förekomst_sum": 4,
     "images": [
-      "/images/svampbilder/Matsvampar/Boletus edulis-1.jpg",
-      "/images/svampbilder/Matsvampar/Boletus edulis-2.jpg",
-      "/images/svampbilder/Matsvampar/Boletus edulis-3.jpg",
-      "/images/svampbilder/Matsvampar/Boletus edulis-6.jpg",
-      "/images/svampbilder/Matsvampar/Boletus edulis-4.jpg",
-      "/images/svampbilder/Matsvampar/Boletus edulis-5.jpg"
+      "/images/SvampBilder/Matsvampar/Boletus edulis-1.jpg",
+      "/images/SvampBilder/Matsvampar/Boletus edulis-2.jpg",
+      "/images/SvampBilder/Matsvampar/Boletus edulis-3.jpg",
+      "/images/SvampBilder/Matsvampar/Boletus edulis-6.jpg",
+      "/images/SvampBilder/Matsvampar/Boletus edulis-4.jpg",
+      "/images/SvampBilder/Matsvampar/Boletus edulis-5.jpg"
     ]
   },
   {
     "Scientificname": "Russula paludosa",
     "Commonname": "storkremla",
-    "Artfakta": "https://artfakta.se/artinformation/taxa/5908/detaljer",
+    "Artfakta": "https://artfakta.se/taxa/5908/",
     "RL2020kat": "LC",
     "RL2020krit": null,
     "Kriteriedokumentation": null,
@@ -873,14 +873,14 @@
     "förekomst_ung": 0,
     "förekomst_sum": 3,
     "images": [
-      "/images/svampbilder/Matsvampar/Russula paludosa-2.jpg",
-      "/images/svampbilder/Matsvampar/Russula paludosa-1.jpg"
+      "/images/SvampBilder/Matsvampar/Russula paludosa-2.jpg",
+      "/images/SvampBilder/Matsvampar/Russula paludosa-1.jpg"
     ]
   },
   {
     "Scientificname": "Russula decolorans",
     "Commonname": "tegelkremla",
-    "Artfakta": "https://artfakta.se/artinformation/taxa/5852/detaljer",
+    "Artfakta": "https://artfakta.se/taxa/5852/",
     "RL2020kat": "LC",
     "RL2020krit": null,
     "Kriteriedokumentation": null,
@@ -918,16 +918,16 @@
     "förekomst_ung": 0,
     "förekomst_sum": 3,
     "images": [
-      "/images/svampbilder/Matsvampar/Russula decolorans-4.jpg",
-      "/images/svampbilder/Matsvampar/Russula decolorans-1.jpg",
-      "/images/svampbilder/Matsvampar/Russula decolorans-2.jpg",
-      "/images/svampbilder/Matsvampar/Russula decolorans-3.jpg"
+      "/images/SvampBilder/Matsvampar/Russula decolorans-4.jpg",
+      "/images/SvampBilder/Matsvampar/Russula decolorans-1.jpg",
+      "/images/SvampBilder/Matsvampar/Russula decolorans-2.jpg",
+      "/images/SvampBilder/Matsvampar/Russula decolorans-3.jpg"
     ]
   },
   {
     "Scientificname": "Leccinum versipelle",
     "Commonname": "tegelsopp",
-    "Artfakta": "https://artfakta.se/artinformation/taxa/245486/detaljer",
+    "Artfakta": "https://artfakta.se/taxa/245486/",
     "RL2020kat": "LC",
     "RL2020krit": null,
     "Kriteriedokumentation": null,
@@ -965,18 +965,18 @@
     "förekomst_ung": 0,
     "förekomst_sum": 3,
     "images": [
-      "/images/svampbilder/Matsvampar/Leccinum versipelle-1.jpg",
-      "/images/svampbilder/Matsvampar/Leccinum versipelle-2.jpg",
-      "/images/svampbilder/Matsvampar/Leccinum versipelle-3.jpg",
-      "/images/svampbilder/Matsvampar/Leccinum versipelle-4.jpg",
-      "/images/svampbilder/Giftsvampar/Leccinum versipelle-47-245486.jpg",
-      "/images/svampbilder/Giftsvampar/Leccinum versipelle-36-245486.jpg"
+      "/images/SvampBilder/Matsvampar/Leccinum versipelle-1.jpg",
+      "/images/SvampBilder/Matsvampar/Leccinum versipelle-2.jpg",
+      "/images/SvampBilder/Matsvampar/Leccinum versipelle-3.jpg",
+      "/images/SvampBilder/Matsvampar/Leccinum versipelle-4.jpg",
+      "/images/SvampBilder/Giftsvampar/Leccinum versipelle-47-245486.jpg",
+      "/images/SvampBilder/Giftsvampar/Leccinum versipelle-36-245486.jpg"
     ]
   },
   {
     "Scientificname": "Russula vinosa",
     "Commonname": "vinkremla",
-    "Artfakta": "https://artfakta.se/artinformation/taxa/5902/detaljer",
+    "Artfakta": "https://artfakta.se/taxa/5902/",
     "RL2020kat": "LC",
     "RL2020krit": null,
     "Kriteriedokumentation": null,
@@ -1014,12 +1014,12 @@
     "förekomst_ung": 0,
     "förekomst_sum": 3,
     "images": [
-      "/images/svampbilder/Matsvampar/Russula vinosa-6.jpg",
-      "/images/svampbilder/Matsvampar/Russula vinosa-5.jpg",
-      "/images/svampbilder/Matsvampar/Russula vinosa-4.jpg",
-      "/images/svampbilder/Matsvampar/Russula vinosa-1.jpg",
-      "/images/svampbilder/Matsvampar/Russula vinosa-3.jpg",
-      "/images/svampbilder/Matsvampar/Russula vinosa-2.jpg"
+      "/images/SvampBilder/Matsvampar/Russula vinosa-6.jpg",
+      "/images/SvampBilder/Matsvampar/Russula vinosa-5.jpg",
+      "/images/SvampBilder/Matsvampar/Russula vinosa-4.jpg",
+      "/images/SvampBilder/Matsvampar/Russula vinosa-1.jpg",
+      "/images/SvampBilder/Matsvampar/Russula vinosa-3.jpg",
+      "/images/SvampBilder/Matsvampar/Russula vinosa-2.jpg"
     ]
   }
 ]

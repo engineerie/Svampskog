@@ -2,10 +2,10 @@
   {
     "Scientificname": "Rubroboletus legaliae",
     "Commonname": "falsk djävulssopp",
-    "Artfakta": "https://artfakta.se/artinformation/taxa/156/detaljer",
+    "Artfakta": "https://artfakta.se/taxa/156/information",
     "RL2020kat": "VU",
     "RL2020krit": "D1",
-    "Kriteriedokumentation": "Uppträder ibland under solitära kvarstående ekar längs vägkanter ochparkliknande ytor i tätortsbebyggelse. Endast fem aktuella lokalområden i landet (Öland, Östergötland, Sörmland och Uppland). Växer i en väl undersökt miljö. Uppenbarligen en mycket sällsynt art med liten population i landet. Har tidigare har sammanblandats med B. rhodoxanthus och B. rhodopurpureus. Antalet individer bedöms vara lägre än gränsvärdet för Sårbar (VU) enligt D-kriteriet. (D1).",
+    "Kriteriedokumentation": "Uppträder ibland under solitära kvarstående ekar längs vägkanter och parkliknande ytor i tätortsbebyggelse. Endast fem aktuella lokalområden i landet (Öland, Östergötland, Sörmland och Uppland). Växer i en väl undersökt miljö. Uppenbarligen en sällsynt art med liten population i landet. Har tidigare har sammanblandats med B. rhodoxanthus och B. rhodopurpureus.  Antalet individer bedöms vara lägre än gränsvärdet för Sårbar (VU) enligt D-kriteriet. (D1).",
     "Svamp-grupp": "sopp",
     "Svamp-Undersvamp-grupp": null,
     "SIGNAL_art": null,
@@ -30,7 +30,7 @@
     "KALKmark": "x",
     "ANNANmark": null,
     "rating": null,
-    "ekologi": "Bildar mykorrhiza med ek på kalkrik mark i solvarma lägen i glesa ädellövskogar, parker och andra brynmiljöer. ",
+    "ekologi": "Växer med ek på kalkrik mark i solvarma lägen i glesa ädellövskogar, parker och andra brynmiljöer. ",
     "Giftsvamp": "x",
     "Rank matsvamp": null,
     "Rank giftsvamp": 3,
@@ -40,15 +40,15 @@
     "förekomst_ung": 0,
     "förekomst_sum": 3,
     "images": [
-      "/images/svampbilder/Giftsvampar/Rubroboletus legaliae-232-156.jpg",
-      "/images/svampbilder/Giftsvampar/Rubroboletus legaliae-255-.jpg",
-      "/images/svampbilder/Giftsvampar/Rubroboletus legaliae-231-156.jpg"
+      "/images/SvampBilder/Giftsvampar/Rubroboletus legaliae-232-156.jpg",
+      "/images/SvampBilder/Giftsvampar/Rubroboletus legaliae-255-.jpg",
+      "/images/SvampBilder/Giftsvampar/Rubroboletus legaliae-231-156.jpg"
     ]
   },
   {
     "Scientificname": "Cantharellus cibarius",
     "Commonname": "kantarell",
-    "Artfakta": "https://artfakta.se/artinformation/taxa/3213/detaljer",
+    "Artfakta": "https://artfakta.se/taxa/3213/",
     "RL2020kat": "LC",
     "RL2020krit": null,
     "Kriteriedokumentation": null,
@@ -86,17 +86,17 @@
     "förekomst_ung": 0,
     "förekomst_sum": 3,
     "images": [
-      "/images/svampbilder/Matsvampar/Cantharellus cibarius-4.jpg",
-      "/images/svampbilder/Matsvampar/Cantharellus cibarius-5.jpg",
-      "/images/svampbilder/Matsvampar/Cantharellus cibarius-2.jpg",
-      "/images/svampbilder/Matsvampar/Cantharellus cibarius-3.jpg",
-      "/images/svampbilder/Matsvampar/Cantharellus cibarius-1.jpg"
+      "/images/SvampBilder/Matsvampar/Cantharellus cibarius-4.jpg",
+      "/images/SvampBilder/Matsvampar/Cantharellus cibarius-5.jpg",
+      "/images/SvampBilder/Matsvampar/Cantharellus cibarius-2.jpg",
+      "/images/SvampBilder/Matsvampar/Cantharellus cibarius-3.jpg",
+      "/images/SvampBilder/Matsvampar/Cantharellus cibarius-1.jpg"
     ]
   },
   {
     "Scientificname": "Paxillus involutus s.lat.",
     "Commonname": "pluggskivling",
-    "Artfakta": "https://artfakta.se/artinformation/taxa/5351/detaljer",
+    "Artfakta": "https://artfakta.se/taxa/5351/",
     "RL2020kat": "LC",
     "RL2020krit": null,
     "Kriteriedokumentation": null,
@@ -134,15 +134,15 @@
     "förekomst_ung": 0,
     "förekomst_sum": 2,
     "images": [
-      "/images/svampbilder/Giftsvampar/Paxillus involutus-104-5351.jpg",
-      "/images/svampbilder/Giftsvampar/Paxillus involutus-98-5351.jpg"
+      "/images/SvampBilder/Giftsvampar/Paxillus involutus-104-5351.jpg",
+      "/images/SvampBilder/Giftsvampar/Paxillus involutus-98-5351.jpg"
     ]
   },
   {
     "Scientificname": "Paxillus involutus",
     "Commonname": "pluggskivling",
-    "Artfakta": "https://artfakta.se/artinformation/taxa/6051059/detaljer",
-    "RL2020kat": null,
+    "Artfakta": "https://artfakta.se/taxa/6051059/",
+    "RL2020kat": "LC",
     "RL2020krit": null,
     "Kriteriedokumentation": null,
     "Svamp-grupp": "hattsvamp",
@@ -179,14 +179,14 @@
     "förekomst_ung": 0,
     "förekomst_sum": 2,
     "images": [
-      "/images/svampbilder/Giftsvampar/Paxillus involutus-104-5351.jpg",
-      "/images/svampbilder/Giftsvampar/Paxillus involutus-98-5351.jpg"
+      "/images/SvampBilder/Giftsvampar/Paxillus involutus-104-5351.jpg",
+      "/images/SvampBilder/Giftsvampar/Paxillus involutus-98-5351.jpg"
     ]
   },
   {
     "Scientificname": "Lactarius torminosus",
     "Commonname": "skäggriska",
-    "Artfakta": "https://artfakta.se/artinformation/taxa/4779/detaljer",
+    "Artfakta": "https://artfakta.se/taxa/4779/",
     "RL2020kat": "LC",
     "RL2020krit": null,
     "Kriteriedokumentation": null,
@@ -224,14 +224,14 @@
     "förekomst_ung": 0,
     "förekomst_sum": 3,
     "images": [
-      "/images/svampbilder/Matsvampar/Lactarius torminosus-2.jpg",
-      "/images/svampbilder/Matsvampar/Lactarius torminosus-1.jpg"
+      "/images/SvampBilder/Matsvampar/Lactarius torminosus-2.jpg",
+      "/images/SvampBilder/Matsvampar/Lactarius torminosus-1.jpg"
     ]
   },
   {
     "Scientificname": "Boletus edulis",
     "Commonname": "stensopp",
-    "Artfakta": "https://artfakta.se/artinformation/taxa/245630/detaljer",
+    "Artfakta": "https://artfakta.se/taxa/245630/",
     "RL2020kat": "LC",
     "RL2020krit": null,
     "Kriteriedokumentation": null,
@@ -269,12 +269,12 @@
     "förekomst_ung": 0,
     "förekomst_sum": 3,
     "images": [
-      "/images/svampbilder/Matsvampar/Boletus edulis-1.jpg",
-      "/images/svampbilder/Matsvampar/Boletus edulis-2.jpg",
-      "/images/svampbilder/Matsvampar/Boletus edulis-3.jpg",
-      "/images/svampbilder/Matsvampar/Boletus edulis-6.jpg",
-      "/images/svampbilder/Matsvampar/Boletus edulis-4.jpg",
-      "/images/svampbilder/Matsvampar/Boletus edulis-5.jpg"
+      "/images/SvampBilder/Matsvampar/Boletus edulis-1.jpg",
+      "/images/SvampBilder/Matsvampar/Boletus edulis-2.jpg",
+      "/images/SvampBilder/Matsvampar/Boletus edulis-3.jpg",
+      "/images/SvampBilder/Matsvampar/Boletus edulis-6.jpg",
+      "/images/SvampBilder/Matsvampar/Boletus edulis-4.jpg",
+      "/images/SvampBilder/Matsvampar/Boletus edulis-5.jpg"
     ]
   }
 ]

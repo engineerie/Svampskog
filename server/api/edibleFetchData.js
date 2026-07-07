@@ -2,6 +2,11 @@
 
 import sqlite3 from "sqlite3";
 import { open } from "sqlite";
+import {
+  pickColumnRef,
+  quoteIdentifier,
+  resolveSpeciesSourceSchema,
+} from "../utils/speciesSourceSchema.js";
 
 const fetchEdibleDataFromDB = async ({
   geography,
@@ -13,46 +18,93 @@ const fetchEdibleDataFromDB = async ({
     filename: "./server/EDNAData.db",
     driver: sqlite3.Database,
   });
+  const schema = await resolveSpeciesSourceSchema(db);
+  const speciesTable = quoteIdentifier(schema.speciesTable);
+
+  const kriteriedokumentationRef =
+    pickColumnRef("m", schema.speciesColumns, ["Kriteriedokumentation2025"]) ||
+    pickColumnRef("m", schema.speciesColumns, ["Kriteriedokumentation"]) ||
+    "NULL";
+  const ekologiRef =
+    pickColumnRef("m", schema.speciesColumns, ["Ekologi2025", "ekologi 2025"]) ||
+    pickColumnRef("m", schema.speciesColumns, ["ekologi"]) ||
+    "NULL";
+  const artfaktaRef =
+    pickColumnRef("m", schema.speciesColumns, ["Artfakta_2025", "Artfakta 2025", "Artfakta"]) ||
+    "NULL";
+  const rlRef =
+    pickColumnRef("m", schema.speciesColumns, ["RL2025kat", "RL2020kat"]) ||
+    "NULL";
+  const norrRef =
+    pickColumnRef("m", schema.speciesColumns, ["Norra_Sverige", "Norra Sverige"]) ||
+    "NULL";
+  const soderRef =
+    pickColumnRef("m", schema.speciesColumns, ["Södra_Sverige", "Södra Sverige"]) ||
+    "NULL";
+  const barrRef =
+    pickColumnRef("m", schema.speciesColumns, ["Blandad_barrskog", "Blandad barrskog"]) ||
+    "NULL";
+  const lovRef =
+    pickColumnRef("m", schema.speciesColumns, ["Blandad_lövskog", "Blandad lövskog"]) ||
+    "NULL";
+  const youngRef =
+    pickColumnRef("m", schema.speciesColumns, ["11-20_år", "11-20 år"]) ||
+    "NULL";
+  const earlyRef =
+    pickColumnRef("m", schema.speciesColumns, ["1-40_år", "1-40 år"]) ||
+    "NULL";
+  const middleRef =
+    pickColumnRef("m", schema.speciesColumns, ["41-90_år", "41-90 år"]) ||
+    "NULL";
+  const oldRef =
+    pickColumnRef("m", schema.speciesColumns, ["91_år_och_äldre", "91 år och äldre"]) ||
+    "NULL";
+  const rankMatsvampRef =
+    pickColumnRef("m", schema.speciesColumns, ["Rank_matsvamp", "Rank matsvamp"]) ||
+    "NULL";
+  const rankGiftsvampRef =
+    pickColumnRef("m", schema.speciesColumns, ["Rank_giftsvamp", "Rank giftsvamp"]) ||
+    "NULL";
 
   // Updated query with additional WHERE conditions
   const query = `
   SELECT 
     m.Scientificname,
     m.Commonname,
-    m.Artfakta,
-    m.RL2020kat,
+    COALESCE(${artfaktaRef}, 'Information saknas') AS Artfakta,
+    COALESCE(${rlRef}, '0') AS RL2020kat,
     m.RL2020krit,
-    m.Kriteriedokumentation,
+    ${kriteriedokumentationRef} AS Kriteriedokumentation,
     m."Svamp-grupp",
     m."Svamp-Undersvamp-grupp",
     m."SIGNAL_art",
     m.Svampguiden,
     m."Nyasvamp-boken",
-    m."Norra Sverige",
-    m."Södra Sverige",
+    ${norrRef} AS "Norra Sverige",
+    ${soderRef} AS "Södra Sverige",
     m.Gran,
     m.Tall,
-    m."Blandad barrskog",
-    m."Blandad lövskog",
+    ${barrRef} AS "Blandad barrskog",
+    ${lovRef} AS "Blandad lövskog",
     m.Lövskog,
     m.EkochBokskog,
     m.Naturbete,
-    m."11-20 år",
-    m."1-40 år",
-    m."41-90 år",
-    m."91 år och äldre",
+    ${youngRef} AS "11-20 år",
+    ${earlyRef} AS "1-40 år",
+    ${middleRef} AS "41-90 år",
+    ${oldRef} AS "91 år och äldre",
     m."ÖRTER_grupp",
     m."BLÅBÄR_grupp",
     m."LINGON_grupp",
     m."KALKmark",
     m."ANNANmark",
     s.rating,
-    m.ekologi AS ekologi,
+    ${ekologiRef} AS ekologi,
     m."Giftsvamp",
-    m."Rank matsvamp",
-    m."Rank giftsvamp"
+    ${rankMatsvampRef} AS "Rank matsvamp",
+    ${rankGiftsvampRef} AS "Rank giftsvamp"
   FROM 
-    "Mat_Naturvård_Gift_Jan_3" m
+    ${speciesTable} m
   LEFT JOIN svampguiden s ON m.taxon = s.taxonid
   WHERE 
     m."Nyasvamp-boken" IS NOT NULL
