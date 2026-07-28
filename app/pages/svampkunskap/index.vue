@@ -52,7 +52,10 @@ useSeoMeta({
   ogDescription: page.value?.description
 })
 
-defineOgImageComponent('Saas')
+defineOgImage('Saas', {
+  title: page.value?.title || 'Svampkunskap',
+  description: page.value?.description || 'Kunskap om svampar och deras roll i skogen.'
+})
 </script>
 
 <template>
@@ -69,7 +72,7 @@ defineOgImageComponent('Saas')
 
       <UPageBody>
         <UBlogPosts v-if="filteredPosts.length">
-          <Motion v-for="(post, index) in filteredPosts" :key="post._path || index" class="relative" :initial="{
+          <Motion v-for="(post, index) in filteredPosts" :key="post.path || index" class="relative" :initial="{
             scale: 1,
             transform: 'translateY(20px)',
             opacity: 0,

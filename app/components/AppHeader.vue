@@ -18,12 +18,12 @@ const items = computed(() => [
     active: route.path.startsWith('/skogsskotsel'),
     // icon: 'i-hugeicons-tree-06'
   },
-  // {
-  //   label: 'Svampkunskap',
-  //   description: 'Hur skogsskötsel påverkar svampar.',
-  //   to: '/svampkunskap',
-  //   active: route.path.startsWith('/svampkunskap'),
-  // },
+  {
+    label: 'Svampkunskap',
+    description: 'Hur skogsskötsel påverkar svampar.',
+    to: '/svampkunskap',
+    active: route.path.startsWith('/svampkunskap'),
+  },
   {
     label: 'Om projektet',
     description: 'Bakgrund och syfte',

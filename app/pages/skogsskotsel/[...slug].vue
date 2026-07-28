@@ -30,7 +30,10 @@ useSeoMeta({
   ogDescription: page.value.description
 })
 
-defineOgImageComponent('Saas')
+defineOgImage('Saas', {
+  title: page.value.title,
+  description: page.value.description
+})
 
 const startskogOptions = [
   { label: 'Inte kalavverkad', value: 'naturskog' },

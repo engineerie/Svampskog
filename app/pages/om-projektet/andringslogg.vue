@@ -46,7 +46,10 @@ useSeoMeta({
   ogDescription: 'Senaste uppdateringarna i Svampskog.'
 })
 
-defineOgImageComponent('Saas')
+defineOgImage('Saas', {
+  title: 'Ändringslogg',
+  description: 'Senaste uppdateringarna i Svampskog.'
+})
 </script>
 
 <template>

@@ -1,10 +1,16 @@
 <template>
   <div>
-    <UCarousel v-slot="{ item }" :items="resolvedImages" arrows :fade="useFade" class="w-full"
-      :ui="{ prev: 'start-4 sm:start-4', next: 'end-4 sm:end-4', item: resolvedItemClass }" @select="onSelect">
+    <div v-if="resolvedImages.length === 1" :class="resolvedFrameClass">
+      <NuxtImg :src="resolvedImages[0]" :alt="alt" :class="resolvedImageClass" loading="lazy" decoding="async"
+        width="900" format="webp" />
+    </div>
+
+    <UCarousel v-else v-slot="{ item }" :items="resolvedImages" :arrows="resolvedImages.length > 1" :fade="useFade"
+      class="w-full" :ui="{ prev: 'start-4 sm:start-4', next: 'end-4 sm:end-4', item: resolvedItemClass }"
+      @select="onSelect">
       <div :class="resolvedFrameClass">
-        <NuxtImg :src="item" :alt="alt" :class="resolvedImageClass" loading="lazy"
-          decoding="async" width="900" format="webp" />
+        <NuxtImg :src="item" :alt="alt" :class="resolvedImageClass" loading="lazy" decoding="async" width="900"
+          format="webp" />
       </div>
     </UCarousel>
 

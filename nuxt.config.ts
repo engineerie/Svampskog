@@ -12,6 +12,7 @@ export default defineNuxtConfig({
     "@pinia/nuxt",
     "motion-v/nuxt",
     "nuxt-studio",
+    "@nuxt/fonts",
   ],
   icon: {
     clientBundle: {
@@ -36,10 +37,14 @@ export default defineNuxtConfig({
     },
   },
 
+  build: {
+    transpile: ["motion-v", "motion-dom"],
+  },
+
   vite: {
-    ssr: {
-      noExternal: ["motion-v", "motion-dom"],
-    },
+    //   ssr: {
+    //     noExternal: ["motion-v", "motion-dom"],
+    //   },
     server: {
       cors: true,
     },
