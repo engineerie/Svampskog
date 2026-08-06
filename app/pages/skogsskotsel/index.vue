@@ -3,9 +3,6 @@
 
 
 
-
-
-
         <UContainer class="w-full px-0 sm:px-0">
 
             <NuxtImg v-if="isMobile" :src="page.hero.src"
@@ -81,7 +78,7 @@
                                     ]">
                                         <h1 class="text-lg lg:text-lg font-medium text-neutral-800 text-nowrap ">{{
                                             method.title
-                                            }}</h1>
+                                        }}</h1>
                                         <p class="text-muted text-sm mb-1">{{ method.shortdescription }}</p>
                                         <div class="flex flex-wrap items-center gap-1 lg:pt-2 lg:pb-1">
                                             <UBadge v-if="method.impactLabel" :color="method.impactColor || 'warning'"
