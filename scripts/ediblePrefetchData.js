@@ -85,10 +85,10 @@ async function computeImages(scientificName, manifest) {
       if (cleanedNamePart.includes(",")) {
         const [nameA, nameB] = cleanedNamePart.split(",").map((s) => s.trim());
         if (nameA === cleanedName || nameB === cleanedName) {
-          foundImages.push(`/images/SvampBilder/${folder}/${file}`);
+          foundImages.push(`/images/svampbilder/${folder}/${file}`);
         }
       } else if (cleanedNamePart === cleanedName) {
-        foundImages.push(`/images/SvampBilder/${folder}/${file}`);
+        foundImages.push(`/images/svampbilder/${folder}/${file}`);
       }
     }
   }
@@ -194,7 +194,7 @@ async function prefetchEdibleData() {
 
       const filename = `edibledata-${geo}-${forest}-${age}-${veg}.json`;
       fs.writeFileSync(
-        path.join(__dirname, `../static/${filename}`),
+        path.join(__dirname, `../public/edible/${filename}`),
         JSON.stringify(enhancedDataWithImages, null, 2), // Ensure the output is nicely formatted
       );
       console.log(`Edible data pre-fetching complete for ${filename}.`);

@@ -309,10 +309,10 @@ async function computeImages(scientificName, manifest) {
       if (cleanedNamePart.includes(',')) {
         const [nameA, nameB] = cleanedNamePart.split(',').map(part => part.trim())
         if (nameA === cleanedName || nameB === cleanedName) {
-          foundImages.push(`/images/SvampBilder/${folder}/${file}`)
+          foundImages.push(`/images/svampbilder/${folder}/${file}`)
         }
       } else if (cleanedNamePart === cleanedName) {
-        foundImages.push(`/images/SvampBilder/${folder}/${file}`)
+        foundImages.push(`/images/svampbilder/${folder}/${file}`)
       }
     }
   }
@@ -361,6 +361,9 @@ async function buildAllSpeciesJson() {
     'NULL'
   const rankGiftsvampRef =
     pickColumnRef('m', schema.speciesColumns, ['Rank_giftsvamp', 'Rank giftsvamp']) ||
+    'NULL'
+  const godMatsvampRef =
+    pickColumnRef('m', schema.speciesColumns, ['God matsvamp', 'Godmatsvamp']) ||
     'NULL'
   const vedOchBarkRef =
     pickColumnRef('m', schema.speciesColumns, ['Värdtaxa:Vedochbark', 'Värdtaxa:VedochBark']) ||
@@ -438,6 +441,7 @@ async function buildAllSpeciesJson() {
       m.SIGNAL_art,
       m.Svampguiden,
       m."Nyasvamp-boken",
+      ${godMatsvampRef} AS "God matsvamp",
       m.NOTE,
       ${vedOchBarkRef} AS "Värdtaxa:Vedochbark",
       ${finaRotterRef} AS "Värdtaxa:Finarerötterochrottrådar",

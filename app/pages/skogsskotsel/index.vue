@@ -81,7 +81,7 @@
                                     ]">
                                         <h1 class="text-lg lg:text-lg font-medium text-neutral-800 text-nowrap ">{{
                                             method.title
-                                        }}</h1>
+                                            }}</h1>
                                         <p class="text-muted text-sm mb-1">{{ method.shortdescription }}</p>
                                         <div class="flex flex-wrap items-center gap-1 lg:pt-2 lg:pb-1">
                                             <UBadge v-if="method.impactLabel" :color="method.impactColor || 'warning'"
@@ -158,7 +158,7 @@
                 </UCard>
             </UPageSection>
         </UContainer>
-        <UContainer class="px-0">
+        <!-- <UContainer class="px-0">
             <UPageSection :auto-height="isMobile ? true : false" :title="page.factsSection?.title"
                 :description="page.factsSection?.description" :ui="{ title: 'text-start', description: 'text-start' }">
                 <UCarousel v-slot="{ item }" dots :items="page.factsSection?.items" arrows :ui="{
@@ -176,7 +176,7 @@
                     </UPageCard>
                 </UCarousel>
             </UPageSection>
-        </UContainer>
+        </UContainer> -->
         <!-- <div class="bg-muted border-y border-muted/50">
             <UContainer class="px-0">
                 <KnowledgeSelectionSection :title="page.knowledgeSection?.title"

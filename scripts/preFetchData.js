@@ -67,10 +67,10 @@ async function computeImages(scientificName, manifest) {
       if (cleanedNamePart.includes(",")) {
         const [nameA, nameB] = cleanedNamePart.split(",").map((s) => s.trim());
         if (nameA === cleanedName || nameB === cleanedName) {
-          foundImages.push(`/images/SvampBilder/${folder}/${file}`);
+          foundImages.push(`/images/svampbilder/${folder}/${file}`);
         }
       } else if (cleanedNamePart === cleanedName) {
-        foundImages.push(`/images/SvampBilder/${folder}/${file}`);
+        foundImages.push(`/images/svampbilder/${folder}/${file}`);
       }
     }
   }
@@ -342,7 +342,7 @@ async function prefetchData() {
 
       const safeVegGroupName = vegGroupName.replace(/\//g, ""); // Remove slashes
       const filename = `edna-${geo}-${forest}-${age}-${safeVegGroupName}.json`;
-      const filePath = path.join(__dirname, `../static/${filename}`);
+      const filePath = path.join(__dirname, `../public/edna/${filename}`);
 
       fs.writeFileSync(
         filePath,

@@ -19,6 +19,7 @@ export async function resolveSpeciesSourceSchema(db) {
   const tables = await db.all(`SELECT name FROM sqlite_master WHERE type = 'table'`)
   const tableNames = tables.map((row) => row.name)
   const speciesTableCandidates = [
+    'Mat_Naturvard_Gift_28_jul_2026',
     'Mat_Naturvard_Gift_29_jun_2026',
     'Mat_Naturvård_Gift_Maj_2026',
     'Mat_Naturvård_Gift_Jan_3',

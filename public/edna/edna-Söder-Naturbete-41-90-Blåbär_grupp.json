@@ -689,7 +689,7 @@
     "Scientificname": "Russula aurea",
     "Svampguiden": "https://svampguiden.com/art/visa/russula_aurea",
     "Kriteriedokumentation": null,
-    "OVANLIGHET": 1,
+    "OVANLIGHET": "1",
     "KALKmark": "x",
     "ANNANmark": null,
     "Värdtaxa:VedochBark": null,
