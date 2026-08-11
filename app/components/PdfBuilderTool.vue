@@ -113,7 +113,7 @@ const TABLE_CONFIGS: TableConfig[] = [
     dataType: 'edibledata',
     tableKey: 'edna-edible',
     grupp: 'Svamp-grupp',
-    mat: 'Nyasvamp-boken',
+    mat: 'SKR_rek_matsvamp_2026',
     obs: 'Rank matsvamp',
     filterEdible: true
   },
@@ -124,7 +124,7 @@ const TABLE_CONFIGS: TableConfig[] = [
     dataType: 'edibledata',
     tableKey: 'edna-poison',
     grupp: 'Svamp-grupp',
-    mat: 'Nyasvamp-boken',
+    mat: 'SKR_rek_matsvamp_2026',
     obs: 'Rank giftsvamp',
     filterPoison: true
   },
@@ -135,7 +135,7 @@ const TABLE_CONFIGS: TableConfig[] = [
     dataType: 'redlisted',
     tableKey: 'edna-redlisted',
     grupp: 'Svamp-grupp',
-    mat: 'Nyasvamp-boken',
+    mat: 'SKR_rek_matsvamp_2026',
     obs: 'RankRed'
   }
 ]

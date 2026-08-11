@@ -10,7 +10,7 @@
     "Svamp-Undersvamp-grupp": null,
     "SIGNAL_art": "S",
     "Svampguiden": null,
-    "Nyasvamp-boken": null,
+    "SKR_rek_matsvamp_2026": null,
     "Norra Sverige": "x",
     "Södra Sverige": "x",
     "Gran": null,
@@ -41,7 +41,7 @@
     "förekomst_ung": 0,
     "förekomst_sum": "12",
     "images": [
-      "/images/SvampBilder/Giftsvampar/Tricholoma batschii-175-.jpg"
+      "/images/svampbilder/Giftsvampar/Tricholoma batschii-175-.jpg"
     ]
   },
   {
@@ -55,7 +55,7 @@
     "Svamp-Undersvamp-grupp": null,
     "SIGNAL_art": null,
     "Svampguiden": null,
-    "Nyasvamp-boken": null,
+    "SKR_rek_matsvamp_2026": null,
     "Norra Sverige": "x",
     "Södra Sverige": "x",
     "Gran": "2",
@@ -86,7 +86,7 @@
     "förekomst_ung": 0,
     "förekomst_sum": "12",
     "images": [
-      "/images/SvampBilder/RödlistadeSvampar/Hydnellum caeruleum-4362.jpg"
+      "/images/svampbilder/RödlistadeSvampar/Hydnellum caeruleum-4362.jpg"
     ]
   },
   {
@@ -100,7 +100,7 @@
     "Svamp-Undersvamp-grupp": null,
     "SIGNAL_art": "S",
     "Svampguiden": null,
-    "Nyasvamp-boken": null,
+    "SKR_rek_matsvamp_2026": null,
     "Norra Sverige": "x",
     "Södra Sverige": "x",
     "Gran": "2",
@@ -143,7 +143,7 @@
     "Svamp-Undersvamp-grupp": null,
     "SIGNAL_art": "S",
     "Svampguiden": "https://svampguiden.com/art/visa/sarcodon_imbricatus",
-    "Nyasvamp-boken": "x",
+    "SKR_rek_matsvamp_2026": "x",
     "Norra Sverige": "x",
     "Södra Sverige": "x",
     "Gran": "2",
@@ -174,8 +174,8 @@
     "förekomst_ung": 0,
     "förekomst_sum": "22",
     "images": [
-      "/images/SvampBilder/Matsvampar/Sarcodon imbricatus-2.jpg",
-      "/images/SvampBilder/Matsvampar/Sarcodon imbricatus-1.jpg"
+      "/images/svampbilder/Matsvampar/Sarcodon imbricatus-2.jpg",
+      "/images/svampbilder/Matsvampar/Sarcodon imbricatus-1.jpg"
     ]
   },
   {
@@ -189,7 +189,7 @@
     "Svamp-Undersvamp-grupp": null,
     "SIGNAL_art": null,
     "Svampguiden": null,
-    "Nyasvamp-boken": null,
+    "SKR_rek_matsvamp_2026": null,
     "Norra Sverige": null,
     "Södra Sverige": "x",
     "Gran": "1",
@@ -232,7 +232,7 @@
     "Svamp-Undersvamp-grupp": null,
     "SIGNAL_art": null,
     "Svampguiden": null,
-    "Nyasvamp-boken": null,
+    "SKR_rek_matsvamp_2026": null,
     "Norra Sverige": "x",
     "Södra Sverige": "x",
     "Gran": null,
@@ -263,7 +263,7 @@
     "förekomst_ung": 0,
     "förekomst_sum": "22",
     "images": [
-      "/images/SvampBilder/RödlistadeSvampar/Tricholoma colossus-1596.jpg"
+      "/images/svampbilder/RödlistadeSvampar/Tricholoma colossus-1596.jpg"
     ]
   },
   {
@@ -277,7 +277,7 @@
     "Svamp-Undersvamp-grupp": null,
     "SIGNAL_art": null,
     "Svampguiden": null,
-    "Nyasvamp-boken": null,
+    "SKR_rek_matsvamp_2026": null,
     "Norra Sverige": "x",
     "Södra Sverige": "x",
     "Gran": null,
@@ -308,7 +308,7 @@
     "förekomst_ung": 0,
     "förekomst_sum": "12",
     "images": [
-      "/images/SvampBilder/RödlistadeSvampar/Tricholoma apium-1593.jpg"
+      "/images/svampbilder/RödlistadeSvampar/Tricholoma apium-1593.jpg"
     ]
   },
   {
@@ -322,7 +322,7 @@
     "Svamp-Undersvamp-grupp": null,
     "SIGNAL_art": null,
     "Svampguiden": null,
-    "Nyasvamp-boken": null,
+    "SKR_rek_matsvamp_2026": null,
     "Norra Sverige": "x",
     "Södra Sverige": "x",
     "Gran": null,
@@ -365,7 +365,7 @@
     "Svamp-Undersvamp-grupp": null,
     "SIGNAL_art": null,
     "Svampguiden": "https://svampguiden.com/art/visa/sarcodon_squamosus",
-    "Nyasvamp-boken": "x",
+    "SKR_rek_matsvamp_2026": "x",
     "Norra Sverige": "x",
     "Södra Sverige": "x",
     "Gran": null,
@@ -396,8 +396,8 @@
     "förekomst_ung": 0,
     "förekomst_sum": "12",
     "images": [
-      "/images/SvampBilder/Matsvampar/Sarcodon squamosus.jpg",
-      "/images/SvampBilder/RödlistadeSvampar/Sarcodon squamosus-5966.jpg"
+      "/images/svampbilder/Matsvampar/Sarcodon squamosus.jpg",
+      "/images/svampbilder/RödlistadeSvampar/Sarcodon squamosus-5966.jpg"
     ]
   },
   {
@@ -411,7 +411,7 @@
     "Svamp-Undersvamp-grupp": null,
     "SIGNAL_art": null,
     "Svampguiden": null,
-    "Nyasvamp-boken": null,
+    "SKR_rek_matsvamp_2026": null,
     "Norra Sverige": "x",
     "Södra Sverige": "x",
     "Gran": null,
@@ -454,7 +454,7 @@
     "Svamp-Undersvamp-grupp": null,
     "SIGNAL_art": null,
     "Svampguiden": null,
-    "Nyasvamp-boken": null,
+    "SKR_rek_matsvamp_2026": null,
     "Norra Sverige": null,
     "Södra Sverige": "x",
     "Gran": null,
@@ -485,7 +485,7 @@
     "förekomst_ung": 0,
     "förekomst_sum": "22",
     "images": [
-      "/images/SvampBilder/RödlistadeSvampar/Tricholoma joachimii-2072.jpg"
+      "/images/svampbilder/RödlistadeSvampar/Tricholoma joachimii-2072.jpg"
     ]
   },
   {
@@ -499,7 +499,7 @@
     "Svamp-Undersvamp-grupp": null,
     "SIGNAL_art": null,
     "Svampguiden": null,
-    "Nyasvamp-boken": null,
+    "SKR_rek_matsvamp_2026": null,
     "Norra Sverige": null,
     "Södra Sverige": "x",
     "Gran": null,
@@ -530,7 +530,7 @@
     "förekomst_ung": 0,
     "förekomst_sum": "12",
     "images": [
-      "/images/SvampBilder/RödlistadeSvampar/Hydnellum gracilipes-4365.jpg"
+      "/images/svampbilder/RödlistadeSvampar/Hydnellum gracilipes-4365.jpg"
     ]
   },
   {
@@ -544,7 +544,7 @@
     "Svamp-Undersvamp-grupp": null,
     "SIGNAL_art": null,
     "Svampguiden": null,
-    "Nyasvamp-boken": null,
+    "SKR_rek_matsvamp_2026": null,
     "Norra Sverige": "x",
     "Södra Sverige": "x",
     "Gran": "1",
@@ -575,7 +575,7 @@
     "förekomst_ung": 0,
     "förekomst_sum": "12",
     "images": [
-      "/images/SvampBilder/RödlistadeSvampar/Phellodon connatus-5448.jpg"
+      "/images/svampbilder/RödlistadeSvampar/Phellodon connatus-5448.jpg"
     ]
   },
   {
@@ -589,7 +589,7 @@
     "Svamp-Undersvamp-grupp": null,
     "SIGNAL_art": null,
     "Svampguiden": null,
-    "Nyasvamp-boken": null,
+    "SKR_rek_matsvamp_2026": null,
     "Norra Sverige": "(x)",
     "Södra Sverige": "x",
     "Gran": null,
@@ -620,7 +620,7 @@
     "förekomst_ung": 0,
     "förekomst_sum": "12",
     "images": [
-      "/images/SvampBilder/RödlistadeSvampar/Tricholoma roseoacerbum-245044.jpg"
+      "/images/svampbilder/RödlistadeSvampar/Tricholoma roseoacerbum-245044.jpg"
     ]
   },
   {
@@ -634,7 +634,7 @@
     "Svamp-Undersvamp-grupp": null,
     "SIGNAL_art": null,
     "Svampguiden": null,
-    "Nyasvamp-boken": null,
+    "SKR_rek_matsvamp_2026": null,
     "Norra Sverige": null,
     "Södra Sverige": "x",
     "Gran": null,
@@ -665,7 +665,7 @@
     "förekomst_ung": 0,
     "förekomst_sum": "1s",
     "images": [
-      "/images/SvampBilder/RödlistadeSvampar/Cortinarius terpsichores-248939.jpg"
+      "/images/svampbilder/RödlistadeSvampar/Cortinarius terpsichores-248939.jpg"
     ]
   },
   {
@@ -679,7 +679,7 @@
     "Svamp-Undersvamp-grupp": null,
     "SIGNAL_art": null,
     "Svampguiden": null,
-    "Nyasvamp-boken": null,
+    "SKR_rek_matsvamp_2026": null,
     "Norra Sverige": "x",
     "Södra Sverige": "x",
     "Gran": null,
@@ -710,7 +710,7 @@
     "förekomst_ung": 0,
     "förekomst_sum": "12",
     "images": [
-      "/images/SvampBilder/RödlistadeSvampar/Lactarius musteus-4745.jpg"
+      "/images/svampbilder/RödlistadeSvampar/Lactarius musteus-4745.jpg"
     ]
   },
   {
@@ -724,7 +724,7 @@
     "Svamp-Undersvamp-grupp": null,
     "SIGNAL_art": null,
     "Svampguiden": "https://svampguiden.com/art/visa/hygrophorus_karstenii",
-    "Nyasvamp-boken": "x",
+    "SKR_rek_matsvamp_2026": "x",
     "Norra Sverige": "x",
     "Södra Sverige": "x",
     "Gran": "2",
@@ -755,9 +755,9 @@
     "förekomst_ung": 0,
     "förekomst_sum": "22",
     "images": [
-      "/images/SvampBilder/Matsvampar/Hygrophorus karstenii-2.jpg",
-      "/images/SvampBilder/Matsvampar/Hygrophorus karstenii-1.jpg",
-      "/images/SvampBilder/RödlistadeSvampar/Hygrophorus karstenii-4412.jpg"
+      "/images/svampbilder/Matsvampar/Hygrophorus karstenii-2.jpg",
+      "/images/svampbilder/Matsvampar/Hygrophorus karstenii-1.jpg",
+      "/images/svampbilder/RödlistadeSvampar/Hygrophorus karstenii-4412.jpg"
     ]
   }
 ]

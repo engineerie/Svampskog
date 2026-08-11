@@ -109,7 +109,7 @@ type SpeciesEntry = {
   Svampguiden?: string
   Giftsvamp?: string | null
   SIGNAL_art?: string | null
-  'Nyasvamp-boken'?: string | null
+  SKR_rek_matsvamp_2026?: string | null
   KALKmark?: string | null
   ANNANmark?: string | null
   'Svamp-grupp'?: string | null
@@ -480,7 +480,7 @@ onBeforeUnmount(() => {
                     color="neutral" icon="i-heroicons-arrow-top-right-on-square-20-solid" label="Svampguiden" />
                 </div>
                 <div class="mt-3 flex flex-wrap gap-1.5">
-                  <UBadge v-if="item.species?.['Nyasvamp-boken'] === 'x'" color="warning" size="md" variant="subtle">
+                  <UBadge v-if="item.species?.SKR_rek_matsvamp_2026 === 'x'" color="warning" size="md" variant="subtle">
                     Matsvamp
                   </UBadge>
                   <UBadge v-if="item.species?.Giftsvamp === 'x'" color="poison" size="md" variant="subtle">

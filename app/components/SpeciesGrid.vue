@@ -24,7 +24,7 @@
             :label="row.RL2020kat !== 'Saknas' ? getStatusTooltip(row.RL2020kat) : 'Ej bedömd'" />
           <UBadge v-if="row.SIGNAL_art === 'S'" color="signal" variant="subtle" label="Signalart" size="sm" />
           <!-- <UBadge
-                    v-if="row['Nyasvamp-boken'] === 'x'"
+                    v-if="row.SKR_rek_matsvamp_2026 === 'x'"
                     color="warning"
                     variant="subtle"
                     label="Matsvamp"
@@ -188,12 +188,12 @@ const baseFilteredData = computed(() => {
   }
   if (props.filterEdible) {
     result = result.filter(row => {
-      const edibleVal = row["Nyasvamp-boken"];
+      const edibleVal = row.SKR_rek_matsvamp_2026;
       return edibleVal && String(edibleVal).toLowerCase() === 'x';
     });
   } else if (props.filterPoison) {
     result = result.filter(row => {
-      const edibleVal = row["Nyasvamp-boken"];
+      const edibleVal = row.SKR_rek_matsvamp_2026;
       return !(edibleVal && String(edibleVal).toLowerCase() === 'x');
     });
   }
@@ -288,15 +288,15 @@ const filteredData = computed(() => {
   // Apply edible or poisonous filtering based on props
   if (props.filterEdible) {
     result = result.filter(row => {
-      // For edible species, we expect the "Nyasvamp-boken" field to equal "x" (case-insensitive)
-      const edibleVal = row["Nyasvamp-boken"];
+      // For edible species, we expect the SKR recommendation field to equal "x" (case-insensitive)
+      const edibleVal = row.SKR_rek_matsvamp_2026;
       return edibleVal && String(edibleVal).toLowerCase() === 'x';
     });
     console.log('After edible filtering, count:', result.length);
   } else if (props.filterPoison) {
     result = result.filter(row => {
       // For poisonous species, exclude those that are edible
-      const edibleVal = row["Nyasvamp-boken"];
+      const edibleVal = row.SKR_rek_matsvamp_2026;
       return !(edibleVal && String(edibleVal).toLowerCase() === 'x');
     });
     console.log('After poison filtering, count:', result.length);

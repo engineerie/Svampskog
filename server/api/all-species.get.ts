@@ -17,8 +17,8 @@ function getCountTotal(counts: Record<string, number>) {
   return Object.values(counts || {}).reduce((sum, value) => sum + Number(value || 0), 0)
 }
 
-function isEdibleSpecies(row: { 'Nyasvamp-boken'?: string | null }) {
-  return String(row['Nyasvamp-boken'] || '').toLowerCase() === 'x'
+function isEdibleSpecies(row: { SKR_rek_matsvamp_2026?: string | null }) {
+  return String(row.SKR_rek_matsvamp_2026 || '').toLowerCase() === 'x'
 }
 
 function isPoisonSpecies(row: { Giftsvamp?: string | null }) {

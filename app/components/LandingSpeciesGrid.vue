@@ -231,12 +231,12 @@ const baseFilteredData = computed(() => {
   }
   if (props.filterEdible) {
     result = result.filter(row => {
-      const edibleVal = row["Nyasvamp-boken"]
+      const edibleVal = row.SKR_rek_matsvamp_2026
       return edibleVal && String(edibleVal).toLowerCase() === 'x'
     })
   } else if (props.filterPoison) {
     result = result.filter(row => {
-      const edibleVal = row["Nyasvamp-boken"]
+      const edibleVal = row.SKR_rek_matsvamp_2026
       return !(edibleVal && String(edibleVal).toLowerCase() === 'x')
     })
   }

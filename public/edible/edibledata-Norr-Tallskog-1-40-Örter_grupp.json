@@ -10,7 +10,7 @@
     "Svamp-Undersvamp-grupp": null,
     "SIGNAL_art": null,
     "Svampguiden": "https://svampguiden.com/art/visa/hydnum_repandum",
-    "Nyasvamp-boken": "x",
+    "SKR_rek_matsvamp_2026": "x",
     "Norra Sverige": "x",
     "Södra Sverige": "x",
     "Gran": "2",
@@ -40,8 +40,8 @@
     "förekomst_ung": 0,
     "förekomst_sum": 10.5,
     "images": [
-      "/images/SvampBilder/Matsvampar/Hydnum repandum-2.jpg",
-      "/images/SvampBilder/Matsvampar/Hydnum repandum-1.jpg"
+      "/images/svampbilder/Matsvampar/Hydnum repandum-2.jpg",
+      "/images/svampbilder/Matsvampar/Hydnum repandum-1.jpg"
     ]
   },
   {
@@ -55,7 +55,7 @@
     "Svamp-Undersvamp-grupp": null,
     "SIGNAL_art": null,
     "Svampguiden": "https://svampguiden.com/art/visa/boletus_badius",
-    "Nyasvamp-boken": "x",
+    "SKR_rek_matsvamp_2026": "x",
     "Norra Sverige": "x",
     "Södra Sverige": "x",
     "Gran": null,
@@ -85,12 +85,12 @@
     "förekomst_ung": "1",
     "förekomst_sum": "21",
     "images": [
-      "/images/SvampBilder/Matsvampar/Imleria badia-4.jpg",
-      "/images/SvampBilder/Matsvampar/Imleria badia-5.jpg",
-      "/images/SvampBilder/Matsvampar/Imleria badia-6.jpg",
-      "/images/SvampBilder/Matsvampar/Imleria badia-2.jpg",
-      "/images/SvampBilder/Matsvampar/Imleria badia-3.jpg",
-      "/images/SvampBilder/Matsvampar/Imleria badia-1.jpg"
+      "/images/svampbilder/Matsvampar/Imleria badia-4.jpg",
+      "/images/svampbilder/Matsvampar/Imleria badia-5.jpg",
+      "/images/svampbilder/Matsvampar/Imleria badia-6.jpg",
+      "/images/svampbilder/Matsvampar/Imleria badia-2.jpg",
+      "/images/svampbilder/Matsvampar/Imleria badia-3.jpg",
+      "/images/svampbilder/Matsvampar/Imleria badia-1.jpg"
     ]
   },
   {
@@ -104,7 +104,7 @@
     "Svamp-Undersvamp-grupp": null,
     "SIGNAL_art": null,
     "Svampguiden": "https://svampguiden.com/art/visa/cantharellus_cibarius",
-    "Nyasvamp-boken": "x",
+    "SKR_rek_matsvamp_2026": "x",
     "Norra Sverige": "x",
     "Södra Sverige": "x",
     "Gran": "2",
@@ -134,11 +134,11 @@
     "förekomst_ung": 0,
     "förekomst_sum": 20.5,
     "images": [
-      "/images/SvampBilder/Matsvampar/Cantharellus cibarius-4.jpg",
-      "/images/SvampBilder/Matsvampar/Cantharellus cibarius-5.jpg",
-      "/images/SvampBilder/Matsvampar/Cantharellus cibarius-2.jpg",
-      "/images/SvampBilder/Matsvampar/Cantharellus cibarius-3.jpg",
-      "/images/SvampBilder/Matsvampar/Cantharellus cibarius-1.jpg"
+      "/images/svampbilder/Matsvampar/Cantharellus cibarius-4.jpg",
+      "/images/svampbilder/Matsvampar/Cantharellus cibarius-5.jpg",
+      "/images/svampbilder/Matsvampar/Cantharellus cibarius-2.jpg",
+      "/images/svampbilder/Matsvampar/Cantharellus cibarius-3.jpg",
+      "/images/svampbilder/Matsvampar/Cantharellus cibarius-1.jpg"
     ]
   },
   {
@@ -152,7 +152,7 @@
     "Svamp-Undersvamp-grupp": null,
     "SIGNAL_art": null,
     "Svampguiden": "https://svampguiden.com/art/visa/russula_vesca",
-    "Nyasvamp-boken": "x",
+    "SKR_rek_matsvamp_2026": "x",
     "Norra Sverige": "x",
     "Södra Sverige": "x",
     "Gran": "2",
@@ -182,10 +182,10 @@
     "förekomst_ung": 0,
     "förekomst_sum": 10.5,
     "images": [
-      "/images/SvampBilder/Matsvampar/Russula vesca-1.jpg",
-      "/images/SvampBilder/Matsvampar/Russula vesca-3.jpg",
-      "/images/SvampBilder/Matsvampar/Russula vesca-2.jpg",
-      "/images/SvampBilder/Matsvampar/Russula vesca-4.jpg"
+      "/images/svampbilder/Matsvampar/Russula vesca-1.jpg",
+      "/images/svampbilder/Matsvampar/Russula vesca-3.jpg",
+      "/images/svampbilder/Matsvampar/Russula vesca-2.jpg",
+      "/images/svampbilder/Matsvampar/Russula vesca-4.jpg"
     ]
   },
   {
@@ -199,7 +199,7 @@
     "Svamp-Undersvamp-grupp": null,
     "SIGNAL_art": null,
     "Svampguiden": null,
-    "Nyasvamp-boken": null,
+    "SKR_rek_matsvamp_2026": null,
     "Norra Sverige": "x",
     "Södra Sverige": "x",
     "Gran": "1",
@@ -229,8 +229,8 @@
     "förekomst_ung": 0,
     "förekomst_sum": 10.5,
     "images": [
-      "/images/SvampBilder/Giftsvampar/Paxillus involutus-104-5351.jpg",
-      "/images/SvampBilder/Giftsvampar/Paxillus involutus-98-5351.jpg"
+      "/images/svampbilder/Giftsvampar/Paxillus involutus-104-5351.jpg",
+      "/images/svampbilder/Giftsvampar/Paxillus involutus-98-5351.jpg"
     ]
   },
   {
@@ -244,7 +244,7 @@
     "Svamp-Undersvamp-grupp": null,
     "SIGNAL_art": null,
     "Svampguiden": null,
-    "Nyasvamp-boken": null,
+    "SKR_rek_matsvamp_2026": null,
     "Norra Sverige": "x",
     "Södra Sverige": "x",
     "Gran": "1",
@@ -274,52 +274,8 @@
     "förekomst_ung": 0,
     "förekomst_sum": 10.5,
     "images": [
-      "/images/SvampBilder/Giftsvampar/Paxillus involutus-104-5351.jpg",
-      "/images/SvampBilder/Giftsvampar/Paxillus involutus-98-5351.jpg"
-    ]
-  },
-  {
-    "Scientificname": "Russula xerampelina s. lat.",
-    "Commonname": "sillkremlor",
-    "Artfakta": "https://artfakta.se/taxa/267011/",
-    "RL2020kat": "NA",
-    "RL2020krit": null,
-    "Kriteriedokumentation": null,
-    "Svamp-grupp": "hattsvamp",
-    "Svamp-Undersvamp-grupp": null,
-    "SIGNAL_art": null,
-    "Svampguiden": null,
-    "Nyasvamp-boken": "x",
-    "Norra Sverige": "x",
-    "Södra Sverige": "x",
-    "Gran": "2",
-    "Tall": "2",
-    "Blandad barrskog": "2",
-    "Blandad lövskog": "1",
-    "Lövskog": null,
-    "EkochBokskog": null,
-    "Naturbete": null,
-    "11-20 år": null,
-    "1-40 år": "1",
-    "41-90 år": "2",
-    "91 år och äldre": "2",
-    "ÖRTER_grupp": "x",
-    "BLÅBÄR_grupp": "x",
-    "LINGON_grupp": "x",
-    "KALKmark": null,
-    "ANNANmark": "x",
-    "rating": null,
-    "ekologi": "Artgrupp som växer i löv- och blandskog med bl a gran, tall och björk. ",
-    "Giftsvamp": null,
-    "Rank matsvamp": "3",
-    "Rank giftsvamp": null,
-    "förekomst_skog_ålder": "21",
-    "förekomst_skog": "2",
-    "förekomst_ålder": "1",
-    "förekomst_ung": 0,
-    "förekomst_sum": 20.5,
-    "images": [
-      "/images/SvampBilder/Matsvampar/Russula xerampelina.jpg"
+      "/images/svampbilder/Giftsvampar/Paxillus involutus-104-5351.jpg",
+      "/images/svampbilder/Giftsvampar/Paxillus involutus-98-5351.jpg"
     ]
   },
   {
@@ -333,7 +289,7 @@
     "Svamp-Undersvamp-grupp": null,
     "SIGNAL_art": null,
     "Svampguiden": "https://svampguiden.com/art/visa/boletus_edulis",
-    "Nyasvamp-boken": "x",
+    "SKR_rek_matsvamp_2026": "x",
     "Norra Sverige": "x",
     "Södra Sverige": "x",
     "Gran": "2",
@@ -363,12 +319,12 @@
     "förekomst_ung": 0,
     "förekomst_sum": 20.5,
     "images": [
-      "/images/SvampBilder/Matsvampar/Boletus edulis-1.jpg",
-      "/images/SvampBilder/Matsvampar/Boletus edulis-2.jpg",
-      "/images/SvampBilder/Matsvampar/Boletus edulis-3.jpg",
-      "/images/SvampBilder/Matsvampar/Boletus edulis-6.jpg",
-      "/images/SvampBilder/Matsvampar/Boletus edulis-4.jpg",
-      "/images/SvampBilder/Matsvampar/Boletus edulis-5.jpg"
+      "/images/svampbilder/Matsvampar/Boletus edulis-1.jpg",
+      "/images/svampbilder/Matsvampar/Boletus edulis-2.jpg",
+      "/images/svampbilder/Matsvampar/Boletus edulis-3.jpg",
+      "/images/svampbilder/Matsvampar/Boletus edulis-6.jpg",
+      "/images/svampbilder/Matsvampar/Boletus edulis-4.jpg",
+      "/images/svampbilder/Matsvampar/Boletus edulis-5.jpg"
     ]
   },
   {
@@ -382,7 +338,7 @@
     "Svamp-Undersvamp-grupp": null,
     "SIGNAL_art": null,
     "Svampguiden": null,
-    "Nyasvamp-boken": null,
+    "SKR_rek_matsvamp_2026": null,
     "Norra Sverige": "x",
     "Södra Sverige": "x",
     "Gran": "1",
@@ -412,9 +368,9 @@
     "förekomst_ung": 0,
     "förekomst_sum": 20.5,
     "images": [
-      "/images/SvampBilder/Giftsvampar/Hebeloma crustuliniforme-217-4264.jpg",
-      "/images/SvampBilder/Giftsvampar/Hebeloma crustuliniforme-216-4264.jpg",
-      "/images/SvampBilder/Giftsvampar/Hebeloma crustuliniforme-142-4264.jpg"
+      "/images/svampbilder/Giftsvampar/Hebeloma crustuliniforme-217-4264.jpg",
+      "/images/svampbilder/Giftsvampar/Hebeloma crustuliniforme-216-4264.jpg",
+      "/images/svampbilder/Giftsvampar/Hebeloma crustuliniforme-142-4264.jpg"
     ]
   }
 ]

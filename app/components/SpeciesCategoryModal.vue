@@ -105,7 +105,7 @@ interface SpeciesRow {
   RL2025kat?: string | null
   SIGNAL_art?: string | null
   Giftsvamp?: string | null
-  'Nyasvamp-boken'?: string | null
+  SKR_rek_matsvamp_2026?: string | null
   'God matsvamp'?: string | null
   'Svamp-grupp'?: string | null
   'Svamp-grupp-släkte'?: string | null
@@ -253,7 +253,7 @@ async function selectSpecies(row: SpeciesRow) {
 
 const species = computed(() => {
   const rows = allSpecies.value.filter((row) => {
-    if (props.category === 'edible') return normalizedMarker(row['Nyasvamp-boken']) === 'x'
+    if (props.category === 'edible') return normalizedMarker(row.SKR_rek_matsvamp_2026) === 'x'
     if (props.category === 'poisonous') return normalizedMarker(row.Giftsvamp) === 'x'
     return conservationView.value === 'redlisted'
       ? isRedlisted(row)

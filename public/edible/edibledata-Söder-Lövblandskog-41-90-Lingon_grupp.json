@@ -10,7 +10,7 @@
     "Svamp-Undersvamp-grupp": null,
     "SIGNAL_art": null,
     "Svampguiden": "https://svampguiden.com/art/visa/leccinum_scabrum",
-    "Nyasvamp-boken": "x",
+    "SKR_rek_matsvamp_2026": "x",
     "Norra Sverige": "x",
     "Södra Sverige": "x",
     "Gran": null,
@@ -40,53 +40,11 @@
     "förekomst_ung": "1",
     "förekomst_sum": "12",
     "images": [
-      "/images/SvampBilder/Matsvampar/Leccinum scabrum-4.jpg",
-      "/images/SvampBilder/Matsvampar/Leccinum scabrum-3.jpg",
-      "/images/SvampBilder/Matsvampar/Leccinum scabrum-2.jpg",
-      "/images/SvampBilder/Matsvampar/Leccinum scabrum-1.jpg"
+      "/images/svampbilder/Matsvampar/Leccinum scabrum-4.jpg",
+      "/images/svampbilder/Matsvampar/Leccinum scabrum-3.jpg",
+      "/images/svampbilder/Matsvampar/Leccinum scabrum-2.jpg",
+      "/images/svampbilder/Matsvampar/Leccinum scabrum-1.jpg"
     ]
-  },
-  {
-    "Scientificname": "Lactarius pubescens",
-    "Commonname": "blek skäggriska",
-    "Artfakta": "https://artfakta.se/taxa/4758/",
-    "RL2020kat": "LC",
-    "RL2020krit": null,
-    "Kriteriedokumentation": null,
-    "Svamp-grupp": "hattsvamp",
-    "Svamp-Undersvamp-grupp": null,
-    "SIGNAL_art": null,
-    "Svampguiden": null,
-    "Nyasvamp-boken": "x",
-    "Norra Sverige": "x",
-    "Södra Sverige": "x",
-    "Gran": null,
-    "Tall": null,
-    "Blandad barrskog": "1",
-    "Blandad lövskog": "2",
-    "Lövskog": "2",
-    "EkochBokskog": null,
-    "Naturbete": "1",
-    "11-20 år": null,
-    "1-40 år": "1",
-    "41-90 år": "2",
-    "91 år och äldre": "2",
-    "ÖRTER_grupp": null,
-    "BLÅBÄR_grupp": "x",
-    "LINGON_grupp": "x",
-    "KALKmark": null,
-    "ANNANmark": "x",
-    "rating": null,
-    "ekologi": "Växer med björk både på fuktig och torr mark, tex längs stränder och I rikkärr samt I gräsmattor och längs vägkanter. ",
-    "Giftsvamp": null,
-    "Rank matsvamp": "2",
-    "Rank giftsvamp": null,
-    "förekomst_skog_ålder": "22",
-    "förekomst_skog": "2",
-    "förekomst_ålder": "2",
-    "förekomst_ung": 0,
-    "förekomst_sum": "22",
-    "images": []
   },
   {
     "Scientificname": "Imleria badia",
@@ -99,7 +57,7 @@
     "Svamp-Undersvamp-grupp": null,
     "SIGNAL_art": null,
     "Svampguiden": "https://svampguiden.com/art/visa/boletus_badius",
-    "Nyasvamp-boken": "x",
+    "SKR_rek_matsvamp_2026": "x",
     "Norra Sverige": "x",
     "Södra Sverige": "x",
     "Gran": null,
@@ -129,12 +87,12 @@
     "förekomst_ung": "1",
     "förekomst_sum": "12",
     "images": [
-      "/images/SvampBilder/Matsvampar/Imleria badia-4.jpg",
-      "/images/SvampBilder/Matsvampar/Imleria badia-5.jpg",
-      "/images/SvampBilder/Matsvampar/Imleria badia-6.jpg",
-      "/images/SvampBilder/Matsvampar/Imleria badia-2.jpg",
-      "/images/SvampBilder/Matsvampar/Imleria badia-3.jpg",
-      "/images/SvampBilder/Matsvampar/Imleria badia-1.jpg"
+      "/images/svampbilder/Matsvampar/Imleria badia-4.jpg",
+      "/images/svampbilder/Matsvampar/Imleria badia-5.jpg",
+      "/images/svampbilder/Matsvampar/Imleria badia-6.jpg",
+      "/images/svampbilder/Matsvampar/Imleria badia-2.jpg",
+      "/images/svampbilder/Matsvampar/Imleria badia-3.jpg",
+      "/images/svampbilder/Matsvampar/Imleria badia-1.jpg"
     ]
   },
   {
@@ -148,7 +106,7 @@
     "Svamp-Undersvamp-grupp": null,
     "SIGNAL_art": null,
     "Svampguiden": "https://svampguiden.com/art/visa/russula_claroflava",
-    "Nyasvamp-boken": "x",
+    "SKR_rek_matsvamp_2026": "x",
     "Norra Sverige": "x",
     "Södra Sverige": "x",
     "Gran": null,
@@ -178,10 +136,10 @@
     "förekomst_ung": 0,
     "förekomst_sum": "12",
     "images": [
-      "/images/SvampBilder/Matsvampar/Russula claroflava-4.jpg",
-      "/images/SvampBilder/Matsvampar/Russula claroflava-1.jpg",
-      "/images/SvampBilder/Matsvampar/Russula claroflava-3.jpg",
-      "/images/SvampBilder/Matsvampar/Russula claroflava-2.jpg"
+      "/images/svampbilder/Matsvampar/Russula claroflava-4.jpg",
+      "/images/svampbilder/Matsvampar/Russula claroflava-1.jpg",
+      "/images/svampbilder/Matsvampar/Russula claroflava-3.jpg",
+      "/images/svampbilder/Matsvampar/Russula claroflava-2.jpg"
     ]
   },
   {
@@ -195,7 +153,7 @@
     "Svamp-Undersvamp-grupp": null,
     "SIGNAL_art": null,
     "Svampguiden": "https://svampguiden.com/art/visa/cantharellus_cibarius",
-    "Nyasvamp-boken": "x",
+    "SKR_rek_matsvamp_2026": "x",
     "Norra Sverige": "x",
     "Södra Sverige": "x",
     "Gran": "2",
@@ -225,54 +183,12 @@
     "förekomst_ung": 0,
     "förekomst_sum": "22",
     "images": [
-      "/images/SvampBilder/Matsvampar/Cantharellus cibarius-4.jpg",
-      "/images/SvampBilder/Matsvampar/Cantharellus cibarius-5.jpg",
-      "/images/SvampBilder/Matsvampar/Cantharellus cibarius-2.jpg",
-      "/images/SvampBilder/Matsvampar/Cantharellus cibarius-3.jpg",
-      "/images/SvampBilder/Matsvampar/Cantharellus cibarius-1.jpg"
+      "/images/svampbilder/Matsvampar/Cantharellus cibarius-4.jpg",
+      "/images/svampbilder/Matsvampar/Cantharellus cibarius-5.jpg",
+      "/images/svampbilder/Matsvampar/Cantharellus cibarius-2.jpg",
+      "/images/svampbilder/Matsvampar/Cantharellus cibarius-3.jpg",
+      "/images/svampbilder/Matsvampar/Cantharellus cibarius-1.jpg"
     ]
-  },
-  {
-    "Scientificname": "Leccinum holopus",
-    "Commonname": "kärrsopp",
-    "Artfakta": "https://artfakta.se/taxa/4818/",
-    "RL2020kat": "LC",
-    "RL2020krit": null,
-    "Kriteriedokumentation": null,
-    "Svamp-grupp": "sopp",
-    "Svamp-Undersvamp-grupp": null,
-    "SIGNAL_art": null,
-    "Svampguiden": "https://svampguiden.com/art/visa/leccinum_niveum",
-    "Nyasvamp-boken": "x",
-    "Norra Sverige": "x",
-    "Södra Sverige": "x",
-    "Gran": null,
-    "Tall": null,
-    "Blandad barrskog": "2",
-    "Blandad lövskog": "2",
-    "Lövskog": "2",
-    "EkochBokskog": null,
-    "Naturbete": null,
-    "11-20 år": null,
-    "1-40 år": "1",
-    "41-90 år": "2",
-    "91 år och äldre": "2",
-    "ÖRTER_grupp": null,
-    "BLÅBÄR_grupp": "x",
-    "LINGON_grupp": "x",
-    "KALKmark": null,
-    "ANNANmark": "x",
-    "rating": 0,
-    "ekologi": "Växer med björk på fuktiga ställen, ofta i kärrkanter.",
-    "Giftsvamp": null,
-    "Rank matsvamp": "3",
-    "Rank giftsvamp": null,
-    "förekomst_skog_ålder": "22",
-    "förekomst_skog": "2",
-    "förekomst_ålder": "2",
-    "förekomst_ung": 0,
-    "förekomst_sum": "22",
-    "images": []
   },
   {
     "Scientificname": "Lactarius helvus",
@@ -285,7 +201,7 @@
     "Svamp-Undersvamp-grupp": null,
     "SIGNAL_art": null,
     "Svampguiden": null,
-    "Nyasvamp-boken": null,
+    "SKR_rek_matsvamp_2026": null,
     "Norra Sverige": "x",
     "Södra Sverige": "x",
     "Gran": "1",
@@ -315,9 +231,9 @@
     "förekomst_ung": 0,
     "förekomst_sum": "12",
     "images": [
-      "/images/SvampBilder/Giftsvampar/Lactarius helvus-191-4732.jpg",
-      "/images/SvampBilder/Giftsvampar/Lactarius helvus-103-4732.jpg",
-      "/images/SvampBilder/Giftsvampar/Lactarius helvus-192-4732.jpg"
+      "/images/svampbilder/Giftsvampar/Lactarius helvus-191-4732.jpg",
+      "/images/svampbilder/Giftsvampar/Lactarius helvus-103-4732.jpg",
+      "/images/svampbilder/Giftsvampar/Lactarius helvus-192-4732.jpg"
     ]
   },
   {
@@ -331,7 +247,7 @@
     "Svamp-Undersvamp-grupp": null,
     "SIGNAL_art": null,
     "Svampguiden": "https://svampguiden.com/art/visa/russula_integra",
-    "Nyasvamp-boken": "x",
+    "SKR_rek_matsvamp_2026": "x",
     "Norra Sverige": "x",
     "Södra Sverige": "x",
     "Gran": "2",
@@ -361,11 +277,11 @@
     "förekomst_ung": 0,
     "förekomst_sum": "12",
     "images": [
-      "/images/SvampBilder/Matsvampar/Russula integra-2.jpg",
-      "/images/SvampBilder/Matsvampar/Russula integra-3.jpg",
-      "/images/SvampBilder/Matsvampar/Russula integra-1.jpg",
-      "/images/SvampBilder/Matsvampar/Russula integra-4.jpg",
-      "/images/SvampBilder/Matsvampar/Russula integra-5.jpg"
+      "/images/svampbilder/Matsvampar/Russula integra-2.jpg",
+      "/images/svampbilder/Matsvampar/Russula integra-3.jpg",
+      "/images/svampbilder/Matsvampar/Russula integra-1.jpg",
+      "/images/svampbilder/Matsvampar/Russula integra-4.jpg",
+      "/images/svampbilder/Matsvampar/Russula integra-5.jpg"
     ]
   },
   {
@@ -379,7 +295,7 @@
     "Svamp-Undersvamp-grupp": null,
     "SIGNAL_art": null,
     "Svampguiden": "https://svampguiden.com/art/visa/lactarius_rufus",
-    "Nyasvamp-boken": "x",
+    "SKR_rek_matsvamp_2026": "x",
     "Norra Sverige": "x",
     "Södra Sverige": "x",
     "Gran": "1",
@@ -409,10 +325,10 @@
     "förekomst_ung": "1",
     "förekomst_sum": "12",
     "images": [
-      "/images/SvampBilder/Matsvampar/Lactarius rufus-4.jpg",
-      "/images/SvampBilder/Matsvampar/Lactarius rufus-1.jpg",
-      "/images/SvampBilder/Matsvampar/Lactarius rufus-3.jpg",
-      "/images/SvampBilder/Matsvampar/Lactarius rufus-2.jpg"
+      "/images/svampbilder/Matsvampar/Lactarius rufus-4.jpg",
+      "/images/svampbilder/Matsvampar/Lactarius rufus-1.jpg",
+      "/images/svampbilder/Matsvampar/Lactarius rufus-3.jpg",
+      "/images/svampbilder/Matsvampar/Lactarius rufus-2.jpg"
     ]
   },
   {
@@ -426,7 +342,7 @@
     "Svamp-Undersvamp-grupp": null,
     "SIGNAL_art": null,
     "Svampguiden": null,
-    "Nyasvamp-boken": null,
+    "SKR_rek_matsvamp_2026": null,
     "Norra Sverige": "x",
     "Södra Sverige": "x",
     "Gran": "1",
@@ -456,8 +372,8 @@
     "förekomst_ung": 0,
     "förekomst_sum": "11",
     "images": [
-      "/images/SvampBilder/Giftsvampar/Paxillus involutus-104-5351.jpg",
-      "/images/SvampBilder/Giftsvampar/Paxillus involutus-98-5351.jpg"
+      "/images/svampbilder/Giftsvampar/Paxillus involutus-104-5351.jpg",
+      "/images/svampbilder/Giftsvampar/Paxillus involutus-98-5351.jpg"
     ]
   },
   {
@@ -471,7 +387,7 @@
     "Svamp-Undersvamp-grupp": null,
     "SIGNAL_art": null,
     "Svampguiden": null,
-    "Nyasvamp-boken": null,
+    "SKR_rek_matsvamp_2026": null,
     "Norra Sverige": "x",
     "Södra Sverige": "x",
     "Gran": "1",
@@ -501,8 +417,8 @@
     "förekomst_ung": 0,
     "förekomst_sum": "11",
     "images": [
-      "/images/SvampBilder/Giftsvampar/Paxillus involutus-104-5351.jpg",
-      "/images/SvampBilder/Giftsvampar/Paxillus involutus-98-5351.jpg"
+      "/images/svampbilder/Giftsvampar/Paxillus involutus-104-5351.jpg",
+      "/images/svampbilder/Giftsvampar/Paxillus involutus-98-5351.jpg"
     ]
   },
   {
@@ -516,7 +432,7 @@
     "Svamp-Undersvamp-grupp": null,
     "SIGNAL_art": null,
     "Svampguiden": "https://svampguiden.com/art/visa/rozites_caperatus",
-    "Nyasvamp-boken": "x",
+    "SKR_rek_matsvamp_2026": "x",
     "Norra Sverige": "x",
     "Södra Sverige": "x",
     "Gran": "2",
@@ -546,11 +462,11 @@
     "förekomst_ung": 0,
     "förekomst_sum": "12",
     "images": [
-      "/images/SvampBilder/Matsvampar/Cortinarius caperatus-1.jpg",
-      "/images/SvampBilder/Matsvampar/Cortinarius caperatus-2.jpg",
-      "/images/SvampBilder/Matsvampar/Cortinarius caperatus-3.jpg",
-      "/images/SvampBilder/Matsvampar/Cortinarius caperatus-4.jpg",
-      "/images/SvampBilder/Matsvampar/Cortinarius caperatus-5.jpg"
+      "/images/svampbilder/Matsvampar/Cortinarius caperatus-1.jpg",
+      "/images/svampbilder/Matsvampar/Cortinarius caperatus-2.jpg",
+      "/images/svampbilder/Matsvampar/Cortinarius caperatus-3.jpg",
+      "/images/svampbilder/Matsvampar/Cortinarius caperatus-4.jpg",
+      "/images/svampbilder/Matsvampar/Cortinarius caperatus-5.jpg"
     ]
   },
   {
@@ -564,7 +480,7 @@
     "Svamp-Undersvamp-grupp": null,
     "SIGNAL_art": null,
     "Svampguiden": null,
-    "Nyasvamp-boken": null,
+    "SKR_rek_matsvamp_2026": null,
     "Norra Sverige": "x",
     "Södra Sverige": "x",
     "Gran": "x",
@@ -594,11 +510,11 @@
     "förekomst_ung": 0,
     "förekomst_sum": "x2",
     "images": [
-      "/images/SvampBilder/Giftsvampar/Amanita muscaria-28-2976.jpg",
-      "/images/SvampBilder/Giftsvampar/Amanita muscaria-29-2976.jpg",
-      "/images/SvampBilder/Giftsvampar/Amanita muscaria-48-2976.jpg",
-      "/images/SvampBilder/Giftsvampar/Amanita muscaria-49-2976.jpg",
-      "/images/SvampBilder/Giftsvampar/Amanita muscaria-26-2976.jpg"
+      "/images/svampbilder/Giftsvampar/Amanita muscaria-28-2976.jpg",
+      "/images/svampbilder/Giftsvampar/Amanita muscaria-29-2976.jpg",
+      "/images/svampbilder/Giftsvampar/Amanita muscaria-48-2976.jpg",
+      "/images/svampbilder/Giftsvampar/Amanita muscaria-49-2976.jpg",
+      "/images/svampbilder/Giftsvampar/Amanita muscaria-26-2976.jpg"
     ]
   },
   {
@@ -612,7 +528,7 @@
     "Svamp-Undersvamp-grupp": null,
     "SIGNAL_art": null,
     "Svampguiden": null,
-    "Nyasvamp-boken": null,
+    "SKR_rek_matsvamp_2026": null,
     "Norra Sverige": "x",
     "Södra Sverige": "x",
     "Gran": null,
@@ -642,8 +558,8 @@
     "förekomst_ung": 0,
     "förekomst_sum": "22",
     "images": [
-      "/images/SvampBilder/Giftsvampar/Cortinarius armillatus-20-3541.jpg",
-      "/images/SvampBilder/Giftsvampar/Cortinarius armillatus-21-3541.jpg"
+      "/images/svampbilder/Giftsvampar/Cortinarius armillatus-20-3541.jpg",
+      "/images/svampbilder/Giftsvampar/Cortinarius armillatus-21-3541.jpg"
     ]
   },
   {
@@ -657,7 +573,7 @@
     "Svamp-Undersvamp-grupp": null,
     "SIGNAL_art": null,
     "Svampguiden": null,
-    "Nyasvamp-boken": null,
+    "SKR_rek_matsvamp_2026": null,
     "Norra Sverige": "x",
     "Södra Sverige": "x",
     "Gran": null,
@@ -689,98 +605,6 @@
     "images": []
   },
   {
-    "Scientificname": "Tricholoma columbetta",
-    "Commonname": "silkesmusseron",
-    "Artfakta": "https://artfakta.se/taxa/6263/",
-    "RL2020kat": "LC",
-    "RL2020krit": null,
-    "Kriteriedokumentation": null,
-    "Svamp-grupp": "hattsvamp",
-    "Svamp-Undersvamp-grupp": null,
-    "SIGNAL_art": null,
-    "Svampguiden": "https://svampguiden.com/art/visa/tricholoma_columbetta",
-    "Nyasvamp-boken": "x",
-    "Norra Sverige": null,
-    "Södra Sverige": "x",
-    "Gran": null,
-    "Tall": null,
-    "Blandad barrskog": null,
-    "Blandad lövskog": "1",
-    "Lövskog": "1",
-    "EkochBokskog": "2",
-    "Naturbete": null,
-    "11-20 år": null,
-    "1-40 år": null,
-    "41-90 år": "2",
-    "91 år och äldre": "2",
-    "ÖRTER_grupp": null,
-    "BLÅBÄR_grupp": "x",
-    "LINGON_grupp": "x",
-    "KALKmark": null,
-    "ANNANmark": "x",
-    "rating": 3,
-    "ekologi": "Växer med ek och björk i lövskog i södra och mellersta Sverige. ",
-    "Giftsvamp": null,
-    "Rank matsvamp": "2",
-    "Rank giftsvamp": null,
-    "förekomst_skog_ålder": "12",
-    "förekomst_skog": "1",
-    "förekomst_ålder": "2",
-    "förekomst_ung": 0,
-    "förekomst_sum": "12",
-    "images": [
-      "/images/SvampBilder/Matsvampar/Tricholoma columbetta-1.jpg",
-      "/images/SvampBilder/Matsvampar/Tricholoma columbetta-3.jpg",
-      "/images/SvampBilder/Matsvampar/Tricholoma columbetta-2.jpg",
-      "/images/SvampBilder/Matsvampar/Tricholoma columbetta-5.jpg",
-      "/images/SvampBilder/Matsvampar/Tricholoma columbetta-4.jpg"
-    ]
-  },
-  {
-    "Scientificname": "Russula xerampelina s. lat.",
-    "Commonname": "sillkremlor",
-    "Artfakta": "https://artfakta.se/taxa/267011/",
-    "RL2020kat": "NA",
-    "RL2020krit": null,
-    "Kriteriedokumentation": null,
-    "Svamp-grupp": "hattsvamp",
-    "Svamp-Undersvamp-grupp": null,
-    "SIGNAL_art": null,
-    "Svampguiden": null,
-    "Nyasvamp-boken": "x",
-    "Norra Sverige": "x",
-    "Södra Sverige": "x",
-    "Gran": "2",
-    "Tall": "2",
-    "Blandad barrskog": "2",
-    "Blandad lövskog": "1",
-    "Lövskog": null,
-    "EkochBokskog": null,
-    "Naturbete": null,
-    "11-20 år": null,
-    "1-40 år": "1",
-    "41-90 år": "2",
-    "91 år och äldre": "2",
-    "ÖRTER_grupp": "x",
-    "BLÅBÄR_grupp": "x",
-    "LINGON_grupp": "x",
-    "KALKmark": null,
-    "ANNANmark": "x",
-    "rating": null,
-    "ekologi": "Artgrupp som växer i löv- och blandskog med bl a gran, tall och björk. ",
-    "Giftsvamp": null,
-    "Rank matsvamp": "3",
-    "Rank giftsvamp": null,
-    "förekomst_skog_ålder": "12",
-    "förekomst_skog": "1",
-    "förekomst_ålder": "2",
-    "förekomst_ung": 0,
-    "förekomst_sum": "12",
-    "images": [
-      "/images/SvampBilder/Matsvampar/Russula xerampelina.jpg"
-    ]
-  },
-  {
     "Scientificname": "Lactarius torminosus",
     "Commonname": "skäggriska",
     "Artfakta": "https://artfakta.se/taxa/4779/",
@@ -791,7 +615,7 @@
     "Svamp-Undersvamp-grupp": null,
     "SIGNAL_art": null,
     "Svampguiden": "https://svampguiden.com/art/visa/lactarius_torminosus",
-    "Nyasvamp-boken": "x",
+    "SKR_rek_matsvamp_2026": "x",
     "Norra Sverige": "x",
     "Södra Sverige": "x",
     "Gran": null,
@@ -821,8 +645,8 @@
     "förekomst_ung": 0,
     "förekomst_sum": "12",
     "images": [
-      "/images/SvampBilder/Matsvampar/Lactarius torminosus-2.jpg",
-      "/images/SvampBilder/Matsvampar/Lactarius torminosus-1.jpg"
+      "/images/svampbilder/Matsvampar/Lactarius torminosus-2.jpg",
+      "/images/svampbilder/Matsvampar/Lactarius torminosus-1.jpg"
     ]
   },
   {
@@ -836,7 +660,7 @@
     "Svamp-Undersvamp-grupp": null,
     "SIGNAL_art": null,
     "Svampguiden": "https://svampguiden.com/art/visa/boletus_edulis",
-    "Nyasvamp-boken": "x",
+    "SKR_rek_matsvamp_2026": "x",
     "Norra Sverige": "x",
     "Södra Sverige": "x",
     "Gran": "2",
@@ -866,12 +690,12 @@
     "förekomst_ung": 0,
     "förekomst_sum": "22",
     "images": [
-      "/images/SvampBilder/Matsvampar/Boletus edulis-1.jpg",
-      "/images/SvampBilder/Matsvampar/Boletus edulis-2.jpg",
-      "/images/SvampBilder/Matsvampar/Boletus edulis-3.jpg",
-      "/images/SvampBilder/Matsvampar/Boletus edulis-6.jpg",
-      "/images/SvampBilder/Matsvampar/Boletus edulis-4.jpg",
-      "/images/SvampBilder/Matsvampar/Boletus edulis-5.jpg"
+      "/images/svampbilder/Matsvampar/Boletus edulis-1.jpg",
+      "/images/svampbilder/Matsvampar/Boletus edulis-2.jpg",
+      "/images/svampbilder/Matsvampar/Boletus edulis-3.jpg",
+      "/images/svampbilder/Matsvampar/Boletus edulis-6.jpg",
+      "/images/svampbilder/Matsvampar/Boletus edulis-4.jpg",
+      "/images/svampbilder/Matsvampar/Boletus edulis-5.jpg"
     ]
   },
   {
@@ -885,7 +709,7 @@
     "Svamp-Undersvamp-grupp": null,
     "SIGNAL_art": null,
     "Svampguiden": "https://svampguiden.com/art/visa/russula_paludosa",
-    "Nyasvamp-boken": "x",
+    "SKR_rek_matsvamp_2026": "x",
     "Norra Sverige": "x",
     "Södra Sverige": "x",
     "Gran": null,
@@ -915,8 +739,8 @@
     "förekomst_ung": 0,
     "förekomst_sum": "12",
     "images": [
-      "/images/SvampBilder/Matsvampar/Russula paludosa-2.jpg",
-      "/images/SvampBilder/Matsvampar/Russula paludosa-1.jpg"
+      "/images/svampbilder/Matsvampar/Russula paludosa-2.jpg",
+      "/images/svampbilder/Matsvampar/Russula paludosa-1.jpg"
     ]
   },
   {
@@ -930,7 +754,7 @@
     "Svamp-Undersvamp-grupp": null,
     "SIGNAL_art": null,
     "Svampguiden": "https://svampguiden.com/art/visa/russula_decolorans",
-    "Nyasvamp-boken": "x",
+    "SKR_rek_matsvamp_2026": "x",
     "Norra Sverige": "x",
     "Södra Sverige": "x",
     "Gran": null,
@@ -960,10 +784,10 @@
     "förekomst_ung": 0,
     "förekomst_sum": "12",
     "images": [
-      "/images/SvampBilder/Matsvampar/Russula decolorans-4.jpg",
-      "/images/SvampBilder/Matsvampar/Russula decolorans-1.jpg",
-      "/images/SvampBilder/Matsvampar/Russula decolorans-2.jpg",
-      "/images/SvampBilder/Matsvampar/Russula decolorans-3.jpg"
+      "/images/svampbilder/Matsvampar/Russula decolorans-4.jpg",
+      "/images/svampbilder/Matsvampar/Russula decolorans-1.jpg",
+      "/images/svampbilder/Matsvampar/Russula decolorans-2.jpg",
+      "/images/svampbilder/Matsvampar/Russula decolorans-3.jpg"
     ]
   },
   {
@@ -977,7 +801,7 @@
     "Svamp-Undersvamp-grupp": null,
     "SIGNAL_art": null,
     "Svampguiden": "https://svampguiden.com/art/visa/leccinum_versipelle",
-    "Nyasvamp-boken": "x",
+    "SKR_rek_matsvamp_2026": "x",
     "Norra Sverige": "x",
     "Södra Sverige": "x",
     "Gran": null,
@@ -1007,12 +831,12 @@
     "förekomst_ung": 0,
     "förekomst_sum": "12",
     "images": [
-      "/images/SvampBilder/Matsvampar/Leccinum versipelle-1.jpg",
-      "/images/SvampBilder/Matsvampar/Leccinum versipelle-2.jpg",
-      "/images/SvampBilder/Matsvampar/Leccinum versipelle-3.jpg",
-      "/images/SvampBilder/Matsvampar/Leccinum versipelle-4.jpg",
-      "/images/SvampBilder/Giftsvampar/Leccinum versipelle-47-245486.jpg",
-      "/images/SvampBilder/Giftsvampar/Leccinum versipelle-36-245486.jpg"
+      "/images/svampbilder/Matsvampar/Leccinum versipelle-1.jpg",
+      "/images/svampbilder/Matsvampar/Leccinum versipelle-2.jpg",
+      "/images/svampbilder/Matsvampar/Leccinum versipelle-3.jpg",
+      "/images/svampbilder/Matsvampar/Leccinum versipelle-4.jpg",
+      "/images/svampbilder/Giftsvampar/Leccinum versipelle-47-245486.jpg",
+      "/images/svampbilder/Giftsvampar/Leccinum versipelle-36-245486.jpg"
     ]
   },
   {
@@ -1026,7 +850,7 @@
     "Svamp-Undersvamp-grupp": null,
     "SIGNAL_art": null,
     "Svampguiden": "https://svampguiden.com/art/visa/russula_obscura",
-    "Nyasvamp-boken": "x",
+    "SKR_rek_matsvamp_2026": "x",
     "Norra Sverige": "x",
     "Södra Sverige": "x",
     "Gran": "1",
@@ -1056,12 +880,12 @@
     "förekomst_ung": 0,
     "förekomst_sum": "12",
     "images": [
-      "/images/SvampBilder/Matsvampar/Russula vinosa-6.jpg",
-      "/images/SvampBilder/Matsvampar/Russula vinosa-5.jpg",
-      "/images/SvampBilder/Matsvampar/Russula vinosa-4.jpg",
-      "/images/SvampBilder/Matsvampar/Russula vinosa-1.jpg",
-      "/images/SvampBilder/Matsvampar/Russula vinosa-3.jpg",
-      "/images/SvampBilder/Matsvampar/Russula vinosa-2.jpg"
+      "/images/svampbilder/Matsvampar/Russula vinosa-6.jpg",
+      "/images/svampbilder/Matsvampar/Russula vinosa-5.jpg",
+      "/images/svampbilder/Matsvampar/Russula vinosa-4.jpg",
+      "/images/svampbilder/Matsvampar/Russula vinosa-1.jpg",
+      "/images/svampbilder/Matsvampar/Russula vinosa-3.jpg",
+      "/images/svampbilder/Matsvampar/Russula vinosa-2.jpg"
     ]
   }
 ]

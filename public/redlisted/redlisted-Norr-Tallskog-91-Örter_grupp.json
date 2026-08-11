@@ -10,7 +10,7 @@
     "Svamp-Undersvamp-grupp": null,
     "SIGNAL_art": null,
     "Svampguiden": null,
-    "Nyasvamp-boken": null,
+    "SKR_rek_matsvamp_2026": null,
     "Norra Sverige": "x",
     "Södra Sverige": "x",
     "Gran": "2",
@@ -53,7 +53,7 @@
     "Svamp-Undersvamp-grupp": null,
     "SIGNAL_art": "S",
     "Svampguiden": null,
-    "Nyasvamp-boken": null,
+    "SKR_rek_matsvamp_2026": null,
     "Norra Sverige": "x",
     "Södra Sverige": "x",
     "Gran": "1",
@@ -96,7 +96,7 @@
     "Svamp-Undersvamp-grupp": null,
     "SIGNAL_art": null,
     "Svampguiden": null,
-    "Nyasvamp-boken": null,
+    "SKR_rek_matsvamp_2026": null,
     "Norra Sverige": "x",
     "Södra Sverige": "x",
     "Gran": "2",
@@ -127,7 +127,7 @@
     "förekomst_ung": 0,
     "förekomst_sum": "22",
     "images": [
-      "/images/SvampBilder/RödlistadeSvampar/Hydnellum caeruleum-4362.jpg"
+      "/images/svampbilder/RödlistadeSvampar/Hydnellum caeruleum-4362.jpg"
     ]
   },
   {
@@ -141,7 +141,7 @@
     "Svamp-Undersvamp-grupp": null,
     "SIGNAL_art": null,
     "Svampguiden": null,
-    "Nyasvamp-boken": null,
+    "SKR_rek_matsvamp_2026": null,
     "Norra Sverige": "x",
     "Södra Sverige": "x",
     "Gran": "2",
@@ -184,7 +184,7 @@
     "Svamp-Undersvamp-grupp": null,
     "SIGNAL_art": "S",
     "Svampguiden": null,
-    "Nyasvamp-boken": null,
+    "SKR_rek_matsvamp_2026": null,
     "Norra Sverige": "x",
     "Södra Sverige": "x",
     "Gran": "2",
@@ -215,8 +215,8 @@
     "förekomst_ung": 0,
     "förekomst_sum": "12",
     "images": [
-      "/images/SvampBilder/Giftsvampar/Tricholoma aurantium-92-1595.jpg",
-      "/images/SvampBilder/Giftsvampar/Tricholoma aurantium-174-1595.jpg"
+      "/images/svampbilder/Giftsvampar/Tricholoma aurantium-92-1595.jpg",
+      "/images/svampbilder/Giftsvampar/Tricholoma aurantium-174-1595.jpg"
     ]
   },
   {
@@ -230,7 +230,7 @@
     "Svamp-Undersvamp-grupp": null,
     "SIGNAL_art": null,
     "Svampguiden": null,
-    "Nyasvamp-boken": null,
+    "SKR_rek_matsvamp_2026": null,
     "Norra Sverige": "x",
     "Södra Sverige": "x",
     "Gran": "2",
@@ -273,7 +273,7 @@
     "Svamp-Undersvamp-grupp": null,
     "SIGNAL_art": null,
     "Svampguiden": null,
-    "Nyasvamp-boken": null,
+    "SKR_rek_matsvamp_2026": null,
     "Norra Sverige": "x",
     "Södra Sverige": "x",
     "Gran": "2",
@@ -316,7 +316,7 @@
     "Svamp-Undersvamp-grupp": null,
     "SIGNAL_art": null,
     "Svampguiden": null,
-    "Nyasvamp-boken": null,
+    "SKR_rek_matsvamp_2026": null,
     "Norra Sverige": "x",
     "Södra Sverige": "x",
     "Gran": "2",
@@ -347,7 +347,7 @@
     "förekomst_ung": 0,
     "förekomst_sum": "22",
     "images": [
-      "/images/SvampBilder/RödlistadeSvampar/Cortinarius haasii-248956.jpg"
+      "/images/svampbilder/RödlistadeSvampar/Cortinarius haasii-248956.jpg"
     ]
   },
   {
@@ -361,7 +361,7 @@
     "Svamp-Undersvamp-grupp": null,
     "SIGNAL_art": null,
     "Svampguiden": null,
-    "Nyasvamp-boken": null,
+    "SKR_rek_matsvamp_2026": null,
     "Norra Sverige": "x",
     "Södra Sverige": "(x)",
     "Gran": "2",
@@ -392,7 +392,7 @@
     "förekomst_ung": 0,
     "förekomst_sum": "12",
     "images": [
-      "/images/SvampBilder/RödlistadeSvampar/Cortinarius aureofulvus-426.jpg"
+      "/images/svampbilder/RödlistadeSvampar/Cortinarius aureofulvus-426.jpg"
     ]
   },
   {
@@ -406,7 +406,7 @@
     "Svamp-Undersvamp-grupp": null,
     "SIGNAL_art": null,
     "Svampguiden": null,
-    "Nyasvamp-boken": null,
+    "SKR_rek_matsvamp_2026": null,
     "Norra Sverige": "x",
     "Södra Sverige": "x",
     "Gran": "2",
@@ -437,7 +437,7 @@
     "förekomst_ung": 0,
     "förekomst_sum": "22",
     "images": [
-      "/images/SvampBilder/RödlistadeSvampar/Hygrophorus hyacinthinus-823.jpg"
+      "/images/svampbilder/RödlistadeSvampar/Hygrophorus hyacinthinus-823.jpg"
     ]
   },
   {
@@ -451,7 +451,7 @@
     "Svamp-Undersvamp-grupp": null,
     "SIGNAL_art": null,
     "Svampguiden": null,
-    "Nyasvamp-boken": null,
+    "SKR_rek_matsvamp_2026": null,
     "Norra Sverige": "x",
     "Södra Sverige": "x",
     "Gran": "1",
@@ -482,7 +482,7 @@
     "förekomst_ung": 0,
     "förekomst_sum": "22",
     "images": [
-      "/images/SvampBilder/RödlistadeSvampar/Catathelasma imperiale-275.jpg"
+      "/images/svampbilder/RödlistadeSvampar/Catathelasma imperiale-275.jpg"
     ]
   },
   {
@@ -496,7 +496,7 @@
     "Svamp-Undersvamp-grupp": null,
     "SIGNAL_art": null,
     "Svampguiden": null,
-    "Nyasvamp-boken": null,
+    "SKR_rek_matsvamp_2026": null,
     "Norra Sverige": "x",
     "Södra Sverige": "x",
     "Gran": "2",
@@ -527,7 +527,7 @@
     "förekomst_ung": 0,
     "förekomst_sum": "12",
     "images": [
-      "/images/SvampBilder/RödlistadeSvampar/Cortinarius cupreorufus-445.jpg"
+      "/images/svampbilder/RödlistadeSvampar/Cortinarius cupreorufus-445.jpg"
     ]
   },
   {
@@ -541,7 +541,7 @@
     "Svamp-Undersvamp-grupp": null,
     "SIGNAL_art": "S",
     "Svampguiden": null,
-    "Nyasvamp-boken": null,
+    "SKR_rek_matsvamp_2026": null,
     "Norra Sverige": "x",
     "Södra Sverige": "x",
     "Gran": "2",
@@ -584,7 +584,7 @@
     "Svamp-Undersvamp-grupp": null,
     "SIGNAL_art": null,
     "Svampguiden": null,
-    "Nyasvamp-boken": null,
+    "SKR_rek_matsvamp_2026": null,
     "Norra Sverige": "x",
     "Södra Sverige": "x",
     "Gran": null,
@@ -627,7 +627,7 @@
     "Svamp-Undersvamp-grupp": null,
     "SIGNAL_art": null,
     "Svampguiden": null,
-    "Nyasvamp-boken": null,
+    "SKR_rek_matsvamp_2026": null,
     "Norra Sverige": "x",
     "Södra Sverige": "x",
     "Gran": "2",
@@ -658,7 +658,7 @@
     "förekomst_ung": 0,
     "förekomst_sum": "12",
     "images": [
-      "/images/SvampBilder/RödlistadeSvampar/Hygrophorus subviscifer-831.jpg"
+      "/images/svampbilder/RödlistadeSvampar/Hygrophorus subviscifer-831.jpg"
     ]
   },
   {
@@ -672,7 +672,7 @@
     "Svamp-Undersvamp-grupp": null,
     "SIGNAL_art": "S",
     "Svampguiden": null,
-    "Nyasvamp-boken": null,
+    "SKR_rek_matsvamp_2026": null,
     "Norra Sverige": "x",
     "Södra Sverige": "x",
     "Gran": "2",
@@ -715,7 +715,7 @@
     "Svamp-Undersvamp-grupp": null,
     "SIGNAL_art": null,
     "Svampguiden": null,
-    "Nyasvamp-boken": null,
+    "SKR_rek_matsvamp_2026": null,
     "Norra Sverige": "x",
     "Södra Sverige": "x",
     "Gran": "2",
@@ -746,7 +746,7 @@
     "förekomst_ung": 0,
     "förekomst_sum": "22",
     "images": [
-      "/images/SvampBilder/RödlistadeSvampar/Hydnellum aurantiacum-4361.jpg"
+      "/images/svampbilder/RödlistadeSvampar/Hydnellum aurantiacum-4361.jpg"
     ]
   },
   {
@@ -760,7 +760,7 @@
     "Svamp-Undersvamp-grupp": null,
     "SIGNAL_art": null,
     "Svampguiden": null,
-    "Nyasvamp-boken": null,
+    "SKR_rek_matsvamp_2026": null,
     "Norra Sverige": "x",
     "Södra Sverige": "x",
     "Gran": "2",
@@ -803,7 +803,7 @@
     "Svamp-Undersvamp-grupp": null,
     "SIGNAL_art": null,
     "Svampguiden": null,
-    "Nyasvamp-boken": null,
+    "SKR_rek_matsvamp_2026": null,
     "Norra Sverige": "x",
     "Södra Sverige": "x",
     "Gran": "2",
@@ -846,7 +846,7 @@
     "Svamp-Undersvamp-grupp": null,
     "SIGNAL_art": "S",
     "Svampguiden": null,
-    "Nyasvamp-boken": null,
+    "SKR_rek_matsvamp_2026": null,
     "Norra Sverige": "x",
     "Södra Sverige": "x",
     "Gran": "2",
@@ -889,7 +889,7 @@
     "Svamp-Undersvamp-grupp": null,
     "SIGNAL_art": null,
     "Svampguiden": null,
-    "Nyasvamp-boken": null,
+    "SKR_rek_matsvamp_2026": null,
     "Norra Sverige": "x",
     "Södra Sverige": "x",
     "Gran": "2",
@@ -932,7 +932,7 @@
     "Svamp-Undersvamp-grupp": null,
     "SIGNAL_art": "S",
     "Svampguiden": null,
-    "Nyasvamp-boken": null,
+    "SKR_rek_matsvamp_2026": null,
     "Norra Sverige": "x",
     "Södra Sverige": "x",
     "Gran": "2",
@@ -975,7 +975,7 @@
     "Svamp-Undersvamp-grupp": null,
     "SIGNAL_art": null,
     "Svampguiden": null,
-    "Nyasvamp-boken": null,
+    "SKR_rek_matsvamp_2026": null,
     "Norra Sverige": "x",
     "Södra Sverige": "x",
     "Gran": "2",
@@ -1006,7 +1006,7 @@
     "förekomst_ung": 0,
     "förekomst_sum": "12",
     "images": [
-      "/images/SvampBilder/RödlistadeSvampar/Tricholoma atrosquamosum-1594.jpg"
+      "/images/svampbilder/RödlistadeSvampar/Tricholoma atrosquamosum-1594.jpg"
     ]
   },
   {
@@ -1020,7 +1020,7 @@
     "Svamp-Undersvamp-grupp": null,
     "SIGNAL_art": "S",
     "Svampguiden": null,
-    "Nyasvamp-boken": null,
+    "SKR_rek_matsvamp_2026": null,
     "Norra Sverige": "x",
     "Södra Sverige": "x",
     "Gran": "2",
@@ -1063,7 +1063,7 @@
     "Svamp-Undersvamp-grupp": null,
     "SIGNAL_art": null,
     "Svampguiden": null,
-    "Nyasvamp-boken": null,
+    "SKR_rek_matsvamp_2026": null,
     "Norra Sverige": "x",
     "Södra Sverige": "x",
     "Gran": null,
@@ -1106,7 +1106,7 @@
     "Svamp-Undersvamp-grupp": null,
     "SIGNAL_art": "S",
     "Svampguiden": null,
-    "Nyasvamp-boken": null,
+    "SKR_rek_matsvamp_2026": null,
     "Norra Sverige": "x",
     "Södra Sverige": "x",
     "Gran": "2",

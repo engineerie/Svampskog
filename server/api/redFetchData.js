@@ -83,7 +83,7 @@ const fetchEdibleDataFromDB = async ({
     m."Svamp-Undersvamp-grupp",
     m."SIGNAL_art",
     m.Svampguiden,
-    m."Nyasvamp-boken",
+    m.SKR_rek_matsvamp_2026,
     ${norrRef} AS "Norra Sverige",
     ${soderRef} AS "Södra Sverige",
     m.Gran,

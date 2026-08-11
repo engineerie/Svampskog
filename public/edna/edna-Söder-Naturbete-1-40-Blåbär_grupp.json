@@ -18,7 +18,7 @@
     "Svamp-grupp": "0",
     "Svamp-Undersvamp-grupp": "0",
     "SIGNAL_art": "0",
-    "Nyasvamp-boken": "0",
+    "SKR_rek_matsvamp_2026": "0",
     "Giftsvamp": "0",
     "Genus": "Cortinarius",
     "sample_plot_count": 1,
@@ -46,7 +46,7 @@
     "Svamp-grupp": "skinnsvamp",
     "Svamp-Undersvamp-grupp": "0",
     "SIGNAL_art": "0",
-    "Nyasvamp-boken": "0",
+    "SKR_rek_matsvamp_2026": "0",
     "Giftsvamp": "0",
     "Genus": "Tomentella",
     "sample_plot_count": 1,
@@ -74,7 +74,7 @@
     "Svamp-grupp": "sopp",
     "Svamp-Undersvamp-grupp": "0",
     "SIGNAL_art": "0",
-    "Nyasvamp-boken": "x",
+    "SKR_rek_matsvamp_2026": "x",
     "Giftsvamp": "0",
     "Genus": "Imleria",
     "sample_plot_count": 1,
@@ -82,12 +82,12 @@
     "Svamp-grupp-släkte": "sopp",
     "synlighet": 1,
     "images": [
-      "/images/SvampBilder/Matsvampar/Imleria badia-4.jpg",
-      "/images/SvampBilder/Matsvampar/Imleria badia-5.jpg",
-      "/images/SvampBilder/Matsvampar/Imleria badia-6.jpg",
-      "/images/SvampBilder/Matsvampar/Imleria badia-2.jpg",
-      "/images/SvampBilder/Matsvampar/Imleria badia-3.jpg",
-      "/images/SvampBilder/Matsvampar/Imleria badia-1.jpg"
+      "/images/svampbilder/Matsvampar/Imleria badia-4.jpg",
+      "/images/svampbilder/Matsvampar/Imleria badia-5.jpg",
+      "/images/svampbilder/Matsvampar/Imleria badia-6.jpg",
+      "/images/svampbilder/Matsvampar/Imleria badia-2.jpg",
+      "/images/svampbilder/Matsvampar/Imleria badia-3.jpg",
+      "/images/svampbilder/Matsvampar/Imleria badia-1.jpg"
     ]
   },
   {
@@ -109,7 +109,7 @@
     "Svamp-grupp": "hattsvamp",
     "Svamp-Undersvamp-grupp": "0",
     "SIGNAL_art": "0",
-    "Nyasvamp-boken": "0",
+    "SKR_rek_matsvamp_2026": "0",
     "Giftsvamp": "0",
     "Genus": "Laccaria",
     "sample_plot_count": 1,
@@ -137,7 +137,7 @@
     "Svamp-grupp": "hattsvamp",
     "Svamp-Undersvamp-grupp": "0",
     "SIGNAL_art": "0",
-    "Nyasvamp-boken": "0",
+    "SKR_rek_matsvamp_2026": "0",
     "Giftsvamp": "x",
     "Genus": "Lactarius",
     "sample_plot_count": 1,
@@ -145,8 +145,8 @@
     "Svamp-grupp-släkte": "hattsvamp",
     "synlighet": 1,
     "images": [
-      "/images/SvampBilder/Giftsvampar/Lactarius necator-33-4747.jpg",
-      "/images/SvampBilder/Giftsvampar/Lactarius necator-32-4747.jpg"
+      "/images/svampbilder/Giftsvampar/Lactarius necator-33-4747.jpg",
+      "/images/svampbilder/Giftsvampar/Lactarius necator-32-4747.jpg"
     ]
   },
   {
@@ -168,7 +168,7 @@
     "Svamp-grupp": "hattsvamp",
     "Svamp-Undersvamp-grupp": "0",
     "SIGNAL_art": "0",
-    "Nyasvamp-boken": "0",
+    "SKR_rek_matsvamp_2026": "0",
     "Giftsvamp": "0",
     "Genus": "Laccaria",
     "sample_plot_count": 1,
@@ -196,7 +196,7 @@
     "Svamp-grupp": "tryffel",
     "Svamp-Undersvamp-grupp": "0",
     "SIGNAL_art": "0",
-    "Nyasvamp-boken": "0",
+    "SKR_rek_matsvamp_2026": "0",
     "Giftsvamp": "0",
     "Genus": "Hydnotrya",
     "sample_plot_count": 1,
@@ -224,7 +224,7 @@
     "Svamp-grupp": "hattsvamp",
     "Svamp-Undersvamp-grupp": "0",
     "SIGNAL_art": "0",
-    "Nyasvamp-boken": "0",
+    "SKR_rek_matsvamp_2026": "0",
     "Giftsvamp": "0",
     "Genus": "Amanita",
     "sample_plot_count": 1,
@@ -252,7 +252,7 @@
     "Svamp-grupp": "hattsvamp",
     "Svamp-Undersvamp-grupp": "0",
     "SIGNAL_art": "0",
-    "Nyasvamp-boken": "0",
+    "SKR_rek_matsvamp_2026": "0",
     "Giftsvamp": "x",
     "Genus": "Paxillus",
     "sample_plot_count": 1,
@@ -260,8 +260,8 @@
     "Svamp-grupp-släkte": "hattsvamp",
     "synlighet": 1,
     "images": [
-      "/images/SvampBilder/Giftsvampar/Paxillus involutus-104-5351.jpg",
-      "/images/SvampBilder/Giftsvampar/Paxillus involutus-98-5351.jpg"
+      "/images/svampbilder/Giftsvampar/Paxillus involutus-104-5351.jpg",
+      "/images/svampbilder/Giftsvampar/Paxillus involutus-98-5351.jpg"
     ]
   },
   {
@@ -283,7 +283,7 @@
     "Svamp-grupp": "0",
     "Svamp-Undersvamp-grupp": "0",
     "SIGNAL_art": "0",
-    "Nyasvamp-boken": "0",
+    "SKR_rek_matsvamp_2026": "0",
     "Giftsvamp": "0",
     "Genus": "Tomentella",
     "sample_plot_count": 1,
@@ -311,7 +311,7 @@
     "Svamp-grupp": "hattsvamp",
     "Svamp-Undersvamp-grupp": "0",
     "SIGNAL_art": "0",
-    "Nyasvamp-boken": "x",
+    "SKR_rek_matsvamp_2026": "x",
     "Giftsvamp": "0",
     "Genus": "Russula",
     "sample_plot_count": 1,
@@ -319,11 +319,11 @@
     "Svamp-grupp-släkte": "hattsvamp",
     "synlighet": 1,
     "images": [
-      "/images/SvampBilder/Matsvampar/Russula aeruginea-1.jpg",
-      "/images/SvampBilder/Matsvampar/Russula aeruginea-2.jpg",
-      "/images/SvampBilder/Matsvampar/Russula aeruginea-3.jpg",
-      "/images/SvampBilder/Matsvampar/Russula aeruginea-4.jpg",
-      "/images/SvampBilder/Matsvampar/Russula aeruginea-5.jpg"
+      "/images/svampbilder/Matsvampar/Russula aeruginea-1.jpg",
+      "/images/svampbilder/Matsvampar/Russula aeruginea-2.jpg",
+      "/images/svampbilder/Matsvampar/Russula aeruginea-3.jpg",
+      "/images/svampbilder/Matsvampar/Russula aeruginea-4.jpg",
+      "/images/svampbilder/Matsvampar/Russula aeruginea-5.jpg"
     ]
   },
   {
@@ -345,7 +345,7 @@
     "Svamp-grupp": "0",
     "Svamp-Undersvamp-grupp": "0",
     "SIGNAL_art": "0",
-    "Nyasvamp-boken": "0",
+    "SKR_rek_matsvamp_2026": "0",
     "Giftsvamp": "0",
     "Genus": "Inocybe",
     "sample_plot_count": 1,
@@ -373,7 +373,7 @@
     "Svamp-grupp": "0",
     "Svamp-Undersvamp-grupp": "0",
     "SIGNAL_art": "0",
-    "Nyasvamp-boken": "0",
+    "SKR_rek_matsvamp_2026": "0",
     "Giftsvamp": "0",
     "Genus": "Thaxterogaster",
     "sample_plot_count": 1,

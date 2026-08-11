@@ -10,7 +10,7 @@
     "Svamp-Undersvamp-grupp": null,
     "SIGNAL_art": null,
     "Svampguiden": null,
-    "Nyasvamp-boken": null,
+    "SKR_rek_matsvamp_2026": null,
     "Norra Sverige": "x",
     "Södra Sverige": "x",
     "Gran": null,
@@ -41,9 +41,9 @@
     "förekomst_ung": 0,
     "förekomst_sum": "11",
     "images": [
-      "/images/SvampBilder/Giftsvampar/Rubroboletus legaliae-232-156.jpg",
-      "/images/SvampBilder/Giftsvampar/Rubroboletus legaliae-255-.jpg",
-      "/images/SvampBilder/Giftsvampar/Rubroboletus legaliae-231-156.jpg"
+      "/images/svampbilder/Giftsvampar/Rubroboletus legaliae-232-156.jpg",
+      "/images/svampbilder/Giftsvampar/Rubroboletus legaliae-255-.jpg",
+      "/images/svampbilder/Giftsvampar/Rubroboletus legaliae-231-156.jpg"
     ]
   }
 ]

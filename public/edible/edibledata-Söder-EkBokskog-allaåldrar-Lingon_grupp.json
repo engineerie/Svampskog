@@ -10,7 +10,7 @@
     "Svamp-Undersvamp-grupp": null,
     "SIGNAL_art": null,
     "Svampguiden": "https://svampguiden.com/art/visa/boletus_badius",
-    "Nyasvamp-boken": "x",
+    "SKR_rek_matsvamp_2026": "x",
     "Norra Sverige": "x",
     "Södra Sverige": "x",
     "Gran": null,
@@ -40,12 +40,12 @@
     "förekomst_ung": "1",
     "förekomst_sum": "141",
     "images": [
-      "/images/SvampBilder/Matsvampar/Imleria badia-4.jpg",
-      "/images/SvampBilder/Matsvampar/Imleria badia-5.jpg",
-      "/images/SvampBilder/Matsvampar/Imleria badia-6.jpg",
-      "/images/SvampBilder/Matsvampar/Imleria badia-2.jpg",
-      "/images/SvampBilder/Matsvampar/Imleria badia-3.jpg",
-      "/images/SvampBilder/Matsvampar/Imleria badia-1.jpg"
+      "/images/svampbilder/Matsvampar/Imleria badia-4.jpg",
+      "/images/svampbilder/Matsvampar/Imleria badia-5.jpg",
+      "/images/svampbilder/Matsvampar/Imleria badia-6.jpg",
+      "/images/svampbilder/Matsvampar/Imleria badia-2.jpg",
+      "/images/svampbilder/Matsvampar/Imleria badia-3.jpg",
+      "/images/svampbilder/Matsvampar/Imleria badia-1.jpg"
     ]
   },
   {
@@ -59,7 +59,7 @@
     "Svamp-Undersvamp-grupp": null,
     "SIGNAL_art": null,
     "Svampguiden": "https://svampguiden.com/art/visa/cantharellus_cibarius",
-    "Nyasvamp-boken": "x",
+    "SKR_rek_matsvamp_2026": "x",
     "Norra Sverige": "x",
     "Södra Sverige": "x",
     "Gran": "2",
@@ -89,11 +89,11 @@
     "förekomst_ung": 0,
     "förekomst_sum": "241",
     "images": [
-      "/images/SvampBilder/Matsvampar/Cantharellus cibarius-4.jpg",
-      "/images/SvampBilder/Matsvampar/Cantharellus cibarius-5.jpg",
-      "/images/SvampBilder/Matsvampar/Cantharellus cibarius-2.jpg",
-      "/images/SvampBilder/Matsvampar/Cantharellus cibarius-3.jpg",
-      "/images/SvampBilder/Matsvampar/Cantharellus cibarius-1.jpg"
+      "/images/svampbilder/Matsvampar/Cantharellus cibarius-4.jpg",
+      "/images/svampbilder/Matsvampar/Cantharellus cibarius-5.jpg",
+      "/images/svampbilder/Matsvampar/Cantharellus cibarius-2.jpg",
+      "/images/svampbilder/Matsvampar/Cantharellus cibarius-3.jpg",
+      "/images/svampbilder/Matsvampar/Cantharellus cibarius-1.jpg"
     ]
   },
   {
@@ -107,7 +107,7 @@
     "Svamp-Undersvamp-grupp": null,
     "SIGNAL_art": null,
     "Svampguiden": null,
-    "Nyasvamp-boken": null,
+    "SKR_rek_matsvamp_2026": null,
     "Norra Sverige": null,
     "Södra Sverige": "x",
     "Gran": null,
@@ -137,7 +137,7 @@
     "förekomst_ung": 0,
     "förekomst_sum": "237",
     "images": [
-      "/images/SvampBilder/Giftsvampar/Scleroderma bovista-161-5975.jpg"
+      "/images/svampbilder/Giftsvampar/Scleroderma bovista-161-5975.jpg"
     ]
   },
   {
@@ -151,7 +151,7 @@
     "Svamp-Undersvamp-grupp": null,
     "SIGNAL_art": null,
     "Svampguiden": "https://svampguiden.com/art/visa/rozites_caperatus",
-    "Nyasvamp-boken": "x",
+    "SKR_rek_matsvamp_2026": "x",
     "Norra Sverige": "x",
     "Södra Sverige": "x",
     "Gran": "2",
@@ -181,59 +181,11 @@
     "förekomst_ung": 0,
     "förekomst_sum": "241",
     "images": [
-      "/images/SvampBilder/Matsvampar/Cortinarius caperatus-1.jpg",
-      "/images/SvampBilder/Matsvampar/Cortinarius caperatus-2.jpg",
-      "/images/SvampBilder/Matsvampar/Cortinarius caperatus-3.jpg",
-      "/images/SvampBilder/Matsvampar/Cortinarius caperatus-4.jpg",
-      "/images/SvampBilder/Matsvampar/Cortinarius caperatus-5.jpg"
-    ]
-  },
-  {
-    "Scientificname": "Tricholoma columbetta",
-    "Commonname": "silkesmusseron",
-    "Artfakta": "https://artfakta.se/taxa/6263/",
-    "RL2020kat": "LC",
-    "RL2020krit": null,
-    "Kriteriedokumentation": null,
-    "Svamp-grupp": "hattsvamp",
-    "Svamp-Undersvamp-grupp": null,
-    "SIGNAL_art": null,
-    "Svampguiden": "https://svampguiden.com/art/visa/tricholoma_columbetta",
-    "Nyasvamp-boken": "x",
-    "Norra Sverige": null,
-    "Södra Sverige": "x",
-    "Gran": null,
-    "Tall": null,
-    "Blandad barrskog": null,
-    "Blandad lövskog": "1",
-    "Lövskog": "1",
-    "EkochBokskog": "2",
-    "Naturbete": null,
-    "11-20 år": null,
-    "1-40 år": null,
-    "41-90 år": "2",
-    "91 år och äldre": "2",
-    "ÖRTER_grupp": null,
-    "BLÅBÄR_grupp": "x",
-    "LINGON_grupp": "x",
-    "KALKmark": null,
-    "ANNANmark": "x",
-    "rating": 3,
-    "ekologi": "Växer med ek och björk i lövskog i södra och mellersta Sverige. ",
-    "Giftsvamp": null,
-    "Rank matsvamp": "2",
-    "Rank giftsvamp": null,
-    "förekomst_skog_ålder": "27",
-    "förekomst_skog": "2",
-    "förekomst_ålder": 7,
-    "förekomst_ung": 0,
-    "förekomst_sum": "27",
-    "images": [
-      "/images/SvampBilder/Matsvampar/Tricholoma columbetta-1.jpg",
-      "/images/SvampBilder/Matsvampar/Tricholoma columbetta-3.jpg",
-      "/images/SvampBilder/Matsvampar/Tricholoma columbetta-2.jpg",
-      "/images/SvampBilder/Matsvampar/Tricholoma columbetta-5.jpg",
-      "/images/SvampBilder/Matsvampar/Tricholoma columbetta-4.jpg"
+      "/images/svampbilder/Matsvampar/Cortinarius caperatus-1.jpg",
+      "/images/svampbilder/Matsvampar/Cortinarius caperatus-2.jpg",
+      "/images/svampbilder/Matsvampar/Cortinarius caperatus-3.jpg",
+      "/images/svampbilder/Matsvampar/Cortinarius caperatus-4.jpg",
+      "/images/svampbilder/Matsvampar/Cortinarius caperatus-5.jpg"
     ]
   },
   {
@@ -247,7 +199,7 @@
     "Svamp-Undersvamp-grupp": null,
     "SIGNAL_art": null,
     "Svampguiden": "https://svampguiden.com/art/visa/boletus_edulis",
-    "Nyasvamp-boken": "x",
+    "SKR_rek_matsvamp_2026": "x",
     "Norra Sverige": "x",
     "Södra Sverige": "x",
     "Gran": "2",
@@ -277,12 +229,12 @@
     "förekomst_ung": 0,
     "förekomst_sum": "241",
     "images": [
-      "/images/SvampBilder/Matsvampar/Boletus edulis-1.jpg",
-      "/images/SvampBilder/Matsvampar/Boletus edulis-2.jpg",
-      "/images/SvampBilder/Matsvampar/Boletus edulis-3.jpg",
-      "/images/SvampBilder/Matsvampar/Boletus edulis-6.jpg",
-      "/images/SvampBilder/Matsvampar/Boletus edulis-4.jpg",
-      "/images/SvampBilder/Matsvampar/Boletus edulis-5.jpg"
+      "/images/svampbilder/Matsvampar/Boletus edulis-1.jpg",
+      "/images/svampbilder/Matsvampar/Boletus edulis-2.jpg",
+      "/images/svampbilder/Matsvampar/Boletus edulis-3.jpg",
+      "/images/svampbilder/Matsvampar/Boletus edulis-6.jpg",
+      "/images/svampbilder/Matsvampar/Boletus edulis-4.jpg",
+      "/images/svampbilder/Matsvampar/Boletus edulis-5.jpg"
     ]
   },
   {
@@ -296,7 +248,7 @@
     "Svamp-Undersvamp-grupp": null,
     "SIGNAL_art": null,
     "Svampguiden": "https://svampguiden.com/art/visa/tricholoma_portentosum",
-    "Nyasvamp-boken": "x",
+    "SKR_rek_matsvamp_2026": "x",
     "Norra Sverige": "x",
     "Södra Sverige": "x",
     "Gran": "2",
@@ -326,9 +278,9 @@
     "förekomst_ung": 0,
     "förekomst_sum": "27",
     "images": [
-      "/images/SvampBilder/Matsvampar/Tricholoma portentosum-1.jpg",
-      "/images/SvampBilder/Matsvampar/Tricholoma portentosum-2.jpg",
-      "/images/SvampBilder/Matsvampar/Tricholoma portentosum-3.jpg"
+      "/images/svampbilder/Matsvampar/Tricholoma portentosum-1.jpg",
+      "/images/svampbilder/Matsvampar/Tricholoma portentosum-2.jpg",
+      "/images/svampbilder/Matsvampar/Tricholoma portentosum-3.jpg"
     ]
   },
   {
@@ -342,7 +294,7 @@
     "Svamp-Undersvamp-grupp": null,
     "SIGNAL_art": null,
     "Svampguiden": "https://svampguiden.com/art/visa/cantharellus_tubaeformis",
-    "Nyasvamp-boken": "x",
+    "SKR_rek_matsvamp_2026": "x",
     "Norra Sverige": "x",
     "Södra Sverige": "x",
     "Gran": "2",
@@ -372,9 +324,9 @@
     "förekomst_ung": 0,
     "förekomst_sum": "27",
     "images": [
-      "/images/SvampBilder/Matsvampar/Craterellus tubaeformis-3.jpg",
-      "/images/SvampBilder/Matsvampar/Craterellus tubaeformis-2.jpg",
-      "/images/SvampBilder/Matsvampar/Craterellus tubaeformis-1.jpg"
+      "/images/svampbilder/Matsvampar/Craterellus tubaeformis-3.jpg",
+      "/images/svampbilder/Matsvampar/Craterellus tubaeformis-2.jpg",
+      "/images/svampbilder/Matsvampar/Craterellus tubaeformis-1.jpg"
     ]
   }
 ]

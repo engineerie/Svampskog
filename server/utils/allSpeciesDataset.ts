@@ -18,7 +18,7 @@ export type AllSpeciesRow = {
   'Svamp-Undersvamp-grupp': string | null
   SIGNAL_art: string | null
   Svampguiden: string | null
-  'Nyasvamp-boken': string | null
+  SKR_rek_matsvamp_2026: string | null
   Giftsvamp: string | null
   OVANLIGHET: number | null
   KALKmark: string | null
@@ -140,8 +140,8 @@ function getDisplayGroup(row: Pick<AllSpeciesRow, 'Svamp-grupp' | 'Svamp-grupp-s
   return row['Svamp-grupp-släkte'] || 'Saknas'
 }
 
-function isEdibleSpecies(row: Pick<AllSpeciesRow, 'Nyasvamp-boken'>) {
-  return String(row['Nyasvamp-boken'] || '').toLowerCase() === 'x'
+function isEdibleSpecies(row: Pick<AllSpeciesRow, 'SKR_rek_matsvamp_2026'>) {
+  return String(row.SKR_rek_matsvamp_2026 || '').toLowerCase() === 'x'
 }
 
 function isPoisonSpecies(row: Pick<AllSpeciesRow, 'Giftsvamp'>) {

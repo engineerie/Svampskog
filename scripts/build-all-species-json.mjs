@@ -440,7 +440,7 @@ async function buildAllSpeciesJson() {
       m."Svamp-Undersvamp-grupp",
       m.SIGNAL_art,
       m.Svampguiden,
-      m."Nyasvamp-boken",
+      m.SKR_rek_matsvamp_2026,
       ${godMatsvampRef} AS "God matsvamp",
       m.NOTE,
       ${vedOchBarkRef} AS "Värdtaxa:Vedochbark",

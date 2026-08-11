@@ -226,7 +226,7 @@
                     :count-filter-key="desktopKnowledgeTableProps.countFilterKey"
                     @update:search-term="globalSearchTerm = $event" :data-type="desktopKnowledgeTableProps.dataType"
                     :data-type-folder="desktopKnowledgeTableProps.dataTypeFolder" grupp="Svamp-grupp"
-                    mat="Nyasvamp-boken" :obs="desktopKnowledgeTableProps.obs" obs-label="Sannolikhet"
+                    mat="SKR_rek_matsvamp_2026" :obs="desktopKnowledgeTableProps.obs" obs-label="Sannolikhet"
                     :table-key="desktopKnowledgeTableProps.tableKey"
                     :filter-edible="desktopKnowledgeTableProps.filterEdible"
                     :filter-poison="desktopKnowledgeTableProps.filterPoison"
@@ -338,7 +338,7 @@ const REPORT_TABLES = [
     dataType: 'edibledata',
     tableKey: 'edna-edible',
     grupp: 'Svamp-grupp',
-    mat: 'Nyasvamp-boken',
+    mat: 'SKR_rek_matsvamp_2026',
     obs: 'Rank matsvamp',
     filterEdible: true
   },
@@ -349,7 +349,7 @@ const REPORT_TABLES = [
     dataType: 'edibledata',
     tableKey: 'edna-poison',
     grupp: 'Svamp-grupp',
-    mat: 'Nyasvamp-boken',
+    mat: 'SKR_rek_matsvamp_2026',
     obs: 'Rank giftsvamp',
     filterPoison: true
   },
@@ -360,7 +360,7 @@ const REPORT_TABLES = [
     dataType: 'redlisted',
     tableKey: 'edna-redlisted',
     grupp: 'Svamp-grupp',
-    mat: 'Nyasvamp-boken',
+    mat: 'SKR_rek_matsvamp_2026',
     obs: 'RankRed'
   }
 ]
@@ -708,7 +708,7 @@ const desktopKnowledgeTableProps = computed(() => {
     titleColorClass: 'text-warning-500 dark:text-neutral-300',
     countFolder: 'edible',
     countType: 'edibledata',
-    countFilterKey: 'Nyasvamp-boken',
+    countFilterKey: 'SKR_rek_matsvamp_2026',
     dataType: 'edibledata',
     dataTypeFolder: 'edible',
     obs: 'Rank matsvamp',
@@ -749,11 +749,11 @@ const detailComponentProps = computed(() => {
       cardClass: 'rounded-none sm:rounded-lg',
       countFolder: 'edible',
       countType: 'edibledata',
-      countFilterKey: 'Nyasvamp-boken',
+      countFilterKey: 'SKR_rek_matsvamp_2026',
       dataType: 'edibledata',
       dataTypeFolder: 'edible',
       grupp: 'Svamp-grupp',
-      mat: 'Nyasvamp-boken',
+      mat: 'SKR_rek_matsvamp_2026',
       obs: 'Rank matsvamp',
       obsLabel: 'Sannolikhet',
       tableKey: 'edna-edible',
@@ -778,7 +778,7 @@ const detailComponentProps = computed(() => {
       dataType: 'edibledata',
       dataTypeFolder: 'edible',
       grupp: 'Svamp-grupp',
-      mat: 'Nyasvamp-boken',
+      mat: 'SKR_rek_matsvamp_2026',
       obs: 'Rank giftsvamp',
       obsLabel: 'Sannolikhet',
       tableKey: 'edna-poison',
@@ -802,7 +802,7 @@ const detailComponentProps = computed(() => {
       dataType: 'redlisted',
       dataTypeFolder: 'redlisted',
       grupp: 'Svamp-grupp',
-      mat: 'Nyasvamp-boken',
+      mat: 'SKR_rek_matsvamp_2026',
       obs: 'RankRed',
       obsLabel: 'Sannolikhet',
       tableKey: 'edna-redlisted',
@@ -933,7 +933,7 @@ watch(
   () => [envStore.geography, envStore.forestType, envStore.standAge, envStore.vegetationType],
   () => {
     fetchCount('redlisted', 'redlisted', redlistCount)
-    fetchCount('edible', 'edibledata', edibleCount, 'Nyasvamp-boken')
+    fetchCount('edible', 'edibledata', edibleCount, 'SKR_rek_matsvamp_2026')
     fetchCount('edible', 'edibledata', poisonCount, 'Giftsvamp')
     fetchEdnaCount()
   },

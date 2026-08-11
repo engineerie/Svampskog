@@ -129,7 +129,7 @@ async function main() {
       missingFiles.set(ednaPath, (missingFiles.get(ednaPath) || 0) + 1)
     }
 
-    const edibleCount = edibleData.filter(row => normalizeFlag(row['Nyasvamp-boken'])).length
+    const edibleCount = edibleData.filter(row => normalizeFlag(row.SKR_rek_matsvamp_2026)).length
     const poisonousCount = edibleData.filter(row => normalizeFlag(row.Giftsvamp)).length
     const redlistedCount = redlistedData.length
     const ednaCount = ednaData.length

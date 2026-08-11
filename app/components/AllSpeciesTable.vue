@@ -67,7 +67,7 @@ type SpeciesRow = {
   SIGNAL_art?: string | null
   'Svamp-grupp'?: string | null
   'Svamp-grupp-släkte'?: string | null
-  'Nyasvamp-boken'?: string | null
+  SKR_rek_matsvamp_2026?: string | null
   Giftsvamp?: string | null
   Fylum?: string | null
   Klass?: string | null
@@ -223,7 +223,7 @@ function getStatusColor(status?: string | null) {
 }
 
 function isEdibleSpecies(row: SpeciesRow) {
-  return String(row['Nyasvamp-boken'] || '').toLowerCase() === 'x'
+  return String(row.SKR_rek_matsvamp_2026 || '').toLowerCase() === 'x'
 }
 
 function isPoisonSpecies(row: SpeciesRow) {

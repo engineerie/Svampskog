@@ -106,7 +106,7 @@
         </div>
 
         <!-- Matsvamp indicator -->
-        <div class="shrink-0 inline-flex m-1 align-bottom" v-if="species['Nyasvamp-boken'] === 'x'">
+        <div class="shrink-0 inline-flex m-1 align-bottom" v-if="species.SKR_rek_matsvamp_2026 === 'x'">
           <UBadge color="warning" size="lg" variant="subtle" class="">
             <Icon name="icon-park-solid:knife-fork" />Matsvamp
           </UBadge>
@@ -256,40 +256,6 @@
         </div>
       </div>
 
-      <div v-if="environmentOccurrences.length" class="mt-6 space-y-3">
-        <div>
-          <h2 class="text-base font-semibold text-neutral-900">Miljöer där arten hittats</h2>
-          <p class="text-sm text-neutral-500">Visar kombinationer med antal provytor per miljö.</p>
-        </div>
-
-        <div class="space-y-2">
-          <div v-for="environment in environmentOccurrences" :key="environment.key"
-            class="flex items-center justify-between gap-3 rounded-lg border border-muted/50 px-3 py-2">
-            <div class="min-w-0">
-              <div class="flex flex-wrap gap-1.5">
-                <UBadge color="neutral" variant="subtle" size="sm" class="pointer-default">
-                  {{ environment.geographyLabel }}
-                </UBadge>
-                <UBadge color="neutral" variant="subtle" size="sm" class="pointer-default">
-                  {{ environment.forestTypeLabel }}
-                </UBadge>
-                <UBadge color="neutral" variant="subtle" size="sm" class="pointer-default">
-                  {{ environment.standAgeLabel }}
-                </UBadge>
-                <UBadge color="neutral" variant="subtle" size="sm" class="pointer-default">
-                  {{ environment.vegetationTypeLabel }}
-                </UBadge>
-              </div>
-              <p class="mt-1 text-sm text-neutral-500">
-                {{ environment.plotCount }} provytor
-              </p>
-            </div>
-
-            <UButton size="sm" variant="outline" color="neutral" icon="i-heroicons-arrow-right" label="Gå till miljö"
-              @click="goToEnvironment(environment)" />
-          </div>
-        </div>
-      </div>
       <!-- <UButton v-if="species.Svampguiden && species.Svampguiden !== '0'" :to="stripDetailsFromURL(species.Svampguiden)"
         trailing label="Svampguiden.com" icon="i-heroicons-arrow-up-right-20-solid" target="_blank" variant="ghost"
         class=" text-primary-500 w-full" size="xl" /> -->
@@ -300,7 +266,6 @@
 <script setup>
 import { ref, computed, watch } from "vue";
 import { VisXYContainer, VisGroupedBar, VisAxis, VisTooltip, VisCrosshair } from '@unovis/vue'
-import { useEnvParamsStore, geographyOptions, forestTypeOptions, standAgeOptions, vegetationTypeOptions } from '~/stores/envParamsStore'
 
 const currentIndex = ref(0)
 
@@ -313,7 +278,6 @@ const props = defineProps({
 });
 
 const emit = defineEmits(["showPhylogeneticTree"]);
-const envStore = useEnvParamsStore()
 
 const { data: plotComparisonMeta } = useFetch('/species/all-species-meta.json', {
   default: () => ({
@@ -496,38 +460,6 @@ const displayedSvampGrupp = computed(() => {
     ? props.species["Svamp-grupp-släkte"]
     : props.species["Svamp-grupp"];
 });
-
-const optionLabelMap = {
-  geography: Object.fromEntries(geographyOptions.map((option) => [option.value, option.label])),
-  forestType: Object.fromEntries(forestTypeOptions.map((option) => [option.value, option.label])),
-  standAge: Object.fromEntries(standAgeOptions.map((option) => [option.value, option.label])),
-  vegetationType: Object.fromEntries(vegetationTypeOptions.map((option) => [option.value, option.label]))
-}
-
-const environmentOccurrences = computed(() => {
-  return (props.species?.environment_occurrences || []).map((environment) => ({
-    ...environment,
-    key: `${environment.geography}-${environment.forestType}-${environment.standAge}-${environment.vegetationType}`,
-    geographyLabel: optionLabelMap.geography[environment.geography] || environment.geography,
-    forestTypeLabel: optionLabelMap.forestType[environment.forestType] || environment.forestType,
-    standAgeLabel: optionLabelMap.standAge[environment.standAge] || environment.standAge,
-    vegetationTypeLabel: optionLabelMap.vegetationType[environment.vegetationType] || environment.vegetationType
-  }))
-})
-
-function goToEnvironment(environment) {
-  envStore.setParams({
-    geography: environment.geography,
-    forestType: environment.forestType,
-    standAge: environment.standAge,
-    vegetationType: environment.vegetationType
-  })
-
-  const path = `/mykorrhizasvampar/${encodeURIComponent(environment.geography)}/${encodeURIComponent(environment.forestType)}/${encodeURIComponent(environment.standAge)}/${encodeURIComponent(environment.vegetationType)}`
-  if (import.meta.client) {
-    window.location.assign(path)
-  }
-}
 
 const plotChartColorBySection = {
   'forest-type': '#10b981',

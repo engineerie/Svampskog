@@ -125,7 +125,7 @@ const fetchDataFromDB = async ({
   ösn.högrenivå, 
   'Saknar svenskt namn'
 ) AS Commonname,
-    CASE WHEN ms."Nyasvamp-boken" = 'x' THEN 1 ELSE 0 END AS matsvamp,
+    CASE WHEN ms.SKR_rek_matsvamp_2026 = 'x' THEN 1 ELSE 0 END AS matsvamp,
     SUM(mcv.Presence) AS total_presence,
     COALESCE(${artfaktaRef}, 'Information saknas') AS Artfakta,
     COALESCE(${rlRef}, '0') AS RL2020kat,
@@ -133,7 +133,7 @@ const fetchDataFromDB = async ({
     COALESCE(ms."Svamp-Undersvamp-grupp", '0') AS "Svamp-Undersvamp-grupp",
     COALESCE(ms.SIGNAL_art, '0') AS "SIGNAL_art",
     COALESCE(ms.Svampguiden, '0') AS Svampguiden,
-    COALESCE(ms."Nyasvamp-boken", '0') AS "Nyasvamp-boken",
+    COALESCE(ms.SKR_rek_matsvamp_2026, '0') AS SKR_rek_matsvamp_2026,
     COALESCE(ms."Giftsvamp", '0') AS "Giftsvamp",
     COALESCE(sd.Genus, 'Information saknas') AS Genus,
     COUNT(DISTINCT m.GropInventeringID) AS sample_plot_count,
