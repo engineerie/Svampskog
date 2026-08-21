@@ -411,6 +411,7 @@ async function buildAllSpeciesJson() {
   const outputDir = path.join(__dirname, '../public/species')
   const outputPath = path.join(outputDir, 'all-species.json')
   const metaOutputPath = path.join(outputDir, 'all-species-meta.json')
+  const ednaDetailsOutputPath = path.join(outputDir, 'edna-species-details.json')
 
   const manifest = JSON.parse(fs.readFileSync(manifestPath, 'utf8'))
 
@@ -508,7 +509,7 @@ async function buildAllSpeciesJson() {
       m.H_form AS H_form,
       m.Bestandsalder AS Bestandsalder,
       m.Fältskikt AS "Fältskikt",
-      COUNT(DISTINCT mcv.GropInventeringID) AS plot_count
+      1 AS plot_count
     FROM ${speciesTable} ms
     LEFT JOIN Species_database sd
       ON TRIM(REPLACE(sd.Taxon, '(coll.)', '')) = ms.Scientificname
@@ -534,6 +535,36 @@ async function buildAllSpeciesJson() {
       m.Fältskikt AS "Fältskikt"
     FROM Metadata m
     WHERE m.GropInventeringID IS NOT NULL
+  `)
+
+  const ednaDistributionRows = await db.all(`
+    SELECT
+      sd."ID#" AS SpeciesCode,
+      sd.Taxon_sp AS Scientificname,
+      sd.Genus AS Genus,
+      sd.Family AS Family,
+      sd."Order" AS "OrderName",
+      sd.Class AS "ClassName",
+      sd.Division AS Division,
+      m.Marktyp AS Marktyp,
+      m.H_form AS H_form,
+      m.Bestandsalder AS Bestandsalder,
+      m.Fältskikt AS "Fältskikt",
+      COUNT(DISTINCT mcv.GropInventeringID) AS plot_count
+    FROM Species_database sd
+    INNER JOIN Melted_counts_vs_samples_ECM mcv
+      ON mcv.SpeciesCode = sd."ID#"
+    INNER JOIN Metadata m
+      ON m.GropInventeringID = mcv.GropInventeringID
+    GROUP BY
+      sd."ID#",
+      sd.Taxon_sp,
+      sd.Genus,
+      sd.Family,
+      sd."Order",
+      sd.Class,
+      sd.Division,
+      mcv.GropInventeringID
   `)
 
   const environmentRows = await db.all(`
@@ -563,6 +594,7 @@ async function buildAllSpeciesJson() {
   `)
 
   const distributionsBySpecies = new Map()
+  const ednaDetailsBySpeciesCode = {}
   const environmentsBySpecies = new Map()
   const globalDistribution = {
     forestTypePlotCounts: createCountMap(Object.values(FOREST_TYPE_LABELS)),
@@ -600,6 +632,36 @@ async function buildAllSpeciesJson() {
     if (vegetationGroup && current.vegetationPlotCounts[vegetationGroup] !== undefined) {
       current.vegetationPlotCounts[vegetationGroup] += plotCount
     }
+  }
+
+  for (const row of ednaDistributionRows) {
+    if (!ednaDetailsBySpeciesCode[row.SpeciesCode]) {
+      ednaDetailsBySpeciesCode[row.SpeciesCode] = {
+        Scientificname: row.Scientificname,
+        Fylum: row.Division || null,
+        Klass: row.ClassName || null,
+        Ordning: row.OrderName || null,
+        Familj: row.Family || null,
+        Släkte: row.Genus || null,
+        total_plot_count: 0,
+        forest_type_plot_counts: createCountMap(Object.values(FOREST_TYPE_LABELS)),
+        stand_age_plot_counts: createCountMap(Object.values(AGE_GROUP_LABELS)),
+        vegetation_plot_counts: createCountMap(Object.values(VEGETATION_GROUP_LABELS))
+      }
+    }
+
+    const details = ednaDetailsBySpeciesCode[row.SpeciesCode]
+    const plotCount = Number(row.plot_count) || 0
+    details.total_plot_count += plotCount
+
+    const forestType = normalizeForestType(row.Marktyp, row.H_form)
+    if (forestType) details.forest_type_plot_counts[forestType] += plotCount
+
+    const ageGroup = normalizeAgeGroup(row.Bestandsalder)
+    if (ageGroup) details.stand_age_plot_counts[AGE_GROUP_LABELS[ageGroup]] += plotCount
+
+    const vegetationGroup = normalizeVegetationGroup(row['Fältskikt'])
+    if (vegetationGroup) details.vegetation_plot_counts[vegetationGroup] += plotCount
   }
 
   for (const row of metadataDistributionRows) {
@@ -709,11 +771,13 @@ async function buildAllSpeciesJson() {
     stand_age_plot_counts: globalDistribution.standAgePlotCounts,
     vegetation_plot_counts: globalDistribution.vegetationPlotCounts
   }, null, 2))
+  fs.writeFileSync(ednaDetailsOutputPath, JSON.stringify(ednaDetailsBySpeciesCode, null, 2))
 
   await db.close()
 
   console.log(`Wrote ${enrichedSpecies.length} species to ${outputPath}`)
   console.log(`Wrote meta to ${metaOutputPath}`)
+  console.log(`Wrote ${Object.keys(ednaDetailsBySpeciesCode).length} eDNA species details to ${ednaDetailsOutputPath}`)
 }
 
 buildAllSpeciesJson().catch((error) => {

@@ -55,7 +55,7 @@ const resolvedFrameClass = computed(() => {
       ? 'aspect-video'
       : ''
 
-  return ['overflow-hidden rounded-lg ring ring-muted/50 shadow-sm', aspectClass]
+  return ['overflow-hidden rounded-lg ', aspectClass]
     .filter(Boolean)
     .join(' ')
 })

@@ -102,6 +102,7 @@ type GraphDatasetOptions = {
 }
 
 let datasetPromise: Promise<Dataset> | null = null
+let ednaDetailsPromise: Promise<Record<string, Partial<AllSpeciesRow>>> | null = null
 
 function normalizeString(value: string | null | undefined) {
   return String(value || '')
@@ -210,6 +211,16 @@ export async function getAllSpeciesDataset() {
     datasetPromise = buildDataset()
   }
   return datasetPromise
+}
+
+export async function getEdnaSpeciesDetailsDataset() {
+  if (!ednaDetailsPromise) {
+    const filePath = path.join(process.cwd(), 'public/species/edna-species-details.json')
+    ednaDetailsPromise = fs.promises
+      .readFile(filePath, 'utf8')
+      .then(raw => JSON.parse(raw) as Record<string, Partial<AllSpeciesRow>>)
+  }
+  return ednaDetailsPromise
 }
 
 function getLevelOrder(level: GraphLevel) {

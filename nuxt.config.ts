@@ -1,7 +1,11 @@
 import { fileURLToPath } from "node:url";
 
+const studioEnabled = process.env.NUXT_STUDIO_ENABLED !== "false";
+
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
+  plugins: studioEnabled ? [] : ["~/plugins/disable-studio-service-worker.client"],
+
   modules: [
     "@nuxt/ui",
     "@nuxt/content",
@@ -11,7 +15,7 @@ export default defineNuxtConfig({
     "nuxt-og-image",
     "@pinia/nuxt",
     "motion-v/nuxt",
-    "nuxt-studio",
+    ...(studioEnabled ? ["nuxt-studio"] : []),
     "@nuxt/fonts",
   ],
   icon: {
@@ -47,6 +51,10 @@ export default defineNuxtConfig({
     //   },
     server: {
       cors: true,
+      watch: {
+        usePolling: !studioEnabled,
+        interval: 250,
+      },
     },
     resolve: {
       alias: {
@@ -56,7 +64,7 @@ export default defineNuxtConfig({
   },
 
   devtools: {
-    enabled: false,
+    enabled: true,
   },
 
   css: ["~/assets/css/main.css"],

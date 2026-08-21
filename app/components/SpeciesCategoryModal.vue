@@ -2,7 +2,7 @@
   <div class="not-prose my-6">
     <UModal v-model:open="isOpen" :fullscreen="isMobile" :title="config.title" :description="config.description"
       :ui="{ content: 'sm:max-w-3xl', body: 'p-0 sm:p-0' }">
-      <UButton :label="config.buttonLabel" :icon="config.icon" color="neutral" variant="outline" size="lg" trailing />
+      <UButton :label="config.buttonLabel" :icon="config.icon" color="neutral" variant="solid" size="lg" />
 
       <template #body>
         <div class="flex min-h-0 flex-col">
@@ -123,7 +123,7 @@ const categoryConfig: Record<Category, {
   icon: string
 }> = {
   edible: {
-    title: 'Gatsvampar',
+    title: 'Matsvampar',
     description: 'Matsvampar som är mykorrhizasvampar.',
     buttonLabel: 'Visa matsvampar som är mykorrhizasvampar',
     icon: 'icon-park-solid:knife-fork'

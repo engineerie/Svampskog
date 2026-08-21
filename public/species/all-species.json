@@ -1744,25 +1744,25 @@
     "Svamp-grupp-släkte": "Saknas",
     "synlighet": null,
     "images": [],
-    "total_plot_count": 189,
+    "total_plot_count": 171,
     "forest_type_plot_counts": {
-      "Granskog": 53,
-      "Tallskog": 71,
-      "Barrblandskog": 32,
+      "Granskog": 49,
+      "Tallskog": 60,
+      "Barrblandskog": 29,
       "Lövblandskog": 20,
       "Lövskog": 12,
       "EkBokskog": 0,
       "Naturbete": 0
     },
     "stand_age_plot_counts": {
-      "1-40": 36,
-      "41-90": 69,
-      ">91": 80
+      "1-40": 34,
+      "41-90": 62,
+      ">91": 71
     },
     "vegetation_plot_counts": {
       "Örttyper": 28,
-      "Blåbärstyper": 117,
-      "Lingon-fattigristyper": 42
+      "Blåbärstyper": 107,
+      "Lingon-fattigristyper": 34
     },
     "environment_occurrences": [
       {
@@ -2161,23 +2161,23 @@
     "Svamp-grupp-släkte": "Saknas",
     "synlighet": null,
     "images": [],
-    "total_plot_count": 18,
+    "total_plot_count": 17,
     "forest_type_plot_counts": {
       "Granskog": 5,
       "Tallskog": 3,
       "Barrblandskog": 2,
       "Lövblandskog": 0,
-      "Lövskog": 5,
+      "Lövskog": 4,
       "EkBokskog": 0,
       "Naturbete": 3
     },
     "stand_age_plot_counts": {
       "1-40": 2,
-      "41-90": 10,
+      "41-90": 9,
       ">91": 6
     },
     "vegetation_plot_counts": {
-      "Örttyper": 16,
+      "Örttyper": 15,
       "Blåbärstyper": 1,
       "Lingon-fattigristyper": 0
     },
@@ -2951,25 +2951,25 @@
     "Svamp-grupp-släkte": "Saknas",
     "synlighet": null,
     "images": [],
-    "total_plot_count": 617,
+    "total_plot_count": 579,
     "forest_type_plot_counts": {
-      "Granskog": 220,
-      "Tallskog": 118,
-      "Barrblandskog": 77,
-      "Lövblandskog": 126,
-      "Lövskog": 59,
+      "Granskog": 206,
+      "Tallskog": 107,
+      "Barrblandskog": 74,
+      "Lövblandskog": 118,
+      "Lövskog": 57,
       "EkBokskog": 0,
       "Naturbete": 13
     },
     "stand_age_plot_counts": {
-      "1-40": 252,
-      "41-90": 260,
-      ">91": 94
+      "1-40": 235,
+      "41-90": 243,
+      ">91": 92
     },
     "vegetation_plot_counts": {
-      "Örttyper": 277,
-      "Blåbärstyper": 261,
-      "Lingon-fattigristyper": 44
+      "Örttyper": 261,
+      "Blåbärstyper": 242,
+      "Lingon-fattigristyper": 42
     },
     "environment_occurrences": [
       {
@@ -5148,24 +5148,24 @@
     "Svamp-grupp-släkte": "Saknas",
     "synlighet": null,
     "images": [],
-    "total_plot_count": 102,
+    "total_plot_count": 100,
     "forest_type_plot_counts": {
       "Granskog": 36,
       "Tallskog": 18,
-      "Barrblandskog": 16,
+      "Barrblandskog": 15,
       "Lövblandskog": 16,
-      "Lövskog": 12,
+      "Lövskog": 11,
       "EkBokskog": 0,
       "Naturbete": 0
     },
     "stand_age_plot_counts": {
       "1-40": 18,
-      "41-90": 45,
+      "41-90": 44,
       ">91": 33
     },
     "vegetation_plot_counts": {
       "Örttyper": 28,
-      "Blåbärstyper": 65,
+      "Blåbärstyper": 63,
       "Lingon-fattigristyper": 7
     },
     "environment_occurrences": [
@@ -7134,9 +7134,9 @@
     "Svamp-grupp-släkte": "Saknas",
     "synlighet": null,
     "images": [],
-    "total_plot_count": 39,
+    "total_plot_count": 38,
     "forest_type_plot_counts": {
-      "Granskog": 21,
+      "Granskog": 20,
       "Tallskog": 8,
       "Barrblandskog": 3,
       "Lövblandskog": 3,
@@ -7145,13 +7145,13 @@
       "Naturbete": 1
     },
     "stand_age_plot_counts": {
-      "1-40": 24,
+      "1-40": 23,
       "41-90": 10,
       ">91": 5
     },
     "vegetation_plot_counts": {
       "Örttyper": 19,
-      "Blåbärstyper": 15,
+      "Blåbärstyper": 14,
       "Lingon-fattigristyper": 1
     },
     "environment_occurrences": [
@@ -13028,10 +13028,10 @@
     "Svamp-grupp-släkte": "Saknas",
     "synlighet": null,
     "images": [],
-    "total_plot_count": 58,
+    "total_plot_count": 57,
     "forest_type_plot_counts": {
       "Granskog": 20,
-      "Tallskog": 14,
+      "Tallskog": 13,
       "Barrblandskog": 12,
       "Lövblandskog": 4,
       "Lövskog": 8,
@@ -13040,12 +13040,12 @@
     },
     "stand_age_plot_counts": {
       "1-40": 17,
-      "41-90": 23,
+      "41-90": 22,
       ">91": 16
     },
     "vegetation_plot_counts": {
       "Örttyper": 8,
-      "Blåbärstyper": 41,
+      "Blåbärstyper": 40,
       "Lingon-fattigristyper": 9
     },
     "environment_occurrences": [
@@ -13598,20 +13598,20 @@
     "Svamp-grupp-släkte": "Saknas",
     "synlighet": null,
     "images": [],
-    "total_plot_count": 22,
+    "total_plot_count": 21,
     "forest_type_plot_counts": {
       "Granskog": 10,
       "Tallskog": 0,
       "Barrblandskog": 0,
       "Lövblandskog": 3,
       "Lövskog": 3,
-      "EkBokskog": 5,
+      "EkBokskog": 4,
       "Naturbete": 0
     },
     "stand_age_plot_counts": {
       "1-40": 6,
       "41-90": 11,
-      ">91": 4
+      ">91": 3
     },
     "vegetation_plot_counts": {
       "Örttyper": 5,
@@ -14110,25 +14110,25 @@
     "Svamp-grupp-släkte": "Saknas",
     "synlighet": null,
     "images": [],
-    "total_plot_count": 1037,
+    "total_plot_count": 870,
     "forest_type_plot_counts": {
-      "Granskog": 378,
-      "Tallskog": 285,
-      "Barrblandskog": 165,
-      "Lövblandskog": 134,
-      "Lövskog": 57,
+      "Granskog": 315,
+      "Tallskog": 217,
+      "Barrblandskog": 146,
+      "Lövblandskog": 120,
+      "Lövskog": 55,
       "EkBokskog": 4,
       "Naturbete": 6
     },
     "stand_age_plot_counts": {
-      "1-40": 357,
-      "41-90": 403,
-      ">91": 256
+      "1-40": 311,
+      "41-90": 319,
+      ">91": 225
     },
     "vegetation_plot_counts": {
-      "Örttyper": 241,
-      "Blåbärstyper": 616,
-      "Lingon-fattigristyper": 132
+      "Örttyper": 227,
+      "Blåbärstyper": 481,
+      "Lingon-fattigristyper": 117
     },
     "environment_occurrences": [
       {
@@ -16429,10 +16429,10 @@
     "Svamp-grupp-släkte": "Saknas",
     "synlighet": null,
     "images": [],
-    "total_plot_count": 220,
+    "total_plot_count": 216,
     "forest_type_plot_counts": {
-      "Granskog": 68,
-      "Tallskog": 45,
+      "Granskog": 66,
+      "Tallskog": 44,
       "Barrblandskog": 25,
       "Lövblandskog": 35,
       "Lövskog": 32,
@@ -16440,14 +16440,14 @@
       "Naturbete": 2
     },
     "stand_age_plot_counts": {
-      "1-40": 78,
-      "41-90": 103,
+      "1-40": 77,
+      "41-90": 101,
       ">91": 33
     },
     "vegetation_plot_counts": {
       "Örttyper": 55,
-      "Blåbärstyper": 131,
-      "Lingon-fattigristyper": 21
+      "Blåbärstyper": 128,
+      "Lingon-fattigristyper": 20
     },
     "environment_occurrences": [
       {
@@ -17424,24 +17424,24 @@
       "/images/svampbilder/Matsvampar/Imleria badia-3.jpg",
       "/images/svampbilder/Matsvampar/Imleria badia-1.jpg"
     ],
-    "total_plot_count": 81,
+    "total_plot_count": 79,
     "forest_type_plot_counts": {
       "Granskog": 35,
       "Tallskog": 16,
       "Barrblandskog": 6,
-      "Lövblandskog": 8,
+      "Lövblandskog": 6,
       "Lövskog": 8,
       "EkBokskog": 4,
       "Naturbete": 4
     },
     "stand_age_plot_counts": {
-      "1-40": 29,
+      "1-40": 27,
       "41-90": 42,
       ">91": 9
     },
     "vegetation_plot_counts": {
       "Örttyper": 29,
-      "Blåbärstyper": 43,
+      "Blåbärstyper": 41,
       "Lingon-fattigristyper": 2
     },
     "environment_occurrences": [
@@ -17736,25 +17736,25 @@
     "Svamp-grupp-släkte": "Saknas",
     "synlighet": null,
     "images": [],
-    "total_plot_count": 312,
+    "total_plot_count": 294,
     "forest_type_plot_counts": {
-      "Granskog": 86,
-      "Tallskog": 93,
+      "Granskog": 75,
+      "Tallskog": 90,
       "Barrblandskog": 54,
-      "Lövblandskog": 48,
+      "Lövblandskog": 44,
       "Lövskog": 24,
       "EkBokskog": 1,
       "Naturbete": 0
     },
     "stand_age_plot_counts": {
-      "1-40": 96,
-      "41-90": 131,
-      ">91": 75
+      "1-40": 90,
+      "41-90": 122,
+      ">91": 72
     },
     "vegetation_plot_counts": {
       "Örttyper": 44,
-      "Blåbärstyper": 175,
-      "Lingon-fattigristyper": 77
+      "Blåbärstyper": 161,
+      "Lingon-fattigristyper": 74
     },
     "environment_occurrences": [
       {
@@ -19538,9 +19538,9 @@
     "Svamp-grupp-släkte": "Saknas",
     "synlighet": null,
     "images": [],
-    "total_plot_count": 11,
+    "total_plot_count": 10,
     "forest_type_plot_counts": {
-      "Granskog": 10,
+      "Granskog": 9,
       "Tallskog": 0,
       "Barrblandskog": 0,
       "Lövblandskog": 0,
@@ -19550,11 +19550,11 @@
     },
     "stand_age_plot_counts": {
       "1-40": 3,
-      "41-90": 8,
+      "41-90": 7,
       ">91": 0
     },
     "vegetation_plot_counts": {
-      "Örttyper": 9,
+      "Örttyper": 8,
       "Blåbärstyper": 0,
       "Lingon-fattigristyper": 0
     },
@@ -22806,23 +22806,23 @@
     "Svamp-grupp-släkte": "Saknas",
     "synlighet": null,
     "images": [],
-    "total_plot_count": 112,
+    "total_plot_count": 105,
     "forest_type_plot_counts": {
       "Granskog": 10,
       "Tallskog": 8,
       "Barrblandskog": 3,
-      "Lövblandskog": 21,
-      "Lövskog": 38,
+      "Lövblandskog": 20,
+      "Lövskog": 36,
       "EkBokskog": 6,
-      "Naturbete": 26
+      "Naturbete": 22
     },
     "stand_age_plot_counts": {
       "1-40": 32,
-      "41-90": 53,
+      "41-90": 52,
       ">91": 12
     },
     "vegetation_plot_counts": {
-      "Örttyper": 99,
+      "Örttyper": 92,
       "Blåbärstyper": 8,
       "Lingon-fattigristyper": 2
     },
@@ -26399,23 +26399,23 @@
     "Svamp-grupp-släkte": "Saknas",
     "synlighet": null,
     "images": [],
-    "total_plot_count": 24,
+    "total_plot_count": 23,
     "forest_type_plot_counts": {
       "Granskog": 6,
       "Tallskog": 4,
       "Barrblandskog": 2,
       "Lövblandskog": 6,
-      "Lövskog": 5,
+      "Lövskog": 4,
       "EkBokskog": 0,
       "Naturbete": 0
     },
     "stand_age_plot_counts": {
       "1-40": 6,
-      "41-90": 14,
+      "41-90": 13,
       ">91": 4
     },
     "vegetation_plot_counts": {
-      "Örttyper": 12,
+      "Örttyper": 11,
       "Blåbärstyper": 8,
       "Lingon-fattigristyper": 3
     },
@@ -29511,23 +29511,23 @@
       "/images/svampbilder/Giftsvampar/Tricholoma fulvum-129-6269.jpg",
       "/images/svampbilder/Giftsvampar/Tricholoma fulvum-27-6269.jpg"
     ],
-    "total_plot_count": 41,
+    "total_plot_count": 38,
     "forest_type_plot_counts": {
       "Granskog": 8,
       "Tallskog": 5,
       "Barrblandskog": 4,
       "Lövblandskog": 7,
-      "Lövskog": 13,
+      "Lövskog": 12,
       "EkBokskog": 0,
-      "Naturbete": 4
+      "Naturbete": 2
     },
     "stand_age_plot_counts": {
       "1-40": 13,
-      "41-90": 18,
+      "41-90": 17,
       ">91": 7
     },
     "vegetation_plot_counts": {
-      "Örttyper": 25,
+      "Örttyper": 22,
       "Blåbärstyper": 14,
       "Lingon-fattigristyper": 2
     },
@@ -29863,24 +29863,24 @@
     "images": [
       "/images/svampbilder/Matsvampar/Leccinum variicolor.jpg"
     ],
-    "total_plot_count": 144,
+    "total_plot_count": 141,
     "forest_type_plot_counts": {
-      "Granskog": 31,
+      "Granskog": 29,
       "Tallskog": 17,
       "Barrblandskog": 17,
-      "Lövblandskog": 39,
+      "Lövblandskog": 38,
       "Lövskog": 22,
       "EkBokskog": 2,
       "Naturbete": 2
     },
     "stand_age_plot_counts": {
-      "1-40": 73,
+      "1-40": 72,
       "41-90": 41,
-      ">91": 28
+      ">91": 26
     },
     "vegetation_plot_counts": {
       "Örttyper": 35,
-      "Blåbärstyper": 71,
+      "Blåbärstyper": 68,
       "Lingon-fattigristyper": 32
     },
     "environment_occurrences": [
@@ -34307,20 +34307,20 @@
     "Svamp-grupp-släkte": "Saknas",
     "synlighet": null,
     "images": [],
-    "total_plot_count": 14,
+    "total_plot_count": 13,
     "forest_type_plot_counts": {
       "Granskog": 3,
       "Tallskog": 0,
       "Barrblandskog": 1,
       "Lövblandskog": 2,
       "Lövskog": 2,
-      "EkBokskog": 6,
+      "EkBokskog": 5,
       "Naturbete": 0
     },
     "stand_age_plot_counts": {
       "1-40": 2,
       "41-90": 7,
-      ">91": 5
+      ">91": 4
     },
     "vegetation_plot_counts": {
       "Örttyper": 4,
@@ -35708,9 +35708,9 @@
     "Svamp-grupp-släkte": "Saknas",
     "synlighet": null,
     "images": [],
-    "total_plot_count": 7,
+    "total_plot_count": 6,
     "forest_type_plot_counts": {
-      "Granskog": 5,
+      "Granskog": 4,
       "Tallskog": 0,
       "Barrblandskog": 0,
       "Lövblandskog": 1,
@@ -35720,11 +35720,11 @@
     },
     "stand_age_plot_counts": {
       "1-40": 0,
-      "41-90": 5,
+      "41-90": 4,
       ">91": 1
     },
     "vegetation_plot_counts": {
-      "Örttyper": 7,
+      "Örttyper": 6,
       "Blåbärstyper": 0,
       "Lingon-fattigristyper": 0
     },
@@ -40176,7 +40176,7 @@
       "/images/svampbilder/Matsvampar/Suillus granulatus-6.jpg",
       "/images/svampbilder/Giftsvampar/Suillus granulatus-42-6086.jpg"
     ],
-    "total_plot_count": 22,
+    "total_plot_count": 21,
     "forest_type_plot_counts": {
       "Granskog": 2,
       "Tallskog": 8,
@@ -40184,7 +40184,7 @@
       "Lövblandskog": 2,
       "Lövskog": 2,
       "EkBokskog": 0,
-      "Naturbete": 7
+      "Naturbete": 6
     },
     "stand_age_plot_counts": {
       "1-40": 2,
@@ -40192,7 +40192,7 @@
       ">91": 6
     },
     "vegetation_plot_counts": {
-      "Örttyper": 19,
+      "Örttyper": 18,
       "Blåbärstyper": 1,
       "Lingon-fattigristyper": 0
     },
@@ -40785,10 +40785,10 @@
     "Svamp-grupp-släkte": "Saknas",
     "synlighet": null,
     "images": [],
-    "total_plot_count": 96,
+    "total_plot_count": 89,
     "forest_type_plot_counts": {
       "Granskog": 13,
-      "Tallskog": 59,
+      "Tallskog": 52,
       "Barrblandskog": 13,
       "Lövblandskog": 6,
       "Lövskog": 5,
@@ -40797,13 +40797,13 @@
     },
     "stand_age_plot_counts": {
       "1-40": 20,
-      "41-90": 41,
-      ">91": 33
+      "41-90": 39,
+      ">91": 28
     },
     "vegetation_plot_counts": {
       "Örttyper": 5,
-      "Blåbärstyper": 47,
-      "Lingon-fattigristyper": 43
+      "Blåbärstyper": 44,
+      "Lingon-fattigristyper": 39
     },
     "environment_occurrences": [
       {
@@ -43554,23 +43554,23 @@
       "/images/svampbilder/Matsvampar/Russula aeruginea-4.jpg",
       "/images/svampbilder/Matsvampar/Russula aeruginea-5.jpg"
     ],
-    "total_plot_count": 42,
+    "total_plot_count": 41,
     "forest_type_plot_counts": {
       "Granskog": 10,
       "Tallskog": 9,
       "Barrblandskog": 3,
       "Lövblandskog": 6,
-      "Lövskog": 8,
+      "Lövskog": 7,
       "EkBokskog": 0,
       "Naturbete": 5
     },
     "stand_age_plot_counts": {
-      "1-40": 22,
+      "1-40": 21,
       "41-90": 16,
       ">91": 2
     },
     "vegetation_plot_counts": {
-      "Örttyper": 27,
+      "Örttyper": 26,
       "Blåbärstyper": 13,
       "Lingon-fattigristyper": 1
     },
@@ -44165,20 +44165,20 @@
     "Svamp-grupp-släkte": "Saknas",
     "synlighet": null,
     "images": [],
-    "total_plot_count": 11,
+    "total_plot_count": 10,
     "forest_type_plot_counts": {
       "Granskog": 1,
       "Tallskog": 0,
       "Barrblandskog": 0,
       "Lövblandskog": 2,
       "Lövskog": 2,
-      "EkBokskog": 6,
+      "EkBokskog": 5,
       "Naturbete": 0
     },
     "stand_age_plot_counts": {
       "1-40": 2,
       "41-90": 3,
-      ">91": 6
+      ">91": 5
     },
     "vegetation_plot_counts": {
       "Örttyper": 3,
@@ -45885,10 +45885,10 @@
       "/images/svampbilder/Giftsvampar/Cortinarius gentilis-201-3622.jpg",
       "/images/svampbilder/Giftsvampar/Cortinarius gentilis-135-3622.jpg"
     ],
-    "total_plot_count": 83,
+    "total_plot_count": 79,
     "forest_type_plot_counts": {
-      "Granskog": 41,
-      "Tallskog": 12,
+      "Granskog": 38,
+      "Tallskog": 11,
       "Barrblandskog": 17,
       "Lövblandskog": 8,
       "Lövskog": 3,
@@ -45897,12 +45897,12 @@
     },
     "stand_age_plot_counts": {
       "1-40": 11,
-      "41-90": 36,
-      ">91": 33
+      "41-90": 34,
+      ">91": 31
     },
     "vegetation_plot_counts": {
-      "Örttyper": 17,
-      "Blåbärstyper": 48,
+      "Örttyper": 16,
+      "Blåbärstyper": 45,
       "Lingon-fattigristyper": 16
     },
     "environment_occurrences": [
@@ -47374,7 +47374,7 @@
       "/images/svampbilder/Matsvampar/Russula claroflava-3.jpg",
       "/images/svampbilder/Matsvampar/Russula claroflava-2.jpg"
     ],
-    "total_plot_count": 56,
+    "total_plot_count": 55,
     "forest_type_plot_counts": {
       "Granskog": 5,
       "Tallskog": 8,
@@ -47386,13 +47386,13 @@
     },
     "stand_age_plot_counts": {
       "1-40": 9,
-      "41-90": 27,
+      "41-90": 26,
       ">91": 17
     },
     "vegetation_plot_counts": {
       "Örttyper": 19,
       "Blåbärstyper": 19,
-      "Lingon-fattigristyper": 17
+      "Lingon-fattigristyper": 16
     },
     "environment_occurrences": [
       {
@@ -49826,10 +49826,10 @@
     "Svamp-grupp-släkte": "Saknas",
     "synlighet": null,
     "images": [],
-    "total_plot_count": 152,
+    "total_plot_count": 144,
     "forest_type_plot_counts": {
-      "Granskog": 52,
-      "Tallskog": 45,
+      "Granskog": 47,
+      "Tallskog": 42,
       "Barrblandskog": 24,
       "Lövblandskog": 20,
       "Lövskog": 9,
@@ -49838,13 +49838,13 @@
     },
     "stand_age_plot_counts": {
       "1-40": 37,
-      "41-90": 43,
-      ">91": 70
+      "41-90": 41,
+      ">91": 64
     },
     "vegetation_plot_counts": {
       "Örttyper": 19,
-      "Blåbärstyper": 100,
-      "Lingon-fattigristyper": 32
+      "Blåbärstyper": 94,
+      "Lingon-fattigristyper": 30
     },
     "environment_occurrences": [
       {
@@ -51897,24 +51897,24 @@
     "Svamp-grupp-släkte": "Saknas",
     "synlighet": null,
     "images": [],
-    "total_plot_count": 29,
+    "total_plot_count": 27,
     "forest_type_plot_counts": {
       "Granskog": 12,
       "Tallskog": 4,
-      "Barrblandskog": 8,
-      "Lövblandskog": 5,
+      "Barrblandskog": 7,
+      "Lövblandskog": 4,
       "Lövskog": 0,
       "EkBokskog": 0,
       "Naturbete": 0
     },
     "stand_age_plot_counts": {
       "1-40": 4,
-      "41-90": 15,
-      ">91": 10
+      "41-90": 14,
+      ">91": 9
     },
     "vegetation_plot_counts": {
       "Örttyper": 6,
-      "Blåbärstyper": 22,
+      "Blåbärstyper": 20,
       "Lingon-fattigristyper": 1
     },
     "environment_occurrences": [
@@ -53704,10 +53704,10 @@
     "Svamp-grupp-släkte": "Saknas",
     "synlighet": null,
     "images": [],
-    "total_plot_count": 116,
+    "total_plot_count": 111,
     "forest_type_plot_counts": {
-      "Granskog": 29,
-      "Tallskog": 55,
+      "Granskog": 28,
+      "Tallskog": 51,
       "Barrblandskog": 15,
       "Lövblandskog": 12,
       "Lövskog": 3,
@@ -53716,12 +53716,12 @@
     },
     "stand_age_plot_counts": {
       "1-40": 30,
-      "41-90": 47,
-      ">91": 35
+      "41-90": 44,
+      ">91": 33
     },
     "vegetation_plot_counts": {
       "Örttyper": 18,
-      "Blåbärstyper": 70,
+      "Blåbärstyper": 65,
       "Lingon-fattigristyper": 26
     },
     "environment_occurrences": [
@@ -55938,24 +55938,24 @@
     "Svamp-grupp-släkte": "Saknas",
     "synlighet": null,
     "images": [],
-    "total_plot_count": 134,
+    "total_plot_count": 131,
     "forest_type_plot_counts": {
       "Granskog": 19,
-      "Tallskog": 29,
-      "Barrblandskog": 23,
-      "Lövblandskog": 38,
+      "Tallskog": 28,
+      "Barrblandskog": 22,
+      "Lövblandskog": 37,
       "Lövskog": 16,
       "EkBokskog": 0,
       "Naturbete": 1
     },
     "stand_age_plot_counts": {
       "1-40": 45,
-      "41-90": 53,
+      "41-90": 50,
       ">91": 34
     },
     "vegetation_plot_counts": {
       "Örttyper": 29,
-      "Blåbärstyper": 65,
+      "Blåbärstyper": 62,
       "Lingon-fattigristyper": 36
     },
     "environment_occurrences": [
@@ -58451,25 +58451,25 @@
     "Svamp-grupp-släkte": "Saknas",
     "synlighet": null,
     "images": [],
-    "total_plot_count": 1836,
+    "total_plot_count": 1473,
     "forest_type_plot_counts": {
-      "Granskog": 479,
-      "Tallskog": 518,
-      "Barrblandskog": 261,
-      "Lövblandskog": 286,
-      "Lövskog": 192,
-      "EkBokskog": 19,
-      "Naturbete": 26
+      "Granskog": 389,
+      "Tallskog": 349,
+      "Barrblandskog": 223,
+      "Lövblandskog": 249,
+      "Lövskog": 175,
+      "EkBokskog": 18,
+      "Naturbete": 23
     },
     "stand_age_plot_counts": {
-      "1-40": 660,
-      "41-90": 707,
-      ">91": 415
+      "1-40": 548,
+      "41-90": 549,
+      ">91": 336
     },
     "vegetation_plot_counts": {
-      "Örttyper": 527,
-      "Blåbärstyper": 951,
-      "Lingon-fattigristyper": 296
+      "Örttyper": 487,
+      "Blåbärstyper": 693,
+      "Lingon-fattigristyper": 236
     },
     "environment_occurrences": [
       {
@@ -60325,9 +60325,9 @@
     "Svamp-grupp-släkte": "Saknas",
     "synlighet": null,
     "images": [],
-    "total_plot_count": 65,
+    "total_plot_count": 64,
     "forest_type_plot_counts": {
-      "Granskog": 22,
+      "Granskog": 21,
       "Tallskog": 13,
       "Barrblandskog": 9,
       "Lövblandskog": 12,
@@ -60337,12 +60337,12 @@
     },
     "stand_age_plot_counts": {
       "1-40": 21,
-      "41-90": 29,
+      "41-90": 28,
       ">91": 13
     },
     "vegetation_plot_counts": {
       "Örttyper": 19,
-      "Blåbärstyper": 37,
+      "Blåbärstyper": 36,
       "Lingon-fattigristyper": 3
     },
     "environment_occurrences": [
@@ -63898,24 +63898,24 @@
     "Svamp-grupp-släkte": "Saknas",
     "synlighet": null,
     "images": [],
-    "total_plot_count": 105,
+    "total_plot_count": 102,
     "forest_type_plot_counts": {
       "Granskog": 18,
       "Tallskog": 10,
       "Barrblandskog": 7,
-      "Lövblandskog": 34,
-      "Lövskog": 29,
+      "Lövblandskog": 32,
+      "Lövskog": 28,
       "EkBokskog": 0,
       "Naturbete": 5
     },
     "stand_age_plot_counts": {
-      "1-40": 70,
+      "1-40": 67,
       "41-90": 26,
       ">91": 8
     },
     "vegetation_plot_counts": {
-      "Örttyper": 72,
-      "Blåbärstyper": 26,
+      "Örttyper": 70,
+      "Blåbärstyper": 25,
       "Lingon-fattigristyper": 4
     },
     "environment_occurrences": [
@@ -66223,25 +66223,25 @@
     "Svamp-grupp-släkte": "Saknas",
     "synlighet": null,
     "images": [],
-    "total_plot_count": 687,
+    "total_plot_count": 638,
     "forest_type_plot_counts": {
-      "Granskog": 256,
-      "Tallskog": 84,
-      "Barrblandskog": 102,
-      "Lövblandskog": 155,
-      "Lövskog": 76,
+      "Granskog": 228,
+      "Tallskog": 78,
+      "Barrblandskog": 96,
+      "Lövblandskog": 148,
+      "Lövskog": 74,
       "EkBokskog": 0,
       "Naturbete": 10
     },
     "stand_age_plot_counts": {
-      "1-40": 241,
-      "41-90": 284,
-      ">91": 146
+      "1-40": 232,
+      "41-90": 258,
+      ">91": 132
     },
     "vegetation_plot_counts": {
-      "Örttyper": 303,
-      "Blåbärstyper": 313,
-      "Lingon-fattigristyper": 50
+      "Örttyper": 292,
+      "Blåbärstyper": 276,
+      "Lingon-fattigristyper": 49
     },
     "environment_occurrences": [
       {
@@ -72190,10 +72190,10 @@
     "Svamp-grupp-släkte": "Saknas",
     "synlighet": null,
     "images": [],
-    "total_plot_count": 47,
+    "total_plot_count": 46,
     "forest_type_plot_counts": {
       "Granskog": 18,
-      "Tallskog": 18,
+      "Tallskog": 17,
       "Barrblandskog": 9,
       "Lövblandskog": 2,
       "Lövskog": 0,
@@ -72202,12 +72202,12 @@
     },
     "stand_age_plot_counts": {
       "1-40": 6,
-      "41-90": 20,
+      "41-90": 19,
       ">91": 21
     },
     "vegetation_plot_counts": {
       "Örttyper": 4,
-      "Blåbärstyper": 38,
+      "Blåbärstyper": 37,
       "Lingon-fattigristyper": 4
     },
     "environment_occurrences": [
@@ -72439,11 +72439,11 @@
     "Svamp-grupp-släkte": "Saknas",
     "synlighet": null,
     "images": [],
-    "total_plot_count": 16,
+    "total_plot_count": 15,
     "forest_type_plot_counts": {
       "Granskog": 3,
       "Tallskog": 3,
-      "Barrblandskog": 4,
+      "Barrblandskog": 3,
       "Lövblandskog": 3,
       "Lövskog": 3,
       "EkBokskog": 0,
@@ -72452,11 +72452,11 @@
     "stand_age_plot_counts": {
       "1-40": 4,
       "41-90": 7,
-      ">91": 5
+      ">91": 4
     },
     "vegetation_plot_counts": {
       "Örttyper": 10,
-      "Blåbärstyper": 6,
+      "Blåbärstyper": 5,
       "Lingon-fattigristyper": 0
     },
     "environment_occurrences": [
@@ -73312,7 +73312,7 @@
     "Svamp-grupp-släkte": "Saknas",
     "synlighet": null,
     "images": [],
-    "total_plot_count": 41,
+    "total_plot_count": 40,
     "forest_type_plot_counts": {
       "Granskog": 5,
       "Tallskog": 8,
@@ -73325,10 +73325,10 @@
     "stand_age_plot_counts": {
       "1-40": 4,
       "41-90": 16,
-      ">91": 21
+      ">91": 20
     },
     "vegetation_plot_counts": {
-      "Örttyper": 15,
+      "Örttyper": 14,
       "Blåbärstyper": 14,
       "Lingon-fattigristyper": 12
     },
@@ -73961,25 +73961,25 @@
     "Svamp-grupp-släkte": "Saknas",
     "synlighet": null,
     "images": [],
-    "total_plot_count": 397,
+    "total_plot_count": 378,
     "forest_type_plot_counts": {
-      "Granskog": 94,
-      "Tallskog": 61,
-      "Barrblandskog": 37,
-      "Lövblandskog": 97,
-      "Lövskog": 79,
+      "Granskog": 91,
+      "Tallskog": 57,
+      "Barrblandskog": 36,
+      "Lövblandskog": 90,
+      "Lövskog": 76,
       "EkBokskog": 12,
       "Naturbete": 7
     },
     "stand_age_plot_counts": {
-      "1-40": 228,
-      "41-90": 113,
+      "1-40": 213,
+      "41-90": 109,
       ">91": 47
     },
     "vegetation_plot_counts": {
-      "Örttyper": 164,
-      "Blåbärstyper": 174,
-      "Lingon-fattigristyper": 37
+      "Örttyper": 163,
+      "Blåbärstyper": 159,
+      "Lingon-fattigristyper": 35
     },
     "environment_occurrences": [
       {
@@ -77485,25 +77485,25 @@
     "Svamp-grupp-släkte": "Saknas",
     "synlighet": null,
     "images": [],
-    "total_plot_count": 282,
+    "total_plot_count": 267,
     "forest_type_plot_counts": {
-      "Granskog": 73,
-      "Tallskog": 68,
-      "Barrblandskog": 38,
-      "Lövblandskog": 58,
-      "Lövskog": 36,
+      "Granskog": 70,
+      "Tallskog": 61,
+      "Barrblandskog": 36,
+      "Lövblandskog": 57,
+      "Lövskog": 34,
       "EkBokskog": 1,
       "Naturbete": 2
     },
     "stand_age_plot_counts": {
-      "1-40": 82,
-      "41-90": 114,
-      ">91": 82
+      "1-40": 79,
+      "41-90": 108,
+      ">91": 77
     },
     "vegetation_plot_counts": {
-      "Örttyper": 83,
-      "Blåbärstyper": 144,
-      "Lingon-fattigristyper": 49
+      "Örttyper": 81,
+      "Blåbärstyper": 133,
+      "Lingon-fattigristyper": 47
     },
     "environment_occurrences": [
       {
@@ -78021,9 +78021,9 @@
     "Svamp-grupp-släkte": "Saknas",
     "synlighet": null,
     "images": [],
-    "total_plot_count": 116,
+    "total_plot_count": 113,
     "forest_type_plot_counts": {
-      "Granskog": 70,
+      "Granskog": 67,
       "Tallskog": 16,
       "Barrblandskog": 11,
       "Lövblandskog": 16,
@@ -78032,13 +78032,13 @@
       "Naturbete": 0
     },
     "stand_age_plot_counts": {
-      "1-40": 30,
-      "41-90": 64,
+      "1-40": 29,
+      "41-90": 62,
       ">91": 21
     },
     "vegetation_plot_counts": {
-      "Örttyper": 34,
-      "Blåbärstyper": 65,
+      "Örttyper": 33,
+      "Blåbärstyper": 63,
       "Lingon-fattigristyper": 6
     },
     "environment_occurrences": [
@@ -78795,10 +78795,10 @@
     "Svamp-grupp-släkte": "Saknas",
     "synlighet": null,
     "images": [],
-    "total_plot_count": 134,
+    "total_plot_count": 129,
     "forest_type_plot_counts": {
-      "Granskog": 45,
-      "Tallskog": 46,
+      "Granskog": 43,
+      "Tallskog": 43,
       "Barrblandskog": 24,
       "Lövblandskog": 10,
       "Lövskog": 4,
@@ -78807,12 +78807,12 @@
     },
     "stand_age_plot_counts": {
       "1-40": 18,
-      "41-90": 70,
-      ">91": 43
+      "41-90": 66,
+      ">91": 42
     },
     "vegetation_plot_counts": {
       "Örttyper": 21,
-      "Blåbärstyper": 86,
+      "Blåbärstyper": 81,
       "Lingon-fattigristyper": 17
     },
     "environment_occurrences": [
@@ -80286,9 +80286,9 @@
       "/images/svampbilder/Giftsvampar/Tricholoma inamoenum-138-.jpg",
       "/images/svampbilder/Giftsvampar/Tricholoma inamoenum-180-.jpg"
     ],
-    "total_plot_count": 19,
+    "total_plot_count": 18,
     "forest_type_plot_counts": {
-      "Granskog": 8,
+      "Granskog": 7,
       "Tallskog": 1,
       "Barrblandskog": 5,
       "Lövblandskog": 5,
@@ -80299,11 +80299,11 @@
     "stand_age_plot_counts": {
       "1-40": 3,
       "41-90": 4,
-      ">91": 12
+      ">91": 11
     },
     "vegetation_plot_counts": {
       "Örttyper": 8,
-      "Blåbärstyper": 10,
+      "Blåbärstyper": 9,
       "Lingon-fattigristyper": 1
     },
     "environment_occurrences": [
@@ -84999,24 +84999,24 @@
     "Svamp-grupp-släkte": "Saknas",
     "synlighet": null,
     "images": [],
-    "total_plot_count": 121,
+    "total_plot_count": 118,
     "forest_type_plot_counts": {
       "Granskog": 35,
-      "Tallskog": 24,
-      "Barrblandskog": 10,
+      "Tallskog": 23,
+      "Barrblandskog": 9,
       "Lövblandskog": 18,
       "Lövskog": 21,
-      "EkBokskog": 7,
+      "EkBokskog": 6,
       "Naturbete": 0
     },
     "stand_age_plot_counts": {
       "1-40": 51,
-      "41-90": 46,
-      ">91": 22
+      "41-90": 45,
+      ">91": 20
     },
     "vegetation_plot_counts": {
       "Örttyper": 45,
-      "Blåbärstyper": 58,
+      "Blåbärstyper": 56,
       "Lingon-fattigristyper": 8
     },
     "environment_occurrences": [
@@ -90009,11 +90009,11 @@
     "Svamp-grupp-släkte": "Saknas",
     "synlighet": null,
     "images": [],
-    "total_plot_count": 79,
+    "total_plot_count": 74,
     "forest_type_plot_counts": {
-      "Granskog": 23,
-      "Tallskog": 28,
-      "Barrblandskog": 20,
+      "Granskog": 22,
+      "Tallskog": 25,
+      "Barrblandskog": 19,
       "Lövblandskog": 3,
       "Lövskog": 4,
       "EkBokskog": 0,
@@ -90021,12 +90021,12 @@
     },
     "stand_age_plot_counts": {
       "1-40": 22,
-      "41-90": 41,
-      ">91": 15
+      "41-90": 38,
+      ">91": 13
     },
     "vegetation_plot_counts": {
       "Örttyper": 11,
-      "Blåbärstyper": 58,
+      "Blåbärstyper": 53,
       "Lingon-fattigristyper": 5
     },
     "environment_occurrences": [
@@ -90401,25 +90401,25 @@
     "Svamp-grupp-släkte": "Saknas",
     "synlighet": null,
     "images": [],
-    "total_plot_count": 905,
+    "total_plot_count": 743,
     "forest_type_plot_counts": {
-      "Granskog": 232,
-      "Tallskog": 391,
-      "Barrblandskog": 123,
-      "Lövblandskog": 101,
-      "Lövskog": 52,
+      "Granskog": 208,
+      "Tallskog": 278,
+      "Barrblandskog": 108,
+      "Lövblandskog": 93,
+      "Lövskog": 50,
       "EkBokskog": 2,
       "Naturbete": 3
     },
     "stand_age_plot_counts": {
-      "1-40": 324,
-      "41-90": 374,
-      ">91": 195
+      "1-40": 280,
+      "41-90": 287,
+      ">91": 165
     },
     "vegetation_plot_counts": {
-      "Örttyper": 175,
-      "Blåbärstyper": 549,
-      "Lingon-fattigristyper": 160
+      "Örttyper": 167,
+      "Blåbärstyper": 427,
+      "Lingon-fattigristyper": 129
     },
     "environment_occurrences": [
       {
@@ -92594,9 +92594,9 @@
     "Svamp-grupp-släkte": "Saknas",
     "synlighet": null,
     "images": [],
-    "total_plot_count": 64,
+    "total_plot_count": 63,
     "forest_type_plot_counts": {
-      "Granskog": 29,
+      "Granskog": 28,
       "Tallskog": 9,
       "Barrblandskog": 14,
       "Lövblandskog": 10,
@@ -92607,11 +92607,11 @@
     "stand_age_plot_counts": {
       "1-40": 11,
       "41-90": 12,
-      ">91": 38
+      ">91": 37
     },
     "vegetation_plot_counts": {
       "Örttyper": 13,
-      "Blåbärstyper": 43,
+      "Blåbärstyper": 42,
       "Lingon-fattigristyper": 7
     },
     "environment_occurrences": [
@@ -93854,9 +93854,9 @@
       "/images/svampbilder/Matsvampar/Hygrophorus olivaceoalbus-2.jpg",
       "/images/svampbilder/Matsvampar/Hygrophorus olivaceoalbus-1.jpg"
     ],
-    "total_plot_count": 147,
+    "total_plot_count": 140,
     "forest_type_plot_counts": {
-      "Granskog": 88,
+      "Granskog": 81,
       "Tallskog": 13,
       "Barrblandskog": 33,
       "Lövblandskog": 10,
@@ -93865,13 +93865,13 @@
       "Naturbete": 0
     },
     "stand_age_plot_counts": {
-      "1-40": 38,
-      "41-90": 71,
+      "1-40": 36,
+      "41-90": 66,
       ">91": 38
     },
     "vegetation_plot_counts": {
-      "Örttyper": 27,
-      "Blåbärstyper": 97,
+      "Örttyper": 26,
+      "Blåbärstyper": 92,
       "Lingon-fattigristyper": 11
     },
     "environment_occurrences": [
@@ -94215,25 +94215,25 @@
     "Svamp-grupp-släkte": "Saknas",
     "synlighet": null,
     "images": [],
-    "total_plot_count": 72,
+    "total_plot_count": 68,
     "forest_type_plot_counts": {
       "Granskog": 21,
-      "Tallskog": 15,
-      "Barrblandskog": 15,
+      "Tallskog": 13,
+      "Barrblandskog": 14,
       "Lövblandskog": 13,
-      "Lövskog": 6,
+      "Lövskog": 5,
       "EkBokskog": 0,
       "Naturbete": 1
     },
     "stand_age_plot_counts": {
-      "1-40": 19,
-      "41-90": 31,
-      ">91": 16
+      "1-40": 18,
+      "41-90": 29,
+      ">91": 15
     },
     "vegetation_plot_counts": {
       "Örttyper": 25,
-      "Blåbärstyper": 34,
-      "Lingon-fattigristyper": 9
+      "Blåbärstyper": 32,
+      "Lingon-fattigristyper": 7
     },
     "environment_occurrences": [
       {
@@ -96173,25 +96173,25 @@
       "/images/svampbilder/Matsvampar/Lactarius rufus-3.jpg",
       "/images/svampbilder/Matsvampar/Lactarius rufus-2.jpg"
     ],
-    "total_plot_count": 424,
+    "total_plot_count": 380,
     "forest_type_plot_counts": {
-      "Granskog": 96,
-      "Tallskog": 204,
-      "Barrblandskog": 53,
-      "Lövblandskog": 34,
-      "Lövskog": 32,
+      "Granskog": 88,
+      "Tallskog": 172,
+      "Barrblandskog": 51,
+      "Lövblandskog": 33,
+      "Lövskog": 31,
       "EkBokskog": 0,
       "Naturbete": 1
     },
     "stand_age_plot_counts": {
-      "1-40": 207,
-      "41-90": 125,
-      ">91": 83
+      "1-40": 185,
+      "41-90": 110,
+      ">91": 76
     },
     "vegetation_plot_counts": {
-      "Örttyper": 61,
-      "Blåbärstyper": 238,
-      "Lingon-fattigristyper": 117
+      "Örttyper": 60,
+      "Blåbärstyper": 205,
+      "Lingon-fattigristyper": 108
     },
     "environment_occurrences": [
       {
@@ -96754,10 +96754,10 @@
     "Svamp-grupp-släkte": "Saknas",
     "synlighet": null,
     "images": [],
-    "total_plot_count": 52,
+    "total_plot_count": 50,
     "forest_type_plot_counts": {
       "Granskog": 11,
-      "Tallskog": 30,
+      "Tallskog": 28,
       "Barrblandskog": 7,
       "Lövblandskog": 4,
       "Lövskog": 0,
@@ -96767,12 +96767,12 @@
     "stand_age_plot_counts": {
       "1-40": 8,
       "41-90": 18,
-      ">91": 26
+      ">91": 24
     },
     "vegetation_plot_counts": {
       "Örttyper": 6,
       "Blåbärstyper": 29,
-      "Lingon-fattigristyper": 16
+      "Lingon-fattigristyper": 14
     },
     "environment_occurrences": [
       {
@@ -97797,24 +97797,24 @@
       "/images/svampbilder/Giftsvampar/Paxillus involutus-104-5351.jpg",
       "/images/svampbilder/Giftsvampar/Paxillus involutus-98-5351.jpg"
     ],
-    "total_plot_count": 253,
+    "total_plot_count": 245,
     "forest_type_plot_counts": {
-      "Granskog": 55,
-      "Tallskog": 51,
+      "Granskog": 54,
+      "Tallskog": 49,
       "Barrblandskog": 18,
-      "Lövblandskog": 44,
-      "Lövskog": 66,
+      "Lövblandskog": 42,
+      "Lövskog": 63,
       "EkBokskog": 3,
       "Naturbete": 9
     },
     "stand_age_plot_counts": {
-      "1-40": 128,
-      "41-90": 81,
+      "1-40": 123,
+      "41-90": 78,
       ">91": 35
     },
     "vegetation_plot_counts": {
-      "Örttyper": 100,
-      "Blåbärstyper": 116,
+      "Örttyper": 98,
+      "Blåbärstyper": 110,
       "Lingon-fattigristyper": 29
     },
     "environment_occurrences": [
@@ -100910,10 +100910,10 @@
     "Svamp-grupp-släkte": "Saknas",
     "synlighet": null,
     "images": [],
-    "total_plot_count": 129,
+    "total_plot_count": 123,
     "forest_type_plot_counts": {
       "Granskog": 11,
-      "Tallskog": 83,
+      "Tallskog": 77,
       "Barrblandskog": 25,
       "Lövblandskog": 9,
       "Lövskog": 1,
@@ -100921,14 +100921,14 @@
       "Naturbete": 0
     },
     "stand_age_plot_counts": {
-      "1-40": 38,
-      "41-90": 51,
-      ">91": 40
+      "1-40": 36,
+      "41-90": 48,
+      ">91": 39
     },
     "vegetation_plot_counts": {
       "Örttyper": 8,
-      "Blåbärstyper": 75,
-      "Lingon-fattigristyper": 46
+      "Blåbärstyper": 73,
+      "Lingon-fattigristyper": 42
     },
     "environment_occurrences": [
       {
@@ -102269,11 +102269,11 @@
       "/images/svampbilder/Matsvampar/Cortinarius caperatus-4.jpg",
       "/images/svampbilder/Matsvampar/Cortinarius caperatus-5.jpg"
     ],
-    "total_plot_count": 141,
+    "total_plot_count": 138,
     "forest_type_plot_counts": {
       "Granskog": 35,
-      "Tallskog": 41,
-      "Barrblandskog": 25,
+      "Tallskog": 39,
+      "Barrblandskog": 24,
       "Lövblandskog": 18,
       "Lövskog": 9,
       "EkBokskog": 0,
@@ -102281,12 +102281,12 @@
     },
     "stand_age_plot_counts": {
       "1-40": 26,
-      "41-90": 37,
-      ">91": 72
+      "41-90": 36,
+      ">91": 70
     },
     "vegetation_plot_counts": {
       "Örttyper": 30,
-      "Blåbärstyper": 74,
+      "Blåbärstyper": 71,
       "Lingon-fattigristyper": 37
     },
     "environment_occurrences": [
@@ -106456,24 +106456,24 @@
     "Svamp-grupp-släkte": "Saknas",
     "synlighet": null,
     "images": [],
-    "total_plot_count": 186,
+    "total_plot_count": 184,
     "forest_type_plot_counts": {
-      "Granskog": 73,
+      "Granskog": 72,
       "Tallskog": 28,
       "Barrblandskog": 30,
-      "Lövblandskog": 35,
+      "Lövblandskog": 34,
       "Lövskog": 12,
       "EkBokskog": 2,
       "Naturbete": 2
     },
     "stand_age_plot_counts": {
-      "1-40": 44,
+      "1-40": 43,
       "41-90": 92,
-      ">91": 47
+      ">91": 46
     },
     "vegetation_plot_counts": {
       "Örttyper": 63,
-      "Blåbärstyper": 99,
+      "Blåbärstyper": 97,
       "Lingon-fattigristyper": 16
     },
     "environment_occurrences": [
@@ -108579,9 +108579,9 @@
       "/images/svampbilder/Giftsvampar/Amanita muscaria-49-2976.jpg",
       "/images/svampbilder/Giftsvampar/Amanita muscaria-26-2976.jpg"
     ],
-    "total_plot_count": 97,
+    "total_plot_count": 96,
     "forest_type_plot_counts": {
-      "Granskog": 40,
+      "Granskog": 39,
       "Tallskog": 10,
       "Barrblandskog": 9,
       "Lövblandskog": 13,
@@ -108590,13 +108590,13 @@
       "Naturbete": 4
     },
     "stand_age_plot_counts": {
-      "1-40": 48,
+      "1-40": 47,
       "41-90": 35,
       ">91": 6
     },
     "vegetation_plot_counts": {
       "Örttyper": 56,
-      "Blåbärstyper": 39,
+      "Blåbärstyper": 38,
       "Lingon-fattigristyper": 0
     },
     "environment_occurrences": [
@@ -108994,25 +108994,25 @@
       "/images/svampbilder/Giftsvampar/Cortinarius armillatus-20-3541.jpg",
       "/images/svampbilder/Giftsvampar/Cortinarius armillatus-21-3541.jpg"
     ],
-    "total_plot_count": 739,
+    "total_plot_count": 640,
     "forest_type_plot_counts": {
-      "Granskog": 158,
-      "Tallskog": 208,
-      "Barrblandskog": 131,
-      "Lövblandskog": 121,
-      "Lövskog": 75,
+      "Granskog": 143,
+      "Tallskog": 167,
+      "Barrblandskog": 117,
+      "Lövblandskog": 109,
+      "Lövskog": 67,
       "EkBokskog": 2,
       "Naturbete": 2
     },
     "stand_age_plot_counts": {
-      "1-40": 216,
-      "41-90": 276,
-      ">91": 223
+      "1-40": 195,
+      "41-90": 236,
+      ">91": 192
     },
     "vegetation_plot_counts": {
-      "Örttyper": 142,
-      "Blåbärstyper": 391,
-      "Lingon-fattigristyper": 196
+      "Örttyper": 138,
+      "Blåbärstyper": 326,
+      "Lingon-fattigristyper": 166
     },
     "environment_occurrences": [
       {
@@ -111058,25 +111058,25 @@
     "Svamp-grupp-släkte": "Saknas",
     "synlighet": null,
     "images": [],
-    "total_plot_count": 744,
+    "total_plot_count": 614,
     "forest_type_plot_counts": {
-      "Granskog": 133,
-      "Tallskog": 382,
-      "Barrblandskog": 95,
-      "Lövblandskog": 75,
-      "Lövskog": 48,
+      "Granskog": 127,
+      "Tallskog": 273,
+      "Barrblandskog": 85,
+      "Lövblandskog": 71,
+      "Lövskog": 47,
       "EkBokskog": 0,
       "Naturbete": 2
     },
     "stand_age_plot_counts": {
-      "1-40": 264,
-      "41-90": 278,
-      ">91": 186
+      "1-40": 230,
+      "41-90": 212,
+      ">91": 157
     },
     "vegetation_plot_counts": {
-      "Örttyper": 117,
-      "Blåbärstyper": 391,
-      "Lingon-fattigristyper": 222
+      "Örttyper": 115,
+      "Blåbärstyper": 302,
+      "Lingon-fattigristyper": 183
     },
     "environment_occurrences": [
       {
@@ -115407,25 +115407,25 @@
       "/images/svampbilder/Giftsvampar/Suillus variegatus-1-6090-4.jpg",
       "/images/svampbilder/Giftsvampar/Suillus variegatus-1-6090-5.jpg"
     ],
-    "total_plot_count": 1037,
+    "total_plot_count": 801,
     "forest_type_plot_counts": {
-      "Granskog": 133,
-      "Tallskog": 547,
-      "Barrblandskog": 170,
-      "Lövblandskog": 111,
-      "Lövskog": 52,
+      "Granskog": 122,
+      "Tallskog": 358,
+      "Barrblandskog": 151,
+      "Lövblandskog": 101,
+      "Lövskog": 49,
       "EkBokskog": 0,
       "Naturbete": 6
     },
     "stand_age_plot_counts": {
-      "1-40": 347,
-      "41-90": 379,
-      ">91": 287
+      "1-40": 282,
+      "41-90": 267,
+      ">91": 232
     },
     "vegetation_plot_counts": {
-      "Örttyper": 148,
-      "Blåbärstyper": 567,
-      "Lingon-fattigristyper": 311
+      "Örttyper": 146,
+      "Blåbärstyper": 411,
+      "Lingon-fattigristyper": 233
     },
     "environment_occurrences": [
       {
@@ -116464,9 +116464,9 @@
       "/images/svampbilder/Giftsvampar/Inocybe geophylla-93-4586.jpg",
       "/images/svampbilder/Giftsvampar/Inocybe geophylla-94-4586.jpg"
     ],
-    "total_plot_count": 43,
+    "total_plot_count": 42,
     "forest_type_plot_counts": {
-      "Granskog": 13,
+      "Granskog": 12,
       "Tallskog": 5,
       "Barrblandskog": 5,
       "Lövblandskog": 11,
@@ -116476,11 +116476,11 @@
     },
     "stand_age_plot_counts": {
       "1-40": 9,
-      "41-90": 24,
+      "41-90": 23,
       ">91": 6
     },
     "vegetation_plot_counts": {
-      "Örttyper": 36,
+      "Örttyper": 35,
       "Blåbärstyper": 5,
       "Lingon-fattigristyper": 1
     },
@@ -116713,11 +116713,11 @@
     "Svamp-grupp-släkte": "Saknas",
     "synlighet": null,
     "images": [],
-    "total_plot_count": 52,
+    "total_plot_count": 51,
     "forest_type_plot_counts": {
       "Granskog": 14,
       "Tallskog": 14,
-      "Barrblandskog": 13,
+      "Barrblandskog": 12,
       "Lövblandskog": 6,
       "Lövskog": 3,
       "EkBokskog": 0,
@@ -116725,12 +116725,12 @@
     },
     "stand_age_plot_counts": {
       "1-40": 10,
-      "41-90": 25,
+      "41-90": 24,
       ">91": 17
     },
     "vegetation_plot_counts": {
       "Örttyper": 22,
-      "Blåbärstyper": 24,
+      "Blåbärstyper": 23,
       "Lingon-fattigristyper": 4
     },
     "environment_occurrences": [
@@ -118207,24 +118207,24 @@
     "Svamp-grupp-släkte": "Saknas",
     "synlighet": null,
     "images": [],
-    "total_plot_count": 98,
+    "total_plot_count": 92,
     "forest_type_plot_counts": {
       "Granskog": 14,
-      "Tallskog": 18,
+      "Tallskog": 17,
       "Barrblandskog": 13,
-      "Lövblandskog": 31,
-      "Lövskog": 12,
+      "Lövblandskog": 28,
+      "Lövskog": 11,
       "EkBokskog": 0,
       "Naturbete": 0
     },
     "stand_age_plot_counts": {
-      "1-40": 31,
-      "41-90": 44,
-      ">91": 21
+      "1-40": 29,
+      "41-90": 41,
+      ">91": 20
     },
     "vegetation_plot_counts": {
-      "Örttyper": 52,
-      "Blåbärstyper": 35,
+      "Örttyper": 50,
+      "Blåbärstyper": 31,
       "Lingon-fattigristyper": 11
     },
     "environment_occurrences": [
@@ -118792,25 +118792,25 @@
     "Svamp-grupp-släkte": "Saknas",
     "synlighet": null,
     "images": [],
-    "total_plot_count": 1281,
+    "total_plot_count": 974,
     "forest_type_plot_counts": {
-      "Granskog": 298,
-      "Tallskog": 563,
-      "Barrblandskog": 184,
-      "Lövblandskog": 153,
-      "Lövskog": 73,
+      "Granskog": 245,
+      "Tallskog": 362,
+      "Barrblandskog": 158,
+      "Lövblandskog": 134,
+      "Lövskog": 65,
       "EkBokskog": 2,
       "Naturbete": 1
     },
     "stand_age_plot_counts": {
-      "1-40": 467,
-      "41-90": 486,
-      ">91": 311
+      "1-40": 369,
+      "41-90": 345,
+      ">91": 245
     },
     "vegetation_plot_counts": {
-      "Örttyper": 183,
-      "Blåbärstyper": 762,
-      "Lingon-fattigristyper": 308
+      "Örttyper": 174,
+      "Blåbärstyper": 543,
+      "Lingon-fattigristyper": 231
     },
     "environment_occurrences": [
       {
@@ -125153,24 +125153,24 @@
     "Svamp-grupp-släkte": "Saknas",
     "synlighet": null,
     "images": [],
-    "total_plot_count": 294,
+    "total_plot_count": 284,
     "forest_type_plot_counts": {
-      "Granskog": 105,
-      "Tallskog": 31,
-      "Barrblandskog": 32,
-      "Lövblandskog": 57,
-      "Lövskog": 44,
+      "Granskog": 101,
+      "Tallskog": 30,
+      "Barrblandskog": 31,
+      "Lövblandskog": 56,
+      "Lövskog": 42,
       "EkBokskog": 5,
       "Naturbete": 6
     },
     "stand_age_plot_counts": {
-      "1-40": 121,
-      "41-90": 125,
-      ">91": 41
+      "1-40": 117,
+      "41-90": 120,
+      ">91": 40
     },
     "vegetation_plot_counts": {
-      "Örttyper": 110,
-      "Blåbärstyper": 150,
+      "Örttyper": 108,
+      "Blåbärstyper": 143,
       "Lingon-fattigristyper": 18
     },
     "environment_occurrences": [
@@ -125776,25 +125776,25 @@
       "/images/svampbilder/Matsvampar/Suillus luteus-5.jpg",
       "/images/svampbilder/Giftsvampar/Suillus luteus-66-6088.jpg"
     ],
-    "total_plot_count": 170,
+    "total_plot_count": 166,
     "forest_type_plot_counts": {
       "Granskog": 30,
-      "Tallskog": 52,
+      "Tallskog": 49,
       "Barrblandskog": 28,
       "Lövblandskog": 33,
-      "Lövskog": 18,
+      "Lövskog": 17,
       "EkBokskog": 1,
       "Naturbete": 4
     },
     "stand_age_plot_counts": {
-      "1-40": 72,
-      "41-90": 63,
+      "1-40": 69,
+      "41-90": 62,
       ">91": 30
     },
     "vegetation_plot_counts": {
       "Örttyper": 70,
-      "Blåbärstyper": 68,
-      "Lingon-fattigristyper": 26
+      "Blåbärstyper": 65,
+      "Lingon-fattigristyper": 25
     },
     "environment_occurrences": [
       {
@@ -127295,15 +127295,15 @@
     "Svamp-grupp-släkte": "Saknas",
     "synlighet": null,
     "images": [],
-    "total_plot_count": 19,
+    "total_plot_count": 16,
     "forest_type_plot_counts": {
       "Granskog": 2,
       "Tallskog": 0,
       "Barrblandskog": 0,
-      "Lövblandskog": 3,
+      "Lövblandskog": 2,
       "Lövskog": 9,
       "EkBokskog": 0,
-      "Naturbete": 5
+      "Naturbete": 3
     },
     "stand_age_plot_counts": {
       "1-40": 7,
@@ -127311,7 +127311,7 @@
       ">91": 0
     },
     "vegetation_plot_counts": {
-      "Örttyper": 18,
+      "Örttyper": 15,
       "Blåbärstyper": 1,
       "Lingon-fattigristyper": 0
     },
@@ -130882,11 +130882,11 @@
     "Svamp-grupp-släkte": "Saknas",
     "synlighet": null,
     "images": [],
-    "total_plot_count": 34,
+    "total_plot_count": 31,
     "forest_type_plot_counts": {
-      "Granskog": 14,
+      "Granskog": 12,
       "Tallskog": 8,
-      "Barrblandskog": 8,
+      "Barrblandskog": 7,
       "Lövblandskog": 4,
       "Lövskog": 0,
       "EkBokskog": 0,
@@ -130894,12 +130894,12 @@
     },
     "stand_age_plot_counts": {
       "1-40": 6,
-      "41-90": 8,
-      ">91": 19
+      "41-90": 7,
+      ">91": 17
     },
     "vegetation_plot_counts": {
       "Örttyper": 1,
-      "Blåbärstyper": 25,
+      "Blåbärstyper": 22,
       "Lingon-fattigristyper": 7
     },
     "environment_occurrences": [
@@ -131401,9 +131401,9 @@
     "Svamp-grupp-släkte": "Saknas",
     "synlighet": null,
     "images": [],
-    "total_plot_count": 43,
+    "total_plot_count": 42,
     "forest_type_plot_counts": {
-      "Granskog": 23,
+      "Granskog": 22,
       "Tallskog": 8,
       "Barrblandskog": 5,
       "Lövblandskog": 6,
@@ -131414,11 +131414,11 @@
     "stand_age_plot_counts": {
       "1-40": 10,
       "41-90": 14,
-      ">91": 18
+      ">91": 17
     },
     "vegetation_plot_counts": {
       "Örttyper": 6,
-      "Blåbärstyper": 35,
+      "Blåbärstyper": 34,
       "Lingon-fattigristyper": 2
     },
     "environment_occurrences": [
@@ -132645,10 +132645,10 @@
     "Svamp-grupp-släkte": "Saknas",
     "synlighet": null,
     "images": [],
-    "total_plot_count": 41,
+    "total_plot_count": 40,
     "forest_type_plot_counts": {
       "Granskog": 5,
-      "Tallskog": 23,
+      "Tallskog": 22,
       "Barrblandskog": 5,
       "Lövblandskog": 7,
       "Lövskog": 1,
@@ -132658,12 +132658,12 @@
     "stand_age_plot_counts": {
       "1-40": 11,
       "41-90": 9,
-      ">91": 19
+      ">91": 18
     },
     "vegetation_plot_counts": {
       "Örttyper": 1,
       "Blåbärstyper": 25,
-      "Lingon-fattigristyper": 15
+      "Lingon-fattigristyper": 14
     },
     "environment_occurrences": [
       {
@@ -132859,10 +132859,10 @@
     "Svamp-grupp-släkte": "Saknas",
     "synlighet": null,
     "images": [],
-    "total_plot_count": 65,
+    "total_plot_count": 60,
     "forest_type_plot_counts": {
       "Granskog": 2,
-      "Tallskog": 51,
+      "Tallskog": 46,
       "Barrblandskog": 6,
       "Lövblandskog": 2,
       "Lövskog": 3,
@@ -132870,14 +132870,14 @@
       "Naturbete": 0
     },
     "stand_age_plot_counts": {
-      "1-40": 19,
-      "41-90": 27,
+      "1-40": 17,
+      "41-90": 24,
       ">91": 19
     },
     "vegetation_plot_counts": {
       "Örttyper": 0,
-      "Blåbärstyper": 29,
-      "Lingon-fattigristyper": 36
+      "Blåbärstyper": 28,
+      "Lingon-fattigristyper": 32
     },
     "environment_occurrences": [
       {
@@ -134639,24 +134639,24 @@
     "Svamp-grupp-släkte": "Saknas",
     "synlighet": null,
     "images": [],
-    "total_plot_count": 97,
+    "total_plot_count": 95,
     "forest_type_plot_counts": {
-      "Granskog": 31,
+      "Granskog": 30,
       "Tallskog": 11,
       "Barrblandskog": 8,
-      "Lövblandskog": 23,
+      "Lövblandskog": 22,
       "Lövskog": 18,
       "EkBokskog": 2,
       "Naturbete": 2
     },
     "stand_age_plot_counts": {
       "1-40": 27,
-      "41-90": 45,
-      ">91": 23
+      "41-90": 44,
+      ">91": 22
     },
     "vegetation_plot_counts": {
       "Örttyper": 36,
-      "Blåbärstyper": 53,
+      "Blåbärstyper": 51,
       "Lingon-fattigristyper": 6
     },
     "environment_occurrences": [
@@ -139403,10 +139403,10 @@
     "Svamp-grupp-släkte": "Saknas",
     "synlighet": null,
     "images": [],
-    "total_plot_count": 54,
+    "total_plot_count": 52,
     "forest_type_plot_counts": {
       "Granskog": 10,
-      "Tallskog": 21,
+      "Tallskog": 19,
       "Barrblandskog": 15,
       "Lövblandskog": 5,
       "Lövskog": 1,
@@ -139415,12 +139415,12 @@
     },
     "stand_age_plot_counts": {
       "1-40": 7,
-      "41-90": 31,
+      "41-90": 29,
       ">91": 15
     },
     "vegetation_plot_counts": {
       "Örttyper": 4,
-      "Blåbärstyper": 37,
+      "Blåbärstyper": 35,
       "Lingon-fattigristyper": 10
     },
     "environment_occurrences": [
@@ -143700,25 +143700,25 @@
     "Svamp-grupp-släkte": "Saknas",
     "synlighet": null,
     "images": [],
-    "total_plot_count": 72,
+    "total_plot_count": 68,
     "forest_type_plot_counts": {
       "Granskog": 12,
-      "Tallskog": 37,
-      "Barrblandskog": 9,
+      "Tallskog": 35,
+      "Barrblandskog": 8,
       "Lövblandskog": 7,
-      "Lövskog": 5,
+      "Lövskog": 4,
       "EkBokskog": 0,
       "Naturbete": 0
     },
     "stand_age_plot_counts": {
-      "1-40": 22,
-      "41-90": 37,
+      "1-40": 20,
+      "41-90": 35,
       ">91": 11
     },
     "vegetation_plot_counts": {
-      "Örttyper": 9,
-      "Blåbärstyper": 43,
-      "Lingon-fattigristyper": 20
+      "Örttyper": 8,
+      "Blåbärstyper": 41,
+      "Lingon-fattigristyper": 19
     },
     "environment_occurrences": [
       {
@@ -145995,23 +145995,23 @@
       "/images/svampbilder/Matsvampar/Boletus edulis-4.jpg",
       "/images/svampbilder/Matsvampar/Boletus edulis-5.jpg"
     ],
-    "total_plot_count": 199,
+    "total_plot_count": 197,
     "forest_type_plot_counts": {
-      "Granskog": 71,
+      "Granskog": 70,
       "Tallskog": 44,
-      "Barrblandskog": 21,
+      "Barrblandskog": 20,
       "Lövblandskog": 24,
       "Lövskog": 28,
       "EkBokskog": 4,
       "Naturbete": 5
     },
     "stand_age_plot_counts": {
-      "1-40": 87,
-      "41-90": 83,
+      "1-40": 86,
+      "41-90": 82,
       ">91": 19
     },
     "vegetation_plot_counts": {
-      "Örttyper": 78,
+      "Örttyper": 76,
       "Blåbärstyper": 100,
       "Lingon-fattigristyper": 11
     },
@@ -148768,25 +148768,25 @@
       "/images/svampbilder/Matsvampar/Russula paludosa-2.jpg",
       "/images/svampbilder/Matsvampar/Russula paludosa-1.jpg"
     ],
-    "total_plot_count": 185,
+    "total_plot_count": 174,
     "forest_type_plot_counts": {
       "Granskog": 33,
-      "Tallskog": 104,
-      "Barrblandskog": 34,
+      "Tallskog": 95,
+      "Barrblandskog": 32,
       "Lövblandskog": 6,
       "Lövskog": 6,
       "EkBokskog": 0,
       "Naturbete": 0
     },
     "stand_age_plot_counts": {
-      "1-40": 39,
-      "41-90": 63,
-      ">91": 78
+      "1-40": 37,
+      "41-90": 57,
+      ">91": 75
     },
     "vegetation_plot_counts": {
-      "Örttyper": 17,
-      "Blåbärstyper": 112,
-      "Lingon-fattigristyper": 53
+      "Örttyper": 16,
+      "Blåbärstyper": 104,
+      "Lingon-fattigristyper": 51
     },
     "environment_occurrences": [
       {
@@ -150927,24 +150927,24 @@
     "Svamp-grupp-släkte": "Saknas",
     "synlighet": null,
     "images": [],
-    "total_plot_count": 37,
+    "total_plot_count": 36,
     "forest_type_plot_counts": {
       "Granskog": 3,
       "Tallskog": 5,
       "Barrblandskog": 8,
-      "Lövblandskog": 9,
+      "Lövblandskog": 8,
       "Lövskog": 5,
       "EkBokskog": 0,
       "Naturbete": 0
     },
     "stand_age_plot_counts": {
       "1-40": 7,
-      "41-90": 21,
+      "41-90": 20,
       ">91": 9
     },
     "vegetation_plot_counts": {
       "Örttyper": 13,
-      "Blåbärstyper": 12,
+      "Blåbärstyper": 11,
       "Lingon-fattigristyper": 12
     },
     "environment_occurrences": [
@@ -151496,7 +151496,7 @@
     "Svamp-grupp-släkte": "Saknas",
     "synlighet": null,
     "images": [],
-    "total_plot_count": 153,
+    "total_plot_count": 152,
     "forest_type_plot_counts": {
       "Granskog": 42,
       "Tallskog": 27,
@@ -151509,10 +151509,10 @@
     "stand_age_plot_counts": {
       "1-40": 47,
       "41-90": 61,
-      ">91": 43
+      ">91": 42
     },
     "vegetation_plot_counts": {
-      "Örttyper": 60,
+      "Örttyper": 59,
       "Blåbärstyper": 76,
       "Lingon-fattigristyper": 14
     },
@@ -154094,9 +154094,9 @@
       "/images/svampbilder/Giftsvampar/Lactarius necator-33-4747.jpg",
       "/images/svampbilder/Giftsvampar/Lactarius necator-32-4747.jpg"
     ],
-    "total_plot_count": 180,
+    "total_plot_count": 177,
     "forest_type_plot_counts": {
-      "Granskog": 87,
+      "Granskog": 84,
       "Tallskog": 25,
       "Barrblandskog": 15,
       "Lövblandskog": 21,
@@ -154105,13 +154105,13 @@
       "Naturbete": 5
     },
     "stand_age_plot_counts": {
-      "1-40": 67,
-      "41-90": 85,
+      "1-40": 66,
+      "41-90": 83,
       ">91": 23
     },
     "vegetation_plot_counts": {
       "Örttyper": 66,
-      "Blåbärstyper": 92,
+      "Blåbärstyper": 91,
       "Lingon-fattigristyper": 4
     },
     "environment_occurrences": [
@@ -158143,10 +158143,10 @@
     "images": [
       "/images/svampbilder/RödlistadeSvampar/Lactarius musteus-4745.jpg"
     ],
-    "total_plot_count": 36,
+    "total_plot_count": 34,
     "forest_type_plot_counts": {
       "Granskog": 0,
-      "Tallskog": 24,
+      "Tallskog": 22,
       "Barrblandskog": 4,
       "Lövblandskog": 4,
       "Lövskog": 4,
@@ -158154,14 +158154,14 @@
       "Naturbete": 0
     },
     "stand_age_plot_counts": {
-      "1-40": 13,
-      "41-90": 16,
+      "1-40": 12,
+      "41-90": 15,
       ">91": 7
     },
     "vegetation_plot_counts": {
       "Örttyper": 2,
-      "Blåbärstyper": 18,
-      "Lingon-fattigristyper": 16
+      "Blåbärstyper": 17,
+      "Lingon-fattigristyper": 15
     },
     "environment_occurrences": [
       {
@@ -159057,25 +159057,25 @@
       "/images/svampbilder/Matsvampar/Russula decolorans-2.jpg",
       "/images/svampbilder/Matsvampar/Russula decolorans-3.jpg"
     ],
-    "total_plot_count": 248,
+    "total_plot_count": 226,
     "forest_type_plot_counts": {
-      "Granskog": 50,
-      "Tallskog": 134,
-      "Barrblandskog": 52,
+      "Granskog": 48,
+      "Tallskog": 116,
+      "Barrblandskog": 50,
       "Lövblandskog": 6,
       "Lövskog": 4,
       "EkBokskog": 0,
       "Naturbete": 0
     },
     "stand_age_plot_counts": {
-      "1-40": 42,
-      "41-90": 89,
-      ">91": 110
+      "1-40": 39,
+      "41-90": 77,
+      ">91": 103
     },
     "vegetation_plot_counts": {
-      "Örttyper": 28,
-      "Blåbärstyper": 139,
-      "Lingon-fattigristyper": 77
+      "Örttyper": 27,
+      "Blåbärstyper": 124,
+      "Lingon-fattigristyper": 71
     },
     "environment_occurrences": [
       {
@@ -159900,25 +159900,25 @@
     "Svamp-grupp-släkte": "Saknas",
     "synlighet": null,
     "images": [],
-    "total_plot_count": 241,
+    "total_plot_count": 225,
     "forest_type_plot_counts": {
-      "Granskog": 47,
-      "Tallskog": 61,
+      "Granskog": 44,
+      "Tallskog": 56,
       "Barrblandskog": 37,
-      "Lövblandskog": 48,
-      "Lövskog": 29,
+      "Lövblandskog": 44,
+      "Lövskog": 28,
       "EkBokskog": 0,
       "Naturbete": 0
     },
     "stand_age_plot_counts": {
-      "1-40": 94,
-      "41-90": 77,
-      ">91": 64
+      "1-40": 86,
+      "41-90": 72,
+      ">91": 61
     },
     "vegetation_plot_counts": {
       "Örttyper": 47,
-      "Blåbärstyper": 136,
-      "Lingon-fattigristyper": 53
+      "Blåbärstyper": 123,
+      "Lingon-fattigristyper": 50
     },
     "environment_occurrences": [
       {
@@ -161060,11 +161060,11 @@
     "Svamp-grupp-släkte": "Saknas",
     "synlighet": null,
     "images": [],
-    "total_plot_count": 135,
+    "total_plot_count": 130,
     "forest_type_plot_counts": {
-      "Granskog": 58,
+      "Granskog": 54,
       "Tallskog": 37,
-      "Barrblandskog": 26,
+      "Barrblandskog": 25,
       "Lövblandskog": 13,
       "Lövskog": 1,
       "EkBokskog": 0,
@@ -161072,12 +161072,12 @@
     },
     "stand_age_plot_counts": {
       "1-40": 25,
-      "41-90": 68,
-      ">91": 39
+      "41-90": 65,
+      ">91": 37
     },
     "vegetation_plot_counts": {
       "Örttyper": 18,
-      "Blåbärstyper": 99,
+      "Blåbärstyper": 94,
       "Lingon-fattigristyper": 10
     },
     "environment_occurrences": [
@@ -162583,25 +162583,25 @@
     "Svamp-grupp-släkte": "Saknas",
     "synlighet": null,
     "images": [],
-    "total_plot_count": 485,
+    "total_plot_count": 451,
     "forest_type_plot_counts": {
-      "Granskog": 103,
-      "Tallskog": 114,
-      "Barrblandskog": 83,
-      "Lövblandskog": 74,
-      "Lövskog": 53,
+      "Granskog": 93,
+      "Tallskog": 104,
+      "Barrblandskog": 80,
+      "Lövblandskog": 73,
+      "Lövskog": 52,
       "EkBokskog": 6,
       "Naturbete": 1
     },
     "stand_age_plot_counts": {
-      "1-40": 175,
-      "41-90": 179,
-      ">91": 119
+      "1-40": 166,
+      "41-90": 167,
+      ">91": 108
     },
     "vegetation_plot_counts": {
-      "Örttyper": 132,
-      "Blåbärstyper": 241,
-      "Lingon-fattigristyper": 101
+      "Örttyper": 130,
+      "Blåbärstyper": 216,
+      "Lingon-fattigristyper": 94
     },
     "environment_occurrences": [
       {
@@ -163696,25 +163696,25 @@
     "Svamp-grupp-släkte": "Saknas",
     "synlighet": null,
     "images": [],
-    "total_plot_count": 202,
+    "total_plot_count": 198,
     "forest_type_plot_counts": {
       "Granskog": 58,
-      "Tallskog": 58,
+      "Tallskog": 56,
       "Barrblandskog": 26,
-      "Lövblandskog": 26,
+      "Lövblandskog": 25,
       "Lövskog": 22,
       "EkBokskog": 2,
-      "Naturbete": 7
+      "Naturbete": 6
     },
     "stand_age_plot_counts": {
-      "1-40": 66,
-      "41-90": 102,
-      ">91": 29
+      "1-40": 65,
+      "41-90": 101,
+      ">91": 28
     },
     "vegetation_plot_counts": {
-      "Örttyper": 90,
-      "Blåbärstyper": 87,
-      "Lingon-fattigristyper": 15
+      "Örttyper": 89,
+      "Blåbärstyper": 85,
+      "Lingon-fattigristyper": 14
     },
     "environment_occurrences": [
       {
@@ -165216,23 +165216,23 @@
     "Svamp-grupp-släkte": "Saknas",
     "synlighet": null,
     "images": [],
-    "total_plot_count": 56,
+    "total_plot_count": 53,
     "forest_type_plot_counts": {
       "Granskog": 4,
       "Tallskog": 2,
       "Barrblandskog": 2,
       "Lövblandskog": 10,
-      "Lövskog": 27,
+      "Lövskog": 26,
       "EkBokskog": 0,
-      "Naturbete": 11
+      "Naturbete": 9
     },
     "stand_age_plot_counts": {
-      "1-40": 22,
-      "41-90": 24,
+      "1-40": 21,
+      "41-90": 23,
       ">91": 3
     },
     "vegetation_plot_counts": {
-      "Örttyper": 45,
+      "Örttyper": 42,
       "Blåbärstyper": 10,
       "Lingon-fattigristyper": 0
     },
@@ -166812,10 +166812,10 @@
     "Svamp-grupp-släkte": "Saknas",
     "synlighet": null,
     "images": [],
-    "total_plot_count": 201,
+    "total_plot_count": 197,
     "forest_type_plot_counts": {
-      "Granskog": 71,
-      "Tallskog": 51,
+      "Granskog": 69,
+      "Tallskog": 49,
       "Barrblandskog": 35,
       "Lövblandskog": 25,
       "Lövskog": 14,
@@ -166824,12 +166824,12 @@
     },
     "stand_age_plot_counts": {
       "1-40": 65,
-      "41-90": 96,
-      ">91": 34
+      "41-90": 93,
+      ">91": 33
     },
     "vegetation_plot_counts": {
       "Örttyper": 73,
-      "Blåbärstyper": 100,
+      "Blåbärstyper": 96,
       "Lingon-fattigristyper": 10
     },
     "environment_occurrences": [
@@ -167709,10 +167709,10 @@
     "Svamp-grupp-släkte": "Saknas",
     "synlighet": null,
     "images": [],
-    "total_plot_count": 67,
+    "total_plot_count": 66,
     "forest_type_plot_counts": {
       "Granskog": 21,
-      "Tallskog": 20,
+      "Tallskog": 19,
       "Barrblandskog": 14,
       "Lövblandskog": 5,
       "Lövskog": 5,
@@ -167721,12 +167721,12 @@
     },
     "stand_age_plot_counts": {
       "1-40": 12,
-      "41-90": 39,
+      "41-90": 38,
       ">91": 16
     },
     "vegetation_plot_counts": {
       "Örttyper": 30,
-      "Blåbärstyper": 32,
+      "Blåbärstyper": 31,
       "Lingon-fattigristyper": 3
     },
     "environment_occurrences": [
@@ -178948,10 +178948,10 @@
     "Svamp-grupp-släkte": "Saknas",
     "synlighet": null,
     "images": [],
-    "total_plot_count": 23,
+    "total_plot_count": 22,
     "forest_type_plot_counts": {
       "Granskog": 3,
-      "Tallskog": 9,
+      "Tallskog": 8,
       "Barrblandskog": 2,
       "Lövblandskog": 4,
       "Lövskog": 5,
@@ -178960,12 +178960,12 @@
     },
     "stand_age_plot_counts": {
       "1-40": 12,
-      "41-90": 7,
+      "41-90": 6,
       ">91": 3
     },
     "vegetation_plot_counts": {
       "Örttyper": 2,
-      "Blåbärstyper": 19,
+      "Blåbärstyper": 18,
       "Lingon-fattigristyper": 1
     },
     "environment_occurrences": [
@@ -184612,25 +184612,25 @@
     "Svamp-grupp-släkte": "Saknas",
     "synlighet": null,
     "images": [],
-    "total_plot_count": 265,
+    "total_plot_count": 244,
     "forest_type_plot_counts": {
-      "Granskog": 98,
-      "Tallskog": 65,
-      "Barrblandskog": 53,
+      "Granskog": 91,
+      "Tallskog": 58,
+      "Barrblandskog": 46,
       "Lövblandskog": 40,
       "Lövskog": 5,
       "EkBokskog": 2,
       "Naturbete": 2
     },
     "stand_age_plot_counts": {
-      "1-40": 62,
-      "41-90": 115,
-      ">91": 86
+      "1-40": 56,
+      "41-90": 105,
+      ">91": 81
     },
     "vegetation_plot_counts": {
       "Örttyper": 69,
-      "Blåbärstyper": 162,
-      "Lingon-fattigristyper": 25
+      "Blåbärstyper": 142,
+      "Lingon-fattigristyper": 24
     },
     "environment_occurrences": [
       {
@@ -185432,25 +185432,25 @@
     "Svamp-grupp-släkte": "Saknas",
     "synlighet": null,
     "images": [],
-    "total_plot_count": 358,
+    "total_plot_count": 313,
     "forest_type_plot_counts": {
-      "Granskog": 90,
-      "Tallskog": 163,
-      "Barrblandskog": 48,
+      "Granskog": 81,
+      "Tallskog": 133,
+      "Barrblandskog": 43,
       "Lövblandskog": 31,
-      "Lövskog": 24,
+      "Lövskog": 23,
       "EkBokskog": 0,
       "Naturbete": 1
     },
     "stand_age_plot_counts": {
-      "1-40": 102,
-      "41-90": 151,
-      ">91": 97
+      "1-40": 91,
+      "41-90": 129,
+      ">91": 87
     },
     "vegetation_plot_counts": {
-      "Örttyper": 65,
-      "Blåbärstyper": 202,
-      "Lingon-fattigristyper": 84
+      "Örttyper": 64,
+      "Blåbärstyper": 172,
+      "Lingon-fattigristyper": 70
     },
     "environment_occurrences": [
       {
@@ -186693,7 +186693,7 @@
     "Svamp-grupp-släkte": "Saknas",
     "synlighet": null,
     "images": [],
-    "total_plot_count": 59,
+    "total_plot_count": 58,
     "forest_type_plot_counts": {
       "Granskog": 14,
       "Tallskog": 3,
@@ -186701,7 +186701,7 @@
       "Lövblandskog": 13,
       "Lövskog": 17,
       "EkBokskog": 3,
-      "Naturbete": 9
+      "Naturbete": 8
     },
     "stand_age_plot_counts": {
       "1-40": 26,
@@ -186709,7 +186709,7 @@
       ">91": 8
     },
     "vegetation_plot_counts": {
-      "Örttyper": 38,
+      "Örttyper": 37,
       "Blåbärstyper": 18,
       "Lingon-fattigristyper": 0
     },
@@ -187734,10 +187734,10 @@
       "/images/svampbilder/Matsvampar/Russula vinosa-3.jpg",
       "/images/svampbilder/Matsvampar/Russula vinosa-2.jpg"
     ],
-    "total_plot_count": 97,
+    "total_plot_count": 95,
     "forest_type_plot_counts": {
-      "Granskog": 25,
-      "Tallskog": 33,
+      "Granskog": 24,
+      "Tallskog": 32,
       "Barrblandskog": 22,
       "Lövblandskog": 9,
       "Lövskog": 3,
@@ -187745,13 +187745,13 @@
       "Naturbete": 0
     },
     "stand_age_plot_counts": {
-      "1-40": 19,
+      "1-40": 18,
       "41-90": 40,
-      ">91": 36
+      ">91": 35
     },
     "vegetation_plot_counts": {
       "Örttyper": 15,
-      "Blåbärstyper": 54,
+      "Blåbärstyper": 52,
       "Lingon-fattigristyper": 25
     },
     "environment_occurrences": [
@@ -191887,25 +191887,25 @@
     "Svamp-grupp-släkte": "Saknas",
     "synlighet": null,
     "images": [],
-    "total_plot_count": 389,
+    "total_plot_count": 358,
     "forest_type_plot_counts": {
-      "Granskog": 85,
-      "Tallskog": 113,
+      "Granskog": 79,
+      "Tallskog": 103,
       "Barrblandskog": 30,
-      "Lövblandskog": 82,
-      "Lövskog": 61,
+      "Lövblandskog": 71,
+      "Lövskog": 58,
       "EkBokskog": 2,
-      "Naturbete": 6
+      "Naturbete": 5
     },
     "stand_age_plot_counts": {
-      "1-40": 266,
-      "41-90": 78,
+      "1-40": 239,
+      "41-90": 76,
       ">91": 35
     },
     "vegetation_plot_counts": {
-      "Örttyper": 103,
-      "Blåbärstyper": 196,
-      "Lingon-fattigristyper": 82
+      "Örttyper": 102,
+      "Blåbärstyper": 177,
+      "Lingon-fattigristyper": 71
     },
     "environment_occurrences": [
       {
@@ -193863,25 +193863,25 @@
       "/images/svampbilder/Matsvampar/Suillus bovinus-2.jpg",
       "/images/svampbilder/Matsvampar/Suillus bovinus-1.jpg"
     ],
-    "total_plot_count": 246,
+    "total_plot_count": 230,
     "forest_type_plot_counts": {
       "Granskog": 44,
-      "Tallskog": 107,
-      "Barrblandskog": 35,
-      "Lövblandskog": 25,
-      "Lövskog": 24,
+      "Tallskog": 96,
+      "Barrblandskog": 34,
+      "Lövblandskog": 24,
+      "Lövskog": 23,
       "EkBokskog": 2,
-      "Naturbete": 5
+      "Naturbete": 3
     },
     "stand_age_plot_counts": {
-      "1-40": 89,
-      "41-90": 97,
+      "1-40": 84,
+      "41-90": 88,
       ">91": 48
     },
     "vegetation_plot_counts": {
-      "Örttyper": 60,
-      "Blåbärstyper": 117,
-      "Lingon-fattigristyper": 61
+      "Örttyper": 56,
+      "Blåbärstyper": 108,
+      "Lingon-fattigristyper": 58
     },
     "environment_occurrences": [
       {

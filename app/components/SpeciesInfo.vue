@@ -82,7 +82,7 @@
 
       <div class="-mx-1 mt-4">
         <!-- Svamp-grupp Icon and Name -->
-        <div class="mb-4">
+        <!-- <div class="mb-4">
           <div v-for="badge in taxonomyBadges" :key="badge.level" class="inline-flex m-1 h-fit align-bottom">
             <UTooltip :text="badge.tooltip">
               <UBadge variant="subtle" size="lg" :color="badge.color" :class="[badge.class, 'pointer-default']">
@@ -94,7 +94,7 @@
             <UButton variant="outline" color="neutral" size="sm" icon="i-lucide-git-branch-plus" label="Visa i träd"
               @click="emit('showPhylogeneticTree', phylogeneticAnchor)" />
           </div>
-        </div>
+        </div> -->
 
         <div class="inline-flex m-1 h-fit align-bottom" v-if="species['Svamp-grupp']">
           <UBadge color="neutral" variant="subtle" size="lg">
@@ -214,10 +214,12 @@
       </UCard>
       <!-- <hr class="my-2" v-if="species.Kriteriedokumentation" /> -->
 
-      <h1 class="text-md font-medium mx-2 mt-4">Läs mer på</h1>
+      <h1 class="text-md font-medium mt-4 mb-2">Läs mer på</h1>
       <UButton v-if="species.Artfakta != 'Information saknas'" :to="stripDetailsFromURL(species.Artfakta)"
-        variant="ghost" target="_blank" class="text-primary-500 w-full" size="xl"
+        variant="solid" color="neutral" target="_blank" class=" mb-4" size="md"
         icon="i-heroicons-arrow-up-right-20-solid" label="Artfakta.se" trailing />
+      <USeparator />
+
       <div v-if="plotChartSections.length" class="mt-5 space-y-4">
         <div>
           <h2 class="text-base font-semibold text-neutral-900">Förekomst i markinventeringens provytor</h2>
@@ -251,9 +253,16 @@
               :gridLine="false" :domainLine="false" />
             <VisAxis type="y" :tickFormat="plotChartPercentTickFormat" :gridLine="false" :domainLine="false" />
             <VisTooltip />
-            <VisCrosshair :template="plotChartTooltip" />
+            <VisCrosshair :color="section.colors" :template="plotChartTooltip" />
           </VisXYContainer>
         </div>
+      </div>
+
+      <div v-else class="mt-4">
+        <h2 class="text-base font-semibold text-neutral-900">Förekomst i markinventeringens provytor</h2>
+        <p class="text-sm text-neutral-500">
+          0 provytor med fynd
+        </p>
       </div>
 
       <!-- <UButton v-if="species.Svampguiden && species.Svampguiden !== '0'" :to="stripDetailsFromURL(species.Svampguiden)"
@@ -485,7 +494,7 @@ const plotChartTickFormat = (section, value) => {
 const plotChartPercentTickFormat = (value) => `${Math.round(Number(value) || 0)}%`
 const plotChartTooltip = (d) => {
   if (!d) return ''
-  return `<div class="text-sm"><strong>${d.label}</strong><br/>Arten: ${d.value} provytor (${d.speciesPercent.toFixed(0)}%)<br/>Alla provytor: ${d.globalCount} (${d.globalPercent.toFixed(0)}%)</div>`
+  return `<div class="text-sm"><strong>${d.label}</strong><br/><span style="color: ${d.speciesColor}">●</span> ${d.value} av ${d.totalPlots} provytor<br/><span style="color: ${d.globalColor}">●</span> ${d.globalCount} av ${d.globalTotalPlots} provytor</div>`
 }
 
 const buildPlotChartData = (countMap, globalCountMap) => {
@@ -497,8 +506,10 @@ const buildPlotChartData = (countMap, globalCountMap) => {
       index,
       label,
       value: Number(value || 0),
+      totalPlots,
       speciesPercent: totalPlots > 0 ? (Number(value || 0) / totalPlots) * 100 : 0,
       globalCount: Number(globalCountMap?.[label] || 0),
+      globalTotalPlots,
       globalPercent: globalTotalPlots > 0 ? (Number(globalCountMap?.[label] || 0) / globalTotalPlots) * 100 : 0
     }))
 }
@@ -537,13 +548,22 @@ const plotChartSections = computed(() => {
 
   return sections
     .filter((section) => section.data.length > 0)
-    .map((section) => ({
-      ...section,
-      total: section.data.reduce((sum, entry) => sum + entry.value, 0),
-      colors: [
+    .map((section) => {
+      const colors = [
         plotChartColorBySection[section.key] || '#b1835e',
         plotChartComparisonColorBySection[section.key] || '#dcc7ad'
       ]
-    }))
+
+      return {
+        ...section,
+        data: section.data.map((entry) => ({
+          ...entry,
+          speciesColor: colors[0],
+          globalColor: colors[1]
+        })),
+        total: section.data.reduce((sum, entry) => sum + entry.value, 0),
+        colors
+      }
+    })
 })
 </script>
