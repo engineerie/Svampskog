@@ -168,7 +168,7 @@ const expandedTreeNodes: MycorrhizaNode[] = [
   { id: 'linden', label: 'Lind', icon: '🌳', kind: 'tree', branch: 'ecto' },
   { id: 'maple', label: 'Skogslönn', icon: '🌳', kind: 'tree', branch: 'arbuscular' },
   { id: 'whitebeam', label: 'Oxel', icon: '🌳', kind: 'tree', branch: 'arbuscular' },
-  { id: 'rowan', label: 'Rönn', icon: '🌳', kind: 'tree', branch: 'shared' },
+  { id: 'rowan', label: 'Rönn', icon: '🌳', kind: 'tree', branch: 'arbuscular' },
   { id: 'goat-willow', label: 'Sälg', icon: '🌳', kind: 'tree', branch: 'shared' },
   { id: 'pine', label: 'Tall', icon: '🌲', kind: 'tree', branch: 'ecto' }
 ]
