@@ -8,8 +8,8 @@
       <VisXYContainer :data="chartData" :height="300" :xDomain="[0, 100]" :yDomain="[0, 30]">
         <VisArea :x="xAccessor" :y="yAccessor" :color="() => areaColor" :curveType="CurveType.MonotoneX" :opacity="0.65"
           :line="true" :lineColor="() => lineColor" :lineWidth="1.5" />
-        <VisAxis type="x" label="📏 Avstånd från fruktkroppen" :tickValues="xTickValues" :tickFormat="formatDistance"
-          :gridLine="false" />
+        <VisAxis type="x" label="📏 Hur långt sporer sprids från en fruktkropp" :tickValues="xTickValues"
+          :tickFormat="formatDistance" :gridLine="false" />
         <VisAxis type="y" label="💨 Mängd sporer" :tickValues="noTicks" :tickLine="false" :gridLine="false" />
       </VisXYContainer>
     </ClientOnly>

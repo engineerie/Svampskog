@@ -1,40 +1,41 @@
 <template>
-  <figure class="w-full" aria-labelledby="biomass-carbon-treemap-title">
-    <figcaption id="biomass-carbon-treemap-title" class="mb-3 text-sm font-medium text-neutral-700">
+  <figure class="w-full" aria-labelledby="biomass-carbon-donut-title">
+    <figcaption id="biomass-carbon-donut-title" class="mb-3 text-sm font-medium text-neutral-700">
       Biomassa per organismgrupp (Gt C)
     </figcaption>
 
-    <div class="mb-6 flex flex-wrap gap-x-8 gap-y-3 text-xs text-neutral-600">
-      <div v-for="item in chartData" :key="item.name" class="mr-2 flex items-center gap-2 last:mr-0">
-        <span class="size-2.5 shrink-0 rounded-sm" :style="{ backgroundColor: item.color }" aria-hidden="true" />
-        <span>{{ item.name }}: {{ formatValue(item.value) }} Gt C</span>
+    <div class="flex flex-col items-center gap-5 sm:flex-row sm:justify-center sm:gap-10">
+      <div class="w-full max-w-80" :style="donutLabelColors">
+        <ClientOnly>
+          <VisSingleContainer :data="chartData" :height="320">
+            <VisDonut
+              :value="valueAccessor"
+              :color="colorAccessor"
+              :radius="128"
+              :arc-width="54"
+              :pad-angle="0.015"
+              :corner-radius="3"
+              :central-label="formatValue(totalBiomass)"
+              central-sub-label="Gt C totalt"
+            />
+          </VisSingleContainer>
+        </ClientOnly>
+
+      </div>
+
+      <div class="grid w-full max-w-sm gap-3 text-sm text-neutral-700">
+        <div v-for="item in chartData" :key="item.name" class="flex items-center gap-3">
+          <span class="size-3 shrink-0 rounded-sm" :style="{ backgroundColor: item.color }" aria-hidden="true" />
+          <span class="min-w-0 flex-1">{{ item.name }}</span>
+          <strong class="tabular-nums text-neutral-900">{{ formatValue(item.value) }} Gt C</strong>
+        </div>
       </div>
     </div>
-
-    <ClientOnly>
-      <VisSingleContainer :data="chartData" :height="360">
-        <VisTreemap
-          :id="idAccessor"
-          :value="valueAccessor"
-          :layers="treemapLayers"
-          :tileColor="tileColor"
-          :tileLabel="tileLabel"
-          :tilePadding="3"
-          :tileBorderRadius="4"
-          :labelOffsetX="8"
-          :labelOffsetY="8"
-          :enableLightnessVariance="false"
-          :enableTileLabelFontSizeVariation="true"
-          :tileShowHtmlTooltip="true"
-        />
-      </VisSingleContainer>
-    </ClientOnly>
   </figure>
 </template>
 
 <script setup lang="ts">
-import type { TreemapNode } from '@unovis/ts'
-import { VisSingleContainer, VisTreemap } from '@unovis/vue'
+import { VisDonut, VisSingleContainer } from '@unovis/vue'
 
 type BiomassDatum = {
   name: string
@@ -56,14 +57,13 @@ const chartData: BiomassDatum[] = [
   }
 ]
 
-const treemapLayers = [(datum: BiomassDatum) => datum.name]
-const idAccessor = (datum: BiomassDatum) => datum.name
 const valueAccessor = (datum: BiomassDatum) => datum.value
+const colorAccessor = (datum: BiomassDatum) => datum.color
 const formatValue = (value: number) => value.toLocaleString('sv-SE', { maximumFractionDigits: 2 })
+const totalBiomass = chartData.reduce((sum, datum) => sum + datum.value, 0)
 
-const tileColor = (node: TreemapNode<BiomassDatum>) => node.data.datum?.color ?? '#94a3b8'
-const tileLabel = (node: TreemapNode<BiomassDatum>) => {
-  const datum = node.data.datum
-  return datum ? `${datum.name}\n${formatValue(datum.value)} Gt C` : ''
+const donutLabelColors = {
+  '--vis-donut-central-label-text-color': '#171717',
+  '--vis-donut-central-sub-label-text-color': '#737373'
 }
 </script>

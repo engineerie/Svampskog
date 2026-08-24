@@ -97,6 +97,8 @@
                         </UButton>
                     </div>
                     <UPageSection v-if="!isMobile" class="hidden md:block"
+                        title="Så använder du skogsskötselverktyget"
+                        description="Se hur du väljer skötselmetod, jämför påverkan och tolkar tidslinjer och diagram."
                         :ui="{ title: 'text-start lg:text-center', description: 'text-start lg:text-center', container: 'pb-0 sm:pb-0 lg:pb-0' }">
                         <div
                             class=" ring ring-muted/60 rounded-xl bg-muted/20 min-h-64 flex items-center justify-center overflow-hidden">

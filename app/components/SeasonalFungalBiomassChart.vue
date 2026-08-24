@@ -4,10 +4,22 @@
       Mycelets och fruktkropparnas biomassa under en femårsperiod
     </figcaption>
 
-    <div class="mb-4 flex flex-wrap justify-center gap-x-8 gap-y-2 text-sm text-neutral-700">
-      <div v-for="item in legendItems" :key="item.label" class="flex items-center gap-2">
-        <span class="size-3 rounded-sm" :style="{ backgroundColor: item.color }" aria-hidden="true" />
-        <span>{{ item.label }}</span>
+    <div class="mb-4 flex flex-wrap items-center justify-center gap-x-8 gap-y-2 text-sm text-neutral-700">
+      <div class="flex flex-wrap items-center justify-center gap-x-8 gap-y-2">
+        <div v-for="item in legendItems" :key="item.label" class="flex items-center gap-2">
+          <span class="size-3 rounded-sm" :style="{ backgroundColor: item.color }" aria-hidden="true" />
+          <span>{{ item.label }}</span>
+        </div>
+      </div>
+
+      <div
+        class="flex flex-wrap items-center justify-center gap-2"
+        aria-label="Årstider">
+        <div v-for="season in seasonLegendItems" :key="season.label"
+          class="flex items-center gap-1.5 rounded-md px-2 py-1" :style="{ backgroundColor: season.color }">
+          <span aria-hidden="true">{{ season.icon }}</span>
+          <span>{{ season.label }}</span>
+        </div>
       </div>
     </div>
 

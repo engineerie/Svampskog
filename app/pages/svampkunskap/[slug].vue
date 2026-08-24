@@ -60,19 +60,27 @@ if (!post.value.image?.src) {
       <template #right>
         <div></div>
       </template>
-      <UPageHero :title="post.title"
-        :ui="{ title: 'text-4xl sm:text-6xl text-pretty tracking-tight font-medium', wrapper: 'text-center', container: 'lg:pb-14 pb-12 lg:pt-28 px-0 sm:px-0 md:px-0 lg:px-0 sm:gap-y-14' }">
 
-        <!-- <div class="w-full rounded-lg bg-muted/50 ring-muted/50 ring flex item-center justify-center h-fit">
+      <!-- <USeparator class="lg:pb-8 " /> -->
+    </UPage>
+
+
+    <UPage>
+
+      <UPageBody>
+        <UPageHeader :title="post.title"
+          :ui="{ title: 'text-4xl sm:text-6xl text-pretty tracking-tight font-medium text-center', wrapper: 'lg:flex-col', root: 'border-none' }">
+
+          <!-- <div class="w-full rounded-lg bg-muted/50 ring-muted/50 ring flex item-center justify-center h-fit">
           <NuxtImg :src="post.image.src" class="h-100 w-full" />
         </div> -->
-        <template #headline>
-          <UBadge v-if="postBadge" v-bind="postBadge" color="neutral" variant="subtle" size="lg" />
-          <!-- <span class="text-(--ui-text-muted)">&middot;</span> -->
-          <!-- <time class="text-(--ui-text-muted)">{{ new Date(post.date).toLocaleDateString('en', { year: 'numeric', month: 'short', day: 'numeric' }) }}</time> -->
-        </template>
+          <template #headline>
+            <UBadge v-if="postBadge" v-bind="postBadge" color="neutral" variant="subtle" size="lg" />
+            <!-- <span class="text-(--ui-text-muted)">&middot;</span> -->
+            <!-- <time class="text-(--ui-text-muted)">{{ new Date(post.date).toLocaleDateString('en', { year: 'numeric', month: 'short', day: 'numeric' }) }}</time> -->
+          </template>
 
-        <!-- <div class="flex flex-wrap items-center gap-3 mt-4">
+          <!-- <div class="flex flex-wrap items-center gap-3 mt-4">
         <UButton
           v-for="(author, index) in post.authors"
           :key="index"
@@ -91,14 +99,7 @@ if (!post.value.image?.src) {
           {{ author.name }}
         </UButton>
       </div> -->
-      </UPageHero>
-      <!-- <USeparator class="lg:pb-8 " /> -->
-    </UPage>
-
-
-    <UPage>
-
-      <UPageBody>
+        </UPageHeader>
         <ContentRenderer v-if="post" :value="post" />
 
         <USeparator v-if="surround?.length" />
@@ -111,8 +112,9 @@ if (!post.value.image?.src) {
       </template>
       <template #left>
         <UPageAside>
-
-          <UContentNavigation :navigation="navigation" variant="pill" />
+          <UButton to="/svampkunskap" label="Tillbaka till index" class="mb-4 w-full" size="md" color="neutral"
+            variant="soft" icon="i-heroicons-arrow-left" />
+          <UContentNavigation :navigation="navigation" variant="link" />
         </UPageAside>
       </template>
     </UPage>

@@ -178,7 +178,8 @@ function redirect() {
                 class="w-full justify-center lg:justify-start" />
             </div>
           </div>
-          <UPageSection v-if="!isMobile" class="hidden md:block"
+          <UPageSection v-if="!isMobile" class="hidden md:block" title="Så använder du svampsökningen"
+            description="Se hur du väljer skogsmiljö och navigerar artlistorna baserade på DNA-analyser och fruktkroppsfynd."
             :ui="{ title: 'text-start lg:text-center', description: 'text-start lg:text-center', container: 'pb-0 sm:pb-0 lg:pb-0' }">
             <div
               class=" ring ring-muted/60 rounded-xl bg-muted/20 min-h-64 flex items-center justify-center overflow-hidden">

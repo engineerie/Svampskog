@@ -71,8 +71,8 @@ methodSelectorSection:
   description: Jämför skötselmetoder utifrån deras påverkan.
 navigation: false
 timelineAndChartsIntro:
-  title: Tidslinjer och diagram
-  description: Jämför olika skötselmetoder och deras påverkan med illustrerade tidslinjer och diagram.
+  title: Underlag för jämförelserna
+  description: Här kan du läsa om hur jämförelserna är uppbyggda och vilket underlag de bygger på. Tidslinjer och diagram visar hur olika skötselmetoder kan påverka mykorrhizasvampar över tid.
 timelineSection:
   headline: Tidslinje
   title: Avverkningens faser i bild och text

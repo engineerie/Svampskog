@@ -1,28 +1,69 @@
 <template>
   <section class="w-full">
-    <div class="my-5">
+    <!-- <div class="my-5">
       <h2 class="text-lg font-semibold text-neutral-900">Mykorrhizasvamparnas synlighet</h2>
-      <p class="mt-1 max-w-2xl text-sm text-neutral-600">
-        Diagrammet visar vilka mykorrhizasvampar som är väl synliga och vilka som är svåra att upptäcka. Underlaget
-        bygger på eDNA-analyser av markprover från Markinventeringen.
-      </p>
-    </div>
 
-    <div class="my-5 grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
-      <label v-for="selector in selectors" :key="selector.key" class="space-y-1.5">
-        <span class="text-xs font-medium text-neutral-600">{{ selector.label }}</span>
-        <USelect v-model="selection[selector.key]" :items="selector.items" class="w-full" value-key="value"
-          label-key="label" variant="outline" />
-      </label>
-    </div>
+    </div> -->
 
-    <div class="my-4 flex flex-wrap gap-x-8 gap-y-3 text-sm text-neutral-600">
-      <div v-for="item in legendItems" :key="item.label" class="flex items-center gap-2">
-        <span class="size-3 shrink-0 rounded-sm" :style="{ backgroundColor: item.color }" aria-hidden="true" />
-        <span>{{ item.label }} ({{ item.count }} {{ item.count === 1 ? 'art' : 'arter' }})</span>
+
+
+    <div class="my-4">
+      <div class="flex w-full justify-between items-center gap-2">
+
+
+        <p class=" text-sm text-neutral-700">
+          <span class="font-medium text-neutral-900">Aktuell miljö:</span> {{ currentEnvironmentLabel }}
+        </p>
+        <UPopover class="hidden md:block" :content="{ align: 'end', side: 'bottom' }">
+          <UButton label="Byt miljö" color="neutral" variant="outline" class="ring-muted/50" />
+
+          <template #content>
+            <div class="grid w-96 gap-3 p-4 sm:grid-cols-2">
+              <label v-for="selector in selectors" :key="selector.key" class="space-y-1.5">
+                <span class="text-xs font-medium text-neutral-600">{{ selector.label }}</span>
+                <USelect v-model="selection[selector.key]" :items="selector.items" class="w-full" value-key="value"
+                  label-key="label" variant="outline" />
+              </label>
+            </div>
+          </template>
+        </UPopover>
+
+        <UDrawer class="md:hidden" title="Byt miljö" :ui="{ title: 'text-xl' }">
+          <UButton label="Byt miljö" color="neutral" variant="outline" class="ring-muted/50" />
+
+          <template #body>
+            <div class="grid gap-4">
+              <label v-for="selector in selectors" :key="selector.key" class="space-y-1.5">
+                <span class="text-sm font-medium text-neutral-700">{{ selector.label }}</span>
+                <USelect v-model="selection[selector.key]" :items="selector.items" class="w-full" size="xl"
+                  value-key="value" label-key="label" variant="outline" />
+              </label>
+            </div>
+          </template>
+        </UDrawer>
+      </div>
+      <div class="flex flex-wrap items-center justify-between gap-3 text-sm text-neutral-600">
+        <div class="flex flex-wrap items-center gap-1">
+          <span>Urvalet baseras på {{ sampleCount || '…' }} provtagna skogar.</span>
+          <span v-if="sampleCount > 0 && sampleCount < 10"
+            class="inline-flex items-center gap-1.5 rounded-md bg-amber-50 px-2 py-1 font-medium text-amber-700"
+            role="status">
+            <UIcon name="i-lucide-triangle-alert" class="size-4 shrink-0 text-amber-500" aria-hidden="true" />
+            Lågt antal prover
+          </span>
+        </div>
+
+
       </div>
     </div>
-
+    <div class="my-4 flex justify-end">
+      <UTabs v-model="chartMode" :items="chartModeTabs" size="sm" :ui="{
+        root: '',
+        list: 'flex-nowrap gap-2 bg-transparent',
+        indicator: 'bg-white border border-muted/50 shadow',
+        trigger: 'data-[state=active]:text-neutral-800 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary'
+      }" aria-label="Välj diagramtyp" />
+    </div>
     <div v-if="pending && !chartData.length" class="flex h-96 items-center justify-center text-sm text-neutral-500">
       Laddar eDNA-data…
     </div>
@@ -32,60 +73,86 @@
       {{ errorMessage }}
     </div>
 
-    <figure v-else-if="chartData.length" aria-labelledby="edna-visibility-treemap-title">
-      <figcaption id="edna-visibility-treemap-title" class="sr-only">
-        {{ chartData.length }} svamparter grupperade efter synlighet
+    <figure v-else-if="chartData.length" aria-labelledby="edna-visibility-chart-title">
+      <figcaption id="edna-visibility-chart-title" class="sr-only">
+        {{ chartData.length }} svamparter grupperade efter synlighet som {{ chartModeLabel }}
       </figcaption>
 
       <ClientOnly>
-        <div ref="treemapWrapper" class="relative" @click="selectedSpecies = null">
-          <div v-if="pending"
-            class="pointer-events-none absolute right-3 top-3 z-20 rounded-full bg-white/90 px-3 py-1.5 text-xs text-neutral-600 shadow-sm ring ring-neutral-200">
-            Uppdaterar…
-          </div>
-          <div v-else-if="errorMessage"
-            class="pointer-events-none absolute right-3 top-3 z-20 rounded-full bg-red-50/95 px-3 py-1.5 text-xs text-red-700 shadow-sm ring ring-red-200">
-            {{ errorMessage }}
-          </div>
+        <div v-if="chartMode === 'donut'">
+          <div class="flex flex-col items-center gap-5 sm:flex-row sm:justify-center sm:gap-10">
+            <div class="w-full max-w-80" :style="donutLabelColors">
+              <VisSingleContainer :data="donutData" :height="320">
+                <VisDonut :id="donutIdAccessor" :value="donutValueAccessor" :color="donutColorAccessor" :radius="128"
+                  :arc-width="54" :pad-angle="0.025" :corner-radius="4" :central-label="formatCount(chartData.length)"
+                  central-sub-label="arter totalt" />
+              </VisSingleContainer>
+            </div>
 
-          <VisSingleContainer :data="chartData" :height="420">
-            <VisTreemap :id="idAccessor" :value="valueAccessor" :layers="treemapLayers" :tileColor="tileColor"
-              :tileLabel="tileLabel" :tilePadding="3" :tileBorderRadius="4" :labelOffsetX="7" :labelOffsetY="7"
-              :labelInternalNodes="false" :enableLightnessVariance="false" :enableTileLabelFontSizeVariation="false"
-              :tileShowHtmlTooltip="false" :showTileClickAffordance="true" :events="treemapEvents" />
-          </VisSingleContainer>
-
-          <div v-if="selectedSpecies"
-            class="pointer-events-none absolute z-20 max-w-64 rounded-lg bg-white px-3 py-2 text-sm shadow-lg ring ring-neutral-200"
-            :style="tooltipStyle" role="tooltip">
-            <div class="flex items-start gap-2.5">
-              <img :src="mushroomGroupIcon(selectedSpecies)" :alt="`${mushroomGroup(selectedSpecies)}-ikon`"
-                class="size-8 shrink-0 object-contain">
-              <div class="min-w-0">
-                <strong class="block text-neutral-900">{{ speciesName(selectedSpecies) }}</strong>
-                <em v-if="selectedSpecies.Scientificname" class="block text-xs text-neutral-500">
-                  {{ selectedSpecies.Scientificname }}
-                </em>
-                <span class="mt-1 block text-xs text-neutral-600">
-                  Påträffad i {{ valueAccessor(selectedSpecies) }} av {{ totalSampleCount(selectedSpecies) }} prover
-                </span>
+            <div class="w-full max-w-sm text-sm text-neutral-700">
+              <div class="grid gap-3" aria-label="Färgförklaring">
+                <div v-for="item in legendItems" :key="item.label" class="flex items-center gap-3">
+                  <span class="size-3 shrink-0 rounded-sm" :style="{ backgroundColor: item.color }"
+                    aria-hidden="true" />
+                  <span class="min-w-0 flex-1">{{ item.label }}</span>
+                  <strong class="tabular-nums text-neutral-900">
+                    {{ item.count }} {{ item.count === 1 ? 'art' : 'arter' }}
+                  </strong>
+                </div>
               </div>
             </div>
           </div>
         </div>
+
+        <div v-else>
+          <div class="w-full">
+            <VisXYContainer :data="groupedBarData" :height="160" :padding="{ top: 12, right: 12, bottom: 8, left: 8 }">
+              <VisStackedBar :x="barIndexAccessor" :y="valueAccessor" :color="speciesColorAccessor" :bar-padding="0.1"
+              />
+              <VisAxis type="y" label="Antal skogar" :grid-line="false" />
+              <VisTooltip :triggers="speciesBarTooltipTriggers" :follow-cursor="true" />
+            </VisXYContainer>
+          </div>
+
+          <div class="mt-4 flex flex-wrap gap-x-8 gap-y-3 text-sm text-neutral-600" aria-label="Färgförklaring">
+            <div v-for="item in legendItems" :key="item.label" class="flex items-center gap-2">
+              <span class="size-3 shrink-0 rounded-sm" :style="{ backgroundColor: item.color }" aria-hidden="true" />
+              <span>{{ item.label }} ({{ item.count }} {{ item.count === 1 ? 'art' : 'arter' }})</span>
+            </div>
+          </div>
+
+          <p class="mt-3 text-sm text-neutral-500">
+            Håll pekaren över en stapel för mer information om arten.
+          </p>
+        </div>
+
       </ClientOnly>
     </figure>
 
     <div v-else class="flex h-96 items-center justify-center text-sm text-neutral-500">
       Inga arter hittades för den valda miljön.
     </div>
+    <div class="my-5">
+      <!-- <h2 class="text-lg font-semibold text-neutral-900">Mykorrhizasvamparnas synlighet</h2> -->
+      <p class="mt-1 max-w-2xl text-sm text-neutral-600">
+        Diagrammet visar vilka mykorrhizasvampar som är väl synliga och vilka som är svåra att upptäcka. Underlaget
+        bygger på eDNA-analyser av markprover från Markinventeringen.
+      </p>
+    </div>
   </section>
 </template>
 
 <script setup lang="ts">
-import { Treemap, type TreemapNode } from '@unovis/ts'
-import { VisSingleContainer, VisTreemap, VisTreemapSelectors } from '@unovis/vue'
-import { computed, nextTick, onBeforeUnmount, onMounted, reactive, ref, watch } from 'vue'
+import { StackedBar } from '@unovis/ts'
+import {
+  VisAxis,
+  VisDonut,
+  VisSingleContainer,
+  VisStackedBar,
+  VisTooltip,
+  VisXYContainer,
+} from '@unovis/vue'
+import { computed, onMounted, reactive, ref, watch } from 'vue'
 import validCombinationsData from '~/data/validCombinations.json'
 import {
   forestTypeOptions,
@@ -129,11 +196,17 @@ const selection = reactive<Record<SelectionKey, string>>({
 })
 
 const chartData = ref<EdnaSpecies[]>([])
+const chartMode = ref<'donut' | 'bar'>('donut')
+const chartModeTabs = [
+  { label: 'Cirkeldiagram', value: 'donut', icon: 'i-lucide-chart-pie' },
+  { label: 'Stapeldiagram', value: 'bar', icon: 'fluent:data-bar-vertical-20-regular' }
+]
+const chartModeLabel = computed(() => ({
+  donut: 'donutdiagram',
+  bar: 'stapeldiagram'
+})[chartMode.value])
 const pending = ref(true)
 const errorMessage = ref('')
-const treemapWrapper = ref<HTMLElement | null>(null)
-const selectedSpecies = ref<EdnaSpecies | null>(null)
-const tooltipPosition = reactive({ left: 0, top: 0 })
 const validCombinations = validCombinationsData as EdnaCombination[]
 
 const combinationKeyBySelection: Record<SelectionKey, keyof EdnaCombination> = {
@@ -152,11 +225,8 @@ const baseOptions: Record<SelectionKey, SelectOption[]> = {
 
 const visibilityColors: Record<string, string> = {
   'Svampar som är svåra att se': '#d1bba0',
-  'Svampar som syns': '#a37153',
-  'Synlighet saknas': '#d4d4d4'
+  'Svampar som syns': '#a37153'
 }
-
-const speciesTileColor = '#f8f5f1'
 
 const mushroomGroupIconFiles: Record<string, string> = {
   ovrigt: 'ovrigt.webp',
@@ -176,6 +246,45 @@ const legendItems = computed(() => Object.entries(visibilityColors).map(([label,
   color,
   count: chartData.value.filter(datum => visibilityGroup(datum) === label).length
 })))
+type VisibilityDonutDatum = {
+  id: string
+  value: number
+  color: string
+}
+
+const donutData = computed<VisibilityDonutDatum[]>(() => legendItems.value
+  .filter(item => item.count > 0)
+  .map(item => ({ id: item.label, value: item.count, color: item.color })))
+const visibilityGroupOrder = Object.keys(visibilityColors)
+const donutIdAccessor = (datum: VisibilityDonutDatum) => datum.id
+const donutValueAccessor = (datum: VisibilityDonutDatum) => datum.value
+const donutColorAccessor = (datum: VisibilityDonutDatum) => datum.color
+const formatCount = (value: number) => value.toLocaleString('sv-SE')
+const donutLabelColors = {
+  '--vis-donut-central-label-text-color': '#171717',
+  '--vis-donut-central-sub-label-text-color': '#737373'
+}
+type BarSpeciesDatum = EdnaSpecies & { barPosition: number }
+const groupedBarData = computed<BarSpeciesDatum[]>(() => {
+  let groupIndex = 0
+  let previousGroup = ''
+
+  return [...chartData.value]
+    .sort((a, b) => {
+      const groupDifference = visibilityGroupOrder.indexOf(visibilityGroup(a))
+        - visibilityGroupOrder.indexOf(visibilityGroup(b))
+      return groupDifference || valueAccessor(b) - valueAccessor(a)
+    })
+    .map((species, index) => {
+      const group = visibilityGroup(species)
+      if (index > 0 && group !== previousGroup) groupIndex += 1
+      previousGroup = group
+      return { ...species, barPosition: index + groupIndex * 2 }
+    })
+})
+const barIndexAccessor = (datum: BarSpeciesDatum) => datum.barPosition
+const speciesColorAccessor = (datum: EdnaSpecies) => visibilityColors[visibilityGroup(datum)]
+const sampleCount = computed(() => Number(chartData.value[0]?.sample_env_count) || 0)
 
 function optionIsAvailable(key: SelectionKey, value: string) {
   return validCombinations.some((combination) =>
@@ -199,6 +308,10 @@ const selectors = computed(() => [
   { key: 'standAge' as const, label: 'Beståndsålder', items: optionsFor('standAge') },
   { key: 'vegetationType' as const, label: 'Vegetationstyp', items: optionsFor('vegetationType') }
 ])
+const currentEnvironmentLabel = computed(() => selectors.value
+  .map(selector => selector.items.find(option => option.value === selection[selector.key])?.label)
+  .filter((label): label is string => Boolean(label))
+  .join(' · '))
 
 function visibilityGroup(datum: EdnaSpecies) {
   if (datum.synlighet === 1 || datum.synlighet === '1') return 'Svampar som syns'
@@ -210,18 +323,56 @@ function speciesName(datum: EdnaSpecies) {
   return datum.Commonname?.trim() || datum.Scientificname?.trim() || 'Okänd art'
 }
 
-function speciesKey(datum: EdnaSpecies) {
-  return datum.SpeciesCode?.trim() || datum.Scientificname?.trim() || speciesName(datum)
-}
-
-const treemapLayers = [
-  (datum: EdnaSpecies) => visibilityGroup(datum),
-  (datum: EdnaSpecies) => speciesKey(datum)
-]
-
-const idAccessor = (datum: EdnaSpecies) => speciesKey(datum)
 const valueAccessor = (datum: EdnaSpecies) => Number(datum.sample_plot_count) || 0
 const totalSampleCount = (datum: EdnaSpecies) => Number(datum.sample_env_count) || 0
+
+function resolveSpeciesDatum(payload: unknown): EdnaSpecies | null {
+  if (Array.isArray(payload)) {
+    for (const item of payload) {
+      const species = resolveSpeciesDatum(item)
+      if (species) return species
+    }
+    return null
+  }
+  if (!payload || typeof payload !== 'object') return null
+  const candidate = payload as EdnaSpecies & { datum?: EdnaSpecies, data?: EdnaSpecies, original?: EdnaSpecies }
+  if (candidate.Commonname || candidate.Scientificname) return candidate
+  if (candidate.datum?.Commonname || candidate.datum?.Scientificname) return candidate.datum
+  if (candidate.data?.Commonname || candidate.data?.Scientificname) return candidate.data
+  if (candidate.original?.Commonname || candidate.original?.Scientificname) return candidate.original
+  return null
+}
+
+function escapeHtml(value: string) {
+  return value
+    .replaceAll('&', '&amp;')
+    .replaceAll('<', '&lt;')
+    .replaceAll('>', '&gt;')
+    .replaceAll('"', '&quot;')
+    .replaceAll("'", '&#039;')
+}
+
+function speciesBarTooltip(payload: unknown) {
+  const species = resolveSpeciesDatum(payload)
+  if (!species) return ''
+  const commonName = escapeHtml(speciesName(species))
+  const scientificName = escapeHtml(species.Scientificname?.trim() || '')
+  const groupIcon = escapeHtml(mushroomGroupIcon(species))
+  return `
+    <div style="display: flex; align-items: flex-start; gap: 10px; max-width: 280px">
+      <img src="${groupIcon}" alt="" style="width: 34px; height: 34px; flex-shrink: 0; object-fit: contain" />
+      <div>
+        <div style="font-size: 14px; font-weight: 600">${commonName}</div>
+        ${scientificName ? `<div style="font-size: 12px; color: #737373"><em>${scientificName}</em></div>` : ''}
+        <div style="font-size: 12px; margin-top: 6px">Påträffad i ${valueAccessor(species)} av ${totalSampleCount(species)} prover</div>
+      </div>
+    </div>
+  `
+}
+
+const speciesBarTooltipTriggers = {
+  [StackedBar.selectors.bar]: speciesBarTooltip
+}
 
 function normalizeKey(value: string) {
   return String(value || '')
@@ -234,105 +385,13 @@ function mushroomGroup(datum: EdnaSpecies) {
   return datum['Svamp-grupp-släkte'] || datum['Svamp-grupp'] || 'övrigt'
 }
 
-function mushroomGroupIcon(datum: EdnaSpecies) {
-  const filename = mushroomGroupIconFiles[normalizeKey(mushroomGroup(datum))] || 'default-icon.png'
+function mushroomGroupIconPath(group: string) {
+  const filename = mushroomGroupIconFiles[normalizeKey(group)] || 'default-icon.png'
   return `/images/svampgrupp/${filename}`
 }
 
-function tileColor(node: TreemapNode<EdnaSpecies>) {
-  if (node.depth === 1) {
-    return visibilityColors[String(node.data.key || '')] || '#d4d4d4'
-  }
-  return speciesTileColor
-}
-
-function tileLabel(node: TreemapNode<EdnaSpecies>) {
-  if (node.depth === 1) return ''
-
-  const datum = node.data.datum
-  if (!datum) return ''
-  const tileWidth = Math.max(0, node.x1 - node.x0)
-  const tileHeight = Math.max(0, node.y1 - node.y0)
-  return tileWidth >= 18 && tileHeight >= 18 ? ' ' : ''
-}
-
-const tooltipStyle = computed(() => ({
-  left: `${tooltipPosition.left}px`,
-  top: `${tooltipPosition.top}px`,
-  transform: 'translate(-50%, calc(-100% - 10px))'
-}))
-
-function showSpeciesTooltip(node: TreemapNode<EdnaSpecies>, event: MouseEvent) {
-  event.stopPropagation()
-  const datum = node.data.datum
-  if (!datum) {
-    selectedSpecies.value = null
-    return
-  }
-
-  const bounds = treemapWrapper.value?.getBoundingClientRect()
-  if (!bounds) return
-
-  selectedSpecies.value = datum
-  tooltipPosition.left = Math.max(90, Math.min(bounds.width - 90, event.clientX - bounds.left))
-  tooltipPosition.top = Math.max(70, event.clientY - bounds.top)
-}
-
-function setTileHoverOpacity(node: TreemapNode<EdnaSpecies>, event: MouseEvent, opacity: number) {
-  if (!node.data.datum) return
-  const tile = event.currentTarget as SVGRectElement | null
-  if (!tile) return
-  tile.style.transition = 'opacity 150ms ease'
-  tile.style.opacity = String(opacity)
-}
-
-const treemapEvents = {
-  [Treemap.selectors.tile]: {
-    click: showSpeciesTooltip,
-    mouseenter: (node: TreemapNode<EdnaSpecies>, event: MouseEvent) => setTileHoverOpacity(node, event, 0.65),
-    mouseleave: (node: TreemapNode<EdnaSpecies>, event: MouseEvent) => setTileHoverOpacity(node, event, 1)
-  }
-}
-
-let iconSyncFrame = 0
-let iconSyncTimer: ReturnType<typeof setTimeout> | null = null
-
-function applyMushroomGroupIcons() {
-  const root = treemapWrapper.value
-  if (!root) return
-
-  root.querySelectorAll('.edna-visibility-species-icon').forEach(element => element.remove())
-
-  const tileGroups = Array.from(root.querySelectorAll(`.${VisTreemapSelectors.tileGroup}`)) as SVGGElement[]
-  tileGroups.forEach((tileGroup) => {
-    const node = (tileGroup as SVGGElement & { __data__?: TreemapNode<EdnaSpecies> }).__data__
-    if (!node || node.depth !== 2) return
-
-    const datum = node.data.datum
-    const tileWidth = Math.max(0, node.x1 - node.x0)
-    const tileHeight = Math.max(0, node.y1 - node.y0)
-    if (!datum || tileWidth <= 2 || tileHeight <= 2) return
-
-    const iconSize = Math.min(22, tileWidth - 2, tileHeight - 2)
-    const image = document.createElementNS('http://www.w3.org/2000/svg', 'image')
-    image.setAttribute('href', mushroomGroupIcon(datum))
-    image.setAttribute('x', String(node.x0 + (tileWidth - iconSize) / 2))
-    image.setAttribute('y', String(node.y0 + (tileHeight - iconSize) / 2))
-    image.setAttribute('width', String(iconSize))
-    image.setAttribute('height', String(iconSize))
-    image.setAttribute('class', 'edna-visibility-species-icon')
-    image.setAttribute('preserveAspectRatio', 'xMidYMid meet')
-    image.setAttribute('pointer-events', 'none')
-    tileGroup.appendChild(image)
-  })
-}
-
-async function scheduleIconSync() {
-  await nextTick()
-  if (iconSyncFrame) cancelAnimationFrame(iconSyncFrame)
-  iconSyncFrame = requestAnimationFrame(applyMushroomGroupIcons)
-  if (iconSyncTimer) clearTimeout(iconSyncTimer)
-  iconSyncTimer = setTimeout(applyMushroomGroupIcons, 250)
+function mushroomGroupIcon(datum: EdnaSpecies) {
+  return mushroomGroupIconPath(mushroomGroup(datum))
 }
 
 let requestId = 0
@@ -341,8 +400,6 @@ async function loadChartData() {
   const currentRequestId = ++requestId
   pending.value = true
   errorMessage.value = ''
-  selectedSpecies.value = null
-
   const filename = `edna-${selection.geography}-${selection.forestType}-${selection.standAge}-${selection.vegetationType}.json`
 
   try {
@@ -350,7 +407,7 @@ async function loadChartData() {
     if (currentRequestId !== requestId) return
 
     chartData.value = rows
-      .filter(row => valueAccessor(row) > 0)
+      .filter(row => valueAccessor(row) > 0 && visibilityGroup(row) !== 'Synlighet saknas')
       .sort((a, b) => valueAccessor(b) - valueAccessor(a) || speciesName(a).localeCompare(speciesName(b), 'sv'))
   } catch {
     if (currentRequestId !== requestId) return
@@ -362,21 +419,9 @@ async function loadChartData() {
 
 onMounted(loadChartData)
 
-onBeforeUnmount(() => {
-  if (iconSyncFrame) cancelAnimationFrame(iconSyncFrame)
-  if (iconSyncTimer) clearTimeout(iconSyncTimer)
-})
-
 watch(
   () => [selection.geography, selection.forestType, selection.standAge, selection.vegetationType],
   loadChartData
 )
 
-watch(
-  [chartData, pending],
-  () => {
-    if (!pending.value && chartData.value.length) scheduleIconSync()
-  },
-  { flush: 'post' }
-)
 </script>

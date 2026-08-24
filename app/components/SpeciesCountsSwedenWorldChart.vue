@@ -1,78 +1,41 @@
 <template>
   <figure class="w-full" aria-labelledby="species-counts-title">
-    <figcaption class="mb-4">
-      <h2 id="species-counts-title" class="text-lg font-semibold text-neutral-900">
-        Antal svampar, djur och växter i Sverige och världen
-      </h2>
-      <p class="mt-1 max-w-3xl text-sm text-neutral-600">
-        Välj vilka värden som ska visas. Skalan anpassas automatiskt efter de valda serierna.
-      </p>
-    </figcaption>
+
 
     <div class="mb-4 flex flex-wrap gap-2" role="group" aria-label="Välj värden som visas i diagrammet">
-      <UButton
-        v-for="item in series"
-        :key="item.key"
-        color="neutral"
-        variant="outline"
-        size="sm"
-        class="gap-2 rounded-full transition-colors"
-        :class="isSeriesActive(item.key)
+      <UButton v-for="item in series" :key="item.key" color="neutral" variant="outline" size="sm"
+        class="gap-2 rounded-full transition-colors" :class="isSeriesActive(item.key)
           ? 'bg-white text-neutral-800'
-          : 'bg-neutral-100 text-neutral-400 opacity-60'"
-        :aria-pressed="isSeriesActive(item.key)"
-        @click="toggleSeries(item.key)"
-      >
-        <span
-          class="size-3 rounded-sm transition-opacity"
-          :class="isSeriesActive(item.key) ? 'opacity-100' : 'opacity-30'"
-          :style="{ backgroundColor: item.color }"
-          aria-hidden="true"
-        />
+          : 'bg-neutral-100 text-neutral-400 opacity-60'" :aria-pressed="isSeriesActive(item.key)"
+        @click="toggleSeries(item.key)">
+        <span class="size-3 rounded-sm transition-opacity"
+          :class="isSeriesActive(item.key) ? 'opacity-100' : 'opacity-30'" :style="{ backgroundColor: item.color }"
+          aria-hidden="true" />
         <span>{{ item.label }}</span>
       </UButton>
     </div>
 
     <ClientOnly>
       <div class="species-counts-chart" @click="handleAxisClick">
-      <VisXYContainer
-        :data="chartData"
-        :height="430"
-        :padding="{ top: 10, right: 24, bottom: 8, left: 8 }"
-        :x-domain="xDomain"
-        :y-domain="[-0.5, chartData.length - 0.5]"
-        :y-direction="Direction.South"
-      >
-        <VisTooltip :triggers="tooltipTriggers" :follow-cursor="true" />
-        <VisGroupedBar
-          :x="rowAccessor"
-          :y="valueAccessors"
-          :color="barColors"
-          :orientation="Orientation.Horizontal"
-          :group-padding="0.28"
-          :bar-padding="0.08"
-          :group-max-width="62"
-          :bar-min-height="0"
-          :rounded-corners="3"
-        />
-        <VisAxis
-          type="x"
-          label="Antal arter"
-          :tick-format="formatAxisValue"
-          :grid-line="true"
-          :domain-line="false"
-        />
-        <VisAxis
-          type="y"
-          :tick-values="yTickValues"
-          :tick-format="formatGroup"
-          :grid-line="false"
-          :domain-line="false"
-        />
-      </VisXYContainer>
+        <VisXYContainer :data="chartData" :height="430" :padding="{ top: 10, right: 24, bottom: 8, left: 8 }"
+          :x-domain="xDomain" :y-domain="[-0.5, chartData.length - 0.5]" :y-direction="Direction.South">
+          <VisTooltip :triggers="tooltipTriggers" :follow-cursor="true" />
+          <VisGroupedBar :x="rowAccessor" :y="valueAccessors" :color="barColors" :orientation="Orientation.Horizontal"
+            :group-padding="0.28" :bar-padding="0.08" :group-max-width="62" :bar-min-height="0" :rounded-corners="3" />
+          <VisAxis type="x" label="Antal arter" :tick-format="formatAxisValue" :grid-line="true" :domain-line="false" />
+          <VisAxis type="y" :tick-values="yTickValues" :tick-format="formatGroup" :grid-line="false"
+            :domain-line="false" />
+        </VisXYContainer>
       </div>
     </ClientOnly>
-
+    <figcaption class="my-4">
+      <!-- <h2 id="species-counts-title" class="text-lg font-semibold text-neutral-900">
+        Antal svampar, djur och växter i Sverige och världen
+      </h2> -->
+      <p class="mt-1 max-w-3xl text-sm text-neutral-600">
+        Diagrammet visar antal svampar, djur och växter i Sverige och världen. Klicka på värdena för att anpassa skalan.
+      </p>
+    </figcaption>
   </figure>
 </template>
 
@@ -104,7 +67,7 @@ const chartData: SpeciesDatum[] = [
     sweden: 15_000,
     describedWorldwide: 160_000,
     estimatedWorldwide: 5_000_000,
-    estimatedLabel: '5 miljoner'
+    estimatedLabel: '2-5 miljoner'
   },
   {
     key: 'vertebrates',
@@ -353,5 +316,4 @@ const tooltipTriggers = {
   cursor: default;
   pointer-events: auto;
 }
-
 </style>

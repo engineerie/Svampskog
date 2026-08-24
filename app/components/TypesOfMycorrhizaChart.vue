@@ -24,6 +24,11 @@
           :events="graphEvents" />
       </VisSingleContainer>
     </div>
+
+    <p class="mt-3 text-sm text-neutral-600">
+      I figuren kan du utforska vilka typer av mykorrhiza som olika växtgrupper bildar. Håll pekaren över en grupp,
+      eller tryck på den på mobilen, för att läsa mer.
+    </p>
   </section>
 </template>
 
@@ -117,7 +122,7 @@ const relationshipNodes: MycorrhizaNode[] = [
   },
   {
     id: 'ecto-plants',
-    label: 'Växter',
+    label: 'Vissa växter',
     icon: '🌿',
     kind: 'plant-group',
     branch: 'ecto',

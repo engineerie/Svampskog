@@ -6,43 +6,17 @@
 
     <div class="mb-4 flex flex-wrap justify-center gap-x-6 gap-y-2 text-sm text-neutral-700">
       <div v-for="item in legendItems" :key="item.label" class="flex items-center gap-2">
-        <span
-          class="size-3 rounded-sm"
-          :style="{ backgroundColor: item.color }"
-          aria-hidden="true"
-        />
+        <span class="size-3 rounded-sm" :style="{ backgroundColor: item.color }" aria-hidden="true" />
         <span>{{ item.label }}</span>
       </div>
     </div>
 
     <ClientOnly>
-      <VisXYContainer
-        :data="chartData"
-        :height="300"
-        :padding="{ top: 8, right: 16, bottom: 8, left: 8 }"
-        :xDomain="[-0.5, 1.5]"
-        :yDomain="[0, 100]"
-      >
-        <VisGroupedBar
-          :x="xAccessor"
-          :y="yAccessors"
-          :color="colors"
-          :groupPadding="0.25"
-          :groupMaxWidth="30"
-        />
-        <VisAxis
-          type="x"
-          :tickValues="xTickValues"
-          :tickFormat="formatXTick"
-          :gridLine="false"
-          :domainLine="false"
-        />
-        <VisAxis
-          type="y"
-          :tickValues="yTickValues"
-          :tickFormat="formatPercent"
-          :domainLine="false"
-        />
+      <VisXYContainer :data="chartData" :height="300" :padding="{ top: 8, right: 16, bottom: 8, left: 8 }"
+        :xDomain="[-0.5, 1.5]" :yDomain="[0, 100]">
+        <VisGroupedBar :x="xAccessor" :y="yAccessors" :color="colors" :groupPadding="0.25" />
+        <VisAxis type="x" :tickValues="xTickValues" :tickFormat="formatXTick" :gridLine="false" :domainLine="false" />
+        <VisAxis type="y" :tickValues="yTickValues" :tickFormat="formatPercent" :domainLine="false" />
       </VisXYContainer>
     </ClientOnly>
   </figure>

@@ -1,13 +1,13 @@
 <template>
   <figure class="w-full" aria-labelledby="mycorrhizal-species-share-title">
-    <figcaption class="mb-4">
+    <!-- <figcaption class="mb-4">
       <h2 id="mycorrhizal-species-share-title" class="text-lg font-semibold text-neutral-900">
         Andel svampar som bildar mykorrhiza
       </h2>
       <p class="mt-1 max-w-3xl text-sm text-neutral-600">
         Andel av de kända svamparterna i Sverige och de beskrivna svamparterna i världen.
       </p>
-    </figcaption>
+    </figcaption> -->
 
     <div class="mb-3 flex flex-wrap items-center justify-between gap-3">
       <div class="flex flex-wrap gap-4 text-sm text-neutral-700" aria-label="Färgförklaring">
