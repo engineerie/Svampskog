@@ -47,7 +47,7 @@ const resolvedImages = computed(() => {
 
 const alt = computed(() => props.alt || 'Bildkarusell')
 const resolvedItemClass = computed(() => `${props.itemClass || 'basis-full'} shrink-0`)
-const useFade = computed(() => props.fade ?? true)
+const useFade = computed(() => props.fade ?? false)
 const resolvedFrameClass = computed(() => {
   const aspectClass = props.aspect === 'square'
     ? 'aspect-square'

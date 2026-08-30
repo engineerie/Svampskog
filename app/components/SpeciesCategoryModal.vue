@@ -7,7 +7,7 @@
       <template #body>
         <div class="flex min-h-0 flex-col">
           <div class="border-b border-muted/50 p-4 sm:p-6">
-            <div v-if="props.category === 'conservation'" class="mb-4 grid grid-cols-2 gap-2" role="group"
+            <div v-if="isConservationCategory" class="mb-4 grid grid-cols-2 gap-2" role="group"
               aria-label="Välj typ av naturvårdsart">
               <UButton v-for="option in conservationOptions" :key="option.value" :label="option.label"
                 :icon="option.icon" :variant="conservationView === option.value ? 'soft' : 'outline'"
@@ -63,7 +63,7 @@
                     </UBadge>
                   </div>
 
-                  <div v-if="props.category === 'conservation'" class="flex shrink-0 flex-wrap justify-end gap-1">
+                  <div v-if="isConservationCategory" class="flex shrink-0 flex-wrap justify-end gap-1">
                     <UBadge v-if="isRedlisted(row)" color="error" variant="soft">
                       {{ row.RL2025kat || row.RL2020kat }}
                     </UBadge>
@@ -95,7 +95,7 @@ import { computed, nextTick, ref, watch } from 'vue'
 import { useMediaQuery } from '@vueuse/core'
 import { useSpeciesStore } from '~/stores/speciesStore'
 
-type Category = 'edible' | 'poisonous' | 'conservation'
+type Category = 'edible' | 'poisonous' | 'conservation' | 'redlisted' | 'signal'
 
 interface SpeciesRow {
   taxon?: number | string | null
@@ -139,6 +139,18 @@ const categoryConfig: Record<Category, {
     description: 'Rödlistade arter och signalarter som är mykorrhizasvampar.',
     buttonLabel: 'Visa naturvårdsarter som är mykorrhizasvampar',
     icon: 'i-material-symbols-award-star-outline'
+  },
+  redlisted: {
+    title: 'Rödlistade arter',
+    description: 'Rödlistade arter och signalarter som är mykorrhizasvampar.',
+    buttonLabel: 'Visa rödlistade arter som är mykorrhizasvampar',
+    icon: 'i-lucide-triangle-alert'
+  },
+  signal: {
+    title: 'Signalarter',
+    description: 'Rödlistade arter och signalarter som är mykorrhizasvampar.',
+    buttonLabel: 'Visa signalarter som är mykorrhizasvampar',
+    icon: 'i-material-symbols-flag'
   }
 }
 
@@ -151,13 +163,19 @@ const isLoading = ref(false)
 const hasLoaded = ref(false)
 const errorMessage = ref('')
 const searchTerm = ref('')
-const conservationView = ref<ConservationView>('redlisted')
+const initialConservationView = computed<ConservationView>(() =>
+  props.category === 'signal' ? 'signal' : 'redlisted'
+)
+const conservationView = ref<ConservationView>(initialConservationView.value)
 const allSpecies = ref<SpeciesRow[]>([])
 const failedImageKeys = ref<Set<string>>(new Set())
 const isMobile = useMediaQuery('(max-width: 639px)')
 const speciesStore = useSpeciesStore()
 
 const config = computed(() => categoryConfig[props.category])
+const isConservationCategory = computed(() =>
+  ['conservation', 'redlisted', 'signal'].includes(props.category)
+)
 
 const redlistedSpecies = computed(() => allSpecies.value.filter(isRedlisted))
 const signalSpecies = computed(() => allSpecies.value.filter(isSignalSpecies))
@@ -293,7 +311,10 @@ async function loadSpecies() {
 }
 
 watch(isOpen, (open) => {
-  if (open) loadSpecies()
+  if (open) {
+    conservationView.value = initialConservationView.value
+    loadSpecies()
+  }
 })
 
 watch(showSlideover, (open) => {

@@ -103,10 +103,10 @@ type ForestryRow = {
   'Mängd mykorrhiza'?: number | string
 }
 
-const treeColor = 'rgba(101, 163, 13, 0.55)'
-const treeLineColor = '#4d7c0f'
-const mycorrhizaColor = 'rgba(142, 81, 255, 0.45)'
-const mycorrhizaLineColor = '#7e22ce'
+const treeColor = '#8DC812'
+const treeLineColor = '#1F7718'
+const mycorrhizaColor = '#F7E5B1'
+const mycorrhizaLineColor = '#F5010A'
 
 const legendItems: BulletLegendItemInterface[] = [
   { name: 'Träd', color: treeColor },
