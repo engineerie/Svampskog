@@ -9,26 +9,28 @@ const items = computed(() => [
     description: 'Vilka arter finns i olika skogar.',
     to: '/mykorrhizasvampar',
     active: route.path.startsWith('/mykorrhizasvampar'),
-    // icon: 'i-lineicons-mushroom-1'
+    icon: 'i-lineicons-mushroom-1'
   },
   {
     label: 'Skogsskötsel',
     description: 'Hur skogsskötsel påverkar svampar.',
     to: '/skogsskotsel',
     active: route.path.startsWith('/skogsskotsel'),
-    // icon: 'i-hugeicons-tree-06'
+    icon: 'i-hugeicons-tree-06'
   },
   {
     label: 'Svampkunskap',
     description: 'Hur skogsskötsel påverkar svampar.',
     to: '/svampkunskap',
     active: route.path.startsWith('/svampkunskap'),
+    icon: 'i-hugeicons-book-03'
   },
   {
     label: 'Om projektet',
     description: 'Bakgrund och syfte',
     to: '/om-projektet',
     active: route.path.startsWith('/om-projektet'),
+
     children: [
       {
         label: 'Om projektet',
@@ -51,38 +53,46 @@ const items = computed(() => [
 ])
 
 const itemsmobile = computed(() => [
-  {
-    label: 'Svampar',
-    description: 'Vilka arter finns i olika skogar.',
-    to: '/mykorrhizasvampar',
-    active: route.path.startsWith('/mykorrhizasvampar'),
-    // icon: 'i-lineicons-mushroom-1'
-  },
-  {
-    label: 'Skogsskötsel',
-    description: 'Hur skogsskötsel påverkar svampar.',
-    to: '/skogsskotsel',
-    active: route.path.startsWith('/skogsskotsel'),
-    // icon: 'i-hugeicons-tree-06'
-  },
-  {
-    label: 'Om projektet',
-    description: 'Information om bakgrund och syfte.',
-    to: '/om-projektet',
-    active: route.path.startsWith('/om-projektet'),
-    // children: [
-    //   {
-    //     label: 'Om projektet',
-    //     description: 'Information om bakgrund och syfte.',
-    //     to: '/om-projektet',
-    //   },
-    //   {
-    //     label: 'Ändringslogg',
-    //     description: 'Följ vad som har uppdaterats i appen.',
-    //     to: '/om-projektet/andringslogg'
-    //   },
-    // ]
-  }
+  [
+    {
+      label: 'Svampar',
+      description: 'Vilka arter finns i olika skogar.',
+      to: '/mykorrhizasvampar',
+      active: route.path.startsWith('/mykorrhizasvampar'),
+      icon: 'i-lineicons-mushroom-1'
+    },
+    {
+      label: 'Skogsskötsel',
+      description: 'Hur skogsskötsel påverkar svampar.',
+      to: '/skogsskotsel',
+      active: route.path.startsWith('/skogsskotsel'),
+      icon: 'i-hugeicons-tree-06'
+    },
+    {
+      label: 'Svampkunskap',
+      description: 'Hur skogsskötsel påverkar svampar.',
+      to: '/svampkunskap',
+      active: route.path.startsWith('/svampkunskap'),
+      icon: 'i-hugeicons-book-03'
+    },
+  ],
+  [
+    {
+      label: 'Om projektet',
+      description: 'Information om bakgrund och syfte.',
+      to: '/om-projektet'
+    },
+    {
+      label: 'Ändringslogg',
+      description: 'Följ vad som har uppdaterats i appen.',
+      to: '/om-projektet/andringslogg'
+    },
+    {
+      label: 'Kontakt',
+      description: 'Hör av dig',
+      to: '/om-projektet/kontakt'
+    }
+  ]
 ])
 
 </script>
@@ -113,7 +123,7 @@ const itemsmobile = computed(() => [
 
     <template #body>
       <UNavigationMenu :items="itemsmobile" orientation="vertical" color="neutral" variant="link"
-        :ui="{ link: 'text-3xl/10' }" />
+        :ui="{ link: 'text-3xl/10', linkLeadingIcon: 'size-7' }" />
     </template>
   </UHeader>
 </template>

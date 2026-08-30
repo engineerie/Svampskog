@@ -2,7 +2,8 @@
   <div class="not-prose my-6">
     <UModal v-model:open="isOpen" :fullscreen="isMobile" :title="config.title" :description="config.description"
       :ui="{ content: 'sm:max-w-3xl', body: 'p-0 sm:p-0' }">
-      <UButton :label="config.buttonLabel" :icon="config.icon" color="neutral" variant="solid" size="lg" />
+      <UButton :label="isMobile ? config.mobileButtonLabel : config.buttonLabel" :icon="config.icon" color="neutral"
+        variant="solid" size="lg" />
 
       <template #body>
         <div class="flex min-h-0 flex-col">
@@ -120,36 +121,42 @@ const categoryConfig: Record<Category, {
   title: string
   description: string
   buttonLabel: string
+  mobileButtonLabel: string
   icon: string
 }> = {
   edible: {
     title: 'Matsvampar',
     description: 'Matsvampar som är mykorrhizasvampar.',
     buttonLabel: 'Visa matsvampar som är mykorrhizasvampar',
+    mobileButtonLabel: 'Visa matsvampar',
     icon: 'icon-park-solid:knife-fork'
   },
   poisonous: {
     title: 'Giftsvampar',
     description: 'Giftsvampar som är mykorrhizasvampar.',
     buttonLabel: 'Visa giftsvampar som är mykorrhizasvampar',
+    mobileButtonLabel: 'Visa giftsvampar',
     icon: 'i-hugeicons-danger'
   },
   conservation: {
     title: 'Naturvårdsarter',
     description: 'Rödlistade arter och signalarter som är mykorrhizasvampar.',
     buttonLabel: 'Visa naturvårdsarter som är mykorrhizasvampar',
+    mobileButtonLabel: 'Visa naturvårdsarter',
     icon: 'i-material-symbols-award-star-outline'
   },
   redlisted: {
     title: 'Rödlistade arter',
     description: 'Rödlistade arter och signalarter som är mykorrhizasvampar.',
     buttonLabel: 'Visa rödlistade arter som är mykorrhizasvampar',
+    mobileButtonLabel: 'Visa rödlistade arter',
     icon: 'i-lucide-triangle-alert'
   },
   signal: {
     title: 'Signalarter',
     description: 'Rödlistade arter och signalarter som är mykorrhizasvampar.',
     buttonLabel: 'Visa signalarter som är mykorrhizasvampar',
+    mobileButtonLabel: 'Visa signalarter',
     icon: 'i-material-symbols-flag'
   }
 }

@@ -239,7 +239,7 @@ const heroDescriptionParts = computed(() => {
       :transition="{ duration: 0.6, delay: 0.3 }">
       <UPageSection v-if="page.timeline" :title="page.timeline.title" :description="page.timeline.description"
         :ui="{ container: 'flex-col', title: 'text-start lg:text-center', description: 'text-start lg:text-center text-pretty' }">
-        <UTimeline :default-value="2" :items="page.timeline.items" size="3xl" orientation="vertical" :ui="{
+        <UTimeline :default-value="3" :items="page.timeline.items" size="3xl" orientation="vertical" :ui="{
           root: 'lg:flex-row lg:w-full',
           item: 'lg:flex-col',
           container: 'lg:flex-row',

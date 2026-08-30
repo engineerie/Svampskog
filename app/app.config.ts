@@ -1,5 +1,10 @@
 export default defineAppConfig({
   ui: {
+    button: {
+      slots: {
+        base: "rounded-full",
+      },
+    },
     contentSurround: {
       slots: {
         link: "border-none",

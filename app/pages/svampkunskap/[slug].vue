@@ -69,7 +69,7 @@ if (!post.value.image?.src) {
 
       <UPageBody>
         <UPageHeader :title="post.title"
-          :ui="{ title: 'text-4xl sm:text-6xl text-pretty tracking-tight font-medium text-center', wrapper: 'lg:flex-col', root: 'border-none' }">
+          :ui="{ title: 'text-4xl sm:text-6xl text-pretty tracking-tight font-medium text-center ', wrapper: 'lg:flex-col', root: 'border-none mb-4' }">
 
           <!-- <div class="w-full rounded-lg bg-muted/50 ring-muted/50 ring flex item-center justify-center h-fit">
           <NuxtImg :src="post.image.src" class="h-100 w-full" />
