@@ -6,83 +6,35 @@
 
     <label class="mb-4 block max-w-xs space-y-1.5">
       <span class="text-xs font-medium text-neutral-600">Skogsskötselmetod</span>
-      <USelect
-        v-model="selectedMethod"
-        :items="methodOptions"
-        value-key="value"
-        label-key="label"
-        class="w-full"
-        variant="outline"
-      />
+      <USelect v-model="selectedMethod" :items="methodOptions" value-key="value" label-key="label" class="w-full"
+        variant="outline" />
     </label>
 
     <ClientOnly>
       <VisBulletLegend :items="legendItems" class="mb-4 flex justify-center gap-6" />
 
-      <VisXYContainer
-        :data="chartData"
-        :height="380"
-        :xDomain="[-7, 100]"
-        :yDomain="[-150, 150]"
-      >
-        <VisArea
-          :x="xAccessor"
-          :y="treeAccessor"
-          :baseline="baselineAccessor"
-          :color="() => treeColor"
-          :line="true"
-          :lineColor="() => treeLineColor"
-          :lineWidth="2"
-          :curveType="CurveType.MonotoneX"
-        />
-        <VisArea
-          :x="xAccessor"
-          :y="mycorrhizaAccessor"
-          :baseline="baselineAccessor"
-          :color="() => mycorrhizaColor"
-          :line="true"
-          :lineColor="() => mycorrhizaLineColor"
-          :lineWidth="2"
-          :curveType="CurveType.MonotoneX"
-        />
+      <VisXYContainer :data="chartData" :height="380" :xDomain="[-7, 100]" :yDomain="[-150, 150]">
+        <VisArea :x="xAccessor" :y="treeAccessor" :baseline="baselineAccessor" :color="() => treeColor" :line="true"
+          :lineColor="() => treeLineColor" :lineWidth="2" :curveType="CurveType.MonotoneX" />
+        <VisArea :x="xAccessor" :y="mycorrhizaAccessor" :baseline="baselineAccessor" :color="() => mycorrhizaColor"
+          :line="true" :lineColor="() => mycorrhizaLineColor" :lineWidth="2" :curveType="CurveType.MonotoneX" />
 
         <VisPlotline axis="y" :value="0" color="#737373" :lineWidth="1" :duration="0" />
-        <VisPlotline
-          v-for="intervention in interventions"
-          :key="`${selectedMethod}-${intervention.year}`"
-          axis="x"
-          :value="intervention.year"
-          color="#737373"
-          :lineWidth="1"
-          :lineStyle="[4, 4]"
-          :labelText="intervention.label"
-          labelPosition="top-right"
-          labelOrientation="vertical"
-          :labelOffsetX="8"
-          :labelOffsetY="8"
-          :labelSize="11"
-        />
+        <VisPlotline v-for="intervention in interventions" :key="`${selectedMethod}-${intervention.year}`" axis="x"
+          :value="intervention.year" color="#737373" :lineWidth="1" :lineStyle="[4, 4]" :labelText="intervention.label"
+          labelPosition="top-right" labelOrientation="vertical" :labelOffsetX="8" :labelOffsetY="8" :labelSize="11" />
 
-        <VisAxis
-          type="x"
-          label="År efter åtgärd"
-          :tickValues="xTickValues"
-          :tickFormat="formatYear"
-          :gridLine="false"
-        />
-        <VisAxis
-          type="y"
-          label="Relativ mängd (%)"
-          :tickValues="yTickValues"
-          :tickFormat="formatMultiplier"
-          :gridLine="false"
-        />
+        <VisAxis type="x" label="År efter åtgärd" :tickValues="xTickValues" :tickFormat="formatYear"
+          :gridLine="false" />
+        <VisAxis type="y" label="Relativ mängd (%)" :tickValues="yTickValues" :tickFormat="formatMultiplier"
+          :gridLine="false" />
       </VisXYContainer>
     </ClientOnly>
 
     <p class="mt-3 text-sm text-neutral-600">
-      Diagrammet använder samma data för mängden mykorrhizasvamp som skogsskötselsidorna. Träd och mykorrhiza visas speglade för att illustrera det proportionella sambandet: när trädens relativa mängd förändras följer mykorrhizan med i motsvarande grad.
-    </p>
+      Diagrammet visar sambandet mellan mängden träd och mängden mykorrhizsvamp: när trädens relativa mängd förändras
+      följer mykorrhizan med i motsvarande grad. Diagrammet använder samma data för mängden mykorrhizasvamp som visas på
+      skogsskötselsidorna. </p>
   </figure>
 </template>
 

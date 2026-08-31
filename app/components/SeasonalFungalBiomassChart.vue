@@ -12,9 +12,7 @@
         </div>
       </div>
 
-      <div
-        class="flex flex-wrap items-center justify-center gap-2"
-        aria-label="Årstider">
+      <div class="flex flex-wrap items-center justify-center gap-2" aria-label="Årstider">
         <div v-for="season in seasonLegendItems" :key="season.label"
           class="flex items-center gap-1.5 rounded-md px-2 py-1" :style="{ backgroundColor: season.color }">
           <span aria-hidden="true">{{ season.icon }}</span>
@@ -36,9 +34,9 @@
     </ClientOnly>
 
     <p class="mt-3 text-sm text-neutral-600">
-      Diagrammet illustrerar hur mycelets biomassa i skogsmarken är relativt konstant över tid, medan fruktkropparna
-      uppträder som korta sensommartoppar som varierar mellan åren. Sett över tid utgör mycelet omkring 95 procent och
-      fruktkropparna omkring 5 procent av den samlade biomassan.
+      Diagrammet illustrerar hur mycelets biomassa i skogsmarken är relativt konstant under ett år och mellan år, medan
+      fruktkropparna uppträder som korta sensommar-höst-toppar som varierar mellan åren. Sett över tid utgör mycelet
+      omkring 95 procent och fruktkropparna omkring 5 procent av den samlade biomassan.
     </p>
   </figure>
 </template>

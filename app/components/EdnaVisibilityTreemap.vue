@@ -107,8 +107,8 @@
         <div v-else>
           <div class="w-full">
             <VisXYContainer :data="groupedBarData" :height="160" :padding="{ top: 12, right: 12, bottom: 8, left: 8 }">
-              <VisStackedBar :x="barIndexAccessor" :y="valueAccessor" :color="speciesColorAccessor" :bar-padding="0.1"
-              />
+              <VisStackedBar :x="barIndexAccessor" :y="valueAccessor" :color="speciesColorAccessor"
+                :bar-padding="0.1" />
               <VisAxis type="y" label="Antal skogar" :grid-line="false" />
               <VisTooltip :triggers="speciesBarTooltipTriggers" :follow-cursor="true" />
             </VisXYContainer>
@@ -135,8 +135,9 @@
     <div class="my-5">
       <!-- <h2 class="text-lg font-semibold text-neutral-900">Mykorrhizasvamparnas synlighet</h2> -->
       <p class="mt-1 max-w-2xl text-sm text-neutral-600">
-        Diagrammet visar vilka mykorrhizasvampar som är väl synliga och vilka som är svåra att upptäcka. Underlaget
-        bygger på eDNA-analyser av markprover från Markinventeringen.
+        Diagrammet visar vilka mykorrhizasvampar som har fruktkroppar som syns och vilka som har små och ofta dolda
+        fruktkroppar som är svåra att upptäcka. Underlaget bygger på de svampar som identifierats med eDNA-analyser av
+        markprover från Markinventeringen.
       </p>
     </div>
   </section>

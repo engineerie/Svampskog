@@ -1,5 +1,6 @@
 <template>
-  <figure class="w-full" aria-labelledby="mycorrhiza-tree-chart-title">
+  <figure class="w-full" aria-labelledby="mycorrhiza-tree-chart-title"
+    aria-describedby="mycorrhiza-tree-chart-description">
     <figcaption id="mycorrhiza-tree-chart-title" class="sr-only">
       Linjärt samband mellan mängden träd och mängden mykorrhiza
     </figcaption>
@@ -41,6 +42,11 @@
         />
       </VisXYContainer>
     </ClientOnly>
+
+    <p id="mycorrhiza-tree-chart-description" class="mt-3 text-sm text-neutral-600">
+      Mängden mykorrhizasvamp är helt beroende av energi från trädens fotosyntes. Med få träd och liten fotosyntes är
+      mängden mykorrhizasvamp liten, med många träd och stor fotosyntes är mängden stor.
+    </p>
   </figure>
 </template>
 

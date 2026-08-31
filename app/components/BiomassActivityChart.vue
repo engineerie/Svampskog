@@ -1,5 +1,6 @@
 <template>
-  <figure class="w-full" aria-labelledby="biomass-activity-chart-title">
+  <figure class="w-full" aria-labelledby="biomass-activity-chart-title"
+    aria-describedby="biomass-activity-chart-description">
     <figcaption id="biomass-activity-chart-title" class="sr-only">
       Biomassa och aktivitet för träd och svamp i en skog
     </figcaption>
@@ -19,6 +20,11 @@
         <VisAxis type="y" :tickValues="yTickValues" :tickFormat="formatPercent" :domainLine="false" />
       </VisXYContainer>
     </ClientOnly>
+
+    <p id="biomass-activity-chart-description" class="mt-3 text-sm text-neutral-600">
+      Diagrammet visar i ungefärligt drag hur stor andel av biomassan och energiomsättningen (aktiviteten) i en skog
+      som träd och svampar svarar för.
+    </p>
   </figure>
 </template>
 
