@@ -1,0 +1,34 @@
+import{c as x,q as A,U as G,b as p,a9 as S,m as $,i as _,a6 as F,g as D,s as f,d as E,aa as N,a8 as O,R as H,M as I,o as R,n as j,p as T}from"./DQS-DgH0.js";import{X,a as Z}from"./DZrcxwoD.js";import{r as q}from"./CiP_ZzTK.js";import{O as C}from"./z7MCSWeV.js";import{Z as z,bd as Y,o as L,a6 as U,c as Q,a5 as M,d as J,e as K,Q as tt,r as at}from"./CPJaI1G0.js";const et=Object.assign(Object.assign({},X),{color:void 0,barMaxWidth:void 0,barWidth:void 0,dataStep:void 0,barPadding:0,roundedCorners:2,cursor:null,barMinHeight1Px:!1,barMinHeightZeroValue:null,orientation:C.Vertical}),W=x`
+  label: stacked-bar-component;
+`,st=A`
+  :root {
+    --vis-stacked-bar-cursor: default;
+    --vis-stacked-bar-fill-color: var(--vis-color-main);
+    --vis-stacked-bar-stroke-color: none;
+    --vis-stacked-bar-stroke-width: 0px;
+    --vis-stacked-bar-hover-stroke-width: none;
+    --vis-stacked-bar-hover-stroke-color: none;
+
+    /* Dark Theme */
+    --vis-dark-stacked-bar-stroke-color: none;
+  }
+
+  body.theme-dark ${`.${W}`} {
+    --vis-stacked-bar-stroke-color: var(--vis-dark-stacked-bar-stroke-color);
+  }
+`,k=x`
+  label: bar;
+  fill: var(--vis-stacked-bar-fill-color);
+  stroke: var(--vis-stacked-bar-stroke-color);
+  stroke-width: var(--vis-stacked-bar-stroke-width);
+  cursor: var(--vis-stacked-bar-cursor);
+
+  &:hover {
+    stroke-width: var(--vis-stacked-bar-hover-stroke-width);
+    stroke: var(--vis-stacked-bar-hover-stroke-color);
+  }
+`,y=x`
+  label: barGroup;
+`,P=x`
+  label: barGroupExit;
+`,rt=Object.freeze(Object.defineProperty({__proto__:null,bar:k,barGroup:y,barGroupExit:P,globalStyles:st,root:W},Symbol.toStringTag,{value:"Module"}));class B extends Z{constructor(t){super(),this._defaultConfig=et,this.config=this._defaultConfig,this.getAccessors=()=>G(this.config.y)?this.config.y:[this.config.y],this.stacked=!0,this.events={},this._barData=[],t&&this.setConfig(t)}get bleed(){if(this._barData=this._getVisibleData(),this._barData.length===0)return{top:0,bottom:0,left:0,right:0};const t=!this.isVertical()&&this.dataScale.range()[0]>this.dataScale.range()[1],e=this.dataScale.domain(),s=this._getBarWidth()/2,o=this._barData.map((b,r)=>p(b,this.config.x,r)),c=S(o),a=$(o),i=this.dataScale(c),u=this.dataScale(a),l=this.dataScale.invert(i+(t?s:-s)),h=this.dataScale.invert(u+(t?-s:s)),d=l<=e[0]?this.dataScale(e[0])-this.dataScale(l):0,m=h>e[1]?this.dataScale(h)-this.dataScale(e[1]):0;return{top:this.isVertical()?0:t?-m:d,bottom:this.isVertical()?0:t?-d:m,left:this.isVertical()?d:0,right:this.isVertical()?m:0}}get dataScale(){return this.isVertical()?this.xScale:this.yScale}get valueScale(){return this.isVertical()?this.yScale:this.xScale}isVertical(){return this.config.orientation===C.Vertical}_render(t){const{config:e}=this,s=_(t)?t:e.duration,o=this.getAccessors(),c=F(this._barData,0,o,this._prevNegative);this._prevNegative=c.map(r=>!!r.isMostlyNegative);const a=this.g.selectAll(`.${y}`).data(this._barData,(r,g)=>{var n;return`${(n=D(r,e.id,g))!==null&&n!==void 0?n:g}`}),i=(r,g)=>{const n=this.dataScale(p(r,e.x,g)),v=this.isVertical()?n:0,w=this.isVertical()?0:n;return`translate(${v},${w})`},l=a.enter().append("g").attr("class",y).attr("transform",i).style("opacity",1).merge(a);f(l,s).attr("transform",i).style("opacity",1);const h=a.exit().attr("class",P);f(h,s).style("opacity",0).remove(),f(h.selectAll(`.${k}`),s).attr("transform",this.isVertical()?`translate(0,${this._height/3})`:`translate(${this._width/6},0)`);const d=l.selectAll(`.${k}`).data((r,g)=>c.map((n,v)=>({datum:r,index:g,stacked:n[g],stackIndex:v,isEnding:v===c.length-1||v<=c.length-1&&c[v+1][g][0]!==n[g][1]})).filter(n=>n.stacked[0]!==n.stacked[1]),r=>r.stackIndex),b=d.enter().append("path").attr("class",k).attr("d",r=>this._getBarPath(r,!0)).style("fill",r=>E(r.datum,e.color,r.stackIndex)).merge(d);f(b,s).attr("d",r=>this._getBarPath(r)).style("fill",r=>E(r.datum,e.color,r.stackIndex)).style("cursor",r=>D(r.datum,e.cursor,r.stackIndex)),f(d.exit(),s).style("opacity",0).remove()}_getBarWidth(){const{config:t,datamodel:{data:e}}=this;if(N(e))return 0;if(t.barWidth)return S([t.barWidth,t.barMaxWidth]);const s=this.dataScale.bandwidth,o=this.dataScale.domain?this.dataScale.domain():[];let a=1+(s?o.length:o[1]-o[0])/t.dataStep||!s&&e.filter((l,h)=>{const d=p(l,t.x,h);return d>=o[0]&&d<=o[1]}).length||e.length;!s&&a>=2&&(a+=1);const u=(a<2?1:1-t.barPadding)*(this.isVertical()?this._width:this._height)/a;return S([u,t.barMaxWidth])}_getVisibleData(){const{config:t,datamodel:{data:e}}=this,s=this._getBarWidth(),o=e.length<2?0:s/2,c=this.dataScale,a=Math.abs(c.invert(o)-c.invert(0));return e?.filter((u,l)=>{const h=p(u,t.x,l),d=c.domain(),m=+d[0],b=+d[1];return h>=m-a&&h<=b+a})}_getBarPath(t,e=!1){const{config:s}=this,o=this.getAccessors(),c=this._getBarWidth(),a=t.stacked[1]<0,i=t.isEnding,u=p(t.datum,o[t.stackIndex],t.index),l=e?0:Math.abs(this.valueScale(t.stacked[0])-this.valueScale(t.stacked[1])),h=!e&&s.barMinHeight1Px&&l<1&&isFinite(u)&&u!==s.barMinHeightZeroValue?1:l,d=e?this.valueScale(0):this.valueScale(a?t.stacked[0]:t.stacked[1])-(l<1&&s.barMinHeight1Px?1:0),m=-c/2,b=c,r=s.roundedCorners?_(s.roundedCorners)?+s.roundedCorners:b/2:0,g=I(r,0,Math.min(l,b)/2),n=this.yScale.range()[0]>this.yScale.range()[1];return q({x:this.isVertical()?m:d-h,y:this.isVertical()?d+(n?0:-h):m,w:this.isVertical()?b:h,h:this.isVertical()?h:b,tl:i&&(this.isVertical()?!a&&n||a&&!n:a),tr:i&&(this.isVertical()?!a&&n||a&&!n:!a),br:i&&(this.isVertical()?a&&n||!a&&!n:!a),bl:i&&(this.isVertical()?a&&n||!a&&!n:a),r:g})}getValueScaleExtent(t){const{datamodel:e}=this,s=this.getAccessors(),o=t?this._getVisibleData():e.data;return O(o,...s)}getDataScaleExtent(){const{config:t,datamodel:e}=this;return H(e.data,t.x)}getYDataExtent(t){return this.isVertical()?this.getValueScaleExtent(t):this.getDataScaleExtent()}getXDataExtent(){return this.isVertical()?this.getDataScaleExtent():this.getValueScaleExtent(!1)}}B.selectors=rt;const it={"data-vis-component":""},ht=z({__name:"index",props:{color:{type:[Function,String,Array,null]},barWidth:{},barMaxWidth:{},dataStep:{},barPadding:{},roundedCorners:{type:[Number,Boolean]},cursor:{type:[Function,String,null]},barMinHeight1Px:{type:Boolean},barMinHeightZeroValue:{},orientation:{},x:{type:[Function,Number,null]},y:{type:[Function,Number,null,Array]},id:{type:Function},xScale:{type:[Object,Function]},yScale:{type:[Object,Function]},excludeFromDomainCalculation:{type:Boolean},duration:{},events:{},attributes:{},data:{}},setup(V,{expose:t}){const e=Y(R),s=V,o=tt(()=>e.data.value??s.data),c=j(s),a=at();return L(()=>{U(()=>{var i;a.value=new B(c.value),(i=a.value)==null||i.setData(o.value),e.update(a.value)})}),Q(()=>{var i;(i=a.value)==null||i.destroy(),e.destroy()}),M(c,(i,u)=>{var l;T(i,u)||(l=a.value)==null||l.setConfig(c.value)}),M(o,()=>{var i;(i=a.value)==null||i.setData(o.value)}),t({component:a}),(i,u)=>(J(),K("div",it))}});export{B as S,ht as w};

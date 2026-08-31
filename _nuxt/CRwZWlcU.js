@@ -1,0 +1,1 @@
+import{I as y}from"./z7MCSWeV.js";function i(n){return n}function k(n,...r){return d(n,i,i,r)}function d(n,r,p,s){return(function g(u,f){if(f>=s.length)return p(u);const t=new y,a=s[f++];let l=-1;for(const o of u){const e=a(o,++l,u),c=t.get(e);c?c.push(o):t.set(e,[o])}for(const[o,e]of t)t.set(o,g(e,f));return r(t)})(n,0)}export{k as g};
