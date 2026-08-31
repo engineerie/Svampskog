@@ -1,6 +1,3 @@
-import fs from 'fs'
-import path from 'path'
-
 type CountMap = Record<string, number>
 
 export type AllSpeciesRow = {
@@ -104,6 +101,16 @@ type GraphDatasetOptions = {
 let datasetPromise: Promise<Dataset> | null = null
 let ednaDetailsPromise: Promise<Record<string, Partial<AllSpeciesRow>>> | null = null
 
+async function readSpeciesAsset<T>(filename: string): Promise<T> {
+  const asset = await useStorage('assets:species').getItem<string | T>(filename)
+
+  if (!asset) {
+    throw new Error(`Missing bundled species asset: ${filename}`)
+  }
+
+  return typeof asset === 'string' ? JSON.parse(asset) as T : asset
+}
+
 function normalizeString(value: string | null | undefined) {
   return String(value || '')
     .toLowerCase()
@@ -188,9 +195,7 @@ function buildFilterOptions(rows: AllSpeciesRow[]): FilterOptions {
 }
 
 async function buildDataset(): Promise<Dataset> {
-  const filePath = path.join(process.cwd(), 'public/species/all-species.json')
-  const raw = await fs.promises.readFile(filePath, 'utf8')
-  const rows = JSON.parse(raw) as AllSpeciesRow[]
+  const rows = await readSpeciesAsset<AllSpeciesRow[]>('all-species.json')
 
   return {
     rows,
@@ -215,10 +220,7 @@ export async function getAllSpeciesDataset() {
 
 export async function getEdnaSpeciesDetailsDataset() {
   if (!ednaDetailsPromise) {
-    const filePath = path.join(process.cwd(), 'public/species/edna-species-details.json')
-    ednaDetailsPromise = fs.promises
-      .readFile(filePath, 'utf8')
-      .then(raw => JSON.parse(raw) as Record<string, Partial<AllSpeciesRow>>)
+    ednaDetailsPromise = readSpeciesAsset<Record<string, Partial<AllSpeciesRow>>>('edna-species-details.json')
   }
   return ednaDetailsPromise
 }

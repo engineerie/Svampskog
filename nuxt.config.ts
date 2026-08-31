@@ -106,6 +106,10 @@ export default defineNuxtConfig({
         baseName: "storage",
         dir: "storage",
       },
+      {
+        baseName: "species",
+        dir: fileURLToPath(new URL("./public/species", import.meta.url)),
+      },
     ],
     prerender: {
       routes: ["/"],
