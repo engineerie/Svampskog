@@ -56,7 +56,7 @@ press:
   items:
     - title: Webbinarium om Svampskog
       publication: SLU
-      publicationDate: Höst 2026
+      publicationDate: "2026/2027"
       url: https://www.slu.se/om-slu/organisation/fakulteter/fakulteten-for-skogsvetenskap/samverkan/kompetensutveckling-for-ett-hallbart-skogsbruk/se-svampen-i-din-skog/
       icon: i-heroicons-calendar-date-range
       description: Lär dig mer om skogens mykorrhizasvampar och hur skogsskötsel påverkar dem - och få en genomgång av hur du använder funktionerna i webbappen Svampskog.

@@ -10,14 +10,18 @@ import type { ContentNavigationItem } from '@nuxt/content'
 const navigation = inject<Ref<ContentNavigationItem[]>>('blognavigation')
 
 const route = useRoute()
+const contentPath = route.path.replace(/\/+$/, '') || '/'
 
-const { data: post } = await useAsyncData(route.path, () => queryCollection('posts').path(route.path).first())
+const { data: post } = await useAsyncData(
+  `svampkunskap-post:${contentPath}`,
+  () => queryCollection('posts').path(contentPath).first()
+)
 if (!post.value) {
   throw createError({ statusCode: 404, statusMessage: 'Post not found', fatal: true })
 }
 
-const { data: surround } = await useAsyncData(`${route.path}-surround`, () => {
-  return queryCollectionItemSurroundings('posts', route.path, {
+const { data: surround } = await useAsyncData(`svampkunskap-surround:${contentPath}`, () => {
+  return queryCollectionItemSurroundings('posts', contentPath, {
     fields: ['description']
   })
 })

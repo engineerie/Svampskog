@@ -10,12 +10,12 @@
       </p>
     </div> -->
 
-    <div class="overflow-hidden rounded-xl ">
+    <div ref="chartContainerRef" class="overflow-hidden rounded-xl ">
       <VisSingleContainer :data="graphData" :height="graphHeight">
         <VisTooltip ref="tooltipRef" :triggers="tooltipTriggers" :follow-cursor="false" :allow-hover="true"
           horizontal-placement="center" vertical-placement="top" />
         <VisGraph :layout-type="GraphLayoutType.Elk" :layout-elk-settings="elkLayoutSettings"
-          :layout-elk-node-groups="[nodeLayoutGroup]" :layout-autofit="true" :fit-view-padding="54" :disable-drag="true"
+          :layout-elk-node-groups="[nodeLayoutGroup]" :layout-autofit="true" :fit-view-padding="fitViewPadding" :disable-drag="true"
           :disable-brush="true" :disable-zoom="true" :node-size="nodeSize" :node-fill="nodeFill"
           :node-stroke="nodeStroke" :node-stroke-width="nodeStrokeWidth" :node-icon="nodeIcon"
           :node-icon-size="nodeIconSize" :node-label="nodeLabel" :node-label-trim="false" :node-sub-label="nodeSubLabel"
@@ -34,7 +34,7 @@
 
 <script setup lang="ts">
 import { computed, ref } from 'vue'
-import { useMediaQuery } from '@vueuse/core'
+import { useElementSize, useMediaQuery } from '@vueuse/core'
 import { Graph, GraphLayoutType, type Tooltip } from '@unovis/ts'
 import { VisGraph, VisSingleContainer, VisTooltip } from '@unovis/vue'
 
@@ -60,8 +60,16 @@ type MycorrhizaLink = {
 }
 
 const isMobile = useMediaQuery('(max-width: 767px)')
+const chartContainerRef = ref<HTMLElement | null>(null)
+const { width: chartWidth } = useElementSize(chartContainerRef)
 const tooltipRef = ref<{ component?: Tooltip } | null>(null)
-const graphHeight = computed(() => (isMobile.value ? 680 : 560))
+const graphHeight = computed(() => {
+  if (!isMobile.value) return 560
+
+  const mobileWidth = chartWidth.value || 380
+  return Math.round(Math.min(500, Math.max(400, mobileWidth * 1.15)))
+})
+const fitViewPadding = computed(() => (isMobile.value ? 24 : 54))
 
 const typeNodes: MycorrhizaNode[] = [
   {
@@ -101,7 +109,7 @@ const typeNodes: MycorrhizaNode[] = [
 const relationshipNodes: MycorrhizaNode[] = [
   {
     id: 'arbuscular-plants',
-    label: 'Växter',
+    label: 'De flesta växter',
     icon: '🌿',
     kind: 'plant-group',
     branch: 'arbuscular'
@@ -188,7 +196,7 @@ const expandedEctoPlantNodes: MycorrhizaNode[] = [
 
 const groupInformation = computed(() => ({
   'arbuscular-plants': {
-    title: 'Växter',
+    title: 'De flesta växter',
     description: 'De flesta gräs, örter och buskar bildar arbuskulär mykorrhiza. Några exempel är:',
     items: ['Timotej', 'Hundäxing', 'Rödklöver', 'Maskros', 'Hagtorn']
   },
@@ -218,7 +226,7 @@ const groupInformation = computed(() => ({
     items: expandedTreeNodes.filter(node => node.branch === 'shared').map(node => node.label)
   },
   'ecto-plants': {
-    title: 'Växter',
+    title: 'Vissa växter',
     description: 'Ett antal växter bildar ektomykorrhiza. Några exempel är:',
     items: expandedEctoPlantNodes.map(node => node.label)
   }

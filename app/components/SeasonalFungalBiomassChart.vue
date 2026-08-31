@@ -22,7 +22,8 @@
     </div>
 
     <ClientOnly>
-      <VisXYContainer :data="chartData" :height="320" :xDomain="[0, displayedYearCount]" :yDomain="[0, 240]">
+      <VisXYContainer ref="chartRef" :data="chartData" :height="320" :xDomain="[0, displayedYearCount]"
+        :yDomain="[0, 240]">
         <VisPlotband v-for="band in seasonBands" :key="band.key" axis="x" :from="band.from" :to="band.to"
           :color="band.color" :duration="0" :labelText="band.icon" labelPosition="top-inside" :labelOffsetY="8"
           :labelSize="14" />
@@ -42,6 +43,7 @@
 </template>
 
 <script setup lang="ts">
+import { nextTick, onBeforeUnmount, onMounted, ref } from 'vue'
 import { VisArea, VisAxis, VisPlotband, VisXYContainer } from '@unovis/vue'
 
 type BiomassDatum = {
@@ -49,6 +51,34 @@ type BiomassDatum = {
   mycelium: number
   fruitingBodies: number
 }
+
+type ChartRef = {
+  component?: {
+    render: (duration?: number) => void
+  }
+}
+
+const chartRef = ref<ChartRef | null>(null)
+let layoutFrame: number | undefined
+let renderFrame: number | undefined
+
+onMounted(async () => {
+  await nextTick()
+
+  // Plot bands register after the container mounts. On mobile, the first
+  // geometry pass can happen before every band is registered, so redraw once
+  // after the browser has completed layout and component registration.
+  layoutFrame = requestAnimationFrame(() => {
+    renderFrame = requestAnimationFrame(() => {
+      chartRef.value?.component?.render(0)
+    })
+  })
+})
+
+onBeforeUnmount(() => {
+  if (layoutFrame !== undefined) cancelAnimationFrame(layoutFrame)
+  if (renderFrame !== undefined) cancelAnimationFrame(renderFrame)
+})
 
 const colors = ['rgba(209, 187, 160, 0.6)', '#f59e0b']
 const legendItems = [

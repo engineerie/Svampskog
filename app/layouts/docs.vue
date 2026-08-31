@@ -11,12 +11,7 @@ const omProjektNavigation = computed<ContentNavigationItem[]>(() => [
   {
     title: 'Kontakt',
     path: '/om-projektet/kontakt'
-  },
-  {
-    title: 'Ändringslogg',
-    path: '/om-projektet/andringslogg'
-  },
-
+  }
 ])
 
 const currentNavigation = computed(() => {

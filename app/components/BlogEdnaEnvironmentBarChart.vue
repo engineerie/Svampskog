@@ -44,7 +44,21 @@
         </ClientOnly>
       </div>
     </div>
-    <div class="mt-5 grid grid-cols-1 gap-4 md:grid-cols-3">
+    <UCarousel v-slot="{ item: image }" :items="images" arrows dots
+      class="mt-5 pb-7 md:hidden" aria-label="Bilder av svampsamhälle och vanliga arter"
+      :ui="{ item: 'basis-full', prev: 'start-2', next: 'end-2' }">
+      <figure class="min-w-0">
+        <div class="overflow-hidden rounded-lg ring-1 ring-muted/50">
+          <NuxtImg :src="image.src" :alt="image.alt" class="aspect-16/10 size-full object-cover" width="805"
+            height="505" />
+        </div>
+        <figcaption class="mt-2 text-sm font-medium text-neutral-700">
+          {{ image.caption }}
+        </figcaption>
+      </figure>
+    </UCarousel>
+
+    <div class="mt-5 hidden gap-4 md:grid md:grid-cols-3">
       <figure v-for="image in images" :key="image.src" class="min-w-0">
         <div class="overflow-hidden rounded-lg ring-1 ring-muted/50">
           <NuxtImg :src="image.src" :alt="image.alt" class="aspect-16/10 size-full object-cover" width="805"

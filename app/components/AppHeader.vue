@@ -42,11 +42,11 @@ const items = computed(() => [
         description: 'Hör av dig',
         to: '/om-projektet/kontakt'
       },
-      {
-        label: 'Ändringslogg',
-        description: 'Hur svampskog uppdaterats',
-        to: '/om-projektet/andringslogg'
-      },
+      // {
+      //   label: 'Ändringslogg',
+      //   description: 'Hur svampskog uppdaterats',
+      //   to: '/om-projektet/andringslogg'
+      // },
 
     ]
   }
@@ -82,11 +82,11 @@ const itemsmobile = computed(() => [
       description: 'Information om bakgrund och syfte.',
       to: '/om-projektet'
     },
-    {
-      label: 'Ändringslogg',
-      description: 'Följ vad som har uppdaterats i appen.',
-      to: '/om-projektet/andringslogg'
-    },
+    // {
+    //   label: 'Ändringslogg',
+    //   description: 'Följ vad som har uppdaterats i appen.',
+    //   to: '/om-projektet/andringslogg'
+    // },
     {
       label: 'Kontakt',
       description: 'Hör av dig',
@@ -112,8 +112,8 @@ const itemsmobile = computed(() => [
 
     <template #right>
       <div class="hidden lg:flex items-center">
-        <UNavigationMenu :items="items" variant="link" color="primary"
-          :ui="{ link: 'text-md hover:bg-muted rounded', item: 'mx-0.5' }" />
+        <UNavigationMenu :items="items" variant="link" color="primary" content-orientation="vertical"
+          :ui="{ link: 'text-md hover:bg-muted rounded', item: 'mx-0.5', content: 'w-max max-w-xs' }" />
         <!-- <UTooltip text="Sök" :kbds="['meta', 'K']">
           <USeparator orientation="vertical" class="h-4 mx-3" />
           <UContentSearchButton :collapsed="true" class="ring-muted/50 mx-0.5" />
